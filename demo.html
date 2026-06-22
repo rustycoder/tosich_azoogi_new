@@ -5549,10 +5549,9 @@
           <li class="card-main" id="card_1">
             <div class="card__content">
               <div>
-                <h2>Lighting That Lasts</h2>
-                <p>Built with premium components and backed by strict quality assurance, our products are made to
-                  perform and last – with up to a 5-year warranty for peace of mind.</p>
-                <p><a href="#top" class="btn --accent">Read more</a></p>
+                <h2>Premium Selection. Unmatched Quality.</h2>
+                <p>Explore an extensive, curated catalog of top-tier LED lighting. Whether you need sleek architectural fittings or rugged outdoor solutions, our products are engineered for aesthetic brilliance and flawless performance.</p>
+                <p><a href="#" class="btn --accent">Explore Collections</a></p>
               </div>
               <figure>
                 <img src="assets/img/img-0.jpg" alt="Image description">
@@ -5562,10 +5561,9 @@
           <li class="card-main" id="card_2">
             <div class="card__content">
               <div>
-                <h2>Design Without Limits</h2>
-                <p>From sleek LED strips to statement architectural fittings and rugged garden lighting, we’ve got
-                  solutions for every style, every space, and every project – indoors or out.</p>
-                <p><a href="#top" class="btn --accent">Read more</a></p>
+                <h2>Lighting, Tailored to You.</h2>
+                <p>No two spaces are exactly alike. We engineer custom, adaptive lighting configurations that perfectly match your project’s unique specifications, budget, and design vision.</p>
+                <p><a href="#" class="btn --accent">Request a Custom Quote</a></p>
               </div>
               <figure>
                 <img src="assets/img/img-1.jpg" alt="Image description">
@@ -5575,10 +5573,9 @@
           <li class="card-main" id="card_3">
             <div class="card__content">
               <div>
-                <h2>Made Just for You</h2>
-                <p>From off-spec alternatives to custom fittings, we create lighting that meets your needs – adapting
-                  products, matching specs, or meeting budgets without compromising quality.</p>
-                <p><a href="#top" class="btn --accent">Read more</a></p>
+                <h2>Your Partner, End-to-End.</h2>
+                <p>We don't just sell lights; we illuminate your workflow. From initial blueprint to final installation, our dedicated lighting experts provide continuous, hands-on support to ensure your vision becomes reality.</p>
+                <p><a href="#" class="btn --accent">Talk to an Expert</a></p>
               </div>
               <figure>
                 <img src="assets/img/img-2.jpg" alt="Image description">
@@ -5588,10 +5585,9 @@
           <li class="card-main" id="card_4">
             <div class="card__content">
               <div>
-                <h2>Support That Lasts</h2>
-                <p>We don’t just supply lighting – we partner with you. From your first idea to final install (and well
-                  after), our team is here with advice, guidance, and service that keeps your project shining.</p>
-                <p><a href="#top" class="btn --accent">Read more</a></p>
+                <h2>Built to Last. Guaranteed.</h2>
+                <p>Invest in your projects with total confidence. Our lighting undergoes rigorous quality assurance testing and comes backed by a comprehensive 5-year warranty for complete peace of mind.</p>
+                <p><a href="#" class="btn --accent">View Warranty Details</a></p>
               </div>
               <figure>
                 <img src="assets/img/card.jpg" alt="Image description">
@@ -5703,58 +5699,141 @@
         </div>
         <a href="#" class="btn --accent reveal">View All Products</a>
       </div>
-      <div class="products-grid">
-        <a class="card" href="#">
-          <div class="img" style="background-image:url('assets/img/GL001.webp')"></div>
-          <div class="body">
-            <h4>Garden Lights</h4>
-            <span class="more">View Range
-              &rarr;</span>
+      <div class="products-layout">
+        <!-- Sidebar -->
+        <aside class="products-sidebar" id="productsSidebar">
+          <div class="sidebar-header">
+            <h3>Categories</h3>
+            <button class="close-sidebar" onclick="document.getElementById('productsSidebar').classList.remove('open')" aria-label="Close categories">&times;</button>
           </div>
-        </a>
-        <a class="card" href="#">
-          <div class="img" style="background-image:url('assets/img/neon.webp')"></div>
-          <div class="body">
-            <h4>Neon Range</h4>
-            <span class="more">View Range &rarr;</span>
+          <ul class="category-list">
+            <li><a href="#" class="active">All Products</a></li>
+            <li><a href="#">Garden Lights</a></li>
+            <li><a href="#">Neon Range</a></li>
+            <li><a href="#">LED Strips</a></li>
+            <li><a href="#">LED Drivers</a></li>
+            <li><a href="#">Downlights</a></li>
+            <li><a href="#">Pendant Lights</a></li>
+            <li><a href="#">Architectural</a></li>
+          </ul>
+        </aside>
+
+        <!-- Main Area -->
+        <div class="products-main">
+          <!-- Mobile Sidebar Toggle -->
+          <div class="mobile-filter-bar">
+            <button class="btn --outline" onclick="document.getElementById('productsSidebar').classList.add('open')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="margin-right:8px; vertical-align: text-bottom;"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+              Filter Categories
+            </button>
           </div>
-        </a>
-        <a class="card" href="#">
-          <div class="img" style="background-image:url('assets/img/leds.webp')"></div>
-          <div class="body">
-            <h4>LED Strips</h4>
-            <span class="more">View Range &rarr;</span>
+
+          <!-- Pills (Attributes) -->
+          <div class="products-filters">
+            <div class="filter-pill">Installation <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">Material <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">Coating <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">Dimming method <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">Input voltage <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">SDCM <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">CRI <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">CCT <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">Beam angle <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">Application <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">IP grade <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">Warranty <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">Certification <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">More choices <span class="caret">&#9662;</span></div>
           </div>
-        </a>
-        <a class="card" href="#">
-          <div class="img" style="background-image:url('assets/img/drivers.webp')"></div>
-          <div class="body">
-            <h4>LED Drivers</h4>
-            <span class="more">View Range &rarr;</span>
+
+          <!-- Compact Product Grid -->
+          <div class="compact-products-grid">
+            <div class="compact-card">
+              <a href="#" class="img-wrap" style="background-image:url('assets/img/GL001.webp')"></a>
+              <div class="info">
+                <a href="#" style="text-decoration:none"><h4>Garden Spotlight Pro</h4></a>
+                <div class="specs">
+                  <div><strong>Length:</strong> Opening φ75mm</div>
+                  <div><strong>Beam Angle:</strong> Asymmetric Distribution</div>
+                  <div><strong>Power:</strong> 10W, 15W, 20W</div>
+                </div>
+                <div class="cart-action">
+                  <button class="btn --accent btn-sm">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+            <div class="compact-card">
+              <a href="#" class="img-wrap" style="background-image:url('assets/img/neon.webp')"></a>
+              <div class="info">
+                <a href="#" style="text-decoration:none"><h4>Neon Flex Series 360</h4></a>
+                <div class="specs">
+                  <div><strong>Length:</strong> Custom cut</div>
+                  <div><strong>Beam Angle:</strong> 360° Uniform</div>
+                  <div><strong>Power:</strong> 14.4W/m</div>
+                </div>
+                <div class="cart-action">
+                  <button class="btn --accent btn-sm">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+            <div class="compact-card">
+              <a href="#" class="img-wrap" style="background-image:url('assets/img/leds.webp')"></a>
+              <div class="info">
+                <a href="#" style="text-decoration:none"><h4>High-Output LED Strip</h4></a>
+                <div class="specs">
+                  <div><strong>Length:</strong> 5m Roll</div>
+                  <div><strong>Beam Angle:</strong> 120°</div>
+                  <div><strong>Power:</strong> 20W/m</div>
+                </div>
+                <div class="cart-action">
+                  <button class="btn --accent btn-sm">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+            <div class="compact-card">
+              <a href="#" class="img-wrap" style="background-image:url('assets/img/dt.webp')"></a>
+              <div class="info">
+                <a href="#" style="text-decoration:none"><h4>Recessed Downlight</h4></a>
+                <div class="specs">
+                  <div><strong>Length:</strong> Opening φ90mm</div>
+                  <div><strong>Beam Angle:</strong> 60°</div>
+                  <div><strong>Power:</strong> 15W</div>
+                </div>
+                <div class="cart-action">
+                  <button class="btn --accent btn-sm">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+            <div class="compact-card">
+              <a href="#" class="img-wrap" style="background-image:url('assets/img/prod-4.jpg')"></a>
+              <div class="info">
+                <a href="#" style="text-decoration:none"><h4>Pendant Light Mod</h4></a>
+                <div class="specs">
+                  <div><strong>Length:</strong> 1200mm</div>
+                  <div><strong>Beam Angle:</strong> 45°</div>
+                  <div><strong>Power:</strong> 30W</div>
+                </div>
+                <div class="cart-action">
+                  <button class="btn --accent btn-sm">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+            <div class="compact-card">
+              <a href="#" class="img-wrap" style="background-image:url('assets/img/prod-5.jpg')"></a>
+              <div class="info">
+                <a href="#" style="text-decoration:none"><h4>Architectural Linear</h4></a>
+                <div class="specs">
+                  <div><strong>Length:</strong> Custom Extrusion</div>
+                  <div><strong>Beam Angle:</strong> Diffused</div>
+                  <div><strong>Power:</strong> 24W/m</div>
+                </div>
+                <div class="cart-action">
+                  <button class="btn --accent btn-sm">Add to Cart</button>
+                </div>
+              </div>
+            </div>
           </div>
-        </a>
-        <a class="card" href="#">
-          <div class="img" style="background-image:url('assets/img/dt.webp')"></div>
-          <div class="body">
-            <h4>Downlights</h4>
-            <span class="more">View Range
-              &rarr;</span>
-          </div>
-        </a>
-        <a class="card" href="#">
-          <div class="img" style="background-image:url('assets/img/prod-4.jpg')"></div>
-          <div class="body">
-            <h4>Pendant Lights</h4>
-            <span class="more">View Range &rarr;</span>
-          </div>
-        </a>
-        <a class="card" href="#">
-          <div class="img" style="background-image:url('assets/img/prod-5.jpg')"></div>
-          <div class="body">
-            <h4>Architectural</h4>
-            <span class="more">View Range &rarr;</span>
-          </div>
-        </a>
+        </div>
       </div>
     </div>
   </section>
@@ -5774,21 +5853,49 @@
         <div class="proj p1 reveal"><img src="assets/img/acdm.jpg" alt="Aikenhead Centre" />
           <div class="cap"><small>Medical &mdash; Melbourne</small>
             <h3>Aikenhead Centre for Medical Discovery</h3>
+            <div class="project-products">
+              <a href="#" class="pp-card"><img src="assets/img/prod-1.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-3.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-4.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-5.jpg" alt="Product"></a>
+              <a href="#" class="pp-card pp-view-all">View All<br>Products</a>
+            </div>
           </div>
         </div>
         <div class="proj p2 reveal"><img src="assets/img/img-1.jpg" alt="Zushi Restaurant" />
           <div class="cap"><small>Hospitality &mdash; Sydney</small>
             <h3>Zushi Restaurant</h3>
+            <div class="project-products">
+              <a href="#" class="pp-card"><img src="assets/img/prod-1.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-3.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-4.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-5.jpg" alt="Product"></a>
+              <a href="#" class="pp-card pp-view-all">View All<br>Products</a>
+            </div>
           </div>
         </div>
         <div class="proj p3 reveal"><img src="assets/img/eve.jpg" alt="The Eve Hotel" />
           <div class="cap"><small>Hospitality &mdash; Redfern</small>
             <h3>The Eve Hotel</h3>
+            <div class="project-products">
+              <a href="#" class="pp-card"><img src="assets/img/prod-1.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-3.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-4.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-5.jpg" alt="Product"></a>
+              <a href="#" class="pp-card pp-view-all">View All<br>Products</a>
+            </div>
           </div>
         </div>
         <div class="proj p4 reveal"><img src="assets/img/bondi.webp" alt="Bondi Penthouse" />
           <div class="cap"><small>Residential &mdash; Bondi</small>
             <h3>Bondi Beach Penthouse</h3>
+            <div class="project-products">
+              <a href="#" class="pp-card"><img src="assets/img/prod-1.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-3.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-4.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-5.jpg" alt="Product"></a>
+              <a href="#" class="pp-card pp-view-all">View All<br>Products</a>
+            </div>
           </div>
         </div>
       </div>
@@ -5878,8 +5985,17 @@
   <script>
     /* ===== Header solid on scroll ===== */
     const topbar = document.getElementById('topbar');
-    const onScroll = () => topbar.classList.toggle('solid', window.scrollY > 40);
-    window.addEventListener('scroll', onScroll); onScroll();
+    let lastScrolled = null;
+    const onScroll = () => {
+      const isScrolled = window.scrollY > 40;
+      if (isScrolled !== lastScrolled) {
+        topbar.classList.toggle('solid', isScrolled);
+        lastScrolled = isScrolled;
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        if (typeof updateLogos === 'function') updateLogos(currentTheme);
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
     /* ===== Hero slider with line progress + play/pause ===== */
     (() => {
@@ -6088,9 +6204,14 @@
     }
 
     function updateLogos(theme) {
+      const isScrolled = window.scrollY > 40;
       const logos = document.querySelectorAll('.logo img');
       logos.forEach(img => {
-        img.src = theme === 'light' ? 'assets/logo_dark.png' : 'assets/logo_white.png';
+        if (img.closest('.topbar')) {
+          img.src = (theme === 'light' && isScrolled) ? 'assets/logo_dark.png' : 'assets/logo_white.png';
+        } else {
+          img.src = theme === 'light' ? 'assets/logo_dark.png' : 'assets/logo_white.png';
+        }
       });
     }
 
