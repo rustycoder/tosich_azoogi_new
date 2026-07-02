@@ -2,7 +2,7 @@
 
 /* --- Page Layout & Breadcrumbs --- */
 .product-page-wrapper {
-  padding-top: 120px; /* offset for fixed topbar */
+  padding-top: 110px; /* offset for fixed topbar */
   min-height: 100vh;
   background: var(--bg);
   color: var(--ink);
@@ -37,7 +37,8 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 48px;
-  margin-bottom: 60px;
+  margin-bottom: 0;
+  padding-bottom: 20px;
 }
 
 @media (max-width: 960px) {
@@ -173,7 +174,7 @@
 .product-details-info {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 0;
 }
 
 .product-title-group h1 {
@@ -186,7 +187,7 @@
 .product-code {
   font-size: 13px;
   letter-spacing: 0.05em;
-  color: var(--muted);
+  color: var(--accent);
   margin-bottom: 12px;
 }
 
@@ -195,6 +196,7 @@
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 16px;
+  padding-top: 5px;
 }
 
 .meta-badge {
@@ -203,7 +205,7 @@
   color: var(--ink);
   font-size: 11px;
   padding: 4px 10px;
-  border-radius: 100px;
+  border-radius: 4px;
   letter-spacing: 0.03em;
   font-weight: 500;
 }
@@ -212,23 +214,26 @@
   color: var(--muted);
   font-size: 15px;
   line-height: 1.6;
-  border-bottom: 1px solid var(--line);
   padding-bottom: 20px;
 }
 
+.gallery-actions{
+  margin-top: 0!IMPORTANT;
+}
 /* Configurator selection blocks */
 .config-group {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
   gap: 16px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 10px;
 }
 
 .config-group-title {
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
   color: var(--ink);
   display: flex;
   flex-direction: column;
@@ -250,7 +255,7 @@
   .config-group {
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: 5px;
   }
   .config-group-title {
     width: auto;
@@ -261,10 +266,10 @@
   background: var(--card-bg);
   border: 1px solid var(--border-light);
   color: var(--ink);
-  padding: 10px 16px;
+  padding: 5px  10px;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 500;
   transition: all 0.2s ease;
   display: flex;
@@ -279,11 +284,11 @@
 }
 
 .config-btn.active {
-  background: var(--bg);
+  background: var(--accent);
   border-color: var(--accent);
   box-shadow: 0 0 12px rgba(var(--glow-rgb, 103, 208, 78), 0.15);
-  color: var(--pure-text);
-  font-weight: 600;
+  color: var(--pure-bg);
+  font-weight: 400;
 }
 
 .color-dot {

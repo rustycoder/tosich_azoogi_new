@@ -151,8 +151,8 @@
 
       <!-- ==================== TECHNICAL SPECIFICATIONS SECTION START ==================== -->
       <div class="specifications-section"
-        style="margin-top: 48px; border-top: 1px solid var(--line); padding-top: 40px;">
-        <h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px;">Technical Specifications</h3>
+        style="margin-top: 0; border-top: 1px solid var(--line); padding-top: 20px;">
+        <h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 0;">Technical Specifications</h3>
         <div class="spec-grid-layout"
           style="display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 48px; align-items: start;">
 
@@ -166,7 +166,7 @@
 
           <!-- SPECIFICATIONS DIMENSION VECTOR DIAGRAM START -->
           <div class="spec-dimension-image-wrapper"
-            style="background: var(--card-bg); border: 1px solid var(--border-light); border-radius: 8px; padding: 24px; display: flex; align-items: center; justify-content: center; aspect-ratio: 4/3; overflow: hidden;">
+            style="background: #fff; border-radius: 8px; padding: 24px; display: flex; align-items: center; justify-content: center; aspect-ratio: 4/3; overflow: hidden;">
             <img id="spec-dimension-image" src="assets/dimension.png" alt="Product Dimensions"
               style="max-width: 100%; max-height: 100%; object-fit: contain;">
           </div>
@@ -178,7 +178,7 @@
 
       <!-- ==================== PRODUCT B2B ICONS ROW START ==================== -->
       <div class="product-icons-row-wrapper"
-        style="margin-top: 32px; border-top: 1px solid var(--line); padding-top: 32px; padding-bottom: 8px;">
+        style="margin-top: 32px; padding-top: 10px; padding-bottom: 8px;">
         <div class="product-icons-row" style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center;">
           <img src="assets/p_icon_01.png" alt="Icon 1"
             style="height: 48px; width: auto; opacity: 0.85; transition: opacity 0.2s;"
@@ -207,15 +207,15 @@
 
       <!-- ==================== PRODUCT OPTIONS SECTION START ==================== -->
       <div class="options-section"
-        style="margin-top: 48px; border-top: 1px solid var(--line); padding-top: 40px; margin-bottom: 60px;">
-        <h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px;">Product Configuration Options
-        </h3>
+        style="margin-top: 20px; border-top: 1px solid var(--line); padding-top: 20px; margin-bottom: 60px;">
+        
 
         <div class="options-grid-layout"
           style="display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 48px; align-items: start;">
 
           <!-- DYNAMIC CONFIGURATOR WORKSPACE START -->
-          <div class="config-workspace" id="dynamic-configurator">
+          
+          <div class="config-workspace" id="dynamic-configurator">            
             <!-- Dynamically populated options with constraints -->
           </div>
           <!-- DYNAMIC CONFIGURATOR WORKSPACE END -->
@@ -808,7 +808,7 @@
 
         // Render Configurator Options
         function renderConfigurator() {
-          configurator.innerHTML = '';
+          configurator.innerHTML = '<h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px;">Product Configuration Options</h3>';
           const options = activeVariant.options;
 
           // Configurator option fields only for current product model (bypass variant switch)
@@ -849,7 +849,7 @@
                 else if (name.includes('6000K') || name.includes('6500K')) dotColor = '#dcf0ff';
                 else if (name.includes('RGB')) dotColor = 'linear-gradient(to right, red, green, blue)';
 
-                btn.innerHTML = `<span class="color-dot" style="background:${dotColor}"></span> ${val.name}`;
+                btn.innerHTML = `${val.name}`;
               } else {
                 btn.textContent = val.name;
               }
