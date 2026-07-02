@@ -817,3 +817,21 @@
   border-color: var(--border-light);
   pointer-events: none;
 }
+
+/* Restructured Configurator & Accessories Grid Layouts */
+@media (max-width: 960px) {
+  .options-grid-layout {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+  .config-summary-card {
+    position: static !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .accessories-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}
