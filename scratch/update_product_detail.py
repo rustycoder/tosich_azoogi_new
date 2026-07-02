@@ -1,0 +1,689 @@
+import os
+
+# Read the restored product-detail.html file
+with open("product-detail.html", "r") as f:
+    content = f.read()
+
+# 1. Update <head> to load products_data.js and mega_menu.js
+head_target = """  <link rel="stylesheet" href="assets/css/style_demo.css">
+  <link rel="stylesheet" href="assets/css/product_detail.css">
+</head>"""
+
+head_replacement = """  <link rel="stylesheet" href="assets/css/style_demo.css">
+  <link rel="stylesheet" href="assets/css/product_detail.css">
+  <script src="assets/js/products_data.js"></script>
+  <script src="assets/js/mega_menu.js"></script>
+</head>"""
+
+if head_target in content:
+    content = content.replace(head_target, head_replacement)
+    print("Head links successfully updated.")
+else:
+    print("WARNING: Head links target not found!")
+
+# 2. Replace static header block with dynamic header
+lines = content.splitlines(keepends=True)
+start_idx = None
+end_idx = None
+
+for idx, line in enumerate(lines):
+    if "<!-- ========== HEADER ========== -->" in line and start_idx is None:
+        start_idx = idx
+    if "</header>" in line and start_idx is not None and idx > start_idx:
+        end_idx = idx
+        break
+
+if start_idx is not None and end_idx is not None:
+    print(f"Replacing header block from index {start_idx} to {end_idx}")
+    dynamic_header = """  <!-- ========== HEADER ========== -->
+  <header class="topbar solid" id="topbar">
+    <div class="util">
+      <div class="util-inner">
+        <div>Trusted by architects, designers & builders across Australia</div>
+        <div style="display:flex;gap:24px">
+          <a href="#">1300 AZOOGI</a><a href="#">sales@azoogi.com.au</a>
+          <div style="display:flex; align-items:center;"><a href="#">Trade Login</a><button class="theme-btn"
+              aria-label="Toggle theme" onclick="toggleTheme()"><svg class="sun-icon" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg><svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg></button></div>
+        </div>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="#" class="logo"><img src="assets/logo_white.png" width="80"></a>
+      <div class="menu">
+        <div class="has-dropdown">
+          <a href="#products">Product <span class="caret">&#9662;</span></a>
+          <div class="mega-menu" id="dynamic-mega-menu"></div>
+        </div>
+        <a href="#projects">Projects</a>
+        <a href="#support">Support</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="#contact" class="cta">Get a Quote</a>
+      <div class="burger"><span></span><span></span><span></span></div>
+    </nav>
+  </header>
+"""
+    lines[start_idx:end_idx+1] = [dynamic_header]
+    content = "".join(lines)
+else:
+    print("WARNING: Header block tags not found!")
+
+# 3. Replace the bottom script block
+script_target = """    document.addEventListener("DOMContentLoaded", () => {
+      const savedTheme = localStorage.getItem(\x27theme\x27) || \x27dark\x27;
+      document.documentElement.setAttribute(\x27data-theme\x27, savedTheme);
+      updateLogos(savedTheme);
+    });
+
+    /* ===== Product Page Interaction Script ===== */"""
+
+dynamic_script = """    document.addEventListener("DOMContentLoaded", () => {
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateLogos(savedTheme);
+
+      // Initialize dynamic product configurator
+      initDynamicProductPage();
+    });
+
+    function initDynamicProductPage() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const jsonFile = urlParams.get('file');
+
+      if (jsonFile) {
+        // Fetch and load dynamically from the JSON file reference
+        fetch(jsonFile)
+          .then(response => {
+            if (!response.ok) throw new Error("Failed to load JSON file");
+            return response.json();
+          })
+          .then(variantData => {
+            const pathClean = decodeURIComponent(jsonFile);
+            const parts = pathClean.split('/');
+            const categoryPath = parts.slice(1, -1);
+            const productCode = parts[parts.length - 2] || "Product";
+            const variantKey = parts[parts.length - 1].replace('_v3.json', '');
+
+            // Load full product structure from local database to preserve configurator options
+            let product = AZOOGI_PRODUCTS.products[productCode];
+            if (!product) {
+              product = {
+                name: productCode,
+                category_path: categoryPath,
+                variants: {}
+              };
+            }
+
+            // Update/inject fetched variant data
+            product.variants[variantKey] = variantData;
+
+            setupPageWithData(product, variantKey);
+          })
+          .catch(err => {
+            console.warn("Falling back to local database:", err);
+            loadFromLocalDatabase();
+          });
+      } else {
+        loadFromLocalDatabase();
+      }
+
+      function loadFromLocalDatabase() {
+        let productCode = urlParams.get('product');
+        let variantParam = urlParams.get('variant');
+
+        // Extract parameters from jsonFile path under local CORS fallback
+        if (jsonFile) {
+          const pathClean = decodeURIComponent(jsonFile);
+          const parts = pathClean.split('/');
+          productCode = parts[parts.length - 2] || productCode;
+          variantParam = parts[parts.length - 1].replace('_v3.json', '') || variantParam;
+        }
+
+        let product = null;
+        if (productCode) {
+          product = AZOOGI_PRODUCTS.products[productCode];
+        }
+
+        if (!product && variantParam) {
+          for (const rowKey in AZOOGI_PRODUCTS.products) {
+            const rowNode = AZOOGI_PRODUCTS.products[rowKey];
+            if (rowNode.variants && rowNode.variants[variantParam]) {
+              product = rowNode;
+              productCode = rowKey;
+              break;
+            }
+          }
+        }
+
+        if (!product) {
+          productCode = Object.keys(AZOOGI_PRODUCTS.products)[0];
+          product = AZOOGI_PRODUCTS.products[productCode];
+        }
+
+        let activeVariantKey = null;
+        if (variantParam && product.variants && product.variants[variantParam]) {
+          activeVariantKey = variantParam;
+        } else {
+          activeVariantKey = Object.keys(product.variants)[0];
+        }
+
+        setupPageWithData(product, activeVariantKey);
+      }
+
+      function setupPageWithData(product, activeVariantKey) {
+        let activeVariant = product.variants[activeVariantKey];
+
+        // Configuration state
+        let selectedOptions = {};
+        let selectedLength = 5.0;
+
+        // DOM Elements
+        const productNameEl = document.getElementById('product-name');
+        const productCodeEl = document.getElementById('product-code-label');
+        const breadcrumbsEl = document.getElementById('breadcrumbs');
+        const galleryMainImg = document.getElementById('gallery-main-img');
+        const galleryThumbs = document.getElementById('gallery-thumbs');
+        const configurator = document.getElementById('dynamic-configurator');
+        const specTableBody = document.getElementById('spec-table-body');
+        const descText = document.getElementById('tab-desc-text');
+        const specField = document.getElementById('quote-spec');
+
+        const calcPower = document.getElementById('calc-power');
+        const calcLumens = document.getElementById('calc-lumens');
+        const calcDriver = document.getElementById('calc-driver');
+        const capacityPct = document.getElementById('calc-capacity-pct');
+        const driverBarFill = document.getElementById('driver-bar-fill');
+        const driverWarning = document.getElementById('driver-warning-msg');
+        const calcPanel = document.querySelector('.calc-panel');
+
+        // Resolve Category Path values dynamically
+        const categoryName = (product.category_path && product.category_path[0]) || "";
+        const subcategoryName = (product.category_path && product.category_path.slice(1, -1).join(' / ')) || "";
+
+        // Assign back to product object so recalculate() works
+        product.category = categoryName;
+        product.subcategory = subcategoryName;
+
+        // Update Basic Info
+        productNameEl.textContent = product.name;
+        descText.innerHTML = `This premium product is part of the <strong>${subcategoryName}</strong> range under the <strong>${categoryName}</strong> category. Engineered with high-end materials to deliver professional-grade lighting outputs for architectural highlights, commercial projects, and residential luxury designs.`;
+
+        // Update Breadcrumbs
+        breadcrumbsEl.innerHTML = `
+          <a href="demo.html">Home</a>
+          <span>/</span>
+          <a href="demo.html#products">Products</a>
+          <span>/</span>
+          <a href="#">${categoryName}</a>
+          <span>/</span>
+          ${subcategoryName ? `<a href="#">${subcategoryName}</a><span>/</span>` : ''}
+          <span style="color: var(--ink);">${product.name}</span>
+        `;
+
+        // Load Variant Data
+        function loadVariant(variantKey) {
+          activeVariantKey = variantKey;
+          activeVariant = product.variants[variantKey];
+
+          // Reset selections
+          selectedOptions = {};
+
+          // Initialize default selections (choose first option in each group)
+          for (const key in activeVariant.options) {
+            if (activeVariant.options.hasOwnProperty(key)) {
+              selectedOptions[key] = activeVariant.options[key][0].id;
+            }
+          }
+
+          renderGallery();
+          renderConfigurator();
+          renderSpecs();
+          checkConstraints();
+          recalculate();
+        }
+
+        // Render Gallery
+        function renderGallery() {
+          galleryThumbs.innerHTML = '';
+          const images = activeVariant.product_images || [];
+
+          if (images.length === 0) {
+            galleryMainImg.src = 'assets/logo_dark.png';
+            return;
+          }
+
+          // Set main image
+          galleryMainImg.src = images[0];
+          galleryMainImg.style.opacity = '1';
+          galleryMainImg.style.mixBlendMode = 'normal';
+
+          // Add glow elements or modify SVGs
+          const isNeonOrStrip = product.category.toLowerCase().includes('neon') || product.category.toLowerCase().includes('linear') || product.name.toLowerCase().includes('strip') || product.name.toLowerCase().includes('nnr');
+          const neonSvg = document.getElementById('neon-svg');
+          const glowArea = document.getElementById('glow-area');
+
+          if (isNeonOrStrip) {
+            if (neonSvg) neonSvg.style.display = 'block';
+            if (glowArea) glowArea.style.background = 'radial-gradient(circle at center, rgba(var(--glow-rgb, 103, 208, 78), 0.08) 0%, transparent 70%)';
+          } else {
+            // spotlight cone glow for downlights, or circular halo for modules
+            if (neonSvg) neonSvg.style.display = 'none';
+            if (glowArea) glowArea.style.background = 'radial-gradient(circle at center, rgba(var(--glow-rgb, 255, 255, 255), 0.15) 0%, transparent 60%)';
+          }
+
+          images.forEach((imgSrc, idx) => {
+            const thumb = document.createElement('div');
+            thumb.className = `thumb-card${idx === 0 ? ' active' : ''}`;
+            thumb.innerHTML = `<img src="${imgSrc}" alt="Product Thumbnail ${idx + 1}">`;
+
+            thumb.addEventListener('click', () => {
+              galleryThumbs.querySelectorAll('.thumb-card').forEach(t => t.classList.remove('active'));
+              thumb.classList.add('active');
+              galleryMainImg.src = imgSrc;
+
+              // Fade neon SVG outline if viewing sub-pictures
+              if (idx > 0) {
+                if (neonSvg) neonSvg.style.opacity = '0.15';
+              } else {
+                if (neonSvg) neonSvg.style.opacity = '1';
+              }
+            });
+
+            galleryThumbs.appendChild(thumb);
+          });
+        }
+
+        // Render Configurator Options
+        function renderConfigurator() {
+          configurator.innerHTML = '';
+          const options = activeVariant.options;
+
+          // Render Variant Selector if multiple variants exist
+          const variantKeys = Object.keys(product.variants);
+          if (variantKeys.length > 1) {
+            const group = document.createElement('div');
+            group.className = 'config-group';
+            group.innerHTML = `
+              <div class="config-group-title">
+                <span>Select Model Type / Voltage</span>
+                <span id="selected-variant-label" style="color: var(--accent);">${activeVariantKey}</span>
+              </div>
+              <div class="config-options-flex" id="options-flex-variant"></div>
+            `;
+            configurator.appendChild(group);
+
+            const flex = group.querySelector('#options-flex-variant');
+            variantKeys.forEach(vKey => {
+              const btn = document.createElement('button');
+              btn.className = `config-btn${vKey === activeVariantKey ? ' active' : ''}`;
+              btn.textContent = vKey.replace(product.name + '-', '');
+              btn.addEventListener('click', () => {
+                loadVariant(vKey);
+              });
+              flex.appendChild(btn);
+            });
+          }
+
+          // Render configuration fields
+          for (const optKey in options) {
+            if (!options.hasOwnProperty(optKey)) continue;
+
+            const optVals = options[optKey];
+
+            const group = document.createElement('div');
+            group.className = 'config-group';
+            group.innerHTML = `
+              <div class="config-group-title">
+                <span>${optKey}</span>
+                <span id="selected-${optKey.replace(/\s+/g, '-')}-label" style="color: var(--accent);"></span>
+              </div>
+              <div class="config-options-flex" id="options-flex-${optKey.replace(/\s+/g, '-')}"></div>
+            `;
+            configurator.appendChild(group);
+
+            const flex = group.querySelector(`#options-flex-${optKey.replace(/\s+/g, '-')}`);
+
+            optVals.forEach(val => {
+              const btn = document.createElement('button');
+              btn.className = 'config-btn';
+              btn.setAttribute('data-opt-key', optKey);
+              btn.setAttribute('data-opt-id', val.id);
+              btn.setAttribute('data-opt-name', val.name);
+
+              if (optKey.toUpperCase() === 'CCT') {
+                let dotColor = '#ffffff';
+                const name = val.name.toUpperCase();
+                if (name.includes('2300K') || name.includes('2200K')) dotColor = '#ffa64d';
+                else if (name.includes('2700K')) dotColor = '#ffb45a';
+                else if (name.includes('3000K')) dotColor = '#ffc878';
+                else if (name.includes('4000K') || name.includes('4300K')) dotColor = '#ffebc8';
+                else if (name.includes('6000K') || name.includes('6500K')) dotColor = '#dcf0ff';
+                else if (name.includes('RGB')) dotColor = 'linear-gradient(to right, red, green, blue)';
+
+                btn.innerHTML = `<span class="color-dot" style="background:${dotColor}"></span> ${val.name}`;
+              } else {
+                btn.textContent = val.name;
+              }
+
+              btn.addEventListener('click', () => {
+                selectedOptions[optKey] = val.id;
+                checkConstraints();
+                recalculate();
+              });
+
+              flex.appendChild(btn);
+            });
+          }
+
+          // Render Custom Length Slider if linear/neon product
+          const isLinear = product.category.toLowerCase().includes('neon') || product.category.toLowerCase().includes('linear') || product.name.toLowerCase().includes('strip') || product.name.toLowerCase().includes('nnr');
+          if (isLinear) {
+            const lengthGroup = document.createElement('div');
+            lengthGroup.className = 'config-group';
+            lengthGroup.innerHTML = `
+              <div class="config-group-title">
+                <span>Custom Run Length</span>
+                <span style="color: var(--accent);"><span id="length-val">5.0</span> m</span>
+              </div>
+              <div class="slider-wrapper">
+                <div class="slider-header">
+                  <input type="range" min="1" max="15" step="0.5" value="${selectedLength}" class="range-input" id="length-slider">
+                </div>
+              </div>
+            `;
+            configurator.appendChild(lengthGroup);
+
+            const slider = lengthGroup.querySelector('#length-slider');
+            slider.addEventListener('input', function () {
+              selectedLength = parseFloat(this.value);
+              document.getElementById('length-val').textContent = selectedLength.toFixed(1);
+              recalculate();
+            });
+            if (calcPanel) calcPanel.style.display = 'block';
+          } else {
+            if (calcPanel) calcPanel.style.display = 'none';
+          }
+        }
+
+        // Render Specifications
+        function renderSpecs() {
+          specTableBody.innerHTML = '';
+          const features = activeVariant.product_features || {};
+          for (const key in features) {
+            if (features.hasOwnProperty(key)) {
+              const val = features[key];
+              const row = document.createElement('tr');
+              row.innerHTML = `
+                <td>${key}</td>
+                <td>${Array.isArray(val) ? val.join(' ') : val}</td>
+              `;
+              specTableBody.appendChild(row);
+            }
+          }
+        }
+
+        // Constraints Logic Checker
+        function checkConstraints() {
+          const prohibitedIds = new Set();
+
+          const activeIds = Object.values(selectedOptions);
+          activeIds.forEach(id => {
+            if (activeVariant.constraints && activeVariant.constraints[id]) {
+              activeVariant.constraints[id].forEach(forbiddenId => {
+                prohibitedIds.add(forbiddenId);
+              });
+            }
+          });
+
+          const options = activeVariant.options;
+          for (const optKey in options) {
+            if (!options.hasOwnProperty(optKey)) continue;
+
+            const optVals = options[optKey];
+            const flex = document.getElementById(`options-flex-${optKey.replace(/\s+/g, '-')}`);
+            if (!flex) continue;
+
+            let hasActiveValid = false;
+            let currentSelectedId = selectedOptions[optKey];
+
+            const btns = flex.querySelectorAll('.config-btn');
+            btns.forEach(btn => {
+              const optId = btn.getAttribute('data-opt-id');
+
+              if (prohibitedIds.has(String(optId)) || prohibitedIds.has(Number(optId))) {
+                btn.disabled = true;
+                btn.classList.add('disabled');
+                btn.classList.remove('active');
+              } else {
+                btn.disabled = false;
+                btn.classList.remove('disabled');
+
+                if (String(optId) === String(currentSelectedId)) {
+                  btn.classList.add('active');
+                  hasActiveValid = true;
+                } else {
+                  btn.classList.remove('active');
+                }
+              }
+            });
+
+            // Fallback resolution
+            if (!hasActiveValid && optVals.length > 0) {
+              let fallbackVal = null;
+              for (let i = 0; i < optVals.length; i++) {
+                const optId = optVals[i].id;
+                if (!prohibitedIds.has(String(optId)) && !prohibitedIds.has(Number(optId))) {
+                  fallbackVal = optVals[i];
+                  break;
+                }
+              }
+              if (fallbackVal) {
+                selectedOptions[optKey] = String(fallbackVal.id);
+                btns.forEach(btn => {
+                  const optId = btn.getAttribute('data-opt-id');
+                  if (String(optId) === String(fallbackVal.id)) {
+                    btn.classList.add('active');
+                  }
+                });
+              }
+            }
+
+            // Update active labels
+            const selectedId = selectedOptions[optKey];
+            const selectedValObj = optVals.find(v => String(v.id) === String(selectedId));
+            const label = document.getElementById(`selected-${optKey.replace(/\s+/g, '-')}-label`);
+            if (label && selectedValObj) {
+              label.textContent = selectedValObj.name;
+            }
+          }
+        }
+
+        // Recalculate parameters, SKU, lumens, drivers
+        function recalculate() {
+          let wattageVal = 14.4;
+          let selectedCctText = "";
+          let selectedFinishText = "";
+
+          const options = activeVariant.options;
+          for (const optKey in options) {
+            const optVals = options[optKey];
+            const selectedId = selectedOptions[optKey];
+            const valObj = optVals.find(v => String(v.id) === String(selectedId));
+            if (valObj) {
+              if (optKey.toUpperCase() === 'WATTAGE') {
+                wattageVal = parseFloat(valObj.name.replace(/[^\d.]/g, '')) || 14.4;
+              } else if (optKey.toUpperCase() === 'CCT') {
+                selectedCctText = valObj.name;
+              } else if (optKey.toUpperCase() === 'FINISH' || optKey.toUpperCase() === 'COLOUR') {
+                selectedFinishText = valObj.name;
+              }
+            }
+          }
+
+          const totalPower = selectedLength * wattageVal;
+          const totalLumens = selectedLength * (wattageVal * 85);
+
+          if (calcPower) calcPower.textContent = totalPower.toFixed(1) + ' W';
+          if (calcLumens) calcLumens.textContent = Math.round(totalLumens).toLocaleString() + ' lm';
+
+          const requiredCapacity = totalPower * 1.20;
+          let driverRecommendation = "Azoogi 20W 24V IP67";
+          let driverPowerLimit = 20;
+
+          if (requiredCapacity > 200) {
+            driverRecommendation = "Multiple feeds / 2x Azoogi 150W Drivers";
+            driverPowerLimit = 300;
+          } else if (requiredCapacity > 150) {
+            driverRecommendation = "Azoogi 240W 24V IP67";
+            driverPowerLimit = 240;
+          } else if (requiredCapacity > 120) {
+            driverRecommendation = "Azoogi 150W 24V IP67";
+            driverPowerLimit = 150;
+          } else if (requiredCapacity > 80) {
+            driverRecommendation = "Azoogi 120W 24V IP67";
+            driverPowerLimit = 120;
+          } else if (requiredCapacity > 50) {
+            driverRecommendation = "Azoogi 80W 24V IP67";
+            driverPowerLimit = 80;
+          } else if (requiredCapacity > 20) {
+            driverRecommendation = "Azoogi 50W 24V IP67";
+            driverPowerLimit = 50;
+          }
+
+          if (calcDriver) calcDriver.textContent = driverRecommendation;
+
+          const percentage = Math.min(100, Math.round((totalPower / driverPowerLimit) * 100));
+          if (capacityPct) capacityPct.textContent = percentage + '%';
+          if (driverBarFill) driverBarFill.style.width = percentage + '%';
+
+          if (selectedLength > 10.0) {
+            if (driverWarning) driverWarning.style.display = 'block';
+          } else {
+            if (driverWarning) driverWarning.style.display = 'none';
+          }
+
+          let selectedOptionsSummary = [];
+          for (const key in selectedOptions) {
+            const id = selectedOptions[key];
+            const valObj = activeVariant.options[key].find(v => String(v.id) === String(id));
+            if (valObj) {
+              selectedOptionsSummary.push(`${key}: ${valObj.name}`);
+            }
+          }
+
+          const skuCode = `${product.name}-${activeVariantKey.replace(product.name + '-', '')}`;
+          if (productCodeEl) productCodeEl.textContent = `MODEL: ${skuCode}`;
+
+          const isLinear = product.category.toLowerCase().includes('neon') || product.category.toLowerCase().includes('linear') || product.name.toLowerCase().includes('strip') || product.name.toLowerCase().includes('nnr');
+          let specSummary = `Product: ${product.name} (${product.category})
+Subcategory: ${product.subcategory}
+Variant Model: ${activeVariantKey}
+Selected Options:
+${selectedOptionsSummary.map(s => "  - " + s).join('\\n')}`;
+
+          if (isLinear) {
+            specSummary += `
+Requested custom cut length: ${selectedLength.toFixed(1)}m
+Total power load: ${totalPower.toFixed(1)}W
+Recommended system driver: ${driverRecommendation}`;
+          }
+
+          if (specField) specField.value = specSummary;
+
+          // Visual color glow update
+          const glowArea = document.getElementById('glow-area');
+          const neonPath = document.getElementById('neon-path');
+          const neonSvg = document.getElementById('neon-svg');
+          if (glowArea) {
+            let glowColor = '103, 208, 78';
+            if (selectedCctText.includes('2300K') || selectedCctText.includes('2200K')) glowColor = '255, 166, 77';
+            else if (selectedCctText.includes('2700K')) glowColor = '255, 180, 90';
+            else if (selectedCctText.includes('3000K')) glowColor = '255, 200, 120';
+            else if (selectedCctText.includes('4000K') || selectedCctText.includes('4300K')) glowColor = '255, 235, 200';
+            else if (selectedCctText.includes('6000K') || selectedCctText.includes('6500K')) glowColor = '220, 240, 255';
+            document.documentElement.style.setProperty('--glow-rgb', glowColor);
+
+            if (neonPath) {
+              neonPath.style.transition = 'none';
+              neonPath.style.strokeWidth = '22';
+              setTimeout(() => {
+                neonPath.style.transition = 'stroke-width 0.8s ease, filter 0.5s ease';
+                neonPath.style.strokeWidth = '14';
+              }, 50);
+            }
+          }
+        }
+
+        // Initialize
+        loadVariant(activeVariantKey);
+
+        // Accordion Tab controllers
+        document.querySelectorAll('.tab-nav-btn').forEach(btn => {
+          btn.addEventListener('click', function () {
+            document.querySelectorAll('.tab-nav-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+
+            this.classList.add('active');
+            const tabId = this.getAttribute('data-tab');
+            const panel = document.getElementById(tabId);
+            if (panel) panel.classList.add('active');
+          });
+        });
+
+        // Spec button click animation
+        const specBtn = document.getElementById('add-to-spec-btn');
+        if (specBtn) {
+          specBtn.addEventListener('click', function () {
+            const originalText = this.textContent;
+            this.textContent = 'Added to Specification!';
+            this.style.background = 'var(--rgba-hover)';
+            this.style.borderColor = 'var(--accent)';
+            this.style.color = 'var(--accent)';
+
+            setTimeout(() => {
+              this.textContent = originalText;
+              this.style.background = 'none';
+              this.style.borderColor = 'var(--border-light)';
+              this.style.color = 'var(--ink)';
+            }, 2000);
+          });
+        }
+      } // Closing setupPageWithData
+    } // Closing initDynamicProductPage
+
+    // Inquiry Quote form submit"""
+
+# Find script end
+# In our file, the script target is exactly this block. Let's do a find-and-replace!
+if script_target in content:
+    content = content.replace(script_target, dynamic_script)
+    print("Script successfully updated.")
+else:
+    # Try looking for a simplified script target if newlines match slightly differently
+    # Let's split content on DOMContentLoaded
+    parts = content.split('document.addEventListener("DOMContentLoaded", () => {')
+    if len(parts) >= 2:
+        # We replace the script from DOMContentLoaded to the end of the file (before handleQuoteSubmit)
+        # But let's keep it safe. Let's write the whole file with python script logic.
+        pass
+
+# Save back the file
+with open("product-detail.html", "w") as f:
+    f.write(content)
+
+print("Replacement complete.")

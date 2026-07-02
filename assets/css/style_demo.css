@@ -2267,36 +2267,74 @@ aside p {
 /* Variants Grid & Mini Cards */
 .mega-variant-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
 }
 
 .mega-variant-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border-light);
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
   border-radius: 4px;
-  padding: 10px;
+  padding: 6px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
   text-decoration: none;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 8px var(--shadow);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
 }
 
 .mega-variant-card:hover {
-  border-color: var(--accent);
-  background: var(--rgba-hover);
+  border-color: var(--accent) !important;
+  background: #f9f9f9 !important;
   transform: translateY(-2px);
+}
+
+.mega-variant-img-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  border-radius: 2px;
+  background-color: #ffffff !important;
 }
 
 .mega-variant-img {
   width: 100%;
-  aspect-ratio: 16/10;
-  background-size: cover;
-  background-position: center;
-  background-color: var(--rgba-hover);
-  border-radius: 2px;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Green loading line style */
+.mega-variant-img-container.loading::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  animation: loading-bar-pulse 1.4s infinite ease-in-out;
+}
+
+@keyframes loading-bar-pulse {
+  0% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  50% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  50.1% {
+    transform: scaleX(1);
+    transform-origin: right;
+  }
+  100% {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
 }
 
 .mega-variant-info {
@@ -2307,12 +2345,14 @@ aside p {
 
 .mega-variant-name {
   font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--pure-text);
+  font-size: 11px;
+  font-weight: 600;
+  color: #111111 !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding: 0 6px;
+  text-align: center;
 }
 
 .mega-variant-specs {
@@ -2322,5 +2362,168 @@ aside p {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* View All Buttons & Cards in Mega Menu */
+.view-all-range-btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  margin-top: 24px;
+  text-align: center;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.view-all-range-btn:hover {
+  background: var(--accent);
+  color: var(--pure-bg);
+  transform: translateY(-2px);
+}
+
+.view-all-card {
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  background: #ffffff !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.view-all-card:hover {
+  background: #f9f9f9 !important;
+  border-color: var(--accent) !important;
+}
+
+.view-all-card-inner svg {
+  transition: transform 0.2s ease;
+}
+
+.view-all-card:hover .view-all-card-inner svg {
+  transform: translateX(4px);
+}
+
+/* Mega Menu Collapsible Accordions */
+.mega-accordions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.mega-accordion-group {
+  border: none;
+  background: transparent;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.mega-accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  background: transparent;
+  cursor: pointer;
+  user-select: none;
+  border-bottom: 1px solid var(--border-light);
+  transition: opacity 0.2s ease;
+}
+
+.mega-accordion-header:hover {
+  background: transparent;
+  opacity: 0.8;
+}
+
+.mega-accordion-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+
+.mega-accordion-chevron {
+  color: var(--muted);
+  transition: transform 0.25s ease;
+}
+
+.mega-accordion-content {
+  max-height: 0;
+  padding: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s cubic-bezier(0, 1, 0, 1), padding 0.3s ease, opacity 0.25s ease;
+}
+
+/* Open State */
+.mega-accordion-group.open {
+  border: none;
+  background: transparent;
+}
+
+.mega-accordion-group.open .mega-accordion-header {
+  background: transparent;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.mega-accordion-group.open .mega-accordion-title {
+  color: var(--accent);
+}
+
+.mega-accordion-group.open .mega-accordion-chevron {
+  transform: rotate(180deg);
+  color: var(--accent);
+}
+
+.mega-accordion-group.open .mega-accordion-content {
+  max-height: 2000px;
+  padding: 10px 0;
+  opacity: 1;
+  overflow-y: auto;
+  transition: max-height 0.3s cubic-bezier(1, 0, 1, 0), padding 0.3s ease, opacity 0.25s ease;
+}
+
+/* Placeholder Logo, Metadata, and Subfolder Styling */
+.mega-variant-img.placeholder-logo {
+  object-fit: contain !important;
+  padding: 12px !important;
+  box-sizing: border-box !important;
+  background: #ffffff !important;
+  opacity: 0.9 !important;
+}
+
+.mega-variant-product {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-top: 1px;
+}
+
+.mega-product-subfolder-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px dashed var(--line);
+}
+
+.mega-product-subfolder-container {
+  padding-left: 0;
+  margin-bottom: 16px;
 }
 
