@@ -1,6 +1,10 @@
 /* Azoogi Product Detail CSS */
 
 /* --- Page Layout & Breadcrumbs --- */
+
+h2, h3{
+  font-weight: 500;
+}
 .product-page-wrapper {
   padding-top: 110px; /* offset for fixed topbar */
   min-height: 100vh;
@@ -604,7 +608,7 @@
 
 /* --- Quote Form / Spec Inquiry Section --- */
 .quote-section {
-  padding: 80px 0;
+  padding: 40px 0;
   border-top: 1px solid var(--line);
   background: linear-gradient(180deg, transparent 0%, rgba(var(--glow-rgb, 103, 208, 78), 0.01) 100%);
 }

@@ -109,6 +109,10 @@ img {
   border-bottom-color: var(--line)
 }
 
+h2, h3{
+  font-weight: 500;
+}
+
 .util {
   font-size: 12px;
   color: var(--nav-text);
