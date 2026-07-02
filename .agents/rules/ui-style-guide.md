@@ -1,7 +1,5 @@
 ---
 trigger: always_on
-glob: "*"
-description: Azoogi UI Style Guide: colors, typography, components, animations, and scripts.
 ---
 
 # Azoogi UI Style Guide
