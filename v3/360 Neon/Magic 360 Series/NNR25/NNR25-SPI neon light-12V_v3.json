@@ -1,0 +1,162 @@
+{
+  "product_name": "NNR25-SPI neon light-12V",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/678c9ff889112.jpg",
+    "https://file.colorsled.com/pro/catalog/product/678c9ff88069e.jpg",
+    "https://file.colorsled.com/pro/catalog/product/678c9ff863623.jpg",
+    "https://file.colorsled.com/pro/catalog/product/692fa068185e6.jpg",
+    "https://file.colorsled.com/pro/catalog/product/692fa0681834c.png"
+  ],
+  "product_features": {
+    "Led_Qty": [
+      "180LEDs",
+      "m"
+    ],
+    "Wattage": [
+      "21.6W",
+      "M"
+    ],
+    "Min Cut": [
+      "1*2led",
+      "11.1mm"
+    ],
+    "Luminous flux": [
+      "302LM",
+      "m@ RGB"
+    ],
+    "Bend radius": "≥120mm",
+    "IP": "IP65",
+    "Max run length (single‑end power feed)": "5m",
+    "Warranty": [
+      "5years indoor",
+      "Working life ≥60000 hours;3years semi-outdoor",
+      "Working life ≥36000 hours"
+    ],
+    "Product Certification": [
+      "UKCA",
+      "CE",
+      "UL",
+      "ROHS",
+      "REACH"
+    ],
+    "Operating/storage temperature": [
+      "Ta:-20~40℃",
+      "0℃～60℃"
+    ]
+  },
+  "options": {
+    "CCT": [
+      {
+        "name": "RGB-SPI",
+        "id": "844"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "No CRI",
+        "id": "538"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "21.6W/M",
+        "id": "404"
+      }
+    ],
+    "Silk Printing": [
+      {
+        "name": "COLORS",
+        "id": "643"
+      },
+      {
+        "name": "Neutral",
+        "id": "641"
+      },
+      {
+        "name": "Customize laser silk printing",
+        "id": "642"
+      }
+    ],
+    "Strip Length": [
+      {
+        "name": "5M",
+        "id": "652"
+      },
+      {
+        "name": "Customized Length",
+        "id": "665"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "S(One-end top)",
+        "id": "672"
+      },
+      {
+        "name": "S(One-end side)",
+        "id": "671"
+      }
+    ],
+    "Wire Type": [
+      {
+        "name": "PVC wire",
+        "id": "680"
+      }
+    ],
+    "Wire Length": [
+      {
+        "name": "50CM",
+        "id": "602"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Voltage": [
+      {
+        "name": "12V",
+        "id": "646"
+      }
+    ],
+    "IP": [
+      {
+        "name": "Gluing end cap(IP65)",
+        "id": "630"
+      }
+    ],
+    "ESD": [
+      {
+        "name": "ESD",
+        "id": "651"
+      }
+    ],
+    "Distribution pack": [
+      {
+        "name": "Engineering package",
+        "id": "845"
+      },
+      {
+        "name": "Distribution package",
+        "id": "648"
+      }
+    ]
+  },
+  "constraints": {
+    "643": [
+      552
+    ],
+    "641": [
+      553
+    ],
+    "642": [
+      553
+    ]
+  }
+}

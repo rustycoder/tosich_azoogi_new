@@ -1,0 +1,196 @@
+{
+  "product_name": "BH5470FP",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/6746fc5cb98b9.jpg"
+  ],
+  "product_features": {
+    "Material": [
+      "AL6063-T5,spraying surface",
+      "anodizing"
+    ],
+    "Coating": "Silver anodized(RAL9006),Black(RAL9005),White(RAL9003)",
+    "Lighting direction": "upward & downward",
+    "Light efficiency": [
+      "100LM",
+      "W"
+    ],
+    "U G R": "UGR<19(X=4H,Y=8H)",
+    "Dimming": [
+      "Non",
+      "DALI-2+PUSH",
+      "1-10V"
+    ],
+    "Length": "1200mm/1800mm optional (other length on request)",
+    "Color tolerance": "SDCM≤3(ANSI)",
+    "CRI": [
+      "80",
+      "90"
+    ],
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K",
+      "5000K",
+      "6500K"
+    ],
+    "Input voltage": "AC220-240V",
+    "Application": "Indoor",
+    "Installation": "Pendant",
+    "IP Rating": "IP20",
+    "Certification": [
+      "CE",
+      "CB",
+      "UKCA",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Normal",
+        "id": "708"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "Prismatic",
+        "id": "60"
+      }
+    ],
+    "Length": [
+      {
+        "name": "1200mm",
+        "id": "145"
+      },
+      {
+        "name": "1800mm",
+        "id": "147"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "60W",
+        "id": "283"
+      },
+      {
+        "name": "38W",
+        "id": "279"
+      }
+    ],
+    "Carrier Style": [
+      {
+        "name": "Flat carrier",
+        "id": "115"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "1-10V Dimming",
+        "id": "542"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      }
+    ],
+    "Light Source Type": [
+      {
+        "name": "Constant Current Rigid PCB",
+        "id": "265"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC200-240V",
+        "id": "585"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Package": [
+      {
+        "name": "COLORS Individual",
+        "id": "551"
+      }
+    ]
+  },
+  "constraints": {
+    "145": [
+      283
+    ],
+    "147": [
+      279
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "product_name": "RE-G2SR35L1",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/66d12bd1dcd51.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": "G2SR35L1",
+    "Installation method": "Recessed",
+    "Material process": [
+      "aluminum",
+      "oil spraying"
+    ],
+    "Size": "φ52*17mm",
+    "Quantity": [
+      "1PCS",
+      "set"
+    ],
+    "Other": "Including 1pcs recessed part of the G2SR35L1 downlight and 3pcs  screws."
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

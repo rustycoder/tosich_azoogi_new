@@ -1,0 +1,66 @@
+{
+  "product_name": "PG-I",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67ff7809b1cef.png",
+    "https://file.colorsled.com/pro/catalog/product/6878bfa9255de.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": "LS1911C/LS1911K/LS3535/LS5050/LS3360/LS4067/LS5470(F)/LS7977/LT60/BH3360/BH5470/BH7977/BS3360/BS5470/BS7977/LS60/S60/LS25/LH40FD/LH40FP/LH40G/LS40FD/LS40FP/LS40G/LS40GW/M20FD/M20G(A)/M20G/M20I/M20S/R25FD/R25FP/R25G/R25KD/R25L/R35I/R35S/RNR30MJ/RNR30NJ/RNR30NK",
+    "Installation method": "pendant",
+    "Material process": [
+      "",
+      ""
+    ],
+    "Maximum weight capacity": "8KG",
+    "Quantity": [
+      "2PCS",
+      "set"
+    ],
+    "Other": "Pendant rod (1-2m adjustable), include 2pcs pendant rods, 2 pcs rectangular screw"
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "0.5-1 Meter Adjustable",
+        "id": "173"
+      },
+      {
+        "name": "1-2 Meter Adjustable",
+        "id": "174"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "Pendant Type": [
+      {
+        "name": "Without junction box",
+        "id": "742"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

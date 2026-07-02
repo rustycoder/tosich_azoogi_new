@@ -1,0 +1,56 @@
+{
+  "product_name": "EC-MS70",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/6849633499853.png"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "MS70",
+      "MH70"
+    ],
+    "Material process": [
+      "ADC12",
+      "powder-coated"
+    ],
+    "Size": "L70.2*W70.7*H17mm",
+    "Quantity": [
+      "2PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

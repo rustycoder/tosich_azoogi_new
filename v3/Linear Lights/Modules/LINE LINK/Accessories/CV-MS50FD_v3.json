@@ -1,0 +1,60 @@
+{
+  "product_name": "CV-MS50FD",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/6849636779e34.png"
+  ],
+  "product_features": {
+    "Applicable product model": "MS50FD/MH50FD(suitable for down-lighting)",
+    "Diffuser Nature": "Diffuser",
+    "Material process": "PC",
+    "Light transmittance": "80%",
+    "Size": [
+      "50m",
+      "Reel: 50000*45.8*5.9mm"
+    ],
+    "Other": "Fire protection rating UL94-V2;"
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Package Length": [
+      {
+        "name": "50 Meter/Reel",
+        "id": "1523"
+      },
+      {
+        "name": "5 Meter/Reel",
+        "id": "1591"
+      },
+      {
+        "name": "10 Meter/Reel",
+        "id": "1592"
+      },
+      {
+        "name": "20 Meter/Reel",
+        "id": "1511"
+      }
+    ]
+  },
+  "constraints": []
+}

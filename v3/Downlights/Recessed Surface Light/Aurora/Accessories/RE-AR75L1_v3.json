@@ -1,0 +1,45 @@
+{
+  "product_name": "RE-AR75L1",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/6889858ca3994.png"
+  ],
+  "product_features": {
+    "Applicable product model": "AR75L1",
+    "Installation method": "recessed",
+    "Material process": [
+      "aluminum",
+      "oil spraying"
+    ],
+    "Size": "φ98*24mm",
+    "Quantity": [
+      "1PCS",
+      "set"
+    ],
+    "Other": "Including 1pcs recessed part of the AR75L1spotlight and 3pcs  screws."
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "White(Frame)",
+        "id": "871"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

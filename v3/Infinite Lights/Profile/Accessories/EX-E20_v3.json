@@ -1,0 +1,52 @@
+{
+  "product_name": "EX-E20",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/6913fbc4ddd8d.png"
+  ],
+  "product_features": {
+    "Applicable product model": "CS7070",
+    "Material process": [
+      "SPCC",
+      "Electrophoresis"
+    ],
+    "Size": "L66.8*W30*H15.7mm",
+    "Quantity": [
+      "1 PCS",
+      "SET"
+    ],
+    "Other": "Includes mounting screws."
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 SET",
+        "id": "561"
+      }
+    ]
+  },
+  "constraints": []
+}

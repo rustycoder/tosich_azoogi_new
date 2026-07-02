@@ -1,0 +1,201 @@
+{
+  "product_name": "P3E75L2",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/6942041cbecf2.png",
+    "https://file.colorsled.com/pro/catalog/product/6942041c8a9bb.png",
+    "https://file.colorsled.com/pro/catalog/product/6942041c92346.png",
+    "https://file.colorsled.com/pro/catalog/product/6942041c92b34.png",
+    "https://file.colorsled.com/pro/catalog/product/6942041cd085c.png",
+    "https://file.colorsled.com/pro/catalog/product/6942041cec217.png"
+  ],
+  "product_features": {
+    "Material": "ADC12，spraying surface",
+    "Coating": [
+      "Black",
+      "White"
+    ],
+    "Lighting direction": "downward",
+    "Spotlight angle": [
+      "24°",
+      "36°"
+    ],
+    "UGR(X=4H,Y=8H)": "≤3(24°), UGR≤10(36°)",
+    "Opening size": "φ75mm",
+    "Dimming": [
+      "Non",
+      "DALI",
+      "0-10V",
+      "Triac",
+      "No power"
+    ],
+    "Color tolerance": "SDCM≤3",
+    "CRI": "＞90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K"
+    ],
+    "Input voltage": "AC220-240V",
+    "Application": "Indoor",
+    "Power installation": "External",
+    "Installation": "Recessed",
+    "IP Rating": "IP20",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "Opening φ75mm",
+        "id": "1544"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "12W",
+        "id": "291"
+      },
+      {
+        "name": "9W",
+        "id": "349"
+      }
+    ],
+    "Beam Angle": [
+      {
+        "name": "24°",
+        "id": "745"
+      },
+      {
+        "name": "36°",
+        "id": "621"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black(Frame)",
+        "id": "873"
+      },
+      {
+        "name": "White(Frame)",
+        "id": "871"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Casambi",
+        "id": "539"
+      },
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "0-10V Dimming",
+        "id": "1397"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      },
+      {
+        "name": "Triac Dimming",
+        "id": "1539"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      }
+    ],
+    "Reflector Colour": [
+      {
+        "name": "Mirror",
+        "id": "612"
+      },
+      {
+        "name": "Matte White",
+        "id": "609"
+      },
+      {
+        "name": "Matte Black",
+        "id": "610"
+      },
+      {
+        "name": "Black chrome",
+        "id": "611"
+      }
+    ],
+    "IP Rating": [
+      {
+        "name": "IP20",
+        "id": "629"
+      }
+    ],
+    "Optical": [
+      {
+        "name": "Honeycomb",
+        "id": "613"
+      },
+      {
+        "name": "NO",
+        "id": "1249"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "With cable of drive input",
+        "id": "782"
+      },
+      {
+        "name": "With junction box",
+        "id": "786"
+      }
+    ],
+    "User Manual": [
+      {
+        "name": "EN",
+        "id": "608"
+      },
+      {
+        "name": "CN",
+        "id": "607"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": []
+}

@@ -1,0 +1,164 @@
+{
+  "product_name": "LF-GLD080YE",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67c949b743016.png"
+  ],
+  "product_features": {
+    "Dimming": "0-10V Dimming",
+    "Product name": [
+      "LF-GLD080YE1600H",
+      "LF-GLD080YE1700H",
+      "LF-GLD080YE1800H",
+      "LF-GLD080YE1900H",
+      "LF-GLD080YE2000H"
+    ],
+    "Output power": [
+      "64W",
+      "68W",
+      "70W",
+      "76W",
+      "80W"
+    ],
+    "Output current": [
+      "1.6A",
+      "1.7A",
+      "1.8A",
+      "1.9A",
+      "2A"
+    ],
+    "Product size": "355*30*21mm",
+    "Input voltage": "AC220-240V",
+    "Output voltage": "DC25-40V",
+    "PF": "PF≥0.9",
+    "IP": "IP20",
+    "Material": "Metal housing",
+    "Certification": [
+      "CCC",
+      "ENEC",
+      "CE",
+      "RCM",
+      "UKCA"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "L355*W30.0*H21.0mm",
+        "id": "1393"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "64W",
+        "id": "1360"
+      },
+      {
+        "name": "68W",
+        "id": "324"
+      },
+      {
+        "name": "70W",
+        "id": "308"
+      },
+      {
+        "name": "76W",
+        "id": "282"
+      },
+      {
+        "name": "80W",
+        "id": "356"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "0-10V Dimming",
+        "id": "1397"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC220-240V",
+        "id": "1181"
+      }
+    ],
+    "Output Voltage": [
+      {
+        "name": "DC25-40V",
+        "id": "1371"
+      }
+    ],
+    "Output Current": [
+      {
+        "name": "1.6A",
+        "id": "1330"
+      },
+      {
+        "name": "1.7A",
+        "id": "1376"
+      },
+      {
+        "name": "1.8A",
+        "id": "1332"
+      },
+      {
+        "name": "1.9A",
+        "id": "1328"
+      },
+      {
+        "name": "2A",
+        "id": "1307"
+      }
+    ],
+    "IP Rating": [
+      {
+        "name": "IP20",
+        "id": "629"
+      }
+    ],
+    "PF Value": [
+      {
+        "name": "≥0.9",
+        "id": "1173"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": {
+    "1360": [
+      1376,
+      1332,
+      1328,
+      1307
+    ],
+    "324": [
+      1330,
+      1332,
+      1328,
+      1307
+    ],
+    "308": [
+      1330,
+      1376,
+      1328,
+      1307
+    ],
+    "282": [
+      1330,
+      1376,
+      1332,
+      1307
+    ],
+    "356": [
+      1330,
+      1376,
+      1332,
+      1328
+    ]
+  }
+}

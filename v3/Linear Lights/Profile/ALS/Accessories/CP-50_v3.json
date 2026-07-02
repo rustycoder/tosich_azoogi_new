@@ -1,0 +1,37 @@
+{
+  "product_name": "CP-50",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/NyznfDfsFQWBXzLi.png",
+    "https://file.colorsled.com/pro/catalog/product_img/UeVbJsjRFKLAYerG.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": "LG2020C",
+    "Installation method": "surface mounting",
+    "Material process": "stainless steel",
+    "Size": "21.1*21.1*15mm",
+    "Quantity": [
+      "4PCS",
+      "SET"
+    ],
+    "Others": "1 SET includes 4PCS clips and 6PCS screws"
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "4 PCS/SET",
+        "id": "557"
+      }
+    ]
+  },
+  "constraints": []
+}

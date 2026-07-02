@@ -1,0 +1,169 @@
+{
+  "product_name": "NNR40-RGB-24V",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/678ca2e86de98.gif",
+    "https://file.colorsled.com/pro/catalog/product/678ca30be1368.jpg",
+    "https://file.colorsled.com/pro/catalog/product/678ca30ba5136.jpg",
+    "https://file.colorsled.com/pro/catalog/product/678ca30bbe72c.jpg",
+    "https://file.colorsled.com/pro/catalog/product/678ca30bbf19b.jpg"
+  ],
+  "product_features": {
+    "Led_Qty": [
+      "280LEDs",
+      "m"
+    ],
+    "Wattage": [
+      "14.4W",
+      "M"
+    ],
+    "Min Cut": [
+      "7*2led",
+      "50mm"
+    ],
+    "Luminous flux": [
+      "445LM",
+      "m@RGB"
+    ],
+    "Bend radius": "＞240mm",
+    "IP": "IP65",
+    "Max run length (single‑end power feed)": "5m",
+    "Warranty": [
+      "5years indoor",
+      "Working life ≥60000 hours;3years semi-outdoor",
+      "Working life ≥36000 hours"
+    ],
+    "Product Certification": [
+      "UKCA",
+      "CE",
+      "UL",
+      "ROHS",
+      "REACH"
+    ],
+    "Operating/storage temperature": [
+      "Ta:-25~55℃",
+      "0℃～60℃"
+    ]
+  },
+  "options": {
+    "CCT": [
+      {
+        "name": "RGB",
+        "id": "717"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "No CRI",
+        "id": "538"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "14.4W/M",
+        "id": "369"
+      }
+    ],
+    "Silk Printing": [
+      {
+        "name": "COLORS",
+        "id": "643"
+      },
+      {
+        "name": "Neutral",
+        "id": "641"
+      },
+      {
+        "name": "Customize laser silk printing",
+        "id": "642"
+      }
+    ],
+    "Strip Length": [
+      {
+        "name": "5M",
+        "id": "652"
+      },
+      {
+        "name": "Customized Length",
+        "id": "665"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "S(One-end top)",
+        "id": "672"
+      },
+      {
+        "name": "S(One-end side)",
+        "id": "671"
+      }
+    ],
+    "Wire Type": [
+      {
+        "name": "PVC wire",
+        "id": "680"
+      }
+    ],
+    "Wire Length": [
+      {
+        "name": "50CM",
+        "id": "602"
+      },
+      {
+        "name": "200CM",
+        "id": "598"
+      },
+      {
+        "name": "Length customization",
+        "id": "605"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Voltage": [
+      {
+        "name": "24V",
+        "id": "645"
+      }
+    ],
+    "IP": [
+      {
+        "name": "Gluing end cap(IP65)",
+        "id": "630"
+      }
+    ],
+    "ESD": [
+      {
+        "name": "ESD",
+        "id": "651"
+      }
+    ],
+    "Engineering Package": [
+      {
+        "name": "Engineering package",
+        "id": "647"
+      }
+    ]
+  },
+  "constraints": {
+    "643": [
+      552
+    ],
+    "641": [
+      553
+    ],
+    "642": [
+      553
+    ],
+    "671": [
+      605
+    ]
+  }
+}

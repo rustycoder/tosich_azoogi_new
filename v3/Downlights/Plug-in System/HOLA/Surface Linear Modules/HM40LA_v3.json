@@ -1,0 +1,137 @@
+{
+  "product_name": "HM40LA",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/668241418c184.png"
+  ],
+  "product_features": {
+    "Installation": "Ceiling",
+    "Material": "AL6063-T5",
+    "Coating": "Black",
+    "Dimming": [
+      "Non",
+      "DALI-2",
+      "CASAMBI"
+    ],
+    "Input voltage": "DC48V",
+    "SDCM": "<3 Step (ANSI)",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "4000K"
+    ],
+    "Beam angle": "90°x45°x15°",
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ETL",
+      "ROHS",
+      "Reach"
+    ]
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "Asymmetric",
+        "id": "53"
+      }
+    ],
+    "Length": [
+      {
+        "name": "600mm",
+        "id": "153"
+      },
+      {
+        "name": "900mm",
+        "id": "229"
+      },
+      {
+        "name": "1200mm",
+        "id": "145"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "24W",
+        "id": "307"
+      },
+      {
+        "name": "18W",
+        "id": "290"
+      },
+      {
+        "name": "12W",
+        "id": "291"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "DC48V",
+        "id": "941"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ]
+  },
+  "constraints": {
+    "153": [
+      290,
+      307
+    ],
+    "229": [
+      291,
+      307
+    ],
+    "145": [
+      291,
+      290
+    ]
+  }
+}

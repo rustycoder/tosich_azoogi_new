@@ -1,0 +1,189 @@
+{
+  "product_name": "MS5070D-NX",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/68ef9afa945e4.png"
+  ],
+  "product_features": {
+    "Installation": "Pendant&Ceiling",
+    "Material": [
+      "AL6063-T5",
+      "spraying surface"
+    ],
+    "Coating": "Silver(RAL9006),Black(RAL9005),White(RAL9003)",
+    "Power Supply": "External power supply",
+    "Light efficiency": "100LM/W(Regular)，135LM/W(High-Efficiency)",
+    "SDCM": "≤3",
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ROHS",
+      "REACH",
+      "CB",
+      "ENEC",
+      "LM-80"
+    ]
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Regular",
+        "id": "1244"
+      },
+      {
+        "name": "High efficiency",
+        "id": "709"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Length": [
+      {
+        "name": "D600mm",
+        "id": "1217"
+      },
+      {
+        "name": "D800mm",
+        "id": "1218"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "75W",
+        "id": "337"
+      },
+      {
+        "name": "127W",
+        "id": "1284"
+      }
+    ],
+    "Input Current": [
+      {
+        "name": "1.9A",
+        "id": "1426"
+      },
+      {
+        "name": "1.6A*2",
+        "id": "1427"
+      }
+    ],
+    "Corner Angle": [
+      {
+        "name": "90°",
+        "id": "1352"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Casambi",
+        "id": "539"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "DC36V",
+        "id": "1358"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": {
+    "1217": [
+      1284
+    ],
+    "1218": [
+      337
+    ],
+    "337": [
+      1218,
+      1427
+    ],
+    "1284": [
+      1217,
+      1426
+    ],
+    "709": [
+      445,
+      441
+    ],
+    "445": [
+      709
+    ],
+    "441": [
+      709
+    ],
+    "1426": [
+      1218,
+      1284
+    ],
+    "1427": [
+      1217,
+      337
+    ]
+  }
+}

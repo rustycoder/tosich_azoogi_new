@@ -1,0 +1,45 @@
+{
+  "product_name": "RE-BR95L2",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/685a45b4a72c3.png"
+  ],
+  "product_features": {
+    "Applicable product model": "BR95L2",
+    "Installation method": "Recessed",
+    "Material process": [
+      "aluminum",
+      "oil spraying"
+    ],
+    "Size": "φ104*34mm",
+    "Quantity": [
+      "1PCS",
+      "set"
+    ],
+    "Other": "Including 1pcs recessed part of the BR95L2 downlight and 4pcs  screws."
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "White(Frame)",
+        "id": "871"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

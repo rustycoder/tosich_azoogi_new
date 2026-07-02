@@ -1,0 +1,41 @@
+{
+  "product_name": "EX-40",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/6800798aa6db7.png"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "BS7977",
+      "BH7977"
+    ],
+    "Material process": "galvanized",
+    "Size": "150*49.2*32.9mm",
+    "Quantity": "1 set",
+    "Others": "1PCS internal splice bar and 2 PCS back splice bar"
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 SET",
+        "id": "561"
+      }
+    ]
+  },
+  "constraints": []
+}

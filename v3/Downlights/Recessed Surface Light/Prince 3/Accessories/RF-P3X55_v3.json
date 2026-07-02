@@ -1,0 +1,65 @@
+{
+  "product_name": "RF-P3X55",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/693d3fb869ef9.png",
+    "https://file.colorsled.com/pro/catalog/product/693d3fb86b0d9.png",
+    "https://file.colorsled.com/pro/catalog/product/693d3fb86bad6.png",
+    "https://file.colorsled.com/pro/catalog/product/693d3fb87225b.png"
+  ],
+  "product_features": {
+    "Applicable product model": "P3E55L2",
+    "Installation method": "recessed",
+    "Material process": "PC",
+    "Size": [
+      "",
+      "mm"
+    ],
+    "Quantity": [
+      "1PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Reflector Type": [
+      {
+        "name": "Round",
+        "id": "733"
+      }
+    ],
+    "Reflector Colour": [
+      {
+        "name": "Mirror",
+        "id": "612"
+      },
+      {
+        "name": "Black chrome",
+        "id": "611"
+      },
+      {
+        "name": "Matte Black",
+        "id": "610"
+      },
+      {
+        "name": "Matte White",
+        "id": "609"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

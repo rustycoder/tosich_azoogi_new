@@ -1,0 +1,167 @@
+{
+  "product_name": "BK-MGVX-24V0M",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/690490198ee84.png",
+    "https://file.colorsled.com/pro/catalog/product/6904901e8ef7b.png",
+    "https://file.colorsled.com/pro/catalog/product/690490211607b.png"
+  ],
+  "product_features": {
+    "ProductName": [
+      "BK-MGV036-24V0M",
+      "BK-MGV060-24V0M",
+      "BK-MGV100-24V0M"
+    ],
+    "Applicable product model": "General",
+    "Output power": [
+      "36W",
+      "60W",
+      "100W"
+    ],
+    "Output current": [
+      "≤1.5A",
+      "≤2.5A",
+      "≤4.2A"
+    ],
+    "Product size": [
+      "245.0*30.0*21.0mm",
+      "285.0*30.0*21.0mm",
+      "355.0*30.0*21.0mm"
+    ],
+    "Input voltage": "AC200-240V",
+    "Operating frequency": [
+      "50",
+      "60Hz"
+    ],
+    "Output voltage": "DC24V",
+    "PF value": "≥0.9",
+    "Efficiency": "≥0.89",
+    "IP": "IP20",
+    "Dimming mode": "1-10V Dimming",
+    "Certification": [
+      "TUV",
+      "CE",
+      "ENEC",
+      "RCM"
+    ],
+    "Material": "Metal housing",
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Wattage": [
+      {
+        "name": "36W",
+        "id": "344"
+      },
+      {
+        "name": "60W",
+        "id": "283"
+      },
+      {
+        "name": "100W",
+        "id": "946"
+      }
+    ],
+    "Length": [
+      {
+        "name": "L245.0*W30.0*H21.0mm",
+        "id": "1409"
+      },
+      {
+        "name": "L285.0*W30.0*H21.0mm",
+        "id": "1410"
+      },
+      {
+        "name": "L355.0*W30.0*H21.0mm",
+        "id": "1411"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "1-10V Dimming",
+        "id": "542"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC200-240V",
+        "id": "585"
+      }
+    ],
+    "IP Rating": [
+      {
+        "name": "IP20",
+        "id": "629"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ],
+    "Output Voltage": [
+      {
+        "name": "DC24V",
+        "id": "1127"
+      }
+    ],
+    "Output Current": [
+      {
+        "name": "≤1.5A",
+        "id": "1406"
+      },
+      {
+        "name": "≤2.5A",
+        "id": "1407"
+      },
+      {
+        "name": "≤4.2A",
+        "id": "1408"
+      }
+    ],
+    "PF Value": [
+      {
+        "name": "≥0.95",
+        "id": "1145"
+      }
+    ]
+  },
+  "constraints": {
+    "344": [
+      1407,
+      1408,
+      1410,
+      1411
+    ],
+    "283": [
+      1406,
+      1408,
+      1409,
+      1411
+    ],
+    "946": [
+      1406,
+      1407,
+      1409,
+      1410
+    ],
+    "1406": [
+      283,
+      946,
+      1410,
+      1411
+    ],
+    "1407": [
+      344,
+      946,
+      1409,
+      1411
+    ],
+    "1408": [
+      344,
+      283,
+      1409,
+      1410
+    ]
+  }
+}

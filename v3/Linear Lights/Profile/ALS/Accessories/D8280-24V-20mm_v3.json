@@ -1,0 +1,231 @@
+{
+  "product_name": "D8280-24V-20mm",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/68073f7920ed6.png",
+    "https://file.colorsled.com/pro/catalog/product_img/GjuUjbeFdYxUQNbE.png"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "LS4067",
+      "LE5535",
+      "LT60"
+    ],
+    "Size": "2500*20*1.5mm",
+    "Cutting Unit": "50mm",
+    "Input Voltage": "DC24V",
+    "Wattage": [
+      "20W",
+      "m"
+    ],
+    "Typ.luminous flux": [
+      "2700 LM",
+      "M"
+    ],
+    "CCT": [
+      "1900K",
+      "2300K",
+      "2700K",
+      "3000K",
+      "4000K",
+      "5000K",
+      "6000K"
+    ],
+    "CRI": [
+      "80",
+      "90",
+      "95"
+    ],
+    "Other": [
+      "18# wire diameter",
+      "PVC material",
+      "2PIN red-black wire"
+    ]
+  },
+  "options": {
+    "Wattage": [
+      {
+        "name": "20W/M",
+        "id": "277"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      },
+      {
+        "name": "Ra95",
+        "id": "536"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "1900K",
+        "id": "448"
+      },
+      {
+        "name": "2300K",
+        "id": "449"
+      },
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6000K",
+        "id": "447"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "One end",
+        "id": "667"
+      },
+      {
+        "name": "No",
+        "id": "666"
+      },
+      {
+        "name": "Dual ends",
+        "id": "668"
+      }
+    ],
+    "Wire Length": [
+      {
+        "name": "12CM",
+        "id": "600"
+      },
+      {
+        "name": "20CM",
+        "id": "601"
+      },
+      {
+        "name": "50CM",
+        "id": "602"
+      },
+      {
+        "name": "100CM",
+        "id": "597"
+      },
+      {
+        "name": "200CM",
+        "id": "598"
+      },
+      {
+        "name": "No",
+        "id": "599"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Strip Length": [
+      {
+        "name": "Customized Length",
+        "id": "665"
+      },
+      {
+        "name": "5M",
+        "id": "652"
+      },
+      {
+        "name": "2.5M",
+        "id": "658"
+      }
+    ],
+    "Silk Printing": [
+      {
+        "name": "Neutral",
+        "id": "641"
+      },
+      {
+        "name": "Customize laser silk printing",
+        "id": "642"
+      },
+      {
+        "name": "COLORS",
+        "id": "643"
+      }
+    ],
+    "IP Process": [
+      {
+        "name": "NO(not waterproof)",
+        "id": "690"
+      }
+    ],
+    "Tape Type": [
+      {
+        "name": "White",
+        "id": "699"
+      }
+    ],
+    "Wire Type": [
+      {
+        "name": "Parallel wires",
+        "id": "679"
+      },
+      {
+        "name": "No",
+        "id": "704"
+      }
+    ]
+  },
+  "constraints": {
+    "536": [
+      448,
+      447
+    ],
+    "666": [
+      600,
+      601,
+      602,
+      597,
+      598,
+      679
+    ],
+    "667": [
+      599,
+      704
+    ],
+    "668": [
+      599,
+      704
+    ],
+    "643": [
+      552
+    ],
+    "641": [
+      553
+    ],
+    "642": [
+      553
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "product_name": "CL-01",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/685cf642b4b4f.png"
+  ],
+  "product_features": {
+    "Applicable product model": "LE1616/LG2323/LG2727/LG7043/LG7070/LR0812/LR1613/LR1616/LR2013/LR3735/LR3840(A)/LR3840(B)/LR3924/LR3943/SK10032/SK6013(A)/SK6013(B)/LR5535(A)/LR5535(B)/LS3360/LS4067/LS5470(F)/LS7977/AS3535-2500/AS3535-08A45/90/AS3535-15A45/90/AS3535-30A45/AS3535-03A90/AS3535-03N90/AS3535-03W90/AS3535-15N90/AS3535-15W90/LR25/BH3360/BH5470/BH7977/BS3360/BS5470/BS7977",
+    "Installation method": "Ceiling",
+    "Material process": "Carbon Steel",
+    "Size": "M3.5*40mm",
+    "Quantity": [
+      "4 PCS",
+      "set"
+    ],
+    "Others": "4 pcs screws+4 pcs expansion tube"
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "4 PCS/SET",
+        "id": "557"
+      }
+    ]
+  },
+  "constraints": []
+}

@@ -1,0 +1,70 @@
+{
+  "product_name": "PY-D",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/66cd2fca0cf00.png",
+    "https://file.colorsled.com/pro/catalog/product/6878bff75bf8f.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": "LS1911C/LS1911K/LS3535/LS5050/LS3360/LS4067/LS5470(F)/LS7977/LT60/BH3360/BH5470/BH7977/BS3360/BS5470/BS7977/LS60/S60/LS5470(F)/LS7977/LT60/LH40FD/LH40FP/LH40G/LS40FD/LS40FP/LS40G/LS40GW",
+    "Installation method": "pendant",
+    "Material process": "Spraying surface",
+    "Size": [
+      "",
+      ""
+    ],
+    "Quantity": "1 set",
+    "Other": [
+      "Including junction box, 2PCS wire rope, wire rope 2M",
+      "4M length optional,1PCS 5PIN terminal,1PCS ceiling bottom plate, 2PCS screws"
+    ]
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "2M",
+        "id": "140"
+      },
+      {
+        "name": "4M",
+        "id": "887"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Pendant Type": [
+      {
+        "name": "With junction box",
+        "id": "894"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

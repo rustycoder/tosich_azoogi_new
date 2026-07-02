@@ -1,0 +1,49 @@
+{
+  "product_name": "CM-11",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/GyvuVCPQACXsvJQk.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": "S60",
+    "Material process": "PVC",
+    "Size": "1000*φ6mm",
+    "Wire diameter": "18AWG",
+    "Quantity": [
+      "1PCS",
+      "set"
+    ],
+    "Others": [
+      "Module connection cable, length is 1m,3 pin non-dimming version，for the first module power feeding",
+      "inter-modules power feeding"
+    ]
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 SET",
+        "id": "561"
+      }
+    ]
+  },
+  "constraints": []
+}

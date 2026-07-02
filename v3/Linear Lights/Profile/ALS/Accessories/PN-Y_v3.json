@@ -1,0 +1,74 @@
+{
+  "product_name": "PN-Y",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/bJUONaBjDaztquWq.png",
+    "https://file.colorsled.com/pro/catalog/product/6878c1484b0de.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": "LT30",
+    "Installation method": "pendant",
+    "Material process": [
+      "",
+      ""
+    ],
+    "Size": [
+      "",
+      ""
+    ],
+    "Quantity": [
+      "2PCS",
+      "set"
+    ],
+    "Other": [
+      "Junction box not included",
+      "2pcs pendant cable accessory",
+      "pendant cable length 4m",
+      "rectangular screw model."
+    ]
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "2M",
+        "id": "140"
+      },
+      {
+        "name": "4M",
+        "id": "887"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Pendant Type": [
+      {
+        "name": "Without junction box",
+        "id": "742"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

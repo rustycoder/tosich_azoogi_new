@@ -1,0 +1,265 @@
+{
+  "product_name": "T-CS7035D",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/678c94bbdb6f0.png"
+  ],
+  "product_features": {
+    "Installation": "Pendant&Ceiling",
+    "Material": [
+      "AL6063-T5",
+      "spraying surface"
+    ],
+    "Coating": "Silver(RAL9006),Black(RAL9005),White(RAL9003)",
+    "Power Supply": "External power supply",
+    "Light efficiency": "110LM/W(Regular)，140LM/W(High-Efficiency)",
+    "SDCM": "≤3",
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ROHS",
+      "REACH",
+      "CB",
+      "ENEC",
+      "LM-80"
+    ]
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Regular",
+        "id": "1244"
+      },
+      {
+        "name": "High efficiency",
+        "id": "709"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Length": [
+      {
+        "name": "900mm",
+        "id": "229"
+      },
+      {
+        "name": "1200mm",
+        "id": "145"
+      },
+      {
+        "name": "1500mm",
+        "id": "146"
+      },
+      {
+        "name": "1800mm",
+        "id": "147"
+      },
+      {
+        "name": "2400mm",
+        "id": "149"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "78W",
+        "id": "345"
+      },
+      {
+        "name": "116W",
+        "id": "1230"
+      },
+      {
+        "name": "148W",
+        "id": "1270"
+      },
+      {
+        "name": "176W",
+        "id": "1269"
+      },
+      {
+        "name": "235W",
+        "id": "1271"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "1-10V Dimming",
+        "id": "542"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC200-240V",
+        "id": "585"
+      }
+    ],
+    "Installation Accessory": [
+      {
+        "name": "Ceiling",
+        "id": "1209"
+      },
+      {
+        "name": "Ceiling Plate(With Steel Wire Rope)",
+        "id": "1212"
+      },
+      {
+        "name": "Ceiling Plate(With Rod)",
+        "id": "1213"
+      },
+      {
+        "name": "Linear Power Box(With Steel Wire Rope)",
+        "id": "1214"
+      },
+      {
+        "name": "Linear Power Box(With Rod)",
+        "id": "1215"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": {
+    "229": [
+      1230,
+      1270,
+      1269,
+      1271
+    ],
+    "145": [
+      345,
+      1270,
+      1269,
+      1271
+    ],
+    "146": [
+      345,
+      1230,
+      1269,
+      1271
+    ],
+    "147": [
+      345,
+      1230,
+      1270,
+      1271
+    ],
+    "149": [
+      345,
+      1230,
+      1270,
+      1269
+    ],
+    "345": [
+      145,
+      146,
+      147,
+      149
+    ],
+    "1230": [
+      229,
+      146,
+      147,
+      149
+    ],
+    "1270": [
+      229,
+      145,
+      147,
+      149
+    ],
+    "1269": [
+      229,
+      145,
+      146,
+      149
+    ],
+    "1271": [
+      229,
+      145,
+      146,
+      147
+    ],
+    "709": [
+      445,
+      441
+    ],
+    "445": [
+      709
+    ],
+    "441": [
+      709
+    ]
+  }
+}

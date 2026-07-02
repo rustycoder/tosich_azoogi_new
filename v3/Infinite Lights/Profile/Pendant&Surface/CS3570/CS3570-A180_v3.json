@@ -1,0 +1,75 @@
+{
+  "product_name": "CS3570-A180",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/684b87fa24096.png"
+  ],
+  "product_features": {
+    "Installation": "Pendant&Ceiling",
+    "Material": [
+      "AL6063-T5",
+      "spraying surface"
+    ],
+    "Coating": "Silver(RAL9006),Black(RAL9005),White(RAL9003)",
+    "Lighting direction": "downward",
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "ROHS",
+      "REACH"
+    ]
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "D450mm",
+        "id": "1204"
+      },
+      {
+        "name": "D600mm",
+        "id": "1217"
+      },
+      {
+        "name": "D800mm",
+        "id": "1218"
+      },
+      {
+        "name": "D1000mm",
+        "id": "1219"
+      },
+      {
+        "name": "D1200mm",
+        "id": "1220"
+      },
+      {
+        "name": "D1500mm",
+        "id": "1221"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": []
+}

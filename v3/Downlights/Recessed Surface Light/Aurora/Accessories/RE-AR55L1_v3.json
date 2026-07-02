@@ -1,0 +1,45 @@
+{
+  "product_name": "RE-AR55L1",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/68898574a6ce9.png"
+  ],
+  "product_features": {
+    "Applicable product model": "AR55L1",
+    "Installation method": "recessed",
+    "Material process": [
+      "aluminum",
+      "oil spraying"
+    ],
+    "Size": "φ78*24mm",
+    "Quantity": [
+      "1PCS",
+      "set"
+    ],
+    "Other": "Including 1pcs recessed part of the AR55L1spotlight and 3pcs  screws."
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "White(Frame)",
+        "id": "871"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

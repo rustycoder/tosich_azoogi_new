@@ -1,0 +1,249 @@
+{
+  "product_name": "S-CE7035D",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/68ee0d737f4f6.png"
+  ],
+  "product_features": {
+    "Installation": "Recessed",
+    "Material": [
+      "AL6063-T5",
+      "spraying surface"
+    ],
+    "Coating": "Silver(RAL9006),Black(RAL9005),White(RAL9003)",
+    "Power Supply": "External power supply",
+    "Light efficiency": "110LM/W(Regular)，140LM/W(High-Efficiency)",
+    "SDCM": "≤3",
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ROHS",
+      "REACH",
+      "CB",
+      "ENEC",
+      "LM-80"
+    ]
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Regular",
+        "id": "1244"
+      },
+      {
+        "name": "High efficiency",
+        "id": "709"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Length": [
+      {
+        "name": "900mm",
+        "id": "229"
+      },
+      {
+        "name": "1200mm",
+        "id": "145"
+      },
+      {
+        "name": "1500mm",
+        "id": "146"
+      },
+      {
+        "name": "1800mm",
+        "id": "147"
+      },
+      {
+        "name": "2400mm",
+        "id": "149"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "96W",
+        "id": "285"
+      },
+      {
+        "name": "136W",
+        "id": "1278"
+      },
+      {
+        "name": "156W",
+        "id": "1263"
+      },
+      {
+        "name": "216W",
+        "id": "1279"
+      },
+      {
+        "name": "300W",
+        "id": "1098"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "1-10V Dimming",
+        "id": "542"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC200-240V",
+        "id": "585"
+      }
+    ],
+    "Installation Accessory": [
+      {
+        "name": "Recessed",
+        "id": "1210"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": {
+    "229": [
+      1278,
+      1263,
+      1279,
+      1098
+    ],
+    "145": [
+      285,
+      1263,
+      1279,
+      1098
+    ],
+    "146": [
+      285,
+      1278,
+      1279,
+      1098
+    ],
+    "147": [
+      285,
+      1278,
+      1263,
+      1098
+    ],
+    "149": [
+      285,
+      1278,
+      1263,
+      1279
+    ],
+    "285": [
+      145,
+      146,
+      147,
+      149
+    ],
+    "1278": [
+      229,
+      146,
+      147,
+      149
+    ],
+    "1263": [
+      229,
+      145,
+      147,
+      149
+    ],
+    "1279": [
+      229,
+      145,
+      146,
+      149
+    ],
+    "1098": [
+      229,
+      145,
+      146,
+      147
+    ],
+    "709": [
+      445,
+      441
+    ],
+    "445": [
+      709
+    ],
+    "441": [
+      709
+    ]
+  }
+}

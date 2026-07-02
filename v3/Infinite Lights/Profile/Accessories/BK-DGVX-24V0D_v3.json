@@ -1,0 +1,173 @@
+{
+  "product_name": "BK-DGVX-24V0D",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/69049041d76e3.png",
+    "https://file.colorsled.com/pro/catalog/product/6904905a1c42d.png",
+    "https://file.colorsled.com/pro/catalog/product/690490607e690.png"
+  ],
+  "product_features": {
+    "ProductName": [
+      "BK-DGV036-24V0D",
+      "BK-DGV060-24V0D",
+      "BK-DGV100-24V0D"
+    ],
+    "Applicable product model": "General",
+    "Output power": [
+      "36W",
+      "60W",
+      "100W"
+    ],
+    "Output current": [
+      "≤1.5A",
+      "≤2.5A",
+      "≤4.2A"
+    ],
+    "Product size": [
+      "245.0*30.0*21.0mm",
+      "285.0*30.0*21.0mm",
+      "355.0*30.0*21.0mm"
+    ],
+    "Input voltage": "AC200~240V",
+    "Operating frequency": [
+      "50",
+      "60Hz"
+    ],
+    "Output voltage": "DC24V",
+    "PF value": "≥0.9",
+    "Efficiency": "≥0.88",
+    "IP": "IP20",
+    "Dimming mode": [
+      "DALI-2",
+      "PUSH-Dimming",
+      "1-10V 3in1 Dimming"
+    ],
+    "Certification": [
+      "CE",
+      "ENEC",
+      "UKCA",
+      "RCM",
+      "CCC",
+      "EL"
+    ],
+    "Material": "Metal housing",
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Wattage": [
+      {
+        "name": "36W",
+        "id": "344"
+      },
+      {
+        "name": "60W",
+        "id": "283"
+      },
+      {
+        "name": "100W",
+        "id": "946"
+      }
+    ],
+    "Length": [
+      {
+        "name": "L245.0*W30.0*H21.0mm",
+        "id": "1409"
+      },
+      {
+        "name": "L285.0*W30.0*H21.0mm",
+        "id": "1410"
+      },
+      {
+        "name": "L355.0*W30.0*H21.0mm",
+        "id": "1411"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "DALI-2&PUSH&1-10V 3 in 1 Dimming",
+        "id": "1405"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC200-240V",
+        "id": "585"
+      }
+    ],
+    "IP Rating": [
+      {
+        "name": "IP20",
+        "id": "629"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ],
+    "Output Voltage": [
+      {
+        "name": "DC24V",
+        "id": "1127"
+      }
+    ],
+    "Output Current": [
+      {
+        "name": "≤1.5A",
+        "id": "1406"
+      },
+      {
+        "name": "≤2.5A",
+        "id": "1407"
+      },
+      {
+        "name": "≤4.2A",
+        "id": "1408"
+      }
+    ],
+    "PF Value": [
+      {
+        "name": "≥0.9",
+        "id": "1173"
+      }
+    ]
+  },
+  "constraints": {
+    "344": [
+      1407,
+      1408,
+      1410,
+      1411
+    ],
+    "283": [
+      1406,
+      1408,
+      1409,
+      1411
+    ],
+    "946": [
+      1406,
+      1407,
+      1409,
+      1410
+    ],
+    "1409": [
+      283,
+      946,
+      1407,
+      1408
+    ],
+    "1410": [
+      344,
+      946,
+      1406,
+      1408
+    ],
+    "1411": [
+      344,
+      283,
+      1406,
+      1407
+    ]
+  }
+}

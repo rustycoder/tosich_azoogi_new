@@ -1,0 +1,156 @@
+{
+  "product_name": "GTE120L2",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/6940ce765504b.png"
+  ],
+  "product_features": {
+    "Material": [
+      "AL6063-T5",
+      "spraying surface"
+    ],
+    "Driver Installation": "Remote",
+    "Lighting direction": "Downward",
+    "Beam angle": [
+      "28°",
+      "40°",
+      "50°"
+    ],
+    "UGR(X=4H, Y=8H)": [
+      "≤6(28°/40°)",
+      "≤13(50° )"
+    ],
+    "Opening size": "φ120mm",
+    "Dimming": [
+      "Non",
+      "0-10V",
+      "DALI"
+    ],
+    "SDCM(Light source)": "<3 Step",
+    "CRI": "90",
+    "CCT": [
+      "3000K",
+      "4000K"
+    ],
+    "Input voltage": "AC220-240V",
+    "Working temperature": "-15℃~30℃",
+    "Application": "Indoor",
+    "Installation": "Recessed",
+    "IP Rating": "IP20",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "Opening φ120mm",
+        "id": "1615"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "35W",
+        "id": "309"
+      }
+    ],
+    "Beam Angle": [
+      {
+        "name": "28°",
+        "id": "620"
+      },
+      {
+        "name": "40°",
+        "id": "808"
+      },
+      {
+        "name": "50°",
+        "id": "789"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "White(Frame)",
+        "id": "871"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "0-10V Dimming",
+        "id": "1397"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      }
+    ],
+    "Reflector Colour": [
+      {
+        "name": "Mirror",
+        "id": "612"
+      },
+      {
+        "name": "Matte White",
+        "id": "609"
+      },
+      {
+        "name": "Matte Black",
+        "id": "610"
+      },
+      {
+        "name": "Black chrome",
+        "id": "611"
+      }
+    ],
+    "IP Rating": [
+      {
+        "name": "IP20",
+        "id": "629"
+      }
+    ],
+    "User Manual": [
+      {
+        "name": "EN",
+        "id": "608"
+      },
+      {
+        "name": "CN",
+        "id": "607"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": []
+}

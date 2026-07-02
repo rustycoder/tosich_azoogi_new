@@ -1,0 +1,48 @@
+{
+  "product_name": "EX-39",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/rfhHyZQurYdXTAJm.png",
+    "https://file.colorsled.com/pro/catalog/product_img/nYOOpWRNBcOsUHvr.png"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "BS5470",
+      "BH5470"
+    ],
+    "Material process": [
+      "AL6063-T5",
+      "anodizing"
+    ],
+    "Size": "50*9*22.5mm",
+    "Quantity": "1 SET",
+    "Others": [
+      "1 PCS inner long splice panel",
+      "2 PCS side short splice strips"
+    ]
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 SET",
+        "id": "561"
+      }
+    ]
+  },
+  "constraints": []
+}

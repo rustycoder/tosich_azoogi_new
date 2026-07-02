@@ -1,0 +1,87 @@
+{
+  "product_name": "T90-BE9435",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/dblBESfEdYWcGYXb.png",
+    "https://file.colorsled.com/pro/catalog/product_img/APFuIuBRyNKOjcBP.png"
+  ],
+  "product_features": {
+    "Applicable product model": "BE9435",
+    "Installation method": "T-shaped splicing",
+    "Material process": [
+      "Al6063-T5",
+      "chromed"
+    ],
+    "Light source": "No",
+    "Size": "300*184.5*35mm",
+    "Other": "Include whole luminaire straight splicing bar 6PCS"
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "NO",
+        "id": "798"
+      }
+    ],
+    "Carrier Style": [
+      {
+        "name": "No carrier",
+        "id": "114"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "No CRI",
+        "id": "538"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "No CCT",
+        "id": "452"
+      }
+    ],
+    "Light Source Type": [
+      {
+        "name": "No Light source",
+        "id": "269"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

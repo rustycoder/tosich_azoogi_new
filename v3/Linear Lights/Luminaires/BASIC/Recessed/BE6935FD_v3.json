@@ -1,0 +1,254 @@
+{
+  "product_name": "BE6935FD",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/6746d31a95a62.jpg"
+  ],
+  "product_features": {
+    "Material": [
+      "AL6063-T5,spraying surface",
+      "anodizing"
+    ],
+    "Coating": "Silver anodized(RAL9006),Black(RAL9005),White(RAL9003)",
+    "Lighting direction": "downward",
+    "Light efficiency": [
+      "110LM/W(regular model/emergency model)",
+      "140LM/W(high efficiency model)"
+    ],
+    "Dimming": [
+      "Non",
+      "DALI-2+PUSH",
+      "1-10V"
+    ],
+    "Length": "1200mm/1800mm/2400mm optional (other length on request)",
+    "Color tolerance": "SDCM≤3(ANSI)",
+    "CRI": [
+      "80",
+      "90"
+    ],
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K",
+      "5000K",
+      "6500K",
+      "3000-6500"
+    ],
+    "Input voltage": "AC220-240V",
+    "Application": "Indoor",
+    "Installation": "Recessed",
+    "IP Rating": "IP20",
+    "Certification": [
+      "CE",
+      "CB",
+      "UKCA",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Normal",
+        "id": "708"
+      },
+      {
+        "name": "High efficiency",
+        "id": "709"
+      },
+      {
+        "name": "3 CCT tunable(Dial switch)",
+        "id": "710"
+      },
+      {
+        "name": "Emergency",
+        "id": "711"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Length": [
+      {
+        "name": "1200mm",
+        "id": "145"
+      },
+      {
+        "name": "1800mm",
+        "id": "147"
+      },
+      {
+        "name": "2400mm",
+        "id": "149"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "27W",
+        "id": "336"
+      },
+      {
+        "name": "38W",
+        "id": "279"
+      },
+      {
+        "name": "53W",
+        "id": "339"
+      }
+    ],
+    "Carrier Style": [
+      {
+        "name": "No carrier",
+        "id": "114"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "1-10V Dimming",
+        "id": "542"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      },
+      {
+        "name": "3000K-6500K",
+        "id": "454"
+      }
+    ],
+    "Light Source Type": [
+      {
+        "name": "Constant Current Rigid PCB",
+        "id": "265"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC200-240V",
+        "id": "585"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Package": [
+      {
+        "name": "COLORS Individual",
+        "id": "551"
+      }
+    ]
+  },
+  "constraints": {
+    "145": [
+      279,
+      339
+    ],
+    "147": [
+      336,
+      339,
+      711
+    ],
+    "149": [
+      336,
+      279,
+      711
+    ],
+    "710": [
+      443,
+      444,
+      445,
+      446,
+      441,
+      442
+    ],
+    "709": [
+      445,
+      441,
+      454,
+      454
+    ],
+    "708": [
+      454
+    ],
+    "711": [
+      454
+    ],
+    "542": [
+      710
+    ],
+    "540": [
+      710
+    ]
+  }
+}

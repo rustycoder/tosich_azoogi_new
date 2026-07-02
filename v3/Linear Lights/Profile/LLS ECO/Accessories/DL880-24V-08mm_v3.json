@@ -1,0 +1,226 @@
+{
+  "product_name": "DL880-24V-08mm",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/66bacadb6e3c8.png"
+  ],
+  "product_features": {
+    "Applicable product model": "BH3360",
+    "Size": "2500*8*1.5mm",
+    "Cutting Unit": "100mm",
+    "Input Voltage": "DC24V",
+    "Wattage": [
+      "7.5W",
+      "m"
+    ],
+    "Typ.luminous flux": [
+      "1190LM",
+      "M"
+    ],
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K",
+      "5000K",
+      "6500K"
+    ],
+    "CRI": [
+      "80",
+      "90"
+    ],
+    "Other": [
+      "18# wire diameter",
+      "PVC material",
+      "2PIN red-black wire"
+    ]
+  },
+  "options": {
+    "Wattage": [
+      {
+        "name": "7.5W/M",
+        "id": "408"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "One end",
+        "id": "667"
+      },
+      {
+        "name": "No",
+        "id": "666"
+      },
+      {
+        "name": "Dual ends",
+        "id": "668"
+      }
+    ],
+    "Wire Length": [
+      {
+        "name": "12CM",
+        "id": "600"
+      },
+      {
+        "name": "20CM",
+        "id": "601"
+      },
+      {
+        "name": "50CM",
+        "id": "602"
+      },
+      {
+        "name": "100CM",
+        "id": "597"
+      },
+      {
+        "name": "200CM",
+        "id": "598"
+      },
+      {
+        "name": "No",
+        "id": "599"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Strip Length": [
+      {
+        "name": "Customized Length",
+        "id": "665"
+      },
+      {
+        "name": "5M",
+        "id": "652"
+      },
+      {
+        "name": "2.5M",
+        "id": "658"
+      }
+    ],
+    "Silk Printing": [
+      {
+        "name": "Neutral",
+        "id": "641"
+      },
+      {
+        "name": "Customize laser silk printing",
+        "id": "642"
+      },
+      {
+        "name": "COLORS",
+        "id": "643"
+      }
+    ],
+    "IP Process": [
+      {
+        "name": "NO(not waterproof)",
+        "id": "690"
+      }
+    ],
+    "Tape Type": [
+      {
+        "name": "White",
+        "id": "699"
+      }
+    ],
+    "Wire Type": [
+      {
+        "name": "Parallel wires",
+        "id": "679"
+      },
+      {
+        "name": "No",
+        "id": "704"
+      }
+    ]
+  },
+  "constraints": {
+    "666": [
+      600,
+      601,
+      602,
+      597,
+      598,
+      679
+    ],
+    "667": [
+      599,
+      704
+    ],
+    "668": [
+      599,
+      704
+    ],
+    "600": [
+      704
+    ],
+    "601": [
+      704
+    ],
+    "602": [
+      704
+    ],
+    "597": [
+      704
+    ],
+    "598": [
+      704
+    ],
+    "599": [
+      679
+    ],
+    "643": [
+      552
+    ],
+    "641": [
+      553
+    ],
+    "642": [
+      553
+    ]
+  }
+}

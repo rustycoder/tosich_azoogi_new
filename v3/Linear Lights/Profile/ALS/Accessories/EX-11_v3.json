@@ -1,0 +1,43 @@
+{
+  "product_name": "EX-11",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67ff4da5997f3.png"
+  ],
+  "product_features": {
+    "Applicable product model": "LS5050",
+    "Material process": [
+      "AL6063-T5",
+      "anodizing"
+    ],
+    "Size": "400*45.6*21.4mm",
+    "Quantity": [
+      "1PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

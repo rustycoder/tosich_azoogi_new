@@ -1,0 +1,59 @@
+{
+  "product_name": "CE3535-N90",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/6943c4e689335.png"
+  ],
+  "product_features": {
+    "Installation": "Recessed",
+    "Material": [
+      "AL6063-T5",
+      "spraying surface"
+    ],
+    "Coating": "Silver,Black(RAL9005),White(RAL9003)",
+    "Lighting direction": "Inward",
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "ROHS",
+      "REACH"
+    ]
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "D450mm",
+        "id": "1204"
+      },
+      {
+        "name": "D800mm",
+        "id": "1218"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": []
+}

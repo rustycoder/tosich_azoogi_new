@@ -1,0 +1,35 @@
+{
+  "product_name": "CP-47",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/wOQYNDdVJUAtZztQ.png"
+  ],
+  "product_features": {
+    "Applicable product model": "BE2007",
+    "Installation method": "recessed",
+    "Material process": "stainless steel",
+    "Size": "24*15.4*6.3mm",
+    "Quantity": [
+      "4PCS",
+      "SET"
+    ]
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "4 PCS/SET",
+        "id": "557"
+      }
+    ]
+  },
+  "constraints": []
+}

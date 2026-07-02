@@ -1,0 +1,35 @@
+{
+  "product_name": "CP-11",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/XwItkRYhWgFfmqTC.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": "LE1212",
+    "Installation method": "recessed",
+    "Material process": "stainless steel",
+    "Size": "25*13*9.5mm",
+    "Quantity": [
+      "4PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "4 PCS/SET",
+        "id": "557"
+      }
+    ]
+  },
+  "constraints": []
+}

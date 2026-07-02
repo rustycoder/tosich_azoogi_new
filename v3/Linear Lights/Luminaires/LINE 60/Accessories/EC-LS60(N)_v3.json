@@ -1,0 +1,49 @@
+{
+  "product_name": "EC-LS60(N)",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/66e1654988ec0.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "PR-S60 Material process: aluminum",
+      "powder-coated black Size:",
+      "Quantity:2PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

@@ -1,0 +1,87 @@
+{
+  "product_name": "SKY-12C",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/ikYMgyUktxJCpTza.png",
+    "https://file.colorsled.com/pro/catalog/product/67fe022bba65c.png"
+  ],
+  "product_features": {
+    "Material": "Zinc alloy，spraying surface，steel belt (stainless steel)",
+    "Coating": "Black(RAL9005)",
+    "Lighting direction": "Upward",
+    "Light source": "DS8120-24V-12mm(2835/120LED/24V/12mm)",
+    "Dimming": "no power supply",
+    "Length": "12000mm optional (other length on request)",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "4000K",
+      "6500K"
+    ],
+    "Input voltage": "DC24V",
+    "Application": "Indoor",
+    "Installation": "Ceiling",
+    "IP Rating": "IP20",
+    "Certification": [
+      "CE",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "12M",
+        "id": "151"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "6000K",
+        "id": "447"
+      }
+    ],
+    "Light Source Type": [
+      {
+        "name": "DS8120-24V-12mm",
+        "id": "270"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ]
+  },
+  "constraints": []
+}

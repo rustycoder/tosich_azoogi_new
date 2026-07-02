@@ -1,0 +1,38 @@
+{
+  "product_name": "CP-42",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/68ad535b5e417.png"
+  ],
+  "product_features": {
+    "Applicable product model": "BS3360",
+    "Installation method": [
+      "Recessed",
+      "Ceiling"
+    ],
+    "Material process": "Stainless Steel",
+    "Size": "22.4*4.2*20mm",
+    "Quantity": [
+      "2 PCS",
+      "SET"
+    ]
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

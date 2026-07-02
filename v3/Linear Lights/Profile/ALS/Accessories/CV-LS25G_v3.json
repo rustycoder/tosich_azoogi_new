@@ -1,0 +1,63 @@
+{
+  "product_name": "CV-LS25G",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67ff6adf2e6fc.png"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "LE3523",
+      "LH25100",
+      "LR2522",
+      "LS2522"
+    ],
+    "Diffuser Nature": "Black Grating",
+    "Material process": "PC",
+    "Beam angle": [
+      "30°",
+      "55°"
+    ],
+    "Size": "107.7*20*15mm",
+    "Others": "Need to be used with DY8302414 light source."
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "Grating 30°",
+        "id": "76"
+      },
+      {
+        "name": "Grating 55°",
+        "id": "75"
+      }
+    ],
+    "Length": [
+      {
+        "name": "107.7mm",
+        "id": "1078"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Package": [
+      {
+        "name": "COLORS Whole",
+        "id": "550"
+      }
+    ]
+  },
+  "constraints": []
+}

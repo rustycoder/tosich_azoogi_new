@@ -1,0 +1,215 @@
+{
+  "product_name": "K2R75V1",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/690b27c66f8b3.png",
+    "https://file.colorsled.com/pro/catalog/product/690b27c68af09.png",
+    "https://file.colorsled.com/pro/catalog/product/690b27cf8318a.jpg",
+    "https://file.colorsled.com/pro/catalog/product/69cf86294ef56.png"
+  ],
+  "product_features": {
+    "Material": [
+      "ADC12",
+      "spraying surface"
+    ],
+    "Driver Installation": "Remote",
+    "Lighting direction": "downward",
+    "UGR(X=4H, Y=8H)": [
+      "",
+      ""
+    ],
+    "Dimming": [
+      "Non",
+      "0-10V",
+      "Traic",
+      "DALI"
+    ],
+    "SDCM(Light source)": "<3 Step",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K"
+    ],
+    "Input voltage": "AC220-240V",
+    "Application": "Indoor",
+    "Installation": "Trimless recessed",
+    "IP Rating": "IP20",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Normal",
+        "id": "708"
+      }
+    ],
+    "Length": [
+      {
+        "name": "Opening φ75mm",
+        "id": "1544"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "10W",
+        "id": "288"
+      },
+      {
+        "name": "12W",
+        "id": "291"
+      },
+      {
+        "name": "15W",
+        "id": "294"
+      },
+      {
+        "name": "20W",
+        "id": "312"
+      }
+    ],
+    "Beam Angle": [
+      {
+        "name": "Asymmetric Distribution",
+        "id": "1596"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "No(Frame)",
+        "id": "875"
+      },
+      {
+        "name": "White(Frame)",
+        "id": "871"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Casambi",
+        "id": "539"
+      },
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "0-10V Dimming",
+        "id": "1397"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      },
+      {
+        "name": "Triac Dimming",
+        "id": "1539"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      }
+    ],
+    "Reflector Type": [
+      {
+        "name": "Round",
+        "id": "733"
+      }
+    ],
+    "Reflector Colour": [
+      {
+        "name": "Mirror",
+        "id": "612"
+      },
+      {
+        "name": "Black chrome",
+        "id": "611"
+      },
+      {
+        "name": "Matte Black",
+        "id": "610"
+      },
+      {
+        "name": "Matte White",
+        "id": "609"
+      },
+      {
+        "name": "Champagne Gold",
+        "id": "776"
+      }
+    ],
+    "IP Rating": [
+      {
+        "name": "IP20",
+        "id": "629"
+      },
+      {
+        "name": "IP54",
+        "id": "1057"
+      }
+    ],
+    "Optical": [
+      {
+        "name": "NO",
+        "id": "1249"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "With cable of drive input",
+        "id": "782"
+      },
+      {
+        "name": "With junction box",
+        "id": "786"
+      }
+    ],
+    "User Manual": [
+      {
+        "name": "CN",
+        "id": "607"
+      },
+      {
+        "name": "EN",
+        "id": "608"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": []
+}

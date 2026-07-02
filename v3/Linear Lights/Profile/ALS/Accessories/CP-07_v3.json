@@ -1,0 +1,41 @@
+{
+  "product_name": "CP-07",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/qFrMzWkyjjfmTEWL.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "LS1911C",
+      "LS1911K"
+    ],
+    "Installation method": [
+      "recessed",
+      "ceiling"
+    ],
+    "Material process": "stainless steel",
+    "Size": "38*15*4.5mm",
+    "Quantity": [
+      "4PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "4 PCS/SET",
+        "id": "557"
+      }
+    ]
+  },
+  "constraints": []
+}

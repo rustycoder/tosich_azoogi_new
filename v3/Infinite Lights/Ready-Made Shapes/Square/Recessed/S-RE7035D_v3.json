@@ -1,0 +1,281 @@
+{
+  "product_name": "S-RE7035D",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/68ee0db336ebe.png"
+  ],
+  "product_features": {
+    "Installation": "Recessed",
+    "Material": [
+      "AL6063-T5",
+      "spraying surface"
+    ],
+    "Coating": "Silver(RAL9006),Black(RAL9005),White(RAL9003)",
+    "Power Supply": "External power supply",
+    "Light efficiency": "110LM/W(Regular)，140LM/W(High-Efficiency)",
+    "SDCM": "≤3",
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ROHS",
+      "REACH",
+      "CB",
+      "ENEC",
+      "LM-80"
+    ]
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Regular",
+        "id": "1244"
+      },
+      {
+        "name": "High efficiency",
+        "id": "709"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Length": [
+      {
+        "name": "600mm",
+        "id": "153"
+      },
+      {
+        "name": "900mm",
+        "id": "229"
+      },
+      {
+        "name": "1200mm",
+        "id": "145"
+      },
+      {
+        "name": "1500mm",
+        "id": "146"
+      },
+      {
+        "name": "1800mm",
+        "id": "147"
+      },
+      {
+        "name": "2400mm",
+        "id": "149"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "78W",
+        "id": "345"
+      },
+      {
+        "name": "116W",
+        "id": "1230"
+      },
+      {
+        "name": "156W",
+        "id": "1263"
+      },
+      {
+        "name": "200W",
+        "id": "1097"
+      },
+      {
+        "name": "235W",
+        "id": "1271"
+      },
+      {
+        "name": "310W",
+        "id": "1280"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "1-10V Dimming",
+        "id": "542"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC200-240V",
+        "id": "585"
+      }
+    ],
+    "Installation Accessory": [
+      {
+        "name": "Recessed",
+        "id": "1210"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": {
+    "153": [
+      1230,
+      1263,
+      1097,
+      1271,
+      1280
+    ],
+    "229": [
+      345,
+      1263,
+      1097,
+      1271,
+      1280
+    ],
+    "145": [
+      345,
+      1230,
+      1097,
+      1271,
+      1280
+    ],
+    "146": [
+      345,
+      1230,
+      1263,
+      1271,
+      1280
+    ],
+    "147": [
+      345,
+      1230,
+      1263,
+      1097,
+      1280
+    ],
+    "149": [
+      345,
+      1230,
+      1263,
+      1097,
+      1271
+    ],
+    "345": [
+      229,
+      145,
+      146,
+      147,
+      149
+    ],
+    "1230": [
+      153,
+      145,
+      146,
+      147,
+      149
+    ],
+    "1263": [
+      153,
+      229,
+      146,
+      147,
+      149
+    ],
+    "1097": [
+      153,
+      229,
+      145,
+      147,
+      149
+    ],
+    "1271": [
+      153,
+      229,
+      145,
+      146,
+      149
+    ],
+    "1280": [
+      153,
+      229,
+      145,
+      146,
+      147
+    ],
+    "709": [
+      445,
+      441
+    ],
+    "445": [
+      709
+    ],
+    "441": [
+      709
+    ]
+  }
+}

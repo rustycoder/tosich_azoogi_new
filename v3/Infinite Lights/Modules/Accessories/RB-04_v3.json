@@ -1,0 +1,56 @@
+{
+  "product_name": "RB-04",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/678f847cee65e.png"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "ME3535",
+      "ME5035",
+      "ME7035"
+    ],
+    "Installation method": "Recessed",
+    "Material process": [
+      "aluminum alloy",
+      "oil spray"
+    ],
+    "Size": "24*6.9*15.7mm",
+    "Quantity": [
+      "4PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "4 PCS/SET",
+        "id": "557"
+      }
+    ]
+  },
+  "constraints": []
+}

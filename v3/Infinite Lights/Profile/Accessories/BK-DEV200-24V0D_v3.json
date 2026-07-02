@@ -1,0 +1,88 @@
+{
+  "product_name": "BK-DEV200-24V0D",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/684bca308e08c.png"
+  ],
+  "product_features": {
+    "Applicable product model": "General",
+    "Dimming mode": [
+      "DALI2",
+      "PUSH-dimming",
+      "1-10V 3in1 dimming"
+    ],
+    "Size": "361*33.1*22.8mm",
+    "Input voltage": "AC200~240V",
+    "Operating frequency": [
+      "50",
+      "60Hz"
+    ],
+    "PF value": "≥0.9",
+    "Output voltage": "DC24V",
+    "Output current": "≤8.3A",
+    "Power": "200W",
+    "Efficiency": "0.92",
+    "Certification": [
+      "TUV",
+      "CE",
+      "RCM"
+    ],
+    "Case material": "Metal housing"
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "L361.0*W33.1*H22.8mm",
+        "id": "1527"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "200W",
+        "id": "1097"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC200-240V",
+        "id": "585"
+      }
+    ],
+    "Output Voltage": [
+      {
+        "name": "DC24V",
+        "id": "1127"
+      }
+    ],
+    "Output Current": [
+      {
+        "name": "≤8.3A",
+        "id": "1524"
+      }
+    ],
+    "IP Rating": [
+      {
+        "name": "IP20",
+        "id": "629"
+      }
+    ],
+    "PF Value": [
+      {
+        "name": "≥0.9",
+        "id": "1173"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

@@ -1,0 +1,39 @@
+{
+  "product_name": "CP-38",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67ff75d0d755a.png",
+    "https://file.colorsled.com/pro/catalog/product_img/yIJgcMvufszvnDBG.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "BE1010",
+      "LE1410"
+    ],
+    "Installation method": "recessed",
+    "Material process": "stainless steel",
+    "Size": "24*15.79*8mm",
+    "Quantity": [
+      "4PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "4 PCS/SET",
+        "id": "557"
+      }
+    ]
+  },
+  "constraints": []
+}

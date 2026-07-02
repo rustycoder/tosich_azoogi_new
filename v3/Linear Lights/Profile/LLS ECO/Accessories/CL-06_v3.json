@@ -1,0 +1,38 @@
+{
+  "product_name": "CL-06",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67fdd5d2679ca.png"
+  ],
+  "product_features": {
+    "Applicable product model": "BS5470/LS5470(F)/LS60FD/LS60FP/LS60G/LS60BD/LS60HP/LS60LA/LS60LS/S60",
+    "Installation method": "ceiling",
+    "Material process": [
+      "Iron zinc alloy",
+      "electroplating"
+    ],
+    "Size": "90.5*54*5.9mm",
+    "Quantity": [
+      "2PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

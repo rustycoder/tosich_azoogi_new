@@ -1,0 +1,52 @@
+{
+  "product_name": "RA-HE40",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67fcb296ebaa8.png",
+    "https://file.colorsled.com/pro/catalog/product/67fcb296dce35.png"
+  ],
+  "product_features": {
+    "Applicable product model": "HOLA",
+    "Input voltage": "DC48V",
+    "Coating": [
+      "Black",
+      "White"
+    ],
+    "Open Size": "φ55mm",
+    "Rated Power": "150W",
+    "Rated Current": "3A",
+    "Warranty": "5 years",
+    "Maximum load": [
+      "1Kg",
+      "Lamp"
+    ]
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

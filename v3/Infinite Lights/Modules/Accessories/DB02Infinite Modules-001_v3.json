@@ -1,0 +1,29 @@
+{
+  "product_name": "DB02Infinite Modules-001",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/69200d841039d.png",
+    "https://file.colorsled.com/pro/catalog/product/69200d86ac5af.png",
+    "https://file.colorsled.com/pro/catalog/product/69200d88ccb68.png",
+    "https://file.colorsled.com/pro/catalog/product/69200d81973b6.png",
+    "https://file.colorsled.com/pro/catalog/product/69200d8ba98f5.png"
+  ],
+  "product_features": {
+    "Applicable product model": "Infinite Modules",
+    "Size": "L420*W280*H120mm",
+    "Weight": [
+      "",
+      "kg"
+    ],
+    "Material process": "needle-stripe leather box",
+    "Others": "include some samples and accessories of Infinite Modules"
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ]
+  },
+  "constraints": []
+}

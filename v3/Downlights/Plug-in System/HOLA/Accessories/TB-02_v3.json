@@ -1,0 +1,41 @@
+{
+  "product_name": "TB-02",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/yKVPEOPXnNfwYebO.png"
+  ],
+  "product_features": {
+    "Applicable product model": "HOLA",
+    "Material": "PA6",
+    "Size": "L38*W9.4*H10.5mm",
+    "Applicable wires": [
+      "solid wire:0.5-4mm²",
+      "stranded wire:0.5-2.5mm²"
+    ],
+    "Rated Voltage": [
+      "250V",
+      "600V"
+    ],
+    "Rated Current": "32A",
+    "Certification": "CE",
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

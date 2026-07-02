@@ -1,0 +1,46 @@
+{
+  "product_name": "CM-15",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/icJLdTWGczRIvqxZ.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": "S60",
+    "Material process": "PVC",
+    "Size": "2000*φ6.5mm",
+    "Wire diameter": "18AWG",
+    "Quantity": [
+      "1PCS",
+      "set"
+    ],
+    "Others": "1-in-2-out power cable， length is 2m，5 pin dimming version，for power feeding from outside between 2 modules"
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 SET",
+        "id": "561"
+      }
+    ]
+  },
+  "constraints": []
+}

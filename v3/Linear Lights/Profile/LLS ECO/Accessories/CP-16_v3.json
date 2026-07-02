@@ -1,0 +1,41 @@
+{
+  "product_name": "CP-16",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/tKHmhOtYXaBTPYwZ.jpg",
+    "https://file.colorsled.com/pro/catalog/product/66d55a5734a71.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "BH5470",
+      "BH7977",
+      "S60",
+      "LS60"
+    ],
+    "Installation method": "pendant",
+    "Material process": "SUS304",
+    "Size": "37*7*20mm",
+    "Quantity": [
+      "2PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

@@ -1,0 +1,87 @@
+{
+  "product_name": "BR2013(BA)",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/69b381f0811f7.png",
+    "https://file.colorsled.com/pro/catalog/product/6a213ba3687e7.png",
+    "https://file.colorsled.com/pro/catalog/product/69b381fe687b5.png"
+  ],
+  "product_features": {
+    "Material": [
+      "AL6063-T5,anodizing ·Coating:Silver anodized(RAL9006) ·Length:2500mm (Other lengths on request) ·Application: Indoor ·Installation:Trimless recessed ·IP grade:IP20 ·Certification:ROHS",
+      "Reach ·Warranty:5 years"
+    ]
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "No diffuser",
+        "id": "73"
+      }
+    ],
+    "Length": [
+      {
+        "name": "2000mm",
+        "id": "1076"
+      },
+      {
+        "name": "2500mm",
+        "id": "134"
+      }
+    ],
+    "Carrier Style": [
+      {
+        "name": "No carrier",
+        "id": "114"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "No end cap",
+        "id": "131"
+      }
+    ],
+    "End caps Quantity": [
+      {
+        "name": "No end cap",
+        "id": "571"
+      }
+    ],
+    "Accessory Quantity": [
+      {
+        "name": "No screw",
+        "id": "581"
+      },
+      {
+        "name": "8PCS screws",
+        "id": "577"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Package": [
+      {
+        "name": "Two per packge",
+        "id": "817"
+      },
+      {
+        "name": "Bulk Packaging",
+        "id": "761"
+      }
+    ]
+  },
+  "constraints": []
+}

@@ -1,0 +1,35 @@
+{
+  "product_name": "CP-30",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/BVGdvFSITXcLLzGi.png"
+  ],
+  "product_features": {
+    "Applicable product model": "LS5470(F)/BS5470/LS60/PR-S60",
+    "Installation method": "Ceiling",
+    "Material process": "SUS304",
+    "Size": "41.2*20*5.8mm",
+    "Quantity": [
+      "4PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "4 PCS/SET",
+        "id": "557"
+      }
+    ]
+  },
+  "constraints": []
+}

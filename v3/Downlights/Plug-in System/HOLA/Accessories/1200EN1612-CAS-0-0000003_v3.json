@@ -1,0 +1,24 @@
+{
+  "product_name": "1200EN1612-CAS-0-0000003",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/682708f7b48e2.png"
+  ],
+  "product_features": {
+    "Dimming mode": "CASAMBI",
+    "Size": "180*42*25mm",
+    "[Inch Size": "7.09''*1.65''*0.98'']",
+    "Input voltage": "24-48VDC",
+    "Output signal": "DALI",
+    "Output DALI Max.current": "250mA",
+    "Control devices": "≤64",
+    "Control groups": "≤8",
+    "Certification": [
+      "CE",
+      "UKCA"
+    ],
+    "Warranty": "5 years",
+    "Others": "Controller should be used with DALI dimming modules."
+  },
+  "options": {},
+  "constraints": {}
+}

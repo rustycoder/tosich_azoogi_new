@@ -1,0 +1,49 @@
+{
+  "product_name": "RE-K2E55L2",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/691ecf939bfdc.png",
+    "https://file.colorsled.com/pro/catalog/product/691ecf939f7c1.png"
+  ],
+  "product_features": {
+    "Applicable product model": "K2E55L2",
+    "Installation method": "recessed",
+    "Material process": [
+      "aluminum",
+      "oil spraying"
+    ],
+    "Size": "φ62*19mm",
+    "Quantity": [
+      "1PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black(Frame)",
+        "id": "873"
+      },
+      {
+        "name": "White(Frame)",
+        "id": "871"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

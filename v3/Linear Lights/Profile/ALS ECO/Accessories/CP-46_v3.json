@@ -1,0 +1,36 @@
+{
+  "product_name": "CP-46",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/68006e62bc315.png"
+  ],
+  "product_features": {
+    "Applicable product model": "BS1805",
+    "Installation method": "ceiling",
+    "Material process": "stainless steel",
+    "Size": "19*19.6*4.1mm",
+    "Quantity": [
+      "4PCS",
+      "SET"
+    ],
+    "Others": "1 SET includes 4PCS clips and 6PCS screws"
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "4 PCS/SET",
+        "id": "557"
+      }
+    ]
+  },
+  "constraints": []
+}

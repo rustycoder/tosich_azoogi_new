@@ -1,0 +1,225 @@
+{
+  "product_name": "S60HP",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/676d143d91edd.png"
+  ],
+  "product_features": {
+    "Material": "AL6063-T5，spraying surface",
+    "Coating": [
+      "Black(RAL9005)",
+      "White(RAL9003)"
+    ],
+    "Lighting direction": "downward",
+    "Light efficiency": [
+      "60LM",
+      "W"
+    ],
+    "UGR": "≤ 19 (X=4H, Y=8H)",
+    "Dimming": [
+      "Non",
+      "DALI-2+PUSH",
+      "1-10V"
+    ],
+    "Length": "600mm/1200mm/2400mm optional (other length on request)",
+    "Color tolerance": "SDCM≤3(ANSI)",
+    "CRI": [
+      "80",
+      "90"
+    ],
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K",
+      "5000K",
+      "6500K",
+      "3000-6500"
+    ],
+    "Input voltage": "AC200-240V",
+    "Application": "Indoor",
+    "Installation": [
+      "Pendant",
+      "Ceiling",
+      "Trimless recessed"
+    ],
+    "IP Rating": "IP20",
+    "Certification": [
+      "CE",
+      "CB",
+      "UKCA",
+      "SAA",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Normal",
+        "id": "708"
+      },
+      {
+        "name": "3 CCT tunable(Dial switch)",
+        "id": "710"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "Honeycomb",
+        "id": "800"
+      }
+    ],
+    "Length": [
+      {
+        "name": "600mm",
+        "id": "153"
+      },
+      {
+        "name": "1200mm",
+        "id": "145"
+      },
+      {
+        "name": "2400mm",
+        "id": "149"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "68W",
+        "id": "324"
+      },
+      {
+        "name": "34W",
+        "id": "321"
+      },
+      {
+        "name": "17W",
+        "id": "330"
+      }
+    ],
+    "Carrier Style": [
+      {
+        "name": "No carrier",
+        "id": "114"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "1-10V Dimming",
+        "id": "542"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      },
+      {
+        "name": "3000K-6500K",
+        "id": "454"
+      }
+    ],
+    "Light Source Type": [
+      {
+        "name": "Constant Current Rigid PCB",
+        "id": "265"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Package": [
+      {
+        "name": "COLORS Individual",
+        "id": "551"
+      }
+    ]
+  },
+  "constraints": {
+    "153": [
+      321,
+      324
+    ],
+    "145": [
+      330,
+      324
+    ],
+    "149": [
+      330,
+      321
+    ],
+    "710": [
+      443,
+      444,
+      445,
+      446,
+      441,
+      442
+    ],
+    "454": [
+      708
+    ]
+  }
+}

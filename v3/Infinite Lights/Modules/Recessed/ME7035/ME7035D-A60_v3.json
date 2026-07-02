@@ -1,0 +1,326 @@
+{
+  "product_name": "ME7035D-A60",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67d93a9d083f3.png",
+    "https://file.colorsled.com/pro/catalog/product/68ee1fb34dbb5.png"
+  ],
+  "product_features": {
+    "Installation": "Recessed",
+    "Material": [
+      "AL6063-T5",
+      "spraying surface"
+    ],
+    "Coating": "Silver(RAL9006),Black(RAL9005),White(RAL9003)",
+    "Power Supply": "External power supply",
+    "Light efficiency": "110LM/W(Regular)，140LM/W(High-Efficiency)",
+    "SDCM": "≤3",
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ROHS",
+      "REACH",
+      "CB",
+      "ENEC",
+      "LM-80"
+    ]
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Regular",
+        "id": "1244"
+      },
+      {
+        "name": "High efficiency",
+        "id": "709"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Length": [
+      {
+        "name": "D600mm",
+        "id": "1217"
+      },
+      {
+        "name": "D800mm",
+        "id": "1218"
+      },
+      {
+        "name": "D1000mm",
+        "id": "1219"
+      },
+      {
+        "name": "D1200mm",
+        "id": "1220"
+      },
+      {
+        "name": "D1500mm",
+        "id": "1221"
+      },
+      {
+        "name": "D2000mm",
+        "id": "1222"
+      },
+      {
+        "name": "D3000mm",
+        "id": "1223"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "10W",
+        "id": "288"
+      },
+      {
+        "name": "15W",
+        "id": "294"
+      },
+      {
+        "name": "16W",
+        "id": "303"
+      },
+      {
+        "name": "20W",
+        "id": "312"
+      },
+      {
+        "name": "25W",
+        "id": "286"
+      },
+      {
+        "name": "33W",
+        "id": "357"
+      },
+      {
+        "name": "49W",
+        "id": "1291"
+      }
+    ],
+    "Input Current": [
+      {
+        "name": "0.25A",
+        "id": "1434"
+      },
+      {
+        "name": "0.375A",
+        "id": "1456"
+      },
+      {
+        "name": "0.4A",
+        "id": "1447"
+      },
+      {
+        "name": "0.5A",
+        "id": "1416"
+      },
+      {
+        "name": "0.63A",
+        "id": "1458"
+      },
+      {
+        "name": "0.83A",
+        "id": "1459"
+      },
+      {
+        "name": "1.25A",
+        "id": "1420"
+      }
+    ],
+    "Corner Angle": [
+      {
+        "name": "60°",
+        "id": "1351"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Casambi",
+        "id": "539"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "DC36V",
+        "id": "1358"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": {
+    "1217": [
+      294,
+      303,
+      312,
+      286,
+      357,
+      1291,
+      1456,
+      1447,
+      1416,
+      1458,
+      1459,
+      1420
+    ],
+    "1218": [
+      288,
+      303,
+      312,
+      286,
+      357,
+      1291,
+      1434,
+      1447,
+      1416,
+      1458,
+      1459,
+      1420
+    ],
+    "1219": [
+      288,
+      294,
+      312,
+      286,
+      357,
+      1291,
+      1434,
+      1456,
+      1416,
+      1458,
+      1459,
+      1420
+    ],
+    "1220": [
+      288,
+      294,
+      303,
+      286,
+      357,
+      1291,
+      1434,
+      1456,
+      1447,
+      1458,
+      1459,
+      1420
+    ],
+    "1221": [
+      288,
+      294,
+      303,
+      312,
+      357,
+      1291,
+      1434,
+      1456,
+      1447,
+      1416,
+      1459,
+      1420
+    ],
+    "1222": [
+      288,
+      294,
+      303,
+      312,
+      286,
+      1291,
+      1434,
+      1456,
+      1447,
+      1416,
+      1458,
+      1420
+    ],
+    "1223": [
+      288,
+      294,
+      303,
+      312,
+      286,
+      357,
+      1434,
+      1456,
+      1447,
+      1416,
+      1458,
+      1459
+    ],
+    "709": [
+      445,
+      441
+    ],
+    "445": [
+      709
+    ],
+    "441": [
+      709
+    ]
+  }
+}

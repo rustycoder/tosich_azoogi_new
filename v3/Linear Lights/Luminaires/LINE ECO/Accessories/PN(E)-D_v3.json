@@ -1,0 +1,72 @@
+{
+  "product_name": "PN(E)-D",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/68593586a6658.png"
+  ],
+  "product_features": {
+    "Applicable product model": "LINE ECO series",
+    "Installation method": "Pendant",
+    "Material process": "Nickel plating",
+    "Size": [
+      "",
+      ""
+    ],
+    "Quantity": [
+      "2PCS",
+      "SET"
+    ],
+    "Other": [
+      "2 meter wire rope 2PCS",
+      "cable locker 2PCS",
+      "cable holder 2PCS",
+      "M5 flat head Phillips screws 2PCS",
+      "M4*35mm screws 2PCS",
+      "expansion tube 2PCS"
+    ]
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "2M",
+        "id": "140"
+      },
+      {
+        "name": "4M",
+        "id": "887"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Pendant Type": [
+      {
+        "name": "Without junction box",
+        "id": "742"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

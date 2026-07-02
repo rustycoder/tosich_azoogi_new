@@ -1,0 +1,83 @@
+{
+  "product_name": "LF-GSD060YE",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67c94a3977af6.png"
+  ],
+  "product_features": {
+    "Dimming": "DALI Dimming",
+    "Product name": "LF-GSD060YE",
+    "Output power": "40-60W",
+    "Output current": "1.1-1.5A(50mA per dip-switch)",
+    "Product size": "285*30*21mm",
+    "Input voltage": "AC220-240V",
+    "Output voltage": "DC25-42V",
+    "PF": "PF≥0.9",
+    "IP": "IP20",
+    "Material": "Metal housing",
+    "Certification": [
+      "CCC",
+      "ENEC",
+      "CE",
+      "RCM",
+      "UKCA"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "L285*W30.0*H21.0mm",
+        "id": "1392"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "40~60W",
+        "id": "1364"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC220-240V",
+        "id": "1181"
+      }
+    ],
+    "Output Voltage": [
+      {
+        "name": "DC25-42V",
+        "id": "1370"
+      }
+    ],
+    "Output Current": [
+      {
+        "name": "1.1-1.5A",
+        "id": "1386"
+      }
+    ],
+    "IP Rating": [
+      {
+        "name": "IP20",
+        "id": "629"
+      }
+    ],
+    "PF Value": [
+      {
+        "name": "≥0.9",
+        "id": "1173"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

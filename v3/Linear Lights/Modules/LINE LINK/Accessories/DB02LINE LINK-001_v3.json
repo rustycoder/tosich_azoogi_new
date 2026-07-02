@@ -1,0 +1,29 @@
+{
+  "product_name": "DB02LINE LINK-001",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/694206f54faa6.png",
+    "https://file.colorsled.com/pro/catalog/product/694206f71b56f.png",
+    "https://file.colorsled.com/pro/catalog/product/694206f2f0f41.png",
+    "https://file.colorsled.com/pro/catalog/product/694206f93a4be.png",
+    "https://file.colorsled.com/pro/catalog/product/694206fbcbad1.png"
+  ],
+  "product_features": {
+    "Applicable product model": "LINE LINK series",
+    "Size": "L420*W280*H120mm",
+    "Weight": [
+      "",
+      "kg"
+    ],
+    "Material process": "needle-stripe leather box",
+    "Others": "include some samples and accessories of LINE LINK series"
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ]
+  },
+  "constraints": []
+}

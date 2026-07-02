@@ -1,0 +1,29 @@
+{
+  "product_name": "DB02Infinite Profile-001",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/69200da520f7d.png",
+    "https://file.colorsled.com/pro/catalog/product/69200da78edf5.png",
+    "https://file.colorsled.com/pro/catalog/product/69200da942cdc.png",
+    "https://file.colorsled.com/pro/catalog/product/69200da2ba887.png",
+    "https://file.colorsled.com/pro/catalog/product/69200dab1810f.png"
+  ],
+  "product_features": {
+    "Applicable product model": "Infinite Profile",
+    "Size": "L420*W280*H120mm",
+    "Weight": [
+      "",
+      "kg"
+    ],
+    "Material process": "needle-stripe leather box",
+    "Others": "include some samples and accessories of Infinite Profile"
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ]
+  },
+  "constraints": []
+}

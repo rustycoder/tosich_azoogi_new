@@ -1,0 +1,65 @@
+{
+  "product_name": "EC-BG1818",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/68006d1701c73.png"
+  ],
+  "product_features": {
+    "Applicable product model": "BG1818",
+    "Material process": [
+      "PC",
+      "oil spraying"
+    ],
+    "Size": "18*18*7.5mm",
+    "Quantity": [
+      "2PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Single end with hole",
+        "id": "128"
+      },
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      },
+      {
+        "name": "End cap with hole",
+        "id": "129"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

@@ -1,0 +1,57 @@
+{
+  "product_name": "CV-LS40FD",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/dZYGOKaTUsGJoWsf.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": "S40FD",
+    "Diffuser Nature": "Diffuser",
+    "Material process": "PC",
+    "Light transmittance": "≥75%",
+    "Size": [
+      "20m",
+      "Reel:20000*37.8*6.7mm"
+    ],
+    "50m/Reel": "50000*37.8*6.7mm",
+    "Other": [
+      "Black",
+      "White",
+      "Silver"
+    ]
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Length": [
+      {
+        "name": "20 Meter/Reel",
+        "id": "218"
+      },
+      {
+        "name": "50 Meter/Reel",
+        "id": "207"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ]
+  },
+  "constraints": []
+}

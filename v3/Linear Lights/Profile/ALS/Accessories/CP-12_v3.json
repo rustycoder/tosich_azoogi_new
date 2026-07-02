@@ -1,0 +1,38 @@
+{
+  "product_name": "CP-12",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/cJneZPlPMUMWINZX.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "LE2513",
+      "BE2513"
+    ],
+    "Installation method": "recessed",
+    "Material process": "stainless steel",
+    "Size": "5*22*11mm",
+    "Quantity": [
+      "4PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "4 PCS/SET",
+        "id": "557"
+      }
+    ]
+  },
+  "constraints": []
+}

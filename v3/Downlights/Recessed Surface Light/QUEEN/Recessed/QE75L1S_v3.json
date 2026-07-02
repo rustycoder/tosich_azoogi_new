@@ -1,0 +1,249 @@
+{
+  "product_name": "QE75L1S",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/69ddfd825a590.png",
+    "https://file.colorsled.com/pro/catalog/product/69ddfd82502ed.png",
+    "https://file.colorsled.com/pro/catalog/product/69ddfd825e33e.png",
+    "https://file.colorsled.com/pro/catalog/product/69ddfd9c1b34c.png",
+    "https://file.colorsled.com/pro/catalog/product/69ddfd9beb3a5.png"
+  ],
+  "product_features": {
+    "Material": [
+      "ADC12",
+      "spraying surface"
+    ],
+    "Coating": [
+      "Black",
+      "White"
+    ],
+    "Lighting direction": "downward",
+    "Dimming": [
+      "Non",
+      "DALI",
+      "0-10V",
+      "Triac"
+    ],
+    "SDCM(Light source)": "<3 Step",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "4000K",
+      "2700K-3000K-3500K-4000K-5000K"
+    ],
+    "Input voltage": "AC220-240V",
+    "Application": "Indoor",
+    "Power installation": "External",
+    "Installation": "Recessed",
+    "IP Rating": [
+      "IP20",
+      "Front IP54"
+    ],
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Normal",
+        "id": "708"
+      },
+      {
+        "name": "5 CCT Dial Switch",
+        "id": "1683"
+      }
+    ],
+    "Length": [
+      {
+        "name": "Opening 75x75mm",
+        "id": "1684"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "6W",
+        "id": "289"
+      },
+      {
+        "name": "10W",
+        "id": "288"
+      },
+      {
+        "name": "12W",
+        "id": "291"
+      }
+    ],
+    "Beam Angle": [
+      {
+        "name": "24°",
+        "id": "745"
+      },
+      {
+        "name": "40°",
+        "id": "808"
+      },
+      {
+        "name": "60°",
+        "id": "1588"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Casambi",
+        "id": "539"
+      },
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "0-10V Dimming",
+        "id": "1397"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      },
+      {
+        "name": "Triac Dimming",
+        "id": "1539"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "2700K-3000K-3500K-4000K-5000K",
+        "id": "1682"
+      }
+    ],
+    "Reflector Colour": [
+      {
+        "name": "Matte White",
+        "id": "609"
+      },
+      {
+        "name": "Matte Black",
+        "id": "610"
+      }
+    ],
+    "IP Rating": [
+      {
+        "name": "IP20",
+        "id": "629"
+      },
+      {
+        "name": "Front Part IP54",
+        "id": "1681"
+      }
+    ],
+    "Optical": [
+      {
+        "name": "No Honeycomb",
+        "id": "614"
+      },
+      {
+        "name": "Honeycomb",
+        "id": "613"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "With cable of drive input",
+        "id": "782"
+      },
+      {
+        "name": "With junction box",
+        "id": "786"
+      }
+    ],
+    "User Manual": [
+      {
+        "name": "EN",
+        "id": "608"
+      },
+      {
+        "name": "CN",
+        "id": "607"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": {
+    "708": [
+      1682,
+      629
+    ],
+    "1683": [
+      443,
+      444,
+      445,
+      446
+    ],
+    "539": [
+      786
+    ],
+    "445": [
+      629
+    ],
+    "446": [
+      629
+    ],
+    "444": [
+      629
+    ],
+    "443": [
+      629
+    ],
+    "610": [
+      864
+    ],
+    "609": [
+      865
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "product_name": "EC-BR1613(BA)",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/69c501284f086.png"
+  ],
+  "product_features": {
+    "Applicable product model": "BR1613(BA)",
+    "Material process": [
+      "PC",
+      "oil spraying"
+    ],
+    "Size": "16*13*7.5mm",
+    "Quantity": [
+      "2PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      },
+      {
+        "name": "End cap with hole",
+        "id": "129"
+      },
+      {
+        "name": "Single end with hole",
+        "id": "128"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

@@ -1,0 +1,28 @@
+{
+  "product_name": "CP-14",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/cRRAtmVCuogLdNld.jpg"
+  ],
+  "product_features": {
+    "LG3030K(B)-SM*4pcs mounting clips*4pcs": ""
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "4 PCS/SET",
+        "id": "557"
+      }
+    ]
+  },
+  "constraints": []
+}

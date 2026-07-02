@@ -1,0 +1,237 @@
+{
+  "product_name": "DS8160-24V-23mm",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/684a9635bf0cf.png"
+  ],
+  "product_features": {
+    "Applicable product model": "CS5035/CS5070/CE5035(stick a single strip)",
+    "CS7035/CS7070/CE7035(paste two strips placed parallel to each other)": "",
+    "Size": [
+      "4000*23*1.5mm",
+      "5000*23*1.5mm"
+    ],
+    "Cutting Unit": "50mm",
+    "Input Voltage": "DC24V",
+    "Wattage": "14.4W/M(5M/roll); 24W/M(4M/roll)",
+    "Typ.luminous flux": "",
+    "2300LM/M@RA80,4000k(5M/roll)": "",
+    "3600LM/M@RA80,4000k(4M/roll)": "",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K",
+      "5000K",
+      "6500K"
+    ],
+    "CRI": [
+      "80",
+      "90"
+    ],
+    "Other": [
+      "18# wire diameter",
+      "PVC material",
+      "2PIN red-black wire"
+    ]
+  },
+  "options": {
+    "Wattage": [
+      {
+        "name": "14.4W/M",
+        "id": "369"
+      },
+      {
+        "name": "24W/M",
+        "id": "425"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "No",
+        "id": "666"
+      },
+      {
+        "name": "One end",
+        "id": "667"
+      },
+      {
+        "name": "Dual ends",
+        "id": "668"
+      }
+    ],
+    "Wire Length": [
+      {
+        "name": "12CM",
+        "id": "600"
+      },
+      {
+        "name": "20CM",
+        "id": "601"
+      },
+      {
+        "name": "50CM",
+        "id": "602"
+      },
+      {
+        "name": "100CM",
+        "id": "597"
+      },
+      {
+        "name": "200CM",
+        "id": "598"
+      },
+      {
+        "name": "No",
+        "id": "599"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Strip Length": [
+      {
+        "name": "4M",
+        "id": "661"
+      },
+      {
+        "name": "5M",
+        "id": "652"
+      }
+    ],
+    "Silk Printing": [
+      {
+        "name": "COLORS",
+        "id": "643"
+      },
+      {
+        "name": "Neutral",
+        "id": "641"
+      }
+    ],
+    "IP Process": [
+      {
+        "name": "NO(not waterproof)",
+        "id": "690"
+      }
+    ],
+    "Tape Type": [
+      {
+        "name": "White",
+        "id": "699"
+      }
+    ],
+    "Wire Type": [
+      {
+        "name": "Parallel wires",
+        "id": "679"
+      },
+      {
+        "name": "No",
+        "id": "704"
+      }
+    ]
+  },
+  "constraints": {
+    "666": [
+      600,
+      601,
+      602,
+      597,
+      598,
+      679
+    ],
+    "600": [
+      666,
+      704
+    ],
+    "601": [
+      666,
+      704
+    ],
+    "602": [
+      666,
+      704
+    ],
+    "597": [
+      666,
+      704
+    ],
+    "598": [
+      666,
+      704
+    ],
+    "667": [
+      599,
+      704
+    ],
+    "668": [
+      599,
+      704
+    ],
+    "369": [
+      661
+    ],
+    "661": [
+      369
+    ],
+    "425": [
+      652
+    ],
+    "652": [
+      425
+    ],
+    "643": [
+      552
+    ],
+    "641": [
+      553
+    ],
+    "679": [
+      666,
+      599
+    ]
+  }
+}

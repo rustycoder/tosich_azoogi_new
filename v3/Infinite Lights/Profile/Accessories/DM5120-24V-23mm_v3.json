@@ -1,0 +1,174 @@
+{
+  "product_name": "DM5120-24V-23mm",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/693a83d8a38bc.png",
+    "https://file.colorsled.com/pro/catalog/product/693a83dea03e9.png",
+    "https://file.colorsled.com/pro/catalog/product/693a8458b2a58.png"
+  ],
+  "product_features": {
+    "Applicable product model": "CS5035/CS5070/CE5035(stick a single strip)",
+    "CS7035/CS7070/CE7035(paste two strips placed parallel to each other)": "",
+    "Size": [
+      "4000*23*1.5mm",
+      "5000*23*1.5mm"
+    ],
+    "Cutting Unit": "50mm",
+    "Input Voltage": "DC24V",
+    "Wattage": "14.4W/M(5M/roll); 24W/M(4M/roll)",
+    "Typ.luminous flux": "",
+    "800LM/M@RGBNW(5M/roll)": "",
+    "1320LM/M@RGBNW(4M/roll)": "",
+    "CCT": "RGB(DMX)+2700/RGB(DMX)+3000/RGB(DMX)+4000/RGB(DMX)+6000K",
+    "CRI": "RA80 @ white light",
+    "Other": [
+      "20# wire diameter,outer diameter 5.5mm, PVC material;5PIN red",
+      "black",
+      "green",
+      "blue",
+      "white wire"
+    ]
+  },
+  "options": {
+    "Wattage": [
+      {
+        "name": "14.4W/M",
+        "id": "369"
+      },
+      {
+        "name": "24W/M",
+        "id": "425"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "No CRI",
+        "id": "538"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "RGB(DMX)+6000K",
+        "id": "1656"
+      },
+      {
+        "name": "RGB(DMX)+4000K",
+        "id": "1655"
+      },
+      {
+        "name": "RGB(DMX)+3000K",
+        "id": "1654"
+      },
+      {
+        "name": "RGB(DMX)+2700K",
+        "id": "1653"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "No",
+        "id": "666"
+      },
+      {
+        "name": "One end",
+        "id": "667"
+      }
+    ],
+    "Wire Length": [
+      {
+        "name": "50CM",
+        "id": "602"
+      },
+      {
+        "name": "100CM",
+        "id": "597"
+      },
+      {
+        "name": "200CM",
+        "id": "598"
+      },
+      {
+        "name": "No",
+        "id": "599"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Strip Length": [
+      {
+        "name": "4M",
+        "id": "661"
+      },
+      {
+        "name": "5M",
+        "id": "652"
+      }
+    ],
+    "Silk Printing": [
+      {
+        "name": "COLORS",
+        "id": "643"
+      },
+      {
+        "name": "Neutral",
+        "id": "641"
+      }
+    ],
+    "IP Process": [
+      {
+        "name": "NO(not waterproof)",
+        "id": "690"
+      }
+    ],
+    "Tape Type": [
+      {
+        "name": "White",
+        "id": "699"
+      }
+    ],
+    "Wire Type": [
+      {
+        "name": "No",
+        "id": "704"
+      },
+      {
+        "name": "Crystal wires",
+        "id": "890"
+      }
+    ]
+  },
+  "constraints": {
+    "369": [
+      661
+    ],
+    "425": [
+      652
+    ],
+    "666": [
+      598,
+      597,
+      602,
+      890
+    ],
+    "643": [
+      552
+    ],
+    "667": [
+      599,
+      704,
+      599,
+      704
+    ],
+    "668": [
+      599,
+      704
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "product_name": "EC-LH25",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67ff62c154c6c.png"
+  ],
+  "product_features": {
+    "Applicable product model": "LH25FD/LH25FP/LH25G(A)/LC25FD/LH25100",
+    "Material process": [
+      "PC",
+      "oil spraying"
+    ],
+    "Size": "100*20*10.5mm",
+    "Quantity": [
+      "2PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

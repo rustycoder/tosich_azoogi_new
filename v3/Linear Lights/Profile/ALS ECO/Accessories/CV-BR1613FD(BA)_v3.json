@@ -1,0 +1,51 @@
+{
+  "product_name": "CV-BR1613FD(BA)",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/69c503302871e.png"
+  ],
+  "product_features": {
+    "Applicable product model": "BR1613FD(BA)",
+    "Diffuser Nature": "Diffuser",
+    "Material process": [
+      "Silica gel flexible",
+      "Smooth"
+    ],
+    "Light transmittance": "60%",
+    "Size": [
+      "50m",
+      "Reel: 20000*14.8*3.8mm"
+    ],
+    "Other": "Fire protection rating UL94-V2;"
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Package Length": [
+      {
+        "name": "20 Meter/Reel",
+        "id": "1511"
+      }
+    ]
+  },
+  "constraints": []
+}

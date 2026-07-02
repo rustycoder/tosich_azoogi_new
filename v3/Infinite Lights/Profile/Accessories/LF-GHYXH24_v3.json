@@ -1,0 +1,119 @@
+{
+  "product_name": "LF-GHYXH24",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/68f72fbf9759a.png",
+    "https://file.colorsled.com/pro/catalog/product/68f72fc196772.png"
+  ],
+  "product_features": {
+    "Applicable product model": "General",
+    "Dimming mode": "Non-Dimming",
+    "Size": [
+      "316*30.7*22.8mm",
+      "361*33.1*22.8mm"
+    ],
+    "Input voltage": "AC220~240V",
+    "Operating frequency": [
+      "50",
+      "60Hz"
+    ],
+    "PF value": "≥0.9",
+    "Output voltage": "DC24V",
+    "Output current": [
+      "≤4.25A",
+      "≤10A"
+    ],
+    "Power": [
+      "100W",
+      "240W"
+    ],
+    "Efficiency": "0.92",
+    "Certification": [
+      "ENEC",
+      "CE",
+      "CB",
+      "RCM",
+      "UKCA",
+      "MM",
+      "CCC"
+    ],
+    "Case material": "Plastic"
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "L361.0*W33.1*H22.8mm",
+        "id": "1527"
+      },
+      {
+        "name": "L316.0*W30.7*H22.8mm",
+        "id": "1528"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "100W",
+        "id": "946"
+      },
+      {
+        "name": "240W",
+        "id": "1112"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC220-240V",
+        "id": "1181"
+      }
+    ],
+    "Output Voltage": [
+      {
+        "name": "DC24V",
+        "id": "1127"
+      }
+    ],
+    "Output Current": [
+      {
+        "name": "≤4.25A",
+        "id": "1525"
+      },
+      {
+        "name": "≤10A",
+        "id": "1526"
+      }
+    ],
+    "IP Rating": [
+      {
+        "name": "IP20",
+        "id": "629"
+      }
+    ],
+    "PF Value": [
+      {
+        "name": "≥0.9",
+        "id": "1173"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": {
+    "946": [
+      1526,
+      1527
+    ],
+    "1112": [
+      1525,
+      1528
+    ]
+  }
+}

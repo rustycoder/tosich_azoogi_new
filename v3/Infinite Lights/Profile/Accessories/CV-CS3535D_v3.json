@@ -1,0 +1,48 @@
+{
+  "product_name": "CV-CS3535D",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/684aac3770745.png"
+  ],
+  "product_features": {
+    "Applicable product model": "CS3535/CS3570/CE3535(suitable for down-lighting)",
+    "Diffuser Nature": "Diffuser",
+    "Material process": [
+      "silica gel flexible",
+      "frosting"
+    ],
+    "Light transmittance": "≥55%",
+    "Size": "20000*32*3.5mm",
+    "Other": "Fire protection rating UL94-V2; increased silicone oil on both sides (dustproof)"
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Package Length": [
+      {
+        "name": "20 Meter/Reel",
+        "id": "1511"
+      }
+    ]
+  },
+  "constraints": []
+}

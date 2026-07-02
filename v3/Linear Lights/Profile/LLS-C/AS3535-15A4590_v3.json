@@ -1,0 +1,220 @@
+{
+  "product_name": "AS3535-15A4590",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/GIdfuGIccMwKOUGw.png",
+    "https://file.colorsled.com/pro/catalog/product_img/lTriwROzeIvGASpi.jpg",
+    "https://file.colorsled.com/pro/catalog/product_img/qmnEowxwjffWhRbz.jpg",
+    "https://file.colorsled.com/pro/catalog/product/66e29f87ab8b7.jpg"
+  ],
+  "product_features": {
+    "Material": "AL6063-T5，spraying surface",
+    "Coating": [
+      "Silver(RAL9006)",
+      "Black(RAL9005)",
+      "White(RAL9003)"
+    ],
+    "Lighting direction": "downward",
+    "Diameter": "φ1500mm-45°/90°optional (other diameter & angle on request)",
+    "Application": "Indoor",
+    "Installation": [
+      "Pendant",
+      "Ceiling",
+      "Trimless recessed"
+    ],
+    "IP Rating": "IP20",
+    "Certification": [
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "No diffuser",
+        "id": "73"
+      }
+    ],
+    "Length": [
+      {
+        "name": "φ1.5M-45°-lighting downward",
+        "id": "164"
+      },
+      {
+        "name": "φ1.5M-90°-lighting downward",
+        "id": "249"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "NO",
+        "id": "798"
+      },
+      {
+        "name": "23W",
+        "id": "334"
+      },
+      {
+        "name": "12W",
+        "id": "291"
+      }
+    ],
+    "Carrier Style": [
+      {
+        "name": "No carrier",
+        "id": "114"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      },
+      {
+        "name": "Matt Orange",
+        "id": "879"
+      },
+      {
+        "name": "Matt Blue",
+        "id": "876"
+      },
+      {
+        "name": "Yellow",
+        "id": "874"
+      },
+      {
+        "name": "Champagne Gold",
+        "id": "872"
+      },
+      {
+        "name": "Rose gold",
+        "id": "878"
+      },
+      {
+        "name": "Matt Green",
+        "id": "877"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "No CRI",
+        "id": "538"
+      },
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "No CCT",
+        "id": "452"
+      },
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      }
+    ],
+    "Light Source Type": [
+      {
+        "name": "Rigid modular",
+        "id": "264"
+      },
+      {
+        "name": "No Light source",
+        "id": "269"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "No end cap",
+        "id": "131"
+      }
+    ],
+    "Wire Length": [
+      {
+        "name": "2M",
+        "id": "816"
+      },
+      {
+        "name": "No",
+        "id": "599"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Package": [
+      {
+        "name": "COLORS Whole",
+        "id": "550"
+      }
+    ]
+  },
+  "constraints": {
+    "264": [
+      798,
+      452,
+      538,
+      599
+    ],
+    "269": [
+      291,
+      334,
+      443,
+      444,
+      445,
+      446,
+      441,
+      442,
+      534,
+      535,
+      816
+    ],
+    "164": [
+      334
+    ],
+    "249": [
+      291
+    ]
+  }
+}

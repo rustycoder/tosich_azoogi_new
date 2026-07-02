@@ -1,0 +1,45 @@
+{
+  "product_name": "EX-46(N)",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67fe0443df366.png",
+    "https://file.colorsled.com/pro/catalog/product/67fe04461aae4.png"
+  ],
+  "product_features": {
+    "Applicable product model": "PR-S40",
+    "Material process": [
+      "SPCC",
+      "oil spraying"
+    ],
+    "Size": "L135*W41.4*H42.2mm",
+    "Quantity": [
+      "1 PCS",
+      "SET"
+    ],
+    "Other": "Includes mounting screws."
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

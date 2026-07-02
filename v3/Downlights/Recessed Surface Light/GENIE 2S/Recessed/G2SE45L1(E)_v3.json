@@ -1,0 +1,191 @@
+{
+  "product_name": "G2SE45L1(E)",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/66d15b0eb9b48.jpg"
+  ],
+  "product_features": {
+    "Material": [
+      "ADC12",
+      "spraying surface"
+    ],
+    "Driver Installation": "Remote",
+    "Lighting direction": "Downward",
+    "Beam angle": [
+      "15°",
+      "24°",
+      "36°"
+    ],
+    "UGR(X=4H, Y=8H)": "≤13(15°/24°),≤19(36°)",
+    "Opening size": "φ45mm",
+    "Dimming": [
+      "Non",
+      "1-10V",
+      "DALI"
+    ],
+    "SDCM(Light source)": "<3 Step(ANSI)",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K"
+    ],
+    "Input voltage": "AC220-240V",
+    "Application": "Indoor",
+    "Installation": "Recessed",
+    "IP Rating": "IP54",
+    "Certification": [
+      "CE",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Wattage": [
+      {
+        "name": "6W",
+        "id": "289"
+      },
+      {
+        "name": "9W",
+        "id": "349"
+      }
+    ],
+    "Beam Angle": [
+      {
+        "name": "15°",
+        "id": "740"
+      },
+      {
+        "name": "24°",
+        "id": "745"
+      },
+      {
+        "name": "36°",
+        "id": "621"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "White(Frame)",
+        "id": "871"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Casambi",
+        "id": "539"
+      },
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "0-10V Dimming",
+        "id": "1397"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      }
+    ],
+    "Reflector Colour": [
+      {
+        "name": "Matte Black",
+        "id": "610"
+      },
+      {
+        "name": "Matte White",
+        "id": "609"
+      }
+    ],
+    "IP Rating": [
+      {
+        "name": "IP54",
+        "id": "1057"
+      }
+    ],
+    "Optical": [
+      {
+        "name": "Linear Spread Filter",
+        "id": "1245"
+      },
+      {
+        "name": "Honeycomb",
+        "id": "613"
+      },
+      {
+        "name": "Diffusion Filter",
+        "id": "1246"
+      },
+      {
+        "name": "Honeycomb + Linear Spread Filter",
+        "id": "1533"
+      },
+      {
+        "name": "Honeycomb + Diffusion Filter",
+        "id": "1534"
+      },
+      {
+        "name": "NO",
+        "id": "1249"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "With junction box",
+        "id": "786"
+      },
+      {
+        "name": "With cable of drive input",
+        "id": "782"
+      }
+    ],
+    "User Manual": [
+      {
+        "name": "EN",
+        "id": "608"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": {
+    "786": [
+      539
+    ]
+  }
+}

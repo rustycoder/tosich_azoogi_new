@@ -1,0 +1,29 @@
+{
+  "product_name": "DB02ALS&ALS ECO-001",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/69200d199dbb9.png",
+    "https://file.colorsled.com/pro/catalog/product/69200d1c145e8.png",
+    "https://file.colorsled.com/pro/catalog/product/69200d1e36664.png",
+    "https://file.colorsled.com/pro/catalog/product/69200d173f7c8.png",
+    "https://file.colorsled.com/pro/catalog/product/69200d2096997.png"
+  ],
+  "product_features": {
+    "Applicable product model": "ALS&ALS ECO series",
+    "Size": "L420*W280*H120mm",
+    "Weight": [
+      "",
+      "kg"
+    ],
+    "Material process": "needle-stripe leather box",
+    "Others": "include some samples and accessories of ALS&ALS ECO series"
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ]
+  },
+  "constraints": []
+}

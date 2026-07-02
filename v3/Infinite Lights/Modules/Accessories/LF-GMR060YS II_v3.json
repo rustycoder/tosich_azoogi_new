@@ -1,0 +1,83 @@
+{
+  "product_name": "LF-GMR060YS II",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67c948fb2e8d6.png"
+  ],
+  "product_features": {
+    "Dimming": "Non-Dimming",
+    "Product name": "LF-GMR060YSⅡ1150H",
+    "Output power": "46W",
+    "Output current": "1.15A",
+    "Product size": "245*30*21mm",
+    "Input voltage": "AC220-240V",
+    "Output voltage": "DC33-42V",
+    "PF": "PF≥0.9",
+    "IP": "IP20",
+    "Material": "Metal housing",
+    "Certification": [
+      "CCC",
+      "ENEC",
+      "CE",
+      "RCM",
+      "UKCA"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "L245*W30.0*H21.0mm",
+        "id": "1391"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "46W",
+        "id": "275"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC220-240V",
+        "id": "1181"
+      }
+    ],
+    "Output Voltage": [
+      {
+        "name": "DC33-42V",
+        "id": "1369"
+      }
+    ],
+    "Output Current": [
+      {
+        "name": "1.15A",
+        "id": "1303"
+      }
+    ],
+    "IP Rating": [
+      {
+        "name": "IP20",
+        "id": "629"
+      }
+    ],
+    "PF Value": [
+      {
+        "name": "≥0.9",
+        "id": "1173"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

@@ -1,0 +1,118 @@
+{
+  "product_name": "GLE-MR35W24",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/VgQzPONxUDeLULje.png",
+    "https://file.colorsled.com/pro/catalog/product_img/UoRFlxjQBwTAsVpF.png"
+  ],
+  "product_features": {
+    "Material": "AL6063-T5，spraying surface",
+    "Coating": [
+      "White(RAL9003)",
+      "Black"
+    ],
+    "Lighting direction": "downward",
+    "Light efficiency": [
+      "56LM",
+      "W"
+    ],
+    "Beam angle": "90°",
+    "UGR": "≤13(X=4H,Y=8H)",
+    "Dimming": [
+      "Non",
+      "1-10V",
+      "DALI"
+    ],
+    "Color tolerance": "SDCM≤3(ANSI)",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K"
+    ],
+    "Input voltage": "AC220-240V",
+    "Application": "Indoor",
+    "Installation": "Trimless recessed",
+    "Power installation": "External",
+    "IP Rating": "IP20",
+    "Certification": [
+      "CE",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "Flood light",
+        "id": "70"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "24W",
+        "id": "307"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "1-10V Dimming",
+        "id": "542"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ]
+  },
+  "constraints": []
+}

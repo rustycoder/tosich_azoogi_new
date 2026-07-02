@@ -1,0 +1,39 @@
+{
+  "product_name": "RE-G2SR55L2",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67fcab86d55b4.png"
+  ],
+  "product_features": {
+    "Applicable product model": "G2SR55L2",
+    "Installation method": "recessed",
+    "Material process": [
+      "aluminum",
+      "oil spraying"
+    ],
+    "Size": "φ82.8*33.9mm",
+    "Quantity": [
+      "1PCS",
+      "set"
+    ],
+    "Other": "Including 1pcs recessed part of the G2SR55L2 downlight and 3pcs screws."
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

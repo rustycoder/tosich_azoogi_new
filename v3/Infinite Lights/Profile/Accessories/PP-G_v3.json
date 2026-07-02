@@ -1,0 +1,75 @@
+{
+  "product_name": "PP-G",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/684bf11a8beb9.png"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "CS3535",
+      "CS5035",
+      "CS7035",
+      "CS3570",
+      "CS5070",
+      "CS7070"
+    ],
+    "Installation method": "pendant(Ceiling plate with rod)",
+    "Material process": [
+      "Fe",
+      "powder spraying"
+    ],
+    "Maximum weight capacity": "3Kg",
+    "Size": [
+      "Ceiling Plate: D88*29mm",
+      "Rod: 1-2 meter adjustable",
+      "Wire: D3*2000mm"
+    ],
+    "Open hole": "D75mm",
+    "Quantity": [
+      "1PCS",
+      "set"
+    ],
+    "Note": "",
+    "1. Including 1PCS Ceiling plate+2PCS springs+1PCS input wire+1PCS rod.": "",
+    "2. One ceiling plate holds one power supply.": "",
+    "3. Need to order separate clip(CP-XX) to use with it.": ""
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Pendant Type": [
+      {
+        "name": "With ceiling plate",
+        "id": "1474"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

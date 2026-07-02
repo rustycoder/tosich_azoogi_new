@@ -1,0 +1,55 @@
+{
+  "product_name": "CM-26",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/69377ed4c731c.png"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "MS35",
+      "MH35"
+    ],
+    "Type": "Dimming Input line(5PIN)",
+    "Material process": [
+      "Wiring cover: SPCC",
+      "Input line: PVC"
+    ],
+    "Size": [
+      "Wiring cover: 108.5*30.2*4mm",
+      "Input line: 2200*φ7.2mm"
+    ],
+    "Quantity": [
+      "1PCS",
+      "set"
+    ],
+    "Others": "Including 1pcs wiring cover+1pcs input line"
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

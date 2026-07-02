@@ -1,0 +1,56 @@
+{
+  "product_name": "EC-MS50",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/6849632869e49.png"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "MS50",
+      "MH50"
+    ],
+    "Material process": [
+      "ADC12",
+      "powder-coated"
+    ],
+    "Size": "L50.2*W65.7*H17mm",
+    "Quantity": [
+      "2PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

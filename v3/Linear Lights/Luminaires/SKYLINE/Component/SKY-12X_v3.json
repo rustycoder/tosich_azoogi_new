@@ -1,0 +1,63 @@
+{
+  "product_name": "SKY-12X",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/XWlhLxaVZJGeaOZp.png"
+  ],
+  "product_features": {
+    "Material": "Zinc alloy，spraying surface，steel belt (stainless steel)",
+    "Coating": "Black(RAL9005)",
+    "Length": "12000mm optional (other length on request)",
+    "Application": "Indoor",
+    "Installation": "Ceiling",
+    "IP Rating": "IP20",
+    "Certification": [
+      "CE",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "12M",
+        "id": "151"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "No CRI",
+        "id": "538"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "No CCT",
+        "id": "452"
+      }
+    ],
+    "Light Source Type": [
+      {
+        "name": "No Light source",
+        "id": "269"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ]
+  },
+  "constraints": []
+}

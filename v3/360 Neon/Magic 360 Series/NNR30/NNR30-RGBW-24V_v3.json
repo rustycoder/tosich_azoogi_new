@@ -1,0 +1,178 @@
+{
+  "product_name": "NNR30-RGBW-24V",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/678ca16cb4563.gif",
+    "https://file.colorsled.com/pro/catalog/product/678ca18b25a3d.jpg",
+    "https://file.colorsled.com/pro/catalog/product/678ca18b251e7.jpg",
+    "https://file.colorsled.com/pro/catalog/product/678ca18b4ed9f.jpg",
+    "https://file.colorsled.com/pro/catalog/product/678ca18b5add6.jpg"
+  ],
+  "product_features": {
+    "Led_Qty": [
+      "384LEDs",
+      "m"
+    ],
+    "Wattage": [
+      "17.2W",
+      "M"
+    ],
+    "Min Cut": [
+      "12*2led",
+      "62.5mm"
+    ],
+    "Luminous flux": "540LM/m@RGBW(4500K)",
+    "Bend radius": "＞120mm",
+    "IP": "IP65",
+    "Max run length (single‑end power feed)": "5m",
+    "Warranty": [
+      "5years indoor",
+      "Working life ≥60000 hours;3years semi-outdoor",
+      "Working life ≥36000 hours"
+    ],
+    "Product Certification": [
+      "UKCA",
+      "CE",
+      "UL",
+      "ROHS",
+      "REACH"
+    ],
+    "Operating/storage temperature": [
+      "Ta:-25~55℃",
+      "0℃～60℃"
+    ]
+  },
+  "options": {
+    "CCT": [
+      {
+        "name": "RGB+4500K",
+        "id": "483"
+      },
+      {
+        "name": "RGB+3200K",
+        "id": "484"
+      },
+      {
+        "name": "RGB+2800K",
+        "id": "839"
+      },
+      {
+        "name": "RGB+2300K",
+        "id": "485"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "No CRI",
+        "id": "538"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "17.2W/M",
+        "id": "422"
+      }
+    ],
+    "Silk Printing": [
+      {
+        "name": "COLORS",
+        "id": "643"
+      },
+      {
+        "name": "Neutral",
+        "id": "641"
+      },
+      {
+        "name": "Customize laser silk printing",
+        "id": "642"
+      }
+    ],
+    "Strip Length": [
+      {
+        "name": "5M",
+        "id": "652"
+      },
+      {
+        "name": "Customized Length",
+        "id": "665"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "S(One-end top)",
+        "id": "672"
+      },
+      {
+        "name": "S(One-end side)",
+        "id": "671"
+      }
+    ],
+    "Wire Type": [
+      {
+        "name": "PVC wire",
+        "id": "680"
+      }
+    ],
+    "Wire Length": [
+      {
+        "name": "50CM",
+        "id": "602"
+      },
+      {
+        "name": "200CM",
+        "id": "598"
+      },
+      {
+        "name": "Length customization",
+        "id": "605"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Voltage": [
+      {
+        "name": "24V",
+        "id": "645"
+      }
+    ],
+    "IP": [
+      {
+        "name": "Gluing end cap(IP65)",
+        "id": "630"
+      }
+    ],
+    "ESD": [
+      {
+        "name": "ESD",
+        "id": "651"
+      }
+    ],
+    "Engineering Package": [
+      {
+        "name": "Engineering package",
+        "id": "647"
+      }
+    ]
+  },
+  "constraints": {
+    "643": [
+      552
+    ],
+    "641": [
+      553
+    ],
+    "642": [
+      553
+    ],
+    "671": [
+      605
+    ]
+  }
+}
