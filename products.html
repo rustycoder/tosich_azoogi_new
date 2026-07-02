@@ -54,13 +54,13 @@
   =========================================================== */
   .prod-layout {
     display: grid;
-    grid-template-columns: 160px 1fr;
+    grid-template-columns: 240px 1fr;
     gap: 28px;
     padding: 28px 0 100px;
     align-items: start;
   }
   @media(max-width:1280px) {
-    .prod-layout { grid-template-columns: 150px 1fr; gap: 22px; }
+    .prod-layout { grid-template-columns: 220px 1fr; gap: 22px; }
   }
   @media(max-width:900px) {
     .prod-layout { grid-template-columns: 1fr; }
@@ -84,19 +84,19 @@
   .prod-sidebar::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
 
   .sb-block { border-bottom: 1px solid var(--line); padding-bottom: 16px; margin-bottom: 16px; }
-  .sb-title { display: flex; align-items: center; justify-content: space-between; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; cursor: pointer; }
-  .sb-title:hover { color: var(--accent); }
-  .sb-toggle { font-size: 15px; font-weight: 300; line-height: 1; color: var(--muted); }
-  .sb-block.open .sb-toggle { color: var(--accent); }
+  .sb-title { display: flex; align-items: center; justify-content: space-between; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; cursor: pointer; }
+  .sb-title:hover { opacity: 0.8; }
+  .sb-toggle { font-size: 15px; font-weight: 300; line-height: 1; color: var(--accent); }
+  .sb-block.open .sb-title { border-bottom: 1px solid var(--border-light); padding-bottom: 12px; margin-bottom: 12px; }
   .sb-block.open .sb-toggle::after { content: '\2013'; }
   .sb-block:not(.open) .sb-toggle::after { content: '+'; }
   .sb-content { max-height: 2000px; overflow: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; opacity: 1; }
   .sb-block:not(.open) .sb-content { max-height: 0; opacity: 0; }
-  .sb-block:not(.open) .sb-title { margin-bottom: 0; }
+  .sb-block:not(.open) .sb-title { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
 
   .cat-list { list-style: none; margin: 0; padding: 0; }
   .cat-list > li { border-bottom: 1px solid var(--line); }
-  .cat-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; cursor: pointer; font-size: 12px; gap: 6px; }
+  .cat-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; cursor: pointer; font-size: 12px; font-weight: 600; gap: 6px; }
   .cat-row.active, .cat-row:hover { color: var(--accent); }
   .cat-row span:first-child { flex: 1; line-height: 1.3; word-break: break-word; }
 
@@ -113,14 +113,14 @@
   .cat-list > li.open .cat-toggle { color: var(--accent); }
   .cat-row:hover .cat-toggle { color: var(--accent); }
 
-  .sub-list { list-style: none; margin: 0 0 8px; padding: 0 0 0 2px; max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+  .sub-list { list-style: none; margin: 0 0 8px; padding: 0 0 0 16px; max-height: 0; overflow: hidden; transition: max-height .3s ease; }
   .cat-list > li.open .sub-list { max-height: 400px; }
   .sub-list li a { display: block; padding: 5px 0; font-size: 11.5px; color: var(--muted); line-height: 1.3; }
   .sub-list li a.active, .sub-list li a:hover { color: var(--accent); }
 
   /* Filter accordion */
   .filter-item { border-bottom: 1px solid var(--line); }
-  .filter-head { display: flex; align-items: center; justify-content: space-between; padding: 13px 0; cursor: pointer; font-size: 13px; }
+  .filter-head { display: flex; align-items: center; justify-content: space-between; padding: 13px 0; cursor: pointer; font-size: 13px; font-weight: 600; }
   .filter-head:hover { color: var(--accent); }
   .filter-toggle { font-size: 15px; font-weight: 300; color: var(--muted); width: 16px; text-align: center; }
   .filter-body { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
@@ -159,21 +159,28 @@
   @media(max-width:900px)  { .prod-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
   @media(max-width:480px)  { .prod-grid { grid-template-columns: 1fr; } }
 
-  .prod-card { position: relative; border: 1px solid var(--border-light); background: var(--card-bg); overflow: hidden; border-radius: 3px; transition: border-color .25s; }
+  .prod-card { position: relative; border: 1px solid var(--border-light); background: var(--card-bg); overflow: hidden; border-radius: 3px; transition: border-color .25s; cursor: pointer; }
   .prod-card:hover { border-color: var(--accent); }
   .prod-card-img { position: relative; aspect-ratio: 1/1; overflow: hidden; }
   .prod-swatch { position: absolute; inset: 0; background: linear-gradient(135deg, var(--sw1,#1c2e17), var(--sw2,#0b0b0b)); display: flex; align-items: center; justify-content: center; }
   .prod-swatch svg { width: 38%; opacity: .35; }
-  .prod-card-title { padding: 12px 14px 14px; font-size: 14px; }
-  .prod-card-title .cat-label { display: block; font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 3px; }
+  .prod-card-title { padding: 12px 14px 14px; font-size: 13.5px; display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; line-height: 1.3; }
+  .prod-card-title-text { flex: 1; }
+  .prod-card-title .cat-label { display: block; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+  .add-quote-btn { background: var(--card-bg); border: 1px solid var(--line); color: var(--ink); width: 28px; height: 28px; border-radius: 4px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .2s; flex-shrink: 0; font-size: 16px; font-weight: 300; padding: 0; }
+  .add-quote-btn:hover { background: var(--accent); color: var(--pure-bg); border-color: var(--accent); }
+  .add-quote-btn.added { background: var(--accent-2); color: #fff; border-color: var(--accent-2); }
 
-  .prod-overlay { position: absolute; inset: 0; padding: 18px; display: flex; flex-direction: column; justify-content: flex-end;
-    background: linear-gradient(180deg, rgba(11,11,11,0) 30%, rgba(11,11,11,.92) 100%);
-    opacity: 0; transform: translateY(8%); transition: opacity .3s ease, transform .3s ease; }
-  .prod-card:hover .prod-overlay, .prod-card:focus-within .prod-overlay { opacity: 1; transform: translateY(0); }
-  .prod-overlay h4 { color: #fff; font-size: 18px; margin-bottom: 6px; font-family: 'Cormorant Garamond', serif; font-weight: 500; }
-  .prod-overlay .spec-line { color: rgba(255,255,255,.7); font-size: 11.5px; margin-bottom: 12px; line-height: 1.6; }
-  .prod-overlay .spec-line span { display: block; }
+  .prod-overlay { position: absolute; inset: 0; padding: 18px; display: flex; flex-direction: column; justify-content: center;
+    background: linear-gradient(180deg, rgba(11,11,11,0.4) 0%, rgba(11,11,11,.92) 100%);
+    opacity: 0; transition: opacity .3s ease; }
+  .prod-card:hover .prod-overlay, .prod-card:focus-within .prod-overlay { opacity: 1; }
+  .spec-list { display: flex; flex-direction: column; gap: 6px; width: 100%; transform: translateY(8%); transition: transform .3s ease; }
+  .prod-card:hover .spec-list { transform: translateY(0); }
+  .spec-item { font-size: 11.5px; color: rgba(255,255,255,0.85); line-height: 1.4; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 6px; display: flex; justify-content: space-between; gap: 8px; }
+  .spec-item:last-child { border-bottom: none; }
+  .spec-item strong { color: #fff; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; }
+  .spec-item span { text-align: right; }
   .p-btn-row { display: flex; gap: 8px; }
   .ov-btn { flex: 1; text-align: center; font-size: 11.5px; padding: 9px 6px; cursor: pointer; border-radius: 2px; transition: all .2s; border: 1px solid rgba(255,255,255,.5); color: #fff; background: transparent; }
   .ov-btn:hover { background: rgba(255,255,255,.12); }
@@ -5649,7 +5656,7 @@
       </div>
       <div class="sb-block open">
         <div class="sb-title" onclick="this.parentElement.classList.toggle('open')">
-          <span>Filter by Specification</span><span class="sb-toggle"></span>
+          <span>Tech Specification</span><span class="sb-toggle"></span>
         </div>
         <div class="sb-content">
           <div id="filterAccordion"></div>
@@ -6131,17 +6138,27 @@ function renderGrid() {
       ? '<div class="prod-swatch" style="background-image:url(\'' + p.img + '\'); background-size:cover; background-position:center;"></div>' 
       : '<div class="prod-swatch" style="background:linear-gradient(135deg, #1c3312, #0b0b0b)"></div>';
       
-    return '<div class="prod-card">' +
+    var specHtml = '<div class="spec-list">';
+    var count = 0;
+    if (p.specs) {
+      for (var key in p.specs) {
+        if (count >= 5) break;
+        specHtml += '<div class="spec-item"><strong>' + key + '</strong><span>' + p.specs[key] + '</span></div>';
+        count++;
+      }
+    }
+    specHtml += '</div>';
+
+    return '<div class="prod-card" onclick="window.location.href=\'product-detail.html\'">' +
       '<div class="prod-card-img">' + imgHtml +
         '<div class="prod-overlay">' +
-          '<h4>' + p.name + '</h4>' +
-          '<div class="spec-line"><span>Power: ' + p.power + ' &middot; IP: ' + p.ip + '</span></div>' +
-          '<div class="p-btn-row">' +
-            '<div class="ov-btn solid">View Details</div>' +
-          '</div>' +
+          specHtml +
         '</div>' +
       '</div>' +
-      '<div class="prod-card-title"><span class="cat-label">' + p.sub + '</span>' + p.name + '</div>' +
+      '<div class="prod-card-title">' +
+        '<div class="prod-card-title-text"><span class="cat-label">' + p.sub + '</span>' + p.name + '</div>' +
+        '<button class="add-quote-btn" aria-label="Add to quote" onclick="event.stopPropagation(); this.classList.add(\'added\'); this.innerHTML=\'&check;\';">+</button>' +
+      '</div>' +
     '</div>';
   }).join('');
 }
