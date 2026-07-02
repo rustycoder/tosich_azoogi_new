@@ -150,8 +150,7 @@
       <!-- ==================== PRODUCT DETAIL GRID END ==================== -->
 
       <!-- ==================== TECHNICAL SPECIFICATIONS SECTION START ==================== -->
-      <div class="specifications-section"
-        style="margin-top: 0; border-top: 1px solid var(--line); padding-top: 20px;">
+      <div class="specifications-section" style="margin-top: 0; border-top: 1px solid var(--line); padding-top: 20px;">
         <h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 0;">Technical Specifications</h3>
         <div class="spec-grid-layout"
           style="display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 48px; align-items: start;">
@@ -177,8 +176,7 @@
       <!-- ==================== TECHNICAL SPECIFICATIONS SECTION END ==================== -->
 
       <!-- ==================== PRODUCT B2B ICONS ROW START ==================== -->
-      <div class="product-icons-row-wrapper"
-        style="margin-top: 32px; padding-top: 10px; padding-bottom: 8px;">
+      <div class="product-icons-row-wrapper" style="margin-top: 32px; padding-top: 10px; padding-bottom: 8px;">
         <div class="product-icons-row" style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center;">
           <img src="assets/p_icon_01.png" alt="Icon 1"
             style="height: 48px; width: auto; opacity: 0.85; transition: opacity 0.2s;"
@@ -208,14 +206,14 @@
       <!-- ==================== PRODUCT OPTIONS SECTION START ==================== -->
       <div class="options-section"
         style="margin-top: 20px; border-top: 1px solid var(--line); padding-top: 30px; margin-bottom: 20px;">
-        
+
 
         <div class="options-grid-layout"
           style="display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 48px; align-items: start;">
 
           <!-- DYNAMIC CONFIGURATOR WORKSPACE START -->
-          
-          <div class="config-workspace" id="dynamic-configurator">            
+
+          <div class="config-workspace" id="dynamic-configurator">
             <!-- Dynamically populated options with constraints -->
           </div>
           <!-- DYNAMIC CONFIGURATOR WORKSPACE END -->
@@ -264,66 +262,166 @@
 
     <!-- ==================== COMPATIBLE ACCESSORIES SECTION START ==================== -->
     <section class="accessories-section"
-      style="margin-top: 25px; border-top: 1px solid var(--line); padding-top: 20px; padding-bottom: 20px;">
+      style="margin-top: 25px; border-top: 1px solid var(--line); padding-top: 20px; padding-bottom: 40px;">
       <div class="wrap">
         <h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px;">Recommended Compatible
           Accessories</h3>
-        <div class="accessories-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
-
-          <!-- ACCESSORY CARD 1: LED DRIVER -->
-          <div class="accessory-card"
-            style="background: var(--card-bg); border: 1px solid var(--border-light); border-radius: 8px; padding: 20px; display: flex; flex-direction: column; gap: 12px; transition: all 0.3s;"
-            onmouseover="this.style.borderColor='var(--accent)'; this.style.transform='translateY(-3px)'"
-            onmouseout="this.style.borderColor='var(--border-light)'; this.style.transform='none'">
-            <div
-              style="aspect-ratio: 4/3; background: var(--rgba-hover); border-radius: 6px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-              <img src="assets/img/drivers.webp" alt="Mean Well LED Driver"
-                style="max-width: 80%; max-height: 80%; object-fit: contain;">
+        <div class="prod-grid" id="productGrid">
+          <div class="prod-card" onclick="window.location.href='product-detail.html'">
+            <div class="prod-card-img">
+              <div class="prod-swatch"
+                style="background-image:url('assets/img/GL001.webp'); background-size:cover; background-position:center;">
+              </div>
+              <div class="prod-overlay">
+                <div class="spec-list">
+                  <div class="spec-item"><strong>Bending Direction</strong><span>Non-Bendable</span></div>
+                </div>
+              </div>
             </div>
-            <h4 style="font-size: 16px; font-weight: 600; color: var(--ink); margin: 0;">Mean Well LED Driver 24V DC
-            </h4>
-            <p style="font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0; flex-grow: 1;">Premium
-              high-efficiency constant voltage driver, compatible with TRIAC and DALI dimming options.</p>
-            <a href="demo.html#products" class="btn --outline"
-              style="font-size: 11px; padding: 8px 12px; align-self: flex-start;">View Driver Details</a>
-          </div>
-
-          <!-- ACCESSORY CARD 2: MOUNTING PROFILE -->
-          <div class="accessory-card"
-            style="background: var(--card-bg); border: 1px solid var(--border-light); border-radius: 8px; padding: 20px; display: flex; flex-direction: column; gap: 12px; transition: all 0.3s;"
-            onmouseover="this.style.borderColor='var(--accent)'; this.style.transform='translateY(-3px)'"
-            onmouseout="this.style.borderColor='var(--border-light)'; this.style.transform='none'">
-            <div
-              style="aspect-ratio: 4/3; background: var(--rgba-hover); border-radius: 6px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-              <img src="assets/img/leds.webp" alt="Mounting Profile"
-                style="max-width: 80%; max-height: 80%; object-fit: contain;">
+            <div class="prod-card-title">
+              <div class="prod-card-title-text"><span class="cat-label">Recessed</span>L90-BH5470 Linear Profile</div>
+              <button class="add-quote-btn" aria-label="Add to quote"
+                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
             </div>
-            <h4 style="font-size: 16px; font-weight: 600; color: var(--ink); margin: 0;">Surface Aluminium Mounting
-              Profile</h4>
-            <p style="font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0; flex-grow: 1;">Premium anodised
-              aluminium extrusion channel with a high-transmittance frosted diffuser cover.</p>
-            <a href="demo.html#products" class="btn --outline"
-              style="font-size: 11px; padding: 8px 12px; align-self: flex-start;">View Profile Details</a>
           </div>
-
-          <!-- ACCESSORY CARD 3: T-CONNECTOR -->
-          <div class="accessory-card"
-            style="background: var(--card-bg); border: 1px solid var(--border-light); border-radius: 8px; padding: 20px; display: flex; flex-direction: column; gap: 12px; transition: all 0.3s;"
-            onmouseover="this.style.borderColor='var(--accent)'; this.style.transform='translateY(-3px)'"
-            onmouseout="this.style.borderColor='var(--border-light)'; this.style.transform='none'">
-            <div
-              style="aspect-ratio: 4/3; background: var(--rgba-hover); border-radius: 6px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-              <img src="assets/img/neon.webp" alt="T-Connector Feed"
-                style="max-width: 80%; max-height: 80%; object-fit: contain; mix-blend-mode: normal;">
+          
+          <div class="prod-card" onclick="window.location.href='product-detail.html'">
+            <div class="prod-card-img">
+              <div class="prod-swatch"
+                style="background-image:url('assets/img/downlights.jpg'); background-size:cover; background-position:center;">
+              </div>
+              <div class="prod-overlay">
+                <div class="spec-list">
+                  <div class="spec-item"><strong>Bending Direction</strong><span>Non-Bendable</span></div>
+                  <div class="spec-item"><strong>IP Rating</strong><span>IP20</span></div>
+                </div>
+              </div>
             </div>
-            <h4 style="font-size: 16px; font-weight: 600; color: var(--ink); margin: 0;">IP67 Injection-Moulded
-              T-Connector</h4>
-            <p style="font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0; flex-grow: 1;">Watertight
-              connector joints and power feed cabling for custom neon flex layout segments.</p>
-            <a href="demo.html#products" class="btn --outline"
-              style="font-size: 11px; padding: 8px 12px; align-self: flex-start;">View Feed Details</a>
+            <div class="prod-card-title">
+              <div class="prod-card-title-text"><span class="cat-label">Recessed Downlights</span>Plug-in System
+                Downlight</div><button class="add-quote-btn" aria-label="Add to quote"
+                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+            </div>
           </div>
-
+          
+         
+          <div class="prod-card" onclick="window.location.href='product-detail.html'">
+            <div class="prod-card-img">
+              <div class="prod-swatch"
+                style="background-image:url('assets/img/prod-4.jpg'); background-size:cover; background-position:center;">
+              </div>
+              <div class="prod-overlay">
+                <div class="spec-list">
+                  <div class="spec-item"><strong>Bending Direction</strong><span>Top Bend</span></div>
+                  <div class="spec-item"><strong>PCB Width</strong><span>15mm</span></div>
+                  <div class="spec-item"><strong>LEDs/m</strong><span>360</span></div>
+                  <div class="spec-item"><strong>Power</strong><span>18W/m</span></div>
+                  <div class="spec-item"><strong>IP Rating</strong><span>IP67</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="prod-card-title">
+              <div class="prod-card-title-text"><span class="cat-label">RGB / RGBW</span>RGBW Outdoor COB</div><button
+                class="add-quote-btn" aria-label="Add to quote"
+                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+            </div>
+          </div>
+          <div class="prod-card" onclick="window.location.href='product-detail.html'">
+            <div class="prod-card-img">
+              <div class="prod-swatch"
+                style="background-image:url('assets/img/prod-3.jpg'); background-size:cover; background-position:center;">
+              </div>
+              <div class="prod-overlay">
+                <div class="spec-list">
+                  <div class="spec-item"><strong>Bending Direction</strong><span>Non-Bendable</span></div>
+                  <div class="spec-item"><strong>PCB Width</strong><span>10mm</span></div>
+                  <div class="spec-item"><strong>LEDs/m</strong><span>240</span></div>
+                  <div class="spec-item"><strong>Power</strong><span>11W/m</span></div>
+                  <div class="spec-item"><strong>IP Rating</strong><span>IP20</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="prod-card-title">
+              <div class="prod-card-title-text"><span class="cat-label">High Efficiency</span>HE Series 130lm/W COB
+              </div><button class="add-quote-btn" aria-label="Add to quote"
+                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+            </div>
+          </div>
+          <div class="prod-card" onclick="window.location.href='product-detail.html'">
+            <div class="prod-card-img">
+              <div class="prod-swatch"
+                style="background-image:url('assets/img/drivers.webp'); background-size:cover; background-position:center;">
+              </div>
+              <div class="prod-overlay">
+                <div class="spec-list">
+                  <div class="spec-item"><strong>Bending Direction</strong><span>Non-Bendable</span></div>
+                  <div class="spec-item"><strong>IP Rating</strong><span>IP20</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="prod-card-title">
+              <div class="prod-card-title-text"><span class="cat-label">DALI / DALI-2</span>DALI-2 Dimmable Driver</div>
+              <button class="add-quote-btn" aria-label="Add to quote"
+                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+            </div>
+          </div>
+          <div class="prod-card" onclick="window.location.href='product-detail.html'">
+            <div class="prod-card-img">
+              <div class="prod-swatch"
+                style="background-image:url('assets/img/dt.webp'); background-size:cover; background-position:center;">
+              </div>
+              <div class="prod-overlay">
+                <div class="spec-list">
+                  <div class="spec-item"><strong>Bending Direction</strong><span>Non-Bendable</span></div>
+                  <div class="spec-item"><strong>IP Rating</strong><span>IP20</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="prod-card-title">
+              <div class="prod-card-title-text"><span class="cat-label">Bluetooth / Casambi</span>Bluetooth Casambi
+                Controller</div><button class="add-quote-btn" aria-label="Add to quote"
+                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+            </div>
+          </div>
+          <div class="prod-card" onclick="window.location.href='product-detail.html'">
+            <div class="prod-card-img">
+              <div class="prod-swatch"
+                style="background-image:url('assets/img/img-1.jpg'); background-size:cover; background-position:center;">
+              </div>
+              <div class="prod-overlay">
+                <div class="spec-list">
+                  <div class="spec-item"><strong>Bending Direction</strong><span>Non-Bendable</span></div>
+                  <div class="spec-item"><strong>IP Rating</strong><span>IP65</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="prod-card-title">
+              <div class="prod-card-title-text"><span class="cat-label">Asymmetrical</span>Asymmetrical Handrail Puck
+              </div><button class="add-quote-btn" aria-label="Add to quote"
+                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+            </div>
+          </div>
+          <div class="prod-card" onclick="window.location.href='product-detail.html'">
+            <div class="prod-card-img">
+              <div class="prod-swatch"
+                style="background-image:url('assets/img/prod-5.jpg'); background-size:cover; background-position:center;">
+              </div>
+              <div class="prod-overlay">
+                <div class="spec-list">
+                  <div class="spec-item"><strong>Bending Direction</strong><span>Non-Bendable</span></div>
+                  <div class="spec-item"><strong>PCB Width</strong><span>10mm</span></div>
+                  <div class="spec-item"><strong>LEDs/m</strong><span>120</span></div>
+                  <div class="spec-item"><strong>Power</strong><span>14.4W/m</span></div>
+                  <div class="spec-item"><strong>IP Rating</strong><span>IP65</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="prod-card-title">
+              <div class="prod-card-title-text"><span class="cat-label">Single Colour</span>Single Colour SMD 5050</div>
+              <button class="add-quote-btn" aria-label="Add to quote"
+                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
