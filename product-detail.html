@@ -67,7 +67,8 @@
   <!-- ========== BREADCRUMBS ========== -->
   <div class="product-page-wrapper">
     <div class="wrap">
-      <div class="breadcrumbs">
+      <!-- ==================== BREADCRUMBS START ==================== -->
+      <div class="breadcrumbs" id="breadcrumbs">
         <a href="demo.html">Home</a>
         <span>/</span>
         <a href="demo.html#products">Products</a>
@@ -76,12 +77,91 @@
         <span>/</span>
         <span style="color: var(--ink);">Neon Flex Series 360</span>
       </div>
+      <!-- ==================== BREADCRUMBS END ==================== -->
 
-      <!-- ========== PRODUCT DETAIL GRID ========== -->
+      <!-- ==================== PRODUCT DETAIL GRID START ==================== -->
       <div class="product-grid">
-        
-        <!-- LEFT COLUMN: GALLERY & GLOW PREVIEW -->
+
+        <!-- ==================== LEFT COLUMN: DETAILS START ==================== -->
+        <div class="product-details-info">
+          
+          <!-- PRODUCT TITLE GROUP START -->
+          <div class="product-title-group">
+            <h1 id="product-name">Neon Flex Series 360</h1>
+            <div class="product-code" id="product-code-label">MODEL: AZ-NF360-3000K-DOME</div>
+          </div>
+          <!-- PRODUCT TITLE GROUP END -->
+
+          <!-- PRODUCT METADATA BADGES START -->
+          <div class="product-meta-badges">
+            <span class="meta-badge" id="badge-ip">IP67 Waterproof</span>
+            <span class="meta-badge">360° Light Emission</span>
+            <span class="meta-badge">5-Year Warranty</span>
+            <span class="meta-badge">24V DC Input</span>
+            <span class="meta-badge">CRI 90+</span>
+          </div>
+          <!-- PRODUCT METADATA BADGES END -->
+
+          <!-- PRODUCT SHORT DESCRIPTION START -->
+          <div class="product-short-desc" id="product-short-desc">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas condimentum lacinia. Suspendisse nec
+            tincidunt ante, sed sodales tellus. Aliquam quis pulvinar mi. Nunc at feugiat sem. Pellentesque molestie mi
+            eget faucibus interdum. Quisque ornare leo sed neque ullamcorper, in viverra tellus feugiat. Phasellus augue
+            magna, imperdiet id libero eu, ultricies cursus leo.
+
+            Nulla neque dolor, sagittis in felis sit amet, congue iaculis magna. Fusce sodales enim sit amet dui gravida
+            accumsan. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi non
+            dolor et dui finibus commodo rutrum et tortor.
+          </div>
+          <!-- PRODUCT SHORT DESCRIPTION END -->
+
+          <!-- PRODUCT B2B ICONS ROW START -->
+          <div class="product-icons-row" style="display: flex; flex-wrap: wrap; gap: 16px; margin: 24px 0 12px 0;">
+            <img src="assets/p_icon_01.png" alt="Icon 1"
+              style="height: 32px; width: auto; opacity: 0.85; transition: opacity 0.2s;"
+              onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+            <img src="assets/p_icon_02.png" alt="Icon 2"
+              style="height: 32px; width: auto; opacity: 0.85; transition: opacity 0.2s;"
+              onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+            <img src="assets/p_icon_03.png" alt="Icon 3"
+              style="height: 32px; width: auto; opacity: 0.85; transition: opacity 0.2s;"
+              onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+            <img src="assets/p_icon_04.png" alt="Icon 4"
+              style="height: 32px; width: auto; opacity: 0.85; transition: opacity 0.2s;"
+              onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+            <img src="assets/p_icon_05.png" alt="Icon 5"
+              style="height: 32px; width: auto; opacity: 0.85; transition: opacity 0.2s;"
+              onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+            <img src="assets/p_icon_06.png" alt="Icon 6"
+              style="height: 32px; width: auto; opacity: 0.85; transition: opacity 0.2s;"
+              onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+            <img src="assets/p_icon_07.png" alt="Icon 7"
+              style="height: 32px; width: auto; opacity: 0.85; transition: opacity 0.2s;"
+              onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+          </div>
+          <!-- PRODUCT B2B ICONS ROW END -->
+
+          <!-- B2B ACTION BUTTONS START -->
+          <div class="gallery-actions" style="display: flex; gap: 16px; justify-content: flex-start; margin-top: 24px;">
+            <a href="#" class="btn --accent" style="display:flex; align-items:center; justify-content:center; gap:8px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Download Datasheet
+            </a>
+            <button class="btn --outline" id="add-to-spec-btn">Add to Quote List</button>
+          </div>
+          <!-- B2B ACTION BUTTONS END -->
+          
+        </div>
+        <!-- ==================== LEFT COLUMN: DETAILS END ==================== -->
+
+        <!-- ==================== RIGHT COLUMN: GALLERY START ==================== -->
         <div class="product-gallery">
+          
+          <!-- MAIN IMAGE COVER START -->
           <div class="gallery-main-wrapper">
             <!-- Glow Preview Area -->
             <div class="glow-preview-area" id="glow-area">
@@ -92,281 +172,64 @@
               <!-- Small sub-tube inside for intense center element light -->
               <div class="glow-neon-tube" id="glow-tube" style="display:none;"></div>
             </div>
-            <img class="gallery-main-image" src="assets/img/neon.webp" alt="Neon Flex Series 360 Overlay">
+            <img class="gallery-main-image" src="assets/img/neon.webp" id="gallery-main-img" alt="Product Image">
           </div>
+          <!-- MAIN IMAGE COVER END -->
+
+          <!-- IMAGE VARIANT THUMBNAILS LIST START -->
+          <div class="gallery-thumbs" id="gallery-thumbs">
+            <!-- Dynamically populated thumbs from JSON -->
+          </div>
+          <!-- IMAGE VARIANT THUMBNAILS LIST END -->
           
-          <!-- Gallery Thumbnails -->
-          <div class="gallery-thumbs">
-            <div class="thumb-card active" data-view="bend">
-              <img src="assets/img/neon.webp" alt="Bend View">
-            </div>
-            <div class="thumb-card" data-view="closeup">
-              <img src="assets/img/leds.webp" alt="LED Internals Close Up">
-            </div>
-            <div class="thumb-card" data-view="driver">
-              <img src="assets/img/drivers.webp" alt="Driver and Feed View">
-            </div>
-            <div class="thumb-card" data-view="downlight">
-              <img src="assets/img/dt.webp" alt="Architectural Application">
-            </div>
+          <div style="text-align: center; font-size: 11px; color: var(--muted); margin-top: 4px;">Hover to zoom image
           </div>
         </div>
-
-        <!-- RIGHT COLUMN: CONFIGURATOR & DETAILS -->
-        <div class="product-details-info">
-          <div class="product-title-group">
-            <h1 id="product-name">Neon Flex Series 360</h1>
-            <div class="product-code" id="product-code-label">MODEL: AZ-NF360-3000K-DOME</div>
-          </div>
-
-          <div class="product-meta-badges">
-            <span class="meta-badge" id="badge-ip">IP67 Waterproof</span>
-            <span class="meta-badge">360° Light Emission</span>
-            <span class="meta-badge">5-Year Warranty</span>
-            <span class="meta-badge">24V DC Input</span>
-            <span class="meta-badge">CRI 90+</span>
-          </div>
-
-          <div class="product-short-desc">
-            The AZ-NF360 is a premium, architectural-grade flexible LED neon fixture that provides complete 360-degree circular lighting. Perfect for custom curved chandeliers, statement ceiling artwork, pillars wrapping, and premium B2B decorative hospitality spaces.
-          </div>
-
-          <!-- CONFIGURATOR WORKSPACE -->
-          <div class="config-workspace">
-            
-            <!-- Option 1: Color Temperature (CCT) -->
-            <div class="config-group">
-              <div class="config-group-title">
-                <span>Color Temperature (CCT)</span>
-                <span id="selected-cct-label" style="color: var(--accent);">3000K Warm White</span>
-              </div>
-              <div class="config-options-flex">
-                <button class="config-btn active" data-cct="2700" data-rgb="255,180,90" data-lbl="2700K Extra Warm White">
-                  <span class="color-dot" style="background:#ffb45a;"></span> 2700K
-                </button>
-                <button class="config-btn" data-cct="3000" data-rgb="255,200,120" data-lbl="3000K Warm White">
-                  <span class="color-dot" style="background:#ffc878;"></span> 3000K
-                </button>
-                <button class="config-btn" data-cct="4000" data-rgb="255,235,200" data-lbl="4000K Natural White">
-                  <span class="color-dot" style="background:#ffebc8;"></span> 4000K
-                </button>
-                <button class="config-btn" data-cct="6000" data-rgb="220,240,255" data-lbl="6000K Cool White">
-                  <span class="color-dot" style="background:#dcf0ff;"></span> 6000K
-                </button>
-                <button class="config-btn" data-cct="RGBW" data-rgb="103,208,78" data-lbl="RGBW Color Changing">
-                  <span class="color-dot" style="background: linear-gradient(to right, red, green, blue);"></span> RGBW
-                </button>
-              </div>
-            </div>
-
-            <!-- Option 2: Profile Shape -->
-            <div class="config-group">
-              <div class="config-group-title">
-                <span>Profile Shape</span>
-                <span id="selected-profile-label" style="color: var(--accent);">Dome Profile</span>
-              </div>
-              <div class="config-options-flex">
-                <button class="config-btn active" data-profile="dome" data-lbl="Dome Profile (180° Emission)">Dome</button>
-                <button class="config-btn" data-profile="round" data-lbl="Round Profile (360° Full Emission)">Round</button>
-                <button class="config-btn" data-profile="flat" data-lbl="Flat Profile (Side Bending)">Flat</button>
-              </div>
-            </div>
-
-            <!-- Option 3: Wattage / Brightness -->
-            <div class="config-group">
-              <div class="config-group-title">
-                <span>Wattage Options</span>
-                <span id="selected-watts-label" style="color: var(--accent);">14.4W/m (Standard Output)</span>
-              </div>
-              <div class="config-options-flex">
-                <button class="config-btn" data-watts="10" data-lumens="850" data-lbl="10.0W/m (Low-Output - 850 lm/m)">10.0W/m</button>
-                <button class="config-btn active" data-watts="14.4" data-lumens="1200" data-lbl="14.4W/m (Standard Output - 1200 lm/m)">14.4W/m</button>
-                <button class="config-btn" data-watts="20" data-lumens="1650" data-lbl="20.0W/m (High-Output - 1650 lm/m)">20.0W/m</button>
-              </div>
-            </div>
-
-            <!-- Option 4: Length Selection -->
-            <div class="config-group">
-              <div class="config-group-title">
-                <span>Custom Run Length</span>
-                <span>Max 15m single feed</span>
-              </div>
-              <div class="slider-wrapper">
-                <div class="slider-header">
-                  <input type="range" min="1" max="15" step="0.5" value="5" class="range-input" id="length-slider">
-                  <div class="slider-val-box"><span id="length-val">5.0</span> m</div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- DRIVER CALCULATOR PANEL -->
-          <div class="calc-panel">
-            <div class="calc-title">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" style="vertical-align:-4px; color:var(--accent);"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
-              <span>Driver Load & Power Calculator</span>
-            </div>
-            <div class="calc-metrics">
-              <div class="metric-card">
-                <span class="metric-label">Total Power Load</span>
-                <span class="metric-value" id="calc-power">72.0 W</span>
-              </div>
-              <div class="metric-card">
-                <span class="metric-label">Total Brightness</span>
-                <span class="metric-value" id="calc-lumens">6,000 lm</span>
-              </div>
-              <div class="metric-card">
-                <span class="metric-label">Recommended Driver</span>
-                <span class="metric-value highlight" id="calc-driver">Azoogi 80W 24V IP67</span>
-              </div>
-            </div>
-            <div class="driver-bar-wrapper">
-              <div class="driver-bar-label">
-                <span>Driver Capacity Utilisation</span>
-                <span id="calc-capacity-pct">90%</span>
-              </div>
-              <div class="driver-bar-bg">
-                <div class="driver-bar-fill" id="driver-bar-fill" style="width: 90%;"></div>
-              </div>
-            </div>
-            <div class="driver-warning" id="driver-warning-msg">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" style="vertical-align:text-bottom; margin-right:4px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-              Voltage drop warning! Long runs exceeding 10m require parallel wiring feeds to ensure uniform brightness.
-            </div>
-          </div>
-
-          <!-- ACTION BUTTONS -->
-          <div class="gallery-actions">
-            <a href="#quote-section-anchor" class="btn --accent" style="display:flex; align-items:center; justify-content:center; gap:8px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              Configure & Request Quote
-            </a>
-            <button class="btn --outline" id="add-to-spec-btn">Add to Specification</button>
-          </div>
-
-        </div>
+        <!-- ==================== RIGHT COLUMN: GALLERY END ==================== -->
 
       </div>
+      <!-- ==================== PRODUCT DETAIL GRID END ==================== -->
 
-      <!-- ========== DETAILED SPECIFICATIONS TABS ========== -->
-      <div class="tabs-container">
-        <div class="tabs-nav">
-          <button class="tab-nav-btn active" data-tab="tab-desc">Product Overview</button>
-          <button class="tab-nav-btn" data-tab="tab-spec">Technical Specifications</button>
-          <button class="tab-nav-btn" data-tab="tab-install">Installation & Wiring</button>
-          <button class="tab-nav-btn" data-tab="tab-downloads">Downloads</button>
-        </div>
-
-        <div class="tabs-content">
-          <!-- Description Tab -->
-          <div class="tab-panel active" id="tab-desc">
-            <p style="margin-bottom: 20px;">
-              Azoogi's AZ-NF360 Neon Flex 360 is engineered to redefine the limits of architectural lighting designs. Unlike conventional linear lights that direct output in a single plane, the NF360 projects light uniformly across a full 360-degree diameter. This continuous illumination profile hides all hotspot details and eliminates standard dark spaces completely.
-            </p>
-            <p>
-              Its unique chemical-grade silicone sleeve is highly UV-stabilized, salt-mist resistant, and IP67 protected, making it highly robust for high-end coastal facades, gardens, hospitality venues, and architectural statements alike. Combined with 3-Step MacAdam binning and a High Color Rendering Index (CRI >90), it delivers visual comfort and color accuracy suited for photography, dining, and luxury commercial settings.
-            </p>
+      <!-- ==================== TECHNICAL SPECIFICATIONS SECTION START ==================== -->
+      <div class="specifications-section"
+        style="margin-top: 48px; border-top: 1px solid var(--line); padding-top: 40px;">
+        <h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px;">Technical Specifications</h3>
+        <div class="spec-grid-layout"
+          style="display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 48px; align-items: start;">
+          
+          <!-- DYNAMIC FEATURES TABLE START -->
+          <table class="spec-table" style="width: 100%;">
+            <tbody id="spec-table-body">
+              <!-- Dynamically populated spec features from JSON -->
+            </tbody>
+          </table>
+          <!-- DYNAMIC FEATURES TABLE END -->
+          
+          <!-- SPECIFICATIONS DIMENSION VECTOR DIAGRAM START -->
+          <div class="spec-dimension-image-wrapper"
+            style="background: var(--card-bg); border: 1px solid var(--border-light); border-radius: 8px; padding: 24px; display: flex; align-items: center; justify-content: center; aspect-ratio: 4/3; overflow: hidden;">
+            <img id="spec-dimension-image" src="assets/dimension.png" alt="Product Dimensions"
+              style="max-width: 100%; max-height: 100%; object-fit: contain;">
           </div>
-
-          <!-- Specifications Table Tab -->
-          <div class="tab-panel" id="tab-spec">
-            <table class="spec-table">
-              <tr>
-                <td>Input Voltage</td>
-                <td>24V DC</td>
-              </tr>
-              <tr>
-                <td>CRI</td>
-                <td>Ra > 90</td>
-              </tr>
-              <tr>
-                <td>LED Binning</td>
-                <td>3-Step MacAdam Ellipse (SDCM < 3)</td>
-              </tr>
-              <tr>
-                <td>Cutting Unit</td>
-                <td>50mm increments</td>
-              </tr>
-              <tr>
-                <td>Waterproof Rating</td>
-                <td>IP67 (Moulded factory injection connectors required)</td>
-              </tr>
-              <tr>
-                <td>Bending Radius</td>
-                <td>Min. 60mm</td>
-              </tr>
-              <tr>
-                <td>Luminous Efficiency</td>
-                <td>Up to 85 lm/W</td>
-              </tr>
-              <tr>
-                <td>Working Temperature</td>
-                <td>-25°C to +50°C</td>
-              </tr>
-              <tr>
-                <td>Product Warranty</td>
-                <td>5 Years Commercial Warranty</td>
-              </tr>
-            </table>
-          </div>
-
-          <!-- Installation Guidelines Tab -->
-          <div class="tab-panel" id="tab-install">
-            <p style="margin-bottom: 20px;">
-              Proper installation ensures longevity and keeps your warranty valid. Please follow these installation rules:
-            </p>
-            <ul style="list-style:disc; margin-left: 20px; color: var(--muted); font-size:14px; line-height:1.7;">
-              <li><strong>Do not twist the product:</strong> This product bends horizontally/vertically depending on profile chosen, but twisting the internal FPCB can fracture solder points.</li>
-              <li><strong>Max Single Feed Run:</strong> Limit single feed power configurations to 10 meters. For runs between 10m and 15m, supply power from both ends in parallel loops to avoid luminance drop due to copper line resistance.</li>
-              <li><strong>Appropriate Driver Placement:</strong> Position drivers in well-ventilated boxes. Keep the secondary DC wire runs under 10 meters to prevent DC voltage losses.</li>
-              <li><strong>Mounting:</strong> Use Azoogi stainless steel mounting clips or continuous aluminum tracks. Space mounting clips every 300mm.</li>
-            </ul>
-          </div>
-
-          <!-- Downloads Tab -->
-          <div class="tab-panel" id="tab-downloads">
-            <div class="downloads-list">
-              <a href="#" class="download-item">
-                <div class="download-item-info">
-                  <span class="download-name">AZ-NF360 Product Spec Sheet</span>
-                  <span class="download-meta">PDF · 1.4 MB · Version 2026</span>
-                </div>
-                <div class="download-icon-btn">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                </div>
-              </a>
-              <a href="#" class="download-item">
-                <div class="download-item-info">
-                  <span class="download-name">IES Photometric Files (Complete Pack)</span>
-                  <span class="download-meta">ZIP · 820 KB · Light Profiles</span>
-                </div>
-                <div class="download-icon-btn">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                </div>
-              </a>
-              <a href="#" class="download-item">
-                <div class="download-item-info">
-                  <span class="download-name">Installation Manual & Safety Guide</span>
-                  <span class="download-meta">PDF · 2.1 MB · Step-by-Step</span>
-                </div>
-                <div class="download-icon-btn">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                </div>
-              </a>
-              <a href="#" class="download-item">
-                <div class="download-item-info">
-                  <span class="download-name">Revit BIM Lighting Model</span>
-                  <span class="download-meta">RFA · 4.8 MB · 3D Luminaire</span>
-                </div>
-                <div class="download-icon-btn">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                </div>
-              </a>
-            </div>
-          </div>
+          <!-- SPECIFICATIONS DIMENSION VECTOR DIAGRAM END -->
+          
         </div>
       </div>
+      <!-- ==================== TECHNICAL SPECIFICATIONS SECTION END ==================== -->
+
+      <!-- ==================== PRODUCT OPTIONS SECTION START ==================== -->
+      <div class="options-section"
+        style="margin-top: 48px; border-top: 1px solid var(--line); padding-top: 40px; margin-bottom: 60px;">
+        <h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px;">Product Configuration Options</h3>
+
+        <!-- DYNAMIC CONFIGURATOR WORKSPACE START -->
+        <div class="config-workspace" id="dynamic-configurator" style="margin-bottom: 32px;">
+          <!-- Dynamically populated options with constraints -->
+        </div>
+        <!-- DYNAMIC CONFIGURATOR WORKSPACE END -->
+
+      </div>
+      <!-- ==================== PRODUCT OPTIONS SECTION END ==================== -->
 
     </div>
 
@@ -397,11 +260,12 @@
     <section class="quote-section" id="quote-section-anchor">
       <div class="wrap">
         <div class="quote-grid">
-          
+
           <div class="quote-intro">
             <h2>Let's light up your project.</h2>
             <p style="margin-bottom: 20px;">
-              Request a B2B project quote or coordinate a specsheet request. Fill out your details, and an Azoogi commercial specialist will follow up with pricing, lead times, and trade discount rates.
+              Request a B2B project quote or coordinate a specsheet request. Fill out your details, and an Azoogi
+              commercial specialist will follow up with pricing, lead times, and trade discount rates.
             </p>
             <div style="font-size:13px; color:var(--muted); line-height: 2;">
               <div><strong>Sales Support:</strong> 1300 AZOOGI</div>
@@ -413,8 +277,8 @@
           <div class="quote-form-card">
             <div id="quote-form-success" class="form-success-message">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="48" height="48">
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                <polyline points="22 4 12 14.01 9 11.01"/>
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
               </svg>
               <h4>Quote Request Sent!</h4>
               <p>Thank you. Our specification team is reviewing your project details. We will contact you shortly.</p>
@@ -428,7 +292,8 @@
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="quote-email">Email Address *</label>
-                  <input class="form-input" id="quote-email" type="email" required placeholder="e.g. name@company.com.au">
+                  <input class="form-input" id="quote-email" type="email" required
+                    placeholder="e.g. name@company.com.au">
                 </div>
               </div>
 
@@ -445,12 +310,14 @@
 
               <div class="form-group">
                 <label class="form-label" for="quote-spec">Configured Specification</label>
-                <textarea class="form-textarea" id="quote-spec" readonly style="opacity: 0.8; background: var(--rgba-hover); cursor: not-allowed;"></textarea>
+                <textarea class="form-textarea" id="quote-spec" readonly
+                  style="opacity: 0.8; background: var(--rgba-hover); cursor: not-allowed;"></textarea>
               </div>
 
               <div class="form-group">
                 <label class="form-label" for="quote-message">Additional Project Details</label>
-                <textarea class="form-textarea" id="quote-message" placeholder="Provide extra requirements, dimming requests, or custom connector feeds..."></textarea>
+                <textarea class="form-textarea" id="quote-message"
+                  placeholder="Provide extra requirements, dimming requests, or custom connector feeds..."></textarea>
               </div>
 
               <button class="form-submit-btn" type="submit">Submit Spec Inquiry</button>
@@ -651,7 +518,12 @@
         if (productCode) {
           product = AZOOGI_PRODUCTS.products[productCode];
         }
-
+        if (!product && variantParam) {
+          product = AZOOGI_PRODUCTS.products[variantParam];
+          if (product) {
+            productCode = variantParam;
+          }
+        }
         if (!product && variantParam) {
           for (const rowKey in AZOOGI_PRODUCTS.products) {
             const rowNode = AZOOGI_PRODUCTS.products[rowKey];
@@ -714,19 +586,48 @@
 
         // Update Basic Info
         productNameEl.textContent = product.name;
-        descText.innerHTML = `This premium product is part of the <strong>${subcategoryName}</strong> range under the <strong>${categoryName}</strong> category. Engineered with high-end materials to deliver professional-grade lighting outputs for architectural highlights, commercial projects, and residential luxury designs.`;
 
-        // Update Breadcrumbs
-        breadcrumbsEl.innerHTML = `
+        // Use Lorem Ipsum for description fields
+        if (descText) {
+          descText.innerHTML = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`;
+        }
+
+        // Update Breadcrumbs to show exact category structure
+        let categorySegments = [];
+        if (jsonFile) {
+          const pathClean = decodeURIComponent(jsonFile);
+          const parts = pathClean.split('/');
+          categorySegments = parts.slice(1, -1);
+        } else if (product.category_path) {
+          categorySegments = product.category_path;
+        } else {
+          categorySegments = [categoryName];
+          if (subcategoryName) {
+            categorySegments.push(subcategoryName);
+          }
+        }
+
+        let breadcrumbHTML = `
           <a href="demo.html">Home</a>
           <span>/</span>
           <a href="demo.html#products">Products</a>
+        `;
+
+        categorySegments.forEach(seg => {
+          if (seg && seg.trim()) {
+            breadcrumbHTML += `
+              <span>/</span>
+              <a href="#">${seg}</a>
+            `;
+          }
+        });
+
+        breadcrumbHTML += `
           <span>/</span>
-          <a href="#">${categoryName}</a>
-          <span>/</span>
-          ${subcategoryName ? `<a href="#">${subcategoryName}</a><span>/</span>` : ''}
           <span style="color: var(--ink);">${product.name}</span>
         `;
+
+        breadcrumbsEl.innerHTML = breadcrumbHTML;
 
         // Load Variant Data
         function loadVariant(variantKey) {
@@ -766,7 +667,9 @@
           galleryMainImg.style.mixBlendMode = 'normal';
 
           // Add glow elements or modify SVGs
-          const isNeonOrStrip = product.category.toLowerCase().includes('neon') || product.category.toLowerCase().includes('linear') || product.name.toLowerCase().includes('strip') || product.name.toLowerCase().includes('nnr');
+          const catLower = (product.category || "").toLowerCase();
+          const nameLower = (product.name || "").toLowerCase();
+          const isNeonOrStrip = catLower.includes('neon') || catLower.includes('linear') || nameLower.includes('strip') || nameLower.includes('nnr');
           const neonSvg = document.getElementById('neon-svg');
           const glowArea = document.getElementById('glow-area');
 
@@ -799,6 +702,12 @@
 
             galleryThumbs.appendChild(thumb);
           });
+
+          // Update technical specifications dimension drawing image
+          const dimensionImg = document.getElementById('spec-dimension-image');
+          if (dimensionImg) {
+            dimensionImg.src = 'assets/dimension.svg';
+          }
         }
 
         // Render Configurator Options
@@ -806,31 +715,7 @@
           configurator.innerHTML = '';
           const options = activeVariant.options;
 
-          // Render Variant Selector if multiple variants exist
-          const variantKeys = Object.keys(product.variants);
-          if (variantKeys.length > 1) {
-            const group = document.createElement('div');
-            group.className = 'config-group';
-            group.innerHTML = `
-              <div class="config-group-title">
-                <span>Select Model Type / Voltage</span>
-                <span id="selected-variant-label" style="color: var(--accent);">${activeVariantKey}</span>
-              </div>
-              <div class="config-options-flex" id="options-flex-variant"></div>
-            `;
-            configurator.appendChild(group);
-
-            const flex = group.querySelector('#options-flex-variant');
-            variantKeys.forEach(vKey => {
-              const btn = document.createElement('button');
-              btn.className = `config-btn${vKey === activeVariantKey ? ' active' : ''}`;
-              btn.textContent = vKey.replace(product.name + '-', '');
-              btn.addEventListener('click', () => {
-                loadVariant(vKey);
-              });
-              flex.appendChild(btn);
-            });
-          }
+          // Configurator option fields only for current product model (bypass variant switch)
 
           // Render configuration fields
           for (const optKey in options) {
@@ -1143,7 +1028,7 @@ Recommended system driver: ${driverRecommendation}`;
         if (specBtn) {
           specBtn.addEventListener('click', function () {
             const originalText = this.textContent;
-            this.textContent = 'Added to Specification!';
+            this.textContent = 'Added to Quote List!';
             this.style.background = 'var(--rgba-hover)';
             this.style.borderColor = 'var(--accent)';
             this.style.color = 'var(--accent)';
@@ -1154,6 +1039,22 @@ Recommended system driver: ${driverRecommendation}`;
               this.style.borderColor = 'var(--border-light)';
               this.style.color = 'var(--ink)';
             }, 2000);
+          });
+        }
+
+        // Hover Zoom effect on main image
+        if (galleryMainImg) {
+          galleryMainImg.addEventListener('mousemove', (e) => {
+            const rect = galleryMainImg.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            galleryMainImg.style.transformOrigin = `${x}% ${y}%`;
+            galleryMainImg.style.transform = 'scale(1.8)';
+          });
+
+          galleryMainImg.addEventListener('mouseleave', () => {
+            galleryMainImg.style.transform = 'scale(1)';
+            galleryMainImg.style.transformOrigin = 'center center';
           });
         }
       } // Closing setupPageWithData
