@@ -1,19 +1,145 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 
 <head>
   <script>const savedTheme = localStorage.getItem('theme'); if (savedTheme) { document.documentElement.setAttribute('data-theme', savedTheme); }</script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Azoogi — Award-winning LED Lighting Solutions</title>
-  <meta name="description"
-    content="Azoogi designs and supplies premium LED lighting — strips, neon, garden lights, drivers and architectural fittings for projects that demand more." />
+  <title>Products — Azoogi LED Lighting</title>
+  <meta name="description" content="Browse the full Azoogi LED lighting catalogue. COB Strips, SMD Strips, Neon, Outdoor Lights, Aluminium Profiles, LED Drivers and more." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style_demo.css">
+  <style>
+  /* ===== Products Page — Header Override ===== */
+  /* Force the fixed topbar to always be solid (no transparent hero on this page) */
+  .topbar {
+    background: rgba(11,11,11,.92) !important;
+    backdrop-filter: blur(14px) !important;
+    border-bottom-color: var(--line) !important;
+  }
+  :root[data-theme="light"] .topbar {
+    background: rgba(255,255,255,.96) !important;
+  }
+  /* Push page content below the fixed header (~100px = util bar + nav) */
+  body {
+    padding-top: 100px;
+  }
+  @media(max-width:768px) {
+    body { padding-top: 80px; }
+  }
+
+  /* ===== Products Page Styles ===== */
+  .page-head{padding:36px 0 28px;border-bottom:1px solid var(--line)}
+  .crumb{font-size:13px;color:var(--muted);margin-bottom:14px}
+  .crumb a:hover{color:var(--accent)}
+  .crumb span{margin:0 6px;opacity:.5}
+  .page-head h1{font-size:clamp(32px,4vw,48px);line-height:1.05;font-family:'Cormorant Garamond',serif;font-weight:500;margin:0}
+  .page-sub{color:var(--muted);font-size:14px;margin-top:8px}
+
+  /* Layout */
+  .prod-layout{display:grid;grid-template-columns:280px 1fr;gap:48px;padding:40px 0 100px;align-items:start}
+  @media(max-width:900px){.prod-layout{grid-template-columns:1fr}}
+
+  /* Sidebar */
+  .prod-sidebar{position:sticky;top:120px}
+  .sb-block{border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:22px}
+  .sb-title{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .cat-list{list-style:none;margin:0;padding:0}
+  .cat-list>li{border-bottom:1px solid var(--line)}
+  .cat-row{display:flex;align-items:center;justify-content:space-between;padding:13px 0;cursor:pointer;font-size:15px}
+  .cat-row.active,.cat-row:hover{color:var(--accent)}
+  .cat-row .caret{font-size:11px;transition:transform .25s;opacity:.5}
+  .cat-list>li.open .caret{transform:rotate(90deg)}
+  .sub-list{list-style:none;margin:0 0 12px;padding:0 0 0 4px;max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .cat-list>li.open .sub-list{max-height:400px}
+  .sub-list li a{display:block;padding:7px 0;font-size:13.5px;color:var(--muted)}
+  .sub-list li a.active,.sub-list li a:hover{color:var(--accent)}
+
+  /* Filter accordion */
+  .filter-item{border-bottom:1px solid var(--line)}
+  .filter-head{display:flex;align-items:center;justify-content:space-between;padding:16px 0;cursor:pointer;font-size:15px}
+  .filter-head:hover{color:var(--accent)}
+  .filter-toggle{font-size:16px;font-weight:300;color:var(--muted);width:16px;text-align:center}
+  .filter-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .filter-item.open .filter-body{max-height:300px}
+  .filter-item.open .filter-toggle{color:var(--accent)}
+  .opt-row{display:flex;align-items:center;gap:10px;padding:8px 0 8px 2px;font-size:13.5px;color:var(--ink);cursor:pointer}
+  .opt-row input{accent-color:var(--accent);width:14px;height:14px}
+  .clear-filters{font-size:12.5px;color:var(--muted);margin-top:16px;cursor:pointer;display:inline-block}
+  .clear-filters:hover{color:var(--accent)}
+
+  /* Toolbar */
+  .prod-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+  .result-count{font-size:14px;color:var(--muted)}
+  .result-count strong{color:var(--ink)}
+  .toolbar-right{display:flex;align-items:center;gap:14px}
+  .sort-select{background:var(--card-bg);border:1px solid var(--line);color:var(--ink);font-size:13px;padding:9px 14px;border-radius:2px;font-family:'Inter',sans-serif}
+  .prod-mobile-filter-btn{display:none;border:1px solid var(--line);background:none;color:var(--ink);padding:9px 14px;font-size:13px;cursor:pointer}
+  @media(max-width:900px){
+    .prod-mobile-filter-btn{display:inline-block}
+    .prod-sidebar{display:none}
+    .prod-sidebar.open{display:block;position:fixed;inset:0;z-index:80;background:var(--bg);padding:24px;overflow-y:auto}
+  }
+
+  .active-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+  .p-tag{display:flex;align-items:center;gap:6px;background:var(--card-bg);border:1px solid var(--line);font-size:12px;padding:6px 10px;border-radius:20px}
+  .p-tag button{background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;line-height:1}
+
+  /* Product card grid */
+  .prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media(max-width:1100px){.prod-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.prod-grid{grid-template-columns:1fr}}
+
+  .prod-card{position:relative;border:1px solid var(--border-light);background:var(--card-bg);overflow:hidden;border-radius:3px;transition:border-color .25s}
+  .prod-card:hover{border-color:var(--accent)}
+  .prod-card-img{position:relative;aspect-ratio:1/1;overflow:hidden}
+  .prod-swatch{position:absolute;inset:0;background:linear-gradient(135deg,var(--sw1,#1c2e17),var(--sw2,#0b0b0b));display:flex;align-items:center;justify-content:center}
+  .prod-swatch svg{width:38%;opacity:.35}
+  .prod-card-title{padding:14px 16px 16px;font-size:14.5px}
+  .prod-card-title .cat-label{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+
+  .prod-overlay{position:absolute;inset:0;padding:20px;display:flex;flex-direction:column;justify-content:flex-end;
+    background:linear-gradient(180deg,rgba(11,11,11,0) 30%,rgba(11,11,11,.92) 100%);
+    opacity:0;transform:translateY(8%);transition:opacity .3s ease,transform .3s ease}
+  .prod-card:hover .prod-overlay,.prod-card:focus-within .prod-overlay{opacity:1;transform:translateY(0)}
+  .prod-overlay h4{color:#fff;font-size:19px;margin-bottom:8px;font-family:'Cormorant Garamond',serif;font-weight:500}
+  .prod-overlay .spec-line{color:rgba(255,255,255,.7);font-size:12px;margin-bottom:14px;line-height:1.6}
+  .prod-overlay .spec-line span{display:block}
+  .p-btn-row{display:flex;gap:8px}
+  .ov-btn{flex:1;text-align:center;font-size:12px;padding:10px 6px;cursor:pointer;border-radius:2px;transition:all .2s;border:1px solid rgba(255,255,255,.5);color:#fff;background:transparent}
+  .ov-btn:hover{background:rgba(255,255,255,.12)}
+  .ov-btn.solid{background:var(--accent);border-color:var(--accent);color:var(--pure-bg);font-weight:600}
+  .ov-btn.solid:hover{background:#fff;border-color:#fff;color:#000}
+  .ov-btn.added{background:var(--accent-2);border-color:var(--accent-2)}
+
+  /* Pagination */
+  .pagination{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:48px}
+  .pg-btn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);font-size:13px;cursor:pointer;color:var(--muted)}
+  .pg-btn.active{background:var(--accent);border-color:var(--accent);color:var(--pure-bg)}
+  .pg-btn:hover:not(.active){color:var(--ink);border-color:var(--accent)}
+
+  /* Quote drawer */
+  .quote-fab{position:fixed;bottom:28px;right:28px;z-index:70;background:var(--accent);color:var(--pure-bg);border:none;padding:14px 20px;font-size:13px;font-weight:600;border-radius:30px;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 8px 24px var(--shadow)}
+  .quote-fab .fab-count{background:var(--pure-bg);color:var(--accent);width:20px;height:20px;border-radius:50%;font-size:11px;display:flex;align-items:center;justify-content:center}
+  .drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .3s;z-index:89}
+  .drawer-overlay.open{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;right:0;bottom:0;width:380px;max-width:90vw;background:var(--bg-2);border-left:1px solid var(--line);z-index:90;transform:translateX(100%);transition:transform .35s ease;display:flex;flex-direction:column}
+  .drawer.open{transform:translateX(0)}
+  .drawer-head{padding:22px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+  .drawer-close{background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer}
+  .drawer-items{flex:1;overflow-y:auto;padding:10px 24px}
+  .qi{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+  .qi .qi-sw{width:56px;height:56px;border-radius:2px;flex-shrink:0}
+  .qi-info{flex:1}
+  .qi-info h5{font-family:'Inter',sans-serif;font-weight:600;font-size:13.5px;margin-bottom:4px}
+  .qi-info span{font-size:12px;color:var(--muted)}
+  .qi-remove{background:none;border:none;color:var(--muted);cursor:pointer;font-size:12px;align-self:flex-start}
+  .drawer-empty{color:var(--muted);font-size:13.5px;text-align:center;padding:60px 20px}
+  .drawer-foot{padding:22px 24px;border-top:1px solid var(--line)}
+  .drawer-foot .btn-full{display:block;width:100%;text-align:center;background:var(--accent);color:var(--pure-bg);padding:14px;font-weight:600;font-size:14px;border:none;cursor:pointer;border-radius:2px}
+  </style>
 </head>
 
 <body>
@@ -48,7 +174,7 @@
       <a href="#" class="logo"><img src="assets/logo_white.png" width="80"></a>
       <div class="menu">
         <div class="has-dropdown">
-          <a href="products.html">Product <span class="caret">&#9662;</span></a>
+          <a href="#products">Product <span class="caret">&#9662;</span></a>
           <div class="mega-menu">
             <div class="mega-menu-inner">
               <div class="mega-tabs">
@@ -122,7 +248,7 @@
                 <div class="mega-panel active" id="cat-outdoor">
                   <div class="mega-panel-header">
                     <h3 class="mega-panel-title">Outdoor Lights</h3>
-                    <a href="products.html" class="view-all-btn">View All Range &rarr;</a>
+                    <a href="#" class="view-all-btn">View All Range &rarr;</a>
                   </div>
                   <div class="subcategory-section">
                     <div class="subcategory-header">
@@ -512,7 +638,7 @@
                 <div class="mega-panel" id="cat-aluminium">
                   <div class="mega-panel-header">
                     <h3 class="mega-panel-title">Aluminium Profiles</h3>
-                    <a href="products.html" class="view-all-btn">View All Range &rarr;</a>
+                    <a href="#" class="view-all-btn">View All Range &rarr;</a>
                   </div>
                   <div class="subcategory-section">
                     <div class="subcategory-header">
@@ -998,7 +1124,7 @@
                 <div class="mega-panel" id="cat-cob">
                   <div class="mega-panel-header">
                     <h3 class="mega-panel-title">COB Strips</h3>
-                    <a href="products.html" class="view-all-btn">View All Range &rarr;</a>
+                    <a href="#" class="view-all-btn">View All Range &rarr;</a>
                   </div>
                   <div class="subcategory-section">
                     <div class="subcategory-header">
@@ -1532,7 +1658,7 @@
                 <div class="mega-panel" id="cat-smd">
                   <div class="mega-panel-header">
                     <h3 class="mega-panel-title">SMD Strips</h3>
-                    <a href="products.html" class="view-all-btn">View All Range &rarr;</a>
+                    <a href="#" class="view-all-btn">View All Range &rarr;</a>
                   </div>
                   <div class="subcategory-section">
                     <div class="subcategory-header">
@@ -2114,7 +2240,7 @@
                 <div class="mega-panel" id="cat-neon67">
                   <div class="mega-panel-header">
                     <h3 class="mega-panel-title">IP67 Neon</h3>
-                    <a href="products.html" class="view-all-btn">View All Range &rarr;</a>
+                    <a href="#" class="view-all-btn">View All Range &rarr;</a>
                   </div>
                   <div class="subcategory-section">
                     <div class="subcategory-header">
@@ -2792,7 +2918,7 @@
                 <div class="mega-panel" id="cat-neon69">
                   <div class="mega-panel-header">
                     <h3 class="mega-panel-title">IP69 Neon</h3>
-                    <a href="products.html" class="view-all-btn">View All Range &rarr;</a>
+                    <a href="#" class="view-all-btn">View All Range &rarr;</a>
                   </div>
                   <div class="subcategory-section">
                     <div class="subcategory-header">
@@ -3278,7 +3404,7 @@
                 <div class="mega-panel" id="cat-linear">
                   <div class="mega-panel-header">
                     <h3 class="mega-panel-title">Linear Lighting</h3>
-                    <a href="products.html" class="view-all-btn">View All Range &rarr;</a>
+                    <a href="#" class="view-all-btn">View All Range &rarr;</a>
                   </div>
                   <div class="subcategory-section">
                     <div class="subcategory-header">
@@ -3572,7 +3698,7 @@
                 <div class="mega-panel" id="cat-drivers">
                   <div class="mega-panel-header">
                     <h3 class="mega-panel-title">LED Drivers</h3>
-                    <a href="products.html" class="view-all-btn">View All Range &rarr;</a>
+                    <a href="#" class="view-all-btn">View All Range &rarr;</a>
                   </div>
                   <div class="subcategory-section">
                     <div class="subcategory-header">
@@ -3866,7 +3992,7 @@
                 <div class="mega-panel" id="cat-downlights">
                   <div class="mega-panel-header">
                     <h3 class="mega-panel-title">Downlights</h3>
-                    <a href="products.html" class="view-all-btn">View All Range &rarr;</a>
+                    <a href="#" class="view-all-btn">View All Range &rarr;</a>
                   </div>
                   <div class="subcategory-section">
                     <div class="subcategory-header">
@@ -4160,7 +4286,7 @@
                 <div class="mega-panel" id="cat-handrail">
                   <div class="mega-panel-header">
                     <h3 class="mega-panel-title">Handrail Lights</h3>
-                    <a href="products.html" class="view-all-btn">View All Range &rarr;</a>
+                    <a href="#" class="view-all-btn">View All Range &rarr;</a>
                   </div>
                   <div class="subcategory-section">
                     <div class="subcategory-header">
@@ -4358,7 +4484,7 @@
                 <div class="mega-panel" id="cat-other">
                   <div class="mega-panel-header">
                     <h3 class="mega-panel-title">Other</h3>
-                    <a href="products.html" class="view-all-btn">View All Range &rarr;</a>
+                    <a href="#" class="view-all-btn">View All Range &rarr;</a>
                   </div>
                   <div class="subcategory-section">
                     <div class="subcategory-header">
@@ -4796,7 +4922,7 @@
                 <div class="mega-panel" id="cat-casambi">
                   <div class="mega-panel-header">
                     <h3 class="mega-panel-title">Casambi</h3>
-                    <a href="products.html" class="view-all-btn">View All Range &rarr;</a>
+                    <a href="#" class="view-all-btn">View All Range &rarr;</a>
                   </div>
                   <div class="subcategory-section">
                     <div class="subcategory-header">
@@ -5234,7 +5360,7 @@
                 <div class="mega-panel" id="cat-building">
                   <div class="mega-panel-header">
                     <h3 class="mega-panel-title">Building Management</h3>
-                    <a href="products.html" class="view-all-btn">View All Range &rarr;</a>
+                    <a href="#" class="view-all-btn">View All Range &rarr;</a>
                   </div>
                   <div class="subcategory-section">
                     <div class="subcategory-header">
@@ -5449,485 +5575,59 @@
     </nav>
   </header>
 
-  <!-- ========== HERO SLIDER ========== -->
-  <section class="hero" id="hero">
-    <div class="slide active has-video">
-      <video class="bg-video" autoplay muted loop playsinline preload="auto" poster="assets/hero00.jpg">
-        <source src="assets/lighting.mp4" type="video/mp4">
-      </video>
-      <div class="slide-inner">
-        <div class="eyebrow">Made just for you</div>
-        <h1 class="slide-title">Custom fittings<br />without compromise.</h1>
-        <p class="slide-sub">Off-spec alternatives, custom fittings, matched specs and budgets — without ever
-          compromising on quality.</p>
-        <div class="slide-actions">
-          <a class="btn primary" href="#contact">Start a Project</a>
-          <a class="btn" href="#services">Our Services</a>
-        </div>
-      </div>
-    </div>
 
-    <div class="slide" style="background-image:url('assets/hero02.jpg')">
-      <div class="slide-inner">
-        <div class="eyebrow">For those who demand more from their lighting</div>
-        <h1 class="slide-title">Award-winning<br />LED lighting solutions.</h1>
-        <p class="slide-sub">Premium components, strict quality assurance, and up to a 5-year warranty — engineered to
-          perform and last.</p>
-        <div class="slide-actions">
-          <a class="btn primary" href="products.html">Explore Products</a>
-          <a class="btn" href="#projects">View Projects</a>
-        </div>
-      </div>
-    </div>
-    <div class="slide" style="background-image:url('assets/hero01.jpg')">
-      <div class="slide-inner">
-        <div class="eyebrow">Support that lasts</div>
-        <h1 class="slide-title">From first idea<br />to final install — and beyond.</h1>
-        <p class="slide-sub">We don't just supply lighting. We partner with you with advice, guidance, and service that
-          keeps your project shining.</p>
-        <div class="slide-actions">
-          <a class="btn primary" href="#contact">Talk to a Specialist</a>
-          <a class="btn" href="#projects">Recent Work</a>
-        </div>
-      </div>
-    </div>
-    <div class="slide"
-      style="background-image:url('https://images.unsplash.com/photo-1567016526105-22da7c13161a?w=2400&q=80')">
-      <div class="slide-inner">
-        <div class="eyebrow">Design without limits</div>
-        <h1 class="slide-title">Architectural lighting,<br />shaped to your vision.</h1>
-        <p class="slide-sub">From sleek LED strips to statement architectural fittings — solutions for every style and
-          every space, indoors or out.</p>
-        <div class="slide-actions">
-          <a class="btn primary" href="products.html">Browse Range</a>
-          <a class="btn" href="#about">Our Story</a>
-        </div>
-      </div>
-    </div>
-    <div class="slide"
-      style="background-image:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=2400&q=80')">
-      <div class="slide-inner">
-        <div class="eyebrow">Made just for you</div>
-        <h1 class="slide-title">Custom fittings<br />without compromise.</h1>
-        <p class="slide-sub">Off-spec alternatives, custom fittings, matched specs and budgets — without ever
-          compromising on quality.</p>
-        <div class="slide-actions">
-          <a class="btn primary" href="#contact">Start a Project</a>
-          <a class="btn" href="#services">Our Services</a>
-        </div>
-      </div>
-    </div>
+<div class="wrap">
+  <div class="page-head">
+    <div class="crumb"><a href="demo.html">Home</a><span>/</span><a href="products.html">Products</a><span>/</span>COB Strips</div>
+    <h1>COB Strips</h1>
+    <div class="page-sub">Continuous phosphor-coated LED strips for shadow-free, dot-free linear lighting.</div>
+  </div>
 
-
-    <div class="slider-ctrl">
-      <div class="lines" id="lines"></div>
-      <div class="counter"><b id="cur">01</b> <span>/ <b id="tot">04</b></span></div>
-      <div class="pp" id="pp" aria-label="Pause">
-        <svg id="ppIcon" viewBox="0 0 24 24" fill="currentColor">
-          <rect x="6" y="5" width="4" height="14" />
-          <rect x="14" y="5" width="4" height="14" />
-        </svg>
-      </div>
-    </div>
-
-    <div class="scroll-cue"><span>Scroll</span>
-      <div class="l"></div>
-    </div>
-  </section>
-
-  <!-- ========== VALUES ========== -->
-  <section class="card-in">
-    <div class="wrap-sm">
-      <div class="head">
-        <div class="kicker reveal">Why Azoogi</div>
-        <h2 class="h2 reveal">For those who demand more — from the components inside to the support behind every
-          product.</h2>
-      </div>
-
-      <div class="container max-width-adaptive-md margin-bottom-lg">
-        <ul id="cards">
-          <li class="card-main" id="card_1">
-            <div class="card__content">
-              <div>
-                <h2>Premium Selection. Unmatched Quality.</h2>
-                <p>Explore an extensive, curated catalog of top-tier LED lighting. Whether you need sleek architectural fittings or rugged outdoor solutions, our products are engineered for aesthetic brilliance and flawless performance.</p>
-                <p><a href="#" class="btn --accent">Explore Collections</a></p>
-              </div>
-              <figure>
-                <img src="assets/img/img-0.jpg" alt="Image description">
-              </figure>
-            </div>
-          </li>
-          <li class="card-main" id="card_2">
-            <div class="card__content">
-              <div>
-                <h2>Lighting, Tailored to You.</h2>
-                <p>No two spaces are exactly alike. We engineer custom, adaptive lighting configurations that perfectly match your project’s unique specifications, budget, and design vision.</p>
-                <p><a href="#" class="btn --accent">Request a Custom Quote</a></p>
-              </div>
-              <figure>
-                <img src="assets/img/img-1.jpg" alt="Image description">
-              </figure>
-            </div>
-          </li>
-          <li class="card-main" id="card_3">
-            <div class="card__content">
-              <div>
-                <h2>Your Partner, End-to-End.</h2>
-                <p>We don't just sell lights; we illuminate your workflow. From initial blueprint to final installation, our dedicated lighting experts provide continuous, hands-on support to ensure your vision becomes reality.</p>
-                <p><a href="#" class="btn --accent">Talk to an Expert</a></p>
-              </div>
-              <figure>
-                <img src="assets/img/img-2.jpg" alt="Image description">
-              </figure>
-            </div>
-          </li>
-          <li class="card-main" id="card_4">
-            <div class="card__content">
-              <div>
-                <h2>Built to Last. Guaranteed.</h2>
-                <p>Invest in your projects with total confidence. Our lighting undergoes rigorous quality assurance testing and comes backed by a comprehensive 5-year warranty for complete peace of mind.</p>
-                <p><a href="#" class="btn --accent">View Warranty Details</a></p>
-              </div>
-              <figure>
-                <img src="assets/img/card.jpg" alt="Image description">
-              </figure>
-            </div>
-          </li>
+  <div class="prod-layout">
+    <!-- ===== Sidebar ===== -->
+    <aside class="prod-sidebar" id="prodSidebar">
+      <div class="sb-block">
+        <div class="sb-title">Categories</div>
+        <ul class="cat-list" id="catList">
+          <!-- populated by JS -->
         </ul>
       </div>
-    </div>
 
-  </section>
+      <div class="sb-block">
+        <div class="sb-title">Filter by Specification</div>
+        <div id="filterAccordion"></div>
+        <span class="clear-filters" onclick="clearFilters()">Clear all filters</span>
+      </div>
+    </aside>
 
-  <section class="cityscape">
-    <div class="city-intro">
-      <div>
-        <span class="kicker reveal">Where Azoogi lights up</span>
-        <h2>Illuminating <em>Sydney</em>, one project at a time.</h2>
+    <!-- ===== Main ===== -->
+    <main>
+      <div class="prod-toolbar">
+        <div class="result-count"><strong id="resultCount">12</strong> products in COB Strips</div>
+        <div class="toolbar-right">
+          <button class="prod-mobile-filter-btn" onclick="document.getElementById('prodSidebar').classList.add('open')">Filters</button>
+          <select class="sort-select">
+            <option>Sort: Relevance</option>
+            <option>Name A&ndash;Z</option>
+            <option>Newest</option>
+          </select>
+        </div>
       </div>
 
-    </div>
+      <div class="active-tags" id="activeTags"></div>
 
-    <div class="stage" aria-label="Interactive Sydney skyline">
-      <img class="bg" src="assets/img/sydney-night.jpg" alt="Sydney skyline at night" />
+      <div class="prod-grid" id="productGrid"></div>
 
-      <!-- Hotspots (positioned in % over the cityscape) -->
-      <a class="hotspot" style="left:36%;top:38%" href="#" aria-label="AZ-PNL24">
-        <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
-        <div class="tip">
-          <div class="thumb" style="background-image:url('assets/img/prod-1.jpg')"></div>
-          <div class="code">AZ-PNL24</div>
-          <div class="name">Slim Edge LED Panel 600×600</div>
-          <div class="meta">Office towers · 4000K</div>
-        </div>
-      </a>
-
-      <a class="hotspot" style="left:48%;top:30%" href="#" aria-label="AZ-HBY150">
-        <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
-        <div class="tip">
-          <div class="thumb" style="background-image:url('assets/img/prod-3.jpg')"></div>
-          <div class="code">AZ-HBY150</div>
-          <div class="name">UFO High Bay 150W</div>
-          <div class="meta">Commercial atriums</div>
-        </div>
-      </a>
-
-      <a class="hotspot bottom" style="left:62%;top:27%" href="#" aria-label="AZ-LNR42">
-        <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
-        <div class="tip">
-          <div class="thumb" style="background-image:url('assets/img/prod-4.jpg')"></div>
-          <div class="code">AZ-LNR42</div>
-          <div class="name">Linear Pendant 1.2m</div>
-          <div class="meta">Corporate lobbies</div>
-        </div>
-      </a>
-
-      <a class="hotspot" style="left:72%;top:55%" href="#" aria-label="AZ-STR80">
-        <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
-        <div class="tip">
-          <div class="thumb" style="background-image:url('assets/img/prod-3.jpg')"></div>
-          <div class="code">AZ-STR80</div>
-          <div class="name">Urban Street Luminaire 80W</div>
-          <div class="meta">Harbour Bridge approach</div>
-        </div>
-      </a>
-
-      <a class="hotspot" style="left:30%;top:74%" href="#" aria-label="AZ-FLD50">
-        <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
-        <div class="tip">
-          <div class="thumb" style="background-image:url('assets/img/prod-5.jpg')"></div>
-          <div class="code">AZ-FLD50</div>
-          <div class="name">Architectural Flood 50W RGBW</div>
-          <div class="meta">Opera House façade</div>
-        </div>
-      </a>
-
-      <a class="hotspot bottom" style="left:18%;top:48%" href="#" aria-label="AZ-PNL24-W">
-        <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
-        <div class="tip">
-          <div class="thumb" style="background-image:url('assets/img/prod-1.jpg')"></div>
-          <div class="code">AZ-PNL24-W</div>
-          <div class="name">Recessed Panel — Warm</div>
-          <div class="meta">Residential towers · 3000K</div>
-        </div>
-      </a>
-
-      <a class="hotspot" style="left:85%;top:62%" href="#" aria-label="AZ-FLD50-N">
-        <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
-        <div class="tip">
-          <div class="thumb" style="background-image:url('assets/img/prod-5.jpg')"></div>
-          <div class="code">AZ-FLD50-N</div>
-          <div class="name">Marine Flood — IP66</div>
-          <div class="meta">North Sydney waterfront</div>
-        </div>
-      </a>
-      <div class="legend">
-        <span class="pill"><span class="ldot"></span> Hover a marker to view the product</span>
+      <div class="pagination">
+        <div class="pg-btn active">1</div>
+        <div class="pg-btn">2</div>
+        <div class="pg-btn">3</div>
+        <div class="pg-btn">&rsaquo;</div>
       </div>
-    </div>
-  </section>
+    </main>
+  </div>
+</div>
 
-
-  <!-- ========== PRODUCTS MARQUEE ========== -->
-  <section class="products" id="products">
-    <div class="wrap">
-      <div class="head">
-        <div>
-          <div class="kicker reveal">Our Range</div>
-          <h2 class="h2 reveal">Explore the full Azoogi lighting catalogue.</h2>
-        </div>
-        <a href="products.html" class="btn --accent reveal">View All Products</a>
-      </div>
-      <div class="products-layout">
-        <!-- Sidebar -->
-        <aside class="products-sidebar" id="productsSidebar">
-          <div class="sidebar-header">
-            <h3>Categories</h3>
-            <button class="close-sidebar" onclick="document.getElementById('productsSidebar').classList.remove('open')" aria-label="Close categories">&times;</button>
-          </div>
-          <ul class="category-list">
-            <li><a href="#" class="active">All Products</a></li>
-            <li><a href="#">Garden Lights</a></li>
-            <li><a href="#">Neon Range</a></li>
-            <li><a href="#">LED Strips</a></li>
-            <li><a href="#">LED Drivers</a></li>
-            <li><a href="#">Downlights</a></li>
-            <li><a href="#">Pendant Lights</a></li>
-            <li><a href="#">Architectural</a></li>
-          </ul>
-        </aside>
-
-        <!-- Main Area -->
-        <div class="products-main">
-          <!-- Mobile Sidebar Toggle -->
-          <div class="mobile-filter-bar">
-            <button class="btn --outline" onclick="document.getElementById('productsSidebar').classList.add('open')">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="margin-right:8px; vertical-align: text-bottom;"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
-              Filter Categories
-            </button>
-          </div>
-
-          <!-- Pills (Attributes) -->
-          <div class="products-filters">
-            <div class="filter-pill">Installation <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">Material <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">Coating <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">Dimming method <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">Input voltage <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">SDCM <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">CRI <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">CCT <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">Beam angle <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">Application <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">IP grade <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">Warranty <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">Certification <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">More choices <span class="caret">&#9662;</span></div>
-          </div>
-
-          <!-- Compact Product Grid -->
-          <div class="compact-products-grid">
-            <div class="compact-card">
-              <a href="#" class="img-wrap" style="background-image:url('assets/img/GL001.webp')"></a>
-              <div class="info">
-                <a href="#" style="text-decoration:none"><h4>Garden Spotlight Pro</h4></a>
-                <div class="specs">
-                  <div><strong>Length:</strong> Opening φ75mm</div>
-                  <div><strong>Beam Angle:</strong> Asymmetric Distribution</div>
-                  <div><strong>Power:</strong> 10W, 15W, 20W</div>
-                </div>
-                <div class="cart-action">
-                  <button class="btn --accent btn-sm">Add to Cart</button>
-                </div>
-              </div>
-            </div>
-            <div class="compact-card">
-              <a href="product-detail.html" class="img-wrap" style="background-image:url('assets/img/neon.webp')"></a>
-              <div class="info">
-                <a href="product-detail.html" style="text-decoration:none"><h4>Neon Flex Series 360</h4></a>
-                <div class="specs">
-                  <div><strong>Length:</strong> Custom cut</div>
-                  <div><strong>Beam Angle:</strong> 360° Uniform</div>
-                  <div><strong>Power:</strong> 14.4W/m</div>
-                </div>
-                <div class="cart-action">
-                  <button class="btn --accent btn-sm">Add to Cart</button>
-                </div>
-              </div>
-            </div>
-            <div class="compact-card">
-              <a href="#" class="img-wrap" style="background-image:url('assets/img/leds.webp')"></a>
-              <div class="info">
-                <a href="#" style="text-decoration:none"><h4>High-Output LED Strip</h4></a>
-                <div class="specs">
-                  <div><strong>Length:</strong> 5m Roll</div>
-                  <div><strong>Beam Angle:</strong> 120°</div>
-                  <div><strong>Power:</strong> 20W/m</div>
-                </div>
-                <div class="cart-action">
-                  <button class="btn --accent btn-sm">Add to Cart</button>
-                </div>
-              </div>
-            </div>
-            <div class="compact-card">
-              <a href="#" class="img-wrap" style="background-image:url('assets/img/dt.webp')"></a>
-              <div class="info">
-                <a href="#" style="text-decoration:none"><h4>Recessed Downlight</h4></a>
-                <div class="specs">
-                  <div><strong>Length:</strong> Opening φ90mm</div>
-                  <div><strong>Beam Angle:</strong> 60°</div>
-                  <div><strong>Power:</strong> 15W</div>
-                </div>
-                <div class="cart-action">
-                  <button class="btn --accent btn-sm">Add to Cart</button>
-                </div>
-              </div>
-            </div>
-            <div class="compact-card">
-              <a href="#" class="img-wrap" style="background-image:url('assets/img/prod-4.jpg')"></a>
-              <div class="info">
-                <a href="#" style="text-decoration:none"><h4>Pendant Light Mod</h4></a>
-                <div class="specs">
-                  <div><strong>Length:</strong> 1200mm</div>
-                  <div><strong>Beam Angle:</strong> 45°</div>
-                  <div><strong>Power:</strong> 30W</div>
-                </div>
-                <div class="cart-action">
-                  <button class="btn --accent btn-sm">Add to Cart</button>
-                </div>
-              </div>
-            </div>
-            <div class="compact-card">
-              <a href="#" class="img-wrap" style="background-image:url('assets/img/prod-5.jpg')"></a>
-              <div class="info">
-                <a href="#" style="text-decoration:none"><h4>Architectural Linear</h4></a>
-                <div class="specs">
-                  <div><strong>Length:</strong> Custom Extrusion</div>
-                  <div><strong>Beam Angle:</strong> Diffused</div>
-                  <div><strong>Power:</strong> 24W/m</div>
-                </div>
-                <div class="cart-action">
-                  <button class="btn --accent btn-sm">Add to Cart</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== PROJECTS ========== -->
-  <section class="projects" id="projects">
-    <div class="wrap">
-      <div class="head" style="display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap">
-        <div>
-          <div class="kicker reveal">Recent Highlights</div>
-          <h2 class="h2 reveal">Where Azoogi lighting comes to life.</h2>
-        </div>
-        <a href="#" class="btn reveal">View All Projects</a>
-      </div>
-
-      <div class="grid">
-        <div class="proj p1 reveal"><img src="assets/img/acdm.jpg" alt="Aikenhead Centre" />
-          <div class="cap"><small>Medical &mdash; Melbourne</small>
-            <h3>Aikenhead Centre for Medical Discovery</h3>
-            <div class="project-products">
-              <a href="#" class="pp-card"><img src="assets/img/prod-1.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-3.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-4.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-5.jpg" alt="Product"></a>
-              <a href="#" class="pp-card pp-view-all">View All<br>Products</a>
-            </div>
-          </div>
-        </div>
-        <div class="proj p2 reveal"><img src="assets/img/img-1.jpg" alt="Zushi Restaurant" />
-          <div class="cap"><small>Hospitality &mdash; Sydney</small>
-            <h3>Zushi Restaurant</h3>
-            <div class="project-products">
-              <a href="#" class="pp-card"><img src="assets/img/prod-1.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-3.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-4.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-5.jpg" alt="Product"></a>
-              <a href="#" class="pp-card pp-view-all">View All<br>Products</a>
-            </div>
-          </div>
-        </div>
-        <div class="proj p3 reveal"><img src="assets/img/eve.jpg" alt="The Eve Hotel" />
-          <div class="cap"><small>Hospitality &mdash; Redfern</small>
-            <h3>The Eve Hotel</h3>
-            <div class="project-products">
-              <a href="#" class="pp-card"><img src="assets/img/prod-1.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-3.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-4.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-5.jpg" alt="Product"></a>
-              <a href="#" class="pp-card pp-view-all">View All<br>Products</a>
-            </div>
-          </div>
-        </div>
-        <div class="proj p4 reveal"><img src="assets/img/bondi.webp" alt="Bondi Penthouse" />
-          <div class="cap"><small>Residential &mdash; Bondi</small>
-            <h3>Bondi Beach Penthouse</h3>
-            <div class="project-products">
-              <a href="#" class="pp-card"><img src="assets/img/prod-1.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-3.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-4.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-5.jpg" alt="Product"></a>
-              <a href="#" class="pp-card pp-view-all">View All<br>Products</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== STATS ========== -->
-  <section class="stats">
-    <div class="wrap">
-      <div class="kicker reveal" style="text-align:center">By the numbers</div>
-      <h2 class="h2 reveal" style="text-align:center;max-width:900px;margin:0 auto">Engineered - Tested -
-        Trusted<br>across Australia.</h2>
-      <div class="stats-grid">
-        <div class="stat reveal">
-          <div class="num" data-c="2500">0</div>
-          <div class="lbl">Projects Delivered</div>
-        </div>
-        <div class="stat reveal">
-          <div class="num" data-c="500">0</div>
-          <div class="lbl">Product Lines</div>
-        </div>
-        <div class="stat reveal">
-          <div class="num" data-c="5">0</div>
-          <div class="lbl">Year Warranty</div>
-        </div>
-        <div class="stat reveal">
-          <div class="num" data-c="15">0</div>
-          <div class="lbl">Years in Lighting</div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ========== FOOTER ========== -->
   <footer id="contact">
@@ -6185,7 +5885,7 @@
         hasDropdown.addEventListener('click', (e) => {
           if (window.innerWidth <= 960) {
             // only toggle if clicking the main a tag
-            if (e.target.closest('a[href="products.html"]')) {
+            if (e.target.closest('a[href="#products"]')) {
               e.preventDefault();
               hasDropdown.classList.toggle('open');
             }
@@ -6221,6 +5921,155 @@
     });
 
   </script>
+
+
+<!-- Quote FAB -->
+<button class="quote-fab" id="quoteFab" onclick="openDrawer()">
+  Quote List <span class="fab-count" id="fabCount">0</span>
+</button>
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3 style="font-family:'Inter',sans-serif;font-weight:600;font-size:16px">Your Quote List</h3>
+    <button class="drawer-close" onclick="closeDrawer()">&times;</button>
+  </div>
+  <div class="drawer-items" id="drawerItems"></div>
+  <div class="drawer-foot">
+    <button class="btn-full" onclick="alert('Quote request form — name, company, email, project details.')">Request Quote</button>
+  </div>
+</div>
+
+<script>
+/* ===== Category taxonomy ===== */
+const categories = [
+  {name:"Outdoor Lights", subs:["Spike Lights","Step & Brick Lights","Wall Lights","Inground Uplights","Deck Lights","Highbays & Floodlights"]},
+  {name:"Aluminium Profiles", subs:["Surface Mounted","Recessed","Angled & Corner","Suspended & Large","Wardrobe & Specialty","Plaster-in","Bendable / Flexible"]},
+  {name:"COB Strips", subs:["Standard COB (8mm/10mm)","Ultra Narrow COB (4mm/5mm)","Tunable White COB","Dim to Warm COB","RGB / RGBW COB","High Efficiency COB"], active:true},
+  {name:"SMD Strips", subs:["Single Colour SMD","Tunable White SMD","RGB / RGBW / RGBCW SMD","Digital / Addressable SMD","Side Emitting SMD"]},
+  {name:"Neon LED (IP67 / IP68 / IP69K)", subs:["Top Bending Neon","Side Bending Neon","3D / Multi Bending Neon","Ultra Slim Neon","RGB & Digital Neon"]},
+  {name:"Lumoflex (360 Neon)", subs:["18mm Diameter 360","25mm Diameter 360","Accessories & Mounts"]},
+  {name:"Linear Lighting", subs:["Custom Linear Bars","Trunking Systems","Architectural Pendants"]},
+  {name:"LED Drivers & Control", subs:["Non-Dimmable Drivers","Phase Cut / Triac Dimmable","0-10V / 1-10V Dimmable","DALI / DALI-2 Dimmable","Bluetooth / Casambi Control","Controllers & Receivers"]},
+  {name:"Downlights & Spotlights", subs:["Recessed Downlights","Surface Mounted Downlights","Track Lighting & Spots"]},
+  {name:"LED Globes", subs:["MR16 / GU10","Standard Lamps (A60, Filament)","Industrial Globes"]},
+  {name:"Handrail Lights", subs:["Asymmetrical Handrail Pucks","Symmetrical Handrail Pucks","Curved Handrail Solutions"]}
+];
+
+const catListEl = document.getElementById('catList');
+categories.forEach(function(cat) {
+  var li = document.createElement('li');
+  if(cat.active) li.classList.add('open');
+  var subItems = cat.subs.map(function(s) {
+    var isActive = cat.active && s.indexOf('Standard') === 0;
+    return '<li><a href="#" class="' + (isActive ? 'active' : '') + '">' + s + '</a></li>';
+  }).join('');
+  li.innerHTML = '<div class="cat-row ' + (cat.active ? 'active' : '') + '"><span>' + cat.name + '</span><span class="caret">&#203A;</span></div><ul class="sub-list">' + subItems + '</ul>';
+  li.querySelector('.cat-row').addEventListener('click', function() { li.classList.toggle('open'); });
+  catListEl.appendChild(li);
+});
+
+/* ===== Filter accordion ===== */
+var filters = [
+  {name:"Bending Direction", options:["Top Bend","Side Bend","Non-Bendable"]},
+  {name:"PCB Width", options:["8mm","10mm","12mm","15mm"]},
+  {name:"LEDs/m", options:["120","240","360","480"]},
+  {name:"IP Rating", options:["IP20","IP54","IP65","IP67"]},
+  {name:"Dimension", options:["Custom Cut","5m Roll","10m Reel"]},
+  {name:"Power", options:["18W/m","16W/m","14.4W/m","11W/m","10W/m"], open:true}
+];
+var filterAcc = document.getElementById('filterAccordion');
+filters.forEach(function(f) {
+  var div = document.createElement('div');
+  div.className = 'filter-item' + (f.open ? ' open' : '');
+  var opts = f.options.map(function(o) {
+    return '<label class="opt-row"><input type="radio" name="' + f.name + '"> ' + o + '</label>';
+  }).join('');
+  div.innerHTML = '<div class="filter-head"><span>' + f.name + '</span><span class="filter-toggle">' + (f.open ? '&ndash;' : '+') + '</span></div><div class="filter-body">' + opts + '</div>';
+  div.querySelector('.filter-head').addEventListener('click', function() {
+    div.classList.toggle('open');
+    div.querySelector('.filter-toggle').innerHTML = div.classList.contains('open') ? '&ndash;' : '+';
+  });
+  filterAcc.appendChild(div);
+});
+function clearFilters() { document.querySelectorAll('.opt-row input').forEach(function(i) { i.checked = false; }); }
+
+/* ===== Product data (COB Strips) ===== */
+var products = [
+  {name:"AFS2020 Standard COB", sub:"Standard COB", power:"14.4W/m", ip:"IP20", leds:"240", bend:"Non-Bendable", sw:["#1c3312","#0b0b0b"]},
+  {name:"AFS2020 Outdoor COB", sub:"Standard COB", power:"16W/m", ip:"IP65", leds:"240", bend:"Non-Bendable", sw:["#213b16","#0b0b0b"]},
+  {name:"Narrow-4 Precision COB", sub:"Ultra Narrow", power:"10W/m", ip:"IP20", leds:"360", bend:"Top Bend", sw:["#173312","#0b0b0b"]},
+  {name:"Narrow-5 Precision COB", sub:"Ultra Narrow", power:"11W/m", ip:"IP54", leds:"360", bend:"Top Bend", sw:["#1a3815","#0b0b0b"]},
+  {name:"TW Series Tunable COB", sub:"Tunable White", power:"18W/m", ip:"IP20", leds:"480", bend:"Side Bend", sw:["#243d19","#0b0b0b"]},
+  {name:"TW Series Pro COB", sub:"Tunable White", power:"18W/m", ip:"IP67", leds:"480", bend:"Side Bend", sw:["#2a4520","#0b0b0b"]},
+  {name:"D2W Amber Fade COB", sub:"Dim to Warm", power:"14.4W/m", ip:"IP20", leds:"240", bend:"Non-Bendable", sw:["#1e3517","#0b0b0b"]},
+  {name:"D2W Studio COB", sub:"Dim to Warm", power:"16W/m", ip:"IP54", leds:"240", bend:"Non-Bendable", sw:["#213a19","#0b0b0b"]},
+  {name:"RGBW Colour-Rich COB", sub:"RGB / RGBW", power:"18W/m", ip:"IP20", leds:"360", bend:"Top Bend", sw:["#173312","#0b0b0b"]},
+  {name:"RGBW Outdoor COB", sub:"RGB / RGBW", power:"18W/m", ip:"IP67", leds:"360", bend:"Top Bend", sw:["#1c3a15","#0b0b0b"]},
+  {name:"HE Series 130lm/W COB", sub:"High Efficiency", power:"11W/m", ip:"IP20", leds:"240", bend:"Non-Bendable", sw:["#204019","#0b0b0b"]},
+  {name:"HE Series Slimline COB", sub:"High Efficiency", power:"10W/m", ip:"IP54", leds:"240", bend:"Side Bend", sw:["#1a3616","#0b0b0b"]}
+];
+
+var grid = document.getElementById('productGrid');
+var quoteItems = [];
+
+function renderGrid() {
+  grid.innerHTML = products.map(function(p, i) {
+    return '<div class="prod-card">' +
+      '<div class="prod-card-img">' +
+        '<div class="prod-swatch" style="--sw1:' + p.sw[0] + ';--sw2:' + p.sw[1] + '">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1"><rect x="2" y="9" width="20" height="6" rx="1"></rect><circle cx="6" cy="12" r="1"></circle><circle cx="11" cy="12" r="1"></circle><circle cx="16" cy="12" r="1"></circle></svg>' +
+        '</div>' +
+        '<div class="prod-overlay">' +
+          '<h4>' + p.name + '</h4>' +
+          '<div class="spec-line"><span>Power: ' + p.power + ' &middot; IP Rating: ' + p.ip + '</span><span>LEDs/m: ' + p.leds + ' &middot; Bending: ' + p.bend + '</span></div>' +
+          '<div class="p-btn-row">' +
+            '<div class="ov-btn">View Details</div>' +
+            '<div class="ov-btn solid" onclick="addToQuote(' + i + ', this)">Add to Quote</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="prod-card-title"><span class="cat-label">' + p.sub + '</span>' + p.name + '</div>' +
+    '</div>';
+  }).join('');
+}
+renderGrid();
+
+/* ===== Quote drawer ===== */
+function addToQuote(i, btn) {
+  if(quoteItems.indexOf(i) === -1) {
+    quoteItems.push(i);
+    btn.textContent = 'Added \u2713';
+    btn.classList.add('added');
+    updateDrawer();
+  }
+}
+function removeFromQuote(i) {
+  var idx = quoteItems.indexOf(i);
+  if(idx > -1) quoteItems.splice(idx, 1);
+  var cards = document.querySelectorAll('.prod-grid .prod-card');
+  if(cards[i]) {
+    var solidBtn = cards[i].querySelector('.ov-btn.solid');
+    if(solidBtn) { solidBtn.textContent = 'Add to Quote'; solidBtn.classList.remove('added'); }
+  }
+  updateDrawer();
+}
+function updateDrawer() {
+  document.getElementById('fabCount').textContent = quoteItems.length;
+  var wrap = document.getElementById('drawerItems');
+  if(quoteItems.length === 0) {
+    wrap.innerHTML = '<div class="drawer-empty">No products added yet.<br>Browse the catalogue and tap "Add to Quote" on anything you need pricing for.</div>';
+    return;
+  }
+  wrap.innerHTML = quoteItems.map(function(i) {
+    var p = products[i];
+    return '<div class="qi"><div class="qi-sw" style="background:linear-gradient(135deg,' + p.sw[0] + ',' + p.sw[1] + ')"></div><div class="qi-info"><h5>' + p.name + '</h5><span>' + p.power + ' &middot; ' + p.ip + '</span></div><button class="qi-remove" onclick="removeFromQuote(' + i + ')">Remove</button></div>';
+  }).join('');
+}
+updateDrawer();
+function openDrawer() { document.getElementById('drawer').classList.add('open'); document.getElementById('drawerOverlay').classList.add('open'); }
+function closeDrawer() { document.getElementById('drawer').classList.remove('open'); document.getElementById('drawerOverlay').classList.remove('open'); }
+</script>
 </body>
 
 </html>
+
