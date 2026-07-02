@@ -772,77 +772,74 @@
     /* ===== Mega Menu Tabs ===== */
     // Dynamic mega menu is initialized from mega_menu.js
 
-<<<<<<< HEAD
-=======
-      tabs.forEach(tab => {
-        tab.addEventListener('mouseenter', () => {
-          if (window.innerWidth > 960) switchTab(tab);
-        });
-        tab.addEventListener('click', (e) => {
-          e.preventDefault();
-          switchTab(tab);
-        });
+    tabs.forEach(tab => {
+      tab.addEventListener('mouseenter', () => {
+        if (window.innerWidth > 960) switchTab(tab);
       });
+      tab.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchTab(tab);
+      });
+    });
 
-      function switchTab(activeTab) {
-        tabs.forEach(t => t.classList.remove('active'));
-        panels.forEach(p => p.classList.remove('active'));
+    function switchTab(activeTab) {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
 
-        activeTab.classList.add('active');
-        const targetId = activeTab.getAttribute('data-target');
-        const targetPanel = document.getElementById(targetId);
-        if (targetPanel) targetPanel.classList.add('active');
+      activeTab.classList.add('active');
+      const targetId = activeTab.getAttribute('data-target');
+      const targetPanel = document.getElementById(targetId);
+      if (targetPanel) targetPanel.classList.add('active');
+    }
+
+
+    // Scroll indicator fade logic
+    const megaTabs = document.querySelector('.mega-tabs');
+    const megaPanelsWrapper = document.querySelector('.mega-panels');
+    const indLeft = document.querySelector('.scroll-indicator-left');
+    const indRight = document.querySelector('.scroll-indicator-right');
+
+    function handleScroll(el, indicator) {
+      if (!el || !indicator) return;
+      if (el.scrollHeight - el.scrollTop <= el.clientHeight + 2) {
+        indicator.classList.add('hidden');
+      } else {
+        indicator.classList.remove('hidden');
       }
+    }
+
+    if (megaTabs && indLeft) {
+      megaTabs.addEventListener('scroll', () => handleScroll(megaTabs, indLeft));
+      // initial check
+      handleScroll(megaTabs, indLeft);
+    }
+
+    if (megaPanelsWrapper && indRight) {
+      megaPanelsWrapper.addEventListener('scroll', () => handleScroll(megaPanelsWrapper, indRight));
+      // We need to also listen to tab changes since the panel content changes height
+      tabs.forEach(tab => {
+        tab.addEventListener('mouseenter', () => setTimeout(() => handleScroll(megaPanelsWrapper, indRight), 50));
+        tab.addEventListener('click', () => setTimeout(() => handleScroll(megaPanelsWrapper, indRight), 50));
+      });
+      // initial check
+      handleScroll(megaPanelsWrapper, indRight);
+    }
 
 
-      // Scroll indicator fade logic
-      const megaTabs = document.querySelector('.mega-tabs');
-      const megaPanelsWrapper = document.querySelector('.mega-panels');
-      const indLeft = document.querySelector('.scroll-indicator-left');
-      const indRight = document.querySelector('.scroll-indicator-right');
-
-      function handleScroll(el, indicator) {
-        if (!el || !indicator) return;
-        if (el.scrollHeight - el.scrollTop <= el.clientHeight + 2) {
-          indicator.classList.add('hidden');
-        } else {
-          indicator.classList.remove('hidden');
-        }
-      }
-
-      if (megaTabs && indLeft) {
-        megaTabs.addEventListener('scroll', () => handleScroll(megaTabs, indLeft));
-        // initial check
-        handleScroll(megaTabs, indLeft);
-      }
-
-      if (megaPanelsWrapper && indRight) {
-        megaPanelsWrapper.addEventListener('scroll', () => handleScroll(megaPanelsWrapper, indRight));
-        // We need to also listen to tab changes since the panel content changes height
-        tabs.forEach(tab => {
-          tab.addEventListener('mouseenter', () => setTimeout(() => handleScroll(megaPanelsWrapper, indRight), 50));
-          tab.addEventListener('click', () => setTimeout(() => handleScroll(megaPanelsWrapper, indRight), 50));
-        });
-        // initial check
-        handleScroll(megaPanelsWrapper, indRight);
-      }
-
-
-      // Hybrid hover/click toggle for mobile
-      const hasDropdown = document.querySelector('.has-dropdown');
-      if (hasDropdown) {
-        hasDropdown.addEventListener('click', (e) => {
-          if (window.innerWidth <= 960) {
-            // only toggle if clicking the main a tag
-            if (e.target.closest('a[href="products.html"]')) {
-              e.preventDefault();
-              hasDropdown.classList.toggle('open');
-            }
+    // Hybrid hover/click toggle for mobile
+    const hasDropdown = document.querySelector('.has-dropdown');
+    if (hasDropdown) {
+      hasDropdown.addEventListener('click', (e) => {
+        if (window.innerWidth <= 960) {
+          // only toggle if clicking the main a tag
+          if (e.target.closest('a[href="products.html"]')) {
+            e.preventDefault();
+            hasDropdown.classList.toggle('open');
           }
-        });
-      }
-    })();
->>>>>>> b33f8b3fe087b5d2fc90db59d1378c5c913125bc
+        }
+      });
+    }
+    }) ();
 
     function toggleTheme() {
       const root = document.documentElement;
