@@ -177,7 +177,6 @@
 }
 
 .product-title-group h1 {
-  font-family: 'Cormorant Garamond', serif;
   font-size: clamp(32px, 3.5vw, 48px);
   line-height: 1.1;
   font-weight: 500;

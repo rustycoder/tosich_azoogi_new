@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -54,7 +56,7 @@
 
 :root[data-theme="light"] .topbar.solid {
   --nav-text: #111111;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.90);
 }
 
 html {
@@ -66,7 +68,7 @@ html,
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: 'Inter', sans-serif;
+  font-family: "Google Sans Flex", sans-serif;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   overflow-x: visible;
@@ -146,7 +148,7 @@ img {
 }
 
 .logo {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: "Google Sans Flex", sans-serif;;
   font-size: 32px;
   font-weight: 500;
   letter-spacing: .18em;
@@ -314,7 +316,7 @@ img {
   background: none;
   border: none;
   color: var(--muted);
-  font-family: 'Inter', sans-serif;
+  font-family: "Google Sans Flex", sans-serif;
   font-size: 13px;
   padding: 12px 24px;
   cursor: pointer;
@@ -375,10 +377,10 @@ img {
 }
 
 .mega-panel-title {
-  font-family: 'Inter', sans-serif;
+  font-family: "Google Sans Flex", sans-serif;
   font-size: 13px;
   font-weight: 600;
-  color: var(--pure-text);
+  color: var(--accent);
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -428,7 +430,7 @@ img {
 }
 
 .subcategory-header h5 {
-  font-family: 'Inter', sans-serif;
+  font-family: "Google Sans Flex", sans-serif;
   font-size: 13px;
   font-weight: 500;
   color: var(--pure-text);
@@ -522,7 +524,7 @@ img {
 .view-all-card svg {
   width: 20px;
   height: 20px;
-  margin-bottom: 8px;
+  margin-bottom: 3px;
   stroke: currentColor;
 }
 
@@ -714,7 +716,7 @@ a.cta:after {
 }
 
 .slide-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: "Google Sans Flex", sans-serif;
   font-weight: 400;
   font-size: clamp(40px, 6.5vw, 96px);
   line-height: 1.02;
@@ -954,15 +956,16 @@ section {
 }
 
 .kicker {
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: .4em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 18px
+  margin-bottom: 18px;
+  font-weight: 500;
 }
 
 .h2 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: "Google Sans Flex", sans-serif;
   font-weight: 400;
   font-size: clamp(36px, 4.5vw, 64px);
   line-height: 1.05;
@@ -1093,14 +1096,14 @@ section {
 }
 
 .value .n {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: "Google Sans Flex", sans-serif;;
   color: var(--accent);
   font-size: 22px;
   margin-bottom: 30px
 }
 
 .value h3 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: "Google Sans Flex", sans-serif;;
   font-weight: 500;
   font-size: 26px;
   margin-bottom: 14px
@@ -1158,7 +1161,7 @@ section {
 }
 
 .sidebar-header h3 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: "Google Sans Flex", sans-serif;;
   font-size: 22px;
   margin: 0;
 }
@@ -1398,7 +1401,7 @@ section {
 }
 
 .proj .cap h3 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: "Google Sans Flex", sans-serif;;
   font-weight: 500;
   font-size: 26px;
   margin-top: 8px
@@ -1503,7 +1506,7 @@ section {
 }
 
 .stat .num {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: "Google Sans Flex", sans-serif;;
   font-size: 72px;
   color: var(--accent);
   font-weight: 400;
@@ -1889,7 +1892,7 @@ aside p {
   margin: 14px 0 0;
   letter-spacing: -.02em;
   font-weight: 400;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: "Google Sans Flex", sans-serif;;
 }
 
 .cityscape h2 em {
@@ -2242,7 +2245,7 @@ aside p {
   background: none;
   border: none;
   color: var(--muted);
-  font-family: 'Inter', sans-serif;
+  font-family: "Google Sans Flex", sans-serif;
   font-size: 13px;
   padding: 12px 24px;
   cursor: pointer;
@@ -2311,7 +2314,7 @@ aside p {
 }
 
 .mega-product-row-title {
-  font-family: 'Inter', sans-serif;
+  font-family: "Google Sans Flex", sans-serif;
   font-size: 12px;
   font-weight: 600;
   color: var(--pure-text);
@@ -2335,13 +2338,14 @@ aside p {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 10px;
+  align-items: stretch;
 }
 
 .mega-variant-card {
   background: #ffffff !important;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
   border-radius: 4px;
-  padding: 6px;
+  padding: 6px!important;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -2354,6 +2358,10 @@ aside p {
   border-color: var(--accent) !important;
   background: #f9f9f9 !important;
   transform: translateY(-2px);
+}
+
+a.mega-variant-card:after{
+  height: 0;
 }
 
 .mega-variant-img-container {
@@ -2413,19 +2421,18 @@ aside p {
 }
 
 .mega-variant-name {
-  font-family: 'Inter', sans-serif;
+  font-family: "Google Sans Flex", sans-serif;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 400;
   color: #111111 !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 0 6px;
-  text-align: center;
+  text-align: left;
 }
 
 .mega-variant-specs {
-  font-family: 'Inter', sans-serif;
+  font-family: "Google Sans Flex", sans-serif;
   font-size: 10px;
   color: var(--muted);
   white-space: nowrap;
@@ -2443,7 +2450,7 @@ aside p {
   background: transparent;
   border: 1px solid var(--accent);
   color: var(--accent);
-  font-family: 'Inter', sans-serif;
+  font-family: "Google Sans Flex", sans-serif;
   font-size: 13px;
   font-weight: 600;
   text-decoration: none;
@@ -2470,6 +2477,16 @@ aside p {
 .view-all-card:hover {
   background: #f9f9f9 !important;
   border-color: var(--accent) !important;
+}
+
+.view-all-card-inner{
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  height: 100%; 
+  text-align: center; 
+  gap: 8px;
+  flex-direction: row-reverse;
 }
 
 .view-all-card-inner svg {
@@ -2513,7 +2530,6 @@ aside p {
 }
 
 .mega-accordion-title {
-  font-family: 'Cormorant Garamond', serif;
   font-size: 14px;
   font-weight: 700;
   color: var(--ink);
@@ -2571,7 +2587,7 @@ aside p {
 }
 
 .mega-variant-product {
-  font-family: 'Inter', sans-serif;
+  font-family: "Google Sans Flex", sans-serif;
   font-size: 10px;
   font-weight: 600;
   color: var(--accent);
@@ -2579,7 +2595,7 @@ aside p {
 }
 
 .mega-product-subfolder-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: "Google Sans Flex", sans-serif;;
   font-size: 13px;
   font-weight: 600;
   color: var(--muted);

@@ -303,7 +303,7 @@
       viewAllCard.className = 'mega-variant-card view-all-card';
       viewAllCard.href = `product-detail.html?product=${rowNode.name}`;
       viewAllCard.innerHTML = `
-        <div class="view-all-card-inner" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; gap: 8px;">
+        <div class="view-all-card-inner">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="color: var(--accent);">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>

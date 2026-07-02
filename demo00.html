@@ -1,0 +1,873 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+  <script>const savedTheme = localStorage.getItem('theme'); if (savedTheme) { document.documentElement.setAttribute('data-theme', savedTheme); }</script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Azoogi — Award-winning LED Lighting Solutions</title>
+  <meta name="description"
+    content="Azoogi designs and supplies premium LED lighting — strips, neon, garden lights, drivers and architectural fittings for projects that demand more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style_demo.css">
+  <script src="assets/js/products_data.js"></script>
+  <script src="assets/js/mega_menu.js"></script>
+</head>
+
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="topbar" id="topbar">
+    <div class="util">
+      <div class="util-inner">
+        <div>Trusted by architects, designers & builders across Australia</div>
+        <div style="display:flex;gap:24px">
+          <a href="#">1300 AZOOGI</a><a href="#">sales@azoogi.com.au</a>
+          <div style="display:flex; align-items:center;"><a href="#">Trade Login</a><button class="theme-btn"
+              aria-label="Toggle theme" onclick="toggleTheme()"><svg class="sun-icon" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg><svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg></button></div>
+        </div>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="#" class="logo"><img src="assets/logo_white.png" width="80"></a>
+      <div class="menu">
+        <div class="has-dropdown">
+          <a href="#products">Product <span class="caret">&#9662;</span></a>
+          <div class="mega-menu" id="dynamic-mega-menu"></div>
+          <a href="#projects">Projects</a>
+          <a href="#support">Support</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <a href="#contact" class="cta">Get a Quote</a>
+        <div class="burger"><span></span><span></span><span></span></div>
+    </nav>
+  </header>
+
+  <!-- ========== HERO SLIDER ========== -->
+  <section class="hero" id="hero">
+    <div class="slide active has-video">
+      <video class="bg-video" autoplay muted loop playsinline preload="auto" poster="assets/hero00.jpg">
+        <source src="assets/lighting.mp4" type="video/mp4">
+      </video>
+      <div class="slide-inner">
+        <div class="eyebrow">Made just for you</div>
+        <h1 class="slide-title">Custom fittings<br />without compromise.</h1>
+        <p class="slide-sub">Off-spec alternatives, custom fittings, matched specs and budgets — without ever
+          compromising on quality.</p>
+        <div class="slide-actions">
+          <a class="btn primary" href="#contact">Start a Project</a>
+          <a class="btn" href="#services">Our Services</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide" style="background-image:url('assets/hero02.jpg')">
+      <div class="slide-inner">
+        <div class="eyebrow">For those who demand more from their lighting</div>
+        <h1 class="slide-title">Award-winning<br />LED lighting solutions.</h1>
+        <p class="slide-sub">Premium components, strict quality assurance, and up to a 5-year warranty — engineered to
+          perform and last.</p>
+        <div class="slide-actions">
+          <a class="btn primary" href="products.html">Explore Products</a>
+          <a class="btn" href="#projects">View Projects</a>
+        </div>
+      </div>
+    </div>
+    <div class="slide" style="background-image:url('assets/hero01.jpg')">
+      <div class="slide-inner">
+        <div class="eyebrow">Support that lasts</div>
+        <h1 class="slide-title">From first idea<br />to final install — and beyond.</h1>
+        <p class="slide-sub">We don't just supply lighting. We partner with you with advice, guidance, and service that
+          keeps your project shining.</p>
+        <div class="slide-actions">
+          <a class="btn primary" href="#contact">Talk to a Specialist</a>
+          <a class="btn" href="#projects">Recent Work</a>
+        </div>
+      </div>
+    </div>
+    <div class="slide"
+      style="background-image:url('https://images.unsplash.com/photo-1567016526105-22da7c13161a?w=2400&q=80')">
+      <div class="slide-inner">
+        <div class="eyebrow">Design without limits</div>
+        <h1 class="slide-title">Architectural lighting,<br />shaped to your vision.</h1>
+        <p class="slide-sub">From sleek LED strips to statement architectural fittings — solutions for every style and
+          every space, indoors or out.</p>
+        <div class="slide-actions">
+          <a class="btn primary" href="products.html">Browse Range</a>
+          <a class="btn" href="#about">Our Story</a>
+        </div>
+      </div>
+    </div>
+    <div class="slide"
+      style="background-image:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=2400&q=80')">
+      <div class="slide-inner">
+        <div class="eyebrow">Made just for you</div>
+        <h1 class="slide-title">Custom fittings<br />without compromise.</h1>
+        <p class="slide-sub">Off-spec alternatives, custom fittings, matched specs and budgets — without ever
+          compromising on quality.</p>
+        <div class="slide-actions">
+          <a class="btn primary" href="#contact">Start a Project</a>
+          <a class="btn" href="#services">Our Services</a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="slider-ctrl">
+      <div class="lines" id="lines"></div>
+      <div class="counter"><b id="cur">01</b> <span>/ <b id="tot">04</b></span></div>
+      <div class="pp" id="pp" aria-label="Pause">
+        <svg id="ppIcon" viewBox="0 0 24 24" fill="currentColor">
+          <rect x="6" y="5" width="4" height="14" />
+          <rect x="14" y="5" width="4" height="14" />
+        </svg>
+      </div>
+    </div>
+
+    <div class="scroll-cue"><span>Scroll</span>
+      <div class="l"></div>
+    </div>
+  </section>
+
+  <!-- ========== VALUES ========== -->
+  <section class="card-in">
+    <div class="wrap-sm">
+      <div class="head">
+        <div class="kicker reveal">Why Azoogi</div>
+        <h2 class="h2 reveal">For those who demand more — from the components inside to the support behind every
+          product.</h2>
+      </div>
+
+      <div class="container max-width-adaptive-md margin-bottom-lg">
+        <ul id="cards">
+          <li class="card-main" id="card_1">
+            <div class="card__content">
+              <div>
+                <h2>Premium Selection. Unmatched Quality.</h2>
+                <p>Explore an extensive, curated catalog of top-tier LED lighting. Whether you need sleek architectural
+                  fittings or rugged outdoor solutions, our products are engineered for aesthetic brilliance and
+                  flawless performance.</p>
+                <p><a href="#" class="btn --accent">Explore Collections</a></p>
+              </div>
+              <figure>
+                <img src="assets/img/img-0.jpg" alt="Image description">
+              </figure>
+            </div>
+          </li>
+          <li class="card-main" id="card_2">
+            <div class="card__content">
+              <div>
+                <h2>Lighting, Tailored to You.</h2>
+                <p>No two spaces are exactly alike. We engineer custom, adaptive lighting configurations that perfectly
+                  match your project’s unique specifications, budget, and design vision.</p>
+                <p><a href="#" class="btn --accent">Request a Custom Quote</a></p>
+              </div>
+              <figure>
+                <img src="assets/img/img-1.jpg" alt="Image description">
+              </figure>
+            </div>
+          </li>
+          <li class="card-main" id="card_3">
+            <div class="card__content">
+              <div>
+                <h2>Your Partner, End-to-End.</h2>
+                <p>We don't just sell lights; we illuminate your workflow. From initial blueprint to final installation,
+                  our dedicated lighting experts provide continuous, hands-on support to ensure your vision becomes
+                  reality.</p>
+                <p><a href="#" class="btn --accent">Talk to an Expert</a></p>
+              </div>
+              <figure>
+                <img src="assets/img/img-2.jpg" alt="Image description">
+              </figure>
+            </div>
+          </li>
+          <li class="card-main" id="card_4">
+            <div class="card__content">
+              <div>
+                <h2>Built to Last. Guaranteed.</h2>
+                <p>Invest in your projects with total confidence. Our lighting undergoes rigorous quality assurance
+                  testing and comes backed by a comprehensive 5-year warranty for complete peace of mind.</p>
+                <p><a href="#" class="btn --accent">View Warranty Details</a></p>
+              </div>
+              <figure>
+                <img src="assets/img/card.jpg" alt="Image description">
+              </figure>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="cityscape">
+    <div class="city-intro">
+      <div>
+        <span class="kicker reveal">Where Azoogi lights up</span>
+        <h2>Illuminating <em>Sydney</em>, one project at a time.</h2>
+      </div>
+
+    </div>
+
+    <div class="stage" aria-label="Interactive Sydney skyline">
+      <img class="bg" src="assets/img/sydney-night.jpg" alt="Sydney skyline at night" />
+
+      <!-- Hotspots (positioned in % over the cityscape) -->
+      <a class="hotspot" style="left:36%;top:38%" href="#" aria-label="AZ-PNL24">
+        <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
+        <div class="tip">
+          <div class="thumb" style="background-image:url('assets/img/prod-1.jpg')"></div>
+          <div class="code">AZ-PNL24</div>
+          <div class="name">Slim Edge LED Panel 600×600</div>
+          <div class="meta">Office towers · 4000K</div>
+        </div>
+      </a>
+
+      <a class="hotspot" style="left:48%;top:30%" href="#" aria-label="AZ-HBY150">
+        <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
+        <div class="tip">
+          <div class="thumb" style="background-image:url('assets/img/prod-3.jpg')"></div>
+          <div class="code">AZ-HBY150</div>
+          <div class="name">UFO High Bay 150W</div>
+          <div class="meta">Commercial atriums</div>
+        </div>
+      </a>
+
+      <a class="hotspot bottom" style="left:62%;top:27%" href="#" aria-label="AZ-LNR42">
+        <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
+        <div class="tip">
+          <div class="thumb" style="background-image:url('assets/img/prod-4.jpg')"></div>
+          <div class="code">AZ-LNR42</div>
+          <div class="name">Linear Pendant 1.2m</div>
+          <div class="meta">Corporate lobbies</div>
+        </div>
+      </a>
+
+      <a class="hotspot" style="left:72%;top:55%" href="#" aria-label="AZ-STR80">
+        <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
+        <div class="tip">
+          <div class="thumb" style="background-image:url('assets/img/prod-3.jpg')"></div>
+          <div class="code">AZ-STR80</div>
+          <div class="name">Urban Street Luminaire 80W</div>
+          <div class="meta">Harbour Bridge approach</div>
+        </div>
+      </a>
+
+      <a class="hotspot" style="left:30%;top:74%" href="#" aria-label="AZ-FLD50">
+        <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
+        <div class="tip">
+          <div class="thumb" style="background-image:url('assets/img/prod-5.jpg')"></div>
+          <div class="code">AZ-FLD50</div>
+          <div class="name">Architectural Flood 50W RGBW</div>
+          <div class="meta">Opera House façade</div>
+        </div>
+      </a>
+
+      <a class="hotspot bottom" style="left:18%;top:48%" href="#" aria-label="AZ-PNL24-W">
+        <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
+        <div class="tip">
+          <div class="thumb" style="background-image:url('assets/img/prod-1.jpg')"></div>
+          <div class="code">AZ-PNL24-W</div>
+          <div class="name">Recessed Panel — Warm</div>
+          <div class="meta">Residential towers · 3000K</div>
+        </div>
+      </a>
+
+      <a class="hotspot" style="left:85%;top:62%" href="#" aria-label="AZ-FLD50-N">
+        <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
+        <div class="tip">
+          <div class="thumb" style="background-image:url('assets/img/prod-5.jpg')"></div>
+          <div class="code">AZ-FLD50-N</div>
+          <div class="name">Marine Flood — IP66</div>
+          <div class="meta">North Sydney waterfront</div>
+        </div>
+      </a>
+      <div class="legend">
+        <span class="pill"><span class="ldot"></span> Hover a marker to view the product</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== PRODUCTS MARQUEE ========== -->
+  <section class="products" id="products">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <div class="kicker reveal">Our Range</div>
+          <h2 class="h2 reveal">Explore the full Azoogi lighting catalogue.</h2>
+        </div>
+        <a href="products.html" class="btn --accent reveal">View All Products</a>
+      </div>
+      <div class="products-layout">
+        <!-- Sidebar -->
+        <aside class="products-sidebar" id="productsSidebar">
+          <div class="sidebar-header">
+            <h3>Categories</h3>
+            <button class="close-sidebar" onclick="document.getElementById('productsSidebar').classList.remove('open')"
+              aria-label="Close categories">&times;</button>
+          </div>
+          <ul class="category-list">
+            <li><a href="#" class="active">All Products</a></li>
+            <li><a href="#">Garden Lights</a></li>
+            <li><a href="#">Neon Range</a></li>
+            <li><a href="#">LED Strips</a></li>
+            <li><a href="#">LED Drivers</a></li>
+            <li><a href="#">Downlights</a></li>
+            <li><a href="#">Pendant Lights</a></li>
+            <li><a href="#">Architectural</a></li>
+          </ul>
+        </aside>
+
+        <!-- Main Area -->
+        <div class="products-main">
+          <!-- Mobile Sidebar Toggle -->
+          <div class="mobile-filter-bar">
+            <button class="btn --outline" onclick="document.getElementById('productsSidebar').classList.add('open')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"
+                style="margin-right:8px; vertical-align: text-bottom;">
+                <line x1="4" y1="21" x2="4" y2="14"></line>
+                <line x1="4" y1="10" x2="4" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12" y2="3"></line>
+                <line x1="20" y1="21" x2="20" y2="16"></line>
+                <line x1="20" y1="12" x2="20" y2="3"></line>
+                <line x1="1" y1="14" x2="7" y2="14"></line>
+                <line x1="9" y1="8" x2="15" y2="8"></line>
+                <line x1="17" y1="16" x2="23" y2="16"></line>
+              </svg>
+              Filter Categories
+            </button>
+          </div>
+
+          <!-- Pills (Attributes) -->
+          <div class="products-filters">
+            <div class="filter-pill">Installation <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">Material <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">Coating <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">Dimming method <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">Input voltage <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">SDCM <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">CRI <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">CCT <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">Beam angle <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">Application <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">IP grade <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">Warranty <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">Certification <span class="caret">&#9662;</span></div>
+            <div class="filter-pill">More choices <span class="caret">&#9662;</span></div>
+          </div>
+
+          <!-- Compact Product Grid -->
+          <div class="compact-products-grid">
+            <div class="compact-card">
+              <a href="product-detail.html?product=SPARK" class="img-wrap"
+                style="background-image:url('assets/img/GL001.webp')"></a>
+              <div class="info">
+                <a href="product-detail.html?product=SPARK" style="text-decoration:none">
+                  <h4>Garden Spotlight Pro</h4>
+                </a>
+                <div class="specs">
+                  <div><strong>Length:</strong> Opening φ75mm</div>
+                  <div><strong>Beam Angle:</strong> Asymmetric Distribution</div>
+                  <div><strong>Power:</strong> 10W, 15W, 20W</div>
+                </div>
+                <div class="cart-action">
+                  <button class="btn --accent btn-sm">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+            <div class="compact-card">
+              <a href="product-detail.html?product=NNR25" class="img-wrap"
+                style="background-image:url('assets/img/neon.webp')"></a>
+              <div class="info">
+                <a href="product-detail.html?product=NNR25" style="text-decoration:none">
+                  <h4>Neon Flex Series 360</h4>
+                </a>
+                <div class="specs">
+                  <div><strong>Length:</strong> Custom cut</div>
+                  <div><strong>Beam Angle:</strong> 360° Uniform</div>
+                  <div><strong>Power:</strong> 14.4W/m</div>
+                </div>
+                <div class="cart-action">
+                  <button class="btn --accent btn-sm">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+            <div class="compact-card">
+              <a href="product-detail.html?product=LINE+ECO" class="img-wrap"
+                style="background-image:url('assets/img/leds.webp')"></a>
+              <div class="info">
+                <a href="product-detail.html?product=LINE+ECO" style="text-decoration:none">
+                  <h4>High-Output LED Strip</h4>
+                </a>
+                <div class="specs">
+                  <div><strong>Length:</strong> 5m Roll</div>
+                  <div><strong>Beam Angle:</strong> 120°</div>
+                  <div><strong>Power:</strong> 20W/m</div>
+                </div>
+                <div class="cart-action">
+                  <button class="btn --accent btn-sm">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+            <div class="compact-card">
+              <a href="product-detail.html?product=Aurora" class="img-wrap"
+                style="background-image:url('assets/img/dt.webp')"></a>
+              <div class="info">
+                <a href="product-detail.html?product=Aurora" style="text-decoration:none">
+                  <h4>Recessed Downlight</h4>
+                </a>
+                <div class="specs">
+                  <div><strong>Length:</strong> Opening φ90mm</div>
+                  <div><strong>Beam Angle:</strong> 60°</div>
+                  <div><strong>Power:</strong> 15W</div>
+                </div>
+                <div class="cart-action">
+                  <button class="btn --accent btn-sm">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+            <div class="compact-card">
+              <a href="product-detail.html?product=LINE+25" class="img-wrap"
+                style="background-image:url('assets/img/prod-4.jpg')"></a>
+              <div class="info">
+                <a href="product-detail.html?product=LINE+25" style="text-decoration:none">
+                  <h4>Pendant Light Mod</h4>
+                </a>
+                <div class="specs">
+                  <div><strong>Length:</strong> 1200mm</div>
+                  <div><strong>Beam Angle:</strong> 45°</div>
+                  <div><strong>Power:</strong> 30W</div>
+                </div>
+                <div class="cart-action">
+                  <button class="btn --accent btn-sm">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+            <div class="compact-card">
+              <a href="product-detail.html?product=LLS2.0" class="img-wrap"
+                style="background-image:url('assets/img/prod-5.jpg')"></a>
+              <div class="info">
+                <a href="product-detail.html?product=LLS2.0" style="text-decoration:none">
+                  <h4>Architectural Linear</h4>
+                </a>
+                <div class="specs">
+                  <div><strong>Length:</strong> Custom Extrusion</div>
+                  <div><strong>Beam Angle:</strong> Diffused</div>
+                  <div><strong>Power:</strong> 24W/m</div>
+                </div>
+                <div class="cart-action">
+                  <button class="btn --accent btn-sm">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROJECTS ========== -->
+  <section class="projects" id="projects">
+    <div class="wrap">
+      <div class="head" style="display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap">
+        <div>
+          <div class="kicker reveal">Recent Highlights</div>
+          <h2 class="h2 reveal">Where Azoogi lighting comes to life.</h2>
+        </div>
+        <a href="#" class="btn reveal">View All Projects</a>
+      </div>
+
+      <div class="grid">
+        <div class="proj p1 reveal"><img src="assets/img/acdm.jpg" alt="Aikenhead Centre" />
+          <div class="cap"><small>Medical &mdash; Melbourne</small>
+            <h3>Aikenhead Centre for Medical Discovery</h3>
+            <div class="project-products">
+              <a href="#" class="pp-card"><img src="assets/img/prod-1.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-3.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-4.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-5.jpg" alt="Product"></a>
+              <a href="#" class="pp-card pp-view-all">View All<br>Products</a>
+            </div>
+          </div>
+        </div>
+        <div class="proj p2 reveal"><img src="assets/img/img-1.jpg" alt="Zushi Restaurant" />
+          <div class="cap"><small>Hospitality &mdash; Sydney</small>
+            <h3>Zushi Restaurant</h3>
+            <div class="project-products">
+              <a href="#" class="pp-card"><img src="assets/img/prod-1.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-3.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-4.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-5.jpg" alt="Product"></a>
+              <a href="#" class="pp-card pp-view-all">View All<br>Products</a>
+            </div>
+          </div>
+        </div>
+        <div class="proj p3 reveal"><img src="assets/img/eve.jpg" alt="The Eve Hotel" />
+          <div class="cap"><small>Hospitality &mdash; Redfern</small>
+            <h3>The Eve Hotel</h3>
+            <div class="project-products">
+              <a href="#" class="pp-card"><img src="assets/img/prod-1.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-3.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-4.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-5.jpg" alt="Product"></a>
+              <a href="#" class="pp-card pp-view-all">View All<br>Products</a>
+            </div>
+          </div>
+        </div>
+        <div class="proj p4 reveal"><img src="assets/img/bondi.webp" alt="Bondi Penthouse" />
+          <div class="cap"><small>Residential &mdash; Bondi</small>
+            <h3>Bondi Beach Penthouse</h3>
+            <div class="project-products">
+              <a href="#" class="pp-card"><img src="assets/img/prod-1.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-3.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-4.jpg" alt="Product"></a>
+              <a href="#" class="pp-card"><img src="assets/img/prod-5.jpg" alt="Product"></a>
+              <a href="#" class="pp-card pp-view-all">View All<br>Products</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STATS ========== -->
+  <section class="stats">
+    <div class="wrap">
+      <div class="kicker reveal" style="text-align:center">By the numbers</div>
+      <h2 class="h2 reveal" style="text-align:center;max-width:900px;margin:0 auto">Engineered - Tested -
+        Trusted<br>across Australia.</h2>
+      <div class="stats-grid">
+        <div class="stat reveal">
+          <div class="num" data-c="2500">0</div>
+          <div class="lbl">Projects Delivered</div>
+        </div>
+        <div class="stat reveal">
+          <div class="num" data-c="500">0</div>
+          <div class="lbl">Product Lines</div>
+        </div>
+        <div class="stat reveal">
+          <div class="num" data-c="5">0</div>
+          <div class="lbl">Year Warranty</div>
+        </div>
+        <div class="stat reveal">
+          <div class="num" data-c="15">0</div>
+          <div class="lbl">Years in Lighting</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer id="contact">
+    <div class="wrap">
+      <div class="foot">
+        <div>
+          <a href="#" class="logo"><img src="assets/logo.png" width="150"></a>
+          <p>Premium LED lighting solutions for architects, designers, builders and homeowners across Australia.</p>
+          <div class="socials">
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r=".8" fill="currentColor" />
+              </svg></a>
+            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M4 4h4v16H4zM6 2.5A1.5 1.5 0 1 1 4.5 4 1.5 1.5 0 0 1 6 2.5zM10 8h4v2c.7-1.2 2-2.3 4-2.3 3 0 4 2 4 5V20h-4v-6c0-1.4-.5-2.4-1.9-2.4S14 12.6 14 14v6h-4z" />
+              </svg></a>
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M13 22v-8h3l1-4h-4V7.5c0-1.2.4-2 2.2-2H17V2.2C16.6 2.1 15.4 2 14 2c-3 0-5 1.8-5 5.2V10H6v4h3v8z" />
+              </svg></a>
+          </div>
+        </div>
+        <div>
+          <h5>Products</h5>
+          <a href="#">LED Strips</a><a href="#">Neon Range</a><a href="#">Garden Lights</a><a href="#">LED Drivers</a><a
+            href="#">Architectural</a><a href="#">Downlights</a>
+        </div>
+        <div>
+          <h5>Solutions</h5>
+          <a href="#">Architects & Designers</a><a href="#">Electricians & Builders</a><a href="#">Wholesalers</a><a
+            href="#">Home Owners</a>
+        </div>
+        <div>
+          <h5>Company</h5>
+          <a href="#">About Azoogi</a><a href="#">Projects</a><a href="#">Resources</a><a href="#">News</a><a
+            href="#">Contact</a>
+        </div>
+        <div>
+          <h5>Contact</h5>
+          <a href="tel:1300296644">1300 AZOOGI</a><a href="mailto:sales@azoogi.com.au">sales@azoogi.com.au</a><a
+            href="#">Sydney &middot; Melbourne</a>
+          <a href="#">Trade Login</a>
+        </div>
+      </div>
+      <div class="copy">
+        <div>&copy; 2026 Azoogi Pty Ltd. All rights reserved.</div>
+        <div>Privacy &middot; Terms &middot; Warranty</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ===== Header solid on scroll ===== */
+    const topbar = document.getElementById('topbar');
+    let lastScrolled = null;
+    const onScroll = () => {
+      const isScrolled = window.scrollY > 40;
+      if (isScrolled !== lastScrolled) {
+        topbar.classList.toggle('solid', isScrolled);
+        lastScrolled = isScrolled;
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        if (typeof updateLogos === 'function') updateLogos(currentTheme);
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+    /* ===== Hero slider with line progress + play/pause ===== */
+    (() => {
+      const slides = document.querySelectorAll('.hero .slide');
+      const n = slides.length;
+      const linesEl = document.getElementById('lines');
+      const cur = document.getElementById('cur');
+      const tot = document.getElementById('tot');
+      const pp = document.getElementById('pp');
+      const ppIcon = document.getElementById('ppIcon');
+      const DUR = 6000;
+      let idx = 0, playing = true, start = performance.now(), raf;
+
+      tot.textContent = String(n).padStart(2, '0');
+      for (let i = 0; i < n; i++) {
+        const ln = document.createElement('div'); ln.className = 'line'; ln.innerHTML = '<div class="fill"></div>';
+        ln.addEventListener('click', () => goto(i, true));
+        linesEl.appendChild(ln);
+      }
+      const lines = linesEl.querySelectorAll('.line');
+
+      function paint(p) {
+        lines.forEach((l, i) => {
+          l.classList.toggle('active', i === idx);
+          l.classList.toggle('done', i < idx);
+          if (i === idx) l.style.setProperty('--p', p.toFixed(3));
+          else if (i < idx) l.style.setProperty('--p', '1');
+          else l.style.setProperty('--p', '0');
+        });
+      }
+      function show(i) {
+        slides.forEach((s, k) => s.classList.toggle('active', k === i));
+        cur.textContent = String(i + 1).padStart(2, '0');
+      }
+      function goto(i, reset) {
+        idx = (i + n) % n; show(idx);
+        if (reset) { start = performance.now(); paint(0); }
+      }
+      function loop(t) {
+        if (!playing) { raf = requestAnimationFrame(loop); return; }
+        const p = Math.min(1, (t - start) / DUR);
+        paint(p);
+        if (p >= 1) { idx = (idx + 1) % n; show(idx); start = t; }
+        raf = requestAnimationFrame(loop);
+      }
+      pp.addEventListener('click', () => {
+        playing = !playing;
+        ppIcon.innerHTML = playing
+          ? '<rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/>'
+          : '<polygon points="7,4 20,12 7,20"/>';
+        if (playing) start = performance.now() - DUR * getCurrentP();
+      });
+      function getCurrentP() {
+        const f = lines[idx].querySelector('.fill');
+        const m = getComputedStyle(f).transform;
+        if (m && m !== 'none') { const v = m.match(/matrix\(([-\d.]+)/); if (v) return parseFloat(v[1]); }
+        return 0;
+      }
+      show(0); paint(0); raf = requestAnimationFrame(loop);
+    })();
+
+    /* ===== Reveal on scroll ===== */
+    const io = new IntersectionObserver((es) => {
+      es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    /* ===== Stat counter ===== */
+    const sio = new IntersectionObserver((es) => {
+      es.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target; const target = parseInt(el.dataset.c, 10); const dur = 1600; const t0 = performance.now();
+        const step = (t) => {
+          const p = Math.min(1, (t - t0) / dur);
+          const v = Math.floor(target * (1 - Math.pow(1 - p, 3)));
+          el.textContent = v.toLocaleString() + (target >= 100 ? '+' : '');
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+        sio.unobserve(el);
+      });
+    }, { threshold: .5 });
+    document.querySelectorAll('.stat .num').forEach(el => sio.observe(el));
+
+    /* ===== Hero parallax zoom (background fixed feel) ===== */
+    const heroSlides = document.querySelectorAll('.hero .slide');
+    function heroParallax() {
+      const y = window.scrollY;
+      const vh = window.innerHeight;
+      const p = Math.min(1, Math.max(0, y / vh));
+      const scale = 1 + p * 0.18;
+      const ty = p * 40;
+      heroSlides.forEach(s => { s.style.setProperty('--z', scale.toFixed(4)); s.style.setProperty('--ty', ty.toFixed(1) + 'px'); });
+    }
+    heroParallax();
+    window.addEventListener('scroll', heroParallax, { passive: true });
+
+    /* ===== Pinned "Why Azoogi" — single-scroll step reveals ===== */
+    (function () {
+      const track = document.getElementById('pinTrack');
+      const head = document.getElementById('vHead');
+      const blocks = document.querySelectorAll('#vGrid .value');
+      if (!track || !head) return;
+      // Thresholds (as fraction of pinned scroll progress 0..1)
+      const blockAt = [0.12, 0.32, 0.52, 0.72];
+      function update() {
+        const r = track.getBoundingClientRect();
+        const total = track.offsetHeight - window.innerHeight;
+        const scrolled = Math.min(Math.max(-r.top, 0), Math.max(total, 1));
+        const p = total > 0 ? scrolled / total : 0;
+        // Heading: reveal as soon as stage is visible / pinning begins
+        const headOn = r.top <= window.innerHeight * 0.85;
+        head.classList.toggle('on', headOn);
+        blocks.forEach((b, i) => b.classList.toggle('on', p >= blockAt[i] || (headOn && r.top <= 0 && i === 0 && p >= 0.02)));
+      }
+      update();
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      // Safety fallback: if user has reduced motion or JS scroll math fails, reveal everything once section enters viewport
+      const safety = new IntersectionObserver((es) => {
+        es.forEach(e => { if (e.isIntersecting && e.intersectionRatio > 0.6) { head.classList.add('on'); } });
+      }, { threshold: [0, .3, .6] });
+      safety.observe(track);
+    })();
+    /* ===== Mega Menu Tabs ===== */
+    // Dynamic mega menu is initialized from mega_menu.js
+
+    tabs.forEach(tab => {
+      tab.addEventListener('mouseenter', () => {
+        if (window.innerWidth > 960) switchTab(tab);
+      });
+      tab.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchTab(tab);
+      });
+    });
+
+    function switchTab(activeTab) {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+
+      activeTab.classList.add('active');
+      const targetId = activeTab.getAttribute('data-target');
+      const targetPanel = document.getElementById(targetId);
+      if (targetPanel) targetPanel.classList.add('active');
+    }
+
+
+    // Scroll indicator fade logic
+    const megaTabs = document.querySelector('.mega-tabs');
+    const megaPanelsWrapper = document.querySelector('.mega-panels');
+    const indLeft = document.querySelector('.scroll-indicator-left');
+    const indRight = document.querySelector('.scroll-indicator-right');
+
+    function handleScroll(el, indicator) {
+      if (!el || !indicator) return;
+      if (el.scrollHeight - el.scrollTop <= el.clientHeight + 2) {
+        indicator.classList.add('hidden');
+      } else {
+        indicator.classList.remove('hidden');
+      }
+    }
+
+    if (megaTabs && indLeft) {
+      megaTabs.addEventListener('scroll', () => handleScroll(megaTabs, indLeft));
+      // initial check
+      handleScroll(megaTabs, indLeft);
+    }
+
+    if (megaPanelsWrapper && indRight) {
+      megaPanelsWrapper.addEventListener('scroll', () => handleScroll(megaPanelsWrapper, indRight));
+      // We need to also listen to tab changes since the panel content changes height
+      tabs.forEach(tab => {
+        tab.addEventListener('mouseenter', () => setTimeout(() => handleScroll(megaPanelsWrapper, indRight), 50));
+        tab.addEventListener('click', () => setTimeout(() => handleScroll(megaPanelsWrapper, indRight), 50));
+      });
+      // initial check
+      handleScroll(megaPanelsWrapper, indRight);
+    }
+
+
+    // Hybrid hover/click toggle for mobile
+    const hasDropdown = document.querySelector('.has-dropdown');
+    if (hasDropdown) {
+      hasDropdown.addEventListener('click', (e) => {
+        if (window.innerWidth <= 960) {
+          // only toggle if clicking the main a tag
+          if (e.target.closest('a[href="products.html"]')) {
+            e.preventDefault();
+            hasDropdown.classList.toggle('open');
+          }
+        }
+      });
+    }
+    }) ();
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const currentTheme = root.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateLogos(newTheme);
+    }
+
+    function updateLogos(theme) {
+      const isScrolled = window.scrollY > 40;
+      const logos = document.querySelectorAll('.logo img');
+      logos.forEach(img => {
+        if (img.closest('.topbar')) {
+          img.src = (theme === 'light' && isScrolled) ? 'assets/logo_dark.png' : 'assets/logo_white.png';
+        } else {
+          img.src = theme === 'light' ? 'assets/logo_dark.png' : 'assets/logo_white.png';
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      updateLogos(savedTheme);
+    });
+
+  </script>
+</body>
+
+</html>
