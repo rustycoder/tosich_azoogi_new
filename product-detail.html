@@ -5,7 +5,7 @@
   <script>const savedTheme = localStorage.getItem('theme'); if (savedTheme) { document.documentElement.setAttribute('data-theme', savedTheme); }</script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Azoogi — Award-winning LED Lighting Solutions</title>
+  <title>AZ-NF360 Neon Flex Series 360 — Azoogi LED Lighting Solutions</title>
   <meta name="description"
     content="Azoogi designs and supplies premium LED lighting — strips, neon, garden lights, drivers and architectural fittings for projects that demand more." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,12 +14,13 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style_demo.css">
+  <link rel="stylesheet" href="assets/css/product_detail.css">
 </head>
 
 <body>
 
   <!-- ========== HEADER ========== -->
-  <header class="topbar" id="topbar">
+  <header class="topbar solid" id="topbar">
     <div class="util">
       <div class="util-inner">
         <div>Trusted by architects, designers & builders across Australia</div>
@@ -45,7 +46,7 @@
       </div>
     </div>
     <nav class="nav">
-      <a href="#" class="logo"><img src="assets/logo_white.png" width="80"></a>
+      <a href="#" class="logo"><img src="assets/logo_dark.png" width="80"></a>
       <div class="menu">
         <div class="has-dropdown">
           <a href="#products">Product <span class="caret">&#9662;</span></a>
@@ -5449,486 +5450,404 @@
     </nav>
   </header>
 
-  <!-- ========== HERO SLIDER ========== -->
-  <section class="hero" id="hero">
-    <div class="slide active has-video">
-      <video class="bg-video" autoplay muted loop playsinline preload="auto" poster="assets/hero00.jpg">
-        <source src="assets/lighting.mp4" type="video/mp4">
-      </video>
-      <div class="slide-inner">
-        <div class="eyebrow">Made just for you</div>
-        <h1 class="slide-title">Custom fittings<br />without compromise.</h1>
-        <p class="slide-sub">Off-spec alternatives, custom fittings, matched specs and budgets — without ever
-          compromising on quality.</p>
-        <div class="slide-actions">
-          <a class="btn primary" href="#contact">Start a Project</a>
-          <a class="btn" href="#services">Our Services</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="slide" style="background-image:url('assets/hero02.jpg')">
-      <div class="slide-inner">
-        <div class="eyebrow">For those who demand more from their lighting</div>
-        <h1 class="slide-title">Award-winning<br />LED lighting solutions.</h1>
-        <p class="slide-sub">Premium components, strict quality assurance, and up to a 5-year warranty — engineered to
-          perform and last.</p>
-        <div class="slide-actions">
-          <a class="btn primary" href="#products">Explore Products</a>
-          <a class="btn" href="#projects">View Projects</a>
-        </div>
-      </div>
-    </div>
-    <div class="slide" style="background-image:url('assets/hero01.jpg')">
-      <div class="slide-inner">
-        <div class="eyebrow">Support that lasts</div>
-        <h1 class="slide-title">From first idea<br />to final install — and beyond.</h1>
-        <p class="slide-sub">We don't just supply lighting. We partner with you with advice, guidance, and service that
-          keeps your project shining.</p>
-        <div class="slide-actions">
-          <a class="btn primary" href="#contact">Talk to a Specialist</a>
-          <a class="btn" href="#projects">Recent Work</a>
-        </div>
-      </div>
-    </div>
-    <div class="slide"
-      style="background-image:url('https://images.unsplash.com/photo-1567016526105-22da7c13161a?w=2400&q=80')">
-      <div class="slide-inner">
-        <div class="eyebrow">Design without limits</div>
-        <h1 class="slide-title">Architectural lighting,<br />shaped to your vision.</h1>
-        <p class="slide-sub">From sleek LED strips to statement architectural fittings — solutions for every style and
-          every space, indoors or out.</p>
-        <div class="slide-actions">
-          <a class="btn primary" href="#products">Browse Range</a>
-          <a class="btn" href="#about">Our Story</a>
-        </div>
-      </div>
-    </div>
-    <div class="slide"
-      style="background-image:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=2400&q=80')">
-      <div class="slide-inner">
-        <div class="eyebrow">Made just for you</div>
-        <h1 class="slide-title">Custom fittings<br />without compromise.</h1>
-        <p class="slide-sub">Off-spec alternatives, custom fittings, matched specs and budgets — without ever
-          compromising on quality.</p>
-        <div class="slide-actions">
-          <a class="btn primary" href="#contact">Start a Project</a>
-          <a class="btn" href="#services">Our Services</a>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="slider-ctrl">
-      <div class="lines" id="lines"></div>
-      <div class="counter"><b id="cur">01</b> <span>/ <b id="tot">04</b></span></div>
-      <div class="pp" id="pp" aria-label="Pause">
-        <svg id="ppIcon" viewBox="0 0 24 24" fill="currentColor">
-          <rect x="6" y="5" width="4" height="14" />
-          <rect x="14" y="5" width="4" height="14" />
-        </svg>
-      </div>
-    </div>
-
-    <div class="scroll-cue"><span>Scroll</span>
-      <div class="l"></div>
-    </div>
-  </section>
-
-  <!-- ========== VALUES ========== -->
-  <section class="card-in">
-    <div class="wrap-sm">
-      <div class="head">
-        <div class="kicker reveal">Why Azoogi</div>
-        <h2 class="h2 reveal">For those who demand more — from the components inside to the support behind every
-          product.</h2>
-      </div>
-
-      <div class="container max-width-adaptive-md margin-bottom-lg">
-        <ul id="cards">
-          <li class="card-main" id="card_1">
-            <div class="card__content">
-              <div>
-                <h2>Premium Selection. Unmatched Quality.</h2>
-                <p>Explore an extensive, curated catalog of top-tier LED lighting. Whether you need sleek architectural fittings or rugged outdoor solutions, our products are engineered for aesthetic brilliance and flawless performance.</p>
-                <p><a href="#" class="btn --accent">Explore Collections</a></p>
-              </div>
-              <figure>
-                <img src="assets/img/img-0.jpg" alt="Image description">
-              </figure>
-            </div>
-          </li>
-          <li class="card-main" id="card_2">
-            <div class="card__content">
-              <div>
-                <h2>Lighting, Tailored to You.</h2>
-                <p>No two spaces are exactly alike. We engineer custom, adaptive lighting configurations that perfectly match your project’s unique specifications, budget, and design vision.</p>
-                <p><a href="#" class="btn --accent">Request a Custom Quote</a></p>
-              </div>
-              <figure>
-                <img src="assets/img/img-1.jpg" alt="Image description">
-              </figure>
-            </div>
-          </li>
-          <li class="card-main" id="card_3">
-            <div class="card__content">
-              <div>
-                <h2>Your Partner, End-to-End.</h2>
-                <p>We don't just sell lights; we illuminate your workflow. From initial blueprint to final installation, our dedicated lighting experts provide continuous, hands-on support to ensure your vision becomes reality.</p>
-                <p><a href="#" class="btn --accent">Talk to an Expert</a></p>
-              </div>
-              <figure>
-                <img src="assets/img/img-2.jpg" alt="Image description">
-              </figure>
-            </div>
-          </li>
-          <li class="card-main" id="card_4">
-            <div class="card__content">
-              <div>
-                <h2>Built to Last. Guaranteed.</h2>
-                <p>Invest in your projects with total confidence. Our lighting undergoes rigorous quality assurance testing and comes backed by a comprehensive 5-year warranty for complete peace of mind.</p>
-                <p><a href="#" class="btn --accent">View Warranty Details</a></p>
-              </div>
-              <figure>
-                <img src="assets/img/card.jpg" alt="Image description">
-              </figure>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-  </section>
-
-  <section class="cityscape">
-    <div class="city-intro">
-      <div>
-        <span class="kicker reveal">Where Azoogi lights up</span>
-        <h2>Illuminating <em>Sydney</em>, one project at a time.</h2>
-      </div>
-
-    </div>
-
-    <div class="stage" aria-label="Interactive Sydney skyline">
-      <img class="bg" src="assets/img/sydney-night.jpg" alt="Sydney skyline at night" />
-
-      <!-- Hotspots (positioned in % over the cityscape) -->
-      <a class="hotspot" style="left:36%;top:38%" href="#" aria-label="AZ-PNL24">
-        <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
-        <div class="tip">
-          <div class="thumb" style="background-image:url('assets/img/prod-1.jpg')"></div>
-          <div class="code">AZ-PNL24</div>
-          <div class="name">Slim Edge LED Panel 600×600</div>
-          <div class="meta">Office towers · 4000K</div>
-        </div>
-      </a>
-
-      <a class="hotspot" style="left:48%;top:30%" href="#" aria-label="AZ-HBY150">
-        <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
-        <div class="tip">
-          <div class="thumb" style="background-image:url('assets/img/prod-3.jpg')"></div>
-          <div class="code">AZ-HBY150</div>
-          <div class="name">UFO High Bay 150W</div>
-          <div class="meta">Commercial atriums</div>
-        </div>
-      </a>
-
-      <a class="hotspot bottom" style="left:62%;top:27%" href="#" aria-label="AZ-LNR42">
-        <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
-        <div class="tip">
-          <div class="thumb" style="background-image:url('assets/img/prod-4.jpg')"></div>
-          <div class="code">AZ-LNR42</div>
-          <div class="name">Linear Pendant 1.2m</div>
-          <div class="meta">Corporate lobbies</div>
-        </div>
-      </a>
-
-      <a class="hotspot" style="left:72%;top:55%" href="#" aria-label="AZ-STR80">
-        <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
-        <div class="tip">
-          <div class="thumb" style="background-image:url('assets/img/prod-3.jpg')"></div>
-          <div class="code">AZ-STR80</div>
-          <div class="name">Urban Street Luminaire 80W</div>
-          <div class="meta">Harbour Bridge approach</div>
-        </div>
-      </a>
-
-      <a class="hotspot" style="left:30%;top:74%" href="#" aria-label="AZ-FLD50">
-        <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
-        <div class="tip">
-          <div class="thumb" style="background-image:url('assets/img/prod-5.jpg')"></div>
-          <div class="code">AZ-FLD50</div>
-          <div class="name">Architectural Flood 50W RGBW</div>
-          <div class="meta">Opera House façade</div>
-        </div>
-      </a>
-
-      <a class="hotspot bottom" style="left:18%;top:48%" href="#" aria-label="AZ-PNL24-W">
-        <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
-        <div class="tip">
-          <div class="thumb" style="background-image:url('assets/img/prod-1.jpg')"></div>
-          <div class="code">AZ-PNL24-W</div>
-          <div class="name">Recessed Panel — Warm</div>
-          <div class="meta">Residential towers · 3000K</div>
-        </div>
-      </a>
-
-      <a class="hotspot" style="left:85%;top:62%" href="#" aria-label="AZ-FLD50-N">
-        <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
-        <div class="tip">
-          <div class="thumb" style="background-image:url('assets/img/prod-5.jpg')"></div>
-          <div class="code">AZ-FLD50-N</div>
-          <div class="name">Marine Flood — IP66</div>
-          <div class="meta">North Sydney waterfront</div>
-        </div>
-      </a>
-      <div class="legend">
-        <span class="pill"><span class="ldot"></span> Hover a marker to view the product</span>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ========== PRODUCTS MARQUEE ========== -->
-  <section class="products" id="products">
+  <!-- ========== BREADCRUMBS ========== -->
+  <div class="product-page-wrapper">
     <div class="wrap">
-      <div class="head">
-        <div>
-          <div class="kicker reveal">Our Range</div>
-          <h2 class="h2 reveal">Explore the full Azoogi lighting catalogue.</h2>
-        </div>
-        <a href="#" class="btn --accent reveal">View All Products</a>
+      <div class="breadcrumbs">
+        <a href="demo.html">Home</a>
+        <span>/</span>
+        <a href="demo.html#products">Products</a>
+        <span>/</span>
+        <a href="#">IP67 Neon</a>
+        <span>/</span>
+        <span style="color: var(--ink);">Neon Flex Series 360</span>
       </div>
-      <div class="products-layout">
-        <!-- Sidebar -->
-        <aside class="products-sidebar" id="productsSidebar">
-          <div class="sidebar-header">
-            <h3>Categories</h3>
-            <button class="close-sidebar" onclick="document.getElementById('productsSidebar').classList.remove('open')" aria-label="Close categories">&times;</button>
-          </div>
-          <ul class="category-list">
-            <li><a href="#" class="active">All Products</a></li>
-            <li><a href="#">Garden Lights</a></li>
-            <li><a href="#">Neon Range</a></li>
-            <li><a href="#">LED Strips</a></li>
-            <li><a href="#">LED Drivers</a></li>
-            <li><a href="#">Downlights</a></li>
-            <li><a href="#">Pendant Lights</a></li>
-            <li><a href="#">Architectural</a></li>
-          </ul>
-        </aside>
 
-        <!-- Main Area -->
-        <div class="products-main">
-          <!-- Mobile Sidebar Toggle -->
-          <div class="mobile-filter-bar">
-            <button class="btn --outline" onclick="document.getElementById('productsSidebar').classList.add('open')">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="margin-right:8px; vertical-align: text-bottom;"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
-              Filter Categories
-            </button>
+      <!-- ========== PRODUCT DETAIL GRID ========== -->
+      <div class="product-grid">
+        
+        <!-- LEFT COLUMN: GALLERY & GLOW PREVIEW -->
+        <div class="product-gallery">
+          <div class="gallery-main-wrapper">
+            <!-- Glow Preview Area -->
+            <div class="glow-preview-area" id="glow-area">
+              <svg class="neon-svg-mockup" viewBox="0 0 200 200" id="neon-svg">
+                <!-- A sleek artistic bend that visually highlights "Flexibility" -->
+                <path d="M 30,100 C 30,50 170,50 170,100 C 170,150 30,150 30,100 Z" id="neon-path" />
+              </svg>
+              <!-- Small sub-tube inside for intense center element light -->
+              <div class="glow-neon-tube" id="glow-tube" style="display:none;"></div>
+            </div>
+            <img class="gallery-main-image" src="assets/img/neon.webp" alt="Neon Flex Series 360 Overlay">
           </div>
-
-          <!-- Pills (Attributes) -->
-          <div class="products-filters">
-            <div class="filter-pill">Installation <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">Material <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">Coating <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">Dimming method <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">Input voltage <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">SDCM <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">CRI <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">CCT <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">Beam angle <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">Application <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">IP grade <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">Warranty <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">Certification <span class="caret">&#9662;</span></div>
-            <div class="filter-pill">More choices <span class="caret">&#9662;</span></div>
-          </div>
-
-          <!-- Compact Product Grid -->
-          <div class="compact-products-grid">
-            <div class="compact-card">
-              <a href="#" class="img-wrap" style="background-image:url('assets/img/GL001.webp')"></a>
-              <div class="info">
-                <a href="#" style="text-decoration:none"><h4>Garden Spotlight Pro</h4></a>
-                <div class="specs">
-                  <div><strong>Length:</strong> Opening φ75mm</div>
-                  <div><strong>Beam Angle:</strong> Asymmetric Distribution</div>
-                  <div><strong>Power:</strong> 10W, 15W, 20W</div>
-                </div>
-                <div class="cart-action">
-                  <button class="btn --accent btn-sm">Add to Cart</button>
-                </div>
-              </div>
+          
+          <!-- Gallery Thumbnails -->
+          <div class="gallery-thumbs">
+            <div class="thumb-card active" data-view="bend">
+              <img src="assets/img/neon.webp" alt="Bend View">
             </div>
-            <div class="compact-card">
-              <a href="product-detail.html" class="img-wrap" style="background-image:url('assets/img/neon.webp')"></a>
-              <div class="info">
-                <a href="product-detail.html" style="text-decoration:none"><h4>Neon Flex Series 360</h4></a>
-                <div class="specs">
-                  <div><strong>Length:</strong> Custom cut</div>
-                  <div><strong>Beam Angle:</strong> 360° Uniform</div>
-                  <div><strong>Power:</strong> 14.4W/m</div>
-                </div>
-                <div class="cart-action">
-                  <button class="btn --accent btn-sm">Add to Cart</button>
-                </div>
-              </div>
+            <div class="thumb-card" data-view="closeup">
+              <img src="assets/img/leds.webp" alt="LED Internals Close Up">
             </div>
-            <div class="compact-card">
-              <a href="#" class="img-wrap" style="background-image:url('assets/img/leds.webp')"></a>
-              <div class="info">
-                <a href="#" style="text-decoration:none"><h4>High-Output LED Strip</h4></a>
-                <div class="specs">
-                  <div><strong>Length:</strong> 5m Roll</div>
-                  <div><strong>Beam Angle:</strong> 120°</div>
-                  <div><strong>Power:</strong> 20W/m</div>
-                </div>
-                <div class="cart-action">
-                  <button class="btn --accent btn-sm">Add to Cart</button>
-                </div>
-              </div>
+            <div class="thumb-card" data-view="driver">
+              <img src="assets/img/drivers.webp" alt="Driver and Feed View">
             </div>
-            <div class="compact-card">
-              <a href="#" class="img-wrap" style="background-image:url('assets/img/dt.webp')"></a>
-              <div class="info">
-                <a href="#" style="text-decoration:none"><h4>Recessed Downlight</h4></a>
-                <div class="specs">
-                  <div><strong>Length:</strong> Opening φ90mm</div>
-                  <div><strong>Beam Angle:</strong> 60°</div>
-                  <div><strong>Power:</strong> 15W</div>
-                </div>
-                <div class="cart-action">
-                  <button class="btn --accent btn-sm">Add to Cart</button>
-                </div>
-              </div>
-            </div>
-            <div class="compact-card">
-              <a href="#" class="img-wrap" style="background-image:url('assets/img/prod-4.jpg')"></a>
-              <div class="info">
-                <a href="#" style="text-decoration:none"><h4>Pendant Light Mod</h4></a>
-                <div class="specs">
-                  <div><strong>Length:</strong> 1200mm</div>
-                  <div><strong>Beam Angle:</strong> 45°</div>
-                  <div><strong>Power:</strong> 30W</div>
-                </div>
-                <div class="cart-action">
-                  <button class="btn --accent btn-sm">Add to Cart</button>
-                </div>
-              </div>
-            </div>
-            <div class="compact-card">
-              <a href="#" class="img-wrap" style="background-image:url('assets/img/prod-5.jpg')"></a>
-              <div class="info">
-                <a href="#" style="text-decoration:none"><h4>Architectural Linear</h4></a>
-                <div class="specs">
-                  <div><strong>Length:</strong> Custom Extrusion</div>
-                  <div><strong>Beam Angle:</strong> Diffused</div>
-                  <div><strong>Power:</strong> 24W/m</div>
-                </div>
-                <div class="cart-action">
-                  <button class="btn --accent btn-sm">Add to Cart</button>
-                </div>
-              </div>
+            <div class="thumb-card" data-view="downlight">
+              <img src="assets/img/dt.webp" alt="Architectural Application">
             </div>
           </div>
         </div>
+
+        <!-- RIGHT COLUMN: CONFIGURATOR & DETAILS -->
+        <div class="product-details-info">
+          <div class="product-title-group">
+            <h1 id="product-name">Neon Flex Series 360</h1>
+            <div class="product-code" id="product-code-label">MODEL: AZ-NF360-3000K-DOME</div>
+          </div>
+
+          <div class="product-meta-badges">
+            <span class="meta-badge" id="badge-ip">IP67 Waterproof</span>
+            <span class="meta-badge">360° Light Emission</span>
+            <span class="meta-badge">5-Year Warranty</span>
+            <span class="meta-badge">24V DC Input</span>
+            <span class="meta-badge">CRI 90+</span>
+          </div>
+
+          <div class="product-short-desc">
+            The AZ-NF360 is a premium, architectural-grade flexible LED neon fixture that provides complete 360-degree circular lighting. Perfect for custom curved chandeliers, statement ceiling artwork, pillars wrapping, and premium B2B decorative hospitality spaces.
+          </div>
+
+          <!-- CONFIGURATOR WORKSPACE -->
+          <div class="config-workspace">
+            
+            <!-- Option 1: Color Temperature (CCT) -->
+            <div class="config-group">
+              <div class="config-group-title">
+                <span>Color Temperature (CCT)</span>
+                <span id="selected-cct-label" style="color: var(--accent);">3000K Warm White</span>
+              </div>
+              <div class="config-options-flex">
+                <button class="config-btn active" data-cct="2700" data-rgb="255,180,90" data-lbl="2700K Extra Warm White">
+                  <span class="color-dot" style="background:#ffb45a;"></span> 2700K
+                </button>
+                <button class="config-btn" data-cct="3000" data-rgb="255,200,120" data-lbl="3000K Warm White">
+                  <span class="color-dot" style="background:#ffc878;"></span> 3000K
+                </button>
+                <button class="config-btn" data-cct="4000" data-rgb="255,235,200" data-lbl="4000K Natural White">
+                  <span class="color-dot" style="background:#ffebc8;"></span> 4000K
+                </button>
+                <button class="config-btn" data-cct="6000" data-rgb="220,240,255" data-lbl="6000K Cool White">
+                  <span class="color-dot" style="background:#dcf0ff;"></span> 6000K
+                </button>
+                <button class="config-btn" data-cct="RGBW" data-rgb="103,208,78" data-lbl="RGBW Color Changing">
+                  <span class="color-dot" style="background: linear-gradient(to right, red, green, blue);"></span> RGBW
+                </button>
+              </div>
+            </div>
+
+            <!-- Option 2: Profile Shape -->
+            <div class="config-group">
+              <div class="config-group-title">
+                <span>Profile Shape</span>
+                <span id="selected-profile-label" style="color: var(--accent);">Dome Profile</span>
+              </div>
+              <div class="config-options-flex">
+                <button class="config-btn active" data-profile="dome" data-lbl="Dome Profile (180° Emission)">Dome</button>
+                <button class="config-btn" data-profile="round" data-lbl="Round Profile (360° Full Emission)">Round</button>
+                <button class="config-btn" data-profile="flat" data-lbl="Flat Profile (Side Bending)">Flat</button>
+              </div>
+            </div>
+
+            <!-- Option 3: Wattage / Brightness -->
+            <div class="config-group">
+              <div class="config-group-title">
+                <span>Wattage Options</span>
+                <span id="selected-watts-label" style="color: var(--accent);">14.4W/m (Standard Output)</span>
+              </div>
+              <div class="config-options-flex">
+                <button class="config-btn" data-watts="10" data-lumens="850" data-lbl="10.0W/m (Low-Output - 850 lm/m)">10.0W/m</button>
+                <button class="config-btn active" data-watts="14.4" data-lumens="1200" data-lbl="14.4W/m (Standard Output - 1200 lm/m)">14.4W/m</button>
+                <button class="config-btn" data-watts="20" data-lumens="1650" data-lbl="20.0W/m (High-Output - 1650 lm/m)">20.0W/m</button>
+              </div>
+            </div>
+
+            <!-- Option 4: Length Selection -->
+            <div class="config-group">
+              <div class="config-group-title">
+                <span>Custom Run Length</span>
+                <span>Max 15m single feed</span>
+              </div>
+              <div class="slider-wrapper">
+                <div class="slider-header">
+                  <input type="range" min="1" max="15" step="0.5" value="5" class="range-input" id="length-slider">
+                  <div class="slider-val-box"><span id="length-val">5.0</span> m</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- DRIVER CALCULATOR PANEL -->
+          <div class="calc-panel">
+            <div class="calc-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20" style="vertical-align:-4px; color:var(--accent);"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+              <span>Driver Load & Power Calculator</span>
+            </div>
+            <div class="calc-metrics">
+              <div class="metric-card">
+                <span class="metric-label">Total Power Load</span>
+                <span class="metric-value" id="calc-power">72.0 W</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-label">Total Brightness</span>
+                <span class="metric-value" id="calc-lumens">6,000 lm</span>
+              </div>
+              <div class="metric-card">
+                <span class="metric-label">Recommended Driver</span>
+                <span class="metric-value highlight" id="calc-driver">Azoogi 80W 24V IP67</span>
+              </div>
+            </div>
+            <div class="driver-bar-wrapper">
+              <div class="driver-bar-label">
+                <span>Driver Capacity Utilisation</span>
+                <span id="calc-capacity-pct">90%</span>
+              </div>
+              <div class="driver-bar-bg">
+                <div class="driver-bar-fill" id="driver-bar-fill" style="width: 90%;"></div>
+              </div>
+            </div>
+            <div class="driver-warning" id="driver-warning-msg">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14" style="vertical-align:text-bottom; margin-right:4px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              Voltage drop warning! Long runs exceeding 10m require parallel wiring feeds to ensure uniform brightness.
+            </div>
+          </div>
+
+          <!-- ACTION BUTTONS -->
+          <div class="gallery-actions">
+            <a href="#quote-section-anchor" class="btn --accent" style="display:flex; align-items:center; justify-content:center; gap:8px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Configure & Request Quote
+            </a>
+            <button class="btn --outline" id="add-to-spec-btn">Add to Specification</button>
+          </div>
+
+        </div>
+
       </div>
+
+      <!-- ========== DETAILED SPECIFICATIONS TABS ========== -->
+      <div class="tabs-container">
+        <div class="tabs-nav">
+          <button class="tab-nav-btn active" data-tab="tab-desc">Product Overview</button>
+          <button class="tab-nav-btn" data-tab="tab-spec">Technical Specifications</button>
+          <button class="tab-nav-btn" data-tab="tab-install">Installation & Wiring</button>
+          <button class="tab-nav-btn" data-tab="tab-downloads">Downloads</button>
+        </div>
+
+        <div class="tabs-content">
+          <!-- Description Tab -->
+          <div class="tab-panel active" id="tab-desc">
+            <p style="margin-bottom: 20px;">
+              Azoogi's AZ-NF360 Neon Flex 360 is engineered to redefine the limits of architectural lighting designs. Unlike conventional linear lights that direct output in a single plane, the NF360 projects light uniformly across a full 360-degree diameter. This continuous illumination profile hides all hotspot details and eliminates standard dark spaces completely.
+            </p>
+            <p>
+              Its unique chemical-grade silicone sleeve is highly UV-stabilized, salt-mist resistant, and IP67 protected, making it highly robust for high-end coastal facades, gardens, hospitality venues, and architectural statements alike. Combined with 3-Step MacAdam binning and a High Color Rendering Index (CRI >90), it delivers visual comfort and color accuracy suited for photography, dining, and luxury commercial settings.
+            </p>
+          </div>
+
+          <!-- Specifications Table Tab -->
+          <div class="tab-panel" id="tab-spec">
+            <table class="spec-table">
+              <tr>
+                <td>Input Voltage</td>
+                <td>24V DC</td>
+              </tr>
+              <tr>
+                <td>CRI</td>
+                <td>Ra > 90</td>
+              </tr>
+              <tr>
+                <td>LED Binning</td>
+                <td>3-Step MacAdam Ellipse (SDCM < 3)</td>
+              </tr>
+              <tr>
+                <td>Cutting Unit</td>
+                <td>50mm increments</td>
+              </tr>
+              <tr>
+                <td>Waterproof Rating</td>
+                <td>IP67 (Moulded factory injection connectors required)</td>
+              </tr>
+              <tr>
+                <td>Bending Radius</td>
+                <td>Min. 60mm</td>
+              </tr>
+              <tr>
+                <td>Luminous Efficiency</td>
+                <td>Up to 85 lm/W</td>
+              </tr>
+              <tr>
+                <td>Working Temperature</td>
+                <td>-25°C to +50°C</td>
+              </tr>
+              <tr>
+                <td>Product Warranty</td>
+                <td>5 Years Commercial Warranty</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- Installation Guidelines Tab -->
+          <div class="tab-panel" id="tab-install">
+            <p style="margin-bottom: 20px;">
+              Proper installation ensures longevity and keeps your warranty valid. Please follow these installation rules:
+            </p>
+            <ul style="list-style:disc; margin-left: 20px; color: var(--muted); font-size:14px; line-height:1.7;">
+              <li><strong>Do not twist the product:</strong> This product bends horizontally/vertically depending on profile chosen, but twisting the internal FPCB can fracture solder points.</li>
+              <li><strong>Max Single Feed Run:</strong> Limit single feed power configurations to 10 meters. For runs between 10m and 15m, supply power from both ends in parallel loops to avoid luminance drop due to copper line resistance.</li>
+              <li><strong>Appropriate Driver Placement:</strong> Position drivers in well-ventilated boxes. Keep the secondary DC wire runs under 10 meters to prevent DC voltage losses.</li>
+              <li><strong>Mounting:</strong> Use Azoogi stainless steel mounting clips or continuous aluminum tracks. Space mounting clips every 300mm.</li>
+            </ul>
+          </div>
+
+          <!-- Downloads Tab -->
+          <div class="tab-panel" id="tab-downloads">
+            <div class="downloads-list">
+              <a href="#" class="download-item">
+                <div class="download-item-info">
+                  <span class="download-name">AZ-NF360 Product Spec Sheet</span>
+                  <span class="download-meta">PDF · 1.4 MB · Version 2026</span>
+                </div>
+                <div class="download-icon-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </div>
+              </a>
+              <a href="#" class="download-item">
+                <div class="download-item-info">
+                  <span class="download-name">IES Photometric Files (Complete Pack)</span>
+                  <span class="download-meta">ZIP · 820 KB · Light Profiles</span>
+                </div>
+                <div class="download-icon-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </div>
+              </a>
+              <a href="#" class="download-item">
+                <div class="download-item-info">
+                  <span class="download-name">Installation Manual & Safety Guide</span>
+                  <span class="download-meta">PDF · 2.1 MB · Step-by-Step</span>
+                </div>
+                <div class="download-icon-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </div>
+              </a>
+              <a href="#" class="download-item">
+                <div class="download-item-info">
+                  <span class="download-name">Revit BIM Lighting Model</span>
+                  <span class="download-meta">RFA · 4.8 MB · 3D Luminaire</span>
+                </div>
+                <div class="download-icon-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </section>
 
-  <!-- ========== PROJECTS ========== -->
-  <section class="projects" id="projects">
-    <div class="wrap">
-      <div class="head" style="display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap">
-        <div>
-          <div class="kicker reveal">Recent Highlights</div>
-          <h2 class="h2 reveal">Where Azoogi lighting comes to life.</h2>
-        </div>
-        <a href="#" class="btn reveal">View All Projects</a>
-      </div>
-
-      <div class="grid">
-        <div class="proj p1 reveal"><img src="assets/img/acdm.jpg" alt="Aikenhead Centre" />
-          <div class="cap"><small>Medical &mdash; Melbourne</small>
-            <h3>Aikenhead Centre for Medical Discovery</h3>
-            <div class="project-products">
-              <a href="#" class="pp-card"><img src="assets/img/prod-1.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-3.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-4.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-5.jpg" alt="Product"></a>
-              <a href="#" class="pp-card pp-view-all">View All<br>Products</a>
+    <!-- ========== RELATED PROJECTS GALLERY ========== -->
+    <section class="related-projects-section">
+      <div class="wrap">
+        <h3>Featured Project Applications</h3>
+        <div class="projects-small-grid">
+          <div class="proj-small-card">
+            <img src="assets/img/img-1.jpg" alt="Zushi Restaurant">
+            <div class="proj-small-overlay">
+              <small>Hospitality · Sydney</small>
+              <h4>Zushi Restaurant Custom Facade Outlines</h4>
             </div>
           </div>
-        </div>
-        <div class="proj p2 reveal"><img src="assets/img/img-1.jpg" alt="Zushi Restaurant" />
-          <div class="cap"><small>Hospitality &mdash; Sydney</small>
-            <h3>Zushi Restaurant</h3>
-            <div class="project-products">
-              <a href="#" class="pp-card"><img src="assets/img/prod-1.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-3.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-4.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-5.jpg" alt="Product"></a>
-              <a href="#" class="pp-card pp-view-all">View All<br>Products</a>
-            </div>
-          </div>
-        </div>
-        <div class="proj p3 reveal"><img src="assets/img/eve.jpg" alt="The Eve Hotel" />
-          <div class="cap"><small>Hospitality &mdash; Redfern</small>
-            <h3>The Eve Hotel</h3>
-            <div class="project-products">
-              <a href="#" class="pp-card"><img src="assets/img/prod-1.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-3.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-4.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-5.jpg" alt="Product"></a>
-              <a href="#" class="pp-card pp-view-all">View All<br>Products</a>
-            </div>
-          </div>
-        </div>
-        <div class="proj p4 reveal"><img src="assets/img/bondi.webp" alt="Bondi Penthouse" />
-          <div class="cap"><small>Residential &mdash; Bondi</small>
-            <h3>Bondi Beach Penthouse</h3>
-            <div class="project-products">
-              <a href="#" class="pp-card"><img src="assets/img/prod-1.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-3.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-4.jpg" alt="Product"></a>
-              <a href="#" class="pp-card"><img src="assets/img/prod-5.jpg" alt="Product"></a>
-              <a href="#" class="pp-card pp-view-all">View All<br>Products</a>
+          <div class="proj-small-card">
+            <img src="assets/img/eve.jpg" alt="The Eve Hotel">
+            <div class="proj-small-overlay">
+              <small>Commercial · Redfern</small>
+              <h4>The Eve Hotel Curved Lounge Cove Illumination</h4>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ========== STATS ========== -->
-  <section class="stats">
-    <div class="wrap">
-      <div class="kicker reveal" style="text-align:center">By the numbers</div>
-      <h2 class="h2 reveal" style="text-align:center;max-width:900px;margin:0 auto">Engineered - Tested -
-        Trusted<br>across Australia.</h2>
-      <div class="stats-grid">
-        <div class="stat reveal">
-          <div class="num" data-c="2500">0</div>
-          <div class="lbl">Projects Delivered</div>
-        </div>
-        <div class="stat reveal">
-          <div class="num" data-c="500">0</div>
-          <div class="lbl">Product Lines</div>
-        </div>
-        <div class="stat reveal">
-          <div class="num" data-c="5">0</div>
-          <div class="lbl">Year Warranty</div>
-        </div>
-        <div class="stat reveal">
-          <div class="num" data-c="15">0</div>
-          <div class="lbl">Years in Lighting</div>
+    <!-- ========== B2B INQUIRY FORM SECTION ========== -->
+    <section class="quote-section" id="quote-section-anchor">
+      <div class="wrap">
+        <div class="quote-grid">
+          
+          <div class="quote-intro">
+            <h2>Let's light up your project.</h2>
+            <p style="margin-bottom: 20px;">
+              Request a B2B project quote or coordinate a specsheet request. Fill out your details, and an Azoogi commercial specialist will follow up with pricing, lead times, and trade discount rates.
+            </p>
+            <div style="font-size:13px; color:var(--muted); line-height: 2;">
+              <div><strong>Sales Support:</strong> 1300 AZOOGI</div>
+              <div><strong>Email Response:</strong> sales@azoogi.com.au</div>
+              <div><strong>B2B Turnaround:</strong> Within 4 business hours</div>
+            </div>
+          </div>
+
+          <div class="quote-form-card">
+            <div id="quote-form-success" class="form-success-message">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="48" height="48">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+              <h4>Quote Request Sent!</h4>
+              <p>Thank you. Our specification team is reviewing your project details. We will contact you shortly.</p>
+            </div>
+
+            <form id="quote-form" onsubmit="handleQuoteSubmit(event)">
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label class="form-label" for="quote-name">Your Name *</label>
+                  <input class="form-input" id="quote-name" type="text" required placeholder="e.g. John Doe">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="quote-email">Email Address *</label>
+                  <input class="form-input" id="quote-email" type="email" required placeholder="e.g. name@company.com.au">
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label class="form-label" for="quote-company">Company / Trade Name</label>
+                  <input class="form-input" id="quote-company" type="text" placeholder="e.g. Summit Electrical">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="quote-project">Project Name</label>
+                  <input class="form-input" id="quote-project" type="text" placeholder="e.g. Sydney Office fitout">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="quote-spec">Configured Specification</label>
+                <textarea class="form-textarea" id="quote-spec" readonly style="opacity: 0.8; background: var(--rgba-hover); cursor: not-allowed;"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="quote-message">Additional Project Details</label>
+                <textarea class="form-textarea" id="quote-message" placeholder="Provide extra requirements, dimming requests, or custom connector feeds..."></textarea>
+              </div>
+
+              <button class="form-submit-btn" type="submit">Submit Spec Inquiry</button>
+            </form>
+          </div>
+
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
+  </div>
   <!-- ========== FOOTER ========== -->
   <footer id="contact">
     <div class="wrap">
@@ -5981,145 +5900,16 @@
       </div>
     </div>
   </footer>
-
   <script>
     /* ===== Header solid on scroll ===== */
     const topbar = document.getElementById('topbar');
-    let lastScrolled = null;
+    topbar.classList.add('solid');
     const onScroll = () => {
-      const isScrolled = window.scrollY > 40;
-      if (isScrolled !== lastScrolled) {
-        topbar.classList.toggle('solid', isScrolled);
-        lastScrolled = isScrolled;
-        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-        if (typeof updateLogos === 'function') updateLogos(currentTheme);
-      }
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      if (typeof updateLogos === 'function') updateLogos(currentTheme);
     };
     window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
-    /* ===== Hero slider with line progress + play/pause ===== */
-    (() => {
-      const slides = document.querySelectorAll('.hero .slide');
-      const n = slides.length;
-      const linesEl = document.getElementById('lines');
-      const cur = document.getElementById('cur');
-      const tot = document.getElementById('tot');
-      const pp = document.getElementById('pp');
-      const ppIcon = document.getElementById('ppIcon');
-      const DUR = 6000;
-      let idx = 0, playing = true, start = performance.now(), raf;
-
-      tot.textContent = String(n).padStart(2, '0');
-      for (let i = 0; i < n; i++) {
-        const ln = document.createElement('div'); ln.className = 'line'; ln.innerHTML = '<div class="fill"></div>';
-        ln.addEventListener('click', () => goto(i, true));
-        linesEl.appendChild(ln);
-      }
-      const lines = linesEl.querySelectorAll('.line');
-
-      function paint(p) {
-        lines.forEach((l, i) => {
-          l.classList.toggle('active', i === idx);
-          l.classList.toggle('done', i < idx);
-          if (i === idx) l.style.setProperty('--p', p.toFixed(3));
-          else if (i < idx) l.style.setProperty('--p', '1');
-          else l.style.setProperty('--p', '0');
-        });
-      }
-      function show(i) {
-        slides.forEach((s, k) => s.classList.toggle('active', k === i));
-        cur.textContent = String(i + 1).padStart(2, '0');
-      }
-      function goto(i, reset) {
-        idx = (i + n) % n; show(idx);
-        if (reset) { start = performance.now(); paint(0); }
-      }
-      function loop(t) {
-        if (!playing) { raf = requestAnimationFrame(loop); return; }
-        const p = Math.min(1, (t - start) / DUR);
-        paint(p);
-        if (p >= 1) { idx = (idx + 1) % n; show(idx); start = t; }
-        raf = requestAnimationFrame(loop);
-      }
-      pp.addEventListener('click', () => {
-        playing = !playing;
-        ppIcon.innerHTML = playing
-          ? '<rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/>'
-          : '<polygon points="7,4 20,12 7,20"/>';
-        if (playing) start = performance.now() - DUR * getCurrentP();
-      });
-      function getCurrentP() {
-        const f = lines[idx].querySelector('.fill');
-        const m = getComputedStyle(f).transform;
-        if (m && m !== 'none') { const v = m.match(/matrix\(([-\d.]+)/); if (v) return parseFloat(v[1]); }
-        return 0;
-      }
-      show(0); paint(0); raf = requestAnimationFrame(loop);
-    })();
-
-    /* ===== Reveal on scroll ===== */
-    const io = new IntersectionObserver((es) => {
-      es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold: .12 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-    /* ===== Stat counter ===== */
-    const sio = new IntersectionObserver((es) => {
-      es.forEach(e => {
-        if (!e.isIntersecting) return;
-        const el = e.target; const target = parseInt(el.dataset.c, 10); const dur = 1600; const t0 = performance.now();
-        const step = (t) => {
-          const p = Math.min(1, (t - t0) / dur);
-          const v = Math.floor(target * (1 - Math.pow(1 - p, 3)));
-          el.textContent = v.toLocaleString() + (target >= 100 ? '+' : '');
-          if (p < 1) requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step);
-        sio.unobserve(el);
-      });
-    }, { threshold: .5 });
-    document.querySelectorAll('.stat .num').forEach(el => sio.observe(el));
-
-    /* ===== Hero parallax zoom (background fixed feel) ===== */
-    const heroSlides = document.querySelectorAll('.hero .slide');
-    function heroParallax() {
-      const y = window.scrollY;
-      const vh = window.innerHeight;
-      const p = Math.min(1, Math.max(0, y / vh));
-      const scale = 1 + p * 0.18;
-      const ty = p * 40;
-      heroSlides.forEach(s => { s.style.setProperty('--z', scale.toFixed(4)); s.style.setProperty('--ty', ty.toFixed(1) + 'px'); });
-    }
-    heroParallax();
-    window.addEventListener('scroll', heroParallax, { passive: true });
-
-    /* ===== Pinned "Why Azoogi" — single-scroll step reveals ===== */
-    (function () {
-      const track = document.getElementById('pinTrack');
-      const head = document.getElementById('vHead');
-      const blocks = document.querySelectorAll('#vGrid .value');
-      if (!track || !head) return;
-      // Thresholds (as fraction of pinned scroll progress 0..1)
-      const blockAt = [0.12, 0.32, 0.52, 0.72];
-      function update() {
-        const r = track.getBoundingClientRect();
-        const total = track.offsetHeight - window.innerHeight;
-        const scrolled = Math.min(Math.max(-r.top, 0), Math.max(total, 1));
-        const p = total > 0 ? scrolled / total : 0;
-        // Heading: reveal as soon as stage is visible / pinning begins
-        const headOn = r.top <= window.innerHeight * 0.85;
-        head.classList.toggle('on', headOn);
-        blocks.forEach((b, i) => b.classList.toggle('on', p >= blockAt[i] || (headOn && r.top <= 0 && i === 0 && p >= 0.02)));
-      }
-      update();
-      window.addEventListener('scroll', update, { passive: true });
-      window.addEventListener('resize', update);
-      // Safety fallback: if user has reduced motion or JS scroll math fails, reveal everything once section enters viewport
-      const safety = new IntersectionObserver((es) => {
-        es.forEach(e => { if (e.isIntersecting && e.intersectionRatio > 0.6) { head.classList.add('on'); } });
-      }, { threshold: [0, .3, .6] });
-      safety.observe(track);
-    })();
     /* ===== Mega Menu Tabs ===== */
     (function () {
       const tabs = document.querySelectorAll('.mega-tab');
@@ -6145,46 +5935,11 @@
         if (targetPanel) targetPanel.classList.add('active');
       }
 
-
-      // Scroll indicator fade logic
-      const megaTabs = document.querySelector('.mega-tabs');
-      const megaPanelsWrapper = document.querySelector('.mega-panels');
-      const indLeft = document.querySelector('.scroll-indicator-left');
-      const indRight = document.querySelector('.scroll-indicator-right');
-
-      function handleScroll(el, indicator) {
-        if (!el || !indicator) return;
-        if (el.scrollHeight - el.scrollTop <= el.clientHeight + 2) {
-          indicator.classList.add('hidden');
-        } else {
-          indicator.classList.remove('hidden');
-        }
-      }
-
-      if (megaTabs && indLeft) {
-        megaTabs.addEventListener('scroll', () => handleScroll(megaTabs, indLeft));
-        // initial check
-        handleScroll(megaTabs, indLeft);
-      }
-
-      if (megaPanelsWrapper && indRight) {
-        megaPanelsWrapper.addEventListener('scroll', () => handleScroll(megaPanelsWrapper, indRight));
-        // We need to also listen to tab changes since the panel content changes height
-        tabs.forEach(tab => {
-          tab.addEventListener('mouseenter', () => setTimeout(() => handleScroll(megaPanelsWrapper, indRight), 50));
-          tab.addEventListener('click', () => setTimeout(() => handleScroll(megaPanelsWrapper, indRight), 50));
-        });
-        // initial check
-        handleScroll(megaPanelsWrapper, indRight);
-      }
-
-
       // Hybrid hover/click toggle for mobile
       const hasDropdown = document.querySelector('.has-dropdown');
       if (hasDropdown) {
         hasDropdown.addEventListener('click', (e) => {
           if (window.innerWidth <= 960) {
-            // only toggle if clicking the main a tag
             if (e.target.closest('a[href="#products"]')) {
               e.preventDefault();
               hasDropdown.classList.toggle('open');
@@ -6194,6 +5949,7 @@
       }
     })();
 
+    /* ===== Theme Toggle ===== */
     function toggleTheme() {
       const root = document.documentElement;
       const currentTheme = root.getAttribute('data-theme');
@@ -6204,7 +5960,7 @@
     }
 
     function updateLogos(theme) {
-      const isScrolled = window.scrollY > 40;
+      const isScrolled = true; // Always solid header on product page
       const logos = document.querySelectorAll('.logo img');
       logos.forEach(img => {
         if (img.closest('.topbar')) {
@@ -6217,10 +5973,256 @@
 
     document.addEventListener("DOMContentLoaded", () => {
       const savedTheme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
       updateLogos(savedTheme);
     });
 
-  </script>
-</body>
+    /* ===== Product Page Interaction Script ===== */
+    (function() {
+      // Configuration variables
+      let selectedCct = "2700";
+      let selectedCctLabel = "2700K Extra Warm White";
+      let selectedRgb = "255,180,90";
+      let selectedProfile = "dome";
+      let selectedProfileLabel = "Dome Profile (180° Emission)";
+      let selectedWatts = 14.4;
+      let selectedWattsLabel = "14.4W/m (Standard Output)";
+      let selectedLumensPerMeter = 1200;
+      let selectedLength = 5.0;
 
-</html>
+      // DOM Elements
+      const lengthSlider = document.getElementById('length-slider');
+      const lengthVal = document.getElementById('length-val');
+      const calcPower = document.getElementById('calc-power');
+      const calcLumens = document.getElementById('calc-lumens');
+      const calcDriver = document.getElementById('calc-driver');
+      const capacityPct = document.getElementById('calc-capacity-pct');
+      const driverBarFill = document.getElementById('driver-bar-fill');
+      const driverWarning = document.getElementById('driver-warning-msg');
+      const specField = document.getElementById('quote-spec');
+      const productCodeLabel = document.getElementById('product-code-label');
+
+      // Theme-responsive root variables
+      const neonPath = document.getElementById('neon-path');
+      const neonSvg = document.getElementById('neon-svg');
+      const glowArea = document.getElementById('glow-area');
+
+      // Change CCT
+      document.querySelectorAll('[data-cct]').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('[data-cct]').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          selectedCct = this.getAttribute('data-cct');
+          selectedCctLabel = this.getAttribute('data-lbl');
+          selectedRgb = this.getAttribute('data-rgb');
+          document.getElementById('selected-cct-label').textContent = selectedCctLabel;
+          
+          updateGlowEffects();
+          recalculate();
+        });
+      });
+
+      // Change Profile
+      document.querySelectorAll('[data-profile]').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('[data-profile]').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          selectedProfile = this.getAttribute('data-profile');
+          selectedProfileLabel = this.getAttribute('data-lbl');
+          document.getElementById('selected-profile-label').textContent = selectedProfile;
+          
+          // Modify neon shape based on profile for dynamic aesthetic representation
+          if (selectedProfile === 'round') {
+            neonPath.setAttribute('d', 'M 30,100 C 30,50 170,50 170,100 C 170,150 30,150 30,100 Z');
+            neonSvg.style.transform = 'scale(1.0) rotate(0deg)';
+          } else if (selectedProfile === 'flat') {
+            // wavy curve for side bend
+            neonPath.setAttribute('d', 'M 20,60 C 60,60 80,140 120,140 C 160,140 180,60 180,60');
+            neonSvg.style.transform = 'scale(0.95)';
+          } else { // dome
+            neonPath.setAttribute('d', 'M 30,100 C 30,50 170,50 170,100 C 170,150 30,150 30,100 Z');
+            neonSvg.style.transform = 'scale(1.0)';
+          }
+          
+          recalculate();
+        });
+      });
+
+      // Change Wattage
+      document.querySelectorAll('[data-watts]').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('[data-watts]').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          selectedWatts = parseFloat(this.getAttribute('data-watts'));
+          selectedWattsLabel = this.getAttribute('data-lbl');
+          selectedLumensPerMeter = parseInt(this.getAttribute('data-lumens'));
+          document.getElementById('selected-watts-label').textContent = selectedWattsLabel;
+          
+          recalculate();
+        });
+      });
+
+      // Length Slider
+      if (lengthSlider) {
+        lengthSlider.addEventListener('input', function() {
+          selectedLength = parseFloat(this.value);
+          lengthVal.textContent = selectedLength.toFixed(1);
+          recalculate();
+        });
+      }
+
+      // Live Glow updater
+      function updateGlowEffects() {
+        if (!glowArea || !neonPath) return;
+        
+        // Update RGB custom property for Neon Glow
+        document.documentElement.style.setProperty('--glow-rgb', selectedRgb);
+        
+        // Trigger visual pulse interaction
+        neonPath.style.transition = 'none';
+        neonPath.style.strokeWidth = '22';
+        setTimeout(() => {
+          neonPath.style.transition = 'stroke-width 0.8s ease, filter 0.5s ease';
+          neonPath.style.strokeWidth = '14';
+        }, 50);
+      }
+
+      // Dynamic calculation engine
+      function recalculate() {
+        const totalPower = selectedLength * selectedWatts;
+        const totalLumens = selectedLength * selectedLumensPerMeter;
+        
+        // Round for screen display
+        calcPower.textContent = totalPower.toFixed(1) + ' W';
+        calcLumens.textContent = Math.round(totalLumens).toLocaleString() + ' lm';
+
+        // Select driver sizing (20% safety margin buffer)
+        const requiredCapacity = totalPower * 1.20;
+        let driverRecommendation = "Azoogi 20W 24V IP67";
+        let driverPowerLimit = 20;
+
+        if (requiredCapacity > 200) {
+          driverRecommendation = "Multiple feeds / 2x Azoogi 150W Drivers";
+          driverPowerLimit = 300;
+        } else if (requiredCapacity > 150) {
+          driverRecommendation = "Azoogi 240W 24V IP67";
+          driverPowerLimit = 240;
+        } else if (requiredCapacity > 120) {
+          driverRecommendation = "Azoogi 150W 24V IP67";
+          driverPowerLimit = 150;
+        } else if (requiredCapacity > 80) {
+          driverRecommendation = "Azoogi 120W 24V IP67";
+          driverPowerLimit = 120;
+        } else if (requiredCapacity > 50) {
+          driverRecommendation = "Azoogi 80W 24V IP67";
+          driverPowerLimit = 80;
+        } else if (requiredCapacity > 20) {
+          driverRecommendation = "Azoogi 50W 24V IP67";
+          driverPowerLimit = 50;
+        }
+
+        calcDriver.textContent = driverRecommendation;
+
+        // Driver loading percentage indicator
+        const percentage = Math.min(100, Math.round((totalPower / driverPowerLimit) * 100));
+        capacityPct.textContent = percentage + '%';
+        driverBarFill.style.width = percentage + '%';
+        
+        // Voltage drop check
+        if (selectedLength > 10.0) {
+          driverWarning.style.display = 'block';
+        } else {
+          driverWarning.style.display = 'none';
+        }
+
+        // Update product configuration SKU code
+        const profileCode = selectedProfile.substring(0, 3).toUpperCase();
+        const skuCode = `AZ-NF360-${selectedCct}-${profileCode}-${selectedWatts}W`;
+        productCodeLabel.textContent = `MODEL: ${skuCode}`;
+
+        // Auto compile specs description for inquiry B2B textarea
+        const specSummary = `Product: Neon Flex Series 360 (AZ-NF360)
+Configuration: ${selectedCctLabel} CCT, ${selectedProfileLabel} Profile
+Configured Wattage: ${selectedWattsLabel}
+Requested Custom Cut Run Length: ${selectedLength.toFixed(1)} meters
+Total Computed Power: ${totalPower.toFixed(1)} Watts
+Recommended System Power Driver: ${driverRecommendation}`;
+        
+        if (specField) {
+          specField.value = specSummary;
+        }
+      }
+
+      // Detailed Specs tabs handler
+      document.querySelectorAll('.tab-nav-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.tab-nav-btn').forEach(b => b.classList.remove('active'));
+          document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+          
+          this.classList.add('active');
+          const tabId = this.getAttribute('data-tab');
+          const panel = document.getElementById(tabId);
+          if (panel) panel.classList.add('active');
+        });
+      });
+
+      // Gallery Thumbnails view changer
+      document.querySelectorAll('.gallery-thumbs .thumb-card').forEach(card => {
+        card.addEventListener('click', function() {
+          document.querySelectorAll('.gallery-thumbs .thumb-card').forEach(c => c.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Switch main overlay opacity texture or color triggers
+          const viewMode = this.getAttribute('data-view');
+          const mainImg = document.querySelector('.gallery-main-image');
+          if (viewMode === 'closeup') {
+            mainImg.src = 'assets/img/leds.webp';
+            mainImg.style.opacity = '0.35';
+            document.getElementById('neon-svg').style.opacity = '0.2';
+          } else if (viewMode === 'driver') {
+            mainImg.src = 'assets/img/drivers.webp';
+            mainImg.style.opacity = '0.35';
+            document.getElementById('neon-svg').style.opacity = '0.2';
+          } else if (viewMode === 'downlight') {
+            mainImg.src = 'assets/img/dt.webp';
+            mainImg.style.opacity = '0.35';
+            document.getElementById('neon-svg').style.opacity = '0.2';
+          } else {
+            mainImg.src = 'assets/img/neon.webp';
+            mainImg.style.opacity = '0.15';
+            document.getElementById('neon-svg').style.opacity = '1';
+          }
+        });
+      });
+
+      // Micro-animation "Add to Spec Sheet" Alert
+      const specBtn = document.getElementById('add-to-spec-btn');
+      if (specBtn) {
+        specBtn.addEventListener('click', function() {
+          const originalText = this.textContent;
+          this.textContent = 'Added to Specification!';
+          this.style.background = 'var(--rgba-hover)';
+          this.style.borderColor = 'var(--accent)';
+          this.style.color = 'var(--accent)';
+          
+          setTimeout(() => {
+            this.textContent = originalText;
+            this.style.background = 'none';
+            this.style.borderColor = 'var(--border-light)';
+            this.style.color = 'var(--ink)';
+          }, 2000);
+        });
+      }
+
+      // Initial execution
+      updateGlowEffects();
+      recalculate();
+    })();
+
+    // Form submit controller
+    function handleQuoteSubmit(event) {
+      event.preventDefault();
+      document.getElementById('quote-form').style.display = 'none';
+      document.getElementById('quote-form-success').style.display = 'block';
+    }
+\n  </script>\n</body>\n</html>\n
