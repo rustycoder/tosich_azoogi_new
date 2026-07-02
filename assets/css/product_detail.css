@@ -2,7 +2,7 @@
 
 /* --- Page Layout & Breadcrumbs --- */
 .product-page-wrapper {
-  padding-top: 140px; /* offset for fixed topbar */
+  padding-top: 120px; /* offset for fixed topbar */
   min-height: 100vh;
   background: var(--bg);
   color: var(--ink);
