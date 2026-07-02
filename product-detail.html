@@ -228,7 +228,7 @@
               Selected Configuration</h4>
 
             <div id="selected-summary-list"
-              style="display: flex; flex-direction: column; gap: 10px; font-size: 13.5px; color: var(--muted);">
+              style="display: flex; flex-direction: column; gap: 10px; font-size: 12px; color: var(--muted);">
               <!-- Dynamically populated list from Javascript selection updates -->
             </div>
 
@@ -808,7 +808,7 @@
 
         // Render Configurator Options
         function renderConfigurator() {
-          configurator.innerHTML = '<h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px;">Product Configuration Options</h3>';
+          configurator.innerHTML = '<div class="reset-selection"><h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px;">Product Configuration Options</h3><a href="#" class="btn sm">Clear Selection</a></div>';
           const options = activeVariant.options;
 
           // Configurator option fields only for current product model (bypass variant switch)

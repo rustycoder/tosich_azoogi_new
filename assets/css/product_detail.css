@@ -623,7 +623,6 @@
 }
 
 .quote-intro h2 {
-  font-family: 'Cormorant Garamond', serif;
   font-size: clamp(28px, 3vw, 36px);
   margin-bottom: 16px;
   line-weight: 1.2;
@@ -750,7 +749,6 @@
 }
 
 .related-projects-section h3 {
-  font-family: 'Cormorant Garamond', serif;
   font-size: 28px;
   margin-bottom: 24px;
   font-weight: 500;
@@ -808,10 +806,20 @@
 }
 
 .proj-small-overlay h4 {
-  font-family: 'Cormorant Garamond', serif;
   font-size: 18px;
   color: #ffffff;
   font-weight: 400;
+}
+
+.reset-selection{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.reset-selection a{
+  font-size: 10px;
+  padding: 5px 10px!important;
 }
 
 /* Configurator Button Disabled State */
