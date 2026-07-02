@@ -207,7 +207,7 @@
 
       <!-- ==================== PRODUCT OPTIONS SECTION START ==================== -->
       <div class="options-section"
-        style="margin-top: 20px; border-top: 1px solid var(--line); padding-top: 20px; margin-bottom: 60px;">
+        style="margin-top: 20px; border-top: 1px solid var(--line); padding-top: 30px; margin-bottom: 60px;">
         
 
         <div class="options-grid-layout"
@@ -416,7 +416,7 @@
                   placeholder="Provide extra requirements, dimming requests, or custom connector feeds..."></textarea>
               </div>
 
-              <button class="form-submit-btn" type="submit">Submit Spec Inquiry</button>
+              <button class="btn" type="submit">Submit Spec Inquiry</button>
             </form>
           </div>
 
@@ -808,7 +808,7 @@
 
         // Render Configurator Options
         function renderConfigurator() {
-          configurator.innerHTML = '<div class="reset-selection"><h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px;">Product Configuration Options</h3><a href="#" class="btn sm">Clear Selection</a></div>';
+          configurator.innerHTML = '<div class="reset-selection"><h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px; margin-top-10px">Product Configuration Options</h3><a href="#" class="btn sm">Clear Selection</a></div>';
           const options = activeVariant.options;
 
           // Configurator option fields only for current product model (bypass variant switch)
