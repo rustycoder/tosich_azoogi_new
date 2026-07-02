@@ -1,0 +1,176 @@
+{
+  "product_name": "DS8320-24V-15mm",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/66ac552174947.jpg",
+    "https://file.colorsled.com/pro/catalog/product/66bb38d0e3e01.png"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "AS3535",
+      "AH5060"
+    ],
+    "Size": "4000*15*1.5mm",
+    "Cutting Unit": [
+      "50mm",
+      "16LEDs"
+    ],
+    "Input Voltage": "DC24V",
+    "Wattage": "38.4W/M(2700K+6500K)",
+    "Typ.luminous flux": [
+      "2880LM",
+      "M@2700K"
+    ],
+    "CCT": "2700K+6500K",
+    "CRI": [
+      "80",
+      "90"
+    ],
+    "Other": [
+      "Outer diameter 6mm",
+      "18# wire diameter",
+      "brown-blue-green 3PIN crystal wire"
+    ]
+  },
+  "options": {
+    "Wattage": [
+      {
+        "name": "38.4W/M",
+        "id": "429"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K+6500K",
+        "id": "500"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "One end",
+        "id": "667"
+      },
+      {
+        "name": "No",
+        "id": "666"
+      },
+      {
+        "name": "Dual ends",
+        "id": "668"
+      }
+    ],
+    "Wire Length": [
+      {
+        "name": "50CM",
+        "id": "602"
+      },
+      {
+        "name": "100CM",
+        "id": "597"
+      },
+      {
+        "name": "200CM",
+        "id": "598"
+      },
+      {
+        "name": "No",
+        "id": "599"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Strip Length": [
+      {
+        "name": "Customized Length",
+        "id": "665"
+      },
+      {
+        "name": "4M",
+        "id": "661"
+      }
+    ],
+    "Silk Printing": [
+      {
+        "name": "Neutral",
+        "id": "641"
+      },
+      {
+        "name": "COLORS",
+        "id": "643"
+      }
+    ],
+    "IP Process": [
+      {
+        "name": "NO(not waterproof)",
+        "id": "690"
+      }
+    ],
+    "Tape Type": [
+      {
+        "name": "White",
+        "id": "699"
+      }
+    ],
+    "Wire Type": [
+      {
+        "name": "No",
+        "id": "704"
+      },
+      {
+        "name": "Crystal wires",
+        "id": "890"
+      }
+    ]
+  },
+  "constraints": {
+    "666": [
+      602,
+      597,
+      598,
+      890
+    ],
+    "667": [
+      666,
+      704
+    ],
+    "668": [
+      666,
+      704
+    ],
+    "643": [
+      552
+    ],
+    "641": [
+      553
+    ],
+    "599": [
+      890
+    ],
+    "602": [
+      704
+    ],
+    "597": [
+      704
+    ],
+    "598": [
+      704
+    ]
+  }
+}

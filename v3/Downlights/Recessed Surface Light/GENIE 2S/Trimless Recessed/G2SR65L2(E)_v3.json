@@ -1,0 +1,280 @@
+{
+  "product_name": "G2SR65L2(E)",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67fcab9a8dbe2.png"
+  ],
+  "product_features": {
+    "Material": [
+      "ADC12",
+      "spraying surface"
+    ],
+    "Driver Installation": "Remote",
+    "Lighting direction": "downward",
+    "Beam angle": [
+      "9°",
+      "15°",
+      "24°",
+      "36°",
+      "50°"
+    ],
+    "UGR(X=4H,Y=8H)": "≤10(9°/15°/24°/36°),≤19(50°)",
+    "Opening size": "φ65mm",
+    "Dimming": [
+      "Non",
+      "0-10V",
+      "Traic",
+      "DALI"
+    ],
+    "SDCM(Lightsource)": "<3 Step(ANSI)",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K",
+      "2700-6500K"
+    ],
+    "Input voltage": "AC220-240V",
+    "Application": "Indoor",
+    "Installation": "Trimless Recessed",
+    "IP Rating": [
+      "IP20",
+      "IP54"
+    ],
+    "Certification": [
+      "CE",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Normal",
+        "id": "708"
+      },
+      {
+        "name": "CCT Tunable",
+        "id": "937"
+      }
+    ],
+    "Length": [
+      {
+        "name": "Opening φ65mm",
+        "id": "1543"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "9W",
+        "id": "349"
+      },
+      {
+        "name": "12W",
+        "id": "291"
+      },
+      {
+        "name": "15W",
+        "id": "294"
+      }
+    ],
+    "Beam Angle": [
+      {
+        "name": "15°",
+        "id": "740"
+      },
+      {
+        "name": "24°",
+        "id": "745"
+      },
+      {
+        "name": "36°",
+        "id": "621"
+      },
+      {
+        "name": "50°",
+        "id": "789"
+      },
+      {
+        "name": "9°",
+        "id": "1540"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "No(Frame)",
+        "id": "875"
+      },
+      {
+        "name": "White(Frame)",
+        "id": "871"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Casambi",
+        "id": "539"
+      },
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "0-10V Dimming",
+        "id": "1397"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      },
+      {
+        "name": "Triac Dimming",
+        "id": "1539"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "2700K-6500K",
+        "id": "455"
+      }
+    ],
+    "Reflector Colour": [
+      {
+        "name": "Mirror",
+        "id": "612"
+      },
+      {
+        "name": "Black chrome",
+        "id": "611"
+      },
+      {
+        "name": "Matte Black",
+        "id": "610"
+      },
+      {
+        "name": "Matte White",
+        "id": "609"
+      }
+    ],
+    "IP Rating": [
+      {
+        "name": "IP20",
+        "id": "629"
+      },
+      {
+        "name": "IP54",
+        "id": "1057"
+      }
+    ],
+    "Optical": [
+      {
+        "name": "Linear Spread Filter",
+        "id": "1245"
+      },
+      {
+        "name": "Honeycomb",
+        "id": "613"
+      },
+      {
+        "name": "Diffusion Filter",
+        "id": "1246"
+      },
+      {
+        "name": "Honeycomb + Linear Spread Filter",
+        "id": "1533"
+      },
+      {
+        "name": "Honeycomb + Diffusion Filter",
+        "id": "1534"
+      },
+      {
+        "name": "NO",
+        "id": "1249"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "With junction box",
+        "id": "786"
+      },
+      {
+        "name": "With cable of drive input",
+        "id": "782"
+      }
+    ],
+    "User Manual": [
+      {
+        "name": "EN",
+        "id": "608"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": {
+    "539": [
+      786
+    ],
+    "708": [
+      455
+    ],
+    "937": [
+      1540,
+      740,
+      443,
+      444,
+      446,
+      445,
+      786,
+      541,
+      1397,
+      1539,
+      613,
+      1245,
+      1533,
+      1249
+    ],
+    "294": [
+      1540,
+      740
+    ],
+    "1540": [
+      613,
+      1245,
+      1533,
+      1534,
+      1249
+    ]
+  }
+}

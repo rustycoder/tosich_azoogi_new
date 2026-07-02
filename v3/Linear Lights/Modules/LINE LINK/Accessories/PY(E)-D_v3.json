@@ -1,0 +1,74 @@
+{
+  "product_name": "PY(E)-D",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/693780f584170.png",
+    "https://file.colorsled.com/pro/catalog/product/6878bfeb0d9dd.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "MS35",
+      "MH35",
+      "MS50",
+      "MH50",
+      "MS70",
+      "MH70"
+    ],
+    "Installation method": "Junction Box(pendant wire)",
+    "Material process": [
+      "SPCC",
+      "Spraying surface"
+    ],
+    "Size": [
+      "Box: D80*30*1mm, Pendant wire: D1.5*2000",
+      "4000mm"
+    ],
+    "Quantity": "1 set",
+    "Other": [
+      "Including junction box, 2PCS wire rope, wire rope 2M",
+      "4M length"
+    ]
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "2M",
+        "id": "140"
+      },
+      {
+        "name": "4M",
+        "id": "887"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

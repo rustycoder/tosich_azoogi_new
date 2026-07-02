@@ -1,0 +1,29 @@
+{
+  "product_name": "DB02LINE 25-001",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/6943acaf5819c.png",
+    "https://file.colorsled.com/pro/catalog/product/6943acb13534a.png",
+    "https://file.colorsled.com/pro/catalog/product/6943acb35166e.png",
+    "https://file.colorsled.com/pro/catalog/product/6943acad55b4c.png",
+    "https://file.colorsled.com/pro/catalog/product/6943acb4cdf4d.png"
+  ],
+  "product_features": {
+    "Applicable product model": "LINE25 series",
+    "Size": "L420*W280*H120mm",
+    "Weight": [
+      "",
+      "kg"
+    ],
+    "Material process": "needle-stripe leather box",
+    "Others": "include some samples and accessories of LINE25 series"
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ]
+  },
+  "constraints": []
+}

@@ -1,0 +1,53 @@
+{
+  "product_name": "EC-LE25",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67ff26104ddd6.png"
+  ],
+  "product_features": {
+    "Applicable product model": "LE25FD/LEFP/LE25G(A)/LE25LA/LE3523",
+    "Material process": [
+      "Zinc alloy",
+      "spraying"
+    ],
+    "Size": "35*23*21.5mm",
+    "Quantity": [
+      "2PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

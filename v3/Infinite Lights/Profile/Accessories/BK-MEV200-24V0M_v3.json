@@ -1,0 +1,87 @@
+{
+  "product_name": "BK-MEV200-24V0M",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/684bca246cce6.png"
+  ],
+  "product_features": {
+    "Applicable product model": "General",
+    "Dimming mode": "1-10V Dimming",
+    "Size": "321.5*48*30mm",
+    "Input voltage": "AC200~240V",
+    "Operating frequency": [
+      "50",
+      "60Hz"
+    ],
+    "PF value": "≥0.9",
+    "Output voltage": "DC24V",
+    "Output current": "≤8.3A",
+    "Power": "200W",
+    "Efficiency": "0.93",
+    "Certification": [
+      "CE",
+      "ENEC",
+      "UKCA",
+      "RCM",
+      "CCC",
+      "EL"
+    ],
+    "Case material": "Metal housing"
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "L321.5*W48.0*H30.0mm",
+        "id": "1529"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "200W",
+        "id": "1097"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "1-10V Dimming",
+        "id": "542"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC200-240V",
+        "id": "585"
+      }
+    ],
+    "Output Voltage": [
+      {
+        "name": "DC24V",
+        "id": "1127"
+      }
+    ],
+    "Output Current": [
+      {
+        "name": "≤8.3A",
+        "id": "1524"
+      }
+    ],
+    "IP Rating": [
+      {
+        "name": "IP20",
+        "id": "629"
+      }
+    ],
+    "PF Value": [
+      {
+        "name": "≥0.9",
+        "id": "1173"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

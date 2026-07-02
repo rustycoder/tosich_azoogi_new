@@ -1,0 +1,87 @@
+{
+  "product_name": "SKY-06A",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/eQqrsTkLrGAClGZo.png",
+    "https://file.colorsled.com/pro/catalog/product/67fe02124b71c.png"
+  ],
+  "product_features": {
+    "Material": "Zinc alloy，spraying surface，steel belt (stainless steel)",
+    "Coating": "Black(RAL9005)",
+    "Lighting direction": "Upward",
+    "Light source": "D8120-24V-8mm(2835/120LED/24V/8mm)",
+    "Dimming": "no power supply",
+    "Length": "6000mm optional (other length on request)",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "4000K",
+      "6500K"
+    ],
+    "Input voltage": "DC24V",
+    "Application": "Indoor",
+    "Installation": "Ceiling",
+    "IP Rating": "IP20",
+    "Certification": [
+      "CE",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "6M",
+        "id": "152"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "6000K",
+        "id": "447"
+      }
+    ],
+    "Light Source Type": [
+      {
+        "name": "D8120-24V-8mm",
+        "id": "271"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ]
+  },
+  "constraints": []
+}

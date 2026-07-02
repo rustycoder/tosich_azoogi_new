@@ -1,0 +1,69 @@
+{
+  "product_name": "PN-P",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/678f84966e0db.png"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "MS3535",
+      "MS5035",
+      "MS7035",
+      "MS3570",
+      "MS5070",
+      "MS7070"
+    ],
+    "Installation method": "pendant(Ceiling plate with wire)",
+    "Material process": [
+      "Fe",
+      "powder spraying"
+    ],
+    "Maximum current capacity": "4A",
+    "Maximum weight capacity": "3Kg",
+    "Size": [
+      "Ceiling Plate: D88*29mm",
+      "Wire: D3*2000mm"
+    ],
+    "Open hole": "D75mm",
+    "Quantity": [
+      "1PCS",
+      "set"
+    ],
+    "Note": "",
+    "1. Including 1PCS Ceiling plate+2PCS springs+1PCS input wire.": "",
+    "2. One ceiling plate holds one power supply.": "",
+    "3. Need to order separate clip(CP-XX) to use with it.": ""
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

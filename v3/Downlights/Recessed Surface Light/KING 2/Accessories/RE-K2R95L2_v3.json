@@ -1,0 +1,45 @@
+{
+  "product_name": "RE-K2R95L2",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/68ba526e2f20b.png"
+  ],
+  "product_features": {
+    "Applicable product model": "K2R95L2",
+    "Installation method": "recessed",
+    "Material process": [
+      "aluminum",
+      "oil spraying"
+    ],
+    "Size": "φ124*30mm",
+    "Quantity": [
+      "1PCS",
+      "set"
+    ],
+    "Other": "Including 1pcs recessed part of the K2R55L2 spotlight and 3pcs  screws."
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "White(Frame)",
+        "id": "871"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

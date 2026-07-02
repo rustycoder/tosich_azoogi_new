@@ -1,0 +1,46 @@
+{
+  "product_name": "CL-05",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/66ee5b82e120b.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "AS3535-2500",
+      "AS3535-08A45",
+      "AS3535-08A90",
+      "AS3535-15A45",
+      "AS3535-15A90",
+      "AS3535-30A45"
+    ],
+    "Installation method": "ceiling",
+    "Material process": [
+      "AL6061-T5",
+      "oil spray"
+    ],
+    "Size": "33.5*8.5*5.6mm",
+    "Quantity": [
+      "2PCS",
+      "set"
+    ],
+    "Other": "Include 2 sets of fixing bracket"
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

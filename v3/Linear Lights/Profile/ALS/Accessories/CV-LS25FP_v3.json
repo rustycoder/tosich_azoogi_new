@@ -1,0 +1,63 @@
+{
+  "product_name": "CV-LS25FP",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67ff68ddc1043.png"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "LE3523",
+      "LH25100",
+      "LR2522",
+      "LS2522"
+    ],
+    "Diffuser Nature": "White Prismatic",
+    "Material process": [
+      "PC",
+      "emboss"
+    ],
+    "Light transmittance": "≥85%",
+    "Size": "2500*20.4*6.7mm",
+    "Other": "Fire protection rating UL94-V2;"
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "Prismatic",
+        "id": "60"
+      }
+    ],
+    "Length": [
+      {
+        "name": "2500mm",
+        "id": "134"
+      },
+      {
+        "name": "Customized Length",
+        "id": "154"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Package": [
+      {
+        "name": "COLORS Whole",
+        "id": "550"
+      }
+    ]
+  },
+  "constraints": []
+}

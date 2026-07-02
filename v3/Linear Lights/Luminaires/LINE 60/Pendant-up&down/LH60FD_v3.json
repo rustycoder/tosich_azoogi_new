@@ -1,0 +1,292 @@
+{
+  "product_name": "LH60FD",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67d3c8c113cf0.png"
+  ],
+  "product_features": {
+    "Material": "AL6063-T5，spraying surface",
+    "Coating": [
+      "Black(RAL9005)",
+      "White(RAL9003)"
+    ],
+    "Lighting direction": "upward & downward",
+    "Light efficiency": [
+      "112LM/W(regular model/emergency model)",
+      "140LM/W(high efficiency model)"
+    ],
+    "Dimming": [
+      "Non",
+      "DALI-2+PUSH",
+      "1-10V"
+    ],
+    "Length": "1200mm/1800mm/2400mm optional (other length on request)",
+    "Color tolerance": "SDCM≤3(ANSI)",
+    "CRI": [
+      "80",
+      "90"
+    ],
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K",
+      "5000K",
+      "6500K",
+      "3000-6500"
+    ],
+    "Input voltage": "AC200-240V",
+    "Application": "Indoor",
+    "Installation": "Pendant",
+    "IP Rating": "IP20",
+    "Certification": [
+      "CE",
+      "CB",
+      "UKCA",
+      "SAA",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years (emergency model: 3 years)"
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Normal",
+        "id": "708"
+      },
+      {
+        "name": "High efficiency",
+        "id": "709"
+      },
+      {
+        "name": "3 CCT tunable(Dial switch)",
+        "id": "710"
+      },
+      {
+        "name": "Emergency",
+        "id": "711"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Length": [
+      {
+        "name": "1200mm",
+        "id": "145"
+      },
+      {
+        "name": "1800mm",
+        "id": "147"
+      },
+      {
+        "name": "2400mm",
+        "id": "149"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "78W",
+        "id": "345"
+      },
+      {
+        "name": "51W",
+        "id": "323"
+      },
+      {
+        "name": "102W",
+        "id": "359"
+      },
+      {
+        "name": "42W",
+        "id": "352"
+      },
+      {
+        "name": "63W",
+        "id": "351"
+      },
+      {
+        "name": "84W",
+        "id": "1564"
+      }
+    ],
+    "Carrier Style": [
+      {
+        "name": "Flat carrier",
+        "id": "115"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Matt Orange",
+        "id": "879"
+      },
+      {
+        "name": "Matt Blue",
+        "id": "876"
+      },
+      {
+        "name": "Yellow",
+        "id": "874"
+      },
+      {
+        "name": "Champagne Gold",
+        "id": "872"
+      },
+      {
+        "name": "Rose gold",
+        "id": "878"
+      },
+      {
+        "name": "Matt Green",
+        "id": "877"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "1-10V Dimming",
+        "id": "542"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      },
+      {
+        "name": "3000K-6500K",
+        "id": "454"
+      }
+    ],
+    "Light Source Type": [
+      {
+        "name": "Constant Current Rigid PCB",
+        "id": "265"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Package": [
+      {
+        "name": "COLORS Individual",
+        "id": "551"
+      }
+    ]
+  },
+  "constraints": {
+    "145": [
+      345,
+      359,
+      351,
+      1564
+    ],
+    "147": [
+      323,
+      359,
+      352,
+      1564
+    ],
+    "149": [
+      323,
+      345,
+      352,
+      351
+    ],
+    "711": [
+      147,
+      149,
+      454,
+      352,
+      351,
+      1564
+    ],
+    "710": [
+      443,
+      444,
+      445,
+      446,
+      441,
+      442,
+      352,
+      351,
+      1564
+    ],
+    "708": [
+      454,
+      352,
+      351,
+      1564
+    ],
+    "709": [
+      454,
+      323,
+      345,
+      359,
+      445,
+      441
+    ]
+  }
+}

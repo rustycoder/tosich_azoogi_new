@@ -1,0 +1,69 @@
+{
+  "product_name": "PR-LE60",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/XKpBpmNSLwVMbNXK.png"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "S60FD",
+      "S60FP",
+      "S60HP",
+      "S60BD",
+      "S60LA",
+      "S60LS",
+      "S60G",
+      "S60S-52WA",
+      "S60S-35RB",
+      "S60S-23WC",
+      "CS-S60"
+    ],
+    "Material process": [
+      "aluminum",
+      "powder spraying"
+    ],
+    "Size": "2500*76*85mm"
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "2500mm",
+        "id": "134"
+      },
+      {
+        "name": "Customized Length",
+        "id": "154"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Package": [
+      {
+        "name": "COLORS Whole",
+        "id": "550"
+      }
+    ]
+  },
+  "constraints": []
+}

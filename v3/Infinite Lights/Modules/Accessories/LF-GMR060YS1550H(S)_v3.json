@@ -1,0 +1,83 @@
+{
+  "product_name": "LF-GMR060YS1550H(S)",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67c948d435062.png"
+  ],
+  "product_features": {
+    "Dimming": "Non-Dimming",
+    "Product name": "LF-GMR060YS1550H(S)",
+    "Output power": "60W",
+    "Output current": "1.2-1.55A(50mA per dip-switch)",
+    "Product size": "280*30*21mm",
+    "Input voltage": "AC220-240V",
+    "Output voltage": "DC20-39V",
+    "PF": "PF≥0.9",
+    "IP": "IP20",
+    "Material": "Metal housing",
+    "Certification": [
+      "CCC",
+      "ENEC",
+      "CE",
+      "RCM",
+      "UKCA"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "L280*W30.0*H21.0mm",
+        "id": "1390"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "60W",
+        "id": "283"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC220-240V",
+        "id": "1181"
+      }
+    ],
+    "Output Voltage": [
+      {
+        "name": "DC20-39V",
+        "id": "1368"
+      }
+    ],
+    "Output Current": [
+      {
+        "name": "1.2-1.55A",
+        "id": "1375"
+      }
+    ],
+    "IP Rating": [
+      {
+        "name": "IP20",
+        "id": "629"
+      }
+    ],
+    "PF Value": [
+      {
+        "name": "≥0.9",
+        "id": "1173"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

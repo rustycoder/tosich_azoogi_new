@@ -1,0 +1,57 @@
+{
+  "product_name": "CM-24",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67d94cf47998b.png"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "MS3535",
+      "MS5035",
+      "MS7035",
+      "MS3570",
+      "MS5070",
+      "MS7070",
+      "ME3535",
+      "ME5035",
+      "ME7035"
+    ],
+    "Material process": "PVC",
+    "Size": "D3*2000mm",
+    "Maximum current capacity": "4A",
+    "Maximum weight capacity": "8Kg",
+    "Quantity": [
+      "1PCS",
+      "set"
+    ],
+    "Other": "Need to order separate clip(CP-XX) to use with it"
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

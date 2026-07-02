@@ -1,0 +1,127 @@
+{
+  "product_name": "HS40FD",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/668c8fbbf3dba.png"
+  ],
+  "product_features": {
+    "Installation": "Pendant",
+    "Size": [
+      "23*22.5*1200",
+      "1800mm"
+    ],
+    "Material": "AL6063-T5",
+    "Coating": "Black",
+    "Dimming": [
+      "Non",
+      "DALI-2",
+      "CASAMBI"
+    ],
+    "Input voltage": "DC48V",
+    "SDCM": "<3 Step (ANSI)",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "4000K"
+    ],
+    "Beam angle": "100°",
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ETL",
+      "ROHS",
+      "Reach"
+    ]
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Length": [
+      {
+        "name": "1200mm",
+        "id": "145"
+      },
+      {
+        "name": "1800mm",
+        "id": "147"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "24W",
+        "id": "307"
+      },
+      {
+        "name": "36W",
+        "id": "344"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "DC48V",
+        "id": "941"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": {
+    "145": [
+      344
+    ],
+    "147": [
+      307
+    ]
+  }
+}

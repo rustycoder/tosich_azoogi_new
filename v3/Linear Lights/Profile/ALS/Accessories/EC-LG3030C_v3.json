@@ -1,0 +1,69 @@
+{
+  "product_name": "EC-LG3030C",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67fe383d0aa48.png"
+  ],
+  "product_features": {
+    "Applicable product model": "LG3030C",
+    "Material process": [
+      "PC",
+      "oil spraying"
+    ],
+    "Size": [
+      "",
+      ""
+    ],
+    "Quantity": [
+      "2PCS",
+      "set"
+    ],
+    "Other": "6 countersunk screws"
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Single end with hole",
+        "id": "128"
+      },
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      },
+      {
+        "name": "End cap with hole",
+        "id": "129"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

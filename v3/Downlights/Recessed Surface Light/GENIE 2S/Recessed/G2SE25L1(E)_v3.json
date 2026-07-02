@@ -1,0 +1,168 @@
+{
+  "product_name": "G2SE25L1(E)",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/685e3d856d064.png"
+  ],
+  "product_features": {
+    "Material": [
+      "AL1070",
+      "spraying surface"
+    ],
+    "Driver Installation": "Remote",
+    "Lighting direction": "Downward",
+    "Beam angle": [
+      "24°",
+      "36°"
+    ],
+    "UGR(X=4H,Y=8H)": "≤8(24°),≤16(36°)",
+    "Opening size": "φ25mm",
+    "Dimming": "Non-Dimming",
+    "SDCM(Lightsource)": "<3 Step(ANSI)",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K"
+    ],
+    "Input voltage": "AC220-240V",
+    "Application": "Indoor",
+    "Installation": "Recessed",
+    "IP Rating": "IP20",
+    "Certification": [
+      "CE",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "Opening φ25mm",
+        "id": "1557"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "6W",
+        "id": "289"
+      }
+    ],
+    "Beam Angle": [
+      {
+        "name": "24°",
+        "id": "745"
+      },
+      {
+        "name": "36°",
+        "id": "621"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black(Frame)",
+        "id": "873"
+      },
+      {
+        "name": "White(Frame)",
+        "id": "871"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Casambi",
+        "id": "539"
+      },
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      }
+    ],
+    "Reflector Colour": [
+      {
+        "name": "Mirror",
+        "id": "612"
+      },
+      {
+        "name": "Black chrome",
+        "id": "611"
+      },
+      {
+        "name": "Matte Black",
+        "id": "610"
+      },
+      {
+        "name": "Matte White",
+        "id": "609"
+      }
+    ],
+    "IP Rating": [
+      {
+        "name": "IP20",
+        "id": "629"
+      },
+      {
+        "name": "IP54",
+        "id": "1057"
+      }
+    ],
+    "Optical": [
+      {
+        "name": "Honeycomb",
+        "id": "613"
+      },
+      {
+        "name": "NO",
+        "id": "1249"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "With cable of drive input",
+        "id": "782"
+      }
+    ],
+    "User Manual": [
+      {
+        "name": "EN",
+        "id": "608"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": []
+}

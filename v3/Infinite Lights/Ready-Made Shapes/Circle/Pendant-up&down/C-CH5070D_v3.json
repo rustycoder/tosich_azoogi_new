@@ -1,0 +1,221 @@
+{
+  "product_name": "C-CH5070D",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/6927f84fb5952.png"
+  ],
+  "product_features": {
+    "Installation": "Pendant",
+    "Material": [
+      "AL6063-T5",
+      "spraying surface"
+    ],
+    "Coating": "Silver,Black(RAL9005),White(RAL9003)",
+    "Power Supply": "External power supply",
+    "Light efficiency": "95LM/W(Regular)",
+    "SDCM": "≤3",
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ROHS",
+      "REACH",
+      "CB",
+      "ENEC",
+      "LM-80"
+    ]
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Regular",
+        "id": "1244"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Length": [
+      {
+        "name": "D450mm",
+        "id": "1204"
+      },
+      {
+        "name": "D600mm",
+        "id": "1217"
+      },
+      {
+        "name": "D800mm",
+        "id": "1218"
+      },
+      {
+        "name": "D1000mm",
+        "id": "1219"
+      },
+      {
+        "name": "D1200mm",
+        "id": "1220"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "44W(UP:15W/DOWN:29W)",
+        "id": "1648"
+      },
+      {
+        "name": "65W(UP:22W/DOWN:43W)",
+        "id": "1649"
+      },
+      {
+        "name": "76W(UP:26W/DOWN:50W)",
+        "id": "1650"
+      },
+      {
+        "name": "107W(UP:36W/DOWN:71W)",
+        "id": "1647"
+      },
+      {
+        "name": "118W(UP:40W/DOWN:78W)",
+        "id": "1651"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "1-10V Dimming",
+        "id": "542"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC200-240V",
+        "id": "585"
+      }
+    ],
+    "Installation Accessory": [
+      {
+        "name": "Ceiling Plate(With Steel Wire Rope)",
+        "id": "1212"
+      },
+      {
+        "name": "Linear Power Box(With Steel Wire Rope)",
+        "id": "1214"
+      },
+      {
+        "name": "Round Power Box",
+        "id": "1211"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": {
+    "1204": [
+      1214,
+      1649,
+      1650,
+      1647,
+      1651
+    ],
+    "1217": [
+      1214,
+      1648,
+      1650,
+      1647,
+      1651
+    ],
+    "1218": [
+      1648,
+      1649,
+      1647,
+      1651
+    ],
+    "1219": [
+      542,
+      1648,
+      1649,
+      1650,
+      1651
+    ],
+    "1220": [
+      542,
+      1648,
+      1649,
+      1650,
+      1647
+    ],
+    "1214": [
+      1204,
+      1217
+    ]
+  }
+}

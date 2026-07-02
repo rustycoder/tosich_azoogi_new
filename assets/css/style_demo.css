@@ -2130,3 +2130,197 @@ aside p {
   opacity: 1;
   transform: rotate(0) scale(1);
 }
+
+/* ==========================================================================
+   3-LEVEL RECURSIVE MEGA MENU STYLES
+   ========================================================================== */
+.mega-menu-inner {
+  display: flex;
+  height: 600px;
+  max-height: 80vh;
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.mega-menu-column {
+  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* Sidebar Columns (First, Second, etc.) */
+.mega-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border-light);
+  padding: 16px 0;
+  background: rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+}
+
+:root[data-theme="light"] .mega-sidebar {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.mega-sidebar.level-2 {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+:root[data-theme="light"] .mega-sidebar.level-2 {
+  background: rgba(0, 0, 0, 0.01);
+}
+
+.mega-sidebar-btn {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.mega-sidebar-btn:hover {
+  color: var(--pure-text);
+  background: var(--card-bg);
+}
+
+.mega-sidebar-btn.active {
+  color: var(--accent);
+  background: var(--rgba-hover);
+  font-weight: 600;
+}
+
+.mega-sidebar-btn svg {
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  transform: translateX(-5px);
+}
+
+.mega-sidebar-btn.active svg,
+.mega-sidebar-btn:hover svg {
+  opacity: 0.5;
+  transform: translateX(0);
+}
+
+/* Product Area Column (Rightmost panel) */
+.mega-products-view {
+  flex: 1;
+  min-width: 450px;
+  padding: 24px;
+  background: var(--pure-bg);
+}
+
+.mega-products-view::-webkit-scrollbar {
+  width: 6px;
+}
+.mega-products-view::-webkit-scrollbar-track {
+  background: var(--track-bg);
+}
+.mega-products-view::-webkit-scrollbar-thumb {
+  background: var(--thumb-bg);
+  border-radius: 4px;
+}
+
+/* Product Row Container */
+.mega-product-row {
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 24px;
+}
+
+.mega-product-row:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.mega-product-row-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--pure-text);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mega-product-row-title::after {
+  content: "";
+  flex-grow: 1;
+  height: 1px;
+  background: var(--border-light);
+}
+
+/* Variants Grid & Mini Cards */
+.mega-variant-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.mega-variant-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.mega-variant-card:hover {
+  border-color: var(--accent);
+  background: var(--rgba-hover);
+  transform: translateY(-2px);
+}
+
+.mega-variant-img {
+  width: 100%;
+  aspect-ratio: 16/10;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--rgba-hover);
+  border-radius: 2px;
+}
+
+.mega-variant-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mega-variant-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--pure-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mega-variant-specs {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+

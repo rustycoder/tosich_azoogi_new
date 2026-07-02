@@ -1,0 +1,115 @@
+{
+  "product_name": "HM40SZ-45(N)",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/66827b2783a56.png"
+  ],
+  "product_features": {
+    "Installation": "Ceiling",
+    "Material": "AL1070",
+    "Coating": "Black",
+    "Dimming": [
+      "Non-Dimming",
+      "DALI Dimming",
+      "CASAMBI"
+    ],
+    "Input voltage": "DC48V",
+    "SDCM": "<5 Step (ANSI)",
+    "UGR": "<13",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "4000K"
+    ],
+    "Beam angle": "15°-45°Angle Adjustable",
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ETL",
+      "ROHS",
+      "Reach"
+    ]
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Normal",
+        "id": "708"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "15°-45°Angle Adjustable",
+        "id": "1022"
+      }
+    ],
+    "Length": [
+      {
+        "name": "φ45mm Zoom Spotlight",
+        "id": "238"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "5W",
+        "id": "305"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "DC48V",
+        "id": "941"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": []
+}

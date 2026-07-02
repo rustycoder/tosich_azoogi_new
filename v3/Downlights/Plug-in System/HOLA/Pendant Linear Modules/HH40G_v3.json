@@ -1,0 +1,119 @@
+{
+  "product_name": "HH40G",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/668240a09c20f.png"
+  ],
+  "product_features": {
+    "Installation": "Pendant",
+    "Size": [
+      "25*100*1300",
+      "1900mm"
+    ],
+    "Material": "AL6063-T5",
+    "Coating": "Black",
+    "Dimming": [
+      "Non",
+      "DALI-2",
+      "CASAMBI"
+    ],
+    "Input voltage": "DC48V",
+    "SDCM": "<3 Step (ANSI)",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "4000K"
+    ],
+    "Beam angle": [
+      "30°",
+      "55°"
+    ],
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ETL",
+      "ROHS",
+      "Reach"
+    ]
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "Grating 30°",
+        "id": "76"
+      },
+      {
+        "name": "Grating 55°",
+        "id": "75"
+      }
+    ],
+    "Length": [
+      {
+        "name": "1300mm",
+        "id": "242"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "44W",
+        "id": "322"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "DC48V",
+        "id": "941"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": []
+}

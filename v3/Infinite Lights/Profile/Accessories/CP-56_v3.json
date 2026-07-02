@@ -1,0 +1,33 @@
+{
+  "product_name": "CP-56",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/695a3e830b639.png.png"
+  ],
+  "product_features": {
+    "Applicable product model": "Inward&Outward&Twist profile(CS3535/CS5035)",
+    "Installation method": "Ceiling & Pendant",
+    "Material": "SUS304",
+    "Size": "36.3*17*7.3mm",
+    "Quantity": "2 PCS/SET(with screws)",
+    "Note": "The clips only for Inward&Outward&Twist profile"
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

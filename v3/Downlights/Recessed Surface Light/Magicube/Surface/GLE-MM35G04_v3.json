@@ -1,0 +1,112 @@
+{
+  "product_name": "GLE-MM35G04",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/iVBXsmklEOSxBWWE.png"
+  ],
+  "product_features": {
+    "Material": "AL6063-T5，spraying surface",
+    "Coating": [
+      "White(RAL9003)",
+      "Black"
+    ],
+    "Lighting direction": "downward",
+    "Light efficiency": [
+      "68LM",
+      "W"
+    ],
+    "Beam angle": [
+      "30°",
+      "45°"
+    ],
+    "UGR": "≤13(X=4H,Y=8H)",
+    "Dimming": "Non-Dimming",
+    "Color tolerance": "SDCM≤3(ANSI)",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K"
+    ],
+    "Input voltage": "AC220-240V",
+    "Application": "Indoor",
+    "Installation": "Ceiling",
+    "Power installation": "Non dimming:Built-in",
+    "IP Rating": "IP20",
+    "Certification": [
+      "CE",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "45°",
+        "id": "71"
+      },
+      {
+        "name": "30°",
+        "id": "58"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "10W",
+        "id": "288"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ]
+  },
+  "constraints": []
+}

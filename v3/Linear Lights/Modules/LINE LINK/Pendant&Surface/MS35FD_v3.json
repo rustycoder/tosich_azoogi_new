@@ -1,0 +1,280 @@
+{
+  "product_name": "MS35FD",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/6849606314d21.png",
+    "https://file.colorsled.com/pro/catalog/product/684960650fae6.png",
+    "https://file.colorsled.com/pro/catalog/product/684960683afa7.png",
+    "https://file.colorsled.com/pro/catalog/product/6849606a99404.png"
+  ],
+  "product_features": {
+    "Material": [
+      "AL6063-T5",
+      "spraying surface"
+    ],
+    "Coating": [
+      "Matte black",
+      "Matte white"
+    ],
+    "Length": [
+      "1200",
+      "1800",
+      "2400mm"
+    ],
+    "Lighting direction": "Downward",
+    "Installation": [
+      "Pendant",
+      "Ceiling"
+    ],
+    "IP Rating": "IP20",
+    "Application": "Indoor",
+    "Light efficiency": "110LM/W(Normal),100LM/W(Normal-3CCT Dial switch)",
+    "140LM/W(High efficiency),130LM/W(High efficiency-3CCT Dial switch)": "",
+    "SDCM": "<3 Step (ANSI)",
+    "CRI": [
+      "80",
+      "90"
+    ],
+    "Dimming": [
+      "Non",
+      "1-10V",
+      "DALI2"
+    ],
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Regular",
+        "id": "1244"
+      },
+      {
+        "name": "Regular-3 CCT Dial Switch",
+        "id": "1404"
+      },
+      {
+        "name": "High efficiency",
+        "id": "709"
+      },
+      {
+        "name": "High efficiency-3 CCT Dial Switch",
+        "id": "933"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "No diffuser",
+        "id": "73"
+      },
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Length": [
+      {
+        "name": "1200mm",
+        "id": "145"
+      },
+      {
+        "name": "1800mm",
+        "id": "147"
+      },
+      {
+        "name": "2400mm",
+        "id": "149"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "22W",
+        "id": "355"
+      },
+      {
+        "name": "29W",
+        "id": "354"
+      },
+      {
+        "name": "33W",
+        "id": "357"
+      },
+      {
+        "name": "44W",
+        "id": "322"
+      },
+      {
+        "name": "45W",
+        "id": "348"
+      },
+      {
+        "name": "58W",
+        "id": "298"
+      }
+    ],
+    "Carrier Style": [
+      {
+        "name": "No carrier",
+        "id": "114"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "1-10V Dimming",
+        "id": "542"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      },
+      {
+        "name": "3000K-4200K-6500K",
+        "id": "1199"
+      }
+    ],
+    "Light Source Type": [
+      {
+        "name": "Constant Current Rigid PCB",
+        "id": "265"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC100-277V",
+        "id": "588"
+      },
+      {
+        "name": "AC220-240V",
+        "id": "1181"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "No end cap",
+        "id": "131"
+      },
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Package": [
+      {
+        "name": "Single-Unit Inner Box Packaging",
+        "id": "739"
+      }
+    ]
+  },
+  "constraints": {
+    "1244": [
+      1199,
+      355,
+      357,
+      322
+    ],
+    "709": [
+      1199,
+      354,
+      348,
+      298
+    ],
+    "1404": [
+      443,
+      444,
+      446,
+      442,
+      355,
+      357,
+      322
+    ],
+    "933": [
+      443,
+      444,
+      446,
+      442,
+      354,
+      348,
+      298
+    ],
+    "145": [
+      357,
+      322,
+      348,
+      298
+    ],
+    "147": [
+      355,
+      354,
+      322,
+      298
+    ],
+    "149": [
+      355,
+      354,
+      357,
+      348
+    ],
+    "588": [
+      1404,
+      933,
+      1199,
+      540
+    ]
+  }
+}

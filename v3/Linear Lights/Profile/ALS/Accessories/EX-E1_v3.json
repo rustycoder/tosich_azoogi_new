@@ -1,0 +1,44 @@
+{
+  "product_name": "EX-E1",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/vWUcbGmjJWaOGRhs.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": "LG7043/LR3735/LR3840(A)/LR3840(B)/LR3924/LR3943/LS1911C/LS1911K/SK10032/SK6013(A)/SK6013(B)/LE5535/LE6935(F)/LE9435/LR5535(A)/LR5535(B)/LS3360/LS4067/LS5470(F)/LS7977/M20FD/M20G(A)/M20G/M20I/M20S/R25FD/R25FP/R25G/R25KD/R25L/R35I/R35S/RNR30MJ/RNR30NJ/RNR30NK",
+    "Material process": [
+      "SPCC",
+      "spray paint"
+    ],
+    "Size": "80*10*2mm",
+    "Quantity": [
+      "10 PCS",
+      "set"
+    ],
+    "Other": "180° straight splicing bar,include 20pcs M5X4 headless hex socket screws, 20pcs M5X4 flat head hex socket screws, 1pc 2.5 Allen key(15mm), 1pc 2.5 Allen key(20mm)"
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "10 PCS/SET",
+        "id": "559"
+      }
+    ]
+  },
+  "constraints": []
+}

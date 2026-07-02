@@ -1,0 +1,59 @@
+{
+  "product_name": "CL-28",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/678f845502f73.png"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "MS3535",
+      "MS5035",
+      "MS7035",
+      "MS3570",
+      "MS5070",
+      "MS7070"
+    ],
+    "Installation method": "Ceiling",
+    "Material process": [
+      "zinc alloy",
+      "oil spraying"
+    ],
+    "Size": "22*12*5.6mm",
+    "Quantity": [
+      "2 PCS",
+      "SET"
+    ]
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

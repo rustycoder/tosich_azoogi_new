@@ -1,0 +1,175 @@
+{
+  "product_name": "DS8320-24V-23mm",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/684a99b650391.png"
+  ],
+  "product_features": {
+    "Applicable product model": "CS5035/CS5070/CE5035(stick a single strip)",
+    "CS7035/CS7070/CE7035(paste two strips placed parallel to each other)": "",
+    "Size": [
+      "3000*23*1.5mm",
+      "4000*23*1.5mm"
+    ],
+    "Cutting Unit": [
+      "50mm",
+      "16LEDs"
+    ],
+    "Input Voltage": "DC24V",
+    "Wattage": "",
+    "48W/M(2700K+6500K)@3M/roll": "",
+    "28.8W/M(2700K+6500K)@4M/roll": "",
+    "Typ.luminous flux": "",
+    "4000LM/M@RA80,2700K+6500K(4M/roll)": "",
+    "6700LM/M@RA80,2700K+6500K(3M/roll)": "",
+    "CCT": "2700K+6500K",
+    "CRI": [
+      "80",
+      "90"
+    ],
+    "Other": [
+      "Outer diameter 6mm",
+      "18# wire diameter",
+      "brown-blue-green 3PIN crystal wire"
+    ]
+  },
+  "options": {
+    "Wattage": [
+      {
+        "name": "28.8W/M",
+        "id": "1514"
+      },
+      {
+        "name": "48W/M",
+        "id": "424"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K+6500K",
+        "id": "500"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "No",
+        "id": "666"
+      },
+      {
+        "name": "One end",
+        "id": "667"
+      },
+      {
+        "name": "Dual ends",
+        "id": "668"
+      }
+    ],
+    "Wire Length": [
+      {
+        "name": "50CM",
+        "id": "602"
+      },
+      {
+        "name": "100CM",
+        "id": "597"
+      },
+      {
+        "name": "200CM",
+        "id": "598"
+      },
+      {
+        "name": "No",
+        "id": "599"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Strip Length": [
+      {
+        "name": "3M",
+        "id": "662"
+      },
+      {
+        "name": "4M",
+        "id": "661"
+      }
+    ],
+    "Silk Printing": [
+      {
+        "name": "COLORS",
+        "id": "643"
+      },
+      {
+        "name": "Neutral",
+        "id": "641"
+      }
+    ],
+    "IP Process": [
+      {
+        "name": "NO(not waterproof)",
+        "id": "690"
+      }
+    ],
+    "Tape Type": [
+      {
+        "name": "White",
+        "id": "699"
+      }
+    ],
+    "Wire Type": [
+      {
+        "name": "Crystal wires",
+        "id": "890"
+      },
+      {
+        "name": "No",
+        "id": "704"
+      }
+    ]
+  },
+  "constraints": {
+    "1514": [
+      662
+    ],
+    "424": [
+      661
+    ],
+    "643": [
+      552
+    ],
+    "641": [
+      553
+    ],
+    "666": [
+      602,
+      597,
+      598,
+      890
+    ],
+    "667": [
+      599,
+      704
+    ],
+    "668": [
+      599,
+      704
+    ]
+  }
+}

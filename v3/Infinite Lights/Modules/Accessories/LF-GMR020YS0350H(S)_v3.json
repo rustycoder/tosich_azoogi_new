@@ -1,0 +1,83 @@
+{
+  "product_name": "LF-GMR020YS0350H(S)",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67c9481862cb7.png"
+  ],
+  "product_features": {
+    "Dimming": "Non-Dimming",
+    "Product name": "LF-GMR020YS0350H(S)",
+    "Output power": "20W",
+    "Output current": "0.2-0.35A(50mA per dip-switch)",
+    "Product size": "168*30*21mm",
+    "Input voltage": "AC220-240V",
+    "Output voltage": "DC20-56V",
+    "PF": "PF≥0.9",
+    "IP": "IP20",
+    "Material": "Metal housing",
+    "Certification": [
+      "CCC",
+      "ENEC",
+      "CE",
+      "RCM",
+      "UKCA"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "L168*W30.0*H21.0mm",
+        "id": "1395"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "20W",
+        "id": "312"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC220-240V",
+        "id": "1181"
+      }
+    ],
+    "Output Voltage": [
+      {
+        "name": "DC20-56V",
+        "id": "1366"
+      }
+    ],
+    "Output Current": [
+      {
+        "name": "0.2-0.35A",
+        "id": "1372"
+      }
+    ],
+    "IP Rating": [
+      {
+        "name": "IP20",
+        "id": "629"
+      }
+    ],
+    "PF Value": [
+      {
+        "name": "≥0.9",
+        "id": "1173"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

@@ -1,0 +1,183 @@
+{
+  "product_name": "AE75L1",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/68898620218c1.png"
+  ],
+  "product_features": {
+    "Material": [
+      "AL1060",
+      "spraying surface"
+    ],
+    "Driver Installation": "Remote",
+    "Lighting direction": "downward",
+    "Beam angle": "Wall washer(40°)",
+    "UGR(X=4H, Y=8H)": [
+      "",
+      ""
+    ],
+    "Opening size": "φ75mm",
+    "Dimming": [
+      "Non",
+      "0-10V",
+      "Triac",
+      "DALI"
+    ],
+    "SDCM(Light source)": "<3 Step(ANSI)",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K"
+    ],
+    "Input voltage": "AC220-240V",
+    "Application": "Indoor",
+    "Installation": "Recessed",
+    "IP Rating": "IP20",
+    "Certification": [
+      "CE",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Wattage": [
+      {
+        "name": "12W",
+        "id": "291"
+      },
+      {
+        "name": "15W",
+        "id": "294"
+      },
+      {
+        "name": "17W",
+        "id": "330"
+      },
+      {
+        "name": "9W",
+        "id": "349"
+      }
+    ],
+    "Beam Angle": [
+      {
+        "name": "Wall Washer",
+        "id": "1561"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black(Frame)",
+        "id": "873"
+      },
+      {
+        "name": "White(Frame)",
+        "id": "871"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Casambi",
+        "id": "539"
+      },
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "0-10V Dimming",
+        "id": "1397"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      },
+      {
+        "name": "Triac Dimming",
+        "id": "1539"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      }
+    ],
+    "Reflector Colour": [
+      {
+        "name": "Mirror",
+        "id": "612"
+      },
+      {
+        "name": "Black chrome",
+        "id": "611"
+      }
+    ],
+    "IP Rating": [
+      {
+        "name": "IP20",
+        "id": "629"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "With cable of drive input",
+        "id": "782"
+      },
+      {
+        "name": "With junction box",
+        "id": "786"
+      }
+    ],
+    "User Manual": [
+      {
+        "name": "EN",
+        "id": "608"
+      },
+      {
+        "name": "CN",
+        "id": "607"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": {
+    "873": [
+      612
+    ],
+    "871": [
+      611
+    ],
+    "539": [
+      786
+    ]
+  }
+}

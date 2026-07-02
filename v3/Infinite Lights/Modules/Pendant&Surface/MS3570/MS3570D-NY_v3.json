@@ -1,0 +1,233 @@
+{
+  "product_name": "MS3570D-NY",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/68ef9bb310792.png"
+  ],
+  "product_features": {
+    "Installation": "Pendant&Ceiling",
+    "Material": [
+      "AL6063-T5",
+      "spraying surface"
+    ],
+    "Coating": "Silver(RAL9006),Black(RAL9005),White(RAL9003)",
+    "Power Supply": "External power supply",
+    "Light efficiency": "100LM/W(Regular)，120LM/W(High-Efficiency)",
+    "SDCM": "≤3",
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ROHS",
+      "REACH",
+      "CB",
+      "ENEC",
+      "LM-80"
+    ]
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Regular",
+        "id": "1244"
+      },
+      {
+        "name": "High efficiency",
+        "id": "709"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Length": [
+      {
+        "name": "D450mm",
+        "id": "1204"
+      },
+      {
+        "name": "D600mm",
+        "id": "1217"
+      },
+      {
+        "name": "D800mm",
+        "id": "1218"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "10W",
+        "id": "288"
+      },
+      {
+        "name": "18W",
+        "id": "290"
+      },
+      {
+        "name": "26W",
+        "id": "343"
+      }
+    ],
+    "Input Current": [
+      {
+        "name": "0.25A",
+        "id": "1434"
+      },
+      {
+        "name": "0.45A",
+        "id": "1435"
+      },
+      {
+        "name": "0.65A",
+        "id": "1436"
+      }
+    ],
+    "Corner Angle": [
+      {
+        "name": "60°",
+        "id": "1351"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Casambi",
+        "id": "539"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "DC36V",
+        "id": "1358"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": {
+    "1204": [
+      290,
+      343,
+      1435,
+      1436
+    ],
+    "1217": [
+      288,
+      343,
+      1434,
+      1436
+    ],
+    "1218": [
+      288,
+      290,
+      1434,
+      1435
+    ],
+    "288": [
+      1217,
+      1218,
+      1435,
+      1436
+    ],
+    "290": [
+      1204,
+      1218,
+      1434,
+      1436
+    ],
+    "343": [
+      1204,
+      1217,
+      1434,
+      1435
+    ],
+    "1434": [
+      1217,
+      1218,
+      290,
+      343
+    ],
+    "1435": [
+      1204,
+      1218,
+      288,
+      343
+    ],
+    "1436": [
+      1204,
+      1217,
+      288,
+      290
+    ],
+    "709": [
+      445,
+      441
+    ],
+    "445": [
+      709
+    ],
+    "441": [
+      709
+    ]
+  }
+}

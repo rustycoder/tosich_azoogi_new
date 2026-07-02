@@ -1,0 +1,57 @@
+{
+  "product_name": "EC-BR2013(A)",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/69c502750c33f.png"
+  ],
+  "product_features": {
+    "Applicable product model": "BR2013(BA)/BR2013(A)",
+    "Material process": [
+      "PC",
+      "oil spraying"
+    ],
+    "Size": "20*13*8.5mm",
+    "Quantity": [
+      "2PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      },
+      {
+        "name": "End cap with hole",
+        "id": "129"
+      },
+      {
+        "name": "Single end with hole",
+        "id": "128"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

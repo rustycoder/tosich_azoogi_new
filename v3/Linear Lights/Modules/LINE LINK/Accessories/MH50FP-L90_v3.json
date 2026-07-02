@@ -1,0 +1,174 @@
+{
+  "product_name": "MH50FP-L90",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/68d672556bdf0.png"
+  ],
+  "product_features": {
+    "Applicable product model": "MH50FP",
+    "Installation method": "L-shaped 90° splicing",
+    "Material process": [
+      "AL6063-T5",
+      "spraying"
+    ],
+    "Coating": "Black(RAL9006), White(RAL9003)",
+    "Diffuser Nature": "Prismatic",
+    "Light efficiency": "110LM/W(Regular),100LM/W(Regular-3CCT Dial switch)",
+    "135LM/W(High efficiency),115LM/W(High efficiency-3CCT Dial switch)": "",
+    "Light source": "Constant Current Rigid PCB",
+    "Size": "L300*W50*H65mm"
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Regular",
+        "id": "1244"
+      },
+      {
+        "name": "Regular-3 CCT Dial Switch",
+        "id": "1404"
+      },
+      {
+        "name": "High efficiency",
+        "id": "709"
+      },
+      {
+        "name": "High efficiency-3 CCT Dial Switch",
+        "id": "933"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "Prismatic",
+        "id": "60"
+      }
+    ],
+    "Length": [
+      {
+        "name": "300mm",
+        "id": "216"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "18W",
+        "id": "290"
+      }
+    ],
+    "Carrier Style": [
+      {
+        "name": "No carrier",
+        "id": "114"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "1-10V Dimming",
+        "id": "542"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      },
+      {
+        "name": "3000K-4200K-6500K",
+        "id": "1199"
+      }
+    ],
+    "Light Source Type": [
+      {
+        "name": "Constant Current Rigid PCB",
+        "id": "265"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC220-240V",
+        "id": "1181"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "No end cap",
+        "id": "131"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": {
+    "1244": [
+      1199
+    ],
+    "709": [
+      1199
+    ],
+    "933": [
+      442,
+      446,
+      444,
+      443
+    ],
+    "1404": [
+      442,
+      446,
+      444,
+      443
+    ]
+  }
+}

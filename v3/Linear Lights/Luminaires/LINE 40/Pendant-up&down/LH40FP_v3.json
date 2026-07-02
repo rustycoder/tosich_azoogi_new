@@ -1,0 +1,308 @@
+{
+  "product_name": "LH40FP",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/ITRJsimjVgLNHyDq.png",
+    "https://file.colorsled.com/pro/catalog/product_img/ouoRdweVSJHNTJSt.jpg"
+  ],
+  "product_features": {
+    "Material": "AL6063-T5，spraying surface",
+    "Coating": [
+      "Black(RAL9005)",
+      "White(RAL9003)"
+    ],
+    "Lighting direction": "upward & downward",
+    "Light efficiency": "90LM/W(CCT tunable) /",
+    "100LM/W(Normal&Emergency&Presence sensing) / 130LM/W(High efficiency)": "",
+    "Dimming": [
+      "Non",
+      "DALI-2+PUSH",
+      "1-10V"
+    ],
+    "Length": "1200mm/1500mm/1800mm optional (other length on request)",
+    "Color tolerance": "SDCM≤3(ANSI)",
+    "CRI": [
+      "80",
+      "90"
+    ],
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K",
+      "5000K",
+      "6500K",
+      "3000-6500K"
+    ],
+    "Input voltage": "AC200-240V",
+    "Application": "Indoor",
+    "Installation": "Pendant",
+    "IP Rating": "IP20",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years (Emergency model: 3 years)"
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Normal",
+        "id": "708"
+      },
+      {
+        "name": "High efficiency",
+        "id": "709"
+      },
+      {
+        "name": "3 CCT tunable(Dial switch)",
+        "id": "710"
+      },
+      {
+        "name": "Emergency",
+        "id": "711"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "Prismatic",
+        "id": "60"
+      }
+    ],
+    "Length": [
+      {
+        "name": "1200mm",
+        "id": "145"
+      },
+      {
+        "name": "1500mm",
+        "id": "146"
+      },
+      {
+        "name": "1800mm",
+        "id": "147"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "60W (Up:20W/Down:40W)",
+        "id": "306"
+      },
+      {
+        "name": "46W (Up:15W/Down:31W)",
+        "id": "315"
+      },
+      {
+        "name": "39W (Up:13W/Down:26W)",
+        "id": "316"
+      },
+      {
+        "name": "37W (Up:12W/Down:25W)",
+        "id": "1574"
+      },
+      {
+        "name": "46W (Up:14W/Down:32W)",
+        "id": "1575"
+      },
+      {
+        "name": "55W (Up:17W/Down:38W)",
+        "id": "1576"
+      }
+    ],
+    "Carrier Style": [
+      {
+        "name": "Flat carrier",
+        "id": "115"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Matt Orange",
+        "id": "879"
+      },
+      {
+        "name": "Matt Blue",
+        "id": "876"
+      },
+      {
+        "name": "Yellow",
+        "id": "874"
+      },
+      {
+        "name": "Champagne Gold",
+        "id": "872"
+      },
+      {
+        "name": "Rose gold",
+        "id": "878"
+      },
+      {
+        "name": "Matt Green",
+        "id": "877"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "1-10V Dimming",
+        "id": "542"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      },
+      {
+        "name": "3000K-6500K",
+        "id": "454"
+      }
+    ],
+    "Light Source Type": [
+      {
+        "name": "Constant Current Rigid PCB",
+        "id": "265"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC200-240V",
+        "id": "585"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Package": [
+      {
+        "name": "COLORS Individual",
+        "id": "551"
+      }
+    ]
+  },
+  "constraints": {
+    "145": [
+      315,
+      306,
+      1575,
+      1576
+    ],
+    "146": [
+      316,
+      306,
+      1574,
+      1576
+    ],
+    "147": [
+      316,
+      315,
+      1574,
+      1575
+    ],
+    "708": [
+      454
+    ],
+    "709": [
+      454,
+      445,
+      441,
+      454
+    ],
+    "711": [
+      454,
+      146,
+      147
+    ],
+    "710": [
+      443,
+      444,
+      445,
+      446,
+      441,
+      442
+    ],
+    "1574": [
+      708,
+      710,
+      711
+    ],
+    "1575": [
+      708,
+      710,
+      711
+    ],
+    "1576": [
+      708,
+      710,
+      711
+    ],
+    "316": [
+      709
+    ],
+    "315": [
+      709
+    ],
+    "306": [
+      709
+    ]
+  }
+}

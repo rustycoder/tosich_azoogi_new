@@ -1,0 +1,96 @@
+{
+  "product_name": "RF-K2X75",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/692520b014403.png",
+    "https://file.colorsled.com/pro/catalog/product/692520af89dfe.png",
+    "https://file.colorsled.com/pro/catalog/product/692520af8be66.png",
+    "https://file.colorsled.com/pro/catalog/product/692520af91025.png",
+    "https://file.colorsled.com/pro/catalog/product/692520b00b98f.png",
+    "https://file.colorsled.com/pro/catalog/product/692520af80ac3.png",
+    "https://file.colorsled.com/pro/catalog/product/692520af79e54.png",
+    "https://file.colorsled.com/pro/catalog/product/692520b0076d7.png",
+    "https://file.colorsled.com/pro/catalog/product/692520b001f32.png"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "K2E75L2",
+      "K2E75V1"
+    ],
+    "Installation method": "recessed",
+    "Material process": [
+      "aluminum",
+      "electroplating or oil spraying"
+    ],
+    "Size": "φ69.4*15.8mm",
+    "Quantity": [
+      "1PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Reflector Type": [
+      {
+        "name": "Round",
+        "id": "733"
+      },
+      {
+        "name": "Pin hole",
+        "id": "767"
+      },
+      {
+        "name": "Oval",
+        "id": "772"
+      }
+    ],
+    "Reflector Colour": [
+      {
+        "name": "Mirror",
+        "id": "612"
+      },
+      {
+        "name": "Matte White",
+        "id": "609"
+      },
+      {
+        "name": "Matte Black",
+        "id": "610"
+      },
+      {
+        "name": "Champagne Gold",
+        "id": "776"
+      },
+      {
+        "name": "Black chrome",
+        "id": "611"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": {
+    "767": [
+      612,
+      611,
+      776
+    ],
+    "772": [
+      612,
+      611,
+      776
+    ]
+  }
+}

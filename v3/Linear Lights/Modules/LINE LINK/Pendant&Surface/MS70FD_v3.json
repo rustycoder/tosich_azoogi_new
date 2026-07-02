@@ -1,0 +1,270 @@
+{
+  "product_name": "MS70FD",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/6849610391820.png",
+    "https://file.colorsled.com/pro/catalog/product/68496105500dd.png",
+    "https://file.colorsled.com/pro/catalog/product/6849610786eee.png",
+    "https://file.colorsled.com/pro/catalog/product/684961097a939.png"
+  ],
+  "product_features": {
+    "Material": [
+      "AL6063-T5",
+      "spraying surface"
+    ],
+    "Coating": [
+      "Matte black",
+      "Matte white"
+    ],
+    "Length": [
+      "1200",
+      "1800",
+      "2400mm"
+    ],
+    "Lighting direction": "Downward",
+    "Installation": [
+      "Pendant",
+      "Ceiling"
+    ],
+    "IP Rating": "IP20",
+    "Application": "Indoor",
+    "Light efficiency": "115LM/W(Regular),120LM/W(Regular-3CCT Dial switch)",
+    "150LM/W(High efficiency),145LM/W(High efficiency-3CCT Dial switch)": "",
+    "SDCM": "<3 Step (ANSI)",
+    "CRI": [
+      "80",
+      "90"
+    ],
+    "Dimming": [
+      "Non",
+      "1-10V",
+      "DALI2"
+    ],
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Regular",
+        "id": "1244"
+      },
+      {
+        "name": "Regular-3 CCT Dial Switch",
+        "id": "1404"
+      },
+      {
+        "name": "High efficiency",
+        "id": "709"
+      },
+      {
+        "name": "High efficiency-3 CCT Dial Switch",
+        "id": "933"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      },
+      {
+        "name": "No diffuser",
+        "id": "73"
+      }
+    ],
+    "Length": [
+      {
+        "name": "1200mm",
+        "id": "145"
+      },
+      {
+        "name": "1800mm",
+        "id": "147"
+      },
+      {
+        "name": "2400mm",
+        "id": "149"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "36W",
+        "id": "344"
+      },
+      {
+        "name": "47W",
+        "id": "943"
+      },
+      {
+        "name": "54W",
+        "id": "1266"
+      },
+      {
+        "name": "70W",
+        "id": "308"
+      },
+      {
+        "name": "72W",
+        "id": "284"
+      },
+      {
+        "name": "90W",
+        "id": "273"
+      }
+    ],
+    "Carrier Style": [
+      {
+        "name": "No carrier",
+        "id": "114"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "1-10V Dimming",
+        "id": "542"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      },
+      {
+        "name": "3000K-4200K-6500K",
+        "id": "1199"
+      }
+    ],
+    "Light Source Type": [
+      {
+        "name": "Constant Current Rigid PCB",
+        "id": "265"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC220-240V",
+        "id": "1181"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "No end cap",
+        "id": "131"
+      },
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Package": [
+      {
+        "name": "Single-Unit Inner Box Packaging",
+        "id": "739"
+      }
+    ]
+  },
+  "constraints": {
+    "1244": [
+      1199,
+      344,
+      1266,
+      284
+    ],
+    "709": [
+      1199,
+      943,
+      308,
+      273
+    ],
+    "1404": [
+      443,
+      444,
+      446,
+      442,
+      344,
+      1266,
+      284
+    ],
+    "933": [
+      443,
+      444,
+      446,
+      442,
+      943,
+      308,
+      273
+    ],
+    "145": [
+      1266,
+      308,
+      284,
+      273
+    ],
+    "147": [
+      344,
+      943,
+      284,
+      273
+    ],
+    "149": [
+      344,
+      943,
+      1266,
+      308
+    ]
+  }
+}

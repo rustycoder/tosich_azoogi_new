@@ -1,0 +1,57 @@
+{
+  "product_name": "EC-LS40",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67fe0492698c5.png"
+  ],
+  "product_features": {
+    "Applicable product model": "PR-LS40",
+    "Material process": [
+      "Aluminum",
+      "powder-coated"
+    ],
+    "Size": "L83*W45*H10.5mm",
+    "Quantity": [
+      "2PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

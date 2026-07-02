@@ -1,0 +1,143 @@
+{
+  "product_name": "LE2409",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/yisRnbEcakwfrCam.png",
+    "https://file.colorsled.com/pro/catalog/product_img/DjBLDGDCueJqqNWd.jpg",
+    "https://file.colorsled.com/pro/catalog/product_img/KzoTIJGSwSnEfHOC.jpg",
+    "https://file.colorsled.com/pro/catalog/product_img/IJMmXSrPpzxRtsPU.jpg"
+  ],
+  "product_features": {
+    "Material": [
+      "AL6063-T5,spraying surface",
+      "anodizing"
+    ],
+    "Coating": "Silver anodized(RAL9006),Black(RAL9005),White(RAL9003)",
+    "Length": "2500mm/0-2500mm customizable (Other lengths on request)",
+    "Application": "Indoor",
+    "Installation": "Recessed",
+    "IP Rating": "IP20",
+    "Certification": [
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Length": [
+      {
+        "name": "2500mm",
+        "id": "134"
+      },
+      {
+        "name": "Customized Length",
+        "id": "154"
+      }
+    ],
+    "Carrier Style": [
+      {
+        "name": "No carrier",
+        "id": "114"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      },
+      {
+        "name": "End cap with hole",
+        "id": "129"
+      },
+      {
+        "name": "Single end with hole (left)",
+        "id": "718"
+      },
+      {
+        "name": "Single end with hole (right)",
+        "id": "130"
+      },
+      {
+        "name": "No end cap",
+        "id": "131"
+      }
+    ],
+    "End caps Quantity": [
+      {
+        "name": "2PCS end caps",
+        "id": "572"
+      },
+      {
+        "name": "4PCS end caps",
+        "id": "573"
+      },
+      {
+        "name": "No end cap",
+        "id": "571"
+      }
+    ],
+    "Accessory Quantity": [
+      {
+        "name": "No clip",
+        "id": "576"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Package": [
+      {
+        "name": "COLORS Individual",
+        "id": "551"
+      },
+      {
+        "name": "COLORS Whole",
+        "id": "550"
+      }
+    ]
+  },
+  "constraints": {
+    "127": [
+      571
+    ],
+    "129": [
+      571
+    ],
+    "718": [
+      571
+    ],
+    "130": [
+      571
+    ],
+    "131": [
+      572,
+      573
+    ]
+  }
+}

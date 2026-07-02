@@ -1,0 +1,203 @@
+{
+  "product_name": "MS3535D-L",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/68ef992055b65.png",
+    "https://file.colorsled.com/pro/catalog/product/68ef9922e3442.png",
+    "https://file.colorsled.com/pro/catalog/product/68ef99271ba53.png"
+  ],
+  "product_features": {
+    "Installation": "Pendant&Ceiling",
+    "Material": [
+      "AL6063-T5",
+      "spraying surface"
+    ],
+    "Coating": "Silver(RAL9006),Black(RAL9005),White(RAL9003)",
+    "Power Supply": "External power supply",
+    "Light efficiency": "100LM/W(Regular)，120LM/W(High-Efficiency)",
+    "SDCM": "≤3",
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ROHS",
+      "REACH",
+      "CB",
+      "ENEC",
+      "LM-80"
+    ]
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Regular",
+        "id": "1244"
+      },
+      {
+        "name": "High efficiency",
+        "id": "709"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Length": [
+      {
+        "name": "300mm",
+        "id": "216"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "10W",
+        "id": "288"
+      },
+      {
+        "name": "12W",
+        "id": "291"
+      }
+    ],
+    "Input Current": [
+      {
+        "name": "0.26A",
+        "id": "1430"
+      },
+      {
+        "name": "0.3A",
+        "id": "1431"
+      }
+    ],
+    "Corner Angle": [
+      {
+        "name": "60°",
+        "id": "1351"
+      },
+      {
+        "name": "90°",
+        "id": "1352"
+      },
+      {
+        "name": "120°",
+        "id": "1353"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Casambi",
+        "id": "539"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "DC36V",
+        "id": "1358"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": {
+    "1351": [
+      291,
+      1431
+    ],
+    "1352": [
+      288,
+      1430
+    ],
+    "1353": [
+      288,
+      1430
+    ],
+    "288": [
+      1352,
+      1353,
+      1431
+    ],
+    "291": [
+      1351,
+      1430
+    ],
+    "1430": [
+      1352,
+      1353,
+      291
+    ],
+    "1431": [
+      1351,
+      288
+    ],
+    "709": [
+      445,
+      441
+    ],
+    "445": [
+      709
+    ],
+    "441": [
+      709
+    ]
+  }
+}

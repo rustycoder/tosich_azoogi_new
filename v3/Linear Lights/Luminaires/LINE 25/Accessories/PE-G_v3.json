@@ -1,0 +1,78 @@
+{
+  "product_name": "PE-G",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67370daf0791b.jpg",
+    "https://file.colorsled.com/pro/catalog/product/6878bf26e212d.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": "LH25",
+    "Installation method": "pendant",
+    "Material process": [
+      "",
+      ""
+    ],
+    "Size": [
+      "",
+      ""
+    ],
+    "Quantity": [
+      "2PCS",
+      "set"
+    ],
+    "Other": [
+      "1PCS 2m wire rope",
+      "1PCS 2m 2-in-1 cable",
+      "1PCS small-head cable locker",
+      "1PCS large-head cable locker",
+      "2PCS fixing plate",
+      "2PCS PM3*13.5 screws",
+      "2PCS crimping screws",
+      "2PCS crimping screw nuts"
+    ]
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "2M",
+        "id": "140"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Pendant Type": [
+      {
+        "name": "Without junction box",
+        "id": "742"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

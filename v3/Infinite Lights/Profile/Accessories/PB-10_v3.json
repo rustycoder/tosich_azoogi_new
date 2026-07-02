@@ -1,0 +1,65 @@
+{
+  "product_name": "PB-10",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/684bf0dfc9f37.png"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "CS3535",
+      "CS5035",
+      "CS7035",
+      "CS3570",
+      "CS5070",
+      "CS7070"
+    ],
+    "Installation method": "pendant(Power box with rod )",
+    "Material process": [
+      "SPCC",
+      "powder spraying"
+    ],
+    "Size": "Power Box:  L400*W55*H50mm",
+    "Rod": "1-2 meter adjustable",
+    "Wire": "D3*2000mm",
+    "Quantity": [
+      "1PCS",
+      "set"
+    ],
+    "Note": "",
+    "1. Including 1PCS Power Box+1PCS input wire+1PCS rod; Power supply not included.": "",
+    "2. One power box holds one power supply": "",
+    "3. Need to order separate clip(CP-XX) to use with it": ""
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

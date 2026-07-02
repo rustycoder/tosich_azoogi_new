@@ -1,0 +1,45 @@
+{
+  "product_name": "RE-G2SR50S2",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/686c77eb452bd.png"
+  ],
+  "product_features": {
+    "Applicable product model": "G2SR50S2",
+    "Installation method": "recessed",
+    "Material process": [
+      "aluminum",
+      "oil spraying"
+    ],
+    "Size": "109*95*27mm",
+    "Quantity": [
+      "1PCS",
+      "set"
+    ],
+    "Other": "Including 1pcs recessed part of the G2SR50S2 downlight and 4pcs  screws."
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "White(Frame)",
+        "id": "871"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

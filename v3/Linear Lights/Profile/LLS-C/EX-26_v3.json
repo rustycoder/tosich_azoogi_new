@@ -1,0 +1,60 @@
+{
+  "product_name": "EX-26",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/6800a10c7532f.png"
+  ],
+  "product_features": {
+    "Applicable product model": "AS3535",
+    "Material process": [
+      "SPCC",
+      "oil spraying"
+    ],
+    "Inner Size": [
+      "25*23.5*4.6mm",
+      "Outer Size:28*10*2mm"
+    ],
+    "Quantity": [
+      "3 PCS",
+      "set"
+    ],
+    "Other": [
+      "Include 2pcs side splicing bars",
+      "1pc back splicing bar",
+      "6pcs screws",
+      "1pc Hexagon wrench"
+    ]
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "3 PCS/SET",
+        "id": "558"
+      }
+    ]
+  },
+  "constraints": []
+}

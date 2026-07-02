@@ -1,0 +1,116 @@
+{
+  "product_name": "BR2013(A)",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/69b381ab3968c.png"
+  ],
+  "product_features": {
+    "Material": [
+      "AL6063-T5",
+      "anodizing"
+    ],
+    "Coating": "Silver anodized(RAL9006)",
+    "Length": "2500mm (Other lengths on request)",
+    "Application": "Indoor",
+    "Installation": "Trimless recessed",
+    "IP Rating": "IP20",
+    "Certification": [
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Length": [
+      {
+        "name": "2500mm",
+        "id": "134"
+      }
+    ],
+    "Carrier Style": [
+      {
+        "name": "No carrier",
+        "id": "114"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "No end cap",
+        "id": "131"
+      },
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      },
+      {
+        "name": "End cap with hole",
+        "id": "129"
+      },
+      {
+        "name": "Single end with hole",
+        "id": "128"
+      }
+    ],
+    "End caps Quantity": [
+      {
+        "name": "No end cap",
+        "id": "571"
+      },
+      {
+        "name": "2PCS end caps",
+        "id": "572"
+      },
+      {
+        "name": "4PCS end caps",
+        "id": "573"
+      }
+    ],
+    "Accessory Quantity": [
+      {
+        "name": "No screw",
+        "id": "581"
+      },
+      {
+        "name": "8PCS screws",
+        "id": "577"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Package": [
+      {
+        "name": "Two per packge",
+        "id": "817"
+      },
+      {
+        "name": "Bulk Packaging",
+        "id": "761"
+      }
+    ]
+  },
+  "constraints": {
+    "131": [
+      572,
+      573
+    ]
+  }
+}

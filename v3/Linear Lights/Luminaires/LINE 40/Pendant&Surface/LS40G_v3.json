@@ -1,0 +1,298 @@
+{
+  "product_name": "LS40G",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/tYKAEjKHUZKDHhds.png"
+  ],
+  "product_features": {
+    "Material": "AL6063-T5，spraying surface",
+    "Coating": [
+      "Black(RAL9005)",
+      "White(RAL9003)"
+    ],
+    "Lighting direction": "downward",
+    "Light efficiency": [
+      "80",
+      "100 LM",
+      "W"
+    ],
+    "Grille angle": [
+      "18°",
+      "30°",
+      "45°"
+    ],
+    "UGR": "≤ 10/13 (X=4H, Y=8H)",
+    "Dimming": [
+      "Non",
+      "DALI-2+PUSH",
+      "1-10V"
+    ],
+    "Length": "1200mm/1500mm/1700mm/2300mm optional (other length on request)",
+    "CRI": [
+      "80",
+      "90"
+    ],
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K",
+      "5000K",
+      "6500K",
+      "2700-6500K"
+    ],
+    "Input voltage": "AC200-240V",
+    "Application": "Indoor",
+    "Installation": [
+      "Pendant",
+      "Ceiling"
+    ],
+    "IP Rating": "IP20",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Normal",
+        "id": "708"
+      },
+      {
+        "name": "3 CCT tunable(Dial switch)",
+        "id": "710"
+      },
+      {
+        "name": "Emergency",
+        "id": "711"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "Grating 45°",
+        "id": "94"
+      },
+      {
+        "name": "Grating 30°",
+        "id": "76"
+      },
+      {
+        "name": "Grating 18°",
+        "id": "95"
+      }
+    ],
+    "Length": [
+      {
+        "name": "1200mm",
+        "id": "145"
+      },
+      {
+        "name": "1500mm",
+        "id": "146"
+      },
+      {
+        "name": "1700mm",
+        "id": "217"
+      },
+      {
+        "name": "2300mm",
+        "id": "148"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "60W",
+        "id": "283"
+      },
+      {
+        "name": "44W",
+        "id": "322"
+      },
+      {
+        "name": "30W",
+        "id": "311"
+      },
+      {
+        "name": "40W",
+        "id": "310"
+      }
+    ],
+    "Carrier Style": [
+      {
+        "name": "Flat carrier",
+        "id": "115"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Matt Orange",
+        "id": "879"
+      },
+      {
+        "name": "Matt Blue",
+        "id": "876"
+      },
+      {
+        "name": "Yellow",
+        "id": "874"
+      },
+      {
+        "name": "Champagne Gold",
+        "id": "872"
+      },
+      {
+        "name": "Rose gold",
+        "id": "878"
+      },
+      {
+        "name": "Matt Green",
+        "id": "877"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "1-10V Dimming",
+        "id": "542"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      },
+      {
+        "name": "2700K-6500K",
+        "id": "455"
+      }
+    ],
+    "Light Source Type": [
+      {
+        "name": "Constant Current Rigid PCB",
+        "id": "265"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC200-240V",
+        "id": "585"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Package": [
+      {
+        "name": "COLORS Individual",
+        "id": "551"
+      }
+    ]
+  },
+  "constraints": {
+    "145": [
+      310,
+      322,
+      283
+    ],
+    "146": [
+      311,
+      322,
+      283
+    ],
+    "217": [
+      311,
+      310,
+      283
+    ],
+    "148": [
+      311,
+      310,
+      322
+    ],
+    "708": [
+      455
+    ],
+    "710": [
+      443,
+      444,
+      445,
+      446,
+      441,
+      442
+    ],
+    "711": [
+      146,
+      217,
+      148,
+      455
+    ],
+    "535": [
+      441,
+      442
+    ],
+    "534": [
+      710
+    ]
+  }
+}

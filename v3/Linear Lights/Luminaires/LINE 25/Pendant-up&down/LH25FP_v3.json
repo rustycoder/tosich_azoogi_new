@@ -1,0 +1,170 @@
+{
+  "product_name": "LH25FP",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67fcc86ec4cfc.png"
+  ],
+  "product_features": {
+    "Material": [
+      "AL6063-T5",
+      "spraying surface"
+    ],
+    "Coating": "Black(RAL9005),White(RAL9003)",
+    "Lighting direction": "upward & downward",
+    "Light efficiency": [
+      "90LM",
+      "W"
+    ],
+    "Dimming": "no power supply",
+    "Length": "600mm/1200mm/1500mm/1800mm/2400mm optional (other length on request)",
+    "Color tolerance": "SDCM≤3(ANSI)",
+    "CRI": [
+      "80",
+      "90"
+    ],
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K",
+      "5000K",
+      "6500K"
+    ],
+    "Input voltage": "DC24V",
+    "Application": "Indoor",
+    "Installation": "Pendant",
+    "IP Rating": "IP20",
+    "Certification": [
+      "CE",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "Prismatic",
+        "id": "60"
+      }
+    ],
+    "Length": [
+      {
+        "name": "600mm",
+        "id": "153"
+      },
+      {
+        "name": "1200mm",
+        "id": "145"
+      },
+      {
+        "name": "1500mm",
+        "id": "146"
+      },
+      {
+        "name": "1800mm",
+        "id": "147"
+      },
+      {
+        "name": "2400mm",
+        "id": "149"
+      },
+      {
+        "name": "Customized Length",
+        "id": "154"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "40W/M",
+        "id": "299"
+      }
+    ],
+    "Carrier Style": [
+      {
+        "name": "No carrier",
+        "id": "114"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Casambi",
+        "id": "539"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      }
+    ],
+    "Light Source Type": [
+      {
+        "name": "Flexible strip",
+        "id": "263"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Package": [
+      {
+        "name": "COLORS Individual",
+        "id": "551"
+      }
+    ]
+  },
+  "constraints": []
+}

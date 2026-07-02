@@ -775,3 +775,11 @@
   color: #ffffff;
   font-weight: 400;
 }
+
+/* Configurator Button Disabled State */
+.config-btn:disabled, .config-btn.disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  border-color: var(--border-light);
+  pointer-events: none;
+}

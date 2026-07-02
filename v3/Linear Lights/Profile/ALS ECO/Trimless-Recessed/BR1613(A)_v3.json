@@ -1,0 +1,137 @@
+{
+  "product_name": "BR1613(A)",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/XeBNapDHdWIKzYgc.jpg"
+  ],
+  "product_features": {
+    "Material": [
+      "AL6063-T5,spraying surface",
+      "anodizing"
+    ],
+    "Coating": "Silver anodized(RAL9006),Black(RAL9005),White(RAL9003)",
+    "Length": "2500mm/0-2500mm customizable (Other lengths on request)",
+    "Application": "Indoor",
+    "Installation": "Trimless recessed",
+    "IP Rating": "IP20",
+    "Certification": [
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Length": [
+      {
+        "name": "2500mm",
+        "id": "134"
+      },
+      {
+        "name": "Customized Length",
+        "id": "154"
+      }
+    ],
+    "Carrier Style": [
+      {
+        "name": "No carrier",
+        "id": "114"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Single end with hole",
+        "id": "128"
+      },
+      {
+        "name": "No end cap",
+        "id": "131"
+      },
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      },
+      {
+        "name": "End cap with hole",
+        "id": "129"
+      }
+    ],
+    "End caps Quantity": [
+      {
+        "name": "No end cap",
+        "id": "571"
+      },
+      {
+        "name": "4PCS end caps",
+        "id": "573"
+      },
+      {
+        "name": "2PCS end caps",
+        "id": "572"
+      }
+    ],
+    "Accessory Quantity": [
+      {
+        "name": "No screw",
+        "id": "581"
+      },
+      {
+        "name": "8PCS screws",
+        "id": "577"
+      },
+      {
+        "name": "4PCS screws",
+        "id": "578"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Package": [
+      {
+        "name": "Single-Unit Inner Box Packaging",
+        "id": "739"
+      },
+      {
+        "name": "Single-Unit Bag Packaging",
+        "id": "813"
+      },
+      {
+        "name": "Bulk Packaging",
+        "id": "761"
+      }
+    ]
+  },
+  "constraints": {
+    "131": [
+      572,
+      573
+    ],
+    "127": [
+      571
+    ],
+    "129": [
+      571
+    ],
+    "128": [
+      571
+    ]
+  }
+}

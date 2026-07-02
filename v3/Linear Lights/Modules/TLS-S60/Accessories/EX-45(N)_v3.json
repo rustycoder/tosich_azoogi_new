@@ -1,0 +1,45 @@
+{
+  "product_name": "EX-45(N)",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67fe08322a212.png",
+    "https://file.colorsled.com/pro/catalog/product/67fe083476c2a.png"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "PR-S60",
+      "PR-LE60"
+    ],
+    "Material process": "SPCC",
+    "Size": "135*51.6*51.5mm",
+    "Quantity": [
+      "1 PCS",
+      "SET"
+    ],
+    "Other": "Includes mounting screws."
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}

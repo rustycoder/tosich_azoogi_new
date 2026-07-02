@@ -1,0 +1,91 @@
+{
+  "product_name": "LT30",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/tZtqOpgMJbxOeWqd.jpg"
+  ],
+  "product_features": {
+    "Material": [
+      "AL6063-T5,spraying surface",
+      "anodizing"
+    ],
+    "Coating": "Black(RAL9005)",
+    "Length": "2500mm/0-2500mm customizable (Other lengths on request)",
+    "Application": "Indoor",
+    "Installation": "Pendant",
+    "IP Rating": "IP20",
+    "Certification": [
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Length": [
+      {
+        "name": "2500mm",
+        "id": "134"
+      },
+      {
+        "name": "Customized Length",
+        "id": "154"
+      }
+    ],
+    "Carrier Style": [
+      {
+        "name": "No carrier",
+        "id": "114"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "No end cap",
+        "id": "131"
+      },
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Package": [
+      {
+        "name": "COLORS Whole",
+        "id": "550"
+      },
+      {
+        "name": "COLORS Individual",
+        "id": "551"
+      }
+    ]
+  },
+  "constraints": []
+}

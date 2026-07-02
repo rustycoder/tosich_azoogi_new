@@ -1,0 +1,40 @@
+{
+  "product_name": "RB-02",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/hVHcTZpBPwdojNbf.jpg",
+    "https://file.colorsled.com/pro/catalog/product/66cc272c5733f.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": "LE5535/LE6935(F)/LE9435/BE5535/BE6935/BE9435",
+    "Installation method": "recessed",
+    "Material process": [
+      "Stainless steel",
+      "oil spray"
+    ],
+    "Size": "68.5*35*31.6mm",
+    "Quantity": [
+      "4PCS",
+      "set"
+    ],
+    "Other": "butterfly clip"
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "4 PCS/SET",
+        "id": "557"
+      }
+    ]
+  },
+  "constraints": []
+}

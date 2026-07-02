@@ -1,0 +1,165 @@
+{
+  "product_name": "NNR18-CCT-24V",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/678c9c07534b2.gif",
+    "https://file.colorsled.com/pro/catalog/product/678c9c16f4153.jpg",
+    "https://file.colorsled.com/pro/catalog/product/678c9c16ecc48.jpg",
+    "https://file.colorsled.com/pro/catalog/product/692f9f5db7f1e.jpg",
+    "https://file.colorsled.com/pro/catalog/product/692f9f5de4a4b.png"
+  ],
+  "product_features": {
+    "Led_Qty": [
+      "768LEDs",
+      "m"
+    ],
+    "Wattage": [
+      "14.4W",
+      "M"
+    ],
+    "Min Cut": [
+      "12*2led",
+      "31.25mm"
+    ],
+    "Luminous flux": [
+      "850LM",
+      "m@4000K"
+    ],
+    "Bend radius": "≥120mm",
+    "IP": "IP65",
+    "Max run length (single‑end power feed)": "5m",
+    "Warranty": [
+      "5years indoor",
+      "Working life ≥60000 hours;3years semi-outdoor",
+      "Working life ≥36000 hours"
+    ],
+    "Product Certification": [
+      "UKCA",
+      "CE",
+      "UL",
+      "ROHS",
+      "REACH"
+    ],
+    "Operating/storage temperature": [
+      "Ta:-25~55℃",
+      "0℃～60℃"
+    ]
+  },
+  "options": {
+    "CCT": [
+      {
+        "name": "2300K+4000K",
+        "id": "467"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "14.4W/M",
+        "id": "369"
+      }
+    ],
+    "Silk Printing": [
+      {
+        "name": "COLORS",
+        "id": "643"
+      },
+      {
+        "name": "Neutral",
+        "id": "641"
+      },
+      {
+        "name": "Customize laser silk printing",
+        "id": "642"
+      }
+    ],
+    "Strip Length": [
+      {
+        "name": "5M",
+        "id": "652"
+      },
+      {
+        "name": "Customized Length",
+        "id": "665"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "S(One-end top)",
+        "id": "672"
+      }
+    ],
+    "Wire Type": [
+      {
+        "name": "PVC wire",
+        "id": "680"
+      }
+    ],
+    "Wire Length": [
+      {
+        "name": "50CM",
+        "id": "602"
+      },
+      {
+        "name": "200CM",
+        "id": "598"
+      },
+      {
+        "name": "Length customization",
+        "id": "605"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Voltage": [
+      {
+        "name": "24V",
+        "id": "645"
+      }
+    ],
+    "IP": [
+      {
+        "name": "Gluing end cap(IP65)",
+        "id": "630"
+      }
+    ],
+    "ESD": [
+      {
+        "name": "ESD",
+        "id": "651"
+      }
+    ],
+    "Engineering Package": [
+      {
+        "name": "Engineering package",
+        "id": "647"
+      }
+    ]
+  },
+  "constraints": {
+    "643": [
+      552
+    ],
+    "641": [
+      553
+    ],
+    "642": [
+      553
+    ],
+    "671": [
+      605
+    ]
+  }
+}

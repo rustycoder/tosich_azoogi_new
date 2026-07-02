@@ -1,0 +1,157 @@
+{
+  "product_name": "DY830-24V-14mm",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/664d5e5e9adcc.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "LR2522",
+      "LE3523",
+      "LS2522",
+      "LH25100"
+    ],
+    "Size": "538.5*14*1.2mm",
+    "Cutting Unit": "107.7mm",
+    "Input Voltage": "DC24V",
+    "Wattage": [
+      "11W",
+      "PCS"
+    ],
+    "Typ.luminous flux": [
+      "2400LM",
+      "M,2060LM",
+      "M"
+    ],
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K",
+      "5000K",
+      "6500K"
+    ],
+    "CRI": [
+      "80",
+      "90"
+    ]
+  },
+  "options": {
+    "Wattage": [
+      {
+        "name": "11W/PCS",
+        "id": "882"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "No",
+        "id": "666"
+      }
+    ],
+    "Wire Length": [
+      {
+        "name": "No",
+        "id": "599"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Strip Length": [
+      {
+        "name": "539mm",
+        "id": "886"
+      }
+    ],
+    "Silk Printing": [
+      {
+        "name": "Neutral",
+        "id": "641"
+      },
+      {
+        "name": "Customize laser silk printing",
+        "id": "642"
+      },
+      {
+        "name": "COLORS",
+        "id": "643"
+      }
+    ],
+    "IP Process": [
+      {
+        "name": "NO(not waterproof)",
+        "id": "690"
+      }
+    ],
+    "Tape Type": [
+      {
+        "name": "No tape",
+        "id": "702"
+      }
+    ],
+    "Wire Type": [
+      {
+        "name": "No Wago terminal",
+        "id": "888"
+      }
+    ]
+  },
+  "constraints": {
+    "535": [
+      441,
+      442
+    ],
+    "643": [
+      552
+    ],
+    "641": [
+      553
+    ],
+    "642": [
+      553
+    ]
+  }
+}

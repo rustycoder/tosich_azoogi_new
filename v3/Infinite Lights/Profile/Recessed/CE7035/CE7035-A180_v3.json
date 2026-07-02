@@ -1,0 +1,55 @@
+{
+  "product_name": "CE7035-A180",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/684b86935fe58.png"
+  ],
+  "product_features": {
+    "Installation": "Recessed",
+    "Material": [
+      "AL6063-T5",
+      "spraying surface"
+    ],
+    "Coating": "Silver(RAL9006),Black(RAL9005),White(RAL9003)",
+    "Lighting direction": "downward",
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "ROHS",
+      "REACH"
+    ]
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "D1500mm",
+        "id": "1221"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": []
+}

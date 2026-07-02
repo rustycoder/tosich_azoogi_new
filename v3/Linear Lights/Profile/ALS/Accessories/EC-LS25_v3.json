@@ -1,0 +1,53 @@
+{
+  "product_name": "EC-LS25",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67ff64d3f3302.png"
+  ],
+  "product_features": {
+    "Applicable product model": "LS25FD/LS25FP/LS25G(A)/LM25FD/LM25FP/LM25G(A)/LM25LA/LS2522/LR2522",
+    "Material process": [
+      "Zinc alloy",
+      "spraying"
+    ],
+    "Size": "25.1*22.5*16mm",
+    "Quantity": [
+      "2PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

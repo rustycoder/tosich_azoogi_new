@@ -1,0 +1,206 @@
+{
+  "product_name": "HM40S-52(N)",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/66827ae9414f5.png"
+  ],
+  "product_features": {
+    "Installation": "Ceiling",
+    "Material": "AL1070",
+    "Coating": "Black",
+    "Dimming": [
+      "Non-Dimming",
+      "DALI Dimming",
+      "CASAMBI"
+    ],
+    "Input voltage": "DC24-48V",
+    "SDCM": "<3 Step (ANSI)",
+    "UGR": "<13",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "4000K",
+      "3000K-3800K-5000K"
+    ],
+    "Beam angle": [
+      "15°",
+      "20°",
+      "24°",
+      "36°",
+      "38°",
+      "50°"
+    ],
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ETL",
+      "ROHS",
+      "Reach"
+    ]
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Normal",
+        "id": "708"
+      },
+      {
+        "name": "3 CCT tunable(Dial switch)",
+        "id": "710"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "15°",
+        "id": "65"
+      },
+      {
+        "name": "20°",
+        "id": "68"
+      },
+      {
+        "name": "24°",
+        "id": "64"
+      },
+      {
+        "name": "36°",
+        "id": "66"
+      },
+      {
+        "name": "38°",
+        "id": "91"
+      },
+      {
+        "name": "50°",
+        "id": "62"
+      }
+    ],
+    "Length": [
+      {
+        "name": "φ52mm Spotlight",
+        "id": "237"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "12W",
+        "id": "291"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "3000K-3800K-5000K",
+        "id": "989"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "DC24-48V",
+        "id": "940"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": {
+    "708": [
+      64,
+      91,
+      989
+    ],
+    "710": [
+      65,
+      68,
+      66,
+      443,
+      444,
+      446
+    ],
+    "64": [
+      708,
+      443,
+      444,
+      446
+    ],
+    "91": [
+      708,
+      443,
+      444,
+      446
+    ],
+    "65": [
+      710,
+      989
+    ],
+    "68": [
+      710,
+      989
+    ],
+    "66": [
+      710,
+      989
+    ],
+    "443": [
+      64,
+      91
+    ],
+    "444": [
+      64,
+      91
+    ],
+    "446": [
+      64,
+      91
+    ],
+    "989": [
+      65,
+      68,
+      66
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "product_name": "CV-CS5035D",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/684bedd7b8e12.png"
+  ],
+  "product_features": {
+    "Applicable product model": "CS5035/CS5070/CE5035(suitable for down-lighting)",
+    "Diffuser Nature": "Diffuser",
+    "Material process": [
+      "Silica gel flexible",
+      "frosting"
+    ],
+    "Light transmittance": "≥55%",
+    "Size": "20000*47*4mm",
+    "Other": "Fire protection rating UL94-V2；"
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Package Length": [
+      {
+        "name": "20 Meter/Reel",
+        "id": "1511"
+      }
+    ]
+  },
+  "constraints": []
+}

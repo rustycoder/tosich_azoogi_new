@@ -1,0 +1,193 @@
+{
+  "product_name": "BE55L2",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/6866244573351.png",
+    "https://file.colorsled.com/pro/catalog/product/6866244c980ae.png",
+    "https://file.colorsled.com/pro/catalog/product/6866244fa1cc6.png",
+    "https://file.colorsled.com/pro/catalog/product/6866245ea4912.png",
+    "https://file.colorsled.com/pro/catalog/product/68662461d4d4d.png"
+  ],
+  "product_features": {
+    "Material": [
+      "ADC12",
+      "spraying surface"
+    ],
+    "Driver Installation": "Remote",
+    "Lighting direction": "downward",
+    "Beam angle": [
+      "15°",
+      "24°",
+      "30°",
+      "45°optional"
+    ],
+    "UGR(X=4H, Y=8H)": "≤6(15°/24°), ≤10(30°), ≤16(45°)",
+    "Opening size": "φ55mm",
+    "Dimming": [
+      "Non",
+      "1-10V",
+      "DALI"
+    ],
+    "SDCM(Light source)": "<3 Step(ANSI)",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K"
+    ],
+    "Input voltage": "AC220-240V",
+    "Application": [
+      "Indoor",
+      "Outdoor"
+    ],
+    "Installation": "Recessed",
+    "IP Rating": "IP65",
+    "Certification": [
+      "CE",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Wattage": [
+      {
+        "name": "6W",
+        "id": "289"
+      },
+      {
+        "name": "9W",
+        "id": "349"
+      }
+    ],
+    "Beam Angle": [
+      {
+        "name": "15°",
+        "id": "740"
+      },
+      {
+        "name": "24°",
+        "id": "745"
+      },
+      {
+        "name": "30°",
+        "id": "807"
+      },
+      {
+        "name": "45°",
+        "id": "622"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black(Frame)",
+        "id": "873"
+      },
+      {
+        "name": "White(Frame)",
+        "id": "871"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "1-10V Dimming",
+        "id": "542"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      }
+    ],
+    "Reflector Colour": [
+      {
+        "name": "Mirror",
+        "id": "612"
+      },
+      {
+        "name": "Black chrome",
+        "id": "611"
+      },
+      {
+        "name": "Matte Black",
+        "id": "610"
+      },
+      {
+        "name": "Matte White",
+        "id": "609"
+      },
+      {
+        "name": "Matte Silver",
+        "id": "1530"
+      }
+    ],
+    "IP Rating": [
+      {
+        "name": "IP65",
+        "id": "1172"
+      }
+    ],
+    "Optical": [
+      {
+        "name": "Honeycomb",
+        "id": "613"
+      },
+      {
+        "name": "No Honeycomb",
+        "id": "614"
+      }
+    ],
+    "User Manual": [
+      {
+        "name": "CN",
+        "id": "607"
+      },
+      {
+        "name": "EN",
+        "id": "608"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": {
+    "740": [
+      349
+    ]
+  }
+}

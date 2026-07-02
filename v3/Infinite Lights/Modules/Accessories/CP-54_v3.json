@@ -1,0 +1,43 @@
+{
+  "product_name": "CP-54",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/678f855e74038.png"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "MS5035",
+      "MS5070",
+      "ME5035"
+    ],
+    "Applicable installation": [
+      "Pendant",
+      "Ceiling",
+      "Recessed"
+    ],
+    "Material process": "Stainless Steel",
+    "Size": "L37.87*W20*H5.4mm",
+    "Quantity": [
+      "4 PCS",
+      "SET"
+    ]
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "4 PCS/SET",
+        "id": "557"
+      }
+    ]
+  },
+  "constraints": []
+}

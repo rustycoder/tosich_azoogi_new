@@ -1,0 +1,93 @@
+{
+  "product_name": "RF-K2X55",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/6925205955431.png",
+    "https://file.colorsled.com/pro/catalog/product/69252058d5fe2.png",
+    "https://file.colorsled.com/pro/catalog/product/69252058d2ad7.png",
+    "https://file.colorsled.com/pro/catalog/product/69252058df4ce.png",
+    "https://file.colorsled.com/pro/catalog/product/69252058daf5b.png",
+    "https://file.colorsled.com/pro/catalog/product/69252058dc4ad.png",
+    "https://file.colorsled.com/pro/catalog/product/69252058c82d4.png",
+    "https://file.colorsled.com/pro/catalog/product/692520594c335.png",
+    "https://file.colorsled.com/pro/catalog/product/692520593f0c4.png"
+  ],
+  "product_features": {
+    "Applicable product model": "K2E55L2",
+    "Installation method": "recessed",
+    "Material process": [
+      "aluminum",
+      "electroplating or oil spraying"
+    ],
+    "Size": "φ50.7*12mm",
+    "Quantity": [
+      "1PCS",
+      "set"
+    ]
+  },
+  "options": {
+    "Reflector Type": [
+      {
+        "name": "Round",
+        "id": "733"
+      },
+      {
+        "name": "Pin hole",
+        "id": "767"
+      },
+      {
+        "name": "Oval",
+        "id": "772"
+      }
+    ],
+    "Reflector Colour": [
+      {
+        "name": "Mirror",
+        "id": "612"
+      },
+      {
+        "name": "Matte White",
+        "id": "609"
+      },
+      {
+        "name": "Matte Black",
+        "id": "610"
+      },
+      {
+        "name": "Champagne Gold",
+        "id": "776"
+      },
+      {
+        "name": "Black chrome",
+        "id": "611"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": {
+    "767": [
+      612,
+      611,
+      776
+    ],
+    "772": [
+      612,
+      611,
+      776
+    ]
+  }
+}

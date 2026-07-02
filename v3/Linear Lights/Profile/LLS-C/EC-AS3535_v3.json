@@ -1,0 +1,58 @@
+{
+  "product_name": "EC-AS3535",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/6800990fd5159.png"
+  ],
+  "product_features": {
+    "Applicable product model": "AS3535",
+    "Material process": "AL6063",
+    "Size": [
+      "",
+      ""
+    ],
+    "Quantity": [
+      "2PCS",
+      "set"
+    ],
+    "Other": "Include 10pcs KA2*6 countersunk screws"
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

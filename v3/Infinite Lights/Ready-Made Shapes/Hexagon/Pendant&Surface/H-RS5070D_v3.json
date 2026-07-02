@@ -1,0 +1,319 @@
+{
+  "product_name": "H-RS5070D",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/678c7167e1b55.png"
+  ],
+  "product_features": {
+    "Installation": "Pendant&Ceiling",
+    "Material": [
+      "AL6063-T5",
+      "spraying surface"
+    ],
+    "Coating": "Silver(RAL9006),Black(RAL9005),White(RAL9003)",
+    "Power Supply": "Built-in power supply",
+    "Light efficiency": "100LM/W(Regular)，135LM/W(High-Efficiency)",
+    "SDCM": "≤3",
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ROHS",
+      "REACH",
+      "CB",
+      "ENEC",
+      "LM-80"
+    ]
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Regular",
+        "id": "1244"
+      },
+      {
+        "name": "High efficiency",
+        "id": "709"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Length": [
+      {
+        "name": "300mm",
+        "id": "216"
+      },
+      {
+        "name": "450mm",
+        "id": "246"
+      },
+      {
+        "name": "600mm",
+        "id": "153"
+      },
+      {
+        "name": "900mm",
+        "id": "229"
+      },
+      {
+        "name": "1200mm",
+        "id": "145"
+      },
+      {
+        "name": "750mm",
+        "id": "1356"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "45W",
+        "id": "348"
+      },
+      {
+        "name": "66W",
+        "id": "358"
+      },
+      {
+        "name": "90W",
+        "id": "273"
+      },
+      {
+        "name": "110W",
+        "id": "1259"
+      },
+      {
+        "name": "132W",
+        "id": "1268"
+      },
+      {
+        "name": "176W",
+        "id": "1269"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      },
+      {
+        "name": "Brushed Gold",
+        "id": "1710"
+      },
+      {
+        "name": "Brushed Bronze",
+        "id": "1711"
+      },
+      {
+        "name": "Brushed Silver",
+        "id": "1712"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "1-10V Dimming",
+        "id": "542"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC200-240V",
+        "id": "585"
+      }
+    ],
+    "Installation Accessory": [
+      {
+        "name": "Ceiling",
+        "id": "1209"
+      },
+      {
+        "name": "Junction Box(With Steel Wire Rope)",
+        "id": "1207"
+      },
+      {
+        "name": "Junction Box(With Rod)",
+        "id": "1206"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": {
+    "216": [
+      358,
+      273,
+      1259,
+      1268,
+      1269
+    ],
+    "246": [
+      348,
+      273,
+      1259,
+      1268,
+      1269
+    ],
+    "153": [
+      348,
+      358,
+      1259,
+      1268,
+      1269
+    ],
+    "1356": [
+      348,
+      358,
+      273,
+      1268,
+      1269,
+      1710,
+      1711,
+      1712
+    ],
+    "229": [
+      348,
+      358,
+      273,
+      1259,
+      1269,
+      1710,
+      1711,
+      1712
+    ],
+    "145": [
+      348,
+      358,
+      273,
+      1259,
+      1268,
+      1710,
+      1711,
+      1712
+    ],
+    "348": [
+      246,
+      153,
+      1356,
+      229,
+      145
+    ],
+    "358": [
+      216,
+      153,
+      1356,
+      229,
+      145
+    ],
+    "273": [
+      216,
+      246,
+      1356,
+      229,
+      145
+    ],
+    "1259": [
+      216,
+      246,
+      153,
+      229,
+      145
+    ],
+    "1268": [
+      216,
+      246,
+      153,
+      1356,
+      145
+    ],
+    "1269": [
+      216,
+      246,
+      153,
+      1356,
+      229
+    ],
+    "709": [
+      445,
+      441
+    ],
+    "445": [
+      709
+    ],
+    "441": [
+      709
+    ],
+    "1711": [
+      1206
+    ],
+    "1710": [
+      1206
+    ],
+    "1712": [
+      1206
+    ]
+  }
+}

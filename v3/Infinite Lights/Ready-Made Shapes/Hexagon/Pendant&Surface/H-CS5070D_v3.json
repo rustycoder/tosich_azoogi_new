@@ -1,0 +1,289 @@
+{
+  "product_name": "H-CS5070D",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/678c6f85d2d7d.png"
+  ],
+  "product_features": {
+    "Installation": "Pendant&Ceiling",
+    "Material": [
+      "AL6063-T5",
+      "spraying surface"
+    ],
+    "Coating": "Silver(RAL9006),Black(RAL9005),White(RAL9003)",
+    "Power Supply": "Built-in power supply",
+    "Light efficiency": "100LM/W(Regular)，135LM/W(High-Efficiency)",
+    "SDCM": "≤3",
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ROHS",
+      "REACH",
+      "CB",
+      "ENEC",
+      "LM-80"
+    ]
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Regular",
+        "id": "1244"
+      },
+      {
+        "name": "High efficiency",
+        "id": "709"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Length": [
+      {
+        "name": "450mm",
+        "id": "246"
+      },
+      {
+        "name": "600mm",
+        "id": "153"
+      },
+      {
+        "name": "900mm",
+        "id": "229"
+      },
+      {
+        "name": "1200mm",
+        "id": "145"
+      },
+      {
+        "name": "375mm",
+        "id": "1357"
+      },
+      {
+        "name": "750mm",
+        "id": "1356"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "56W",
+        "id": "281"
+      },
+      {
+        "name": "66W",
+        "id": "358"
+      },
+      {
+        "name": "90W",
+        "id": "273"
+      },
+      {
+        "name": "110W",
+        "id": "1259"
+      },
+      {
+        "name": "132W",
+        "id": "1268"
+      },
+      {
+        "name": "176W",
+        "id": "1269"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "1-10V Dimming",
+        "id": "542"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "AC200-240V",
+        "id": "585"
+      }
+    ],
+    "Installation Accessory": [
+      {
+        "name": "Ceiling",
+        "id": "1209"
+      },
+      {
+        "name": "Junction Box(With Steel Wire Rope)",
+        "id": "1207"
+      },
+      {
+        "name": "Junction Box(With Rod)",
+        "id": "1206"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": {
+    "1357": [
+      358,
+      273,
+      1259,
+      1268,
+      1269
+    ],
+    "246": [
+      281,
+      273,
+      1259,
+      1268,
+      1269
+    ],
+    "153": [
+      281,
+      358,
+      1259,
+      1268,
+      1269
+    ],
+    "1356": [
+      281,
+      358,
+      273,
+      1268,
+      1269
+    ],
+    "229": [
+      281,
+      358,
+      273,
+      1259,
+      1269
+    ],
+    "145": [
+      281,
+      358,
+      273,
+      1259,
+      1268
+    ],
+    "281": [
+      246,
+      153,
+      1356,
+      229,
+      145
+    ],
+    "358": [
+      1357,
+      153,
+      1356,
+      229,
+      145
+    ],
+    "273": [
+      1357,
+      246,
+      1356,
+      229,
+      145
+    ],
+    "1259": [
+      1357,
+      246,
+      153,
+      229,
+      145
+    ],
+    "1268": [
+      1357,
+      246,
+      153,
+      1356,
+      145
+    ],
+    "1269": [
+      1357,
+      246,
+      153,
+      1356,
+      229
+    ],
+    "709": [
+      445,
+      441
+    ],
+    "445": [
+      709
+    ],
+    "441": [
+      709
+    ]
+  }
+}

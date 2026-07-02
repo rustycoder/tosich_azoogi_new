@@ -1,0 +1,154 @@
+{
+  "product_name": "DY8160-24V-20mm-15A45",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/66bb3bec5faf0.png"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "AS3535-15A45",
+      "AH5060-15A45"
+    ],
+    "Size": "D1500*45°*20*5.6mm",
+    "Cutting Unit": [
+      "",
+      ""
+    ],
+    "Input Voltage": "DC24V",
+    "Wattage": [
+      "11.6W",
+      "PCS"
+    ],
+    "Typ.luminous flux": [
+      "1740LM",
+      "PCS"
+    ],
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K",
+      "5000K",
+      "6500K"
+    ],
+    "CRI": [
+      "80",
+      "90"
+    ],
+    "Other": "1.5M curved profile dedicated light source"
+  },
+  "options": {
+    "Wattage": [
+      {
+        "name": "11.6W/PCS",
+        "id": "900"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "No",
+        "id": "666"
+      }
+    ],
+    "Wire Length": [
+      {
+        "name": "No",
+        "id": "599"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Strip Length": [
+      {
+        "name": "φ1.5M-45°-lighting downward",
+        "id": "909"
+      }
+    ],
+    "Silk Printing": [
+      {
+        "name": "COLORS",
+        "id": "643"
+      },
+      {
+        "name": "Neutral",
+        "id": "641"
+      },
+      {
+        "name": "Customize laser silk printing",
+        "id": "642"
+      }
+    ],
+    "IP Process": [
+      {
+        "name": "NO(not waterproof)",
+        "id": "690"
+      }
+    ],
+    "Tape Type": [
+      {
+        "name": "No tape",
+        "id": "702"
+      }
+    ],
+    "Wire Type": [
+      {
+        "name": "Two position Wago terminal",
+        "id": "907"
+      }
+    ]
+  },
+  "constraints": {
+    "643": [
+      552
+    ],
+    "641": [
+      553
+    ],
+    "642": [
+      553
+    ]
+  }
+}

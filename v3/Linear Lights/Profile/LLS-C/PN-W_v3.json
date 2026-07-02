@@ -1,0 +1,71 @@
+{
+  "product_name": "PN-W",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67f4d25f3e853.png",
+    "https://file.colorsled.com/pro/catalog/product/6878bfd6715b9.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "AS3535",
+      "AH5060"
+    ],
+    "Installation method": "Pendant",
+    "Material process": [
+      "",
+      ""
+    ],
+    "Size": [
+      "",
+      ""
+    ],
+    "Quantity": [
+      "2PCS",
+      "set"
+    ],
+    "Other": [
+      "2 sets of swing rope and cable lockers, pendant cable 2m",
+      "4m"
+    ]
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "2M",
+        "id": "140"
+      },
+      {
+        "name": "4M",
+        "id": "887"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Pendant Type": [
+      {
+        "name": "Without junction box",
+        "id": "742"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

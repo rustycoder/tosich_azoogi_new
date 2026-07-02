@@ -1,0 +1,57 @@
+{
+  "product_name": "EC-LR5535(B)",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/67fe3885202b9.png"
+  ],
+  "product_features": {
+    "Applicable product model": "LR5535(B)",
+    "Material process": [
+      "",
+      ""
+    ],
+    "Size": [
+      "",
+      ""
+    ],
+    "Quantity": [
+      "2PCS",
+      "set"
+    ],
+    "Other": [
+      "Include 2 silver end caps",
+      "2 silver end cap buckles",
+      "1 set of fixed cable accessory kit"
+    ]
+  },
+  "options": {
+    "Finish": [
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

@@ -1,0 +1,29 @@
+{
+  "product_name": "DB02LINE 40-001",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/69200d4e2ddcd.png",
+    "https://file.colorsled.com/pro/catalog/product/69200d50cbbd4.png",
+    "https://file.colorsled.com/pro/catalog/product/69200d52d9933.png",
+    "https://file.colorsled.com/pro/catalog/product/69200d4b955df.png",
+    "https://file.colorsled.com/pro/catalog/product/69200d555df52.png"
+  ],
+  "product_features": {
+    "Applicable product model": "LINE40 series",
+    "Size": "L420*W280*H120mm",
+    "Weight": [
+      "",
+      "kg"
+    ],
+    "Material process": "needle-stripe leather box",
+    "Others": "include some samples and accessories of LINE40 series"
+  },
+  "options": {
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ]
+  },
+  "constraints": []
+}

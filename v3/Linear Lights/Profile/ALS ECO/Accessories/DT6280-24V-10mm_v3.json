@@ -1,0 +1,187 @@
+{
+  "product_name": "DT6280-24V-10mm",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/69c500e3f3ef9.png",
+    "https://file.colorsled.com/pro/catalog/product/69c500e922607.png"
+  ],
+  "product_features": {
+    "Applicable product model": "BR1613(BA)/BR2013(BA)/BR2013(A)",
+    "Size": [
+      "5000*10*1.9mm",
+      "5000*10*1.9mm"
+    ],
+    "Cutting Unit": [
+      "50mm",
+      "14LEDs"
+    ],
+    "Input Voltage": "DC24V",
+    "Wattage": "6.6W/M(5M/roll); 15W/M(4M/roll)",
+    "Typ.luminous flux": "",
+    "726LM/M@RA90,4000k(5M/roll)": "",
+    "1530LM/M@RA90,4000k(4M/roll)": "",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K",
+      "5000K",
+      "6000K"
+    ],
+    "CRI": "90"
+  },
+  "options": {
+    "Wattage": [
+      {
+        "name": "6.6W/M",
+        "id": "376"
+      },
+      {
+        "name": "15W/M",
+        "id": "346"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6000K",
+        "id": "447"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "No",
+        "id": "666"
+      },
+      {
+        "name": "One end",
+        "id": "667"
+      },
+      {
+        "name": "Dual ends",
+        "id": "668"
+      }
+    ],
+    "Wire Length": [
+      {
+        "name": "12CM",
+        "id": "600"
+      },
+      {
+        "name": "20CM",
+        "id": "601"
+      },
+      {
+        "name": "50CM",
+        "id": "602"
+      },
+      {
+        "name": "100CM",
+        "id": "597"
+      },
+      {
+        "name": "200CM",
+        "id": "598"
+      },
+      {
+        "name": "No",
+        "id": "599"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Strip Length": [
+      {
+        "name": "4M",
+        "id": "661"
+      },
+      {
+        "name": "5M",
+        "id": "652"
+      }
+    ],
+    "Silk Printing": [
+      {
+        "name": "COLORS",
+        "id": "643"
+      },
+      {
+        "name": "Neutral",
+        "id": "641"
+      }
+    ],
+    "IP Process": [
+      {
+        "name": "NO(not waterproof)",
+        "id": "690"
+      }
+    ],
+    "Tape Type": [
+      {
+        "name": "White",
+        "id": "699"
+      }
+    ],
+    "Wire Type": [
+      {
+        "name": "Parallel wires",
+        "id": "679"
+      },
+      {
+        "name": "No",
+        "id": "704"
+      }
+    ]
+  },
+  "constraints": {
+    "643": [
+      552
+    ],
+    "376": [
+      661
+    ],
+    "346": [
+      652
+    ],
+    "666": [
+      598,
+      597,
+      602,
+      601,
+      600,
+      679
+    ]
+  }
+}

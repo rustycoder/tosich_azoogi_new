@@ -1,0 +1,109 @@
+{
+  "product_name": "HS40IJ-30",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/66827e84100f2.png"
+  ],
+  "product_features": {
+    "Installation": "Pendant",
+    "Material": "Silicone Neon",
+    "Coating": "Black",
+    "Dimming": [
+      "Non",
+      "DALI-2",
+      "CASAMBI"
+    ],
+    "Input voltage": "DC48V",
+    "SDCM": "<5 Step (ANSI)",
+    "UGR": "<10",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "4000K"
+    ],
+    "Beam angle": "360°",
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ETL",
+      "ROHS",
+      "Reach"
+    ]
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Length": [
+      {
+        "name": "φ30mm Round tube pendant light",
+        "id": "221"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "7W",
+        "id": "292"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "DC48V",
+        "id": "941"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": []
+}

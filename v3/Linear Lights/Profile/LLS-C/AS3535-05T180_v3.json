@@ -1,0 +1,112 @@
+{
+  "product_name": "AS3535-05T180",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/AEKXHCpBMytyHpqU.png",
+    "https://file.colorsled.com/pro/catalog/product_img/pqxNouBBtarEaAyq.jpg",
+    "https://file.colorsled.com/pro/catalog/product_img/hEFuEQTZxfPWgrkD.jpg",
+    "https://file.colorsled.com/pro/catalog/product/66e29f5d0b4b8.jpg"
+  ],
+  "product_features": {
+    "Material": "AL6063-T5，spraying surface",
+    "Coating": [
+      "Silver(RAL9006)",
+      "Black(RAL9005)",
+      "White(RAL9003)"
+    ],
+    "Lighting direction": "downward",
+    "Length": "500mm twisting 180°",
+    "Application": "Indoor",
+    "Installation": [
+      "Pendant",
+      "Ceiling",
+      "Trimless recessed"
+    ],
+    "IP Rating": "IP20",
+    "Certification": [
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "No diffuser",
+        "id": "73"
+      }
+    ],
+    "Length": [
+      {
+        "name": "500mm-Twist 180°",
+        "id": "160"
+      }
+    ],
+    "Carrier Style": [
+      {
+        "name": "No carrier",
+        "id": "114"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      },
+      {
+        "name": "Matt Orange",
+        "id": "879"
+      },
+      {
+        "name": "Matt Blue",
+        "id": "876"
+      },
+      {
+        "name": "Yellow",
+        "id": "874"
+      },
+      {
+        "name": "Champagne Gold",
+        "id": "872"
+      },
+      {
+        "name": "Rose gold",
+        "id": "878"
+      },
+      {
+        "name": "Matt Green",
+        "id": "877"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "No end cap",
+        "id": "131"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Package": [
+      {
+        "name": "COLORS Whole",
+        "id": "550"
+      }
+    ]
+  },
+  "constraints": []
+}

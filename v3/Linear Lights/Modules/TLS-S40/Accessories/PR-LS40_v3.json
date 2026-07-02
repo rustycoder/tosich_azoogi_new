@@ -1,0 +1,72 @@
+{
+  "product_name": "PR-LS40",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/676d14bfa361e.png"
+  ],
+  "product_features": {
+    "Applicable product model": [
+      "S40FD",
+      "S40FP",
+      "S40HP",
+      "S40BD",
+      "S40LA",
+      "S40LS",
+      "S40G",
+      "S40S-42WA",
+      "S40S-25RB",
+      "S60S-42WB",
+      "CS-S40"
+    ],
+    "Material process": [
+      "aluminum",
+      "powder spraying"
+    ],
+    "Size": [
+      "",
+      ""
+    ]
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "2500mm",
+        "id": "134"
+      },
+      {
+        "name": "Customized Length",
+        "id": "154"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Package": [
+      {
+        "name": "COLORS Whole",
+        "id": "550"
+      }
+    ]
+  },
+  "constraints": []
+}

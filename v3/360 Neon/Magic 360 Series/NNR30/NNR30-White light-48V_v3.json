@@ -1,0 +1,189 @@
+{
+  "product_name": "NNR30-White light-48V",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/678ca2b1ec9ba.jpg",
+    "https://file.colorsled.com/pro/catalog/product/678ca2b1e15e1.jpg",
+    "https://file.colorsled.com/pro/catalog/product/678ca2b1c3d6e.jpg",
+    "https://file.colorsled.com/pro/catalog/product/678ca2b221567.jpg",
+    "https://file.colorsled.com/pro/catalog/product/678ca2b21b97d.jpg"
+  ],
+  "product_features": {
+    "Led_Qty": [
+      "336LEDs",
+      "m"
+    ],
+    "Wattage": [
+      "12.5W",
+      "M"
+    ],
+    "Min Cut": [
+      "14*2led",
+      "83.3mm"
+    ],
+    "Luminous flux": [
+      "950LM",
+      "m@4000K"
+    ],
+    "Bend radius": "＞120mm",
+    "IP": "IP65",
+    "Max run length (single‑end power feed)": "20m",
+    "Warranty": [
+      "5years indoor",
+      "Working life ≥60000 hours;3years semi-outdoor",
+      "Working life ≥36000 hours"
+    ],
+    "Product Certification": [
+      "UKCA",
+      "CE",
+      "UL",
+      "ROHS",
+      "REACH"
+    ],
+    "Operating/storage temperature": [
+      "Ta:-25~55℃",
+      "0℃～60℃"
+    ]
+  },
+  "options": {
+    "CCT": [
+      {
+        "name": "2200K",
+        "id": "458"
+      },
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "12.5W/M",
+        "id": "370"
+      }
+    ],
+    "Silk Printing": [
+      {
+        "name": "COLORS",
+        "id": "643"
+      },
+      {
+        "name": "Neutral",
+        "id": "641"
+      },
+      {
+        "name": "Customize laser silk printing",
+        "id": "642"
+      }
+    ],
+    "Strip Length": [
+      {
+        "name": "5M",
+        "id": "652"
+      },
+      {
+        "name": "10M",
+        "id": "654"
+      },
+      {
+        "name": "20M",
+        "id": "655"
+      },
+      {
+        "name": "Customized Length",
+        "id": "665"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "S(One-end top)",
+        "id": "672"
+      },
+      {
+        "name": "S(One-end side)",
+        "id": "671"
+      }
+    ],
+    "Wire Type": [
+      {
+        "name": "PVC wire",
+        "id": "680"
+      }
+    ],
+    "Wire Length": [
+      {
+        "name": "50CM",
+        "id": "602"
+      },
+      {
+        "name": "200CM",
+        "id": "598"
+      },
+      {
+        "name": "Length customization",
+        "id": "605"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Voltage": [
+      {
+        "name": "48V",
+        "id": "644"
+      }
+    ],
+    "IP": [
+      {
+        "name": "IP65 gluing end cap",
+        "id": "633"
+      }
+    ],
+    "ESD": [
+      {
+        "name": "ESD",
+        "id": "651"
+      }
+    ],
+    "Engineering Package": [
+      {
+        "name": "Engineering package",
+        "id": "647"
+      }
+    ]
+  },
+  "constraints": {
+    "643": [
+      552
+    ],
+    "641": [
+      553
+    ],
+    "642": [
+      553
+    ],
+    "671": [
+      605
+    ]
+  }
+}

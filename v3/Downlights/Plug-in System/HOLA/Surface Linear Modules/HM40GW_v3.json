@@ -1,0 +1,123 @@
+{
+  "product_name": "HM40GW",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/6682412d93412.png"
+  ],
+  "product_features": {
+    "Installation": "Ceiling",
+    "Material": "AL6063-T5",
+    "Coating": "Black",
+    "Dimming": [
+      "Non",
+      "DALI-2",
+      "CASAMBI"
+    ],
+    "Input voltage": "DC48V",
+    "SDCM": "<3 Step (ANSI)",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "4000K"
+    ],
+    "Beam angle": "60°x25°x73°",
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ETL",
+      "ROHS",
+      "Reach"
+    ]
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "Wall Washer",
+        "id": "61"
+      }
+    ],
+    "Length": [
+      {
+        "name": "600mm",
+        "id": "153"
+      },
+      {
+        "name": "1200mm",
+        "id": "145"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "20W",
+        "id": "312"
+      },
+      {
+        "name": "10W",
+        "id": "288"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "DC48V",
+        "id": "941"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ]
+  },
+  "constraints": {
+    "153": [
+      312
+    ],
+    "145": [
+      288
+    ]
+  }
+}

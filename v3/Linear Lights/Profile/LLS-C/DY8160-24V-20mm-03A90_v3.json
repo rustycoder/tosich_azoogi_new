@@ -1,0 +1,151 @@
+{
+  "product_name": "DY8160-24V-20mm-03A90",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/66bb3a7aaea12.png"
+  ],
+  "product_features": {
+    "Applicable product model": "AS3535-03A90",
+    "Size": "D320*90°*20*5.8mm",
+    "Cutting Unit": [
+      "",
+      ""
+    ],
+    "Input Voltage": "DC24V",
+    "Wattage": [
+      "5.4W",
+      "PCS"
+    ],
+    "Typ.luminous flux": [
+      "810LM",
+      "PCS"
+    ],
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K",
+      "5000K",
+      "6500K"
+    ],
+    "CRI": [
+      "80",
+      "90"
+    ],
+    "Other": "320 mm curved profile dedicated light source"
+  },
+  "options": {
+    "Wattage": [
+      {
+        "name": "5.4W/PCS",
+        "id": "902"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra80",
+        "id": "534"
+      },
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "3500K",
+        "id": "445"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "5000K",
+        "id": "441"
+      },
+      {
+        "name": "6500K",
+        "id": "442"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "No",
+        "id": "666"
+      }
+    ],
+    "Wire Length": [
+      {
+        "name": "No",
+        "id": "599"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Strip Length": [
+      {
+        "name": "φ320mm-90°-lighting downward",
+        "id": "903"
+      }
+    ],
+    "Silk Printing": [
+      {
+        "name": "Neutral",
+        "id": "641"
+      },
+      {
+        "name": "Customize laser silk printing",
+        "id": "642"
+      },
+      {
+        "name": "COLORS",
+        "id": "643"
+      }
+    ],
+    "IP Process": [
+      {
+        "name": "NO(not waterproof)",
+        "id": "690"
+      }
+    ],
+    "Tape Type": [
+      {
+        "name": "No tape",
+        "id": "702"
+      }
+    ],
+    "Wire Type": [
+      {
+        "name": "Two position Wago terminal",
+        "id": "907"
+      }
+    ]
+  },
+  "constraints": {
+    "643": [
+      552
+    ],
+    "641": [
+      553
+    ],
+    "642": [
+      553
+    ]
+  }
+}

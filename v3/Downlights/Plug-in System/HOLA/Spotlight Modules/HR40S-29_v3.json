@@ -1,0 +1,115 @@
+{
+  "product_name": "HR40S-29",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/66827b640057e.png"
+  ],
+  "product_features": {
+    "Installation": "Reccessed",
+    "Material": "AL6063-T5",
+    "Coating": "Black",
+    "Dimming": [
+      "Non",
+      "DALI-2",
+      "CASAMBI"
+    ],
+    "Input voltage": "DC24-48V",
+    "SDCM": "<3 Step (ANSI)",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "4000K"
+    ],
+    "Beam angle": [
+      "15°",
+      "25°"
+    ],
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ETL",
+      "ROHS",
+      "Reach"
+    ]
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "25°",
+        "id": "105"
+      },
+      {
+        "name": "15°",
+        "id": "65"
+      }
+    ],
+    "Length": [
+      {
+        "name": "φ29mm Recessed Spotlight",
+        "id": "244"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "3W",
+        "id": "293"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "DC24-48V",
+        "id": "940"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ]
+  },
+  "constraints": []
+}

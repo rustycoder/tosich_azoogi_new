@@ -1,0 +1,72 @@
+{
+  "product_name": "PN-D",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/677e3efd5fcbb.jpg",
+    "https://file.colorsled.com/pro/catalog/product/677e3f06b3eb0.jpg",
+    "https://file.colorsled.com/pro/catalog/product/6878bfbe2cce0.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": "LS1911C/LS1911K/LS3535/LS5050/LS3360/LS4067/LS5470(F)/LS7977/LT60/BH3360/BH5470/BH7977/BS3360/BS5470/BS7977/LS5470(F)/LS7977/LT60/LINE40 series product/LINE60 series product/TLS-R6X0 track",
+    "Installation method": "Pendant",
+    "Material process": "Pearl Chrome",
+    "Size": [
+      "",
+      ""
+    ],
+    "Quantity": [
+      "2PCS",
+      "set"
+    ],
+    "Other": [
+      "Junction box not included",
+      "2pcs pendant cable accessory",
+      "pendant cable length 4m",
+      "rectangular screw model."
+    ]
+  },
+  "options": {
+    "Length": [
+      {
+        "name": "2M",
+        "id": "140"
+      },
+      {
+        "name": "4M",
+        "id": "887"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "Pendant Type": [
+      {
+        "name": "Without junction box",
+        "id": "742"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "2 PCS/SET",
+        "id": "554"
+      }
+    ]
+  },
+  "constraints": []
+}

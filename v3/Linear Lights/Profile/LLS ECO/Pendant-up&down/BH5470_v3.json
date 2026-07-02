@@ -1,0 +1,96 @@
+{
+  "product_name": "BH5470",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/6747d9df65f87.jpg"
+  ],
+  "product_features": {
+    "Material": [
+      "AL6063-T5,spraying surface",
+      "anodizing"
+    ],
+    "Coating": "Silver anodized(RAL9006),Black(RAL9005),White(RAL9003)",
+    "Lighting direction": "upward & downward",
+    "Length": "2500mm/0-2500mm customizable (Other lengths on request)",
+    "Application": "Indoor",
+    "Installation": "Pendant",
+    "IP Rating": "IP20",
+    "Certification": [
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "No diffuser",
+        "id": "73"
+      },
+      {
+        "name": "Diffuser",
+        "id": "39"
+      }
+    ],
+    "Length": [
+      {
+        "name": "2500mm",
+        "id": "134"
+      },
+      {
+        "name": "Customized Length",
+        "id": "154"
+      }
+    ],
+    "Carrier Style": [
+      {
+        "name": "Flat carrier",
+        "id": "115"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      },
+      {
+        "name": "Silver",
+        "id": "854"
+      }
+    ],
+    "End Cap Style": [
+      {
+        "name": "No end cap",
+        "id": "131"
+      },
+      {
+        "name": "Holeless end cap",
+        "id": "127"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Package": [
+      {
+        "name": "COLORS Whole",
+        "id": "550"
+      },
+      {
+        "name": "COLORS Individual",
+        "id": "551"
+      }
+    ]
+  },
+  "constraints": []
+}

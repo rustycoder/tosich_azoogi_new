@@ -1,0 +1,123 @@
+{
+  "product_name": "HM40NK",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/66824164d0fc3.png"
+  ],
+  "product_features": {
+    "Installation": "Ceiling",
+    "Material": "Silicone Neon",
+    "Coating": "Black",
+    "Dimming": [
+      "Non",
+      "DALI-2",
+      "CASAMBI"
+    ],
+    "Input voltage": "DC48V",
+    "SDCM": "<5 Step (ANSI)",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "4000K"
+    ],
+    "Beam angle": "360°",
+    "Application": "Indoor",
+    "IP Rating": "IP20",
+    "Warranty": "5 years",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ETL",
+      "ROHS",
+      "Reach"
+    ]
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "φ25mm Round neon",
+        "id": "107"
+      }
+    ],
+    "Length": [
+      {
+        "name": "1000mm",
+        "id": "143"
+      },
+      {
+        "name": "2500mm",
+        "id": "134"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "14W",
+        "id": "295"
+      },
+      {
+        "name": "35W",
+        "id": "309"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      }
+    ],
+    "Input Voltage": [
+      {
+        "name": "DC48V",
+        "id": "941"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": {
+    "143": [
+      309
+    ],
+    "134": [
+      295
+    ]
+  }
+}

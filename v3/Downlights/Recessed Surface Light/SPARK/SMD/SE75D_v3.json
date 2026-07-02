@@ -1,0 +1,186 @@
+{
+  "product_name": "SE75D",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product_img/iNAkVGvfqAtdiLak.png"
+  ],
+  "product_features": {
+    "Material": "AL6063-T5，spraying surface",
+    "Coating": "White(RAL9003)",
+    "Lighting direction": "downward",
+    "Light efficiency": [
+      "92LM",
+      "W"
+    ],
+    "Spotlight angle": "80°",
+    "Opening size": "φ75mm",
+    "Dimming": [
+      "Non",
+      "DALI",
+      "0-10V"
+    ],
+    "Color tolerance": "SDCM≤5(ANSI)",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "4000K",
+      "3000-5000K"
+    ],
+    "Input voltage": "AC220-240V",
+    "Application": "Indoor",
+    "Power installation": "External",
+    "Installation": "Recessed",
+    "IP Rating": [
+      "IP20",
+      "Front Part IP44"
+    ],
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  },
+  "options": {
+    "Version": [
+      {
+        "name": "Normal",
+        "id": "708"
+      },
+      {
+        "name": "3 CCT tunable(Dial switch)",
+        "id": "710"
+      }
+    ],
+    "Diffuser Nature": [
+      {
+        "name": "Diffuser",
+        "id": "39"
+      },
+      {
+        "name": "Prismatic",
+        "id": "60"
+      }
+    ],
+    "Length": [
+      {
+        "name": "φ75mm  Downlight",
+        "id": "1398"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "6W",
+        "id": "289"
+      }
+    ],
+    "Beam Angle": [
+      {
+        "name": "80°",
+        "id": "619"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "Dimming": [
+      {
+        "name": "Casambi",
+        "id": "539"
+      },
+      {
+        "name": "Non-Dimming",
+        "id": "541"
+      },
+      {
+        "name": "0-10V Dimming",
+        "id": "1397"
+      },
+      {
+        "name": "DALI Dimming",
+        "id": "540"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "Ra90",
+        "id": "535"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "2700K",
+        "id": "443"
+      },
+      {
+        "name": "3000K",
+        "id": "444"
+      },
+      {
+        "name": "4000K",
+        "id": "446"
+      },
+      {
+        "name": "3000K-5000K",
+        "id": "451"
+      }
+    ],
+    "IP Rating": [
+      {
+        "name": "IP20",
+        "id": "629"
+      },
+      {
+        "name": "IP44",
+        "id": "628"
+      }
+    ],
+    "Entry Cable": [
+      {
+        "name": "With cable of drive input",
+        "id": "782"
+      },
+      {
+        "name": "With junction box",
+        "id": "786"
+      }
+    ],
+    "User Manual": [
+      {
+        "name": "EN",
+        "id": "608"
+      },
+      {
+        "name": "CN",
+        "id": "607"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "COLORS",
+        "id": "553"
+      },
+      {
+        "name": "Customized Label",
+        "id": "552"
+      }
+    ]
+  },
+  "constraints": {
+    "708": [
+      451
+    ],
+    "710": [
+      443,
+      444,
+      446
+    ],
+    "539": [
+      786
+    ]
+  }
+}

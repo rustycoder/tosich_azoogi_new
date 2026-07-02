@@ -1,0 +1,82 @@
+{
+  "product_name": "T90-LS60",
+  "product_images": [
+    "https://file.colorsled.com/pro/catalog/product/66e15b4c46667.jpg"
+  ],
+  "product_features": {
+    "Applicable product model": "PR-S60",
+    "Installation method": "T-shaped splicing",
+    "Material process": [
+      "Al6063-T5",
+      "chromed"
+    ],
+    "Light source": "NO",
+    "Size": "305*188*85mm",
+    "Othes": "Includes 3PCS EX-45(N) splicing accessories"
+  },
+  "options": {
+    "Diffuser Nature": [
+      {
+        "name": "Blind Diffuser",
+        "id": "74"
+      }
+    ],
+    "Wattage": [
+      {
+        "name": "NO",
+        "id": "798"
+      }
+    ],
+    "Carrier Style": [
+      {
+        "name": "No carrier",
+        "id": "114"
+      }
+    ],
+    "Finish": [
+      {
+        "name": "Black",
+        "id": "865"
+      },
+      {
+        "name": "White",
+        "id": "864"
+      }
+    ],
+    "CRI": [
+      {
+        "name": "No CRI",
+        "id": "538"
+      }
+    ],
+    "CCT": [
+      {
+        "name": "No CCT",
+        "id": "452"
+      }
+    ],
+    "Light Source Type": [
+      {
+        "name": "No Light source",
+        "id": "269"
+      }
+    ],
+    "Label Type": [
+      {
+        "name": "Customized Label",
+        "id": "552"
+      },
+      {
+        "name": "COLORS",
+        "id": "553"
+      }
+    ],
+    "Packaging Quantity": [
+      {
+        "name": "1 PCS/SET",
+        "id": "556"
+      }
+    ]
+  },
+  "constraints": []
+}
