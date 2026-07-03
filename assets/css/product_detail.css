@@ -13,6 +13,14 @@ h2, h3{
   transition: background 0.4s ease, color 0.4s ease;
 }
 
+.pull-right{
+      display: flex;
+    }
+
+.pull-right a{
+  padding-left: 10px;
+  
+}
 .breadcrumbs {
   font-size: 11px;
   text-transform: uppercase;
