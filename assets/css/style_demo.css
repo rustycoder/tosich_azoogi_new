@@ -2364,7 +2364,7 @@ aside p {
 
 /* Product Row Container */
 .mega-product-row {
-  margin-bottom: 32px;
+  margin-bottom: 15px;
   border-bottom: 1px solid var(--border-light);
   padding-bottom: 24px;
 }
@@ -2411,7 +2411,6 @@ aside p {
   gap: 6px;
   text-decoration: none;
   transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
 }
 
 .mega-variant-card:hover {
@@ -2504,15 +2503,15 @@ a.mega-variant-card:after{
 .view-all-range-btn {
   display: block;
   width: 100%;
-  padding: 14px;
+  padding: 8px!important;
   margin-top: 24px;
   text-align: center;
   background: transparent;
   border: 1px solid var(--accent);
   color: var(--accent);
   font-family: "Google Sans Flex", sans-serif;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 500;
   text-decoration: none;
   border-radius: 4px;
   transition: all 0.2s ease;
@@ -2523,6 +2522,10 @@ a.mega-variant-card:after{
   background: var(--accent);
   color: var(--pure-bg);
   transform: translateY(-2px);
+}
+
+.view-all-range-btn:after{
+  height: 0!important;
 }
 
 .view-all-card {
@@ -2561,22 +2564,26 @@ a.mega-variant-card:after{
 .mega-accordions-container {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 5px;
   width: 100%;
 }
 
 .mega-accordion-group {
   border: none;
-  background: transparent;
+  background: #f1f1f1;
   overflow: hidden;
   transition: all 0.25s ease;
+}
+
+.mega-direct-products-container{
+  padding:10px 15px 0 15px
 }
 
 .mega-accordion-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0;
+  padding: 5px 15px;
   background: transparent;
   cursor: pointer;
   user-select: none;
@@ -2590,8 +2597,8 @@ a.mega-variant-card:after{
 }
 
 .mega-accordion-title {
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 600;
   color: var(--ink);
   letter-spacing: 0.02em;
 }
@@ -2616,12 +2623,15 @@ a.mega-variant-card:after{
 }
 
 .mega-accordion-group.open .mega-accordion-header {
-  background: transparent;
+  background: #f1f1f1;
   border-bottom: 1px solid var(--border-light);
+  padding: 5px 15px;
+  font-weight: 400;
+  font-size: 11px;
 }
 
 .mega-accordion-group.open .mega-accordion-title {
-  color: var(--accent);
+  color: var(--ink);
 }
 
 .mega-accordion-group.open .mega-accordion-chevron {
@@ -2631,7 +2641,7 @@ a.mega-variant-card:after{
 
 .mega-accordion-group.open .mega-accordion-content {
   max-height: 2000px;
-  padding: 10px 0;
+  padding: 10px 15px;
   opacity: 1;
   overflow-y: auto;
   transition: max-height 0.3s cubic-bezier(1, 0, 1, 0), padding 0.3s ease, opacity 0.25s ease;

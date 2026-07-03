@@ -162,7 +162,7 @@
       const directContainer = document.createElement('div');
       directContainer.className = 'mega-direct-products-container';
       if (visibleFolders.length > 0) {
-        directContainer.style.marginTop = '24px';
+        directContainer.style.marginTop = '0';
       }
       visibleDirectRows.forEach(rowNode => {
         renderProductRowElement(rowNode, directContainer);
