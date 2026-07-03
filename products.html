@@ -684,7 +684,7 @@
       <div class="util-inner">
         <div>Trusted by architects, designers & builders across Australia</div>
         <div style="display:flex;gap:24px">
-          <a href="#">1300 AZOOGI</a><a href="#">sales@azoogi.com.au</a>
+          <a href="#">0123456789</a><a href="#">sales@azoogi.com.au</a>
           <div style="display:flex; align-items:center;"><a href="#">Trade Login</a></div>
         </div>
       </div>
@@ -702,8 +702,11 @@
         <a href="#resources">Resources</a>
         <a href="#contact">Contact</a>
       </div>
-      <a href="#contact" class="cta">Get a Quote</a>
-      <div class="burger"><span></span><span></span><span></span></div>
+      <div class="pull-right">
+        <a href="#contact" class="cta"><img src="assets/img/search.svg"></a>
+        <a href="#contact" class="cta"><img src="assets/img/qoute.svg"><span class="count">2</span></a>
+        <div class="burger"><span></span><span></span><span></span></div>
+      </div>
     </nav>
   </header>
 
@@ -1015,9 +1018,9 @@
       const logos = document.querySelectorAll('.logo img');
       logos.forEach(img => {
         if (img.closest('.topbar')) {
-          img.src = (theme === 'light' && isScrolled) ? 'assets/logo_dark.png' : 'assets/logo_white.png';
+          img.src = (theme === 'light' && isScrolled) ? 'assets/logo_dark.png' : 'assets/logo_dark.png';
         } else {
-          img.src = theme === 'light' ? 'assets/logo_dark.png' : 'assets/logo_white.png';
+          img.src = theme === 'light' ? 'assets/logo_dark.png' : 'assets/logo_dark.png';
         }
       });
     }
