@@ -576,6 +576,20 @@ h2, h3{
   letter-spacing: .12em;
   transition: all .3s;
   border-radius: 4px;
+  position: relative;
+}
+
+.cta span.count{  
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--pure-bg);
+  font-size: 10px;
+  width: 18px;
+  height: 18px;
+  padding: 1px 7px;
 }
 /*
 .cta {

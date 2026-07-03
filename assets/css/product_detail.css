@@ -232,6 +232,10 @@ h2, h3, h4{
 .gallery-actions{
   margin-top: 0!IMPORTANT;
 }
+
+.gallery-actions a:hover svg{
+  fill: var(--pure-bg);
+}
 /* Configurator selection blocks */
 .config-group {
   margin-bottom: 10px;
@@ -458,13 +462,10 @@ h2, h3, h4{
 }
 
 .gallery-actions .btn {
-  flex: 1;
-  padding: 16px;
-  font-weight: 600;
   letter-spacing: 0.05em;
   text-align: center;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 /* --- Specification Tabs --- */
@@ -832,9 +833,14 @@ h2, h3, h4{
   font-size: 10px;
   padding: 5px 10px!important;
   display:flex;
+  transition: all .3s;
 }
 
-.reset-selection a img{
+.reset-selection a:hover svg{
+  fill: var(--pure-bg);
+}
+
+.reset-selection a svg{
   padding-right: 5px;
 }
 
