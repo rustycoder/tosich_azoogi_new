@@ -223,7 +223,7 @@ h2, h3{
 }
 
 .product-short-desc {
-  color: var(--muted);
+  color: var(--ink);
   font-size: 15px;
   line-height: 1.6;
   padding-bottom: 20px;
