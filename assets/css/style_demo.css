@@ -2391,8 +2391,6 @@ aside p {
 .mega-product-row-title::after {
   content: "";
   flex-grow: 1;
-  height: 1px;
-  background: var(--border-light);
 }
 
 /* Variants Grid & Mini Cards */
