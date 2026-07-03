@@ -237,7 +237,7 @@ h2, h3{
 .config-group-title {
   font-size: 12px;
   font-weight: 600;
-  text-transform: uppercase;
+  text-transform: capitalize;
   color: var(--ink);
   display: flex;
   flex-direction: column;
@@ -532,7 +532,7 @@ h2, h3{
 
 .spec-table td {
   padding: 6px 0;
-  font-size: 13.5px;
+  font-size: 12px;
 }
 
 .product-icons-row img {

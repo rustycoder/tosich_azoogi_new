@@ -566,6 +566,15 @@ h2, h3{
 }
 
 .cta {
+   color: var(--nav-text);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  transition: all .3s;
+  border-radius: 4px;
+}
+/*
+.cta {
   padding: 8px 16px;
   border: 1px solid var(--nav-text);
   color: var(--nav-text);
@@ -574,13 +583,8 @@ h2, h3{
   letter-spacing: .12em;
   transition: all .3s;
   border-radius: 4px;
-}
+}*/
 
-.cta:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--pure-bg)
-}
 
 a.cta:after {
   height: 0
