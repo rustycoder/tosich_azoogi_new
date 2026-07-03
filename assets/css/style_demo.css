@@ -789,7 +789,6 @@ a.cta:after {
   padding: 14px 28px;
   font-size: 13px;
   text-transform: uppercase;
-  letter-spacing: .14em;
   border: 1px solid var(--accent-2);
   color: var(--pure-text);
   transition: all .3s;
