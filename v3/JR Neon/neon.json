@@ -1,0 +1,116 @@
+{
+    "product_name": "3 SIDE 1010T",
+    "product_images": [
+        "https://www.aspectled.com/collections/led-neon-lights",
+        "https: //oss.jrlite.com/uploads/upload/images/20260623/fce62a09738ba87965b779838cb8438a.webp"
+    ],
+    "product_features": {
+        "CCT": [
+            "2700K",
+            "3000K",
+            "4000K"
+        ],
+        "Ra": "≥90",
+        "Bending Direction": "Vertical Bending",
+        "MacAdam Ellipse(SDCM)": "3 steps",
+        "Standard Lumen Output": "780 lm/m（3000K）",
+        "Mounting": [
+            "Aluminum Profile",
+            "PC Profile",
+            "Clips"
+        ],
+        "Input Voltage": "24V DC",
+        "Color": "White",
+        "Power": "10W/m",
+        "IP Rating": "IP68(Not for underwater application)",
+        "Dimension": "10mm(W) x 10mm(H)",
+        "Height": "10mm",
+        "Max running length": "5m",
+        "Unit cut": "12.5mm",
+        "Lens": "Silicone",
+        "Operating Temperature": "-40℃~65℃",
+        "Sustainability": "UV Resistant",
+        "Certification": [
+            "UL",
+            "cUL",
+            "TÜV",
+            "CE",
+            "RoHS",
+            "REACH",
+            "CB"
+        ]
+    },
+    "options": {
+        "CCT": [
+            {
+                "name": "2700K",
+                "id": "1615"
+            },
+            {
+                "name": "3000K",
+                "id": "1616"
+            },
+            {
+                "name": "4000K",
+                "id": "1617"
+            }
+        ],
+        "Ra": [
+            {
+                "name": "≥90",
+                "id": "309"
+            }
+        ],
+        "Mounting": [
+            {
+                "name": "Aluminum Profile",
+                "id": "620"
+            },
+            {
+                "name": "PC Profile",
+                "id": "808"
+            },
+            {
+                "name": "Clips",
+                "id": "789"
+            }
+        ],
+        "Lens": [
+            {
+                "name": "Silicone",
+                "id": "871"
+            }
+        ],
+        "Height": [
+            {
+                "name": "10mm",
+                "id": "535"
+            }
+        ],
+        "Certification": [
+            {
+                "name": "UL",
+                "id": "612"
+            },
+            {
+                "name": "cUL",
+                "id": "609"
+            },
+            {
+                "name": "TÜV",
+                "id": "610"
+            },
+            {
+                "name": "CE",
+                "id": "611"
+            }
+        ],
+        "IP Rating": [
+            {
+                "name": "IP68",
+                "id": "629"
+            }
+        ]
+    },
+    "constraints": []
+}
