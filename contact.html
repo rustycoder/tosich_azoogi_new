@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Contact Us — Azoogi</title>
+<meta name="description" content="Get in touch with Azoogi. Office hours, address, and contact form for lighting projects across Australia." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style_demo.css">
+<script src="assets/js/products_data.js"></script>
+<script src="assets/js/mega_menu.js"></script>
+</head>
+<body class="contact-page">
+
+<header class="topbar solid" id="topbar">
+  <div class="util">
+    <div class="util-inner">
+      <div>Trusted by architects, designers & builders across Australia</div>
+      <div style="display:flex;gap:24px">
+        <a href="tel:1300641261">1300 AZOOGI</a>
+        <a href="mailto:sales@azoogi.com.au">sales@azoogi.com.au</a>
+        <div style="display:flex; align-items:center;"><a href="trade_login.html">Trade Login</a></div>
+      </div>
+    </div>
+  </div>
+  <nav class="nav">
+    <a href="index.html" class="logo"><img src="assets/logo_dark.png" width="80" alt="Azoogi"></a>
+    <div class="menu">
+      <div class="has-dropdown">
+        <a href="index.html#products">Product <span class="caret">&#9662;</span></a>
+        <div class="mega-menu" id="dynamic-mega-menu"></div>
+      </div>
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#services">Services</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <a href="contact.html" class="cta">Get a Quote</a>
+    <div class="burger"><span></span><span></span><span></span></div>
+  </nav>
+</header>
+
+<main class="contact-main">
+  <div class="wrap contact-wrap">
+    <div class="contact-grid">
+
+      <div class="contact-form-panel">
+        <div class="kicker">Contact</div>
+        <h1 class="h2 contact-title">We’d love to <span>hear</span> from you!</h1>
+        <p class="contact-lead">Use the form below.</p>
+
+        <form class="contact-form" id="contactForm" action="#" method="post" novalidate>
+          <div class="form-group">
+            <label for="your-name">Full Name*</label>
+            <input id="your-name" name="your-name" type="text" maxlength="400" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="your-email">Email*</label>
+            <input id="your-email" name="your-email" type="email" maxlength="400" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="your-company">Company Name*</label>
+            <input id="your-company" name="your-company" type="text" maxlength="400" required autocomplete="organization">
+          </div>
+          <div class="form-group">
+            <label for="your-message">Message*</label>
+            <textarea id="your-message" name="your-message" rows="6" maxlength="2000" required placeholder="We’re here to help genuine customers and potential partners. Please, no unsolicited sales pitches."></textarea>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn primary">Send Message</button>
+          </div>
+          <p class="form-status" id="formStatus" hidden></p>
+        </form>
+      </div>
+
+      <aside class="contact-info-panel">
+        <div class="info-block">
+          <div class="info-label">Office Hours</div>
+          <p>08:00<span>AM</span> – 04:00<span>PM</span><br>Monday To Friday</p>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Address</div>
+          <p>
+            <a href="https://www.google.com/maps/place/Azoogi+LED+Lighting/@-33.9654395,151.2254676,17z" target="_blank" rel="noopener noreferrer">
+              Unit 47/10-12 Girawah Pl<br>Matraville NSW 2036
+            </a>
+          </p>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Office Number</div>
+          <p><a href="tel:1300641261">1300 641 261</a></p>
+        </div>
+        <div class="info-block">
+          <div class="info-label">ABN</div>
+          <p>72 600 241 209</p>
+        </div>
+        <div class="info-block">
+          <div class="info-label">ACN</div>
+          <p>600 241 209</p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="index.html" class="logo"><img src="assets/logo_dark.png" width="150" alt="Azoogi"></a>
+        <p>Premium LED lighting solutions for architects, designers, builders and homeowners across Australia.</p>
+      </div>
+      <div><h5>Products</h5>
+        <a href="index.html#products">LED Strips</a><a href="index.html#products">Neon Range</a><a href="index.html#products">Garden Lights</a><a href="index.html#products">LED Drivers</a>
+      </div>
+      <div><h5>Company</h5>
+        <a href="index.html#about">About Azoogi</a><a href="index.html#projects">Projects</a><a href="contact.html">Contact</a>
+      </div>
+      <div><h5>Contact</h5>
+        <a href="tel:1300641261">1300 641 261</a>
+        <a href="mailto:sales@azoogi.com.au">sales@azoogi.com.au</a>
+        <a href="trade_login.html">Trade Login</a>
+      </div>
+    </div>
+    <div class="copy">
+      <div>&copy; 2026 Azoogi Pty Ltd. All rights reserved.</div>
+      <div>Privacy &middot; Terms &middot; Warranty</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('topbar').classList.add('solid');
+
+  document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const status = document.getElementById('formStatus');
+    if (!this.checkValidity()) {
+      status.hidden = false;
+      status.textContent = 'Please fill in all required fields.';
+      status.className = 'form-status is-error';
+      this.reportValidity();
+      return;
+    }
+    status.hidden = false;
+    status.textContent = 'Thanks — your message has been noted. We’ll be in touch soon.';
+    status.className = 'form-status is-success';
+    this.reset();
+  });
+</script>
+</body>
+</html>

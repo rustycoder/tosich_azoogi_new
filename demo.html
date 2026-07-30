@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script>const savedTheme = localStorage.getItem('theme'); if (savedTheme) { document.documentElement.setAttribute('data-theme', savedTheme); }</script>
   <link rel="stylesheet" href="assets/css/style_demo.css">
   <script src="assets/js/products_data.js"></script>
   <script src="assets/js/mega_menu.js"></script>
@@ -355,8 +354,7 @@
     if (isScrolled !== lastScrolled) {
       topbar.classList.toggle('solid', isScrolled);
       lastScrolled = isScrolled;
-      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-      if (typeof updateLogos === 'function') updateLogos(currentTheme);
+      if (typeof updateLogos === 'function') updateLogos();
     }
   };
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
@@ -457,32 +455,21 @@
   heroParallax();
   window.addEventListener('scroll', heroParallax, { passive: true });
 
-  /* ===== Theme Toggle ===== */
-  function toggleTheme() {
-    const root = document.documentElement;
-    const currentTheme = root.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    root.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateLogos(newTheme);
-  }
-
-  function updateLogos(theme) {
+  function updateLogos() {
     const isScrolled = window.scrollY > 40;
     const logos = document.querySelectorAll('.logo img');
     logos.forEach(img => {
       if (img.closest('.topbar')) {
-        img.src = (theme === 'light' && isScrolled) ? 'assets/logo_dark.png' : 'assets/logo_white.png';
+        img.src = isScrolled ? 'assets/logo_dark.png' : 'assets/logo_white.png';
       } else {
-        img.src = theme === 'light' ? 'assets/logo_dark.png' : 'assets/logo_white.png';
+        img.src = 'assets/logo_dark.png';
       }
     });
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    updateLogos(savedTheme);
+    localStorage.removeItem('theme');
+    updateLogos();
   });
 </script>
 

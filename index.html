@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script>const savedTheme = localStorage.getItem('theme'); if (savedTheme) { document.documentElement.setAttribute('data-theme', savedTheme); }</script>
   <link rel="stylesheet" href="assets/css/style_demo.css">
   <script src="assets/js/products_data.js"></script>
   <script src="assets/js/mega_menu.js"></script>
@@ -21,23 +20,8 @@
       <div class="util-inner">
         <div>Trusted by architects, designers & builders across Australia</div>
         <div style="display:flex;gap:24px">
-          <a href="#">1300 AZOOGI</a><a href="#">sales@azoogi.com.au</a>
-          <div style="display:flex; align-items:center;"><a href="#">Trade Login</a><button class="theme-btn"
-              aria-label="Toggle theme" onclick="toggleTheme()"><svg class="sun-icon" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="5"></circle>
-                <line x1="12" y1="1" x2="12" y2="3"></line>
-                <line x1="12" y1="21" x2="12" y2="23"></line>
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                <line x1="1" y1="12" x2="3" y2="12"></line>
-                <line x1="21" y1="12" x2="23" y2="12"></line>
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-              </svg><svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-              </svg></button></div>
+          <a href="#">1300 AZOOGI</a><a href="#">sales@azoogi.com</a>
+          <div style="display:flex; align-items:center;"><a href="trade_login.html">Trade Login</a></div>
         </div>
       </div>
     </div>
@@ -51,10 +35,10 @@
         <a href="#projects">Projects</a>
         <a href="#about">About</a>
         <a href="#services">Services</a>
-        <a href="#resources">Resources</a>
-        <a href="#contact">Contact</a>
+        <!-- <a href="#resources">Resources</a> -->
+        <a href="contact.html">Contact</a>
       </div>
-      <a href="#contact" class="cta">Get a Quote</a>
+      <a href="led-strip-calculator.html" class="cta">LED Calculator</a>
       <div class="burger"><span></span><span></span><span></span></div>
     </nav>
   </header>
@@ -63,14 +47,14 @@
 <section class="hero" id="hero">
   <div class="slide active has-video">
     <video class="bg-video" autoplay muted loop playsinline preload="auto" poster="assets/hero00.jpg">
-      <source src="assets/lighting.mp4" type="video/mp4">
+      <source src="assets\Azoogi Lighting VOL 1 (HD) (online-video-cutter.com).mp4" type="video/mp4">
     </video>
     <div class="slide-inner">
       <div class="eyebrow">Made just for you</div>
       <h1 class="slide-title">Custom fittings<br/>without compromise.</h1>
       <p class="slide-sub">Off-spec alternatives, custom fittings, matched specs and budgets — without ever compromising on quality.</p>
       <div class="slide-actions">
-        <a class="btn primary" href="#contact">Start a Project</a>
+        <a class="btn primary" href="contact.html">Start a Project</a>
         <a class="btn" href="#services">Our Services</a>
       </div>
     </div>
@@ -93,7 +77,7 @@
       <h1 class="slide-title">From first idea<br/>to final install — and beyond.</h1>
       <p class="slide-sub">We don't just supply lighting. We partner with you with advice, guidance, and service that keeps your project shining.</p>
       <div class="slide-actions">
-        <a class="btn primary" href="#contact">Talk to a Specialist</a>
+        <a class="btn primary" href="contact.html">Talk to a Specialist</a>
         <a class="btn" href="#projects">Recent Work</a>
       </div>
     </div>
@@ -115,7 +99,7 @@
       <h1 class="slide-title">Custom fittings<br/>without compromise.</h1>
       <p class="slide-sub">Off-spec alternatives, custom fittings, matched specs and budgets — without ever compromising on quality.</p>
       <div class="slide-actions">
-        <a class="btn primary" href="#contact">Start a Project</a>
+        <a class="btn primary" href="contact.html">Start a Project</a>
         <a class="btn" href="#services">Our Services</a>
       </div>
     </div>
@@ -129,8 +113,6 @@
       <svg id="ppIcon" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
     </div>
   </div>
-
-  <div class="scroll-cue"><span>Scroll</span><div class="l"></div></div>
 </section>
 
 <!-- ========== INTRO ========== -->
@@ -157,7 +139,7 @@
       <h2 class="h2 reveal">For those who demand more — from the components inside to the support behind every product.</h2>
     </div>
   
-    <div class="container max-width-adaptive-md margin-bottom-lg">
+    <div class="container max-width-adaptive-md">
       <ul id="cards">
         <li class="card-main" id="card_1">
           <div class="card__content">
@@ -372,7 +354,7 @@
 </section>
 
 <!-- ========== FOOTER ========== -->
-<footer id="contact">
+<footer>
   <div class="wrap">
     <div class="foot">
       <div>
@@ -391,10 +373,10 @@
         <a href="#">Architects & Designers</a><a href="#">Electricians & Builders</a><a href="#">Wholesalers</a><a href="#">Home Owners</a>
       </div>
       <div><h5>Company</h5>
-        <a href="#">About Azoogi</a><a href="#">Projects</a><a href="#">Resources</a><a href="#">News</a><a href="#">Contact</a>
+        <a href="#">About Azoogi</a><a href="#">Projects</a><a href="#">Resources</a><a href="#">News</a><a href="contact.html">Contact</a>
       </div>
       <div><h5>Contact</h5>
-        <a href="tel:1300296644">1300 AZOOGI</a><a href="mailto:sales@azoogi.com.au">sales@azoogi.com.au</a><a href="#">Sydney &middot; Melbourne</a><a href="#">Trade Login</a>
+        <a href="tel:1300296644">1300 AZOOGI</a><a href="mailto:sales@azoogi.com.au">sales@azoogi.com.au</a><a href="#">Sydney &middot; Melbourne</a><a href="trade_login.html">Trade Login</a>
       </div>
     </div>
     <div class="copy">
@@ -413,8 +395,7 @@
     if (isScrolled !== lastScrolled) {
       topbar.classList.toggle('solid', isScrolled);
       lastScrolled = isScrolled;
-      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-      if (typeof updateLogos === 'function') updateLogos(currentTheme);
+      if (typeof updateLogos === 'function') updateLogos();
     }
   };
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
@@ -515,32 +496,21 @@
   heroParallax();
   window.addEventListener('scroll', heroParallax, { passive: true });
 
-  /* ===== Theme Toggle ===== */
-  function toggleTheme() {
-    const root = document.documentElement;
-    const currentTheme = root.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    root.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateLogos(newTheme);
-  }
-
-  function updateLogos(theme) {
+  function updateLogos() {
     const isScrolled = window.scrollY > 40;
     const logos = document.querySelectorAll('.logo img');
     logos.forEach(img => {
       if (img.closest('.topbar')) {
-        img.src = (theme === 'light' && isScrolled) ? 'assets/logo_dark.png' : 'assets/logo_white.png';
+        img.src = isScrolled ? 'assets/logo_dark.png' : 'assets/logo_white.png';
       } else {
-        img.src = theme === 'light' ? 'assets/logo_dark.png' : 'assets/logo_white.png';
+        img.src = 'assets/logo_dark.png';
       }
     });
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    updateLogos(savedTheme);
+    localStorage.removeItem('theme');
+    updateLogos();
   });
 </script>
 
