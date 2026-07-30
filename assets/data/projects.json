@@ -1,0 +1,161 @@
+{
+  "intro": {
+    "title": "Projects Powered by Azoogi",
+    "lead": "From a new strip light in your kitchen to landmark Tier-1 developments — we deliver LED lighting solutions for projects of all sizes. Whether it’s a heritage restoration, boutique hospitality venue, residential upgrade, or a large-scale commercial build, our in-house engineering and assembly line ensure precision, speed, efficiency and quality — no matter the scale.",
+    "contactEmail": "majorprojects@azoogi.com"
+  },
+  "projects": [
+    {
+      "id": "zushi-restaurant",
+      "slug": "zushi-restaurant",
+      "title": "Zushi Restaurant",
+      "tag": "Hospitality",
+      "location": "Marrickville NSW",
+      "type": "Hospitality",
+      "completed": "April 2025",
+      "featured": true,
+      "featuredOrder": 1,
+      "cover": "assets/img/img-1.jpg",
+      "coverRemote": "https://i0.wp.com/azoogi.com.au/wp-content/uploads/2025/06/Picture1.jpg?fit=952%2C654&ssl=1",
+      "summary": "Custom lighting integrated into timber ceiling and shelving for a refined Japanese dining atmosphere.",
+      "description": "Located in Sydney’s bustling Barangaroo precinct, the Zushi extension project combines sleek interior design with modern Japanese dining. Azoogi supplied custom lighting solutions that were carefully integrated into the venue’s timber ceiling and shelving features. Our LED products enhanced the architectural detailing, adding depth and warmth while maintaining a clean, refined aesthetic. The result is a layered lighting experience that complements the atmosphere of the space and elevates the dining environment.",
+      "gallery": [
+        "https://i0.wp.com/azoogi.com.au/wp-content/uploads/2025/06/Picture4.jpg?fit=1825%2C2290&ssl=1",
+        "https://i0.wp.com/azoogi.com.au/wp-content/uploads/2025/06/Picture3.jpg?fit=1884%2C1513&ssl=1",
+        "https://i0.wp.com/azoogi.com.au/wp-content/uploads/2025/06/Picture2.jpg?fit=1914%2C763&ssl=1"
+      ]
+    },
+    {
+      "id": "aikenhead-centre",
+      "slug": "aikenhead-centre-for-medical-discovery",
+      "title": "Aikenhead Centre for Medical Discovery",
+      "tag": "Medical",
+      "location": "Melbourne VIC",
+      "type": "Medical & Research",
+      "completed": "2024",
+      "featured": true,
+      "featuredOrder": 2,
+      "cover": "assets/img/acdm.jpg",
+      "coverRemote": "https://i0.wp.com/azoogi.com.au/wp-content/uploads/2025/06/Picture9.jpg?fit=1101%2C849&ssl=1",
+      "summary": "Precision lighting for a landmark medical research facility.",
+      "description": "Azoogi delivered tailored architectural LED solutions for the Aikenhead Centre for Medical Discovery, supporting a high-performance research environment. Lighting was specified to balance visual comfort, energy efficiency and long-term reliability across laboratories, collaborative spaces and circulation zones.",
+      "gallery": [
+        "assets/img/acdm.jpg",
+        "https://i0.wp.com/azoogi.com.au/wp-content/uploads/2025/06/Picture9.jpg?fit=1101%2C849&ssl=1",
+        "assets/img/img-0.jpg"
+      ]
+    },
+    {
+      "id": "the-eve-hotel",
+      "slug": "the-eve-hotel",
+      "title": "The Eve Hotel",
+      "tag": "Hospitality",
+      "location": "Redfern NSW",
+      "type": "Hospitality",
+      "completed": "2024",
+      "featured": true,
+      "featuredOrder": 3,
+      "cover": "assets/img/eve.jpg",
+      "coverRemote": "https://i0.wp.com/azoogi.com.au/wp-content/uploads/2025/06/project-image-2-big.jpg?fit=580%2C700&ssl=1",
+      "summary": "Atmospheric hospitality lighting for a boutique hotel experience.",
+      "description": "For The Eve Hotel, Azoogi supplied layered LED lighting that supports both guest comfort and brand atmosphere. From lobby accents to guest-floor circulation, the scheme was designed for warmth, consistency and easy maintenance across a busy hospitality environment.",
+      "gallery": [
+        "assets/img/eve.jpg",
+        "https://i0.wp.com/azoogi.com.au/wp-content/uploads/2025/06/project-image-2-big.jpg?fit=580%2C700&ssl=1",
+        "assets/img/img-2.jpg"
+      ]
+    },
+    {
+      "id": "bondi-beach-penthouse",
+      "slug": "bondi-beach-penthouse",
+      "title": "Bondi Beach Penthouse",
+      "tag": "Residential",
+      "location": "Bondi NSW",
+      "type": "Residential",
+      "completed": "2024",
+      "featured": true,
+      "featuredOrder": 4,
+      "cover": "assets/img/bondi.webp",
+      "coverRemote": "https://i0.wp.com/azoogi.com.au/wp-content/uploads/2025/06/Picture5.jpg?fit=1308%2C796&ssl=1",
+      "summary": "Refined residential lighting with coastal views in mind.",
+      "description": "This Bondi Beach penthouse project called for discreet, high-quality LED detailing that enhances materials and spatial flow without visual clutter. Azoogi supplied strip and architectural fittings selected for colour quality, clean lines and lasting performance in a premium residential setting.",
+      "gallery": [
+        "assets/img/bondi.webp",
+        "https://i0.wp.com/azoogi.com.au/wp-content/uploads/2025/06/Picture5.jpg?fit=1308%2C796&ssl=1",
+        "assets/img/prod-4.jpg"
+      ]
+    },
+    {
+      "id": "surry-hills-village",
+      "slug": "surry-hills-village",
+      "title": "Surry Hills Village",
+      "tag": "Mixed Development",
+      "location": "Surry Hills NSW",
+      "type": "Mixed Development",
+      "completed": "2025",
+      "featured": false,
+      "cover": "https://i0.wp.com/azoogi.com.au/wp-content/uploads/2025/08/Picture1.jpg?fit=1252%2C791&ssl=1",
+      "summary": "Lighting support across a mixed-use urban development.",
+      "description": "Azoogi provided LED lighting solutions for Surry Hills Village, supporting mixed-use spaces with consistent quality and durable specification. The scheme balances practical illumination with architectural finish across shared and commercial areas.",
+      "gallery": [
+        "https://i0.wp.com/azoogi.com.au/wp-content/uploads/2025/08/Picture1.jpg?fit=1252%2C791&ssl=1",
+        "assets/img/img-3.jpg",
+        "assets/img/sydney-night.jpg"
+      ]
+    },
+    {
+      "id": "made-marrickville",
+      "slug": "made-marrickville-warehouse-complex",
+      "title": "MADE Marrickville Warehouse Complex",
+      "tag": "Industrial",
+      "location": "Marrickville NSW",
+      "type": "Industrial",
+      "completed": "February 2025",
+      "featured": false,
+      "cover": "https://i0.wp.com/azoogi.com.au/wp-content/uploads/2025/06/Picture22.png?fit=473%2C570&ssl=1",
+      "summary": "Functional linear lighting for a modern warehouse facility.",
+      "description": "Azoogi supplied tailored lighting solutions for this modern warehouse and storage facility, with a focus on functional performance and visual consistency. Linear lighting was integrated throughout key operational areas to support safety, visibility, and efficiency across both high-traffic and internal spaces. Our products were selected to complement the industrial design while ensuring long-term durability in a demanding environment.",
+      "gallery": [
+        "https://i0.wp.com/azoogi.com.au/wp-content/uploads/2025/06/Picture25.png?fit=458%2C560&ssl=1",
+        "https://i0.wp.com/azoogi.com.au/wp-content/uploads/2025/06/Picture24.png?fit=660%2C572&ssl=1",
+        "https://i0.wp.com/azoogi.com.au/wp-content/uploads/2025/06/Picture23.png?fit=560%2C567&ssl=1"
+      ]
+    },
+    {
+      "id": "gables-hockey-complex",
+      "slug": "gables-hockey-complex",
+      "title": "Gables Hockey Complex",
+      "tag": "Sporting Complex",
+      "location": "NSW",
+      "type": "Sporting Complex",
+      "completed": "2024",
+      "featured": false,
+      "cover": "https://i0.wp.com/azoogi.com.au/wp-content/uploads/2025/06/Picture21.png?fit=403%2C253&ssl=1",
+      "summary": "High-performance lighting for sport and spectator areas.",
+      "description": "For the Gables Hockey Complex, Azoogi supplied lighting designed for visibility, durability and consistent performance across sporting and amenity spaces. The installation supports safe play and a welcoming venue experience for athletes and visitors alike.",
+      "gallery": [
+        "https://i0.wp.com/azoogi.com.au/wp-content/uploads/2025/06/Picture21.png?fit=403%2C253&ssl=1",
+        "assets/img/leds.webp",
+        "assets/img/drivers.webp"
+      ]
+    },
+    {
+      "id": "westin-maldives",
+      "slug": "westin-maldives-miriandhoo-resort",
+      "title": "Westin Maldives Miriandhoo Resort",
+      "tag": "Tropical Resort",
+      "location": "Maldives",
+      "type": "Tropical Resort",
+      "completed": "2023",
+      "featured": false,
+      "cover": "https://i0.wp.com/azoogi.com.au/wp-content/uploads/2025/06/Picture17-1.png?fit=375%2C271&ssl=1",
+      "summary": "Resort lighting crafted for tropical hospitality settings.",
+      "description": "Azoogi contributed LED lighting solutions for the Westin Maldives Miriandhoo Resort, supporting a luxurious resort atmosphere with products suited to coastal and hospitality conditions. The scheme emphasises warmth, reliability and refined architectural detail.",
+      "gallery": [
+        "https://i0.wp.com/azoogi.com.au/wp-content/uploads/2025/06/Picture17-1.png?fit=375%2C271&ssl=1",
+        "assets/img/neon.webp",
+        "assets/img/prod-5.jpg"
+      ]
+    }
+  ]
+}
