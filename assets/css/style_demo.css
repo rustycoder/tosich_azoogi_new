@@ -979,8 +979,7 @@ section {
 .intro {
   padding: 48px 0;
   text-align: center;
-  background: radial-gradient(900px 500px at 85% 10%, rgba(103, 208, 78, .18), transparent 60%),
-    radial-gradient(700px 400px at 10% 90%, rgba(103, 208, 78, .08), transparent 60%);
+  background: var(--bg);
 }
 
 .audience {
@@ -1070,7 +1069,7 @@ section {
   margin-top: 40px
 }
 
-.value {
+.value-grid .value {
   padding: 36px 28px;
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -1083,30 +1082,30 @@ section {
   transition: opacity .9s cubic-bezier(.22, .61, .36, 1), transform .9s cubic-bezier(.22, .61, .36, 1), background .4s
 }
 
-.value.on {
+.value-grid .value.on {
   opacity: 1;
   transform: none
 }
 
-.value:hover {
+.value-grid .value:hover {
   background: #141414
 }
 
-.value .n {
+.value-grid .value .n {
   font-family: "Google Sans Flex", sans-serif;;
   color: var(--accent);
   font-size: 22px;
   margin-bottom: 30px
 }
 
-.value h3 {
+.value-grid .value h3 {
   font-family: "Google Sans Flex", sans-serif;;
   font-weight: 500;
   font-size: 26px;
   margin-bottom: 14px
 }
 
-.value p {
+.value-grid .value p {
   color: var(--muted);
   font-size: 14.5px;
   line-height: 1.7
@@ -2088,9 +2087,7 @@ aside p {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, transparent 25%, transparent 70%, rgba(0, 0, 0, .55) 100%),
-    radial-gradient(60% 50% at 50% 60%, transparent 0%, rgba(0, 0, 0, .25) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, transparent 25%, transparent 70%, rgba(0, 0, 0, .55) 100%);
 }
 
 /* Hotspots */
@@ -2720,9 +2717,7 @@ a.mega-variant-card:after{
 
 .contact-main {
   padding: 140px 0 64px;
-  background:
-    radial-gradient(900px 500px at 90% 0%, rgba(58, 160, 40, .10), transparent 60%),
-    var(--bg);
+  background: var(--bg);
 }
 
 .contact-wrap {
@@ -2731,38 +2726,19 @@ a.mega-variant-card:after{
 
 .contact-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.85fr);
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.35fr);
   gap: clamp(32px, 5vw, 80px);
   align-items: start;
 }
 
 .contact-form-panel {
-  position: relative;
   padding: clamp(28px, 4vw, 48px);
   background-color: #f6f8f5;
-  background-image: url('https://i0.wp.com/azoogi.com.au/wp-content/uploads/2025/08/form-bg.png?fit=820%2C841&ssl=1');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   border: 1px solid var(--line);
 }
 
-.contact-form-panel::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.72);
-  pointer-events: none;
-}
-
-.contact-form-panel > * {
-  position: relative;
-  z-index: 1;
-}
-
 .contact-title {
-  font-size: clamp(32px, 4.5vw, 48px);
-  margin-bottom: 16px;
+  margin: 0 0 16px;
 }
 
 .contact-title span {
@@ -2771,8 +2747,10 @@ a.mega-variant-card:after{
 
 .contact-lead {
   font-size: 17px;
+  font-weight: 400;
+  line-height: 1.55;
   color: var(--muted);
-  margin-bottom: clamp(24px, 3vh, 40px);
+  margin: 0 0 clamp(24px, 3vh, 40px);
   padding-bottom: 0;
 }
 
@@ -2803,6 +2781,7 @@ a.mega-variant-card:after{
   padding: 14px 16px;
   font: inherit;
   font-size: 15px;
+  font-weight: 400;
   border-radius: 4px;
   outline: none;
   transition: border-color .25s ease, box-shadow .25s ease;
@@ -2823,6 +2802,7 @@ a.mega-variant-card:after{
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
   color: #999;
+  font-weight: 400;
 }
 
 .form-actions {
@@ -2835,6 +2815,7 @@ a.mega-variant-card:after{
 
 .form-status {
   font-size: 14px;
+  font-weight: 400;
   margin-top: 8px;
   padding-bottom: 0;
 }
@@ -2860,17 +2841,19 @@ a.mega-variant-card:after{
 }
 
 .info-label {
-  font-size: clamp(18px, 2vw, 28px);
-  font-weight: 450;
-  color: rgba(17, 17, 17, 0.55);
-  margin-bottom: 12px;
-  line-height: 1.15;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+  line-height: 1.3;
 }
 
 .info-block p {
-  font-size: clamp(15px, 1.15vw, 18px);
-  font-weight: 450;
-  line-height: 1.5;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.55;
   color: var(--ink);
   padding-bottom: 0;
   margin: 0;
@@ -2878,11 +2861,13 @@ a.mega-variant-card:after{
 
 .info-block p span {
   font-size: 0.72em;
+  font-weight: 500;
   vertical-align: super;
   letter-spacing: .04em;
 }
 
 .info-block a {
+  font-weight: 400;
   transition: color .25s ease;
 }
 

@@ -15,16 +15,11 @@
   padding: 130px 28px 36px;
   text-align: center;
   overflow: hidden;
-  background:
-    radial-gradient(900px 480px at 50% 20%, rgba(58, 160, 40, .14), transparent 60%),
-    var(--bg);
+  background: var(--bg);
 }
 
 .calc-hero-glow {
-  position: absolute;
-  inset: 20% 15%;
-  background: radial-gradient(ellipse at center, rgba(58, 160, 40, .12), transparent 70%);
-  pointer-events: none;
+  display: none;
 }
 
 .calc-hero-inner {

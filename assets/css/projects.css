@@ -13,9 +13,7 @@
 .projects-hero {
   padding: 140px 0 40px;
   text-align: center;
-  background:
-    radial-gradient(900px 480px at 50% 0%, rgba(58, 160, 40, .12), transparent 60%),
-    var(--bg);
+  background: var(--bg);
 }
 
 .projects-hero .h2 {
@@ -259,13 +257,14 @@
   align-items: baseline;
 }
 
-.project-meta-row .label {
+.project-meta-row .meta-label {
   font-size: clamp(16px, 1.4vw, 22px);
-  font-weight: 450;
+  font-weight: 500;
 }
 
-.project-meta-row .value {
+.project-meta-row .meta-value {
   font-size: clamp(14px, 1.2vw, 17px);
+  font-weight: 400;
   color: var(--muted);
 }
 

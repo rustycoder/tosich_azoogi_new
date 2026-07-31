@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-  <script>const savedTheme = localStorage.getItem('theme'); if (savedTheme) { document.documentElement.setAttribute('data-theme', savedTheme); }</script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Products — Azoogi LED Lighting</title>
@@ -18,27 +17,13 @@
   <script src="assets/js/mega_menu.js"></script>
   <style>
     
-/* Product page */
-/* ===========================================================
-     PRODUCTS PAGE — HEADER ALWAYS SOLID
-     The topbar is position:fixed and starts transparent (for
-     the homepage hero slider). On this page force it solid.
-  =========================================================== */
+/* Product page — solid light header (matches site light mode) */
     .topbar {
-      background: rgba(11, 11, 11, .94) !important;
-      backdrop-filter: blur(16px) !important;
-      -webkit-backdrop-filter: blur(16px) !important;
+      background: rgba(255, 255, 255, .96) !important;
+      backdrop-filter: blur(14px) !important;
+      -webkit-backdrop-filter: blur(14px) !important;
       border-bottom: 1px solid var(--line) !important;
     }
-
-    :root[data-theme="light"] .topbar {
-      background: rgba(255, 255, 255, .97) !important;
-    }
-
-    /* ===========================================================
-     OFFSET BODY BELOW THE FIXED HEADER
-     total header height ≈ 104px
-  =========================================================== */
 
     .header-bg{
       background-color: #333;
@@ -679,34 +664,31 @@
 <body style="padding-top: 120px;">
 
   <!-- ========== HEADER ========== -->
-  <header class="topbar" id="topbar">
+  <header class="topbar solid" id="topbar">
     <div class="util">
       <div class="util-inner">
         <div>Trusted by architects, designers & builders across Australia</div>
         <div style="display:flex;gap:24px">
-          <a href="#">0123456789</a><a href="#">sales@azoogi.com.au</a>
-          <div style="display:flex; align-items:center;"><a href="#">Trade Login</a></div>
+          <a href="tel:1300641261">1300 AZOOGI</a>
+          <a href="mailto:sales@azoogi.com.au">sales@azoogi.com.au</a>
+          <div style="display:flex; align-items:center;"><a href="trade_login.html">Trade Login</a></div>
         </div>
       </div>
     </div>
     <nav class="nav">
-      <a href="#" class="logo"><img src="assets/logo_dark.png" width="120"></a>
+      <a href="index.html" class="logo"><img src="assets/logo_dark.png" width="80" alt="Azoogi"></a>
       <div class="menu">
         <div class="has-dropdown">
-          <a href="#products">Product <span class="caret">&#9662;</span></a>
+          <a href="products.html">Product <span class="caret">&#9662;</span></a>
           <div class="mega-menu" id="dynamic-mega-menu"></div>
         </div>
-        <a href="#projects">Projects</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#resources">Resources</a>
-        <a href="#contact">Contact</a>
+        <a href="projects.html">Projects</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#services">Services</a>
+        <a href="contact.html">Contact</a>
       </div>
-      <div class="pull-right">
-        <a href="#contact" class="cta"><img src="assets/img/search.svg"></a>
-        <a href="#contact" class="cta"><img src="assets/img/qoute.svg"><span class="count">2</span></a>
-        <div class="burger"><span></span><span></span><span></span></div>
-      </div>
+      <a href="led-strip-calculator.html" class="cta">LED Calculator</a>
+      <div class="burger"><span></span><span></span><span></span></div>
     </nav>
   </header>
 
@@ -714,9 +696,8 @@
   <div class="wrap">
     <!-- Breadcrumb only — no h1 / subtitle -->
     <div class="breadcrumbs" id="breadcrumbs">
-        <a href="demo.html">Home</a>
+        <a href="index.html">Home</a>
         <span>/</span>Products
-        
       </div>
 
 
@@ -774,49 +755,29 @@
 
 
   <!-- ========== FOOTER ========== -->
-  <footer id="contact">
+  <footer>
     <div class="wrap">
       <div class="foot">
         <div>
-          <a href="#" class="logo"><img src="assets/logo.png" width="150"></a>
+          <a href="index.html" class="logo"><img src="assets/logo_dark.png" width="150" alt="Azoogi"></a>
           <p>Premium LED lighting solutions for architects, designers, builders and homeowners across Australia.</p>
-          <div class="socials">
-            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2">
-                <rect x="3" y="3" width="18" height="18" rx="5" />
-                <circle cx="12" cy="12" r="4" />
-                <circle cx="17.5" cy="6.5" r=".8" fill="currentColor" />
-              </svg></a>
-            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M4 4h4v16H4zM6 2.5A1.5 1.5 0 1 1 4.5 4 1.5 1.5 0 0 1 6 2.5zM10 8h4v2c.7-1.2 2-2.3 4-2.3 3 0 4 2 4 5V20h-4v-6c0-1.4-.5-2.4-1.9-2.4S14 12.6 14 14v6h-4z" />
-              </svg></a>
-            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M13 22v-8h3l1-4h-4V7.5c0-1.2.4-2 2.2-2H17V2.2C16.6 2.1 15.4 2 14 2c-3 0-5 1.8-5 5.2V10H6v4h3v8z" />
-              </svg></a>
-          </div>
         </div>
         <div>
           <h5>Products</h5>
-          <a href="#">LED Strips</a><a href="#">Neon Range</a><a href="#">Garden Lights</a><a href="#">LED Drivers</a><a
-            href="#">Architectural</a><a href="#">Downlights</a>
-        </div>
-        <div>
-          <h5>Solutions</h5>
-          <a href="#">Architects & Designers</a><a href="#">Electricians & Builders</a><a href="#">Wholesalers</a><a
-            href="#">Home Owners</a>
+          <a href="products.html">All Products</a>
+          <a href="led-strip-calculator.html">LED Calculator</a>
         </div>
         <div>
           <h5>Company</h5>
-          <a href="#">About Azoogi</a><a href="#">Projects</a><a href="#">Resources</a><a href="#">News</a><a
-            href="#">Contact</a>
+          <a href="index.html#about">About Azoogi</a>
+          <a href="projects.html">Projects</a>
+          <a href="contact.html">Contact</a>
         </div>
         <div>
           <h5>Contact</h5>
-          <a href="tel:1300641261">1300 641 261</a><a href="mailto:sales@azoogi.com.au">sales@azoogi.com.au</a><a
-            href="#">Sydney &middot; Melbourne</a>
-          <a href="#">Trade Login</a>
+          <a href="tel:1300641261">1300 641 261</a>
+          <a href="mailto:sales@azoogi.com.au">sales@azoogi.com.au</a>
+          <a href="trade_login.html">Trade Login</a>
         </div>
       </div>
       <div class="copy">

@@ -117,9 +117,9 @@
             <div>
               <h2>Project Overview</h2>
               <div class="project-meta-rows">
-                ${project.location ? `<div class="project-meta-row"><span class="label">Location:</span><span class="value">${escapeHtml(project.location)}</span></div>` : ''}
-                ${project.type ? `<div class="project-meta-row"><span class="label">Type:</span><span class="value">${escapeHtml(project.type)}</span></div>` : ''}
-                ${project.completed ? `<div class="project-meta-row"><span class="label">Completed:</span><span class="value">${escapeHtml(project.completed)}</span></div>` : ''}
+                ${project.location ? `<div class="project-meta-row"><span class="meta-label">Location:</span><span class="meta-value">${escapeHtml(project.location)}</span></div>` : ''}
+                ${project.type ? `<div class="project-meta-row"><span class="meta-label">Type:</span><span class="meta-value">${escapeHtml(project.type)}</span></div>` : ''}
+                ${project.completed ? `<div class="project-meta-row"><span class="meta-label">Completed:</span><span class="meta-value">${escapeHtml(project.completed)}</span></div>` : ''}
               </div>
             </div>
             <div class="project-description">
