@@ -54,6 +54,16 @@ h2, h3, h4{
 }
 
 @media (max-width: 960px) {
+  .spec-grid-layout {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  .gallery-actions {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
   .product-grid {
     grid-template-columns: 1fr;
     gap: 32px;
@@ -220,6 +230,13 @@ h2, h3, h4{
   border-radius: 4px;
   letter-spacing: 0.03em;
   font-weight: 500;
+  text-decoration: none;
+  transition: border-color .25s ease, color .25s ease;
+}
+
+a.meta-badge:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .product-short-desc {

@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+<link rel="icon" href="assets/favicon.png">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Products — Azoogi LED Lighting</title>
@@ -15,6 +16,7 @@
   <link rel="stylesheet" href="assets/css/style_demo.css">
   <script src="assets/js/products_data.js"></script>
   <script src="assets/js/mega_menu.js"></script>
+  <script src="assets/js/site_header.js"></script>
   <style>
     
 /* Product page — solid light header (matches site light mode) */
@@ -373,11 +375,66 @@
       .prod-sidebar.open {
         display: block;
         position: fixed;
-        inset: 0;
-        z-index: 80;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: auto;
+        width: min(360px, 92vw);
+        z-index: 90;
         background: var(--bg);
-        padding: 24px;
+        padding: 20px 20px 32px;
         overflow-y: auto;
+        border-left: 1px solid var(--line);
+      }
+
+      .prod-filter-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, .4);
+        z-index: 85;
+      }
+
+      .prod-filter-overlay.open {
+        display: block;
+      }
+
+      .prod-sidebar-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 18px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .prod-sidebar-head strong {
+        font-size: 14px;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+
+      .prod-filter-close {
+        min-width: 44px;
+        min-height: 44px;
+        border: 1px solid var(--line);
+        background: none;
+        color: var(--ink);
+        font-size: 22px;
+        line-height: 1;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+    }
+
+    @media (min-width: 901px) {
+      .prod-sidebar-head {
+        display: none;
+      }
+
+      .prod-filter-overlay {
+        display: none !important;
       }
     }
 
@@ -540,7 +597,8 @@
     }
 
     .prod-card:hover .prod-overlay,
-    .prod-card:focus-within .prod-overlay {
+    .prod-card:focus-within .prod-overlay,
+    .prod-card.is-specs .prod-overlay {
       opacity: 1;
     }
 
@@ -553,8 +611,21 @@
       transition: transform .3s ease;
     }
 
-    .prod-card:hover .spec-list {
+    .prod-card:hover .spec-list,
+    .prod-card.is-specs .spec-list {
       transform: translateY(0);
+    }
+
+    @media (hover: none) {
+      .prod-card .prod-overlay {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .prod-card.is-specs .prod-overlay {
+        opacity: 1;
+        pointer-events: auto;
+      }
     }
 
     .spec-item {
@@ -667,10 +738,10 @@
   <header class="topbar solid" id="topbar">
     <div class="util">
       <div class="util-inner">
-        <div>Trusted by architects, designers & builders across Australia</div>
+        <div class="util-rotate" aria-live="polite">Aus Owned B2B Trade Wholesaler - Custom Lighting & Smart Control Solutions</div>
         <div style="display:flex;gap:24px">
           <a href="tel:1300641261">1300 AZOOGI</a>
-          <a href="mailto:sales@azoogi.com.au">sales@azoogi.com.au</a>
+          <a href="mailto:sales@azoogi.com">sales@azoogi.com</a>
           <div style="display:flex; align-items:center;"><a href="trade_login.html">Trade Login</a></div>
         </div>
       </div>
@@ -684,7 +755,7 @@
         </div>
         <a href="projects.html">Projects</a>
         <a href="index.html#about">About</a>
-        <a href="index.html#services">Services</a>
+        <a href="index.html#services">Solutions</a>
         <a href="contact.html">Contact</a>
       </div>
       <a href="led-strip-calculator.html" class="cta">LED Calculator</a>
@@ -703,7 +774,12 @@
 
     <div class="prod-layout">
       <!-- ===== Sidebar ===== -->
+      <div class="prod-filter-overlay" id="prodFilterOverlay"></div>
       <aside class="prod-sidebar" id="prodSidebar">
+        <div class="prod-sidebar-head">
+          <strong>Filters</strong>
+          <button type="button" class="prod-filter-close" id="prodFilterClose" aria-label="Close filters">&times;</button>
+        </div>
         <div class="sb-block open">
           <div class="sb-title" onclick="this.parentElement.classList.toggle('open')">
             <span>Categories</span><span class="sb-toggle"></span>
@@ -729,8 +805,7 @@
         <div class="prod-toolbar">
           <div class="result-count"><strong id="resultCount">12</strong> products found</div>
           <div class="toolbar-right">
-            <button class="prod-mobile-filter-btn"
-              onclick="document.getElementById('prodSidebar').classList.add('open')">Filters</button>
+            <button type="button" class="prod-mobile-filter-btn" id="prodFilterOpen">Filters</button>
             <select class="sort-select">
               <option>Sort: Relevance</option>
               <option>Name A&ndash;Z</option>
@@ -756,36 +831,32 @@
 
   <!-- ========== FOOTER ========== -->
   <footer>
-    <div class="wrap">
-      <div class="foot">
-        <div>
-          <a href="index.html" class="logo"><img src="assets/logo_dark.png" width="150" alt="Azoogi"></a>
-          <p>Premium LED lighting solutions for architects, designers, builders and homeowners across Australia.</p>
-        </div>
-        <div>
-          <h5>Products</h5>
-          <a href="products.html">All Products</a>
-          <a href="led-strip-calculator.html">LED Calculator</a>
-        </div>
-        <div>
-          <h5>Company</h5>
-          <a href="index.html#about">About Azoogi</a>
-          <a href="projects.html">Projects</a>
-          <a href="contact.html">Contact</a>
-        </div>
-        <div>
-          <h5>Contact</h5>
-          <a href="tel:1300641261">1300 641 261</a>
-          <a href="mailto:sales@azoogi.com.au">sales@azoogi.com.au</a>
-          <a href="trade_login.html">Trade Login</a>
-        </div>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="index.html" class="logo"><img src="assets/logo_dark.png" width="150" alt="Azoogi"></a>
+        <p>We design, engineer, manufacture, assemble, and test our products in-house, offering custom powder coating to deliver fully tailored lighting solutions</p>
       </div>
-      <div class="copy">
-        <div>&copy; 2026 Azoogi Pty Ltd. All rights reserved.</div>
-        <div>Privacy &middot; Terms &middot; Warranty</div>
+      <div><h5>Products</h5>
+        <a href="products.html">All Products</a><a href="led-strip-calculator.html">LED Calculator</a>
+      </div>
+      <div><h5>Company</h5>
+        <a href="index.html#about">About Azoogi</a><a href="projects.html">Projects</a><a href="contact.html">Contact</a><a href="policies.html">Policies</a>
+      </div>
+      <div><h5>Contact</h5>
+        <a href="tel:1300641261">1300 AZOOGI</a><a href="mailto:sales@azoogi.com">sales@azoogi.com</a><a href="trade_login.html">Trade Login</a>
       </div>
     </div>
-  </footer>
+    <div class="copy">
+      <div>&copy; 2026 Azoogi Pty Ltd. All rights reserved.</div>
+      <div class="copy-links">
+        <a href="policies.html#privacy">Privacy</a><span class="sep">&middot;</span>
+        <a href="policies.html#terms">Terms</a><span class="sep">&middot;</span>
+        <a href="policies.html#warranty">Warranty</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
   <script>
     /* ===== Header solid on scroll ===== */
@@ -949,19 +1020,6 @@
       }
 
 
-      // Hybrid hover/click toggle for mobile
-      const hasDropdown = document.querySelector('.has-dropdown');
-      if (hasDropdown) {
-        hasDropdown.addEventListener('click', (e) => {
-          if (window.innerWidth <= 960) {
-            // only toggle if clicking the main a tag
-            if (e.target.closest('a[href="products.html"]')) {
-              e.preventDefault();
-              hasDropdown.classList.toggle('open');
-            }
-          }
-        });
-      }
     })();
 
 
@@ -1001,6 +1059,54 @@
     (function () {
       var tb = document.getElementById('topbar');
       if (tb) tb.classList.add('solid');
+
+      var sidebar = document.getElementById('prodSidebar');
+      var overlay = document.getElementById('prodFilterOverlay');
+      var openBtn = document.getElementById('prodFilterOpen');
+      var closeBtn = document.getElementById('prodFilterClose');
+
+      function openFilters() {
+        if (!sidebar) return;
+        sidebar.classList.add('open');
+        if (overlay) overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeFilters() {
+        if (!sidebar) return;
+        sidebar.classList.remove('open');
+        if (overlay) overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      if (openBtn) openBtn.addEventListener('click', openFilters);
+      if (closeBtn) closeBtn.addEventListener('click', closeFilters);
+      if (overlay) overlay.addEventListener('click', closeFilters);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeFilters();
+      });
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 900) closeFilters();
+      });
+
+      // Touch: tap card to reveal specs overlay
+      document.addEventListener('click', function (e) {
+        var card = e.target.closest('.prod-card');
+        if (!window.matchMedia('(hover: none)').matches) return;
+        if (!card) {
+          document.querySelectorAll('.prod-card.is-specs').forEach(function (c) {
+            c.classList.remove('is-specs');
+          });
+          return;
+        }
+        if (e.target.closest('a, button')) return;
+        e.preventDefault();
+        var wasOpen = card.classList.contains('is-specs');
+        document.querySelectorAll('.prod-card.is-specs').forEach(function (c) {
+          c.classList.remove('is-specs');
+        });
+        if (!wasOpen) card.classList.add('is-specs');
+      });
     })();
 
     /* ===== State & Active Filters ===== */

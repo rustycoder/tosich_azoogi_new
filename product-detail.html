@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+<link rel="icon" href="assets/favicon.png">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>AZ-NF360 Neon Flex Series 360 — Azoogi LED Lighting Solutions</title>
@@ -16,6 +17,7 @@
   <link rel="stylesheet" href="assets/css/product_detail.css">
   <script src="assets/js/products_data.js"></script>
   <script src="assets/js/mega_menu.js"></script>
+  <script src="assets/js/site_header.js"></script>
 </head>
 
 <body>
@@ -24,10 +26,10 @@
   <header class="topbar solid" id="topbar">
     <div class="util">
       <div class="util-inner">
-        <div>Trusted by architects, designers & builders across Australia</div>
+        <div class="util-rotate" aria-live="polite">Aus Owned B2B Trade Wholesaler - Custom Lighting & Smart Control Solutions</div>
         <div style="display:flex;gap:24px">
           <a href="tel:1300641261">1300 AZOOGI</a>
-          <a href="mailto:sales@azoogi.com.au">sales@azoogi.com.au</a>
+          <a href="mailto:sales@azoogi.com">sales@azoogi.com</a>
           <div style="display:flex; align-items:center;"><a href="trade_login.html">Trade Login</a></div>
         </div>
       </div>
@@ -41,7 +43,7 @@
         </div>
         <a href="projects.html">Projects</a>
         <a href="index.html#about">About</a>
-        <a href="index.html#services">Services</a>
+        <a href="index.html#services">Solutions</a>
         <a href="contact.html">Contact</a>
       </div>
       <a href="led-strip-calculator.html" class="cta">LED Calculator</a>
@@ -81,7 +83,7 @@
           <div class="product-meta-badges">
             <span class="meta-badge" id="badge-ip">IP67 Waterproof</span>
             <span class="meta-badge">360° Light Emission</span>
-            <span class="meta-badge">5-Year Warranty</span>
+            <a href="policies.html#warranty" class="meta-badge">5-Year Warranty</a>
             <span class="meta-badge">24V DC Input</span>
             <span class="meta-badge">CRI 90+</span>
           </div>
@@ -496,7 +498,7 @@
               </p>
               <div style="font-size:13px; color:var(--muted); line-height: 2;">
                 <div><strong>Sales Support:</strong> 1300 AZOOGI</div>
-                <div><strong>Email Response:</strong> sales@azoogi.com.au</div>
+                <div><strong>Email Response:</strong> sales@azoogi.com</div>
                 <div><strong>B2B Turnaround:</strong> Within 4 business hours</div>
               </div>
             </div>
@@ -557,37 +559,33 @@
 
     </div>
     <!-- ========== FOOTER ========== -->
-    <footer id="contact">
-      <div class="wrap">
-        <div class="foot">
-          <div>
-            <a href="index.html" class="logo"><img src="assets/logo_dark.png" width="150" alt="Azoogi"></a>
-            <p>Premium LED lighting solutions for architects, designers, builders and homeowners across Australia.</p>
-          </div>
-          <div>
-            <h5>Products</h5>
-            <a href="products.html">All Products</a>
-            <a href="led-strip-calculator.html">LED Calculator</a>
-          </div>
-          <div>
-            <h5>Company</h5>
-            <a href="index.html#about">About Azoogi</a>
-            <a href="projects.html">Projects</a>
-            <a href="contact.html">Contact</a>
-          </div>
-          <div>
-            <h5>Contact</h5>
-            <a href="tel:1300641261">1300 641 261</a>
-            <a href="mailto:sales@azoogi.com.au">sales@azoogi.com.au</a>
-            <a href="trade_login.html">Trade Login</a>
-          </div>
-        </div>
-        <div class="copy">
-          <div>&copy; 2026 Azoogi Pty Ltd. All rights reserved.</div>
-          <div>Privacy &middot; Terms &middot; Warranty</div>
-        </div>
+    <footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="index.html" class="logo"><img src="assets/logo_dark.png" width="150" alt="Azoogi"></a>
+        <p>We design, engineer, manufacture, assemble, and test our products in-house, offering custom powder coating to deliver fully tailored lighting solutions</p>
       </div>
-    </footer>
+      <div><h5>Products</h5>
+        <a href="products.html">All Products</a><a href="led-strip-calculator.html">LED Calculator</a>
+      </div>
+      <div><h5>Company</h5>
+        <a href="index.html#about">About Azoogi</a><a href="projects.html">Projects</a><a href="contact.html">Contact</a><a href="policies.html">Policies</a>
+      </div>
+      <div><h5>Contact</h5>
+        <a href="tel:1300641261">1300 AZOOGI</a><a href="mailto:sales@azoogi.com">sales@azoogi.com</a><a href="trade_login.html">Trade Login</a>
+      </div>
+    </div>
+    <div class="copy">
+      <div>&copy; 2026 Azoogi Pty Ltd. All rights reserved.</div>
+      <div class="copy-links">
+        <a href="policies.html#privacy">Privacy</a><span class="sep">&middot;</span>
+        <a href="policies.html#terms">Terms</a><span class="sep">&middot;</span>
+        <a href="policies.html#warranty">Warranty</a>
+      </div>
+    </div>
+  </div>
+</footer>
     <script>
       /* ===== Header solid ===== */
       document.getElementById('topbar')?.classList.add('solid');
@@ -617,18 +615,6 @@
           if (targetPanel) targetPanel.classList.add('active');
         }
 
-        // Hybrid hover/click toggle for mobile
-        const hasDropdown = document.querySelector('.has-dropdown');
-        if (hasDropdown) {
-          hasDropdown.addEventListener('click', (e) => {
-            if (window.innerWidth <= 960) {
-              if (e.target.closest('a[href="products.html"]')) {
-                e.preventDefault();
-                hasDropdown.classList.toggle('open');
-              }
-            }
-          });
-        }
       })();
 
       document.addEventListener("DOMContentLoaded", () => {

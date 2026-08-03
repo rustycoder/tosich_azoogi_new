@@ -5,12 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Azoogi — Award-winning LED Lighting Solutions</title>
 <meta name="description" content="Azoogi designs and supplies premium LED lighting — strips, neon, garden lights, drivers and architectural fittings for projects that demand more." />
+<link rel="icon" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style_demo.css">
   <script src="assets/js/products_data.js"></script>
   <script src="assets/js/mega_menu.js"></script>
+  <script src="assets/js/site_header.js"></script>
 </head>
 <body>
 
@@ -18,10 +20,10 @@
   <header class="topbar" id="topbar">
     <div class="util">
       <div class="util-inner">
-        <div>Trusted by architects, designers & builders across Australia</div>
+        <div class="util-rotate" aria-live="polite">Aus Owned B2B Trade Wholesaler - Custom Lighting & Smart Control Solutions</div>
         <div style="display:flex;gap:24px">
-          <a href="tel:1300641261">1300 AZOOGI</a>
-          <a href="mailto:sales@azoogi.com.au">sales@azoogi.com.au</a>
+          <a href="tel:1300641261"> 1300 641 261</a>
+          <a href="mailto:sales@azoogi.com">sales@azoogi.com</a>
           <div style="display:flex; align-items:center;"><a href="trade_login.html">Trade Login</a></div>
         </div>
       </div>
@@ -35,7 +37,7 @@
         </div>
         <a href="projects.html">Projects</a>
         <a href="#about">About</a>
-        <a href="#services">Services</a>
+        <a href="#services">Solutions</a>
         <a href="contact.html">Contact</a>
       </div>
       <a href="led-strip-calculator.html" class="cta">LED Calculator</a>
@@ -121,10 +123,10 @@
     <div class="kicker reveal ">Lighting solutions from start to finish</div>
     <h2 class="h2 reveal">I'm looking for lighting as a&hellip;</h2>
     <div class="audience reveal">
-      <a href="#">Architect / Designer</a>
-      <a href="#">Electrician / Builder</a>
-      <a href="#">Wholesaler</a>
-      <a href="#">Home Owner</a>
+      <a href="audience.html?slug=architect-designer">Architect / Designer</a>
+      <a href="audience.html?slug=electrician-builder">Electrician / Builder</a>
+      <a href="audience.html?slug=wholesaler">Wholesaler</a>
+      <a href="audience.html?slug=home-owner">Home Owner</a>
     </div>
   </div>
 </section>
@@ -359,21 +361,25 @@
     <div class="foot">
       <div>
         <a href="index.html" class="logo"><img src="assets/logo_dark.png" width="150" alt="Azoogi"></a>
-        <p>Premium LED lighting solutions for architects, designers, builders and homeowners across Australia.</p>
+        <p>We design, engineer, manufacture, assemble, and test our products in-house, offering custom powder coating to deliver fully tailored lighting solutions</p>
       </div>
       <div><h5>Products</h5>
         <a href="products.html">All Products</a><a href="led-strip-calculator.html">LED Calculator</a>
       </div>
       <div><h5>Company</h5>
-        <a href="#about">About Azoogi</a><a href="projects.html">Projects</a><a href="contact.html">Contact</a>
+        <a href="#about">About Azoogi</a><a href="projects.html">Projects</a><a href="contact.html">Contact</a><a href="policies.html">Policies</a>
       </div>
       <div><h5>Contact</h5>
-        <a href="tel:1300641261">1300 AZOOGI</a><a href="mailto:sales@azoogi.com.au">sales@azoogi.com.au</a><a href="trade_login.html">Trade Login</a>
+        <a href="tel:1300641261">1300 AZOOGI</a><a href="mailto:sales@azoogi.com">sales@azoogi.com</a><a href="trade_login.html">Trade Login</a>
       </div>
     </div>
     <div class="copy">
       <div>&copy; 2026 Azoogi Pty Ltd. All rights reserved.</div>
-      <div>Privacy &middot; Terms &middot; Warranty</div>
+      <div class="copy-links">
+        <a href="policies.html#privacy">Privacy</a><span class="sep">&middot;</span>
+        <a href="policies.html#terms">Terms</a><span class="sep">&middot;</span>
+        <a href="policies.html#warranty">Warranty</a>
+      </div>
     </div>
   </div>
 </footer>
@@ -424,6 +430,7 @@
     function show(i) {
       slides.forEach((s, k) => s.classList.toggle('active', k === i));
       cur.textContent = String(i + 1).padStart(2, '0');
+      window.dispatchEvent(new CustomEvent('hero:slide', { detail: { index: i } }));
     }
     function goto(i, reset) {
       idx = (i + n) % n; show(idx);

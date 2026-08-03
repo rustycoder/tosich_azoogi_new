@@ -1,0 +1,177 @@
+/* Audience pages — Why Azoogi sticky stack (inherits #cards from style_demo) */
+
+.audience-page .topbar.solid {
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.audience-main {
+  padding: 120px 0 0;
+  background: var(--bg);
+}
+
+.audience-hero {
+  text-align: center;
+  padding: 24px 0 8px;
+}
+
+.audience-hero .kicker {
+  margin-bottom: 18px;
+}
+
+.audience-hero .h2 {
+  margin: 0 auto 20px;
+  max-width: 920px;
+}
+
+.audience-hero .h2 span {
+  color: var(--accent);
+}
+
+.audience-lead {
+  max-width: 780px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.audience-lead p {
+  margin: 0 0 14px;
+  padding: 0;
+}
+
+.audience-lead p:last-child {
+  margin-bottom: 0;
+}
+
+.audience-cards-wrap {
+  padding-top: 8px;
+  padding-bottom: 48px;
+}
+
+/* Content chrome only — sticky / scale come from style_demo #cards */
+.audience-cards .card__content {
+  background: var(--bg-2);
+}
+
+.audience-cards .card__body {
+  grid-area: text;
+  width: 80%;
+  place-self: center;
+  text-align: left;
+  display: grid;
+  gap: 1em;
+  place-items: start;
+  padding: 0;
+  min-height: 0;
+}
+
+.audience-cards .card__copy {
+  display: grid;
+  gap: 0.85em;
+}
+
+.audience-cards .card__body h2 {
+  font-family: "Google Sans Flex", sans-serif;
+  font-weight: 400;
+  font-size: clamp(26px, 2.8vw, 40px);
+  line-height: 1.15;
+  margin: 0;
+}
+
+.audience-cards .card__body h2 span {
+  color: var(--accent);
+}
+
+.audience-cards .card__copy p {
+  margin: 0;
+  padding: 0;
+  color: var(--muted);
+  font-size: clamp(14px, 1.1vw, 17px);
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.audience-cards .card__copy p a {
+  color: var(--accent);
+}
+
+.audience-cards .card__copy p a:hover {
+  text-decoration: underline;
+}
+
+.audience-cards .card__cta {
+  padding-top: 4px;
+}
+
+.audience-cards .card__cta .btn {
+  display: inline-block;
+}
+
+.audience-cards .card__content > figure {
+  grid-area: img;
+  margin: 0;
+  overflow: hidden;
+  min-height: 0;
+  height: 100%;
+}
+
+.audience-cards .card__content > figure > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.audience-loading,
+.audience-error {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--muted);
+}
+
+.audience-error .btn {
+  margin-top: 20px;
+}
+
+@media (max-width: 960px) {
+  .audience-main {
+    padding: 110px 0 0;
+  }
+}
+
+/* Phones: style_demo already drops sticky on #cards; polish audience copy */
+@media (max-width: 720px) {
+  .audience-cards-wrap {
+    padding-bottom: 32px;
+  }
+
+  .audience-cards .card__body {
+    width: 100%;
+    max-width: none;
+    padding: 22px 20px 26px;
+    place-self: stretch;
+  }
+
+  .audience-cards .card__body h2 {
+    font-size: clamp(24px, 5.5vw, 32px);
+    line-height: 1.2;
+  }
+
+  .audience-cards .card__copy p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .audience-cards .card__cta .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .audience-hero .h2 {
+    font-size: clamp(28px, 8vw, 40px);
+  }
+}

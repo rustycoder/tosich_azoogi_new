@@ -442,6 +442,12 @@
     overflow-x: auto;
     gap: 18px;
     padding-bottom: 4px;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .calc-steps li {
+    scroll-snap-align: start;
   }
 
   .calc-steps li {
@@ -466,14 +472,20 @@
   }
 }
 
+@media (max-width: 768px) {
+  .options-2,
+  .options-3,
+  .options-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 640px) {
   .calc-hero {
     padding: 120px 20px 28px;
   }
 
-  .options-2,
-  .options-3,
-  .options-4 {
-    grid-template-columns: 1fr;
+  .ls-toast {
+    max-width: calc(100% - 32px);
   }
 }
