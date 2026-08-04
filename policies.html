@@ -9,8 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style_demo.css">
-<link rel="stylesheet" href="assets/css/legal.css">
+<link rel="stylesheet" href="assets/css/style_demo.v-1.1.css">
+<link rel="stylesheet" href="assets/css/legal.v-1.1.css">
 <script src="assets/js/products_data.js"></script>
 <script src="assets/js/mega_menu.js"></script>
 <script src="assets/js/site_header.js"></script>
@@ -46,17 +46,21 @@
 </header>
 
 <main class="legal-main">
-  <div class="wrap legal-wrap">
-    <div class="kicker legal-kicker">Legal</div>
-    <h1 class="h2 legal-title">Policies &amp; <span>Terms</span></h1>
-    <p class="legal-intro">Privacy, website terms, and warranty information for Azoogi Pty Ltd trade clients across Australia.</p>
+  <div class="wrap legal-page-wrap">
+    <div class="legal-hero">
+      <div class="kicker legal-kicker">Legal</div>
+      <h1 class="h2 legal-title">Policies &amp; <span>Terms</span></h1>
+      <p class="legal-intro">Privacy, website terms, and warranty information for Azoogi Pty Ltd trade clients across Australia.</p>
+    </div>
 
-    <nav class="legal-nav legal-nav-sticky" aria-label="Policy sections">
-      <a href="#privacy">Privacy</a>
-      <a href="#terms">Terms</a>
-      <a href="#warranty">Warranty &amp; Returns</a>
-    </nav>
+    <div class="legal-shell">
+      <nav class="legal-nav" aria-label="Policy sections">
+        <a href="#privacy">Privacy</a>
+        <a href="#terms">Terms</a>
+        <a href="#warranty">Warranty &amp; Returns</a>
+      </nav>
 
+      <div class="legal-wrap">
     <!-- Privacy -->
     <article class="legal-block" id="privacy">
       <h2 class="legal-block-title">Privacy Policy</h2>
@@ -234,6 +238,8 @@
         </div>
       </section>
     </article>
+      </div>
+    </div>
   </div>
 </main>
 
