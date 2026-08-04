@@ -1,5 +1,5 @@
 (() => {
-  const INTRO = 'Aus Owned B2B Trade Wholesaler - Custom Lighting & Smart Control Solutions';
+  const INTRO = 'Australian Owned B2B Trade Wholesaler - Custom Lighting & Smart Control Solutions';
   const WORDS = ['DESIGN', 'ENGINEER', 'CUSTOMISE', 'SUPPLY', 'CONTROL', 'COMMISSION'];
   const INTERVAL_MS = 6000; // match hero DUR in index.html
   const MOBILE_MQ = '(max-width: 960px)';
