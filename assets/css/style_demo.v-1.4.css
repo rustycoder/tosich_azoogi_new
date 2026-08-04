@@ -2172,8 +2172,7 @@ footer {
 }
 
 aside {
-  width: 50vw;
-  margin: 0 auto;
+  margin: 0;
   text-align: left;
 }
 
@@ -3010,13 +3009,23 @@ a.mega-variant-card:after{
   display: grid;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.35fr);
   gap: clamp(32px, 5vw, 80px);
-  align-items: start;
+  align-items: stretch;
 }
 
 .contact-form-panel {
   padding: clamp(28px, 4vw, 48px);
   background-color: #f6f8f5;
   border: 1px solid var(--line);
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form-panel .contact-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .contact-title {
@@ -3119,11 +3128,50 @@ a.mega-variant-card:after{
 }
 
 .contact-info-panel {
+  width: auto;
+  max-width: 100%;
+  min-width: 0;
+  height: 100%;
+  margin: 0;
   padding: clamp(8px, 2vw, 24px) 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
-.contact-info-panel .contact-company {
-  margin-bottom: clamp(28px, 4vh, 40px);
+/* Contact-only card — do not share .legal-contact */
+.contact-international {
+  margin-top: auto;
+  padding: 22px 24px;
+  border: 1px solid var(--line);
+  background: #f6f8f5;
+  box-sizing: border-box;
+}
+
+.contact-international p {
+  margin: 0 0 10px;
+  padding: 0;
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.contact-international p:last-child {
+  margin-bottom: 0;
+}
+
+.contact-international .green-title {
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.contact-international a {
+  color: var(--accent);
+}
+
+.contact-international a:hover {
+  text-decoration: underline;
 }
 
 .info-block {
@@ -3188,6 +3236,11 @@ a.mega-variant-card:after{
 
   .info-block {
     margin-bottom: 0;
+  }
+
+  .contact-international {
+    grid-column: 1 / -1;
+    margin-top: 8px;
   }
 }
 

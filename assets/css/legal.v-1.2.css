@@ -228,15 +228,6 @@
   text-decoration: underline;
 }
 
-/* Contact page company card */
-.contact-company {
-  margin: 0 0 32px;
-}
-
-.contact-company p {
-  color: var(--ink);
-}
-
 .copy-links {
   display: flex;
   flex-wrap: wrap;
@@ -269,10 +260,6 @@
     padding: 120px 0 56px;
   }
 
-  .contact-info-panel .contact-company {
-    grid-column: 1 / -1;
-    margin-bottom: 8px;
-  }
 }
 
 @media (max-width: 640px) {
