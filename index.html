@@ -48,8 +48,8 @@
   <!-- ========== HERO SLIDER ========== -->
 <section class="hero" id="hero">
   <div class="slide active has-video">
-    <video class="bg-video" autoplay muted loop playsinline preload="auto" poster="assets\fallback.webp">
-      <source src="assets\herovid 1.webm" type="video/mp4">
+    <video class="bg-video" autoplay muted loop playsinline preload="auto" poster="assets/fallback.webp">
+      <source src="assets/herovid%201.webm" type="video/webm">
     </video>
     <div class="slide-inner">
       <div class="eyebrow">Made just for you</div>
@@ -62,7 +62,10 @@
     </div>
   </div>
 
-  <div class="slide" style="background-image:url('assets/hero02.jpg')">
+  <div class="slide has-video">
+    <video class="bg-video" muted loop playsinline preload="auto" poster="assets/hero02.jpg">
+      <source src="assets/herovid%202.webm" type="video/webm">
+    </video>
     <div class="slide-inner">
       <div class="eyebrow">For those who demand more from their lighting</div>
       <h1 class="slide-title">Award-winning<br/>LED lighting solutions.</h1>
@@ -428,7 +431,17 @@
       });
     }
     function show(i) {
-      slides.forEach((s, k) => s.classList.toggle('active', k === i));
+      slides.forEach((s, k) => {
+        s.classList.toggle('active', k === i);
+        const vid = s.querySelector('video.bg-video');
+        if (!vid) return;
+        if (k === i) {
+          vid.currentTime = 0;
+          vid.play().catch(() => {});
+        } else {
+          vid.pause();
+        }
+      });
       cur.textContent = String(i + 1).padStart(2, '0');
       window.dispatchEvent(new CustomEvent('hero:slide', { detail: { index: i } }));
     }
