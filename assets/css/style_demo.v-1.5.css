@@ -1080,7 +1080,7 @@ section {
 
 .card-in {
   text-align: center;
-  padding: 48px 0 24px;
+  padding: 48px 0 8px;
   background: var(--bg);
 }
 
@@ -1692,7 +1692,7 @@ section {
 /* ====== Stats CTA ====== */
 .stats {
   padding: 48px 0;
-  background: url('../img/bg.jpg') center/cover fixed;
+  background: url('../vid2_fallback.jpg') center/cover fixed;
   position: relative;
   color: var(--always-white)
 }
@@ -1974,11 +1974,7 @@ footer {
   }
 
   .card-in {
-    padding: 40px 0 20px;
-  }
-
-  .cityscape .city-intro {
-    padding-top: 40px;
+    padding: 40px 0 8px;
   }
 
   footer {
