@@ -2474,60 +2474,67 @@ aside p {
   }
 }
 
-/* Phones only: readable stacked cards (keep sticky scroll on tablet/desktop) */
+/* Phones: keep sticky stack — only switch to stacked img/text layout */
 @media (max-width: 720px) {
+  :root {
+    --card-height: min(70svh, 520px);
+    --card-top-offset: 0.85rem;
+  }
+
   #cards {
-    display: flex;
-    flex-direction: column;
-    grid-template-rows: none;
-    padding-bottom: 0;
-    padding-top: 8px;
-    gap: 20px;
-    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(var(--numcards), var(--card-height));
+    gap: clamp(0.75rem, 2vh, 1.25rem);
+    padding-top: 16px;
+    padding-bottom: calc(var(--numcards) * var(--card-top-offset));
+    margin-top: 12px;
     outline: none;
   }
 
   .card-main {
-    position: relative;
-    top: auto;
-    padding-top: 0;
+    position: sticky;
+    /* Clear fixed mobile header so the stack is visible */
+    top: 64px;
+    padding-top: calc(var(--index) * var(--card-top-offset));
     outline: none;
   }
 
   .card__content {
     grid-template-areas: "img" "text";
     grid-template-columns: 1fr;
+    grid-template-rows: minmax(140px, 48%) 1fr;
     min-height: 0;
-    height: auto;
-    max-height: none;
-    animation: none !important;
-    transform: none !important;
+    height: 100%;
+    max-height: var(--card-height);
     outline: none;
   }
 
   .card__content > figure {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: auto;
     min-height: 0;
-    max-height: 280px;
+    max-height: none;
+    height: 100%;
   }
 
   .card__content > div {
     width: 100%;
     max-width: none;
-    padding: 22px 20px 26px;
+    padding: 18px 18px 20px;
     place-self: stretch;
     place-items: start;
-    gap: 12px;
+    gap: 10px;
+    overflow: auto;
   }
 
   .card__content > div h2 {
-    font-size: clamp(24px, 5.5vw, 32px);
+    font-size: clamp(22px, 5.5vw, 30px);
     line-height: 1.2;
   }
 
   .card__content > div p {
-    font-size: 15px;
-    line-height: 1.6;
+    font-size: 14px;
+    line-height: 1.55;
   }
 }
 

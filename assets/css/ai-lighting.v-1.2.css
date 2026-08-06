@@ -736,11 +736,12 @@
 
 @media (max-width: 720px) {
   .ai-insights #cards {
-    --card-height: auto;
+    --numcards: 2;
+    --card-height: min(68svh, 480px);
   }
 
   .ai-insights .card__content {
-    max-height: none;
+    max-height: var(--card-height);
   }
 }
 
