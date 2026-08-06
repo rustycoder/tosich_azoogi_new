@@ -148,33 +148,22 @@
 }
 
 .ai-caps li {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto auto;
-  column-gap: 12px;
-  row-gap: 2px;
-  align-items: center;
-  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 18px;
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 4px;
 }
 
 .ai-caps .ai-num {
-  grid-column: 1 / -1;
-  margin: 0 0 4px;
-}
-
-.ai-caps img {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-  display: block;
+  margin: 0;
 }
 
 .ai-caps h3 {
   margin: 0;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   line-height: 1.3;
   color: var(--ink);
@@ -354,6 +343,90 @@
   margin: 0;
   font-size: 15px;
   line-height: 1.6;
+  color: var(--muted);
+}
+
+.ai-page .card__content > figure > img {
+  object-fit: contain;
+}
+
+/* —— App / QR —— */
+.ai-app-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: clamp(24px, 3.5vw, 48px);
+  align-items: center;
+}
+
+.ai-app-phones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.ai-app-phones figure {
+  margin: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #111;
+  aspect-ratio: 3 / 4;
+}
+
+.ai-app-phones img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ai-app-copy .kicker {
+  margin-bottom: 10px;
+}
+
+.ai-app-copy h2 {
+  margin: 0 0 12px;
+  font-family: "Google Sans Flex", sans-serif;
+  font-weight: 400;
+  font-size: clamp(26px, 3.2vw, 38px);
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+
+.ai-app-copy h2 span {
+  color: var(--accent);
+}
+
+.ai-app-copy > p {
+  margin: 0 0 22px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 36ch;
+}
+
+.ai-app-qr {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.ai-app-qr img {
+  flex: 0 0 auto;
+  width: 120px;
+  height: 120px;
+  display: block;
+  background: #fff;
+}
+
+.ai-app-qr p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
   color: var(--muted);
 }
 
@@ -595,7 +668,8 @@
   .ai-split,
   .ai-feature,
   .ai-row-head,
-  .ai-space {
+  .ai-space,
+  .ai-app-grid {
     grid-template-columns: 1fr;
   }
 
