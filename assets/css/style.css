@@ -12,6 +12,7 @@
   --line: rgba(255, 255, 255, .12);
   --accent: #67d04e;
   --accent-2: #3aa028;
+  --site-max: 1400px;
 }
 
 html {
@@ -1050,7 +1051,7 @@ footer {
 }
 
 :root {
-  --card-height: min(80svmax, 80svh);
+  --card-height: min(72svh, 600px);
   --card-margin: 0;
   --card-top-offset: 2rem;
   --outline-width: 0px;
@@ -1087,7 +1088,9 @@ footer {
 }
 
 .card__content {
-  min-height: 70svh;
+  min-height: 0;
+  height: 100%;
+  max-height: var(--card-height);
   transform-origin: 50% 0%;
   will-change: transform;
 }
@@ -1101,8 +1104,8 @@ footer {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(var(--numcards), var(--card-height));
-  gap: calc(var(--card-margin) + calc(var(--card-height) / 3));
-  padding-top: 50px;
+  gap: clamp(1.25rem, 3vh, 2.5rem);
+  padding-top: 32px;
 }
 
 .card-main {

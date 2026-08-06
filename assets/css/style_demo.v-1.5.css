@@ -15,6 +15,9 @@
   --accent: #3aa028;
   --accent-2: #2d7a1e;
 
+  /* Shared shell — header, wraps, and media banners */
+  --site-max: 1400px;
+
   --pure-bg: #ffffff;
   --pure-text: #111111;
   --always-white: #ffffff;
@@ -100,7 +103,7 @@ h2, h3{
 }
 
 .util-inner {
-  max-width: 1400px;
+  max-width: var(--site-max);
   margin: 0 auto;
   padding: 8px 28px;
   display: flex;
@@ -149,7 +152,7 @@ h2, h3{
 
 .nav {
   position: relative;
-  max-width: 1400px;
+  max-width: var(--site-max);
   margin: 0 auto;
   padding: 10px 28px;
   display: flex;
@@ -777,7 +780,8 @@ body.nav-open .nav-overlay {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 0 8% 14vh;
+  /* Full-bleed media; copy aligns to header shell */
+  padding: 0 max(28px, calc((100% - var(--site-max)) / 2 + 28px)) 14vh;
   z-index: 2;
   color: var(--always-white)
 }
@@ -886,8 +890,8 @@ body.nav-open .nav-overlay {
 /* slider controls  */
 .slider-ctrl {
   position: absolute;
-  left: 8%;
-  right: 8%;
+  left: max(28px, calc((100% - var(--site-max)) / 2 + 28px));
+  right: max(28px, calc((100% - var(--site-max)) / 2 + 28px));
   bottom: 6vh;
   display: flex;
   align-items: center;
@@ -1009,7 +1013,7 @@ section {
 }
 
 .wrap {
-  max-width: 1400px;
+  max-width: var(--site-max);
   margin: 0 auto;
   padding: 0 28px
 }
@@ -1187,7 +1191,11 @@ section {
 .products {
   padding: clamp(28px, 4vh, 48px) 0;
   background: var(--bg);
-  overflow: hidden
+  overflow: hidden;
+  max-width: var(--site-max);
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
 .products .head {
@@ -1206,6 +1214,9 @@ section {
 .marquee {
   position: relative;
   width: 100%;
+  max-width: var(--site-max);
+  margin-left: auto;
+  margin-right: auto;
   overflow: hidden;
   -webkit-mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
   mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
@@ -1213,9 +1224,9 @@ section {
 
 .marquee .track {
   display: flex;
-  gap: clamp(12px, 1.4vw, 24px);
+  gap: 16px;
   width: max-content;
-  padding: 6px clamp(16px, 2vw, 28px) clamp(12px, 2vh, 20px);
+  padding: 6px 28px 16px;
   animation: products-scroll 45s linear infinite;
   will-change: transform;
 }
@@ -1235,9 +1246,9 @@ section {
 }
 
 .marquee .card {
-  flex: 0 0 clamp(200px, calc(16vw + 48px), 320px);
-  width: clamp(200px, calc(16vw + 48px), 320px);
-  max-height: clamp(260px, 48vh, 400px);
+  flex: 0 0 260px;
+  width: 260px;
+  max-height: 360px;
   display: flex;
   flex-direction: column;
   background: #fff;
@@ -1255,7 +1266,7 @@ section {
 }
 
 .marquee .card .img {
-  height: clamp(120px, 24vh, 200px);
+  height: 160px;
   flex: 0 0 auto;
   background-size: cover;
   background-position: center;
@@ -1281,24 +1292,24 @@ section {
   flex-direction: column;
   flex: 1;
   min-height: 0;
-  padding: clamp(12px, 1.6vh, 20px) clamp(14px, 1.4vw, 22px) clamp(14px, 1.8vh, 22px);
+  padding: 16px 18px 18px;
   background: var(--bg);
 }
 
 .marquee .card h4 {
   font-family: "Google Sans Flex", sans-serif;
   font-weight: 500;
-  font-size: clamp(15px, calc(1.1vw + 10px), 20px);
+  font-size: 17px;
   letter-spacing: -.01em;
-  margin-bottom: clamp(4px, 0.6vh, 8px);
+  margin-bottom: 6px;
   color: var(--ink);
 }
 
 .marquee .card p {
   color: var(--muted);
-  font-size: clamp(12px, calc(0.85vw + 8px), 14px);
+  font-size: 13px;
   line-height: 1.45;
-  margin-bottom: clamp(8px, 1.2vh, 14px);
+  margin-bottom: 12px;
   flex: 1;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -1308,7 +1319,7 @@ section {
 }
 
 .marquee .card .more {
-  font-size: clamp(10px, calc(0.7vw + 7px), 12px);
+  font-size: 11px;
   letter-spacing: .16em;
   text-transform: uppercase;
   color: var(--accent);
@@ -1328,10 +1339,16 @@ section {
   .marquee .card {
     flex-basis: min(220px, 72vw);
     width: min(220px, 72vw);
+    max-height: 340px;
   }
 
   .marquee .card .img {
-    height: clamp(110px, 22vh, 160px);
+    height: 140px;
+  }
+
+  .marquee .track {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }
 
@@ -1692,9 +1709,10 @@ section {
 /* ====== Stats CTA ====== */
 .stats {
   padding: 48px 0;
-  background: url('../vid2_fallback.jpg') center/cover fixed;
+  background: url('../vid2_fallback.jpg') center/cover no-repeat;
   position: relative;
-  color: var(--always-white)
+  color: var(--always-white);
+  width: 100%;
 }
 
 .stats::before {
@@ -2012,12 +2030,12 @@ footer {
   }
 
   .slide-inner {
-    padding: 0 6% 18vh;
+    padding: 0 20px 18vh;
   }
 
   .slider-ctrl {
-    left: 6%;
-    right: 6%;
+    left: 20px;
+    right: 20px;
   }
 
 }
@@ -2067,9 +2085,10 @@ footer {
 }
 
 :root {
-  --card-height: min(80svmax, 80svh);
+  /* Tall enough on large screens, capped so they don't balloon */
+  --card-height: min(72svh, 600px);
   --card-margin: 0px;
-  --card-top-offset: 2rem;
+  --card-top-offset: 1.25rem;
   --outline-width: 0px;
 }
 
@@ -2104,8 +2123,9 @@ footer {
 }
 
 .card__content {
-  min-height: 70svh;
+  min-height: 0;
   height: 100%;
+  max-height: var(--card-height);
   transform-origin: 50% 0%;
   will-change: transform;
   border-radius: 4px;
@@ -2121,9 +2141,9 @@ footer {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(var(--numcards), var(--card-height));
-  gap: calc(var(--card-height) / 3);
-  padding-top: 50px;
-  margin-top: 24px;
+  gap: clamp(1.25rem, 3vh, 2.5rem);
+  padding-top: 32px;
+  margin-top: 16px;
 }
 
 .card-main {
@@ -2249,6 +2269,7 @@ aside p {
     grid-template-columns: 1fr;
     min-height: 0;
     height: auto;
+    max-height: none;
     animation: none !important;
     transform: none !important;
     outline: none;
@@ -2347,6 +2368,7 @@ aside p {
   overflow: hidden;
   aspect-ratio: 16/9;
   background: #000;
+  width: 100%;
 }
 
 .stage img.bg {

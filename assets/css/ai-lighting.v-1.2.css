@@ -31,6 +31,7 @@
   align-items: end;
   overflow: hidden;
   background: #111;
+  width: 100%;
 }
 
 .ai-hero-media {
@@ -57,10 +58,14 @@
 .ai-hero-copy {
   position: relative;
   z-index: 1;
-  padding: 120px 28px 40px;
-  max-width: 1180px;
+  padding: 120px max(28px, calc((100% - var(--site-max, 1400px)) / 2 + 28px)) 40px;
+  max-width: none;
   margin: 0 auto;
   width: 100%;
+}
+
+.ai-hero-copy > * {
+  max-width: 1180px;
 }
 
 .ai-hero-copy .kicker {
@@ -317,13 +322,29 @@
   margin-bottom: 0;
 }
 
+.ai-insights .wrap-sm {
+  max-width: 1320px;
+}
+
 .ai-insights #cards {
   --numcards: 2;
+  --card-height: min(70svh, 580px);
   text-align: left;
 }
 
 .ai-insights .card__content {
   background: var(--bg-2);
+  max-height: var(--card-height);
+}
+
+@media (min-width: 1400px) {
+  .ai-insights .wrap-sm {
+    max-width: 1440px;
+  }
+
+  .ai-insights #cards {
+    --card-height: min(68svh, 640px);
+  }
 }
 
 .ai-insights .card__content > div .ai-num {
@@ -438,6 +459,7 @@
   align-items: center;
   overflow: hidden;
   color: #fff;
+  width: 100%;
 }
 
 .ai-cct-media {
@@ -462,7 +484,13 @@
 .ai-cct-inner {
   position: relative;
   z-index: 1;
-  padding: clamp(40px, 6vw, 64px) 28px;
+  padding-top: clamp(40px, 6vw, 64px);
+  padding-bottom: clamp(40px, 6vw, 64px);
+}
+
+.ai-cct-inner .kicker,
+.ai-cct-inner h2,
+.ai-cct-inner p {
   max-width: 560px;
 }
 
@@ -678,6 +706,19 @@
     max-width: none;
   }
 
+  .ai-space-visual,
+  .ai-space-visual img {
+    min-height: 240px;
+  }
+
+  .ai-app-phones figure {
+    aspect-ratio: 4 / 5;
+  }
+
+  .ai-cct {
+    min-height: 240px;
+  }
+
   .ai-cct::after {
     background: linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.78) 100%);
   }
@@ -693,7 +734,21 @@
   }
 }
 
+@media (max-width: 720px) {
+  .ai-insights #cards {
+    --card-height: auto;
+  }
+
+  .ai-insights .card__content {
+    max-height: none;
+  }
+}
+
 @media (max-width: 640px) {
+  .ai-band {
+    padding: 28px 0;
+  }
+
   .ai-caps {
     grid-template-columns: 1fr;
   }
@@ -703,11 +758,21 @@
   }
 
   .ai-hero {
-    min-height: 420px;
+    min-height: min(58vh, 420px);
   }
 
   .ai-hero-copy {
     padding: 110px 18px 32px;
+  }
+
+  .ai-hero-copy h1 {
+    max-width: none;
+    font-size: clamp(30px, 9vw, 40px);
+  }
+
+  .ai-app-qr {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .ai-cta-wrap {
@@ -721,5 +786,9 @@
 
   .ai-acc-panel {
     padding-left: 0;
+  }
+
+  .ai-accordion {
+    padding: 4px 14px;
   }
 }
