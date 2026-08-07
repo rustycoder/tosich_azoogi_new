@@ -232,6 +232,23 @@
     }
   }
 
+  function getLocalImagePath(imgUrl, filePath) {
+    if (!imgUrl || typeof imgUrl !== 'string') return 'assets/logo_dark.png';
+    if (!imgUrl.startsWith('http')) return imgUrl;
+    const filename = imgUrl.split('/').pop().split('?')[0];
+    if (!filename) return 'assets/logo_dark.png';
+    if (filePath) {
+      const cleanFilePath = decodeURIComponent(filePath);
+      const lastSlash = cleanFilePath.lastIndexOf('/');
+      if (lastSlash !== -1) {
+        const folderPath = cleanFilePath.substring(0, lastSlash);
+        return `${folderPath}/${filename}`;
+      }
+    }
+    return imgUrl;
+  }
+  window.getLocalImagePath = getLocalImagePath;
+
   // Product Row & Cards generator (shows max 3 variants)
   function renderProductRowElement(rowNode, parentContainer) {
     const row = document.createElement('div');
@@ -250,12 +267,14 @@
     visibleVnames.forEach(vname => {
       const vdata = variants[vname];
 
-      const imgSrc = (vdata && vdata.product_images && vdata.product_images.length > 0)
+      const rawImgSrc = (vdata && vdata.product_images && vdata.product_images.length > 0)
         ? vdata.product_images[0]
-        : 'assets/logo_dark.png'; // Azoogi dark logo placeholder!
+        : 'assets/logo_dark.png';
+
+      const imgSrc = getLocalImagePath(rawImgSrc, vdata ? vdata.file_path : '');
 
       const card = document.createElement('a');
-      card.href = `product-detail.html?file=${encodeURIComponent(vdata.file_path || '')}`;
+      card.href = `product-detail.html?file=${encodeURIComponent(vdata ? (vdata.file_path || '') : '')}`;
       card.className = 'mega-variant-card';
 
       const imgContainer = document.createElement('div');

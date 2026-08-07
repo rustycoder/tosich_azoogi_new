@@ -1114,36 +1114,94 @@
       specs: {}
     };
 
-    /* ===== Category taxonomy ===== */
-    var categories = [
-      { name: "Outdoor Lights", subs: ["Spike Lights", "Step & Brick Lights", "Wall Lights", "Inground Uplights", "Deck Lights", "Highbays & Floodlights"] },
-      { name: "Aluminium Profiles", subs: ["Surface Mounted", "Recessed", "Angled & Corner", "Suspended & Large", "Wardrobe & Specialty", "Plaster-in", "Bendable / Flexible"] },
-      { name: "COB Strips", subs: ["Standard COB", "Ultra Narrow", "Tunable White", "Dim to Warm", "RGB / RGBW", "High Efficiency"] },
-      { name: "SMD Strips", subs: ["Single Colour", "Tunable White SMD", "RGB / RGBW / RGBCW SMD", "Digital / Addressable SMD", "Side Emitting SMD"] },
-      { name: "Neon LED (IP67 / IP68 / IP69K)", subs: ["Top Bending Neon", "Side Bending Neon", "3D / Multi Bending Neon", "Ultra Slim Neon", "RGB & Digital Neon"] },
-      { name: "Lumoflex (360 Neon)", subs: ["360 Neon", "18mm Diameter 360", "25mm Diameter 360", "Accessories & Mounts"] },
-      { name: "Linear Lighting", subs: ["Custom Linear Bars", "Trunking Systems", "Architectural Pendants"] },
-      { name: "LED Drivers & Control", subs: ["Non-Dimmable Drivers", "Phase Cut / Triac Dimmable", "DALI / DALI-2", "Bluetooth / Casambi", "Controllers & Receivers"] },
-      { name: "Downlights & Spotlights", subs: ["Recessed Downlights", "Surface Mounted Downlights", "Track Lighting & Spots"] },
-      { name: "LED Globes", subs: ["MR16 / GU10", "Standard Lamps (A60, Filament)", "Industrial Globes"] },
-      { name: "Handrail Lights", subs: ["Asymmetrical", "Symmetrical Handrail Pucks", "Curved Handrail Solutions"] }
-    ];
+    function getLocalImg(imgUrl, filePath) {
+      if (typeof window.getLocalImagePath === 'function') {
+        return window.getLocalImagePath(imgUrl, filePath);
+      }
+      if (!imgUrl || typeof imgUrl !== 'string') return 'assets/logo_dark.png';
+      if (!imgUrl.startsWith('http')) return imgUrl;
+      var filename = imgUrl.split('/').pop().split('?')[0];
+      if (!filename) return 'assets/logo_dark.png';
+      if (filePath) {
+        var cleanFilePath = decodeURIComponent(filePath);
+        var lastSlash = cleanFilePath.lastIndexOf('/');
+        if (lastSlash !== -1) {
+          return cleanFilePath.substring(0, lastSlash) + '/' + filename;
+        }
+      }
+      return imgUrl;
+    }
+
+    /* ===== Dynamic Category Taxonomy & Product Data ===== */
+    var categories = [];
+    var products = [];
+
+    if (typeof AZOOGI_PRODUCTS !== 'undefined') {
+      // 1. Build category taxonomy from AZOOGI_PRODUCTS.tree
+      if (AZOOGI_PRODUCTS.tree) {
+        AZOOGI_PRODUCTS.tree.forEach(function (topCat) {
+          var subs = [];
+          if (topCat.children) {
+            topCat.children.forEach(function (child) {
+              subs.push(child.name);
+            });
+          }
+          categories.push({
+            name: topCat.name,
+            subs: subs
+          });
+        });
+      }
+
+      // 2. Build full products array from AZOOGI_PRODUCTS.products
+      if (AZOOGI_PRODUCTS.products) {
+        for (var pKey in AZOOGI_PRODUCTS.products) {
+          if (!AZOOGI_PRODUCTS.products.hasOwnProperty(pKey)) continue;
+          var pRow = AZOOGI_PRODUCTS.products[pKey];
+          var variants = pRow.variants || {};
+          var vKeys = Object.keys(variants);
+          if (vKeys.length === 0) continue;
+
+          var firstVar = variants[vKeys[0]];
+          var catPath = pRow.category_path || [];
+          var parentCat = catPath[0] || 'General';
+          var subCat = catPath.length > 1 ? catPath[catPath.length - 1] : parentCat;
+
+          var rawImg = (firstVar.product_images && firstVar.product_images.length > 0)
+            ? firstVar.product_images[0]
+            : 'assets/logo_dark.png';
+
+          var localImgPath = getLocalImg(rawImg, firstVar.file_path);
+
+          products.push({
+            name: pRow.name || pKey,
+            sub: subCat,
+            cat: parentCat,
+            category_path: catPath,
+            filePath: firstVar.file_path || '',
+            img: localImgPath,
+            specs: firstVar.product_features || {}
+          });
+        }
+      }
+    }
 
     var catListEl = document.getElementById('catList');
-    categories.forEach(function (cat) {
-      var li = document.createElement('li');
-      if (cat.active) li.classList.add('open');
-      var subItems = cat.subs.map(function (s) {
-        return '<li><a href="#" class="cat-sub-link" data-sub="' + s + '">' + s + '</a></li>';
-      }).join('');
-      var icon = cat.active ? '&ndash;' : '+';
-      li.innerHTML = '<div class="cat-row"><span>' + cat.name + '</span><span class="cat-toggle">' + icon + '</span></div><ul class="sub-list">' + subItems + '</ul>';
-      li.querySelector('.cat-row').addEventListener('click', function () {
-        li.classList.toggle('open');
-        li.querySelector('.cat-toggle').innerHTML = li.classList.contains('open') ? '&ndash;' : '+';
+    if (catListEl) {
+      catListEl.innerHTML = '';
+      categories.forEach(function (cat) {
+        var li = document.createElement('li');
+        var subItems = cat.subs.map(function (s) {
+          return '<li><a href="#" class="cat-sub-link" data-sub="' + s + '">' + s + '</a></li>';
+        }).join('');
+        li.innerHTML = '<div class="cat-row"><span>' + cat.name + '</span><span class="cat-toggle">+</span></div><ul class="sub-list">' + subItems + '</ul>';
+        li.querySelector('.cat-row').addEventListener('click', function () {
+          li.classList.toggle('open');
+          li.querySelector('.cat-toggle').innerHTML = li.classList.contains('open') ? '&ndash;' : '+';
+        });
+        catListEl.appendChild(li);
       });
-      catListEl.appendChild(li);
-    });
+    }
 
     /* ===== Filter accordion ===== */
     var filters = [
@@ -1155,19 +1213,22 @@
       { name: "Power", options: ["18W/m", "16W/m", "14.4W/m", "11W/m", "10W/m"], open: true }
     ];
     var filterAcc = document.getElementById('filterAccordion');
-    filters.forEach(function (f) {
-      var div = document.createElement('div');
-      div.className = 'filter-item' + (f.open ? ' open' : '');
-      var opts = f.options.map(function (o) {
-        return '<label class="opt-row"><input type="checkbox" name="' + f.name + '" value="' + o + '"> ' + o + '</label>';
-      }).join('');
-      div.innerHTML = '<div class="filter-head"><span>' + f.name + '</span><span class="filter-toggle">' + (f.open ? '&ndash;' : '+') + '</span></div><div class="filter-body">' + opts + '</div>';
-      div.querySelector('.filter-head').addEventListener('click', function () {
-        div.classList.toggle('open');
-        div.querySelector('.filter-toggle').innerHTML = div.classList.contains('open') ? '&ndash;' : '+';
+    if (filterAcc) {
+      filterAcc.innerHTML = '';
+      filters.forEach(function (f) {
+        var div = document.createElement('div');
+        div.className = 'filter-item' + (f.open ? ' open' : '');
+        var opts = f.options.map(function (o) {
+          return '<label class="opt-row"><input type="checkbox" name="' + f.name + '" value="' + o + '"> ' + o + '</label>';
+        }).join('');
+        div.innerHTML = '<div class="filter-head"><span>' + f.name + '</span><span class="filter-toggle">' + (f.open ? '&ndash;' : '+') + '</span></div><div class="filter-body">' + opts + '</div>';
+        div.querySelector('.filter-head').addEventListener('click', function () {
+          div.classList.toggle('open');
+          div.querySelector('.filter-toggle').innerHTML = div.classList.contains('open') ? '&ndash;' : '+';
+        });
+        filterAcc.appendChild(div);
       });
-      filterAcc.appendChild(div);
-    });
+    }
 
     /* ===== Filter Event Listeners ===== */
     document.querySelectorAll('.cat-sub-link').forEach(function (link) {
@@ -1239,25 +1300,10 @@
         tagHtml += '<span class="clear-filters" onclick="clearFilters()" style="margin-left:8px; font-size:12px; color:var(--muted); cursor:pointer; align-self:center;">Clear all filters</span>';
       }
 
-      document.getElementById('activeTags').innerHTML = tagHtml;
+      var activeTagsEl = document.getElementById('activeTags');
+      if (activeTagsEl) activeTagsEl.innerHTML = tagHtml;
       renderGrid();
     }
-
-    /* ===== Realistic Product Data ===== */
-    var products = [
-      { name: "L90-BH5470 Linear Profile", sub: "Recessed", power: "N/A", ip: "IP20", img: "assets/img/GL001.webp", cat: "Aluminium Profiles", specs: { "Bending Direction": "Non-Bendable" } },
-      { name: "Skyline 360 Neon Series", sub: "360 Neon", power: "18W/m", ip: "IP67", img: "assets/img/neon.webp", cat: "Lumoflex (360 Neon)", specs: { "Bending Direction": "Top Bend", "IP Rating": "IP67" } },
-      { name: "Plug-in System Downlight", sub: "Recessed Downlights", power: "10W", ip: "IP20", img: "assets/img/downlights.jpg", cat: "Downlights & Spotlights", specs: { "Bending Direction": "Non-Bendable", "IP Rating": "IP20" } },
-      { name: "AFS2020 Standard COB", sub: "Standard COB", power: "14.4W/m", ip: "IP20", img: "assets/img/leds.webp", cat: "COB Strips", specs: { "Bending Direction": "Non-Bendable", "PCB Width": "8mm", "LEDs/m": "240", "Power": "14.4W/m", "IP Rating": "IP20" } },
-      { name: "Narrow-4 Precision COB", sub: "Ultra Narrow", power: "10W/m", ip: "IP20", img: "assets/img/leds.webp", cat: "COB Strips", specs: { "Bending Direction": "Top Bend", "PCB Width": "10mm", "LEDs/m": "360", "Power": "10W/m", "IP Rating": "IP20" } },
-      { name: "TW Series Tunable COB", sub: "Tunable White", power: "18W/m", ip: "IP20", img: "assets/img/leds.webp", cat: "COB Strips", specs: { "Bending Direction": "Side Bend", "PCB Width": "12mm", "LEDs/m": "480", "Power": "18W/m", "IP Rating": "IP20" } },
-      { name: "RGBW Outdoor COB", sub: "RGB / RGBW", power: "18W/m", ip: "IP67", img: "assets/img/prod-4.jpg", cat: "COB Strips", specs: { "Bending Direction": "Top Bend", "PCB Width": "15mm", "LEDs/m": "360", "Power": "18W/m", "IP Rating": "IP67" } },
-      { name: "HE Series 130lm/W COB", sub: "High Efficiency", power: "11W/m", ip: "IP20", img: "assets/img/prod-3.jpg", cat: "COB Strips", specs: { "Bending Direction": "Non-Bendable", "PCB Width": "10mm", "LEDs/m": "240", "Power": "11W/m", "IP Rating": "IP20" } },
-      { name: "DALI-2 Dimmable Driver", sub: "DALI / DALI-2", power: "100W", ip: "IP20", img: "assets/img/drivers.webp", cat: "LED Drivers & Control", specs: { "Bending Direction": "Non-Bendable", "IP Rating": "IP20" } },
-      { name: "Bluetooth Casambi Controller", sub: "Bluetooth / Casambi", power: "N/A", ip: "IP20", img: "assets/img/dt.webp", cat: "LED Drivers & Control", specs: { "Bending Direction": "Non-Bendable", "IP Rating": "IP20" } },
-      { name: "Asymmetrical Handrail Puck", sub: "Asymmetrical", power: "2W", ip: "IP65", img: "assets/img/img-1.jpg", cat: "Handrail Lights", specs: { "Bending Direction": "Non-Bendable", "IP Rating": "IP65" } },
-      { name: "Single Colour SMD 5050", sub: "Single Colour", power: "14.4W/m", ip: "IP65", img: "assets/img/prod-5.jpg", cat: "SMD Strips", specs: { "Bending Direction": "Non-Bendable", "PCB Width": "10mm", "LEDs/m": "120", "Power": "14.4W/m", "IP Rating": "IP65" } }
-    ];
 
     var grid = document.getElementById('productGrid');
 
@@ -1266,12 +1312,17 @@
 
       var filtered = products.filter(function (p) {
         if (activeFilters.categories.length > 0) {
-          if (!activeFilters.categories.includes(p.sub)) return false;
+          var matchCat = activeFilters.categories.includes(p.sub) ||
+                           activeFilters.categories.includes(p.cat) ||
+                           (p.category_path && p.category_path.some(function(cp){ return activeFilters.categories.includes(cp); }));
+          if (!matchCat) return false;
         }
         for (var group in activeFilters.specs) {
           var selectedVals = activeFilters.specs[group];
           if (selectedVals.length > 0) {
-            if (!p.specs || !p.specs[group] || !selectedVals.includes(p.specs[group])) return false;
+            var specVal = p.specs[group];
+            if (Array.isArray(specVal)) specVal = specVal[0];
+            if (!specVal || !selectedVals.includes(specVal)) return false;
           }
         }
         return true;
@@ -1279,23 +1330,31 @@
 
       if (countEl) countEl.textContent = filtered.length;
 
+      if (!grid) return;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div style="padding: 40px; text-align: center; color: var(--muted); grid-column: 1 / -1;">No products found matching the selected filters.</div>';
+        return;
+      }
+
       grid.innerHTML = filtered.map(function (p) {
-        var imgHtml = p.img
-          ? '<div class="prod-swatch" style="background-image:url(\'' + p.img + '\'); background-size:cover; background-position:center;"></div>'
-          : '<div class="prod-swatch" style="background:linear-gradient(135deg, #1c3312, #0b0b0b)"></div>';
+        var detailUrl = 'product-detail.html?file=' + encodeURIComponent(p.filePath);
+
+        var imgHtml = '<div class="prod-swatch" style="background-image:url(\'' + (p.img || 'assets/logo_dark.png') + '\'); background-size:cover; background-position:center;"></div>';
 
         var specHtml = '<div class="spec-list">';
         var count = 0;
         if (p.specs) {
           for (var key in p.specs) {
             if (count >= 5) break;
-            specHtml += '<div class="spec-item"><strong>' + key + '</strong><span>' + p.specs[key] + '</span></div>';
+            var valStr = Array.isArray(p.specs[key]) ? p.specs[key].join(' ') : p.specs[key];
+            specHtml += '<div class="spec-item"><strong>' + key + '</strong><span>' + valStr + '</span></div>';
             count++;
           }
         }
         specHtml += '</div>';
 
-        return '<div class="prod-card" onclick="window.location.href=\'product-detail.html\'">' +
+        return '<div class="prod-card" onclick="window.location.href=\'' + detailUrl + '\'">' +
           '<div class="prod-card-img">' + imgHtml +
           '<div class="prod-overlay">' +
           specHtml +
