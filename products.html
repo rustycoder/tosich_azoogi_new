@@ -591,13 +591,17 @@
       justify-content: center;
       background: linear-gradient(180deg, rgba(11, 11, 11, 0.8) 0%, rgba(11, 11, 11, .92) 100%);
       opacity: 0;
-      transition: opacity .3s ease;
+      pointer-events: none;
+      transition: opacity .15s ease-out;
+      will-change: opacity;
+      transform: translateZ(0);
     }
 
     .prod-card:hover .prod-overlay,
     .prod-card:focus-within .prod-overlay,
     .prod-card.is-specs .prod-overlay {
       opacity: 1;
+      pointer-events: auto;
     }
 
     .spec-list {
@@ -605,8 +609,9 @@
       flex-direction: column;
       gap: 6px;
       width: 100%;
-      transform: translateY(8%);
-      transition: transform .3s ease;
+      transform: translateY(4px);
+      transition: transform .15s ease-out;
+      will-change: transform;
     }
 
     .prod-card:hover .spec-list,
