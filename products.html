@@ -811,10 +811,11 @@
           <div class="toolbar-right">
             <input type="text" id="prodSearchInput" placeholder="Search products..." style="padding: 6px 12px; border-radius: 4px; border: 1px solid var(--border-light); background: var(--bg-2); color: var(--ink); font-size: 13px; width: 180px;">
             <button type="button" class="prod-mobile-filter-btn" id="prodFilterOpen">Filters</button>
-            <select class="sort-select">
-              <option>Sort: Relevance</option>
-              <option>Name A&ndash;Z</option>
-              <option>Newest</option>
+            <select class="sort-select" id="sortSelect">
+              <option value="relevance">Sort: Relevance</option>
+              <option value="name_asc">Name A&ndash;Z</option>
+              <option value="name_desc">Name Z&ndash;A</option>
+              <option value="cat_asc">Category A&ndash;Z</option>
             </select>
           </div>
         </div>
@@ -1276,9 +1277,10 @@
       });
     }
 
-    /* ===== State & Search Input ===== */
+    /* ===== State & Search / Sort Controls ===== */
     var activeFilters = {
       search: "",
+      sort: "relevance",
       categories: [],
       specs: {}
     };
@@ -1287,6 +1289,14 @@
     if (searchInputEl) {
       searchInputEl.addEventListener('input', function() {
         activeFilters.search = this.value;
+        updateActiveTags();
+      });
+    }
+
+    var sortSelectEl = document.getElementById('sortSelect');
+    if (sortSelectEl) {
+      sortSelectEl.addEventListener('change', function() {
+        activeFilters.sort = this.value;
         currentPage = 1;
         renderGrid();
       });
@@ -1324,7 +1334,10 @@
     });
 
     function removeFilter(type, val, group) {
-      if (type === 'cat') {
+      if (type === 'search') {
+        activeFilters.search = "";
+        if (searchInputEl) searchInputEl.value = "";
+      } else if (type === 'cat') {
         activeFilters.categories = activeFilters.categories.filter(function (x) { return x !== val; });
         document.querySelectorAll('.cat-sub-link').forEach(function (link) {
           if (link.getAttribute('data-sub') === val) link.classList.remove('active');
@@ -1356,6 +1369,11 @@
     function updateActiveTags() {
       currentPage = 1; // Reset to page 1 on filter changes
       var tagHtml = '';
+
+      if (activeFilters.search.trim()) {
+        tagHtml += '<div class="p-tag">Search: "' + activeFilters.search.trim() + '"<span class="remove-tag" onclick="removeFilter(\'search\')">&times;</span></div>';
+      }
+
       activeFilters.categories.forEach(function (c) {
         tagHtml += '<div class="p-tag">' + c + '<span class="remove-tag" onclick="removeFilter(\'cat\', \'' + c + '\')">&times;</span></div>';
       });
@@ -1385,7 +1403,23 @@
         if (searchLower !== "") {
           var matchSearch = p.name.toLowerCase().indexOf(searchLower) !== -1 ||
                             p.modelName.toLowerCase().indexOf(searchLower) !== -1 ||
-                            p.sub.toLowerCase().indexOf(searchLower) !== -1;
+                            p.sub.toLowerCase().indexOf(searchLower) !== -1 ||
+                            p.cat.toLowerCase().indexOf(searchLower) !== -1 ||
+                            (p.category_path && p.category_path.some(function(cp) {
+                              return cp.toLowerCase().indexOf(searchLower) !== -1;
+                            }));
+
+          if (!matchSearch && p.specs) {
+            for (var skey in p.specs) {
+              if (!p.specs.hasOwnProperty(skey)) continue;
+              var sval = p.specs[skey];
+              var valStr = Array.isArray(sval) ? sval.join(' ') : String(sval);
+              if (valStr.toLowerCase().indexOf(searchLower) !== -1) {
+                matchSearch = true;
+                break;
+              }
+            }
+          }
           if (!matchSearch) return false;
         }
 
@@ -1418,6 +1452,15 @@
         }
         return true;
       });
+
+      // Sort filtered products
+      if (activeFilters.sort === 'name_asc') {
+        filtered.sort(function(a, b) { return a.name.localeCompare(b.name); });
+      } else if (activeFilters.sort === 'name_desc') {
+        filtered.sort(function(a, b) { return b.name.localeCompare(a.name); });
+      } else if (activeFilters.sort === 'cat_asc') {
+        filtered.sort(function(a, b) { return a.sub.localeCompare(b.sub) || a.name.localeCompare(b.name); });
+      }
 
       if (countEl) countEl.textContent = filtered.length;
 
