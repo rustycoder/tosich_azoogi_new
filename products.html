@@ -1140,6 +1140,7 @@
     /* ===== Dynamic Category Taxonomy & Product Data ===== */
     var categories = [];
     var products = [];
+    var extractedSpecsMap = {};
 
     if (typeof AZOOGI_PRODUCTS !== 'undefined') {
       // 1. Build category taxonomy from AZOOGI_PRODUCTS.tree
@@ -1158,7 +1159,7 @@
         });
       }
 
-      // 2. Build full products array from AZOOGI_PRODUCTS.products
+      // 2. Build full products array & extract dynamic specifications from product_features
       if (AZOOGI_PRODUCTS.products) {
         for (var pKey in AZOOGI_PRODUCTS.products) {
           if (!AZOOGI_PRODUCTS.products.hasOwnProperty(pKey)) continue;
@@ -1177,6 +1178,25 @@
             : 'assets/logo_dark.png';
 
           var localImgPath = getLocalImg(rawImg, firstVar.file_path);
+          var features = firstVar.product_features || {};
+
+          // Extract unique features into extractedSpecsMap
+          for (var featKey in features) {
+            if (!features.hasOwnProperty(featKey)) continue;
+            var featVal = features[featKey];
+            if (!extractedSpecsMap[featKey]) {
+              extractedSpecsMap[featKey] = new Set();
+            }
+            if (Array.isArray(featVal)) {
+              featVal.forEach(function(v) {
+                if (v && typeof v === 'string' && v.trim().length > 0 && v.trim().length < 40) {
+                  extractedSpecsMap[featKey].add(v.trim());
+                }
+              });
+            } else if (typeof featVal === 'string' && featVal.trim().length > 0 && featVal.trim().length < 40) {
+              extractedSpecsMap[featKey].add(featVal.trim());
+            }
+          }
 
           products.push({
             name: pRow.name || pKey,
@@ -1185,7 +1205,7 @@
             category_path: catPath,
             filePath: firstVar.file_path || '',
             img: localImgPath,
-            specs: firstVar.product_features || {}
+            specs: features
           });
         }
       }
@@ -1208,15 +1228,39 @@
       });
     }
 
-    /* ===== Filter accordion ===== */
-    var filters = [
-      { name: "Bending Direction", options: ["Top Bend", "Side Bend", "Non-Bendable"] },
-      { name: "PCB Width", options: ["8mm", "10mm", "12mm", "15mm"] },
-      { name: "LEDs/m", options: ["120", "240", "360", "480"] },
-      { name: "IP Rating", options: ["IP20", "IP54", "IP65", "IP67"] },
-      { name: "Dimension", options: ["Custom Cut", "5m Roll", "10m Reel"] },
-      { name: "Power", options: ["18W/m", "16W/m", "14.4W/m", "11W/m", "10W/m"], open: true }
-    ];
+    /* ===== Dynamic Specification Filter Accordion ===== */
+    var filters = [];
+    var priorityKeys = ["IP", "Wattage", "Led_Qty", "Product Certification", "Bend radius", "Warranty", "Min Cut"];
+
+    priorityKeys.forEach(function(pKey) {
+      if (extractedSpecsMap[pKey] && extractedSpecsMap[pKey].size > 0) {
+        filters.push({
+          name: pKey,
+          options: Array.from(extractedSpecsMap[pKey]).slice(0, 12),
+          open: pKey === "IP" || pKey === "Wattage"
+        });
+      }
+    });
+
+    for (var specKey in extractedSpecsMap) {
+      if (priorityKeys.includes(specKey)) continue;
+      var vals = Array.from(extractedSpecsMap[specKey]);
+      if (vals.length >= 2 && vals.length <= 15) {
+        filters.push({
+          name: specKey,
+          options: vals.slice(0, 12),
+          open: false
+        });
+      }
+    }
+
+    if (filters.length === 0) {
+      filters = [
+        { name: "IP", options: ["IP20", "IP65", "IP67"] },
+        { name: "Wattage", options: ["8.6W", "10W", "14.4W", "18W"] }
+      ];
+    }
+
     var filterAcc = document.getElementById('filterAccordion');
     if (filterAcc) {
       filterAcc.innerHTML = '';
@@ -1325,9 +1369,22 @@
         for (var group in activeFilters.specs) {
           var selectedVals = activeFilters.specs[group];
           if (selectedVals.length > 0) {
-            var specVal = p.specs[group];
-            if (Array.isArray(specVal)) specVal = specVal[0];
-            if (!specVal || !selectedVals.includes(specVal)) return false;
+            var productSpec = p.specs[group];
+            if (!productSpec) return false;
+
+            var matchesAny = selectedVals.some(function(selVal) {
+              if (Array.isArray(productSpec)) {
+                return productSpec.some(function(psVal) {
+                  return String(psVal).toLowerCase().indexOf(String(selVal).toLowerCase()) !== -1 ||
+                         String(selVal).toLowerCase().indexOf(String(psVal).toLowerCase()) !== -1;
+                });
+              } else {
+                return String(productSpec).toLowerCase().indexOf(String(selVal).toLowerCase()) !== -1 ||
+                       String(selVal).toLowerCase().indexOf(String(productSpec).toLowerCase()) !== -1;
+              }
+            });
+
+            if (!matchesAny) return false;
           }
         }
         return true;
