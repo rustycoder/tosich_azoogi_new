@@ -822,12 +822,7 @@
 
         <div class="prod-grid" id="productGrid"></div>
 
-        <div class="pagination">
-          <div class="pg-btn active">1</div>
-          <div class="pg-btn">2</div>
-          <div class="pg-btn">3</div>
-          <div class="pg-btn">&rsaquo;</div>
-        </div>
+        <div class="pagination" id="paginationContainer"></div>
       </main>
     </div>
   </div>
@@ -1334,7 +1329,12 @@
       updateActiveTags();
     }
 
+    /* ===== Pagination State ===== */
+    var currentPage = 1;
+    var pageSize = 12;
+
     function updateActiveTags() {
+      currentPage = 1; // Reset to page 1 on filter changes
       var tagHtml = '';
       activeFilters.categories.forEach(function (c) {
         tagHtml += '<div class="p-tag">' + c + '<span class="remove-tag" onclick="removeFilter(\'cat\', \'' + c + '\')">&times;</span></div>';
@@ -1396,10 +1396,16 @@
 
       if (filtered.length === 0) {
         grid.innerHTML = '<div style="padding: 40px; text-align: center; color: var(--muted); grid-column: 1 / -1;">No products found matching the selected filters.</div>';
+        renderPagination(0);
         return;
       }
 
-      grid.innerHTML = filtered.map(function (p) {
+      var totalPages = Math.ceil(filtered.length / pageSize);
+      if (currentPage > totalPages) currentPage = Math.max(1, totalPages);
+
+      var pagedItems = filtered.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
+      grid.innerHTML = pagedItems.map(function (p) {
         var detailUrl = 'product-detail.html?file=' + encodeURIComponent(p.filePath);
 
         var imgHtml = '<div class="prod-swatch" style="background-image:url(\'' + (p.img || 'assets/logo_dark.png') + '\'); background-size:cover; background-position:center;"></div>';
@@ -1428,6 +1434,70 @@
           '</div>' +
           '</div>';
       }).join('');
+
+      renderPagination(totalPages);
+    }
+
+    function renderPagination(totalPages) {
+      var paginationEl = document.getElementById('paginationContainer');
+      if (!paginationEl) return;
+
+      if (totalPages <= 1) {
+        paginationEl.style.display = 'none';
+        paginationEl.innerHTML = '';
+        return;
+      }
+
+      paginationEl.style.display = 'flex';
+      var html = '';
+
+      // Prev Button
+      if (currentPage > 1) {
+        html += '<div class="pg-btn" data-page="' + (currentPage - 1) + '">&lsaquo;</div>';
+      } else {
+        html += '<div class="pg-btn disabled" style="opacity:0.3; cursor:not-allowed;">&lsaquo;</div>';
+      }
+
+      var startPage = Math.max(1, currentPage - 2);
+      var endPage = Math.min(totalPages, startPage + 4);
+      if (endPage - startPage < 4) {
+        startPage = Math.max(1, endPage - 4);
+      }
+
+      if (startPage > 1) {
+        html += '<div class="pg-btn" data-page="1">1</div>';
+        if (startPage > 2) html += '<span style="color:var(--muted); align-self:center; margin:0 4px;">...</span>';
+      }
+
+      for (var i = startPage; i <= endPage; i++) {
+        var activeClass = (i === currentPage) ? ' active' : '';
+        html += '<div class="pg-btn' + activeClass + '" data-page="' + i + '">' + i + '</div>';
+      }
+
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) html += '<span style="color:var(--muted); align-self:center; margin:0 4px;">...</span>';
+        html += '<div class="pg-btn" data-page="' + totalPages + '">' + totalPages + '</div>';
+      }
+
+      // Next Button
+      if (currentPage < totalPages) {
+        html += '<div class="pg-btn" data-page="' + (currentPage + 1) + '">&rsaquo;</div>';
+      } else {
+        html += '<div class="pg-btn disabled" style="opacity:0.3; cursor:not-allowed;">&rsaquo;</div>';
+      }
+
+      paginationEl.innerHTML = html;
+
+      paginationEl.querySelectorAll('.pg-btn[data-page]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var page = parseInt(this.getAttribute('data-page'), 10);
+          if (page && page !== currentPage) {
+            currentPage = page;
+            renderGrid();
+            grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
     }
 
     // Initial category filter from URL parameter
