@@ -807,8 +807,9 @@
         
 
         <div class="prod-toolbar">
-          <div class="result-count"><strong id="resultCount">12</strong> products found</div>
+          <div class="result-count"><strong id="resultCount">0</strong> products found</div>
           <div class="toolbar-right">
+            <input type="text" id="prodSearchInput" placeholder="Search products..." style="padding: 6px 12px; border-radius: 4px; border: 1px solid var(--border-light); background: var(--bg-2); color: var(--ink); font-size: 13px; width: 180px;">
             <button type="button" class="prod-mobile-filter-btn" id="prodFilterOpen">Filters</button>
             <select class="sort-select">
               <option>Sort: Relevance</option>
@@ -1154,54 +1155,55 @@
         });
       }
 
-      // 2. Build full products array & extract dynamic specifications from product_features
+      // 2. Build full products array (all 730+ variants) & extract dynamic specifications
       if (AZOOGI_PRODUCTS.products) {
         for (var pKey in AZOOGI_PRODUCTS.products) {
           if (!AZOOGI_PRODUCTS.products.hasOwnProperty(pKey)) continue;
           var pRow = AZOOGI_PRODUCTS.products[pKey];
           var variants = pRow.variants || {};
-          var vKeys = Object.keys(variants);
-          if (vKeys.length === 0) continue;
-
-          var firstVar = variants[vKeys[0]];
           var catPath = pRow.category_path || [];
           var parentCat = catPath[0] || 'General';
           var subCat = catPath.length > 1 ? catPath[catPath.length - 1] : parentCat;
 
-          var rawImg = (firstVar.product_images && firstVar.product_images.length > 0)
-            ? firstVar.product_images[0]
-            : 'assets/logo_dark.png';
+          for (var vName in variants) {
+            if (!variants.hasOwnProperty(vName)) continue;
+            var vData = variants[vName];
+            var rawImg = (vData.product_images && vData.product_images.length > 0)
+              ? vData.product_images[0]
+              : 'assets/logo_dark.png';
 
-          var localImgPath = getLocalImg(rawImg, firstVar.file_path);
-          var features = firstVar.product_features || {};
+            var localImgPath = getLocalImg(rawImg, vData.file_path);
+            var features = vData.product_features || {};
 
-          // Extract unique features into extractedSpecsMap
-          for (var featKey in features) {
-            if (!features.hasOwnProperty(featKey)) continue;
-            var featVal = features[featKey];
-            if (!extractedSpecsMap[featKey]) {
-              extractedSpecsMap[featKey] = new Set();
+            // Extract unique features into extractedSpecsMap for dynamic filter accordions
+            for (var featKey in features) {
+              if (!features.hasOwnProperty(featKey)) continue;
+              var featVal = features[featKey];
+              if (!extractedSpecsMap[featKey]) {
+                extractedSpecsMap[featKey] = new Set();
+              }
+              if (Array.isArray(featVal)) {
+                featVal.forEach(function(v) {
+                  if (v && typeof v === 'string' && v.trim().length > 0 && v.trim().length < 40) {
+                    extractedSpecsMap[featKey].add(v.trim());
+                  }
+                });
+              } else if (typeof featVal === 'string' && featVal.trim().length > 0 && featVal.trim().length < 40) {
+                extractedSpecsMap[featKey].add(featVal.trim());
+              }
             }
-            if (Array.isArray(featVal)) {
-              featVal.forEach(function(v) {
-                if (v && typeof v === 'string' && v.trim().length > 0 && v.trim().length < 40) {
-                  extractedSpecsMap[featKey].add(v.trim());
-                }
-              });
-            } else if (typeof featVal === 'string' && featVal.trim().length > 0 && featVal.trim().length < 40) {
-              extractedSpecsMap[featKey].add(featVal.trim());
-            }
+
+            products.push({
+              name: vName,
+              modelName: pRow.name || pKey,
+              sub: subCat,
+              cat: parentCat,
+              category_path: catPath,
+              filePath: vData.file_path || '',
+              img: localImgPath,
+              specs: features
+            });
           }
-
-          products.push({
-            name: pRow.name || pKey,
-            sub: subCat,
-            cat: parentCat,
-            category_path: catPath,
-            filePath: firstVar.file_path || '',
-            img: localImgPath,
-            specs: features
-          });
         }
       }
     }
@@ -1274,6 +1276,22 @@
       });
     }
 
+    /* ===== State & Search Input ===== */
+    var activeFilters = {
+      search: "",
+      categories: [],
+      specs: {}
+    };
+
+    var searchInputEl = document.getElementById('prodSearchInput');
+    if (searchInputEl) {
+      searchInputEl.addEventListener('input', function() {
+        activeFilters.search = this.value;
+        currentPage = 1;
+        renderGrid();
+      });
+    }
+
     /* ===== Filter Event Listeners ===== */
     document.querySelectorAll('.cat-sub-link').forEach(function (link) {
       link.addEventListener('click', function (e) {
@@ -1322,6 +1340,8 @@
     }
 
     function clearFilters() {
+      activeFilters.search = "";
+      if (searchInputEl) searchInputEl.value = "";
       activeFilters.categories = [];
       activeFilters.specs = {};
       document.querySelectorAll('.cat-sub-link').forEach(function (link) { link.classList.remove('active'); });
@@ -1331,7 +1351,7 @@
 
     /* ===== Pagination State ===== */
     var currentPage = 1;
-    var pageSize = 12;
+    var pageSize = 24;
 
     function updateActiveTags() {
       currentPage = 1; // Reset to page 1 on filter changes
@@ -1359,7 +1379,16 @@
     function renderGrid() {
       var countEl = document.getElementById('resultCount');
 
+      var searchLower = activeFilters.search.trim().toLowerCase();
+
       var filtered = products.filter(function (p) {
+        if (searchLower !== "") {
+          var matchSearch = p.name.toLowerCase().indexOf(searchLower) !== -1 ||
+                            p.modelName.toLowerCase().indexOf(searchLower) !== -1 ||
+                            p.sub.toLowerCase().indexOf(searchLower) !== -1;
+          if (!matchSearch) return false;
+        }
+
         if (activeFilters.categories.length > 0) {
           var matchCat = activeFilters.categories.includes(p.sub) ||
                            activeFilters.categories.includes(p.cat) ||
