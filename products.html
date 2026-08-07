@@ -1368,6 +1368,30 @@
       }).join('');
     }
 
+    // Initial category filter from URL parameter
+    var urlParams = new URLSearchParams(window.location.search);
+    var catParam = urlParams.get('category');
+    if (catParam) {
+      catParam = decodeURIComponent(catParam);
+      if (!activeFilters.categories.includes(catParam)) {
+        activeFilters.categories.push(catParam);
+      }
+      document.querySelectorAll('.cat-sub-link').forEach(function (link) {
+        if (link.getAttribute('data-sub') === catParam) {
+          link.classList.add('active');
+          var li = link.closest('li');
+          if (li) {
+            var topLi = li.closest('.cat-list > li');
+            if (topLi) {
+              topLi.classList.add('open');
+              var toggle = topLi.querySelector('.cat-toggle');
+              if (toggle) toggle.innerHTML = '&ndash;';
+            }
+          }
+        }
+      });
+    }
+
     // Initial render
     updateActiveTags();
   </script>
