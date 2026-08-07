@@ -182,27 +182,29 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 5px 10px;
+      padding: 5px 6px;
       cursor: pointer;
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 600;
       gap: 6px;
     }
 
-    .cat-row.active,
+    .cat-label-text {
+      flex: 1;
+      line-height: 1.3;
+      word-break: break-word;
+      cursor: pointer;
+    }
+
+    .cat-label-text.active,
+    .cat-label-text:hover,
     .cat-row:hover {
       color: var(--accent);
     }
 
-    .cat-row span:first-child {
-      flex: 1;
-      line-height: 1.3;
-      word-break: break-word;
-    }
-
     /* cleaner +/- toggle icon to match filter accordion */
     .cat-toggle {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 300;
       color: var(--muted);
       width: 16px;
@@ -211,37 +213,40 @@
       flex-shrink: 0;
     }
 
-    .cat-list>li.open .cat-toggle {
-      color: var(--accent);
-    }
-
-    .cat-row:hover .cat-toggle {
+    .cat-node.open > .cat-row > .cat-toggle {
       color: var(--accent);
     }
 
     .sub-list {
       list-style: none;
       margin: 0;
-      padding: 0 0 0 16px;
+      padding: 0;
       max-height: 0;
       overflow: hidden;
-      transition: max-height .3s ease;
+      transition: max-height .35s ease;
     }
 
-    .cat-list>li.open .sub-list {
-      max-height: 400px;
+    .cat-node.open > .sub-list {
+      max-height: 2000px;
+      margin-left: 6px;
+      padding-left: 8px;
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .sub-list li a {
+    .sub-list li a,
+    .cat-sub-link {
       display: block;
-      padding: 5px 0;
-      font-size: 10px;
+      padding: 4px 6px;
+      font-size: 10.5px;
       color: var(--muted);
       line-height: 1.3;
+      text-decoration: none;
     }
 
     .sub-list li a.active,
-    .sub-list li a:hover {
+    .sub-list li a:hover,
+    .cat-sub-link.active,
+    .cat-sub-link:hover {
       color: var(--accent);
     }
 
@@ -1134,96 +1139,180 @@
       return imgUrl;
     }
 
-    /* ===== Dynamic Category Taxonomy & Product Data ===== */
-    var categories = [];
+    /* ===== Dynamic Category Taxonomy & Product Data (Full 893 Products) ===== */
+    var productsMap = {};
     var products = [];
     var extractedSpecsMap = {};
 
-    if (typeof AZOOGI_PRODUCTS !== 'undefined') {
-      // 1. Build category taxonomy from AZOOGI_PRODUCTS.tree
-      if (AZOOGI_PRODUCTS.tree) {
-        AZOOGI_PRODUCTS.tree.forEach(function (topCat) {
-          var subs = [];
-          if (topCat.children) {
-            topCat.children.forEach(function (child) {
-              subs.push(child.name);
-            });
-          }
-          categories.push({
-            name: topCat.name,
-            subs: subs
+    function addProductToCatalog(vName, modelName, catPath, vData) {
+      if (!vName || productsMap[vName]) return;
+
+      var parentCat = catPath[0] || 'General';
+      var subCat = catPath.length > 1 ? catPath[catPath.length - 1] : parentCat;
+
+      var rawImg = (vData.product_images && vData.product_images.length > 0)
+        ? vData.product_images[0]
+        : 'assets/logo_dark.png';
+
+      var localImgPath = getLocalImg(rawImg, vData.file_path);
+      var features = vData.product_features || {};
+
+      // Extract unique features into extractedSpecsMap for dynamic filter accordions
+      for (var featKey in features) {
+        if (!features.hasOwnProperty(featKey)) continue;
+        var featVal = features[featKey];
+        if (!extractedSpecsMap[featKey]) {
+          extractedSpecsMap[featKey] = new Set();
+        }
+        if (Array.isArray(featVal)) {
+          featVal.forEach(function(v) {
+            if (v && typeof v === 'string' && v.trim().length > 0 && v.trim().length < 40) {
+              extractedSpecsMap[featKey].add(v.trim());
+            }
           });
-        });
+        } else if (typeof featVal === 'string' && featVal.trim().length > 0 && featVal.trim().length < 40) {
+          extractedSpecsMap[featKey].add(featVal.trim());
+        }
       }
 
-      // 2. Build full products array (all 730+ variants) & extract dynamic specifications
+      var item = {
+        name: vName,
+        modelName: modelName,
+        sub: subCat,
+        cat: parentCat,
+        category_path: catPath,
+        filePath: vData.file_path || '',
+        img: localImgPath,
+        specs: features
+      };
+
+      productsMap[vName] = true;
+      products.push(item);
+    }
+
+    function collectProductsFromTree(treeNodes, parentPath) {
+      if (!treeNodes || !Array.isArray(treeNodes)) return;
+      treeNodes.forEach(function(node) {
+        var nodeName = node.name || 'Category';
+        var currentPath = node.category_path || (parentPath ? parentPath.concat([nodeName]) : [nodeName]);
+
+        if (node.variants) {
+          for (var vName in node.variants) {
+            if (node.variants.hasOwnProperty(vName)) {
+              var vData = node.variants[vName];
+              var vPath = vData.category_path || currentPath;
+              addProductToCatalog(vName, node.name || nodeName, vPath, vData);
+            }
+          }
+        }
+
+        if (node.children) {
+          collectProductsFromTree(node.children, currentPath);
+        }
+      });
+    }
+
+    if (typeof AZOOGI_PRODUCTS !== 'undefined') {
+      // 1. Collect all 893 products directly from AZOOGI_PRODUCTS.tree
+      if (AZOOGI_PRODUCTS.tree) {
+        collectProductsFromTree(AZOOGI_PRODUCTS.tree, []);
+      }
+
+      // 2. Fallback check for any additional products in AZOOGI_PRODUCTS.products
       if (AZOOGI_PRODUCTS.products) {
         for (var pKey in AZOOGI_PRODUCTS.products) {
           if (!AZOOGI_PRODUCTS.products.hasOwnProperty(pKey)) continue;
           var pRow = AZOOGI_PRODUCTS.products[pKey];
           var variants = pRow.variants || {};
           var catPath = pRow.category_path || [];
-          var parentCat = catPath[0] || 'General';
-          var subCat = catPath.length > 1 ? catPath[catPath.length - 1] : parentCat;
-
           for (var vName in variants) {
             if (!variants.hasOwnProperty(vName)) continue;
-            var vData = variants[vName];
-            var rawImg = (vData.product_images && vData.product_images.length > 0)
-              ? vData.product_images[0]
-              : 'assets/logo_dark.png';
-
-            var localImgPath = getLocalImg(rawImg, vData.file_path);
-            var features = vData.product_features || {};
-
-            // Extract unique features into extractedSpecsMap for dynamic filter accordions
-            for (var featKey in features) {
-              if (!features.hasOwnProperty(featKey)) continue;
-              var featVal = features[featKey];
-              if (!extractedSpecsMap[featKey]) {
-                extractedSpecsMap[featKey] = new Set();
-              }
-              if (Array.isArray(featVal)) {
-                featVal.forEach(function(v) {
-                  if (v && typeof v === 'string' && v.trim().length > 0 && v.trim().length < 40) {
-                    extractedSpecsMap[featKey].add(v.trim());
-                  }
-                });
-              } else if (typeof featVal === 'string' && featVal.trim().length > 0 && featVal.trim().length < 40) {
-                extractedSpecsMap[featKey].add(featVal.trim());
-              }
-            }
-
-            products.push({
-              name: vName,
-              modelName: pRow.name || pKey,
-              sub: subCat,
-              cat: parentCat,
-              category_path: catPath,
-              filePath: vData.file_path || '',
-              img: localImgPath,
-              specs: features
-            });
+            addProductToCatalog(vName, pRow.name || pKey, catPath, variants[vName]);
           }
         }
       }
     }
 
-    var catListEl = document.getElementById('catList');
-    if (catListEl) {
-      catListEl.innerHTML = '';
-      categories.forEach(function (cat) {
+    /* ===== Recursive Multi-Level Category Tree Generator ===== */
+    function renderCategoryTree(treeNodes, containerEl, level) {
+      if (!treeNodes || !Array.isArray(treeNodes) || treeNodes.length === 0) return;
+
+      treeNodes.forEach(function (node) {
         var li = document.createElement('li');
-        var subItems = cat.subs.map(function (s) {
-          return '<li><a href="#" class="cat-sub-link" data-sub="' + s + '">' + s + '</a></li>';
-        }).join('');
-        li.innerHTML = '<div class="cat-row"><span>' + cat.name + '</span><span class="cat-toggle">+</span></div><ul class="sub-list">' + subItems + '</ul>';
-        li.querySelector('.cat-row').addEventListener('click', function () {
-          li.classList.toggle('open');
-          li.querySelector('.cat-toggle').innerHTML = li.classList.contains('open') ? '&ndash;' : '+';
-        });
-        catListEl.appendChild(li);
+        li.className = 'cat-node level-' + level;
+
+        var nodeName = node.name || 'Category';
+        var hasChildren = node.children && Array.isArray(node.children) && node.children.length > 0;
+
+        if (hasChildren) {
+          var row = document.createElement('div');
+          row.className = 'cat-row level-' + level;
+          row.innerHTML = '<span class="cat-label-text" data-cat="' + nodeName + '">' + nodeName + '</span><span class="cat-toggle">+</span>';
+
+          row.querySelector('.cat-label-text').addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleCategoryFilter(nodeName);
+          });
+
+          row.addEventListener('click', function() {
+            li.classList.toggle('open');
+            var toggle = row.querySelector('.cat-toggle');
+            if (toggle) toggle.innerHTML = li.classList.contains('open') ? '&ndash;' : '+';
+          });
+
+          li.appendChild(row);
+
+          var subUl = document.createElement('ul');
+          subUl.className = 'sub-list level-' + (level + 1);
+          renderCategoryTree(node.children, subUl, level + 1);
+          li.appendChild(subUl);
+        } else {
+          var link = document.createElement('a');
+          link.href = '#';
+          link.className = 'cat-sub-link level-' + level;
+          link.setAttribute('data-sub', nodeName);
+          link.textContent = nodeName;
+          if (activeFilters.categories.includes(nodeName)) {
+            link.classList.add('active');
+          }
+
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            toggleCategoryFilter(nodeName);
+          });
+
+          li.appendChild(link);
+        }
+
+        containerEl.appendChild(li);
       });
+    }
+
+    function toggleCategoryFilter(categoryName) {
+      if (activeFilters.categories.length === 1 && activeFilters.categories[0] === categoryName) {
+        activeFilters.categories = []; // Deselect if clicking active category
+      } else {
+        activeFilters.categories = [categoryName]; // Filter exclusively to clicked category
+      }
+      updateActiveCategoryClasses();
+      updateActiveTags();
+    }
+
+    function updateActiveCategoryClasses() {
+      document.querySelectorAll('.cat-label-text, .cat-sub-link').forEach(function(el) {
+        var catName = el.getAttribute('data-cat') || el.getAttribute('data-sub');
+        if (catName && activeFilters.categories.includes(catName)) {
+          el.classList.add('active');
+        } else {
+          el.classList.remove('active');
+        }
+      });
+    }
+
+    var catListEl = document.getElementById('catList');
+    if (catListEl && typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS.tree) {
+      catListEl.innerHTML = '';
+      renderCategoryTree(AZOOGI_PRODUCTS.tree, catListEl, 0);
     }
 
     /* ===== Dynamic Specification Filter Accordion ===== */
@@ -1303,21 +1392,6 @@
     }
 
     /* ===== Filter Event Listeners ===== */
-    document.querySelectorAll('.cat-sub-link').forEach(function (link) {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        var c = this.getAttribute('data-sub');
-        if (!activeFilters.categories.includes(c)) {
-          activeFilters.categories.push(c);
-          this.classList.add('active');
-        } else {
-          activeFilters.categories = activeFilters.categories.filter(function (x) { return x !== c; });
-          this.classList.remove('active');
-        }
-        updateActiveTags();
-      });
-    });
-
     document.querySelectorAll('.opt-row input').forEach(function (input) {
       input.addEventListener('change', function () {
         var group = this.name;
@@ -1339,9 +1413,7 @@
         if (searchInputEl) searchInputEl.value = "";
       } else if (type === 'cat') {
         activeFilters.categories = activeFilters.categories.filter(function (x) { return x !== val; });
-        document.querySelectorAll('.cat-sub-link').forEach(function (link) {
-          if (link.getAttribute('data-sub') === val) link.classList.remove('active');
-        });
+        updateActiveCategoryClasses();
       } else if (type === 'spec') {
         activeFilters.specs[group] = activeFilters.specs[group].filter(function (x) { return x !== val; });
         if (activeFilters.specs[group].length === 0) delete activeFilters.specs[group];
@@ -1357,7 +1429,7 @@
       if (searchInputEl) searchInputEl.value = "";
       activeFilters.categories = [];
       activeFilters.specs = {};
-      document.querySelectorAll('.cat-sub-link').forEach(function (link) { link.classList.remove('active'); });
+      updateActiveCategoryClasses();
       document.querySelectorAll('.opt-row input').forEach(function (input) { input.checked = false; });
       updateActiveTags();
     }
@@ -1424,9 +1496,17 @@
         }
 
         if (activeFilters.categories.length > 0) {
-          var matchCat = activeFilters.categories.includes(p.sub) ||
-                           activeFilters.categories.includes(p.cat) ||
-                           (p.category_path && p.category_path.some(function(cp){ return activeFilters.categories.includes(cp); }));
+          var matchCat = activeFilters.categories.some(function(selectedCat) {
+            var selLower = selectedCat.trim().toLowerCase();
+            if (p.modelName && p.modelName.trim().toLowerCase() === selLower) return true;
+            if (p.name && p.name.trim().toLowerCase().indexOf(selLower) !== -1) return true;
+            if (p.sub && p.sub.trim().toLowerCase() === selLower) return true;
+            if (p.cat && p.cat.trim().toLowerCase() === selLower) return true;
+            if (p.category_path && p.category_path.some(function(cp) {
+              return cp.trim().toLowerCase() === selLower;
+            })) return true;
+            return false;
+          });
           if (!matchCat) return false;
         }
         for (var group in activeFilters.specs) {
