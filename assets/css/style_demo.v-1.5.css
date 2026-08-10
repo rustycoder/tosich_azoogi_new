@@ -2030,16 +2030,21 @@ footer {
     border: 0;
     border-radius: 0;
     box-shadow: none;
-    display: none;
+    display: none !important;
     left: auto;
     right: auto;
     margin: 0;
   }
 
+  /* Products: plain link on mobile — no accordion panel or caret */
+  .has-dropdown.mobile-plain-link .mega-menu,
   .has-dropdown.open .mega-menu {
-    display: block;
-    background: #fafafa;
-    border-bottom: 1px solid rgba(0, 0, 0, .06);
+    display: none !important;
+  }
+
+  .has-dropdown.mobile-plain-link > a .caret,
+  .menu.mobile-drawer .has-dropdown > a .caret {
+    display: none;
   }
 
   .mega-menu-inner {

@@ -196,15 +196,14 @@
       }
     });
 
+    // Mobile: Products is a normal link (no accordion / mega menu)
     const dropdown = menu.querySelector('.has-dropdown');
     if (dropdown) {
+      dropdown.classList.add('mobile-plain-link');
       const trigger = dropdown.querySelector(':scope > a');
       if (trigger) {
-        trigger.addEventListener('click', (e) => {
-          if (!window.matchMedia(MOBILE_MQ).matches) return;
-          e.preventDefault();
-          dropdown.classList.toggle('open');
-        });
+        const caret = trigger.querySelector('.caret');
+        if (caret) caret.hidden = true;
       }
     }
 
@@ -215,7 +214,6 @@
         closeNav();
         return;
       }
-      if (link.closest('.has-dropdown') && link === dropdown?.querySelector(':scope > a')) return;
       if (link.closest('.mega-menu')) {
         closeNav();
         return;
