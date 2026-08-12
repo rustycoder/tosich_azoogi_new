@@ -5,13 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Azoogi — Award-winning LED Lighting Solutions</title>
 <meta name="description" content="Azoogi designs and supplies premium LED lighting — strips, neon, garden lights, drivers and architectural fittings for projects that demand more." />
+<link rel="icon" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script>const savedTheme = localStorage.getItem('theme'); if (savedTheme) { document.documentElement.setAttribute('data-theme', savedTheme); }</script>
-  <link rel="stylesheet" href="assets/css/style_demo.css">
+  <link rel="stylesheet" href="assets/css/style_demo.v-1.5.css">
   <script src="assets/js/products_data.js"></script>
   <script src="assets/js/mega_menu.js"></script>
+  <script src="assets/js/site_header.js"></script>
 </head>
 <body>
 
@@ -19,42 +20,28 @@
   <header class="topbar" id="topbar">
     <div class="util">
       <div class="util-inner">
-        <div>Trusted by architects, designers & builders across Australia</div>
+        <div class="util-rotate" aria-live="polite">Australian-Owned B2B Trade Wholesaler - Custom Lighting & Smart Control Solutions</div>
         <div style="display:flex;gap:24px">
-          <a href="#">1300 AZOOGI</a><a href="#">sales@azoogi.com.au</a>
-          <div style="display:flex; align-items:center;"><a href="#">Trade Login</a><button class="theme-btn"
-              aria-label="Toggle theme" onclick="toggleTheme()"><svg class="sun-icon" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="5"></circle>
-                <line x1="12" y1="1" x2="12" y2="3"></line>
-                <line x1="12" y1="21" x2="12" y2="23"></line>
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                <line x1="1" y1="12" x2="3" y2="12"></line>
-                <line x1="21" y1="12" x2="23" y2="12"></line>
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-              </svg><svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-              </svg></button></div>
+          <a href="tel:1300641261">1300 641 261</a>
+          <a href="mailto:sales@azoogi.com">sales@azoogi.com</a>
+          <div style="display:flex; align-items:center;"><a href="trade_login.html">Trade Login</a></div>
         </div>
       </div>
     </div>
     <nav class="nav">
-      <a href="#" class="logo"><img src="assets/logo_white.png" width="80"></a>
+      <a href="index.html" class="logo"><img src="assets/logo_white.png" width="80" alt="Azoogi"></a>
       <div class="menu">
         <div class="has-dropdown">
-          <a href="#products">Product <span class="caret">&#9662;</span></a>
+          <a href="products.html">Products <span class="caret">&#9662;</span></a>
           <div class="mega-menu" id="dynamic-mega-menu"></div>
         </div>
-        <a href="#projects">Projects</a>
+        <a href="projects.html">Projects</a>
         <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#resources">Resources</a>
-        <a href="#contact">Contact</a>
+        <a href="solutions.html">Solutions</a>
+        <a href="contact.html">Contact</a>
+        <a href="ai-lighting.html">AI Lighting</a>
       </div>
-      <a href="#contact" class="cta">Get a Quote</a>
+      <a href="led-strip-calculator.html" class="cta">LED Calculator</a>
       <div class="burger"><span></span><span></span><span></span></div>
     </nav>
   </header>
@@ -62,28 +49,31 @@
   <!-- ========== HERO SLIDER ========== -->
 <section class="hero" id="hero">
   <div class="slide active has-video">
-    <video class="bg-video" autoplay muted loop playsinline preload="auto" poster="assets/hero00.jpg">
-      <source src="assets/lighting.mp4" type="video/mp4">
+    <video class="bg-video" autoplay muted loop playsinline preload="auto" poster="assets/fallback.webp">
+      <source src="assets/herovid%201.webm" type="video/webm">
     </video>
     <div class="slide-inner">
       <div class="eyebrow">Made just for you</div>
       <h1 class="slide-title">Custom fittings<br/>without compromise.</h1>
       <p class="slide-sub">Off-spec alternatives, custom fittings, matched specs and budgets — without ever compromising on quality.</p>
       <div class="slide-actions">
-        <a class="btn primary" href="#contact">Start a Project</a>
-        <a class="btn" href="#services">Our Services</a>
+        <a class="btn primary" href="contact.html">Start a Project</a>
+        <a class="btn" href="#products">Our Services</a>
       </div>
     </div>
   </div>
 
-  <div class="slide" style="background-image:url('assets/hero02.jpg')">
+  <div class="slide has-video">
+    <video class="bg-video" muted loop playsinline preload="auto" poster="assets\vid2_fallback.jpg">
+      <source src="assets/herovid%202.webm" type="video/webm">
+    </video>
     <div class="slide-inner">
       <div class="eyebrow">For those who demand more from their lighting</div>
       <h1 class="slide-title">Award-winning<br/>LED lighting solutions.</h1>
       <p class="slide-sub">Premium components, strict quality assurance, and up to a 5-year warranty — engineered to perform and last.</p>
       <div class="slide-actions">
-        <a class="btn primary" href="#products">Explore Products</a>
-        <a class="btn" href="#projects">View Projects</a>
+        <a class="btn primary" href="products.html">Explore Products</a>
+        <a class="btn" href="projects.html">View Projects</a>
       </div>
     </div>
   </div>
@@ -93,8 +83,8 @@
       <h1 class="slide-title">From first idea<br/>to final install — and beyond.</h1>
       <p class="slide-sub">We don't just supply lighting. We partner with you with advice, guidance, and service that keeps your project shining.</p>
       <div class="slide-actions">
-        <a class="btn primary" href="#contact">Talk to a Specialist</a>
-        <a class="btn" href="#projects">Recent Work</a>
+        <a class="btn primary" href="contact.html">Talk to a Specialist</a>
+        <a class="btn" href="projects.html">Recent Work</a>
       </div>
     </div>
   </div>
@@ -104,7 +94,7 @@
       <h1 class="slide-title">Architectural lighting,<br/>shaped to your vision.</h1>
       <p class="slide-sub">From sleek LED strips to statement architectural fittings — solutions for every style and every space, indoors or out.</p>
       <div class="slide-actions">
-        <a class="btn primary" href="#products">Browse Range</a>
+        <a class="btn primary" href="products.html">Browse Range</a>
         <a class="btn" href="#about">Our Story</a>
       </div>
     </div>
@@ -115,8 +105,8 @@
       <h1 class="slide-title">Custom fittings<br/>without compromise.</h1>
       <p class="slide-sub">Off-spec alternatives, custom fittings, matched specs and budgets — without ever compromising on quality.</p>
       <div class="slide-actions">
-        <a class="btn primary" href="#contact">Start a Project</a>
-        <a class="btn" href="#services">Our Services</a>
+        <a class="btn primary" href="contact.html">Start a Project</a>
+        <a class="btn" href="#products">Our Services</a>
       </div>
     </div>
   </div>
@@ -129,8 +119,6 @@
       <svg id="ppIcon" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
     </div>
   </div>
-
-  <div class="scroll-cue"><span>Scroll</span><div class="l"></div></div>
 </section>
 
 <!-- ========== INTRO ========== -->
@@ -139,10 +127,10 @@
     <div class="kicker reveal ">Lighting solutions from start to finish</div>
     <h2 class="h2 reveal">I'm looking for lighting as a&hellip;</h2>
     <div class="audience reveal">
-      <a href="#">Architect / Designer</a>
-      <a href="#">Electrician / Builder</a>
-      <a href="#">Wholesaler</a>
-      <a href="#">Home Owner</a>
+      <a href="audience.html?slug=architect-designer">Architect / Designer</a>
+      <a href="audience.html?slug=electrician-builder">Electrician / Builder</a>
+      <a href="audience.html?slug=wholesaler">Wholesaler</a>
+      <a href="audience.html?slug=home-owner">Home Owner</a>
     </div>
   </div>
 </section>
@@ -150,14 +138,14 @@
 <!-- ========== VALUES ========== -->
 
 
-<section class="card-in">
+<section class="card-in" id="about">
   <div class="wrap-sm">
     <div class="head">
       <div class="kicker reveal">Why Azoogi</div>
       <h2 class="h2 reveal">For those who demand more — from the components inside to the support behind every product.</h2>
     </div>
   
-    <div class="container max-width-adaptive-md margin-bottom-lg">
+    <div class="container max-width-adaptive-md">
       <ul id="cards">
         <li class="card-main" id="card_1">
           <div class="card__content">
@@ -203,7 +191,7 @@
               <p><a href="#top" class="btn --accent">Read more</a></p>
             </div>
             <figure>
-              <img src="assets/img/card.jpg" alt="Image description">
+              <img src="assets/supportthatlasts.jpeg" alt="Image description">
             </figure>
           </div>
         </li>
@@ -213,97 +201,6 @@
 
 </section>
 
-<section class="cityscape">
-  <div class="city-intro">
-    <div>
-      <span class="kicker reveal">Where Azoogi lights up</span>
-      <h2>Illuminating <em>Sydney</em>, one project at a time.</h2>
-    </div>
-    
-  </div>
-
-  <div class="stage" aria-label="Interactive Sydney skyline">
-    <img class="bg" src="assets/img/sydney-night.jpg" alt="Sydney skyline at night" />
-
-    <!-- Hotspots (positioned in % over the cityscape) -->
-    <a class="hotspot" style="left:36%;top:38%" href="#" aria-label="AZ-PNL24">
-      <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
-      <div class="tip">
-        <div class="thumb" style="background-image:url('assets/img/prod-1.jpg')"></div>
-        <div class="code">AZ-PNL24</div>
-        <div class="name">Slim Edge LED Panel 600×600</div>
-        <div class="meta">Office towers · 4000K</div>
-      </div>
-    </a>
-
-    <a class="hotspot" style="left:48%;top:30%" href="#" aria-label="AZ-HBY150">
-      <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
-      <div class="tip">
-        <div class="thumb" style="background-image:url('assets/img/prod-3.jpg')"></div>
-        <div class="code">AZ-HBY150</div>
-        <div class="name">UFO High Bay 150W</div>
-        <div class="meta">Commercial atriums</div>
-      </div>
-    </a>
-
-    <a class="hotspot bottom" style="left:62%;top:27%" href="#" aria-label="AZ-LNR42">
-      <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
-      <div class="tip">
-        <div class="thumb" style="background-image:url('assets/img/prod-4.jpg')"></div>
-        <div class="code">AZ-LNR42</div>
-        <div class="name">Linear Pendant 1.2m</div>
-        <div class="meta">Corporate lobbies</div>
-      </div>
-    </a>
-
-    <a class="hotspot" style="left:72%;top:55%" href="#" aria-label="AZ-STR80">
-      <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
-      <div class="tip">
-        <div class="thumb" style="background-image:url('assets/img/prod-3.jpg')"></div>
-        <div class="code">AZ-STR80</div>
-        <div class="name">Urban Street Luminaire 80W</div>
-        <div class="meta">Harbour Bridge approach</div>
-      </div>
-    </a>
-
-    <a class="hotspot" style="left:30%;top:74%" href="#" aria-label="AZ-FLD50">
-      <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
-      <div class="tip">
-        <div class="thumb" style="background-image:url('assets/img/prod-5.jpg')"></div>
-        <div class="code">AZ-FLD50</div>
-        <div class="name">Architectural Flood 50W RGBW</div>
-        <div class="meta">Opera House façade</div>
-      </div>
-    </a>
-
-    <a class="hotspot bottom" style="left:18%;top:48%" href="#" aria-label="AZ-PNL24-W">
-      <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
-      <div class="tip">
-        <div class="thumb" style="background-image:url('assets/img/prod-1.jpg')"></div>
-        <div class="code">AZ-PNL24-W</div>
-        <div class="name">Recessed Panel — Warm</div>
-        <div class="meta">Residential towers · 3000K</div>
-      </div>
-    </a>
-
-    <a class="hotspot" style="left:85%;top:62%" href="#" aria-label="AZ-FLD50-N">
-      <span class="ring"></span><span class="ring2"></span><span class="dot"></span>
-      <div class="tip">
-        <div class="thumb" style="background-image:url('assets/img/prod-5.jpg')"></div>
-        <div class="code">AZ-FLD50-N</div>
-        <div class="name">Marine Flood — IP66</div>
-        <div class="meta">North Sydney waterfront</div>
-      </div>
-    </a>
-    <div class="legend">
-    <span class="pill"><span class="ldot"></span> Hover a marker to view the product</span> 
-  </div>
-  </div>
-
-  
-</section>
-
-
 <!-- ========== PRODUCTS MARQUEE ========== -->
 <section class="products" id="products">
   <div class="wrap">
@@ -312,7 +209,7 @@
         <div class="kicker reveal">Our Range</div>
         <h2 class="h2 reveal">Explore the full Azoogi lighting catalogue.</h2>
       </div>
-      <a href="#" class="btn --accent reveal">View All Products</a>
+      <a href="products.html" class="btn --accent reveal">View All Products</a>
     </div>
   </div>
   <div class="marquee">
@@ -345,14 +242,14 @@
         <div class="kicker reveal">Recent Highlights</div>
         <h2 class="h2 reveal">Where Azoogi lighting comes to life.</h2>
       </div>
-      <a href="#" class="btn reveal">View All Projects</a>
+      <a href="projects.html" class="btn reveal">View All Projects</a>
     </div>
 
     <div class="grid">
-      <div class="proj p1 reveal"><img src="assets/img/acdm.jpg" alt="Aikenhead Centre"/><div class="cap"><small>Medical &mdash; Melbourne</small><h3>Aikenhead Centre for Medical Discovery</h3></div></div>
-      <div class="proj p2 reveal"><img src="assets/img/img-1.jpg" alt="Zushi Restaurant"/><div class="cap"><small>Hospitality &mdash; Sydney</small><h3>Zushi Restaurant</h3></div></div>
-      <div class="proj p3 reveal"><img src="assets/img/eve.jpg" alt="The Eve Hotel"/><div class="cap"><small>Hospitality &mdash; Redfern</small><h3>The Eve Hotel</h3></div></div>
-      <div class="proj p4 reveal"><img src="assets/img/bondi.webp" alt="Bondi Penthouse"/><div class="cap"><small>Residential &mdash; Bondi</small><h3>Bondi Beach Penthouse</h3></div></div>
+      <div class="proj p1 reveal"><a href="project-detail.html?slug=aikenhead-centre-for-medical-discovery"><img src="assets/img/acdm.jpg" alt="Aikenhead Centre"/><div class="cap"><small>Medical &mdash; Melbourne</small><h3>Aikenhead Centre for Medical Discovery</h3></div></a></div>
+      <div class="proj p2 reveal"><a href="project-detail.html?slug=zushi-restaurant"><img src="assets/img/img-1.jpg" alt="Zushi Restaurant"/><div class="cap"><small>Hospitality &mdash; Sydney</small><h3>Zushi Restaurant</h3></div></a></div>
+      <div class="proj p3 reveal"><a href="project-detail.html?slug=the-eve-hotel"><img src="assets/img/eve.jpg" alt="The Eve Hotel"/><div class="cap"><small>Hospitality &mdash; Redfern</small><h3>The Eve Hotel</h3></div></a></div>
+      <div class="proj p4 reveal"><a href="project-detail.html?slug=bondi-beach-penthouse"><img src="assets/img/bondi.webp" alt="Bondi Penthouse"/><div class="cap"><small>Residential &mdash; Bondi</small><h3>Bondi Beach Penthouse</h3></div></a></div>
     </div>
   </div>
 </section>
@@ -372,34 +269,30 @@
 </section>
 
 <!-- ========== FOOTER ========== -->
-<footer id="contact">
+<footer>
   <div class="wrap">
     <div class="foot">
       <div>
-        <a href="#" class="logo"><img src="assets/logo.png" width="150"></a>
-        <p>Premium LED lighting solutions for architects, designers, builders and homeowners across Australia.</p>
-        <div class="socials">
-          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor"/></svg></a>
-          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h4v16H4zM6 2.5A1.5 1.5 0 1 1 4.5 4 1.5 1.5 0 0 1 6 2.5zM10 8h4v2c.7-1.2 2-2.3 4-2.3 3 0 4 2 4 5V20h-4v-6c0-1.4-.5-2.4-1.9-2.4S14 12.6 14 14v6h-4z"/></svg></a>
-          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l1-4h-4V7.5c0-1.2.4-2 2.2-2H17V2.2C16.6 2.1 15.4 2 14 2c-3 0-5 1.8-5 5.2V10H6v4h3v8z"/></svg></a>
-        </div>
+        <a href="index.html" class="logo"><img src="assets/logo_dark.png" width="150" alt="Azoogi"></a>
+        <p>We design, engineer, manufacture, assemble, and test our products in-house, offering custom powder coating to deliver fully tailored lighting solutions</p>
       </div>
       <div><h5>Products</h5>
-        <a href="#">LED Strips</a><a href="#">Neon Range</a><a href="#">Garden Lights</a><a href="#">LED Drivers</a><a href="#">Architectural</a><a href="#">Downlights</a>
-      </div>
-      <div><h5>Solutions</h5>
-        <a href="#">Architects & Designers</a><a href="#">Electricians & Builders</a><a href="#">Wholesalers</a><a href="#">Home Owners</a>
+        <a href="products.html">All Products</a><a href="led-strip-calculator.html">LED Calculator</a>
       </div>
       <div><h5>Company</h5>
-        <a href="#">About Azoogi</a><a href="#">Projects</a><a href="#">Resources</a><a href="#">News</a><a href="#">Contact</a>
+        <a href="#about">About Azoogi</a><a href="projects.html">Projects</a><a href="ai-lighting.html">AI Lighting</a><a href="contact.html">Contact</a><a href="policies.html">Policies</a>
       </div>
       <div><h5>Contact</h5>
-        <a href="tel:1300296644">1300 AZOOGI</a><a href="mailto:sales@azoogi.com.au">sales@azoogi.com.au</a><a href="#">Sydney &middot; Melbourne</a><a href="#">Trade Login</a>
+        <a href="tel:1300641261">1300 641 261</a><a href="mailto:sales@azoogi.com">sales@azoogi.com</a><a href="trade_login.html">Trade Login</a>
       </div>
     </div>
     <div class="copy">
       <div>&copy; 2026 Azoogi Pty Ltd. All rights reserved.</div>
-      <div>Privacy &middot; Terms &middot; Warranty</div>
+      <div class="copy-links">
+        <a href="policies.html#privacy">Privacy</a><span class="sep">&middot;</span>
+        <a href="policies.html#terms">Terms</a><span class="sep">&middot;</span>
+        <a href="policies.html#warranty">Warranty</a>
+      </div>
     </div>
   </div>
 </footer>
@@ -413,8 +306,7 @@
     if (isScrolled !== lastScrolled) {
       topbar.classList.toggle('solid', isScrolled);
       lastScrolled = isScrolled;
-      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-      if (typeof updateLogos === 'function') updateLogos(currentTheme);
+      if (typeof updateLogos === 'function') updateLogos();
     }
   };
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
@@ -449,8 +341,19 @@
       });
     }
     function show(i) {
-      slides.forEach((s, k) => s.classList.toggle('active', k === i));
+      slides.forEach((s, k) => {
+        s.classList.toggle('active', k === i);
+        const vid = s.querySelector('video.bg-video');
+        if (!vid) return;
+        if (k === i) {
+          vid.currentTime = 0;
+          vid.play().catch(() => {});
+        } else {
+          vid.pause();
+        }
+      });
       cur.textContent = String(i + 1).padStart(2, '0');
+      window.dispatchEvent(new CustomEvent('hero:slide', { detail: { index: i } }));
     }
     function goto(i, reset) {
       idx = (i + n) % n; show(idx);
@@ -515,32 +418,21 @@
   heroParallax();
   window.addEventListener('scroll', heroParallax, { passive: true });
 
-  /* ===== Theme Toggle ===== */
-  function toggleTheme() {
-    const root = document.documentElement;
-    const currentTheme = root.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    root.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateLogos(newTheme);
-  }
-
-  function updateLogos(theme) {
+  function updateLogos() {
     const isScrolled = window.scrollY > 40;
     const logos = document.querySelectorAll('.logo img');
     logos.forEach(img => {
       if (img.closest('.topbar')) {
-        img.src = (theme === 'light' && isScrolled) ? 'assets/logo_dark.png' : 'assets/logo_white.png';
+        img.src = isScrolled ? 'assets/logo_dark.png' : 'assets/logo_white.png';
       } else {
-        img.src = theme === 'light' ? 'assets/logo_dark.png' : 'assets/logo_white.png';
+        img.src = 'assets/logo_dark.png';
       }
     });
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    updateLogos(savedTheme);
+    localStorage.removeItem('theme');
+    updateLogos();
   });
 </script>
 

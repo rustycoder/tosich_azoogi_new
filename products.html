@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <script>const savedTheme = localStorage.getItem('theme'); if (savedTheme) { document.documentElement.setAttribute('data-theme', savedTheme); }</script>
+<link rel="icon" href="assets/favicon.png">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Products — Azoogi LED Lighting</title>
@@ -13,32 +13,17 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style_demo.css">
+  <link rel="stylesheet" href="assets/css/style_demo.v-1.5.css">
   <script src="assets/js/products_data.js"></script>
   <script src="assets/js/mega_menu.js"></script>
+  <script src="assets/js/site_header.js"></script>
   <style>
     
-/* Product page */
-/* ===========================================================
-     PRODUCTS PAGE — HEADER ALWAYS SOLID
-     The topbar is position:fixed and starts transparent (for
-     the homepage hero slider). On this page force it solid.
-  =========================================================== */
+/* Product page — solid light header (matches site light mode) */
     .topbar {
-      background: rgba(11, 11, 11, .94) !important;
-      backdrop-filter: blur(16px) !important;
-      -webkit-backdrop-filter: blur(16px) !important;
+      background: rgba(255, 255, 255, .96) !important;
       border-bottom: 1px solid var(--line) !important;
     }
-
-    :root[data-theme="light"] .topbar {
-      background: rgba(255, 255, 255, .97) !important;
-    }
-
-    /* ===========================================================
-     OFFSET BODY BELOW THE FIXED HEADER
-     total header height ≈ 104px
-  =========================================================== */
 
     .header-bg{
       background-color: #333;
@@ -83,6 +68,10 @@
       align-items: start;
     }
 
+    .prod-layout > main {
+      min-width: 0;
+    }
+
     @media(max-width:1280px) {
       .prod-layout {
         grid-template-columns: 220px 1fr;
@@ -90,9 +79,10 @@
       }
     }
 
-    @media(max-width:900px) {
+    @media(max-width:960px) {
       .prod-layout {
         grid-template-columns: 1fr;
+        padding: 16px 0 72px;
       }
     }
 
@@ -197,27 +187,29 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 5px 10px;
+      padding: 5px 6px;
       cursor: pointer;
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 600;
       gap: 6px;
     }
 
-    .cat-row.active,
+    .cat-label-text {
+      flex: 1;
+      line-height: 1.3;
+      word-break: break-word;
+      cursor: pointer;
+    }
+
+    .cat-label-text.active,
+    .cat-label-text:hover,
     .cat-row:hover {
       color: var(--accent);
     }
 
-    .cat-row span:first-child {
-      flex: 1;
-      line-height: 1.3;
-      word-break: break-word;
-    }
-
     /* cleaner +/- toggle icon to match filter accordion */
     .cat-toggle {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 300;
       color: var(--muted);
       width: 16px;
@@ -226,37 +218,40 @@
       flex-shrink: 0;
     }
 
-    .cat-list>li.open .cat-toggle {
-      color: var(--accent);
-    }
-
-    .cat-row:hover .cat-toggle {
+    .cat-node.open > .cat-row > .cat-toggle {
       color: var(--accent);
     }
 
     .sub-list {
       list-style: none;
       margin: 0;
-      padding: 0 0 0 16px;
+      padding: 0;
       max-height: 0;
       overflow: hidden;
-      transition: max-height .3s ease;
+      transition: max-height .35s ease;
     }
 
-    .cat-list>li.open .sub-list {
-      max-height: 400px;
+    .cat-node.open > .sub-list {
+      max-height: 2000px;
+      margin-left: 6px;
+      padding-left: 8px;
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .sub-list li a {
+    .sub-list li a,
+    .cat-sub-link {
       display: block;
-      padding: 5px 0;
-      font-size: 10px;
+      padding: 4px 6px;
+      font-size: 10.5px;
       color: var(--muted);
       line-height: 1.3;
+      text-decoration: none;
     }
 
     .sub-list li a.active,
-    .sub-list li a:hover {
+    .sub-list li a:hover,
+    .cat-sub-link.active,
+    .cat-sub-link:hover {
       color: var(--accent);
     }
 
@@ -291,7 +286,8 @@
     }
 
     .filter-item.open .filter-body {
-      max-height: 300px;
+      max-height: min(50vh, 320px);
+      overflow-y: auto;
       padding: 0 10px;
     }
 
@@ -352,17 +348,31 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      min-width: 0;
+    }
+
+    .prod-search-input {
+      padding: 8px 12px;
+      border-radius: 4px;
+      border: 1px solid var(--border-light);
+      background: var(--bg-2);
+      color: var(--ink);
+      font-size: 13px;
+      width: 180px;
+      min-width: 0;
+      box-sizing: border-box;
     }
 
     .sort-select {
-      /*background: var(--card-bg);*/
-      border: none;
+      border: 1px solid var(--line);
+      background: var(--bg);
       color: var(--ink);
       font-size: 12px;
       padding: 8px 12px;
-      border-radius: 2px;
+      border-radius: 4px;
       cursor: pointer;
-
+      min-width: 0;
+      max-width: 100%;
     }
 
     .prod-mobile-filter-btn {
@@ -373,12 +383,43 @@
       padding: 8px 12px;
       font-size: 13px;
       cursor: pointer;
-      border-radius: 2px;
+      border-radius: 4px;
+      white-space: nowrap;
     }
 
-    @media(max-width:900px) {
+    @media(max-width:960px) {
+      .prod-toolbar {
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .result-count {
+        width: 100%;
+        margin-bottom: 2px;
+      }
+
+      .toolbar-right {
+        flex: 1 1 100%;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .prod-search-input {
+        flex: 1 1 100%;
+        width: 100%;
+        min-height: 44px;
+      }
+
+      .prod-mobile-filter-btn,
+      .sort-select {
+        flex: 1 1 calc(50% - 4px);
+        min-height: 44px;
+      }
+
       .prod-mobile-filter-btn {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .prod-sidebar {
@@ -388,11 +429,67 @@
       .prod-sidebar.open {
         display: block;
         position: fixed;
-        inset: 0;
-        z-index: 80;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: auto;
+        width: min(360px, 92vw);
+        z-index: 290;
         background: var(--bg);
-        padding: 24px;
+        padding: 20px 20px 32px;
         overflow-y: auto;
+        border-left: 1px solid var(--line);
+        box-shadow: -18px 0 48px rgba(0, 0, 0, .12);
+      }
+
+      .prod-filter-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, .4);
+        z-index: 280;
+      }
+
+      .prod-filter-overlay.open {
+        display: block;
+      }
+
+      .prod-sidebar-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 18px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .prod-sidebar-head strong {
+        font-size: 14px;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+
+      .prod-filter-close {
+        min-width: 44px;
+        min-height: 44px;
+        border: 1px solid var(--line);
+        background: none;
+        color: var(--ink);
+        font-size: 22px;
+        line-height: 1;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+    }
+
+    @media (min-width: 961px) {
+      .prod-sidebar-head {
+        display: none;
+      }
+
+      .prod-filter-overlay {
+        display: none !important;
       }
     }
 
@@ -442,7 +539,7 @@
       }
     }
 
-    @media(max-width:900px) {
+    @media(max-width:960px) {
       .prod-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
@@ -463,6 +560,7 @@
       border-radius: 3px;
       transition: border-color .25s;
       cursor: pointer;
+      min-width: 0;
     }
 
     .prod-card:hover {
@@ -551,12 +649,17 @@
       justify-content: center;
       background: linear-gradient(180deg, rgba(11, 11, 11, 0.8) 0%, rgba(11, 11, 11, .92) 100%);
       opacity: 0;
-      transition: opacity .3s ease;
+      pointer-events: none;
+      transition: opacity .15s ease-out;
+      will-change: opacity;
+      transform: translateZ(0);
     }
 
     .prod-card:hover .prod-overlay,
-    .prod-card:focus-within .prod-overlay {
+    .prod-card:focus-within .prod-overlay,
+    .prod-card.is-specs .prod-overlay {
       opacity: 1;
+      pointer-events: auto;
     }
 
     .spec-list {
@@ -564,12 +667,26 @@
       flex-direction: column;
       gap: 6px;
       width: 100%;
-      transform: translateY(8%);
-      transition: transform .3s ease;
+      transform: translateY(4px);
+      transition: transform .15s ease-out;
+      will-change: transform;
     }
 
-    .prod-card:hover .spec-list {
+    .prod-card:hover .spec-list,
+    .prod-card.is-specs .spec-list {
       transform: translateY(0);
+    }
+
+    @media (hover: none) {
+      .prod-card .prod-overlay {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .prod-card.is-specs .prod-overlay {
+        opacity: 1;
+        pointer-events: auto;
+      }
     }
 
     .spec-item {
@@ -646,8 +763,20 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 10px;
+      flex-wrap: wrap;
+      gap: 8px;
       margin-top: 48px;
+      padding: 0 4px;
+    }
+
+    @media (max-width: 960px) {
+      body.products-page {
+        padding-top: 72px !important;
+      }
+
+      .breadcrumbs {
+        margin: 8px 0 12px;
+      }
     }
 
     .pg-btn {
@@ -676,37 +805,35 @@
 
 </head>
 
-<body style="padding-top: 120px;">
+<body class="products-page" style="padding-top: 120px;">
 
   <!-- ========== HEADER ========== -->
-  <header class="topbar" id="topbar">
+  <header class="topbar solid" id="topbar">
     <div class="util">
       <div class="util-inner">
-        <div>Trusted by architects, designers & builders across Australia</div>
+        <div class="util-rotate" aria-live="polite">Aus Owned B2B Trade Wholesaler - Custom Lighting & Smart Control Solutions</div>
         <div style="display:flex;gap:24px">
-          <a href="#">0123456789</a><a href="#">sales@azoogi.com.au</a>
-          <div style="display:flex; align-items:center;"><a href="#">Trade Login</a></div>
+          <a href="tel:1300641261">1300 641 261</a>
+          <a href="mailto:sales@azoogi.com">sales@azoogi.com</a>
+          <div style="display:flex; align-items:center;"><a href="trade_login.html">Trade Login</a></div>
         </div>
       </div>
     </div>
     <nav class="nav">
-      <a href="#" class="logo"><img src="assets/logo_dark.png" width="120"></a>
+      <a href="index.html" class="logo"><img src="assets/logo_dark.png" width="80" alt="Azoogi"></a>
       <div class="menu">
         <div class="has-dropdown">
-          <a href="#products">Product <span class="caret">&#9662;</span></a>
+          <a href="products.html">Products <span class="caret">&#9662;</span></a>
           <div class="mega-menu" id="dynamic-mega-menu"></div>
         </div>
-        <a href="#projects">Projects</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#resources">Resources</a>
-        <a href="#contact">Contact</a>
+        <a href="projects.html">Projects</a>
+        <a href="index.html#about">About</a>
+        <a href="solutions.html">Solutions</a>
+        <a href="contact.html">Contact</a>
+        <a href="ai-lighting.html">AI Lighting</a>
       </div>
-      <div class="pull-right">
-        <a href="#contact" class="cta"><img src="assets/img/search.svg"></a>
-        <a href="#contact" class="cta"><img src="assets/img/qoute.svg"><span class="count">2</span></a>
-        <div class="burger"><span></span><span></span><span></span></div>
-      </div>
+      <a href="led-strip-calculator.html" class="cta">LED Calculator</a>
+      <div class="burger"><span></span><span></span><span></span></div>
     </nav>
   </header>
 
@@ -714,15 +841,19 @@
   <div class="wrap">
     <!-- Breadcrumb only — no h1 / subtitle -->
     <div class="breadcrumbs" id="breadcrumbs">
-        <a href="demo.html">Home</a>
+        <a href="index.html">Home</a>
         <span>/</span>Products
-        
       </div>
 
 
     <div class="prod-layout">
       <!-- ===== Sidebar ===== -->
+      <div class="prod-filter-overlay" id="prodFilterOverlay"></div>
       <aside class="prod-sidebar" id="prodSidebar">
+        <div class="prod-sidebar-head">
+          <strong>Filters</strong>
+          <button type="button" class="prod-filter-close" id="prodFilterClose" aria-label="Close filters">&times;</button>
+        </div>
         <div class="sb-block open">
           <div class="sb-title" onclick="this.parentElement.classList.toggle('open')">
             <span>Categories</span><span class="sb-toggle"></span>
@@ -746,14 +877,15 @@
         
 
         <div class="prod-toolbar">
-          <div class="result-count"><strong id="resultCount">12</strong> products found</div>
+          <div class="result-count"><strong id="resultCount">0</strong> products found</div>
           <div class="toolbar-right">
-            <button class="prod-mobile-filter-btn"
-              onclick="document.getElementById('prodSidebar').classList.add('open')">Filters</button>
-            <select class="sort-select">
-              <option>Sort: Relevance</option>
-              <option>Name A&ndash;Z</option>
-              <option>Newest</option>
+            <input type="text" id="prodSearchInput" class="prod-search-input" placeholder="Search products...">
+            <button type="button" class="prod-mobile-filter-btn" id="prodFilterOpen">Filters</button>
+            <select class="sort-select" id="sortSelect" aria-label="Sort products">
+              <option value="relevance">Sort: Relevance</option>
+              <option value="name_asc">Name A&ndash;Z</option>
+              <option value="name_desc">Name Z&ndash;A</option>
+              <option value="cat_asc">Category A&ndash;Z</option>
             </select>
           </div>
         </div>
@@ -762,69 +894,40 @@
 
         <div class="prod-grid" id="productGrid"></div>
 
-        <div class="pagination">
-          <div class="pg-btn active">1</div>
-          <div class="pg-btn">2</div>
-          <div class="pg-btn">3</div>
-          <div class="pg-btn">&rsaquo;</div>
-        </div>
+        <div class="pagination" id="paginationContainer"></div>
       </main>
     </div>
   </div>
 
 
   <!-- ========== FOOTER ========== -->
-  <footer id="contact">
-    <div class="wrap">
-      <div class="foot">
-        <div>
-          <a href="#" class="logo"><img src="assets/logo.png" width="150"></a>
-          <p>Premium LED lighting solutions for architects, designers, builders and homeowners across Australia.</p>
-          <div class="socials">
-            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2">
-                <rect x="3" y="3" width="18" height="18" rx="5" />
-                <circle cx="12" cy="12" r="4" />
-                <circle cx="17.5" cy="6.5" r=".8" fill="currentColor" />
-              </svg></a>
-            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M4 4h4v16H4zM6 2.5A1.5 1.5 0 1 1 4.5 4 1.5 1.5 0 0 1 6 2.5zM10 8h4v2c.7-1.2 2-2.3 4-2.3 3 0 4 2 4 5V20h-4v-6c0-1.4-.5-2.4-1.9-2.4S14 12.6 14 14v6h-4z" />
-              </svg></a>
-            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M13 22v-8h3l1-4h-4V7.5c0-1.2.4-2 2.2-2H17V2.2C16.6 2.1 15.4 2 14 2c-3 0-5 1.8-5 5.2V10H6v4h3v8z" />
-              </svg></a>
-          </div>
-        </div>
-        <div>
-          <h5>Products</h5>
-          <a href="#">LED Strips</a><a href="#">Neon Range</a><a href="#">Garden Lights</a><a href="#">LED Drivers</a><a
-            href="#">Architectural</a><a href="#">Downlights</a>
-        </div>
-        <div>
-          <h5>Solutions</h5>
-          <a href="#">Architects & Designers</a><a href="#">Electricians & Builders</a><a href="#">Wholesalers</a><a
-            href="#">Home Owners</a>
-        </div>
-        <div>
-          <h5>Company</h5>
-          <a href="#">About Azoogi</a><a href="#">Projects</a><a href="#">Resources</a><a href="#">News</a><a
-            href="#">Contact</a>
-        </div>
-        <div>
-          <h5>Contact</h5>
-          <a href="tel:1300641261">1300 641 261</a><a href="mailto:sales@azoogi.com.au">sales@azoogi.com.au</a><a
-            href="#">Sydney &middot; Melbourne</a>
-          <a href="#">Trade Login</a>
-        </div>
+  <footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="index.html" class="logo"><img src="assets/logo_dark.png" width="150" alt="Azoogi"></a>
+        <p>We design, engineer, manufacture, assemble, and test our products in-house, offering custom powder coating to deliver fully tailored lighting solutions</p>
       </div>
-      <div class="copy">
-        <div>&copy; 2026 Azoogi Pty Ltd. All rights reserved.</div>
-        <div>Privacy &middot; Terms &middot; Warranty</div>
+      <div><h5>Products</h5>
+        <a href="products.html">All Products</a><a href="led-strip-calculator.html">LED Calculator</a>
+      </div>
+      <div><h5>Company</h5>
+        <a href="index.html#about">About Azoogi</a><a href="projects.html">Projects</a><a href="ai-lighting.html">AI Lighting</a><a href="contact.html">Contact</a><a href="policies.html">Policies</a>
+      </div>
+      <div><h5>Contact</h5>
+        <a href="tel:1300641261">1300 641 261</a><a href="mailto:sales@azoogi.com">sales@azoogi.com</a><a href="trade_login.html">Trade Login</a>
       </div>
     </div>
-  </footer>
+    <div class="copy">
+      <div>&copy; 2026 Azoogi Pty Ltd. All rights reserved.</div>
+      <div class="copy-links">
+        <a href="policies.html#privacy">Privacy</a><span class="sep">&middot;</span>
+        <a href="policies.html#terms">Terms</a><span class="sep">&middot;</span>
+        <a href="policies.html#warranty">Warranty</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
   <script>
     /* ===== Header solid on scroll ===== */
@@ -988,19 +1091,6 @@
       }
 
 
-      // Hybrid hover/click toggle for mobile
-      const hasDropdown = document.querySelector('.has-dropdown');
-      if (hasDropdown) {
-        hasDropdown.addEventListener('click', (e) => {
-          if (window.innerWidth <= 960) {
-            // only toggle if clicking the main a tag
-            if (e.target.closest('a[href="products.html"]')) {
-              e.preventDefault();
-              hasDropdown.classList.toggle('open');
-            }
-          }
-        });
-      }
     })();
 
 
@@ -1040,6 +1130,66 @@
     (function () {
       var tb = document.getElementById('topbar');
       if (tb) tb.classList.add('solid');
+
+      var sidebar = document.getElementById('prodSidebar');
+      var overlay = document.getElementById('prodFilterOverlay');
+      var openBtn = document.getElementById('prodFilterOpen');
+      var closeBtn = document.getElementById('prodFilterClose');
+
+      function openFilters() {
+        if (!sidebar) return;
+        sidebar.classList.add('open');
+        if (overlay) overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeFilters() {
+        if (!sidebar) return;
+        sidebar.classList.remove('open');
+        if (overlay) overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      if (openBtn) openBtn.addEventListener('click', openFilters);
+      if (closeBtn) closeBtn.addEventListener('click', closeFilters);
+      if (overlay) overlay.addEventListener('click', closeFilters);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeFilters();
+      });
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 960) closeFilters();
+      });
+
+      // Touch: first tap reveals specs; second tap opens detail
+      document.addEventListener('click', function (e) {
+        var card = e.target.closest('.prod-card');
+        var isTouch = window.matchMedia('(hover: none)').matches;
+        if (!card) {
+          document.querySelectorAll('.prod-card.is-specs').forEach(function (c) {
+            c.classList.remove('is-specs');
+          });
+          return;
+        }
+        if (e.target.closest('a, button')) return;
+
+        var detailUrl = card.getAttribute('data-href');
+        if (!isTouch) {
+          if (detailUrl) window.location.href = detailUrl;
+          return;
+        }
+
+        e.preventDefault();
+        e.stopPropagation();
+        var wasOpen = card.classList.contains('is-specs');
+        document.querySelectorAll('.prod-card.is-specs').forEach(function (c) {
+          c.classList.remove('is-specs');
+        });
+        if (!wasOpen) {
+          card.classList.add('is-specs');
+        } else if (detailUrl) {
+          window.location.href = detailUrl;
+        }
+      }, true);
     })();
 
     /* ===== State & Active Filters ===== */
@@ -1048,77 +1198,277 @@
       specs: {}
     };
 
-    /* ===== Category taxonomy ===== */
-    var categories = [
-      { name: "Outdoor Lights", subs: ["Spike Lights", "Step & Brick Lights", "Wall Lights", "Inground Uplights", "Deck Lights", "Highbays & Floodlights"] },
-      { name: "Aluminium Profiles", subs: ["Surface Mounted", "Recessed", "Angled & Corner", "Suspended & Large", "Wardrobe & Specialty", "Plaster-in", "Bendable / Flexible"] },
-      { name: "COB Strips", subs: ["Standard COB", "Ultra Narrow", "Tunable White", "Dim to Warm", "RGB / RGBW", "High Efficiency"] },
-      { name: "SMD Strips", subs: ["Single Colour", "Tunable White SMD", "RGB / RGBW / RGBCW SMD", "Digital / Addressable SMD", "Side Emitting SMD"] },
-      { name: "Neon LED (IP67 / IP68 / IP69K)", subs: ["Top Bending Neon", "Side Bending Neon", "3D / Multi Bending Neon", "Ultra Slim Neon", "RGB & Digital Neon"] },
-      { name: "Lumoflex (360 Neon)", subs: ["360 Neon", "18mm Diameter 360", "25mm Diameter 360", "Accessories & Mounts"] },
-      { name: "Linear Lighting", subs: ["Custom Linear Bars", "Trunking Systems", "Architectural Pendants"] },
-      { name: "LED Drivers & Control", subs: ["Non-Dimmable Drivers", "Phase Cut / Triac Dimmable", "DALI / DALI-2", "Bluetooth / Casambi", "Controllers & Receivers"] },
-      { name: "Downlights & Spotlights", subs: ["Recessed Downlights", "Surface Mounted Downlights", "Track Lighting & Spots"] },
-      { name: "LED Globes", subs: ["MR16 / GU10", "Standard Lamps (A60, Filament)", "Industrial Globes"] },
-      { name: "Handrail Lights", subs: ["Asymmetrical", "Symmetrical Handrail Pucks", "Curved Handrail Solutions"] }
-    ];
+    function getLocalImg(imgUrl, filePath) {
+      if (typeof window.getLocalImagePath === 'function') {
+        return window.getLocalImagePath(imgUrl, filePath);
+      }
+      if (!imgUrl || typeof imgUrl !== 'string') return 'assets/logo_dark.png';
+      if (!imgUrl.startsWith('http')) return imgUrl;
+      var filename = imgUrl.split('/').pop().split('?')[0];
+      if (!filename) return 'assets/logo_dark.png';
+      if (filePath) {
+        var cleanFilePath = decodeURIComponent(filePath);
+        var lastSlash = cleanFilePath.lastIndexOf('/');
+        if (lastSlash !== -1) {
+          return cleanFilePath.substring(0, lastSlash) + '/' + filename;
+        }
+      }
+      return imgUrl;
+    }
+
+    /* ===== Dynamic Category Taxonomy & Product Data (Full 893 Products) ===== */
+    var productsMap = {};
+    var products = [];
+    var extractedSpecsMap = {};
+
+    function addProductToCatalog(vName, modelName, catPath, vData) {
+      if (!vName || productsMap[vName]) return;
+
+      var parentCat = catPath[0] || 'General';
+      var subCat = catPath.length > 1 ? catPath[catPath.length - 1] : parentCat;
+
+      var rawImg = (vData.product_images && vData.product_images.length > 0)
+        ? vData.product_images[0]
+        : 'assets/logo_dark.png';
+
+      var localImgPath = getLocalImg(rawImg, vData.file_path);
+      var features = vData.product_features || {};
+
+      // Extract unique features into extractedSpecsMap for dynamic filter accordions
+      for (var featKey in features) {
+        if (!features.hasOwnProperty(featKey)) continue;
+        var featVal = features[featKey];
+        if (!extractedSpecsMap[featKey]) {
+          extractedSpecsMap[featKey] = new Set();
+        }
+        if (Array.isArray(featVal)) {
+          featVal.forEach(function(v) {
+            if (v && typeof v === 'string' && v.trim().length > 0 && v.trim().length < 40) {
+              extractedSpecsMap[featKey].add(v.trim());
+            }
+          });
+        } else if (typeof featVal === 'string' && featVal.trim().length > 0 && featVal.trim().length < 40) {
+          extractedSpecsMap[featKey].add(featVal.trim());
+        }
+      }
+
+      var item = {
+        name: vName,
+        modelName: modelName,
+        sub: subCat,
+        cat: parentCat,
+        category_path: catPath,
+        filePath: vData.file_path || '',
+        img: localImgPath,
+        specs: features
+      };
+
+      productsMap[vName] = true;
+      products.push(item);
+    }
+
+    function collectProductsFromTree(treeNodes, parentPath) {
+      if (!treeNodes || !Array.isArray(treeNodes)) return;
+      treeNodes.forEach(function(node) {
+        var nodeName = node.name || 'Category';
+        var currentPath = node.category_path || (parentPath ? parentPath.concat([nodeName]) : [nodeName]);
+
+        if (node.variants) {
+          for (var vName in node.variants) {
+            if (node.variants.hasOwnProperty(vName)) {
+              var vData = node.variants[vName];
+              var vPath = vData.category_path || currentPath;
+              addProductToCatalog(vName, node.name || nodeName, vPath, vData);
+            }
+          }
+        }
+
+        if (node.children) {
+          collectProductsFromTree(node.children, currentPath);
+        }
+      });
+    }
+
+    if (typeof AZOOGI_PRODUCTS !== 'undefined') {
+      // 1. Collect all 893 products directly from AZOOGI_PRODUCTS.tree
+      if (AZOOGI_PRODUCTS.tree) {
+        collectProductsFromTree(AZOOGI_PRODUCTS.tree, []);
+      }
+
+      // 2. Fallback check for any additional products in AZOOGI_PRODUCTS.products
+      if (AZOOGI_PRODUCTS.products) {
+        for (var pKey in AZOOGI_PRODUCTS.products) {
+          if (!AZOOGI_PRODUCTS.products.hasOwnProperty(pKey)) continue;
+          var pRow = AZOOGI_PRODUCTS.products[pKey];
+          var variants = pRow.variants || {};
+          var catPath = pRow.category_path || [];
+          for (var vName in variants) {
+            if (!variants.hasOwnProperty(vName)) continue;
+            addProductToCatalog(vName, pRow.name || pKey, catPath, variants[vName]);
+          }
+        }
+      }
+    }
+
+    /* ===== Recursive Multi-Level Category Tree Generator ===== */
+    function renderCategoryTree(treeNodes, containerEl, level) {
+      if (!treeNodes || !Array.isArray(treeNodes) || treeNodes.length === 0) return;
+
+      treeNodes.forEach(function (node) {
+        var li = document.createElement('li');
+        li.className = 'cat-node level-' + level;
+
+        var nodeName = node.name || 'Category';
+        var hasChildren = node.children && Array.isArray(node.children) && node.children.length > 0;
+
+        if (hasChildren) {
+          var row = document.createElement('div');
+          row.className = 'cat-row level-' + level;
+          row.innerHTML = '<span class="cat-label-text" data-cat="' + nodeName + '">' + nodeName + '</span><span class="cat-toggle">+</span>';
+
+          row.querySelector('.cat-label-text').addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleCategoryFilter(nodeName);
+          });
+
+          row.addEventListener('click', function() {
+            li.classList.toggle('open');
+            var toggle = row.querySelector('.cat-toggle');
+            if (toggle) toggle.innerHTML = li.classList.contains('open') ? '&ndash;' : '+';
+          });
+
+          li.appendChild(row);
+
+          var subUl = document.createElement('ul');
+          subUl.className = 'sub-list level-' + (level + 1);
+          renderCategoryTree(node.children, subUl, level + 1);
+          li.appendChild(subUl);
+        } else {
+          var link = document.createElement('a');
+          link.href = '#';
+          link.className = 'cat-sub-link level-' + level;
+          link.setAttribute('data-sub', nodeName);
+          link.textContent = nodeName;
+          if (activeFilters.categories.includes(nodeName)) {
+            link.classList.add('active');
+          }
+
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            toggleCategoryFilter(nodeName);
+          });
+
+          li.appendChild(link);
+        }
+
+        containerEl.appendChild(li);
+      });
+    }
+
+    function toggleCategoryFilter(categoryName) {
+      if (activeFilters.categories.length === 1 && activeFilters.categories[0] === categoryName) {
+        activeFilters.categories = []; // Deselect if clicking active category
+      } else {
+        activeFilters.categories = [categoryName]; // Filter exclusively to clicked category
+      }
+      updateActiveCategoryClasses();
+      updateActiveTags();
+    }
+
+    function updateActiveCategoryClasses() {
+      document.querySelectorAll('.cat-label-text, .cat-sub-link').forEach(function(el) {
+        var catName = el.getAttribute('data-cat') || el.getAttribute('data-sub');
+        if (catName && activeFilters.categories.includes(catName)) {
+          el.classList.add('active');
+        } else {
+          el.classList.remove('active');
+        }
+      });
+    }
 
     var catListEl = document.getElementById('catList');
-    categories.forEach(function (cat) {
-      var li = document.createElement('li');
-      if (cat.active) li.classList.add('open');
-      var subItems = cat.subs.map(function (s) {
-        return '<li><a href="#" class="cat-sub-link" data-sub="' + s + '">' + s + '</a></li>';
-      }).join('');
-      var icon = cat.active ? '&ndash;' : '+';
-      li.innerHTML = '<div class="cat-row"><span>' + cat.name + '</span><span class="cat-toggle">' + icon + '</span></div><ul class="sub-list">' + subItems + '</ul>';
-      li.querySelector('.cat-row').addEventListener('click', function () {
-        li.classList.toggle('open');
-        li.querySelector('.cat-toggle').innerHTML = li.classList.contains('open') ? '&ndash;' : '+';
-      });
-      catListEl.appendChild(li);
+    if (catListEl && typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS.tree) {
+      catListEl.innerHTML = '';
+      renderCategoryTree(AZOOGI_PRODUCTS.tree, catListEl, 0);
+    }
+
+    /* ===== Dynamic Specification Filter Accordion ===== */
+    var filters = [];
+    var priorityKeys = ["IP", "Wattage", "Led_Qty", "Product Certification", "Bend radius", "Warranty", "Min Cut"];
+
+    priorityKeys.forEach(function(pKey) {
+      if (extractedSpecsMap[pKey] && extractedSpecsMap[pKey].size > 0) {
+        filters.push({
+          name: pKey,
+          options: Array.from(extractedSpecsMap[pKey]).slice(0, 12),
+          open: pKey === "IP" || pKey === "Wattage"
+        });
+      }
     });
 
-    /* ===== Filter accordion ===== */
-    var filters = [
-      { name: "Bending Direction", options: ["Top Bend", "Side Bend", "Non-Bendable"] },
-      { name: "PCB Width", options: ["8mm", "10mm", "12mm", "15mm"] },
-      { name: "LEDs/m", options: ["120", "240", "360", "480"] },
-      { name: "IP Rating", options: ["IP20", "IP54", "IP65", "IP67"] },
-      { name: "Dimension", options: ["Custom Cut", "5m Roll", "10m Reel"] },
-      { name: "Power", options: ["18W/m", "16W/m", "14.4W/m", "11W/m", "10W/m"], open: true }
-    ];
+    for (var specKey in extractedSpecsMap) {
+      if (priorityKeys.includes(specKey)) continue;
+      var vals = Array.from(extractedSpecsMap[specKey]);
+      if (vals.length >= 2 && vals.length <= 15) {
+        filters.push({
+          name: specKey,
+          options: vals.slice(0, 12),
+          open: false
+        });
+      }
+    }
+
+    if (filters.length === 0) {
+      filters = [
+        { name: "IP", options: ["IP20", "IP65", "IP67"] },
+        { name: "Wattage", options: ["8.6W", "10W", "14.4W", "18W"] }
+      ];
+    }
+
     var filterAcc = document.getElementById('filterAccordion');
-    filters.forEach(function (f) {
-      var div = document.createElement('div');
-      div.className = 'filter-item' + (f.open ? ' open' : '');
-      var opts = f.options.map(function (o) {
-        return '<label class="opt-row"><input type="checkbox" name="' + f.name + '" value="' + o + '"> ' + o + '</label>';
-      }).join('');
-      div.innerHTML = '<div class="filter-head"><span>' + f.name + '</span><span class="filter-toggle">' + (f.open ? '&ndash;' : '+') + '</span></div><div class="filter-body">' + opts + '</div>';
-      div.querySelector('.filter-head').addEventListener('click', function () {
-        div.classList.toggle('open');
-        div.querySelector('.filter-toggle').innerHTML = div.classList.contains('open') ? '&ndash;' : '+';
+    if (filterAcc) {
+      filterAcc.innerHTML = '';
+      filters.forEach(function (f) {
+        var div = document.createElement('div');
+        div.className = 'filter-item' + (f.open ? ' open' : '');
+        var opts = f.options.map(function (o) {
+          return '<label class="opt-row"><input type="checkbox" name="' + f.name + '" value="' + o + '"> ' + o + '</label>';
+        }).join('');
+        div.innerHTML = '<div class="filter-head"><span>' + f.name + '</span><span class="filter-toggle">' + (f.open ? '&ndash;' : '+') + '</span></div><div class="filter-body">' + opts + '</div>';
+        div.querySelector('.filter-head').addEventListener('click', function () {
+          div.classList.toggle('open');
+          div.querySelector('.filter-toggle').innerHTML = div.classList.contains('open') ? '&ndash;' : '+';
+        });
+        filterAcc.appendChild(div);
       });
-      filterAcc.appendChild(div);
-    });
+    }
 
-    /* ===== Filter Event Listeners ===== */
-    document.querySelectorAll('.cat-sub-link').forEach(function (link) {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        var c = this.getAttribute('data-sub');
-        if (!activeFilters.categories.includes(c)) {
-          activeFilters.categories.push(c);
-          this.classList.add('active');
-        } else {
-          activeFilters.categories = activeFilters.categories.filter(function (x) { return x !== c; });
-          this.classList.remove('active');
-        }
+    /* ===== State & Search / Sort Controls ===== */
+    var activeFilters = {
+      search: "",
+      sort: "relevance",
+      categories: [],
+      specs: {}
+    };
+
+    var searchInputEl = document.getElementById('prodSearchInput');
+    if (searchInputEl) {
+      searchInputEl.addEventListener('input', function() {
+        activeFilters.search = this.value;
         updateActiveTags();
       });
-    });
+    }
 
+    var sortSelectEl = document.getElementById('sortSelect');
+    if (sortSelectEl) {
+      sortSelectEl.addEventListener('change', function() {
+        activeFilters.sort = this.value;
+        currentPage = 1;
+        renderGrid();
+      });
+    }
+
+    /* ===== Filter Event Listeners ===== */
     document.querySelectorAll('.opt-row input').forEach(function (input) {
       input.addEventListener('change', function () {
         var group = this.name;
@@ -1135,11 +1485,12 @@
     });
 
     function removeFilter(type, val, group) {
-      if (type === 'cat') {
+      if (type === 'search') {
+        activeFilters.search = "";
+        if (searchInputEl) searchInputEl.value = "";
+      } else if (type === 'cat') {
         activeFilters.categories = activeFilters.categories.filter(function (x) { return x !== val; });
-        document.querySelectorAll('.cat-sub-link').forEach(function (link) {
-          if (link.getAttribute('data-sub') === val) link.classList.remove('active');
-        });
+        updateActiveCategoryClasses();
       } else if (type === 'spec') {
         activeFilters.specs[group] = activeFilters.specs[group].filter(function (x) { return x !== val; });
         if (activeFilters.specs[group].length === 0) delete activeFilters.specs[group];
@@ -1151,15 +1502,27 @@
     }
 
     function clearFilters() {
+      activeFilters.search = "";
+      if (searchInputEl) searchInputEl.value = "";
       activeFilters.categories = [];
       activeFilters.specs = {};
-      document.querySelectorAll('.cat-sub-link').forEach(function (link) { link.classList.remove('active'); });
+      updateActiveCategoryClasses();
       document.querySelectorAll('.opt-row input').forEach(function (input) { input.checked = false; });
       updateActiveTags();
     }
 
+    /* ===== Pagination State ===== */
+    var currentPage = 1;
+    var pageSize = 24;
+
     function updateActiveTags() {
+      currentPage = 1; // Reset to page 1 on filter changes
       var tagHtml = '';
+
+      if (activeFilters.search.trim()) {
+        tagHtml += '<div class="p-tag">Search: "' + activeFilters.search.trim() + '"<span class="remove-tag" onclick="removeFilter(\'search\')">&times;</span></div>';
+      }
+
       activeFilters.categories.forEach(function (c) {
         tagHtml += '<div class="p-tag">' + c + '<span class="remove-tag" onclick="removeFilter(\'cat\', \'' + c + '\')">&times;</span></div>';
       });
@@ -1173,63 +1536,122 @@
         tagHtml += '<span class="clear-filters" onclick="clearFilters()" style="margin-left:8px; font-size:12px; color:var(--muted); cursor:pointer; align-self:center;">Clear all filters</span>';
       }
 
-      document.getElementById('activeTags').innerHTML = tagHtml;
+      var activeTagsEl = document.getElementById('activeTags');
+      if (activeTagsEl) activeTagsEl.innerHTML = tagHtml;
       renderGrid();
     }
-
-    /* ===== Realistic Product Data ===== */
-    var products = [
-      { name: "L90-BH5470 Linear Profile", sub: "Recessed", power: "N/A", ip: "IP20", img: "assets/img/GL001.webp", cat: "Aluminium Profiles", specs: { "Bending Direction": "Non-Bendable" } },
-      { name: "Skyline 360 Neon Series", sub: "360 Neon", power: "18W/m", ip: "IP67", img: "assets/img/neon.webp", cat: "Lumoflex (360 Neon)", specs: { "Bending Direction": "Top Bend", "IP Rating": "IP67" } },
-      { name: "Plug-in System Downlight", sub: "Recessed Downlights", power: "10W", ip: "IP20", img: "assets/img/downlights.jpg", cat: "Downlights & Spotlights", specs: { "Bending Direction": "Non-Bendable", "IP Rating": "IP20" } },
-      { name: "AFS2020 Standard COB", sub: "Standard COB", power: "14.4W/m", ip: "IP20", img: "assets/img/leds.webp", cat: "COB Strips", specs: { "Bending Direction": "Non-Bendable", "PCB Width": "8mm", "LEDs/m": "240", "Power": "14.4W/m", "IP Rating": "IP20" } },
-      { name: "Narrow-4 Precision COB", sub: "Ultra Narrow", power: "10W/m", ip: "IP20", img: "assets/img/leds.webp", cat: "COB Strips", specs: { "Bending Direction": "Top Bend", "PCB Width": "10mm", "LEDs/m": "360", "Power": "10W/m", "IP Rating": "IP20" } },
-      { name: "TW Series Tunable COB", sub: "Tunable White", power: "18W/m", ip: "IP20", img: "assets/img/leds.webp", cat: "COB Strips", specs: { "Bending Direction": "Side Bend", "PCB Width": "12mm", "LEDs/m": "480", "Power": "18W/m", "IP Rating": "IP20" } },
-      { name: "RGBW Outdoor COB", sub: "RGB / RGBW", power: "18W/m", ip: "IP67", img: "assets/img/prod-4.jpg", cat: "COB Strips", specs: { "Bending Direction": "Top Bend", "PCB Width": "15mm", "LEDs/m": "360", "Power": "18W/m", "IP Rating": "IP67" } },
-      { name: "HE Series 130lm/W COB", sub: "High Efficiency", power: "11W/m", ip: "IP20", img: "assets/img/prod-3.jpg", cat: "COB Strips", specs: { "Bending Direction": "Non-Bendable", "PCB Width": "10mm", "LEDs/m": "240", "Power": "11W/m", "IP Rating": "IP20" } },
-      { name: "DALI-2 Dimmable Driver", sub: "DALI / DALI-2", power: "100W", ip: "IP20", img: "assets/img/drivers.webp", cat: "LED Drivers & Control", specs: { "Bending Direction": "Non-Bendable", "IP Rating": "IP20" } },
-      { name: "Bluetooth Casambi Controller", sub: "Bluetooth / Casambi", power: "N/A", ip: "IP20", img: "assets/img/dt.webp", cat: "LED Drivers & Control", specs: { "Bending Direction": "Non-Bendable", "IP Rating": "IP20" } },
-      { name: "Asymmetrical Handrail Puck", sub: "Asymmetrical", power: "2W", ip: "IP65", img: "assets/img/img-1.jpg", cat: "Handrail Lights", specs: { "Bending Direction": "Non-Bendable", "IP Rating": "IP65" } },
-      { name: "Single Colour SMD 5050", sub: "Single Colour", power: "14.4W/m", ip: "IP65", img: "assets/img/prod-5.jpg", cat: "SMD Strips", specs: { "Bending Direction": "Non-Bendable", "PCB Width": "10mm", "LEDs/m": "120", "Power": "14.4W/m", "IP Rating": "IP65" } }
-    ];
 
     var grid = document.getElementById('productGrid');
 
     function renderGrid() {
       var countEl = document.getElementById('resultCount');
 
+      var searchLower = activeFilters.search.trim().toLowerCase();
+
       var filtered = products.filter(function (p) {
+        if (searchLower !== "") {
+          var matchSearch = p.name.toLowerCase().indexOf(searchLower) !== -1 ||
+                            p.modelName.toLowerCase().indexOf(searchLower) !== -1 ||
+                            p.sub.toLowerCase().indexOf(searchLower) !== -1 ||
+                            p.cat.toLowerCase().indexOf(searchLower) !== -1 ||
+                            (p.category_path && p.category_path.some(function(cp) {
+                              return cp.toLowerCase().indexOf(searchLower) !== -1;
+                            }));
+
+          if (!matchSearch && p.specs) {
+            for (var skey in p.specs) {
+              if (!p.specs.hasOwnProperty(skey)) continue;
+              var sval = p.specs[skey];
+              var valStr = Array.isArray(sval) ? sval.join(' ') : String(sval);
+              if (valStr.toLowerCase().indexOf(searchLower) !== -1) {
+                matchSearch = true;
+                break;
+              }
+            }
+          }
+          if (!matchSearch) return false;
+        }
+
         if (activeFilters.categories.length > 0) {
-          if (!activeFilters.categories.includes(p.sub)) return false;
+          var matchCat = activeFilters.categories.some(function(selectedCat) {
+            var selLower = selectedCat.trim().toLowerCase();
+            if (p.modelName && p.modelName.trim().toLowerCase() === selLower) return true;
+            if (p.name && p.name.trim().toLowerCase().indexOf(selLower) !== -1) return true;
+            if (p.sub && p.sub.trim().toLowerCase() === selLower) return true;
+            if (p.cat && p.cat.trim().toLowerCase() === selLower) return true;
+            if (p.category_path && p.category_path.some(function(cp) {
+              return cp.trim().toLowerCase() === selLower;
+            })) return true;
+            return false;
+          });
+          if (!matchCat) return false;
         }
         for (var group in activeFilters.specs) {
           var selectedVals = activeFilters.specs[group];
           if (selectedVals.length > 0) {
-            if (!p.specs || !p.specs[group] || !selectedVals.includes(p.specs[group])) return false;
+            var productSpec = p.specs[group];
+            if (!productSpec) return false;
+
+            var matchesAny = selectedVals.some(function(selVal) {
+              if (Array.isArray(productSpec)) {
+                return productSpec.some(function(psVal) {
+                  return String(psVal).toLowerCase().indexOf(String(selVal).toLowerCase()) !== -1 ||
+                         String(selVal).toLowerCase().indexOf(String(psVal).toLowerCase()) !== -1;
+                });
+              } else {
+                return String(productSpec).toLowerCase().indexOf(String(selVal).toLowerCase()) !== -1 ||
+                       String(selVal).toLowerCase().indexOf(String(productSpec).toLowerCase()) !== -1;
+              }
+            });
+
+            if (!matchesAny) return false;
           }
         }
         return true;
       });
 
+      // Sort filtered products
+      if (activeFilters.sort === 'name_asc') {
+        filtered.sort(function(a, b) { return a.name.localeCompare(b.name); });
+      } else if (activeFilters.sort === 'name_desc') {
+        filtered.sort(function(a, b) { return b.name.localeCompare(a.name); });
+      } else if (activeFilters.sort === 'cat_asc') {
+        filtered.sort(function(a, b) { return a.sub.localeCompare(b.sub) || a.name.localeCompare(b.name); });
+      }
+
       if (countEl) countEl.textContent = filtered.length;
 
-      grid.innerHTML = filtered.map(function (p) {
-        var imgHtml = p.img
-          ? '<div class="prod-swatch" style="background-image:url(\'' + p.img + '\'); background-size:cover; background-position:center;"></div>'
-          : '<div class="prod-swatch" style="background:linear-gradient(135deg, #1c3312, #0b0b0b)"></div>';
+      if (!grid) return;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div style="padding: 40px; text-align: center; color: var(--muted); grid-column: 1 / -1;">No products found matching the selected filters.</div>';
+        renderPagination(0);
+        return;
+      }
+
+      var totalPages = Math.ceil(filtered.length / pageSize);
+      if (currentPage > totalPages) currentPage = Math.max(1, totalPages);
+
+      var pagedItems = filtered.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
+      grid.innerHTML = pagedItems.map(function (p) {
+        var detailUrl = 'product-detail.html?file=' + encodeURIComponent(p.filePath);
+
+        var imgHtml = '<div class="prod-swatch" style="background-image:url(\'' + (p.img || 'assets/logo_dark.png') + '\'); background-size:cover; background-position:center;"></div>';
 
         var specHtml = '<div class="spec-list">';
         var count = 0;
         if (p.specs) {
           for (var key in p.specs) {
             if (count >= 5) break;
-            specHtml += '<div class="spec-item"><strong>' + key + '</strong><span>' + p.specs[key] + '</span></div>';
+            var valStr = Array.isArray(p.specs[key]) ? p.specs[key].join(' ') : p.specs[key];
+            specHtml += '<div class="spec-item"><strong>' + key + '</strong><span>' + valStr + '</span></div>';
             count++;
           }
         }
         specHtml += '</div>';
 
-        return '<div class="prod-card" onclick="window.location.href=\'product-detail.html\'">' +
+        return '<div class="prod-card" data-href="' + detailUrl + '" role="link" tabindex="0">' +
           '<div class="prod-card-img">' + imgHtml +
           '<div class="prod-overlay">' +
           specHtml +
@@ -1241,6 +1663,94 @@
           '</div>' +
           '</div>';
       }).join('');
+
+      renderPagination(totalPages);
+    }
+
+    function renderPagination(totalPages) {
+      var paginationEl = document.getElementById('paginationContainer');
+      if (!paginationEl) return;
+
+      if (totalPages <= 1) {
+        paginationEl.style.display = 'none';
+        paginationEl.innerHTML = '';
+        return;
+      }
+
+      paginationEl.style.display = 'flex';
+      var html = '';
+
+      // Prev Button
+      if (currentPage > 1) {
+        html += '<div class="pg-btn" data-page="' + (currentPage - 1) + '">&lsaquo;</div>';
+      } else {
+        html += '<div class="pg-btn disabled" style="opacity:0.3; cursor:not-allowed;">&lsaquo;</div>';
+      }
+
+      var startPage = Math.max(1, currentPage - 2);
+      var endPage = Math.min(totalPages, startPage + 4);
+      if (endPage - startPage < 4) {
+        startPage = Math.max(1, endPage - 4);
+      }
+
+      if (startPage > 1) {
+        html += '<div class="pg-btn" data-page="1">1</div>';
+        if (startPage > 2) html += '<span style="color:var(--muted); align-self:center; margin:0 4px;">...</span>';
+      }
+
+      for (var i = startPage; i <= endPage; i++) {
+        var activeClass = (i === currentPage) ? ' active' : '';
+        html += '<div class="pg-btn' + activeClass + '" data-page="' + i + '">' + i + '</div>';
+      }
+
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) html += '<span style="color:var(--muted); align-self:center; margin:0 4px;">...</span>';
+        html += '<div class="pg-btn" data-page="' + totalPages + '">' + totalPages + '</div>';
+      }
+
+      // Next Button
+      if (currentPage < totalPages) {
+        html += '<div class="pg-btn" data-page="' + (currentPage + 1) + '">&rsaquo;</div>';
+      } else {
+        html += '<div class="pg-btn disabled" style="opacity:0.3; cursor:not-allowed;">&rsaquo;</div>';
+      }
+
+      paginationEl.innerHTML = html;
+
+      paginationEl.querySelectorAll('.pg-btn[data-page]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var page = parseInt(this.getAttribute('data-page'), 10);
+          if (page && page !== currentPage) {
+            currentPage = page;
+            renderGrid();
+            grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    }
+
+    // Initial category filter from URL parameter
+    var urlParams = new URLSearchParams(window.location.search);
+    var catParam = urlParams.get('category');
+    if (catParam) {
+      catParam = decodeURIComponent(catParam);
+      if (!activeFilters.categories.includes(catParam)) {
+        activeFilters.categories.push(catParam);
+      }
+      document.querySelectorAll('.cat-sub-link').forEach(function (link) {
+        if (link.getAttribute('data-sub') === catParam) {
+          link.classList.add('active');
+          var li = link.closest('li');
+          if (li) {
+            var topLi = li.closest('.cat-list > li');
+            if (topLi) {
+              topLi.classList.add('open');
+              var toggle = topLi.querySelector('.cat-toggle');
+              if (toggle) toggle.innerHTML = '&ndash;';
+            }
+          }
+        }
+      });
     }
 
     // Initial render

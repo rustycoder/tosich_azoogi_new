@@ -8,8 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script>const savedTheme = localStorage.getItem('theme'); if (savedTheme) { document.documentElement.setAttribute('data-theme', savedTheme); }</script>
-  <link rel="stylesheet" href="assets/css/style_demo.css">
+  <link rel="stylesheet" href="assets/css/style_demo.v-1.5.css">
   <script src="assets/js/products_data.js"></script>
   <script src="assets/js/mega_menu.js"></script>
 </head>
@@ -21,7 +20,7 @@
       <div class="util-inner">
         <div>Trusted by architects, designers & builders across Australia</div>
         <div style="display:flex;gap:24px">
-          <a href="#">1300 AZOOGI</a><a href="#">sales@azoogi.com.au</a>
+          <a href="#">1300 AZOOGI</a><a href="#">sales@azoogi.com</a>
           <div style="display:flex; align-items:center;"><a href="#">Trade Login</a></div>
         </div>
       </div>
@@ -30,12 +29,12 @@
       <a href="#" class="logo"><img src="assets/logo_white.png" width="120"></a>
       <div class="menu">
         <div class="has-dropdown">
-          <a href="#products">Product <span class="caret">&#9662;</span></a>
+          <a href="#products">Products <span class="caret">&#9662;</span></a>
           <div class="mega-menu" id="dynamic-mega-menu"></div>
         </div>
         <a href="#projects">Projects</a>
         <a href="#about">About</a>
-        <a href="#services">Services</a>
+        <a href="#products">Services</a>
         <a href="#resources">Resources</a>
         <a href="#contact">Contact</a>
       </div>
@@ -60,7 +59,7 @@
       <p class="slide-sub">Off-spec alternatives, custom fittings, matched specs and budgets — without ever compromising on quality.</p>
       <div class="slide-actions">
         <a class="btn primary" href="#contact">Start a Project</a>
-        <a class="btn" href="#services">Our Services</a>
+        <a class="btn" href="#products">Our Services</a>
       </div>
     </div>
   </div>
@@ -105,7 +104,7 @@
       <p class="slide-sub">Off-spec alternatives, custom fittings, matched specs and budgets — without ever compromising on quality.</p>
       <div class="slide-actions">
         <a class="btn primary" href="#contact">Start a Project</a>
-        <a class="btn" href="#services">Our Services</a>
+        <a class="btn" href="#products">Our Services</a>
       </div>
     </div>
   </div>
@@ -336,7 +335,7 @@
         <a href="#">About Azoogi</a><a href="#">Projects</a><a href="#">Resources</a><a href="#">News</a><a href="#">Contact</a>
       </div>
       <div><h5>Contact</h5>
-        <a href="tel:1300296644">1300 AZOOGI</a><a href="mailto:sales@azoogi.com.au">sales@azoogi.com.au</a><a href="#">Sydney &middot; Melbourne</a><a href="#">Trade Login</a>
+        <a href="tel:1300296644">1300 AZOOGI</a><a href="mailto:sales@azoogi.com">sales@azoogi.com</a><a href="#">Sydney &middot; Melbourne</a><a href="#">Trade Login</a>
       </div>
     </div>
     <div class="copy">
@@ -355,8 +354,7 @@
     if (isScrolled !== lastScrolled) {
       topbar.classList.toggle('solid', isScrolled);
       lastScrolled = isScrolled;
-      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-      if (typeof updateLogos === 'function') updateLogos(currentTheme);
+      if (typeof updateLogos === 'function') updateLogos();
     }
   };
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
@@ -457,32 +455,21 @@
   heroParallax();
   window.addEventListener('scroll', heroParallax, { passive: true });
 
-  /* ===== Theme Toggle ===== */
-  function toggleTheme() {
-    const root = document.documentElement;
-    const currentTheme = root.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    root.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateLogos(newTheme);
-  }
-
-  function updateLogos(theme) {
+  function updateLogos() {
     const isScrolled = window.scrollY > 40;
     const logos = document.querySelectorAll('.logo img');
     logos.forEach(img => {
       if (img.closest('.topbar')) {
-        img.src = (theme === 'light' && isScrolled) ? 'assets/logo_dark.png' : 'assets/logo_white.png';
+        img.src = isScrolled ? 'assets/logo_dark.png' : 'assets/logo_white.png';
       } else {
-        img.src = theme === 'light' ? 'assets/logo_dark.png' : 'assets/logo_white.png';
+        img.src = 'assets/logo_dark.png';
       }
     });
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    updateLogos(savedTheme);
+    localStorage.removeItem('theme');
+    updateLogos();
   });
 </script>
 

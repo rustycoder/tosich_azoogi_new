@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <script>const savedTheme = localStorage.getItem('theme'); if (savedTheme) { document.documentElement.setAttribute('data-theme', savedTheme); }</script>
+  <link rel="icon" href="assets/favicon.png">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>AZ-NF360 Neon Flex Series 360 — Azoogi LED Lighting Solutions</title>
@@ -13,10 +13,11 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style_demo.css">
+  <link rel="stylesheet" href="assets/css/style_demo.v-1.5.css">
   <link rel="stylesheet" href="assets/css/product_detail.css">
   <script src="assets/js/products_data.js"></script>
   <script src="assets/js/mega_menu.js"></script>
+  <script src="assets/js/site_header.js"></script>
 </head>
 
 <body>
@@ -25,30 +26,30 @@
   <header class="topbar solid" id="topbar">
     <div class="util">
       <div class="util-inner">
-        <div>Trusted by architects, designers & builders across Australia</div>
+        <div class="util-rotate" aria-live="polite">Aus Owned B2B Trade Wholesaler - Custom Lighting & Smart Control
+          Solutions</div>
         <div style="display:flex;gap:24px">
-          <a href="#">1300 641 261</a><a href="#">sales@azoogi.com.au</a>
-          <div style="display:flex; align-items:center;"><a href="#">Trade Login</a></div>
+          <a href="tel:1300641261">1300 641 261</a>
+          <a href="mailto:sales@azoogi.com">sales@azoogi.com</a>
+          <div style="display:flex; align-items:center;"><a href="trade_login.html">Trade Login</a></div>
         </div>
       </div>
     </div>
     <nav class="nav">
-      <a href="#" class="logo"><img src="assets/logo_white.png" width="120"></a>
+      <a href="index.html" class="logo"><img src="assets/logo_dark.png" width="80" alt="Azoogi"></a>
       <div class="menu">
         <div class="has-dropdown">
-          <a href="#products">Product <span class="caret">&#9662;</span></a>
+          <a href="products.html">Products <span class="caret">&#9662;</span></a>
           <div class="mega-menu" id="dynamic-mega-menu"></div>
         </div>
-        <a href="#projects">Projects</a>
-        <a href="#support">Support</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a href="projects.html">Projects</a>
+        <a href="index.html#about">About</a>
+        <a href="solutions.html">Solutions</a>
+        <a href="contact.html">Contact</a>
+        <a href="ai-lighting.html">AI Lighting</a>
       </div>
-      <div class="pull-right">
-        <a href="#contact" class="cta"><img src="assets/img/search.svg"></a>
-        <a href="#contact" class="cta"><img src="assets/img/qoute.svg"><span class="count">2</span></a>
-        <div class="burger"><span></span><span></span><span></span></div>
-      </div>
+      <a href="led-strip-calculator.html" class="cta">LED Calculator</a>
+      <div class="burger"><span></span><span></span><span></span></div>
     </nav>
   </header>
 
@@ -57,9 +58,9 @@
     <div class="wrap">
       <!-- ==================== BREADCRUMBS START ==================== -->
       <div class="breadcrumbs" id="breadcrumbs">
-        <a href="demo.html">Home</a>
+        <a href="index.html">Home</a>
         <span>/</span>
-        <a href="demo.html#products">Products</a>
+        <a href="products.html">Products</a>
         <span>/</span>
         <a href="#">IP67 Neon</a>
         <span>/</span>
@@ -84,7 +85,7 @@
           <div class="product-meta-badges">
             <span class="meta-badge" id="badge-ip">IP67 Waterproof</span>
             <span class="meta-badge">360° Light Emission</span>
-            <span class="meta-badge">5-Year Warranty</span>
+            <a href="policies.html#warranty" class="meta-badge">5-Year Warranty</a>
             <span class="meta-badge">24V DC Input</span>
             <span class="meta-badge">CRI 90+</span>
           </div>
@@ -106,8 +107,12 @@
           <!-- B2B ACTION BUTTONS START -->
           <div class="gallery-actions" style="display: flex; gap: 16px; justify-content: flex-start; margin-top: 24px;">
 
-            <a class="btn --outline" id="add-to-spec-btn" style="display:flex; align-items:center; justify-content:center; gap:8px;">
-              <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#1f1f1f"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg> Add to Quote List</a>
+            <a class="btn --outline" id="add-to-spec-btn"
+              style="display:flex; align-items:center; justify-content:center; gap:8px;">
+              <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px"
+                fill="#1f1f1f">
+                <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+              </svg> Add to Quote List</a>
           </div>
           <!-- B2B ACTION BUTTONS END -->
 
@@ -119,16 +124,7 @@
 
           <!-- MAIN IMAGE COVER START -->
           <div class="gallery-main-wrapper">
-            <!-- Glow Preview Area -->
-            <div class="glow-preview-area" id="glow-area">
-              <svg class="neon-svg-mockup" viewBox="0 0 200 200" id="neon-svg">
-                <!-- A sleek artistic bend that visually highlights "Flexibility" -->
-                <path d="M 30,100 C 30,50 170,50 170,100 C 170,150 30,150 30,100 Z" id="neon-path" />
-              </svg>
-              <!-- Small sub-tube inside for intense center element light -->
-              <div class="glow-neon-tube" id="glow-tube" style="display:none;"></div>
-            </div>
-            <img class="gallery-main-image" src="assets/img/neon.webp" id="gallery-main-img" alt="Product Image">
+            <img class="gallery-main-image" src="" id="gallery-main-img" alt="Product Image" style="display:none;">
           </div>
           <!-- MAIN IMAGE COVER END -->
 
@@ -163,7 +159,7 @@
           <!-- SPECIFICATIONS DIMENSION VECTOR DIAGRAM START -->
           <div class="spec-dimension-image-wrapper"
             style="background: #fff; border-radius: 8px; padding: 24px; display: flex; align-items: center; justify-content: center; aspect-ratio: 4/3; overflow: hidden; flex-direction: column;">
-            
+
             <img id="spec-dimension-image" src="assets/dimensions.png" alt="Product Dimensions"
               style="max-width: 100%; max-height: 100%; object-fit: contain;">
           </div>
@@ -204,10 +200,11 @@
       </div>
 
 
-      
+
       <!-- ==================== PRODUCT B2B ICONS ROW END ==================== -->
       <!--PRODUCT SPEICIFICATION IEF FILE DOWNLOAD OPTION START -->
-      <div class="specification-download-section" style="margin-top: 20px; border-top: 1px solid var(--line); padding-top: 20px; margin-bottom: 20px;">
+      <div class="specification-download-section"
+        style="margin-top: 20px; border-top: 1px solid var(--line); padding-top: 20px; margin-bottom: 20px;">
         <h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px;">Downloadable Resources</h3>
         <div class="download-options" style="display: flex; gap: 16px; flex-wrap: wrap;">
           <a href="#" class="btn --accent" style="display:flex; align-items:center; justify-content:center; gap:8px;">
@@ -244,225 +241,90 @@
             IES files
           </a>
         </div>
-      <!--PRODUCT SPEICIFICATION IEF FILE DOWNLOAD OPTION END -->
-    
-
-      <!-- ==================== PRODUCT OPTIONS SECTION START ==================== -->
-      <div class="options-section"
-        style="margin-top: 40px; border-top: 1px solid var(--line); padding-top: 30px; margin-bottom: 20px;">
+        <!--PRODUCT SPEICIFICATION IEF FILE DOWNLOAD OPTION END -->
 
 
-        <div class="options-grid-layout"
-          style="display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 48px; align-items: start;">
+        <!-- ==================== PRODUCT OPTIONS SECTION START ==================== -->
+        <div class="options-section"
+          style="margin-top: 40px; border-top: 1px solid var(--line); padding-top: 30px; margin-bottom: 20px;">
 
-          <!-- DYNAMIC CONFIGURATOR WORKSPACE START -->
 
-          <div class="config-workspace" id="dynamic-configurator">
-            <!-- Dynamically populated options with constraints -->
-          </div>
-          <!-- DYNAMIC CONFIGURATOR WORKSPACE END -->
+          <div class="options-grid-layout"
+            style="display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 48px; align-items: start;">
 
-          <!-- ==================== SELECTED SUMMARY CARD START ==================== -->
-          <div class="config-summary-card"
-            style="background: var(--card-bg); border: 1px solid var(--border-light); border-radius: 8px; padding: 24px; display: flex; flex-direction: column; gap: 20px; position: sticky; top: 100px;">
-            <h4
-              style="font-family: var(--font-serif); font-size: 20px; margin: 0; color: var(--ink); border-bottom: 1px solid var(--line); padding-bottom: 12px;">
-              Selected Configuration</h4>
+            <!-- DYNAMIC CONFIGURATOR WORKSPACE START -->
 
-            <div id="selected-summary-list"
-              style="display: flex; flex-direction: column; gap: 10px; font-size: 12px; color: var(--muted);">
-              <!-- Dynamically populated list from Javascript selection updates -->
+            <div class="config-workspace" id="dynamic-configurator">
+              <!-- Dynamically populated options with constraints -->
             </div>
+            <!-- DYNAMIC CONFIGURATOR WORKSPACE END -->
 
-            <!-- ACTION BUTTONS -->
-            <div class="gallery-actions" style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
-              <a href="#" class="btn --accent"
-                style="display:flex; align-items:center; justify-content:center; gap:8px; width: 100%;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="7 10 12 15 17 10" />
-                  <line x1="12" y1="15" x2="12" y2="3" />
-                </svg>
-                Download Custom Datasheet
-              </a>
-              <a href="#" class="btn --accent"
-                style="display:flex;  justify-content:center; gap:8px; width: 100%;">
-                <svg viewBox="0 -960 960 960" fill="#111111" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z"/></svg> 
-                Enquiry
-              </a>
+            <!-- ==================== SELECTED SUMMARY CARD START ==================== -->
+            <div class="config-summary-card"
+              style="background: var(--card-bg); border: 1px solid var(--border-light); border-radius: 8px; padding: 24px; display: flex; flex-direction: column; gap: 20px; position: sticky; top: 100px;">
+              <h4
+                style="font-family: var(--font-serif); font-size: 20px; margin: 0; color: var(--ink); border-bottom: 1px solid var(--line); padding-bottom: 12px;">
+                Selected Configuration</h4>
+
+              <div id="selected-summary-list"
+                style="display: flex; flex-direction: column; gap: 10px; font-size: 12px; color: var(--muted);">
+                <!-- Dynamically populated list from Javascript selection updates -->
+              </div>
+
+              <!-- ACTION BUTTONS -->
+              <div class="gallery-actions" style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+                <a href="#" class="btn --accent"
+                  style="display:flex; align-items:center; justify-content:center; gap:8px; width: 100%;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  Download Custom Datasheet
+                </a>
+                <a href="#" class="btn --accent" style="display:flex;  justify-content:center; gap:8px; width: 100%;">
+                  <svg viewBox="0 -960 960 960" fill="#111111" stroke="currentColor" stroke-width="2" width="18"
+                    height="18">
+                    <path
+                      d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z" />
+                  </svg>
+                  Enquiry
+                </a>
+              </div>
             </div>
-          </div>
-          <!-- ==================== SELECTED SUMMARY CARD END ==================== -->
+            <!-- ==================== SELECTED SUMMARY CARD END ==================== -->
 
+          </div>
         </div>
+        <!-- ==================== PRODUCT OPTIONS SECTION END ==================== -->
+
       </div>
-      <!-- ==================== PRODUCT OPTIONS SECTION END ==================== -->
 
-    </div>
-
-    <!-- ==================== COMPATIBLE ACCESSORIES SECTION START ==================== -->
-    <section class="accessories-section"
-      style="margin-top: 25px; border-top: 1px solid var(--line); padding-top: 20px; padding-bottom: 40px;">
+      <!-- ==================== COMPATIBLE ACCESSORIES SECTION START ==================== -->
+      <section class="accessories-section"
+        style="margin-top: 25px; border-top: 1px solid var(--line); padding-top: 20px; padding-bottom: 40px;">
 
         <h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px;">Recommended Compatible
           Accessories</h3>
         <div class="prod-grid" id="productGrid">
-          <div class="prod-card" onclick="window.location.href='product-detail.html'">
-            <div class="prod-card-img">
-              <div class="prod-swatch"
-                style="background-image:url('assets/img/GL001.webp'); background-size:cover; background-position:center;">
-              </div>
-              <div class="prod-overlay">
-                <div class="spec-list">
-                  <div class="spec-item"><strong>Bending Direction</strong><span>Non-Bendable</span></div>
-                </div>
-              </div>
+          <div class="prod-card-img">
+            <div class="prod-swatch"
+              style="background-image:url('assets/img/drivers.webp'); background-size:cover; background-position:center;">
             </div>
-            <div class="prod-card-title">
-              <div class="prod-card-title-text"><span class="cat-label">Recessed</span>L90-BH5470 Linear Profile</div>
-              <button class="add-quote-btn" aria-label="Add to quote"
-                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+            <div class="prod-overlay">
+              <div class="spec-list">
+                <div class="spec-item"><strong>Bending Direction</strong><span>Non-Bendable</span></div>
+                <div class="spec-item"><strong>IP Rating</strong><span>IP20</span></div>
+              </div>
             </div>
           </div>
-          
-          <div class="prod-card" onclick="window.location.href='product-detail.html'">
-            <div class="prod-card-img">
-              <div class="prod-swatch"
-                style="background-image:url('assets/img/downlights.jpg'); background-size:cover; background-position:center;">
-              </div>
-              <div class="prod-overlay">
-                <div class="spec-list">
-                  <div class="spec-item"><strong>Bending Direction</strong><span>Non-Bendable</span></div>
-                  <div class="spec-item"><strong>IP Rating</strong><span>IP20</span></div>
-                </div>
-              </div>
-            </div>
-            <div class="prod-card-title">
-              <div class="prod-card-title-text"><span class="cat-label">Recessed Downlights</span>Plug-in System
-                Downlight</div><button class="add-quote-btn" aria-label="Add to quote"
-                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
-            </div>
-          </div>
-          
-         
-          <div class="prod-card" onclick="window.location.href='product-detail.html'">
-            <div class="prod-card-img">
-              <div class="prod-swatch"
-                style="background-image:url('assets/img/prod-4.jpg'); background-size:cover; background-position:center;">
-              </div>
-              <div class="prod-overlay">
-                <div class="spec-list">
-                  <div class="spec-item"><strong>Bending Direction</strong><span>Top Bend</span></div>
-                  <div class="spec-item"><strong>PCB Width</strong><span>15mm</span></div>
-                  <div class="spec-item"><strong>LEDs/m</strong><span>360</span></div>
-                  <div class="spec-item"><strong>Power</strong><span>18W/m</span></div>
-                  <div class="spec-item"><strong>IP Rating</strong><span>IP67</span></div>
-                </div>
-              </div>
-            </div>
-            <div class="prod-card-title">
-              <div class="prod-card-title-text"><span class="cat-label">RGB / RGBW</span>RGBW Outdoor COB</div><button
-                class="add-quote-btn" aria-label="Add to quote"
-                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
-            </div>
-          </div>
-          <div class="prod-card" onclick="window.location.href='product-detail.html'">
-            <div class="prod-card-img">
-              <div class="prod-swatch"
-                style="background-image:url('assets/img/prod-3.jpg'); background-size:cover; background-position:center;">
-              </div>
-              <div class="prod-overlay">
-                <div class="spec-list">
-                  <div class="spec-item"><strong>Bending Direction</strong><span>Non-Bendable</span></div>
-                  <div class="spec-item"><strong>PCB Width</strong><span>10mm</span></div>
-                  <div class="spec-item"><strong>LEDs/m</strong><span>240</span></div>
-                  <div class="spec-item"><strong>Power</strong><span>11W/m</span></div>
-                  <div class="spec-item"><strong>IP Rating</strong><span>IP20</span></div>
-                </div>
-              </div>
-            </div>
-            <div class="prod-card-title">
-              <div class="prod-card-title-text"><span class="cat-label">High Efficiency</span>HE Series 130lm/W COB
-              </div><button class="add-quote-btn" aria-label="Add to quote"
-                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
-            </div>
-          </div>
-          <div class="prod-card" onclick="window.location.href='product-detail.html'">
-            <div class="prod-card-img">
-              <div class="prod-swatch"
-                style="background-image:url('assets/img/drivers.webp'); background-size:cover; background-position:center;">
-              </div>
-              <div class="prod-overlay">
-                <div class="spec-list">
-                  <div class="spec-item"><strong>Bending Direction</strong><span>Non-Bendable</span></div>
-                  <div class="spec-item"><strong>IP Rating</strong><span>IP20</span></div>
-                </div>
-              </div>
-            </div>
-            <div class="prod-card-title">
-              <div class="prod-card-title-text"><span class="cat-label">DALI / DALI-2</span>DALI-2 Dimmable Driver</div>
-              <button class="add-quote-btn" aria-label="Add to quote"
-                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
-            </div>
-          </div>
-          <div class="prod-card" onclick="window.location.href='product-detail.html'">
-            <div class="prod-card-img">
-              <div class="prod-swatch"
-                style="background-image:url('assets/img/dt.webp'); background-size:cover; background-position:center;">
-              </div>
-              <div class="prod-overlay">
-                <div class="spec-list">
-                  <div class="spec-item"><strong>Bending Direction</strong><span>Non-Bendable</span></div>
-                  <div class="spec-item"><strong>IP Rating</strong><span>IP20</span></div>
-                </div>
-              </div>
-            </div>
-            <div class="prod-card-title">
-              <div class="prod-card-title-text"><span class="cat-label">Bluetooth / Casambi</span>Bluetooth Casambi
-                Controller</div><button class="add-quote-btn" aria-label="Add to quote"
-                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
-            </div>
-          </div>
-          <div class="prod-card" onclick="window.location.href='product-detail.html'">
-            <div class="prod-card-img">
-              <div class="prod-swatch"
-                style="background-image:url('assets/img/img-1.jpg'); background-size:cover; background-position:center;">
-              </div>
-              <div class="prod-overlay">
-                <div class="spec-list">
-                  <div class="spec-item"><strong>Bending Direction</strong><span>Non-Bendable</span></div>
-                  <div class="spec-item"><strong>IP Rating</strong><span>IP65</span></div>
-                </div>
-              </div>
-            </div>
-            <div class="prod-card-title">
-              <div class="prod-card-title-text"><span class="cat-label">Asymmetrical</span>Asymmetrical Handrail Puck
-              </div><button class="add-quote-btn" aria-label="Add to quote"
-                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
-            </div>
-          </div>
-          <div class="prod-card" onclick="window.location.href='product-detail.html'">
-            <div class="prod-card-img">
-              <div class="prod-swatch"
-                style="background-image:url('assets/img/prod-5.jpg'); background-size:cover; background-position:center;">
-              </div>
-              <div class="prod-overlay">
-                <div class="spec-list">
-                  <div class="spec-item"><strong>Bending Direction</strong><span>Non-Bendable</span></div>
-                  <div class="spec-item"><strong>PCB Width</strong><span>10mm</span></div>
-                  <div class="spec-item"><strong>LEDs/m</strong><span>120</span></div>
-                  <div class="spec-item"><strong>Power</strong><span>14.4W/m</span></div>
-                  <div class="spec-item"><strong>IP Rating</strong><span>IP65</span></div>
-                </div>
-              </div>
-            </div>
-            <div class="prod-card-title">
-              <div class="prod-card-title-text"><span class="cat-label">Single Colour</span>Single Colour SMD 5050</div>
-              <button class="add-quote-btn" aria-label="Add to quote"
-                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
-            </div>
+          <div class="prod-card-title">
+            <div class="prod-card-title-text"><span class="cat-label">DALI / DALI-2</span>DALI-2 Dimmable Driver</div>
+            <button class="add-quote-btn" aria-label="Add to quote"
+              onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
           </div>
         </div>
+    </div>
 
     </section>
     <!-- ==================== COMPATIBLE ACCESSORIES SECTION END ==================== -->
@@ -503,7 +365,7 @@
             </p>
             <div style="font-size:13px; color:var(--muted); line-height: 2;">
               <div><strong>Sales Support:</strong> 1300 AZOOGI</div>
-              <div><strong>Email Response:</strong> sales@azoogi.com.au</div>
+              <div><strong>Email Response:</strong> sales@azoogi.com</div>
               <div><strong>B2B Turnaround:</strong> Within 4 business hours</div>
             </div>
           </div>
@@ -564,66 +426,42 @@
 
   </div>
   <!-- ========== FOOTER ========== -->
-  <footer id="contact">
+  <footer>
     <div class="wrap">
       <div class="foot">
         <div>
-          <a href="#" class="logo"><img src="assets/logo.png" width="150"></a>
-          <p>Premium LED lighting solutions for architects, designers, builders and homeowners across Australia.</p>
-          <div class="socials">
-            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2">
-                <rect x="3" y="3" width="18" height="18" rx="5" />
-                <circle cx="12" cy="12" r="4" />
-                <circle cx="17.5" cy="6.5" r=".8" fill="currentColor" />
-              </svg></a>
-            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M4 4h4v16H4zM6 2.5A1.5 1.5 0 1 1 4.5 4 1.5 1.5 0 0 1 6 2.5zM10 8h4v2c.7-1.2 2-2.3 4-2.3 3 0 4 2 4 5V20h-4v-6c0-1.4-.5-2.4-1.9-2.4S14 12.6 14 14v6h-4z" />
-              </svg></a>
-            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M13 22v-8h3l1-4h-4V7.5c0-1.2.4-2 2.2-2H17V2.2C16.6 2.1 15.4 2 14 2c-3 0-5 1.8-5 5.2V10H6v4h3v8z" />
-              </svg></a>
-          </div>
+          <a href="index.html" class="logo"><img src="assets/logo_dark.png" width="150" alt="Azoogi"></a>
+          <p>We design, engineer, manufacture, assemble, and test our products in-house, offering custom powder coating
+            to deliver fully tailored lighting solutions</p>
         </div>
         <div>
           <h5>Products</h5>
-          <a href="#">LED Strips</a><a href="#">Neon Range</a><a href="#">Garden Lights</a><a href="#">LED Drivers</a><a
-            href="#">Architectural</a><a href="#">Downlights</a>
-        </div>
-        <div>
-          <h5>Solutions</h5>
-          <a href="#">Architects & Designers</a><a href="#">Electricians & Builders</a><a href="#">Wholesalers</a><a
-            href="#">Home Owners</a>
+          <a href="products.html">All Products</a><a href="led-strip-calculator.html">LED Calculator</a>
         </div>
         <div>
           <h5>Company</h5>
-          <a href="#">About Azoogi</a><a href="#">Projects</a><a href="#">Resources</a><a href="#">News</a><a
-            href="#">Contact</a>
+          <a href="index.html#about">About Azoogi</a><a href="projects.html">Projects</a><a href="ai-lighting.html">AI
+            Lighting</a><a href="contact.html">Contact</a><a href="policies.html">Policies</a>
         </div>
         <div>
           <h5>Contact</h5>
-          <a href="tel:1300641261">1300 641 261</a><a href="mailto:sales@azoogi.com.au">sales@azoogi.com.au</a><a
-            href="#">Sydney &middot; Melbourne</a>
-          <a href="#">Trade Login</a>
+          <a href="tel:1300641261">1300 641 261</a><a href="mailto:sales@azoogi.com">sales@azoogi.com</a><a
+            href="trade_login.html">Trade Login</a>
         </div>
       </div>
       <div class="copy">
         <div>&copy; 2026 Azoogi Pty Ltd. All rights reserved.</div>
-        <div>Privacy &middot; Terms &middot; Warranty</div>
+        <div class="copy-links">
+          <a href="policies.html#privacy">Privacy</a><span class="sep">&middot;</span>
+          <a href="policies.html#terms">Terms</a><span class="sep">&middot;</span>
+          <a href="policies.html#warranty">Warranty</a>
+        </div>
       </div>
     </div>
   </footer>
   <script>
-    /* ===== Header solid on scroll ===== */
-    const topbar = document.getElementById('topbar');
-    topbar.classList.add('solid');
-    const onScroll = () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-      if (typeof updateLogos === 'function') updateLogos(currentTheme);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+    /* ===== Header solid ===== */
+    document.getElementById('topbar')?.classList.add('solid');
 
     /* ===== Mega Menu Tabs ===== */
     (function () {
@@ -650,48 +488,12 @@
         if (targetPanel) targetPanel.classList.add('active');
       }
 
-      // Hybrid hover/click toggle for mobile
-      const hasDropdown = document.querySelector('.has-dropdown');
-      if (hasDropdown) {
-        hasDropdown.addEventListener('click', (e) => {
-          if (window.innerWidth <= 960) {
-            if (e.target.closest('a[href="#products"]')) {
-              e.preventDefault();
-              hasDropdown.classList.toggle('open');
-            }
-          }
-        });
-      }
     })();
 
-    /* ===== Theme Toggle ===== */
-    function toggleTheme() {
-      const root = document.documentElement;
-      const currentTheme = root.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      root.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      updateLogos(newTheme);
-    }
-
-    function updateLogos(theme) {
-      const isScrolled = true; // Always solid header on product page
-      const logos = document.querySelectorAll('.logo img');
-      logos.forEach(img => {
-        if (img.closest('.topbar')) {
-          img.src = (theme === 'light' && isScrolled) ? 'assets/logo_dark.png' : 'assets/logo_white.png';
-        } else {
-          img.src = theme === 'light' ? 'assets/logo_dark.png' : 'assets/logo_white.png';
-        }
-      });
-    }
-
     document.addEventListener("DOMContentLoaded", () => {
-      const savedTheme = localStorage.getItem('theme') || 'dark';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      updateLogos(savedTheme);
-
-      // Initialize dynamic product configurator
+      document.querySelectorAll('.logo img').forEach((img) => {
+        img.src = 'assets/logo_dark.png';
+      });
       initDynamicProductPage();
     });
 
@@ -724,6 +526,7 @@
             }
 
             // Update/inject fetched variant data
+            variantData.file_path = jsonFile;
             product.variants[variantKey] = variantData;
 
             setupPageWithData(product, variantKey);
@@ -786,6 +589,9 @@
 
       function setupPageWithData(product, activeVariantKey) {
         let activeVariant = product.variants[activeVariantKey];
+        if (activeVariant && !activeVariant.file_path && jsonFile) {
+          activeVariant.file_path = jsonFile;
+        }
 
         // Configuration state
         let selectedOptions = {};
@@ -842,9 +648,9 @@
         }
 
         let breadcrumbHTML = `
-          <a href="demo.html">Home</a>
+          <a href="index.html">Home</a>
           <span>/</span>
-          <a href="demo.html#products">Products</a>
+          <a href="products.html">Products</a>
         `;
 
         categorySegments.forEach(seg => {
@@ -881,8 +687,116 @@
           renderGallery();
           renderConfigurator();
           renderSpecs();
+          renderRecommendedAccessories();
           checkConstraints();
           recalculate();
+        }
+
+        // Helper to get local image path
+        function resolveImg(url, customFilePath) {
+          const filePath = customFilePath || (activeVariant && activeVariant.file_path) || jsonFile || '';
+          if (typeof window.getLocalImagePath === 'function') {
+            return window.getLocalImagePath(url, filePath);
+          }
+          if (!url || typeof url !== 'string') return 'assets/logo_dark.png';
+          if (!url.startsWith('http')) return url;
+          const filename = url.split('/').pop().split('?')[0];
+          if (!filename) return 'assets/logo_dark.png';
+          if (filePath) {
+            const cleanFilePath = decodeURIComponent(filePath);
+            const lastSlash = cleanFilePath.lastIndexOf('/');
+            if (lastSlash !== -1) {
+              return cleanFilePath.substring(0, lastSlash) + '/' + filename;
+            }
+          }
+          return url;
+        }
+
+        // Render Recommended Compatible Accessories from the same category
+        function renderRecommendedAccessories() {
+          const accessoriesGrid = document.getElementById('productGrid');
+          if (!accessoriesGrid || typeof AZOOGI_PRODUCTS === 'undefined' || !AZOOGI_PRODUCTS.products) return;
+
+          const currentCatPath = product.category_path || [product.category || ''];
+          const topCat = currentCatPath[0] || '';
+          const subCat = currentCatPath.length > 1 ? currentCatPath[currentCatPath.length - 1] : topCat;
+
+          const sameSubCatProducts = [];
+          const sameTopCatProducts = [];
+          const otherProducts = [];
+
+          for (const pKey in AZOOGI_PRODUCTS.products) {
+            if (!AZOOGI_PRODUCTS.products.hasOwnProperty(pKey)) continue;
+            if (pKey === product.name) continue;
+
+            const pRow = AZOOGI_PRODUCTS.products[pKey];
+            const variants = pRow.variants || {};
+            const vKeys = Object.keys(variants);
+            if (vKeys.length === 0) continue;
+
+            const firstVar = variants[vKeys[0]];
+            const catPath = pRow.category_path || [];
+            const pTopCat = catPath[0] || '';
+            const pSubCat = catPath.length > 1 ? catPath[catPath.length - 1] : pTopCat;
+
+            const rawImg = (firstVar.product_images && firstVar.product_images.length > 0)
+              ? firstVar.product_images[0]
+              : 'assets/logo_dark.png';
+
+            const localImg = resolveImg(rawImg, firstVar.file_path);
+
+            const item = {
+              name: pRow.name || pKey,
+              sub: pSubCat,
+              cat: pTopCat,
+              filePath: firstVar.file_path || '',
+              img: localImg,
+              specs: firstVar.product_features || {}
+            };
+
+            if (subCat && (pSubCat === subCat || catPath.includes(subCat))) {
+              sameSubCatProducts.push(item);
+            } else if (topCat && (pTopCat === topCat || catPath.includes(topCat))) {
+              sameTopCatProducts.push(item);
+            } else {
+              otherProducts.push(item);
+            }
+          }
+
+          const recommended = [...sameSubCatProducts, ...sameTopCatProducts, ...otherProducts].slice(0, 4);
+
+          if (recommended.length === 0) {
+            accessoriesGrid.innerHTML = '<div style="padding: 20px; color: var(--muted); grid-column: 1 / -1;">No accessories found.</div>';
+            return;
+          }
+
+          accessoriesGrid.innerHTML = recommended.map(p => {
+            const detailUrl = 'product-detail.html?file=' + encodeURIComponent(p.filePath);
+            let specHtml = '<div class="spec-list">';
+            let count = 0;
+            for (const key in p.specs) {
+              if (count >= 3) break;
+              const valStr = Array.isArray(p.specs[key]) ? p.specs[key].join(' ') : p.specs[key];
+              specHtml += `<div class="spec-item"><strong>${key}</strong><span>${valStr}</span></div>`;
+              count++;
+            }
+            specHtml += '</div>';
+
+            return `
+                <div class="prod-card" onclick="window.location.href='${detailUrl}'">
+                  <div class="prod-card-img">
+                    <div class="prod-swatch" style="background-image:url('${p.img}'); background-size:cover; background-position:center;"></div>
+                    <div class="prod-overlay">
+                      ${specHtml}
+                    </div>
+                  </div>
+                  <div class="prod-card-title">
+                    <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}</div>
+                    <button class="add-quote-btn" aria-label="Add to quote" onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+                  </div>
+                </div>
+              `;
+          }).join('');
         }
 
         // Render Gallery
@@ -892,39 +806,48 @@
 
           if (images.length === 0) {
             galleryMainImg.src = 'assets/logo_dark.png';
+            galleryMainImg.style.display = '';
             return;
           }
 
-          // Set main image
-          galleryMainImg.src = images[0];
+          const mainLocalSrc = resolveImg(images[0]);
+          galleryMainImg.src = mainLocalSrc;
+          galleryMainImg.style.display = '';
           galleryMainImg.style.opacity = '1';
           galleryMainImg.style.mixBlendMode = 'normal';
+          galleryMainImg.onerror = () => {
+            galleryMainImg.src = 'assets/logo_dark.png';
+          };
 
           // Add glow elements or modify SVGs
           const catLower = (product.category || "").toLowerCase();
           const nameLower = (product.name || "").toLowerCase();
           const isNeonOrStrip = catLower.includes('neon') || catLower.includes('linear') || nameLower.includes('strip') || nameLower.includes('nnr');
           const neonSvg = document.getElementById('neon-svg');
-          const glowArea = document.getElementById('glow-area');
 
           if (isNeonOrStrip) {
             if (neonSvg) neonSvg.style.display = 'block';
-            if (glowArea) glowArea.style.background = 'radial-gradient(circle at center, rgba(var(--glow-rgb, 103, 208, 78), 0.08) 0%, transparent 70%)';
           } else {
-            // spotlight cone glow for downlights, or circular halo for modules
             if (neonSvg) neonSvg.style.display = 'none';
-            if (glowArea) glowArea.style.background = 'radial-gradient(circle at center, rgba(var(--glow-rgb, 255, 255, 255), 0.15) 0%, transparent 60%)';
           }
 
           images.forEach((imgSrc, idx) => {
+            const localSrc = resolveImg(imgSrc);
             const thumb = document.createElement('div');
             thumb.className = `thumb-card${idx === 0 ? ' active' : ''}`;
-            thumb.innerHTML = `<img src="${imgSrc}" alt="Product Thumbnail ${idx + 1}">`;
+
+            const thumbImg = document.createElement('img');
+            thumbImg.src = localSrc;
+            thumbImg.alt = `Product Thumbnail ${idx + 1}`;
+            thumbImg.onerror = () => {
+              thumbImg.src = 'assets/logo_dark.png';
+            };
+            thumb.appendChild(thumbImg);
 
             thumb.addEventListener('click', () => {
               galleryThumbs.querySelectorAll('.thumb-card').forEach(t => t.classList.remove('active'));
               thumb.classList.add('active');
-              galleryMainImg.src = imgSrc;
+              galleryMainImg.src = localSrc;
 
               // Fade neon SVG outline if viewing sub-pictures
               if (idx > 0) {
@@ -1254,27 +1177,27 @@ Recommended system driver: ${driverRecommendation}`;
           if (specField) specField.value = specSummary;
 
           // Visual color glow update
-          const glowArea = document.getElementById('glow-area');
+          // const glowArea = document.getElementById('glow-area');
           const neonPath = document.getElementById('neon-path');
           const neonSvg = document.getElementById('neon-svg');
-          if (glowArea) {
-            let glowColor = '103, 208, 78';
-            if (selectedCctText.includes('2300K') || selectedCctText.includes('2200K')) glowColor = '255, 166, 77';
-            else if (selectedCctText.includes('2700K')) glowColor = '255, 180, 90';
-            else if (selectedCctText.includes('3000K')) glowColor = '255, 200, 120';
-            else if (selectedCctText.includes('4000K') || selectedCctText.includes('4300K')) glowColor = '255, 235, 200';
-            else if (selectedCctText.includes('6000K') || selectedCctText.includes('6500K')) glowColor = '220, 240, 255';
-            document.documentElement.style.setProperty('--glow-rgb', glowColor);
+          // if (glowArea) {
+          //   let glowColor = '103, 208, 78';
+          //   if (selectedCctText.includes('2300K') || selectedCctText.includes('2200K')) glowColor = '255, 166, 77';
+          //   else if (selectedCctText.includes('2700K')) glowColor = '255, 180, 90';
+          //   else if (selectedCctText.includes('3000K')) glowColor = '255, 200, 120';
+          //   else if (selectedCctText.includes('4000K') || selectedCctText.includes('4300K')) glowColor = '255, 235, 200';
+          //   else if (selectedCctText.includes('6000K') || selectedCctText.includes('6500K')) glowColor = '220, 240, 255';
+          //   document.documentElement.style.setProperty('--glow-rgb', glowColor);
 
-            if (neonPath) {
-              neonPath.style.transition = 'none';
-              neonPath.style.strokeWidth = '22';
-              setTimeout(() => {
-                neonPath.style.transition = 'stroke-width 0.8s ease, filter 0.5s ease';
-                neonPath.style.strokeWidth = '14';
-              }, 50);
-            }
-          }
+          //   if (neonPath) {
+          //     neonPath.style.transition = 'none';
+          //     neonPath.style.strokeWidth = '22';
+          //     setTimeout(() => {
+          //       neonPath.style.transition = 'stroke-width 0.8s ease, filter 0.5s ease';
+          //       neonPath.style.strokeWidth = '14';
+          //     }, 50);
+          //   }
+          // }
         }
 
         // Initialize

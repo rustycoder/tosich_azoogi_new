@@ -68,6 +68,10 @@
           renderLevel(child, columnIndex + 1);
         };
 
+        btn.addEventListener('mouseenter', () => {
+          switchAction();
+        });
+
         btn.addEventListener('click', (e) => {
           e.preventDefault();
           switchAction();
@@ -172,10 +176,9 @@
 
     // 3. Range buttons if total folders or rows exceed 3
     if (folderNodes.length > 3 || directRowNodes.length > 3) {
-      const targetNode = folderNodes[3] || directRowNodes[3];
       const viewAllRangeBtn = document.createElement('a');
       viewAllRangeBtn.className = 'view-all-range-btn';
-      viewAllRangeBtn.href = `product-detail.html?product=${targetNode.name}`;
+      viewAllRangeBtn.href = `products.html?category=${encodeURIComponent(node.name)}`;
       viewAllRangeBtn.innerHTML = `View all ${folderNodes.length + directRowNodes.length} items in range &rarr;`;
       viewAllRangeBtn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -221,7 +224,7 @@
         const viewAllRangeBtn = document.createElement('a');
         viewAllRangeBtn.className = 'view-all-range-btn';
         viewAllRangeBtn.style.marginTop = '12px';
-        viewAllRangeBtn.href = `product-detail.html?product=${currentNode.name}`;
+        viewAllRangeBtn.href = `products.html?category=${encodeURIComponent(currentNode.name)}`;
         viewAllRangeBtn.innerHTML = `View all ${childRows.length + childCats.length} items &rarr;`;
         viewAllRangeBtn.addEventListener('click', (e) => {
           e.preventDefault();
@@ -231,6 +234,23 @@
       }
     }
   }
+
+  function getLocalImagePath(imgUrl, filePath) {
+    if (!imgUrl || typeof imgUrl !== 'string') return 'assets/logo_dark.png';
+    if (!imgUrl.startsWith('http')) return imgUrl;
+    const filename = imgUrl.split('/').pop().split('?')[0];
+    if (!filename) return 'assets/logo_dark.png';
+    if (filePath) {
+      const cleanFilePath = decodeURIComponent(filePath);
+      const lastSlash = cleanFilePath.lastIndexOf('/');
+      if (lastSlash !== -1) {
+        const folderPath = cleanFilePath.substring(0, lastSlash);
+        return `${folderPath}/${filename}`;
+      }
+    }
+    return imgUrl;
+  }
+  window.getLocalImagePath = getLocalImagePath;
 
   // Product Row & Cards generator (shows max 3 variants)
   function renderProductRowElement(rowNode, parentContainer) {
@@ -250,12 +270,14 @@
     visibleVnames.forEach(vname => {
       const vdata = variants[vname];
 
-      const imgSrc = (vdata && vdata.product_images && vdata.product_images.length > 0)
+      const rawImgSrc = (vdata && vdata.product_images && vdata.product_images.length > 0)
         ? vdata.product_images[0]
-        : 'assets/logo_dark.png'; // Azoogi dark logo placeholder!
+        : 'assets/logo_dark.png';
+
+      const imgSrc = getLocalImagePath(rawImgSrc, vdata ? vdata.file_path : '');
 
       const card = document.createElement('a');
-      card.href = `product-detail.html?file=${encodeURIComponent(vdata.file_path || '')}`;
+      card.href = `product-detail.html?file=${encodeURIComponent(vdata ? (vdata.file_path || '') : '')}`;
       card.className = 'mega-variant-card';
 
       const imgContainer = document.createElement('div');
@@ -301,7 +323,16 @@
     if (vnames.length > 3) {
       const viewAllCard = document.createElement('a');
       viewAllCard.className = 'mega-variant-card view-all-card';
-      viewAllCard.href = `product-detail.html?product=${rowNode.name}`;
+      viewAllCard.href = `products.html?category=${encodeURIComponent(rowNode.name)}`;
+      viewAllCard.innerHTML = `
+        <div class="view-all-card-inner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="color: var(--accent);">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+          <span style="font-size: 11px; font-weight: 600; color: var(--accent);">View all ${vnames.length}</span>
+        </div>
+      `;
       viewAllCard.innerHTML = `
         <div class="view-all-card-inner">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="color: var(--accent);">

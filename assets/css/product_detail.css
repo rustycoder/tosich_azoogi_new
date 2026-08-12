@@ -54,6 +54,16 @@ h2, h3, h4{
 }
 
 @media (max-width: 960px) {
+  .spec-grid-layout {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  .gallery-actions {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
   .product-grid {
     grid-template-columns: 1fr;
     gap: 32px;
@@ -103,7 +113,7 @@ h2, h3, h4{
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  background: radial-gradient(circle at center, rgba(var(--glow-rgb, 103, 208, 78), 0.08) 0%, transparent 70%);
+  background: transparent;
   transition: background 0.5s ease;
 }
 
@@ -220,6 +230,13 @@ h2, h3, h4{
   border-radius: 4px;
   letter-spacing: 0.03em;
   font-weight: 500;
+  text-decoration: none;
+  transition: border-color .25s ease, color .25s ease;
+}
+
+a.meta-badge:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .product-short-desc {
@@ -993,14 +1010,18 @@ h2, h3, h4{
       display: flex;
       flex-direction: column;
       justify-content: center;
-      background: linear-gradient(180deg, rgba(11, 11, 11, 0.8) 0%, rgba(11, 11, 11, .92) 100%);
+      background: linear-gradient(180deg, rgba(11, 11, 11, 0.85) 0%, rgba(11, 11, 11, .95) 100%);
       opacity: 0;
-      transition: opacity .3s ease;
+      pointer-events: none;
+      transition: opacity .15s ease-out;
+      will-change: opacity;
+      transform: translateZ(0);
     }
 
     .prod-card:hover .prod-overlay,
     .prod-card:focus-within .prod-overlay {
       opacity: 1;
+      pointer-events: auto;
     }
 
     .spec-list {
@@ -1008,8 +1029,9 @@ h2, h3, h4{
       flex-direction: column;
       gap: 6px;
       width: 100%;
-      transform: translateY(8%);
-      transition: transform .3s ease;
+      transform: translateY(4px);
+      transition: transform .15s ease-out;
+      will-change: transform;
     }
 
     .prod-card:hover .spec-list {
