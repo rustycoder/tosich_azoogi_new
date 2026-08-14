@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Azoogi | Airtable JSON Uploader Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <!-- Top Navigation & Header -->
+  <header class="topbar">
+    <div class="header-inner">
+      <div class="brand">
+        <h1 class="logo-text">AZOOGI</h1>
+        <span class="badge">Airtable Sync Studio</span>
+      </div>
+
+      <div class="header-actions">
+        <div id="key-status-pill" class="status-pill offline">
+          <span class="status-dot"></span>
+          <span id="key-status-text">Checking Token...</span>
+        </div>
+        <button id="btn-settings" class="btn btn-outline">⚙ Token Settings</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+
+    <!-- Progress Stepper Wizard -->
+    <div class="wizard-stepper">
+      <div class="step-tab active" data-step="1">
+        <span class="step-num">1</span>
+        <span class="step-title">Workspace & Target Base</span>
+      </div>
+      <div class="step-divider"></div>
+      <div class="step-tab" data-step="2">
+        <span class="step-num">2</span>
+        <span class="step-title">JSON Source & Sync</span>
+      </div>
+    </div>
+
+
+    <!-- WIZARD STEP 1: Workspace & Base Selection -->
+    <section id="step-1" class="wizard-section active">
+      <div class="card glass-card">
+        <div class="card-header">
+          <h2>1. Select Workspace, Base & Target Table</h2>
+          <p>Choose the Airtable Workspace, Base, and destination Table you want to update.</p>
+        </div>
+
+        <div class="card-body grid-2">
+          <div class="form-group">
+            <label for="select-workspace">Workspace Filter</label>
+            <select id="select-workspace" class="form-control">
+              <option value="all">-- All Workspaces --</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="select-base">Airtable Base <span class="req">*</span></label>
+            <select id="select-base" class="form-control" disabled>
+              <option value="">-- Select Base --</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="select-table">Target Products Table <span class="req">*</span></label>
+            <select id="select-table" class="form-control" disabled>
+              <option value="">-- Select Table --</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="select-attr-table">Product Attributes Linked Table (Optional)</label>
+            <select id="select-attr-table" class="form-control" disabled>
+              <option value="">-- None / Select Attributes Table --</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div id="table-schema-preview" class="schema-preview-box hidden">
+          <h4>Detected Table Schema Columns (<span id="col-count">0</span> columns)</h4>
+          <div id="table-cols-pills" class="pills-flex"></div>
+        </div>
+
+        <div class="card-footer align-right">
+          <button id="btn-goto-step2" class="btn btn-accent" disabled>Next: Choose JSON Source &rarr;</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- WIZARD STEP 2: JSON Source & File Browser -->
+    <section id="step-2" class="wizard-section">
+      <div class="card glass-card">
+        <div class="card-header">
+          <h2>2. Load JSON Data Source</h2>
+          <p>Upload a JSON file, select from your local drop folder (<code>json_files/</code>), or paste raw JSON payload.</p>
+        </div>
+
+        <div class="card-body">
+          <!-- Dropzone -->
+          <div id="dropzone" class="dropzone">
+            <div class="dropzone-icon">📁</div>
+            <p><strong>Drag & Drop JSON, Excel (.xlsx), or CSV files here</strong> or click to browse</p>
+            <input type="file" id="file-input" accept=".json, .xlsx, .xls, .csv" class="hidden-file-input">
+          </div>
+
+          <div class="divider-text"><span>OR CHOOSE FROM LOCAL DROP FOLDER</span></div>
+
+          <!-- Multi-Select Server Data Files Checklist -->
+          <div class="json-folder-checklist-box" style="margin-top: 20px; border: 1px solid var(--line); border-radius: 8px; padding: 16px; background: rgba(0,0,0,0.2);">
+            <div class="flex-between" style="margin-bottom: 12px;">
+              <div style="font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" id="chk-select-all-json" style="width: 16px; height: 16px; cursor: pointer;">
+                <label for="chk-select-all-json" style="cursor: pointer; user-select: none;">Select All Files in <code>json_files/</code> (.json, .xlsx, .csv)</label>
+              </div>
+              <span id="json-files-selected-tag" class="badge" style="background: rgba(103, 208, 78, 0.15); color: var(--accent);">0 Selected</span>
+            </div>
+
+            <div id="json-files-checklist" style="max-height: 220px; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; padding: 8px 0;">
+              <!-- Dynamic Checkbox Items Rendered Here -->
+            </div>
+
+            <div style="margin-top: 12px; text-align: right;">
+              <button id="btn-load-folder-json" class="btn btn-outline" style="padding: 8px 18px;">Load Checked Files</button>
+            </div>
+          </div>
+
+
+
+          <!-- JSON & Excel Data Status & Preview -->
+          <div id="json-parsed-summary" class="json-summary-box hidden" style="margin-top: 24px;">
+            <div class="summary-header flex-between" style="margin-bottom: 12px;">
+              <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                <span class="badge badge-success">✓ Data Payload Loaded</span>
+                <span id="json-items-count" class="badge" style="background:rgba(255,255,255,0.08);">0 Items Parsed</span>
+                <span id="json-keys-count" class="badge" style="background:rgba(255,255,255,0.08);">0 Unique Columns</span>
+              </div>
+              <div style="display:flex; gap:6px;">
+                <button id="btn-toggle-view-table" class="btn btn-xs btn-accent" style="padding:4px 10px; font-size:12px;">📊 Table View</button>
+                <button id="btn-toggle-view-json" class="btn btn-xs btn-outline" style="padding:4px 10px; font-size:12px;">📄 JSON View</button>
+              </div>
+            </div>
+
+            <!-- Table Rows Preview Container -->
+            <div id="preview-table-box" style="overflow: auto; max-height: 360px; border: 1px solid var(--line); border-radius: 6px; background: rgba(0,0,0,0.2);">
+              <table class="table" style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: left;">
+                <thead style="position: sticky; top: 0; background: #181818; border-bottom: 1px solid var(--line); z-index: 2;">
+                  <tr id="preview-thead-row">
+                    <!-- Dynamic Column Headers -->
+                  </tr>
+                </thead>
+                <tbody id="preview-tbody">
+                  <!-- Dynamic Rows -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Raw JSON Preview Container -->
+            <div id="preview-json-box" class="json-preview-container hidden" style="margin-top: 12px;">
+              <h4>Sample Raw Product Payload Preview</h4>
+              <pre id="json-preview-code"><code>{}</code></pre>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card-footer flex-between">
+          <button class="btn btn-secondary btn-back" data-target="1">&larr; Back to Step 1</button>
+          <button id="btn-direct-sync-step2" class="btn btn-accent" style="padding: 14px 32px; font-size: 16px; font-weight: 700;" disabled>⚡ Sync Direct to Airtable</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- WIZARD STEP 3: Visual Field Mapping Studio -->
+    <section id="step-3" class="wizard-section">
+      <div class="card glass-card">
+        <div class="card-header flex-between">
+          <div>
+            <h2>3. Key-to-Column Mapping Studio</h2>
+            <p>Pair extracted JSON fields with your Airtable table columns.</p>
+          </div>
+
+          <div class="mapping-actions">
+            <button id="btn-test-attrs-only" class="btn btn-outline" style="border-color: #ffa726; color: #ffa726;" disabled>🧪 Test Sync Attributes Only</button>
+            <button id="btn-auto-match" class="btn btn-outline">⚡ Auto-Match Names</button>
+            <select id="select-mapping-profile" class="form-control-sm">
+              <option value="">-- Load Saved Profile --</option>
+            </select>
+            <button id="btn-save-mapping-modal" class="btn btn-outline">💾 Save Mapping Profile</button>
+          </div>
+
+        </div>
+
+        <div class="card-body">
+          <div class="table-search-bar">
+            <input type="text" id="input-search-fields" class="form-control" placeholder="Search JSON keys or Airtable columns...">
+            <span id="mapping-count-tag" class="tag">0 Mapped</span>
+          </div>
+
+          <div class="mapping-table-container">
+            <table class="mapping-table">
+              <thead>
+                <tr>
+                  <th style="width: 45%;">JSON Field Path</th>
+                  <th style="width: 10%;">Direction</th>
+                  <th style="width: 45%;">Airtable Column</th>
+                </tr>
+              </thead>
+              <tbody id="mapping-tbody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card-footer flex-between">
+          <button class="btn btn-secondary btn-back" data-target="2">&larr; Back</button>
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <button id="btn-direct-update" class="btn btn-accent" disabled>⚡ Direct Sync to Airtable</button>
+            <button id="btn-goto-step4" class="btn btn-secondary" disabled>Advanced Diff Preview &rarr;</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- WIZARD STEP 4: Sync & Update Studio -->
+    <section id="step-4" class="wizard-section">
+      <div class="card glass-card">
+        <div class="card-header">
+          <h2>4. Match & Update Airtable Records</h2>
+          <p>Match JSON products to existing Airtable rows by primary column and review changes before patching.</p>
+        </div>
+
+        <div class="card-body">
+          <div class="grid-2 align-center bg-card-panel">
+            <div class="form-group">
+              <label for="select-primary-col">Matching Primary Column (e.g., SKU or Name)</label>
+              <select id="select-primary-col" class="form-control">
+                <option value="">-- Select Column --</option>
+              </select>
+            </div>
+
+            <div class="sync-actions-top">
+              <button id="btn-preview-matches" class="btn btn-accent">🔍 Fetch Existing Records & Match</button>
+            </div>
+          </div>
+
+          <!-- Matching Results & Diff Studio -->
+          <div id="match-results-box" class="match-results-box hidden">
+            <div class="match-summary-cards">
+              <div class="stat-card">
+                <span class="stat-val" id="stat-json-count">0</span>
+                <span class="stat-lbl">JSON Items</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-val" id="stat-matched-count">0</span>
+                <span class="stat-lbl">Matched Records</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-val" id="stat-unmatched-count">0</span>
+                <span class="stat-lbl">Unmatched Items</span>
+              </div>
+            </div>
+
+            <h3 class="section-title">Matched Record Diff Preview</h3>
+            <div class="diff-table-container">
+              <table class="diff-table">
+                <thead>
+                  <tr>
+                    <th style="width: 40px;"><input type="checkbox" id="check-all-matches" checked></th>
+                    <th>Record ID</th>
+                    <th>Matched Key Value</th>
+                    <th>Fields to Update</th>
+                  </tr>
+                </thead>
+                <tbody id="diff-tbody">
+                  <!-- Match rows populated here -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Sync Execution Bar -->
+            <div class="sync-execution-bar">
+              <label class="toggle-switch">
+                <input type="checkbox" id="check-dry-run">
+                <span class="slider"></span>
+                <span class="toggle-label">Dry Run (Preview Only)</span>
+              </label>
+
+              <button id="btn-execute-sync" class="btn btn-accent btn-lg">⚡ Update Airtable Records Now</button>
+            </div>
+
+            <div id="sync-progress-box" class="progress-box hidden">
+              <div class="progress-bar-bg">
+                <div id="sync-progress-fill" class="progress-bar-fill" style="width: 0%;"></div>
+              </div>
+              <p id="sync-status-msg" class="progress-msg">Updating Airtable records...</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer flex-between">
+          <button class="btn btn-secondary btn-back" data-target="3">&larr; Back</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Token Settings Modal -->
+  <div id="modal-settings" class="modal">
+    <div class="modal-content glass-card">
+      <div class="modal-header">
+        <h3>Airtable Personal Access Token Settings</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Enter your Airtable Personal Access Token (PAT). This is saved securely to your local <code>.env</code> file.</p>
+        <div class="form-group">
+          <label for="input-pat-token">Personal Access Token</label>
+          <input type="password" id="input-pat-token" class="form-control" placeholder="patOBU3...">
+        </div>
+      </div>
+      <div class="modal-footer align-right">
+        <button id="btn-save-token" class="btn btn-accent">Save Token</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Save Mapping Modal -->
+  <div id="modal-save-mapping" class="modal">
+    <div class="modal-content glass-card">
+      <div class="modal-header">
+        <h3>Save Field Mapping Profile</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Save this field mapping profile to a JSON file to reuse it for future uploads.</p>
+        <div class="form-group">
+          <label for="input-mapping-filename">Profile Filename</label>
+          <input type="text" id="input-mapping-filename" class="form-control" placeholder="product_mapping.json">
+        </div>
+      </div>
+      <div class="modal-footer align-right">
+        <button id="btn-confirm-save-mapping" class="btn btn-accent">Save Profile</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Test Attributes Results Modal -->
+  <div id="modal-test-attrs-result" class="modal">
+    <div class="modal-content glass-card" style="max-width: 650px;">
+      <div class="modal-header">
+        <h3>🧪 Product Attributes Table Sync Results</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Synced product features to table: <strong id="test-attrs-table-name" style="color:var(--accent);">Product attributes</strong></p>
+        <div class="stat-card" style="margin: 16px 0; padding: 12px;">
+          <span class="stat-val" id="test-attrs-count" style="color:var(--accent);">0</span>
+          <span class="stat-lbl">Record IDs Created / Found</span>
+        </div>
+        <h4>Synced Record IDs:</h4>
+        <div id="test-attrs-ids-list" class="json-preview-container" style="max-height: 200px; font-family: monospace; font-size: 12px; color: var(--ink);">
+        </div>
+      </div>
+      <div class="modal-footer align-right">
+        <button class="btn btn-secondary modal-close-btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+
+</body>
+</html>
