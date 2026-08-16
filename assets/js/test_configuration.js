@@ -142,13 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Initialize default selections if empty or keys changed
-    const currentOptionKeys = Object.keys(currentOptions);
-    const selectedKeys = Object.keys(selectedOptions);
-    if (selectedKeys.length === 0 || !currentOptionKeys.every(k => selectedKeys.includes(k))) {
-      initDefaultSelections();
-    }
-
     // Build Header in Product Details Style
     configuratorContainer.innerHTML = `
       <div class="reset-selection">
@@ -162,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
 
     document.getElementById('clear-selection-btn').addEventListener('click', () => {
-      initDefaultSelections();
+      selectedOptions = {};
       checkConstraints();
       renderSummary();
     });
@@ -197,7 +190,11 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.textContent = itemObj.name;
 
         btn.addEventListener('click', () => {
-          selectedOptions[optKey] = String(itemObj.id);
+          if (selectedOptions[optKey] === String(itemObj.id)) {
+            delete selectedOptions[optKey]; // Toggle off
+          } else {
+            selectedOptions[optKey] = String(itemObj.id);
+          }
           checkConstraints();
           renderSummary();
         });
@@ -248,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
           btn.disabled = false;
           btn.classList.remove('disabled');
 
-          if (String(optId) === String(currentSelectedId)) {
+          if (currentSelectedId !== undefined && String(optId) === String(currentSelectedId)) {
             btn.classList.add('active');
             hasActiveValid = true;
           } else {
@@ -257,8 +254,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      // Fallback resolution: If currently selected option became forbidden, auto-select first valid choice
-      if (!hasActiveValid && optVals.length > 0) {
+      // Fallback resolution: Only if category had a selected option that became forbidden
+      if (currentSelectedId !== undefined && !hasActiveValid && optVals.length > 0) {
         let fallbackVal = null;
         for (let i = 0; i < optVals.length; i++) {
           const itemObj = typeof optVals[i] === 'object' ? optVals[i] : { name: String(optVals[i]), id: String(optVals[i]) };
@@ -275,6 +272,8 @@ document.addEventListener('DOMContentLoaded', () => {
               btn.classList.add('active');
             }
           });
+        } else {
+          delete selectedOptions[optKey];
         }
       }
     }
@@ -311,6 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Event Listeners
   compileBtn.addEventListener('click', () => {
+    initDefaultSelections();
     renderConfigurator();
     showAlert('Configuration successfully generated!', 'success');
   });
@@ -325,5 +325,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Initial render
+  initDefaultSelections();
   renderConfigurator();
 });
