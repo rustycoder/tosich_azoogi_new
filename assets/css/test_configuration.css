@@ -1,0 +1,320 @@
+:root {
+  --editor-bg: #ffffff;
+  --editor-border: rgba(0, 0, 0, 0.12);
+  --editor-text: #0f172a;
+  --editor-header-bg: #f8fafc;
+  --code-font: 'Fira Code', 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+}
+
+.test-page-hero {
+  position: relative;
+  padding: 130px 28px 30px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.test-hero-inner {
+  max-width: 1340px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.test-hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4.5vw, 48px);
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.test-hero-title span {
+  color: var(--accent);
+  font-style: italic;
+}
+
+.test-hero-subtitle {
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 780px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Grid Layout */
+.test-layout {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 28px 28px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Single Combined Editor Card - White Theme */
+.editor-card-single {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: border-color 0.25s ease;
+}
+
+.editor-card-single:focus-within {
+  border-color: var(--accent);
+}
+
+.editor-header {
+  background: #f8fafc;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.editor-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.editor-badge {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: rgba(58, 160, 40, 0.12);
+  color: #2d7a1e;
+  font-weight: 600;
+}
+
+.icon-btn {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #0f172a;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+  background: #f1f5f9;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.json-textarea-single {
+  width: 100%;
+  height: 380px;
+  background: #ffffff;
+  color: #0f172a;
+  font-family: var(--code-font);
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 16px;
+  border: none;
+  resize: vertical;
+  outline: none;
+  tab-size: 2;
+  white-space: pre;
+}
+
+.editor-status {
+  padding: 10px 20px;
+  font-size: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #475569;
+}
+
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.status-indicator.valid {
+  color: var(--accent);
+}
+
+.status-indicator.invalid {
+  color: #f87171;
+}
+
+/* Global Action Bar */
+.action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: var(--bg-2);
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+}
+
+.action-btns {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-primary-glow {
+  background: var(--accent);
+  color: var(--pure-bg);
+  font-weight: 700;
+  padding: 11px 22px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 4px 14px rgba(103, 208, 78, 0.25);
+}
+
+.btn-primary-glow:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.btn-secondary-outline {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.toggle-switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 13px;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.toggle-checkbox {
+  appearance: none;
+  width: 38px;
+  height: 20px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  position: relative;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.toggle-checkbox:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.toggle-checkbox::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.25s ease;
+}
+
+.toggle-checkbox:checked::after {
+  transform: translateX(18px);
+  background: var(--pure-bg);
+}
+
+/* System Alerts */
+.alert-banner {
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  line-height: 1.5;
+}
+
+.alert-banner.error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+}
+
+.alert-banner.success {
+  background: rgba(103, 208, 78, 0.1);
+  border: 1px solid rgba(103, 208, 78, 0.3);
+  color: var(--accent);
+}
+
+/* Product Details Page Style Configurator Override / Enhancements */
+.product-style-configurator {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 32px;
+  margin-top: 10px;
+}
+
+.reset-selection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 14px;
+}
+
+.reset-selection h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--ink);
+}
+
+/* Disabled option button styling in Product Detail style */
+.config-btn.disabled {
+  opacity: 0.3;
+  cursor: not-allowed !important;
+  text-decoration: line-through;
+  border-style: dashed;
+  pointer-events: none;
+}
