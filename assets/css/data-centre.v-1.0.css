@@ -10,9 +10,6 @@
   font-family: "Google Sans Flex", sans-serif;
 }
 
-.dc-main .wrap {
-  max-width: 1180px;
-}
 
 .dc-num {
   display: block;
@@ -75,7 +72,7 @@
 }
 
 .dc-hero-copy > * {
-  max-width: 1180px;
+  max-width: var(--site-max, 1400px);
 }
 
 .dc-hero-copy .kicker {

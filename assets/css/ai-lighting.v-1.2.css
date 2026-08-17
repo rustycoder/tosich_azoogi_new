@@ -10,9 +10,6 @@
   font-family: "Google Sans Flex", sans-serif;
 }
 
-.ai-main .wrap {
-  max-width: 1180px;
-}
 
 .ai-num {
   display: block;
@@ -66,7 +63,7 @@
 }
 
 .ai-hero-copy > * {
-  max-width: 1180px;
+  max-width: var(--site-max, 1400px);
 }
 
 .ai-hero-copy .kicker {
@@ -635,7 +632,7 @@
 
 /* —— CTA —— */
 .ai-cta-wrap {
-  max-width: 1180px;
+  max-width: var(--site-max, 1400px);
   margin: 0 auto;
   padding: 8px 28px 56px;
 }
