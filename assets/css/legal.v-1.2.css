@@ -10,11 +10,11 @@
 }
 
 .legal-page-wrap {
-  max-width: 1100px;
+  max-width: var(--site-max, 1400px);
 }
 
 .legal-hero {
-  max-width: 820px;
+  max-width: none;
   margin-bottom: 8px;
 }
 
@@ -45,7 +45,7 @@
 }
 
 .legal-wrap {
-  max-width: 820px;
+  max-width: none;
 }
 
 .legal-nav {
@@ -201,6 +201,7 @@
   padding: 22px 24px;
   border: 1px solid var(--line);
   background: #f6f8f5;
+  max-width: 420px;
 }
 
 .legal-contact p {
