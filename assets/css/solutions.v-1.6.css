@@ -74,6 +74,10 @@
   min-width: 0;
 }
 
+.solutions-grid li a {
+  display: block;
+}
+
 .solutions-grid img {
   width: 100%;
   height: auto;
