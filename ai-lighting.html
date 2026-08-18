@@ -14,7 +14,7 @@
 </head>
 <body class="ai-page">
 
-<header class="topbar" id="topbar">
+<header class="topbar solid" id="topbar">
   <div class="util">
     <div class="util-inner">
       <div class="util-rotate" aria-live="polite">Aus Owned B2B Trade Wholesaler - Custom Lighting & Smart Control Solutions</div>
@@ -26,7 +26,7 @@
     </div>
   </div>
   <nav class="nav">
-    <a href="index.html" class="logo"><img src="assets/logo_white.png" width="80" alt="Azoogi"></a>
+    <a href="index.html" class="logo"><img src="assets/logo_dark.png" width="80" alt="Azoogi"></a>
     <div class="menu">
       <div class="has-dropdown">
         <a href="products.html">Products <span class="caret">&#9662;</span></a>
@@ -47,9 +47,7 @@
 
   <section class="ai-hero">
     <div class="ai-hero-media" aria-hidden="true">
-      <video class="ai-hero-video" autoplay muted loop playsinline preload="auto">
-        <source src="assets/img/Data_Centre_DRAFT_optimized.webm" type="video/webm">
-      </video>
+      <img src="assets/img/ai-lighting/hero.jpg" alt="" loading="eager">
     </div>
     <div class="ai-hero-copy">
       <div class="kicker">AI Lighting</div>
@@ -284,30 +282,7 @@
 </footer>
 
 <script>
-  const topbar = document.getElementById('topbar');
-  let lastScrolled = null;
-
-  function updateLogos() {
-    const isScrolled = window.scrollY > 40;
-    document.querySelectorAll('.logo img').forEach(img => {
-      if (img.closest('.topbar')) {
-        img.src = isScrolled ? 'assets/logo_dark.png' : 'assets/logo_white.png';
-      } else {
-        img.src = 'assets/logo_dark.png';
-      }
-    });
-  }
-
-  const onScroll = () => {
-    const isScrolled = window.scrollY > 40;
-    if (isScrolled !== lastScrolled) {
-      topbar.classList.toggle('solid', isScrolled);
-      lastScrolled = isScrolled;
-      updateLogos();
-    }
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  document.getElementById('topbar')?.classList.add('solid');
 
   (function () {
     var items = document.querySelectorAll('#aiAccordion .ai-acc-item');
