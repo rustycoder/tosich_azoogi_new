@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Azoogi | Airtable Extraction Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .nav-tabs {
+      display: flex;
+      gap: 12px;
+      margin-right: 20px;
+    }
+    .nav-link {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 13px;
+      transition: all 0.2s ease;
+    }
+    .nav-link:hover {
+      color: #fff;
+      background: var(--rgba-hover);
+    }
+    .nav-link.active {
+      color: var(--accent);
+      background: rgba(103, 208, 78, 0.1);
+      border: 1px solid rgba(103, 208, 78, 0.25);
+    }
+    .result-card {
+      background: rgba(103, 208, 78, 0.05);
+      border: 1px solid rgba(103, 208, 78, 0.25);
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .stat-badge {
+      display: inline-block;
+      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      margin-right: 10px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="topbar">
+    <div class="header-inner">
+      <div class="brand">
+        <h1 class="logo-text">AZOOGI</h1>
+        <span class="badge">Extraction Studio</span>
+      </div>
+
+      <div class="header-actions">
+        <nav class="nav-tabs">
+          <a href="/" class="nav-link">📤 JSON Uploader</a>
+          <a href="/extract" class="nav-link active">📥 Airtable Extractor</a>
+        </nav>
+        <div id="key-status-pill" class="status-pill offline">
+          <span class="status-dot"></span>
+          <span id="key-status-text">Checking Token...</span>
+        </div>
+        <button id="btn-settings" class="btn btn-outline">⚙ Token Settings</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+
+    <div class="card glass-card">
+      <div class="card-header">
+        <h2>Airtable Data Extraction & Website Sync</h2>
+        <p>Select your Airtable Workspace, Base, and Tables to extract Product Categories, Details, and Attributes directly to your website assets.</p>
+      </div>
+
+      <div class="card-body">
+        <form id="extract-config-form">
+          <div class="grid-2">
+            <div class="form-group">
+              <label for="select-workspace">Workspace Filter</label>
+              <select id="select-workspace" class="form-control">
+                <option value="all">-- All Workspaces --</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="select-base">Airtable Base <span class="req">*</span></label>
+              <select id="select-base" class="form-control" disabled>
+                <option value="">-- Loading Bases... --</option>
+              </select>
+            </div>
+          </div>
+
+          <hr style="border: none; border-top: 1px solid var(--border-light); margin: 24px 0;">
+
+          <h3>Target Tables Configuration</h3>
+          <p style="color: var(--muted); font-size: 13px; margin-bottom: 16px;">Specify the tables in your Airtable base used for storing product catalog items, categories, and attributes.</p>
+
+          <div class="grid-3" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+            <div class="form-group">
+              <label for="select-products-table">Products Table <span class="req">*</span></label>
+              <select id="select-products-table" class="form-control" disabled>
+                <option value="">-- Select Products Table --</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="select-categories-table">Categories Table (Optional)</label>
+              <select id="select-categories-table" class="form-control" disabled>
+                <option value="">-- None / Select Categories Table --</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="select-attributes-table">Attributes Table (Optional)</label>
+              <select id="select-attributes-table" class="form-control" disabled>
+                <option value="">-- None / Select Attributes Table --</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Schema Preview Section -->
+          <div id="schema-preview-container" class="schema-preview-box hidden" style="margin-top: 20px;">
+            <h4>Detected Table Schema Columns</h4>
+            <div id="schema-pills" class="pills-flex" style="margin-top: 10px;"></div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div style="margin-top: 30px; display: flex; gap: 12px; justify-content: flex-end; align-items: center;">
+            <button type="button" id="btn-save-env" class="btn btn-outline">💾 Save Config to .env</button>
+            <button type="button" id="btn-run-extract" class="btn btn-accent" disabled>⚡ Extract & Sync to Website</button>
+          </div>
+        </form>
+
+        <!-- Loading / Progress Indicator -->
+        <div id="extract-loading" class="hidden" style="text-align: center; padding: 30px 0;">
+          <div class="spinner" style="border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid var(--accent); border-radius: 50%; width: 36px; height: 36px; animation: spin 1s linear infinite; margin: 0 auto 12px;"></div>
+          <p id="extract-status-text" style="font-weight: 500;">Fetching and compiling Airtable catalog data...</p>
+        </div>
+
+        <!-- Extraction Results Banner -->
+        <div id="extract-results" class="result-card hidden">
+          <h3 style="color: var(--accent); margin-bottom: 8px;">✅ Extraction Completed Successfully!</h3>
+          <p style="margin-bottom: 14px; color: var(--ink);">Product dataset has been compiled and saved to website static assets.</p>
+          <div>
+            <span class="stat-badge">📦 <strong id="res-prod-count">0</strong> Products</span>
+            <span class="stat-badge">📂 <strong id="res-cat-count">0</strong> Categories</span>
+          </div>
+          <div style="margin-top: 16px; font-size: 12px; color: var(--muted);">
+            Updated Files: <code>assets/data/products.json</code> & <code>assets/js/products_data.js</code>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Settings Modal (Token) -->
+  <div id="settings-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Airtable API Configuration</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="token-input">Personal Access Token (PAT)</label>
+          <input type="password" id="token-input" class="form-control" placeholder="patXXXXXXXXXXXX.XXXXXXXXXXXXXXXX">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-save-token" class="btn btn-accent">Save Token</button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  </style>
+
+  <script>
+    let allBases = [];
+    let workspacesMap = {};
+    let tableSchemas = {};
+
+    document.addEventListener("DOMContentLoaded", () => {
+      checkStatus();
+      loadWorkspacesAndBases();
+
+      document.getElementById("select-workspace").addEventListener("change", onWorkspaceChange);
+      document.getElementById("select-base").addEventListener("change", onBaseChange);
+      document.getElementById("select-products-table").addEventListener("change", updateExtractButtonState);
+      document.getElementById("btn-run-extract").addEventListener("click", runExtraction);
+      document.getElementById("btn-save-env").addEventListener("click", saveEnvConfig);
+
+      // Modal handling
+      const modal = document.getElementById("settings-modal");
+      document.getElementById("btn-settings").addEventListener("click", () => modal.classList.remove("hidden"));
+      document.querySelector(".modal-close").addEventListener("click", () => modal.classList.add("hidden"));
+      document.getElementById("btn-save-token").addEventListener("click", saveToken);
+    });
+
+    async function checkStatus() {
+      try {
+        const res = await fetch("/api/status");
+        const data = await res.json();
+        const pill = document.getElementById("key-status-pill");
+        const text = document.getElementById("key-status-text");
+
+        if (data.has_key) {
+          pill.className = "status-pill online";
+          text.innerText = `Token: ${data.masked_key}`;
+        } else {
+          pill.className = "status-pill offline";
+          text.innerText = "Token Missing";
+        }
+      } catch (err) {
+        console.error("Status check error:", err);
+      }
+    }
+
+    async function saveToken() {
+      const token = document.getElementById("token-input").value.trim();
+      if (!token) return alert("Token cannot be empty");
+
+      try {
+        const res = await fetch("/api/save-token", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token })
+        });
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById("settings-modal").classList.add("hidden");
+          checkStatus();
+          loadWorkspacesAndBases();
+        } else {
+          alert("Failed to save token: " + data.error);
+        }
+      } catch (err) {
+        alert("Error saving token: " + err.message);
+      }
+    }
+
+    async function loadWorkspacesAndBases() {
+      try {
+        const res = await fetch("/api/workspaces-and-bases");
+        const data = await res.json();
+
+        if (data.error) {
+          console.error("Failed to load bases:", data.error);
+          return;
+        }
+
+        allBases = data.bases || [];
+        workspacesMap = data.base_to_wsp || {};
+
+        populateWorkspacesDropdown();
+        populateBasesDropdown(allBases);
+      } catch (err) {
+        console.error("Error loading workspaces and bases:", err);
+      }
+    }
+
+    function populateWorkspacesDropdown() {
+      const wspSelect = document.getElementById("select-workspace");
+      wspSelect.innerHTML = '<option value="all">-- All Workspaces --</option>';
+
+      const uniqueWsps = new Set(Object.values(workspacesMap));
+      uniqueWsps.forEach(wsp => {
+        const opt = document.createElement("option");
+        opt.value = wsp;
+        opt.textContent = wsp;
+        wspSelect.appendChild(opt);
+      });
+    }
+
+    function populateBasesDropdown(bases) {
+      const baseSelect = document.getElementById("select-base");
+      baseSelect.innerHTML = '<option value="">-- Select Base --</option>';
+
+      bases.forEach(b => {
+        const opt = document.createElement("option");
+        opt.value = b.id;
+        const wspName = workspacesMap[b.id] ? ` (${workspacesMap[b.id]})` : '';
+        opt.textContent = `${b.name}${wspName}`;
+        baseSelect.appendChild(opt);
+      });
+
+      baseSelect.disabled = bases.length === 0;
+    }
+
+    function onWorkspaceChange() {
+      const selectedWsp = document.getElementById("select-workspace").value;
+      if (selectedWsp === "all") {
+        populateBasesDropdown(allBases);
+      } else {
+        const filtered = allBases.filter(b => workspacesMap[b.id] === selectedWsp);
+        populateBasesDropdown(filtered);
+      }
+    }
+
+    async function onBaseChange() {
+      const baseId = document.getElementById("select-base").value;
+      const prodSelect = document.getElementById("select-products-table");
+      const catSelect = document.getElementById("select-categories-table");
+      const attrSelect = document.getElementById("select-attributes-table");
+
+      if (!baseId) {
+        prodSelect.innerHTML = '<option value="">-- Select Products Table --</option>';
+        catSelect.innerHTML = '<option value="">-- None / Select Categories Table --</option>';
+        attrSelect.innerHTML = '<option value="">-- None / Select Attributes Table --</option>';
+        prodSelect.disabled = catSelect.disabled = attrSelect.disabled = true;
+        updateExtractButtonState();
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/tables?base_id=${baseId}`);
+        const data = await res.json();
+        const tables = data.tables || [];
+
+        tableSchemas = {};
+        tables.forEach(t => tableSchemas[t.name] = t.fields || []);
+
+        populateTableDropdowns(tables);
+      } catch (err) {
+        alert("Failed to load tables for base: " + err.message);
+      }
+    }
+
+    function populateTableDropdowns(tables) {
+      const prodSelect = document.getElementById("select-products-table");
+      const catSelect = document.getElementById("select-categories-table");
+      const attrSelect = document.getElementById("select-attributes-table");
+
+      prodSelect.innerHTML = '<option value="">-- Select Products Table --</option>';
+      catSelect.innerHTML = '<option value="">-- None / Select Categories Table --</option>';
+      attrSelect.innerHTML = '<option value="">-- None / Select Attributes Table --</option>';
+
+      tables.forEach(t => {
+        const name = t.name;
+
+        const opt1 = document.createElement("option");
+        opt1.value = name; opt1.textContent = name;
+        if (name.toLowerCase() === "products") opt1.selected = true;
+        prodSelect.appendChild(opt1);
+
+        const opt2 = document.createElement("option");
+        opt2.value = name; opt2.textContent = name;
+        if (name.toLowerCase() === "categories") opt2.selected = true;
+        catSelect.appendChild(opt2);
+
+        const opt3 = document.createElement("option");
+        opt3.value = name; opt3.textContent = name;
+        if (name.toLowerCase() === "attributes") opt3.selected = true;
+        attrSelect.appendChild(opt3);
+      });
+
+      prodSelect.disabled = catSelect.disabled = attrSelect.disabled = false;
+      updateExtractButtonState();
+    }
+
+    function updateExtractButtonState() {
+      const baseId = document.getElementById("select-base").value;
+      const prodTable = document.getElementById("select-products-table").value;
+      const btn = document.getElementById("btn-run-extract");
+      btn.disabled = !(baseId && prodTable);
+    }
+
+    async function saveEnvConfig() {
+      const baseId = document.getElementById("select-base").value;
+      const prodTable = document.getElementById("select-products-table").value;
+      const catTable = document.getElementById("select-categories-table").value;
+      const attrTable = document.getElementById("select-attributes-table").value;
+
+      try {
+        const res = await fetch("/api/save-config", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            base_id: baseId,
+            products_table: prodTable,
+            categories_table: catTable,
+            attributes_table: attrTable
+          })
+        });
+        const data = await res.json();
+        if (data.success) {
+          alert("Configuration saved to .env file successfully!");
+        } else {
+          alert("Failed to save config: " + data.error);
+        }
+      } catch (err) {
+        alert("Error saving config: " + err.message);
+      }
+    }
+
+    async function runExtraction() {
+      const baseId = document.getElementById("select-base").value;
+      const prodTable = document.getElementById("select-products-table").value;
+      const catTable = document.getElementById("select-categories-table").value;
+      const attrTable = document.getElementById("select-attributes-table").value;
+
+      const loadingBox = document.getElementById("extract-loading");
+      const resultsBox = document.getElementById("extract-results");
+      const btn = document.getElementById("btn-run-extract");
+
+      loadingBox.classList.remove("hidden");
+      resultsBox.classList.add("hidden");
+      btn.disabled = true;
+
+      try {
+        const res = await fetch("/api/extract", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            base_id: baseId,
+            products_table: prodTable,
+            categories_table: catTable,
+            attributes_table: attrTable
+          })
+        });
+
+        const data = await res.json();
+
+        loadingBox.classList.add("hidden");
+        btn.disabled = false;
+
+        if (data.success) {
+          document.getElementById("res-prod-count").innerText = data.product_count || 0;
+          document.getElementById("res-cat-count").innerText = data.category_count || 0;
+          resultsBox.classList.remove("hidden");
+        } else {
+          alert("Extraction failed: " + data.error);
+        }
+      } catch (err) {
+        loadingBox.classList.add("hidden");
+        btn.disabled = false;
+        alert("Error running extraction: " + err.message);
+      }
+    }
+  </script>
+</body>
+</html>

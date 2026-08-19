@@ -399,5 +399,41 @@ def main():
     print(f"\nSuccessfully updated {len(updated)} record(s) in Airtable!")
 
 
+def extract_cli():
+    """CLI entrypoint for extracting data from Airtable and syncing to website assets."""
+    parser = argparse.ArgumentParser(description="Extract Product Categories, Details, and Attributes from Airtable to website assets.")
+    parser.add_argument("--api-key", help="Airtable Personal Access Token")
+    parser.add_argument("--base-id", help="Target Airtable Base ID")
+    parser.add_argument("--products-table", help="Products table name")
+    parser.add_argument("--categories-table", help="Categories table name")
+    parser.add_argument("--attributes-table", help="Attributes table name")
+    parser.add_argument("--output-json", help="Path for output JSON file (default: assets/data/products.json)")
+    parser.add_argument("--output-js", help="Path for output JS file (default: assets/js/products_data.js)")
+
+    args = parser.parse_args()
+
+    from .extractor import run_extraction_cmd
+    print("==============================================")
+    print("       AIRTABLE DATA EXTRACTION PIPELINE      ")
+    print("==============================================")
+
+    try:
+        catalog = run_extraction_cmd(
+            base_id=args.base_id,
+            products_table=args.products_table,
+            categories_table=args.categories_table,
+            attributes_table=args.attributes_table,
+            output_json=args.output_json,
+            output_js=args.output_js
+        )
+        print(f"\nExtraction successfully finished!")
+        print(f"Extracted {len(catalog.get('products', []))} product(s) across {len(catalog.get('categories', []))} category(ies).")
+        print(f"Updated static JSON dataset and JS catalog bundle.")
+    except Exception as e:
+        print(f"\nExtraction failed: {e}")
+        sys.exit(1)
+
+
 if __name__ == "__main__":
     main()
+

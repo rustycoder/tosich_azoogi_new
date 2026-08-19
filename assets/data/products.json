@@ -1,5 +1,4 @@
-// Azoogi Auto-Generated Product Database from Airtable
-const AZOOGI_PRODUCTS = {
+{
   "categories": [
     "5-in-1 Dimming Driver",
     "LED Flex Sheet",
@@ -3289,4 +3288,4 @@ const AZOOGI_PRODUCTS = {
       ]
     }
   ]
-};
+}

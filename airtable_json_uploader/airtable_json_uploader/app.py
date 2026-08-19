@@ -5,10 +5,34 @@ from pathlib import Path
 from typing import Dict, Any, List
 from flask import Flask, render_template, request, jsonify
 
-from .config import get_api_key, save_api_key
-from .airtable_client import AirtableClient
-from .parser import JSONParser, flatten_json
-from .mapper import MappingProfile
+try:
+    from .config import (
+        get_api_key,
+        save_api_key,
+        save_config,
+        get_base_id,
+        get_products_table,
+        get_categories_table,
+        get_attributes_table,
+    )
+    from .airtable_client import AirtableClient
+    from .parser import JSONParser, flatten_json
+    from .mapper import MappingProfile
+except ImportError:
+    sys.path.insert(0, str(Path(__file__).parent.parent))
+    from airtable_json_uploader.config import (
+        get_api_key,
+        save_api_key,
+        save_config,
+        get_base_id,
+        get_products_table,
+        get_categories_table,
+        get_attributes_table,
+    )
+    from airtable_json_uploader.airtable_client import AirtableClient
+    from airtable_json_uploader.parser import JSONParser, flatten_json
+    from airtable_json_uploader.mapper import MappingProfile
+
 
 # Package directories
 PACKAGE_DIR = Path(__file__).parent
@@ -37,6 +61,11 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/extract")
+def extract_page():
+    return render_template("extract.html")
+
+
 @app.route("/test-attributes")
 def test_attributes_page():
     return render_template("test_attributes.html")
@@ -51,7 +80,11 @@ def get_status():
         "has_key": bool(key),
         "masked_key": masked,
         "json_dir": str(JSON_FILES_DIR),
-        "mappings_dir": str(MAPPINGS_DIR)
+        "mappings_dir": str(MAPPINGS_DIR),
+        "base_id": get_base_id(),
+        "products_table": get_products_table(),
+        "categories_table": get_categories_table(),
+        "attributes_table": get_attributes_table()
     })
 
 
@@ -63,6 +96,19 @@ def save_token_route():
         return jsonify({"error": "Token cannot be empty"}), 400
     save_api_key(new_token)
     return jsonify({"success": True, "masked_key": f"{new_token[:7]}...{new_token[-4:]}"})
+
+
+@app.route("/api/save-config", methods=["POST"])
+def save_config_route():
+    data = request.get_json() or {}
+    save_config(
+        base_id=data.get("base_id"),
+        products_table=data.get("products_table"),
+        categories_table=data.get("categories_table"),
+        attributes_table=data.get("attributes_table")
+    )
+    return jsonify({"success": True})
+
 
 
 @app.route("/api/workspaces-and-bases", methods=["GET"])
@@ -413,6 +459,33 @@ def execute_updates_route():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+
+@app.route("/api/extract", methods=["POST"])
+def extract_route():
+    try:
+        data = request.get_json() or {}
+        base_id = data.get("base_id") or get_base_id()
+        products_table = data.get("products_table") or get_products_table()
+        categories_table = data.get("categories_table") or get_categories_table()
+        attributes_table = data.get("attributes_table") or get_attributes_table()
+
+        try:
+            from .extractor import run_extraction_cmd
+        except ImportError:
+            from airtable_json_uploader.extractor import run_extraction_cmd
+        catalog = run_extraction_cmd(
+            base_id=base_id,
+            products_table=products_table,
+            categories_table=categories_table,
+            attributes_table=attributes_table,
+        )
+        return jsonify({
+            "success": True,
+            "product_count": len(catalog.get("products", [])),
+            "category_count": len(catalog.get("categories", []))
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 def main():

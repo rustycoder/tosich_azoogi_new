@@ -15,6 +15,7 @@ setup(
         "console_scripts": [
             "airtable-upload = airtable_json_uploader.cli:main",
             "airtable-web = airtable_json_uploader.app:main",
+            "airtable-extract = airtable_json_uploader.cli:extract_cli",
         ],
     },
     package_data={

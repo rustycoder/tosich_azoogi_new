@@ -1,0 +1,355 @@
+import os
+import json
+import logging
+from pathlib import Path
+from typing import Dict, List, Any, Optional, Union
+from .airtable_client import AirtableClient
+from .config import (
+    get_api_key,
+    get_base_id,
+    get_products_table,
+    get_categories_table,
+    get_attributes_table,
+)
+
+logger = logging.getLogger(__name__)
+
+
+class AirtableDataExtractor:
+    """Extracts, normalizes, and resolves Product, Category, and Attribute data from Airtable."""
+
+    def __init__(
+        self,
+        api_key: Optional[str] = None,
+        base_id: Optional[str] = None,
+        products_table: Optional[str] = None,
+        categories_table: Optional[str] = None,
+        attributes_table: Optional[str] = None,
+    ):
+        self.api_key = api_key or get_api_key()
+        self.base_id = base_id or get_base_id()
+        self.products_table = products_table or get_products_table()
+        self.categories_table = categories_table or get_categories_table()
+        self.attributes_table = attributes_table or get_attributes_table()
+
+        if not self.api_key:
+            raise ValueError("AIRTABLE_API_KEY is required. Please set it in .env or pass it to extractor.")
+
+        self.client = AirtableClient(api_key=self.api_key)
+
+    def extract_image_urls(self, record_fields: Dict[str, Any]) -> List[str]:
+        """Extract image URLs from Airtable Attachment fields or plain string/URL fields."""
+        images = []
+        image_field_keys = ["Images", "Product_Images", "Image", "Attachments", "Photos", "Media", "product_images"]
+
+        for key, val in record_fields.items():
+            # Match explicitly listed keys or any list of attachment dicts
+            is_target_key = key.lower() in [k.lower() for k in image_field_keys] or "image" in key.lower() or "attachment" in key.lower()
+            if is_target_key and val:
+                if isinstance(val, list):
+                    for item in val:
+                        if isinstance(item, dict) and "url" in item:
+                            images.append(item["url"])
+                        elif isinstance(item, str) and item.startswith("http"):
+                            images.append(item)
+                elif isinstance(val, str) and val.startswith("http"):
+                    images.append(val)
+
+        return list(dict.fromkeys(images))  # Deduplicate while keeping order
+
+    def extract_attributes(self, attribute_records: List[Dict[str, Any]]) -> Dict[str, Dict[str, Any]]:
+        """
+        Build an index of Attribute Record ID -> Attribute details.
+        Handles schemas with 'Attribute Name', 'Name', 'Value', 'Product', etc.
+        """
+        attr_map = {}
+        for rec in attribute_records:
+            rec_id = rec.get("id")
+            fields = rec.get("fields", {})
+
+            name = fields.get("Attribute_Name") or fields.get("Attribute Name") or fields.get("Name") or fields.get("Attribute") or ""
+            val = fields.get("Attribute_Value") or fields.get("Attribute Value") or fields.get("Value") or fields.get("Option") or ""
+
+            # Check for product link field (if attributes store product IDs)
+            product_links = fields.get("Product") or fields.get("Products") or []
+            if isinstance(product_links, str):
+                product_links = [product_links]
+
+            attr_map[rec_id] = {
+                "id": rec_id,
+                "name": str(name).strip(),
+                "value": val,
+                "product_ids": product_links,
+                "raw_fields": fields
+            }
+        return attr_map
+
+    @staticmethod
+    def parse_json_field(val: Any, default_type: Any = None) -> Any:
+        """Safely parse JSON strings into dicts/lists or return default."""
+        if default_type is None:
+            default_type = {}
+        if isinstance(val, (dict, list)):
+            return val
+        if isinstance(val, str) and val.strip():
+            try:
+                return json.loads(val.strip())
+            except Exception:
+                pass
+        return default_type
+
+    @staticmethod
+    def parse_attribute_keys(attr_keys_str: str) -> Dict[str, Any]:
+        """
+        Parse pipe-delimited Key:Value strings such as:
+        "CCT:3000K|CCT:4000K|IP Rating:IP20|Power:30W|Voltage:24V"
+        into structured dictionary {"CCT": ["3000K", "4000K"], "IP Rating": "IP20", ...}
+        """
+        result: Dict[str, Any] = {}
+        if not isinstance(attr_keys_str, str) or not attr_keys_str.strip():
+            return result
+
+        parts = [p.strip() for p in attr_keys_str.split("|") if p.strip()]
+        for part in parts:
+            if ":" in part:
+                key, val = part.split(":", 1)
+                key = key.strip()
+                val = val.strip()
+                if not key or not val:
+                    continue
+
+                if key not in result:
+                    result[key] = val
+                else:
+                    if isinstance(result[key], list):
+                        if val not in result[key]:
+                            result[key].append(val)
+                    else:
+                        if result[key] != val:
+                            result[key] = [result[key], val]
+        return result
+
+
+
+
+    def run_extraction(self) -> Dict[str, Any]:
+        """Fetch all tables from Airtable and compile normalized product catalog JSON."""
+        if not self.base_id:
+            raise ValueError("AIRTABLE_BASE_ID is required. Please set it in .env or pass it to extractor.")
+
+        logger.info(f"Extracting data from Base ID: {self.base_id}")
+
+        # 1. Fetch Products
+        products_raw = []
+        try:
+            products_raw = self.client.fetch_existing_records(self.base_id, self.products_table)
+            logger.info(f"Fetched {len(products_raw)} records from '{self.products_table}'")
+        except Exception as e:
+            logger.error(f"Failed to fetch products from '{self.products_table}': {e}")
+            raise
+
+        # 2. Fetch Attributes (Optional/Safe fallback)
+        attributes_raw = []
+        try:
+            attributes_raw = self.client.fetch_existing_records(self.base_id, self.attributes_table)
+            logger.info(f"Fetched {len(attributes_raw)} records from '{self.attributes_table}'")
+        except Exception as e:
+            logger.warning(f"Could not fetch attributes from '{self.attributes_table}' (ignoring if not present): {e}")
+
+        # 3. Fetch Categories (Optional/Safe fallback)
+        categories_raw = []
+        try:
+            categories_raw = self.client.fetch_existing_records(self.base_id, self.categories_table)
+            logger.info(f"Fetched {len(categories_raw)} records from '{self.categories_table}'")
+        except Exception as e:
+            logger.warning(f"Could not fetch categories from '{self.categories_table}' (ignoring if not present): {e}")
+
+        # Process Attributes Map
+        attr_index = self.extract_attributes(attributes_raw)
+
+        # Process Categories Map (if category table exists)
+        cat_index = {}
+        for cat_rec in categories_raw:
+            c_id = cat_rec.get("id")
+            c_fields = cat_rec.get("fields", {})
+            cat_name = c_fields.get("Category_Name") or c_fields.get("Category Name") or c_fields.get("Name") or ""
+            cat_index[c_id] = str(cat_name).strip()
+
+        # Build Normalized Product Items
+        catalog = {
+            "categories": [],
+            "products": [],
+            "tree": []
+        }
+
+        category_groups: Dict[str, List[Dict[str, Any]]] = {}
+
+        for p_rec in products_raw:
+            p_id = p_rec.get("id")
+            fields = p_rec.get("fields", {})
+
+            # Product Name & Descriptions
+            p_name = fields.get("Product_Name") or fields.get("Product Name") or fields.get("Name") or fields.get("Title") or "Unnamed Product"
+            p_short_desc = fields.get("Product short description") or fields.get("Short description") or fields.get("short_description") or fields.get("Short Description") or ""
+            p_long_desc = fields.get("Product long description") or fields.get("Product description") or fields.get("Long description") or fields.get("Description") or fields.get("description") or ""
+
+            # Category resolution (Single Select / Text / Linked Record ID)
+            raw_cat = fields.get("Category") or fields.get("Product Category") or fields.get("Categories") or "General"
+            if isinstance(raw_cat, list) and raw_cat:
+                first_cat = raw_cat[0]
+                category_name = cat_index.get(first_cat, str(first_cat))
+            else:
+                category_name = str(raw_cat).strip() if raw_cat else "General"
+
+            # Extract Attached Images
+            images = self.extract_image_urls(fields)
+
+            # Extract Options & Constraints (parsed JSON)
+            raw_options = fields.get("Options") or fields.get("options") or {}
+            options = self.parse_json_field(raw_options, default_type={})
+
+            raw_constraints = fields.get("Constraints") or fields.get("constraints") or []
+            constraints = self.parse_json_field(raw_constraints, default_type=[])
+
+            # Extract Pipe-Separated Attributes Keys (e.g. "CCT:3000K|CCT:4000K|IP Rating:IP20")
+            attr_keys_str = fields.get("Attributes keys") or fields.get("Attribute Keys") or fields.get("Attributes Keys") or ""
+            parsed_attr_keys = self.parse_attribute_keys(attr_keys_str)
+
+            # Build Product Features
+            product_features = {}
+
+            # 1. Start with parsed Attributes Keys
+            product_features.update(parsed_attr_keys)
+
+            # 2. Add linked attributes from attributes_table
+            if attr_index:
+                for f_key, f_val in fields.items():
+                    if isinstance(f_val, list):
+                        linked_attrs = [attr_index[item] for item in f_val if isinstance(item, str) and item in attr_index]
+                        if linked_attrs:
+                            for lattr in linked_attrs:
+                                a_name = lattr["name"] or f_key
+                                a_val = lattr["value"]
+                                if a_name and a_val:
+                                    if a_name not in product_features:
+                                        product_features[a_name] = a_val
+                                    elif isinstance(product_features[a_name], list):
+                                        if a_val not in product_features[a_name]:
+                                            product_features[a_name].append(a_val)
+                                    else:
+                                        if product_features[a_name] != a_val:
+                                            product_features[a_name] = [product_features[a_name], a_val]
+
+            # 3. Add direct column attributes, excluding meta keys
+            excluded_meta_keys = [
+                "product_name", "product name", "name", "title",
+                "category", "product category", "categories",
+                "images", "product_images", "image", "attachments", "photos", "media",
+                "options", "constraints", "attributes keys", "attribute keys", "attributes keys",
+                "product short description", "short description", "short_description",
+                "product long description", "long description", "description", "product description",
+                "status", "product type", "attributes", "stock / quantity", "sku", "supplier code", "supplier name", "datasheet"
+            ]
+
+            for f_key, f_val in fields.items():
+                if f_key.lower() not in excluded_meta_keys and f_val not in [None, "", []]:
+                    if f_key not in product_features:
+                        product_features[f_key] = f_val
+
+            # Also check Attributes table referencing Product ID
+            if attr_index:
+                for a_id, a_data in attr_index.items():
+                    if p_id in a_data.get("product_ids", []):
+                        a_name = a_data["name"]
+                        a_val = a_data["value"]
+                        if a_name and a_val:
+                            if a_name not in product_features:
+                                product_features[a_name] = a_val
+                            elif isinstance(product_features[a_name], list):
+                                if a_val not in product_features[a_name]:
+                                    product_features[a_name].append(a_val)
+
+            product_entry = {
+                "id": p_id,
+                "product_name": p_name,
+                "category": category_name,
+                "product_short_description": p_short_desc,
+                "product_description": p_long_desc,
+                "product_images": images,
+                "product_features": product_features,
+                "options": options,
+                "constraints": constraints,
+                "raw_fields": fields
+            }
+
+            catalog["products"].append(product_entry)
+
+            if category_name not in category_groups:
+                category_groups[category_name] = []
+            category_groups[category_name].append(product_entry)
+
+        # Build Tree format matching AZOOGI_PRODUCTS structure
+        tree_categories = []
+        for cat_name, prod_list in category_groups.items():
+            cat_node = {
+                "type": "category",
+                "name": cat_name,
+                "children": []
+            }
+            for prod in prod_list:
+                prod_row = {
+                    "type": "product_row",
+                    "name": prod["product_name"],
+                    "variants": {
+                        prod["product_name"]: prod
+                    }
+                }
+                cat_node["children"].append(prod_row)
+            tree_categories.append(cat_node)
+
+        catalog["tree"] = tree_categories
+        catalog["categories"] = list(category_groups.keys())
+
+        return catalog
+
+    def save_outputs(self, catalog: Dict[str, Any], json_path: Path, js_path: Path) -> None:
+        """Save extracted catalog to static JSON and compiled JS file."""
+        json_path.parent.mkdir(parents=True, exist_ok=True)
+        js_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # Write products.json
+        with open(json_path, "w", encoding="utf-8") as f:
+            json.dump(catalog, f, indent=2, ensure_ascii=False)
+        logger.info(f"Saved extracted catalog JSON to {json_path}")
+
+        # Write products_data.js
+        js_content = f"// Azoogi Auto-Generated Product Database from Airtable\nconst AZOOGI_PRODUCTS = {json.dumps(catalog, indent=2, ensure_ascii=False)};\n"
+        with open(js_path, "w", encoding="utf-8") as f:
+            f.write(js_content)
+        logger.info(f"Saved compiled JavaScript bundle to {js_path}")
+
+
+def run_extraction_cmd(
+    base_id: Optional[str] = None,
+    products_table: Optional[str] = None,
+    categories_table: Optional[str] = None,
+    attributes_table: Optional[str] = None,
+    output_json: Optional[str] = None,
+    output_js: Optional[str] = None
+) -> Dict[str, Any]:
+    """Top-level helper function for CLI / API trigger."""
+    extractor = AirtableDataExtractor(
+        base_id=base_id,
+        products_table=products_table,
+        categories_table=categories_table,
+        attributes_table=attributes_table,
+    )
+    catalog = extractor.run_extraction()
+
+    # Determine default paths
+    project_root = Path(__file__).parent.parent.parent
+    json_path = Path(output_json) if output_json else project_root / "assets" / "data" / "products.json"
+    js_path = Path(output_js) if output_js else project_root / "assets" / "js" / "products_data.js"
+
+    extractor.save_outputs(catalog, json_path, js_path)
+    return catalog
