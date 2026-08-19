@@ -277,7 +277,8 @@
       const imgSrc = getLocalImagePath(rawImgSrc, vdata ? vdata.file_path : '');
 
       const card = document.createElement('a');
-      card.href = `product-detail.html?file=${encodeURIComponent(vdata ? (vdata.file_path || '') : '')}`;
+      const pId = (vdata && vdata.id) ? vdata.id : (vdata && vdata.product_name ? vdata.product_name : vname);
+      card.href = `product-detail.html?id=${encodeURIComponent(pId)}`;
       card.className = 'mega-variant-card';
 
       const imgContainer = document.createElement('div');

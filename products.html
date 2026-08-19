@@ -1290,23 +1290,47 @@
     }
 
     if (typeof AZOOGI_PRODUCTS !== 'undefined') {
-      // 1. Collect all 893 products directly from AZOOGI_PRODUCTS.tree
-      if (AZOOGI_PRODUCTS.tree) {
-        collectProductsFromTree(AZOOGI_PRODUCTS.tree, []);
-      }
-
-      // 2. Fallback check for any additional products in AZOOGI_PRODUCTS.products
+      // 1. Collect products from AZOOGI_PRODUCTS.products array or map
       if (AZOOGI_PRODUCTS.products) {
-        for (var pKey in AZOOGI_PRODUCTS.products) {
-          if (!AZOOGI_PRODUCTS.products.hasOwnProperty(pKey)) continue;
-          var pRow = AZOOGI_PRODUCTS.products[pKey];
-          var variants = pRow.variants || {};
-          var catPath = pRow.category_path || [];
-          for (var vName in variants) {
-            if (!variants.hasOwnProperty(vName)) continue;
-            addProductToCatalog(vName, pRow.name || pKey, catPath, variants[vName]);
+        if (Array.isArray(AZOOGI_PRODUCTS.products)) {
+          AZOOGI_PRODUCTS.products.forEach(function(prod) {
+            var pName = prod.product_name || prod.name || "Product";
+            var images = prod.product_images || [];
+            var imgUrl = images.length > 0 ? images[0] : 'assets/logo_dark.png';
+            var item = {
+              id: prod.id,
+              name: pName,
+              modelName: pName,
+              sub: prod.category || "General",
+              cat: prod.category || "General",
+              category_path: [prod.category || "General"],
+              filePath: '',
+              img: imgUrl,
+              specs: prod.product_features || {},
+              rawProd: prod
+            };
+            if (!productsMap[pName]) {
+              productsMap[pName] = true;
+              products.push(item);
+            }
+          });
+        } else {
+          for (var pKey in AZOOGI_PRODUCTS.products) {
+            if (!AZOOGI_PRODUCTS.products.hasOwnProperty(pKey)) continue;
+            var pRow = AZOOGI_PRODUCTS.products[pKey];
+            var variants = pRow.variants || {};
+            var catPath = pRow.category_path || [];
+            for (var vName in variants) {
+              if (!variants.hasOwnProperty(vName)) continue;
+              addProductToCatalog(vName, pRow.name || pKey, catPath, variants[vName]);
+            }
           }
         }
+      }
+
+      // 2. Collect products from AZOOGI_PRODUCTS.tree
+      if (AZOOGI_PRODUCTS.tree) {
+        collectProductsFromTree(AZOOGI_PRODUCTS.tree, []);
       }
     }
 
@@ -1635,7 +1659,7 @@
       var pagedItems = filtered.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
       grid.innerHTML = pagedItems.map(function (p) {
-        var detailUrl = 'product-detail.html?file=' + encodeURIComponent(p.filePath);
+        var detailUrl = p.id ? ('product-detail.html?id=' + encodeURIComponent(p.id)) : (p.filePath ? ('product-detail.html?file=' + encodeURIComponent(p.filePath)) : ('product-detail.html?product=' + encodeURIComponent(p.name)));
 
         var imgHtml = '<div class="prod-swatch" style="background-image:url(\'' + (p.img || 'assets/logo_dark.png') + '\'); background-size:cover; background-position:center;"></div>';
 

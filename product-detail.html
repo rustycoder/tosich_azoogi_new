@@ -92,7 +92,7 @@
           <!-- PRODUCT METADATA BADGES END -->
 
           <!-- PRODUCT SHORT DESCRIPTION START -->
-          <div class="product-short-desc" id="product-short-desc">
+          <div class="product-desc" id="product-desc">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas condimentum lacinia. Suspendisse nec
             tincidunt ante, sed sodales tellus. Aliquam quis pulvinar mi. Nunc at feugiat sem. Pellentesque molestie mi
             eget faucibus interdum. Quisque ornare leo sed neque ullamcorper, in viverra tellus feugiat. Phasellus augue
@@ -170,40 +170,10 @@
       <!-- ==================== TECHNICAL SPECIFICATIONS SECTION END ==================== -->
 
       <!-- ==================== PRODUCT B2B ICONS ROW START ==================== -->
-      <div class="product-icons-row-wrapper" style="margin-top: 0; padding-top: 10px; padding-bottom: 8px;">
-        <div class="product-icons-row" style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center;">
-          <img src="assets/p_icon_01.svg" alt="Icon 1"
-            style="height: 36px; width: auto; opacity: 0.85; transition: opacity 0.2s;"
-            onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
-          <img src="assets/p_icon_02.svg" alt="Icon 2"
-            style="height: 36px; width: auto; opacity: 0.85; transition: opacity 0.2s;"
-            onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
-          <img src="assets/p_icon_03.svg" alt="Icon 3"
-            style="height: 36px; width: auto; opacity: 0.85; transition: opacity 0.2s;"
-            onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
-          <img src="assets/p_icon_04.svg" alt="Icon 4"
-            style="height: 48px; width: auto; opacity: 0.85; transition: opacity 0.2s;"
-            onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
-          <img src="assets/p_icon_05.svg" alt="Icon 5"
-            style="height: 48px; width: auto; opacity: 0.85; transition: opacity 0.2s;"
-            onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
-          <img src="assets/p_icon_06.svg" alt="Icon 6"
-            style="height: 48px; width: auto; opacity: 0.85; transition: opacity 0.2s;"
-            onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
-          <img src="assets/p_icon_07.svg" alt="Icon 7"
-            style="height: 48px; width: auto; opacity: 0.85; transition: opacity 0.2s;"
-            onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
-            <img src="assets/p_icon_08.svg" alt="Icon 7"
-            style="height: 48px; width: auto; opacity: 0.85; transition: opacity 0.2s;"
-            onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
-            <img src="assets/p_icon_09.svg" alt="Icon 7"
-            style="height: 48px; width: auto; opacity: 0.85; transition: opacity 0.2s;"
-            onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
-        </div>
+      <div class="product-icons-row-wrapper"
+        style="display: none; margin-top: 0; padding-top: 10px; padding-bottom: 8px;">
+        <div class="product-icons-row" style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center;"></div>
       </div>
-
-
-
       <!-- ==================== PRODUCT B2B ICONS ROW END ==================== -->
       <!--PRODUCT SPEICIFICATION IEF FILE DOWNLOAD OPTION START -->
       <div class="specification-download-section"
@@ -502,290 +472,238 @@
 
     function initDynamicProductPage() {
       const urlParams = new URLSearchParams(window.location.search);
-      const jsonFile = urlParams.get('file');
+      const productId = urlParams.get('id');
+      const productCode = urlParams.get('product') || urlParams.get('name') || urlParams.get('variant') || urlParams.get('file');
 
-      if (jsonFile) {
-        // Fetch and load dynamically from the JSON file reference
-        fetch(jsonFile)
-          .then(response => {
-            if (!response.ok) throw new Error("Failed to load JSON file");
-            return response.json();
-          })
-          .then(variantData => {
-            const pathClean = decodeURIComponent(jsonFile);
-            const parts = pathClean.split('/');
-            const categoryPath = parts.slice(1, -1);
-            const productCode = parts[parts.length - 2] || "Product";
-            const variantKey = parts[parts.length - 1].replace('_v3.json', '');
+      let product = null;
 
-            // Load full product structure from local database to preserve configurator options
-            let product = AZOOGI_PRODUCTS.products[productCode];
-            if (!product) {
-              product = {
-                name: productCode,
-                category_path: categoryPath,
-                variants: {}
-              };
+      // Load product details exclusively from products_data.js (AZOOGI_PRODUCTS)
+      if (typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS.products) {
+        const allProducts = Array.isArray(AZOOGI_PRODUCTS.products)
+          ? AZOOGI_PRODUCTS.products
+          : Object.values(AZOOGI_PRODUCTS.products);
+
+        if (productId) {
+          product = allProducts.find(p => p.id === productId || p.id === decodeURIComponent(productId));
+        }
+        if (!product && productCode) {
+          const codeLower = decodeURIComponent(productCode).toLowerCase().trim();
+          product = allProducts.find(p =>
+            (p.id && p.id.toLowerCase() === codeLower) ||
+            (p.product_name && p.product_name.toLowerCase() === codeLower) ||
+            (p.sku && p.sku.toLowerCase() === codeLower) ||
+            (p.category && p.category.toLowerCase() === codeLower) ||
+            (p.product_name && p.product_name.toLowerCase().includes(codeLower))
+          );
+        }
+        if (!product && allProducts.length > 0) {
+          product = allProducts[0];
+        }
+      }
+
+      if (!product) return;
+
+      setupPageWithData(product);
+    }
+
+    function setupPageWithData(product) {
+      // Normalize options so values are objects { id, name }
+      const rawOptions = product.options || {};
+      const normalizedOptions = {};
+      for (const optKey in rawOptions) {
+        if (!rawOptions.hasOwnProperty(optKey)) continue;
+        const rawVals = rawOptions[optKey];
+        if (Array.isArray(rawVals)) {
+          normalizedOptions[optKey] = rawVals.map((item, idx) => {
+            if (typeof item === 'object' && item !== null) {
+              return { id: String(item.id || idx + 1), name: String(item.name || item.id || idx + 1) };
             }
-
-            // Update/inject fetched variant data
-            variantData.file_path = jsonFile;
-            product.variants[variantKey] = variantData;
-
-            setupPageWithData(product, variantKey);
-          })
-          .catch(err => {
-            console.warn("Falling back to local database:", err);
-            loadFromLocalDatabase();
+            return { id: String(item), name: String(item) };
           });
-      } else {
-        loadFromLocalDatabase();
+        }
       }
+      product.options = normalizedOptions;
 
-      function loadFromLocalDatabase() {
-        let productCode = urlParams.get('product');
-        let variantParam = urlParams.get('variant');
+      // Configuration state: start empty by default (no options pre-selected)
+      let selectedOptions = {};
 
-        // Extract parameters from jsonFile path under local CORS fallback
-        if (jsonFile) {
-          const pathClean = decodeURIComponent(jsonFile);
-          const parts = pathClean.split('/');
-          productCode = parts[parts.length - 2] || productCode;
-          variantParam = parts[parts.length - 1].replace('_v3.json', '') || variantParam;
-        }
+      let selectedLength = 5.0;
 
-        let product = null;
-        if (productCode) {
-          product = AZOOGI_PRODUCTS.products[productCode];
-        }
-        if (!product && variantParam) {
-          product = AZOOGI_PRODUCTS.products[variantParam];
-          if (product) {
-            productCode = variantParam;
-          }
-        }
-        if (!product && variantParam) {
-          for (const rowKey in AZOOGI_PRODUCTS.products) {
-            const rowNode = AZOOGI_PRODUCTS.products[rowKey];
-            if (rowNode.variants && rowNode.variants[variantParam]) {
-              product = rowNode;
-              productCode = rowKey;
-              break;
+      // DOM Elements
+      const productNameEl = document.getElementById('product-name');
+      const productCodeEl = document.getElementById('product-code-label');
+      const breadcrumbsEl = document.getElementById('breadcrumbs');
+      const galleryMainImg = document.getElementById('gallery-main-img');
+      const galleryThumbs = document.getElementById('gallery-thumbs');
+      const configurator = document.getElementById('dynamic-configurator');
+      const specTableBody = document.getElementById('spec-table-body');
+      const descEl = document.getElementById('product-desc');
+
+      const calcPower = document.getElementById('calc-power');
+      const calcLumens = document.getElementById('calc-lumens');
+      const calcDriver = document.getElementById('calc-driver');
+      const capacityPct = document.getElementById('calc-capacity-pct');
+      const driverBarFill = document.getElementById('driver-bar-fill');
+      const driverWarning = document.getElementById('driver-warning-msg');
+      const calcPanel = document.querySelector('.calc-panel');
+
+      // Extract Product Name, SKU, Short & Long Descriptions
+      const pName = product.product_name || product.name || "Azoogi Lighting Product";
+      const features = product.product_features || {};
+      const sku = features.SKU || features.sku || features["Supplier Code"] || product.sku || product.id || "";
+      const pShortDesc = product.product_short_description || product.short_description || features["Product short description"] || "";
+      const pLongDesc = product.product_description || product.description || features["Product long description"] || pShortDesc;
+
+      // Update Basic Info & Descriptions
+      if (productNameEl) productNameEl.textContent = pName;
+      if (productCodeEl) productCodeEl.textContent = sku ? `SKU: ${sku}` : `SKU: ${pName}`;
+      if (descEl) descEl.innerHTML = pLongDesc || pShortDesc || "Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.";
+
+      // Update Document Title
+      document.title = `${pName} — Azoogi LED Lighting Solutions`;
+
+      // Render Meta Keywords Badges
+      const metaBadgesEl = document.querySelector('.product-meta-badges');
+      if (metaBadgesEl) {
+        const rawMeta = product.meta_keywords || features["Meta Keywords"] || features["Meta keywords"] || features["meta_keywords"] || "";
+        let metaItems = [];
+        if (Array.isArray(rawMeta)) {
+          rawMeta.forEach(item => {
+            if (typeof item === 'string') {
+              item.split(',').forEach(k => { if (k.trim()) metaItems.push(k.trim()); });
             }
-          }
+          });
+        } else if (typeof rawMeta === 'string' && rawMeta.trim()) {
+          rawMeta.split(',').forEach(k => { if (k.trim()) metaItems.push(k.trim()); });
         }
 
-        if (!product) {
-          productCode = Object.keys(AZOOGI_PRODUCTS.products)[0];
-          product = AZOOGI_PRODUCTS.products[productCode];
+        function toTitleCase(str) {
+          if (!str) return '';
+          return str.split(' ').map(w => w ? (w.charAt(0).toUpperCase() + w.slice(1)) : '').join(' ');
         }
 
-        let activeVariantKey = null;
-        if (variantParam && product.variants && product.variants[variantParam]) {
-          activeVariantKey = variantParam;
+        metaItems = Array.from(new Set(metaItems)).map(toTitleCase);
+
+        if (metaItems.length > 0) {
+          metaBadgesEl.style.display = 'flex';
+          metaBadgesEl.innerHTML = metaItems.map(item => `<span class="meta-badge">${item}</span>`).join('');
         } else {
-          activeVariantKey = Object.keys(product.variants)[0];
+          metaBadgesEl.style.display = 'none';
+          metaBadgesEl.innerHTML = '';
         }
-
-        setupPageWithData(product, activeVariantKey);
       }
 
-      function setupPageWithData(product, activeVariantKey) {
-        let activeVariant = product.variants[activeVariantKey];
-        if (activeVariant && !activeVariant.file_path && jsonFile) {
-          activeVariant.file_path = jsonFile;
-        }
+      // Resolve Category Path values dynamically
+      const categoryName = product.category || (product.category_path && product.category_path[0]) || "Products";
+      const subcategoryName = (product.category_path && product.category_path.slice(1, -1).join(' / ')) || "";
 
-        // Configuration state
-        let selectedOptions = {};
-        let selectedLength = 5.0;
+      // Update Breadcrumbs to show exact category structure
+      let categorySegments = product.category_path || [categoryName];
+      if (subcategoryName && !categorySegments.includes(subcategoryName)) {
+        categorySegments.push(subcategoryName);
+      }
 
-        // DOM Elements
-        const productNameEl = document.getElementById('product-name');
-        const productCodeEl = document.getElementById('product-code-label');
-        const breadcrumbsEl = document.getElementById('breadcrumbs');
-        const galleryMainImg = document.getElementById('gallery-main-img');
-        const galleryThumbs = document.getElementById('gallery-thumbs');
-        const configurator = document.getElementById('dynamic-configurator');
-        const specTableBody = document.getElementById('spec-table-body');
-        const descText = document.getElementById('tab-desc-text');
-        const specField = document.getElementById('quote-spec');
-
-        const calcPower = document.getElementById('calc-power');
-        const calcLumens = document.getElementById('calc-lumens');
-        const calcDriver = document.getElementById('calc-driver');
-        const capacityPct = document.getElementById('calc-capacity-pct');
-        const driverBarFill = document.getElementById('driver-bar-fill');
-        const driverWarning = document.getElementById('driver-warning-msg');
-        const calcPanel = document.querySelector('.calc-panel');
-
-        // Resolve Category Path values dynamically
-        const categoryName = (product.category_path && product.category_path[0]) || "";
-        const subcategoryName = (product.category_path && product.category_path.slice(1, -1).join(' / ')) || "";
-
-        // Assign back to product object so recalculate() works
-        product.category = categoryName;
-        product.subcategory = subcategoryName;
-
-        // Update Basic Info
-        productNameEl.textContent = product.name;
-
-        // Use Lorem Ipsum for description fields
-        if (descText) {
-          descText.innerHTML = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`;
-        }
-
-        // Update Breadcrumbs to show exact category structure
-        let categorySegments = [];
-        if (jsonFile) {
-          const pathClean = decodeURIComponent(jsonFile);
-          const parts = pathClean.split('/');
-          categorySegments = parts.slice(1, -1);
-        } else if (product.category_path) {
-          categorySegments = product.category_path;
-        } else {
-          categorySegments = [categoryName];
-          if (subcategoryName) {
-            categorySegments.push(subcategoryName);
-          }
-        }
-
-        let breadcrumbHTML = `
+      let breadcrumbHTML = `
           <a href="index.html">Home</a>
           <span>/</span>
           <a href="products.html">Products</a>
         `;
 
-        categorySegments.forEach(seg => {
-          if (seg && seg.trim()) {
-            breadcrumbHTML += `
+      categorySegments.forEach(seg => {
+        if (seg && seg.trim() && seg !== 'undefined') {
+          breadcrumbHTML += `
               <span>/</span>
-              <a href="#">${seg}</a>
+              <a href="products.html">${seg}</a>
             `;
+        }
+      });
+
+      breadcrumbHTML += `
+          <span>/</span>
+          <span style="color: var(--ink);">${pName}</span>
+        `;
+
+      breadcrumbsEl.innerHTML = breadcrumbHTML;
+
+      // Helper to get image path
+      function resolveImg(url) {
+        if (!url || typeof url !== 'string') return 'assets/logo_dark.png';
+        return url;
+      }
+
+      // Render Recommended Compatible Accessories from the same category
+      function renderRecommendedAccessories() {
+        const accessoriesGrid = document.getElementById('productGrid');
+        if (!accessoriesGrid || typeof AZOOGI_PRODUCTS === 'undefined' || !AZOOGI_PRODUCTS.products) return;
+
+        const currentCatPath = product.category_path || [product.category || ''];
+        const topCat = currentCatPath[0] || '';
+        const subCat = currentCatPath.length > 1 ? currentCatPath[currentCatPath.length - 1] : topCat;
+
+        const sameSubCatProducts = [];
+        const sameTopCatProducts = [];
+        const otherProducts = [];
+
+        const rawList = Array.isArray(AZOOGI_PRODUCTS.products)
+          ? AZOOGI_PRODUCTS.products
+          : Object.values(AZOOGI_PRODUCTS.products);
+
+        rawList.forEach(pRow => {
+          const pId = pRow.id || '';
+          const pName = pRow.product_name || pRow.name || '';
+          if (pId === product.id || pName === product.product_name || pName === product.name) return;
+
+          const variants = pRow.variants || {};
+          const vKeys = Object.keys(variants);
+          const firstVar = vKeys.length > 0 ? variants[vKeys[0]] : pRow;
+
+          const catPath = pRow.category_path || [pRow.category || ''];
+          const pTopCat = catPath[0] || '';
+          const pSubCat = catPath.length > 1 ? catPath[catPath.length - 1] : pTopCat;
+
+          const images = firstVar.product_images || pRow.product_images || [];
+          const rawImg = images.length > 0 ? images[0] : 'assets/logo_dark.png';
+          const localImg = resolveImg(rawImg, firstVar.file_path);
+
+          const item = {
+            id: pId,
+            name: pName,
+            sub: pSubCat,
+            cat: pTopCat,
+            filePath: firstVar.file_path || '',
+            img: localImg,
+            specs: firstVar.product_features || pRow.product_features || {}
+          };
+
+          if (subCat && (pSubCat === subCat || catPath.includes(subCat))) {
+            sameSubCatProducts.push(item);
+          } else if (topCat && (pTopCat === topCat || catPath.includes(topCat))) {
+            sameTopCatProducts.push(item);
+          } else {
+            otherProducts.push(item);
           }
         });
 
-        breadcrumbHTML += `
-          <span>/</span>
-          <span style="color: var(--ink);">${product.name}</span>
-        `;
+        const recommended = [...sameSubCatProducts, ...sameTopCatProducts, ...otherProducts].slice(0, 4);
 
-        breadcrumbsEl.innerHTML = breadcrumbHTML;
-
-        // Load Variant Data
-        function loadVariant(variantKey) {
-          activeVariantKey = variantKey;
-          activeVariant = product.variants[variantKey];
-
-          // Reset selections
-          selectedOptions = {};
-
-          // Initialize default selections (choose first option in each group)
-          for (const key in activeVariant.options) {
-            if (activeVariant.options.hasOwnProperty(key)) {
-              selectedOptions[key] = activeVariant.options[key][0].id;
-            }
-          }
-
-          renderGallery();
-          renderConfigurator();
-          renderSpecs();
-          renderRecommendedAccessories();
-          checkConstraints();
-          recalculate();
+        if (recommended.length === 0) {
+          accessoriesGrid.innerHTML = '<div style="padding: 20px; color: var(--muted); grid-column: 1 / -1;">No accessories found.</div>';
+          return;
         }
 
-        // Helper to get local image path
-        function resolveImg(url, customFilePath) {
-          const filePath = customFilePath || (activeVariant && activeVariant.file_path) || jsonFile || '';
-          if (typeof window.getLocalImagePath === 'function') {
-            return window.getLocalImagePath(url, filePath);
+        accessoriesGrid.innerHTML = recommended.map(p => {
+          const detailUrl = p.id ? ('product-detail.html?id=' + encodeURIComponent(p.id)) : (p.filePath ? ('product-detail.html?file=' + encodeURIComponent(p.filePath)) : ('product-detail.html?product=' + encodeURIComponent(p.name)));
+          let specHtml = '<div class="spec-list">';
+          let count = 0;
+          for (const key in p.specs) {
+            if (count >= 3) break;
+            const valStr = Array.isArray(p.specs[key]) ? p.specs[key].join(' ') : p.specs[key];
+            specHtml += `<div class="spec-item"><strong>${key}</strong><span>${valStr}</span></div>`;
+            count++;
           }
-          if (!url || typeof url !== 'string') return 'assets/logo_dark.png';
-          if (!url.startsWith('http')) return url;
-          const filename = url.split('/').pop().split('?')[0];
-          if (!filename) return 'assets/logo_dark.png';
-          if (filePath) {
-            const cleanFilePath = decodeURIComponent(filePath);
-            const lastSlash = cleanFilePath.lastIndexOf('/');
-            if (lastSlash !== -1) {
-              return cleanFilePath.substring(0, lastSlash) + '/' + filename;
-            }
-          }
-          return url;
-        }
+          specHtml += '</div>';
 
-        // Render Recommended Compatible Accessories from the same category
-        function renderRecommendedAccessories() {
-          const accessoriesGrid = document.getElementById('productGrid');
-          if (!accessoriesGrid || typeof AZOOGI_PRODUCTS === 'undefined' || !AZOOGI_PRODUCTS.products) return;
-
-          const currentCatPath = product.category_path || [product.category || ''];
-          const topCat = currentCatPath[0] || '';
-          const subCat = currentCatPath.length > 1 ? currentCatPath[currentCatPath.length - 1] : topCat;
-
-          const sameSubCatProducts = [];
-          const sameTopCatProducts = [];
-          const otherProducts = [];
-
-          for (const pKey in AZOOGI_PRODUCTS.products) {
-            if (!AZOOGI_PRODUCTS.products.hasOwnProperty(pKey)) continue;
-            if (pKey === product.name) continue;
-
-            const pRow = AZOOGI_PRODUCTS.products[pKey];
-            const variants = pRow.variants || {};
-            const vKeys = Object.keys(variants);
-            if (vKeys.length === 0) continue;
-
-            const firstVar = variants[vKeys[0]];
-            const catPath = pRow.category_path || [];
-            const pTopCat = catPath[0] || '';
-            const pSubCat = catPath.length > 1 ? catPath[catPath.length - 1] : pTopCat;
-
-            const rawImg = (firstVar.product_images && firstVar.product_images.length > 0)
-              ? firstVar.product_images[0]
-              : 'assets/logo_dark.png';
-
-            const localImg = resolveImg(rawImg, firstVar.file_path);
-
-            const item = {
-              name: pRow.name || pKey,
-              sub: pSubCat,
-              cat: pTopCat,
-              filePath: firstVar.file_path || '',
-              img: localImg,
-              specs: firstVar.product_features || {}
-            };
-
-            if (subCat && (pSubCat === subCat || catPath.includes(subCat))) {
-              sameSubCatProducts.push(item);
-            } else if (topCat && (pTopCat === topCat || catPath.includes(topCat))) {
-              sameTopCatProducts.push(item);
-            } else {
-              otherProducts.push(item);
-            }
-          }
-
-          const recommended = [...sameSubCatProducts, ...sameTopCatProducts, ...otherProducts].slice(0, 4);
-
-          if (recommended.length === 0) {
-            accessoriesGrid.innerHTML = '<div style="padding: 20px; color: var(--muted); grid-column: 1 / -1;">No accessories found.</div>';
-            return;
-          }
-
-          accessoriesGrid.innerHTML = recommended.map(p => {
-            const detailUrl = 'product-detail.html?file=' + encodeURIComponent(p.filePath);
-            let specHtml = '<div class="spec-list">';
-            let count = 0;
-            for (const key in p.specs) {
-              if (count >= 3) break;
-              const valStr = Array.isArray(p.specs[key]) ? p.specs[key].join(' ') : p.specs[key];
-              specHtml += `<div class="spec-item"><strong>${key}</strong><span>${valStr}</span></div>`;
-              count++;
-            }
-            specHtml += '</div>';
-
-            return `
+          return `
                 <div class="prod-card" onclick="window.location.href='${detailUrl}'">
                   <div class="prod-card-img">
                     <div class="prod-swatch" style="background-image:url('${p.img}'); background-size:cover; background-position:center;"></div>
@@ -799,468 +717,534 @@
                   </div>
                 </div>
               `;
-          }).join('');
+        }).join('');
+      }
+
+      // Render Gallery
+      function renderGallery() {
+        galleryThumbs.innerHTML = '';
+        const features = product.product_features || {};
+
+        let images = [];
+
+        function addImagesFrom(source) {
+          if (!source) return;
+          if (Array.isArray(source)) {
+            source.forEach(item => {
+              if (typeof item === 'string' && item.startsWith('http')) {
+                images.push(item);
+              } else if (typeof item === 'object' && item !== null && item.url) {
+                images.push(item.url);
+              }
+            });
+          } else if (typeof source === 'string' && source.startsWith('http')) {
+            images.push(source);
+          }
         }
 
-        // Render Gallery
-        function renderGallery() {
-          galleryThumbs.innerHTML = '';
-          const images = activeVariant.product_images || [];
+        addImagesFrom(product.product_images);
+        addImagesFrom(features["Product image"]);
+        addImagesFrom(features["Product gallery"]);
+        addImagesFrom(features["Product Image"]);
+        addImagesFrom(features["Product Gallery"]);
 
-          if (images.length === 0) {
-            galleryMainImg.src = 'assets/logo_dark.png';
-            galleryMainImg.style.display = '';
-            return;
-          }
+        images = Array.from(new Set(images));
 
-          const mainLocalSrc = resolveImg(images[0]);
-          galleryMainImg.src = mainLocalSrc;
-          galleryMainImg.style.display = '';
-          galleryMainImg.style.opacity = '1';
-          galleryMainImg.style.mixBlendMode = 'normal';
-          galleryMainImg.onerror = () => {
-            galleryMainImg.src = 'assets/logo_dark.png';
+        if (!images || images.length === 0) {
+          galleryMainImg.src = 'assets/logo_dark.png';
+          galleryMainImg.style.display = 'block';
+          return;
+        }
+
+        const mainLocalSrc = resolveImg(images[0]);
+        galleryMainImg.src = mainLocalSrc;
+        galleryMainImg.style.display = 'block';
+        galleryMainImg.style.opacity = '1';
+        galleryMainImg.onerror = () => {
+          galleryMainImg.src = 'assets/logo_dark.png';
+        };
+
+        images.forEach((imgSrc, idx) => {
+          const localSrc = resolveImg(imgSrc);
+          const thumb = document.createElement('div');
+          thumb.className = `thumb-card${idx === 0 ? ' active' : ''}`;
+
+          const thumbImg = document.createElement('img');
+          thumbImg.src = localSrc;
+          thumbImg.alt = `Product Thumbnail ${idx + 1}`;
+          thumbImg.onerror = () => {
+            thumbImg.src = 'assets/logo_dark.png';
           };
+          thumb.appendChild(thumbImg);
 
-          // Add glow elements or modify SVGs
-          const catLower = (product.category || "").toLowerCase();
-          const nameLower = (product.name || "").toLowerCase();
-          const isNeonOrStrip = catLower.includes('neon') || catLower.includes('linear') || nameLower.includes('strip') || nameLower.includes('nnr');
-          const neonSvg = document.getElementById('neon-svg');
-
-          if (isNeonOrStrip) {
-            if (neonSvg) neonSvg.style.display = 'block';
-          } else {
-            if (neonSvg) neonSvg.style.display = 'none';
-          }
-
-          images.forEach((imgSrc, idx) => {
-            const localSrc = resolveImg(imgSrc);
-            const thumb = document.createElement('div');
-            thumb.className = `thumb-card${idx === 0 ? ' active' : ''}`;
-
-            const thumbImg = document.createElement('img');
-            thumbImg.src = localSrc;
-            thumbImg.alt = `Product Thumbnail ${idx + 1}`;
-            thumbImg.onerror = () => {
-              thumbImg.src = 'assets/logo_dark.png';
-            };
-            thumb.appendChild(thumbImg);
-
-            thumb.addEventListener('click', () => {
-              galleryThumbs.querySelectorAll('.thumb-card').forEach(t => t.classList.remove('active'));
-              thumb.classList.add('active');
-              galleryMainImg.src = localSrc;
-
-              // Fade neon SVG outline if viewing sub-pictures
-              if (idx > 0) {
-                if (neonSvg) neonSvg.style.opacity = '0.15';
-              } else {
-                if (neonSvg) neonSvg.style.opacity = '1';
-              }
-            });
-
-            galleryThumbs.appendChild(thumb);
+          thumb.addEventListener('click', () => {
+            galleryThumbs.querySelectorAll('.thumb-card').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+            galleryMainImg.src = localSrc;
           });
 
-          // Update technical specifications dimension drawing image
-          const dimensionImg = document.getElementById('spec-dimension-image');
-          if (dimensionImg) {
-            dimensionImg.src = 'assets/dimensions.png';
-          }
+          galleryThumbs.appendChild(thumb);
+        });
+      }
+
+      // Render Configurator Options
+      function renderConfigurator() {
+        configurator.innerHTML = '<div class="reset-selection" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;"><h3 style="font-family: var(--font-serif); font-size: 28px; margin: 0;">Product Configuration</h3><a href="#" id="btn-clear-selection" class="btn sm" style="display: flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" height="15px" viewBox="0 -960 960 960" fill="currentColor"><path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>Reset Selection</a></div>';
+
+        const clearBtn = document.getElementById('btn-clear-selection');
+        if (clearBtn) {
+          clearBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            selectedOptions = {};
+            renderConfigurator();
+            checkConstraints();
+            recalculate();
+          });
         }
 
-        // Render Configurator Options
-        function renderConfigurator() {
-          configurator.innerHTML = '<div class="reset-selection"><h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px; margin-top-10px">Build Your Own</h3><a href="#" class="btn sm"><svg xmlns="http://www.w3.org/2000/svg" height="15px" viewBox="0 -960 960 960"><path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>Clear Selection</a></div>';
-          const options = activeVariant.options;
+        const options = product.options || {};
+        const optionKeys = Object.keys(options);
 
-          // Configurator option fields only for current product model (bypass variant switch)
+        if (optionKeys.length === 0) {
+          const infoBox = document.createElement('div');
+          infoBox.style.cssText = "padding: 16px; background: var(--card-bg); border: 1px solid var(--border-light); border-radius: 6px; color: var(--muted); font-size: 13px;";
+          infoBox.textContent = "Standard configuration. No customizable options for this model.";
+          configurator.appendChild(infoBox);
+          return;
+        }
 
-          // Render configuration fields
-          for (const optKey in options) {
-            if (!options.hasOwnProperty(optKey)) continue;
+        for (const optKey in options) {
+          if (!options.hasOwnProperty(optKey)) continue;
 
-            const optVals = options[optKey];
+          const optVals = options[optKey];
+          if (!Array.isArray(optVals) || optVals.length === 0) continue;
 
-            const group = document.createElement('div');
-            group.className = 'config-group';
-            group.innerHTML = `
-              <div class="config-group-title">
+          const group = document.createElement('div');
+          group.className = 'config-group';
+          group.style.marginBottom = '24px';
+
+          group.innerHTML = `
+              <div class="config-group-title" style="display: flex; justify-content: space-between; font-weight: 600; margin-bottom: 10px;">
                 <span>${optKey}</span>
-                
               </div>
-              <div class="config-options-flex" id="options-flex-${optKey.replace(/\s+/g, '-')}"></div>
+              <div class="config-options-flex" id="options-flex-${optKey.replace(/\s+/g, '-')}" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
             `;
-            configurator.appendChild(group);
+          configurator.appendChild(group);
 
-            const flex = group.querySelector(`#options-flex-${optKey.replace(/\s+/g, '-')}`);
+          const flex = group.querySelector(`#options-flex-${optKey.replace(/\s+/g, '-')}`);
 
-            optVals.forEach(val => {
-              const btn = document.createElement('button');
-              btn.className = 'config-btn';
-              btn.setAttribute('data-opt-key', optKey);
-              btn.setAttribute('data-opt-id', val.id);
-              btn.setAttribute('data-opt-name', val.name);
+          optVals.forEach(valObj => {
+            const btn = document.createElement('button');
+            btn.className = 'config-btn';
+            btn.setAttribute('data-opt-key', optKey);
+            btn.setAttribute('data-opt-id', valObj.id);
+            btn.setAttribute('data-opt-name', valObj.name);
 
-              if (optKey.toUpperCase() === 'CCT') {
-                let dotColor = '#ffffff';
-                const name = val.name.toUpperCase();
-                if (name.includes('2300K') || name.includes('2200K')) dotColor = '#ffa64d';
-                else if (name.includes('2700K')) dotColor = '#ffb45a';
-                else if (name.includes('3000K')) dotColor = '#ffc878';
-                else if (name.includes('4000K') || name.includes('4300K')) dotColor = '#ffebc8';
-                else if (name.includes('6000K') || name.includes('6500K')) dotColor = '#dcf0ff';
-                else if (name.includes('RGB')) dotColor = 'linear-gradient(to right, red, green, blue)';
+            btn.textContent = valObj.name;
 
-                btn.innerHTML = `${val.name}`;
-              } else {
-                btn.textContent = val.name;
-              }
-
-              btn.addEventListener('click', () => {
-                selectedOptions[optKey] = val.id;
-                checkConstraints();
-                recalculate();
-              });
-
-              flex.appendChild(btn);
-            });
-          }
-
-          // Render Custom Length Slider if linear/neon product
-          // const isLinear = product.category.toLowerCase().includes('neon') || product.category.toLowerCase().includes('linear') || product.name.toLowerCase().includes('strip') || product.name.toLowerCase().includes('nnr');
-          // if (isLinear) {
-          //   const lengthGroup = document.createElement('div');
-          //   lengthGroup.className = 'config-group';
-          //   lengthGroup.innerHTML = `
-          //     <div class="config-group-title">
-          //       <span>Custom Run Length</span>
-          //       <span style="color: var(--accent);"><span id="length-val">5.0</span> m</span>
-          //     </div>
-          //     <div class="slider-wrapper">
-          //       <div class="slider-header">
-          //         <input type="range" min="1" max="15" step="0.5" value="${selectedLength}" class="range-input" id="length-slider">
-          //       </div>
-          //     </div>
-          //   `;
-          //   configurator.appendChild(lengthGroup);
-
-          //   const slider = lengthGroup.querySelector('#length-slider');
-          //   slider.addEventListener('input', function () {
-          //     selectedLength = parseFloat(this.value);
-          //     document.getElementById('length-val').textContent = selectedLength.toFixed(1);
-          //     recalculate();
-          //   });
-          //   if (calcPanel) calcPanel.style.display = 'block';
-          // } else {
-          //   if (calcPanel) calcPanel.style.display = 'none';
-          // }
-        }
-
-        // Render Specifications
-        function renderSpecs() {
-          specTableBody.innerHTML = '';
-          const features = activeVariant.product_features || {};
-          for (const key in features) {
-            if (features.hasOwnProperty(key)) {
-              const val = features[key];
-              const row = document.createElement('tr');
-              row.innerHTML = `
-                <td>${key}</td>
-                <td>${Array.isArray(val) ? val.join(' ') : val}</td>
-              `;
-              specTableBody.appendChild(row);
+            if (selectedOptions[optKey] && String(selectedOptions[optKey]) === String(valObj.id)) {
+              btn.classList.add('active');
             }
-          }
-        }
 
-        // Constraints Logic Checker
-        function checkConstraints() {
-          const prohibitedIds = new Set();
-
-          const activeIds = Object.values(selectedOptions);
-          activeIds.forEach(id => {
-            if (activeVariant.constraints && activeVariant.constraints[id]) {
-              activeVariant.constraints[id].forEach(forbiddenId => {
-                prohibitedIds.add(forbiddenId);
-              });
-            }
-          });
-
-          const options = activeVariant.options;
-          for (const optKey in options) {
-            if (!options.hasOwnProperty(optKey)) continue;
-
-            const optVals = options[optKey];
-            const flex = document.getElementById(`options-flex-${optKey.replace(/\s+/g, '-')}`);
-            if (!flex) continue;
-
-            let hasActiveValid = false;
-            let currentSelectedId = selectedOptions[optKey];
-
-            const btns = flex.querySelectorAll('.config-btn');
-            btns.forEach(btn => {
-              const optId = btn.getAttribute('data-opt-id');
-
-              if (prohibitedIds.has(String(optId)) || prohibitedIds.has(Number(optId))) {
-                btn.disabled = true;
-                btn.classList.add('disabled');
+            btn.addEventListener('click', () => {
+              if (selectedOptions[optKey] === valObj.id) {
+                delete selectedOptions[optKey];
                 btn.classList.remove('active');
               } else {
-                btn.disabled = false;
-                btn.classList.remove('disabled');
-
-                if (String(optId) === String(currentSelectedId)) {
-                  btn.classList.add('active');
-                  hasActiveValid = true;
-                } else {
-                  btn.classList.remove('active');
-                }
+                selectedOptions[optKey] = valObj.id;
+                flex.querySelectorAll('.config-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
               }
+
+              checkConstraints();
+              recalculate();
             });
 
-            // Fallback resolution
-            if (!hasActiveValid && optVals.length > 0) {
-              let fallbackVal = null;
-              for (let i = 0; i < optVals.length; i++) {
-                const optId = optVals[i].id;
-                if (!prohibitedIds.has(String(optId)) && !prohibitedIds.has(Number(optId))) {
-                  fallbackVal = optVals[i];
-                  break;
-                }
-              }
-              if (fallbackVal) {
-                selectedOptions[optKey] = String(fallbackVal.id);
-                btns.forEach(btn => {
-                  const optId = btn.getAttribute('data-opt-id');
-                  if (String(optId) === String(fallbackVal.id)) {
-                    btn.classList.add('active');
-                  }
-                });
+            flex.appendChild(btn);
+          });
+        }
+      }
+
+      // Render Specifications
+      function renderSpecs() {
+        specTableBody.innerHTML = '';
+        const features = product.product_features || {};
+        const ignoreKeys = [
+          "id", "file_path", "options", "constraints", "sku", "product_name", "name",
+          "supplier code", "product_short_description", "product_description", "product_images",
+          "product image", "product gallery", "product dimension", "product_dimension", "attachment", "images",
+          "meta keywords", "meta_keywords", "meta"
+        ];
+
+        let count = 0;
+        for (const key in features) {
+          if (!features.hasOwnProperty(key)) continue;
+          if (ignoreKeys.includes(key.toLowerCase())) continue;
+
+          const val = features[key];
+          if (val === null || val === undefined || val === '') continue;
+
+          let displayVal = val;
+          if (Array.isArray(val)) {
+            if (val.length > 0 && typeof val[0] === 'object') continue;
+            displayVal = val.join(', ');
+          } else if (typeof val === 'object') {
+            continue;
+          }
+
+          count++;
+          const row = document.createElement('tr');
+          row.innerHTML = `
+              <td style="padding: 12px 16px; font-weight: 600; color: var(--ink); border-bottom: 1px solid var(--line);">${key}</td>
+              <td style="padding: 12px 16px; color: var(--muted); border-bottom: 1px solid var(--line);">${displayVal}</td>
+            `;
+          specTableBody.appendChild(row);
+        }
+
+        if (count === 0) {
+          specTableBody.innerHTML = '<tr><td colspan="2" style="padding: 16px; color: var(--muted);">No specifications available.</td></tr>';
+        }
+
+        // Update Technical Specifications Product Dimension Image
+        const dimImgEl = document.getElementById('spec-dimension-image');
+        if (dimImgEl) {
+          let dimUrl = null;
+          const dimSource = product.product_dimension || features["Product Dimension"] || features["Product dimension"];
+
+          if (Array.isArray(dimSource) && dimSource.length > 0) {
+            const first = dimSource[0];
+            if (typeof first === 'object' && first !== null && first.url) {
+              dimUrl = first.url;
+            } else if (typeof first === 'string' && first.startsWith('http')) {
+              dimUrl = first;
+            }
+          } else if (typeof dimSource === 'string' && dimSource.startsWith('http')) {
+            dimUrl = dimSource;
+          }
+
+          if (dimUrl) {
+            dimImgEl.src = resolveImg(dimUrl);
+            dimImgEl.style.display = 'block';
+          } else {
+            dimImgEl.src = 'assets/dimensions.png';
+          }
+        }
+      }
+
+      // Render Product Icons from Airtable "Product Icons"
+      function renderProductIcons() {
+        const iconsRow = document.querySelector('.product-icons-row');
+        const iconsWrapper = document.querySelector('.product-icons-row-wrapper');
+        if (!iconsRow) return;
+
+        const features = product.product_features || {};
+        const rawIcons = product.product_icons || features["Product Icons"] || features["Product icons"] || features["product_icons"];
+
+        let iconUrls = [];
+        if (Array.isArray(rawIcons)) {
+          rawIcons.forEach(item => {
+            if (typeof item === 'string' && (item.startsWith('http') || item.startsWith('assets/'))) {
+              iconUrls.push(item);
+            } else if (typeof item === 'object' && item !== null && item.url) {
+              iconUrls.push(item.url);
+            }
+          });
+        } else if (typeof rawIcons === 'string' && (rawIcons.startsWith('http') || rawIcons.startsWith('assets/'))) {
+          iconUrls.push(rawIcons);
+        }
+
+        iconUrls = Array.from(new Set(iconUrls));
+
+        if (iconUrls.length > 0) {
+          if (iconsWrapper) iconsWrapper.style.display = 'block';
+          iconsRow.innerHTML = iconUrls.map((url, idx) => `
+            <img src="${resolveImg(url)}" alt="Product Icon ${idx + 1}"
+              style="height: 42px; width: auto; opacity: 0.85; transition: opacity 0.2s; max-width: 100px; object-fit: contain;"
+              onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"
+              onerror="this.style.display='none'">
+          `).join('');
+        } else {
+          if (iconsWrapper) iconsWrapper.style.display = 'none';
+          iconsRow.innerHTML = '';
+        }
+      }
+
+      // Constraints Logic Checker
+      function checkConstraints() {
+        const prohibitedIds = new Set();
+
+        const activeIds = Object.values(selectedOptions);
+        activeIds.forEach(id => {
+          if (product.constraints && product.constraints[id]) {
+            product.constraints[id].forEach(forbiddenId => {
+              prohibitedIds.add(String(forbiddenId));
+            });
+          }
+          if (product.constraints) {
+            for (const cKey in product.constraints) {
+              const forbiddenList = product.constraints[cKey];
+              if (Array.isArray(forbiddenList) && forbiddenList.map(String).includes(String(id))) {
+                prohibitedIds.add(String(cKey));
               }
             }
+          }
+        });
 
-            // Update active labels
-            const selectedId = selectedOptions[optKey];
-            const selectedValObj = optVals.find(v => String(v.id) === String(selectedId));
-            const label = document.getElementById(`selected-${optKey.replace(/\s+/g, '-')}-label`);
-            if (label && selectedValObj) {
-              label.textContent = selectedValObj.name;
+        const options = product.options || {};
+        for (const optKey in options) {
+          if (!options.hasOwnProperty(optKey)) continue;
+
+          const optVals = options[optKey];
+          const flex = document.getElementById(`options-flex-${optKey.replace(/\s+/g, '-')}`);
+          if (!flex) continue;
+
+          let hasActiveValid = false;
+          let currentSelectedId = selectedOptions[optKey];
+
+          const btns = flex.querySelectorAll('.config-btn');
+          btns.forEach(btn => {
+            const optId = btn.getAttribute('data-opt-id');
+
+            if (prohibitedIds.has(String(optId)) || prohibitedIds.has(Number(optId))) {
+              btn.disabled = true;
+              btn.classList.add('disabled');
+              btn.classList.remove('active');
+            } else {
+              btn.disabled = false;
+              btn.classList.remove('disabled');
+              if (selectedOptions[optKey] && String(optId) === String(selectedOptions[optKey])) {
+                btn.classList.add('active');
+              } else {
+                btn.classList.remove('active');
+              }
+            }
+          });
+        }
+      }
+
+      // Recalculate parameters, SKU, lumens, drivers
+      function recalculate() {
+        const pName = product.product_name || product.name || "Product";
+        const features = product.product_features || {};
+        const skuDisplay = features.SKU || features["Supplier Code"] || product.sku || product.id || pName;
+
+        let wattageVal = 14.4;
+        let selectedCctText = "";
+        let selectedFinishText = "";
+
+        const options = product.options || {};
+        for (const optKey in options) {
+          const optVals = options[optKey] || [];
+          const selectedId = selectedOptions[optKey];
+          const valObj = optVals.find(v => String(v.id) === String(selectedId));
+          if (valObj) {
+            if (optKey.toUpperCase() === 'WATTAGE') {
+              wattageVal = parseFloat(valObj.name.replace(/[^\d.]/g, '')) || 14.4;
+            } else if (optKey.toUpperCase() === 'CCT') {
+              selectedCctText = valObj.name;
+            } else if (optKey.toUpperCase() === 'FINISH' || optKey.toUpperCase() === 'COLOUR') {
+              selectedFinishText = valObj.name;
             }
           }
         }
 
-        // Recalculate parameters, SKU, lumens, drivers
-        function recalculate() {
-          let wattageVal = 14.4;
-          let selectedCctText = "";
-          let selectedFinishText = "";
+        const totalPower = selectedLength * wattageVal;
+        const totalLumens = selectedLength * (wattageVal * 85);
 
-          const options = activeVariant.options;
-          for (const optKey in options) {
-            const optVals = options[optKey];
-            const selectedId = selectedOptions[optKey];
-            const valObj = optVals.find(v => String(v.id) === String(selectedId));
-            if (valObj) {
-              if (optKey.toUpperCase() === 'WATTAGE') {
-                wattageVal = parseFloat(valObj.name.replace(/[^\d.]/g, '')) || 14.4;
-              } else if (optKey.toUpperCase() === 'CCT') {
-                selectedCctText = valObj.name;
-              } else if (optKey.toUpperCase() === 'FINISH' || optKey.toUpperCase() === 'COLOUR') {
-                selectedFinishText = valObj.name;
-              }
-            }
+        if (calcPower) calcPower.textContent = totalPower.toFixed(1) + ' W';
+        if (calcLumens) calcLumens.textContent = Math.round(totalLumens).toLocaleString() + ' lm';
+
+        const requiredCapacity = totalPower * 1.20;
+        let driverRecommendation = "Azoogi 20W 24V IP67";
+        let driverPowerLimit = 20;
+
+        if (requiredCapacity > 200) {
+          driverRecommendation = "Multiple feeds / 2x Azoogi 150W Drivers";
+          driverPowerLimit = 300;
+        } else if (requiredCapacity > 150) {
+          driverRecommendation = "Azoogi 240W 24V IP67";
+          driverPowerLimit = 240;
+        } else if (requiredCapacity > 120) {
+          driverRecommendation = "Azoogi 150W 24V IP67";
+          driverPowerLimit = 150;
+        } else if (requiredCapacity > 80) {
+          driverRecommendation = "Azoogi 120W 24V IP67";
+          driverPowerLimit = 120;
+        } else if (requiredCapacity > 50) {
+          driverRecommendation = "Azoogi 80W 24V IP67";
+          driverPowerLimit = 80;
+        } else if (requiredCapacity > 20) {
+          driverRecommendation = "Azoogi 50W 24V IP67";
+          driverPowerLimit = 50;
+        }
+
+        if (calcDriver) calcDriver.textContent = driverRecommendation;
+
+        const percentage = Math.min(100, Math.round((totalPower / driverPowerLimit) * 100));
+        if (capacityPct) capacityPct.textContent = percentage + '%';
+        if (driverBarFill) driverBarFill.style.width = percentage + '%';
+
+        if (selectedLength > 10.0) {
+          if (driverWarning) driverWarning.style.display = 'block';
+        } else {
+          if (driverWarning) driverWarning.style.display = 'none';
+        }
+
+        let selectedOptionsSummary = [];
+
+        for (const key in selectedOptions) {
+          const id = selectedOptions[key];
+          const optVals = options[key] || [];
+          const valObj = optVals.find(v => String(v.id) === String(id)) || { name: String(id) };
+          if (valObj) {
+            selectedOptionsSummary.push(`${key}: ${valObj.name}`);
           }
+        }
 
-          const totalPower = selectedLength * wattageVal;
-          const totalLumens = selectedLength * (wattageVal * 85);
+        // Render dynamic summary card list
+        const summaryListEl = document.getElementById('selected-summary-list');
+        if (summaryListEl) {
+          summaryListEl.innerHTML = '';
 
-          if (calcPower) calcPower.textContent = totalPower.toFixed(1) + ' W';
-          if (calcLumens) calcLumens.textContent = Math.round(totalLumens).toLocaleString() + ' lm';
+          const modelDiv = document.createElement('div');
+          modelDiv.style.display = 'flex';
+          modelDiv.style.justifyContent = 'space-between';
+          modelDiv.style.borderBottom = '1px solid var(--line)';
+          modelDiv.style.paddingBottom = '8px';
+          modelDiv.style.marginBottom = '8px';
+          modelDiv.innerHTML = `
+              <strong style="color: var(--ink);">SKU / MODEL:</strong>
+              <span style="color: var(--accent); font-weight: 600;">${skuDisplay}</span>
+            `;
+          summaryListEl.appendChild(modelDiv);
 
-          const requiredCapacity = totalPower * 1.20;
-          let driverRecommendation = "Azoogi 20W 24V IP67";
-          let driverPowerLimit = 20;
-
-          if (requiredCapacity > 200) {
-            driverRecommendation = "Multiple feeds / 2x Azoogi 150W Drivers";
-            driverPowerLimit = 300;
-          } else if (requiredCapacity > 150) {
-            driverRecommendation = "Azoogi 240W 24V IP67";
-            driverPowerLimit = 240;
-          } else if (requiredCapacity > 120) {
-            driverRecommendation = "Azoogi 150W 24V IP67";
-            driverPowerLimit = 150;
-          } else if (requiredCapacity > 80) {
-            driverRecommendation = "Azoogi 120W 24V IP67";
-            driverPowerLimit = 120;
-          } else if (requiredCapacity > 50) {
-            driverRecommendation = "Azoogi 80W 24V IP67";
-            driverPowerLimit = 80;
-          } else if (requiredCapacity > 20) {
-            driverRecommendation = "Azoogi 50W 24V IP67";
-            driverPowerLimit = 50;
-          }
-
-          if (calcDriver) calcDriver.textContent = driverRecommendation;
-
-          const percentage = Math.min(100, Math.round((totalPower / driverPowerLimit) * 100));
-          if (capacityPct) capacityPct.textContent = percentage + '%';
-          if (driverBarFill) driverBarFill.style.width = percentage + '%';
-
-          if (selectedLength > 10.0) {
-            if (driverWarning) driverWarning.style.display = 'block';
-          } else {
-            if (driverWarning) driverWarning.style.display = 'none';
-          }
-
-          let selectedOptionsSummary = [];
+          // Render each option key/value pair
           for (const key in selectedOptions) {
             const id = selectedOptions[key];
-            const valObj = activeVariant.options[key].find(v => String(v.id) === String(id));
+            const optVals = options[key] || [];
+            const valObj = optVals.find(v => String(v.id) === String(id)) || { name: String(id) };
             if (valObj) {
-              selectedOptionsSummary.push(`${key}: ${valObj.name}`);
-            }
-          }
-
-          // Render dynamic summary card list
-          const summaryListEl = document.getElementById('selected-summary-list');
-          if (summaryListEl) {
-            summaryListEl.innerHTML = '';
-
-            // Render SKU / Model Name
-            const skuCode = `${product.name}-${activeVariantKey.replace(product.name + '-', '')}`;
-            const modelDiv = document.createElement('div');
-            modelDiv.style.display = 'flex';
-            modelDiv.style.justifyContent = 'space-between';
-            modelDiv.style.borderBottom = '1px solid var(--line)';
-            modelDiv.style.paddingBottom = '8px';
-            modelDiv.style.marginBottom = '8px';
-            modelDiv.innerHTML = `
-              <strong style="color: var(--ink);">SKU MODEL:</strong>
-              <span style="color: var(--accent); font-weight: 600;">${skuCode}</span>
-            `;
-            summaryListEl.appendChild(modelDiv);
-
-            // Render each option key/value pair
-            for (const key in selectedOptions) {
-              const id = selectedOptions[key];
-              const valObj = activeVariant.options[key].find(v => String(v.id) === String(id));
-              if (valObj) {
-                const itemDiv = document.createElement('div');
-                itemDiv.style.display = 'flex';
-                itemDiv.style.justifyContent = 'space-between';
-                itemDiv.innerHTML = `
-                  <span style="font-weight: 500; text-transform: capitalize;">${key}:</span>
+              const itemDiv = document.createElement('div');
+              itemDiv.style.display = 'flex';
+              itemDiv.style.justifyContent = 'space-between';
+              itemDiv.style.fontSize = '12px';
+              itemDiv.style.marginBottom = '4px';
+              itemDiv.innerHTML = `
+                  <span style="font-weight: 500; text-transform: capitalize; color: var(--muted);">${key}:</span>
                   <span style="color: var(--ink); font-weight: 600;">${valObj.name}</span>
                 `;
-                summaryListEl.appendChild(itemDiv);
-              }
+              summaryListEl.appendChild(itemDiv);
             }
           }
+        }
 
-          const skuCode = `${product.name}-${activeVariantKey.replace(product.name + '-', '')}`;
-          if (productCodeEl) productCodeEl.textContent = `MODEL: ${skuCode}`;
+        if (productCodeEl) productCodeEl.textContent = `SKU: ${skuDisplay}`;
 
-          const isLinear = product.category.toLowerCase().includes('neon') || product.category.toLowerCase().includes('linear') || product.name.toLowerCase().includes('strip') || product.name.toLowerCase().includes('nnr');
-          let specSummary = `Product: ${product.name} (${product.category})
-Subcategory: ${product.subcategory}
-Variant Model: ${activeVariantKey}
+        const catLower = (product.category || "").toLowerCase();
+        const pNameLower = pName.toLowerCase();
+        const isLinear = catLower.includes('neon') || catLower.includes('linear') || pNameLower.includes('strip') || pNameLower.includes('nnr');
+        let specSummary = `Product: ${pName} (${product.category || 'General'})
+Variant Model: ${skuDisplay}
 Selected Options:
 ${selectedOptionsSummary.map(s => "  - " + s).join('\n')}`;
 
-          if (isLinear) {
-            specSummary += `
+        if (isLinear) {
+          specSummary += `
 Requested custom cut length: ${selectedLength.toFixed(1)}m
 Total power load: ${totalPower.toFixed(1)}W
 Recommended system driver: ${driverRecommendation}`;
-          }
-
-          if (specField) specField.value = specSummary;
-
-          // Visual color glow update
-          // const glowArea = document.getElementById('glow-area');
-          const neonPath = document.getElementById('neon-path');
-          const neonSvg = document.getElementById('neon-svg');
-          // if (glowArea) {
-          //   let glowColor = '103, 208, 78';
-          //   if (selectedCctText.includes('2300K') || selectedCctText.includes('2200K')) glowColor = '255, 166, 77';
-          //   else if (selectedCctText.includes('2700K')) glowColor = '255, 180, 90';
-          //   else if (selectedCctText.includes('3000K')) glowColor = '255, 200, 120';
-          //   else if (selectedCctText.includes('4000K') || selectedCctText.includes('4300K')) glowColor = '255, 235, 200';
-          //   else if (selectedCctText.includes('6000K') || selectedCctText.includes('6500K')) glowColor = '220, 240, 255';
-          //   document.documentElement.style.setProperty('--glow-rgb', glowColor);
-
-          //   if (neonPath) {
-          //     neonPath.style.transition = 'none';
-          //     neonPath.style.strokeWidth = '22';
-          //     setTimeout(() => {
-          //       neonPath.style.transition = 'stroke-width 0.8s ease, filter 0.5s ease';
-          //       neonPath.style.strokeWidth = '14';
-          //     }, 50);
-          //   }
-          // }
         }
 
-        // Initialize
-        loadVariant(activeVariantKey);
+        const specField = document.getElementById('quote-spec');
+        if (specField) specField.value = specSummary;
 
-        // Accordion Tab controllers
-        document.querySelectorAll('.tab-nav-btn').forEach(btn => {
-          btn.addEventListener('click', function () {
-            document.querySelectorAll('.tab-nav-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        // Visual color glow update
+        // const glowArea = document.getElementById('glow-area');
+        const neonPath = document.getElementById('neon-path');
+        const neonSvg = document.getElementById('neon-svg');
+        // if (glowArea) {
+        //   let glowColor = '103, 208, 78';
+        //   if (selectedCctText.includes('2300K') || selectedCctText.includes('2200K')) glowColor = '255, 166, 77';
+        //   else if (selectedCctText.includes('2700K')) glowColor = '255, 180, 90';
+        //   else if (selectedCctText.includes('3000K')) glowColor = '255, 200, 120';
+        //   else if (selectedCctText.includes('4000K') || selectedCctText.includes('4300K')) glowColor = '255, 235, 200';
+        //   else if (selectedCctText.includes('6000K') || selectedCctText.includes('6500K')) glowColor = '220, 240, 255';
+        //   document.documentElement.style.setProperty('--glow-rgb', glowColor);
 
-            this.classList.add('active');
-            const tabId = this.getAttribute('data-tab');
-            const panel = document.getElementById(tabId);
-            if (panel) panel.classList.add('active');
-          });
+        //   if (neonPath) {
+        //     neonPath.style.transition = 'none';
+        //     neonPath.style.strokeWidth = '22';
+        //     setTimeout(() => {
+        //       neonPath.style.transition = 'stroke-width 0.8s ease, filter 0.5s ease';
+        //       neonPath.style.strokeWidth = '14';
+        //     }, 50);
+        //   }
+        // }
+      }
+
+      // Initialize
+      renderGallery();
+      renderConfigurator();
+      renderSpecs();
+      renderProductIcons();
+      renderRecommendedAccessories();
+      checkConstraints();
+      recalculate();
+
+      // Accordion Tab controllers
+      document.querySelectorAll('.tab-nav-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.tab-nav-btn').forEach(b => b.classList.remove('active'));
+          document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+
+          this.classList.add('active');
+          const tabId = this.getAttribute('data-tab');
+          const panel = document.getElementById(tabId);
+          if (panel) panel.classList.add('active');
+        });
+      });
+
+      // Spec button click animation for both details and summary buttons
+      const handleSpecAdd = function () {
+        const originalText = this.textContent;
+        this.textContent = 'Added to Quote List!';
+        this.style.background = 'var(--rgba-hover)';
+        this.style.borderColor = 'var(--accent)';
+        this.style.color = 'var(--accent)';
+
+        setTimeout(() => {
+          this.textContent = originalText;
+          this.style.background = 'none';
+          this.style.borderColor = 'var(--border-light)';
+          this.style.color = 'var(--ink)';
+        }, 2000);
+      };
+
+      const specBtn = document.getElementById('add-to-spec-btn');
+      if (specBtn) {
+        specBtn.addEventListener('click', handleSpecAdd);
+      }
+      const specSummaryBtn = document.getElementById('add-to-spec-btn-summary');
+      if (specSummaryBtn) {
+        specSummaryBtn.addEventListener('click', handleSpecAdd);
+      }
+
+      // Hover Zoom effect on main image
+      if (galleryMainImg) {
+        galleryMainImg.addEventListener('mousemove', (e) => {
+          const rect = galleryMainImg.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width) * 100;
+          const y = ((e.clientY - rect.top) / rect.height) * 100;
+          galleryMainImg.style.transformOrigin = `${x}% ${y}%`;
+          galleryMainImg.style.transform = 'scale(1.8)';
         });
 
-        // Spec button click animation for both details and summary buttons
-        const handleSpecAdd = function () {
-          const originalText = this.textContent;
-          this.textContent = 'Added to Quote List!';
-          this.style.background = 'var(--rgba-hover)';
-          this.style.borderColor = 'var(--accent)';
-          this.style.color = 'var(--accent)';
-
-          setTimeout(() => {
-            this.textContent = originalText;
-            this.style.background = 'none';
-            this.style.borderColor = 'var(--border-light)';
-            this.style.color = 'var(--ink)';
-          }, 2000);
-        };
-
-        const specBtn = document.getElementById('add-to-spec-btn');
-        if (specBtn) {
-          specBtn.addEventListener('click', handleSpecAdd);
-        }
-        const specSummaryBtn = document.getElementById('add-to-spec-btn-summary');
-        if (specSummaryBtn) {
-          specSummaryBtn.addEventListener('click', handleSpecAdd);
-        }
-
-        // Hover Zoom effect on main image
-        if (galleryMainImg) {
-          galleryMainImg.addEventListener('mousemove', (e) => {
-            const rect = galleryMainImg.getBoundingClientRect();
-            const x = ((e.clientX - rect.left) / rect.width) * 100;
-            const y = ((e.clientY - rect.top) / rect.height) * 100;
-            galleryMainImg.style.transformOrigin = `${x}% ${y}%`;
-            galleryMainImg.style.transform = 'scale(1.8)';
-          });
-
-          galleryMainImg.addEventListener('mouseleave', () => {
-            galleryMainImg.style.transform = 'scale(1)';
-            galleryMainImg.style.transformOrigin = 'center center';
-          });
-        }
-      } // Closing setupPageWithData
-    } // Closing initDynamicProductPage
+        galleryMainImg.addEventListener('mouseleave', () => {
+          galleryMainImg.style.transform = 'scale(1)';
+          galleryMainImg.style.transformOrigin = 'center center';
+        });
+      }
+    }
 
     // Inquiry Quote form submit
     function handleQuoteSubmit(event) {

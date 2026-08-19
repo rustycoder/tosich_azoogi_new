@@ -40,12 +40,14 @@ class AirtableDataExtractor:
     def extract_image_urls(self, record_fields: Dict[str, Any]) -> List[str]:
         """Extract image URLs from Airtable Attachment fields or plain string/URL fields."""
         images = []
-        image_field_keys = ["Images", "Product_Images", "Image", "Attachments", "Photos", "Media", "product_images"]
+        image_field_keys = [
+            "Images", "Product_Images", "Image", "Attachments", "Photos", "Media", "product_images",
+            "Product image", "Product gallery", "Gallery", "Photo"
+        ]
 
         for key, val in record_fields.items():
-            # Match explicitly listed keys or any list of attachment dicts
-            is_target_key = key.lower() in [k.lower() for k in image_field_keys] or "image" in key.lower() or "attachment" in key.lower()
-            if is_target_key and val:
+            is_target_key = key.lower() in [k.lower() for k in image_field_keys] or "image" in key.lower() or "attachment" in key.lower() or "gallery" in key.lower() or "photo" in key.lower()
+            if is_target_key and "dimension" not in key.lower() and val:
                 if isinstance(val, list):
                     for item in val:
                         if isinstance(item, dict) and "url" in item:
@@ -131,6 +133,20 @@ class AirtableDataExtractor:
 
 
 
+
+    def sanitize_field_value(self, val: Any) -> Any:
+        """Convert attachment dict objects containing 'url' into clean URL strings."""
+        if isinstance(val, list):
+            cleaned = []
+            for item in val:
+                if isinstance(item, dict) and "url" in item:
+                    cleaned.append(item["url"])
+                else:
+                    cleaned.append(item)
+            return cleaned
+        elif isinstance(val, dict) and "url" in val:
+            return val["url"]
+        return val
 
     def run_extraction(self) -> Dict[str, Any]:
         """Fetch all tables from Airtable and compile normalized product catalog JSON."""
@@ -240,21 +256,35 @@ class AirtableDataExtractor:
                                         if product_features[a_name] != a_val:
                                             product_features[a_name] = [product_features[a_name], a_val]
 
-            # 3. Add direct column attributes, excluding meta keys
+            # Extract Non-Attribute Columns for Top-Level Product Keys
+            sku = self.sanitize_field_value(fields.get("SKU") or fields.get("sku") or fields.get("Supplier Code") or "")
+            dimension_drawing = self.sanitize_field_value(fields.get("Product Dimension") or fields.get("Product dimension") or "")
+            stocked_item = self.sanitize_field_value(fields.get("Stocked Item") or fields.get("Stock / Quantity") or "")
+            datasheet = self.sanitize_field_value(fields.get("Datasheet") or "")
+            product_icons = self.sanitize_field_value(fields.get("Product Icons") or "")
+            meta_keywords = self.sanitize_field_value(fields.get("Meta Keywords") or fields.get("meta_keywords") or fields.get("Meta keywords") or fields.get("meta keywords") or "")
+            supplier_name = self.sanitize_field_value(fields.get("Supplier Name") or "")
+            status = self.sanitize_field_value(fields.get("Status") or "")
+            product_type = self.sanitize_field_value(fields.get("Product type") or "")
+
+            # 3. Add direct column attributes to product_features, excluding non-attribute meta keys
             excluded_meta_keys = [
                 "product_name", "product name", "name", "title",
                 "category", "product category", "categories",
-                "images", "product_images", "image", "attachments", "photos", "media",
-                "options", "constraints", "attributes keys", "attribute keys", "attributes keys",
-                "product short description", "short description", "short_description",
-                "product long description", "long description", "description", "product description",
-                "status", "product type", "attributes", "stock / quantity", "sku", "supplier code", "supplier name", "datasheet"
+                "images", "product_images", "attachments", "photos", "media",
+                "options", "constraints", "attributes keys", "attribute keys", "attributes",
+                "sku", "product dimension", "product_dimension", "product image", "product gallery",
+                "product short description", "product long description", "product description", "short description",
+                "stocked item", "stock / quantity", "status", "product type", "datasheet", "product icons",
+                "meta keywords", "meta_keywords",
+                "supplier code", "supplier name", "raw_fields"
             ]
 
             for f_key, f_val in fields.items():
                 if f_key.lower() not in excluded_meta_keys and f_val not in [None, "", []]:
+                    sanitized = self.sanitize_field_value(f_val)
                     if f_key not in product_features:
-                        product_features[f_key] = f_val
+                        product_features[f_key] = sanitized
 
             # Also check Attributes table referencing Product ID
             if attr_index:
@@ -273,13 +303,21 @@ class AirtableDataExtractor:
                 "id": p_id,
                 "product_name": p_name,
                 "category": category_name,
+                "sku": sku,
                 "product_short_description": p_short_desc,
                 "product_description": p_long_desc,
                 "product_images": images,
+                "product_dimension": dimension_drawing,
+                "stocked_item": stocked_item,
+                "datasheet": datasheet,
+                "product_icons": product_icons,
+                "meta_keywords": meta_keywords,
+                "supplier_name": supplier_name,
+                "status": status,
+                "product_type": product_type,
                 "product_features": product_features,
                 "options": options,
-                "constraints": constraints,
-                "raw_fields": fields
+                "constraints": constraints
             }
 
             catalog["products"].append(product_entry)
