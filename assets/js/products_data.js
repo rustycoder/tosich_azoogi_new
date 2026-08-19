@@ -2,15 +2,18 @@
 const AZOOGI_PRODUCTS = {
   "categories": [
     "5-in-1 Dimming Driver",
-    "LED Flex Sheet",
     "DALI-2 & PUSH 2 in 1 Dimmable Driver",
-    "Handrail",
+    "Drivers",
     "Garden Light",
-    "Pool Light",
-    "SMD Strip",
-    "RGBW Strip",
-    "Profiles",
+    "Handrail",
+    "LED Flex Sheet",
     "Non-Dimmable Driver",
+    "Outdoor & Architectural",
+    "Pool Light",
+    "Profiles",
+    "RGBW Strip",
+    "SMD Strip",
+    "Strips and Flex",
     "Switchable Driver"
   ],
   "products": [
@@ -26,7 +29,7 @@ const AZOOGI_PRODUCTS = {
       "stocked_item": "",
       "datasheet": "Yes",
       "product_icons": "",
-      "meta_keywords": "IP67 Waterproof, Triac Dimming, 24V DC Input, 5-Year Warranty",
+      "meta_keywords": "",
       "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
       "status": "draft",
       "product_type": "simple",
@@ -124,7 +127,11 @@ const AZOOGI_PRODUCTS = {
           }
         ]
       },
-      "constraints": []
+      "constraints": [],
+      "category_path": [
+        "Drivers",
+        "5-in-1 Dimming Driver"
+      ]
     },
     {
       "id": "recF77CHZbtpxqAdy",
@@ -138,6 +145,7 @@ const AZOOGI_PRODUCTS = {
       "stocked_item": "",
       "datasheet": "No",
       "product_icons": "",
+      "meta_keywords": "",
       "supplier_name": "CHINA - Rising Sun",
       "status": "draft",
       "product_type": "simple",
@@ -204,7 +212,11 @@ const AZOOGI_PRODUCTS = {
           }
         ]
       },
-      "constraints": []
+      "constraints": [],
+      "category_path": [
+        "Strips and Flex",
+        "LED Flex Sheet"
+      ]
     },
     {
       "id": "recFN63Od8jLncgeg",
@@ -218,6 +230,7 @@ const AZOOGI_PRODUCTS = {
       "stocked_item": "",
       "datasheet": "Yes",
       "product_icons": "",
+      "meta_keywords": "",
       "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
       "status": "draft",
       "product_type": "simple",
@@ -284,7 +297,11 @@ const AZOOGI_PRODUCTS = {
         "106": [
           "107"
         ]
-      }
+      },
+      "category_path": [
+        "Drivers",
+        "DALI-2 & PUSH 2 in 1 Dimmable Driver"
+      ]
     },
     {
       "id": "recFfiGcLRw3JjjSh",
@@ -298,6 +315,7 @@ const AZOOGI_PRODUCTS = {
       "stocked_item": "",
       "datasheet": "Yes",
       "product_icons": "",
+      "meta_keywords": "",
       "supplier_name": "SPARKLED",
       "status": "draft",
       "product_type": "simple",
@@ -359,7 +377,11 @@ const AZOOGI_PRODUCTS = {
           }
         ]
       },
-      "constraints": []
+      "constraints": [],
+      "category_path": [
+        "Outdoor & Architectural",
+        "Handrail"
+      ]
     },
     {
       "id": "recGgRF6gZMVCo6qY",
@@ -386,6 +408,7 @@ const AZOOGI_PRODUCTS = {
         "https://v5.airtableusercontent.com/v3/u/56/56/1787148000000/SdjrgLFleFN5DvJHGsqlZA/X4z3vwXFOskvcYU57b40hbn211JsWMFl_MRXy0qe7_En8Ry47RNP81Rc2YKZCBvd4HUQV7AsJ1bYM6xzmqsz_BxjhF9_Ntsze8A5adzudrosEG0DvapFMbwctPeqwgXSWKdbJuK4hmdv607Uzt-Ozn_vAE4dTSs3zywyR2rI6do/bHQv7NAlW527heAyRsni2-GkYyaw-_5Ie1nGthTQmOw",
         "https://v5.airtableusercontent.com/v3/u/56/56/1787148000000/wZsyA362iOsr16qlhv-zPg/WZxR8AiAuwnbu5i-ydyubQTXhYJLfJcf4ozc_KwJTGrpToBVfeKENvb29kBqmrS5hr-vi945TBlLHbfPrg6eUKwi1e8UncNimJZHomdORHyyut36vdc32db5Ly4nRL18Zll2RfRPzS5uRF9Pts_3l7KUDO0Wtu0V5TAJhKBrqDc/Fze2LHl-Pt2R-jqKTyB-HN05bJyzwjRZvk9ggfu1PMs"
       ],
+      "meta_keywords": "garden lights, outdoor garden lights, solar garden lights, LED landscape lighting, pathway lights, garden spotlights, yard lighting, low voltage landscape lights, waterproof outdoor lights, garden decor lighting",
       "supplier_name": "CHINA - 7 Colors Co Ltd",
       "status": "draft",
       "product_type": "simple",
@@ -398,8 +421,7 @@ const AZOOGI_PRODUCTS = {
           "7W",
           "12W"
         ],
-        "Voltage": "12V/24V",
-        "Meta Keywords": "garden lights, outdoor garden lights, solar garden lights, LED landscape lighting, pathway lights, garden spotlights, yard lighting, low voltage landscape lights, waterproof outdoor lights, garden decor lighting"
+        "Voltage": "12V/24V"
       },
       "options": {
         "Power": [
@@ -447,7 +469,11 @@ const AZOOGI_PRODUCTS = {
           }
         ]
       },
-      "constraints": []
+      "constraints": [],
+      "category_path": [
+        "Outdoor & Architectural",
+        "Garden Light"
+      ]
     },
     {
       "id": "recPcYiIIV8VLqru4",
@@ -463,6 +489,7 @@ const AZOOGI_PRODUCTS = {
       ],
       "datasheet": "No",
       "product_icons": "",
+      "meta_keywords": "",
       "supplier_name": "CHINA - 7 Colors Co Ltd",
       "status": "draft",
       "product_type": "simple",
@@ -505,7 +532,11 @@ const AZOOGI_PRODUCTS = {
           }
         ]
       },
-      "constraints": []
+      "constraints": [],
+      "category_path": [
+        "Outdoor & Architectural",
+        "Pool Light"
+      ]
     },
     {
       "id": "recYMBioQ5x4HEKdT",
@@ -519,6 +550,7 @@ const AZOOGI_PRODUCTS = {
       "stocked_item": "",
       "datasheet": "No",
       "product_icons": "",
+      "meta_keywords": "",
       "supplier_name": "CHINA - Rising Sun",
       "status": "draft",
       "product_type": "simple",
@@ -622,7 +654,11 @@ const AZOOGI_PRODUCTS = {
           "107",
           "108"
         ]
-      }
+      },
+      "category_path": [
+        "Strips and Flex",
+        "SMD Strip"
+      ]
     },
     {
       "id": "recalM75aIuyrcP07",
@@ -636,6 +672,7 @@ const AZOOGI_PRODUCTS = {
       "stocked_item": "",
       "datasheet": "No",
       "product_icons": "",
+      "meta_keywords": "",
       "supplier_name": "CHINA - Rising Sun",
       "status": "draft",
       "product_type": "simple",
@@ -657,7 +694,11 @@ const AZOOGI_PRODUCTS = {
           }
         ]
       },
-      "constraints": []
+      "constraints": [],
+      "category_path": [
+        "Strips and Flex",
+        "RGBW Strip"
+      ]
     },
     {
       "id": "recfKARqbTPcAwrrf",
@@ -673,6 +714,7 @@ const AZOOGI_PRODUCTS = {
       ],
       "datasheet": "No",
       "product_icons": "",
+      "meta_keywords": "",
       "supplier_name": "BAIWEI",
       "status": "draft",
       "product_type": "simple",
@@ -840,7 +882,10 @@ const AZOOGI_PRODUCTS = {
           "115",
           "117"
         ]
-      }
+      },
+      "category_path": [
+        "Profiles"
+      ]
     },
     {
       "id": "rechaqZ8XahO5Kftl",
@@ -854,6 +899,7 @@ const AZOOGI_PRODUCTS = {
       "stocked_item": "",
       "datasheet": "Yes",
       "product_icons": "",
+      "meta_keywords": "",
       "supplier_name": "SPARKLED",
       "status": "draft",
       "product_type": "simple",
@@ -915,7 +961,11 @@ const AZOOGI_PRODUCTS = {
           }
         ]
       },
-      "constraints": []
+      "constraints": [],
+      "category_path": [
+        "Outdoor & Architectural",
+        "Handrail"
+      ]
     },
     {
       "id": "reciwSxR6ltI67o0O",
@@ -929,6 +979,7 @@ const AZOOGI_PRODUCTS = {
       "stocked_item": "",
       "datasheet": "Yes",
       "product_icons": "",
+      "meta_keywords": "",
       "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
       "status": "draft",
       "product_type": "simple",
@@ -1006,7 +1057,11 @@ const AZOOGI_PRODUCTS = {
           }
         ]
       },
-      "constraints": []
+      "constraints": [],
+      "category_path": [
+        "Drivers",
+        "Non-Dimmable Driver"
+      ]
     },
     {
       "id": "recqPIv7UfmEBe3PO",
@@ -1020,6 +1075,7 @@ const AZOOGI_PRODUCTS = {
       "stocked_item": "",
       "datasheet": "Yes",
       "product_icons": "",
+      "meta_keywords": "",
       "supplier_name": "SPARKLED",
       "status": "draft",
       "product_type": "simple",
@@ -1076,7 +1132,11 @@ const AZOOGI_PRODUCTS = {
           }
         ]
       },
-      "constraints": []
+      "constraints": [],
+      "category_path": [
+        "Outdoor & Architectural",
+        "Handrail"
+      ]
     },
     {
       "id": "recqvzuqZCKIfSO11",
@@ -1090,6 +1150,7 @@ const AZOOGI_PRODUCTS = {
       "stocked_item": "",
       "datasheet": "Yes",
       "product_icons": "",
+      "meta_keywords": "",
       "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
       "status": "draft",
       "product_type": "simple",
@@ -1140,7 +1201,11 @@ const AZOOGI_PRODUCTS = {
           }
         ]
       },
-      "constraints": []
+      "constraints": [],
+      "category_path": [
+        "Drivers",
+        "Switchable Driver"
+      ]
     },
     {
       "id": "recz0f8gzZkhCSMm0",
@@ -1154,6 +1219,7 @@ const AZOOGI_PRODUCTS = {
       "stocked_item": "",
       "datasheet": "No",
       "product_icons": "",
+      "meta_keywords": "",
       "supplier_name": "BAIWEI",
       "status": "draft",
       "product_type": "simple",
@@ -1182,904 +1248,430 @@ const AZOOGI_PRODUCTS = {
           }
         ]
       },
-      "constraints": []
+      "constraints": [],
+      "category_path": [
+        "Profiles"
+      ]
     }
   ],
   "tree": [
     {
       "type": "category",
-      "name": "5-in-1 Dimming Driver",
+      "name": "Drivers",
       "children": [
         {
-          "type": "product_row",
-          "name": "5-in-1 Dimming Driver",
-          "variants": {
-            "5-in-1 Dimming Driver": {
-              "id": "rec2Wd9mV8ibXiAnL",
-              "product_name": "5-in-1 Dimming Driver",
-              "category": "5-in-1 Dimming Driver",
-              "sku": "ADR003D",
-              "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
-              "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
-              "product_images": [],
-              "product_dimension": "",
-              "stocked_item": "",
-              "datasheet": "Yes",
-              "product_icons": "",
-              "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
-              "status": "draft",
-              "product_type": "simple",
-              "product_features": {
-                "IP Rating": "IP67",
-                "Power": [
-                  "60W",
-                  "100W",
-                  "150W",
-                  "200W",
-                  "300W",
-                  "30W"
-                ],
-                "Voltage": [
-                  "12V",
-                  "24V"
-                ],
-                "AC Phase-Cut": "Triac",
-                "Current Sinking": "0-10V",
-                "Current Sourcing": "1-10V",
-                "Duty Cycle": "PWM",
-                "Variable Resistance": "Potentiometer"
-              },
-              "options": {
-                "Power": [
-                  {
-                    "name": "30W",
-                    "id": "101"
+          "type": "category",
+          "name": "Non-Dimmable Driver",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Non-Dimmable Driver",
+              "variants": {
+                "Non-Dimmable Driver": {
+                  "id": "reciwSxR6ltI67o0O",
+                  "product_name": "Non-Dimmable Driver",
+                  "category": "Non-Dimmable Driver",
+                  "sku": "ADR001",
+                  "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
+                  "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": "",
+                  "datasheet": "Yes",
+                  "product_icons": "",
+                  "meta_keywords": "",
+                  "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "IP Rating": "IP67",
+                    "Voltage": [
+                      "12V",
+                      "24V"
+                    ],
+                    "Power": [
+                      "20W",
+                      "40W",
+                      "60W",
+                      "100W",
+                      "150W",
+                      "200W",
+                      "300W",
+                      "400W",
+                      "500W"
+                    ]
                   },
-                  {
-                    "name": "60W",
-                    "id": "102"
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "20W",
+                        "id": "101"
+                      },
+                      {
+                        "name": "40W",
+                        "id": "102"
+                      },
+                      {
+                        "name": "60W",
+                        "id": "103"
+                      },
+                      {
+                        "name": "100W",
+                        "id": "104"
+                      },
+                      {
+                        "name": "150W",
+                        "id": "105"
+                      },
+                      {
+                        "name": "200W",
+                        "id": "106"
+                      },
+                      {
+                        "name": "300W",
+                        "id": "107"
+                      },
+                      {
+                        "name": "400W",
+                        "id": "108"
+                      },
+                      {
+                        "name": "500W",
+                        "id": "109"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "12V",
+                        "id": "110"
+                      },
+                      {
+                        "name": "24V",
+                        "id": "111"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP67",
+                        "id": "112"
+                      }
+                    ]
                   },
-                  {
-                    "name": "100W",
-                    "id": "103"
-                  },
-                  {
-                    "name": "150W",
-                    "id": "104"
-                  },
-                  {
-                    "name": "200W",
-                    "id": "105"
-                  },
-                  {
-                    "name": "300W",
-                    "id": "106"
-                  }
-                ],
-                "Voltage": [
-                  {
-                    "name": "12V",
-                    "id": "107"
-                  },
-                  {
-                    "name": "24V",
-                    "id": "108"
-                  }
-                ],
-                "IP Rating": [
-                  {
-                    "name": "IP67",
-                    "id": "109"
-                  }
-                ],
-                "AC Phase-Cut": [
-                  {
-                    "name": "Triac",
-                    "id": "110"
-                  }
-                ],
-                "Current Sinking": [
-                  {
-                    "name": "0-10V",
-                    "id": "111"
-                  }
-                ],
-                "Current Sourcing": [
-                  {
-                    "name": "1-10V",
-                    "id": "112"
-                  }
-                ],
-                "Duty Cycle": [
-                  {
-                    "name": "PWM",
-                    "id": "113"
-                  }
-                ],
-                "Variable Resistance": [
-                  {
-                    "name": "Potentiometer",
-                    "id": "114"
-                  }
-                ]
-              },
-              "constraints": []
+                  "constraints": [],
+                  "category_path": [
+                    "Drivers",
+                    "Non-Dimmable Driver"
+                  ]
+                }
+              }
             }
-          }
-        }
-      ]
-    },
-    {
-      "type": "category",
-      "name": "LED Flex Sheet",
-      "children": [
+          ]
+        },
         {
-          "type": "product_row",
-          "name": "LED Flex Sheet",
-          "variants": {
-            "LED Flex Sheet": {
-              "id": "recF77CHZbtpxqAdy",
-              "product_name": "LED Flex Sheet",
-              "category": "LED Flex Sheet",
-              "sku": "SMD-SHEET-30W-3K-IP20",
-              "product_short_description": "Transform your home into a breathtaking visual journey. Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.\n",
-              "product_description": "Transform your home into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers a sophisticated, seamless glow that beautifully enhances your elegant spaces, casting a warm and inviting atmosphere throughout. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating style to any room, making it the ultimate choice for elevated interior illumination.\n",
-              "product_images": [],
-              "product_dimension": "",
-              "stocked_item": "",
-              "datasheet": "No",
-              "product_icons": "",
-              "supplier_name": "CHINA - Rising Sun",
-              "status": "draft",
-              "product_type": "simple",
-              "product_features": {
-                "CCT": [
-                  "3000K",
-                  "4000K",
-                  "6000K"
-                ],
-                "IP Rating": [
-                  "IP20",
-                  "IP54",
-                  "IP67"
-                ],
-                "Power": "30W",
-                "Voltage": "24V",
-                "Dimension": "480mm (L) x 240mm (W)"
-              },
-              "options": {
-                "Power": [
-                  {
-                    "name": "30W",
-                    "id": "101"
-                  }
-                ],
-                "CCT": [
-                  {
-                    "name": "3000K",
-                    "id": "102"
+          "type": "category",
+          "name": "Switchable Driver",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Switchable Driver",
+              "variants": {
+                "Switchable Driver": {
+                  "id": "recqvzuqZCKIfSO11",
+                  "product_name": "Switchable Driver",
+                  "category": "Switchable Driver",
+                  "sku": "ADR-S12V24V-20W",
+                  "product_short_description": "Elevate your environment with a perfect blend of elegance and modern design, casting a warm, sophisticated glow that adds an unparalleled touch of ambiance and luxury.\n",
+                  "product_description": "Transform your spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your environment, casting a warm, sophisticated glow that effortlessly enhances the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and style to any setting, making it the ultimate choice for elevated architectural illumination.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": "",
+                  "datasheet": "Yes",
+                  "product_icons": "",
+                  "meta_keywords": "",
+                  "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Power": [
+                      "20W",
+                      "40W",
+                      "60W",
+                      "100W",
+                      "80W"
+                    ],
+                    "Voltage": "12V/24V",
+                    "IP Rating": "IP20"
                   },
-                  {
-                    "name": "4000K",
-                    "id": "103"
+                  "options": {
+                    "Voltage": [
+                      {
+                        "name": "12V/24V",
+                        "id": "101"
+                      }
+                    ],
+                    "Power": [
+                      {
+                        "name": "20W",
+                        "id": "102"
+                      },
+                      {
+                        "name": "40W",
+                        "id": "103"
+                      },
+                      {
+                        "name": "60W",
+                        "id": "104"
+                      },
+                      {
+                        "name": "80W",
+                        "id": "105"
+                      },
+                      {
+                        "name": "100W",
+                        "id": "106"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP20",
+                        "id": "107"
+                      }
+                    ]
                   },
-                  {
-                    "name": "6000K",
-                    "id": "104"
-                  }
-                ],
-                "Voltage": [
-                  {
-                    "name": "24V",
-                    "id": "105"
-                  }
-                ],
-                "IP Rating": [
-                  {
-                    "name": "IP20",
-                    "id": "106"
-                  },
-                  {
-                    "name": "IP54",
-                    "id": "107"
-                  },
-                  {
-                    "name": "IP67",
-                    "id": "108"
-                  }
-                ],
-                "Dimension": [
-                  {
-                    "name": "480mm (L) x 240mm (W)",
-                    "id": "109"
-                  }
-                ]
-              },
-              "constraints": []
+                  "constraints": [],
+                  "category_path": [
+                    "Drivers",
+                    "Switchable Driver"
+                  ]
+                }
+              }
             }
-          }
-        }
-      ]
-    },
-    {
-      "type": "category",
-      "name": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
-      "children": [
+          ]
+        },
         {
-          "type": "product_row",
+          "type": "category",
           "name": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
-          "variants": {
-            "DALI-2 & PUSH 2 in 1 Dimmable Driver": {
-              "id": "recFN63Od8jLncgeg",
-              "product_name": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
-              "category": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
-              "sku": "ADR005DA",
-              "product_short_description": "Transform your space with elegant design and discreet luxury. Enjoy a sophisticated, seamless glow that brings your vision to life and makes every moment feel truly magical.\n",
-              "product_description": "Elevate your spaces into a breathtaking visual journey of elegant design and discreet luxury with a sophisticated, seamless glow. This premium dimmable driver offers the perfect blend of modern innovation and refined elegance, effortlessly transforming your environment into a warm, welcoming retreat. Designed for those who appreciate flawless execution and an unparalleled touch of ambiance, it beautifully highlights your architecture to create a captivating and serene atmosphere. Unwind in the stunning, soft illumination that brings your vision to life and makes every evening feel truly magical.\n",
-              "product_images": [],
-              "product_dimension": "",
-              "stocked_item": "",
-              "datasheet": "Yes",
-              "product_icons": "",
-              "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
-              "status": "draft",
-              "product_type": "simple",
-              "product_features": {
-                "IP Rating": "IP67",
-                "Power": [
-                  "60W",
-                  "100W",
-                  "150W",
-                  "200W",
-                  "300W",
-                  "360W"
-                ],
-                "Voltage": [
-                  "12V",
-                  "24V"
-                ]
-              },
-              "options": {
-                "Power": [
-                  {
-                    "name": "60W",
-                    "id": "101"
+          "children": [
+            {
+              "type": "product_row",
+              "name": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
+              "variants": {
+                "DALI-2 & PUSH 2 in 1 Dimmable Driver": {
+                  "id": "recFN63Od8jLncgeg",
+                  "product_name": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
+                  "category": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
+                  "sku": "ADR005DA",
+                  "product_short_description": "Transform your space with elegant design and discreet luxury. Enjoy a sophisticated, seamless glow that brings your vision to life and makes every moment feel truly magical.\n",
+                  "product_description": "Elevate your spaces into a breathtaking visual journey of elegant design and discreet luxury with a sophisticated, seamless glow. This premium dimmable driver offers the perfect blend of modern innovation and refined elegance, effortlessly transforming your environment into a warm, welcoming retreat. Designed for those who appreciate flawless execution and an unparalleled touch of ambiance, it beautifully highlights your architecture to create a captivating and serene atmosphere. Unwind in the stunning, soft illumination that brings your vision to life and makes every evening feel truly magical.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": "",
+                  "datasheet": "Yes",
+                  "product_icons": "",
+                  "meta_keywords": "",
+                  "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "IP Rating": "IP67",
+                    "Power": [
+                      "60W",
+                      "100W",
+                      "150W",
+                      "200W",
+                      "300W",
+                      "360W"
+                    ],
+                    "Voltage": [
+                      "12V",
+                      "24V"
+                    ]
                   },
-                  {
-                    "name": "100W",
-                    "id": "102"
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "60W",
+                        "id": "101"
+                      },
+                      {
+                        "name": "100W",
+                        "id": "102"
+                      },
+                      {
+                        "name": "150W",
+                        "id": "103"
+                      },
+                      {
+                        "name": "200W",
+                        "id": "104"
+                      },
+                      {
+                        "name": "300W",
+                        "id": "105"
+                      },
+                      {
+                        "name": "360W",
+                        "id": "106"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "12V",
+                        "id": "107"
+                      },
+                      {
+                        "name": "24V",
+                        "id": "108"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP67",
+                        "id": "109"
+                      }
+                    ]
                   },
-                  {
-                    "name": "150W",
-                    "id": "103"
+                  "constraints": {
+                    "106": [
+                      "107"
+                    ]
                   },
-                  {
-                    "name": "200W",
-                    "id": "104"
-                  },
-                  {
-                    "name": "300W",
-                    "id": "105"
-                  },
-                  {
-                    "name": "360W",
-                    "id": "106"
-                  }
-                ],
-                "Voltage": [
-                  {
-                    "name": "12V",
-                    "id": "107"
-                  },
-                  {
-                    "name": "24V",
-                    "id": "108"
-                  }
-                ],
-                "IP Rating": [
-                  {
-                    "name": "IP67",
-                    "id": "109"
-                  }
-                ]
-              },
-              "constraints": {
-                "106": [
-                  "107"
-                ]
+                  "category_path": [
+                    "Drivers",
+                    "DALI-2 & PUSH 2 in 1 Dimmable Driver"
+                  ]
+                }
               }
             }
-          }
-        }
-      ]
-    },
-    {
-      "type": "category",
-      "name": "Handrail",
-      "children": [
-        {
-          "type": "product_row",
-          "name": "Handrail Spot II",
-          "variants": {
-            "Handrail Spot II": {
-              "id": "recFfiGcLRw3JjjSh",
-              "product_name": "Handrail Spot II",
-              "category": "Handrail",
-              "sku": "HRS011",
-              "product_short_description": "Elevate your pathways with Handrail Spot II. It casts a warm, sophisticated ambiance that seamlessly guides your steps with elegant architectural charm.\n",
-              "product_description": "Elevate your architectural designs with Handrail Spot II, the premium lighting solution that effortlessly marries sophistication with modern functionality. Designed to seamlessly blend into any indoor or outdoor pathway, it casts a warm, inviting glow that gracefully guides your way while accentuating the elegant contours of your space. Perfect for those who demand meticulous attention to detail, this exquisite fixture turns ordinary walkways into enchanting visual experiences, adding a layer of sophisticated ambiance and subtle security to your surroundings. Discreet yet profoundly impactful, it is the quintessential choice for transforming your environment into a beautifully illuminated masterpiece.\n",
-              "product_images": [],
-              "product_dimension": "",
-              "stocked_item": "",
-              "datasheet": "Yes",
-              "product_icons": "",
-              "supplier_name": "SPARKLED",
-              "status": "draft",
-              "product_type": "simple",
-              "product_features": {
-                "CCT": [
-                  "3000K",
-                  "4000K"
-                ],
-                "IP Rating": "IP67",
-                "Impact Strength": "IK10",
-                "Optics": [
-                  "SYM 30°",
-                  "SYM 60°",
-                  "ASYM 50°"
-                ],
-                "Power": "1.5W"
-              },
-              "options": {
-                "Power": [
-                  {
-                    "name": "1.5W",
-                    "id": "101"
-                  }
-                ],
-                "Optics": [
-                  {
-                    "name": "SYM 30°",
-                    "id": "102"
-                  },
-                  {
-                    "name": "SYM 60°",
-                    "id": "103"
-                  },
-                  {
-                    "name": "ASYM 50°",
-                    "id": "104"
-                  }
-                ],
-                "CCT": [
-                  {
-                    "name": "3000K",
-                    "id": "105"
-                  },
-                  {
-                    "name": "4000K",
-                    "id": "106"
-                  }
-                ],
-                "IP Rating": [
-                  {
-                    "name": "IP67",
-                    "id": "107"
-                  }
-                ],
-                "Impact Strength": [
-                  {
-                    "name": "IK10",
-                    "id": "108"
-                  }
-                ]
-              },
-              "constraints": []
-            }
-          }
+          ]
         },
         {
-          "type": "product_row",
-          "name": "Handrail Spot I",
-          "variants": {
-            "Handrail Spot I": {
-              "id": "rechaqZ8XahO5Kftl",
-              "product_name": "Handrail Spot I",
-              "category": "Handrail",
-              "sku": "HRS001",
-              "product_short_description": "Elegantly illuminate your pathways with Handrail Spot I. It casts a warm, sophisticated glow that guides the way while beautifully enhancing your architectural space.\n",
-              "product_description": "Illuminate your architectural masterpieces with the perfect blend of elegance and modern design. Handrail Spot I offers seamless integration into your outdoor or indoor pathways, casting a warm, sophisticated glow that guides the way while enhancing the beauty of your space. Crafted for those who appreciate refined detail, it transforms ordinary walkways into stunning visual journeys, adding an unparalleled touch of ambiance and security to any setting. Elegant, discreet, and captivating, it is the ultimate choice for elevated architectural lighting.\n",
-              "product_images": [],
-              "product_dimension": "",
-              "stocked_item": "",
-              "datasheet": "Yes",
-              "product_icons": "",
-              "supplier_name": "SPARKLED",
-              "status": "draft",
-              "product_type": "simple",
-              "product_features": {
-                "CCT": [
-                  "3000K",
-                  "4000K"
-                ],
-                "IP Rating": "IP67",
-                "Impact Strength": "IK10",
-                "Optics": [
-                  "SYM 30°",
-                  "SYM 60°",
-                  "ASYM 50°"
-                ],
-                "Power": "1.2W"
-              },
-              "options": {
-                "Power": [
-                  {
-                    "name": "1.2W",
-                    "id": "101"
-                  }
-                ],
-                "Optics": [
-                  {
-                    "name": "SYM 30°",
-                    "id": "102"
+          "type": "category",
+          "name": "5-in-1 Dimming Driver",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "5-in-1 Dimming Driver",
+              "variants": {
+                "5-in-1 Dimming Driver": {
+                  "id": "rec2Wd9mV8ibXiAnL",
+                  "product_name": "5-in-1 Dimming Driver",
+                  "category": "5-in-1 Dimming Driver",
+                  "sku": "ADR003D",
+                  "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
+                  "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": "",
+                  "datasheet": "Yes",
+                  "product_icons": "",
+                  "meta_keywords": "",
+                  "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "IP Rating": "IP67",
+                    "Power": [
+                      "60W",
+                      "100W",
+                      "150W",
+                      "200W",
+                      "300W",
+                      "30W"
+                    ],
+                    "Voltage": [
+                      "12V",
+                      "24V"
+                    ],
+                    "AC Phase-Cut": "Triac",
+                    "Current Sinking": "0-10V",
+                    "Current Sourcing": "1-10V",
+                    "Duty Cycle": "PWM",
+                    "Variable Resistance": "Potentiometer"
                   },
-                  {
-                    "name": "SYM 60°",
-                    "id": "103"
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "30W",
+                        "id": "101"
+                      },
+                      {
+                        "name": "60W",
+                        "id": "102"
+                      },
+                      {
+                        "name": "100W",
+                        "id": "103"
+                      },
+                      {
+                        "name": "150W",
+                        "id": "104"
+                      },
+                      {
+                        "name": "200W",
+                        "id": "105"
+                      },
+                      {
+                        "name": "300W",
+                        "id": "106"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "12V",
+                        "id": "107"
+                      },
+                      {
+                        "name": "24V",
+                        "id": "108"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP67",
+                        "id": "109"
+                      }
+                    ],
+                    "AC Phase-Cut": [
+                      {
+                        "name": "Triac",
+                        "id": "110"
+                      }
+                    ],
+                    "Current Sinking": [
+                      {
+                        "name": "0-10V",
+                        "id": "111"
+                      }
+                    ],
+                    "Current Sourcing": [
+                      {
+                        "name": "1-10V",
+                        "id": "112"
+                      }
+                    ],
+                    "Duty Cycle": [
+                      {
+                        "name": "PWM",
+                        "id": "113"
+                      }
+                    ],
+                    "Variable Resistance": [
+                      {
+                        "name": "Potentiometer",
+                        "id": "114"
+                      }
+                    ]
                   },
-                  {
-                    "name": "ASYM 50°",
-                    "id": "104"
-                  }
-                ],
-                "CCT": [
-                  {
-                    "name": "3000K",
-                    "id": "105"
-                  },
-                  {
-                    "name": "4000K",
-                    "id": "106"
-                  }
-                ],
-                "IP Rating": [
-                  {
-                    "name": "IP67",
-                    "id": "107"
-                  }
-                ],
-                "Impact Strength": [
-                  {
-                    "name": "IK10",
-                    "id": "108"
-                  }
-                ]
-              },
-              "constraints": []
-            }
-          }
-        },
-        {
-          "type": "product_row",
-          "name": "Handrail Spot III",
-          "variants": {
-            "Handrail Spot III": {
-              "id": "recqPIv7UfmEBe3PO",
-              "product_name": "Handrail Spot III",
-              "category": "Handrail",
-              "sku": "HRS021",
-              "product_short_description": "Elegantly illuminate your pathways with Handrail Spot III. It casts a warm, sophisticated glow that guides the way while enhancing your architectural space.\n",
-              "product_description": "Discover a new dimension of architectural elegance with Handrail Spot III. Perfectly engineered to blend seamlessly into your indoor and outdoor environments, this exquisite lighting solution casts a mesmerizing, sophisticated glow that elegantly maps your pathways. Designed for connoisseurs of fine detail, it redefines standard walkways into spectacular visual corridors, infusing your surroundings with an unparalleled layer of luxurious ambiance and subtle, reassuring security. Sleek, minimal, and entirely captivating, it represents the absolute pinnacle of refined aesthetic illumination.\n",
-              "product_images": [],
-              "product_dimension": "",
-              "stocked_item": "",
-              "datasheet": "Yes",
-              "product_icons": "",
-              "supplier_name": "SPARKLED",
-              "status": "draft",
-              "product_type": "simple",
-              "product_features": {
-                "CCT": [
-                  "3000K",
-                  "4000K"
-                ],
-                "IP Rating": "IP67",
-                "Impact Strength": "IK10",
-                "Optics": [
-                  "SYM 60°",
-                  "ASYM 80°"
-                ],
-                "Power": "1.5W"
-              },
-              "options": {
-                "Power": [
-                  {
-                    "name": "1.5W",
-                    "id": "101"
-                  }
-                ],
-                "Optics": [
-                  {
-                    "name": "SYM 60°",
-                    "id": "102"
-                  },
-                  {
-                    "name": "ASYM 80°",
-                    "id": "103"
-                  }
-                ],
-                "CCT": [
-                  {
-                    "name": "3000K",
-                    "id": "104"
-                  },
-                  {
-                    "name": "4000K",
-                    "id": "105"
-                  }
-                ],
-                "IP Rating": [
-                  {
-                    "name": "IP67",
-                    "id": "106"
-                  }
-                ],
-                "Impact Strength": [
-                  {
-                    "name": "IK10",
-                    "id": "107"
-                  }
-                ]
-              },
-              "constraints": []
-            }
-          }
-        }
-      ]
-    },
-    {
-      "type": "category",
-      "name": "Garden Light",
-      "children": [
-        {
-          "type": "product_row",
-          "name": "Garden Light",
-          "variants": {
-            "Garden Light": {
-              "id": "recGgRF6gZMVCo6qY",
-              "product_name": "Garden Light",
-              "category": "Garden Light",
-              "sku": "GL001",
-              "product_short_description": "Transform your outdoor spaces into a breathtaking visual journey. Experience discreet luxury and a sophisticated glow that beautifully enhances your home.\n",
-              "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
-              "product_images": [
-                "https://v5.airtableusercontent.com/v3/u/56/56/1787148000000/YBO7u6Y86NunhCWwWtw0QQ/Vs_Dm0I1u9x56hIPSM_6Znr-XSrw1UglLdazreWQj8v0X0g3qRNflHsjPaU3dvwRXlP1SWMdPBXfy62sjUth8Dg9mHMd2IDeIiNEgFb56vBwpKobQJnufFO-jInFBwPibjrIp5ixV-6gVogimaChbw/Tz307v67xwFz8N6PQa7VyemFhF-vOjoUAzMtnJUGy20",
-                "https://v5.airtableusercontent.com/v3/u/56/56/1787148000000/4ovw_CB3OICvhQ6No9KUiw/RU4No5E4Jj7fN37Ewebl9jTTsNqigeW324sa2IRQn1u21DTZD-niDzSNN9EgAtFHZFPV2FhhObnwmzZmqHpaysG7Zb8C5OD2Zr4_SGTxJcnw6YuVQQxxOK6xDtrsKeeJMpXNgUEJ5IJIm90W5QXYuw/znCn8M8Zr9jQ0VTPrTYHLAFgCul5_Qm_FLe-g_WkEkU",
-                "https://v5.airtableusercontent.com/v3/u/56/56/1787148000000/K6Ef0ZnD9V3kOi46HOHSaw/bSqemXZMVqbRAdF61elqecM6K8oCOdf_cEzJvzy8YU97m3dPRsPxjMzo_1ouCmNlrnTbUBoivDTEg0ddJ9z-AXXgDcod2Cwq6xPM9-xNsDH9LVsJxe2njKaN2dTQX25VIVlbJ4am5YsdFpAcfClRNg/fFMGdQcJ9_rxWG3Y4dPNRKFmhwX7EIckJy6zsvV5WkM"
-              ],
-              "product_dimension": [
-                "https://v5.airtableusercontent.com/v3/u/56/56/1787148000000/Y7Mut9ueLqEWENBKor2hSQ/rwKjy6pKiJ9u-o8un6RqFc31Vs32eEqg0zN1zvxrZhMsx2m-gdVEDsEhdbkZ73AK2M4MuJgtilQL1cb9i9mlsWRKUyFxBnY2v76GzYbt3pdU1ZVYHhOBylgl9Fdxb6FvSNVU9Ub1Ml6y1XXhWIABtw/vfoAi5nvLDQbr5Fby5W8jPo4eu6yaMW36beYyvx5MUQ"
-              ],
-              "stocked_item": [
-                "In Stock"
-              ],
-              "datasheet": "Yes",
-              "product_icons": [
-                "https://v5.airtableusercontent.com/v3/u/56/56/1787148000000/HoIIolv2fFK7sDch8enl-w/nSbhEKe9kSXghfbh1soidPaC7pcHe2riWDoB4OFWoiQmwKkm99PWYDkKDqenI2XnEpobxYe8F-70iL-N7dc-neccM2VIr8v8Rq5nsZvBXGwK2alBVu1eM4Irc9bnY5bveD1Ea7HLGWU-3sfoMt4smy-0-x0ihTQro23hUk0KUrQ/_spFyy5u0FZUyLf88VCm5EhYd86tuFLf67k9BtK-VB0",
-                "https://v5.airtableusercontent.com/v3/u/56/56/1787148000000/SU5d7oDipSO33mG4bGqqTw/xRufOa4UgqpdJ7K18bfT6O85VNHNqghBD8kQ86mWS7jwnh_bmLSjXRo4i7NFgRSFmCIU76ECCS7xZPHoR5vet3wnrbw7ZWw0DfAzCvggpYNZB3fa1RdxKC2GhpfgdavmTrKzvLylbVAEciAg3jDf_4PMXTq0tDjtyW_Ulj-BeX0/uTqXIULu_KvV6G5szwfo84aPqgVCnb3PQZeQXS1040M",
-                "https://v5.airtableusercontent.com/v3/u/56/56/1787148000000/SdjrgLFleFN5DvJHGsqlZA/X4z3vwXFOskvcYU57b40hbn211JsWMFl_MRXy0qe7_En8Ry47RNP81Rc2YKZCBvd4HUQV7AsJ1bYM6xzmqsz_BxjhF9_Ntsze8A5adzudrosEG0DvapFMbwctPeqwgXSWKdbJuK4hmdv607Uzt-Ozn_vAE4dTSs3zywyR2rI6do/bHQv7NAlW527heAyRsni2-GkYyaw-_5Ie1nGthTQmOw",
-                "https://v5.airtableusercontent.com/v3/u/56/56/1787148000000/wZsyA362iOsr16qlhv-zPg/WZxR8AiAuwnbu5i-ydyubQTXhYJLfJcf4ozc_KwJTGrpToBVfeKENvb29kBqmrS5hr-vi945TBlLHbfPrg6eUKwi1e8UncNimJZHomdORHyyut36vdc32db5Ly4nRL18Zll2RfRPzS5uRF9Pts_3l7KUDO0Wtu0V5TAJhKBrqDc/Fze2LHl-Pt2R-jqKTyB-HN05bJyzwjRZvk9ggfu1PMs"
-              ],
-              "supplier_name": "CHINA - 7 Colors Co Ltd",
-              "status": "draft",
-              "product_type": "simple",
-              "product_features": {
-                "Current Type": "AC/DC",
-                "Finish": "Black finish",
-                "IP Rating": "IP67",
-                "Light Color": "Warm White",
-                "Power": [
-                  "7W",
-                  "12W"
-                ],
-                "Voltage": "12V/24V",
-                "Meta Keywords": "garden lights, outdoor garden lights, solar garden lights, LED landscape lighting, pathway lights, garden spotlights, yard lighting, low voltage landscape lights, waterproof outdoor lights, garden decor lighting"
-              },
-              "options": {
-                "Power": [
-                  {
-                    "name": "7W",
-                    "id": "101"
-                  },
-                  {
-                    "name": "12W",
-                    "id": "102"
-                  },
-                  {
-                    "name": "3W",
-                    "id": "103"
-                  }
-                ],
-                "Light Color": [
-                  {
-                    "name": "Warm White",
-                    "id": "104"
-                  }
-                ],
-                "Voltage": [
-                  {
-                    "name": "12V/24V",
-                    "id": "105"
-                  }
-                ],
-                "Current Type": [
-                  {
-                    "name": "AC/DC",
-                    "id": "106"
-                  }
-                ],
-                "IP Rating": [
-                  {
-                    "name": "IP67",
-                    "id": "107"
-                  }
-                ],
-                "Finish": [
-                  {
-                    "name": "Black finish",
-                    "id": "108"
-                  }
-                ]
-              },
-              "constraints": []
-            }
-          }
-        }
-      ]
-    },
-    {
-      "type": "category",
-      "name": "Pool Light",
-      "children": [
-        {
-          "type": "product_row",
-          "name": "Pool Light",
-          "variants": {
-            "Pool Light": {
-              "id": "recPcYiIIV8VLqru4",
-              "product_name": "Pool Light",
-              "category": "Pool Light",
-              "sku": "PL001",
-              "product_short_description": "Dive into an enchanting oasis of light and luxury. Elevate your pool into a sophisticated, glowing retreat, adding breathtaking allure and serene ambiance to every evening.\n",
-              "product_description": "Dive into an enchanting oasis of light and luxury with our premium pool illumination solution. Designed to effortlessly elevate your outdoor experience, it bathes your aquatic retreat in a warm, sophisticated radiance that creates an unparalleled ambiance. Perfect for those with a discerning eye for discreet elegance and refined architectural detail, this lighting masterpiece transforms ordinary evenings into a breathtaking visual journey, adding both captivating allure and a profound sense of serenity to your home.\n",
-              "product_images": [],
-              "product_dimension": "",
-              "stocked_item": [
-                "Please Enquire"
-              ],
-              "datasheet": "No",
-              "product_icons": "",
-              "supplier_name": "CHINA - 7 Colors Co Ltd",
-              "status": "draft",
-              "product_type": "simple",
-              "product_features": {
-                "Power": "7W",
-                "CCT": [
-                  "3000K",
-                  "6000K"
-                ],
-                "IP Rating": "IP68",
-                "Voltage": "12V"
-              },
-              "options": {
-                "Power": [
-                  {
-                    "name": "7W",
-                    "id": "101"
-                  }
-                ],
-                "CCT": [
-                  {
-                    "name": "3000K",
-                    "id": "102"
-                  },
-                  {
-                    "name": "6000K",
-                    "id": "103"
-                  }
-                ],
-                "Voltage": [
-                  {
-                    "name": "12V",
-                    "id": "104"
-                  }
-                ],
-                "IP Rating": [
-                  {
-                    "name": "IP68",
-                    "id": "105"
-                  }
-                ]
-              },
-              "constraints": []
-            }
-          }
-        }
-      ]
-    },
-    {
-      "type": "category",
-      "name": "SMD Strip",
-      "children": [
-        {
-          "type": "product_row",
-          "name": "Bendable LED SMD Strip",
-          "variants": {
-            "Bendable LED SMD Strip": {
-              "id": "recYMBioQ5x4HEKdT",
-              "product_name": "Bendable LED SMD Strip",
-              "category": "SMD Strip",
-              "sku": "SMD-BEND-2.7K-IP54",
-              "product_short_description": "Transform your spaces with a stunning visual journey of elegant design and discreet luxury, creating a sophisticated and seamless glow that beautifully enhances your home.\n",
-              "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
-              "product_images": [],
-              "product_dimension": "",
-              "stocked_item": "",
-              "datasheet": "No",
-              "product_icons": "",
-              "supplier_name": "CHINA - Rising Sun",
-              "status": "draft",
-              "product_type": "simple",
-              "product_features": {
-                "CCT": [
-                  "3000K",
-                  "2700K",
-                  "4000K"
-                ],
-                "IP Rating": [
-                  "IP20",
-                  "IP54"
-                ],
-                "Voltage": "24V",
-                "Light Color": "RGBW",
-                "Power Consumption Rate": [
-                  "8W/m",
-                  "5W/m"
-                ],
-                "Strip Width": [
-                  "8mm",
-                  "12mm"
-                ]
-              },
-              "options": {
-                "Power Consumption Rate": [
-                  {
-                    "name": "8W/m",
-                    "id": "101"
-                  },
-                  {
-                    "name": "5W/m",
-                    "id": "106"
-                  }
-                ],
-                "CCT": [
-                  {
-                    "name": "2700K",
-                    "id": "102"
-                  },
-                  {
-                    "name": "3000K",
-                    "id": "103"
-                  },
-                  {
-                    "name": "4000K",
-                    "id": "104"
-                  }
-                ],
-                "Voltage": [
-                  {
-                    "name": "24V",
-                    "id": "105"
-                  }
-                ],
-                "IP Rating": [
-                  {
-                    "name": "IP54",
-                    "id": "107"
-                  },
-                  {
-                    "name": "IP20",
-                    "id": "109"
-                  }
-                ],
-                "Strip Width": [
-                  {
-                    "name": "8mm",
-                    "id": "108"
-                  },
-                  {
-                    "name": "12mm",
-                    "id": "111"
-                  }
-                ],
-                "Light Color": [
-                  {
-                    "name": "RGBW",
-                    "id": "110"
-                  }
-                ]
-              },
-              "constraints": {
-                "106": [
-                  "102",
-                  "104",
-                  "107",
-                  "108"
-                ],
-                "110": [
-                  "101",
-                  "102",
-                  "104",
-                  "107",
-                  "108"
-                ],
-                "111": [
-                  "101",
-                  "102",
-                  "104",
-                  "107",
-                  "108"
-                ]
+                  "constraints": [],
+                  "category_path": [
+                    "Drivers",
+                    "5-in-1 Dimming Driver"
+                  ]
+                }
               }
             }
-          }
-        }
-      ]
-    },
-    {
-      "type": "category",
-      "name": "RGBW Strip",
-      "children": [
-        {
-          "type": "product_row",
-          "name": "Flex Alu RGBW Strip",
-          "variants": {
-            "Flex Alu RGBW Strip": {
-              "id": "recalM75aIuyrcP07",
-              "product_name": "Flex Alu RGBW Strip",
-              "category": "RGBW Strip",
-              "sku": "PR-BEND-1M",
-              "product_short_description": "Elevate your spaces into a breathtaking visual journey of elegant design and discreet luxury with a sophisticated, seamless glow.\n",
-              "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
-              "product_images": [],
-              "product_dimension": "",
-              "stocked_item": "",
-              "datasheet": "No",
-              "product_icons": "",
-              "supplier_name": "CHINA - Rising Sun",
-              "status": "draft",
-              "product_type": "simple",
-              "product_features": {
-                "Finish": "Silver",
-                "Profile Length": "1,000mm"
-              },
-              "options": {
-                "Profile Length": [
-                  {
-                    "name": "1,000mm",
-                    "id": "101"
-                  }
-                ],
-                "Finish": [
-                  {
-                    "name": "Silver",
-                    "id": "102"
-                  }
-                ]
-              },
-              "constraints": []
-            }
-          }
+          ]
         }
       ]
     },
@@ -2105,6 +1697,7 @@ const AZOOGI_PRODUCTS = {
               ],
               "datasheet": "No",
               "product_icons": "",
+              "meta_keywords": "",
               "supplier_name": "BAIWEI",
               "status": "draft",
               "product_type": "simple",
@@ -2272,7 +1865,10 @@ const AZOOGI_PRODUCTS = {
                   "115",
                   "117"
                 ]
-              }
+              },
+              "category_path": [
+                "Profiles"
+              ]
             }
           }
         },
@@ -2292,6 +1888,7 @@ const AZOOGI_PRODUCTS = {
               "stocked_item": "",
               "datasheet": "No",
               "product_icons": "",
+              "meta_keywords": "",
               "supplier_name": "BAIWEI",
               "status": "draft",
               "product_type": "simple",
@@ -2320,7 +1917,10 @@ const AZOOGI_PRODUCTS = {
                   }
                 ]
               },
-              "constraints": []
+              "constraints": [],
+              "category_path": [
+                "Profiles"
+              ]
             }
           }
         }
@@ -2328,180 +1928,734 @@ const AZOOGI_PRODUCTS = {
     },
     {
       "type": "category",
-      "name": "Non-Dimmable Driver",
+      "name": "Outdoor & Architectural",
       "children": [
         {
-          "type": "product_row",
-          "name": "Non-Dimmable Driver",
-          "variants": {
-            "Non-Dimmable Driver": {
-              "id": "reciwSxR6ltI67o0O",
-              "product_name": "Non-Dimmable Driver",
-              "category": "Non-Dimmable Driver",
-              "sku": "ADR001",
-              "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
-              "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
-              "product_images": [],
-              "product_dimension": "",
-              "stocked_item": "",
-              "datasheet": "Yes",
-              "product_icons": "",
-              "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
-              "status": "draft",
-              "product_type": "simple",
-              "product_features": {
-                "IP Rating": "IP67",
-                "Voltage": [
-                  "12V",
-                  "24V"
-                ],
-                "Power": [
-                  "20W",
-                  "40W",
-                  "60W",
-                  "100W",
-                  "150W",
-                  "200W",
-                  "300W",
-                  "400W",
-                  "500W"
-                ]
-              },
-              "options": {
-                "Power": [
-                  {
-                    "name": "20W",
-                    "id": "101"
+          "type": "category",
+          "name": "Garden Light",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Garden Light",
+              "variants": {
+                "Garden Light": {
+                  "id": "recGgRF6gZMVCo6qY",
+                  "product_name": "Garden Light",
+                  "category": "Garden Light",
+                  "sku": "GL001",
+                  "product_short_description": "Transform your outdoor spaces into a breathtaking visual journey. Experience discreet luxury and a sophisticated glow that beautifully enhances your home.\n",
+                  "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
+                  "product_images": [
+                    "https://v5.airtableusercontent.com/v3/u/56/56/1787148000000/YBO7u6Y86NunhCWwWtw0QQ/Vs_Dm0I1u9x56hIPSM_6Znr-XSrw1UglLdazreWQj8v0X0g3qRNflHsjPaU3dvwRXlP1SWMdPBXfy62sjUth8Dg9mHMd2IDeIiNEgFb56vBwpKobQJnufFO-jInFBwPibjrIp5ixV-6gVogimaChbw/Tz307v67xwFz8N6PQa7VyemFhF-vOjoUAzMtnJUGy20",
+                    "https://v5.airtableusercontent.com/v3/u/56/56/1787148000000/4ovw_CB3OICvhQ6No9KUiw/RU4No5E4Jj7fN37Ewebl9jTTsNqigeW324sa2IRQn1u21DTZD-niDzSNN9EgAtFHZFPV2FhhObnwmzZmqHpaysG7Zb8C5OD2Zr4_SGTxJcnw6YuVQQxxOK6xDtrsKeeJMpXNgUEJ5IJIm90W5QXYuw/znCn8M8Zr9jQ0VTPrTYHLAFgCul5_Qm_FLe-g_WkEkU",
+                    "https://v5.airtableusercontent.com/v3/u/56/56/1787148000000/K6Ef0ZnD9V3kOi46HOHSaw/bSqemXZMVqbRAdF61elqecM6K8oCOdf_cEzJvzy8YU97m3dPRsPxjMzo_1ouCmNlrnTbUBoivDTEg0ddJ9z-AXXgDcod2Cwq6xPM9-xNsDH9LVsJxe2njKaN2dTQX25VIVlbJ4am5YsdFpAcfClRNg/fFMGdQcJ9_rxWG3Y4dPNRKFmhwX7EIckJy6zsvV5WkM"
+                  ],
+                  "product_dimension": [
+                    "https://v5.airtableusercontent.com/v3/u/56/56/1787148000000/Y7Mut9ueLqEWENBKor2hSQ/rwKjy6pKiJ9u-o8un6RqFc31Vs32eEqg0zN1zvxrZhMsx2m-gdVEDsEhdbkZ73AK2M4MuJgtilQL1cb9i9mlsWRKUyFxBnY2v76GzYbt3pdU1ZVYHhOBylgl9Fdxb6FvSNVU9Ub1Ml6y1XXhWIABtw/vfoAi5nvLDQbr5Fby5W8jPo4eu6yaMW36beYyvx5MUQ"
+                  ],
+                  "stocked_item": [
+                    "In Stock"
+                  ],
+                  "datasheet": "Yes",
+                  "product_icons": [
+                    "https://v5.airtableusercontent.com/v3/u/56/56/1787148000000/HoIIolv2fFK7sDch8enl-w/nSbhEKe9kSXghfbh1soidPaC7pcHe2riWDoB4OFWoiQmwKkm99PWYDkKDqenI2XnEpobxYe8F-70iL-N7dc-neccM2VIr8v8Rq5nsZvBXGwK2alBVu1eM4Irc9bnY5bveD1Ea7HLGWU-3sfoMt4smy-0-x0ihTQro23hUk0KUrQ/_spFyy5u0FZUyLf88VCm5EhYd86tuFLf67k9BtK-VB0",
+                    "https://v5.airtableusercontent.com/v3/u/56/56/1787148000000/SU5d7oDipSO33mG4bGqqTw/xRufOa4UgqpdJ7K18bfT6O85VNHNqghBD8kQ86mWS7jwnh_bmLSjXRo4i7NFgRSFmCIU76ECCS7xZPHoR5vet3wnrbw7ZWw0DfAzCvggpYNZB3fa1RdxKC2GhpfgdavmTrKzvLylbVAEciAg3jDf_4PMXTq0tDjtyW_Ulj-BeX0/uTqXIULu_KvV6G5szwfo84aPqgVCnb3PQZeQXS1040M",
+                    "https://v5.airtableusercontent.com/v3/u/56/56/1787148000000/SdjrgLFleFN5DvJHGsqlZA/X4z3vwXFOskvcYU57b40hbn211JsWMFl_MRXy0qe7_En8Ry47RNP81Rc2YKZCBvd4HUQV7AsJ1bYM6xzmqsz_BxjhF9_Ntsze8A5adzudrosEG0DvapFMbwctPeqwgXSWKdbJuK4hmdv607Uzt-Ozn_vAE4dTSs3zywyR2rI6do/bHQv7NAlW527heAyRsni2-GkYyaw-_5Ie1nGthTQmOw",
+                    "https://v5.airtableusercontent.com/v3/u/56/56/1787148000000/wZsyA362iOsr16qlhv-zPg/WZxR8AiAuwnbu5i-ydyubQTXhYJLfJcf4ozc_KwJTGrpToBVfeKENvb29kBqmrS5hr-vi945TBlLHbfPrg6eUKwi1e8UncNimJZHomdORHyyut36vdc32db5Ly4nRL18Zll2RfRPzS5uRF9Pts_3l7KUDO0Wtu0V5TAJhKBrqDc/Fze2LHl-Pt2R-jqKTyB-HN05bJyzwjRZvk9ggfu1PMs"
+                  ],
+                  "meta_keywords": "garden lights, outdoor garden lights, solar garden lights, LED landscape lighting, pathway lights, garden spotlights, yard lighting, low voltage landscape lights, waterproof outdoor lights, garden decor lighting",
+                  "supplier_name": "CHINA - 7 Colors Co Ltd",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Current Type": "AC/DC",
+                    "Finish": "Black finish",
+                    "IP Rating": "IP67",
+                    "Light Color": "Warm White",
+                    "Power": [
+                      "7W",
+                      "12W"
+                    ],
+                    "Voltage": "12V/24V"
                   },
-                  {
-                    "name": "40W",
-                    "id": "102"
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "7W",
+                        "id": "101"
+                      },
+                      {
+                        "name": "12W",
+                        "id": "102"
+                      },
+                      {
+                        "name": "3W",
+                        "id": "103"
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "name": "Warm White",
+                        "id": "104"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "12V/24V",
+                        "id": "105"
+                      }
+                    ],
+                    "Current Type": [
+                      {
+                        "name": "AC/DC",
+                        "id": "106"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP67",
+                        "id": "107"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Black finish",
+                        "id": "108"
+                      }
+                    ]
                   },
-                  {
-                    "name": "60W",
-                    "id": "103"
-                  },
-                  {
-                    "name": "100W",
-                    "id": "104"
-                  },
-                  {
-                    "name": "150W",
-                    "id": "105"
-                  },
-                  {
-                    "name": "200W",
-                    "id": "106"
-                  },
-                  {
-                    "name": "300W",
-                    "id": "107"
-                  },
-                  {
-                    "name": "400W",
-                    "id": "108"
-                  },
-                  {
-                    "name": "500W",
-                    "id": "109"
-                  }
-                ],
-                "Voltage": [
-                  {
-                    "name": "12V",
-                    "id": "110"
-                  },
-                  {
-                    "name": "24V",
-                    "id": "111"
-                  }
-                ],
-                "IP Rating": [
-                  {
-                    "name": "IP67",
-                    "id": "112"
-                  }
-                ]
-              },
-              "constraints": []
+                  "constraints": [],
+                  "category_path": [
+                    "Outdoor & Architectural",
+                    "Garden Light"
+                  ]
+                }
+              }
             }
-          }
+          ]
+        },
+        {
+          "type": "category",
+          "name": "Handrail",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Handrail Spot II",
+              "variants": {
+                "Handrail Spot II": {
+                  "id": "recFfiGcLRw3JjjSh",
+                  "product_name": "Handrail Spot II",
+                  "category": "Handrail",
+                  "sku": "HRS011",
+                  "product_short_description": "Elevate your pathways with Handrail Spot II. It casts a warm, sophisticated ambiance that seamlessly guides your steps with elegant architectural charm.\n",
+                  "product_description": "Elevate your architectural designs with Handrail Spot II, the premium lighting solution that effortlessly marries sophistication with modern functionality. Designed to seamlessly blend into any indoor or outdoor pathway, it casts a warm, inviting glow that gracefully guides your way while accentuating the elegant contours of your space. Perfect for those who demand meticulous attention to detail, this exquisite fixture turns ordinary walkways into enchanting visual experiences, adding a layer of sophisticated ambiance and subtle security to your surroundings. Discreet yet profoundly impactful, it is the quintessential choice for transforming your environment into a beautifully illuminated masterpiece.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": "",
+                  "datasheet": "Yes",
+                  "product_icons": "",
+                  "meta_keywords": "",
+                  "supplier_name": "SPARKLED",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      "3000K",
+                      "4000K"
+                    ],
+                    "IP Rating": "IP67",
+                    "Impact Strength": "IK10",
+                    "Optics": [
+                      "SYM 30°",
+                      "SYM 60°",
+                      "ASYM 50°"
+                    ],
+                    "Power": "1.5W"
+                  },
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "1.5W",
+                        "id": "101"
+                      }
+                    ],
+                    "Optics": [
+                      {
+                        "name": "SYM 30°",
+                        "id": "102"
+                      },
+                      {
+                        "name": "SYM 60°",
+                        "id": "103"
+                      },
+                      {
+                        "name": "ASYM 50°",
+                        "id": "104"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "3000K",
+                        "id": "105"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "106"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP67",
+                        "id": "107"
+                      }
+                    ],
+                    "Impact Strength": [
+                      {
+                        "name": "IK10",
+                        "id": "108"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "Outdoor & Architectural",
+                    "Handrail"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Handrail Spot I",
+              "variants": {
+                "Handrail Spot I": {
+                  "id": "rechaqZ8XahO5Kftl",
+                  "product_name": "Handrail Spot I",
+                  "category": "Handrail",
+                  "sku": "HRS001",
+                  "product_short_description": "Elegantly illuminate your pathways with Handrail Spot I. It casts a warm, sophisticated glow that guides the way while beautifully enhancing your architectural space.\n",
+                  "product_description": "Illuminate your architectural masterpieces with the perfect blend of elegance and modern design. Handrail Spot I offers seamless integration into your outdoor or indoor pathways, casting a warm, sophisticated glow that guides the way while enhancing the beauty of your space. Crafted for those who appreciate refined detail, it transforms ordinary walkways into stunning visual journeys, adding an unparalleled touch of ambiance and security to any setting. Elegant, discreet, and captivating, it is the ultimate choice for elevated architectural lighting.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": "",
+                  "datasheet": "Yes",
+                  "product_icons": "",
+                  "meta_keywords": "",
+                  "supplier_name": "SPARKLED",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      "3000K",
+                      "4000K"
+                    ],
+                    "IP Rating": "IP67",
+                    "Impact Strength": "IK10",
+                    "Optics": [
+                      "SYM 30°",
+                      "SYM 60°",
+                      "ASYM 50°"
+                    ],
+                    "Power": "1.2W"
+                  },
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "1.2W",
+                        "id": "101"
+                      }
+                    ],
+                    "Optics": [
+                      {
+                        "name": "SYM 30°",
+                        "id": "102"
+                      },
+                      {
+                        "name": "SYM 60°",
+                        "id": "103"
+                      },
+                      {
+                        "name": "ASYM 50°",
+                        "id": "104"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "3000K",
+                        "id": "105"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "106"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP67",
+                        "id": "107"
+                      }
+                    ],
+                    "Impact Strength": [
+                      {
+                        "name": "IK10",
+                        "id": "108"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "Outdoor & Architectural",
+                    "Handrail"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Handrail Spot III",
+              "variants": {
+                "Handrail Spot III": {
+                  "id": "recqPIv7UfmEBe3PO",
+                  "product_name": "Handrail Spot III",
+                  "category": "Handrail",
+                  "sku": "HRS021",
+                  "product_short_description": "Elegantly illuminate your pathways with Handrail Spot III. It casts a warm, sophisticated glow that guides the way while enhancing your architectural space.\n",
+                  "product_description": "Discover a new dimension of architectural elegance with Handrail Spot III. Perfectly engineered to blend seamlessly into your indoor and outdoor environments, this exquisite lighting solution casts a mesmerizing, sophisticated glow that elegantly maps your pathways. Designed for connoisseurs of fine detail, it redefines standard walkways into spectacular visual corridors, infusing your surroundings with an unparalleled layer of luxurious ambiance and subtle, reassuring security. Sleek, minimal, and entirely captivating, it represents the absolute pinnacle of refined aesthetic illumination.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": "",
+                  "datasheet": "Yes",
+                  "product_icons": "",
+                  "meta_keywords": "",
+                  "supplier_name": "SPARKLED",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      "3000K",
+                      "4000K"
+                    ],
+                    "IP Rating": "IP67",
+                    "Impact Strength": "IK10",
+                    "Optics": [
+                      "SYM 60°",
+                      "ASYM 80°"
+                    ],
+                    "Power": "1.5W"
+                  },
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "1.5W",
+                        "id": "101"
+                      }
+                    ],
+                    "Optics": [
+                      {
+                        "name": "SYM 60°",
+                        "id": "102"
+                      },
+                      {
+                        "name": "ASYM 80°",
+                        "id": "103"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "3000K",
+                        "id": "104"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "105"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP67",
+                        "id": "106"
+                      }
+                    ],
+                    "Impact Strength": [
+                      {
+                        "name": "IK10",
+                        "id": "107"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "Outdoor & Architectural",
+                    "Handrail"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "name": "Pool Light",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Pool Light",
+              "variants": {
+                "Pool Light": {
+                  "id": "recPcYiIIV8VLqru4",
+                  "product_name": "Pool Light",
+                  "category": "Pool Light",
+                  "sku": "PL001",
+                  "product_short_description": "Dive into an enchanting oasis of light and luxury. Elevate your pool into a sophisticated, glowing retreat, adding breathtaking allure and serene ambiance to every evening.\n",
+                  "product_description": "Dive into an enchanting oasis of light and luxury with our premium pool illumination solution. Designed to effortlessly elevate your outdoor experience, it bathes your aquatic retreat in a warm, sophisticated radiance that creates an unparalleled ambiance. Perfect for those with a discerning eye for discreet elegance and refined architectural detail, this lighting masterpiece transforms ordinary evenings into a breathtaking visual journey, adding both captivating allure and a profound sense of serenity to your home.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    "Please Enquire"
+                  ],
+                  "datasheet": "No",
+                  "product_icons": "",
+                  "meta_keywords": "",
+                  "supplier_name": "CHINA - 7 Colors Co Ltd",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Power": "7W",
+                    "CCT": [
+                      "3000K",
+                      "6000K"
+                    ],
+                    "IP Rating": "IP68",
+                    "Voltage": "12V"
+                  },
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "7W",
+                        "id": "101"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "3000K",
+                        "id": "102"
+                      },
+                      {
+                        "name": "6000K",
+                        "id": "103"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "12V",
+                        "id": "104"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP68",
+                        "id": "105"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "Outdoor & Architectural",
+                    "Pool Light"
+                  ]
+                }
+              }
+            }
+          ]
         }
       ]
     },
     {
       "type": "category",
-      "name": "Switchable Driver",
+      "name": "Strips and Flex",
       "children": [
         {
-          "type": "product_row",
-          "name": "Switchable Driver",
-          "variants": {
-            "Switchable Driver": {
-              "id": "recqvzuqZCKIfSO11",
-              "product_name": "Switchable Driver",
-              "category": "Switchable Driver",
-              "sku": "ADR-S12V24V-20W",
-              "product_short_description": "Elevate your environment with a perfect blend of elegance and modern design, casting a warm, sophisticated glow that adds an unparalleled touch of ambiance and luxury.\n",
-              "product_description": "Transform your spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your environment, casting a warm, sophisticated glow that effortlessly enhances the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and style to any setting, making it the ultimate choice for elevated architectural illumination.\n",
-              "product_images": [],
-              "product_dimension": "",
-              "stocked_item": "",
-              "datasheet": "Yes",
-              "product_icons": "",
-              "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
-              "status": "draft",
-              "product_type": "simple",
-              "product_features": {
-                "Power": [
-                  "20W",
-                  "40W",
-                  "60W",
-                  "100W",
-                  "80W"
-                ],
-                "Voltage": "12V/24V",
-                "IP Rating": "IP20"
-              },
-              "options": {
-                "Voltage": [
-                  {
-                    "name": "12V/24V",
-                    "id": "101"
-                  }
-                ],
-                "Power": [
-                  {
-                    "name": "20W",
-                    "id": "102"
+          "type": "category",
+          "name": "RGBW Strip",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Flex Alu RGBW Strip",
+              "variants": {
+                "Flex Alu RGBW Strip": {
+                  "id": "recalM75aIuyrcP07",
+                  "product_name": "Flex Alu RGBW Strip",
+                  "category": "RGBW Strip",
+                  "sku": "PR-BEND-1M",
+                  "product_short_description": "Elevate your spaces into a breathtaking visual journey of elegant design and discreet luxury with a sophisticated, seamless glow.\n",
+                  "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": "",
+                  "datasheet": "No",
+                  "product_icons": "",
+                  "meta_keywords": "",
+                  "supplier_name": "CHINA - Rising Sun",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Finish": "Silver",
+                    "Profile Length": "1,000mm"
                   },
-                  {
-                    "name": "40W",
-                    "id": "103"
+                  "options": {
+                    "Profile Length": [
+                      {
+                        "name": "1,000mm",
+                        "id": "101"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "102"
+                      }
+                    ]
                   },
-                  {
-                    "name": "60W",
-                    "id": "104"
-                  },
-                  {
-                    "name": "80W",
-                    "id": "105"
-                  },
-                  {
-                    "name": "100W",
-                    "id": "106"
-                  }
-                ],
-                "IP Rating": [
-                  {
-                    "name": "IP20",
-                    "id": "107"
-                  }
-                ]
-              },
-              "constraints": []
+                  "constraints": [],
+                  "category_path": [
+                    "Strips and Flex",
+                    "RGBW Strip"
+                  ]
+                }
+              }
             }
-          }
+          ]
+        },
+        {
+          "type": "category",
+          "name": "LED Flex Sheet",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "LED Flex Sheet",
+              "variants": {
+                "LED Flex Sheet": {
+                  "id": "recF77CHZbtpxqAdy",
+                  "product_name": "LED Flex Sheet",
+                  "category": "LED Flex Sheet",
+                  "sku": "SMD-SHEET-30W-3K-IP20",
+                  "product_short_description": "Transform your home into a breathtaking visual journey. Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.\n",
+                  "product_description": "Transform your home into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers a sophisticated, seamless glow that beautifully enhances your elegant spaces, casting a warm and inviting atmosphere throughout. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating style to any room, making it the ultimate choice for elevated interior illumination.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": "",
+                  "datasheet": "No",
+                  "product_icons": "",
+                  "meta_keywords": "",
+                  "supplier_name": "CHINA - Rising Sun",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      "3000K",
+                      "4000K",
+                      "6000K"
+                    ],
+                    "IP Rating": [
+                      "IP20",
+                      "IP54",
+                      "IP67"
+                    ],
+                    "Power": "30W",
+                    "Voltage": "24V",
+                    "Dimension": "480mm (L) x 240mm (W)"
+                  },
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "30W",
+                        "id": "101"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "3000K",
+                        "id": "102"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "103"
+                      },
+                      {
+                        "name": "6000K",
+                        "id": "104"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "105"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP20",
+                        "id": "106"
+                      },
+                      {
+                        "name": "IP54",
+                        "id": "107"
+                      },
+                      {
+                        "name": "IP67",
+                        "id": "108"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "480mm (L) x 240mm (W)",
+                        "id": "109"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "Strips and Flex",
+                    "LED Flex Sheet"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "name": "SMD Strip",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Bendable LED SMD Strip",
+              "variants": {
+                "Bendable LED SMD Strip": {
+                  "id": "recYMBioQ5x4HEKdT",
+                  "product_name": "Bendable LED SMD Strip",
+                  "category": "SMD Strip",
+                  "sku": "SMD-BEND-2.7K-IP54",
+                  "product_short_description": "Transform your spaces with a stunning visual journey of elegant design and discreet luxury, creating a sophisticated and seamless glow that beautifully enhances your home.\n",
+                  "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": "",
+                  "datasheet": "No",
+                  "product_icons": "",
+                  "meta_keywords": "",
+                  "supplier_name": "CHINA - Rising Sun",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      "3000K",
+                      "2700K",
+                      "4000K"
+                    ],
+                    "IP Rating": [
+                      "IP20",
+                      "IP54"
+                    ],
+                    "Voltage": "24V",
+                    "Light Color": "RGBW",
+                    "Power Consumption Rate": [
+                      "8W/m",
+                      "5W/m"
+                    ],
+                    "Strip Width": [
+                      "8mm",
+                      "12mm"
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "8W/m",
+                        "id": "101"
+                      },
+                      {
+                        "name": "5W/m",
+                        "id": "106"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "2700K",
+                        "id": "102"
+                      },
+                      {
+                        "name": "3000K",
+                        "id": "103"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "104"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "105"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP54",
+                        "id": "107"
+                      },
+                      {
+                        "name": "IP20",
+                        "id": "109"
+                      }
+                    ],
+                    "Strip Width": [
+                      {
+                        "name": "8mm",
+                        "id": "108"
+                      },
+                      {
+                        "name": "12mm",
+                        "id": "111"
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "name": "RGBW",
+                        "id": "110"
+                      }
+                    ]
+                  },
+                  "constraints": {
+                    "106": [
+                      "102",
+                      "104",
+                      "107",
+                      "108"
+                    ],
+                    "110": [
+                      "101",
+                      "102",
+                      "104",
+                      "107",
+                      "108"
+                    ],
+                    "111": [
+                      "101",
+                      "102",
+                      "104",
+                      "107",
+                      "108"
+                    ]
+                  },
+                  "category_path": [
+                    "Strips and Flex",
+                    "SMD Strip"
+                  ]
+                }
+              }
+            }
+          ]
         }
       ]
     }

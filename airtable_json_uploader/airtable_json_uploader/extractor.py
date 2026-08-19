@@ -326,29 +326,217 @@ class AirtableDataExtractor:
                 category_groups[category_name] = []
             category_groups[category_name].append(product_entry)
 
-        # Build Tree format matching AZOOGI_PRODUCTS structure
-        tree_categories = []
-        for cat_name, prod_list in category_groups.items():
-            cat_node = {
-                "type": "category",
-                "name": cat_name,
-                "children": []
-            }
-            for prod in prod_list:
-                prod_row = {
-                    "type": "product_row",
-                    "name": prod["product_name"],
-                    "variants": {
-                        prod["product_name"]: prod
-                    }
-                }
-                cat_node["children"].append(prod_row)
-            tree_categories.append(cat_node)
+        # Build Tree format matching AZOOGI_PRODUCTS structure from Categories table and products
+        all_categories, tree_categories = self.build_category_tree(categories_raw, catalog["products"])
 
         catalog["tree"] = tree_categories
-        catalog["categories"] = list(category_groups.keys())
+        catalog["categories"] = all_categories
 
         return catalog
+
+    def build_category_tree(self, categories_raw: List[Dict[str, Any]], products_list: List[Dict[str, Any]]) -> tuple:
+        """
+        Builds hierarchical categories and category tree from Airtable Categories table records.
+        Handles Parent / Child linked category records, as well as string path delimiters ('/', '>', '|').
+        """
+        cat_by_id = {}
+        cat_by_name = {}
+
+        # 1. First pass: Index all Category records from Categories table
+        for cat_rec in categories_raw:
+            c_id = cat_rec.get("id")
+            c_fields = cat_rec.get("fields", {})
+
+            name = (
+                c_fields.get("Category_Name") or
+                c_fields.get("Category Name") or
+                c_fields.get("Name") or
+                c_fields.get("Title") or
+                c_fields.get("Category") or
+                ""
+            )
+            name = str(name).strip()
+            if not name:
+                continue
+
+            # Extract parent category references (linked record IDs or text names)
+            parent_refs = (
+                c_fields.get("Parent Category") or
+                c_fields.get("Parent_Category") or
+                c_fields.get("Parent") or
+                c_fields.get("Parent_Category_Name") or
+                c_fields.get("Parent Category Name") or
+                []
+            )
+            if not isinstance(parent_refs, list):
+                parent_refs = [parent_refs]
+
+            # Extract child category references (linked record IDs or text names)
+            child_refs = (
+                c_fields.get("Child Categories") or
+                c_fields.get("Subcategories") or
+                c_fields.get("Children") or
+                c_fields.get("Sub-Categories") or
+                c_fields.get("Sub Categories") or
+                []
+            )
+            if not isinstance(child_refs, list):
+                child_refs = [child_refs]
+
+            cat_info = {
+                "id": c_id,
+                "name": name,
+                "parent_refs": [str(r).strip() for r in parent_refs if r],
+                "child_refs": [str(r).strip() for r in child_refs if r],
+                "parent_ids": set(),
+                "child_ids": set(),
+                "products": []
+            }
+
+            cat_by_id[c_id] = cat_info
+            cat_by_name[name.lower()] = cat_info
+
+        # 2. Second pass: Establish Parent-Child links
+        for c_id, cat in cat_by_id.items():
+            # Resolve parent references
+            for pref in cat["parent_refs"]:
+                if pref in cat_by_id:
+                    cat["parent_ids"].add(pref)
+                    cat_by_id[pref]["child_ids"].add(c_id)
+                elif pref.lower() in cat_by_name:
+                    parent_node = cat_by_name[pref.lower()]
+                    cat["parent_ids"].add(parent_node["id"])
+                    parent_node["child_ids"].add(c_id)
+
+            # Resolve child references
+            for cref in cat["child_refs"]:
+                if cref in cat_by_id:
+                    cat["child_ids"].add(cref)
+                    cat_by_id[cref]["parent_ids"].add(c_id)
+                elif cref.lower() in cat_by_name:
+                    child_node = cat_by_name[cref.lower()]
+                    cat["child_ids"].add(child_node["id"])
+                    child_node["parent_ids"].add(c_id)
+
+        # 3. Associate Products with Categories & compute Category Path
+        category_product_map = {}
+        all_cat_names = set()
+
+        for prod in products_list:
+            cat_val = prod.get("category") or "General"
+            matched_cat = None
+
+            if cat_val in cat_by_id:
+                matched_cat = cat_by_id[cat_val]
+            elif str(cat_val).lower() in cat_by_name:
+                matched_cat = cat_by_name[str(cat_val).lower()]
+
+            if matched_cat:
+                cat_name = matched_cat["name"]
+                prod["category"] = cat_name
+
+                # Build category path [Parent, Child]
+                path = []
+                curr = matched_cat
+                visited = set()
+                while curr and curr["id"] not in visited:
+                    visited.add(curr["id"])
+                    path.insert(0, curr["name"])
+                    if curr["parent_ids"]:
+                        parent_id = list(curr["parent_ids"])[0]
+                        curr = cat_by_id.get(parent_id)
+                    else:
+                        break
+
+                prod["category_path"] = path
+                matched_cat["products"].append(prod)
+                all_cat_names.add(cat_name)
+                if path and len(path) > 1:
+                    all_cat_names.add(path[0])
+            else:
+                # Handle path delimiters if category name has '/' or '>'
+                raw_cat_name = str(cat_val).strip()
+                delimiters = [" > ", " / ", ">", "/"]
+                path_parts = [raw_cat_name]
+                for delim in delimiters:
+                    if delim in raw_cat_name:
+                        path_parts = [p.strip() for p in raw_cat_name.split(delim) if p.strip()]
+                        break
+
+                prod["category"] = path_parts[-1]
+                prod["category_path"] = path_parts
+                cat_name = path_parts[-1]
+                all_cat_names.add(cat_name)
+                if len(path_parts) > 1:
+                    all_cat_names.add(path_parts[0])
+
+                if cat_name not in category_product_map:
+                    category_product_map[cat_name] = []
+                category_product_map[cat_name].append(prod)
+
+        # 4. Build Tree data structure
+        tree_nodes = []
+
+        if cat_by_id:
+            # Find top-level categories (categories with no parent_ids)
+            root_cats = [c for c in cat_by_id.values() if not c["parent_ids"]]
+            if not root_cats:
+                root_cats = list(cat_by_id.values())
+
+            for root_cat in root_cats:
+                root_node = self._build_category_node(root_cat, cat_by_id)
+                if root_node and root_node["children"]:
+                    tree_nodes.append(root_node)
+
+        if not tree_nodes:
+            # Fallback tree building from category_groups if no explicit category records
+            for cat_name, prod_list in category_product_map.items():
+                cat_node = {
+                    "type": "category",
+                    "name": cat_name,
+                    "children": []
+                }
+                for prod in prod_list:
+                    prod_row = {
+                        "type": "product_row",
+                        "name": prod["product_name"],
+                        "variants": {
+                            prod["product_name"]: prod
+                        }
+                    }
+                    cat_node["children"].append(prod_row)
+                tree_nodes.append(cat_node)
+
+        all_categories = sorted(list(all_cat_names or [c["name"] for c in cat_by_id.values()]))
+        return all_categories, tree_nodes
+
+    def _build_category_node(self, cat_info: Dict[str, Any], cat_by_id: Dict[str, Any]) -> Dict[str, Any]:
+        node = {
+            "type": "category",
+            "name": cat_info["name"],
+            "children": []
+        }
+
+        # First add child categories
+        for child_id in cat_info["child_ids"]:
+            child_info = cat_by_id.get(child_id)
+            if child_info:
+                child_node = self._build_category_node(child_info, cat_by_id)
+                if child_node and child_node["children"]:
+                    node["children"].append(child_node)
+
+        # Then add direct products
+        for prod in cat_info["products"]:
+            prod_row = {
+                "type": "product_row",
+                "name": prod["product_name"],
+                "variants": {
+                    prod["product_name"]: prod
+                }
+            }
+            node["children"].append(prod_row)
+
+        return node
 
     def save_outputs(self, catalog: Dict[str, Any], json_path: Path, js_path: Path) -> None:
         """Save extracted catalog to static JSON and compiled JS file."""
