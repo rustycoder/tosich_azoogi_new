@@ -348,9 +348,9 @@ class AirtableDataExtractor:
             c_fields = cat_rec.get("fields", {})
 
             name = (
+                c_fields.get("Name") or
                 c_fields.get("Category_Name") or
                 c_fields.get("Category Name") or
-                c_fields.get("Name") or
                 c_fields.get("Title") or
                 c_fields.get("Category") or
                 ""
@@ -361,9 +361,9 @@ class AirtableDataExtractor:
 
             # Extract parent category references (linked record IDs or text names)
             parent_refs = (
+                c_fields.get("Parent") or
                 c_fields.get("Parent Category") or
                 c_fields.get("Parent_Category") or
-                c_fields.get("Parent") or
                 c_fields.get("Parent_Category_Name") or
                 c_fields.get("Parent Category Name") or
                 []
@@ -426,10 +426,21 @@ class AirtableDataExtractor:
             cat_val = prod.get("category") or "General"
             matched_cat = None
 
-            if cat_val in cat_by_id:
-                matched_cat = cat_by_id[cat_val]
-            elif str(cat_val).lower() in cat_by_name:
-                matched_cat = cat_by_name[str(cat_val).lower()]
+            if isinstance(cat_val, list) and cat_val:
+                for c_item in cat_val:
+                    c_str = str(c_item).strip()
+                    if c_str in cat_by_id:
+                        matched_cat = cat_by_id[c_str]
+                        break
+                    elif c_str.lower() in cat_by_name:
+                        matched_cat = cat_by_name[c_str.lower()]
+                        break
+            else:
+                c_str = str(cat_val).strip()
+                if c_str in cat_by_id:
+                    matched_cat = cat_by_id[c_str]
+                elif c_str.lower() in cat_by_name:
+                    matched_cat = cat_by_name[c_str.lower()]
 
             if matched_cat:
                 cat_name = matched_cat["name"]
@@ -485,7 +496,7 @@ class AirtableDataExtractor:
 
             for root_cat in root_cats:
                 root_node = self._build_category_node(root_cat, cat_by_id)
-                if root_node and root_node["children"]:
+                if root_node:
                     tree_nodes.append(root_node)
 
         if not tree_nodes:
@@ -522,7 +533,7 @@ class AirtableDataExtractor:
             child_info = cat_by_id.get(child_id)
             if child_info:
                 child_node = self._build_category_node(child_info, cat_by_id)
-                if child_node and child_node["children"]:
+                if child_node:
                     node["children"].append(child_node)
 
         # Then add direct products

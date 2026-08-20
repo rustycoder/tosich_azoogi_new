@@ -113,6 +113,70 @@ class TestAirtableDataExtractor(unittest.TestCase):
         self.assertEqual(len(prod["options"]["CCT"]), 2)
         self.assertEqual(len(prod["constraints"]), 1)
 
+    def test_parent_child_categories(self):
+        mock_products = [
+            {
+                "id": "recP1",
+                "fields": {
+                    "Product_Name": "Cob Strip 24V",
+                    "Category": ["recCatChild1"]
+                }
+            },
+            {
+                "id": "recP2",
+                "fields": {
+                    "Product_Name": "Neon Flex IP68",
+                    "Category": ["recCatParent2"]
+                }
+            }
+        ]
+        mock_categories = [
+            {
+                "id": "recCatParent1",
+                "fields": {
+                    "Name": "LED Strip Lighting"
+                }
+            },
+            {
+                "id": "recCatChild1",
+                "fields": {
+                    "Name": "COB LED Strips",
+                    "Parent": ["recCatParent1"]
+                }
+            },
+            {
+                "id": "recCatParent2",
+                "fields": {
+                    "Name": "Neon Flex"
+                }
+            }
+        ]
+
+        def mock_fetch(base_id, table):
+            if table == "Products":
+                return mock_products
+            elif table == "Categories":
+                return mock_categories
+            return []
+
+        self.mock_client.fetch_existing_records.side_effect = mock_fetch
+
+        catalog = self.extractor.run_extraction()
+
+        # Tree structure check
+        tree = catalog["tree"]
+        self.assertEqual(len(tree), 2)
+        
+        # Parent 1: LED Strip Lighting should have child COB LED Strips
+        parent1_node = next(n for n in tree if n["name"] == "LED Strip Lighting")
+        self.assertEqual(len(parent1_node["children"]), 1)
+        self.assertEqual(parent1_node["children"][0]["name"], "COB LED Strips")
+        self.assertEqual(parent1_node["children"][0]["children"][0]["name"], "Cob Strip 24V")
+
+        # Parent 2: Neon Flex has no child categories, direct product
+        parent2_node = next(n for n in tree if n["name"] == "Neon Flex")
+        self.assertEqual(parent2_node["children"][0]["name"], "Neon Flex IP68")
+
 
 if __name__ == "__main__":
     unittest.main()

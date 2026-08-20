@@ -1339,11 +1339,14 @@
       if (!treeNodes || !Array.isArray(treeNodes) || treeNodes.length === 0) return;
 
       treeNodes.forEach(function (node) {
+        if (node.type === 'product_row') return;
+
         var li = document.createElement('li');
         li.className = 'cat-node level-' + level;
 
         var nodeName = node.name || 'Category';
-        var hasChildren = node.children && Array.isArray(node.children) && node.children.length > 0;
+        var subCats = (node.children || []).filter(function(c) { return c.type === 'category'; });
+        var hasChildren = subCats.length > 0;
 
         if (hasChildren) {
           var row = document.createElement('div');
@@ -1365,7 +1368,7 @@
 
           var subUl = document.createElement('ul');
           subUl.className = 'sub-list level-' + (level + 1);
-          renderCategoryTree(node.children, subUl, level + 1);
+          renderCategoryTree(subCats, subUl, level + 1);
           li.appendChild(subUl);
         } else {
           var link = document.createElement('a');

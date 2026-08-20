@@ -27,7 +27,7 @@
   }
 
   function renderLevel(node, columnIndex) {
-    // 1. Remove all columns index > columnIndex
+    // 1. Remove all columns with data-column-index > columnIndex
     const columns = innerWrapper.querySelectorAll('.mega-menu-column');
     columns.forEach(col => {
       const idx = parseInt(col.getAttribute('data-column-index'), 10);
@@ -36,23 +36,26 @@
       }
     });
 
-    // 2. Max 2 Sidebars rule:
+    // 2. Max 2 Sidebars rule or if node is a product_row directly
     if (columnIndex >= 2 || node.type === 'product_row') {
       renderProductsView(node, columnIndex);
       return;
     }
 
-    if (!node.children || node.children.length === 0) return;
+    if (!node.children || node.children.length === 0) {
+      renderProductsView(node, columnIndex);
+      return;
+    }
 
-    const firstChild = node.children[0];
+    const subCats = (node.children || []).filter(c => c.type === 'category');
 
-    // If children are categories, render a sidebar column
-    if (firstChild.type === 'category') {
+    // If subcategories exist under this parent category, render Level 2 Sidebar
+    if (subCats.length > 0) {
       const sidebarCol = document.createElement('div');
       sidebarCol.className = `mega-menu-column mega-sidebar level-${columnIndex + 1}`;
       sidebarCol.setAttribute('data-column-index', columnIndex + 1);
 
-      node.children.forEach(child => {
+      subCats.forEach(child => {
         const btn = document.createElement('button');
         btn.className = 'mega-sidebar-btn';
         btn.innerHTML = `
@@ -82,13 +85,14 @@
 
       innerWrapper.appendChild(sidebarCol);
 
-      // Auto-trigger selection on first item
+      // Auto-trigger selection on first subcategory item
       const firstBtn = sidebarCol.querySelector('.mega-sidebar-btn');
       if (firstBtn) {
         firstBtn.classList.add('active');
-        renderLevel(node.children[0], columnIndex + 1);
+        renderLevel(subCats[0], columnIndex + 1);
       }
     } else {
+      // No subcategories exist: skip Level 2 Sidebar and render Main Panel directly
       renderProductsView(node, columnIndex);
     }
   }
