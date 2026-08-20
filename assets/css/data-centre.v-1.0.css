@@ -149,10 +149,13 @@
 .dc-actions {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 12px;
 }
 
 .dc-actions .btn {
+  width: max-content;
+  max-width: 100%;
   text-align: center;
 }
 
@@ -510,8 +513,25 @@
 
 .dc-cta-copy .dc-actions {
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   gap: 16px;
+}
+
+@media (min-width: 1600px) {
+  .dc-hero {
+    min-height: 0;
+    height: min(56vh, 560px);
+  }
+
+  .dc-hero-video {
+    object-position: center 42%;
+  }
+
+  .dc-hero-copy {
+    padding-bottom: 40px;
+  }
 }
 
 @media (max-width: 960px) {
@@ -531,10 +551,8 @@
 
   .dc-actions {
     flex-direction: row;
-  }
-  
-  .dc-cta-copy .dc-actions {
-    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
   }
 }
 
@@ -566,5 +584,6 @@
 
   .dc-actions {
     flex-direction: column;
+    align-items: center;
   }
 }
