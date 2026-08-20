@@ -1260,215 +1260,6 @@
       "children": [
         {
           "type": "category",
-          "name": "5-in-1 Dimming Driver",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "5-in-1 Dimming Driver",
-              "variants": {
-                "5-in-1 Dimming Driver": {
-                  "id": "rec2Wd9mV8ibXiAnL",
-                  "product_name": "5-in-1 Dimming Driver",
-                  "category": "5-in-1 Dimming Driver",
-                  "sku": "ADR003D",
-                  "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
-                  "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": "",
-                  "datasheet": "Yes",
-                  "product_icons": "",
-                  "meta_keywords": "",
-                  "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "IP Rating": "IP67",
-                    "Power": [
-                      "60W",
-                      "100W",
-                      "150W",
-                      "200W",
-                      "300W",
-                      "30W"
-                    ],
-                    "Voltage": [
-                      "12V",
-                      "24V"
-                    ],
-                    "AC Phase-Cut": "Triac",
-                    "Current Sinking": "0-10V",
-                    "Current Sourcing": "1-10V",
-                    "Duty Cycle": "PWM",
-                    "Variable Resistance": "Potentiometer"
-                  },
-                  "options": {
-                    "Power": [
-                      {
-                        "name": "30W",
-                        "id": "101"
-                      },
-                      {
-                        "name": "60W",
-                        "id": "102"
-                      },
-                      {
-                        "name": "100W",
-                        "id": "103"
-                      },
-                      {
-                        "name": "150W",
-                        "id": "104"
-                      },
-                      {
-                        "name": "200W",
-                        "id": "105"
-                      },
-                      {
-                        "name": "300W",
-                        "id": "106"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "12V",
-                        "id": "107"
-                      },
-                      {
-                        "name": "24V",
-                        "id": "108"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP67",
-                        "id": "109"
-                      }
-                    ],
-                    "AC Phase-Cut": [
-                      {
-                        "name": "Triac",
-                        "id": "110"
-                      }
-                    ],
-                    "Current Sinking": [
-                      {
-                        "name": "0-10V",
-                        "id": "111"
-                      }
-                    ],
-                    "Current Sourcing": [
-                      {
-                        "name": "1-10V",
-                        "id": "112"
-                      }
-                    ],
-                    "Duty Cycle": [
-                      {
-                        "name": "PWM",
-                        "id": "113"
-                      }
-                    ],
-                    "Variable Resistance": [
-                      {
-                        "name": "Potentiometer",
-                        "id": "114"
-                      }
-                    ]
-                  },
-                  "constraints": [],
-                  "category_path": [
-                    "Drivers",
-                    "5-in-1 Dimming Driver"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
-          "name": "Switchable Driver",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "Switchable Driver",
-              "variants": {
-                "Switchable Driver": {
-                  "id": "recqvzuqZCKIfSO11",
-                  "product_name": "Switchable Driver",
-                  "category": "Switchable Driver",
-                  "sku": "ADR-S12V24V-20W",
-                  "product_short_description": "Elevate your environment with a perfect blend of elegance and modern design, casting a warm, sophisticated glow that adds an unparalleled touch of ambiance and luxury.\n",
-                  "product_description": "Transform your spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your environment, casting a warm, sophisticated glow that effortlessly enhances the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and style to any setting, making it the ultimate choice for elevated architectural illumination.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": "",
-                  "datasheet": "Yes",
-                  "product_icons": "",
-                  "meta_keywords": "",
-                  "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Power": [
-                      "20W",
-                      "40W",
-                      "60W",
-                      "100W",
-                      "80W"
-                    ],
-                    "Voltage": "12V/24V",
-                    "IP Rating": "IP20"
-                  },
-                  "options": {
-                    "Voltage": [
-                      {
-                        "name": "12V/24V",
-                        "id": "101"
-                      }
-                    ],
-                    "Power": [
-                      {
-                        "name": "20W",
-                        "id": "102"
-                      },
-                      {
-                        "name": "40W",
-                        "id": "103"
-                      },
-                      {
-                        "name": "60W",
-                        "id": "104"
-                      },
-                      {
-                        "name": "80W",
-                        "id": "105"
-                      },
-                      {
-                        "name": "100W",
-                        "id": "106"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP20",
-                        "id": "107"
-                      }
-                    ]
-                  },
-                  "constraints": [],
-                  "category_path": [
-                    "Drivers",
-                    "Switchable Driver"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
           "name": "Non-Dimmable Driver",
           "children": [
             {
@@ -1666,6 +1457,215 @@
                   "category_path": [
                     "Drivers",
                     "DALI-2 & PUSH 2 in 1 Dimmable Driver"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "name": "Switchable Driver",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Switchable Driver",
+              "variants": {
+                "Switchable Driver": {
+                  "id": "recqvzuqZCKIfSO11",
+                  "product_name": "Switchable Driver",
+                  "category": "Switchable Driver",
+                  "sku": "ADR-S12V24V-20W",
+                  "product_short_description": "Elevate your environment with a perfect blend of elegance and modern design, casting a warm, sophisticated glow that adds an unparalleled touch of ambiance and luxury.\n",
+                  "product_description": "Transform your spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your environment, casting a warm, sophisticated glow that effortlessly enhances the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and style to any setting, making it the ultimate choice for elevated architectural illumination.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": "",
+                  "datasheet": "Yes",
+                  "product_icons": "",
+                  "meta_keywords": "",
+                  "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Power": [
+                      "20W",
+                      "40W",
+                      "60W",
+                      "100W",
+                      "80W"
+                    ],
+                    "Voltage": "12V/24V",
+                    "IP Rating": "IP20"
+                  },
+                  "options": {
+                    "Voltage": [
+                      {
+                        "name": "12V/24V",
+                        "id": "101"
+                      }
+                    ],
+                    "Power": [
+                      {
+                        "name": "20W",
+                        "id": "102"
+                      },
+                      {
+                        "name": "40W",
+                        "id": "103"
+                      },
+                      {
+                        "name": "60W",
+                        "id": "104"
+                      },
+                      {
+                        "name": "80W",
+                        "id": "105"
+                      },
+                      {
+                        "name": "100W",
+                        "id": "106"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP20",
+                        "id": "107"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "Drivers",
+                    "Switchable Driver"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "name": "5-in-1 Dimming Driver",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "5-in-1 Dimming Driver",
+              "variants": {
+                "5-in-1 Dimming Driver": {
+                  "id": "rec2Wd9mV8ibXiAnL",
+                  "product_name": "5-in-1 Dimming Driver",
+                  "category": "5-in-1 Dimming Driver",
+                  "sku": "ADR003D",
+                  "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
+                  "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": "",
+                  "datasheet": "Yes",
+                  "product_icons": "",
+                  "meta_keywords": "",
+                  "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "IP Rating": "IP67",
+                    "Power": [
+                      "60W",
+                      "100W",
+                      "150W",
+                      "200W",
+                      "300W",
+                      "30W"
+                    ],
+                    "Voltage": [
+                      "12V",
+                      "24V"
+                    ],
+                    "AC Phase-Cut": "Triac",
+                    "Current Sinking": "0-10V",
+                    "Current Sourcing": "1-10V",
+                    "Duty Cycle": "PWM",
+                    "Variable Resistance": "Potentiometer"
+                  },
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "30W",
+                        "id": "101"
+                      },
+                      {
+                        "name": "60W",
+                        "id": "102"
+                      },
+                      {
+                        "name": "100W",
+                        "id": "103"
+                      },
+                      {
+                        "name": "150W",
+                        "id": "104"
+                      },
+                      {
+                        "name": "200W",
+                        "id": "105"
+                      },
+                      {
+                        "name": "300W",
+                        "id": "106"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "12V",
+                        "id": "107"
+                      },
+                      {
+                        "name": "24V",
+                        "id": "108"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP67",
+                        "id": "109"
+                      }
+                    ],
+                    "AC Phase-Cut": [
+                      {
+                        "name": "Triac",
+                        "id": "110"
+                      }
+                    ],
+                    "Current Sinking": [
+                      {
+                        "name": "0-10V",
+                        "id": "111"
+                      }
+                    ],
+                    "Current Sourcing": [
+                      {
+                        "name": "1-10V",
+                        "id": "112"
+                      }
+                    ],
+                    "Duty Cycle": [
+                      {
+                        "name": "PWM",
+                        "id": "113"
+                      }
+                    ],
+                    "Variable Resistance": [
+                      {
+                        "name": "Potentiometer",
+                        "id": "114"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "Drivers",
+                    "5-in-1 Dimming Driver"
                   ]
                 }
               }
@@ -1931,6 +1931,81 @@
       "children": [
         {
           "type": "category",
+          "name": "Pool Light",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Pool Light",
+              "variants": {
+                "Pool Light": {
+                  "id": "recPcYiIIV8VLqru4",
+                  "product_name": "Pool Light",
+                  "category": "Pool Light",
+                  "sku": "PL001",
+                  "product_short_description": "Dive into an enchanting oasis of light and luxury. Elevate your pool into a sophisticated, glowing retreat, adding breathtaking allure and serene ambiance to every evening.\n",
+                  "product_description": "Dive into an enchanting oasis of light and luxury with our premium pool illumination solution. Designed to effortlessly elevate your outdoor experience, it bathes your aquatic retreat in a warm, sophisticated radiance that creates an unparalleled ambiance. Perfect for those with a discerning eye for discreet elegance and refined architectural detail, this lighting masterpiece transforms ordinary evenings into a breathtaking visual journey, adding both captivating allure and a profound sense of serenity to your home.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    "Please Enquire"
+                  ],
+                  "datasheet": "No",
+                  "product_icons": "",
+                  "meta_keywords": "",
+                  "supplier_name": "CHINA - 7 Colors Co Ltd",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Power": "7W",
+                    "CCT": [
+                      "3000K",
+                      "6000K"
+                    ],
+                    "IP Rating": "IP68",
+                    "Voltage": "12V"
+                  },
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "7W",
+                        "id": "101"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "3000K",
+                        "id": "102"
+                      },
+                      {
+                        "name": "6000K",
+                        "id": "103"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "12V",
+                        "id": "104"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP68",
+                        "id": "105"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "Outdoor & Architectural",
+                    "Pool Light"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
           "name": "Handrail",
           "children": [
             {
@@ -2190,81 +2265,6 @@
         },
         {
           "type": "category",
-          "name": "Pool Light",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "Pool Light",
-              "variants": {
-                "Pool Light": {
-                  "id": "recPcYiIIV8VLqru4",
-                  "product_name": "Pool Light",
-                  "category": "Pool Light",
-                  "sku": "PL001",
-                  "product_short_description": "Dive into an enchanting oasis of light and luxury. Elevate your pool into a sophisticated, glowing retreat, adding breathtaking allure and serene ambiance to every evening.\n",
-                  "product_description": "Dive into an enchanting oasis of light and luxury with our premium pool illumination solution. Designed to effortlessly elevate your outdoor experience, it bathes your aquatic retreat in a warm, sophisticated radiance that creates an unparalleled ambiance. Perfect for those with a discerning eye for discreet elegance and refined architectural detail, this lighting masterpiece transforms ordinary evenings into a breathtaking visual journey, adding both captivating allure and a profound sense of serenity to your home.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    "Please Enquire"
-                  ],
-                  "datasheet": "No",
-                  "product_icons": "",
-                  "meta_keywords": "",
-                  "supplier_name": "CHINA - 7 Colors Co Ltd",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Power": "7W",
-                    "CCT": [
-                      "3000K",
-                      "6000K"
-                    ],
-                    "IP Rating": "IP68",
-                    "Voltage": "12V"
-                  },
-                  "options": {
-                    "Power": [
-                      {
-                        "name": "7W",
-                        "id": "101"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "3000K",
-                        "id": "102"
-                      },
-                      {
-                        "name": "6000K",
-                        "id": "103"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "12V",
-                        "id": "104"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP68",
-                        "id": "105"
-                      }
-                    ]
-                  },
-                  "constraints": [],
-                  "category_path": [
-                    "Outdoor & Architectural",
-                    "Pool Light"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
           "name": "Garden Light",
           "children": [
             {
@@ -2373,6 +2373,103 @@
       "type": "category",
       "name": "Strips and Flex",
       "children": [
+        {
+          "type": "category",
+          "name": "LED Flex Sheet",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "LED Flex Sheet",
+              "variants": {
+                "LED Flex Sheet": {
+                  "id": "recF77CHZbtpxqAdy",
+                  "product_name": "LED Flex Sheet",
+                  "category": "LED Flex Sheet",
+                  "sku": "SMD-SHEET-30W-3K-IP20",
+                  "product_short_description": "Transform your home into a breathtaking visual journey. Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.\n",
+                  "product_description": "Transform your home into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers a sophisticated, seamless glow that beautifully enhances your elegant spaces, casting a warm and inviting atmosphere throughout. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating style to any room, making it the ultimate choice for elevated interior illumination.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": "",
+                  "datasheet": "No",
+                  "product_icons": "",
+                  "meta_keywords": "",
+                  "supplier_name": "CHINA - Rising Sun",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      "3000K",
+                      "4000K",
+                      "6000K"
+                    ],
+                    "IP Rating": [
+                      "IP20",
+                      "IP54",
+                      "IP67"
+                    ],
+                    "Power": "30W",
+                    "Voltage": "24V",
+                    "Dimension": "480mm (L) x 240mm (W)"
+                  },
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "30W",
+                        "id": "101"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "3000K",
+                        "id": "102"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "103"
+                      },
+                      {
+                        "name": "6000K",
+                        "id": "104"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "105"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP20",
+                        "id": "106"
+                      },
+                      {
+                        "name": "IP54",
+                        "id": "107"
+                      },
+                      {
+                        "name": "IP67",
+                        "id": "108"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "480mm (L) x 240mm (W)",
+                        "id": "109"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "Strips and Flex",
+                    "LED Flex Sheet"
+                  ]
+                }
+              }
+            }
+          ]
+        },
         {
           "type": "category",
           "name": "SMD Strip",
@@ -2501,103 +2598,6 @@
                   "category_path": [
                     "Strips and Flex",
                     "SMD Strip"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
-          "name": "LED Flex Sheet",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "LED Flex Sheet",
-              "variants": {
-                "LED Flex Sheet": {
-                  "id": "recF77CHZbtpxqAdy",
-                  "product_name": "LED Flex Sheet",
-                  "category": "LED Flex Sheet",
-                  "sku": "SMD-SHEET-30W-3K-IP20",
-                  "product_short_description": "Transform your home into a breathtaking visual journey. Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.\n",
-                  "product_description": "Transform your home into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers a sophisticated, seamless glow that beautifully enhances your elegant spaces, casting a warm and inviting atmosphere throughout. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating style to any room, making it the ultimate choice for elevated interior illumination.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": "",
-                  "datasheet": "No",
-                  "product_icons": "",
-                  "meta_keywords": "",
-                  "supplier_name": "CHINA - Rising Sun",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      "3000K",
-                      "4000K",
-                      "6000K"
-                    ],
-                    "IP Rating": [
-                      "IP20",
-                      "IP54",
-                      "IP67"
-                    ],
-                    "Power": "30W",
-                    "Voltage": "24V",
-                    "Dimension": "480mm (L) x 240mm (W)"
-                  },
-                  "options": {
-                    "Power": [
-                      {
-                        "name": "30W",
-                        "id": "101"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "3000K",
-                        "id": "102"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "103"
-                      },
-                      {
-                        "name": "6000K",
-                        "id": "104"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "105"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP20",
-                        "id": "106"
-                      },
-                      {
-                        "name": "IP54",
-                        "id": "107"
-                      },
-                      {
-                        "name": "IP67",
-                        "id": "108"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "480mm (L) x 240mm (W)",
-                        "id": "109"
-                      }
-                    ]
-                  },
-                  "constraints": [],
-                  "category_path": [
-                    "Strips and Flex",
-                    "LED Flex Sheet"
                   ]
                 }
               }

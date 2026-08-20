@@ -1221,6 +1221,33 @@
     var products = [];
     var extractedSpecsMap = {};
 
+    function extractSpecsFromFeatures(features) {
+      if (!features || typeof features !== 'object') return;
+      for (var featKey in features) {
+        if (!features.hasOwnProperty(featKey)) continue;
+        if (!featKey || typeof featKey !== 'string' || featKey.trim() === '') continue;
+        var featVal = features[featKey];
+        if (!extractedSpecsMap[featKey]) {
+          extractedSpecsMap[featKey] = new Set();
+        }
+        if (Array.isArray(featVal)) {
+          featVal.forEach(function(v) {
+            if (v !== null && v !== undefined) {
+              var sVal = String(v).trim();
+              if (sVal.length > 0 && sVal.length < 80) {
+                extractedSpecsMap[featKey].add(sVal);
+              }
+            }
+          });
+        } else if (featVal !== null && featVal !== undefined) {
+          var sVal = String(featVal).trim();
+          if (sVal.length > 0 && sVal.length < 80) {
+            extractedSpecsMap[featKey].add(sVal);
+          }
+        }
+      }
+    }
+
     function addProductToCatalog(vName, modelName, catPath, vData) {
       if (!vName || productsMap[vName]) return;
 
@@ -1235,22 +1262,7 @@
       var features = vData.product_features || {};
 
       // Extract unique features into extractedSpecsMap for dynamic filter accordions
-      for (var featKey in features) {
-        if (!features.hasOwnProperty(featKey)) continue;
-        var featVal = features[featKey];
-        if (!extractedSpecsMap[featKey]) {
-          extractedSpecsMap[featKey] = new Set();
-        }
-        if (Array.isArray(featVal)) {
-          featVal.forEach(function(v) {
-            if (v && typeof v === 'string' && v.trim().length > 0 && v.trim().length < 40) {
-              extractedSpecsMap[featKey].add(v.trim());
-            }
-          });
-        } else if (typeof featVal === 'string' && featVal.trim().length > 0 && featVal.trim().length < 40) {
-          extractedSpecsMap[featKey].add(featVal.trim());
-        }
-      }
+      extractSpecsFromFeatures(features);
 
       var item = {
         name: vName,
@@ -1297,16 +1309,20 @@
             var pName = prod.product_name || prod.name || "Product";
             var images = prod.product_images || [];
             var imgUrl = images.length > 0 ? images[0] : 'assets/logo_dark.png';
+            var feats = prod.product_features || {};
+            
+            extractSpecsFromFeatures(feats);
+
             var item = {
               id: prod.id,
               name: pName,
               modelName: pName,
               sub: prod.category || "General",
               cat: prod.category || "General",
-              category_path: [prod.category || "General"],
+              category_path: prod.category_path || [prod.category || "General"],
               filePath: '',
               img: imgUrl,
-              specs: prod.product_features || {},
+              specs: feats,
               rawProd: prod
             };
             if (!productsMap[pName]) {
@@ -1399,6 +1415,7 @@
         activeFilters.categories = [categoryName]; // Filter exclusively to clicked category
       }
       updateActiveCategoryClasses();
+      renderFilterAccordion();
       updateActiveTags();
     }
 
@@ -1417,57 +1434,6 @@
     if (catListEl && typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS.tree) {
       catListEl.innerHTML = '';
       renderCategoryTree(AZOOGI_PRODUCTS.tree, catListEl, 0);
-    }
-
-    /* ===== Dynamic Specification Filter Accordion ===== */
-    var filters = [];
-    var priorityKeys = ["IP", "Wattage", "Led_Qty", "Product Certification", "Bend radius", "Warranty", "Min Cut"];
-
-    priorityKeys.forEach(function(pKey) {
-      if (extractedSpecsMap[pKey] && extractedSpecsMap[pKey].size > 0) {
-        filters.push({
-          name: pKey,
-          options: Array.from(extractedSpecsMap[pKey]).slice(0, 12),
-          open: pKey === "IP" || pKey === "Wattage"
-        });
-      }
-    });
-
-    for (var specKey in extractedSpecsMap) {
-      if (priorityKeys.includes(specKey)) continue;
-      var vals = Array.from(extractedSpecsMap[specKey]);
-      if (vals.length >= 2 && vals.length <= 15) {
-        filters.push({
-          name: specKey,
-          options: vals.slice(0, 12),
-          open: false
-        });
-      }
-    }
-
-    if (filters.length === 0) {
-      filters = [
-        { name: "IP", options: ["IP20", "IP65", "IP67"] },
-        { name: "Wattage", options: ["8.6W", "10W", "14.4W", "18W"] }
-      ];
-    }
-
-    var filterAcc = document.getElementById('filterAccordion');
-    if (filterAcc) {
-      filterAcc.innerHTML = '';
-      filters.forEach(function (f) {
-        var div = document.createElement('div');
-        div.className = 'filter-item' + (f.open ? ' open' : '');
-        var opts = f.options.map(function (o) {
-          return '<label class="opt-row"><input type="checkbox" name="' + f.name + '" value="' + o + '"> ' + o + '</label>';
-        }).join('');
-        div.innerHTML = '<div class="filter-head"><span>' + f.name + '</span><span class="filter-toggle">' + (f.open ? '&ndash;' : '+') + '</span></div><div class="filter-body">' + opts + '</div>';
-        div.querySelector('.filter-head').addEventListener('click', function () {
-          div.classList.toggle('open');
-          div.querySelector('.filter-toggle').innerHTML = div.classList.contains('open') ? '&ndash;' : '+';
-        });
-        filterAcc.appendChild(div);
-      });
     }
 
     /* ===== State & Search / Sort Controls ===== */
@@ -1495,21 +1461,148 @@
       });
     }
 
-    /* ===== Filter Event Listeners ===== */
-    document.querySelectorAll('.opt-row input').forEach(function (input) {
-      input.addEventListener('change', function () {
-        var group = this.name;
-        var val = this.value;
-        if (!activeFilters.specs[group]) activeFilters.specs[group] = [];
-        if (this.checked) {
-          if (!activeFilters.specs[group].includes(val)) activeFilters.specs[group].push(val);
-        } else {
-          activeFilters.specs[group] = activeFilters.specs[group].filter(function (x) { return x !== val; });
-          if (activeFilters.specs[group].length === 0) delete activeFilters.specs[group];
+    /* ===== Dynamic Category-Scoped Specification Filter Accordion ===== */
+    function renderFilterAccordion() {
+      // 1. Determine target products (filtered by active category, or all products if no category selected)
+      var targetProducts = products;
+      if (activeFilters.categories && activeFilters.categories.length > 0) {
+        targetProducts = products.filter(function(p) {
+          return activeFilters.categories.some(function(selectedCat) {
+            var selLower = selectedCat.trim().toLowerCase();
+            if (p.modelName && p.modelName.trim().toLowerCase() === selLower) return true;
+            if (p.name && p.name.trim().toLowerCase().indexOf(selLower) !== -1) return true;
+            if (p.sub && p.sub.trim().toLowerCase() === selLower) return true;
+            if (p.cat && p.cat.trim().toLowerCase() === selLower) return true;
+            if (p.category_path && p.category_path.some(function(cp) {
+              return cp.trim().toLowerCase() === selLower;
+            })) return true;
+            return false;
+          });
+        });
+      }
+
+      // 2. Extract specs map ONLY from targetProducts in selected category
+      var catSpecsMap = {};
+      targetProducts.forEach(function(prod) {
+        var features = prod.specs || {};
+        for (var featKey in features) {
+          if (!features.hasOwnProperty(featKey)) continue;
+          if (!featKey || typeof featKey !== 'string' || featKey.trim() === '') continue;
+          var featVal = features[featKey];
+          if (!catSpecsMap[featKey]) catSpecsMap[featKey] = new Set();
+          if (Array.isArray(featVal)) {
+            featVal.forEach(function(v) {
+              if (v !== null && v !== undefined) {
+                var sVal = String(v).trim();
+                if (sVal.length > 0 && sVal.length < 80) catSpecsMap[featKey].add(sVal);
+              }
+            });
+          } else if (featVal !== null && featVal !== undefined) {
+            var sVal = String(featVal).trim();
+            if (sVal.length > 0 && sVal.length < 80) catSpecsMap[featKey].add(sVal);
+          }
         }
-        updateActiveTags();
       });
-    });
+
+      // 3. Preserve open/collapsed accordion states
+      var openStateMap = {};
+      var filterAcc = document.getElementById('filterAccordion');
+      if (filterAcc) {
+        filterAcc.querySelectorAll('.filter-item').forEach(function(itemEl) {
+          var headSpan = itemEl.querySelector('.filter-head span');
+          if (headSpan) {
+            openStateMap[headSpan.textContent] = itemEl.classList.contains('open');
+          }
+        });
+      }
+
+      // 4. Build filters list
+      var filters = [];
+      var priorityKeywords = ["ip", "wattage", "power", "voltage", "cct", "color", "led", "certification", "warranty", "radius", "cut"];
+
+      // Priority keys
+      for (var specKey in catSpecsMap) {
+        if (!catSpecsMap.hasOwnProperty(specKey)) continue;
+        var specLower = specKey.toLowerCase();
+        var isPriority = priorityKeywords.some(function(kw) { return specLower.indexOf(kw) !== -1; });
+        if (isPriority) {
+          var pVals = Array.from(catSpecsMap[specKey]).sort();
+          if (pVals.length >= 1) {
+            filters.push({
+              name: specKey,
+              options: pVals.slice(0, 20),
+              open: openStateMap.hasOwnProperty(specKey) ? openStateMap[specKey] : false
+            });
+          }
+        }
+      }
+
+      // Remaining keys
+      for (var specKey in catSpecsMap) {
+        if (!catSpecsMap.hasOwnProperty(specKey)) continue;
+        var specLower = specKey.toLowerCase();
+        var isPriority = priorityKeywords.some(function(kw) { return specLower.indexOf(kw) !== -1; });
+        if (!isPriority) {
+          var vals = Array.from(catSpecsMap[specKey]).sort();
+          if (vals.length >= 1) {
+            filters.push({
+              name: specKey,
+              options: vals.slice(0, 20),
+              open: openStateMap.hasOwnProperty(specKey) ? openStateMap[specKey] : false
+            });
+          }
+        }
+      }
+
+      // Clean activeFilters.specs if any spec keys no longer exist in the selected category
+      for (var activeGroup in activeFilters.specs) {
+        if (!catSpecsMap.hasOwnProperty(activeGroup)) {
+          delete activeFilters.specs[activeGroup];
+        }
+      }
+
+      // 5. Render accordion HTML & attach events
+      if (filterAcc) {
+        filterAcc.innerHTML = '';
+        if (filters.length === 0) {
+          filterAcc.innerHTML = '<div style="padding:12px 0; font-size:12px; color:var(--muted);">No attributes available for this category.</div>';
+          return;
+        }
+
+        filters.forEach(function (f) {
+          var div = document.createElement('div');
+          div.className = 'filter-item' + (f.open ? ' open' : '');
+          var opts = f.options.map(function (o) {
+            var isChecked = activeFilters.specs[f.name] && activeFilters.specs[f.name].includes(o);
+            return '<label class="opt-row"><input type="checkbox" name="' + f.name + '" value="' + o + '"' + (isChecked ? ' checked' : '') + '> ' + o + '</label>';
+          }).join('');
+
+          div.innerHTML = '<div class="filter-head"><span>' + f.name + '</span><span class="filter-toggle">' + (f.open ? '&ndash;' : '+') + '</span></div><div class="filter-body">' + opts + '</div>';
+
+          div.querySelector('.filter-head').addEventListener('click', function () {
+            div.classList.toggle('open');
+            div.querySelector('.filter-toggle').innerHTML = div.classList.contains('open') ? '&ndash;' : '+';
+          });
+
+          div.querySelectorAll('.opt-row input').forEach(function (input) {
+            input.addEventListener('change', function () {
+              var group = this.name;
+              var val = this.value;
+              if (!activeFilters.specs[group]) activeFilters.specs[group] = [];
+              if (this.checked) {
+                if (!activeFilters.specs[group].includes(val)) activeFilters.specs[group].push(val);
+              } else {
+                activeFilters.specs[group] = activeFilters.specs[group].filter(function (x) { return x !== val; });
+                if (activeFilters.specs[group].length === 0) delete activeFilters.specs[group];
+              }
+              updateActiveTags();
+            });
+          });
+
+          filterAcc.appendChild(div);
+        });
+      }
+    }
 
     function removeFilter(type, val, group) {
       if (type === 'search') {
@@ -1518,10 +1611,11 @@
       } else if (type === 'cat') {
         activeFilters.categories = activeFilters.categories.filter(function (x) { return x !== val; });
         updateActiveCategoryClasses();
+        renderFilterAccordion();
       } else if (type === 'spec') {
         activeFilters.specs[group] = activeFilters.specs[group].filter(function (x) { return x !== val; });
         if (activeFilters.specs[group].length === 0) delete activeFilters.specs[group];
-        document.querySelectorAll('.opt-row input').forEach(function (input) {
+        document.querySelectorAll('#filterAccordion .opt-row input').forEach(function (input) {
           if (input.name === group && input.value === val) input.checked = false;
         });
       }
@@ -1534,7 +1628,7 @@
       activeFilters.categories = [];
       activeFilters.specs = {};
       updateActiveCategoryClasses();
-      document.querySelectorAll('.opt-row input').forEach(function (input) { input.checked = false; });
+      renderFilterAccordion();
       updateActiveTags();
     }
 
@@ -1781,6 +1875,7 @@
     }
 
     // Initial render
+    renderFilterAccordion();
     updateActiveTags();
   </script>
 </body>

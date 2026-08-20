@@ -267,25 +267,6 @@ class AirtableDataExtractor:
             status = self.sanitize_field_value(fields.get("Status") or "")
             product_type = self.sanitize_field_value(fields.get("Product type") or "")
 
-            # 3. Add direct column attributes to product_features, excluding non-attribute meta keys
-            excluded_meta_keys = [
-                "product_name", "product name", "name", "title",
-                "category", "product category", "categories",
-                "images", "product_images", "attachments", "photos", "media",
-                "options", "constraints", "attributes keys", "attribute keys", "attributes",
-                "sku", "product dimension", "product_dimension", "product image", "product gallery",
-                "product short description", "product long description", "product description", "short description",
-                "stocked item", "stock / quantity", "status", "product type", "datasheet", "product icons",
-                "meta keywords", "meta_keywords",
-                "supplier code", "supplier name", "raw_fields"
-            ]
-
-            for f_key, f_val in fields.items():
-                if f_key.lower() not in excluded_meta_keys and f_val not in [None, "", []]:
-                    sanitized = self.sanitize_field_value(f_val)
-                    if f_key not in product_features:
-                        product_features[f_key] = sanitized
-
             # Also check Attributes table referencing Product ID
             if attr_index:
                 for a_id, a_data in attr_index.items():
