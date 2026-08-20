@@ -641,52 +641,7 @@
     }
 
     .prod-overlay {
-      position: absolute;
-      inset: 0;
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background: linear-gradient(180deg, rgba(11, 11, 11, 0.8) 0%, rgba(11, 11, 11, .92) 100%);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .15s ease-out;
-      will-change: opacity;
-      transform: translateZ(0);
-    }
-
-    .prod-card:hover .prod-overlay,
-    .prod-card:focus-within .prod-overlay,
-    .prod-card.is-specs .prod-overlay {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .spec-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      width: 100%;
-      transform: translateY(4px);
-      transition: transform .15s ease-out;
-      will-change: transform;
-    }
-
-    .prod-card:hover .spec-list,
-    .prod-card.is-specs .spec-list {
-      transform: translateY(0);
-    }
-
-    @media (hover: none) {
-      .prod-card .prod-overlay {
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      .prod-card.is-specs .prod-overlay {
-        opacity: 1;
-        pointer-events: auto;
-      }
+      display: none !important;
     }
 
     .spec-item {
@@ -1760,24 +1715,8 @@
 
         var imgHtml = '<div class="prod-swatch" style="background-image:url(\'' + (p.img || 'assets/logo_dark.png') + '\'); background-size:cover; background-position:center;"></div>';
 
-        var specHtml = '<div class="spec-list">';
-        var count = 0;
-        if (p.specs) {
-          for (var key in p.specs) {
-            if (count >= 5) break;
-            var valStr = Array.isArray(p.specs[key]) ? p.specs[key].join(' ') : p.specs[key];
-            specHtml += '<div class="spec-item"><strong>' + key + '</strong><span>' + valStr + '</span></div>';
-            count++;
-          }
-        }
-        specHtml += '</div>';
-
         return '<div class="prod-card" data-href="' + detailUrl + '" role="link" tabindex="0">' +
-          '<div class="prod-card-img">' + imgHtml +
-          '<div class="prod-overlay">' +
-          specHtml +
-          '</div>' +
-          '</div>' +
+          '<div class="prod-card-img">' + imgHtml + '</div>' +
           '<div class="prod-card-title">' +
           '<div class="prod-card-title-text"><span class="cat-label">' + p.sub + '</span>' + p.name + '</div>' +
           '<button class="add-quote-btn" aria-label="Add to quote" onclick="event.stopPropagation(); this.classList.add(\'added\'); this.innerHTML=\'&check;\';">+</button>' +

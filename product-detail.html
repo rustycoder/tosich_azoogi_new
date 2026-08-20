@@ -158,10 +158,10 @@
 
           <!-- SPECIFICATIONS DIMENSION VECTOR DIAGRAM START -->
           <div class="spec-dimension-image-wrapper"
-            style="background: #fff; border-radius: 8px; padding: 24px; display: flex; align-items: center; justify-content: center; aspect-ratio: 4/3; overflow: hidden; flex-direction: column;">
+            style="background: #fff; border-radius: 8px; padding: 24px; display: none; align-items: center; justify-content: center; aspect-ratio: 4/3; overflow: hidden; flex-direction: column;">
 
-            <img id="spec-dimension-image" src="assets/dimensions.png" alt="Product Dimensions"
-              style="max-width: 100%; max-height: 100%; object-fit: contain;">
+            <img id="spec-dimension-image" src="" alt="Product Dimensions"
+              style="max-width: 100%; max-height: 100%; object-fit: contain; display: none;">
           </div>
           <!-- SPECIFICATIONS DIMENSION VECTOR DIAGRAM END -->
 
@@ -283,12 +283,6 @@
           <div class="prod-card-img">
             <div class="prod-swatch"
               style="background-image:url('assets/img/drivers.webp'); background-size:cover; background-position:center;">
-            </div>
-            <div class="prod-overlay">
-              <div class="spec-list">
-                <div class="spec-item"><strong>Bending Direction</strong><span>Non-Bendable</span></div>
-                <div class="spec-item"><strong>IP Rating</strong><span>IP20</span></div>
-              </div>
             </div>
           </div>
           <div class="prod-card-title">
@@ -693,23 +687,10 @@
 
         accessoriesGrid.innerHTML = recommended.map(p => {
           const detailUrl = p.id ? ('product-detail.html?id=' + encodeURIComponent(p.id)) : (p.filePath ? ('product-detail.html?file=' + encodeURIComponent(p.filePath)) : ('product-detail.html?product=' + encodeURIComponent(p.name)));
-          let specHtml = '<div class="spec-list">';
-          let count = 0;
-          for (const key in p.specs) {
-            if (count >= 3) break;
-            const valStr = Array.isArray(p.specs[key]) ? p.specs[key].join(' ') : p.specs[key];
-            specHtml += `<div class="spec-item"><strong>${key}</strong><span>${valStr}</span></div>`;
-            count++;
-          }
-          specHtml += '</div>';
-
           return `
                 <div class="prod-card" onclick="window.location.href='${detailUrl}'">
                   <div class="prod-card-img">
                     <div class="prod-swatch" style="background-image:url('${p.img}'); background-size:cover; background-position:center;"></div>
-                    <div class="prod-overlay">
-                      ${specHtml}
-                    </div>
                   </div>
                   <div class="prod-card-title">
                     <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}</div>
@@ -915,18 +896,23 @@
             const first = dimSource[0];
             if (typeof first === 'object' && first !== null && first.url) {
               dimUrl = first.url;
-            } else if (typeof first === 'string' && first.startsWith('http')) {
-              dimUrl = first;
+            } else if (typeof first === 'string' && first.trim()) {
+              dimUrl = first.trim();
             }
-          } else if (typeof dimSource === 'string' && dimSource.startsWith('http')) {
-            dimUrl = dimSource;
+          } else if (typeof dimSource === 'string' && dimSource.trim()) {
+            dimUrl = dimSource.trim();
           }
+
+          const wrapper = dimImgEl.closest('.spec-dimension-image-wrapper') || dimImgEl.parentElement;
 
           if (dimUrl) {
             dimImgEl.src = resolveImg(dimUrl);
             dimImgEl.style.display = 'block';
+            if (wrapper) wrapper.style.display = 'flex';
           } else {
-            dimImgEl.src = 'assets/dimensions.png';
+            dimImgEl.src = '';
+            dimImgEl.style.display = 'none';
+            if (wrapper) wrapper.style.display = 'none';
           }
         }
       }
