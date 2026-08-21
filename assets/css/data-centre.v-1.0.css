@@ -120,7 +120,7 @@
 
 /* —— Bands —— */
 .dc-band {
-  padding: clamp(48px, 6vw, 72px) 0;
+  padding: clamp(30px, 6vw, 30px) 0;
 }
 
 .dc-band--tight {
@@ -519,14 +519,14 @@
   gap: 16px;
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1500px) {
   .dc-hero {
     min-height: 0;
-    height: min(56vh, 560px);
+    height: 68vh;
   }
 
   .dc-hero-video {
-    object-position: center 42%;
+    object-position: top center;
   }
 
   .dc-hero-copy {
