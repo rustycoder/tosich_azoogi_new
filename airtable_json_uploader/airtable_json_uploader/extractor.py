@@ -1,6 +1,9 @@
 import os
 import json
 import logging
+import hashlib
+import ssl
+import urllib.request
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Union
 from .airtable_client import AirtableClient
@@ -313,7 +316,104 @@ class AirtableDataExtractor:
         catalog["tree"] = tree_categories
         catalog["categories"] = all_categories
 
+        # Localize expiring Airtable image URLs to permanent static assets
+        self.localize_catalog_images(catalog)
+
         return catalog
+
+    def localize_image_url(self, url: str, media_root: Path, prefix: str = "img", subfolder: str = "products") -> str:
+        """Downloads remote Airtable image URL to local media_root / subfolder and returns relative static path."""
+        if not url or not isinstance(url, str) or not url.startswith("http"):
+            return url
+
+        # Determine extension
+        ext = ".jpg"
+        clean_url = url.split("?")[0]
+        filename_part = clean_url.split("/")[-1]
+        if "." in filename_part:
+            possible_ext = "." + filename_part.split(".")[-1].lower()
+            if possible_ext in [".jpg", ".jpeg", ".png", ".webp", ".gif", ".svg"]:
+                ext = possible_ext
+
+        # Create deterministic hash based on clean URL
+        url_hash = hashlib.md5(clean_url.encode("utf-8")).hexdigest()[:10]
+        safe_prefix = "".join(c for c in prefix if c.isalnum() or c in "_-") or "prod"
+        filename = f"{safe_prefix}_{url_hash}{ext}"
+
+        target_dir = media_root / subfolder
+        target_dir.mkdir(parents=True, exist_ok=True)
+        local_file_path = target_dir / filename
+        relative_path = f"assets/img/{subfolder}/{filename}"
+
+        try:
+            ctx = ssl._create_unverified_context()
+            req = urllib.request.Request(
+                url,
+                headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"}
+            )
+            with urllib.request.urlopen(req, timeout=30, context=ctx) as resp, open(local_file_path, "wb") as f:
+                f.write(resp.read())
+            logger.info(f"Downloaded image {relative_path}")
+        except Exception as e:
+            logger.warning(f"Failed to download image from {url}: {e}")
+            if local_file_path.exists():
+                return relative_path
+
+        return relative_path
+
+    def localize_catalog_images(self, catalog: Dict[str, Any], media_root: Optional[Path] = None) -> None:
+        """Traverse catalog dictionary and replace expiring Airtable image URLs with local static image paths."""
+        if media_root is None:
+            project_root = Path(__file__).parent.parent.parent
+            media_root = project_root / "assets" / "img"
+
+        url_cache: Dict[tuple, str] = {}
+
+        def process_url(url_val: str, prefix_str: str, subfolder: str = "products") -> str:
+            if not url_val or not isinstance(url_val, str) or not url_val.startswith("http"):
+                return url_val
+            cache_key = (url_val, subfolder)
+            if cache_key not in url_cache:
+                url_cache[cache_key] = self.localize_image_url(url_val, media_root, prefix=prefix_str, subfolder=subfolder)
+            return url_cache[cache_key]
+
+        def process_url_list(urls: Any, prefix_str: str, subfolder: str = "products") -> Any:
+            if isinstance(urls, list):
+                return [process_url(u, prefix_str, subfolder) for u in urls]
+            elif isinstance(urls, str):
+                return process_url(urls, prefix_str, subfolder)
+            return urls
+
+        # 1. Process top-level products
+        for prod in catalog.get("products", []):
+            p_id = prod.get("id") or prod.get("sku") or "product"
+            if "product_images" in prod:
+                prod["product_images"] = process_url_list(prod["product_images"], str(p_id), "products")
+            if "product_dimension" in prod:
+                prod["product_dimension"] = process_url_list(prod["product_dimension"], f"{p_id}_dim", "products")
+            if "product_icons" in prod:
+                prod["product_icons"] = process_url_list(prod["product_icons"], f"{p_id}_icon", "icons")
+
+        # 2. Process tree nodes recursively
+        def process_tree_node(node: Dict[str, Any]) -> None:
+            if not isinstance(node, dict):
+                return
+            if node.get("variants"):
+                for vname, vdata in node["variants"].items():
+                    p_id = (vdata.get("id") if isinstance(vdata, dict) else None) or vname
+                    if isinstance(vdata, dict):
+                        if "product_images" in vdata:
+                            vdata["product_images"] = process_url_list(vdata["product_images"], str(p_id), "products")
+                        if "product_dimension" in vdata:
+                            vdata["product_dimension"] = process_url_list(vdata["product_dimension"], f"{p_id}_dim", "products")
+                        if "product_icons" in vdata:
+                            vdata["product_icons"] = process_url_list(vdata["product_icons"], f"{p_id}_icon", "icons")
+            if node.get("children"):
+                for child in node["children"]:
+                    process_tree_node(child)
+
+        for tree_root in catalog.get("tree", []):
+            process_tree_node(tree_root)
 
     def build_category_tree(self, categories_raw: List[Dict[str, Any]], products_list: List[Dict[str, Any]]) -> tuple:
         """

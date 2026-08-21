@@ -100,7 +100,7 @@ class TestAirtableDataExtractor(unittest.TestCase):
         self.assertEqual(prod["category"], "Neon Lights")
         self.assertEqual(prod["product_short_description"], "Short summary text")
         self.assertEqual(prod["product_description"], "Full detailed description text")
-        self.assertEqual(prod["product_images"], ["https://example.com/neon.jpg"])
+        self.assertEqual(prod["product_images"], ["assets/img/products/recProd1_a2934e427d.jpg"])
 
         # Features from Attributes keys and linked records
         self.assertEqual(prod["product_features"]["CCT"], ["3000K", "4000K"])
