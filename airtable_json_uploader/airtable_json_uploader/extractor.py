@@ -322,12 +322,12 @@ class AirtableDataExtractor:
         return catalog
 
     def localize_image_url(self, url: str, media_root: Path, prefix: str = "img", subfolder: str = "products") -> str:
-        """Downloads remote Airtable image URL to local media_root / subfolder and returns relative static path."""
+        """Downloads remote Airtable image URL to local media_root / subfolder and returns relative static path with exact file format."""
         if not url or not isinstance(url, str) or not url.startswith("http"):
             return url
 
-        # Determine extension
-        ext = ".jpg"
+        # Determine extension from URL path if available
+        ext = None
         clean_url = url.split("?")[0]
         filename_part = clean_url.split("/")[-1]
         if "." in filename_part:
@@ -335,15 +335,11 @@ class AirtableDataExtractor:
             if possible_ext in [".jpg", ".jpeg", ".png", ".webp", ".gif", ".svg"]:
                 ext = possible_ext
 
-        # Create deterministic hash based on clean URL
         url_hash = hashlib.md5(clean_url.encode("utf-8")).hexdigest()[:10]
         safe_prefix = "".join(c for c in prefix if c.isalnum() or c in "_-") or "prod"
-        filename = f"{safe_prefix}_{url_hash}{ext}"
 
         target_dir = media_root / subfolder
         target_dir.mkdir(parents=True, exist_ok=True)
-        local_file_path = target_dir / filename
-        relative_path = f"assets/img/{subfolder}/{filename}"
 
         try:
             ctx = ssl._create_unverified_context()
@@ -351,21 +347,74 @@ class AirtableDataExtractor:
                 url,
                 headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"}
             )
-            with urllib.request.urlopen(req, timeout=30, context=ctx) as resp, open(local_file_path, "wb") as f:
-                f.write(resp.read())
-            logger.info(f"Downloaded image {relative_path}")
+            with urllib.request.urlopen(req, timeout=30, context=ctx) as resp:
+                content_type = resp.headers.get("Content-Type", "").lower()
+                payload = resp.read()
+
+                # Detect format from Content-Type or payload byte signature
+                if "svg" in content_type or payload.strip().startswith(b"<?xml") or b"<svg" in payload[:300].lower():
+                    ext = ".svg"
+                elif "png" in content_type or payload.startswith(b"\x89PNG"):
+                    ext = ".png"
+                elif "webp" in content_type or (payload.startswith(b"RIFF") and b"WEBP" in payload[:20]):
+                    ext = ".webp"
+                elif "gif" in content_type or payload.startswith(b"GIF8"):
+                    ext = ".gif"
+                elif "jpeg" in content_type or "jpg" in content_type or payload.startswith(b"\xff\xd8\xff"):
+                    ext = ".jpg"
+                elif not ext:
+                    ext = ".jpg"
+
+                # Remove any stale file with same prefix and hash but different extension
+                for old_ext in [".jpg", ".jpeg", ".png", ".webp", ".gif", ".svg"]:
+                    if old_ext != ext:
+                        stale_file = target_dir / f"{safe_prefix}_{url_hash}{old_ext}"
+                        if stale_file.exists():
+                            try:
+                                stale_file.unlink()
+                                logger.info(f"Cleaned up stale icon/image file {stale_file}")
+                            except Exception:
+                                pass
+
+                filename = f"{safe_prefix}_{url_hash}{ext}"
+                local_file_path = target_dir / filename
+                relative_path = f"assets/img/{subfolder}/{filename}"
+
+                # Always overwrite local file with fresh payload from Airtable
+                with open(local_file_path, "wb") as f:
+                    f.write(payload)
+                logger.info(f"Downloaded and overwrote asset {relative_path} (Format: {ext})")
+                return relative_path
+
         except Exception as e:
+            fallback_ext = ext or ".jpg"
+            filename = f"{safe_prefix}_{url_hash}{fallback_ext}"
+            local_file_path = target_dir / filename
+            relative_path = f"assets/img/{subfolder}/{filename}"
             logger.warning(f"Failed to download image from {url}: {e}")
             if local_file_path.exists():
                 return relative_path
 
         return relative_path
 
-    def localize_catalog_images(self, catalog: Dict[str, Any], media_root: Optional[Path] = None) -> None:
+    def localize_catalog_images(self, catalog: Dict[str, Any], media_root: Optional[Path] = None, clear_existing: bool = True) -> None:
         """Traverse catalog dictionary and replace expiring Airtable image URLs with local static image paths."""
         if media_root is None:
             project_root = Path(__file__).parent.parent.parent
             media_root = project_root / "assets" / "img"
+
+        # Clear existing images and icons folders to perform a 100% fresh download
+        if clear_existing:
+            for subfolder in ["products", "icons"]:
+                target_dir = media_root / subfolder
+                if target_dir.exists():
+                    for file_path in target_dir.glob("*"):
+                        if file_path.is_file():
+                            try:
+                                file_path.unlink()
+                            except Exception as e:
+                                logger.warning(f"Could not delete {file_path}: {e}")
+                    logger.info(f"Cleared all existing files in {target_dir}")
 
         url_cache: Dict[tuple, str] = {}
 

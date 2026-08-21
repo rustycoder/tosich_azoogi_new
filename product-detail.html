@@ -712,14 +712,14 @@
           if (!source) return;
           if (Array.isArray(source)) {
             source.forEach(item => {
-              if (typeof item === 'string' && item.startsWith('http')) {
-                images.push(item);
+              if (typeof item === 'string' && item.trim()) {
+                images.push(item.trim());
               } else if (typeof item === 'object' && item !== null && item.url) {
                 images.push(item.url);
               }
             });
-          } else if (typeof source === 'string' && source.startsWith('http')) {
-            images.push(source);
+          } else if (typeof source === 'string' && source.trim()) {
+            images.push(source.trim());
           }
         }
 
@@ -917,26 +917,30 @@
         }
       }
 
-      // Render Product Icons from Airtable "Product Icons"
+        // Render Product Icons from Airtable "Product Icons"
       function renderProductIcons() {
         const iconsRow = document.querySelector('.product-icons-row');
         const iconsWrapper = document.querySelector('.product-icons-row-wrapper');
         if (!iconsRow) return;
 
         const features = product.product_features || {};
-        const rawIcons = product.product_icons || features["Product Icons"] || features["Product icons"] || features["product_icons"];
+        const rawIcons = product.product_icons || features["Product Icons"] || features["Product icons"] || features["product_icons"] || features["Icons"] || features["Icon"];
 
         let iconUrls = [];
         if (Array.isArray(rawIcons)) {
           rawIcons.forEach(item => {
-            if (typeof item === 'string' && (item.startsWith('http') || item.startsWith('assets/'))) {
-              iconUrls.push(item);
-            } else if (typeof item === 'object' && item !== null && item.url) {
-              iconUrls.push(item.url);
+            if (typeof item === 'string' && item.trim()) {
+              iconUrls.push(item.trim());
+            } else if (typeof item === 'object' && item !== null) {
+              if (item.url) iconUrls.push(item.url);
+              else if (item.filePath) iconUrls.push(item.filePath);
+              else if (item.path) iconUrls.push(item.path);
             }
           });
-        } else if (typeof rawIcons === 'string' && (rawIcons.startsWith('http') || rawIcons.startsWith('assets/'))) {
-          iconUrls.push(rawIcons);
+        } else if (typeof rawIcons === 'string' && rawIcons.trim()) {
+          rawIcons.split(',').forEach(item => {
+            if (item.trim()) iconUrls.push(item.trim());
+          });
         }
 
         iconUrls = Array.from(new Set(iconUrls));
