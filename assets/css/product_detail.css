@@ -320,11 +320,12 @@ a.meta-badge:hover {
 }
 
 .config-btn .config-btn-icon {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   object-fit: contain;
   flex-shrink: 0;
   display: inline-block;
+  background: transparent;
 }
 
 .config-btn.active .circle-icon circle {

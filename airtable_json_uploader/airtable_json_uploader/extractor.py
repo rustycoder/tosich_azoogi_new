@@ -452,6 +452,16 @@ class AirtableDataExtractor:
                 local_file_path = target_dir / filename
                 relative_path = f"assets/img/{subfolder}/{filename}"
 
+                # Strip white background rects from SVG payloads for transparent backgrounds
+                if ext == ".svg":
+                    try:
+                        import re
+                        svg_text = payload.decode("utf-8", errors="ignore")
+                        cleaned_svg = re.sub(r'<rect[^>]*fill=["\'](?:#ffffff|#fff|white|rgb\(255,\s*255,\s*255\))["\'][^>]*/>', '', svg_text, flags=re.IGNORECASE)
+                        payload = cleaned_svg.encode("utf-8")
+                    except Exception as ex:
+                        logger.warning(f"Could not strip SVG white background rect: {ex}")
+
                 # Always overwrite local file with fresh payload from Airtable
                 with open(local_file_path, "wb") as f:
                     f.write(payload)
