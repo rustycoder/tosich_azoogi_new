@@ -924,7 +924,7 @@
         if (!iconsRow) return;
 
         const features = product.product_features || {};
-        const rawIcons = product.product_icons || features["Product Icons"] || features["Product icons"] || features["product_icons"] || features["Icons"] || features["Icon"];
+        const rawIcons = product.technical_icons || product.product_icons || features["Technical Icons"] || features["Technical icons"] || features["technical_icons"] || features["Product Icons"] || features["Product icons"] || features["product_icons"] || features["Icons"] || features["Icon"];
 
         let iconUrls = [];
         if (Array.isArray(rawIcons)) {

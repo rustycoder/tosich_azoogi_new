@@ -264,7 +264,7 @@ class AirtableDataExtractor:
             dimension_drawing = self.sanitize_field_value(fields.get("Product Dimension") or fields.get("Product dimension") or "")
             stocked_item = self.sanitize_field_value(fields.get("Stocked Item") or fields.get("Stock / Quantity") or "")
             datasheet = self.sanitize_field_value(fields.get("Datasheet") or "")
-            product_icons = self.sanitize_field_value(fields.get("Product Icons") or "")
+            technical_icons = self.sanitize_field_value(fields.get("Technical Icons") or fields.get("Technical icons") or fields.get("Technical_Icons") or fields.get("Product Icons") or fields.get("Product icons") or "")
             meta_keywords = self.sanitize_field_value(fields.get("Meta Keywords") or fields.get("meta_keywords") or fields.get("Meta keywords") or fields.get("meta keywords") or "")
             supplier_name = self.sanitize_field_value(fields.get("Supplier Name") or "")
             status = self.sanitize_field_value(fields.get("Status") or "")
@@ -294,7 +294,7 @@ class AirtableDataExtractor:
                 "product_dimension": dimension_drawing,
                 "stocked_item": stocked_item,
                 "datasheet": datasheet,
-                "product_icons": product_icons,
+                "technical_icons": technical_icons,
                 "meta_keywords": meta_keywords,
                 "supplier_name": supplier_name,
                 "status": status,
@@ -440,7 +440,9 @@ class AirtableDataExtractor:
                 prod["product_images"] = process_url_list(prod["product_images"], str(p_id), "products")
             if "product_dimension" in prod:
                 prod["product_dimension"] = process_url_list(prod["product_dimension"], f"{p_id}_dim", "products")
-            if "product_icons" in prod:
+            if "technical_icons" in prod:
+                prod["technical_icons"] = process_url_list(prod["technical_icons"], f"{p_id}_icon", "icons")
+            elif "product_icons" in prod:
                 prod["product_icons"] = process_url_list(prod["product_icons"], f"{p_id}_icon", "icons")
 
         # 2. Process tree nodes recursively
@@ -455,7 +457,9 @@ class AirtableDataExtractor:
                             vdata["product_images"] = process_url_list(vdata["product_images"], str(p_id), "products")
                         if "product_dimension" in vdata:
                             vdata["product_dimension"] = process_url_list(vdata["product_dimension"], f"{p_id}_dim", "products")
-                        if "product_icons" in vdata:
+                        if "technical_icons" in vdata:
+                            vdata["technical_icons"] = process_url_list(vdata["technical_icons"], f"{p_id}_icon", "icons")
+                        elif "product_icons" in vdata:
                             vdata["product_icons"] = process_url_list(vdata["product_icons"], f"{p_id}_icon", "icons")
             if node.get("children"):
                 for child in node["children"]:
