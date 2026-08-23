@@ -139,12 +139,16 @@ class AirtableClient:
             for k, v in attributes_input.items():
                 if isinstance(v, list):
                     for sub_v in v:
-                        if isinstance(sub_v, dict) and "name" in sub_v:
-                            attr_pairs.append((str(k), str(sub_v["name"])))
+                        if isinstance(sub_v, dict):
+                            val_str = sub_v.get("value") or sub_v.get("name") or ""
+                            if val_str:
+                                attr_pairs.append((str(k), str(val_str)))
                         elif sub_v is not None:
                             attr_pairs.append((str(k), str(sub_v)))
-                elif isinstance(v, dict) and "name" in v:
-                    attr_pairs.append((str(k), str(v["name"])))
+                elif isinstance(v, dict):
+                    val_str = v.get("value") or v.get("name") or ""
+                    if val_str:
+                        attr_pairs.append((str(k), str(val_str)))
                 elif v is not None:
                     attr_pairs.append((str(k), str(v)))
 

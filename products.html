@@ -1188,14 +1188,14 @@
         if (Array.isArray(featVal)) {
           featVal.forEach(function(v) {
             if (v !== null && v !== undefined) {
-              var sVal = String(v).trim();
+              var sVal = (typeof v === 'object' && v !== null && v.value !== undefined) ? String(v.value).trim() : String(v).trim();
               if (sVal.length > 0 && sVal.length < 80) {
                 extractedSpecsMap[featKey].add(sVal);
               }
             }
           });
         } else if (featVal !== null && featVal !== undefined) {
-          var sVal = String(featVal).trim();
+          var sVal = (typeof featVal === 'object' && featVal !== null && featVal.value !== undefined) ? String(featVal.value).trim() : String(featVal).trim();
           if (sVal.length > 0 && sVal.length < 80) {
             extractedSpecsMap[featKey].add(sVal);
           }
@@ -1448,12 +1448,12 @@
           if (Array.isArray(featVal)) {
             featVal.forEach(function(v) {
               if (v !== null && v !== undefined) {
-                var sVal = String(v).trim();
+                var sVal = (typeof v === 'object' && v !== null && v.value !== undefined) ? String(v.value).trim() : String(v).trim();
                 if (sVal.length > 0 && sVal.length < 80) catSpecsMap[featKey].add(sVal);
               }
             });
           } else if (featVal !== null && featVal !== undefined) {
-            var sVal = String(featVal).trim();
+            var sVal = (typeof featVal === 'object' && featVal !== null && featVal.value !== undefined) ? String(featVal.value).trim() : String(featVal).trim();
             if (sVal.length > 0 && sVal.length < 80) catSpecsMap[featKey].add(sVal);
           }
         }
@@ -1638,7 +1638,9 @@
             for (var skey in p.specs) {
               if (!p.specs.hasOwnProperty(skey)) continue;
               var sval = p.specs[skey];
-              var valStr = Array.isArray(sval) ? sval.join(' ') : String(sval);
+              var valStr = Array.isArray(sval)
+                ? sval.map(function(item) { return (typeof item === 'object' && item !== null && item.value !== undefined) ? item.value : item; }).join(' ')
+                : ((typeof sval === 'object' && sval !== null && sval.value !== undefined) ? sval.value : String(sval));
               if (valStr.toLowerCase().indexOf(searchLower) !== -1) {
                 matchSearch = true;
                 break;
@@ -1671,12 +1673,14 @@
             var matchesAny = selectedVals.some(function(selVal) {
               if (Array.isArray(productSpec)) {
                 return productSpec.some(function(psVal) {
-                  return String(psVal).toLowerCase().indexOf(String(selVal).toLowerCase()) !== -1 ||
-                         String(selVal).toLowerCase().indexOf(String(psVal).toLowerCase()) !== -1;
+                  var rawVal = (typeof psVal === 'object' && psVal !== null && psVal.value !== undefined) ? psVal.value : psVal;
+                  return String(rawVal).toLowerCase().indexOf(String(selVal).toLowerCase()) !== -1 ||
+                         String(selVal).toLowerCase().indexOf(String(rawVal).toLowerCase()) !== -1;
                 });
               } else {
-                return String(productSpec).toLowerCase().indexOf(String(selVal).toLowerCase()) !== -1 ||
-                       String(selVal).toLowerCase().indexOf(String(productSpec).toLowerCase()) !== -1;
+                var rawVal = (typeof productSpec === 'object' && productSpec !== null && productSpec.value !== undefined) ? productSpec.value : productSpec;
+                return String(rawVal).toLowerCase().indexOf(String(selVal).toLowerCase()) !== -1 ||
+                       String(selVal).toLowerCase().indexOf(String(rawVal).toLowerCase()) !== -1;
               }
             });
 

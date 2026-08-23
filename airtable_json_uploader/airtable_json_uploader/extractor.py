@@ -72,18 +72,61 @@ class AirtableDataExtractor:
             rec_id = rec.get("id")
             fields = rec.get("fields", {})
 
-            name = fields.get("Attribute_Name") or fields.get("Attribute Name") or fields.get("Name") or fields.get("Attribute") or ""
-            val = fields.get("Attribute_Value") or fields.get("Attribute Value") or fields.get("Value") or fields.get("Option") or ""
+            name = (
+                fields.get("Attribute name") or
+                fields.get("Attribute_Name") or
+                fields.get("Attribute Name") or
+                fields.get("Name") or
+                fields.get("Attribute") or
+                ""
+            )
+            val = (
+                fields.get("Term Name") or
+                fields.get("Attribute Value") or
+                fields.get("Attribute_Value") or
+                fields.get("Value") or
+                fields.get("Option") or
+                fields.get("Term Value") or
+                ""
+            )
+
+            # Extract Attribute Icon URL
+            icon_field = (
+                fields.get("Attribute Icon") or
+                fields.get("Attribute_Icon") or
+                fields.get("Attribute icon") or
+                fields.get("Icon") or
+                fields.get("attribute_icon") or
+                fields.get("attribute icon") or
+                ""
+            )
+            icon_url = ""
+            if isinstance(icon_field, list) and icon_field:
+                first_icon = icon_field[0]
+                if isinstance(first_icon, dict) and "url" in first_icon:
+                    icon_url = first_icon["url"]
+                elif isinstance(first_icon, str) and first_icon.startswith("http"):
+                    icon_url = first_icon
+            elif isinstance(icon_field, dict) and "url" in icon_field:
+                icon_url = icon_field["url"]
+            elif isinstance(icon_field, str) and icon_field.startswith("http"):
+                icon_url = icon_field
 
             # Check for product link field (if attributes store product IDs)
-            product_links = fields.get("Product") or fields.get("Products") or []
+            product_links = (
+                fields.get("Simple Products") or
+                fields.get("Product") or
+                fields.get("Products") or
+                []
+            )
             if isinstance(product_links, str):
                 product_links = [product_links]
 
             attr_map[rec_id] = {
                 "id": rec_id,
                 "name": str(name).strip(),
-                "value": val,
+                "value": str(val).strip() if val is not None else "",
+                "icon": icon_url,
                 "product_ids": product_links,
                 "raw_fields": fields
             }
@@ -104,13 +147,13 @@ class AirtableDataExtractor:
         return default_type
 
     @staticmethod
-    def parse_attribute_keys(attr_keys_str: str) -> Dict[str, Any]:
+    def parse_attribute_keys(attr_keys_str: str) -> Dict[str, List[Dict[str, str]]]:
         """
         Parse pipe-delimited Key:Value strings such as:
         "CCT:3000K|CCT:4000K|IP Rating:IP20|Power:30W|Voltage:24V"
-        into structured dictionary {"CCT": ["3000K", "4000K"], "IP Rating": "IP20", ...}
+        into structured dictionary {"CCT": [{"value": "3000K", "icon": ""}, {"value": "4000K", "icon": ""}], ...}
         """
-        result: Dict[str, Any] = {}
+        result: Dict[str, List[Dict[str, str]]] = {}
         if not isinstance(attr_keys_str, str) or not attr_keys_str.strip():
             return result
 
@@ -124,14 +167,11 @@ class AirtableDataExtractor:
                     continue
 
                 if key not in result:
-                    result[key] = val
-                else:
-                    if isinstance(result[key], list):
-                        if val not in result[key]:
-                            result[key].append(val)
-                    else:
-                        if result[key] != val:
-                            result[key] = [result[key], val]
+                    result[key] = []
+                
+                existing_vals = [item["value"] for item in result[key] if isinstance(item, dict) and "value" in item]
+                if val not in existing_vals:
+                    result[key].append({"value": val, "icon": ""})
         return result
 
 
@@ -183,8 +223,13 @@ class AirtableDataExtractor:
         except Exception as e:
             logger.warning(f"Could not fetch categories from '{self.categories_table}' (ignoring if not present): {e}")
 
-        # Process Attributes Map
+        # Process Attributes Map & Fast Lookup Cache
         attr_index = self.extract_attributes(attributes_raw)
+        attr_lookup = {}
+        for a_id, a_info in attr_index.items():
+            key = (a_info["name"].strip().lower(), str(a_info["value"]).strip().lower())
+            if a_info.get("icon"):
+                attr_lookup[key] = a_info["icon"]
 
         # Process Categories Map (if category table exists)
         cat_index = {}
@@ -193,6 +238,42 @@ class AirtableDataExtractor:
             c_fields = cat_rec.get("fields", {})
             cat_name = c_fields.get("Category_Name") or c_fields.get("Category Name") or c_fields.get("Name") or ""
             cat_index[c_id] = str(cat_name).strip()
+
+        # Helper to safely add attribute entries into product_features dictionary as list of {"value": ..., "icon": ...}
+        def add_feature_item(features_dict: Dict[str, List[Dict[str, str]]], name: str, val: Any, icon: str = ""):
+            if not name or val is None or val == "":
+                return
+            name = str(name).strip()
+            if isinstance(val, list):
+                for sub in val:
+                    add_feature_item(features_dict, name, sub, icon)
+                return
+
+            if isinstance(val, dict):
+                v_str = str(val.get("value", "")).strip()
+                i_str = val.get("icon", icon) or icon
+                if v_str:
+                    add_feature_item(features_dict, name, v_str, i_str)
+                return
+
+            v_str = str(val).strip()
+            if not v_str:
+                return
+
+            if not icon and attr_lookup:
+                icon = attr_lookup.get((name.lower(), v_str.lower()), "")
+
+            if name not in features_dict:
+                features_dict[name] = []
+
+            existing_vals = [item["value"] for item in features_dict[name] if isinstance(item, dict) and "value" in item]
+            if v_str not in existing_vals:
+                features_dict[name].append({"value": v_str, "icon": icon or ""})
+            else:
+                if icon:
+                    for item in features_dict[name]:
+                        if isinstance(item, dict) and item.get("value") == v_str and not item.get("icon"):
+                            item["icon"] = icon
 
         # Build Normalized Product Items
         catalog = {
@@ -235,10 +316,12 @@ class AirtableDataExtractor:
             parsed_attr_keys = self.parse_attribute_keys(attr_keys_str)
 
             # Build Product Features
-            product_features = {}
+            product_features: Dict[str, List[Dict[str, str]]] = {}
 
             # 1. Start with parsed Attributes Keys
-            product_features.update(parsed_attr_keys)
+            for k, items in parsed_attr_keys.items():
+                for item in items:
+                    add_feature_item(product_features, k, item["value"], item.get("icon", ""))
 
             # 2. Add linked attributes from attributes_table
             if attr_index:
@@ -249,15 +332,8 @@ class AirtableDataExtractor:
                             for lattr in linked_attrs:
                                 a_name = lattr["name"] or f_key
                                 a_val = lattr["value"]
-                                if a_name and a_val:
-                                    if a_name not in product_features:
-                                        product_features[a_name] = a_val
-                                    elif isinstance(product_features[a_name], list):
-                                        if a_val not in product_features[a_name]:
-                                            product_features[a_name].append(a_val)
-                                    else:
-                                        if product_features[a_name] != a_val:
-                                            product_features[a_name] = [product_features[a_name], a_val]
+                                a_icon = lattr.get("icon", "")
+                                add_feature_item(product_features, a_name, a_val, a_icon)
 
             # Extract Non-Attribute Columns for Top-Level Product Keys
             sku = self.sanitize_field_value(fields.get("SKU") or fields.get("sku") or fields.get("Supplier Code") or "")
@@ -276,12 +352,8 @@ class AirtableDataExtractor:
                     if p_id in a_data.get("product_ids", []):
                         a_name = a_data["name"]
                         a_val = a_data["value"]
-                        if a_name and a_val:
-                            if a_name not in product_features:
-                                product_features[a_name] = a_val
-                            elif isinstance(product_features[a_name], list):
-                                if a_val not in product_features[a_name]:
-                                    product_features[a_name].append(a_val)
+                        a_icon = a_data.get("icon", "")
+                        add_feature_item(product_features, a_name, a_val, a_icon)
 
             product_entry = {
                 "id": p_id,
@@ -405,7 +477,7 @@ class AirtableDataExtractor:
 
         # Clear existing images and icons folders to perform a 100% fresh download
         if clear_existing:
-            for subfolder in ["products", "icons"]:
+            for subfolder in ["products", "icons", "attribute_icon"]:
                 target_dir = media_root / subfolder
                 if target_dir.exists():
                     for file_path in target_dir.glob("*"):
@@ -433,6 +505,20 @@ class AirtableDataExtractor:
                 return process_url(urls, prefix_str, subfolder)
             return urls
 
+        def process_product_features(features: Dict[str, Any]) -> None:
+            if not isinstance(features, dict):
+                return
+            for fname, fitems in features.items():
+                if isinstance(fitems, list):
+                    for item in fitems:
+                        if isinstance(item, dict) and "icon" in item and item["icon"]:
+                            raw_icon = item["icon"]
+                            if isinstance(raw_icon, str) and raw_icon.startswith("http"):
+                                val_clean = str(item.get("value", "")).replace(" ", "_").replace("/", "_")
+                                name_clean = str(fname).replace(" ", "_").replace("/", "_")
+                                prefix = f"attr_{name_clean.lower()}_{val_clean.lower()}"
+                                item["icon"] = process_url(raw_icon, prefix, "attribute_icon")
+
         # 1. Process top-level products
         for prod in catalog.get("products", []):
             p_id = prod.get("id") or prod.get("sku") or "product"
@@ -444,6 +530,8 @@ class AirtableDataExtractor:
                 prod["technical_icons"] = process_url_list(prod["technical_icons"], f"{p_id}_icon", "icons")
             elif "product_icons" in prod:
                 prod["product_icons"] = process_url_list(prod["product_icons"], f"{p_id}_icon", "icons")
+            if "product_features" in prod:
+                process_product_features(prod["product_features"])
 
         # 2. Process tree nodes recursively
         def process_tree_node(node: Dict[str, Any]) -> None:
@@ -461,6 +549,8 @@ class AirtableDataExtractor:
                             vdata["technical_icons"] = process_url_list(vdata["technical_icons"], f"{p_id}_icon", "icons")
                         elif "product_icons" in vdata:
                             vdata["product_icons"] = process_url_list(vdata["product_icons"], f"{p_id}_icon", "icons")
+                        if "product_features" in vdata:
+                            process_product_features(vdata["product_features"])
             if node.get("children"):
                 for child in node["children"]:
                     process_tree_node(child)

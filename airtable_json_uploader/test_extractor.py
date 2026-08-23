@@ -38,10 +38,10 @@ class TestAirtableDataExtractor(unittest.TestCase):
     def test_parse_attribute_keys(self):
         attr_str = "CCT:3000K|CCT:4000K|IP Rating:IP20|Power:30W|Voltage:24V"
         parsed = AirtableDataExtractor.parse_attribute_keys(attr_str)
-        self.assertEqual(parsed["CCT"], ["3000K", "4000K"])
-        self.assertEqual(parsed["IP Rating"], "IP20")
-        self.assertEqual(parsed["Power"], "30W")
-        self.assertEqual(parsed["Voltage"], "24V")
+        self.assertEqual(parsed["CCT"], [{"value": "3000K", "icon": ""}, {"value": "4000K", "icon": ""}])
+        self.assertEqual(parsed["IP Rating"], [{"value": "IP20", "icon": ""}])
+        self.assertEqual(parsed["Power"], [{"value": "30W", "icon": ""}])
+        self.assertEqual(parsed["Voltage"], [{"value": "24V", "icon": ""}])
 
     def test_run_extraction_mock_data(self):
         mock_products = [
@@ -103,10 +103,10 @@ class TestAirtableDataExtractor(unittest.TestCase):
         self.assertEqual(prod["product_images"], ["assets/img/products/recProd1_a2934e427d.jpg"])
 
         # Features from Attributes keys and linked records
-        self.assertEqual(prod["product_features"]["CCT"], ["3000K", "4000K"])
-        self.assertEqual(prod["product_features"]["IP Rating"], "IP68")
-        self.assertEqual(prod["product_features"]["Power"], "10W")
-        self.assertEqual(prod["product_features"]["Warranty"], "5 Years")
+        self.assertEqual(prod["product_features"]["CCT"], [{"value": "3000K", "icon": ""}, {"value": "4000K", "icon": ""}])
+        self.assertEqual(prod["product_features"]["IP Rating"], [{"value": "IP68", "icon": ""}])
+        self.assertEqual(prod["product_features"]["Power"], [{"value": "10W", "icon": ""}])
+        self.assertEqual(prod["product_features"]["Warranty"], [{"value": "5 Years", "icon": ""}])
 
         # Configurator Options and Constraints
         self.assertIn("CCT", prod["options"])

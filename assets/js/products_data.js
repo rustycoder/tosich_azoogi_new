@@ -34,24 +34,78 @@ const AZOOGI_PRODUCTS = {
       "status": "draft",
       "product_type": "simple",
       "product_features": {
-        "IP Rating": "IP67",
+        "IP Rating": [
+          {
+            "value": "IP67",
+            "icon": ""
+          }
+        ],
         "Power": [
-          "60W",
-          "100W",
-          "150W",
-          "200W",
-          "300W",
-          "30W"
+          {
+            "value": "60W",
+            "icon": ""
+          },
+          {
+            "value": "100W",
+            "icon": ""
+          },
+          {
+            "value": "150W",
+            "icon": ""
+          },
+          {
+            "value": "200W",
+            "icon": ""
+          },
+          {
+            "value": "300W",
+            "icon": ""
+          },
+          {
+            "value": "30W",
+            "icon": ""
+          }
         ],
         "Voltage": [
-          "12V",
-          "24V"
+          {
+            "value": "12V",
+            "icon": ""
+          },
+          {
+            "value": "24V",
+            "icon": ""
+          }
         ],
-        "AC Phase-Cut": "Triac",
-        "Current Sinking": "0-10V",
-        "Current Sourcing": "1-10V",
-        "Duty Cycle": "PWM",
-        "Variable Resistance": "Potentiometer"
+        "AC Phase-Cut": [
+          {
+            "value": "Triac",
+            "icon": ""
+          }
+        ],
+        "Current Sinking": [
+          {
+            "value": "0-10V",
+            "icon": ""
+          }
+        ],
+        "Current Sourcing": [
+          {
+            "value": "1-10V",
+            "icon": ""
+          }
+        ],
+        "Duty Cycle": [
+          {
+            "value": "PWM",
+            "icon": ""
+          }
+        ],
+        "Variable Resistance": [
+          {
+            "value": "Potentiometer",
+            "icon": ""
+          }
+        ]
       },
       "options": {
         "Power": [
@@ -151,18 +205,51 @@ const AZOOGI_PRODUCTS = {
       "product_type": "simple",
       "product_features": {
         "CCT": [
-          "3000K",
-          "4000K",
-          "6000K"
+          {
+            "value": "3000K",
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_d3b22ce2d9.svg"
+          },
+          {
+            "value": "4000K",
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_0889bb3043.svg"
+          },
+          {
+            "value": "6000K",
+            "icon": "assets/img/attribute_icon/attr_cct_6000k_c061a7fc74.svg"
+          }
         ],
         "IP Rating": [
-          "IP20",
-          "IP54",
-          "IP67"
+          {
+            "value": "IP20",
+            "icon": ""
+          },
+          {
+            "value": "IP54",
+            "icon": ""
+          },
+          {
+            "value": "IP67",
+            "icon": ""
+          }
         ],
-        "Power": "30W",
-        "Voltage": "24V",
-        "Dimension": "480mm (L) x 240mm (W)"
+        "Power": [
+          {
+            "value": "30W",
+            "icon": ""
+          }
+        ],
+        "Voltage": [
+          {
+            "value": "24V",
+            "icon": ""
+          }
+        ],
+        "Dimension": [
+          {
+            "value": "480mm (L) x 240mm (W)",
+            "icon": ""
+          }
+        ]
       },
       "options": {
         "Power": [
@@ -235,18 +322,47 @@ const AZOOGI_PRODUCTS = {
       "status": "draft",
       "product_type": "simple",
       "product_features": {
-        "IP Rating": "IP67",
+        "IP Rating": [
+          {
+            "value": "IP67",
+            "icon": ""
+          }
+        ],
         "Power": [
-          "60W",
-          "100W",
-          "150W",
-          "200W",
-          "300W",
-          "360W"
+          {
+            "value": "60W",
+            "icon": ""
+          },
+          {
+            "value": "100W",
+            "icon": ""
+          },
+          {
+            "value": "150W",
+            "icon": ""
+          },
+          {
+            "value": "200W",
+            "icon": ""
+          },
+          {
+            "value": "300W",
+            "icon": ""
+          },
+          {
+            "value": "360W",
+            "icon": ""
+          }
         ],
         "Voltage": [
-          "12V",
-          "24V"
+          {
+            "value": "12V",
+            "icon": ""
+          },
+          {
+            "value": "24V",
+            "icon": ""
+          }
         ]
       },
       "options": {
@@ -321,17 +437,47 @@ const AZOOGI_PRODUCTS = {
       "product_type": "simple",
       "product_features": {
         "CCT": [
-          "3000K",
-          "4000K"
+          {
+            "value": "3000K",
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_d3b22ce2d9.svg"
+          },
+          {
+            "value": "4000K",
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_0889bb3043.svg"
+          }
         ],
-        "IP Rating": "IP67",
-        "Impact Strength": "IK10",
+        "IP Rating": [
+          {
+            "value": "IP67",
+            "icon": ""
+          }
+        ],
+        "Impact Strength": [
+          {
+            "value": "IK10",
+            "icon": ""
+          }
+        ],
         "Optics": [
-          "SYM 30°",
-          "SYM 60°",
-          "ASYM 50°"
+          {
+            "value": "SYM 30°",
+            "icon": ""
+          },
+          {
+            "value": "SYM 60°",
+            "icon": ""
+          },
+          {
+            "value": "ASYM 50°",
+            "icon": ""
+          }
         ],
-        "Power": "1.5W"
+        "Power": [
+          {
+            "value": "1.5W",
+            "icon": ""
+          }
+        ]
       },
       "options": {
         "Power": [
@@ -391,37 +537,68 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Transform your outdoor spaces into a breathtaking visual journey. Experience discreet luxury and a sophisticated glow that beautifully enhances your home.\n",
       "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
-        "assets/img/products/recGgRF6gZMVCo6qY_099cc6705e.webp",
-        "assets/img/products/recGgRF6gZMVCo6qY_aaa21bae88.jpg",
-        "assets/img/products/recGgRF6gZMVCo6qY_16480eaf6c.jpg"
+        "assets/img/products/recGgRF6gZMVCo6qY_75a602d54c.webp",
+        "assets/img/products/recGgRF6gZMVCo6qY_e03b71eebf.jpg",
+        "assets/img/products/recGgRF6gZMVCo6qY_f955601198.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/recGgRF6gZMVCo6qY_dim_88a3a66921.webp"
+        "assets/img/products/recGgRF6gZMVCo6qY_dim_522e352142.webp"
       ],
       "stocked_item": [
         "In Stock"
       ],
       "datasheet": "Yes",
       "technical_icons": [
-        "assets/img/icons/recGgRF6gZMVCo6qY_icon_b812eb8c54.svg",
-        "assets/img/icons/recGgRF6gZMVCo6qY_icon_8288307892.svg",
-        "assets/img/icons/recGgRF6gZMVCo6qY_icon_1ebd6018ae.svg",
-        "assets/img/icons/recGgRF6gZMVCo6qY_icon_9d63502f88.svg"
+        "assets/img/icons/recGgRF6gZMVCo6qY_icon_db6b2ce235.svg",
+        "assets/img/icons/recGgRF6gZMVCo6qY_icon_845b6d3048.svg",
+        "assets/img/icons/recGgRF6gZMVCo6qY_icon_3f083582f3.svg",
+        "assets/img/icons/recGgRF6gZMVCo6qY_icon_645ee9888b.svg"
       ],
       "meta_keywords": "garden lights, outdoor garden lights, solar garden lights, LED landscape lighting, pathway lights, garden spotlights, yard lighting, low voltage landscape lights, waterproof outdoor lights, garden decor lighting",
       "supplier_name": "CHINA - 7 Colors Co Ltd",
       "status": "draft",
       "product_type": "simple",
       "product_features": {
-        "Current Type": "AC/DC",
-        "Finish": "Black finish",
-        "IP Rating": "IP67",
-        "Light Color": "Warm White",
-        "Power": [
-          "7W",
-          "12W"
+        "Current Type": [
+          {
+            "value": "AC/DC",
+            "icon": ""
+          }
         ],
-        "Voltage": "12V/24V"
+        "Finish": [
+          {
+            "value": "Black finish",
+            "icon": ""
+          }
+        ],
+        "IP Rating": [
+          {
+            "value": "IP67",
+            "icon": ""
+          }
+        ],
+        "Light Color": [
+          {
+            "value": "Warm White",
+            "icon": ""
+          }
+        ],
+        "Power": [
+          {
+            "value": "7W",
+            "icon": ""
+          },
+          {
+            "value": "12W",
+            "icon": ""
+          }
+        ],
+        "Voltage": [
+          {
+            "value": "12V/24V",
+            "icon": ""
+          }
+        ]
       },
       "options": {
         "Power": [
@@ -483,7 +660,7 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Dive into an enchanting oasis of light and luxury. Elevate your pool into a sophisticated, glowing retreat, adding breathtaking allure and serene ambiance to every evening.\n",
       "product_description": "Dive into an enchanting oasis of light and luxury with our premium pool illumination solution. Designed to effortlessly elevate your outdoor experience, it bathes your aquatic retreat in a warm, sophisticated radiance that creates an unparalleled ambiance. Perfect for those with a discerning eye for discreet elegance and refined architectural detail, this lighting masterpiece transforms ordinary evenings into a breathtaking visual journey, adding both captivating allure and a profound sense of serenity to your home.\n",
       "product_images": [
-        "assets/img/products/recPcYiIIV8VLqru4_431f2dd9eb.webp"
+        "assets/img/products/recPcYiIIV8VLqru4_20542a9198.webp"
       ],
       "product_dimension": "",
       "stocked_item": [
@@ -491,22 +668,43 @@ const AZOOGI_PRODUCTS = {
       ],
       "datasheet": "No",
       "technical_icons": [
-        "assets/img/icons/recGgRF6gZMVCo6qY_icon_b812eb8c54.svg",
-        "assets/img/icons/recGgRF6gZMVCo6qY_icon_1ebd6018ae.svg",
-        "assets/img/icons/recGgRF6gZMVCo6qY_icon_9d63502f88.svg"
+        "assets/img/icons/recGgRF6gZMVCo6qY_icon_db6b2ce235.svg",
+        "assets/img/icons/recGgRF6gZMVCo6qY_icon_3f083582f3.svg",
+        "assets/img/icons/recGgRF6gZMVCo6qY_icon_645ee9888b.svg"
       ],
       "meta_keywords": "underwater pool light, inground pool lights, above ground pool light, RGB pool light, color changing pool light, floating pool light, solar pool light, submersible pool light, smart pool light, waterproof pool light",
       "supplier_name": "CHINA - 7 Colors Co Ltd",
       "status": "draft",
       "product_type": "simple",
       "product_features": {
-        "Power": "7W",
-        "CCT": [
-          "3000K",
-          "6000K"
+        "Power": [
+          {
+            "value": "7W",
+            "icon": ""
+          }
         ],
-        "IP Rating": "IP68",
-        "Voltage": "12V"
+        "CCT": [
+          {
+            "value": "3000K",
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_d3b22ce2d9.svg"
+          },
+          {
+            "value": "6000K",
+            "icon": "assets/img/attribute_icon/attr_cct_6000k_c061a7fc74.svg"
+          }
+        ],
+        "IP Rating": [
+          {
+            "value": "IP68",
+            "icon": ""
+          }
+        ],
+        "Voltage": [
+          {
+            "value": "12V",
+            "icon": ""
+          }
+        ]
       },
       "options": {
         "Power": [
@@ -562,23 +760,60 @@ const AZOOGI_PRODUCTS = {
       "product_type": "simple",
       "product_features": {
         "CCT": [
-          "3000K",
-          "2700K",
-          "4000K"
+          {
+            "value": "3000K",
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_d3b22ce2d9.svg"
+          },
+          {
+            "value": "2700K",
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_a08c4a5d86.svg"
+          },
+          {
+            "value": "4000K",
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_0889bb3043.svg"
+          }
         ],
         "IP Rating": [
-          "IP20",
-          "IP54"
+          {
+            "value": "IP20",
+            "icon": ""
+          },
+          {
+            "value": "IP54",
+            "icon": ""
+          }
         ],
-        "Voltage": "24V",
-        "Light Color": "RGBW",
+        "Voltage": [
+          {
+            "value": "24V",
+            "icon": ""
+          }
+        ],
+        "Light Color": [
+          {
+            "value": "RGBW",
+            "icon": ""
+          }
+        ],
         "Power Consumption Rate": [
-          "8W/m",
-          "5W/m"
+          {
+            "value": "8W/m",
+            "icon": ""
+          },
+          {
+            "value": "5W/m",
+            "icon": ""
+          }
         ],
         "Strip Width": [
-          "8mm",
-          "12mm"
+          {
+            "value": "8mm",
+            "icon": ""
+          },
+          {
+            "value": "12mm",
+            "icon": ""
+          }
         ]
       },
       "options": {
@@ -683,8 +918,18 @@ const AZOOGI_PRODUCTS = {
       "status": "draft",
       "product_type": "simple",
       "product_features": {
-        "Finish": "Silver",
-        "Profile Length": "1,000mm"
+        "Finish": [
+          {
+            "value": "Silver",
+            "icon": ""
+          }
+        ],
+        "Profile Length": [
+          {
+            "value": "1,000mm",
+            "icon": ""
+          }
+        ]
       },
       "options": {
         "Profile Length": [
@@ -714,20 +959,20 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Transform your home into a breathtaking visual journey. Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.\n",
       "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
-        "assets/img/products/recfKARqbTPcAwrrf_75672af8a0.jpg",
-        "assets/img/products/recfKARqbTPcAwrrf_98066ddaa5.jpg",
-        "assets/img/products/recfKARqbTPcAwrrf_096cc3103a.jpg"
+        "assets/img/products/recfKARqbTPcAwrrf_c5b859c2cb.jpg",
+        "assets/img/products/recfKARqbTPcAwrrf_6fb84e09ee.jpg",
+        "assets/img/products/recfKARqbTPcAwrrf_2900105255.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/recfKARqbTPcAwrrf_dim_39b7b8b9b4.jpg"
+        "assets/img/products/recfKARqbTPcAwrrf_dim_e995e32313.jpg"
       ],
       "stocked_item": [
         "4-6 Weeks"
       ],
       "datasheet": "No",
       "technical_icons": [
-        "assets/img/icons/recGgRF6gZMVCo6qY_icon_1ebd6018ae.svg",
-        "assets/img/icons/recGgRF6gZMVCo6qY_icon_9d63502f88.svg"
+        "assets/img/icons/recGgRF6gZMVCo6qY_icon_3f083582f3.svg",
+        "assets/img/icons/recGgRF6gZMVCo6qY_icon_645ee9888b.svg"
       ],
       "meta_keywords": "aluminium profile, aluminum extrusion, t-slot aluminum profile, v-slot aluminum profile, structural aluminum tubing, aluminum channel, aluminum angle",
       "supplier_name": "BAIWEI",
@@ -735,27 +980,83 @@ const AZOOGI_PRODUCTS = {
       "product_type": "simple",
       "product_features": {
         "Channel Configuration": [
-          "Double-Sided",
-          "Bendable Single-Sided",
-          "Bendable Double-Sided",
-          "Single-Sided",
-          "Single-Side & Dual LED"
+          {
+            "value": "Double-Sided",
+            "icon": ""
+          },
+          {
+            "value": "Bendable Single-Sided",
+            "icon": ""
+          },
+          {
+            "value": "Bendable Double-Sided",
+            "icon": ""
+          },
+          {
+            "value": "Single-Sided",
+            "icon": ""
+          },
+          {
+            "value": "Single-Side & Dual LED",
+            "icon": ""
+          }
         ],
         "Dimension": [
-          "53mm (W) x 14mm (H)",
-          "34.4mm (W) x 14mm (H)",
-          "51mm (W) x 13.1mm (H)",
-          "52.6mm (W) x 13.7mm (H)",
-          "60mm (W) x 12.9mm (H)",
-          "69mm (W) x 13.5mm (H)",
-          "53mm (W) x 14.5mm (H)",
-          "36.19mm (W) x 14mm (H)",
-          "62mm (W) x 13mm (H)",
-          "53mm (W) x 16mm (H)",
-          "116.1mm (W) x 36.5mm (H)",
-          "60mm (W) x 14.7mm (H)"
+          {
+            "value": "53mm (W) x 14mm (H)",
+            "icon": ""
+          },
+          {
+            "value": "34.4mm (W) x 14mm (H)",
+            "icon": ""
+          },
+          {
+            "value": "51mm (W) x 13.1mm (H)",
+            "icon": ""
+          },
+          {
+            "value": "52.6mm (W) x 13.7mm (H)",
+            "icon": ""
+          },
+          {
+            "value": "60mm (W) x 12.9mm (H)",
+            "icon": ""
+          },
+          {
+            "value": "69mm (W) x 13.5mm (H)",
+            "icon": ""
+          },
+          {
+            "value": "53mm (W) x 14.5mm (H)",
+            "icon": ""
+          },
+          {
+            "value": "36.19mm (W) x 14mm (H)",
+            "icon": ""
+          },
+          {
+            "value": "62mm (W) x 13mm (H)",
+            "icon": ""
+          },
+          {
+            "value": "53mm (W) x 16mm (H)",
+            "icon": ""
+          },
+          {
+            "value": "116.1mm (W) x 36.5mm (H)",
+            "icon": ""
+          },
+          {
+            "value": "60mm (W) x 14.7mm (H)",
+            "icon": ""
+          }
         ],
-        "Finish": "Silver"
+        "Finish": [
+          {
+            "value": "Silver",
+            "icon": ""
+          }
+        ]
       },
       "options": {
         "Channel Configuration": [
@@ -920,17 +1221,47 @@ const AZOOGI_PRODUCTS = {
       "product_type": "simple",
       "product_features": {
         "CCT": [
-          "3000K",
-          "4000K"
+          {
+            "value": "3000K",
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_d3b22ce2d9.svg"
+          },
+          {
+            "value": "4000K",
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_0889bb3043.svg"
+          }
         ],
-        "IP Rating": "IP67",
-        "Impact Strength": "IK10",
+        "IP Rating": [
+          {
+            "value": "IP67",
+            "icon": ""
+          }
+        ],
+        "Impact Strength": [
+          {
+            "value": "IK10",
+            "icon": ""
+          }
+        ],
         "Optics": [
-          "SYM 30°",
-          "SYM 60°",
-          "ASYM 50°"
+          {
+            "value": "SYM 30°",
+            "icon": ""
+          },
+          {
+            "value": "SYM 60°",
+            "icon": ""
+          },
+          {
+            "value": "ASYM 50°",
+            "icon": ""
+          }
         ],
-        "Power": "1.2W"
+        "Power": [
+          {
+            "value": "1.2W",
+            "icon": ""
+          }
+        ]
       },
       "options": {
         "Power": [
@@ -999,21 +1330,59 @@ const AZOOGI_PRODUCTS = {
       "status": "draft",
       "product_type": "simple",
       "product_features": {
-        "IP Rating": "IP67",
+        "IP Rating": [
+          {
+            "value": "IP67",
+            "icon": ""
+          }
+        ],
         "Voltage": [
-          "12V",
-          "24V"
+          {
+            "value": "12V",
+            "icon": ""
+          },
+          {
+            "value": "24V",
+            "icon": ""
+          }
         ],
         "Power": [
-          "20W",
-          "40W",
-          "60W",
-          "100W",
-          "150W",
-          "200W",
-          "300W",
-          "400W",
-          "500W"
+          {
+            "value": "20W",
+            "icon": ""
+          },
+          {
+            "value": "40W",
+            "icon": ""
+          },
+          {
+            "value": "60W",
+            "icon": ""
+          },
+          {
+            "value": "100W",
+            "icon": ""
+          },
+          {
+            "value": "150W",
+            "icon": ""
+          },
+          {
+            "value": "200W",
+            "icon": ""
+          },
+          {
+            "value": "300W",
+            "icon": ""
+          },
+          {
+            "value": "400W",
+            "icon": ""
+          },
+          {
+            "value": "500W",
+            "icon": ""
+          }
         ]
       },
       "options": {
@@ -1096,16 +1465,43 @@ const AZOOGI_PRODUCTS = {
       "product_type": "simple",
       "product_features": {
         "CCT": [
-          "3000K",
-          "4000K"
+          {
+            "value": "3000K",
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_d3b22ce2d9.svg"
+          },
+          {
+            "value": "4000K",
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_0889bb3043.svg"
+          }
         ],
-        "IP Rating": "IP67",
-        "Impact Strength": "IK10",
+        "IP Rating": [
+          {
+            "value": "IP67",
+            "icon": ""
+          }
+        ],
+        "Impact Strength": [
+          {
+            "value": "IK10",
+            "icon": ""
+          }
+        ],
         "Optics": [
-          "SYM 60°",
-          "ASYM 80°"
+          {
+            "value": "SYM 60°",
+            "icon": ""
+          },
+          {
+            "value": "ASYM 80°",
+            "icon": ""
+          }
         ],
-        "Power": "1.5W"
+        "Power": [
+          {
+            "value": "1.5W",
+            "icon": ""
+          }
+        ]
       },
       "options": {
         "Power": [
@@ -1171,14 +1567,39 @@ const AZOOGI_PRODUCTS = {
       "product_type": "simple",
       "product_features": {
         "Power": [
-          "20W",
-          "40W",
-          "60W",
-          "100W",
-          "80W"
+          {
+            "value": "20W",
+            "icon": ""
+          },
+          {
+            "value": "40W",
+            "icon": ""
+          },
+          {
+            "value": "60W",
+            "icon": ""
+          },
+          {
+            "value": "100W",
+            "icon": ""
+          },
+          {
+            "value": "80W",
+            "icon": ""
+          }
         ],
-        "Voltage": "12V/24V",
-        "IP Rating": "IP20"
+        "Voltage": [
+          {
+            "value": "12V/24V",
+            "icon": ""
+          }
+        ],
+        "IP Rating": [
+          {
+            "value": "IP20",
+            "icon": ""
+          }
+        ]
       },
       "options": {
         "Voltage": [
@@ -1239,10 +1660,21 @@ const AZOOGI_PRODUCTS = {
       "status": "draft",
       "product_type": "simple",
       "product_features": {
-        "Finish": "Silver",
+        "Finish": [
+          {
+            "value": "Silver",
+            "icon": ""
+          }
+        ],
         "Dimension": [
-          "13.1mm (W) x 70mm (H)",
-          "15.5mm (W) x 80mm (H)"
+          {
+            "value": "13.1mm (W) x 70mm (H)",
+            "icon": ""
+          },
+          {
+            "value": "15.5mm (W) x 80mm (H)",
+            "icon": ""
+          }
         ]
       },
       "options": {
@@ -1276,87 +1708,6 @@ const AZOOGI_PRODUCTS = {
       "children": [
         {
           "type": "category",
-          "name": "Switchable Driver",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "Switchable Driver",
-              "variants": {
-                "Switchable Driver": {
-                  "id": "recqvzuqZCKIfSO11",
-                  "product_name": "Switchable Driver",
-                  "category": "Switchable Driver",
-                  "sku": "ADR-S12V24V-20W",
-                  "product_short_description": "Elevate your environment with a perfect blend of elegance and modern design, casting a warm, sophisticated glow that adds an unparalleled touch of ambiance and luxury.\n",
-                  "product_description": "Transform your spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your environment, casting a warm, sophisticated glow that effortlessly enhances the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and style to any setting, making it the ultimate choice for elevated architectural illumination.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": "",
-                  "datasheet": "Yes",
-                  "technical_icons": "",
-                  "meta_keywords": "",
-                  "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Power": [
-                      "20W",
-                      "40W",
-                      "60W",
-                      "100W",
-                      "80W"
-                    ],
-                    "Voltage": "12V/24V",
-                    "IP Rating": "IP20"
-                  },
-                  "options": {
-                    "Voltage": [
-                      {
-                        "name": "12V/24V",
-                        "id": "101"
-                      }
-                    ],
-                    "Power": [
-                      {
-                        "name": "20W",
-                        "id": "102"
-                      },
-                      {
-                        "name": "40W",
-                        "id": "103"
-                      },
-                      {
-                        "name": "60W",
-                        "id": "104"
-                      },
-                      {
-                        "name": "80W",
-                        "id": "105"
-                      },
-                      {
-                        "name": "100W",
-                        "id": "106"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP20",
-                        "id": "107"
-                      }
-                    ]
-                  },
-                  "constraints": [],
-                  "category_path": [
-                    "Drivers",
-                    "Switchable Driver"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
           "name": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
           "children": [
             {
@@ -1380,18 +1731,47 @@ const AZOOGI_PRODUCTS = {
                   "status": "draft",
                   "product_type": "simple",
                   "product_features": {
-                    "IP Rating": "IP67",
+                    "IP Rating": [
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
                     "Power": [
-                      "60W",
-                      "100W",
-                      "150W",
-                      "200W",
-                      "300W",
-                      "360W"
+                      {
+                        "value": "60W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "100W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "150W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "200W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "300W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "360W",
+                        "icon": ""
+                      }
                     ],
                     "Voltage": [
-                      "12V",
-                      "24V"
+                      {
+                        "value": "12V",
+                        "icon": ""
+                      },
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
                     ]
                   },
                   "options": {
@@ -1454,6 +1834,258 @@ const AZOOGI_PRODUCTS = {
         },
         {
           "type": "category",
+          "name": "Non-Dimmable Driver",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Non-Dimmable Driver",
+              "variants": {
+                "Non-Dimmable Driver": {
+                  "id": "reciwSxR6ltI67o0O",
+                  "product_name": "Non-Dimmable Driver",
+                  "category": "Non-Dimmable Driver",
+                  "sku": "ADR001",
+                  "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
+                  "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": "",
+                  "datasheet": "Yes",
+                  "technical_icons": "",
+                  "meta_keywords": "",
+                  "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "IP Rating": [
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "12V",
+                        "icon": ""
+                      },
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ],
+                    "Power": [
+                      {
+                        "value": "20W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "40W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "60W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "100W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "150W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "200W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "300W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "400W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "500W",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "20W",
+                        "id": "101"
+                      },
+                      {
+                        "name": "40W",
+                        "id": "102"
+                      },
+                      {
+                        "name": "60W",
+                        "id": "103"
+                      },
+                      {
+                        "name": "100W",
+                        "id": "104"
+                      },
+                      {
+                        "name": "150W",
+                        "id": "105"
+                      },
+                      {
+                        "name": "200W",
+                        "id": "106"
+                      },
+                      {
+                        "name": "300W",
+                        "id": "107"
+                      },
+                      {
+                        "name": "400W",
+                        "id": "108"
+                      },
+                      {
+                        "name": "500W",
+                        "id": "109"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "12V",
+                        "id": "110"
+                      },
+                      {
+                        "name": "24V",
+                        "id": "111"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP67",
+                        "id": "112"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "Drivers",
+                    "Non-Dimmable Driver"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "name": "Switchable Driver",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Switchable Driver",
+              "variants": {
+                "Switchable Driver": {
+                  "id": "recqvzuqZCKIfSO11",
+                  "product_name": "Switchable Driver",
+                  "category": "Switchable Driver",
+                  "sku": "ADR-S12V24V-20W",
+                  "product_short_description": "Elevate your environment with a perfect blend of elegance and modern design, casting a warm, sophisticated glow that adds an unparalleled touch of ambiance and luxury.\n",
+                  "product_description": "Transform your spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your environment, casting a warm, sophisticated glow that effortlessly enhances the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and style to any setting, making it the ultimate choice for elevated architectural illumination.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": "",
+                  "datasheet": "Yes",
+                  "technical_icons": "",
+                  "meta_keywords": "",
+                  "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Power": [
+                      {
+                        "value": "20W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "40W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "60W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "100W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "80W",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "12V/24V",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP20",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Voltage": [
+                      {
+                        "name": "12V/24V",
+                        "id": "101"
+                      }
+                    ],
+                    "Power": [
+                      {
+                        "name": "20W",
+                        "id": "102"
+                      },
+                      {
+                        "name": "40W",
+                        "id": "103"
+                      },
+                      {
+                        "name": "60W",
+                        "id": "104"
+                      },
+                      {
+                        "name": "80W",
+                        "id": "105"
+                      },
+                      {
+                        "name": "100W",
+                        "id": "106"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP20",
+                        "id": "107"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "Drivers",
+                    "Switchable Driver"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
           "name": "5-in-1 Dimming Driver",
           "children": [
             {
@@ -1477,24 +2109,78 @@ const AZOOGI_PRODUCTS = {
                   "status": "draft",
                   "product_type": "simple",
                   "product_features": {
-                    "IP Rating": "IP67",
+                    "IP Rating": [
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
                     "Power": [
-                      "60W",
-                      "100W",
-                      "150W",
-                      "200W",
-                      "300W",
-                      "30W"
+                      {
+                        "value": "60W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "100W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "150W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "200W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "300W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "30W",
+                        "icon": ""
+                      }
                     ],
                     "Voltage": [
-                      "12V",
-                      "24V"
+                      {
+                        "value": "12V",
+                        "icon": ""
+                      },
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
                     ],
-                    "AC Phase-Cut": "Triac",
-                    "Current Sinking": "0-10V",
-                    "Current Sourcing": "1-10V",
-                    "Duty Cycle": "PWM",
-                    "Variable Resistance": "Potentiometer"
+                    "AC Phase-Cut": [
+                      {
+                        "value": "Triac",
+                        "icon": ""
+                      }
+                    ],
+                    "Current Sinking": [
+                      {
+                        "value": "0-10V",
+                        "icon": ""
+                      }
+                    ],
+                    "Current Sourcing": [
+                      {
+                        "value": "1-10V",
+                        "icon": ""
+                      }
+                    ],
+                    "Duty Cycle": [
+                      {
+                        "value": "PWM",
+                        "icon": ""
+                      }
+                    ],
+                    "Variable Resistance": [
+                      {
+                        "value": "Potentiometer",
+                        "icon": ""
+                      }
+                    ]
                   },
                   "options": {
                     "Power": [
@@ -1579,114 +2265,6 @@ const AZOOGI_PRODUCTS = {
               }
             }
           ]
-        },
-        {
-          "type": "category",
-          "name": "Non-Dimmable Driver",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "Non-Dimmable Driver",
-              "variants": {
-                "Non-Dimmable Driver": {
-                  "id": "reciwSxR6ltI67o0O",
-                  "product_name": "Non-Dimmable Driver",
-                  "category": "Non-Dimmable Driver",
-                  "sku": "ADR001",
-                  "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
-                  "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": "",
-                  "datasheet": "Yes",
-                  "technical_icons": "",
-                  "meta_keywords": "",
-                  "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "IP Rating": "IP67",
-                    "Voltage": [
-                      "12V",
-                      "24V"
-                    ],
-                    "Power": [
-                      "20W",
-                      "40W",
-                      "60W",
-                      "100W",
-                      "150W",
-                      "200W",
-                      "300W",
-                      "400W",
-                      "500W"
-                    ]
-                  },
-                  "options": {
-                    "Power": [
-                      {
-                        "name": "20W",
-                        "id": "101"
-                      },
-                      {
-                        "name": "40W",
-                        "id": "102"
-                      },
-                      {
-                        "name": "60W",
-                        "id": "103"
-                      },
-                      {
-                        "name": "100W",
-                        "id": "104"
-                      },
-                      {
-                        "name": "150W",
-                        "id": "105"
-                      },
-                      {
-                        "name": "200W",
-                        "id": "106"
-                      },
-                      {
-                        "name": "300W",
-                        "id": "107"
-                      },
-                      {
-                        "name": "400W",
-                        "id": "108"
-                      },
-                      {
-                        "name": "500W",
-                        "id": "109"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "12V",
-                        "id": "110"
-                      },
-                      {
-                        "name": "24V",
-                        "id": "111"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP67",
-                        "id": "112"
-                      }
-                    ]
-                  },
-                  "constraints": [],
-                  "category_path": [
-                    "Drivers",
-                    "Non-Dimmable Driver"
-                  ]
-                }
-              }
-            }
-          ]
         }
       ]
     },
@@ -1706,20 +2284,20 @@ const AZOOGI_PRODUCTS = {
               "product_short_description": "Transform your home into a breathtaking visual journey. Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.\n",
               "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
               "product_images": [
-                "assets/img/products/recfKARqbTPcAwrrf_75672af8a0.jpg",
-                "assets/img/products/recfKARqbTPcAwrrf_98066ddaa5.jpg",
-                "assets/img/products/recfKARqbTPcAwrrf_096cc3103a.jpg"
+                "assets/img/products/recfKARqbTPcAwrrf_c5b859c2cb.jpg",
+                "assets/img/products/recfKARqbTPcAwrrf_6fb84e09ee.jpg",
+                "assets/img/products/recfKARqbTPcAwrrf_2900105255.jpg"
               ],
               "product_dimension": [
-                "assets/img/products/recfKARqbTPcAwrrf_dim_39b7b8b9b4.jpg"
+                "assets/img/products/recfKARqbTPcAwrrf_dim_e995e32313.jpg"
               ],
               "stocked_item": [
                 "4-6 Weeks"
               ],
               "datasheet": "No",
               "technical_icons": [
-                "assets/img/icons/recGgRF6gZMVCo6qY_icon_1ebd6018ae.svg",
-                "assets/img/icons/recGgRF6gZMVCo6qY_icon_9d63502f88.svg"
+                "assets/img/icons/recGgRF6gZMVCo6qY_icon_3f083582f3.svg",
+                "assets/img/icons/recGgRF6gZMVCo6qY_icon_645ee9888b.svg"
               ],
               "meta_keywords": "aluminium profile, aluminum extrusion, t-slot aluminum profile, v-slot aluminum profile, structural aluminum tubing, aluminum channel, aluminum angle",
               "supplier_name": "BAIWEI",
@@ -1727,27 +2305,83 @@ const AZOOGI_PRODUCTS = {
               "product_type": "simple",
               "product_features": {
                 "Channel Configuration": [
-                  "Double-Sided",
-                  "Bendable Single-Sided",
-                  "Bendable Double-Sided",
-                  "Single-Sided",
-                  "Single-Side & Dual LED"
+                  {
+                    "value": "Double-Sided",
+                    "icon": ""
+                  },
+                  {
+                    "value": "Bendable Single-Sided",
+                    "icon": ""
+                  },
+                  {
+                    "value": "Bendable Double-Sided",
+                    "icon": ""
+                  },
+                  {
+                    "value": "Single-Sided",
+                    "icon": ""
+                  },
+                  {
+                    "value": "Single-Side & Dual LED",
+                    "icon": ""
+                  }
                 ],
                 "Dimension": [
-                  "53mm (W) x 14mm (H)",
-                  "34.4mm (W) x 14mm (H)",
-                  "51mm (W) x 13.1mm (H)",
-                  "52.6mm (W) x 13.7mm (H)",
-                  "60mm (W) x 12.9mm (H)",
-                  "69mm (W) x 13.5mm (H)",
-                  "53mm (W) x 14.5mm (H)",
-                  "36.19mm (W) x 14mm (H)",
-                  "62mm (W) x 13mm (H)",
-                  "53mm (W) x 16mm (H)",
-                  "116.1mm (W) x 36.5mm (H)",
-                  "60mm (W) x 14.7mm (H)"
+                  {
+                    "value": "53mm (W) x 14mm (H)",
+                    "icon": ""
+                  },
+                  {
+                    "value": "34.4mm (W) x 14mm (H)",
+                    "icon": ""
+                  },
+                  {
+                    "value": "51mm (W) x 13.1mm (H)",
+                    "icon": ""
+                  },
+                  {
+                    "value": "52.6mm (W) x 13.7mm (H)",
+                    "icon": ""
+                  },
+                  {
+                    "value": "60mm (W) x 12.9mm (H)",
+                    "icon": ""
+                  },
+                  {
+                    "value": "69mm (W) x 13.5mm (H)",
+                    "icon": ""
+                  },
+                  {
+                    "value": "53mm (W) x 14.5mm (H)",
+                    "icon": ""
+                  },
+                  {
+                    "value": "36.19mm (W) x 14mm (H)",
+                    "icon": ""
+                  },
+                  {
+                    "value": "62mm (W) x 13mm (H)",
+                    "icon": ""
+                  },
+                  {
+                    "value": "53mm (W) x 16mm (H)",
+                    "icon": ""
+                  },
+                  {
+                    "value": "116.1mm (W) x 36.5mm (H)",
+                    "icon": ""
+                  },
+                  {
+                    "value": "60mm (W) x 14.7mm (H)",
+                    "icon": ""
+                  }
                 ],
-                "Finish": "Silver"
+                "Finish": [
+                  {
+                    "value": "Silver",
+                    "icon": ""
+                  }
+                ]
               },
               "options": {
                 "Channel Configuration": [
@@ -1917,10 +2551,21 @@ const AZOOGI_PRODUCTS = {
               "status": "draft",
               "product_type": "simple",
               "product_features": {
-                "Finish": "Silver",
+                "Finish": [
+                  {
+                    "value": "Silver",
+                    "icon": ""
+                  }
+                ],
                 "Dimension": [
-                  "13.1mm (W) x 70mm (H)",
-                  "15.5mm (W) x 80mm (H)"
+                  {
+                    "value": "13.1mm (W) x 70mm (H)",
+                    "icon": ""
+                  },
+                  {
+                    "value": "15.5mm (W) x 80mm (H)",
+                    "icon": ""
+                  }
                 ]
               },
               "options": {
@@ -1980,17 +2625,47 @@ const AZOOGI_PRODUCTS = {
                   "product_type": "simple",
                   "product_features": {
                     "CCT": [
-                      "3000K",
-                      "4000K"
+                      {
+                        "value": "3000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_d3b22ce2d9.svg"
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_0889bb3043.svg"
+                      }
                     ],
-                    "IP Rating": "IP67",
-                    "Impact Strength": "IK10",
+                    "IP Rating": [
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
+                    "Impact Strength": [
+                      {
+                        "value": "IK10",
+                        "icon": ""
+                      }
+                    ],
                     "Optics": [
-                      "SYM 30°",
-                      "SYM 60°",
-                      "ASYM 50°"
+                      {
+                        "value": "SYM 30°",
+                        "icon": ""
+                      },
+                      {
+                        "value": "SYM 60°",
+                        "icon": ""
+                      },
+                      {
+                        "value": "ASYM 50°",
+                        "icon": ""
+                      }
                     ],
-                    "Power": "1.5W"
+                    "Power": [
+                      {
+                        "value": "1.5W",
+                        "icon": ""
+                      }
+                    ]
                   },
                   "options": {
                     "Power": [
@@ -2066,17 +2741,47 @@ const AZOOGI_PRODUCTS = {
                   "product_type": "simple",
                   "product_features": {
                     "CCT": [
-                      "3000K",
-                      "4000K"
+                      {
+                        "value": "3000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_d3b22ce2d9.svg"
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_0889bb3043.svg"
+                      }
                     ],
-                    "IP Rating": "IP67",
-                    "Impact Strength": "IK10",
+                    "IP Rating": [
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
+                    "Impact Strength": [
+                      {
+                        "value": "IK10",
+                        "icon": ""
+                      }
+                    ],
                     "Optics": [
-                      "SYM 30°",
-                      "SYM 60°",
-                      "ASYM 50°"
+                      {
+                        "value": "SYM 30°",
+                        "icon": ""
+                      },
+                      {
+                        "value": "SYM 60°",
+                        "icon": ""
+                      },
+                      {
+                        "value": "ASYM 50°",
+                        "icon": ""
+                      }
                     ],
-                    "Power": "1.2W"
+                    "Power": [
+                      {
+                        "value": "1.2W",
+                        "icon": ""
+                      }
+                    ]
                   },
                   "options": {
                     "Power": [
@@ -2152,16 +2857,43 @@ const AZOOGI_PRODUCTS = {
                   "product_type": "simple",
                   "product_features": {
                     "CCT": [
-                      "3000K",
-                      "4000K"
+                      {
+                        "value": "3000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_d3b22ce2d9.svg"
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_0889bb3043.svg"
+                      }
                     ],
-                    "IP Rating": "IP67",
-                    "Impact Strength": "IK10",
+                    "IP Rating": [
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
+                    "Impact Strength": [
+                      {
+                        "value": "IK10",
+                        "icon": ""
+                      }
+                    ],
                     "Optics": [
-                      "SYM 60°",
-                      "ASYM 80°"
+                      {
+                        "value": "SYM 60°",
+                        "icon": ""
+                      },
+                      {
+                        "value": "ASYM 80°",
+                        "icon": ""
+                      }
                     ],
-                    "Power": "1.5W"
+                    "Power": [
+                      {
+                        "value": "1.5W",
+                        "icon": ""
+                      }
+                    ]
                   },
                   "options": {
                     "Power": [
@@ -2215,87 +2947,6 @@ const AZOOGI_PRODUCTS = {
         },
         {
           "type": "category",
-          "name": "Pool Light",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "Pool Light",
-              "variants": {
-                "Pool Light": {
-                  "id": "recPcYiIIV8VLqru4",
-                  "product_name": "Pool Light",
-                  "category": "Pool Light",
-                  "sku": "PL001",
-                  "product_short_description": "Dive into an enchanting oasis of light and luxury. Elevate your pool into a sophisticated, glowing retreat, adding breathtaking allure and serene ambiance to every evening.\n",
-                  "product_description": "Dive into an enchanting oasis of light and luxury with our premium pool illumination solution. Designed to effortlessly elevate your outdoor experience, it bathes your aquatic retreat in a warm, sophisticated radiance that creates an unparalleled ambiance. Perfect for those with a discerning eye for discreet elegance and refined architectural detail, this lighting masterpiece transforms ordinary evenings into a breathtaking visual journey, adding both captivating allure and a profound sense of serenity to your home.\n",
-                  "product_images": [
-                    "assets/img/products/recPcYiIIV8VLqru4_431f2dd9eb.webp"
-                  ],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    "Please Enquire"
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": [
-                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_b812eb8c54.svg",
-                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_1ebd6018ae.svg",
-                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_9d63502f88.svg"
-                  ],
-                  "meta_keywords": "underwater pool light, inground pool lights, above ground pool light, RGB pool light, color changing pool light, floating pool light, solar pool light, submersible pool light, smart pool light, waterproof pool light",
-                  "supplier_name": "CHINA - 7 Colors Co Ltd",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Power": "7W",
-                    "CCT": [
-                      "3000K",
-                      "6000K"
-                    ],
-                    "IP Rating": "IP68",
-                    "Voltage": "12V"
-                  },
-                  "options": {
-                    "Power": [
-                      {
-                        "name": "7W",
-                        "id": "101"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "3000K",
-                        "id": "102"
-                      },
-                      {
-                        "name": "6000K",
-                        "id": "103"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "12V",
-                        "id": "104"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP68",
-                        "id": "105"
-                      }
-                    ]
-                  },
-                  "constraints": [],
-                  "category_path": [
-                    "Outdoor & Architectural",
-                    "Pool Light"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
           "name": "Garden Light",
           "children": [
             {
@@ -2310,37 +2961,68 @@ const AZOOGI_PRODUCTS = {
                   "product_short_description": "Transform your outdoor spaces into a breathtaking visual journey. Experience discreet luxury and a sophisticated glow that beautifully enhances your home.\n",
                   "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
                   "product_images": [
-                    "assets/img/products/recGgRF6gZMVCo6qY_099cc6705e.webp",
-                    "assets/img/products/recGgRF6gZMVCo6qY_aaa21bae88.jpg",
-                    "assets/img/products/recGgRF6gZMVCo6qY_16480eaf6c.jpg"
+                    "assets/img/products/recGgRF6gZMVCo6qY_75a602d54c.webp",
+                    "assets/img/products/recGgRF6gZMVCo6qY_e03b71eebf.jpg",
+                    "assets/img/products/recGgRF6gZMVCo6qY_f955601198.jpg"
                   ],
                   "product_dimension": [
-                    "assets/img/products/recGgRF6gZMVCo6qY_dim_88a3a66921.webp"
+                    "assets/img/products/recGgRF6gZMVCo6qY_dim_522e352142.webp"
                   ],
                   "stocked_item": [
                     "In Stock"
                   ],
                   "datasheet": "Yes",
                   "technical_icons": [
-                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_b812eb8c54.svg",
-                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_8288307892.svg",
-                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_1ebd6018ae.svg",
-                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_9d63502f88.svg"
+                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_db6b2ce235.svg",
+                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_845b6d3048.svg",
+                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_3f083582f3.svg",
+                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_645ee9888b.svg"
                   ],
                   "meta_keywords": "garden lights, outdoor garden lights, solar garden lights, LED landscape lighting, pathway lights, garden spotlights, yard lighting, low voltage landscape lights, waterproof outdoor lights, garden decor lighting",
                   "supplier_name": "CHINA - 7 Colors Co Ltd",
                   "status": "draft",
                   "product_type": "simple",
                   "product_features": {
-                    "Current Type": "AC/DC",
-                    "Finish": "Black finish",
-                    "IP Rating": "IP67",
-                    "Light Color": "Warm White",
-                    "Power": [
-                      "7W",
-                      "12W"
+                    "Current Type": [
+                      {
+                        "value": "AC/DC",
+                        "icon": ""
+                      }
                     ],
-                    "Voltage": "12V/24V"
+                    "Finish": [
+                      {
+                        "value": "Black finish",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "value": "Warm White",
+                        "icon": ""
+                      }
+                    ],
+                    "Power": [
+                      {
+                        "value": "7W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "12W",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "12V/24V",
+                        "icon": ""
+                      }
+                    ]
                   },
                   "options": {
                     "Power": [
@@ -2397,6 +3079,108 @@ const AZOOGI_PRODUCTS = {
               }
             }
           ]
+        },
+        {
+          "type": "category",
+          "name": "Pool Light",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Pool Light",
+              "variants": {
+                "Pool Light": {
+                  "id": "recPcYiIIV8VLqru4",
+                  "product_name": "Pool Light",
+                  "category": "Pool Light",
+                  "sku": "PL001",
+                  "product_short_description": "Dive into an enchanting oasis of light and luxury. Elevate your pool into a sophisticated, glowing retreat, adding breathtaking allure and serene ambiance to every evening.\n",
+                  "product_description": "Dive into an enchanting oasis of light and luxury with our premium pool illumination solution. Designed to effortlessly elevate your outdoor experience, it bathes your aquatic retreat in a warm, sophisticated radiance that creates an unparalleled ambiance. Perfect for those with a discerning eye for discreet elegance and refined architectural detail, this lighting masterpiece transforms ordinary evenings into a breathtaking visual journey, adding both captivating allure and a profound sense of serenity to your home.\n",
+                  "product_images": [
+                    "assets/img/products/recPcYiIIV8VLqru4_20542a9198.webp"
+                  ],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    "Please Enquire"
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": [
+                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_db6b2ce235.svg",
+                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_3f083582f3.svg",
+                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_645ee9888b.svg"
+                  ],
+                  "meta_keywords": "underwater pool light, inground pool lights, above ground pool light, RGB pool light, color changing pool light, floating pool light, solar pool light, submersible pool light, smart pool light, waterproof pool light",
+                  "supplier_name": "CHINA - 7 Colors Co Ltd",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Power": [
+                      {
+                        "value": "7W",
+                        "icon": ""
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "value": "3000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_d3b22ce2d9.svg"
+                      },
+                      {
+                        "value": "6000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_6000k_c061a7fc74.svg"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP68",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "12V",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "7W",
+                        "id": "101"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "3000K",
+                        "id": "102"
+                      },
+                      {
+                        "name": "6000K",
+                        "id": "103"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "12V",
+                        "id": "104"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP68",
+                        "id": "105"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "Outdoor & Architectural",
+                    "Pool Light"
+                  ]
+                }
+              }
+            }
+          ]
         }
       ]
     },
@@ -2404,6 +3188,136 @@ const AZOOGI_PRODUCTS = {
       "type": "category",
       "name": "Strips and Flex",
       "children": [
+        {
+          "type": "category",
+          "name": "LED Flex Sheet",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "LED Flex Sheet",
+              "variants": {
+                "LED Flex Sheet": {
+                  "id": "recF77CHZbtpxqAdy",
+                  "product_name": "LED Flex Sheet",
+                  "category": "LED Flex Sheet",
+                  "sku": "SMD-SHEET-30W-3K-IP20",
+                  "product_short_description": "Transform your home into a breathtaking visual journey. Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.\n",
+                  "product_description": "Transform your home into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers a sophisticated, seamless glow that beautifully enhances your elegant spaces, casting a warm and inviting atmosphere throughout. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating style to any room, making it the ultimate choice for elevated interior illumination.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": "",
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "",
+                  "supplier_name": "CHINA - Rising Sun",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "3000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_d3b22ce2d9.svg"
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_0889bb3043.svg"
+                      },
+                      {
+                        "value": "6000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_6000k_c061a7fc74.svg"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP20",
+                        "icon": ""
+                      },
+                      {
+                        "value": "IP54",
+                        "icon": ""
+                      },
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
+                    "Power": [
+                      {
+                        "value": "30W",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "480mm (L) x 240mm (W)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "30W",
+                        "id": "101"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "3000K",
+                        "id": "102"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "103"
+                      },
+                      {
+                        "name": "6000K",
+                        "id": "104"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "105"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP20",
+                        "id": "106"
+                      },
+                      {
+                        "name": "IP54",
+                        "id": "107"
+                      },
+                      {
+                        "name": "IP67",
+                        "id": "108"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "480mm (L) x 240mm (W)",
+                        "id": "109"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "Strips and Flex",
+                    "LED Flex Sheet"
+                  ]
+                }
+              }
+            }
+          ]
+        },
         {
           "type": "category",
           "name": "SMD Strip",
@@ -2430,23 +3344,60 @@ const AZOOGI_PRODUCTS = {
                   "product_type": "simple",
                   "product_features": {
                     "CCT": [
-                      "3000K",
-                      "2700K",
-                      "4000K"
+                      {
+                        "value": "3000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_d3b22ce2d9.svg"
+                      },
+                      {
+                        "value": "2700K",
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_a08c4a5d86.svg"
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_0889bb3043.svg"
+                      }
                     ],
                     "IP Rating": [
-                      "IP20",
-                      "IP54"
+                      {
+                        "value": "IP20",
+                        "icon": ""
+                      },
+                      {
+                        "value": "IP54",
+                        "icon": ""
+                      }
                     ],
-                    "Voltage": "24V",
-                    "Light Color": "RGBW",
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "value": "RGBW",
+                        "icon": ""
+                      }
+                    ],
                     "Power Consumption Rate": [
-                      "8W/m",
-                      "5W/m"
+                      {
+                        "value": "8W/m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "5W/m",
+                        "icon": ""
+                      }
                     ],
                     "Strip Width": [
-                      "8mm",
-                      "12mm"
+                      {
+                        "value": "8mm",
+                        "icon": ""
+                      },
+                      {
+                        "value": "12mm",
+                        "icon": ""
+                      }
                     ]
                   },
                   "options": {
@@ -2563,8 +3514,18 @@ const AZOOGI_PRODUCTS = {
                   "status": "draft",
                   "product_type": "simple",
                   "product_features": {
-                    "Finish": "Silver",
-                    "Profile Length": "1,000mm"
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "value": "1,000mm",
+                        "icon": ""
+                      }
+                    ]
                   },
                   "options": {
                     "Profile Length": [
@@ -2584,103 +3545,6 @@ const AZOOGI_PRODUCTS = {
                   "category_path": [
                     "Strips and Flex",
                     "RGBW Strip"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
-          "name": "LED Flex Sheet",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "LED Flex Sheet",
-              "variants": {
-                "LED Flex Sheet": {
-                  "id": "recF77CHZbtpxqAdy",
-                  "product_name": "LED Flex Sheet",
-                  "category": "LED Flex Sheet",
-                  "sku": "SMD-SHEET-30W-3K-IP20",
-                  "product_short_description": "Transform your home into a breathtaking visual journey. Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.\n",
-                  "product_description": "Transform your home into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers a sophisticated, seamless glow that beautifully enhances your elegant spaces, casting a warm and inviting atmosphere throughout. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating style to any room, making it the ultimate choice for elevated interior illumination.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": "",
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "",
-                  "supplier_name": "CHINA - Rising Sun",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      "3000K",
-                      "4000K",
-                      "6000K"
-                    ],
-                    "IP Rating": [
-                      "IP20",
-                      "IP54",
-                      "IP67"
-                    ],
-                    "Power": "30W",
-                    "Voltage": "24V",
-                    "Dimension": "480mm (L) x 240mm (W)"
-                  },
-                  "options": {
-                    "Power": [
-                      {
-                        "name": "30W",
-                        "id": "101"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "3000K",
-                        "id": "102"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "103"
-                      },
-                      {
-                        "name": "6000K",
-                        "id": "104"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "105"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP20",
-                        "id": "106"
-                      },
-                      {
-                        "name": "IP54",
-                        "id": "107"
-                      },
-                      {
-                        "name": "IP67",
-                        "id": "108"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "480mm (L) x 240mm (W)",
-                        "id": "109"
-                      }
-                    ]
-                  },
-                  "constraints": [],
-                  "category_path": [
-                    "Strips and Flex",
-                    "LED Flex Sheet"
                   ]
                 }
               }
