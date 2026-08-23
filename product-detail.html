@@ -883,16 +883,12 @@
           if (val === null || val === undefined || val === '') continue;
 
           let displayVal = '';
-          let iconElements = '';
 
           if (Array.isArray(val)) {
             let valStrs = [];
             val.forEach(item => {
               if (typeof item === 'object' && item !== null) {
                 if (item.value) valStrs.push(item.value);
-                if (item.icon) {
-                  iconElements += `<img src="${resolveImg(item.icon)}" alt="${item.value || ''}" style="height: 18px; width: auto; vertical-align: middle; margin-left: 6px;" />`;
-                }
               } else if (item !== null && item !== undefined && String(item).trim() !== '') {
                 valStrs.push(String(item));
               }
@@ -900,20 +896,17 @@
             displayVal = valStrs.join(', ');
           } else if (typeof val === 'object' && val !== null) {
             displayVal = val.value || '';
-            if (val.icon) {
-              iconElements += `<img src="${resolveImg(val.icon)}" alt="${val.value || ''}" style="height: 18px; width: auto; vertical-align: middle; margin-left: 6px;" />`;
-            }
           } else {
             displayVal = String(val);
           }
 
-          if (!displayVal && !iconElements) continue;
+          if (!displayVal) continue;
 
           count++;
           const row = document.createElement('tr');
           row.innerHTML = `
               <td style="padding: 12px 16px; font-weight: 600; color: var(--ink); border-bottom: 1px solid var(--line);">${key}</td>
-              <td style="padding: 12px 16px; color: var(--muted); border-bottom: 1px solid var(--line);">${displayVal}${iconElements}</td>
+              <td style="padding: 12px 16px; color: var(--muted); border-bottom: 1px solid var(--line);">${displayVal}</td>
             `;
           specTableBody.appendChild(row);
         }
