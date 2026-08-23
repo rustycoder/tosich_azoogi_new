@@ -1,0 +1,38 @@
+<!-- 15° -->
+<path d="M6.420 16 L8 4 L9.580 16 Z" fill="url(#beam-15)"/>
+
+<!-- 22° -->
+<path d="M5.667 16 L8 4 L10.333 16 Z" fill="url(#beam-22)"/>
+
+<!-- 24° -->
+<path d="M5.449 16 L8 4 L10.551 16 Z" fill="url(#beam-24)"/>
+
+<!-- 30° -->
+<path d="M4.785 16 L8 4 L11.215 16 Z" fill="url(#beam-30)"/>
+
+<!-- 36° -->
+<path d="M4.101 16 L8 4 L11.899 16 Z" fill="url(#beam-36)"/>
+
+<!-- 38° -->
+<path d="M3.868 16 L8 4 L12.132 16 Z" fill="url(#beam-38)"/>
+
+<!-- 45° -->
+<path d="M3.029 16 L8 4 L12.971 16 Z" fill="url(#beam-45)"/>
+
+<!-- 50° -->
+<path d="M2.404 16 L8 4 L13.596 16 Z" fill="url(#beam-50)"/>
+
+<!-- 60° -->
+<path d="M1.072 16 L8 4 L14.928 16 Z" fill="url(#beam-60)"/>
+
+<!-- 70° -->
+<path d="M-0.402 16 L8 4 L16.402 16 Z" fill="url(#beam-70)"/>
+
+<!-- 80° -->
+<path d="M-2.069 16 L8 4 L18.069 16 Z" fill="url(#beam-80)"/>
+
+<!-- 110° -->
+<path d="M-9.138 16 L8 4 L25.138 16 Z" fill="url(#beam-110)"/>
+
+<!-- 120° -->
+<path d="M-12.785 16 L8 4 L28.785 16 Z" fill="url(#beam-120)"/>
