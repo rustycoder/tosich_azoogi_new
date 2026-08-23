@@ -178,6 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
       configuratorContainer.appendChild(group);
 
       const flex = group.querySelector(`#${flexId}`);
+      const features = currentProduct.product_features || {};
 
       optVals.forEach(val => {
         const itemObj = typeof val === 'object' ? val : { name: String(val), id: String(val) };
@@ -187,7 +188,21 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.setAttribute('data-opt-key', optKey);
         btn.setAttribute('data-opt-id', itemObj.id);
         btn.setAttribute('data-opt-name', itemObj.name);
-        btn.textContent = itemObj.name;
+
+        let iconUrl = null;
+        const featureGroup = features[optKey];
+        if (Array.isArray(featureGroup)) {
+          const match = featureGroup.find(item => typeof item === 'object' && item !== null && (item.value === itemObj.name || String(item.value).toLowerCase() === String(itemObj.name).toLowerCase()));
+          if (match && match.icon) {
+            iconUrl = match.icon;
+          }
+        }
+
+        if (iconUrl) {
+          btn.innerHTML = `<img class="config-btn-icon attr-icon" src="${iconUrl}" alt="${itemObj.name}" style="width: 14px; height: 14px; object-fit: contain; flex-shrink: 0;" /><span>${itemObj.name}</span>`;
+        } else {
+          btn.innerHTML = `<svg class="config-btn-icon circle-icon" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="4.5"/></svg><span>${itemObj.name}</span>`;
+        }
 
         btn.addEventListener('click', () => {
           if (selectedOptions[optKey] === String(itemObj.id)) {

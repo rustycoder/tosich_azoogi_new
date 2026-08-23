@@ -794,6 +794,8 @@
           return;
         }
 
+        const features = product.product_features || {};
+
         for (const optKey in options) {
           if (!options.hasOwnProperty(optKey)) continue;
 
@@ -821,7 +823,24 @@
             btn.setAttribute('data-opt-id', valObj.id);
             btn.setAttribute('data-opt-name', valObj.name);
 
-            btn.innerHTML = `<svg class="config-btn-icon circle-icon" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="4.5"/></svg><span>${valObj.name}</span>`;
+            // Check if an attribute icon is available for this option value in product_features
+            let iconUrl = null;
+            const featureGroup = features[optKey];
+            if (Array.isArray(featureGroup)) {
+              const match = featureGroup.find(item => typeof item === 'object' && item !== null && (item.value === valObj.name || String(item.value).toLowerCase() === String(valObj.name).toLowerCase()));
+              if (match && match.icon) {
+                iconUrl = match.icon;
+              }
+            }
+
+            let iconHtml = '';
+            if (iconUrl) {
+              iconHtml = `<img class="config-btn-icon attr-icon" src="${resolveImg(iconUrl)}" alt="${valObj.name}" style="width: 14px; height: 14px; object-fit: contain; flex-shrink: 0;" />`;
+            } else {
+              iconHtml = `<svg class="config-btn-icon circle-icon" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="4.5"/></svg>`;
+            }
+
+            btn.innerHTML = `${iconHtml}<span>${valObj.name}</span>`;
 
             if (selectedOptions[optKey] && String(selectedOptions[optKey]) === String(valObj.id)) {
               btn.classList.add('active');
