@@ -836,8 +836,6 @@
             let iconHtml = '';
             if (iconUrl) {
               iconHtml = `<img class="config-btn-icon attr-icon" src="${resolveImg(iconUrl)}" alt="${valObj.name}" style="width: 14px; height: 14px; object-fit: contain; flex-shrink: 0;" />`;
-            } else {
-              iconHtml = `<svg class="config-btn-icon circle-icon" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="4.5"/></svg>`;
             }
 
             btn.innerHTML = `${iconHtml}<span>${valObj.name}</span>`;

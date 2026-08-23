@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (iconUrl) {
           btn.innerHTML = `<img class="config-btn-icon attr-icon" src="${iconUrl}" alt="${itemObj.name}" style="width: 14px; height: 14px; object-fit: contain; flex-shrink: 0;" /><span>${itemObj.name}</span>`;
         } else {
-          btn.innerHTML = `<svg class="config-btn-icon circle-icon" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="4.5"/></svg><span>${itemObj.name}</span>`;
+          btn.innerHTML = `<span>${itemObj.name}</span>`;
         }
 
         btn.addEventListener('click', () => {
