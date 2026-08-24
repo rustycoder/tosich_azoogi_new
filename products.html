@@ -1801,16 +1801,21 @@
       if (!activeFilters.categories.includes(catParam)) {
         activeFilters.categories.push(catParam);
       }
-      document.querySelectorAll('.cat-sub-link').forEach(function (link) {
-        if (link.getAttribute('data-sub') === catParam) {
+      updateActiveCategoryClasses();
+      document.querySelectorAll('.cat-label-text, .cat-sub-link').forEach(function (link) {
+        var cName = link.getAttribute('data-cat') || link.getAttribute('data-sub');
+        if (cName === catParam) {
           link.classList.add('active');
           var li = link.closest('li');
           if (li) {
+            li.classList.add('open');
+            var toggle = li.querySelector('.cat-toggle');
+            if (toggle) toggle.innerHTML = '&ndash;';
             var topLi = li.closest('.cat-list > li');
             if (topLi) {
               topLi.classList.add('open');
-              var toggle = topLi.querySelector('.cat-toggle');
-              if (toggle) toggle.innerHTML = '&ndash;';
+              var topToggle = topLi.querySelector('.cat-toggle');
+              if (topToggle) topToggle.innerHTML = '&ndash;';
             }
           }
         }
