@@ -100,7 +100,7 @@ h2, h3{
 
 .topbar.solid .util {
   border-bottom-color: rgba(0, 0, 0, 0.08);
-  background: #111;
+  background: #222;
 }
 
 .util-inner {
@@ -171,7 +171,7 @@ h2, h3{
 }
 
 .logo img{
-  width:120px;
+  width:100px;
 }
 
 .logo span {
@@ -3254,10 +3254,6 @@ a.mega-variant-card:after{
 .contact-page .topbar {
   background: rgba(255, 255, 255, 0.96);
   border-bottom: 1px solid var(--line);
-}
-
-.contact-page .topbar .cta {
-  color: #fff;
 }
 
 .contact-main {
