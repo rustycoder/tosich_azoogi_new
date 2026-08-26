@@ -33,14 +33,22 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Elevate your space with the ultra-sleek Mini Side Bend, a flexible masterpiece delivering a seamless, captivating glow that turns any environment into a work of art.\n",
       "product_description": "Discover the perfect blend of subtle elegance and dynamic versatility with the Mini (6mm x 12mm) Side Bend linear lighting solution. Crafted for designers who refuse to compromise on style, this ultra-sleek, flexible masterpiece effortlessly curves around architectural features to deliver a seamless, captivating glow. Ideal for adding sophisticated ambiance to modern interiors or transforming commercial spaces, its refined, uniform illumination provides an upscale aesthetic that elevates any environment into a work of art.\n",
       "product_images": [
-        "assets/img/products/rec17jjQ4pcEEAeAd_6197efbdc8.webp"
+        "assets/img/products/rec17jjQ4pcEEAeAd_13a095e434.webp"
       ],
       "product_dimension": "",
       "stocked_item": [
         ""
       ],
       "datasheet": "No",
-      "technical_icons": "",
+      "technical_icons": [
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_89497ca10e.svg"
+      ],
       "meta_keywords": "Mini side bend, Ultra-sleek neon, Seamless flexible glow, Free cut linear LED, Precise length lighting, Architectural ambiance neon",
       "supplier_name": "0612S FC WHT",
       "status": "draft",
@@ -53,15 +61,15 @@ const AZOOGI_PRODUCTS = {
           },
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           },
           {
             "value": "2700K-5300K",
@@ -225,17 +233,17 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Elevate your space with this minimalist lighting masterpiece, blending modern luxury and understated elegance to cast a soft, sophisticated glow throughout your home.\n",
       "product_description": "Elevate your interior design to a work of art with this stunning, minimalist lighting masterpiece. Perfectly bridging the gap between modern luxury and understated elegance, it casts a soft, sophisticated wash of light that highlights the beautiful lines of your home. Crafted for those who appreciate refined detail and discreet luxury, it seamlessly integrates into any setting, creating an inviting atmosphere of warmth, comfort, and captivating beauty. Turn an ordinary space into an unforgettable visual journey and let your home shine with a timeless, modern glow.\n",
       "product_images": [
-        "assets/img/products/rec1i5ej70yGeOWdc_af1224ed5b.jpg"
+        "assets/img/products/rec1i5ej70yGeOWdc_5dec90a636.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/rec1i5ej70yGeOWdc_dim_1022f53dd0.jpg"
+        "assets/img/products/rec1i5ej70yGeOWdc_dim_b75cff4396.jpg"
       ],
       "stocked_item": [
         "In Stock"
       ],
       "datasheet": "Yes",
       "technical_icons": [
-        "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+        "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -251,7 +259,7 @@ const AZOOGI_PRODUCTS = {
         "Finish": [
           {
             "value": "Silver",
-            "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
           }
         ]
       },
@@ -288,7 +296,7 @@ const AZOOGI_PRODUCTS = {
       ],
       "datasheet": "No",
       "technical_icons": [
-        "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+        "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -304,7 +312,7 @@ const AZOOGI_PRODUCTS = {
         "Finish": [
           {
             "value": "Silver",
-            "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
           }
         ]
       },
@@ -335,21 +343,21 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
       "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
-        "assets/img/products/rec2Wd9mV8ibXiAnL_7be1c2dfb6.jpg"
+        "assets/img/products/rec2Wd9mV8ibXiAnL_470cf3de41.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/rec2Wd9mV8ibXiAnL_dim_43bcced7cd.jpg"
+        "assets/img/products/rec2Wd9mV8ibXiAnL_dim_00e5ef8f27.jpg"
       ],
       "stocked_item": [
         "In Stock"
       ],
       "datasheet": "Yes",
       "technical_icons": [
-        "assets/img/icons/rec2Wd9mV8ibXiAnL_icon_0e9b381ac3.svg",
-        "assets/img/icons/rec2Wd9mV8ibXiAnL_icon_b72cf85d88.svg",
-        "assets/img/icons/rec2Wd9mV8ibXiAnL_icon_70422e0f1a.svg",
-        "assets/img/icons/rec2Wd9mV8ibXiAnL_icon_17b903245c.svg",
-        "assets/img/icons/rec2Wd9mV8ibXiAnL_icon_81e413346b.svg"
+        "assets/img/icons/rec2Wd9mV8ibXiAnL_icon_86a83e297e.svg",
+        "assets/img/icons/rec2Wd9mV8ibXiAnL_icon_c86775121f.svg",
+        "assets/img/icons/rec2Wd9mV8ibXiAnL_icon_dd7603e1d7.svg",
+        "assets/img/icons/rec2Wd9mV8ibXiAnL_icon_d642ffc8ac.svg",
+        "assets/img/icons/rec2Wd9mV8ibXiAnL_icon_c4d82c7819.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
@@ -531,15 +539,15 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           }
         ],
         "Cut Interval": [
@@ -659,19 +667,19 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           },
           {
             "value": "6000K",
-            "icon": "assets/img/attribute_icon/attr_cct_6000k_828a4b161d.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_6000k_c14a66d0a6.svg"
           }
         ],
         "Cut Interval": [
@@ -765,17 +773,17 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Transform your living spaces with a blend of elegance and modern design, casting a warm, sophisticated glow that effortlessly enhances your home with discreet luxury.\n",
       "product_description": "Transform your living spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your home, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
-        "assets/img/products/rec79152JdanZA4Pi_1c5f103141.jpg"
+        "assets/img/products/rec79152JdanZA4Pi_e2e8aeb1c5.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/rec79152JdanZA4Pi_dim_2babd9a14c.jpg"
+        "assets/img/products/rec79152JdanZA4Pi_dim_a6fad4d8af.jpg"
       ],
       "stocked_item": [
         "In Stock"
       ],
       "datasheet": "Yes",
       "technical_icons": [
-        "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+        "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -795,15 +803,15 @@ const AZOOGI_PRODUCTS = {
         "Finish": [
           {
             "value": "Silver",
-            "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
           },
           {
             "value": "Black",
-            "icon": "assets/img/attribute_icon/attr_finish_black_e7cc03ec10.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_black_e2b08b6736.svg"
           },
           {
             "value": "White",
-            "icon": "assets/img/attribute_icon/attr_finish_white_5bc13290f4.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_white_910aa86073.svg"
           }
         ]
       },
@@ -846,17 +854,17 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
       "product_description": "Transform your living spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your home, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
-        "assets/img/products/recAeMzYUBC4qkQND_16e3a56a84.jpg"
+        "assets/img/products/recAeMzYUBC4qkQND_6d45a65fc2.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/recAeMzYUBC4qkQND_dim_f3ce5bc32c.jpg"
+        "assets/img/products/recAeMzYUBC4qkQND_dim_2c91c9f25b.jpg"
       ],
       "stocked_item": [
         "In Stock"
       ],
       "datasheet": "No",
       "technical_icons": [
-        "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+        "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -876,15 +884,15 @@ const AZOOGI_PRODUCTS = {
         "Finish": [
           {
             "value": "Silver",
-            "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
           },
           {
             "value": "Black",
-            "icon": "assets/img/attribute_icon/attr_finish_black_e7cc03ec10.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_black_e2b08b6736.svg"
           },
           {
             "value": "White",
-            "icon": "assets/img/attribute_icon/attr_finish_white_5bc13290f4.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_white_910aa86073.svg"
           }
         ]
       },
@@ -931,13 +939,25 @@ const AZOOGI_PRODUCTS = {
       "sku": "SV1617-10W-2.2K-IP68-HC",
       "product_short_description": "Bring fluid brilliance and glare-free elegance to your design with Side View Honeycomb, offering a beautifully softened glow and ultimate flexibility.\n",
       "product_description": "Elevate your architectural designs with the Side View IP68 Honeycomb, a premium linear lighting solution crafted to bring captivating elegance and fluid brilliance to any environment. Engineered with advanced honeycomb anti-glare technology, this luxurious neon-style light delivers a beautifully softened, uniform glow that effortlessly enhances spaces without any harsh glare. Perfectly adapted for seamless side-bending flexibility, it gracefully curves around contours to create stunning visual features, dramatic accents, and a sophisticated atmosphere. Built to withstand demanding elements while maintaining its flawless aesthetic, it represents the ultimate fusion of contemporary style, innovative visual comfort, and breathtaking design freedom.\n",
-      "product_images": [],
+      "product_images": [
+        "assets/img/products/recB1syjKDsQf38sM_79d84b186e.webp",
+        "assets/img/products/recB1syjKDsQf38sM_c8fde869e6.webp",
+        "assets/img/products/recB1syjKDsQf38sM_99cf3e1cfa.webp"
+      ],
       "product_dimension": "",
       "stocked_item": [
         ""
       ],
       "datasheet": "No",
-      "technical_icons": "",
+      "technical_icons": [
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg",
+        "assets/img/icons/recB1syjKDsQf38sM_icon_63c81d6e7c.svg"
+      ],
       "meta_keywords": "Architectural lighting, Linear LED, Side View neon, Anti-glare honeycomb, Waterproof light ribbon, Flexible contour illumination",
       "supplier_name": "AG 1617S",
       "status": "draft",
@@ -950,15 +970,15 @@ const AZOOGI_PRODUCTS = {
           },
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           },
           {
             "value": "2700K-5300K",
@@ -1162,21 +1182,21 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           }
         ],
         "Finish": [
           {
             "value": "Black",
-            "icon": "assets/img/attribute_icon/attr_finish_black_e7cc03ec10.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_black_e2b08b6736.svg"
           }
         ],
         "IP Rating": [
@@ -1457,15 +1477,15 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           },
           {
             "value": "6000K",
-            "icon": "assets/img/attribute_icon/attr_cct_6000k_828a4b161d.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_6000k_c14a66d0a6.svg"
           }
         ],
         "IP Rating": [
@@ -1563,21 +1583,21 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Transform your space with elegant design and discreet luxury. Enjoy a sophisticated, seamless glow that brings your vision to life and makes every moment feel truly magical.\n",
       "product_description": "Elevate your spaces into a breathtaking visual journey of elegant design and discreet luxury with a sophisticated, seamless glow. This premium dimmable driver offers the perfect blend of modern innovation and refined elegance, effortlessly transforming your environment into a warm, welcoming retreat. Designed for those who appreciate flawless execution and an unparalleled touch of ambiance, it beautifully highlights your architecture to create a captivating and serene atmosphere. Unwind in the stunning, soft illumination that brings your vision to life and makes every evening feel truly magical.\n",
       "product_images": [
-        "assets/img/products/recFN63Od8jLncgeg_8fb7e900b7.jpg"
+        "assets/img/products/recFN63Od8jLncgeg_600aeca872.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/recFN63Od8jLncgeg_dim_86584917aa.jpg"
+        "assets/img/products/recFN63Od8jLncgeg_dim_f11269ce6b.jpg"
       ],
       "stocked_item": [
         "In Stock"
       ],
       "datasheet": "Yes",
       "technical_icons": [
-        "assets/img/icons/recFN63Od8jLncgeg_icon_e1a36ee3d1.svg",
-        "assets/img/icons/recFN63Od8jLncgeg_icon_2701f5174b.svg",
-        "assets/img/icons/recFN63Od8jLncgeg_icon_ee2343a68f.svg",
-        "assets/img/icons/recFN63Od8jLncgeg_icon_9d6f225f6d.svg",
-        "assets/img/icons/recFN63Od8jLncgeg_icon_8eebfde61a.svg"
+        "assets/img/icons/recFN63Od8jLncgeg_icon_f21f79cb88.svg",
+        "assets/img/icons/recFN63Od8jLncgeg_icon_a373ec2ab7.svg",
+        "assets/img/icons/recFN63Od8jLncgeg_icon_cf740dd52d.svg",
+        "assets/img/icons/recFN63Od8jLncgeg_icon_1ad12c5104.svg",
+        "assets/img/icons/recFN63Od8jLncgeg_icon_5373322a70.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
@@ -1689,19 +1709,19 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Elevate your pathways with Handrail Spot II. It casts a warm, sophisticated ambiance that seamlessly guides your steps with elegant architectural charm.\n",
       "product_description": "Elevate your architectural designs with Handrail Spot II, the premium lighting solution that effortlessly marries sophistication with modern functionality. Designed to seamlessly blend into any indoor or outdoor pathway, it casts a warm, inviting glow that gracefully guides your way while accentuating the elegant contours of your space. Perfect for those who demand meticulous attention to detail, this exquisite fixture turns ordinary walkways into enchanting visual experiences, adding a layer of sophisticated ambiance and subtle security to your surroundings. Discreet yet profoundly impactful, it is the quintessential choice for transforming your environment into a beautifully illuminated masterpiece.\n",
       "product_images": [
-        "assets/img/products/recFfiGcLRw3JjjSh_abb7546302.jpg"
+        "assets/img/products/recFfiGcLRw3JjjSh_7687c7ffab.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/recFfiGcLRw3JjjSh_dim_1b24f5287d.jpg"
+        "assets/img/products/recFfiGcLRw3JjjSh_dim_9f2a7d9c6a.jpg"
       ],
       "stocked_item": [
         "In Stock"
       ],
       "datasheet": "Yes",
       "technical_icons": [
-        "assets/img/icons/recFfiGcLRw3JjjSh_icon_6ae53180f6.svg",
-        "assets/img/icons/recFfiGcLRw3JjjSh_icon_a405b786de.svg",
-        "assets/img/icons/recFfiGcLRw3JjjSh_icon_b94840d0ff.svg"
+        "assets/img/icons/recFfiGcLRw3JjjSh_icon_7a45c89a2d.svg",
+        "assets/img/icons/recFfiGcLRw3JjjSh_icon_8c6177002e.svg",
+        "assets/img/icons/recFfiGcLRw3JjjSh_icon_b06ea0c985.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "SPARKLED",
@@ -1711,11 +1731,11 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           }
         ],
         "IP Rating": [
@@ -1733,15 +1753,15 @@ const AZOOGI_PRODUCTS = {
         "Optics": [
           {
             "value": "SYM 30°",
-            "icon": "assets/img/attribute_icon/attr_optics_sym_30_fb2771b5c4.svg"
+            "icon": "assets/img/attribute_icon/attr_optics_sym_30_0ff2c02268.svg"
           },
           {
             "value": "SYM 60°",
-            "icon": "assets/img/attribute_icon/attr_optics_sym_60_76d49c9e90.svg"
+            "icon": "assets/img/attribute_icon/attr_optics_sym_60_9b396c72e3.svg"
           },
           {
             "value": "ASYM 50°",
-            "icon": "assets/img/attribute_icon/attr_optics_asym_50_7de067e516.svg"
+            "icon": "assets/img/attribute_icon/attr_optics_asym_50_d1807ae0bc.svg"
           }
         ],
         "Power": [
@@ -1809,17 +1829,17 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
       "product_description": "Transform your living spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your home, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
-        "assets/img/products/recGRUtM95iegZOho_455cd1743c.jpg"
+        "assets/img/products/recGRUtM95iegZOho_0d60624ab7.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/recGRUtM95iegZOho_dim_27ac3bf416.jpg"
+        "assets/img/products/recGRUtM95iegZOho_dim_77dd1e45c2.jpg"
       ],
       "stocked_item": [
         "In Stock"
       ],
       "datasheet": "Yes",
       "technical_icons": [
-        "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+        "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -1835,15 +1855,15 @@ const AZOOGI_PRODUCTS = {
         "Finish": [
           {
             "value": "Silver",
-            "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
           },
           {
             "value": "Black",
-            "icon": "assets/img/attribute_icon/attr_finish_black_e7cc03ec10.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_black_e2b08b6736.svg"
           },
           {
             "value": "White",
-            "icon": "assets/img/attribute_icon/attr_finish_white_5bc13290f4.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_white_910aa86073.svg"
           }
         ]
       },
@@ -1882,23 +1902,22 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Transform your outdoor spaces into a breathtaking visual journey. Experience discreet luxury and a sophisticated glow that beautifully enhances your home.\n",
       "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
-        "assets/img/products/recGgRF6gZMVCo6qY_929463bd9c.webp",
-        "assets/img/products/recGgRF6gZMVCo6qY_b79b441742.jpg",
-        "assets/img/products/recGgRF6gZMVCo6qY_73960dcaf0.jpg"
+        "assets/img/products/recGgRF6gZMVCo6qY_9b1b1d38c3.webp",
+        "assets/img/products/recGgRF6gZMVCo6qY_041725c766.jpg",
+        "assets/img/products/recGgRF6gZMVCo6qY_1d91875579.webp"
       ],
       "product_dimension": [
-        "assets/img/products/recGgRF6gZMVCo6qY_dim_3f7b0e15a9.webp"
+        "assets/img/products/recGgRF6gZMVCo6qY_dim_b376e46c82.webp"
       ],
       "stocked_item": [
         "In Stock"
       ],
       "datasheet": "Yes",
       "technical_icons": [
-        "assets/img/icons/recGgRF6gZMVCo6qY_icon_312bb59040.svg",
-        "assets/img/icons/recGgRF6gZMVCo6qY_icon_df83f4a03d.svg",
-        "assets/img/icons/recGgRF6gZMVCo6qY_icon_0d544e5060.svg",
-        "assets/img/icons/recGgRF6gZMVCo6qY_icon_6a48faefcc.svg",
-        "assets/img/icons/recGgRF6gZMVCo6qY_icon_cbeed2b829.svg"
+        "assets/img/icons/recGgRF6gZMVCo6qY_icon_392affd361.svg",
+        "assets/img/icons/recGgRF6gZMVCo6qY_icon_7f28b8a2c1.svg",
+        "assets/img/icons/recGgRF6gZMVCo6qY_icon_12e39ae75b.svg",
+        "assets/img/icons/recGgRF6gZMVCo6qY_icon_01480636d0.svg"
       ],
       "meta_keywords": "garden lights, outdoor garden lights, solar garden lights, LED landscape lighting, pathway lights, garden spotlights, yard lighting, low voltage landscape lights, waterproof outdoor lights, garden decor lighting",
       "supplier_name": "CHINA - 7 Colors Co Ltd",
@@ -1914,7 +1933,7 @@ const AZOOGI_PRODUCTS = {
         "Finish": [
           {
             "value": "Black finish",
-            "icon": "assets/img/attribute_icon/attr_finish_black_finish_618f770095.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_black_finish_a1464292e3.svg"
           }
         ],
         "IP Rating": [
@@ -2012,7 +2031,7 @@ const AZOOGI_PRODUCTS = {
       ],
       "datasheet": "No",
       "technical_icons": [
-        "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+        "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -2032,7 +2051,7 @@ const AZOOGI_PRODUCTS = {
         "Finish": [
           {
             "value": "Silver",
-            "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
           }
         ]
       },
@@ -2081,15 +2100,15 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           }
         ],
         "Control Protocol": [
@@ -2285,17 +2304,17 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Unleash your ultimate design freedom with fluid artistic expression. This bendable masterpiece contours to unique visions, casting a sophisticated glow around creative curves.\n",
       "product_description": "Transform your spaces with the ultimate freedom of design and fluid artistic expression. This premium bendable lighting solution contours effortlessly to your unique architectural visions, casting a seamless, sophisticated glow around smooth curves and creative transitions. Crafted for those who appreciate understated luxury and dynamic innovation, it elevates any interior into a captivating visual journey, bringing flawless ambiance and modern elegance to the most imaginative layouts.\n",
       "product_images": [
-        "assets/img/products/recK9afZ0lmkzBJU0_1625749977.jpg"
+        "assets/img/products/recK9afZ0lmkzBJU0_9d81131cfd.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/recK9afZ0lmkzBJU0_dim_9c4e8b025a.jpg"
+        "assets/img/products/recK9afZ0lmkzBJU0_dim_c2e364172f.jpg"
       ],
       "stocked_item": [
         "In Stock"
       ],
       "datasheet": "Yes",
       "technical_icons": [
-        "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+        "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -2311,7 +2330,7 @@ const AZOOGI_PRODUCTS = {
         "Finish": [
           {
             "value": "Silver",
-            "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
           }
         ]
       },
@@ -2342,17 +2361,17 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Elevate your architecture with flawless, minimalist design, creating a seamless aesthetic where the pure beauty of light takes center stage.\n",
       "product_description": "Transform your living spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium architectural lighting solution offers seamless integration into your walls and ceilings, creating a flawless, minimalist aesthetic where the pure beauty of light takes center stage. Crafted for those who appreciate refined detail and discreet luxury, it casts a warm, sophisticated glow that effortlessly enhances the natural beauty of your architecture, making it the ultimate choice for elevated interior illumination.\n",
       "product_images": [
-        "assets/img/products/recKMzOquNFyLpVj6_a7d917aa41.jpg"
+        "assets/img/products/recKMzOquNFyLpVj6_482998fa2a.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/recKMzOquNFyLpVj6_dim_cf90309289.jpg"
+        "assets/img/products/recKMzOquNFyLpVj6_dim_30f0704941.jpg"
       ],
       "stocked_item": [
         "In Stock"
       ],
       "datasheet": "Yes",
       "technical_icons": [
-        "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+        "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -2368,7 +2387,7 @@ const AZOOGI_PRODUCTS = {
         "Finish": [
           {
             "value": "Silver",
-            "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
           }
         ]
       },
@@ -2413,15 +2432,15 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           }
         ],
         "IP Rating": [
@@ -2503,17 +2522,17 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
       "product_description": "Elevate your architectural spaces with a perfect blend of elegance and modern design. This premium lighting solution offers a seamless, trimless integration into your walls, casting a sophisticated wash of light that beautifully highlights the natural beauty of your home. Crafted for those who appreciate refined detail and discreet luxury, it creates a captivating ambiance and unmatched warmth, making it the ultimate choice for sophisticated interior illumination.\n",
       "product_images": [
-        "assets/img/products/recN7sVKoqad0ib7p_e3d2fac497.jpg"
+        "assets/img/products/recN7sVKoqad0ib7p_f43dacc04b.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/recN7sVKoqad0ib7p_dim_339a78b223.jpg"
+        "assets/img/products/recN7sVKoqad0ib7p_dim_c220752b09.jpg"
       ],
       "stocked_item": [
         "In Stock"
       ],
       "datasheet": "No",
       "technical_icons": [
-        "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+        "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -2529,7 +2548,7 @@ const AZOOGI_PRODUCTS = {
         "Finish": [
           {
             "value": "White",
-            "icon": "assets/img/attribute_icon/attr_finish_white_5bc13290f4.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_white_910aa86073.svg"
           }
         ]
       },
@@ -2560,7 +2579,7 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Experience ultimate design freedom with the Mini Side Bend. This ultra-flexible linear light curves effortlessly to bring a flawless, captivating glow to any environment.\n",
       "product_description": "Discover the ultimate in design freedom with the Mini Side Bend neon-style light, crafted to bring a sleek, captivating elegance to any environment. Engineered for exceptional side-bending flexibility, this premium linear lighting solution curves seamlessly around intricate architectural contours, allowing you to create fluid, breathtaking visual statements. Its uniform, flawless glow adds a sophisticated ambiance to both interior and exterior spaces, transforming the ordinary into a showcase of luxurious light. Built to deliver reliable radiance and unmatched aesthetic beauty, it is the perfect choice for designers looking to elevate their projects with seamless style and effortless adaptability.\n",
       "product_images": [
-        "assets/img/products/recN9v5UQTBluCeTK_6fa25f3cf7.jpg"
+        "assets/img/products/recN9v5UQTBluCeTK_252f397e52.jpg"
       ],
       "product_dimension": "",
       "stocked_item": [
@@ -2568,13 +2587,13 @@ const AZOOGI_PRODUCTS = {
       ],
       "datasheet": "No",
       "technical_icons": [
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_ac9e593ffd.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_02ba02fe72.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_97ee773ffd.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_f642013e3d.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_6f4d56763f.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_7f0345aa99.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_bee69a869c.svg"
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg",
+        "assets/img/icons/recN9v5UQTBluCeTK_icon_0d746f4fb8.svg"
       ],
       "meta_keywords": "Mini Side Bend, Ultra-flexible linear light, Side View neon, Slim architectural lighting, Waterproof LED ribbon, Fluid contour illumination",
       "supplier_name": "ACE 0408S FC WHT",
@@ -2584,15 +2603,15 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           },
           {
             "value": "2400K",
@@ -2706,10 +2725,10 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Bring seamless radiance to any space with Top Bend IP69, a premium linear light designed to accentuate contours with a flawless uniform glow and ultimate style.\n",
       "product_description": "Illuminate your architectural visions with the Top Bend IP69, a premium linear lighting solution designed to bring seamless radiance to any space. Engineered for incredible flexibility and breathtaking visual impact, this top-bending neon-style light curves effortlessly to accentuate contours and create striking design statements. Whether you are transforming a high-end commercial venue or adding sophisticated atmosphere to an outdoor landscape, its pristine, uniform glow delivers an unmatched aesthetic elegance. Built to withstand the elements while maintaining its flawless brilliance, it is the ultimate choice for designers who refuse to compromise on beauty, adaptability, and style.\n",
       "product_images": [
-        "assets/img/products/recNCok9s0bHaZqzP_eadcf08f03.jpg",
-        "assets/img/products/recNCok9s0bHaZqzP_5401240c0e.jpg",
-        "assets/img/products/recNCok9s0bHaZqzP_5f4e8e7a1a.jpg",
-        "assets/img/products/recNCok9s0bHaZqzP_be78cdf693.jpg"
+        "assets/img/products/recNCok9s0bHaZqzP_bbf83280f7.jpg",
+        "assets/img/products/recNCok9s0bHaZqzP_7316518bae.jpg",
+        "assets/img/products/recNCok9s0bHaZqzP_88c973afb4.jpg",
+        "assets/img/products/recNCok9s0bHaZqzP_f6db4118a2.jpg"
       ],
       "product_dimension": "",
       "stocked_item": [
@@ -2717,13 +2736,13 @@ const AZOOGI_PRODUCTS = {
       ],
       "datasheet": "No",
       "technical_icons": [
-        "assets/img/icons/recNCok9s0bHaZqzP_icon_eb6cc2a19d.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_ac9e593ffd.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_02ba02fe72.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_97ee773ffd.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_f642013e3d.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_6f4d56763f.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_7f0345aa99.svg"
+        "assets/img/icons/recNCok9s0bHaZqzP_icon_d89cc1134b.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg"
       ],
       "meta_keywords": "Architectural lighting, Linear LED, Top View neon, Waterproof light ribbon, Flexible contour illumination, Premium commercial light",
       "supplier_name": "WAVE 1617T WHT",
@@ -2733,15 +2752,15 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           },
           {
             "value": "2200K",
@@ -3100,19 +3119,19 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           },
           {
             "value": "6000K",
-            "icon": "assets/img/attribute_icon/attr_cct_6000k_828a4b161d.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_6000k_c14a66d0a6.svg"
           }
         ],
         "Cut Interval": [
@@ -3252,15 +3271,15 @@ const AZOOGI_PRODUCTS = {
           },
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           },
           {
             "value": "2700K-5300K",
@@ -3276,7 +3295,7 @@ const AZOOGI_PRODUCTS = {
         "Finish": [
           {
             "value": "Black",
-            "icon": "assets/img/attribute_icon/attr_finish_black_e7cc03ec10.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_black_e2b08b6736.svg"
           }
         ],
         "IP Rating": [
@@ -3445,20 +3464,20 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Dive into an enchanting oasis of light and luxury. Elevate your pool into a sophisticated, glowing retreat, adding breathtaking allure and serene ambiance to every evening.\n",
       "product_description": "Dive into an enchanting oasis of light and luxury with our premium pool illumination solution. Designed to effortlessly elevate your outdoor experience, it bathes your aquatic retreat in a warm, sophisticated radiance that creates an unparalleled ambiance. Perfect for those with a discerning eye for discreet elegance and refined architectural detail, this lighting masterpiece transforms ordinary evenings into a breathtaking visual journey, adding both captivating allure and a profound sense of serenity to your home.\n",
       "product_images": [
-        "assets/img/products/recPcYiIIV8VLqru4_9bed217b49.jpg"
+        "assets/img/products/recPcYiIIV8VLqru4_40e9df1387.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/recPcYiIIV8VLqru4_dim_07759f9275.jpg"
+        "assets/img/products/recPcYiIIV8VLqru4_dim_15a793efef.jpg"
       ],
       "stocked_item": [
         "Please Enquire"
       ],
       "datasheet": "No",
       "technical_icons": [
-        "assets/img/icons/recGgRF6gZMVCo6qY_icon_312bb59040.svg",
-        "assets/img/icons/recPcYiIIV8VLqru4_icon_314b4813a4.svg",
-        "assets/img/icons/recPcYiIIV8VLqru4_icon_97a2f340ed.svg",
-        "assets/img/icons/recPcYiIIV8VLqru4_icon_7c638d248c.svg"
+        "assets/img/icons/recPcYiIIV8VLqru4_icon_eacaffeb7c.svg",
+        "assets/img/icons/recPcYiIIV8VLqru4_icon_96dea8e1e0.svg",
+        "assets/img/icons/recPcYiIIV8VLqru4_icon_cb8ec19bd5.svg",
+        "assets/img/icons/recPcYiIIV8VLqru4_icon_a8b9985b68.svg"
       ],
       "meta_keywords": "underwater pool light, inground pool lights, above ground pool light, RGB pool light, color changing pool light, floating pool light, solar pool light, submersible pool light, smart pool light, waterproof pool light",
       "supplier_name": "CHINA - 7 Colors Co Ltd",
@@ -3474,11 +3493,11 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "6000K",
-            "icon": "assets/img/attribute_icon/attr_cct_6000k_828a4b161d.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_6000k_c14a66d0a6.svg"
           }
         ],
         "IP Rating": [
@@ -3537,13 +3556,23 @@ const AZOOGI_PRODUCTS = {
       "sku": "SV1220-10W-2.7K-IP68",
       "product_short_description": "Bring fluid brilliance to any environment with Side View IP68, a premium linear light designed to deliver a flawless, uniform glow that elevates your architectural vision.\n",
       "product_description": "Elevate your architectural and landscape designs with the Side View IP68, a premium linear lighting solution crafted to bring captivating elegance and fluid brilliance to any environment. Engineered for extraordinary side-bending flexibility, this luxurious neon-style light curves effortlessly around contours to create stunning visual features and dramatic accents. Perfect for transforming upscale commercial venues, creating sophisticated outdoor atmospheres, or adding a touch of modern luxury to residential spaces, its uniform, flawless glow delivers an unmatched aesthetic impact. Built to withstand the elements while maintaining its pristine radiance, it is the ultimate choice for designers who demand seamless elegance, adaptability, and style.\n",
-      "product_images": [],
+      "product_images": [
+        "assets/img/products/recQnoCNnWRMKV0D9_6c277f9851.webp"
+      ],
       "product_dimension": "",
       "stocked_item": [
         ""
       ],
       "datasheet": "No",
-      "technical_icons": "",
+      "technical_icons": [
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg",
+        "assets/img/icons/recB1syjKDsQf38sM_icon_63c81d6e7c.svg"
+      ],
       "meta_keywords": "Side view neon, Flexible linear LED, Architectural accent lighting, Landscape contour light, Waterproof light ribbon, Premium commercial lighting",
       "supplier_name": "ACE 1220S WHT",
       "status": "draft",
@@ -3552,15 +3581,15 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           },
           {
             "value": "5300K",
@@ -3824,15 +3853,15 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           }
         ],
         "Dimension": [
@@ -3953,7 +3982,7 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Bring subtle sophistication to any space with the Mini, an ultra-compact linear light designed to deliver a flawless, uniform glow and timeless style.\n",
       "product_description": "Discover the ultimate in discreet elegance with the Mini (6mm x 6mm), a remarkably compact linear lighting solution designed to bring subtle sophistication and seamless radiance to any space. Crafted for extraordinary flexibility and an ultra-minimal profile, this sleek neon-style light curves effortlessly to accent intricate design details and create captivating visual effects. Perfect for adding a luxurious atmosphere to modern retail interiors, high-end lounges, or intimate architectural spaces, its smooth, uniform glow transforms the ordinary into the extraordinary. Embrace a new standard of design freedom with a flawless illumination that blends perfectly into your vision while delivering an unmatched aesthetic impact.\n",
       "product_images": [
-        "assets/img/products/recSqEbruwOumyTxB_ff13d4ef1a.jpg"
+        "assets/img/products/recSqEbruwOumyTxB_b1e76e6d08.jpg"
       ],
       "product_dimension": "",
       "stocked_item": [
@@ -3961,13 +3990,13 @@ const AZOOGI_PRODUCTS = {
       ],
       "datasheet": "No",
       "technical_icons": [
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_ac9e593ffd.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_02ba02fe72.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_97ee773ffd.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_f642013e3d.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_6f4d56763f.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_7f0345aa99.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_bee69a869c.svg"
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg",
+        "assets/img/icons/recN9v5UQTBluCeTK_icon_0d746f4fb8.svg"
       ],
       "meta_keywords": "Discreet elegance, Ultra-compact neon, Subtle sophistication, Minimal lighting profile, Flexible contour accent, Architectural detail illumination",
       "supplier_name": "0606S FC WHT",
@@ -3977,15 +4006,15 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           }
         ],
         "Cut Interval": [
@@ -4090,13 +4119,25 @@ const AZOOGI_PRODUCTS = {
       "sku": "SV1617-18W-2.2K-IP68-Optic",
       "product_short_description": "Redefine luxury with the Side View IP68 Optic, projecting a focused, captivating beam to bring timeless elegance and precision to your visionary spaces.\n",
       "product_description": "Experience the epitome of precision and drama with the Side View IP68 Optic, a premium linear lighting masterpiece designed to redefine luxury illumination. Engineered with advanced optics, this sophisticated neon-style light projects a focused, captivating beam that beautifully accentuates architectural contours and artistic details. Its seamless side-bending flexibility unlocks unparalleled design freedom, allowing you to craft breathtaking visual statements in high-end commercial spaces, upscale residential interiors, and elite outdoor landscapes. Bring an atmosphere of timeless elegance and unmatched prestige to your visionary projects with a refined glow that transforms the ordinary into an extraordinary spectacle of light.\n",
-      "product_images": [],
+      "product_images": [
+        "assets/img/products/recVAUq0tqxZWxHZy_d607244dfd.webp",
+        "assets/img/products/recVAUq0tqxZWxHZy_0eb5aa300f.webp",
+        "assets/img/products/recVAUq0tqxZWxHZy_4e033769c0.webp"
+      ],
       "product_dimension": "",
       "stocked_item": [
         ""
       ],
       "datasheet": "No",
-      "technical_icons": "",
+      "technical_icons": [
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg",
+        "assets/img/icons/recB1syjKDsQf38sM_icon_63c81d6e7c.svg"
+      ],
       "meta_keywords": "Side view neon, Focused beam optics, Waterproof linear LED, Precision architectural lighting, Narrow beam accent, Premium luxury illumination",
       "supplier_name": "LEDLINE OPTIC 1617S",
       "status": "draft",
@@ -4115,15 +4156,15 @@ const AZOOGI_PRODUCTS = {
           },
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           }
         ],
         "Dimension": [
@@ -4227,17 +4268,17 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
       "product_description": "Elevate your architectural landscape with a lighting solution that merges sophisticated design with timeless elegance. Perfect for creating dramatic visual interest or providing seamless ambiance, this premium fixture effortlessly integrates into any modern space. Crafted for those with an eye for refined detail, it casts a warm, inviting glow that enhances the innate beauty of your home while introducing a sense of discreet luxury and captivating warmth to your surroundings.\n",
       "product_images": [
-        "assets/img/products/recX6yVyt9eiLDvmh_7013d57265.jpg"
+        "assets/img/products/recX6yVyt9eiLDvmh_7023a738bc.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/recX6yVyt9eiLDvmh_dim_843ccf5da0.jpg"
+        "assets/img/products/recX6yVyt9eiLDvmh_dim_1f6d14c15a.jpg"
       ],
       "stocked_item": [
         "In Stock"
       ],
       "datasheet": "Yes",
       "technical_icons": [
-        "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+        "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -4261,15 +4302,15 @@ const AZOOGI_PRODUCTS = {
         "Finish": [
           {
             "value": "Silver",
-            "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
           },
           {
             "value": "White",
-            "icon": "assets/img/attribute_icon/attr_finish_white_5bc13290f4.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_white_910aa86073.svg"
           },
           {
             "value": "Black",
-            "icon": "assets/img/attribute_icon/attr_finish_black_e7cc03ec10.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_black_e2b08b6736.svg"
           }
         ]
       },
@@ -4287,10 +4328,10 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Transform your spaces with a stunning visual journey of elegant design and discreet luxury, creating a sophisticated and seamless glow that beautifully enhances your home.\n",
       "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
-        "assets/img/products/recYMBioQ5x4HEKdT_6359d604d9.jpg",
-        "assets/img/products/recYMBioQ5x4HEKdT_e4a76a171d.jpg",
-        "assets/img/products/recYMBioQ5x4HEKdT_2922c89cdc.jpg",
-        "assets/img/products/recYMBioQ5x4HEKdT_a12209a510.jpg"
+        "assets/img/products/recYMBioQ5x4HEKdT_9390c5e378.jpg",
+        "assets/img/products/recYMBioQ5x4HEKdT_d9a480764c.webp",
+        "assets/img/products/recYMBioQ5x4HEKdT_e0e1bcf7ad.webp",
+        "assets/img/products/recYMBioQ5x4HEKdT_f70c2c183c.webp"
       ],
       "product_dimension": "",
       "stocked_item": [
@@ -4298,9 +4339,9 @@ const AZOOGI_PRODUCTS = {
       ],
       "datasheet": "No",
       "technical_icons": [
-        "assets/img/icons/recYMBioQ5x4HEKdT_icon_d4e243a4b0.svg",
-        "assets/img/icons/recYMBioQ5x4HEKdT_icon_1419b65f7c.svg",
-        "assets/img/icons/recYMBioQ5x4HEKdT_icon_769a93460d.svg"
+        "assets/img/icons/recYMBioQ5x4HEKdT_icon_72c5536fa4.svg",
+        "assets/img/icons/recYMBioQ5x4HEKdT_icon_6843a1e83b.svg",
+        "assets/img/icons/recYMBioQ5x4HEKdT_icon_3c2dfa1d87.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "CHINA - Rising Sun",
@@ -4310,15 +4351,15 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           }
         ],
         "IP Rating": [
@@ -4457,17 +4498,17 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Elevate your space with a seamless, sophisticated glow that enhances your architecture with discreet luxury.\n",
       "product_description": "Transform your living spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium architectural lighting solution offers seamless integration into your walls and ceilings, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated and serene illumination.\n",
       "product_images": [
-        "assets/img/products/recYdDyknt1HSzIXf_ea7086e113.jpg"
+        "assets/img/products/recYdDyknt1HSzIXf_23d98c68b1.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/recYdDyknt1HSzIXf_dim_3186c59910.jpg"
+        "assets/img/products/recYdDyknt1HSzIXf_dim_10f436098c.jpg"
       ],
       "stocked_item": [
         "In Stock"
       ],
       "datasheet": "Yes",
       "technical_icons": [
-        "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+        "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -4483,7 +4524,7 @@ const AZOOGI_PRODUCTS = {
         "Finish": [
           {
             "value": "White",
-            "icon": "assets/img/attribute_icon/attr_finish_white_5bc13290f4.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_white_910aa86073.svg"
           }
         ]
       },
@@ -4528,19 +4569,19 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           },
           {
             "value": "6000K",
-            "icon": "assets/img/attribute_icon/attr_cct_6000k_828a4b161d.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_6000k_c14a66d0a6.svg"
           }
         ],
         "IP Rating": [
@@ -4640,7 +4681,7 @@ const AZOOGI_PRODUCTS = {
         "Finish": [
           {
             "value": "Silver",
-            "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
           }
         ],
         "Profile Length": [
@@ -4692,7 +4733,7 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "2700K-6500K",
@@ -4965,15 +5006,15 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           },
           {
             "value": "2300K-4000K",
@@ -5207,20 +5248,20 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Transform your home into a breathtaking visual journey. Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.\n",
       "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
-        "assets/img/products/recfKARqbTPcAwrrf_d42f5d431a.jpg",
-        "assets/img/products/recfKARqbTPcAwrrf_eb6c58de06.jpg",
-        "assets/img/products/recfKARqbTPcAwrrf_606bf433bd.jpg"
+        "assets/img/products/recfKARqbTPcAwrrf_6c4b0d52a6.jpg",
+        "assets/img/products/recfKARqbTPcAwrrf_79dabf6ad5.jpg",
+        "assets/img/products/recfKARqbTPcAwrrf_ad6efed573.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/recfKARqbTPcAwrrf_dim_f752dcfcd7.png"
+        "assets/img/products/recfKARqbTPcAwrrf_dim_314b829679.png"
       ],
       "stocked_item": [
         "4-6 Weeks"
       ],
       "datasheet": "No",
       "technical_icons": [
-        "assets/img/icons/recPcYiIIV8VLqru4_icon_314b4813a4.svg",
-        "assets/img/icons/recGgRF6gZMVCo6qY_icon_df83f4a03d.svg"
+        "assets/img/icons/recPcYiIIV8VLqru4_icon_96dea8e1e0.svg",
+        "assets/img/icons/recGgRF6gZMVCo6qY_icon_392affd361.svg"
       ],
       "meta_keywords": "aluminium profile, aluminum extrusion, t-slot aluminum profile, v-slot aluminum profile, structural aluminum tubing, aluminum channel, aluminum angle",
       "supplier_name": "BAIWEI",
@@ -5302,7 +5343,7 @@ const AZOOGI_PRODUCTS = {
         "Finish": [
           {
             "value": "Silver",
-            "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
           }
         ]
       },
@@ -5459,17 +5500,17 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
       "product_description": "Transform your living spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your home, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
-        "assets/img/products/recgJQ1rfbq0UP4oW_0d244648df.jpg"
+        "assets/img/products/recgJQ1rfbq0UP4oW_456684f720.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/recgJQ1rfbq0UP4oW_dim_ff4609d0a8.jpg"
+        "assets/img/products/recgJQ1rfbq0UP4oW_dim_65f2479900.jpg"
       ],
       "stocked_item": [
         "In Stock"
       ],
       "datasheet": "Yes",
       "technical_icons": [
-        "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+        "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -5497,15 +5538,15 @@ const AZOOGI_PRODUCTS = {
         "Finish": [
           {
             "value": "Silver",
-            "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
           },
           {
             "value": "Black",
-            "icon": "assets/img/attribute_icon/attr_finish_black_e7cc03ec10.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_black_e2b08b6736.svg"
           },
           {
             "value": "White",
-            "icon": "assets/img/attribute_icon/attr_finish_white_5bc13290f4.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_white_910aa86073.svg"
           }
         ]
       },
@@ -5560,13 +5601,25 @@ const AZOOGI_PRODUCTS = {
       "sku": "SV1617-6W-1.6K-IP68-Sauna",
       "product_short_description": "Transform your wellness space into a luxurious haven with Side View Sauna, offering a comforting, uniform glow that invites pure relaxation and elegant tranquility.\n",
       "product_description": "Step into a sanctuary of pure relaxation and elevated luxury with the Side View IP68 Sauna, a premium linear lighting solution crafted to transform wellness spaces into serene havens. Designed to wrap seamlessly around structural curves, this elegant accent light bathes your environment in a smooth, uniform glow that enhances tranquility and soothes the senses. Perfect for creating a high-end spa atmosphere, it brings a touch of sophisticated radiance and comforting warmth, inviting you to completely unwind and escape from the everyday world.\n",
-      "product_images": [],
+      "product_images": [
+        "assets/img/products/recghYXl9epsuqYzU_f02db6ca5e.webp",
+        "assets/img/products/recghYXl9epsuqYzU_d848aba7f0.webp",
+        "assets/img/products/recghYXl9epsuqYzU_7e9a21c769.webp"
+      ],
       "product_dimension": "",
       "stocked_item": [
         ""
       ],
       "datasheet": "No",
-      "technical_icons": "",
+      "technical_icons": [
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg",
+        "assets/img/icons/recB1syjKDsQf38sM_icon_63c81d6e7c.svg"
+      ],
       "meta_keywords": "Sauna lighting, Spa linear LED, Side View neon, Waterproof light ribbon, Wellness space accent, Flexible contour illumination",
       "supplier_name": "SAUNA 1617S",
       "status": "draft",
@@ -5579,15 +5632,15 @@ const AZOOGI_PRODUCTS = {
           },
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           },
           {
             "value": "5300K",
@@ -5762,15 +5815,15 @@ const AZOOGI_PRODUCTS = {
           },
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           },
           {
             "value": "5300K",
@@ -5920,19 +5973,19 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Elegantly illuminate your pathways with Handrail Spot I. It casts a warm, sophisticated glow that guides the way while beautifully enhancing your architectural space.\n",
       "product_description": "Illuminate your architectural masterpieces with the perfect blend of elegance and modern design. Handrail Spot I offers seamless integration into your outdoor or indoor pathways, casting a warm, sophisticated glow that guides the way while enhancing the beauty of your space. Crafted for those who appreciate refined detail, it transforms ordinary walkways into stunning visual journeys, adding an unparalleled touch of ambiance and security to any setting. Elegant, discreet, and captivating, it is the ultimate choice for elevated architectural lighting.\n",
       "product_images": [
-        "assets/img/products/rechaqZ8XahO5Kftl_eb1658f520.jpg"
+        "assets/img/products/rechaqZ8XahO5Kftl_5568f68825.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/rechaqZ8XahO5Kftl_dim_66bcb7ea18.jpg"
+        "assets/img/products/rechaqZ8XahO5Kftl_dim_830c7e14f2.jpg"
       ],
       "stocked_item": [
         "In Stock"
       ],
       "datasheet": "Yes",
       "technical_icons": [
-        "assets/img/icons/rechaqZ8XahO5Kftl_icon_17950acd8c.svg",
-        "assets/img/icons/rechaqZ8XahO5Kftl_icon_c96dbab11d.svg",
-        "assets/img/icons/rechaqZ8XahO5Kftl_icon_ffaf5ee3c8.svg"
+        "assets/img/icons/rechaqZ8XahO5Kftl_icon_f094692cd2.svg",
+        "assets/img/icons/rechaqZ8XahO5Kftl_icon_8a6edd56f8.svg",
+        "assets/img/icons/rechaqZ8XahO5Kftl_icon_7704ccfa37.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "SPARKLED",
@@ -5942,11 +5995,11 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           }
         ],
         "IP Rating": [
@@ -5964,15 +6017,15 @@ const AZOOGI_PRODUCTS = {
         "Optics": [
           {
             "value": "SYM 30°",
-            "icon": "assets/img/attribute_icon/attr_optics_sym_30_fb2771b5c4.svg"
+            "icon": "assets/img/attribute_icon/attr_optics_sym_30_0ff2c02268.svg"
           },
           {
             "value": "SYM 60°",
-            "icon": "assets/img/attribute_icon/attr_optics_sym_60_76d49c9e90.svg"
+            "icon": "assets/img/attribute_icon/attr_optics_sym_60_9b396c72e3.svg"
           },
           {
             "value": "ASYM 50°",
-            "icon": "assets/img/attribute_icon/attr_optics_asym_50_7de067e516.svg"
+            "icon": "assets/img/attribute_icon/attr_optics_asym_50_d1807ae0bc.svg"
           }
         ],
         "Power": [
@@ -6144,20 +6197,20 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
       "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
-        "assets/img/products/reciwSxR6ltI67o0O_56f0e802ed.jpg"
+        "assets/img/products/reciwSxR6ltI67o0O_5a6c1a0256.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/reciwSxR6ltI67o0O_dim_75ddf826d1.jpg"
+        "assets/img/products/reciwSxR6ltI67o0O_dim_7d1d8203a5.jpg"
       ],
       "stocked_item": [
         "In Stock"
       ],
       "datasheet": "Yes",
       "technical_icons": [
-        "assets/img/icons/reciwSxR6ltI67o0O_icon_2a1803b3dc.svg",
-        "assets/img/icons/reciwSxR6ltI67o0O_icon_49825ff7f7.svg",
-        "assets/img/icons/reciwSxR6ltI67o0O_icon_beda397d8d.svg",
-        "assets/img/icons/reciwSxR6ltI67o0O_icon_ab59177278.svg"
+        "assets/img/icons/reciwSxR6ltI67o0O_icon_ef9bfbc35f.svg",
+        "assets/img/icons/reciwSxR6ltI67o0O_icon_f258a3dffb.svg",
+        "assets/img/icons/reciwSxR6ltI67o0O_icon_086baca345.svg",
+        "assets/img/icons/reciwSxR6ltI67o0O_icon_fb2033dd11.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
@@ -6303,15 +6356,15 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           },
           {
             "value": "5000K",
@@ -6425,17 +6478,17 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
       "product_description": "Transform your living spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your home, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
-        "assets/img/products/recl5OARu2CB07dps_d0bcca29b9.jpg"
+        "assets/img/products/recl5OARu2CB07dps_5cffb8601d.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/recl5OARu2CB07dps_dim_4d448da338.jpg"
+        "assets/img/products/recl5OARu2CB07dps_dim_a103f0592f.jpg"
       ],
       "stocked_item": [
         "In Stock"
       ],
       "datasheet": "No",
       "technical_icons": [
-        "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+        "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -6455,7 +6508,7 @@ const AZOOGI_PRODUCTS = {
         "Finish": [
           {
             "value": "Silver",
-            "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
           }
         ]
       },
@@ -6504,15 +6557,15 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           }
         ],
         "Control Protocol": [
@@ -6701,10 +6754,10 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Bring fluid brilliance to any space with Side Bend IP69, curving effortlessly to deliver a seamless, uniform glow that elevates your architectural vision.\n",
       "product_description": "Elevate your architectural and landscape designs with the Side Bend IP69, a premium linear lighting solution crafted to bring captivating elegance and fluid brilliance to any environment. Engineered for extraordinary side-bending flexibility, this luxurious neon-style light curves effortlessly around architectural contours to create stunning visual features and dramatic accents. Perfect for transforming upscale commercial venues, creating an inviting outdoor oasis, or adding a sophisticated glow to modern spaces, its seamless, uniform illumination delivers an unmatched upscale aesthetic. Combining ultimate durability with timeless style, it is the ultimate choice for visionary designers looking to push the boundaries of creative lighting expression.\n",
       "product_images": [
-        "assets/img/products/recnXTAF5eWLRHDVI_6a3f840714.jpg",
-        "assets/img/products/recnXTAF5eWLRHDVI_9cdb630d8b.jpg",
-        "assets/img/products/recnXTAF5eWLRHDVI_2556b7821a.jpg",
-        "assets/img/products/recnXTAF5eWLRHDVI_8d3e48e160.jpg"
+        "assets/img/products/recnXTAF5eWLRHDVI_ef2aa56a65.jpg",
+        "assets/img/products/recnXTAF5eWLRHDVI_4e93d129aa.jpg",
+        "assets/img/products/recnXTAF5eWLRHDVI_93e93ba912.jpg",
+        "assets/img/products/recnXTAF5eWLRHDVI_2bc977bea5.jpg"
       ],
       "product_dimension": "",
       "stocked_item": [
@@ -6712,13 +6765,13 @@ const AZOOGI_PRODUCTS = {
       ],
       "datasheet": "No",
       "technical_icons": [
-        "assets/img/icons/recNCok9s0bHaZqzP_icon_eb6cc2a19d.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_ac9e593ffd.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_02ba02fe72.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_97ee773ffd.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_f642013e3d.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_6f4d56763f.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_7f0345aa99.svg"
+        "assets/img/icons/recNCok9s0bHaZqzP_icon_d89cc1134b.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg"
       ],
       "meta_keywords": "Side bend neon, Flexible linear LED, Architectural accent lighting, Landscape contour light, Waterproof light ribbon, Premium commercial lighting",
       "supplier_name": "WAVE 1617S WHT",
@@ -6732,15 +6785,15 @@ const AZOOGI_PRODUCTS = {
           },
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           },
           {
             "value": "5300K",
@@ -7078,7 +7131,7 @@ const AZOOGI_PRODUCTS = {
       ],
       "datasheet": "Yes",
       "technical_icons": [
-        "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+        "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -7094,7 +7147,7 @@ const AZOOGI_PRODUCTS = {
         "Finish": [
           {
             "value": "Silver",
-            "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
           }
         ]
       },
@@ -7124,13 +7177,24 @@ const AZOOGI_PRODUCTS = {
       "sku": "TV1010-12W-TW-IP68-270",
       "product_short_description": "Wrap your space in pure luxury with the Three-sided Emitting Mini Neon, radiating a stunning, uniform glow from three sides for ultimate design freedom.\n",
       "product_description": "Experience the ultimate in design versatility with the Three-sided Emitting Mini Neon, a revolutionary linear lighting choice crafted to redefine modern luxury. Engineered to radiate a brilliant, uniform glow from three distinct sides, this remarkable neon-style masterpiece wraps any environment in a seamless blanket of sophisticated light. Its highly flexible profile effortlessly contours around architectural features, making it the perfect choice for designers looking to elevate spaces with dramatic ambiance and striking visual impact. Elevate your next project with an unmatched aesthetic elegance that blends artistic freedom with flawless illumination.\n",
-      "product_images": [],
+      "product_images": [
+        "assets/img/products/recq5zK1RIL38n5rM_23145a7e01.webp",
+        "assets/img/products/recq5zK1RIL38n5rM_4818405a63.webp"
+      ],
       "product_dimension": "",
       "stocked_item": [
         ""
       ],
       "datasheet": "No",
-      "technical_icons": "",
+      "technical_icons": [
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg",
+        "assets/img/icons/recB1syjKDsQf38sM_icon_63c81d6e7c.svg"
+      ],
       "meta_keywords": "Three-sided emitting neon, Mini neon strip, Flexible contour light, Top View LED, Uniform glow ribbon, Luxury linear illumination",
       "supplier_name": "ACE 1010YT TW",
       "status": "draft",
@@ -7147,15 +7211,15 @@ const AZOOGI_PRODUCTS = {
           },
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           }
         ],
         "IP Rating": [
@@ -7298,19 +7362,19 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Elegantly illuminate your pathways with Handrail Spot III. It casts a warm, sophisticated glow that guides the way while enhancing your architectural space.\n",
       "product_description": "Discover a new dimension of architectural elegance with Handrail Spot III. Perfectly engineered to blend seamlessly into your indoor and outdoor environments, this exquisite lighting solution casts a mesmerizing, sophisticated glow that elegantly maps your pathways. Designed for connoisseurs of fine detail, it redefines standard walkways into spectacular visual corridors, infusing your surroundings with an unparalleled layer of luxurious ambiance and subtle, reassuring security. Sleek, minimal, and entirely captivating, it represents the absolute pinnacle of refined aesthetic illumination.\n",
       "product_images": [
-        "assets/img/products/recqPIv7UfmEBe3PO_75ae2b3eb3.jpg"
+        "assets/img/products/recqPIv7UfmEBe3PO_895719bf16.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/recqPIv7UfmEBe3PO_dim_9441825fc8.jpg"
+        "assets/img/products/recqPIv7UfmEBe3PO_dim_7bb026640a.jpg"
       ],
       "stocked_item": [
         "In Stock"
       ],
       "datasheet": "Yes",
       "technical_icons": [
-        "assets/img/icons/recqPIv7UfmEBe3PO_icon_4325c8da3d.svg",
-        "assets/img/icons/recqPIv7UfmEBe3PO_icon_fb69dd1d1f.svg",
-        "assets/img/icons/recqPIv7UfmEBe3PO_icon_e293534d20.svg"
+        "assets/img/icons/recqPIv7UfmEBe3PO_icon_f896b848be.svg",
+        "assets/img/icons/recqPIv7UfmEBe3PO_icon_969f4d2dfa.svg",
+        "assets/img/icons/recqPIv7UfmEBe3PO_icon_16ec9b506d.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "SPARKLED",
@@ -7320,11 +7384,11 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           }
         ],
         "IP Rating": [
@@ -7342,11 +7406,11 @@ const AZOOGI_PRODUCTS = {
         "Optics": [
           {
             "value": "SYM 60°",
-            "icon": "assets/img/attribute_icon/attr_optics_sym_60_76d49c9e90.svg"
+            "icon": "assets/img/attribute_icon/attr_optics_sym_60_9b396c72e3.svg"
           },
           {
             "value": "ASYM 80°",
-            "icon": "assets/img/attribute_icon/attr_optics_asym_80_e88e759e93.svg"
+            "icon": "assets/img/attribute_icon/attr_optics_asym_80_b209b6589c.svg"
           }
         ],
         "Power": [
@@ -7410,7 +7474,7 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Redefine your space with the ultra-slim Slice, blending flexibility and contemporary elegance to create a sleek, breathtaking visual statement anywhere.\n",
       "product_description": "Introducing the Slice (10mm x 4mm), an ultra-slim linear lighting solution crafted to redefine modern illumination. Designed with incredible flexibility and a minimal profile, this top-bending masterpiece seamlessly integrates into any architectural vision, effortlessly tracing elegant curves and contours. Its smooth, uniform glow creates a stunning visual statement that elevates the ambiance of sophisticated residential interiors, commercial venues, and luxury landscapes alike. Built to offer ultimate precision and artistic adaptability, the Slice brings a touch of sleek, contemporary elegance to any environment, proving that breathtaking design and exceptional style truly know no boundaries.\n",
       "product_images": [
-        "assets/img/products/recqeTGfdSLJHshOp_f3c233a749.jpg"
+        "assets/img/products/recqeTGfdSLJHshOp_06dd9d03f1.jpg"
       ],
       "product_dimension": "",
       "stocked_item": [
@@ -7418,13 +7482,13 @@ const AZOOGI_PRODUCTS = {
       ],
       "datasheet": "No",
       "technical_icons": [
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_ac9e593ffd.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_02ba02fe72.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_97ee773ffd.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_f642013e3d.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_6f4d56763f.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_7f0345aa99.svg",
-        "assets/img/icons/recN9v5UQTBluCeTK_icon_bee69a869c.svg"
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+        "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg",
+        "assets/img/icons/recN9v5UQTBluCeTK_icon_0d746f4fb8.svg"
       ],
       "meta_keywords": "Ultra-slim linear LED, Minimal profile neon, Top view bendable light, Free cut flexible ribbon, Sleek architectural lighting, Contemporary interior illumination",
       "supplier_name": "APO 10 FC",
@@ -7438,15 +7502,15 @@ const AZOOGI_PRODUCTS = {
           },
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           },
           {
             "value": "5700K",
@@ -7627,7 +7691,7 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Elevate your environment with a perfect blend of elegance and modern design, casting a warm, sophisticated glow that adds an unparalleled touch of ambiance and luxury.\n",
       "product_description": "Transform your spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your environment, casting a warm, sophisticated glow that effortlessly enhances the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and style to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
-        "assets/img/products/recqvzuqZCKIfSO11_0d1eb3d5c7.jpg"
+        "assets/img/products/recqvzuqZCKIfSO11_43eabe8290.jpg"
       ],
       "product_dimension": "",
       "stocked_item": [
@@ -7635,11 +7699,11 @@ const AZOOGI_PRODUCTS = {
       ],
       "datasheet": "Yes",
       "technical_icons": [
-        "assets/img/icons/recqvzuqZCKIfSO11_icon_c68bb85872.svg",
-        "assets/img/icons/recqvzuqZCKIfSO11_icon_2e24991c90.svg",
-        "assets/img/icons/recqvzuqZCKIfSO11_icon_33597f4592.svg",
-        "assets/img/icons/recqvzuqZCKIfSO11_icon_160e62bc0e.svg",
-        "assets/img/icons/recqvzuqZCKIfSO11_icon_6a769fbabf.svg"
+        "assets/img/icons/recqvzuqZCKIfSO11_icon_47fc667713.svg",
+        "assets/img/icons/recqvzuqZCKIfSO11_icon_daa0f773e7.svg",
+        "assets/img/icons/recqvzuqZCKIfSO11_icon_0b011afc7d.svg",
+        "assets/img/icons/recqvzuqZCKIfSO11_icon_0521f60de6.svg",
+        "assets/img/icons/recqvzuqZCKIfSO11_icon_efaf3d3fae.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
@@ -7745,15 +7809,15 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           }
         ],
         "Cut Interval": [
@@ -7873,15 +7937,15 @@ const AZOOGI_PRODUCTS = {
         "CCT": [
           {
             "value": "2700K",
-            "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
           },
           {
             "value": "3000K",
-            "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
           },
           {
             "value": "4000K",
-            "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+            "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
           }
         ],
         "Control Protocol": [
@@ -8042,19 +8106,19 @@ const AZOOGI_PRODUCTS = {
       "product_short_description": "Dive into an enchanting oasis of light and luxury. Elevate your retreat into a sophisticated, glowing sanctuary, adding breathtaking allure and serene ambiance to every evening.\n",
       "product_description": "Dive into an enchanting oasis of light and luxury with our premium illumination solution. Designed to effortlessly elevate your living experience, it bathes your retreat in a warm, sophisticated radiance that creates an unparalleled ambiance. Perfect for those with a discerning eye for discreet elegance, this seamless lighting design adds a breathtaking allure and a serene, captivating glow to every evening, turning any space into a welcoming sanctuary of modern style.\n",
       "product_images": [
-        "assets/img/products/recz0f8gzZkhCSMm0_15894159bc.jpg",
-        "assets/img/products/recz0f8gzZkhCSMm0_e38a94b1b1.jpg",
-        "assets/img/products/recz0f8gzZkhCSMm0_99551eb241.jpg"
+        "assets/img/products/recz0f8gzZkhCSMm0_9199277fca.jpg",
+        "assets/img/products/recz0f8gzZkhCSMm0_f4f3027141.jpg",
+        "assets/img/products/recz0f8gzZkhCSMm0_f25a27fc76.jpg"
       ],
       "product_dimension": [
-        "assets/img/products/recz0f8gzZkhCSMm0_dim_5a78263898.png"
+        "assets/img/products/recz0f8gzZkhCSMm0_dim_e3dbebe3e1.png"
       ],
       "stocked_item": [
         "In Stock"
       ],
       "datasheet": "No",
       "technical_icons": [
-        "assets/img/icons/recz0f8gzZkhCSMm0_icon_caf3298e17.svg"
+        "assets/img/icons/recz0f8gzZkhCSMm0_icon_9cea3cb0ea.svg"
       ],
       "meta_keywords": "",
       "supplier_name": "BAIWEI",
@@ -8064,7 +8128,7 @@ const AZOOGI_PRODUCTS = {
         "Finish": [
           {
             "value": "Silver",
-            "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+            "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
           }
         ],
         "Dimension": [
@@ -8109,6 +8173,260 @@ const AZOOGI_PRODUCTS = {
       "children": [
         {
           "type": "category",
+          "name": "Switchable Driver",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Switchable Driver",
+              "variants": {
+                "Switchable Driver": {
+                  "id": "recqvzuqZCKIfSO11",
+                  "product_name": "Switchable Driver",
+                  "category": "Switchable Driver",
+                  "sku": "ADR-S12V24V-20W",
+                  "product_short_description": "Elevate your environment with a perfect blend of elegance and modern design, casting a warm, sophisticated glow that adds an unparalleled touch of ambiance and luxury.\n",
+                  "product_description": "Transform your spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your environment, casting a warm, sophisticated glow that effortlessly enhances the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and style to any setting, making it the ultimate choice for elevated architectural illumination.\n",
+                  "product_images": [
+                    "assets/img/products/recqvzuqZCKIfSO11_43eabe8290.jpg"
+                  ],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    "In Stock"
+                  ],
+                  "datasheet": "Yes",
+                  "technical_icons": [
+                    "assets/img/icons/recqvzuqZCKIfSO11_icon_47fc667713.svg",
+                    "assets/img/icons/recqvzuqZCKIfSO11_icon_daa0f773e7.svg",
+                    "assets/img/icons/recqvzuqZCKIfSO11_icon_0b011afc7d.svg",
+                    "assets/img/icons/recqvzuqZCKIfSO11_icon_0521f60de6.svg",
+                    "assets/img/icons/recqvzuqZCKIfSO11_icon_efaf3d3fae.svg"
+                  ],
+                  "meta_keywords": "",
+                  "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Power": [
+                      {
+                        "value": "20W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "40W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "60W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "100W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "80W",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "12V/24V",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP20",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Voltage": [
+                      {
+                        "name": "12V/24V",
+                        "id": "101"
+                      }
+                    ],
+                    "Power": [
+                      {
+                        "name": "20W",
+                        "id": "102"
+                      },
+                      {
+                        "name": "40W",
+                        "id": "103"
+                      },
+                      {
+                        "name": "60W",
+                        "id": "104"
+                      },
+                      {
+                        "name": "80W",
+                        "id": "105"
+                      },
+                      {
+                        "name": "100W",
+                        "id": "106"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP20",
+                        "id": "107"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "Drivers",
+                    "Switchable Driver"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "name": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
+              "variants": {
+                "DALI-2 & PUSH 2 in 1 Dimmable Driver": {
+                  "id": "recFN63Od8jLncgeg",
+                  "product_name": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
+                  "category": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
+                  "sku": "ADR005DA",
+                  "product_short_description": "Transform your space with elegant design and discreet luxury. Enjoy a sophisticated, seamless glow that brings your vision to life and makes every moment feel truly magical.\n",
+                  "product_description": "Elevate your spaces into a breathtaking visual journey of elegant design and discreet luxury with a sophisticated, seamless glow. This premium dimmable driver offers the perfect blend of modern innovation and refined elegance, effortlessly transforming your environment into a warm, welcoming retreat. Designed for those who appreciate flawless execution and an unparalleled touch of ambiance, it beautifully highlights your architecture to create a captivating and serene atmosphere. Unwind in the stunning, soft illumination that brings your vision to life and makes every evening feel truly magical.\n",
+                  "product_images": [
+                    "assets/img/products/recFN63Od8jLncgeg_600aeca872.jpg"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/recFN63Od8jLncgeg_dim_f11269ce6b.jpg"
+                  ],
+                  "stocked_item": [
+                    "In Stock"
+                  ],
+                  "datasheet": "Yes",
+                  "technical_icons": [
+                    "assets/img/icons/recFN63Od8jLncgeg_icon_f21f79cb88.svg",
+                    "assets/img/icons/recFN63Od8jLncgeg_icon_a373ec2ab7.svg",
+                    "assets/img/icons/recFN63Od8jLncgeg_icon_cf740dd52d.svg",
+                    "assets/img/icons/recFN63Od8jLncgeg_icon_1ad12c5104.svg",
+                    "assets/img/icons/recFN63Od8jLncgeg_icon_5373322a70.svg"
+                  ],
+                  "meta_keywords": "",
+                  "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "IP Rating": [
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
+                    "Power": [
+                      {
+                        "value": "60W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "100W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "150W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "200W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "300W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "360W",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "12V",
+                        "icon": ""
+                      },
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "60W",
+                        "id": "101"
+                      },
+                      {
+                        "name": "100W",
+                        "id": "102"
+                      },
+                      {
+                        "name": "150W",
+                        "id": "103"
+                      },
+                      {
+                        "name": "200W",
+                        "id": "104"
+                      },
+                      {
+                        "name": "300W",
+                        "id": "105"
+                      },
+                      {
+                        "name": "360W",
+                        "id": "106"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "12V",
+                        "id": "107"
+                      },
+                      {
+                        "name": "24V",
+                        "id": "108"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP67",
+                        "id": "109"
+                      }
+                    ]
+                  },
+                  "constraints": {
+                    "106": [
+                      "107"
+                    ]
+                  },
+                  "category_path": [
+                    "Drivers",
+                    "DALI-2 & PUSH 2 in 1 Dimmable Driver"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
           "name": "5-in-1 Dimming Driver",
           "children": [
             {
@@ -8123,21 +8441,21 @@ const AZOOGI_PRODUCTS = {
                   "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
                   "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
                   "product_images": [
-                    "assets/img/products/rec2Wd9mV8ibXiAnL_7be1c2dfb6.jpg"
+                    "assets/img/products/rec2Wd9mV8ibXiAnL_470cf3de41.jpg"
                   ],
                   "product_dimension": [
-                    "assets/img/products/rec2Wd9mV8ibXiAnL_dim_43bcced7cd.jpg"
+                    "assets/img/products/rec2Wd9mV8ibXiAnL_dim_00e5ef8f27.jpg"
                   ],
                   "stocked_item": [
                     "In Stock"
                   ],
                   "datasheet": "Yes",
                   "technical_icons": [
-                    "assets/img/icons/rec2Wd9mV8ibXiAnL_icon_0e9b381ac3.svg",
-                    "assets/img/icons/rec2Wd9mV8ibXiAnL_icon_b72cf85d88.svg",
-                    "assets/img/icons/rec2Wd9mV8ibXiAnL_icon_70422e0f1a.svg",
-                    "assets/img/icons/rec2Wd9mV8ibXiAnL_icon_17b903245c.svg",
-                    "assets/img/icons/rec2Wd9mV8ibXiAnL_icon_81e413346b.svg"
+                    "assets/img/icons/rec2Wd9mV8ibXiAnL_icon_86a83e297e.svg",
+                    "assets/img/icons/rec2Wd9mV8ibXiAnL_icon_c86775121f.svg",
+                    "assets/img/icons/rec2Wd9mV8ibXiAnL_icon_dd7603e1d7.svg",
+                    "assets/img/icons/rec2Wd9mV8ibXiAnL_icon_d642ffc8ac.svg",
+                    "assets/img/icons/rec2Wd9mV8ibXiAnL_icon_c4d82c7819.svg"
                   ],
                   "meta_keywords": "",
                   "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
@@ -8303,260 +8621,6 @@ const AZOOGI_PRODUCTS = {
         },
         {
           "type": "category",
-          "name": "Switchable Driver",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "Switchable Driver",
-              "variants": {
-                "Switchable Driver": {
-                  "id": "recqvzuqZCKIfSO11",
-                  "product_name": "Switchable Driver",
-                  "category": "Switchable Driver",
-                  "sku": "ADR-S12V24V-20W",
-                  "product_short_description": "Elevate your environment with a perfect blend of elegance and modern design, casting a warm, sophisticated glow that adds an unparalleled touch of ambiance and luxury.\n",
-                  "product_description": "Transform your spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your environment, casting a warm, sophisticated glow that effortlessly enhances the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and style to any setting, making it the ultimate choice for elevated architectural illumination.\n",
-                  "product_images": [
-                    "assets/img/products/recqvzuqZCKIfSO11_0d1eb3d5c7.jpg"
-                  ],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    "In Stock"
-                  ],
-                  "datasheet": "Yes",
-                  "technical_icons": [
-                    "assets/img/icons/recqvzuqZCKIfSO11_icon_c68bb85872.svg",
-                    "assets/img/icons/recqvzuqZCKIfSO11_icon_2e24991c90.svg",
-                    "assets/img/icons/recqvzuqZCKIfSO11_icon_33597f4592.svg",
-                    "assets/img/icons/recqvzuqZCKIfSO11_icon_160e62bc0e.svg",
-                    "assets/img/icons/recqvzuqZCKIfSO11_icon_6a769fbabf.svg"
-                  ],
-                  "meta_keywords": "",
-                  "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Power": [
-                      {
-                        "value": "20W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "40W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "60W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "100W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "80W",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "12V/24V",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP20",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Voltage": [
-                      {
-                        "name": "12V/24V",
-                        "id": "101"
-                      }
-                    ],
-                    "Power": [
-                      {
-                        "name": "20W",
-                        "id": "102"
-                      },
-                      {
-                        "name": "40W",
-                        "id": "103"
-                      },
-                      {
-                        "name": "60W",
-                        "id": "104"
-                      },
-                      {
-                        "name": "80W",
-                        "id": "105"
-                      },
-                      {
-                        "name": "100W",
-                        "id": "106"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP20",
-                        "id": "107"
-                      }
-                    ]
-                  },
-                  "constraints": [],
-                  "category_path": [
-                    "Drivers",
-                    "Switchable Driver"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
-          "name": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
-              "variants": {
-                "DALI-2 & PUSH 2 in 1 Dimmable Driver": {
-                  "id": "recFN63Od8jLncgeg",
-                  "product_name": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
-                  "category": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
-                  "sku": "ADR005DA",
-                  "product_short_description": "Transform your space with elegant design and discreet luxury. Enjoy a sophisticated, seamless glow that brings your vision to life and makes every moment feel truly magical.\n",
-                  "product_description": "Elevate your spaces into a breathtaking visual journey of elegant design and discreet luxury with a sophisticated, seamless glow. This premium dimmable driver offers the perfect blend of modern innovation and refined elegance, effortlessly transforming your environment into a warm, welcoming retreat. Designed for those who appreciate flawless execution and an unparalleled touch of ambiance, it beautifully highlights your architecture to create a captivating and serene atmosphere. Unwind in the stunning, soft illumination that brings your vision to life and makes every evening feel truly magical.\n",
-                  "product_images": [
-                    "assets/img/products/recFN63Od8jLncgeg_8fb7e900b7.jpg"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/recFN63Od8jLncgeg_dim_86584917aa.jpg"
-                  ],
-                  "stocked_item": [
-                    "In Stock"
-                  ],
-                  "datasheet": "Yes",
-                  "technical_icons": [
-                    "assets/img/icons/recFN63Od8jLncgeg_icon_e1a36ee3d1.svg",
-                    "assets/img/icons/recFN63Od8jLncgeg_icon_2701f5174b.svg",
-                    "assets/img/icons/recFN63Od8jLncgeg_icon_ee2343a68f.svg",
-                    "assets/img/icons/recFN63Od8jLncgeg_icon_9d6f225f6d.svg",
-                    "assets/img/icons/recFN63Od8jLncgeg_icon_8eebfde61a.svg"
-                  ],
-                  "meta_keywords": "",
-                  "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "IP Rating": [
-                      {
-                        "value": "IP67",
-                        "icon": ""
-                      }
-                    ],
-                    "Power": [
-                      {
-                        "value": "60W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "100W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "150W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "200W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "300W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "360W",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "12V",
-                        "icon": ""
-                      },
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power": [
-                      {
-                        "name": "60W",
-                        "id": "101"
-                      },
-                      {
-                        "name": "100W",
-                        "id": "102"
-                      },
-                      {
-                        "name": "150W",
-                        "id": "103"
-                      },
-                      {
-                        "name": "200W",
-                        "id": "104"
-                      },
-                      {
-                        "name": "300W",
-                        "id": "105"
-                      },
-                      {
-                        "name": "360W",
-                        "id": "106"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "12V",
-                        "id": "107"
-                      },
-                      {
-                        "name": "24V",
-                        "id": "108"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP67",
-                        "id": "109"
-                      }
-                    ]
-                  },
-                  "constraints": {
-                    "106": [
-                      "107"
-                    ]
-                  },
-                  "category_path": [
-                    "Drivers",
-                    "DALI-2 & PUSH 2 in 1 Dimmable Driver"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
           "name": "Non-Dimmable Driver",
           "children": [
             {
@@ -8571,20 +8635,20 @@ const AZOOGI_PRODUCTS = {
                   "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
                   "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
                   "product_images": [
-                    "assets/img/products/reciwSxR6ltI67o0O_56f0e802ed.jpg"
+                    "assets/img/products/reciwSxR6ltI67o0O_5a6c1a0256.jpg"
                   ],
                   "product_dimension": [
-                    "assets/img/products/reciwSxR6ltI67o0O_dim_75ddf826d1.jpg"
+                    "assets/img/products/reciwSxR6ltI67o0O_dim_7d1d8203a5.jpg"
                   ],
                   "stocked_item": [
                     "In Stock"
                   ],
                   "datasheet": "Yes",
                   "technical_icons": [
-                    "assets/img/icons/reciwSxR6ltI67o0O_icon_2a1803b3dc.svg",
-                    "assets/img/icons/reciwSxR6ltI67o0O_icon_49825ff7f7.svg",
-                    "assets/img/icons/reciwSxR6ltI67o0O_icon_beda397d8d.svg",
-                    "assets/img/icons/reciwSxR6ltI67o0O_icon_ab59177278.svg"
+                    "assets/img/icons/reciwSxR6ltI67o0O_icon_ef9bfbc35f.svg",
+                    "assets/img/icons/reciwSxR6ltI67o0O_icon_f258a3dffb.svg",
+                    "assets/img/icons/reciwSxR6ltI67o0O_icon_086baca345.svg",
+                    "assets/img/icons/reciwSxR6ltI67o0O_icon_fb2033dd11.svg"
                   ],
                   "meta_keywords": "",
                   "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
@@ -8730,17 +8794,17 @@ const AZOOGI_PRODUCTS = {
               "product_short_description": "Elevate your space with this minimalist lighting masterpiece, blending modern luxury and understated elegance to cast a soft, sophisticated glow throughout your home.\n",
               "product_description": "Elevate your interior design to a work of art with this stunning, minimalist lighting masterpiece. Perfectly bridging the gap between modern luxury and understated elegance, it casts a soft, sophisticated wash of light that highlights the beautiful lines of your home. Crafted for those who appreciate refined detail and discreet luxury, it seamlessly integrates into any setting, creating an inviting atmosphere of warmth, comfort, and captivating beauty. Turn an ordinary space into an unforgettable visual journey and let your home shine with a timeless, modern glow.\n",
               "product_images": [
-                "assets/img/products/rec1i5ej70yGeOWdc_af1224ed5b.jpg"
+                "assets/img/products/rec1i5ej70yGeOWdc_5dec90a636.jpg"
               ],
               "product_dimension": [
-                "assets/img/products/rec1i5ej70yGeOWdc_dim_1022f53dd0.jpg"
+                "assets/img/products/rec1i5ej70yGeOWdc_dim_b75cff4396.jpg"
               ],
               "stocked_item": [
                 "In Stock"
               ],
               "datasheet": "Yes",
               "technical_icons": [
-                "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+                "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
               ],
               "meta_keywords": "",
               "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -8756,7 +8820,7 @@ const AZOOGI_PRODUCTS = {
                 "Finish": [
                   {
                     "value": "Silver",
-                    "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
                   }
                 ]
               },
@@ -8799,7 +8863,7 @@ const AZOOGI_PRODUCTS = {
               ],
               "datasheet": "No",
               "technical_icons": [
-                "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+                "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
               ],
               "meta_keywords": "",
               "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -8815,7 +8879,7 @@ const AZOOGI_PRODUCTS = {
                 "Finish": [
                   {
                     "value": "Silver",
-                    "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
                   }
                 ]
               },
@@ -8852,17 +8916,17 @@ const AZOOGI_PRODUCTS = {
               "product_short_description": "Transform your living spaces with a blend of elegance and modern design, casting a warm, sophisticated glow that effortlessly enhances your home with discreet luxury.\n",
               "product_description": "Transform your living spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your home, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
               "product_images": [
-                "assets/img/products/rec79152JdanZA4Pi_1c5f103141.jpg"
+                "assets/img/products/rec79152JdanZA4Pi_e2e8aeb1c5.jpg"
               ],
               "product_dimension": [
-                "assets/img/products/rec79152JdanZA4Pi_dim_2babd9a14c.jpg"
+                "assets/img/products/rec79152JdanZA4Pi_dim_a6fad4d8af.jpg"
               ],
               "stocked_item": [
                 "In Stock"
               ],
               "datasheet": "Yes",
               "technical_icons": [
-                "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+                "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
               ],
               "meta_keywords": "",
               "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -8882,15 +8946,15 @@ const AZOOGI_PRODUCTS = {
                 "Finish": [
                   {
                     "value": "Silver",
-                    "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
                   },
                   {
                     "value": "Black",
-                    "icon": "assets/img/attribute_icon/attr_finish_black_e7cc03ec10.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_black_e2b08b6736.svg"
                   },
                   {
                     "value": "White",
-                    "icon": "assets/img/attribute_icon/attr_finish_white_5bc13290f4.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_white_910aa86073.svg"
                   }
                 ]
               },
@@ -8939,17 +9003,17 @@ const AZOOGI_PRODUCTS = {
               "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
               "product_description": "Transform your living spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your home, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
               "product_images": [
-                "assets/img/products/recAeMzYUBC4qkQND_16e3a56a84.jpg"
+                "assets/img/products/recAeMzYUBC4qkQND_6d45a65fc2.jpg"
               ],
               "product_dimension": [
-                "assets/img/products/recAeMzYUBC4qkQND_dim_f3ce5bc32c.jpg"
+                "assets/img/products/recAeMzYUBC4qkQND_dim_2c91c9f25b.jpg"
               ],
               "stocked_item": [
                 "In Stock"
               ],
               "datasheet": "No",
               "technical_icons": [
-                "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+                "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
               ],
               "meta_keywords": "",
               "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -8969,15 +9033,15 @@ const AZOOGI_PRODUCTS = {
                 "Finish": [
                   {
                     "value": "Silver",
-                    "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
                   },
                   {
                     "value": "Black",
-                    "icon": "assets/img/attribute_icon/attr_finish_black_e7cc03ec10.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_black_e2b08b6736.svg"
                   },
                   {
                     "value": "White",
-                    "icon": "assets/img/attribute_icon/attr_finish_white_5bc13290f4.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_white_910aa86073.svg"
                   }
                 ]
               },
@@ -9031,17 +9095,17 @@ const AZOOGI_PRODUCTS = {
               "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
               "product_description": "Transform your living spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your home, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
               "product_images": [
-                "assets/img/products/recGRUtM95iegZOho_455cd1743c.jpg"
+                "assets/img/products/recGRUtM95iegZOho_0d60624ab7.jpg"
               ],
               "product_dimension": [
-                "assets/img/products/recGRUtM95iegZOho_dim_27ac3bf416.jpg"
+                "assets/img/products/recGRUtM95iegZOho_dim_77dd1e45c2.jpg"
               ],
               "stocked_item": [
                 "In Stock"
               ],
               "datasheet": "Yes",
               "technical_icons": [
-                "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+                "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
               ],
               "meta_keywords": "",
               "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -9057,15 +9121,15 @@ const AZOOGI_PRODUCTS = {
                 "Finish": [
                   {
                     "value": "Silver",
-                    "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
                   },
                   {
                     "value": "Black",
-                    "icon": "assets/img/attribute_icon/attr_finish_black_e7cc03ec10.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_black_e2b08b6736.svg"
                   },
                   {
                     "value": "White",
-                    "icon": "assets/img/attribute_icon/attr_finish_white_5bc13290f4.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_white_910aa86073.svg"
                   }
                 ]
               },
@@ -9116,7 +9180,7 @@ const AZOOGI_PRODUCTS = {
               ],
               "datasheet": "No",
               "technical_icons": [
-                "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+                "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
               ],
               "meta_keywords": "",
               "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -9136,7 +9200,7 @@ const AZOOGI_PRODUCTS = {
                 "Finish": [
                   {
                     "value": "Silver",
-                    "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
                   }
                 ]
               },
@@ -9177,17 +9241,17 @@ const AZOOGI_PRODUCTS = {
               "product_short_description": "Unleash your ultimate design freedom with fluid artistic expression. This bendable masterpiece contours to unique visions, casting a sophisticated glow around creative curves.\n",
               "product_description": "Transform your spaces with the ultimate freedom of design and fluid artistic expression. This premium bendable lighting solution contours effortlessly to your unique architectural visions, casting a seamless, sophisticated glow around smooth curves and creative transitions. Crafted for those who appreciate understated luxury and dynamic innovation, it elevates any interior into a captivating visual journey, bringing flawless ambiance and modern elegance to the most imaginative layouts.\n",
               "product_images": [
-                "assets/img/products/recK9afZ0lmkzBJU0_1625749977.jpg"
+                "assets/img/products/recK9afZ0lmkzBJU0_9d81131cfd.jpg"
               ],
               "product_dimension": [
-                "assets/img/products/recK9afZ0lmkzBJU0_dim_9c4e8b025a.jpg"
+                "assets/img/products/recK9afZ0lmkzBJU0_dim_c2e364172f.jpg"
               ],
               "stocked_item": [
                 "In Stock"
               ],
               "datasheet": "Yes",
               "technical_icons": [
-                "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+                "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
               ],
               "meta_keywords": "",
               "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -9203,7 +9267,7 @@ const AZOOGI_PRODUCTS = {
                 "Finish": [
                   {
                     "value": "Silver",
-                    "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
                   }
                 ]
               },
@@ -9240,17 +9304,17 @@ const AZOOGI_PRODUCTS = {
               "product_short_description": "Elevate your architecture with flawless, minimalist design, creating a seamless aesthetic where the pure beauty of light takes center stage.\n",
               "product_description": "Transform your living spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium architectural lighting solution offers seamless integration into your walls and ceilings, creating a flawless, minimalist aesthetic where the pure beauty of light takes center stage. Crafted for those who appreciate refined detail and discreet luxury, it casts a warm, sophisticated glow that effortlessly enhances the natural beauty of your architecture, making it the ultimate choice for elevated interior illumination.\n",
               "product_images": [
-                "assets/img/products/recKMzOquNFyLpVj6_a7d917aa41.jpg"
+                "assets/img/products/recKMzOquNFyLpVj6_482998fa2a.jpg"
               ],
               "product_dimension": [
-                "assets/img/products/recKMzOquNFyLpVj6_dim_cf90309289.jpg"
+                "assets/img/products/recKMzOquNFyLpVj6_dim_30f0704941.jpg"
               ],
               "stocked_item": [
                 "In Stock"
               ],
               "datasheet": "Yes",
               "technical_icons": [
-                "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+                "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
               ],
               "meta_keywords": "",
               "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -9266,7 +9330,7 @@ const AZOOGI_PRODUCTS = {
                 "Finish": [
                   {
                     "value": "Silver",
-                    "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
                   }
                 ]
               },
@@ -9303,17 +9367,17 @@ const AZOOGI_PRODUCTS = {
               "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
               "product_description": "Elevate your architectural spaces with a perfect blend of elegance and modern design. This premium lighting solution offers a seamless, trimless integration into your walls, casting a sophisticated wash of light that beautifully highlights the natural beauty of your home. Crafted for those who appreciate refined detail and discreet luxury, it creates a captivating ambiance and unmatched warmth, making it the ultimate choice for sophisticated interior illumination.\n",
               "product_images": [
-                "assets/img/products/recN7sVKoqad0ib7p_e3d2fac497.jpg"
+                "assets/img/products/recN7sVKoqad0ib7p_f43dacc04b.jpg"
               ],
               "product_dimension": [
-                "assets/img/products/recN7sVKoqad0ib7p_dim_339a78b223.jpg"
+                "assets/img/products/recN7sVKoqad0ib7p_dim_c220752b09.jpg"
               ],
               "stocked_item": [
                 "In Stock"
               ],
               "datasheet": "No",
               "technical_icons": [
-                "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+                "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
               ],
               "meta_keywords": "",
               "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -9329,7 +9393,7 @@ const AZOOGI_PRODUCTS = {
                 "Finish": [
                   {
                     "value": "White",
-                    "icon": "assets/img/attribute_icon/attr_finish_white_5bc13290f4.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_white_910aa86073.svg"
                   }
                 ]
               },
@@ -9366,17 +9430,17 @@ const AZOOGI_PRODUCTS = {
               "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
               "product_description": "Elevate your architectural landscape with a lighting solution that merges sophisticated design with timeless elegance. Perfect for creating dramatic visual interest or providing seamless ambiance, this premium fixture effortlessly integrates into any modern space. Crafted for those with an eye for refined detail, it casts a warm, inviting glow that enhances the innate beauty of your home while introducing a sense of discreet luxury and captivating warmth to your surroundings.\n",
               "product_images": [
-                "assets/img/products/recX6yVyt9eiLDvmh_7013d57265.jpg"
+                "assets/img/products/recX6yVyt9eiLDvmh_7023a738bc.jpg"
               ],
               "product_dimension": [
-                "assets/img/products/recX6yVyt9eiLDvmh_dim_843ccf5da0.jpg"
+                "assets/img/products/recX6yVyt9eiLDvmh_dim_1f6d14c15a.jpg"
               ],
               "stocked_item": [
                 "In Stock"
               ],
               "datasheet": "Yes",
               "technical_icons": [
-                "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+                "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
               ],
               "meta_keywords": "",
               "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -9400,15 +9464,15 @@ const AZOOGI_PRODUCTS = {
                 "Finish": [
                   {
                     "value": "Silver",
-                    "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
                   },
                   {
                     "value": "White",
-                    "icon": "assets/img/attribute_icon/attr_finish_white_5bc13290f4.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_white_910aa86073.svg"
                   },
                   {
                     "value": "Black",
-                    "icon": "assets/img/attribute_icon/attr_finish_black_e7cc03ec10.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_black_e2b08b6736.svg"
                   }
                 ]
               },
@@ -9432,17 +9496,17 @@ const AZOOGI_PRODUCTS = {
               "product_short_description": "Elevate your space with a seamless, sophisticated glow that enhances your architecture with discreet luxury.\n",
               "product_description": "Transform your living spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium architectural lighting solution offers seamless integration into your walls and ceilings, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated and serene illumination.\n",
               "product_images": [
-                "assets/img/products/recYdDyknt1HSzIXf_ea7086e113.jpg"
+                "assets/img/products/recYdDyknt1HSzIXf_23d98c68b1.jpg"
               ],
               "product_dimension": [
-                "assets/img/products/recYdDyknt1HSzIXf_dim_3186c59910.jpg"
+                "assets/img/products/recYdDyknt1HSzIXf_dim_10f436098c.jpg"
               ],
               "stocked_item": [
                 "In Stock"
               ],
               "datasheet": "Yes",
               "technical_icons": [
-                "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+                "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
               ],
               "meta_keywords": "",
               "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -9458,7 +9522,7 @@ const AZOOGI_PRODUCTS = {
                 "Finish": [
                   {
                     "value": "White",
-                    "icon": "assets/img/attribute_icon/attr_finish_white_5bc13290f4.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_white_910aa86073.svg"
                   }
                 ]
               },
@@ -9495,20 +9559,20 @@ const AZOOGI_PRODUCTS = {
               "product_short_description": "Transform your home into a breathtaking visual journey. Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.\n",
               "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
               "product_images": [
-                "assets/img/products/recfKARqbTPcAwrrf_d42f5d431a.jpg",
-                "assets/img/products/recfKARqbTPcAwrrf_eb6c58de06.jpg",
-                "assets/img/products/recfKARqbTPcAwrrf_606bf433bd.jpg"
+                "assets/img/products/recfKARqbTPcAwrrf_6c4b0d52a6.jpg",
+                "assets/img/products/recfKARqbTPcAwrrf_79dabf6ad5.jpg",
+                "assets/img/products/recfKARqbTPcAwrrf_ad6efed573.jpg"
               ],
               "product_dimension": [
-                "assets/img/products/recfKARqbTPcAwrrf_dim_f752dcfcd7.png"
+                "assets/img/products/recfKARqbTPcAwrrf_dim_314b829679.png"
               ],
               "stocked_item": [
                 "4-6 Weeks"
               ],
               "datasheet": "No",
               "technical_icons": [
-                "assets/img/icons/recPcYiIIV8VLqru4_icon_314b4813a4.svg",
-                "assets/img/icons/recGgRF6gZMVCo6qY_icon_df83f4a03d.svg"
+                "assets/img/icons/recPcYiIIV8VLqru4_icon_96dea8e1e0.svg",
+                "assets/img/icons/recGgRF6gZMVCo6qY_icon_392affd361.svg"
               ],
               "meta_keywords": "aluminium profile, aluminum extrusion, t-slot aluminum profile, v-slot aluminum profile, structural aluminum tubing, aluminum channel, aluminum angle",
               "supplier_name": "BAIWEI",
@@ -9590,7 +9654,7 @@ const AZOOGI_PRODUCTS = {
                 "Finish": [
                   {
                     "value": "Silver",
-                    "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
                   }
                 ]
               },
@@ -9753,17 +9817,17 @@ const AZOOGI_PRODUCTS = {
               "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
               "product_description": "Transform your living spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your home, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
               "product_images": [
-                "assets/img/products/recgJQ1rfbq0UP4oW_0d244648df.jpg"
+                "assets/img/products/recgJQ1rfbq0UP4oW_456684f720.jpg"
               ],
               "product_dimension": [
-                "assets/img/products/recgJQ1rfbq0UP4oW_dim_ff4609d0a8.jpg"
+                "assets/img/products/recgJQ1rfbq0UP4oW_dim_65f2479900.jpg"
               ],
               "stocked_item": [
                 "In Stock"
               ],
               "datasheet": "Yes",
               "technical_icons": [
-                "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+                "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
               ],
               "meta_keywords": "",
               "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -9791,15 +9855,15 @@ const AZOOGI_PRODUCTS = {
                 "Finish": [
                   {
                     "value": "Silver",
-                    "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
                   },
                   {
                     "value": "Black",
-                    "icon": "assets/img/attribute_icon/attr_finish_black_e7cc03ec10.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_black_e2b08b6736.svg"
                   },
                   {
                     "value": "White",
-                    "icon": "assets/img/attribute_icon/attr_finish_white_5bc13290f4.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_white_910aa86073.svg"
                   }
                 ]
               },
@@ -9861,17 +9925,17 @@ const AZOOGI_PRODUCTS = {
               "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
               "product_description": "Transform your living spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your home, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
               "product_images": [
-                "assets/img/products/recl5OARu2CB07dps_d0bcca29b9.jpg"
+                "assets/img/products/recl5OARu2CB07dps_5cffb8601d.jpg"
               ],
               "product_dimension": [
-                "assets/img/products/recl5OARu2CB07dps_dim_4d448da338.jpg"
+                "assets/img/products/recl5OARu2CB07dps_dim_a103f0592f.jpg"
               ],
               "stocked_item": [
                 "In Stock"
               ],
               "datasheet": "No",
               "technical_icons": [
-                "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+                "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
               ],
               "meta_keywords": "",
               "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -9891,7 +9955,7 @@ const AZOOGI_PRODUCTS = {
                 "Finish": [
                   {
                     "value": "Silver",
-                    "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
                   }
                 ]
               },
@@ -9938,7 +10002,7 @@ const AZOOGI_PRODUCTS = {
               ],
               "datasheet": "Yes",
               "technical_icons": [
-                "assets/img/icons/rec1i5ej70yGeOWdc_icon_5a3c3be012.svg"
+                "assets/img/icons/rec1i5ej70yGeOWdc_icon_ca373d7e05.svg"
               ],
               "meta_keywords": "",
               "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
@@ -9954,7 +10018,7 @@ const AZOOGI_PRODUCTS = {
                 "Finish": [
                   {
                     "value": "Silver",
-                    "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
                   }
                 ]
               },
@@ -9991,19 +10055,19 @@ const AZOOGI_PRODUCTS = {
               "product_short_description": "Dive into an enchanting oasis of light and luxury. Elevate your retreat into a sophisticated, glowing sanctuary, adding breathtaking allure and serene ambiance to every evening.\n",
               "product_description": "Dive into an enchanting oasis of light and luxury with our premium illumination solution. Designed to effortlessly elevate your living experience, it bathes your retreat in a warm, sophisticated radiance that creates an unparalleled ambiance. Perfect for those with a discerning eye for discreet elegance, this seamless lighting design adds a breathtaking allure and a serene, captivating glow to every evening, turning any space into a welcoming sanctuary of modern style.\n",
               "product_images": [
-                "assets/img/products/recz0f8gzZkhCSMm0_15894159bc.jpg",
-                "assets/img/products/recz0f8gzZkhCSMm0_e38a94b1b1.jpg",
-                "assets/img/products/recz0f8gzZkhCSMm0_99551eb241.jpg"
+                "assets/img/products/recz0f8gzZkhCSMm0_9199277fca.jpg",
+                "assets/img/products/recz0f8gzZkhCSMm0_f4f3027141.jpg",
+                "assets/img/products/recz0f8gzZkhCSMm0_f25a27fc76.jpg"
               ],
               "product_dimension": [
-                "assets/img/products/recz0f8gzZkhCSMm0_dim_5a78263898.png"
+                "assets/img/products/recz0f8gzZkhCSMm0_dim_e3dbebe3e1.png"
               ],
               "stocked_item": [
                 "In Stock"
               ],
               "datasheet": "No",
               "technical_icons": [
-                "assets/img/icons/recz0f8gzZkhCSMm0_icon_caf3298e17.svg"
+                "assets/img/icons/recz0f8gzZkhCSMm0_icon_9cea3cb0ea.svg"
               ],
               "meta_keywords": "",
               "supplier_name": "BAIWEI",
@@ -10013,7 +10077,7 @@ const AZOOGI_PRODUCTS = {
                 "Finish": [
                   {
                     "value": "Silver",
-                    "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
+                    "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
                   }
                 ],
                 "Dimension": [
@@ -10060,834 +10124,6 @@ const AZOOGI_PRODUCTS = {
       "children": [
         {
           "type": "category",
-          "name": "3D",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "Free Cut 3D Bend Neon (16mm x 17mm)",
-              "variants": {
-                "Free Cut 3D Bend Neon (16mm x 17mm)": {
-                  "id": "rec3bhuvjwMrtupth",
-                  "product_name": "Free Cut 3D Bend Neon (16mm x 17mm)",
-                  "category": "3D",
-                  "sku": "3D1617-10W-2.7K-IP67-FC",
-                  "product_short_description": "Sculpt light without limits using Free Cut 3D Bend Neon. Effortlessly bend in all directions to wrap your space in pure, flawless aesthetic elegance and bold artistic style.\n",
-                  "product_description": "Experience a new dimension of design freedom with the Free Cut 3D Bend Neon. This revolutionary linear lighting masterpiece bends effortlessly in all directions, allowing you to sculpt light around complex architecture, dramatic contours, and fluid custom shapes without limits. Perfect for creating unforgettable statements in luxury commercial spaces or premium modern venues, it delivers a flawless, completely uniform radiance that wraps your environment in pure aesthetic elegance. Striking the perfect balance between artistic versatility and bold visual impact, this stunning accent solution is crafted for visionary designers looking to bring their most imaginative concepts to life with absolute grace and sophistication.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "3D bend neon, Free cut LED, Flexible linear lighting, Omnidirectional bend light, Architectural sculpture illumination, Premium commercial neon",
-                  "supplier_name": "AIR 1617 WHT",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
-                      },
-                      {
-                        "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
-                      }
-                    ],
-                    "Cut Interval": [
-                      {
-                        "value": "Free Cut",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "16mm (W) x 17mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP67",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "10W/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "value": "Max 4,000mm (L)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "10W/m",
-                        "id": "101"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "2700K",
-                        "id": "102"
-                      },
-                      {
-                        "name": "3000K",
-                        "id": "103"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "104"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "105"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP67",
-                        "id": "106"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "16mm (W) x 17mm (H)",
-                        "id": "107"
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "name": "Max 4,000mm (L)",
-                        "id": "108"
-                      }
-                    ],
-                    "Cut Interval": [
-                      {
-                        "name": "Free Cut",
-                        "id": "109"
-                      }
-                    ]
-                  },
-                  "constraints": [],
-                  "category_path": [
-                    "NEON",
-                    "3D"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Dual Colour 3D Bend Neon (16mm x 17mm)",
-              "variants": {
-                "Dual Colour 3D Bend Neon (16mm x 17mm)": {
-                  "id": "recE0hOvx9k6ktiox",
-                  "product_name": "Dual Colour 3D Bend Neon (16mm x 17mm)",
-                  "category": "3D",
-                  "sku": "3D1617-10W-2.7-3K-IP67",
-                  "product_short_description": "Experience ultimate design freedom with the Dual Colour 3D Bend Neon, flowing effortlessly around complex contours to bring fluid brilliance and modern luxury to your vision.\n",
-                  "product_description": "Experience the pinnacle of design freedom with the Dual Colour 3D Bend Neon, a premium linear lighting masterpiece crafted to bring dynamic sophistication and seamless radiance to your most ambitious spaces. Engineered for multi-directional flexibility, this luxurious neon-style solution flows effortlessly around complex contours to create striking architectural statements and captivating visual depth. Perfect for transforming high-end environments into immersive sensory experiences, its elegant and fluid brilliance brings a breath of modern luxury to any design vision, making it the ultimate choice for those who dare to inspire.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "3D bend neon, Dual color LED, Architectural contour lighting, Flexible linear light, IP67 waterproof ribbon, Multi-directional flex strip",
-                  "supplier_name": "AIR 1617 CS",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Dimension": [
-                      {
-                        "value": "16mm (W) x 17mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP67",
-                        "icon": ""
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "value": "Max 5,000mm (L)",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "10W/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "value": "2700K & 3000K",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "10W/m",
-                        "id": "101"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "2700K & 3000K",
-                        "id": "102"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "103"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP67",
-                        "id": "104"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "16mm (W) x 17mm (H)",
-                        "id": "105"
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "name": "Max 5,000mm (L)",
-                        "id": "106"
-                      }
-                    ]
-                  },
-                  "constraints": [],
-                  "category_path": [
-                    "NEON",
-                    "3D"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Long Run 3D Bend Neon (16mm x 17mm)",
-              "variants": {
-                "Long Run 3D Bend Neon (16mm x 17mm)": {
-                  "id": "recR2ljdy4FTUgqYB",
-                  "product_name": "Long Run 3D Bend Neon (16mm x 17mm)",
-                  "category": "3D",
-                  "sku": "3D1617-10W-2.7K-IP68-SLR",
-                  "product_short_description": "Transform your space with Long Run 3D Bend Neon, crafting a flawless, multi-dimensional glow that brings ultimate design freedom and fluid elegance to any environment.\n",
-                  "product_description": "Transform your architectural visions with the Long Run 3D Bend Neon, a premium linear lighting solution crafted to bring multi-directional flexibility and captivating elegance to any environment. Engineered to curve effortlessly in three dimensions, this luxurious neon-style light offers ultimate design freedom, allowing you to accentuate complex contours and create breathtaking visual statements. Its flawless, uniform glow delivers an unmatched aesthetic elegance, making it the perfect choice for transforming sophisticated spaces and adding a seamless, fluid brilliance that captivates and inspires.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "3D bend neon, Multi-directional LED, Waterproof light ribbon, Flexible architectural lighting, Long run linear LED, Premium contour illumination",
-                  "supplier_name": "AXE 1617 SL WHT",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
-                      },
-                      {
-                        "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "16mm (W) x 17mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP68",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "10W/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "value": "Max 40,000mm (L)",
-                        "icon": ""
-                      }
-                    ],
-                    "Light Color": [
-                      {
-                        "value": "RED",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "10W/m",
-                        "id": "101"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "2700K",
-                        "id": "102"
-                      },
-                      {
-                        "name": "3000K",
-                        "id": "103"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "104"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "105"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP68",
-                        "id": "106"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "16mm (W) x 17mm (H)",
-                        "id": "107"
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "name": "Max 40,000mm (L)",
-                        "id": "108"
-                      }
-                    ],
-                    "Light Color": [
-                      {
-                        "name": "RED",
-                        "id": "109"
-                      }
-                    ]
-                  },
-                  "constraints": {
-                    "102": [
-                      "109"
-                    ],
-                    "103": [
-                      "109"
-                    ],
-                    "104": [
-                      "109"
-                    ],
-                    "109": [
-                      "102",
-                      "103",
-                      "104"
-                    ]
-                  },
-                  "category_path": [
-                    "NEON",
-                    "3D"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Dual Colour 3D Bend Neon (10mm x 10mm)",
-              "variants": {
-                "Dual Colour 3D Bend Neon (10mm x 10mm)": {
-                  "id": "reciYqWzW1Jxfe4Ta",
-                  "product_name": "Dual Colour 3D Bend Neon (10mm x 10mm)",
-                  "category": "3D",
-                  "sku": "3D1010-10W-2.7-3K-IP67",
-                  "product_short_description": "Step into the next dimension of luxury illumination with the Dual Colour 3D Bend Neon, wrapping your space in a seamless dual-colour glow of pure elegance and awe.\n",
-                  "product_description": "Step into the next dimension of luxury illumination with the Dual Colour 3D Bend Neon. Designed for visionaries who refuse to compromise on style, this revolutionary linear lighting masterpiece bends effortlessly in all directions to trace breathtaking architectural curves and create captivating visual features. Whether you are transforming a high-end commercial venue, designing a sophisticated modern lounge, or adding a touch of drama to an intimate space, its seamless, uniform dual-colour glow wraps your environment in a blanket of pure elegance. Crafted to elevate the ordinary into the extraordinary, it delivers an unmatched aesthetic ambiance that commands attention and inspires awe.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "Architectural lighting, 3D bend neon, Dual colour LED, Flexible liner light, Luxury ambiance illumination, Premium visual features",
-                  "supplier_name": "AIR 1010 CS",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "2700K & 3000K",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "10mm (W) x 10mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP67",
-                        "icon": ""
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "value": "Max 5,000mm (L)",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "10W/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "10W/m",
-                        "id": "101"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "2700K",
-                        "id": "102"
-                      },
-                      {
-                        "name": "3000K",
-                        "id": "103"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "104"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP67",
-                        "id": "105"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "10mm (W) x 10mm (H)",
-                        "id": "106"
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "name": "Max 5,000mm (L)",
-                        "id": "107"
-                      }
-                    ]
-                  },
-                  "constraints": [],
-                  "category_path": [
-                    "NEON",
-                    "3D"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Free Cut 3D Bend Neon (10mm x 10mm)",
-              "variants": {
-                "Free Cut 3D Bend Neon (10mm x 10mm)": {
-                  "id": "recs6UDsRmcmzbIgx",
-                  "product_name": "Free Cut 3D Bend Neon (10mm x 10mm)",
-                  "category": "3D",
-                  "sku": "3D1010-10W-2.7K-IP67-FC",
-                  "product_short_description": "Unleash your creative vision with Free Cut 3D Bend Neon. Curve it effortlessly in every direction for a seamless, radiant atmosphere that transforms any ordinary space.\n",
-                  "product_description": "Unleash your creative vision with the Free Cut 3D Bend Neon, a revolutionary linear lighting solution designed to bring complete design freedom and fluid brilliance to any environment. Engineered for exceptional three-dimensional flexibility, this luxurious masterpiece curves effortlessly in every direction, allowing you to trace intricate architectural contours and craft captivating, personalized lighting displays. Its pristine, uniform glow eliminates harsh shadows, filling your space with a seamless, radiant atmosphere. Perfect for designers who refuse to compromise on style and adaptability, this premium lighting choice transforms the ordinary into an extraordinary visual statement, capturing elegance and modern sophistication from every single angle.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "Architectural lighting, Linear LED, Top View neon, Waterproof light ribbon, Flexible contour illumination, Premium commercial light",
-                  "supplier_name": "AIR 1010 WHT",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
-                      },
-                      {
-                        "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
-                      }
-                    ],
-                    "Cut Interval": [
-                      {
-                        "value": "Free Cut",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "10mm (W) x 10mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP67",
-                        "icon": ""
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "value": "Max 4,000mm (L)",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "10W/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "10W/m",
-                        "id": "101"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "2700K",
-                        "id": "102"
-                      },
-                      {
-                        "name": "3000K",
-                        "id": "103"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "104"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "105"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP67",
-                        "id": "106"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "10mm (W) x 10mm (H)",
-                        "id": "107"
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "name": "Max 4,000mm (L)",
-                        "id": "108"
-                      }
-                    ],
-                    "Cut Interval": [
-                      {
-                        "name": "Free Cut",
-                        "id": "109"
-                      }
-                    ]
-                  },
-                  "constraints": [],
-                  "category_path": [
-                    "NEON",
-                    "3D"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "3D Bend Neon (16mm x 17mm)",
-              "variants": {
-                "3D Bend Neon (16mm x 17mm)": {
-                  "id": "recx0LSQBCoEmryRO",
-                  "product_name": "3D Bend Neon (16mm x 17mm)",
-                  "category": "3D",
-                  "sku": "3D1617-10W-2.7K-IP68",
-                  "product_short_description": "Transform your space with 3D Bend Neon. Its boundless flexibility creates a flawless ribbon of light, wrapping any environment in pure, uniform elegance.\n",
-                  "product_description": "Unlock a new dimension of design with the 3D Bend Neon, a revolutionary linear lighting masterpiece crafted to bring your boldest artistic concepts to life. Engineered for boundless multi-directional flexibility, this premium neon-style light bends effortlessly across any plane, wrapping architectural contours and spatial features in a flawless, seamless ribbon of light. Perfect for elevating high-end commercial spaces, luxury interiors, or modern landscapes, it creates a breathtaking visual statement that captures the imagination and completely transforms the atmosphere with its pure, uniform radiance.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "3D bend neon, Flexible linear LED, Architectural accent lighting, Multi-directional flexibility, Waterproof light ribbon, Premium commercial lighting",
-                  "supplier_name": "AXE 1617 WHT",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
-                      },
-                      {
-                        "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
-                      }
-                    ],
-                    "Control Protocol": [
-                      {
-                        "value": "DMX",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "16mm (W) x 17mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP68",
-                        "icon": ""
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "value": "Max 10,000mm (L)",
-                        "icon": ""
-                      },
-                      {
-                        "value": "Max 8,000mm (L)",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "10W/m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "15W/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ],
-                    "Light Color": [
-                      {
-                        "value": "RGBW (3000K)",
-                        "icon": ""
-                      }
-                    ],
-                    "Resolution": [
-                      {
-                        "value": "14 Pixels/m",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "10W/m",
-                        "id": "101"
-                      },
-                      {
-                        "name": "15W/m",
-                        "id": "102"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "2700K",
-                        "id": "103"
-                      },
-                      {
-                        "name": "3000K",
-                        "id": "104"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "105"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "106"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP68",
-                        "id": "107"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "16mm (W) x 17mm (H)",
-                        "id": "108"
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "name": "Max 10,000mm (L)",
-                        "id": "109"
-                      },
-                      {
-                        "name": "Max 8,000mm (L)",
-                        "id": "110"
-                      }
-                    ],
-                    "Light Color": [
-                      {
-                        "name": "RGBW (3000K)",
-                        "id": "111"
-                      }
-                    ],
-                    "Control Protocol": [
-                      {
-                        "name": "DMX",
-                        "id": "112"
-                      }
-                    ],
-                    "Resolution": [
-                      {
-                        "name": "14 Pixels/m",
-                        "id": "113"
-                      }
-                    ]
-                  },
-                  "constraints": {
-                    "102": [
-                      "103",
-                      "104",
-                      "105"
-                    ],
-                    "111": [
-                      "101"
-                    ],
-                    "112": [
-                      "101"
-                    ],
-                    "113": [
-                      "101"
-                    ]
-                  },
-                  "category_path": [
-                    "NEON",
-                    "3D"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
           "name": "Top View",
           "children": [
             {
@@ -10916,21 +10152,21 @@ const AZOOGI_PRODUCTS = {
                     "CCT": [
                       {
                         "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
                       },
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
                       }
                     ],
                     "Finish": [
                       {
                         "value": "Black",
-                        "icon": "assets/img/attribute_icon/attr_finish_black_e7cc03ec10.svg"
+                        "icon": "assets/img/attribute_icon/attr_finish_black_e2b08b6736.svg"
                       }
                     ],
                     "IP Rating": [
@@ -11117,15 +10353,15 @@ const AZOOGI_PRODUCTS = {
                     "CCT": [
                       {
                         "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
                       },
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
                       }
                     ],
                     "Control Protocol": [
@@ -11327,10 +10563,10 @@ const AZOOGI_PRODUCTS = {
                   "product_short_description": "Bring seamless radiance to any space with Top Bend IP69, a premium linear light designed to accentuate contours with a flawless uniform glow and ultimate style.\n",
                   "product_description": "Illuminate your architectural visions with the Top Bend IP69, a premium linear lighting solution designed to bring seamless radiance to any space. Engineered for incredible flexibility and breathtaking visual impact, this top-bending neon-style light curves effortlessly to accentuate contours and create striking design statements. Whether you are transforming a high-end commercial venue or adding sophisticated atmosphere to an outdoor landscape, its pristine, uniform glow delivers an unmatched aesthetic elegance. Built to withstand the elements while maintaining its flawless brilliance, it is the ultimate choice for designers who refuse to compromise on beauty, adaptability, and style.\n",
                   "product_images": [
-                    "assets/img/products/recNCok9s0bHaZqzP_eadcf08f03.jpg",
-                    "assets/img/products/recNCok9s0bHaZqzP_5401240c0e.jpg",
-                    "assets/img/products/recNCok9s0bHaZqzP_5f4e8e7a1a.jpg",
-                    "assets/img/products/recNCok9s0bHaZqzP_be78cdf693.jpg"
+                    "assets/img/products/recNCok9s0bHaZqzP_bbf83280f7.jpg",
+                    "assets/img/products/recNCok9s0bHaZqzP_7316518bae.jpg",
+                    "assets/img/products/recNCok9s0bHaZqzP_88c973afb4.jpg",
+                    "assets/img/products/recNCok9s0bHaZqzP_f6db4118a2.jpg"
                   ],
                   "product_dimension": "",
                   "stocked_item": [
@@ -11338,13 +10574,13 @@ const AZOOGI_PRODUCTS = {
                   ],
                   "datasheet": "No",
                   "technical_icons": [
-                    "assets/img/icons/recNCok9s0bHaZqzP_icon_eb6cc2a19d.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_ac9e593ffd.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_02ba02fe72.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_97ee773ffd.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_f642013e3d.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_6f4d56763f.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_7f0345aa99.svg"
+                    "assets/img/icons/recNCok9s0bHaZqzP_icon_d89cc1134b.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg"
                   ],
                   "meta_keywords": "Architectural lighting, Linear LED, Top View neon, Waterproof light ribbon, Flexible contour illumination, Premium commercial light",
                   "supplier_name": "WAVE 1617T WHT",
@@ -11354,15 +10590,15 @@ const AZOOGI_PRODUCTS = {
                     "CCT": [
                       {
                         "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
                       },
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
                       },
                       {
                         "value": "2200K",
@@ -11731,15 +10967,15 @@ const AZOOGI_PRODUCTS = {
                       },
                       {
                         "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
                       },
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
                       },
                       {
                         "value": "2700K-5300K",
@@ -11755,7 +10991,7 @@ const AZOOGI_PRODUCTS = {
                     "Finish": [
                       {
                         "value": "Black",
-                        "icon": "assets/img/attribute_icon/attr_finish_black_e7cc03ec10.svg"
+                        "icon": "assets/img/attribute_icon/attr_finish_black_e2b08b6736.svg"
                       }
                     ],
                     "IP Rating": [
@@ -11952,15 +11188,15 @@ const AZOOGI_PRODUCTS = {
                       },
                       {
                         "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
                       },
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
                       },
                       {
                         "value": "5300K",
@@ -12130,15 +11366,15 @@ const AZOOGI_PRODUCTS = {
                     "CCT": [
                       {
                         "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
                       },
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
                       },
                       {
                         "value": "5000K",
@@ -12257,13 +11493,24 @@ const AZOOGI_PRODUCTS = {
                   "sku": "TV1010-12W-TW-IP68-270",
                   "product_short_description": "Wrap your space in pure luxury with the Three-sided Emitting Mini Neon, radiating a stunning, uniform glow from three sides for ultimate design freedom.\n",
                   "product_description": "Experience the ultimate in design versatility with the Three-sided Emitting Mini Neon, a revolutionary linear lighting choice crafted to redefine modern luxury. Engineered to radiate a brilliant, uniform glow from three distinct sides, this remarkable neon-style masterpiece wraps any environment in a seamless blanket of sophisticated light. Its highly flexible profile effortlessly contours around architectural features, making it the perfect choice for designers looking to elevate spaces with dramatic ambiance and striking visual impact. Elevate your next project with an unmatched aesthetic elegance that blends artistic freedom with flawless illumination.\n",
-                  "product_images": [],
+                  "product_images": [
+                    "assets/img/products/recq5zK1RIL38n5rM_23145a7e01.webp",
+                    "assets/img/products/recq5zK1RIL38n5rM_4818405a63.webp"
+                  ],
                   "product_dimension": "",
                   "stocked_item": [
                     ""
                   ],
                   "datasheet": "No",
-                  "technical_icons": "",
+                  "technical_icons": [
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg",
+                    "assets/img/icons/recB1syjKDsQf38sM_icon_63c81d6e7c.svg"
+                  ],
                   "meta_keywords": "Three-sided emitting neon, Mini neon strip, Flexible contour light, Top View LED, Uniform glow ribbon, Luxury linear illumination",
                   "supplier_name": "ACE 1010YT TW",
                   "status": "draft",
@@ -12280,15 +11527,15 @@ const AZOOGI_PRODUCTS = {
                       },
                       {
                         "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
                       },
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
                       }
                     ],
                     "IP Rating": [
@@ -12437,7 +11684,7 @@ const AZOOGI_PRODUCTS = {
                   "product_short_description": "Redefine your space with the ultra-slim Slice, blending flexibility and contemporary elegance to create a sleek, breathtaking visual statement anywhere.\n",
                   "product_description": "Introducing the Slice (10mm x 4mm), an ultra-slim linear lighting solution crafted to redefine modern illumination. Designed with incredible flexibility and a minimal profile, this top-bending masterpiece seamlessly integrates into any architectural vision, effortlessly tracing elegant curves and contours. Its smooth, uniform glow creates a stunning visual statement that elevates the ambiance of sophisticated residential interiors, commercial venues, and luxury landscapes alike. Built to offer ultimate precision and artistic adaptability, the Slice brings a touch of sleek, contemporary elegance to any environment, proving that breathtaking design and exceptional style truly know no boundaries.\n",
                   "product_images": [
-                    "assets/img/products/recqeTGfdSLJHshOp_f3c233a749.jpg"
+                    "assets/img/products/recqeTGfdSLJHshOp_06dd9d03f1.jpg"
                   ],
                   "product_dimension": "",
                   "stocked_item": [
@@ -12445,13 +11692,13 @@ const AZOOGI_PRODUCTS = {
                   ],
                   "datasheet": "No",
                   "technical_icons": [
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_ac9e593ffd.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_02ba02fe72.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_97ee773ffd.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_f642013e3d.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_6f4d56763f.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_7f0345aa99.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_bee69a869c.svg"
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg",
+                    "assets/img/icons/recN9v5UQTBluCeTK_icon_0d746f4fb8.svg"
                   ],
                   "meta_keywords": "Ultra-slim linear LED, Minimal profile neon, Top view bendable light, Free cut flexible ribbon, Sleek architectural lighting, Contemporary interior illumination",
                   "supplier_name": "APO 10 FC",
@@ -12465,15 +11712,15 @@ const AZOOGI_PRODUCTS = {
                       },
                       {
                         "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
                       },
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
                       },
                       {
                         "value": "5700K",
@@ -12652,6 +11899,834 @@ const AZOOGI_PRODUCTS = {
         },
         {
           "type": "category",
+          "name": "3D",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Free Cut 3D Bend Neon (16mm x 17mm)",
+              "variants": {
+                "Free Cut 3D Bend Neon (16mm x 17mm)": {
+                  "id": "rec3bhuvjwMrtupth",
+                  "product_name": "Free Cut 3D Bend Neon (16mm x 17mm)",
+                  "category": "3D",
+                  "sku": "3D1617-10W-2.7K-IP67-FC",
+                  "product_short_description": "Sculpt light without limits using Free Cut 3D Bend Neon. Effortlessly bend in all directions to wrap your space in pure, flawless aesthetic elegance and bold artistic style.\n",
+                  "product_description": "Experience a new dimension of design freedom with the Free Cut 3D Bend Neon. This revolutionary linear lighting masterpiece bends effortlessly in all directions, allowing you to sculpt light around complex architecture, dramatic contours, and fluid custom shapes without limits. Perfect for creating unforgettable statements in luxury commercial spaces or premium modern venues, it delivers a flawless, completely uniform radiance that wraps your environment in pure aesthetic elegance. Striking the perfect balance between artistic versatility and bold visual impact, this stunning accent solution is crafted for visionary designers looking to bring their most imaginative concepts to life with absolute grace and sophistication.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "3D bend neon, Free cut LED, Flexible linear lighting, Omnidirectional bend light, Architectural sculpture illumination, Premium commercial neon",
+                  "supplier_name": "AIR 1617 WHT",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "2700K",
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
+                      },
+                      {
+                        "value": "3000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
+                      }
+                    ],
+                    "Cut Interval": [
+                      {
+                        "value": "Free Cut",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "16mm (W) x 17mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
+                    "Power Consumption Rate": [
+                      {
+                        "value": "10W/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "value": "Max 4,000mm (L)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "10W/m",
+                        "id": "101"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "2700K",
+                        "id": "102"
+                      },
+                      {
+                        "name": "3000K",
+                        "id": "103"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "104"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "105"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP67",
+                        "id": "106"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "16mm (W) x 17mm (H)",
+                        "id": "107"
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "name": "Max 4,000mm (L)",
+                        "id": "108"
+                      }
+                    ],
+                    "Cut Interval": [
+                      {
+                        "name": "Free Cut",
+                        "id": "109"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "NEON",
+                    "3D"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Dual Colour 3D Bend Neon (16mm x 17mm)",
+              "variants": {
+                "Dual Colour 3D Bend Neon (16mm x 17mm)": {
+                  "id": "recE0hOvx9k6ktiox",
+                  "product_name": "Dual Colour 3D Bend Neon (16mm x 17mm)",
+                  "category": "3D",
+                  "sku": "3D1617-10W-2.7-3K-IP67",
+                  "product_short_description": "Experience ultimate design freedom with the Dual Colour 3D Bend Neon, flowing effortlessly around complex contours to bring fluid brilliance and modern luxury to your vision.\n",
+                  "product_description": "Experience the pinnacle of design freedom with the Dual Colour 3D Bend Neon, a premium linear lighting masterpiece crafted to bring dynamic sophistication and seamless radiance to your most ambitious spaces. Engineered for multi-directional flexibility, this luxurious neon-style solution flows effortlessly around complex contours to create striking architectural statements and captivating visual depth. Perfect for transforming high-end environments into immersive sensory experiences, its elegant and fluid brilliance brings a breath of modern luxury to any design vision, making it the ultimate choice for those who dare to inspire.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "3D bend neon, Dual color LED, Architectural contour lighting, Flexible linear light, IP67 waterproof ribbon, Multi-directional flex strip",
+                  "supplier_name": "AIR 1617 CS",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Dimension": [
+                      {
+                        "value": "16mm (W) x 17mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "value": "Max 5,000mm (L)",
+                        "icon": ""
+                      }
+                    ],
+                    "Power Consumption Rate": [
+                      {
+                        "value": "10W/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "value": "2700K & 3000K",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "10W/m",
+                        "id": "101"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "2700K & 3000K",
+                        "id": "102"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "103"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP67",
+                        "id": "104"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "16mm (W) x 17mm (H)",
+                        "id": "105"
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "name": "Max 5,000mm (L)",
+                        "id": "106"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "NEON",
+                    "3D"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Long Run 3D Bend Neon (16mm x 17mm)",
+              "variants": {
+                "Long Run 3D Bend Neon (16mm x 17mm)": {
+                  "id": "recR2ljdy4FTUgqYB",
+                  "product_name": "Long Run 3D Bend Neon (16mm x 17mm)",
+                  "category": "3D",
+                  "sku": "3D1617-10W-2.7K-IP68-SLR",
+                  "product_short_description": "Transform your space with Long Run 3D Bend Neon, crafting a flawless, multi-dimensional glow that brings ultimate design freedom and fluid elegance to any environment.\n",
+                  "product_description": "Transform your architectural visions with the Long Run 3D Bend Neon, a premium linear lighting solution crafted to bring multi-directional flexibility and captivating elegance to any environment. Engineered to curve effortlessly in three dimensions, this luxurious neon-style light offers ultimate design freedom, allowing you to accentuate complex contours and create breathtaking visual statements. Its flawless, uniform glow delivers an unmatched aesthetic elegance, making it the perfect choice for transforming sophisticated spaces and adding a seamless, fluid brilliance that captivates and inspires.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "3D bend neon, Multi-directional LED, Waterproof light ribbon, Flexible architectural lighting, Long run linear LED, Premium contour illumination",
+                  "supplier_name": "AXE 1617 SL WHT",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "2700K",
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
+                      },
+                      {
+                        "value": "3000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "16mm (W) x 17mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP68",
+                        "icon": ""
+                      }
+                    ],
+                    "Power Consumption Rate": [
+                      {
+                        "value": "10W/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "value": "Max 40,000mm (L)",
+                        "icon": ""
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "value": "RED",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "10W/m",
+                        "id": "101"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "2700K",
+                        "id": "102"
+                      },
+                      {
+                        "name": "3000K",
+                        "id": "103"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "104"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "105"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP68",
+                        "id": "106"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "16mm (W) x 17mm (H)",
+                        "id": "107"
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "name": "Max 40,000mm (L)",
+                        "id": "108"
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "name": "RED",
+                        "id": "109"
+                      }
+                    ]
+                  },
+                  "constraints": {
+                    "102": [
+                      "109"
+                    ],
+                    "103": [
+                      "109"
+                    ],
+                    "104": [
+                      "109"
+                    ],
+                    "109": [
+                      "102",
+                      "103",
+                      "104"
+                    ]
+                  },
+                  "category_path": [
+                    "NEON",
+                    "3D"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Dual Colour 3D Bend Neon (10mm x 10mm)",
+              "variants": {
+                "Dual Colour 3D Bend Neon (10mm x 10mm)": {
+                  "id": "reciYqWzW1Jxfe4Ta",
+                  "product_name": "Dual Colour 3D Bend Neon (10mm x 10mm)",
+                  "category": "3D",
+                  "sku": "3D1010-10W-2.7-3K-IP67",
+                  "product_short_description": "Step into the next dimension of luxury illumination with the Dual Colour 3D Bend Neon, wrapping your space in a seamless dual-colour glow of pure elegance and awe.\n",
+                  "product_description": "Step into the next dimension of luxury illumination with the Dual Colour 3D Bend Neon. Designed for visionaries who refuse to compromise on style, this revolutionary linear lighting masterpiece bends effortlessly in all directions to trace breathtaking architectural curves and create captivating visual features. Whether you are transforming a high-end commercial venue, designing a sophisticated modern lounge, or adding a touch of drama to an intimate space, its seamless, uniform dual-colour glow wraps your environment in a blanket of pure elegance. Crafted to elevate the ordinary into the extraordinary, it delivers an unmatched aesthetic ambiance that commands attention and inspires awe.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "Architectural lighting, 3D bend neon, Dual colour LED, Flexible liner light, Luxury ambiance illumination, Premium visual features",
+                  "supplier_name": "AIR 1010 CS",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "2700K & 3000K",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "10mm (W) x 10mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "value": "Max 5,000mm (L)",
+                        "icon": ""
+                      }
+                    ],
+                    "Power Consumption Rate": [
+                      {
+                        "value": "10W/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "10W/m",
+                        "id": "101"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "2700K",
+                        "id": "102"
+                      },
+                      {
+                        "name": "3000K",
+                        "id": "103"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "104"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP67",
+                        "id": "105"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "10mm (W) x 10mm (H)",
+                        "id": "106"
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "name": "Max 5,000mm (L)",
+                        "id": "107"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "NEON",
+                    "3D"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Free Cut 3D Bend Neon (10mm x 10mm)",
+              "variants": {
+                "Free Cut 3D Bend Neon (10mm x 10mm)": {
+                  "id": "recs6UDsRmcmzbIgx",
+                  "product_name": "Free Cut 3D Bend Neon (10mm x 10mm)",
+                  "category": "3D",
+                  "sku": "3D1010-10W-2.7K-IP67-FC",
+                  "product_short_description": "Unleash your creative vision with Free Cut 3D Bend Neon. Curve it effortlessly in every direction for a seamless, radiant atmosphere that transforms any ordinary space.\n",
+                  "product_description": "Unleash your creative vision with the Free Cut 3D Bend Neon, a revolutionary linear lighting solution designed to bring complete design freedom and fluid brilliance to any environment. Engineered for exceptional three-dimensional flexibility, this luxurious masterpiece curves effortlessly in every direction, allowing you to trace intricate architectural contours and craft captivating, personalized lighting displays. Its pristine, uniform glow eliminates harsh shadows, filling your space with a seamless, radiant atmosphere. Perfect for designers who refuse to compromise on style and adaptability, this premium lighting choice transforms the ordinary into an extraordinary visual statement, capturing elegance and modern sophistication from every single angle.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "Architectural lighting, Linear LED, Top View neon, Waterproof light ribbon, Flexible contour illumination, Premium commercial light",
+                  "supplier_name": "AIR 1010 WHT",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "2700K",
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
+                      },
+                      {
+                        "value": "3000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
+                      }
+                    ],
+                    "Cut Interval": [
+                      {
+                        "value": "Free Cut",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "10mm (W) x 10mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "value": "Max 4,000mm (L)",
+                        "icon": ""
+                      }
+                    ],
+                    "Power Consumption Rate": [
+                      {
+                        "value": "10W/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "10W/m",
+                        "id": "101"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "2700K",
+                        "id": "102"
+                      },
+                      {
+                        "name": "3000K",
+                        "id": "103"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "104"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "105"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP67",
+                        "id": "106"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "10mm (W) x 10mm (H)",
+                        "id": "107"
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "name": "Max 4,000mm (L)",
+                        "id": "108"
+                      }
+                    ],
+                    "Cut Interval": [
+                      {
+                        "name": "Free Cut",
+                        "id": "109"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "NEON",
+                    "3D"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "3D Bend Neon (16mm x 17mm)",
+              "variants": {
+                "3D Bend Neon (16mm x 17mm)": {
+                  "id": "recx0LSQBCoEmryRO",
+                  "product_name": "3D Bend Neon (16mm x 17mm)",
+                  "category": "3D",
+                  "sku": "3D1617-10W-2.7K-IP68",
+                  "product_short_description": "Transform your space with 3D Bend Neon. Its boundless flexibility creates a flawless ribbon of light, wrapping any environment in pure, uniform elegance.\n",
+                  "product_description": "Unlock a new dimension of design with the 3D Bend Neon, a revolutionary linear lighting masterpiece crafted to bring your boldest artistic concepts to life. Engineered for boundless multi-directional flexibility, this premium neon-style light bends effortlessly across any plane, wrapping architectural contours and spatial features in a flawless, seamless ribbon of light. Perfect for elevating high-end commercial spaces, luxury interiors, or modern landscapes, it creates a breathtaking visual statement that captures the imagination and completely transforms the atmosphere with its pure, uniform radiance.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "3D bend neon, Flexible linear LED, Architectural accent lighting, Multi-directional flexibility, Waterproof light ribbon, Premium commercial lighting",
+                  "supplier_name": "AXE 1617 WHT",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "2700K",
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
+                      },
+                      {
+                        "value": "3000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
+                      }
+                    ],
+                    "Control Protocol": [
+                      {
+                        "value": "DMX",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "16mm (W) x 17mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP68",
+                        "icon": ""
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "value": "Max 10,000mm (L)",
+                        "icon": ""
+                      },
+                      {
+                        "value": "Max 8,000mm (L)",
+                        "icon": ""
+                      }
+                    ],
+                    "Power Consumption Rate": [
+                      {
+                        "value": "10W/m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "15W/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "value": "RGBW (3000K)",
+                        "icon": ""
+                      }
+                    ],
+                    "Resolution": [
+                      {
+                        "value": "14 Pixels/m",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "10W/m",
+                        "id": "101"
+                      },
+                      {
+                        "name": "15W/m",
+                        "id": "102"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "2700K",
+                        "id": "103"
+                      },
+                      {
+                        "name": "3000K",
+                        "id": "104"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "105"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "106"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP68",
+                        "id": "107"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "16mm (W) x 17mm (H)",
+                        "id": "108"
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "name": "Max 10,000mm (L)",
+                        "id": "109"
+                      },
+                      {
+                        "name": "Max 8,000mm (L)",
+                        "id": "110"
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "name": "RGBW (3000K)",
+                        "id": "111"
+                      }
+                    ],
+                    "Control Protocol": [
+                      {
+                        "name": "DMX",
+                        "id": "112"
+                      }
+                    ],
+                    "Resolution": [
+                      {
+                        "name": "14 Pixels/m",
+                        "id": "113"
+                      }
+                    ]
+                  },
+                  "constraints": {
+                    "102": [
+                      "103",
+                      "104",
+                      "105"
+                    ],
+                    "111": [
+                      "101"
+                    ],
+                    "112": [
+                      "101"
+                    ],
+                    "113": [
+                      "101"
+                    ]
+                  },
+                  "category_path": [
+                    "NEON",
+                    "3D"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
           "name": "Side View",
           "children": [
             {
@@ -12666,14 +12741,22 @@ const AZOOGI_PRODUCTS = {
                   "product_short_description": "Elevate your space with the ultra-sleek Mini Side Bend, a flexible masterpiece delivering a seamless, captivating glow that turns any environment into a work of art.\n",
                   "product_description": "Discover the perfect blend of subtle elegance and dynamic versatility with the Mini (6mm x 12mm) Side Bend linear lighting solution. Crafted for designers who refuse to compromise on style, this ultra-sleek, flexible masterpiece effortlessly curves around architectural features to deliver a seamless, captivating glow. Ideal for adding sophisticated ambiance to modern interiors or transforming commercial spaces, its refined, uniform illumination provides an upscale aesthetic that elevates any environment into a work of art.\n",
                   "product_images": [
-                    "assets/img/products/rec17jjQ4pcEEAeAd_6197efbdc8.webp"
+                    "assets/img/products/rec17jjQ4pcEEAeAd_13a095e434.webp"
                   ],
                   "product_dimension": "",
                   "stocked_item": [
                     ""
                   ],
                   "datasheet": "No",
-                  "technical_icons": "",
+                  "technical_icons": [
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_89497ca10e.svg"
+                  ],
                   "meta_keywords": "Mini side bend, Ultra-sleek neon, Seamless flexible glow, Free cut linear LED, Precise length lighting, Architectural ambiance neon",
                   "supplier_name": "0612S FC WHT",
                   "status": "draft",
@@ -12686,15 +12769,15 @@ const AZOOGI_PRODUCTS = {
                       },
                       {
                         "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
                       },
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
                       },
                       {
                         "value": "2700K-5300K",
@@ -12863,13 +12946,25 @@ const AZOOGI_PRODUCTS = {
                   "sku": "SV1617-10W-2.2K-IP68-HC",
                   "product_short_description": "Bring fluid brilliance and glare-free elegance to your design with Side View Honeycomb, offering a beautifully softened glow and ultimate flexibility.\n",
                   "product_description": "Elevate your architectural designs with the Side View IP68 Honeycomb, a premium linear lighting solution crafted to bring captivating elegance and fluid brilliance to any environment. Engineered with advanced honeycomb anti-glare technology, this luxurious neon-style light delivers a beautifully softened, uniform glow that effortlessly enhances spaces without any harsh glare. Perfectly adapted for seamless side-bending flexibility, it gracefully curves around contours to create stunning visual features, dramatic accents, and a sophisticated atmosphere. Built to withstand demanding elements while maintaining its flawless aesthetic, it represents the ultimate fusion of contemporary style, innovative visual comfort, and breathtaking design freedom.\n",
-                  "product_images": [],
+                  "product_images": [
+                    "assets/img/products/recB1syjKDsQf38sM_79d84b186e.webp",
+                    "assets/img/products/recB1syjKDsQf38sM_c8fde869e6.webp",
+                    "assets/img/products/recB1syjKDsQf38sM_99cf3e1cfa.webp"
+                  ],
                   "product_dimension": "",
                   "stocked_item": [
                     ""
                   ],
                   "datasheet": "No",
-                  "technical_icons": "",
+                  "technical_icons": [
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg",
+                    "assets/img/icons/recB1syjKDsQf38sM_icon_63c81d6e7c.svg"
+                  ],
                   "meta_keywords": "Architectural lighting, Linear LED, Side View neon, Anti-glare honeycomb, Waterproof light ribbon, Flexible contour illumination",
                   "supplier_name": "AG 1617S",
                   "status": "draft",
@@ -12882,15 +12977,15 @@ const AZOOGI_PRODUCTS = {
                       },
                       {
                         "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
                       },
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
                       },
                       {
                         "value": "2700K-5300K",
@@ -13086,7 +13181,7 @@ const AZOOGI_PRODUCTS = {
                   "product_short_description": "Experience ultimate design freedom with the Mini Side Bend. This ultra-flexible linear light curves effortlessly to bring a flawless, captivating glow to any environment.\n",
                   "product_description": "Discover the ultimate in design freedom with the Mini Side Bend neon-style light, crafted to bring a sleek, captivating elegance to any environment. Engineered for exceptional side-bending flexibility, this premium linear lighting solution curves seamlessly around intricate architectural contours, allowing you to create fluid, breathtaking visual statements. Its uniform, flawless glow adds a sophisticated ambiance to both interior and exterior spaces, transforming the ordinary into a showcase of luxurious light. Built to deliver reliable radiance and unmatched aesthetic beauty, it is the perfect choice for designers looking to elevate their projects with seamless style and effortless adaptability.\n",
                   "product_images": [
-                    "assets/img/products/recN9v5UQTBluCeTK_6fa25f3cf7.jpg"
+                    "assets/img/products/recN9v5UQTBluCeTK_252f397e52.jpg"
                   ],
                   "product_dimension": "",
                   "stocked_item": [
@@ -13094,13 +13189,13 @@ const AZOOGI_PRODUCTS = {
                   ],
                   "datasheet": "No",
                   "technical_icons": [
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_ac9e593ffd.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_02ba02fe72.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_97ee773ffd.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_f642013e3d.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_6f4d56763f.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_7f0345aa99.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_bee69a869c.svg"
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg",
+                    "assets/img/icons/recN9v5UQTBluCeTK_icon_0d746f4fb8.svg"
                   ],
                   "meta_keywords": "Mini Side Bend, Ultra-flexible linear light, Side View neon, Slim architectural lighting, Waterproof LED ribbon, Fluid contour illumination",
                   "supplier_name": "ACE 0408S FC WHT",
@@ -13110,15 +13205,15 @@ const AZOOGI_PRODUCTS = {
                     "CCT": [
                       {
                         "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
                       },
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
                       },
                       {
                         "value": "2400K",
@@ -13237,13 +13332,23 @@ const AZOOGI_PRODUCTS = {
                   "sku": "SV1220-10W-2.7K-IP68",
                   "product_short_description": "Bring fluid brilliance to any environment with Side View IP68, a premium linear light designed to deliver a flawless, uniform glow that elevates your architectural vision.\n",
                   "product_description": "Elevate your architectural and landscape designs with the Side View IP68, a premium linear lighting solution crafted to bring captivating elegance and fluid brilliance to any environment. Engineered for extraordinary side-bending flexibility, this luxurious neon-style light curves effortlessly around contours to create stunning visual features and dramatic accents. Perfect for transforming upscale commercial venues, creating sophisticated outdoor atmospheres, or adding a touch of modern luxury to residential spaces, its uniform, flawless glow delivers an unmatched aesthetic impact. Built to withstand the elements while maintaining its pristine radiance, it is the ultimate choice for designers who demand seamless elegance, adaptability, and style.\n",
-                  "product_images": [],
+                  "product_images": [
+                    "assets/img/products/recQnoCNnWRMKV0D9_6c277f9851.webp"
+                  ],
                   "product_dimension": "",
                   "stocked_item": [
                     ""
                   ],
                   "datasheet": "No",
-                  "technical_icons": "",
+                  "technical_icons": [
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg",
+                    "assets/img/icons/recB1syjKDsQf38sM_icon_63c81d6e7c.svg"
+                  ],
                   "meta_keywords": "Side view neon, Flexible linear LED, Architectural accent lighting, Landscape contour light, Waterproof light ribbon, Premium commercial lighting",
                   "supplier_name": "ACE 1220S WHT",
                   "status": "draft",
@@ -13252,15 +13357,15 @@ const AZOOGI_PRODUCTS = {
                     "CCT": [
                       {
                         "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
                       },
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
                       },
                       {
                         "value": "5300K",
@@ -13516,7 +13621,7 @@ const AZOOGI_PRODUCTS = {
                   "product_short_description": "Bring subtle sophistication to any space with the Mini, an ultra-compact linear light designed to deliver a flawless, uniform glow and timeless style.\n",
                   "product_description": "Discover the ultimate in discreet elegance with the Mini (6mm x 6mm), a remarkably compact linear lighting solution designed to bring subtle sophistication and seamless radiance to any space. Crafted for extraordinary flexibility and an ultra-minimal profile, this sleek neon-style light curves effortlessly to accent intricate design details and create captivating visual effects. Perfect for adding a luxurious atmosphere to modern retail interiors, high-end lounges, or intimate architectural spaces, its smooth, uniform glow transforms the ordinary into the extraordinary. Embrace a new standard of design freedom with a flawless illumination that blends perfectly into your vision while delivering an unmatched aesthetic impact.\n",
                   "product_images": [
-                    "assets/img/products/recSqEbruwOumyTxB_ff13d4ef1a.jpg"
+                    "assets/img/products/recSqEbruwOumyTxB_b1e76e6d08.jpg"
                   ],
                   "product_dimension": "",
                   "stocked_item": [
@@ -13524,13 +13629,13 @@ const AZOOGI_PRODUCTS = {
                   ],
                   "datasheet": "No",
                   "technical_icons": [
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_ac9e593ffd.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_02ba02fe72.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_97ee773ffd.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_f642013e3d.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_6f4d56763f.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_7f0345aa99.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_bee69a869c.svg"
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg",
+                    "assets/img/icons/recN9v5UQTBluCeTK_icon_0d746f4fb8.svg"
                   ],
                   "meta_keywords": "Discreet elegance, Ultra-compact neon, Subtle sophistication, Minimal lighting profile, Flexible contour accent, Architectural detail illumination",
                   "supplier_name": "0606S FC WHT",
@@ -13540,15 +13645,15 @@ const AZOOGI_PRODUCTS = {
                     "CCT": [
                       {
                         "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
                       },
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
                       }
                     ],
                     "Cut Interval": [
@@ -13659,13 +13764,25 @@ const AZOOGI_PRODUCTS = {
                   "sku": "SV1617-18W-2.2K-IP68-Optic",
                   "product_short_description": "Redefine luxury with the Side View IP68 Optic, projecting a focused, captivating beam to bring timeless elegance and precision to your visionary spaces.\n",
                   "product_description": "Experience the epitome of precision and drama with the Side View IP68 Optic, a premium linear lighting masterpiece designed to redefine luxury illumination. Engineered with advanced optics, this sophisticated neon-style light projects a focused, captivating beam that beautifully accentuates architectural contours and artistic details. Its seamless side-bending flexibility unlocks unparalleled design freedom, allowing you to craft breathtaking visual statements in high-end commercial spaces, upscale residential interiors, and elite outdoor landscapes. Bring an atmosphere of timeless elegance and unmatched prestige to your visionary projects with a refined glow that transforms the ordinary into an extraordinary spectacle of light.\n",
-                  "product_images": [],
+                  "product_images": [
+                    "assets/img/products/recVAUq0tqxZWxHZy_d607244dfd.webp",
+                    "assets/img/products/recVAUq0tqxZWxHZy_0eb5aa300f.webp",
+                    "assets/img/products/recVAUq0tqxZWxHZy_4e033769c0.webp"
+                  ],
                   "product_dimension": "",
                   "stocked_item": [
                     ""
                   ],
                   "datasheet": "No",
-                  "technical_icons": "",
+                  "technical_icons": [
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg",
+                    "assets/img/icons/recB1syjKDsQf38sM_icon_63c81d6e7c.svg"
+                  ],
                   "meta_keywords": "Side view neon, Focused beam optics, Waterproof linear LED, Precision architectural lighting, Narrow beam accent, Premium luxury illumination",
                   "supplier_name": "LEDLINE OPTIC 1617S",
                   "status": "draft",
@@ -13684,15 +13801,15 @@ const AZOOGI_PRODUCTS = {
                       },
                       {
                         "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
                       },
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
                       }
                     ],
                     "Dimension": [
@@ -13801,13 +13918,25 @@ const AZOOGI_PRODUCTS = {
                   "sku": "SV1617-6W-1.6K-IP68-Sauna",
                   "product_short_description": "Transform your wellness space into a luxurious haven with Side View Sauna, offering a comforting, uniform glow that invites pure relaxation and elegant tranquility.\n",
                   "product_description": "Step into a sanctuary of pure relaxation and elevated luxury with the Side View IP68 Sauna, a premium linear lighting solution crafted to transform wellness spaces into serene havens. Designed to wrap seamlessly around structural curves, this elegant accent light bathes your environment in a smooth, uniform glow that enhances tranquility and soothes the senses. Perfect for creating a high-end spa atmosphere, it brings a touch of sophisticated radiance and comforting warmth, inviting you to completely unwind and escape from the everyday world.\n",
-                  "product_images": [],
+                  "product_images": [
+                    "assets/img/products/recghYXl9epsuqYzU_f02db6ca5e.webp",
+                    "assets/img/products/recghYXl9epsuqYzU_d848aba7f0.webp",
+                    "assets/img/products/recghYXl9epsuqYzU_7e9a21c769.webp"
+                  ],
                   "product_dimension": "",
                   "stocked_item": [
                     ""
                   ],
                   "datasheet": "No",
-                  "technical_icons": "",
+                  "technical_icons": [
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg",
+                    "assets/img/icons/recB1syjKDsQf38sM_icon_63c81d6e7c.svg"
+                  ],
                   "meta_keywords": "Sauna lighting, Spa linear LED, Side View neon, Waterproof light ribbon, Wellness space accent, Flexible contour illumination",
                   "supplier_name": "SAUNA 1617S",
                   "status": "draft",
@@ -13820,15 +13949,15 @@ const AZOOGI_PRODUCTS = {
                       },
                       {
                         "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
                       },
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
                       },
                       {
                         "value": "5300K",
@@ -14001,15 +14130,15 @@ const AZOOGI_PRODUCTS = {
                     "CCT": [
                       {
                         "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
                       },
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
                       }
                     ],
                     "Control Protocol": [
@@ -14204,10 +14333,10 @@ const AZOOGI_PRODUCTS = {
                   "product_short_description": "Bring fluid brilliance to any space with Side Bend IP69, curving effortlessly to deliver a seamless, uniform glow that elevates your architectural vision.\n",
                   "product_description": "Elevate your architectural and landscape designs with the Side Bend IP69, a premium linear lighting solution crafted to bring captivating elegance and fluid brilliance to any environment. Engineered for extraordinary side-bending flexibility, this luxurious neon-style light curves effortlessly around architectural contours to create stunning visual features and dramatic accents. Perfect for transforming upscale commercial venues, creating an inviting outdoor oasis, or adding a sophisticated glow to modern spaces, its seamless, uniform illumination delivers an unmatched upscale aesthetic. Combining ultimate durability with timeless style, it is the ultimate choice for visionary designers looking to push the boundaries of creative lighting expression.\n",
                   "product_images": [
-                    "assets/img/products/recnXTAF5eWLRHDVI_6a3f840714.jpg",
-                    "assets/img/products/recnXTAF5eWLRHDVI_9cdb630d8b.jpg",
-                    "assets/img/products/recnXTAF5eWLRHDVI_2556b7821a.jpg",
-                    "assets/img/products/recnXTAF5eWLRHDVI_8d3e48e160.jpg"
+                    "assets/img/products/recnXTAF5eWLRHDVI_ef2aa56a65.jpg",
+                    "assets/img/products/recnXTAF5eWLRHDVI_4e93d129aa.jpg",
+                    "assets/img/products/recnXTAF5eWLRHDVI_93e93ba912.jpg",
+                    "assets/img/products/recnXTAF5eWLRHDVI_2bc977bea5.jpg"
                   ],
                   "product_dimension": "",
                   "stocked_item": [
@@ -14215,13 +14344,13 @@ const AZOOGI_PRODUCTS = {
                   ],
                   "datasheet": "No",
                   "technical_icons": [
-                    "assets/img/icons/recNCok9s0bHaZqzP_icon_eb6cc2a19d.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_ac9e593ffd.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_02ba02fe72.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_97ee773ffd.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_f642013e3d.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_6f4d56763f.svg",
-                    "assets/img/icons/recN9v5UQTBluCeTK_icon_7f0345aa99.svg"
+                    "assets/img/icons/recNCok9s0bHaZqzP_icon_d89cc1134b.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_ee1c50af13.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_01953c5a80.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_a0d24f7b28.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_421f9a7c42.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_fac5cdd2e5.svg",
+                    "assets/img/icons/rec17jjQ4pcEEAeAd_icon_d1b5759361.svg"
                   ],
                   "meta_keywords": "Side bend neon, Flexible linear LED, Architectural accent lighting, Landscape contour light, Waterproof light ribbon, Premium commercial lighting",
                   "supplier_name": "WAVE 1617S WHT",
@@ -14235,15 +14364,15 @@ const AZOOGI_PRODUCTS = {
                       },
                       {
                         "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
                       },
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
                       },
                       {
                         "value": "5300K",
@@ -14579,382 +14708,6 @@ const AZOOGI_PRODUCTS = {
       "children": [
         {
           "type": "category",
-          "name": "Handrail",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "Handrail Spot II",
-              "variants": {
-                "Handrail Spot II": {
-                  "id": "recFfiGcLRw3JjjSh",
-                  "product_name": "Handrail Spot II",
-                  "category": "Handrail",
-                  "sku": "HRS011",
-                  "product_short_description": "Elevate your pathways with Handrail Spot II. It casts a warm, sophisticated ambiance that seamlessly guides your steps with elegant architectural charm.\n",
-                  "product_description": "Elevate your architectural designs with Handrail Spot II, the premium lighting solution that effortlessly marries sophistication with modern functionality. Designed to seamlessly blend into any indoor or outdoor pathway, it casts a warm, inviting glow that gracefully guides your way while accentuating the elegant contours of your space. Perfect for those who demand meticulous attention to detail, this exquisite fixture turns ordinary walkways into enchanting visual experiences, adding a layer of sophisticated ambiance and subtle security to your surroundings. Discreet yet profoundly impactful, it is the quintessential choice for transforming your environment into a beautifully illuminated masterpiece.\n",
-                  "product_images": [
-                    "assets/img/products/recFfiGcLRw3JjjSh_abb7546302.jpg"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/recFfiGcLRw3JjjSh_dim_1b24f5287d.jpg"
-                  ],
-                  "stocked_item": [
-                    "In Stock"
-                  ],
-                  "datasheet": "Yes",
-                  "technical_icons": [
-                    "assets/img/icons/recFfiGcLRw3JjjSh_icon_6ae53180f6.svg",
-                    "assets/img/icons/recFfiGcLRw3JjjSh_icon_a405b786de.svg",
-                    "assets/img/icons/recFfiGcLRw3JjjSh_icon_b94840d0ff.svg"
-                  ],
-                  "meta_keywords": "",
-                  "supplier_name": "SPARKLED",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP67",
-                        "icon": ""
-                      }
-                    ],
-                    "Impact Strength": [
-                      {
-                        "value": "IK10",
-                        "icon": ""
-                      }
-                    ],
-                    "Optics": [
-                      {
-                        "value": "SYM 30°",
-                        "icon": "assets/img/attribute_icon/attr_optics_sym_30_fb2771b5c4.svg"
-                      },
-                      {
-                        "value": "SYM 60°",
-                        "icon": "assets/img/attribute_icon/attr_optics_sym_60_76d49c9e90.svg"
-                      },
-                      {
-                        "value": "ASYM 50°",
-                        "icon": "assets/img/attribute_icon/attr_optics_asym_50_7de067e516.svg"
-                      }
-                    ],
-                    "Power": [
-                      {
-                        "value": "1.5W",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power": [
-                      {
-                        "name": "1.5W",
-                        "id": "101"
-                      }
-                    ],
-                    "Optics": [
-                      {
-                        "name": "SYM 30°",
-                        "id": "102"
-                      },
-                      {
-                        "name": "SYM 60°",
-                        "id": "103"
-                      },
-                      {
-                        "name": "ASYM 50°",
-                        "id": "104"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "3000K",
-                        "id": "105"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "106"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP67",
-                        "id": "107"
-                      }
-                    ],
-                    "Impact Strength": [
-                      {
-                        "name": "IK10",
-                        "id": "108"
-                      }
-                    ]
-                  },
-                  "constraints": [],
-                  "category_path": [
-                    "Outdoor & Architectural",
-                    "Handrail"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Handrail Spot I",
-              "variants": {
-                "Handrail Spot I": {
-                  "id": "rechaqZ8XahO5Kftl",
-                  "product_name": "Handrail Spot I",
-                  "category": "Handrail",
-                  "sku": "HRS001",
-                  "product_short_description": "Elegantly illuminate your pathways with Handrail Spot I. It casts a warm, sophisticated glow that guides the way while beautifully enhancing your architectural space.\n",
-                  "product_description": "Illuminate your architectural masterpieces with the perfect blend of elegance and modern design. Handrail Spot I offers seamless integration into your outdoor or indoor pathways, casting a warm, sophisticated glow that guides the way while enhancing the beauty of your space. Crafted for those who appreciate refined detail, it transforms ordinary walkways into stunning visual journeys, adding an unparalleled touch of ambiance and security to any setting. Elegant, discreet, and captivating, it is the ultimate choice for elevated architectural lighting.\n",
-                  "product_images": [
-                    "assets/img/products/rechaqZ8XahO5Kftl_eb1658f520.jpg"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/rechaqZ8XahO5Kftl_dim_66bcb7ea18.jpg"
-                  ],
-                  "stocked_item": [
-                    "In Stock"
-                  ],
-                  "datasheet": "Yes",
-                  "technical_icons": [
-                    "assets/img/icons/rechaqZ8XahO5Kftl_icon_17950acd8c.svg",
-                    "assets/img/icons/rechaqZ8XahO5Kftl_icon_c96dbab11d.svg",
-                    "assets/img/icons/rechaqZ8XahO5Kftl_icon_ffaf5ee3c8.svg"
-                  ],
-                  "meta_keywords": "",
-                  "supplier_name": "SPARKLED",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP67",
-                        "icon": ""
-                      }
-                    ],
-                    "Impact Strength": [
-                      {
-                        "value": "IK10",
-                        "icon": ""
-                      }
-                    ],
-                    "Optics": [
-                      {
-                        "value": "SYM 30°",
-                        "icon": "assets/img/attribute_icon/attr_optics_sym_30_fb2771b5c4.svg"
-                      },
-                      {
-                        "value": "SYM 60°",
-                        "icon": "assets/img/attribute_icon/attr_optics_sym_60_76d49c9e90.svg"
-                      },
-                      {
-                        "value": "ASYM 50°",
-                        "icon": "assets/img/attribute_icon/attr_optics_asym_50_7de067e516.svg"
-                      }
-                    ],
-                    "Power": [
-                      {
-                        "value": "1.2W",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power": [
-                      {
-                        "name": "1.2W",
-                        "id": "101"
-                      }
-                    ],
-                    "Optics": [
-                      {
-                        "name": "SYM 30°",
-                        "id": "102"
-                      },
-                      {
-                        "name": "SYM 60°",
-                        "id": "103"
-                      },
-                      {
-                        "name": "ASYM 50°",
-                        "id": "104"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "3000K",
-                        "id": "105"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "106"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP67",
-                        "id": "107"
-                      }
-                    ],
-                    "Impact Strength": [
-                      {
-                        "name": "IK10",
-                        "id": "108"
-                      }
-                    ]
-                  },
-                  "constraints": [],
-                  "category_path": [
-                    "Outdoor & Architectural",
-                    "Handrail"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Handrail Spot III",
-              "variants": {
-                "Handrail Spot III": {
-                  "id": "recqPIv7UfmEBe3PO",
-                  "product_name": "Handrail Spot III",
-                  "category": "Handrail",
-                  "sku": "HRS021",
-                  "product_short_description": "Elegantly illuminate your pathways with Handrail Spot III. It casts a warm, sophisticated glow that guides the way while enhancing your architectural space.\n",
-                  "product_description": "Discover a new dimension of architectural elegance with Handrail Spot III. Perfectly engineered to blend seamlessly into your indoor and outdoor environments, this exquisite lighting solution casts a mesmerizing, sophisticated glow that elegantly maps your pathways. Designed for connoisseurs of fine detail, it redefines standard walkways into spectacular visual corridors, infusing your surroundings with an unparalleled layer of luxurious ambiance and subtle, reassuring security. Sleek, minimal, and entirely captivating, it represents the absolute pinnacle of refined aesthetic illumination.\n",
-                  "product_images": [
-                    "assets/img/products/recqPIv7UfmEBe3PO_75ae2b3eb3.jpg"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/recqPIv7UfmEBe3PO_dim_9441825fc8.jpg"
-                  ],
-                  "stocked_item": [
-                    "In Stock"
-                  ],
-                  "datasheet": "Yes",
-                  "technical_icons": [
-                    "assets/img/icons/recqPIv7UfmEBe3PO_icon_4325c8da3d.svg",
-                    "assets/img/icons/recqPIv7UfmEBe3PO_icon_fb69dd1d1f.svg",
-                    "assets/img/icons/recqPIv7UfmEBe3PO_icon_e293534d20.svg"
-                  ],
-                  "meta_keywords": "",
-                  "supplier_name": "SPARKLED",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP67",
-                        "icon": ""
-                      }
-                    ],
-                    "Impact Strength": [
-                      {
-                        "value": "IK10",
-                        "icon": ""
-                      }
-                    ],
-                    "Optics": [
-                      {
-                        "value": "SYM 60°",
-                        "icon": "assets/img/attribute_icon/attr_optics_sym_60_76d49c9e90.svg"
-                      },
-                      {
-                        "value": "ASYM 80°",
-                        "icon": "assets/img/attribute_icon/attr_optics_asym_80_e88e759e93.svg"
-                      }
-                    ],
-                    "Power": [
-                      {
-                        "value": "1.5W",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power": [
-                      {
-                        "name": "1.5W",
-                        "id": "101"
-                      }
-                    ],
-                    "Optics": [
-                      {
-                        "name": "SYM 60°",
-                        "id": "102"
-                      },
-                      {
-                        "name": "ASYM 80°",
-                        "id": "103"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "3000K",
-                        "id": "104"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "105"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP67",
-                        "id": "106"
-                      }
-                    ],
-                    "Impact Strength": [
-                      {
-                        "name": "IK10",
-                        "id": "107"
-                      }
-                    ]
-                  },
-                  "constraints": [],
-                  "category_path": [
-                    "Outdoor & Architectural",
-                    "Handrail"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
           "name": "Pool Light",
           "children": [
             {
@@ -14969,20 +14722,20 @@ const AZOOGI_PRODUCTS = {
                   "product_short_description": "Dive into an enchanting oasis of light and luxury. Elevate your pool into a sophisticated, glowing retreat, adding breathtaking allure and serene ambiance to every evening.\n",
                   "product_description": "Dive into an enchanting oasis of light and luxury with our premium pool illumination solution. Designed to effortlessly elevate your outdoor experience, it bathes your aquatic retreat in a warm, sophisticated radiance that creates an unparalleled ambiance. Perfect for those with a discerning eye for discreet elegance and refined architectural detail, this lighting masterpiece transforms ordinary evenings into a breathtaking visual journey, adding both captivating allure and a profound sense of serenity to your home.\n",
                   "product_images": [
-                    "assets/img/products/recPcYiIIV8VLqru4_9bed217b49.jpg"
+                    "assets/img/products/recPcYiIIV8VLqru4_40e9df1387.jpg"
                   ],
                   "product_dimension": [
-                    "assets/img/products/recPcYiIIV8VLqru4_dim_07759f9275.jpg"
+                    "assets/img/products/recPcYiIIV8VLqru4_dim_15a793efef.jpg"
                   ],
                   "stocked_item": [
                     "Please Enquire"
                   ],
                   "datasheet": "No",
                   "technical_icons": [
-                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_312bb59040.svg",
-                    "assets/img/icons/recPcYiIIV8VLqru4_icon_314b4813a4.svg",
-                    "assets/img/icons/recPcYiIIV8VLqru4_icon_97a2f340ed.svg",
-                    "assets/img/icons/recPcYiIIV8VLqru4_icon_7c638d248c.svg"
+                    "assets/img/icons/recPcYiIIV8VLqru4_icon_eacaffeb7c.svg",
+                    "assets/img/icons/recPcYiIIV8VLqru4_icon_96dea8e1e0.svg",
+                    "assets/img/icons/recPcYiIIV8VLqru4_icon_cb8ec19bd5.svg",
+                    "assets/img/icons/recPcYiIIV8VLqru4_icon_a8b9985b68.svg"
                   ],
                   "meta_keywords": "underwater pool light, inground pool lights, above ground pool light, RGB pool light, color changing pool light, floating pool light, solar pool light, submersible pool light, smart pool light, waterproof pool light",
                   "supplier_name": "CHINA - 7 Colors Co Ltd",
@@ -14998,11 +14751,11 @@ const AZOOGI_PRODUCTS = {
                     "CCT": [
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "6000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_6000k_828a4b161d.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_6000k_c14a66d0a6.svg"
                       }
                     ],
                     "IP Rating": [
@@ -15074,23 +14827,22 @@ const AZOOGI_PRODUCTS = {
                   "product_short_description": "Transform your outdoor spaces into a breathtaking visual journey. Experience discreet luxury and a sophisticated glow that beautifully enhances your home.\n",
                   "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
                   "product_images": [
-                    "assets/img/products/recGgRF6gZMVCo6qY_929463bd9c.webp",
-                    "assets/img/products/recGgRF6gZMVCo6qY_b79b441742.jpg",
-                    "assets/img/products/recGgRF6gZMVCo6qY_73960dcaf0.jpg"
+                    "assets/img/products/recGgRF6gZMVCo6qY_9b1b1d38c3.webp",
+                    "assets/img/products/recGgRF6gZMVCo6qY_041725c766.jpg",
+                    "assets/img/products/recGgRF6gZMVCo6qY_1d91875579.webp"
                   ],
                   "product_dimension": [
-                    "assets/img/products/recGgRF6gZMVCo6qY_dim_3f7b0e15a9.webp"
+                    "assets/img/products/recGgRF6gZMVCo6qY_dim_b376e46c82.webp"
                   ],
                   "stocked_item": [
                     "In Stock"
                   ],
                   "datasheet": "Yes",
                   "technical_icons": [
-                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_312bb59040.svg",
-                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_df83f4a03d.svg",
-                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_0d544e5060.svg",
-                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_6a48faefcc.svg",
-                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_cbeed2b829.svg"
+                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_392affd361.svg",
+                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_7f28b8a2c1.svg",
+                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_12e39ae75b.svg",
+                    "assets/img/icons/recGgRF6gZMVCo6qY_icon_01480636d0.svg"
                   ],
                   "meta_keywords": "garden lights, outdoor garden lights, solar garden lights, LED landscape lighting, pathway lights, garden spotlights, yard lighting, low voltage landscape lights, waterproof outdoor lights, garden decor lighting",
                   "supplier_name": "CHINA - 7 Colors Co Ltd",
@@ -15106,7 +14858,7 @@ const AZOOGI_PRODUCTS = {
                     "Finish": [
                       {
                         "value": "Black finish",
-                        "icon": "assets/img/attribute_icon/attr_finish_black_finish_618f770095.svg"
+                        "icon": "assets/img/attribute_icon/attr_finish_black_finish_a1464292e3.svg"
                       }
                     ],
                     "IP Rating": [
@@ -15193,6 +14945,382 @@ const AZOOGI_PRODUCTS = {
               }
             }
           ]
+        },
+        {
+          "type": "category",
+          "name": "Handrail",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Handrail Spot II",
+              "variants": {
+                "Handrail Spot II": {
+                  "id": "recFfiGcLRw3JjjSh",
+                  "product_name": "Handrail Spot II",
+                  "category": "Handrail",
+                  "sku": "HRS011",
+                  "product_short_description": "Elevate your pathways with Handrail Spot II. It casts a warm, sophisticated ambiance that seamlessly guides your steps with elegant architectural charm.\n",
+                  "product_description": "Elevate your architectural designs with Handrail Spot II, the premium lighting solution that effortlessly marries sophistication with modern functionality. Designed to seamlessly blend into any indoor or outdoor pathway, it casts a warm, inviting glow that gracefully guides your way while accentuating the elegant contours of your space. Perfect for those who demand meticulous attention to detail, this exquisite fixture turns ordinary walkways into enchanting visual experiences, adding a layer of sophisticated ambiance and subtle security to your surroundings. Discreet yet profoundly impactful, it is the quintessential choice for transforming your environment into a beautifully illuminated masterpiece.\n",
+                  "product_images": [
+                    "assets/img/products/recFfiGcLRw3JjjSh_7687c7ffab.jpg"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/recFfiGcLRw3JjjSh_dim_9f2a7d9c6a.jpg"
+                  ],
+                  "stocked_item": [
+                    "In Stock"
+                  ],
+                  "datasheet": "Yes",
+                  "technical_icons": [
+                    "assets/img/icons/recFfiGcLRw3JjjSh_icon_7a45c89a2d.svg",
+                    "assets/img/icons/recFfiGcLRw3JjjSh_icon_8c6177002e.svg",
+                    "assets/img/icons/recFfiGcLRw3JjjSh_icon_b06ea0c985.svg"
+                  ],
+                  "meta_keywords": "",
+                  "supplier_name": "SPARKLED",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "3000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
+                    "Impact Strength": [
+                      {
+                        "value": "IK10",
+                        "icon": ""
+                      }
+                    ],
+                    "Optics": [
+                      {
+                        "value": "SYM 30°",
+                        "icon": "assets/img/attribute_icon/attr_optics_sym_30_0ff2c02268.svg"
+                      },
+                      {
+                        "value": "SYM 60°",
+                        "icon": "assets/img/attribute_icon/attr_optics_sym_60_9b396c72e3.svg"
+                      },
+                      {
+                        "value": "ASYM 50°",
+                        "icon": "assets/img/attribute_icon/attr_optics_asym_50_d1807ae0bc.svg"
+                      }
+                    ],
+                    "Power": [
+                      {
+                        "value": "1.5W",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "1.5W",
+                        "id": "101"
+                      }
+                    ],
+                    "Optics": [
+                      {
+                        "name": "SYM 30°",
+                        "id": "102"
+                      },
+                      {
+                        "name": "SYM 60°",
+                        "id": "103"
+                      },
+                      {
+                        "name": "ASYM 50°",
+                        "id": "104"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "3000K",
+                        "id": "105"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "106"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP67",
+                        "id": "107"
+                      }
+                    ],
+                    "Impact Strength": [
+                      {
+                        "name": "IK10",
+                        "id": "108"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "Outdoor & Architectural",
+                    "Handrail"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Handrail Spot I",
+              "variants": {
+                "Handrail Spot I": {
+                  "id": "rechaqZ8XahO5Kftl",
+                  "product_name": "Handrail Spot I",
+                  "category": "Handrail",
+                  "sku": "HRS001",
+                  "product_short_description": "Elegantly illuminate your pathways with Handrail Spot I. It casts a warm, sophisticated glow that guides the way while beautifully enhancing your architectural space.\n",
+                  "product_description": "Illuminate your architectural masterpieces with the perfect blend of elegance and modern design. Handrail Spot I offers seamless integration into your outdoor or indoor pathways, casting a warm, sophisticated glow that guides the way while enhancing the beauty of your space. Crafted for those who appreciate refined detail, it transforms ordinary walkways into stunning visual journeys, adding an unparalleled touch of ambiance and security to any setting. Elegant, discreet, and captivating, it is the ultimate choice for elevated architectural lighting.\n",
+                  "product_images": [
+                    "assets/img/products/rechaqZ8XahO5Kftl_5568f68825.jpg"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/rechaqZ8XahO5Kftl_dim_830c7e14f2.jpg"
+                  ],
+                  "stocked_item": [
+                    "In Stock"
+                  ],
+                  "datasheet": "Yes",
+                  "technical_icons": [
+                    "assets/img/icons/rechaqZ8XahO5Kftl_icon_f094692cd2.svg",
+                    "assets/img/icons/rechaqZ8XahO5Kftl_icon_8a6edd56f8.svg",
+                    "assets/img/icons/rechaqZ8XahO5Kftl_icon_7704ccfa37.svg"
+                  ],
+                  "meta_keywords": "",
+                  "supplier_name": "SPARKLED",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "3000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
+                    "Impact Strength": [
+                      {
+                        "value": "IK10",
+                        "icon": ""
+                      }
+                    ],
+                    "Optics": [
+                      {
+                        "value": "SYM 30°",
+                        "icon": "assets/img/attribute_icon/attr_optics_sym_30_0ff2c02268.svg"
+                      },
+                      {
+                        "value": "SYM 60°",
+                        "icon": "assets/img/attribute_icon/attr_optics_sym_60_9b396c72e3.svg"
+                      },
+                      {
+                        "value": "ASYM 50°",
+                        "icon": "assets/img/attribute_icon/attr_optics_asym_50_d1807ae0bc.svg"
+                      }
+                    ],
+                    "Power": [
+                      {
+                        "value": "1.2W",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "1.2W",
+                        "id": "101"
+                      }
+                    ],
+                    "Optics": [
+                      {
+                        "name": "SYM 30°",
+                        "id": "102"
+                      },
+                      {
+                        "name": "SYM 60°",
+                        "id": "103"
+                      },
+                      {
+                        "name": "ASYM 50°",
+                        "id": "104"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "3000K",
+                        "id": "105"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "106"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP67",
+                        "id": "107"
+                      }
+                    ],
+                    "Impact Strength": [
+                      {
+                        "name": "IK10",
+                        "id": "108"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "Outdoor & Architectural",
+                    "Handrail"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Handrail Spot III",
+              "variants": {
+                "Handrail Spot III": {
+                  "id": "recqPIv7UfmEBe3PO",
+                  "product_name": "Handrail Spot III",
+                  "category": "Handrail",
+                  "sku": "HRS021",
+                  "product_short_description": "Elegantly illuminate your pathways with Handrail Spot III. It casts a warm, sophisticated glow that guides the way while enhancing your architectural space.\n",
+                  "product_description": "Discover a new dimension of architectural elegance with Handrail Spot III. Perfectly engineered to blend seamlessly into your indoor and outdoor environments, this exquisite lighting solution casts a mesmerizing, sophisticated glow that elegantly maps your pathways. Designed for connoisseurs of fine detail, it redefines standard walkways into spectacular visual corridors, infusing your surroundings with an unparalleled layer of luxurious ambiance and subtle, reassuring security. Sleek, minimal, and entirely captivating, it represents the absolute pinnacle of refined aesthetic illumination.\n",
+                  "product_images": [
+                    "assets/img/products/recqPIv7UfmEBe3PO_895719bf16.jpg"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/recqPIv7UfmEBe3PO_dim_7bb026640a.jpg"
+                  ],
+                  "stocked_item": [
+                    "In Stock"
+                  ],
+                  "datasheet": "Yes",
+                  "technical_icons": [
+                    "assets/img/icons/recqPIv7UfmEBe3PO_icon_f896b848be.svg",
+                    "assets/img/icons/recqPIv7UfmEBe3PO_icon_969f4d2dfa.svg",
+                    "assets/img/icons/recqPIv7UfmEBe3PO_icon_16ec9b506d.svg"
+                  ],
+                  "meta_keywords": "",
+                  "supplier_name": "SPARKLED",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "3000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
+                    "Impact Strength": [
+                      {
+                        "value": "IK10",
+                        "icon": ""
+                      }
+                    ],
+                    "Optics": [
+                      {
+                        "value": "SYM 60°",
+                        "icon": "assets/img/attribute_icon/attr_optics_sym_60_9b396c72e3.svg"
+                      },
+                      {
+                        "value": "ASYM 80°",
+                        "icon": "assets/img/attribute_icon/attr_optics_asym_80_b209b6589c.svg"
+                      }
+                    ],
+                    "Power": [
+                      {
+                        "value": "1.5W",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "1.5W",
+                        "id": "101"
+                      }
+                    ],
+                    "Optics": [
+                      {
+                        "name": "SYM 60°",
+                        "id": "102"
+                      },
+                      {
+                        "name": "ASYM 80°",
+                        "id": "103"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "3000K",
+                        "id": "104"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "105"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP67",
+                        "id": "106"
+                      }
+                    ],
+                    "Impact Strength": [
+                      {
+                        "name": "IK10",
+                        "id": "107"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "Outdoor & Architectural",
+                    "Handrail"
+                  ]
+                }
+              }
+            }
+          ]
         }
       ]
     },
@@ -15200,6 +15328,202 @@ const AZOOGI_PRODUCTS = {
       "type": "category",
       "name": "Strips and Flex",
       "children": [
+        {
+          "type": "category",
+          "name": "LED Flex Sheet",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "LED Flex Sheet",
+              "variants": {
+                "LED Flex Sheet": {
+                  "id": "recF77CHZbtpxqAdy",
+                  "product_name": "LED Flex Sheet",
+                  "category": "LED Flex Sheet",
+                  "sku": "SMD-SHEET-30W-3K-IP20",
+                  "product_short_description": "Transform your home into a breathtaking visual journey. Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.\n",
+                  "product_description": "Transform your home into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers a sophisticated, seamless glow that beautifully enhances your elegant spaces, casting a warm and inviting atmosphere throughout. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating style to any room, making it the ultimate choice for elevated interior illumination.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    "In Stock"
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "",
+                  "supplier_name": "CHINA - Rising Sun",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "3000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
+                      },
+                      {
+                        "value": "6000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_6000k_c14a66d0a6.svg"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP20",
+                        "icon": ""
+                      },
+                      {
+                        "value": "IP54",
+                        "icon": ""
+                      },
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
+                    "Power": [
+                      {
+                        "value": "30W",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "480mm (L) x 240mm (W)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "30W",
+                        "id": "101"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "3000K",
+                        "id": "102"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "103"
+                      },
+                      {
+                        "name": "6000K",
+                        "id": "104"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "105"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP20",
+                        "id": "106"
+                      },
+                      {
+                        "name": "IP54",
+                        "id": "107"
+                      },
+                      {
+                        "name": "IP67",
+                        "id": "108"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "480mm (L) x 240mm (W)",
+                        "id": "109"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "Strips and Flex",
+                    "LED Flex Sheet"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "name": "RGBW Strip",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Flex Alu RGBW Strip",
+              "variants": {
+                "Flex Alu RGBW Strip": {
+                  "id": "recalM75aIuyrcP07",
+                  "product_name": "Flex Alu RGBW Strip",
+                  "category": "RGBW Strip",
+                  "sku": "PR-BEND-1M",
+                  "product_short_description": "Elevate your spaces into a breathtaking visual journey of elegant design and discreet luxury with a sophisticated, seamless glow.\n",
+                  "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    "In Stock"
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "",
+                  "supplier_name": "CHINA - Rising Sun",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": "assets/img/attribute_icon/attr_finish_silver_8ffb4d4aa9.svg"
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "value": "1,000mm",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Profile Length": [
+                      {
+                        "name": "1,000mm",
+                        "id": "101"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "102"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "Strips and Flex",
+                    "RGBW Strip"
+                  ]
+                }
+              }
+            }
+          ]
+        },
         {
           "type": "category",
           "name": "SMD Strip",
@@ -15216,10 +15540,10 @@ const AZOOGI_PRODUCTS = {
                   "product_short_description": "Transform your spaces with a stunning visual journey of elegant design and discreet luxury, creating a sophisticated and seamless glow that beautifully enhances your home.\n",
                   "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
                   "product_images": [
-                    "assets/img/products/recYMBioQ5x4HEKdT_6359d604d9.jpg",
-                    "assets/img/products/recYMBioQ5x4HEKdT_e4a76a171d.jpg",
-                    "assets/img/products/recYMBioQ5x4HEKdT_2922c89cdc.jpg",
-                    "assets/img/products/recYMBioQ5x4HEKdT_a12209a510.jpg"
+                    "assets/img/products/recYMBioQ5x4HEKdT_9390c5e378.jpg",
+                    "assets/img/products/recYMBioQ5x4HEKdT_d9a480764c.webp",
+                    "assets/img/products/recYMBioQ5x4HEKdT_e0e1bcf7ad.webp",
+                    "assets/img/products/recYMBioQ5x4HEKdT_f70c2c183c.webp"
                   ],
                   "product_dimension": "",
                   "stocked_item": [
@@ -15227,9 +15551,9 @@ const AZOOGI_PRODUCTS = {
                   ],
                   "datasheet": "No",
                   "technical_icons": [
-                    "assets/img/icons/recYMBioQ5x4HEKdT_icon_d4e243a4b0.svg",
-                    "assets/img/icons/recYMBioQ5x4HEKdT_icon_1419b65f7c.svg",
-                    "assets/img/icons/recYMBioQ5x4HEKdT_icon_769a93460d.svg"
+                    "assets/img/icons/recYMBioQ5x4HEKdT_icon_72c5536fa4.svg",
+                    "assets/img/icons/recYMBioQ5x4HEKdT_icon_6843a1e83b.svg",
+                    "assets/img/icons/recYMBioQ5x4HEKdT_icon_3c2dfa1d87.svg"
                   ],
                   "meta_keywords": "",
                   "supplier_name": "CHINA - Rising Sun",
@@ -15239,15 +15563,15 @@ const AZOOGI_PRODUCTS = {
                     "CCT": [
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
                       },
                       {
                         "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
                       }
                     ],
                     "IP Rating": [
@@ -15381,202 +15705,6 @@ const AZOOGI_PRODUCTS = {
               }
             }
           ]
-        },
-        {
-          "type": "category",
-          "name": "LED Flex Sheet",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "LED Flex Sheet",
-              "variants": {
-                "LED Flex Sheet": {
-                  "id": "recF77CHZbtpxqAdy",
-                  "product_name": "LED Flex Sheet",
-                  "category": "LED Flex Sheet",
-                  "sku": "SMD-SHEET-30W-3K-IP20",
-                  "product_short_description": "Transform your home into a breathtaking visual journey. Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.\n",
-                  "product_description": "Transform your home into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers a sophisticated, seamless glow that beautifully enhances your elegant spaces, casting a warm and inviting atmosphere throughout. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating style to any room, making it the ultimate choice for elevated interior illumination.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    "In Stock"
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "",
-                  "supplier_name": "CHINA - Rising Sun",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
-                      },
-                      {
-                        "value": "6000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_6000k_828a4b161d.svg"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP20",
-                        "icon": ""
-                      },
-                      {
-                        "value": "IP54",
-                        "icon": ""
-                      },
-                      {
-                        "value": "IP67",
-                        "icon": ""
-                      }
-                    ],
-                    "Power": [
-                      {
-                        "value": "30W",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "480mm (L) x 240mm (W)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power": [
-                      {
-                        "name": "30W",
-                        "id": "101"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "3000K",
-                        "id": "102"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "103"
-                      },
-                      {
-                        "name": "6000K",
-                        "id": "104"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "105"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP20",
-                        "id": "106"
-                      },
-                      {
-                        "name": "IP54",
-                        "id": "107"
-                      },
-                      {
-                        "name": "IP67",
-                        "id": "108"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "480mm (L) x 240mm (W)",
-                        "id": "109"
-                      }
-                    ]
-                  },
-                  "constraints": [],
-                  "category_path": [
-                    "Strips and Flex",
-                    "LED Flex Sheet"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
-          "name": "RGBW Strip",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "Flex Alu RGBW Strip",
-              "variants": {
-                "Flex Alu RGBW Strip": {
-                  "id": "recalM75aIuyrcP07",
-                  "product_name": "Flex Alu RGBW Strip",
-                  "category": "RGBW Strip",
-                  "sku": "PR-BEND-1M",
-                  "product_short_description": "Elevate your spaces into a breathtaking visual journey of elegant design and discreet luxury with a sophisticated, seamless glow.\n",
-                  "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    "In Stock"
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "",
-                  "supplier_name": "CHINA - Rising Sun",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": "assets/img/attribute_icon/attr_finish_silver_0c6d1d2d3f.svg"
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "value": "1,000mm",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Profile Length": [
-                      {
-                        "name": "1,000mm",
-                        "id": "101"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "102"
-                      }
-                    ]
-                  },
-                  "constraints": [],
-                  "category_path": [
-                    "Strips and Flex",
-                    "RGBW Strip"
-                  ]
-                }
-              }
-            }
-          ]
         }
       ]
     },
@@ -15584,256 +15712,6 @@ const AZOOGI_PRODUCTS = {
       "type": "category",
       "name": "Linear Lights",
       "children": [
-        {
-          "type": "category",
-          "name": "SMD",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "22W SMD",
-              "variants": {
-                "22W SMD": {
-                  "id": "rec3drebeaCCHzI6X",
-                  "product_name": "22W SMD",
-                  "category": "SMD",
-                  "sku": "SMD-22W-2.7K-IP20",
-                  "product_short_description": "Elevate your architectural vision with stunning linear lighting designed to bring seamless radiance, breathtaking visual impact, and unmatched elegance to any space.\n",
-                  "product_description": "Elevate your architectural visions with the 22W SMD, a premium linear lighting solution designed to bring seamless radiance to any space. Engineered for incredible flexibility and breathtaking visual impact, this brilliant light curves effortlessly to accentuate contours and create striking design statements. Whether you are transforming a high-end commercial venue or adding a sophisticated atmosphere to an outdoor landscape, its pristine, uniform glow delivers unmatched aesthetic elegance. Built to maintain its flawless brilliance, it is the ultimate choice for designers who refuse to compromise on beauty, adaptability, and style.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "22W SMD Linear Light, Premium Linear Lighting, Flexible LED Strip, Architectural Contour Light, Uniform Glow Lighting, High Efficiency LED Tape",
-                  "supplier_name": "CHINA - Colorsled",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
-                      },
-                      {
-                        "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
-                      },
-                      {
-                        "value": "6000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_6000k_828a4b161d.svg"
-                      }
-                    ],
-                    "Cut Interval": [
-                      {
-                        "value": "Free Cut",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP20",
-                        "icon": ""
-                      },
-                      {
-                        "value": "IP65 (Nano-Coated)",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "22W/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "22W/m",
-                        "id": "101"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "2700K",
-                        "id": "102"
-                      },
-                      {
-                        "name": "3000K",
-                        "id": "103"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "104"
-                      },
-                      {
-                        "name": "6000K",
-                        "id": "105"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "106"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP20",
-                        "id": "107"
-                      },
-                      {
-                        "name": "IP65 (Nano-Coated)",
-                        "id": "108"
-                      }
-                    ],
-                    "Cut Interval": [
-                      {
-                        "name": "Free Cut",
-                        "id": "109"
-                      }
-                    ]
-                  },
-                  "constraints": [],
-                  "category_path": [
-                    "Linear Lights",
-                    "SMD"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "29W SMD",
-              "variants": {
-                "29W SMD": {
-                  "id": "recZgwjmklVZhFSVo",
-                  "product_name": "29W SMD",
-                  "category": "SMD",
-                  "sku": "SMD-29W-2.7K-IP20",
-                  "product_short_description": "Elevate your design visions with this premium linear lighting solution, crafted to bring seamless radiance and an unparalleled aesthetic elegance to any space.\n",
-                  "product_description": "Elevate your design visions with this premium linear lighting solution, crafted to bring seamless radiance and an unparalleled aesthetic elegance to any space. Engineered for exceptional flexibility and breathtaking visual impact, it accentuates contours effortlessly to create striking architectural design statements. Whether you are transforming a sophisticated commercial venue or adding a luxurious atmosphere to an interior landscape, its pristine, uniform glow delivers unmatched brilliance. It is the ultimate choice for designers and creators who refuse to compromise on beauty, modern adaptability, and pure style.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "29W SMD, Premium Linear Lighting, Architectural Design Light, Uniform Glow Strip, Elegant Contour Light, High Power LED Strip",
-                  "supplier_name": "CHINA - Colorsled",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
-                      },
-                      {
-                        "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
-                      },
-                      {
-                        "value": "6000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_6000k_828a4b161d.svg"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP20",
-                        "icon": ""
-                      }
-                    ],
-                    "Strip Width": [
-                      {
-                        "value": "12mm",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "29W/m",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "29W/m",
-                        "id": "101"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "2700K",
-                        "id": "102"
-                      },
-                      {
-                        "name": "3000K",
-                        "id": "103"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "104"
-                      },
-                      {
-                        "name": "6000K",
-                        "id": "105"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "106"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP20",
-                        "id": "107"
-                      }
-                    ],
-                    "Strip Width": [
-                      {
-                        "name": "12mm",
-                        "id": "108"
-                      }
-                    ]
-                  },
-                  "constraints": [],
-                  "category_path": [
-                    "Linear Lights",
-                    "SMD"
-                  ]
-                }
-              }
-            }
-          ]
-        },
         {
           "type": "category",
           "name": "LumoFlex",
@@ -15864,15 +15742,15 @@ const AZOOGI_PRODUCTS = {
                     "CCT": [
                       {
                         "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
                       },
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
                       },
                       {
                         "value": "2300K-4000K",
@@ -16104,6 +15982,256 @@ const AZOOGI_PRODUCTS = {
         },
         {
           "type": "category",
+          "name": "SMD",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "22W SMD",
+              "variants": {
+                "22W SMD": {
+                  "id": "rec3drebeaCCHzI6X",
+                  "product_name": "22W SMD",
+                  "category": "SMD",
+                  "sku": "SMD-22W-2.7K-IP20",
+                  "product_short_description": "Elevate your architectural vision with stunning linear lighting designed to bring seamless radiance, breathtaking visual impact, and unmatched elegance to any space.\n",
+                  "product_description": "Elevate your architectural visions with the 22W SMD, a premium linear lighting solution designed to bring seamless radiance to any space. Engineered for incredible flexibility and breathtaking visual impact, this brilliant light curves effortlessly to accentuate contours and create striking design statements. Whether you are transforming a high-end commercial venue or adding a sophisticated atmosphere to an outdoor landscape, its pristine, uniform glow delivers unmatched aesthetic elegance. Built to maintain its flawless brilliance, it is the ultimate choice for designers who refuse to compromise on beauty, adaptability, and style.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "22W SMD Linear Light, Premium Linear Lighting, Flexible LED Strip, Architectural Contour Light, Uniform Glow Lighting, High Efficiency LED Tape",
+                  "supplier_name": "CHINA - Colorsled",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "2700K",
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
+                      },
+                      {
+                        "value": "3000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
+                      },
+                      {
+                        "value": "6000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_6000k_c14a66d0a6.svg"
+                      }
+                    ],
+                    "Cut Interval": [
+                      {
+                        "value": "Free Cut",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP20",
+                        "icon": ""
+                      },
+                      {
+                        "value": "IP65 (Nano-Coated)",
+                        "icon": ""
+                      }
+                    ],
+                    "Power Consumption Rate": [
+                      {
+                        "value": "22W/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "22W/m",
+                        "id": "101"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "2700K",
+                        "id": "102"
+                      },
+                      {
+                        "name": "3000K",
+                        "id": "103"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "104"
+                      },
+                      {
+                        "name": "6000K",
+                        "id": "105"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "106"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP20",
+                        "id": "107"
+                      },
+                      {
+                        "name": "IP65 (Nano-Coated)",
+                        "id": "108"
+                      }
+                    ],
+                    "Cut Interval": [
+                      {
+                        "name": "Free Cut",
+                        "id": "109"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "Linear Lights",
+                    "SMD"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "29W SMD",
+              "variants": {
+                "29W SMD": {
+                  "id": "recZgwjmklVZhFSVo",
+                  "product_name": "29W SMD",
+                  "category": "SMD",
+                  "sku": "SMD-29W-2.7K-IP20",
+                  "product_short_description": "Elevate your design visions with this premium linear lighting solution, crafted to bring seamless radiance and an unparalleled aesthetic elegance to any space.\n",
+                  "product_description": "Elevate your design visions with this premium linear lighting solution, crafted to bring seamless radiance and an unparalleled aesthetic elegance to any space. Engineered for exceptional flexibility and breathtaking visual impact, it accentuates contours effortlessly to create striking architectural design statements. Whether you are transforming a sophisticated commercial venue or adding a luxurious atmosphere to an interior landscape, its pristine, uniform glow delivers unmatched brilliance. It is the ultimate choice for designers and creators who refuse to compromise on beauty, modern adaptability, and pure style.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "29W SMD, Premium Linear Lighting, Architectural Design Light, Uniform Glow Strip, Elegant Contour Light, High Power LED Strip",
+                  "supplier_name": "CHINA - Colorsled",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "2700K",
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
+                      },
+                      {
+                        "value": "3000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
+                      },
+                      {
+                        "value": "6000K",
+                        "icon": "assets/img/attribute_icon/attr_cct_6000k_c14a66d0a6.svg"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP20",
+                        "icon": ""
+                      }
+                    ],
+                    "Strip Width": [
+                      {
+                        "value": "12mm",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ],
+                    "Power Consumption Rate": [
+                      {
+                        "value": "29W/m",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "29W/m",
+                        "id": "101"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "2700K",
+                        "id": "102"
+                      },
+                      {
+                        "name": "3000K",
+                        "id": "103"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "104"
+                      },
+                      {
+                        "name": "6000K",
+                        "id": "105"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "106"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP20",
+                        "id": "107"
+                      }
+                    ],
+                    "Strip Width": [
+                      {
+                        "name": "12mm",
+                        "id": "108"
+                      }
+                    ]
+                  },
+                  "constraints": [],
+                  "category_path": [
+                    "Linear Lights",
+                    "SMD"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
           "name": "COB",
           "children": [
             {
@@ -16132,15 +16260,15 @@ const AZOOGI_PRODUCTS = {
                     "CCT": [
                       {
                         "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
                       },
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
                       }
                     ],
                     "IP Rating": [
@@ -16242,19 +16370,19 @@ const AZOOGI_PRODUCTS = {
                     "CCT": [
                       {
                         "value": "2700K",
-                        "icon": "assets/img/attribute_icon/attr_cct_2700k_3cf8f0b1ed.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_2700k_4384711d96.svg"
                       },
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "4000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_4000k_7d2f795f56.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_4000k_5286331eba.svg"
                       },
                       {
                         "value": "6000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_6000k_828a4b161d.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_6000k_c14a66d0a6.svg"
                       }
                     ],
                     "Cut Interval": [
@@ -16396,7 +16524,7 @@ const AZOOGI_PRODUCTS = {
                     "CCT": [
                       {
                         "value": "3000K",
-                        "icon": "assets/img/attribute_icon/attr_cct_3000k_bbc8ea85a6.svg"
+                        "icon": "assets/img/attribute_icon/attr_cct_3000k_1f23a74d2c.svg"
                       },
                       {
                         "value": "2700K-6500K",
