@@ -1204,7 +1204,8 @@
     }
 
     function addProductToCatalog(vName, modelName, catPath, vData) {
-      if (!vName || productsMap[vName]) return;
+      var itemKey = (vData && vData.id) ? vData.id : vName;
+      if (!vName || productsMap[itemKey]) return;
 
       var parentCat = catPath[0] || 'General';
       var subCat = catPath.length > 1 ? catPath[catPath.length - 1] : parentCat;
@@ -1220,6 +1221,7 @@
       extractSpecsFromFeatures(features);
 
       var item = {
+        id: (vData && vData.id) ? vData.id : '',
         name: vName,
         modelName: modelName,
         sub: subCat,
@@ -1230,7 +1232,7 @@
         specs: features
       };
 
-      productsMap[vName] = true;
+      productsMap[itemKey] = true;
       products.push(item);
     }
 
@@ -1280,8 +1282,9 @@
               specs: feats,
               rawProd: prod
             };
-            if (!productsMap[pName]) {
-              productsMap[pName] = true;
+            var itemKey = prod.id || pName;
+            if (!productsMap[itemKey]) {
+              productsMap[itemKey] = true;
               products.push(item);
             }
           });
@@ -1719,10 +1722,19 @@
 
         var imgHtml = '<div class="prod-swatch" style="background-image:url(\'' + (p.img || 'assets/logo_dark.png') + '\'); background-size:cover; background-position:center;"></div>';
 
+        var displayName = p.name;
+        if (p.specs && p.specs.Power) {
+          var pwr = p.specs.Power;
+          var pwrVal = Array.isArray(pwr) ? (pwr[0] && (typeof pwr[0] === 'object' && pwr[0].value ? pwr[0].value : pwr[0])) : ((typeof pwr === 'object' && pwr.value) ? pwr.value : pwr);
+          if (pwrVal && String(displayName).toLowerCase().indexOf(String(pwrVal).toLowerCase()) === -1) {
+            displayName += ' (' + pwrVal + ')';
+          }
+        }
+
         return '<div class="prod-card" data-href="' + detailUrl + '" role="link" tabindex="0">' +
           '<div class="prod-card-img">' + imgHtml + '</div>' +
           '<div class="prod-card-title">' +
-          '<div class="prod-card-title-text"><span class="cat-label">' + p.sub + '</span>' + p.name + '</div>' +
+          '<div class="prod-card-title-text"><span class="cat-label">' + p.sub + '</span>' + displayName + '</div>' +
           '<button class="add-quote-btn" aria-label="Add to quote" onclick="event.stopPropagation(); this.classList.add(\'added\'); this.innerHTML=\'&check;\';">+</button>' +
           '</div>' +
           '</div>';
