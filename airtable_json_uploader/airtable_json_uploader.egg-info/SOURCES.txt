@@ -7,6 +7,7 @@ airtable_json_uploader/airtable_client.py
 airtable_json_uploader/app.py
 airtable_json_uploader/cli.py
 airtable_json_uploader/config.py
+airtable_json_uploader/extractor.py
 airtable_json_uploader/mapper.py
 airtable_json_uploader/parser.py
 airtable_json_uploader.egg-info/PKG-INFO
@@ -17,4 +18,7 @@ airtable_json_uploader.egg-info/requires.txt
 airtable_json_uploader.egg-info/top_level.txt
 airtable_json_uploader/static/app.js
 airtable_json_uploader/static/style.css
+airtable_json_uploader/static/test_attributes.js
+airtable_json_uploader/templates/extract.html
 airtable_json_uploader/templates/index.html
+airtable_json_uploader/templates/test_attributes.html

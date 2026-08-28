@@ -16,6 +16,7 @@ setup(
             "airtable-upload = airtable_json_uploader.cli:main",
             "airtable-web = airtable_json_uploader.app:main",
             "airtable-extract = airtable_json_uploader.cli:extract_cli",
+            "azoogi-version = airtable_json_uploader.cli:version_cli",
         ],
     },
     package_data={

@@ -70,6 +70,26 @@ You can extract product categories, details, images, and linked attributes using
 
 ---
 
+## ⚡ Cache Version Management (`?v=...`)
+
+Script query version tags (`assets/js/products_data.js?v=2.6`) across all HTML files can be checked and updated using the automated version manager:
+
+* **Automatic Auto-Bump**: Every time data extraction runs (`airtable-extract` or Web Studio sync), cache version tags in all HTML files are automatically incremented (`v2.6` -> `v2.7`) to bust browser cache immediately.
+* **CLI Auto-Bump Command**:
+  ```bash
+  python update_version.py bump    # or simply: azoogi-version bump
+  ```
+* **Set Explicit Version**:
+  ```bash
+  python update_version.py 2.8     # or: azoogi-version 2.8
+  ```
+* **Check Current Version**:
+  ```bash
+  python update_version.py status  # or: azoogi-version status
+  ```
+
+---
+
 ## 🌐 Running & Testing the Website Locally
 
 1. Start a local HTTP web server from the project root:

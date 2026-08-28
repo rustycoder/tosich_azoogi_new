@@ -434,6 +434,22 @@ def extract_cli():
         sys.exit(1)
 
 
+def version_cli():
+    """CLI entrypoint for bumping/updating site script cache version."""
+    from pathlib import Path
+    project_root = Path(__file__).parent.parent.parent
+    version_script = project_root / "update_version.py"
+    if not version_script.exists():
+        print("update_version.py not found in project root.")
+        sys.exit(1)
+
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("update_version", version_script)
+    uv_mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(uv_mod)
+    uv_mod.main()
+
+
 if __name__ == "__main__":
     main()
 

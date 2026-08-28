@@ -823,4 +823,18 @@ def run_extraction_cmd(
     js_path = Path(output_js) if output_js else project_root / "assets" / "js" / "products_data.js"
 
     extractor.save_outputs(catalog, json_path, js_path)
+
+    # Auto-bump script cache version across HTML files
+    try:
+        version_script = project_root / "update_version.py"
+        if version_script.exists():
+            import importlib.util
+            spec = importlib.util.spec_from_file_location("update_version", version_script)
+            uv_mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(uv_mod)
+            old_v, new_v, updated_files = uv_mod.update_cache_version("bump")
+            logger.info(f"Auto-bumped HTML cache version: v{old_v} -> v{new_v} across {len(updated_files)} HTML files")
+    except Exception as err:
+        logger.warning(f"Could not auto-bump HTML cache version: {err}")
+
     return catalog
