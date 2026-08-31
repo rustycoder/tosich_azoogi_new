@@ -19,4 +19,9 @@ enum Status: string
     {
         return $this === self::Active;
     }
+
+    public function toggle(): self
+    {
+        return $this === self::Active ? self::Inactive : self::Active;
+    }
 }

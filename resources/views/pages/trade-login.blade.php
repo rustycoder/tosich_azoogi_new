@@ -194,13 +194,13 @@ html, body {
       &nbsp;&middot;&nbsp;
       <a href="mailto:sales@azoogi.com">sales@azoogi.com</a>
       &nbsp;&middot;&nbsp;
-      <a href="/policies#privacy">Privacy</a>
+      <a href="/privacy">Privacy</a>
       &nbsp;&middot;&nbsp;
-      <a href="/policies#terms">Terms</a>
+      <a href="/terms">Terms</a>
       &nbsp;&middot;&nbsp;
-      <a href="/policies#warranty">Warranty</a>
+      <a href="/warranty-returns">Warranty</a>
       &nbsp;&middot;&nbsp;
-      <a href="/policies#modern-slavery">Modern Slavery</a>
+      <a href="/modern-slavery">Modern Slavery</a>
     </div>
   </div>
 </section>

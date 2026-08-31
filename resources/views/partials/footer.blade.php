@@ -16,7 +16,7 @@
                 <a href="{{ url('/projects') }}">Projects</a>
                 <a href="{{ url('/ai-lighting') }}">AI Lighting</a>
                 <a href="{{ url('/contact') }}">Contact</a>
-                <a href="{{ url('/policies') }}">Policies</a>
+                <a href="{{ url('/privacy') }}">Privacy</a>
             </div>
             <div>
                 <h5>Contact</h5>
@@ -28,10 +28,10 @@
         <div class="copy">
             <div>&copy; {{ date('Y') }} Azoogi Pty Ltd. All rights reserved.</div>
             <div class="copy-links">
-                <a href="{{ url('/policies') }}#privacy">Privacy</a><span class="sep">&middot;</span>
-                <a href="{{ url('/policies') }}#terms">Terms</a><span class="sep">&middot;</span>
-                <a href="{{ url('/policies') }}#warranty">Warranty</a><span class="sep">&middot;</span>
-                <a href="{{ url('/policies') }}#modern-slavery">Modern Slavery</a>
+                <a href="{{ url('/privacy') }}">Privacy</a><span class="sep">&middot;</span>
+                <a href="{{ url('/terms') }}">Terms</a><span class="sep">&middot;</span>
+                <a href="{{ url('/warranty-returns') }}">Warranty</a><span class="sep">&middot;</span>
+                <a href="{{ url('/modern-slavery') }}">Modern Slavery</a>
             </div>
         </div>
     </div>

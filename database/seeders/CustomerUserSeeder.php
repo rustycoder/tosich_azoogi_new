@@ -11,7 +11,7 @@ class CustomerUserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::query()->updateOrCreate(
+        User::query()->firstOrCreate(
             ['email' => 'customer@azoogi.com'],
             [
                 'name' => 'Customer',

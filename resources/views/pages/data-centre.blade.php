@@ -1,12 +1,8 @@
 @extends('layouts.site')
 
-@section('title')
-Data Centre Lighting — Mission-Critical Design | Azoogi
-@endsection
+@section('title', $page->title)
 
-@section('description')
-Azoogi data centre lighting: mission-critical lighting & design services engineered for ANZ standards, max uptime, low PUE, and rapid deployment.
-@endsection
+@section('description', $page->meta_description)
 
 @section('bodyClass', 'dc-page')
 
@@ -20,99 +16,91 @@ Azoogi data centre lighting: mission-critical lighting & design services enginee
 @endpush
 
 @section('content')
+@php
+    $whyItems = $meta->group('why.item');
+    $hardwareTicks = $meta->list('hardware.tick');
+    $controlTicks = $meta->list('control.tick');
+    $emergencyItems = $meta->group('emergency.item');
+    $zones = $meta->group('zones.item');
+@endphp
 <main class="dc-main">
 
-  <section class="dc-hero">
+  <section class="dc-hero" {!! cms_section_attr('hero') !!}>
     <div class="dc-hero-media" aria-hidden="true">
-      <video class="dc-hero-video" autoplay muted loop playsinline preload="auto" poster="/assets/img/datacenter.webp">
-        <source src="/assets/img/Data_Centre_DRAFT_optimized.webm" type="video/webm">
+      <video class="dc-hero-video" autoplay muted loop playsinline preload="auto" poster="{{ media_url($meta->get('hero.poster')) }}">
+        <source src="{{ media_url($meta->get('hero.video')) }}" type="video/webm">
       </video>
     </div>
     <div class="dc-hero-copy">
-      <div class="kicker">Azoogi Data Centre Lighting</div>
-      <h1>Mission-Critical Data Centre<br><span>Lighting & Design Services</span></h1>
-      <p>Engineered for ANZ Standards. Built for Maximum Uptime, Low PUE, and Rapid Deployment.</p>
+      <div class="kicker">{{ $meta->get('hero.kicker') }}</div>
+      <h1>{!! nl2br_html($meta->get('hero.title'), true) !!}</h1>
+      <p>{{ $meta->get('hero.lead') }}</p>
     </div>
   </section>
 
-  <section class="dc-band">
+  <section class="dc-band" {!! cms_section_attr('intro') !!}>
     <div class="wrap dc-intro reveal">
-      <p>From hyperscale developments to brownfield retrofits, Azoogi delivers end-to-end, fully compliant lighting strategies across Australia and New Zealand. We combine tailored design expertise with intelligent controls, thermal-resilient hardware, and integrated sensing technology to de-risk your facility, cut operational energy, and optimize your Power Usage Effectiveness (PUE).</p>
+      <p>{{ $meta->get('intro.body') }}</p>
       
       <div class="dc-actions">
-        <a href="/contact" class="btn primary">Request a Design Consultation</a>
-        <a href="/contact" class="btn">Request Capability Statement</a>
+        <a href="{{ $meta->get('intro.cta.primary.href', 0, '/contact') }}" class="btn primary">{{ $meta->get('intro.cta.primary.label') }}</a>
+        <a href="{{ $meta->get('intro.cta.secondary.href', 0, '/contact') }}" class="btn">{{ $meta->get('intro.cta.secondary.label') }}</a>
       </div>
     </div>
   </section>
 
-  <section class="dc-band dc-band--alt">
+  <section class="dc-band dc-band--alt" {!! cms_section_attr('why') !!}>
     <div class="wrap dc-split">
       <div class="dc-split-copy reveal">
-        <div class="kicker">Why Azoogi Design Services?</div>
-        <h2>Complete Certainty for Your<br><span>White & Grey Spaces</span></h2>
-        <p>Lighting in mission-critical facilities is an operational tool that directly influences technician safety, maintenance precision, ambient heat loads, and overall facility efficiency.</p>
+        <div class="kicker">{{ $meta->get('why.kicker') }}</div>
+        <h2>{!! nl2br_html($meta->get('why.heading'), true) !!}</h2>
+        <p>{{ $meta->get('why.body') }}</p>
       </div>
       <ol class="dc-caps">
-        <li class="reveal" style="transition-delay: 0.1s">
-          <span class="dc-num">01</span>
-          <h3>Audit-Ready Compliance</h3>
-          <p>Fully engineered to satisfy AS/NZS 1680 (interior illuminance & glare control), AS/NZS 2293 (emergency lighting), and global TIA-942 standards.</p>
-        </li>
-        <li class="reveal" style="transition-delay: 0.2s">
-          <span class="dc-num">02</span>
-          <h3>3D Photometric Engineering</h3>
-          <p>Detailed modeling calculating Lux levels, glare control (UGR &lt;19), and color rendering across server aisles, control rooms, and corridors.</p>
-        </li>
-        <li class="reveal" style="transition-delay: 0.3s">
-          <span class="dc-num">03</span>
-          <h3>Cable & Asset Protection</h3>
-          <p>Zero-UV LED light engines prevent photo-degradation and embrittlement of sensitive fiber-optic jacketing, patch cables, and plastic server components.</p>
-        </li>
-        <li class="reveal" style="transition-delay: 0.4s">
-          <span class="dc-num">04</span>
-          <h3>Rapid Deployment & Circular</h3>
-          <p>Pre-configured, modular linear systems designed to minimize labor. High-efficacy luminaires utilizing recycled aluminum profiles and low-embodied-carbon materials.</p>
-        </li>
+        @foreach ($whyItems as $item)
+          <li class="reveal" style="transition-delay: {{ $loop->iteration * 0.1 }}s">
+            <span class="dc-num">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+            <h3>{{ $item['title'] ?? '' }}</h3>
+            <p>{{ $item['body'] ?? '' }}</p>
+          </li>
+        @endforeach
       </ol>
     </div>
   </section>
 
-  <section class="dc-band dc-band--tight">
+  <section class="dc-band dc-band--tight" {!! cms_section_attr('hardware') !!}>
     <div class="wrap dc-feature">
       <div class="dc-feature-copy reveal">
-        <div class="kicker">Hardware</div>
-        <h2>Engineered for Extreme<br><span>Data Hall Conditions</span></h2>
+        <div class="kicker">{{ $meta->get('hardware.kicker') }}</div>
+        <h2>{!! nl2br_html($meta->get('hardware.heading'), true) !!}</h2>
         <ul class="dc-ticks">
-          <li><strong>High-Ambient Thermal Resilience:</strong> Industrial linear solutions feature extruded aluminum heat sinks paired with long-life drivers tested for continuous 24/7 operation in elevated-temperature environments.</li>
-          <li><strong>Reduced HVAC Load:</strong> Ultra-efficient LEDs release minimal heat at the ceiling grid level, relieving thermal strain on CRAC/CRAH air conditioning units and lowering facility PUE.</li>
-          <li><strong>Precision Vertical Optics:</strong> Customized optical distribution delivers uniform vertical illuminance down server rack faces - eliminating dark spots and eye strain without wasting light on empty floors.</li>
-          <li><strong>Instant-On Reliability:</strong> Zero re-strike delay provides 100% instant visual output during power transfers, generator switchovers, or emergency events.</li>
+          @foreach ($hardwareTicks as $tick)
+            <li>{!! labelled_tick($tick) !!}</li>
+          @endforeach
         </ul>
       </div>
       <div class="dc-feature-img reveal" style="transition-delay: 0.2s">
         <figure>
-          <img src="/assets/img/datacenter1.webp" alt="Extreme Data Hall Conditions" loading="lazy">
+          <img src="{{ media_url($meta->get('hardware.image')) }}" alt="{{ $meta->get('hardware.heading') }}" loading="lazy">
         </figure>
       </div>
     </div>
   </section>
 
-  <section class="dc-band dc-band--alt dc-band--tight">
+  <section class="dc-band dc-band--alt dc-band--tight" {!! cms_section_attr('control') !!}>
     <div class="wrap dc-feature dc-feature--flip">
       <div class="dc-feature-copy reveal">
-        <div class="kicker">Control</div>
-        <h2>Smart Sensors &<br><span>Building Automation</span></h2>
+        <div class="kicker">{{ $meta->get('control.kicker') }}</div>
+        <h2>{!! nl2br_html($meta->get('control.heading'), true) !!}</h2>
         <ul class="dc-ticks">
-          <li><strong>Dynamic Occupancy Sensing:</strong> Lights automatically step up from low-power standby mode to full brightness upon technician entry, cutting baseline energy use when aisles are empty.</li>
-          <li><strong>Environmental Data Monitoring:</strong> Integrated sensors capture localized temperature, humidity, and air quality metrics directly at the ceiling grid level.</li>
-          <li><strong>Workflow & Security Insights:</strong> Occupancy heatmaps assist operational planning and support security protocols by tracking movement in restricted zones.</li>
-          <li><strong>Open-Protocol Control Integration:</strong> Seamlessly connect white space lighting with HVAC, access control, and master Building Management Systems (BMS) using open-standard wireless or wired architectures.</li>
+          @foreach ($controlTicks as $tick)
+            <li>{!! labelled_tick($tick) !!}</li>
+          @endforeach
         </ul>
       </div>
       <div class="dc-feature-img reveal" style="transition-delay: 0.2s">
         <figure>
-          <img src="/assets/img/datacenter2.webp" alt="Smart Sensors & Building Automation" loading="lazy">
+          <img src="{{ media_url($meta->get('control.image')) }}" alt="{{ $meta->get('control.heading') }}" loading="lazy">
         </figure>
       </div>
     </div>
@@ -120,40 +108,36 @@ Azoogi data centre lighting: mission-critical lighting & design services enginee
 
   <section class="dc-band">
     <div class="wrap dc-grid-section">
-      <div class="dc-grid-col reveal">
-        <h2>Fail-Safe <span>Emergency Lighting</span></h2>
-        <div class="dc-grid-item">
-          <h3>Centralized Emergency Power (CBS)</h3>
-          <p>Central addressable emergency battery systems located in climate-controlled utility rooms eliminate heat-related battery degradation, simplify automated testing, and extend service life.</p>
-        </div>
-        <div class="dc-grid-item">
-          <h3>High-Temperature Standalone Units</h3>
-          <p>Self-contained emergency fittings and self-testing spitfires built with high-temperature battery chemistry for reliable egress illumination.</p>
-        </div>
+      <div class="dc-grid-col reveal" {!! cms_section_attr('emergency') !!}>
+        <h2>{!! accent_html($meta->get('emergency.heading'), 'Emergency Lighting') !!}</h2>
+        @foreach ($emergencyItems as $item)
+          <div class="dc-grid-item">
+            <h3>{{ $item['title'] ?? '' }}</h3>
+            <p>{{ $item['body'] ?? '' }}</p>
+          </div>
+        @endforeach
       </div>
       
-      <div class="dc-grid-col reveal" style="transition-delay: 0.2s">
-        <h2>Tailored Lighting <span>Across All Zones</span></h2>
+      <div class="dc-grid-col reveal" style="transition-delay: 0.2s" {!! cms_section_attr('zones') !!}>
+        <h2>{!! accent_html($meta->get('zones.heading'), 'Across All Zones') !!}</h2>
         <ul class="dc-zone-list">
-          <li><strong>Data Halls & Server Rooms:</strong> High-efficiency optical linear trunking engineered for thermal durability across hot and cold aisles.</li>
-          <li><strong>UPS, Switchrooms & Battery Rooms:</strong> Heavy-duty, IP/IK-rated industrial luminaires built for tough, continuous operational environments.</li>
-          <li><strong>Network Operations Centres (NOC):</strong> Glare-free, comfort-focused ambient lighting designed to eliminate screen reflections and eye fatigue (UGR &lt;19).</li>
-          <li><strong>Offices & Circulation:</strong> Architectural linear profiles, recessed downlights, and perimeter illumination to maintain visual clarity and staff alertness.</li>
-          <li><strong>Exterior & Perimeters:</strong> High-performance post-tops, bollards, and wall-mounted luminaires engineered to eliminate dark spots for facial recognition and CCTV surveillance.</li>
+          @foreach ($zones as $item)
+            <li>{!! labelled_tick(($item['title'] ?? '').': '.($item['body'] ?? '')) !!}</li>
+          @endforeach
         </ul>
       </div>
     </div>
   </section>
 
-  <div class="dc-cta-wrap reveal">
+  <div class="dc-cta-wrap reveal" {!! cms_section_attr('cta') !!}>
     <div class="wrap">
       <div class="dc-cta">
         <div class="dc-cta-copy">
-          <h2>Ready to Optimise Your Next <span>Data Centre Project?</span></h2>
-          <p>Whether you are designing a new hyperscale facility or upgrading an operational server hall, Azoogi provides complete technical support from initial concept through to final commissioning.</p>
+          <h2>{!! accent_html($meta->get('cta.heading'), 'Data Centre Project?') !!}</h2>
+          <p>{{ $meta->get('cta.body') }}</p>
           <div class="dc-actions">
-            <a href="/contact" class="btn primary">Request a Design Consultation</a>
-            <a href="mailto:datacenters@azoogi.com" class="btn">Email datacenters@azoogi.com</a>
+            <a href="{{ $meta->get('cta.primary.href', 0, '/contact') }}" class="btn primary">{{ $meta->get('cta.primary.label') }}</a>
+            <a href="{{ $meta->get('cta.secondary.href') }}" class="btn">{{ $meta->get('cta.secondary.label') }}</a>
           </div>
         </div>
       </div>
@@ -191,7 +175,6 @@ const topbar = document.getElementById('topbar');
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  /* ===== Reveal on scroll ===== */
   const io = new IntersectionObserver((es) => {
     es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: .12 });

@@ -148,11 +148,13 @@
   padding: 0;
 }
 
-.legal-section {
+.legal-section,
+.legal-body {
   margin: 0 0 28px;
 }
 
-.legal-section h3 {
+.legal-section h3,
+.legal-body h3 {
   font-family: "Google Sans Flex", sans-serif;
   font-size: clamp(16px, 1.6vw, 19px);
   font-weight: 500;
@@ -161,7 +163,8 @@
   color: var(--ink);
 }
 
-.legal-section h2 {
+.legal-section h2,
+.legal-body h2 {
   font-family: "Google Sans Flex", sans-serif;
   font-size: clamp(18px, 2vw, 22px);
   font-weight: 500;
@@ -171,7 +174,9 @@
 }
 
 .legal-section p,
-.legal-section li {
+.legal-section li,
+.legal-body p,
+.legal-body li {
   color: var(--muted);
   font-size: 15px;
   line-height: 1.7;
@@ -179,20 +184,24 @@
   padding: 0;
 }
 
-.legal-section ul {
+.legal-section ul,
+.legal-body ul {
   margin: 0 0 12px;
   padding: 0 0 0 1.15em;
 }
 
-.legal-section li {
+.legal-section li,
+.legal-body li {
   margin-bottom: 8px;
 }
 
-.legal-section a {
+.legal-section a,
+.legal-body a {
   color: var(--accent);
 }
 
-.legal-section a:hover {
+.legal-section a:hover,
+.legal-body a:hover {
   text-decoration: underline;
 }
 
@@ -268,7 +277,8 @@
     padding: 112px 0 48px;
   }
 
-  .legal-section {
+  .legal-section,
+  .legal-body {
     margin-bottom: 28px;
   }
 

@@ -50,7 +50,7 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
           <div class="product-meta-badges">
             <span class="meta-badge" id="badge-ip">IP67 Waterproof</span>
             <span class="meta-badge">360° Light Emission</span>
-            <a href="/policies#warranty" class="meta-badge">5-Year Warranty</a>
+            <a href="/warranty-returns" class="meta-badge">5-Year Warranty</a>
             <span class="meta-badge">24V DC Input</span>
             <span class="meta-badge">CRI 90+</span>
           </div>

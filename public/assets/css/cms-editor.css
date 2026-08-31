@@ -1,0 +1,38 @@
+.cms-editing [data-cms-section] {
+  outline: 1px dashed transparent;
+  outline-offset: -2px;
+}
+
+.cms-editing [data-cms-section]:hover {
+  outline-color: rgba(58, 160, 40, .55);
+}
+
+.cms-edit-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  pointer-events: none;
+}
+
+.cms-edit-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: auto;
+  appearance: none;
+  border: 0;
+  background: #3aa028;
+  color: #fff;
+  font: 650 12px/1 Inter, system-ui, sans-serif;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(16, 24, 16, .18);
+  white-space: nowrap;
+}
+
+.cms-edit-btn:hover {
+  background: #2d7a1e;
+}

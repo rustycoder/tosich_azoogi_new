@@ -11,7 +11,7 @@ class TraderUserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::query()->updateOrCreate(
+        User::query()->firstOrCreate(
             ['email' => 'trader@azoogi.com'],
             [
                 'name' => 'Trader',

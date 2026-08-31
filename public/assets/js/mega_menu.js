@@ -240,16 +240,20 @@
   }
 
   function getLocalImagePath(imgUrl, filePath) {
-    if (!imgUrl || typeof imgUrl !== 'string') return 'assets/logo_dark.png';
-    if (!imgUrl.startsWith('http')) return imgUrl;
+    const fallback = '/assets/logo_dark.png';
+    if (!imgUrl || typeof imgUrl !== 'string') return fallback;
+    if (!imgUrl.startsWith('http')) {
+      return imgUrl.startsWith('/') ? imgUrl : '/'+imgUrl;
+    }
     const filename = imgUrl.split('/').pop().split('?')[0];
-    if (!filename) return 'assets/logo_dark.png';
+    if (!filename) return fallback;
     if (filePath) {
       const cleanFilePath = decodeURIComponent(filePath);
       const lastSlash = cleanFilePath.lastIndexOf('/');
       if (lastSlash !== -1) {
         const folderPath = cleanFilePath.substring(0, lastSlash);
-        return `${folderPath}/${filename}`;
+        const local = `${folderPath}/${filename}`;
+        return local.startsWith('/') ? local : '/'+local;
       }
     }
     return imgUrl;
@@ -276,7 +280,7 @@
 
       const rawImgSrc = (vdata && vdata.product_images && vdata.product_images.length > 0)
         ? vdata.product_images[0]
-        : 'assets/logo_dark.png';
+        : '/assets/logo_dark.png';
 
       const imgSrc = getLocalImagePath(rawImgSrc, vdata ? vdata.file_path : '');
 
@@ -290,7 +294,7 @@
 
       const img = document.createElement('img');
       img.className = 'mega-variant-img';
-      if (imgSrc === 'assets/logo_dark.png') {
+      if (imgSrc === '/assets/logo_dark.png') {
         img.className += ' placeholder-logo';
       }
       img.setAttribute('loading', 'lazy');
@@ -302,7 +306,7 @@
       img.onerror = () => {
         imgContainer.classList.remove('loading');
         img.classList.add('placeholder-logo');
-        img.src = 'assets/logo_dark.png'; // Azoogi dark logo fallback!
+        img.src = '/assets/logo_dark.png';
       };
       img.src = imgSrc;
 

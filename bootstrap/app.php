@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\EnsureCanManageContent;
+use App\Http\Middleware\EnsureUserIsAdmin;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -13,7 +15,11 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->redirectGuestsTo(fn () => route('login'));
-        $middleware->redirectUsersTo('/');
+        $middleware->redirectUsersTo('/dashboard');
+        $middleware->alias([
+            'admin' => EnsureUserIsAdmin::class,
+            'can.manage' => EnsureCanManageContent::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

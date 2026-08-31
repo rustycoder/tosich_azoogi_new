@@ -1694,21 +1694,21 @@ section {
   border-color: var(--accent);
 }
 
-.proj.p1 {
+.projects .grid .proj:nth-child(4n + 1) {
   grid-column: span 7;
   min-height: 520px
 }
 
-.proj.p2 {
+.projects .grid .proj:nth-child(4n + 2) {
   grid-column: span 5;
   min-height: 520px
 }
 
-.proj.p3 {
+.projects .grid .proj:nth-child(4n + 3) {
   grid-column: span 5
 }
 
-.proj.p4 {
+.projects .grid .proj:nth-child(4n + 4) {
   grid-column: span 7
 }
 
@@ -2257,10 +2257,7 @@ footer {
     gap: 40px;
   }
 
-  .proj.p1,
-  .proj.p2,
-  .proj.p3,
-  .proj.p4 {
+  .projects .grid .proj {
     grid-column: span 12;
     min-height: 340px;
   }

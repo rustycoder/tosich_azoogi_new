@@ -1,12 +1,8 @@
 @extends('layouts.site')
 
-@section('title')
-Contact Us — Azoogi
-@endsection
+@section('title', $page->title)
 
-@section('description')
-Get in touch with Azoogi. Office hours, address, and contact form for lighting projects across Australia.
-@endsection
+@section('description', $page->meta_description)
 
 @section('bodyClass', 'contact-page')
 
@@ -21,44 +17,44 @@ Get in touch with Azoogi. Office hours, address, and contact form for lighting p
     <div class="contact-grid">
 
       <aside class="contact-info-panel">
-        <div class="info-block">
-          <div class="info-label">Office Hours</div>
-          <p>08:00<span>AM</span> – 04:00<span>PM</span><br>Monday To Friday</p>
+        <div class="info-block" {!! cms_section_attr('hours') !!}>
+          <div class="info-label">{{ $meta->get('hours.label') }}</div>
+          <p>{!! nl2br_html($meta->get('hours.value')) !!}</p>
         </div>
-        <div class="info-block">
-          <div class="info-label">Address</div>
+        <div class="info-block" {!! cms_section_attr('address') !!}>
+          <div class="info-label">{{ $meta->get('address.label') }}</div>
           <p>
-            <a href="https://www.google.com/maps/place/Azoogi+LED+Lighting/@-33.9654395,151.2254676,17z" target="_blank" rel="noopener noreferrer">
-              Unit 47/10-12 Girawah Pl<br>Matraville NSW 2036
+            <a href="{{ $meta->get('address.maps_url') }}" target="_blank" rel="noopener noreferrer">
+              {!! nl2br_html($meta->get('address.value')) !!}
             </a>
           </p>
         </div>
-        <div class="info-block">
-          <div class="info-label">Office Number</div>
-          <p><a href="tel:1300641261">1300 641 261</a></p>
+        <div class="info-block" {!! cms_section_attr('phone') !!}>
+          <div class="info-label">{{ $meta->get('phone.label') }}</div>
+          <p><a href="tel:{{ preg_replace('/\s+/', '', $meta->get('phone.value')) }}">{{ $meta->get('phone.value') }}</a></p>
         </div>
-        <div class="info-block">
-          <div class="info-label">ABN</div>
-          <p>72 600 241 209</p>
+        <div class="info-block" {!! cms_section_attr('abn') !!}>
+          <div class="info-label">{{ $meta->get('abn.label') }}</div>
+          <p>{{ $meta->get('abn.value') }}</p>
         </div>
-        <div class="info-block">
-          <div class="info-label">ACN</div>
-          <p>600 241 209</p>
+        <div class="info-block" {!! cms_section_attr('acn') !!}>
+          <div class="info-label">{{ $meta->get('acn.label') }}</div>
+          <p>{{ $meta->get('acn.value') }}</p>
         </div>
 
-        <div class="contact-international">
-          <p><strong class="green-title">Inquiring from outside Australia?</strong></p>
-          <p>We regularly partner with architects, designers, developers, and trade contractors across the Asia-Pacific, Indian Ocean, and beyond. Our team is fully experienced in managing international logistics, cross-border time zones, and ensuring all products comply with local electrical, safety, and governance standards.</p>
-          <p>For international project inquiries, connect with our export team at <a href="mailto:exports@azoogi.com">exports@azoogi.com</a> or call <a href="tel:+61279123524">+61 2 7912 3524</a> (or <a href="tel:1300641261">1300 641 261</a> within Australia).</p>
+        <div class="contact-international" {!! cms_section_attr('intl') !!}>
+          <p><strong class="green-title">{{ $meta->get('intl.heading') }}</strong></p>
+          <p>{{ $meta->get('intl.body') }}</p>
+          <p>For international project inquiries, connect with our export team at <a href="mailto:{{ $meta->get('intl.email') }}">{{ $meta->get('intl.email') }}</a> or call <a href="tel:{{ preg_replace('/\s+/', '', $meta->get('intl.phone')) }}">{{ $meta->get('intl.phone') }}</a> (or <a href="tel:{{ preg_replace('/\s+/', '', $meta->get('phone.value')) }}">{{ $meta->get('phone.value') }}</a> within Australia).</p>
         </div>
       </aside>
 
       <div class="contact-grid-gap" aria-hidden="true"></div>
 
-      <div class="contact-form-panel">
-        <div class="kicker">Contact</div>
-        <h1 class="h2 contact-title">We’d love to <span>hear</span> from you!</h1>
-        <p class="contact-lead">Use the form below.</p>
+      <div class="contact-form-panel" {!! cms_section_attr('form') !!}>
+        <div class="kicker">{{ $meta->get('form.kicker') }}</div>
+        <h1 class="h2 contact-title">{!! accent_html($meta->get('form.title'), 'hear') !!}</h1>
+        <p class="contact-lead">{{ $meta->get('form.lead') }}</p>
 
         <form class="contact-form" id="contactForm" action="{{ route('contact.submit') }}" method="post" novalidate>
           @csrf

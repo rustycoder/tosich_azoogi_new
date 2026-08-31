@@ -11,7 +11,7 @@ class StaffUserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::query()->updateOrCreate(
+        User::query()->firstOrCreate(
             ['email' => 'staff@azoogi.com'],
             [
                 'name' => 'Staff',

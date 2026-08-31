@@ -1,12 +1,8 @@
 @extends('layouts.site')
 
-@section('title')
-Azoogi — Award-winning LED Lighting Solutions
-@endsection
+@section('title', $page->title)
 
-@section('description')
-Azoogi designs and supplies premium LED lighting — strips, neon, garden lights, drivers and architectural fittings for projects that demand more.
-@endsection
+@section('description', $page->meta_description)
 
 @section('chrome', 'full')
 
@@ -14,71 +10,51 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
 @section('logo', 'logo_white.png')
 
 @section('content')
+@php
+    $slides = $meta->group('slide');
+    $valueCards = $meta->group('values.card');
+    $rangeItems = [
+        ['title' => 'Garden Lights', 'body' => 'Flexible, high-output lighting for clean, modern installations.', 'image' => '/assets/img/GL001.webp', 'href' => '#'],
+        ['title' => 'Neon Range', 'body' => 'Seamless, uniform glow — easy to shape and mount.', 'image' => '/assets/img/neon.webp', 'href' => '/product-detail'],
+        ['title' => 'LED Strips', 'body' => 'Outdoor-ready lighting, built to install and last.', 'image' => '/assets/img/leds.webp', 'href' => '#'],
+        ['title' => 'LED Drivers', 'body' => 'Reliable power solutions, stocked and ready to go.', 'image' => '/assets/img/drivers.webp', 'href' => '#'],
+        ['title' => 'Downlights', 'body' => 'Precision-engineered downlights for residential & commercial.', 'image' => '/assets/img/dt.webp', 'href' => '#'],
+        ['title' => 'Pendant Lights', 'body' => 'Sculptural pendants to anchor a room.', 'image' => '/assets/img/prod-4.jpg', 'href' => '#'],
+        ['title' => 'Architectural', 'body' => 'Statement fittings designed for considered spaces.', 'image' => '/assets/img/prod-5.jpg', 'href' => '#'],
+    ];
+    $stats = $meta->group('stats.item');
+@endphp
 <!-- ========== HERO SLIDER ========== -->
-<section class="hero" id="hero">
-  <div class="slide active has-video">
-    <video class="bg-video" autoplay muted loop playsinline preload="auto" poster="/assets/fallback.webp">
-      <source src="/assets/herovid%201.webm" type="video/webm">
-    </video>
-    <div class="slide-inner">
-      <div class="eyebrow">Made just for you</div>
-      <h1 class="slide-title">Custom fittings<br/>without compromise.</h1>
-      <p class="slide-sub">Off-spec alternatives, custom fittings, matched specs and budgets — without ever compromising on quality.</p>
-      <div class="slide-actions">
-        <a class="btn primary" href="/contact">Start a Project</a>
-        <a class="btn" href="#products">Our Services</a>
+<section class="hero" id="hero" {!! cms_section_attr('slide') !!}>
+  @foreach ($slides as $slide)
+    @php
+        $isVideo = ($slide['media.type'] ?? '') === 'video';
+        $classes = 'slide';
+        if ($loop->first) {
+            $classes .= ' active';
+        }
+        if ($isVideo) {
+            $classes .= ' has-video';
+        }
+        $image = media_url($slide['media.image'] ?? '');
+    @endphp
+    <div class="{{ $classes }}" @if (! $isVideo && $image) style="background-image:url('{{ $image }}')" @endif>
+      @if ($isVideo)
+        <video class="bg-video" @if ($loop->first) autoplay @endif muted loop playsinline preload="auto" poster="{{ media_url($slide['media.poster'] ?? '') }}">
+          <source src="{{ media_url($slide['media.video'] ?? '') }}" type="video/webm">
+        </video>
+      @endif
+      <div class="slide-inner">
+        <div class="eyebrow">{{ $slide['eyebrow'] ?? '' }}</div>
+        <h1 class="slide-title">{!! nl2br_html($slide['title'] ?? '') !!}</h1>
+        <p class="slide-sub">{{ $slide['subtitle'] ?? '' }}</p>
+        <div class="slide-actions">
+          <a class="btn primary" href="{{ $slide['cta.primary.href'] ?? '#' }}">{{ $slide['cta.primary.label'] ?? '' }}</a>
+          <a class="btn" href="{{ $slide['cta.secondary.href'] ?? '#' }}">{{ $slide['cta.secondary.label'] ?? '' }}</a>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div class="slide has-video">
-    <video class="bg-video" muted loop playsinline preload="auto" poster="/assets/vid2_fallback.jpg">
-      <source src="/assets/herovid%202.webm" type="video/webm">
-    </video>
-    <div class="slide-inner">
-      <div class="eyebrow">For those who demand more from their lighting</div>
-      <h1 class="slide-title">Award-winning<br/>LED lighting solutions.</h1>
-      <p class="slide-sub">Premium components, strict quality assurance, and up to a 5-year warranty — engineered to perform and last.</p>
-      <div class="slide-actions">
-        <a class="btn primary" href="/products">Explore Products</a>
-        <a class="btn" href="/projects">View Projects</a>
-      </div>
-    </div>
-  </div>
-  <div class="slide" style="background-image:url('/assets/hero01.jpg')">
-    <div class="slide-inner">
-      <div class="eyebrow">Support that lasts</div>
-      <h1 class="slide-title">From first idea<br/>to final install — and beyond.</h1>
-      <p class="slide-sub">We don't just supply lighting. We partner with you with advice, guidance, and service that keeps your project shining.</p>
-      <div class="slide-actions">
-        <a class="btn primary" href="/contact">Talk to a Specialist</a>
-        <a class="btn" href="/projects">Recent Work</a>
-      </div>
-    </div>
-  </div>
-  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1567016526105-22da7c13161a?w=2400&q=80')">
-    <div class="slide-inner">
-      <div class="eyebrow">Design without limits</div>
-      <h1 class="slide-title">Architectural lighting,<br/>shaped to your vision.</h1>
-      <p class="slide-sub">From sleek LED strips to statement architectural fittings — solutions for every style and every space, indoors or out.</p>
-      <div class="slide-actions">
-        <a class="btn primary" href="/products">Browse Range</a>
-        <a class="btn" href="#about">Our Story</a>
-      </div>
-    </div>
-  </div>
-  <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=2400&q=80')">
-    <div class="slide-inner">
-      <div class="eyebrow">Made just for you</div>
-      <h1 class="slide-title">Custom fittings<br/>without compromise.</h1>
-      <p class="slide-sub">Off-spec alternatives, custom fittings, matched specs and budgets — without ever compromising on quality.</p>
-      <div class="slide-actions">
-        <a class="btn primary" href="/contact">Start a Project</a>
-        <a class="btn" href="#products">Our Services</a>
-      </div>
-    </div>
-  </div>
-  
+  @endforeach
 
   <div class="slider-ctrl">
     <div class="lines" id="lines"></div>
@@ -90,15 +66,15 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
 </section>
 
 <!-- ========== INTRO ========== -->
-<section class="intro">
+<section class="intro" {!! cms_section_attr('intro') !!}>
   <div class="wrap v-head">
-    <div class="kicker reveal ">Lighting solutions from start to finish</div>
-    <h2 class="h2 reveal">I'm looking for lighting as a&hellip;</h2>
+    <div class="kicker reveal ">{{ $meta->get('intro.kicker') }}</div>
+    <h2 class="h2 reveal">{{ $meta->get('intro.heading') }}</h2>
     <div class="audience reveal">
-      <a href="/audience?slug=architect-designer">Architect / Designer</a>
-      <a href="/audience?slug=electrician-builder">Electrician / Builder</a>
-      <a href="/audience?slug=wholesaler">Wholesaler</a>
-      <a href="/audience?slug=home-owner">Home Owner</a>
+      <a href="{{ url('/architect-designer') }}">Architect / Designer</a>
+      <a href="{{ url('/electrician-builder') }}">Electrician / Builder</a>
+      <a href="{{ url('/wholesaler') }}">Wholesaler</a>
+      <a href="{{ url('/home-owner') }}">Home Owner</a>
     </div>
   </div>
 </section>
@@ -106,63 +82,29 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
 <!-- ========== VALUES ========== -->
 
 
-<section class="card-in" id="about">
+<section class="card-in" id="about" {!! cms_section_attr('values') !!}>
   <div class="wrap-sm">
     <div class="head">
-      <div class="kicker reveal">Why Azoogi</div>
-      <h2 class="h2 reveal">For those who demand more — from the components inside to the support behind every product.</h2>
+      <div class="kicker reveal">{{ $meta->get('values.kicker') }}</div>
+      <h2 class="h2 reveal">{{ $meta->get('values.heading') }}</h2>
     </div>
   
     <div class="container max-width-adaptive-md">
       <ul id="cards">
-        <li class="card-main" id="card_1">
-          <div class="card__content">
-            <div>
-              <h2>Lighting That Lasts</h2>
-              <p>Built with premium components and backed by strict quality assurance, our products are made to perform and last – with up to a 5-year warranty for peace of mind.</p>
-              <p><a href="#top" class="btn --accent">Read more</a></p>
+        @foreach ($valueCards as $card)
+          <li class="card-main" id="card_{{ $loop->iteration }}">
+            <div class="card__content">
+              <div>
+                <h2>{{ $card['title'] ?? '' }}</h2>
+                <p>{{ $card['body'] ?? '' }}</p>
+                <p><a href="{{ $card['href'] ?? '#top' }}" class="btn --accent">Read more</a></p>
+              </div>
+              <figure>
+                <img src="{{ media_url($card['image'] ?? '') }}" alt="{{ $card['title'] ?? '' }}">
+              </figure>
             </div>
-            <figure>
-              <img src="/assets/img/img-0.jpg" alt="Image description">
-            </figure>
-          </div>
-        </li>
-        <li class="card-main" id="card_2">
-          <div class="card__content">
-            <div>
-              <h2>Design Without Limits</h2>
-              <p>From sleek LED strips to statement architectural fittings and rugged garden lighting, we’ve got solutions for every style, every space, and every project – indoors or out.</p>
-              <p><a href="#top" class="btn --accent">Read more</a></p>
-            </div>
-            <figure>
-              <img src="/assets/img/img-1.jpg" alt="Image description">
-            </figure>
-          </div>
-        </li>
-        <li class="card-main" id="card_3">
-          <div class="card__content">
-            <div>
-              <h2>Made Just for You</h2>
-              <p>From off-spec alternatives to custom fittings, we create lighting that meets your needs – adapting products, matching specs, or meeting budgets without compromising quality.</p>
-              <p><a href="#top" class="btn --accent">Read more</a></p>
-            </div>
-            <figure>
-              <img src="/assets/img/img-2.jpg" alt="Image description">
-            </figure>
-          </div>
-        </li>
-        <li class="card-main" id="card_4">
-          <div class="card__content">
-            <div>
-              <h2>Support That Lasts</h2>
-              <p>We don’t just supply lighting – we partner with you. From your first idea to final install (and well after), our team is here with advice, guidance, and service that keeps your project shining.</p>
-              <p><a href="#top" class="btn --accent">Read more</a></p>
-            </div>
-            <figure>
-              <img src="/assets/supportthatlasts.jpeg" alt="Image description">
-            </figure>
-          </div>
-        </li>
+          </li>
+        @endforeach
       </ul>
     </div>
   </div>
@@ -170,68 +112,55 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
 </section>
 
 <!-- ========== PRODUCTS MARQUEE ========== -->
-<section class="products" id="products">
+<section class="products" id="products" {!! cms_section_attr('range') !!}>
   <div class="wrap">
     <div class="head">
       <div>
-        <div class="kicker reveal">Our Range</div>
-        <h2 class="h2 reveal">Explore the full Azoogi lighting catalogue.</h2>
+        <div class="kicker reveal">{{ $meta->get('range.kicker') }}</div>
+        <h2 class="h2 reveal">{{ $meta->get('range.heading') }}</h2>
       </div>
-      <a href="/products" class="btn --accent reveal">View All Products</a>
+      <a href="{{ $meta->get('range.cta.href', 0, '/products') }}" class="btn --accent reveal">{{ $meta->get('range.cta.label') }}</a>
     </div>
   </div>
   <div class="marquee">
     <div class="track" id="track">
-      <!-- set 1 -->
-      <a class="card" href="#"><div class="img" style="background-image:url('/assets/img/GL001.webp')"></div><div class="body"><h4>Garden Lights</h4><p>Flexible, high-output lighting for clean, modern installations.</p><span class="more">View Range &rarr;</span></div></a>
-      <a class="card" href="/product-detail"><div class="img" style="background-image:url('/assets/img/neon.webp')"></div><div class="body"><h4>Neon Range</h4><p>Seamless, uniform glow &mdash; easy to shape and mount.</p><span class="more">View Range &rarr;</span></div></a>
-      <a class="card" href="#"><div class="img" style="background-image:url('/assets/img/leds.webp')"></div><div class="body"><h4>LED Strips</h4><p>Outdoor-ready lighting, built to install and last.</p><span class="more">View Range &rarr;</span></div></a>
-      <a class="card" href="#"><div class="img" style="background-image:url('/assets/img/drivers.webp')"></div><div class="body"><h4>LED Drivers</h4><p>Reliable power solutions, stocked and ready to go.</p><span class="more">View Range &rarr;</span></div></a>      
-      <a class="card" href="#"><div class="img" style="background-image:url('/assets/img/dt.webp')"></div><div class="body"><h4>Downlights</h4><p>Precision-engineered downlights for residential & commercial.</p><span class="more">View Range &rarr;</span></div></a>
-      <a class="card" href="#"><div class="img" style="background-image:url('/assets/img/prod-4.jpg')"></div><div class="body"><h4>Pendant Lights</h4><p>Sculptural pendants to anchor a room.</p><span class="more">View Range &rarr;</span></div></a>
-      <a class="card" href="#"><div class="img" style="background-image:url('/assets/img/prod-5.jpg')"></div><div class="body"><h4>Architectural</h4><p>Statement fittings designed for considered spaces.</p><span class="more">View Range &rarr;</span></div></a>
-      <!-- duplicate for seamless loop -->
-      <a class="card" href="#"><div class="img" style="background-image:url('/assets/img/GL001.webp')"></div><div class="body"><h4>Garden Lights</h4><p>Flexible, high-output lighting for clean, modern installations.</p><span class="more">View Range &rarr;</span></div></a>
-      <a class="card" href="/product-detail"><div class="img" style="background-image:url('/assets/img/neon.webp')"></div><div class="body"><h4>Neon Range</h4><p>Seamless, uniform glow &mdash; easy to shape and mount.</p><span class="more">View Range &rarr;</span></div></a>
-      <a class="card" href="#"><div class="img" style="background-image:url('/assets/img/leds.webp')"></div><div class="body"><h4>LED Strips</h4><p>Outdoor-ready lighting, built to install and last.</p><span class="more">View Range &rarr;</span></div></a>
-      <a class="card" href="#"><div class="img" style="background-image:url('/assets/img/drivers.webp')"></div><div class="body"><h4>LED Drivers</h4><p>Reliable power solutions, stocked and ready to go.</p><span class="more">View Range &rarr;</span></div></a>
-           <a class="card" href="#"><div class="img" style="background-image:url('/assets/img/dt.webp')"></div><div class="body"><h4>Downlights</h4><p>Precision-engineered downlights for residential & commercial.</p><span class="more">View Range &rarr;</span></div></a>
-      <a class="card" href="#"><div class="img" style="background-image:url('/assets/img/prod-4.jpg')"></div><div class="body"><h4>Pendant Lights</h4><p>Sculptural pendants to anchor a room.</p><span class="more">View Range &rarr;</span></div></a>
-      <a class="card" href="#"><div class="img" style="background-image:url('/assets/img/prod-5.jpg')"></div><div class="body"><h4>Architectural</h4><p>Statement fittings designed for considered spaces.</p><span class="more">View Range &rarr;</span></div></a>
+      @foreach ([1, 2] as $set)
+        @foreach ($rangeItems as $item)
+          <a class="card" href="{{ $item['href'] ?? '#' }}"><div class="img" style="background-image:url('{{ media_url($item['image'] ?? '') }}')"></div><div class="body"><h4>{{ $item['title'] ?? '' }}</h4><p>{{ $item['body'] ?? '' }}</p><span class="more">View Range &rarr;</span></div></a>
+        @endforeach
+      @endforeach
     </div>
   </div>
 </section>
 
 <!-- ========== PROJECTS ========== -->
-<section class="projects" id="projects">
+<section class="projects" id="projects" {!! cms_section_attr('projects') !!}>
   <div class="wrap">
     <div class="head" style="display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap">
       <div>
-        <div class="kicker reveal">Recent Highlights</div>
-        <h2 class="h2 reveal">Where Azoogi lighting comes to life.</h2>
+        <div class="kicker reveal">{{ $meta->get('projects.kicker') }}</div>
+        <h2 class="h2 reveal">{{ $meta->get('projects.heading') }}</h2>
       </div>
-      <a href="/projects" class="btn reveal">View All Projects</a>
+      <a href="{{ $meta->get('projects.cta.href', 0, '/projects') }}" class="btn reveal">{{ $meta->get('projects.cta.label') }}</a>
     </div>
 
     <div class="grid">
-      <div class="proj p1 reveal"><a href="/project-detail?slug=aikenhead-centre-for-medical-discovery"><img src="/assets/img/acdm.jpg" alt="Aikenhead Centre"/><div class="cap"><small>Medical &mdash; Melbourne</small><h3>Aikenhead Centre for Medical Discovery</h3></div></a></div>
-      <div class="proj p2 reveal"><a href="/project-detail?slug=zushi-restaurant"><img src="/assets/img/img-1.jpg" alt="Zushi Restaurant"/><div class="cap"><small>Hospitality &mdash; Sydney</small><h3>Zushi Restaurant</h3></div></a></div>
-      <div class="proj p3 reveal"><a href="/project-detail?slug=the-eve-hotel"><img src="/assets/img/eve.jpg" alt="The Eve Hotel"/><div class="cap"><small>Hospitality &mdash; Redfern</small><h3>The Eve Hotel</h3></div></a></div>
-      <div class="proj p4 reveal"><a href="/project-detail?slug=bondi-beach-penthouse"><img src="/assets/img/bondi.webp" alt="Bondi Penthouse"/><div class="cap"><small>Residential &mdash; Bondi</small><h3>Bondi Beach Penthouse</h3></div></a></div>
+      @foreach ($featuredProjects as $project)
+        <div class="proj reveal"><a href="{{ route('project-detail', ['slug' => $project->slug]) }}"><img src="{{ $project->coverUrl() }}" alt="{{ $project->title }}"/><div class="cap"><small>{{ $project->tag }}@if ($project->location) &mdash; {{ $project->location }}@endif</small><h3>{{ $project->title }}</h3></div></a></div>
+      @endforeach
     </div>
   </div>
 </section>
 
 <!-- ========== STATS ========== -->
-<section class="stats">
+<section class="stats" {!! cms_section_attr('stats') !!}>
   <div class="wrap">
-    <div class="kicker reveal" style="text-align:center">By the numbers</div>
-    <h2 class="h2 reveal" style="text-align:center;max-width:900px;margin:0 auto">Engineered - Tested - Trusted<br>across Australia.</h2>
+    <div class="kicker reveal" style="text-align:center">{{ $meta->get('stats.kicker') }}</div>
+    <h2 class="h2 reveal" style="text-align:center;max-width:900px;margin:0 auto">{!! nl2br_html($meta->get('stats.heading')) !!}</h2>
     <div class="stats-grid">
-      <div class="stat reveal"><div class="num" data-c="2500">0</div><div class="lbl">Projects Delivered</div></div>
-      <div class="stat reveal"><div class="num" data-c="500">0</div><div class="lbl">Product Lines</div></div>
-      <div class="stat reveal"><div class="num" data-c="5">0</div><div class="lbl">Year Warranty</div></div>
-      <div class="stat reveal"><div class="num" data-c="15">0</div><div class="lbl">Years in Lighting</div></div>
+      @foreach ($stats as $stat)
+        <div class="stat reveal"><div class="num" data-c="{{ (int) ($stat['value'] ?? 0) }}">0</div><div class="lbl">{{ $stat['label'] ?? '' }}</div></div>
+      @endforeach
     </div>
   </div>
 </section>
