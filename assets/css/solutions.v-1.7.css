@@ -1,0 +1,485 @@
+/* Solutions — hero statement, control ecosystems, flip-card sector grid */
+
+.solutions-page .topbar.solid {
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.solutions-main {
+  padding: 120px 0 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Google Sans Flex", sans-serif;
+}
+
+/* —— Hero —— */
+.solutions-hero {
+  text-align: center;
+  padding: 24px 0 8px;
+}
+
+.solutions-hero-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 30px;
+}
+
+.solutions-hero-logo img {
+  display: block;
+  width: clamp(180px, 28vw, 320px);
+  height: auto;
+  margin: 0 auto;
+}
+
+.solutions-title {
+  margin: 0 auto 20px;
+  max-width: 24ch;
+  font-family: "Google Sans Flex", sans-serif;
+  font-weight: 400;
+  font-size: clamp(27px, 3.4vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+
+.solutions-title span {
+  color: var(--accent);
+}
+
+.solutions-lead {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0;
+  color: var(--muted);
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.solutions-claim {
+  margin: 30px 0 10px;
+  padding: 0;
+  font-size: clamp(17px, 1.5vw, 21px);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.solutions-sub {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0;
+  color: var(--muted);
+  font-size: clamp(15px, 1.15vw, 17px);
+  line-height: 1.7;
+}
+
+/* —— Control ecosystems —— */
+.solutions-eco {
+  padding: clamp(48px, 6vw, 76px) 0 clamp(48px, 6vw, 76px);
+}
+
+.solutions-eco-head {
+  text-align: center;
+  margin-bottom: clamp(26px, 3.2vw, 40px);
+}
+
+.solutions-eco-head h2 {
+  margin: 0 auto 10px;
+  max-width: 30ch;
+  font-family: "Google Sans Flex", sans-serif;
+  font-weight: 500;
+  font-size: clamp(19px, 1.8vw, 25px);
+  line-height: 1.25;
+  letter-spacing: -.01em;
+  color: var(--ink);
+}
+
+.solutions-eco-head p {
+  margin: 0 auto;
+  padding: 0;
+  max-width: 60ch;
+  font-size: 14.5px;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.solutions-eco-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.solutions-eco-grid li {
+  margin: 0;
+  min-width: 0;
+}
+
+.sol-eco {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  height: 100%;
+  padding: 26px 22px 20px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--bg-2);
+  overflow: hidden;
+  transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+
+.sol-eco::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .35s ease;
+}
+
+.sol-eco:hover,
+.sol-eco:focus-visible {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px -20px var(--shadow);
+}
+
+.sol-eco:hover::before,
+.sol-eco:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.sol-eco-name {
+  font-family: "Google Sans Flex", sans-serif;
+  font-size: clamp(19px, 1.7vw, 25px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -.01em;
+  color: var(--ink);
+}
+
+.sol-eco-sub {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.sol-eco-go {
+  margin-top: auto;
+  padding-top: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.sol-eco-go svg {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  transition: transform .25s ease;
+}
+
+.sol-eco:hover .sol-eco-go svg {
+  transform: translateX(4px);
+}
+
+/* —— Borderless CTA band —— */
+.solutions-cta {
+  margin-top: clamp(30px, 3.5vw, 44px);
+  padding: 28px 32px;
+  border: none;
+  border-radius: 4px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 22px;
+  background: var(--card-bg);
+  text-decoration: none;
+  color: inherit;
+  transition: background .25s ease;
+}
+
+.solutions-cta:hover {
+  background: var(--card-hover);
+}
+
+.solutions-cta-check {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(58, 160, 40, 0.12);
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+
+.solutions-cta-check svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.solutions-cta-check svg path {
+  stroke: var(--accent);
+}
+
+.solutions-cta-copy h3 {
+  margin: 0 0 6px;
+  font-family: "Google Sans Flex", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.solutions-cta-copy p {
+  margin: 0;
+  padding: 0;
+  font-family: "Google Sans Flex", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.solutions-cta .btn.primary {
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+/* —— Capabilities by sector —— */
+.solutions-sectors {
+  padding: clamp(52px, 6vw, 80px) 0;
+  background: var(--card-bg);
+}
+
+.solutions-sector-head {
+  text-align: center;
+  margin-bottom: clamp(26px, 3.2vw, 40px);
+}
+
+.solutions-sector-head h2 {
+  margin: 0 auto 10px;
+  font-family: "Google Sans Flex", sans-serif;
+  font-weight: 400;
+  font-size: clamp(24px, 2.8vw, 38px);
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+
+.solutions-sector-head h2 span {
+  color: var(--accent);
+}
+
+.solutions-sector-hint {
+  margin: 0;
+  padding: 0;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+.sol-sectors {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.sol-sector {
+  margin: 0;
+  min-width: 0;
+  perspective: 1400px;
+}
+
+/* Both faces occupy the same grid cell, so the card sizes itself to whichever
+   face is taller — no fixed height to outgrow when copy changes. */
+.sol-sector-inner {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+  border: 0;
+  padding: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform .6s cubic-bezier(.2, .7, .2, 1);
+}
+
+.sol-sector-face {
+  position: relative;
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px 22px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.sol-sector-front {
+  background: var(--bg-2);
+}
+
+.sol-sector-back {
+  transform: rotateY(180deg);
+  background: var(--bg-2);
+  border-color: var(--accent);
+}
+
+.sol-sector-back::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--accent);
+}
+
+.sol-sector-num {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  color: var(--accent);
+}
+
+.sol-sector-title {
+  font-family: "Google Sans Flex", sans-serif;
+  font-size: clamp(16px, 1.35vw, 19px);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -.01em;
+  color: var(--ink);
+}
+
+.sol-sector-desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+@media (hover: hover) {
+  .sol-sector:hover .sol-sector-inner,
+  .sol-sector-inner:focus-visible {
+    transform: rotateY(180deg);
+  }
+}
+
+.sol-sector-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.solutions-sector-cta {
+  margin-top: clamp(30px, 3.5vw, 44px);
+  display: flex;
+  justify-content: center;
+}
+
+.solutions-sector-cta .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 30px;
+  font-size: 14px;
+  text-transform: none;
+  letter-spacing: .01em;
+  text-decoration: none;
+}
+
+.solutions-sector-cta .btn svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  transition: transform .25s ease;
+}
+
+.solutions-sector-cta .btn:hover svg {
+  transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sol-sector-inner {
+    transition: none;
+  }
+
+  .sol-eco {
+    transition: border-color .25s ease;
+  }
+
+  .sol-eco:hover,
+  .sol-eco:focus-visible {
+    transform: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .solutions-main {
+    padding: 110px 0 0;
+  }
+
+  .solutions-eco-grid,
+  .sol-sectors {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .solutions-cta {
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    padding: 22px 20px;
+  }
+
+  .solutions-cta .btn.primary {
+    grid-column: 1 / -1;
+    justify-self: start;
+    width: max-content;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .solutions-eco-grid,
+  .sol-sectors {
+    grid-template-columns: 1fr;
+  }
+
+  .solutions-cta {
+    grid-template-columns: 1fr;
+  }
+
+  .sol-sector-inner {
+    min-height: 130px;
+  }
+
+  .solutions-sector-cta .btn {
+    max-width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}

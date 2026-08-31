@@ -726,8 +726,9 @@
 
   .ai-cta .btn.primary {
     grid-column: 1 / -1;
-    width: 100%;
-    text-align: center;
+    justify-self: start;
+    width: max-content;
+    max-width: 100%;
   }
 }
 
