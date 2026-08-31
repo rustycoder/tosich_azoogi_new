@@ -100,6 +100,14 @@ class PageTest extends TestCase
         $this->get('/project-detail')->assertNotFound();
     }
 
+    public function test_about_intro_cta_links_to_contact(): void
+    {
+        $this->get('/about')
+            ->assertOk()
+            ->assertSee('Request Capability Statement', false)
+            ->assertSee('href="'.url('/contact').'"', false);
+    }
+
     public function test_header_and_footer_are_not_public_pages(): void
     {
         $this->get('/header')->assertNotFound();

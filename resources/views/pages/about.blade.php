@@ -35,9 +35,15 @@
   <section class="about-band" {!! cms_section_attr('intro') !!}>
     <div class="wrap about-intro reveal">
       <p>{{ $meta->get('intro.body') }}</p>
-      <div class="about-intro-action">
-        <button type="button" class="btn primary" id="capabilityBtn">{{ $meta->get('intro.cta.label') }}</button>
-      </div>
+      @php
+          $ctaLabel = $meta->get('intro.cta.label');
+          $ctaHref = $meta->get('intro.cta.href', 0, '/contact');
+      @endphp
+      @if ($ctaLabel !== '')
+        <div class="about-intro-action">
+          <a href="{{ chrome_url($ctaHref) }}" class="btn primary">{{ $ctaLabel }}</a>
+        </div>
+      @endif
     </div>
   </section>
 
@@ -217,30 +223,6 @@ const topbar = document.getElementById('topbar');
     window.addEventListener('resize', sync);
     window.addEventListener('orientationchange', sync);
     sync();
-  })();
-
-  (function () {
-    const modal = document.getElementById('capabilityModal');
-    const openBtn = document.getElementById('capabilityBtn');
-    if (!modal || !openBtn) return;
-
-    function openModal() {
-      modal.hidden = false;
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-      modal.hidden = true;
-      document.body.style.overflow = '';
-    }
-
-    openBtn.addEventListener('click', openModal);
-    modal.querySelectorAll('[data-close-modal]').forEach((el) => {
-      el.addEventListener('click', closeModal);
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !modal.hidden) closeModal();
-    });
   })();
 </script>
 @endverbatim
