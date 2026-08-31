@@ -483,7 +483,7 @@ class AirtableDataExtractor:
         """Traverse catalog dictionary and replace expiring Airtable image URLs with local static image paths."""
         if media_root is None:
             project_root = Path(__file__).parent.parent.parent
-            media_root = project_root / "assets" / "img"
+            media_root = project_root / "public" / "assets" / "img"
 
         # Clear existing images and icons folders to perform a 100% fresh download
         if clear_existing:
@@ -819,8 +819,8 @@ def run_extraction_cmd(
 
     # Determine default paths
     project_root = Path(__file__).parent.parent.parent
-    json_path = Path(output_json) if output_json else project_root / "assets" / "data" / "products.json"
-    js_path = Path(output_js) if output_js else project_root / "assets" / "js" / "products_data.js"
+    json_path = Path(output_json) if output_json else project_root / "public" / "assets" / "data" / "products.json"
+    js_path = Path(output_js) if output_js else project_root / "public" / "assets" / "js" / "products_data.js"
 
     extractor.save_outputs(catalog, json_path, js_path)
 
@@ -833,7 +833,7 @@ def run_extraction_cmd(
             uv_mod = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(uv_mod)
             old_v, new_v, updated_files = uv_mod.update_cache_version("bump")
-            logger.info(f"Auto-bumped HTML cache version: v{old_v} -> v{new_v} across {len(updated_files)} HTML files")
+            logger.info(f"Auto-bumped asset cache version: v{old_v} -> v{new_v}")
     except Exception as err:
         logger.warning(f"Could not auto-bump HTML cache version: {err}")
 

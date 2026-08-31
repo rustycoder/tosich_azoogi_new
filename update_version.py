@@ -1,92 +1,86 @@
 #!/usr/bin/env python3
 """
-Azoogi Script Cache Version Manager
+Azoogi asset cache version manager.
+
 Usage:
   python update_version.py            # Auto-bumps version (e.g. 2.6 -> 2.7)
   python update_version.py bump       # Auto-bumps version
   python update_version.py 2.8        # Sets version explicitly to 2.8
-  python update_version.py status     # Shows current version across HTML files
+  python update_version.py status     # Shows current version
 """
+
+from __future__ import annotations
 
 import re
 import sys
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent.resolve()
+ENV_PATH = PROJECT_ROOT / ".env"
+ENV_EXAMPLE_PATH = PROJECT_ROOT / ".env.example"
+VERSION_KEY = "ASSET_VERSION"
+DEFAULT_VERSION = "2.10"
 
 
-def get_html_files():
-    """Returns a list of HTML files in the project root."""
-    return [f for f in PROJECT_ROOT.glob("*.html") if f.is_file()]
+def read_env_version(path: Path) -> str | None:
+    if not path.exists():
+        return None
+    match = re.search(rf"^{VERSION_KEY}=([0-9]+\.[0-9]+)\s*$", path.read_text(encoding="utf-8"), re.M)
+    return match.group(1) if match else None
 
 
-def find_current_version(html_files):
-    """Finds the predominant ?v=X.Y version in HTML files."""
-    versions = []
-    pattern = re.compile(r'\?v=([0-9]+\.[0-9]+)')
-    for filepath in html_files:
-        try:
-            content = filepath.read_text(encoding="utf-8")
-            matches = pattern.findall(content)
-            versions.extend(matches)
-        except Exception:
-            pass
-    if not versions:
-        return "1.0"
-    from collections import Counter
-    return Counter(versions).most_common(1)[0][0]
+def write_env_version(path: Path, version: str) -> bool:
+    if not path.exists():
+        return False
+    content = path.read_text(encoding="utf-8")
+    pattern = re.compile(rf"^{VERSION_KEY}=.*$", re.M)
+    replacement = f"{VERSION_KEY}={version}"
+    if pattern.search(content):
+        new_content = pattern.sub(replacement, content)
+    else:
+        new_content = content.rstrip() + f"\n{replacement}\n"
+    if new_content != content:
+        path.write_text(new_content, encoding="utf-8")
+        return True
+    return False
 
 
-def increment_version(version_str):
-    """Increments a version string like '2.6' to '2.7'."""
-    parts = version_str.split('.')
+def find_current_version() -> str:
+    return read_env_version(ENV_PATH) or read_env_version(ENV_EXAMPLE_PATH) or DEFAULT_VERSION
+
+
+def increment_version(version_str: str) -> str:
+    parts = version_str.split(".")
     if len(parts) == 2 and parts[0].isdigit() and parts[1].isdigit():
-        major, minor = int(parts[0]), int(parts[1])
-        return f"{major}.{minor + 1}"
+        return f"{int(parts[0])}.{int(parts[1]) + 1}"
     return f"{version_str}.1"
 
 
 def update_cache_version(target_version=None):
-    """
-    Updates ?v=X.Y query strings across all root HTML files.
-    If target_version is None or 'bump', auto-increments current version.
-    Returns (old_version, new_version, updated_files)
-    """
-    html_files = get_html_files()
-    current_ver = find_current_version(html_files)
-
+    current_ver = find_current_version()
     if not target_version or target_version in ("bump", "auto"):
         new_ver = increment_version(current_ver)
     else:
-        new_ver = target_version.lstrip('v')
-
-    pattern = re.compile(r'\?v=[0-9]+\.[0-9]+')
+        new_ver = str(target_version).lstrip("v")
 
     updated_files = []
-
-    for filepath in html_files:
-        content = filepath.read_text(encoding="utf-8")
-        if pattern.search(content):
-            new_content = pattern.sub(f'?v={new_ver}', content)
-            if new_content != content:
-                filepath.write_text(new_content, encoding="utf-8")
-                updated_files.append(filepath.name)
+    for path in (ENV_PATH, ENV_EXAMPLE_PATH):
+        if write_env_version(path, new_ver):
+            updated_files.append(path.name)
 
     return current_ver, new_ver, updated_files
 
 
-def main():
+def main() -> None:
     arg = sys.argv[1] if len(sys.argv) > 1 else None
 
     if arg in ("status", "current", "show"):
-        html_files = get_html_files()
-        cur = find_current_version(html_files)
-        print(f"Current script cache version across HTML files: v{cur}")
+        print(f"Current script cache version: v{find_current_version()}")
         return
 
     old_ver, new_ver, updated_files = update_cache_version(arg)
     print(f"Version update completed: v{old_ver} -> v{new_ver}")
-    print(f"Updated {len(updated_files)} HTML file(s):")
+    print(f"Updated {len(updated_files)} file(s):")
     for fname in updated_files:
         print(f" - {fname}")
 

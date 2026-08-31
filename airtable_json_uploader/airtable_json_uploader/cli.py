@@ -407,8 +407,8 @@ def extract_cli():
     parser.add_argument("--products-table", help="Products table name")
     parser.add_argument("--categories-table", help="Categories table name")
     parser.add_argument("--attributes-table", help="Attributes table name")
-    parser.add_argument("--output-json", help="Path for output JSON file (default: assets/data/products.json)")
-    parser.add_argument("--output-js", help="Path for output JS file (default: assets/js/products_data.js)")
+    parser.add_argument("--output-json", help="Path for output JSON file (default: public/assets/data/products.json)")
+    parser.add_argument("--output-js", help="Path for output JS file (default: public/assets/js/products_data.js)")
 
     args = parser.parse_args()
 

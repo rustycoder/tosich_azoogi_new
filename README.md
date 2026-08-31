@@ -1,132 +1,94 @@
-# Azoogi Website & Airtable Integration
+# Azoogi Website
 
-This workspace contains the Azoogi Lighting website and an integrated **Airtable Extraction & Synchronization Engine** to extract Product Categories, Product Details, and Attributes directly from Airtable and display them on the website.
+Laravel 13 application for the Azoogi lighting website, with the existing Airtable extraction pipeline for product catalogue data.
 
----
+## Requirements
 
-## 🚀 Quick Setup & Configuration
+- PHP 8.3+
+- Composer
+- Python 3 (optional, for Airtable sync)
 
-### 1. Configure Environment Variables (`.env`)
-
-Navigate to `airtable_json_uploader/` (or create a `.env` file in root) and set your Airtable credentials:
+## Setup
 
 ```bash
-# airtable_json_uploader/.env
-
-# Airtable Personal Access Token (PAT) with read permissions
-AIRTABLE_API_KEY=patXXXXXXXXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-# Target Airtable Base ID
-AIRTABLE_BASE_ID=appXXXXXXXXXXXXXX
-
-# Airtable Table Names (Customizable to match your base)
-AIRTABLE_PRODUCTS_TABLE=Products
-AIRTABLE_CATEGORIES_TABLE=Categories
-AIRTABLE_ATTRIBUTES_TABLE=Attributes
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
 ```
 
----
+Serve the app:
 
-## 🔄 Extracting Data from Airtable
+```bash
+php artisan serve
+```
 
-You can extract product categories, details, images, and linked attributes using either the **CLI tool** or the **Visual Web Studio**.
+Then open [http://localhost:8000](http://localhost:8000). The web root is `public/` — do not serve the project root as a static folder.
 
-### Option 1: Command-Line Interface (CLI)
+## Pages
 
-1. Install the `airtable_json_uploader` package in editable mode:
-   ```bash
-   cd airtable_json_uploader
-   pip install -e .
-   ```
+| URL | Page |
+| --- | --- |
+| `/` | Home |
+| `/products` | Product catalogue |
+| `/product-detail` | Product detail |
+| `/projects` | Projects |
+| `/about` | About |
+| `/solutions` | Solutions |
+| `/contact` | Contact |
+| `/ai-lighting` | AI Lighting |
+| `/led-strip-calculator` | LED Calculator |
+| `/policies` | Policies |
+| `/trade-login` | Trade login (coming soon) |
 
-2. Run the extraction command:
-   ```bash
-   airtable-extract
-   ```
+Legacy `*.html` URLs redirect to the new routes (for example `/products.html` → `/products`).
 
-   *Or specify custom parameters on the command line:*
-   ```bash
-   airtable-extract --base-id appXXXXXXXXXXXXXX --products-table Products --attributes-table Attributes
-   ```
+## Airtable extraction
 
-3. The extractor will output:
-   * **`assets/data/products.json`**: Static JSON payload containing normalized products, categories, and attributes.
-   * **`assets/js/products_data.js`**: Compiled JavaScript bundle exposing `AZOOGI_PRODUCTS` for the front-end.
+Product categories, details, and attributes still sync from Airtable via the Python package.
 
----
+1. Configure `airtable_json_uploader/.env` with your Airtable PAT and base IDs (see `airtable_json_uploader/.env.example`).
+2. Install and run:
 
-### Option 2: Visual Web Studio Page
+```bash
+cd airtable_json_uploader
+pip install -e .
+airtable-extract
+```
 
-1. Start the Web Studio server:
-   ```bash
-   airtable-web
-   ```
-   *(Or `python airtable_json_uploader/airtable_json_uploader/app.py`)*
+Output files:
 
-2. Open **`http://127.0.0.1:5050/extract`** in your browser.
-3. Select your **Workspace**, **Base**, and target tables (**Products**, **Categories**, **Attributes**) from visual dropdowns.
-4. Click **"Save Config to .env"** to update your `.env` settings or click **"Extract & Sync to Website"** for 1-click execution.
+- `public/assets/data/products.json`
+- `public/assets/js/products_data.js`
 
+The extractor also writes product images under `public/assets/img/`.
 
----
+Web Studio (optional):
 
-## ⚡ Cache Version Management (`?v=...`)
+```bash
+airtable-web
+```
 
-Script query version tags (`assets/js/products_data.js?v=2.6`) across all HTML files can be checked and updated using the automated version manager:
+Open `http://127.0.0.1:5050/extract`.
 
-* **Automatic Auto-Bump**: Every time data extraction runs (`airtable-extract` or Web Studio sync), cache version tags in all HTML files are automatically incremented (`v2.6` -> `v2.7`) to bust browser cache immediately.
-* **CLI Auto-Bump Command**:
-  ```bash
-  python update_version.py bump    # or simply: azoogi-version bump
-  ```
-* **Set Explicit Version**:
-  ```bash
-  python update_version.py 2.8     # or: azoogi-version 2.8
-  ```
-* **Check Current Version**:
-  ```bash
-  python update_version.py status  # or: azoogi-version status
-  ```
+## Cache version (`?v=...`)
 
----
+Front-end CSS/JS cache-busting uses `ASSET_VERSION` in `.env`. Bump it after catalogue extracts:
 
-## 🌐 Running & Testing the Website Locally
+```bash
+python update_version.py bump
+python update_version.py status
+python update_version.py 2.11
+```
 
-1. Start a local HTTP web server from the project root:
-   ```bash
-   python3 -m http.server 8000
-   ```
+`airtable-extract` bumps this automatically.
 
-2. Open **`http://localhost:8000`** in your browser to inspect the website:
-   * **Product Catalog Grid**: Check `http://localhost:8000/products.html` to test dynamic product cards, attribute filter pills, and search.
-   * **Product Details Page**: Check `http://localhost:8000/product-detail.html` for technical specs, CCT options, and image gallery rendering.
-   * **Navigation Mega Menu**: Check `http://localhost:8000/index.html` to verify topbar category dropdowns.
-
----
-
-## 🛠 Project Structure
+## Project layout
 
 ```
-azoogi/
-├── assets/
-│   ├── data/
-│   │   └── products.json         # Static extracted catalog JSON
-│   ├── js/
-│   │   ├── products_data.js     # Auto-compiled JS bundle (AZOOGI_PRODUCTS)
-│   │   ├── mega_menu.js         # Navigation dynamic loader
-│   │   └── site_header.js       # Dynamic topbar header
-├── airtable_json_uploader/
-│   ├── .env                     # Airtable PAT & Table configuration
-│   ├── airtable_json_uploader/
-│   │   ├── extractor.py         # Main extraction and schema resolver engine
-│   │   ├── airtable_client.py   # Airtable REST API client with retry logic
-│   │   ├── config.py            # Environment configuration helpers
-│   │   ├── cli.py               # CLI entry points (airtable-extract)
-│   │   └── app.py               # Web Studio Flask application
-│   ├── setup.py
-│   └── test_extractor.py        # Extractor unit tests
-├── index.html                   # Main landing page
-├── products.html                # Product catalog grid page
-├── product-detail.html          # Individual product details page
-└── README.md                    # System documentation
+app/Http/Controllers/     Contact form handling
+resources/views/          Blade layouts and pages
+public/assets/            CSS, JS, images, catalogue JSON
+airtable_json_uploader/   Airtable extraction engine
+v3/                       Source product JSON used by the extractor
 ```

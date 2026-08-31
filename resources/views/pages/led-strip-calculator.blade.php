@@ -1,0 +1,292 @@
+@extends('layouts.site')
+
+@section('title')
+LED Strip Calculator — Azoogi
+@endsection
+
+@section('description')
+Build your perfect LED strip setup with Azoogi’s LED Strip Calculator. Choose location, chip, colour, voltage, power and more.
+@endsection
+
+@section('bodyClass', 'calc-page')
+
+@section('chrome', 'full')
+
+@section('topbarClass', 'solid')
+@section('logo', 'logo_dark.png')
+
+@push('styles')
+<link rel="stylesheet" href="{{ asset('assets/css/led_calculator.css') }}?v={{ config('app.asset_version') }}">
+@endpush
+
+@section('content')
+<!-- Hero -->
+<section class="calc-hero">
+  <div class="calc-hero-glow" aria-hidden="true"></div>
+  <div class="calc-hero-inner">
+    <h1 class="h2 calc-hero-title">LED Strip <span>Calculator</span></h1>
+    <p class="calc-hero-lead">
+      Azoogi’s versatile range of interior and exterior LED Strip Lights is perfect for both residential and commercial spaces.
+      With smart control options and custom configurations, creating the ideal lighting solution has never been easier.
+      Use our simple selector tools to build your perfect LED strip setup today.
+    </p>
+    <a href="#led-selector" class="btn primary">Begin LED Selector</a>
+  </div>
+</section>
+
+<!-- Wizard -->
+<section id="led-selector" class="calc-selector">
+  <div class="wrap calc-wrap">
+    <div class="calc-shell">
+
+      <aside class="calc-steps" aria-label="Calculator steps">
+        <ul id="calcStepList">
+          <li class="is-active" data-step-label="1" aria-current="step">Location</li>
+          <li data-step-label="2">Category</li>
+          <li data-step-label="3">Chip Type</li>
+          <li data-step-label="4">Color Type</li>
+          <li data-step-label="5">Voltage</li>
+          <li data-step-label="6">Power</li>
+          <li data-step-label="7">Width</li>
+          <li data-step-label="8">Driver Type</li>
+          <li data-step-label="9">Controller</li>
+        </ul>
+      </aside>
+
+      <section class="calc-content">
+        <div class="steps-container" id="stepsContainer">
+
+          <!-- Step 1 -->
+          <div class="step is-current" data-step="1">
+            <h2>Where will the LED strip be installed?</h2>
+            <p class="step-hint">Your selection will determine whether we show you LED Strip or Neon options next.</p>
+            <div class="options options-4" data-key="pa_ip_rating">
+              <button type="button" data-value="IP20">Indoor and Dry<br><small>IP20</small></button>
+              <button type="button" data-value="IP65">Indoor/Outdoor Shelter<br><small>IP65</small></button>
+              <button type="button" data-value="IP67">Outdoor<br><small>IP67</small></button>
+              <button type="button" data-value="IP68">Underwater<br><small>IP68</small></button>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="step" data-step="2" hidden>
+            <h2>What category of LED strip do you need?</h2>
+
+            <div class="conditional" data-show-when="IP20" hidden>
+              <div class="options options-2" data-key="led_category">
+                <button type="button" data-value="multi-colour">LED Strips (Multi Colour)</button>
+                <button type="button" data-value="single-colour">LED Strips (Single Colour)</button>
+              </div>
+            </div>
+
+            <div class="conditional" data-show-when="IP65" hidden>
+              <div class="options options-3" data-key="led_subcategory">
+                <button type="button" data-value="ip65-multi">IP65 (Multi Colours)</button>
+                <button type="button" data-value="ip65-nano-multi">IP65 [NANO] (Multi Colours)</button>
+                <button type="button" data-value="ip65-nano-single">IP65 [NANO] (Single Colours)</button>
+              </div>
+            </div>
+
+            <div class="conditional" data-show-when="IP67" hidden>
+              <p class="step-hint">IP67 products use NEON technology</p>
+              <div class="options options-3" data-key="neon_type">
+                <button type="button" data-value="side-bend">Side Bend</button>
+                <button type="button" data-value="top-bend">Top Bend</button>
+                <button type="button" data-value="360-neon">360° Neon</button>
+              </div>
+            </div>
+
+            <div class="conditional" data-show-when="IP68" hidden>
+              <p class="step-hint">IP68 products use NEON technology</p>
+              <div class="options options-2" data-key="neon_type">
+                <button type="button" data-value="side-bend">Side Bend</button>
+                <button type="button" data-value="top-bend">Top Bend</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="step" data-step="3" hidden>
+            <h2>Chip Type</h2>
+
+            <div class="conditional" data-show-when="multi-colour" hidden>
+              <p class="step-hint">Multi Colour LED strips use SMD chip technology</p>
+              <div class="options options-row" data-key="chip_type">
+                <button type="button" data-value="smd">SMD</button>
+              </div>
+              <div class="chip-info">
+                <strong>SMD (Surface Mounted Diode)</strong>
+                <p>A flexible, budget-friendly option suited to general lighting or decorative use. Easy to install with a range of brightness levels.</p>
+              </div>
+            </div>
+
+            <div class="conditional" data-show-when="single-colour" hidden>
+              <p class="step-hint">Choose the chip technology that suits your needs</p>
+              <div class="options options-3" data-key="chip_type">
+                <button type="button" data-value="csp">CSP</button>
+                <button type="button" data-value="cob">COB</button>
+                <button type="button" data-value="smd">SMD</button>
+              </div>
+              <div class="chip-info" id="chipInfoDynamic"></div>
+            </div>
+
+            <div class="conditional" data-show-when="neon" hidden>
+              <p class="step-hint">NEON products use integrated chip technology — continue to colour selection.</p>
+              <div class="options options-row" data-key="chip_type">
+                <button type="button" data-value="neon">NEON Integrated</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="step" data-step="4" hidden>
+            <div class="conditional" data-show-when="multi-colour" hidden>
+              <h2>Select color type</h2>
+              <div class="options options-4" data-key="color_type">
+                <button type="button" data-value="RGB">RGB</button>
+                <button type="button" data-value="RGBW">RGBW</button>
+                <button type="button" data-value="CCT">CCT</button>
+                <button type="button" data-value="RGB+CCT">RGB+CCT</button>
+              </div>
+            </div>
+
+            <div class="conditional" data-show-when="single-colour" hidden>
+              <h2>Select color temperature</h2>
+              <p class="step-hint">Choose the warmth or coolness of the light</p>
+              <div class="options options-4" data-key="cct">
+                <button type="button" data-value="2700K">2700K<br><small>Warm White</small></button>
+                <button type="button" data-value="3000K">3000K<br><small>Soft White</small></button>
+                <button type="button" data-value="4000K">4000K<br><small>Natural White</small></button>
+                <button type="button" data-value="6000K">6000K<br><small>Cool White</small></button>
+              </div>
+            </div>
+
+            <div class="conditional" data-show-when="neon" hidden>
+              <h2>Select color</h2>
+              <p class="step-hint">Choose the color temperature or color type</p>
+              <div class="options options-4" data-key="neon_color">
+                <button type="button" data-value="2700K">2700K<br><small>Warm White</small></button>
+                <button type="button" data-value="3000K">3000K<br><small>Soft White</small></button>
+                <button type="button" data-value="4000K">4000K<br><small>Natural White</small></button>
+                <button type="button" data-value="5300K">5300K<br><small>Cool White</small></button>
+                <button type="button" data-value="6000K">6000K<br><small>Cool White</small></button>
+                <button type="button" data-value="RGB">RGB<br><small>Multi Color</small></button>
+                <button type="button" data-value="RGBW">RGBW<br><small>Multi Color + White</small></button>
+                <button type="button" data-value="CCT">CCT<br><small>Tunable White</small></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="step" data-step="5" hidden>
+            <div class="conditional" data-show-when="multi-colour" hidden>
+              <h2>Voltage</h2>
+              <p class="step-hint">All Multi Colour LED strips are 24V</p>
+              <div class="options options-row" data-key="voltage">
+                <button type="button" data-value="24V">24V</button>
+              </div>
+            </div>
+            <div class="conditional" data-show-when="single-colour" hidden>
+              <h2>Select voltage</h2>
+              <p class="step-hint">Choose the operating voltage</p>
+              <div class="options options-2" data-key="voltage">
+                <button type="button" data-value="12V">12V</button>
+                <button type="button" data-value="24V">24V</button>
+              </div>
+            </div>
+            <div class="conditional" data-show-when="neon" hidden>
+              <h2>Voltage</h2>
+              <p class="step-hint">All NEON products are 24V</p>
+              <div class="options options-row" data-key="voltage">
+                <button type="button" data-value="24V">24V</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 6 -->
+          <div class="step" data-step="6" hidden>
+            <h2>Select power output</h2>
+            <div class="options options-4" data-key="power" id="powerOptions">
+              <button type="button" data-value="4.8W">4.8W</button>
+              <button type="button" data-value="5W">5W</button>
+              <button type="button" data-value="5W/m">5W/m</button>
+              <button type="button" data-value="9.6W">9.6W</button>
+              <button type="button" data-value="10W">10W</button>
+              <button type="button" data-value="10W/m">10W/m</button>
+              <button type="button" data-value="13W/m">13W/m</button>
+              <button type="button" data-value="14.4W">14.4W</button>
+              <button type="button" data-value="15W">15W</button>
+              <button type="button" data-value="15W/m">15W/m</button>
+              <button type="button" data-value="17W/m">17W/m</button>
+              <button type="button" data-value="19.2W">19.2W</button>
+              <button type="button" data-value="22W">22W</button>
+              <button type="button" data-value="29W">29W</button>
+            </div>
+          </div>
+
+          <!-- Step 7 -->
+          <div class="step" data-step="7" hidden>
+            <h2>Select size</h2>
+            <div class="options options-3" data-key="width" id="widthOptions">
+              <button type="button" data-value="4mm" data-for="strip">4mm</button>
+              <button type="button" data-value="8mm" data-for="strip">8mm</button>
+              <button type="button" data-value="10mm" data-for="strip">10mm</button>
+              <button type="button" data-value="12mm" data-for="strip">12mm</button>
+              <button type="button" data-value="14mm" data-for="strip">14mm</button>
+              <button type="button" data-value="12x13mm" data-for="neon">12mm × 13mm</button>
+              <button type="button" data-value="12x17mm" data-for="neon">12mm × 17mm</button>
+              <button type="button" data-value="16x16mm" data-for="neon">16mm × 16mm</button>
+              <button type="button" data-value="16x17mm" data-for="neon">16mm × 17mm</button>
+              <button type="button" data-value="13mm" data-for="neon">13mm</button>
+            </div>
+          </div>
+
+          <!-- Step 8 -->
+          <div class="step" data-step="8" hidden>
+            <h2>Select driver type</h2>
+            <p class="step-hint">Choose the dimming capability you need</p>
+            <div class="options options-3" data-key="driver_type">
+              <button type="button" data-value="non-dimmable">Non-Dimmable</button>
+              <button type="button" data-value="dimmable">Dimmable (5-in-1)</button>
+              <button type="button" data-value="dali-2">DALI-2</button>
+            </div>
+          </div>
+
+          <!-- Step 9 -->
+          <div class="step" data-step="9" hidden>
+            <h2>Would you like to add a controller?</h2>
+            <p class="step-hint">Optional: Select a controller to manage your LED strip</p>
+            <div class="options options-4" data-key="controller">
+              <button type="button" data-value="none">None</button>
+              <button type="button" data-value="remote">Remote</button>
+              <button type="button" data-value="wifi-rf">WiFi/RF</button>
+              <button type="button" data-value="wall-panel">Wall Panel</button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="calc-nav">
+          <button type="button" class="btn primary" id="calcNext">Next</button>
+          <button type="button" class="btn" id="calcBack" hidden>Go Back</button>
+          <p class="calc-nav-hint" id="calcNavHint">Select an option to continue</p>
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
+
+<!-- Results -->
+<section id="led-selector-results" class="calc-results" hidden>
+  <div class="wrap calc-wrap">
+    <div class="ls-results-container">
+      <h2 class="ls-results-title">Your perfect LED strip setup...</h2>
+      <div class="ls-results-grid" id="resultsGrid"></div>
+    </div>
+  </div>
+</section>
+@endsection
+
+@push('scripts')
+<script src="{{ asset('assets/js/led_calculator.js') }}?v={{ config('app.asset_version') }}"></script>
+@endpush
