@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\Status;
+use App\Enums\UserType;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'user_type', 'status'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -27,6 +28,33 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'user_type' => UserType::class,
+            'status' => Status::class,
         ];
+    }
+
+    public function isActive(): bool
+    {
+        return $this->status === Status::Active;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->user_type === UserType::Admin;
+    }
+
+    public function isStaff(): bool
+    {
+        return $this->user_type === UserType::Staff;
+    }
+
+    public function isCustomer(): bool
+    {
+        return $this->user_type === UserType::Customer;
+    }
+
+    public function isTrader(): bool
+    {
+        return $this->user_type === UserType::Trader;
     }
 }

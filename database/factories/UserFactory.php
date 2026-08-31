@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\Status;
+use App\Enums\UserType;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -29,6 +31,8 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'user_type' => UserType::Customer,
+            'status' => Status::Active,
             'remember_token' => Str::random(10),
         ];
     }
@@ -40,6 +44,48 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    public function admin(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'user_type' => UserType::Admin,
+        ]);
+    }
+
+    public function staff(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'user_type' => UserType::Staff,
+        ]);
+    }
+
+    public function customer(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'user_type' => UserType::Customer,
+        ]);
+    }
+
+    public function trader(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'user_type' => UserType::Trader,
+        ]);
+    }
+
+    public function active(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => Status::Active,
+        ]);
+    }
+
+    public function inactive(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => Status::Inactive,
         ]);
     }
 }

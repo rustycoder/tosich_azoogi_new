@@ -31,9 +31,9 @@ const savedTheme = localStorage.getItem('theme'); if (savedTheme) { document.doc
     <div class="wrap">
       <!-- ==================== BREADCRUMBS START ==================== -->
       <div class="breadcrumbs" id="breadcrumbs">
-        <a href="/demo">Home</a>
+        <a href="/">Home</a>
         <span>/</span>
-        <a href="/demo#products">Products</a>
+        <a href="/products">Products</a>
         <span>/</span>
         <a href="#">IP67 Neon</a>
         <span>/</span>

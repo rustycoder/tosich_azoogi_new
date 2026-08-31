@@ -1,7 +1,17 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
+
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'create'])->name('login');
+    Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+});
+
+Route::post('/logout', [LoginController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('logout');
 
 $pages = [
     '/' => 'pages.home',
@@ -20,8 +30,6 @@ $pages = [
     '/data-centre' => 'pages.data-centre',
     '/jr-neon' => 'pages.jr-neon',
     '/test-configuration' => 'pages.test-configuration',
-    '/demo' => 'pages.demo',
-    '/demo00' => 'pages.demo00',
 ];
 
 foreach ($pages as $uri => $view) {
@@ -47,8 +55,6 @@ $htmlAliases = [
     'data-centre.html' => '/data-centre',
     'jr-neon.html' => '/jr-neon',
     'test-configuration.html' => '/test-configuration',
-    'demo.html' => '/demo',
-    'demo00.html' => '/demo00',
 ];
 
 foreach ($htmlAliases as $from => $to) {
