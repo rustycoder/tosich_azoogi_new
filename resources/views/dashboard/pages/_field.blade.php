@@ -1,7 +1,7 @@
 @php
     use App\PageMeta\FieldType;
 @endphp
-<div class="dash-field">
+<div class="dash-field{{ ! empty($wide) ? ' is-wide' : '' }}">
     @if (empty($hideLabel))
         <label>{{ $field->label }}</label>
     @endif

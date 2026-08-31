@@ -4,15 +4,17 @@
 
 @section('content')
 @php
-    $singles = [];
-    $groups = [];
+    $bag = \App\Support\PageMetaBag::for($page);
+    $detailKeys = [
+        'header.description', 'header.phone', 'header.email',
+        'footer.description', 'footer.message',
+    ];
+    $detailFields = [];
 
     foreach ($sections as $section) {
         foreach ($section['fields'] as $field) {
-            if ($field->group) {
-                $groups[$field->group][] = $field;
-            } else {
-                $singles[] = $field;
+            if (in_array($field->key, $detailKeys, true)) {
+                $detailFields[] = $field;
             }
         }
     }
@@ -41,7 +43,7 @@
     <div class="dash-card">
         <h2>Details</h2>
         <div class="dash-form-grid">
-            @foreach ($singles as $field)
+            @foreach ($detailFields as $field)
                 @php $row = $metaByKey->get($field->key, collect())->firstWhere('sort_order', 0); @endphp
                 @if ($row)
                     @include('dashboard.pages._field', ['field' => $field, 'row' => $row])
@@ -50,25 +52,65 @@
         </div>
     </div>
 
-    @if ($groups !== [])
+    @if ($page->slug === 'header')
+        <div class="dash-card">
+            <h2>Menu</h2>
+            <p class="dash-lead">Products, Trade Login, and LED Calculator stay fixed. Other links can be added or edited.</p>
+            @include('dashboard.sections._links', [
+                'alias' => 'nav',
+                'links' => $bag->group('header.nav'),
+            ])
+        </div>
         <div class="dash-card">
             <h2>Rotating text</h2>
-            <div class="dash-stack">
-                @foreach ($groups as $fields)
-                    @php
-                        $orders = $metaByKey->get($fields[0]->key, collect())->pluck('sort_order')->unique()->sort()->values();
-                    @endphp
-                    @foreach ($orders as $order)
-                        @foreach ($fields as $field)
-                            @php $row = $metaByKey->get($field->key, collect())->firstWhere('sort_order', $order); @endphp
-                            @if ($row)
-                                @include('dashboard.pages._field', ['field' => $field, 'row' => $row, 'hideLabel' => true])
-                            @endif
-                        @endforeach
-                    @endforeach
-                @endforeach
+            @include('dashboard.sections._words', [
+                'alias' => 'words',
+                'words' => $bag->group('header.word'),
+            ])
+        </div>
+    @endif
+
+    @if ($page->slug === 'footer')
+        @php
+            $productHeading = $metaByKey->get('footer.products.heading', collect())->firstWhere('sort_order', 0);
+            $companyHeading = $metaByKey->get('footer.company.heading', collect())->firstWhere('sort_order', 0);
+            $contactHeading = $metaByKey->get('footer.contact.heading', collect())->firstWhere('sort_order', 0);
+            $contactPhone = $metaByKey->get('footer.phone', collect())->firstWhere('sort_order', 0);
+            $contactEmail = $metaByKey->get('footer.email', collect())->firstWhere('sort_order', 0);
+        @endphp
+        <div class="dash-card">
+            <h2>Menu 1</h2>
+            @if ($productHeading)
+                @include('dashboard.pages._field', ['field' => \App\PageMeta\Field::text('footer.products.heading', 'Column title'), 'row' => $productHeading, 'wide' => true])
+            @endif
+            @include('dashboard.sections._links', ['alias' => 'products', 'links' => $bag->group('footer.products.link')])
+        </div>
+        <div class="dash-card">
+            <h2>Menu 2</h2>
+            @if ($companyHeading)
+                @include('dashboard.pages._field', ['field' => \App\PageMeta\Field::text('footer.company.heading', 'Column title'), 'row' => $companyHeading, 'wide' => true])
+            @endif
+            @include('dashboard.sections._links', ['alias' => 'company', 'links' => $bag->group('footer.company.link')])
+        </div>
+        <div class="dash-card">
+            <h2>Menu 3</h2>
+            @if ($contactHeading)
+                @include('dashboard.pages._field', ['field' => \App\PageMeta\Field::text('footer.contact.heading', 'Column title'), 'row' => $contactHeading, 'wide' => true])
+            @endif
+            <div class="dash-form-grid">
+                @if ($contactPhone)
+                    @include('dashboard.pages._field', ['field' => \App\PageMeta\Field::text('footer.phone', 'Phone'), 'row' => $contactPhone])
+                @endif
+                @if ($contactEmail)
+                    @include('dashboard.pages._field', ['field' => \App\PageMeta\Field::text('footer.email', 'Email'), 'row' => $contactEmail])
+                @endif
             </div>
+            @include('dashboard.sections._links', ['alias' => 'contact', 'links' => $bag->group('footer.contact.link')])
         </div>
     @endif
 </form>
 @endsection
+
+@push('scripts')
+<script src="{{ asset('assets/js/dashboard-section.js') }}?v={{ config('app.asset_version') }}"></script>
+@endpush

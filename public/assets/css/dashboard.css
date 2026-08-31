@@ -432,6 +432,119 @@ body:has(.dash) {
   gap: 12px;
 }
 
+.dash-menu-col {
+  display: grid;
+  gap: 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--dash-line);
+}
+
+.dash-menu-col:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.dash-menu-col h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.dash-link-list {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+
+.dash-link-panel,
+.dash-link-rows,
+.dash-link-item,
+.dash-link-row,
+.dash-link-fields {
+  width: 100%;
+  min-width: 0;
+}
+
+.dash-link-panel {
+  border: 1px solid var(--dash-line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.dash-link-head,
+.dash-link-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 40px;
+  gap: 10px;
+  align-items: end;
+}
+
+.dash-link-head {
+  display: none;
+  padding: 8px 12px;
+  background: #f6f7f6;
+  border-bottom: 1px solid var(--dash-line);
+  align-items: center;
+  font-size: 11px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #5c635c;
+}
+
+.dash-link-head-spacer {
+  width: 40px;
+  height: 1px;
+}
+
+.dash-link-rows {
+  display: grid;
+}
+
+.dash-link-item {
+  padding: 10px 12px;
+}
+
+.dash-link-item + .dash-link-item {
+  border-top: 1px solid var(--dash-line);
+}
+
+.dash-link-fields {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.dash-field-target select {
+  min-width: 0;
+}
+
+.dash-link-remove {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: #c4453c;
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.dash-link-remove:hover {
+  background: #a5362e;
+}
+
+.dash-link-add {
+  width: auto;
+  justify-self: start;
+  white-space: nowrap;
+}
+
 .dash-card {
   background: var(--dash-card);
   border: 1px solid var(--dash-line);
@@ -454,8 +567,8 @@ body:has(.dash) {
   margin: 0;
 }
 
-.dash-form > .dash-card {
-  margin-bottom: 0;
+.dash-card > .dash-field.is-wide {
+  width: 100%;
 }
 
 .dash-form-grid {
@@ -949,6 +1062,18 @@ code {
   .dash-form-grid,
   .dash-card > .dash-form {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dash-link-fields {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) 148px;
+  }
+
+  .dash-link-head {
+    display: grid;
+  }
+
+  .dash-link-row .dash-field > label {
+    display: none;
   }
 
   .dash-form-grid > .dash-field.is-wide,

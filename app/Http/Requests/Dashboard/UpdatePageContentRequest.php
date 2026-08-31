@@ -28,6 +28,7 @@ class UpdatePageContentRequest extends FormRequest
             'meta' => ['nullable', 'array'],
             'meta.*.value' => ['nullable', 'string'],
             'meta.*.file' => ['nullable', 'file', 'max:12288', 'mimes:jpg,jpeg,png,webp,gif,webm,mp4'],
+            'items' => ['nullable', 'array'],
         ];
     }
 }

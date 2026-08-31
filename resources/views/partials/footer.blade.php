@@ -3,6 +3,12 @@
     $phone = $footerMeta->get('footer.phone', 0, '1300 641 261');
     $email = $footerMeta->get('footer.email', 0, 'sales@azoogi.com');
     $message = $footerMeta->get('footer.message', 0, 'Azoogi Pty Ltd. All rights reserved.');
+    $productHeading = $footerMeta->get('footer.products.heading', 0, 'Products');
+    $companyHeading = $footerMeta->get('footer.company.heading', 0, 'Company');
+    $contactHeading = $footerMeta->get('footer.contact.heading', 0, 'Contact');
+    $productLinks = collect($footerMeta->group('footer.products.link'))->filter(fn (array $item): bool => trim($item['label'] ?? '') !== '');
+    $companyLinks = collect($footerMeta->group('footer.company.link'))->filter(fn (array $item): bool => trim($item['label'] ?? '') !== '');
+    $contactLinks = collect($footerMeta->group('footer.contact.link'))->filter(fn (array $item): bool => trim($item['label'] ?? '') !== '');
 @endphp
 <footer>
     <div class="wrap">
@@ -12,23 +18,24 @@
                 <p>{{ $description }}</p>
             </div>
             <div>
-                <h5>Products</h5>
-                <a href="{{ url('/products') }}">All Products</a>
-                <a href="{{ url('/led-strip-calculator') }}">LED Calculator</a>
+                <h5>{{ $productHeading }}</h5>
+                @foreach ($productLinks as $item)
+                    <a href="{{ chrome_url($item['href'] ?? '') }}"{!! chrome_target_attrs($item['target'] ?? null) !!}>{{ $item['label'] }}</a>
+                @endforeach
             </div>
             <div>
-                <h5>Company</h5>
-                <a href="{{ url('/about') }}">About Azoogi</a>
-                <a href="{{ url('/projects') }}">Projects</a>
-                <a href="{{ url('/ai-lighting') }}">AI Lighting</a>
-                <a href="{{ url('/contact') }}">Contact</a>
-                <a href="{{ url('/privacy') }}">Privacy</a>
+                <h5>{{ $companyHeading }}</h5>
+                @foreach ($companyLinks as $item)
+                    <a href="{{ chrome_url($item['href'] ?? '') }}"{!! chrome_target_attrs($item['target'] ?? null) !!}>{{ $item['label'] }}</a>
+                @endforeach
             </div>
             <div>
-                <h5>Contact</h5>
+                <h5>{{ $contactHeading }}</h5>
                 <a href="{{ tel_href($phone) }}">{{ $phone }}</a>
                 <a href="mailto:{{ $email }}">{{ $email }}</a>
-                <a href="{{ url('/trade-login') }}">Trade Login</a>
+                @foreach ($contactLinks as $item)
+                    <a href="{{ chrome_url($item['href'] ?? '') }}"{!! chrome_target_attrs($item['target'] ?? null) !!}>{{ $item['label'] }}</a>
+                @endforeach
             </div>
         </div>
         <div class="copy">

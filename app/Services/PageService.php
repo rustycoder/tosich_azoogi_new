@@ -6,6 +6,7 @@ use App\Models\Page;
 use App\PageMeta\Catalog;
 use App\PageMeta\Definitions\AudiencePageDefinition;
 use App\PageMeta\EditorSections;
+use App\PageMeta\SectionItems;
 use App\Repositories\Contracts\IPageRepository;
 use App\Repositories\Contracts\IProjectRepository;
 use App\Services\Contracts\IPageService;
@@ -67,7 +68,7 @@ class PageService implements IPageService
         ];
     }
 
-    public function updateContent(Page $page, array $attributes, array $metaValues, array $uploaded): void
+    public function updateContent(Page $page, array $attributes, array $metaValues, array $uploaded, array $items = []): void
     {
         $page->fill($attributes);
         $this->pages->save($page);
@@ -94,6 +95,60 @@ class PageService implements IPageService
             }
 
             $this->pages->saveMeta($meta);
+        }
+
+        $this->syncItems($page, $items);
+    }
+
+    /**
+     * @param  array<string, mixed>  $items
+     */
+    private function syncItems(Page $page, array $items): void
+    {
+        foreach (SectionItems::aliases($page->slug) as $alias => $prefix) {
+            if (! array_key_exists($alias, $items) || ! is_array($items[$alias])) {
+                continue;
+            }
+
+            $this->pages->deleteMetaByPrefix($page, $prefix);
+
+            $order = 0;
+
+            foreach ($items[$alias] as $key => $row) {
+                if ($key === '_sync' || ! is_array($row)) {
+                    continue;
+                }
+
+                if ($prefix === 'header.word') {
+                    $text = trim((string) ($row['text'] ?? ''));
+
+                    if ($text === '') {
+                        continue;
+                    }
+
+                    $this->pages->createMeta($page, $prefix.'.text', $order, $text);
+                    $order++;
+
+                    continue;
+                }
+
+                $label = trim((string) ($row['label'] ?? ''));
+                $href = trim((string) ($row['href'] ?? ''));
+
+                if ($label === '' && $href === '') {
+                    continue;
+                }
+
+                $this->pages->createMeta($page, $prefix.'.label', $order, $label);
+                $this->pages->createMeta($page, $prefix.'.href', $order, $href);
+                $this->pages->createMeta(
+                    $page,
+                    $prefix.'.target',
+                    $order,
+                    ($row['target'] ?? '_self') === '_blank' ? '_blank' : '_self',
+                );
+                $order++;
+            }
         }
     }
 

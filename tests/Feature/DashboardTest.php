@@ -631,17 +631,13 @@ class DashboardTest extends TestCase
         $this->seed([AdminUserSeeder::class, PageSeeder::class]);
         $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
         $header = Page::query()->where('slug', 'header')->firstOrFail();
-        $word = PageMeta::query()
-            ->where('page_id', $header->id)
-            ->where('key', 'header.word.text')
-            ->where('sort_order', 0)
-            ->firstOrFail();
 
         $this->actingAs($admin)
             ->get(route('dashboard.sections.edit', $header))
             ->assertOk()
             ->assertSee('Rotating text', false)
             ->assertSee('DESIGN', false)
+            ->assertSee('Add text', false)
             ->assertDontSee('Item 1', false);
 
         $this->actingAs($admin)
@@ -649,16 +645,30 @@ class DashboardTest extends TestCase
                 'title' => $header->title,
                 'meta_description' => $header->meta_description,
                 'status' => Status::Active->value,
-                'meta' => [
-                    $word->id => ['value' => 'CRAFT'],
+                'items' => [
+                    'words' => [
+                        '_sync' => '1',
+                        ['text' => 'CRAFT'],
+                        ['text' => 'ENGINEER'],
+                        ['text' => 'CUSTOMISE'],
+                        ['text' => 'SUPPLY'],
+                        ['text' => 'CONTROL'],
+                        ['text' => 'INSTALL'],
+                        ['text' => 'FINISH'],
+                    ],
                 ],
             ])
             ->assertRedirect(route('dashboard.sections.edit', $header));
 
+        $this->assertSame(7, PageMeta::query()->where('page_id', $header->id)->where('key', 'header.word.text')->count());
+
         $this->get('/')
             ->assertOk()
             ->assertSee('"CRAFT"', false)
-            ->assertDontSee('"DESIGN"', false);
+            ->assertSee('"INSTALL"', false)
+            ->assertSee('"FINISH"', false)
+            ->assertDontSee('"DESIGN"', false)
+            ->assertDontSee('"COMMISSION"', false);
     }
 
     public function test_admin_can_update_header_and_footer_copy(): void
@@ -696,6 +706,74 @@ class DashboardTest extends TestCase
             ->assertOk()
             ->assertSee('Updated header tagline', false)
             ->assertSee('Updated footer description', false);
+    }
+
+    public function test_footer_legal_links_are_not_editable(): void
+    {
+        $this->seed([AdminUserSeeder::class, PageSeeder::class]);
+        $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
+        $footer = Page::query()->where('slug', 'footer')->firstOrFail();
+
+        $this->actingAs($admin)
+            ->get(route('dashboard.sections.edit', $footer))
+            ->assertOk()
+            ->assertSee('>Menu 1</h2>', false)
+            ->assertSee('>Menu 2</h2>', false)
+            ->assertSee('>Menu 3</h2>', false)
+            ->assertSee('>Same tab</option>', false)
+            ->assertSee('>New tab</option>', false)
+            ->assertDontSee('items[legal]', false);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('href="'.url('/privacy').'"', false)
+            ->assertSee('href="'.url('/terms').'"', false)
+            ->assertSee('href="'.url('/warranty-returns').'"', false)
+            ->assertSee('href="'.url('/modern-slavery').'"', false);
+    }
+
+    public function test_admin_can_update_header_and_footer_menus(): void
+    {
+        $this->seed([AdminUserSeeder::class, PageSeeder::class]);
+        $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
+        $header = Page::query()->where('slug', 'header')->firstOrFail();
+        $footer = Page::query()->where('slug', 'footer')->firstOrFail();
+        $heading = PageMeta::query()
+            ->where('page_id', $footer->id)
+            ->where('key', 'footer.products.heading')
+            ->firstOrFail();
+
+        $this->actingAs($admin)
+            ->put(route('dashboard.sections.update', $header), [
+                'title' => $header->title,
+                'meta_description' => $header->meta_description,
+                'status' => Status::Active->value,
+                'items' => [
+                    'nav' => [
+                        '_sync' => '1',
+                        ['label' => 'Projects', 'href' => '/projects', 'target' => '_self'],
+                        ['label' => 'Studio', 'href' => '/about', 'target' => '_blank'],
+                    ],
+                ],
+            ])
+            ->assertRedirect(route('dashboard.sections.edit', $header));
+
+        $this->actingAs($admin)
+            ->put(route('dashboard.sections.update', $footer), [
+                'title' => $footer->title,
+                'meta_description' => $footer->meta_description,
+                'status' => Status::Active->value,
+                'meta' => [
+                    $heading->id => ['value' => 'Range'],
+                ],
+            ])
+            ->assertRedirect(route('dashboard.sections.edit', $footer));
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('Studio', false)
+            ->assertSee('href="'.url('/about').'" target="_blank" rel="noopener noreferrer"', false)
+            ->assertSee('>Range</h5>', false);
     }
 
     public function test_admin_can_update_page_meta_details(): void

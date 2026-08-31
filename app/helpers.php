@@ -18,6 +18,40 @@ if (! function_exists('tel_href')) {
     }
 }
 
+if (! function_exists('chrome_url')) {
+    function chrome_url(string $href): string
+    {
+        $href = trim($href);
+
+        if ($href === '') {
+            return '#';
+        }
+
+        if (
+            str_starts_with($href, 'http://')
+            || str_starts_with($href, 'https://')
+            || str_starts_with($href, 'mailto:')
+            || str_starts_with($href, 'tel:')
+            || str_starts_with($href, '#')
+        ) {
+            return $href;
+        }
+
+        return url($href);
+    }
+}
+
+if (! function_exists('chrome_target_attrs')) {
+    function chrome_target_attrs(?string $target): string
+    {
+        if ($target !== '_blank') {
+            return '';
+        }
+
+        return ' target="_blank" rel="noopener noreferrer"';
+    }
+}
+
 if (! function_exists('media_url')) {
     function media_url(?string $path): string
     {

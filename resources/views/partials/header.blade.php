@@ -10,6 +10,9 @@
         ->filter()
         ->values()
         ->all();
+    $nav = collect($headerMeta->group('header.nav'))
+        ->filter(fn (array $item): bool => trim($item['label'] ?? '') !== '')
+        ->values();
 @endphp
 <header class="topbar {{ $topbarClass }}" id="topbar">
     <div class="util">
@@ -29,11 +32,9 @@
                 <a href="{{ url('/products') }}">Products <span class="caret">&#9662;</span></a>
                 <div class="mega-menu" id="dynamic-mega-menu"></div>
             </div>
-            <a href="{{ url('/projects') }}">Projects</a>
-            <a href="{{ url('/about') }}">About Us</a>
-            <a href="{{ url('/solutions') }}">Solutions</a>
-            <a href="{{ url('/contact') }}">Contact</a>
-            <a href="{{ url('/ai-lighting') }}">AI Lighting</a>
+            @foreach ($nav as $item)
+                <a href="{{ chrome_url($item['href'] ?? '') }}"{!! chrome_target_attrs($item['target'] ?? null) !!}>{{ $item['label'] }}</a>
+            @endforeach
         </div>
         <a href="{{ url('/led-strip-calculator') }}" class="cta">LED Calculator</a>
         <div class="burger"><span></span><span></span><span></span></div>

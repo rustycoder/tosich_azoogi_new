@@ -21,4 +21,8 @@ interface IPageRepository
     public function findMeta(Page $page, int $id): ?PageMeta;
 
     public function saveMeta(PageMeta $meta): void;
+
+    public function createMeta(Page $page, string $key, int $sortOrder, string $value): PageMeta;
+
+    public function deleteMetaByPrefix(Page $page, string $prefix): void;
 }

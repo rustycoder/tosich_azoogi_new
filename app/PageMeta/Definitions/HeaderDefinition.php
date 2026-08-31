@@ -34,6 +34,9 @@ class HeaderDefinition implements PageDefinition
             Field::text('header.phone', 'Phone'),
             Field::text('header.email', 'Email'),
             Field::text('header.word.text', 'Rotating text', true, 'header.word'),
+            Field::text('header.nav.label', 'Label', true, 'header.nav'),
+            Field::url('header.nav.href', 'URL', true, 'header.nav'),
+            Field::select('header.nav.target', 'Target', ['_self' => 'Same tab', '_blank' => 'New tab'], true, 'header.nav'),
         ];
     }
 
@@ -47,6 +50,18 @@ class HeaderDefinition implements PageDefinition
 
         foreach (['DESIGN', 'ENGINEER', 'CUSTOMISE', 'SUPPLY', 'CONTROL', 'COMMISSION'] as $order => $word) {
             $rows[] = ['key' => 'header.word.text', 'sort_order' => $order, 'value' => $word];
+        }
+
+        foreach ([
+            ['Projects', '/projects'],
+            ['About Us', '/about'],
+            ['Solutions', '/solutions'],
+            ['Contact', '/contact'],
+            ['AI Lighting', '/ai-lighting'],
+        ] as $order => $item) {
+            $rows[] = ['key' => 'header.nav.label', 'sort_order' => $order, 'value' => $item[0]];
+            $rows[] = ['key' => 'header.nav.href', 'sort_order' => $order, 'value' => $item[1]];
+            $rows[] = ['key' => 'header.nav.target', 'sort_order' => $order, 'value' => '_self'];
         }
 
         return $rows;

@@ -1,7 +1,5 @@
 (() => {
   const MOBILE_MQ = '(max-width: 960px)';
-  const AI_HREF = '/ai-lighting';
-  const AI_LABEL = 'AI Lighting';
 
   // Client default: clean white sheet + green accent only
   const MOBILE_NAV_STYLE = 'a';
@@ -62,26 +60,6 @@
     words = readWords(el);
     el.classList.remove('is-words', 'is-out');
     el.classList.add('is-in');
-  }
-
-  function ensureAiLightingLink(menu) {
-    if (!menu) return;
-    const existing = Array.from(menu.querySelectorAll(':scope > a')).find((a) => {
-      const href = (a.getAttribute('href') || '').toLowerCase();
-      return href.includes('ai-lighting');
-    });
-    if (existing) return;
-
-    const link = document.createElement('a');
-    link.href = AI_HREF;
-    link.textContent = AI_LABEL;
-
-    const contact = Array.from(menu.querySelectorAll(':scope > a')).find((a) => {
-      const href = (a.getAttribute('href') || '').toLowerCase();
-      return href.includes('contact');
-    });
-    if (contact) contact.after(link);
-    else menu.appendChild(link);
   }
 
   function ensureOverlay() {
@@ -180,13 +158,11 @@
     if (!burger || !menu) return;
 
     if (burger.dataset.navBound === '1') {
-      ensureAiLightingLink(menu);
       ensureMobileChrome(menu);
       return;
     }
     burger.dataset.navBound = '1';
 
-    ensureAiLightingLink(menu);
     ensureMobileChrome(menu);
     const overlay = ensureOverlay();
 

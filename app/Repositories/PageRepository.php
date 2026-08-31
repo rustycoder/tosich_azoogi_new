@@ -44,4 +44,25 @@ class PageRepository implements IPageRepository
     {
         $meta->save();
     }
+
+    public function createMeta(Page $page, string $key, int $sortOrder, string $value): PageMeta
+    {
+        $meta = new PageMeta([
+            'page_id' => $page->id,
+            'key' => $key,
+            'sort_order' => $sortOrder,
+            'value' => $value,
+        ]);
+        $meta->save();
+
+        return $meta;
+    }
+
+    public function deleteMetaByPrefix(Page $page, string $prefix): void
+    {
+        PageMeta::query()
+            ->where('page_id', $page->id)
+            ->where('key', 'like', $prefix.'.%')
+            ->forceDelete();
+    }
 }

@@ -41,8 +41,9 @@ interface IPageService
      * @param  array<string, mixed>  $attributes
      * @param  array<int, array<string, mixed>>  $metaValues
      * @param  array<int, array{file?: UploadedFile|null}>  $uploaded
+     * @param  array<string, mixed>  $items
      */
-    public function updateContent(Page $page, array $attributes, array $metaValues, array $uploaded): void;
+    public function updateContent(Page $page, array $attributes, array $metaValues, array $uploaded, array $items = []): void;
 
     public function toggleStatus(Page $page): Page;
 }

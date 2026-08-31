@@ -44,6 +44,7 @@ class SectionController extends Controller
             $request->safe()->only(['title', 'meta_description', 'status']),
             $request->validated('meta') ?? [],
             $request->file('meta', []) ?? [],
+            $request->validated('items') ?? [],
         );
 
         return redirect()
