@@ -100,6 +100,12 @@ class PageTest extends TestCase
         $this->get('/project-detail')->assertNotFound();
     }
 
+    public function test_header_and_footer_are_not_public_pages(): void
+    {
+        $this->get('/header')->assertNotFound();
+        $this->get('/footer')->assertNotFound();
+    }
+
     public function test_contact_form_validates_required_fields(): void
     {
         $this->from('/contact')

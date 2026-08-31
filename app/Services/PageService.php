@@ -25,7 +25,7 @@ class PageService implements IPageService
 
     public function publicPage(string $slug): array
     {
-        if (! Catalog::has($slug)) {
+        if (! Catalog::has($slug) || Catalog::isSection($slug)) {
             throw new NotFoundHttpException;
         }
 

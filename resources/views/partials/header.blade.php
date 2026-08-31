@@ -1,14 +1,23 @@
 @php
     $topbarClass = trim($__env->yieldContent('topbarClass', 'solid'));
     $logoFile = trim($__env->yieldContent('logo', 'logo_dark.png'));
+    $description = $headerMeta->get('header.description', 0, 'Australian-Owned B2B Trade Wholesaler - Custom Lighting & Smart Control Solutions');
+    $phone = $headerMeta->get('header.phone', 0, '1300 641 261');
+    $email = $headerMeta->get('header.email', 0, 'sales@azoogi.com');
+    $words = collect($headerMeta->group('header.word'))
+        ->pluck('text')
+        ->map(fn (?string $word): string => trim((string) $word))
+        ->filter()
+        ->values()
+        ->all();
 @endphp
 <header class="topbar {{ $topbarClass }}" id="topbar">
     <div class="util">
         <div class="util-inner">
-            <div class="util-rotate" aria-live="polite">Australian-Owned B2B Trade Wholesaler - Custom Lighting &amp; Smart Control Solutions</div>
+            <div class="util-rotate" data-words='@json($words)' aria-live="polite">{{ $description }}</div>
             <div style="display:flex;gap:24px">
-                <a href="tel:1300641261">1300 641 261</a>
-                <a href="mailto:sales@azoogi.com">sales@azoogi.com</a>
+                <a href="{{ tel_href($phone) }}">{{ $phone }}</a>
+                <a href="mailto:{{ $email }}">{{ $email }}</a>
                 <div style="display:flex; align-items:center;"><a href="{{ url('/trade-login') }}">Trade Login</a></div>
             </div>
         </div>

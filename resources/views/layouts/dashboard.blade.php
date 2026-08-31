@@ -36,7 +36,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1z"/></svg>
                 Dashboard
             </a>
-            @if ($canManageProjects || $canManagePages)
+            @if ($canManageProjects || $canManagePages || $canManageSections)
                 <div class="dash-group">Content Management</div>
                 @if ($canManageProjects)
                     <a href="{{ route('dashboard.projects.index') }}" class="{{ request()->routeIs('dashboard.projects.*') ? 'is-active' : '' }}">
@@ -48,6 +48,12 @@
                     <a href="{{ route('dashboard.pages.index') }}" class="{{ request()->routeIs('dashboard.pages.*') ? 'is-active' : '' }}">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v6h6"/></svg>
                         Pages
+                    </a>
+                @endif
+                @if ($canManageSections)
+                    <a href="{{ route('dashboard.sections.index') }}" class="{{ request()->routeIs('dashboard.sections.*') ? 'is-active' : '' }}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+                        Sections
                     </a>
                 @endif
             @endif

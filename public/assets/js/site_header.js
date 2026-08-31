@@ -1,6 +1,4 @@
 (() => {
-  const INTRO = 'Australian-Owned B2B Trade Wholesaler - Custom Lighting & Smart Control Solutions';
-  const WORDS = ['DESIGN', 'ENGINEER', 'CUSTOMISE', 'SUPPLY', 'CONTROL', 'COMMISSION'];
   const MOBILE_MQ = '(max-width: 960px)';
   const AI_HREF = '/ai-lighting';
   const AI_LABEL = 'AI Lighting';
@@ -10,6 +8,8 @@
 
   let el = null;
   let isHome = false;
+  let intro = 'Australian-Owned B2B Trade Wholesaler - Custom Lighting & Smart Control Solutions';
+  let words = ['DESIGN', 'ENGINEER', 'CUSTOMISE', 'SUPPLY', 'CONTROL', 'COMMISSION'];
 
   function swap(nextText, asWords) {
     if (!el || !isHome) return;
@@ -28,17 +28,38 @@
     if (!isHome) return;
     const index = e.detail && typeof e.detail.index === 'number' ? e.detail.index : 0;
     if (index === 0) {
-      swap(INTRO, false);
+      swap(intro, false);
       return;
     }
-    swap(WORDS[(index - 1) % WORDS.length], true);
+    swap(words[(index - 1) % words.length], true);
   });
+
+  function readWords(node) {
+    const raw = node.getAttribute('data-words');
+    if (!raw) {
+      return words;
+    }
+
+    try {
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) {
+        return words;
+      }
+
+      const cleaned = parsed.map((word) => String(word).trim()).filter(Boolean);
+
+      return cleaned.length ? cleaned : words;
+    } catch {
+      return words;
+    }
+  }
 
   function initUtilRotate() {
     el = document.querySelector('.util-rotate');
     isHome = !!document.getElementById('hero');
     if (!el) return;
-    el.textContent = INTRO;
+    intro = el.textContent.trim() || intro;
+    words = readWords(el);
     el.classList.remove('is-words', 'is-out');
     el.classList.add('is-in');
   }

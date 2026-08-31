@@ -26,6 +26,7 @@ class DashboardTest extends TestCase
         $this->get('/dashboard')->assertRedirect('/login');
         $this->get('/dashboard/settings')->assertRedirect('/login');
         $this->get('/dashboard/content/pages/home/preview')->assertRedirect('/login');
+        $this->get('/dashboard/content/sections')->assertRedirect('/login');
     }
 
     public function test_admin_can_open_dashboard_staff_and_page_editors(): void
@@ -38,6 +39,8 @@ class DashboardTest extends TestCase
         $this->actingAs($admin)->get('/dashboard/content/pages')->assertOk()->assertSee('Home', false);
         $this->actingAs($admin)->get('/dashboard/content/pages/home')->assertOk();
         $this->actingAs($admin)->get('/dashboard/content/pages/home-owner')->assertOk();
+        $this->actingAs($admin)->get('/dashboard/content/sections')->assertOk()->assertSee('Header', false)->assertSee('Footer', false);
+        $this->actingAs($admin)->get('/dashboard/content/sections/header')->assertOk()->assertSee('dash-card', false)->assertDontSee('dash-visual-frame', false);
         $this->actingAs($admin)->get('/dashboard/content/projects')->assertOk();
     }
 
@@ -87,6 +90,8 @@ class DashboardTest extends TestCase
         $this->assertNotFalse($wholesaler);
         $this->assertTrue($about < $home);
         $this->assertTrue($home < $wholesaler);
+        $this->assertStringNotContainsString('>Header</a>', $html);
+        $this->assertStringNotContainsString('>Footer</a>', $html);
     }
 
     public function test_index_tables_show_who_last_updated_and_when(): void
@@ -137,6 +142,7 @@ class DashboardTest extends TestCase
         $this->actingAs($staff)->get('/dashboard/content/pages')->assertOk()->assertSee('About', false)->assertDontSee('content/pages/home', false);
         $this->actingAs($staff)->get('/dashboard/content/pages/about')->assertOk();
         $this->actingAs($staff)->get('/dashboard/content/pages/home')->assertForbidden();
+        $this->actingAs($staff)->get('/dashboard/content/sections')->assertForbidden();
         $this->actingAs($staff)->get('/dashboard/content/projects')->assertForbidden();
         $this->actingAs($staff)->get('/dashboard/staff')->assertForbidden();
     }
@@ -153,6 +159,7 @@ class DashboardTest extends TestCase
 
             $this->actingAs($user)->get('/dashboard/content/pages')->assertForbidden();
             $this->actingAs($user)->get('/dashboard/content/pages/home')->assertForbidden();
+            $this->actingAs($user)->get('/dashboard/content/sections')->assertForbidden();
             $this->actingAs($user)->get('/dashboard/staff')->assertForbidden();
         }
     }
@@ -239,6 +246,11 @@ class DashboardTest extends TestCase
             ->get('/dashboard/content/pages/home')
             ->assertOk()
             ->assertSee('dash-visual-frame', false)
+            ->assertSee('Page Meta', false)
+            ->assertSee('Live preview', false)
+            ->assertSee('dash-drawer-meta', false)
+            ->assertSee('name="meta_description"', false)
+            ->assertDontSee('View live', false)
             ->assertSee('/dashboard/content/pages/home/preview', false);
 
         $this->actingAs($admin)
@@ -596,5 +608,114 @@ class DashboardTest extends TestCase
             ])
             ->assertRedirect(route('dashboard.profile.edit'))
             ->assertSessionHasErrors('password');
+    }
+
+    public function test_staff_can_edit_assigned_header_section(): void
+    {
+        $this->seed(PageSeeder::class);
+
+        $staff = User::factory()->staff()->create();
+        ContentPermission::query()->create([
+            'user_id' => $staff->id,
+            'resource' => ContentResource::Header,
+        ]);
+
+        $this->actingAs($staff)->get('/dashboard/content/sections')->assertOk()->assertSee('Header', false)->assertDontSee('Footer', false);
+        $this->actingAs($staff)->get('/dashboard/content/sections/header')->assertOk();
+        $this->actingAs($staff)->get('/dashboard/content/sections/footer')->assertForbidden();
+        $this->actingAs($staff)->get('/dashboard/content/pages')->assertForbidden();
+    }
+
+    public function test_admin_can_update_header_rotating_text(): void
+    {
+        $this->seed([AdminUserSeeder::class, PageSeeder::class]);
+        $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
+        $header = Page::query()->where('slug', 'header')->firstOrFail();
+        $word = PageMeta::query()
+            ->where('page_id', $header->id)
+            ->where('key', 'header.word.text')
+            ->where('sort_order', 0)
+            ->firstOrFail();
+
+        $this->actingAs($admin)
+            ->get(route('dashboard.sections.edit', $header))
+            ->assertOk()
+            ->assertSee('Rotating text', false)
+            ->assertSee('DESIGN', false)
+            ->assertDontSee('Item 1', false);
+
+        $this->actingAs($admin)
+            ->put(route('dashboard.sections.update', $header), [
+                'title' => $header->title,
+                'meta_description' => $header->meta_description,
+                'status' => Status::Active->value,
+                'meta' => [
+                    $word->id => ['value' => 'CRAFT'],
+                ],
+            ])
+            ->assertRedirect(route('dashboard.sections.edit', $header));
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('"CRAFT"', false)
+            ->assertDontSee('"DESIGN"', false);
+    }
+
+    public function test_admin_can_update_header_and_footer_copy(): void
+    {
+        $this->seed([AdminUserSeeder::class, PageSeeder::class]);
+        $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
+        $header = Page::query()->where('slug', 'header')->firstOrFail();
+        $footer = Page::query()->where('slug', 'footer')->firstOrFail();
+        $headerDescription = PageMeta::query()->where('page_id', $header->id)->where('key', 'header.description')->firstOrFail();
+        $footerDescription = PageMeta::query()->where('page_id', $footer->id)->where('key', 'footer.description')->firstOrFail();
+
+        $this->actingAs($admin)
+            ->put(route('dashboard.sections.update', $header), [
+                'title' => $header->title,
+                'meta_description' => $header->meta_description,
+                'status' => Status::Active->value,
+                'meta' => [
+                    $headerDescription->id => ['value' => 'Updated header tagline'],
+                ],
+            ])
+            ->assertRedirect(route('dashboard.sections.edit', $header));
+
+        $this->actingAs($admin)
+            ->put(route('dashboard.sections.update', $footer), [
+                'title' => $footer->title,
+                'meta_description' => $footer->meta_description,
+                'status' => Status::Active->value,
+                'meta' => [
+                    $footerDescription->id => ['value' => 'Updated footer description'],
+                ],
+            ])
+            ->assertRedirect(route('dashboard.sections.edit', $footer));
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('Updated header tagline', false)
+            ->assertSee('Updated footer description', false);
+    }
+
+    public function test_admin_can_update_page_meta_details(): void
+    {
+        $this->seed([AdminUserSeeder::class, PageSeeder::class]);
+        $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
+        $page = Page::query()->where('slug', 'about')->firstOrFail();
+
+        $this->actingAs($admin)
+            ->put(route('dashboard.pages.update', $page), [
+                'title' => 'About meta title',
+                'meta_description' => 'About meta description for search.',
+                'status' => Status::Active->value,
+                'editor_section' => 'meta',
+            ])
+            ->assertRedirect(route('dashboard.pages.edit', ['page' => $page, 'section' => 'meta']));
+
+        $this->get('/about')
+            ->assertOk()
+            ->assertSee('<title>About meta title</title>', false)
+            ->assertSee('content="About meta description for search."', false);
     }
 }

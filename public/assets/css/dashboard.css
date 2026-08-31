@@ -427,6 +427,11 @@ body:has(.dash) {
   color: var(--dash-green-dark);
 }
 
+.dash-stack {
+  display: grid;
+  gap: 12px;
+}
+
 .dash-card {
   background: var(--dash-card);
   border: 1px solid var(--dash-line);
@@ -858,6 +863,13 @@ code {
 .dash-visual-title span {
   color: #9aa394;
   font-size: 13px;
+}
+
+.dash-visual-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
 .dash-visual-tools .btn {

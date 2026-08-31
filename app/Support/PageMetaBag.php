@@ -16,6 +16,11 @@ final class PageMetaBag
         private Collection $rows,
     ) {}
 
+    public static function empty(): self
+    {
+        return new self(new Page, collect());
+    }
+
     public static function for(Page $page): self
     {
         $rows = $page->relationLoaded('meta') ? $page->meta : $page->meta()->get();

@@ -11,6 +11,13 @@ if (! function_exists('cms_section_attr')) {
     }
 }
 
+if (! function_exists('tel_href')) {
+    function tel_href(string $phone): string
+    {
+        return 'tel:'.preg_replace('/[^\d+]/', '', $phone);
+    }
+}
+
 if (! function_exists('media_url')) {
     function media_url(?string $path): string
     {

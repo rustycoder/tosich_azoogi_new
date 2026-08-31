@@ -11,8 +11,8 @@
             <span>Click Edit on the page to change that section.</span>
         </div>
         <div class="dash-visual-tools">
-            <button type="button" class="btn" data-open-section="settings">Page settings</button>
-            <a class="btn" href="{{ $page->publicPath() }}" target="_blank" rel="noopener">View live</a>
+            <button type="button" class="btn" data-open-section="meta">Page Meta</button>
+            <a class="btn" href="{{ $page->publicPath() }}" target="_blank" rel="noopener">Live preview</a>
         </div>
     </header>
 
@@ -28,13 +28,14 @@
 
 <div class="dash-drawer-backdrop" id="dash-drawer-backdrop" hidden></div>
 
-<aside class="dash-drawer" id="dash-drawer-settings" hidden>
+<aside class="dash-drawer" id="dash-drawer-meta" hidden>
     <form class="dash-form" method="post" action="{{ route('dashboard.pages.update', $page) }}">
         @csrf
         @method('put')
-            <input type="hidden" name="editor_section" value="settings">
+        <input type="hidden" name="editor_section" value="meta">
+        <input type="hidden" name="status" value="{{ $page->status->value }}">
         <div class="dash-drawer-head">
-            <h2>Page settings</h2>
+            <h2>Page Meta</h2>
             <button type="button" class="dash-drawer-close" data-close-drawer aria-label="Close">&times;</button>
         </div>
         <div class="dash-drawer-body">
@@ -43,22 +44,14 @@
                 <input id="title" name="title" value="{{ old('title', $page->title) }}" required>
                 @error('title')<p class="login-error">{{ $message }}</p>@enderror
             </div>
-
             <div class="dash-field">
                 <label for="meta_description">Meta description</label>
-                <textarea id="meta_description" name="meta_description" rows="3">{{ old('meta_description', $page->meta_description) }}</textarea>
-            </div>
-
-            <div class="dash-field">
-                <label for="status">Status</label>
-                <select id="status" name="status">
-                    <option value="active" @selected(old('status', $page->status->value) === 'active')>Active</option>
-                    <option value="inactive" @selected(old('status', $page->status->value) === 'inactive')>Inactive</option>
-                </select>
+                <textarea id="meta_description" name="meta_description" rows="4">{{ old('meta_description', $page->meta_description) }}</textarea>
+                @error('meta_description')<p class="login-error">{{ $message }}</p>@enderror
             </div>
         </div>
         <div class="dash-drawer-foot">
-            <button type="submit" class="btn primary">Save settings</button>
+            <button type="submit" class="btn primary">Save meta</button>
         </div>
     </form>
 </aside>

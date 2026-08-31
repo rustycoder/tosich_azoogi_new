@@ -10,7 +10,7 @@
     </div>
 </div>
 
-@if ($canManagePages || $canManageProjects || $isAdmin)
+@if ($canManagePages || $canManageProjects || $canManageSections || $isAdmin)
     <div class="dash-home-grid">
         @if ($canManageProjects)
             <a class="dash-home-card" href="{{ route('dashboard.projects.index') }}">
@@ -28,6 +28,15 @@
                 </span>
                 <h2>Pages</h2>
                 <p>Edit site content for the pages you can manage.</p>
+            </a>
+        @endif
+        @if ($canManageSections)
+            <a class="dash-home-card" href="{{ route('dashboard.sections.index') }}">
+                <span class="dash-home-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+                </span>
+                <h2>Sections</h2>
+                <p>Edit header and footer copy shown across the site.</p>
             </a>
         @endif
         @if ($isAdmin)

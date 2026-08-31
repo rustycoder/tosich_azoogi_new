@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Page;
+use App\PageMeta\Catalog;
 use App\Repositories\ContentPermissionRepository;
 use App\Repositories\Contracts\IContentPermissionRepository;
 use App\Repositories\Contracts\IPageRepository;
@@ -18,6 +20,7 @@ use App\Services\PageService;
 use App\Services\ProfileService;
 use App\Services\ProjectService;
 use App\Services\StaffService;
+use App\Support\PageMetaBag;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -49,7 +52,21 @@ class AppServiceProvider extends ServiceProvider
             $view->with([
                 'canManagePages' => $user?->canManagePages() ?? false,
                 'canManageProjects' => $user?->canManageProjects() ?? false,
+                'canManageSections' => $user?->canManageSections() ?? false,
                 'isAdmin' => $user?->isAdmin() ?? false,
+            ]);
+        });
+
+        View::composer('layouts.site', function ($view): void {
+            $pages = Page::query()
+                ->whereIn('slug', Catalog::sectionSlugs())
+                ->with('meta')
+                ->get()
+                ->keyBy('slug');
+
+            $view->with([
+                'headerMeta' => isset($pages['header']) ? PageMetaBag::for($pages['header']) : PageMetaBag::empty(),
+                'footerMeta' => isset($pages['footer']) ? PageMetaBag::for($pages['footer']) : PageMetaBag::empty(),
             ]);
         });
     }

@@ -8,6 +8,8 @@ use App\PageMeta\Definitions\ArchitectDesignerDefinition;
 use App\PageMeta\Definitions\ContactDefinition;
 use App\PageMeta\Definitions\DataCentreDefinition;
 use App\PageMeta\Definitions\ElectricianBuilderDefinition;
+use App\PageMeta\Definitions\FooterDefinition;
+use App\PageMeta\Definitions\HeaderDefinition;
 use App\PageMeta\Definitions\HomeDefinition;
 use App\PageMeta\Definitions\HomeOwnerDefinition;
 use App\PageMeta\Definitions\ModernSlaveryDefinition;
@@ -38,7 +40,22 @@ final class Catalog
         'terms' => TermsDefinition::class,
         'warranty-returns' => WarrantyReturnsDefinition::class,
         'modern-slavery' => ModernSlaveryDefinition::class,
+        'header' => HeaderDefinition::class,
+        'footer' => FooterDefinition::class,
     ];
+
+    /**
+     * @return list<string>
+     */
+    public static function sectionSlugs(): array
+    {
+        return ['header', 'footer'];
+    }
+
+    public static function isSection(string $slug): bool
+    {
+        return in_array($slug, self::sectionSlugs(), true);
+    }
 
     public static function for(string $slug): PageDefinition
     {

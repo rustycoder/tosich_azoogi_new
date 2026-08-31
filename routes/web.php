@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\PageContentController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\ProjectController;
+use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\Dashboard\StaffController;
 use App\Http\Controllers\Site\PageController;
 use App\Http\Controllers\Site\ProjectController as SiteProjectController;
@@ -61,6 +62,15 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::patch('content/pages/{page:slug}/status', [PageContentController::class, 'toggleStatus'])
         ->middleware('can.manage')
         ->name('pages.toggle-status');
+
+    Route::get('content/sections', [SectionController::class, 'index'])
+        ->name('sections.index');
+    Route::get('content/sections/{page:slug}', [SectionController::class, 'edit'])
+        ->middleware('can.manage')
+        ->name('sections.edit');
+    Route::put('content/sections/{page:slug}', [SectionController::class, 'update'])
+        ->middleware('can.manage')
+        ->name('sections.update');
 });
 
 Route::get('/', [PageController::class, '__invoke'])->name('home');

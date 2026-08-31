@@ -2,7 +2,9 @@
     use App\PageMeta\FieldType;
 @endphp
 <div class="dash-field">
-    <label>{{ $field->label }}</label>
+    @if (empty($hideLabel))
+        <label>{{ $field->label }}</label>
+    @endif
     @if ($field->type === FieldType::Textarea || $field->type === FieldType::Html)
         <textarea
             name="meta[{{ $row->id }}][value]"

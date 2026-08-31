@@ -119,6 +119,22 @@ class User extends Authenticatable
         return $this->managedPageSlugs() !== [];
     }
 
+    /**
+     * @return list<string>
+     */
+    public function managedSectionSlugs(): array
+    {
+        return array_values(array_filter(
+            $this->managedResources(),
+            fn (string $resource): bool => ContentResource::tryFrom($resource)?->isSection() ?? false,
+        ));
+    }
+
+    public function canManageSections(): bool
+    {
+        return $this->managedSectionSlugs() !== [];
+    }
+
     public function canManageProjects(): bool
     {
         return $this->canManage(ContentResource::Projects->value);
