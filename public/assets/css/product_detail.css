@@ -58,7 +58,7 @@ h4 {
   padding-bottom: 20px;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
   .spec-grid-layout {
     grid-template-columns: 1fr !important;
     gap: 24px !important;
@@ -899,7 +899,7 @@ a.meta-badge:hover {
 }
 
 /* Restructured Configurator & Accessories Grid Layouts */
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
   .options-grid-layout {
     grid-template-columns: 1fr !important;
     gap: 32px !important;

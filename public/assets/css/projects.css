@@ -321,7 +321,7 @@
   color: var(--muted);
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
   .highlights-grid,
   .projects-grid,
   .project-info-grid,
@@ -338,7 +338,7 @@
   }
 }
 
-@media (min-width: 641px) and (max-width: 960px) {
+@media (min-width: 641px) and (max-width: 1024px) {
   .projects-grid,
   .project-gallery {
     grid-template-columns: 1fr 1fr;

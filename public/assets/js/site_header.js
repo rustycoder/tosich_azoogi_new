@@ -1,5 +1,5 @@
 (() => {
-  const MOBILE_MQ = '(max-width: 960px)';
+  const MOBILE_MQ = '(max-width: 1024px)';
 
   // Client default: clean white sheet + green accent only
   const MOBILE_NAV_STYLE = 'a';

@@ -607,7 +607,7 @@
   }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
   .about-intro,
   .about-path-section {
     grid-template-columns: 1fr;

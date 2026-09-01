@@ -135,7 +135,7 @@
   margin-top: 20px;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
   .audience-main {
     padding: 110px 0 0;
   }

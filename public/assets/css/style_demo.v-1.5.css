@@ -250,7 +250,7 @@ h2, h3{
   flex-direction: column;
 }
 
-@media (min-width: 961px) {
+@media (min-width: 1025px) {
   .has-dropdown:hover .mega-menu {
     opacity: 1;
     visibility: visible;
@@ -1540,7 +1540,7 @@ section {
   display: block;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
   .products-layout {
     grid-template-columns: 1fr;
   }
@@ -1869,7 +1869,7 @@ footer {
   opacity: .5;
 }
 
-@media (max-width:960px) {
+@media (max-width:1024px) {
   .util {
     display: none;
   }
@@ -3587,7 +3587,7 @@ a.mega-variant-card:after{
   color: var(--accent);
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
   .contact-main {
     padding: 120px 0 48px;
   }
