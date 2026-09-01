@@ -87,18 +87,40 @@ class ExcelParser:
     @staticmethod
     def is_sku_empty(parsed_row: Dict[str, Any]) -> bool:
         """Returns True if the row has an empty SKU or missing SKU value."""
+        if not parsed_row:
+            return True
+
         sku_val = None
+        found_sku_col = False
+
+        # Priority 1: Check keys containing 'product code' or 'sku' (e.g., 'Product Code', 'SKU Code', 'SKU', 'Product SKU')
         for k, v in parsed_row.items():
             k_clean = str(k).strip().lower().replace("_", " ")
-            if k_clean in ["sku", "product sku", "item sku"]:
+            if "product code" in k_clean or "sku" in k_clean:
                 sku_val = v
+                found_sku_col = True
                 break
 
-        if sku_val is None:
-            return True
-        if str(sku_val).strip() == "":
-            return True
-        return False
+        # Priority 2: Item code / Code / Part number / Model
+        if not found_sku_col:
+            for k, v in parsed_row.items():
+                k_clean = str(k).strip().lower().replace("_", " ")
+                if k_clean in ["item code", "code", "part number", "part no", "model", "model number"]:
+                    sku_val = v
+                    found_sku_col = True
+                    break
+
+        if found_sku_col:
+            if sku_val is None:
+                return True
+            if str(sku_val).strip() == "" or str(sku_val).strip().lower() in ["none", "null"]:
+                return True
+            return False
+
+        # Priority 3: Fallback if no SKU column exists at all in the sheet
+        # Check if the row has any non-empty cell value
+        has_data = any(v is not None and str(v).strip() != "" and str(v).strip().lower() not in ["none", "null"] for v in parsed_row.values())
+        return not has_data
 
     @staticmethod
     def load_csv_file(file_path: str) -> List[Dict[str, Any]]:
@@ -192,11 +214,21 @@ class JSONParser:
                         "_flat": flatten_json(obj)
                     })
         elif isinstance(data, dict):
-            items.append({
-                "_source_file": os.path.basename(file_path),
-                "_raw": data,
-                "_flat": flatten_json(data)
-            })
+            list_key = next((k for k in ["products", "items", "data", "records", "rows"] if k in data and isinstance(data[k], list)), None)
+            if list_key:
+                for obj in data[list_key]:
+                    if isinstance(obj, dict):
+                        items.append({
+                            "_source_file": os.path.basename(file_path),
+                            "_raw": obj,
+                            "_flat": flatten_json(obj)
+                        })
+            else:
+                items.append({
+                    "_source_file": os.path.basename(file_path),
+                    "_raw": data,
+                    "_flat": flatten_json(data)
+                })
 
         return items
 
