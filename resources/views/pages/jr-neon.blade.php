@@ -103,9 +103,6 @@ const savedTheme = localStorage.getItem('theme'); if (savedTheme) { document.doc
             <div class="thumb-card"><img src="/assets/img/jr_neon_dimension.jpg" alt="Product Thumbnail 2"></div>
           </div>
           <!-- IMAGE VARIANT THUMBNAILS LIST END -->
-
-          <div style="text-align: center; font-size: 11px; color: var(--muted); margin-top: 4px;">Hover to zoom image
-          </div>
         </div>
         <!-- ==================== RIGHT COLUMN: GALLERY END ==================== -->
 

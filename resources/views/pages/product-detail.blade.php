@@ -98,9 +98,6 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
             <!-- Dynamically populated thumbs from JSON -->
           </div>
           <!-- IMAGE VARIANT THUMBNAILS LIST END -->
-
-          <div style="text-align: center; font-size: 11px; color: var(--muted); margin-top: 4px;">Hover to zoom image
-          </div>
         </div>
         <!-- ==================== RIGHT COLUMN: GALLERY END ==================== -->
 
@@ -602,6 +599,7 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
             cat: pTopCat,
             filePath: firstVar.file_path || '',
             img: localImg,
+            sku: firstVar.sku || pRow.sku || '',
             specs: firstVar.product_features || pRow.product_features || {}
           };
 
@@ -623,13 +621,15 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
 
         accessoriesGrid.innerHTML = recommended.map(p => {
           const detailUrl = p.id ? ('/product-detail?id=' + encodeURIComponent(p.id)) : (p.filePath ? ('/product-detail?file=' + encodeURIComponent(p.filePath)) : ('/product-detail?product=' + encodeURIComponent(p.name)));
+          const code = (p.sku || '').split(',')[0].trim();
+          const codeHtml = code ? ` <span class="prod-card-code">(${code})</span>` : '';
           return `
                 <div class="prod-card" onclick="window.location.href='${detailUrl}'">
                   <div class="prod-card-img">
                     <div class="prod-swatch" style="background-image:url('${p.img}'); background-size:cover; background-position:center;"></div>
                   </div>
                   <div class="prod-card-title">
-                    <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}</div>
+                    <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}${codeHtml}</div>
                     <button class="add-quote-btn" aria-label="Add to quote" onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
                   </div>
                 </div>

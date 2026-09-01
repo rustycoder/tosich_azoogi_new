@@ -613,6 +613,11 @@ style="padding-top: 120px;"
       margin-bottom: 4px;
     }
 
+    .prod-card-title .prod-card-code {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
     .add-quote-btn {
       background: var(--accent);
       border: 1px solid var(--line);
@@ -1147,6 +1152,34 @@ style="padding-top: 120px;"
       }
     }
 
+    function extractProductCode(source) {
+      if (!source) return '';
+      var raw = source.sku || '';
+      if (!raw && source.product_features) {
+        var feats = source.product_features;
+        raw = feats.SKU || feats.sku || feats['Supplier Code'] || '';
+      }
+      if (Array.isArray(raw)) {
+        raw = raw.map(function (v) {
+          return (v && typeof v === 'object' && v.value !== undefined) ? v.value : v;
+        }).filter(Boolean).join(', ');
+      } else if (raw && typeof raw === 'object' && raw.value !== undefined) {
+        raw = raw.value;
+      }
+      return String(raw || '').trim();
+    }
+
+    function primaryProductCode(sku) {
+      if (!sku) return '';
+      return String(sku).split(',')[0].trim();
+    }
+
+    function productCodeHtml(sku) {
+      var code = primaryProductCode(sku);
+      if (!code) return '';
+      return ' <span class="prod-card-code">(' + code + ')</span>';
+    }
+
     function addProductToCatalog(vName, modelName, catPath, vData) {
       var itemKey = (vData && vData.id) ? vData.id : vName;
       if (!vName || productsMap[itemKey]) return;
@@ -1173,7 +1206,8 @@ style="padding-top: 120px;"
         category_path: catPath,
         filePath: vData.file_path || '',
         img: localImgPath,
-        specs: features
+        specs: features,
+        sku: extractProductCode(vData)
       };
 
       productsMap[itemKey] = true;
@@ -1224,6 +1258,7 @@ style="padding-top: 120px;"
               filePath: '',
               img: imgUrl,
               specs: feats,
+              sku: extractProductCode(prod),
               rawProd: prod
             };
             var itemKey = prod.id || pName;
@@ -1577,6 +1612,7 @@ style="padding-top: 120px;"
                             p.modelName.toLowerCase().indexOf(searchLower) !== -1 ||
                             p.sub.toLowerCase().indexOf(searchLower) !== -1 ||
                             p.cat.toLowerCase().indexOf(searchLower) !== -1 ||
+                            (p.sku && p.sku.toLowerCase().indexOf(searchLower) !== -1) ||
                             (p.category_path && p.category_path.some(function(cp) {
                               return cp.toLowerCase().indexOf(searchLower) !== -1;
                             }));
@@ -1678,7 +1714,7 @@ style="padding-top: 120px;"
         return '<div class="prod-card" data-href="' + detailUrl + '" role="link" tabindex="0">' +
           '<div class="prod-card-img">' + imgHtml + '</div>' +
           '<div class="prod-card-title">' +
-          '<div class="prod-card-title-text"><span class="cat-label">' + p.sub + '</span>' + displayName + '</div>' +
+          '<div class="prod-card-title-text"><span class="cat-label">' + p.sub + '</span>' + displayName + productCodeHtml(p.sku) + '</div>' +
           '<button class="add-quote-btn" aria-label="Add to quote" onclick="event.stopPropagation(); this.classList.add(\'added\'); this.innerHTML=\'&check;\';">+</button>' +
           '</div>' +
           '</div>';

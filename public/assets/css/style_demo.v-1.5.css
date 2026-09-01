@@ -2900,8 +2900,7 @@ aside p {
   transform: translateX(-5px);
 }
 
-.mega-sidebar-btn.active svg,
-.mega-sidebar-btn:hover svg {
+.mega-sidebar-btn.active svg {
   opacity: 0.5;
   transform: translateX(0);
 }

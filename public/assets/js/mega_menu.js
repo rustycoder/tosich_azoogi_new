@@ -71,10 +71,6 @@
           renderLevel(child, columnIndex + 1);
         };
 
-        btn.addEventListener('mouseenter', () => {
-          switchAction();
-        });
-
         btn.addEventListener('click', (e) => {
           e.preventDefault();
           switchAction();

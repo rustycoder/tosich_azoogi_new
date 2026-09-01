@@ -1003,6 +1003,11 @@ a.meta-badge:hover {
   margin-bottom: 4px;
 }
 
+.prod-card-title .prod-card-code {
+  color: var(--accent);
+  font-weight: 600;
+}
+
 .add-quote-btn {
   background: var(--accent);
   border: 1px solid var(--line);
