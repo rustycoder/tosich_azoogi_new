@@ -1,0 +1,358 @@
+/* DALI Centre — native Azoogi layout, hero video, spec table */
+
+.dc-page .topbar.solid {
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.dc-main {
+  padding: 120px 0 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Google Sans Flex", sans-serif;
+}
+
+.dc-num {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.dc-hero {
+  padding: 24px 0 8px;
+}
+
+.dc-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+}
+
+.dc-hero-logo {
+  display: block;
+  width: clamp(160px, 22vw, 240px);
+  height: auto;
+  margin-bottom: 18px;
+}
+
+.dc-kicker {
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.dc-title {
+  margin: 0 0 16px;
+  max-width: 18ch;
+  font-family: "Google Sans Flex", sans-serif;
+  font-weight: 400;
+  font-size: clamp(27px, 3.4vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+
+.dc-title span {
+  color: var(--accent);
+}
+
+.dc-lead {
+  margin: 0;
+  max-width: 46ch;
+  color: var(--muted);
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.dc-intro {
+  margin: 20px 0 0;
+  max-width: 52ch;
+  padding: 0;
+  color: var(--muted);
+  font-size: clamp(15px, 1.15vw, 17px);
+  line-height: 1.7;
+}
+
+.dc-hero-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #111;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.dc-hero-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.dc-band {
+  padding: clamp(36px, 6vw, 64px) 0;
+}
+
+.dc-band--alt {
+  background: var(--card-bg);
+}
+
+.dc-section-head {
+  margin-bottom: clamp(22px, 3vw, 32px);
+}
+
+.dc-section-head h2 {
+  margin: 0 0 12px;
+  font-family: "Google Sans Flex", sans-serif;
+  font-weight: 400;
+  font-size: clamp(26px, 3.2vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+
+.dc-section-head p {
+  margin: 0;
+  max-width: 70ch;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.dc-caps,
+.dc-support {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.dc-caps {
+  grid-template-columns: 1fr 1fr;
+}
+
+.dc-support {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.dc-caps li,
+.dc-support li {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.dc-caps h3,
+.dc-support h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.dc-caps p,
+.dc-support p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.dc-diagram {
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  gap: clamp(24px, 3.5vw, 48px);
+  align-items: start;
+}
+
+.dc-diagram-copy h2 {
+  margin: 0 0 12px;
+  font-family: "Google Sans Flex", sans-serif;
+  font-weight: 400;
+  font-size: clamp(26px, 3.2vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+
+.dc-diagram-lead {
+  margin: 0 0 20px;
+  max-width: 46ch;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.dc-diagram-points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.dc-diagram-points li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px 12px;
+  align-items: start;
+}
+
+.dc-diagram-points .dc-num {
+  margin: 2px 0 0;
+}
+
+.dc-diagram-points h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.dc-diagram-points p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.dc-feature-img {
+  margin: 0;
+  padding: clamp(12px, 2vw, 20px);
+  border-radius: 4px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+
+.dc-feature-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.dc-table-wrap {
+  overflow-x: auto;
+}
+
+.dc-page .spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 4px;
+}
+
+.dc-page .spec-table th,
+.dc-page .spec-table td {
+  padding: 10px 12px 10px 0;
+  font-size: 13px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.dc-page .spec-table thead th {
+  font-weight: 600;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+
+.dc-page .spec-table tbody tr {
+  border-bottom: 1px solid var(--line);
+}
+
+.dc-page .spec-table td:first-child {
+  font-weight: 500;
+  color: var(--ink);
+  width: 34%;
+}
+
+.dc-page .spec-table td:nth-child(2) {
+  width: 22%;
+  color: var(--ink);
+}
+
+.dc-page .spec-table td:last-child {
+  color: var(--muted);
+}
+
+.dc-cta-wrap {
+  padding: 8px 0 80px;
+}
+
+.dc-cta {
+  padding: clamp(32px, 5vw, 48px);
+  border-radius: 4px;
+  background: var(--card-bg);
+  text-align: center;
+}
+
+.dc-cta h2 {
+  margin: 0 0 12px;
+  font-family: "Google Sans Flex", sans-serif;
+  font-size: clamp(26px, 3.2vw, 36px);
+  font-weight: 400;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+
+.dc-cta p {
+  margin: 0 auto 24px;
+  max-width: 640px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 900px) {
+  .dc-hero-grid,
+  .dc-diagram,
+  .dc-caps,
+  .dc-support {
+    grid-template-columns: 1fr;
+  }
+
+  .dc-title {
+    max-width: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .dc-band {
+    padding: 32px 0;
+  }
+
+  .dc-cta-wrap {
+    padding: 8px 0 56px;
+  }
+
+  .dc-page .spec-table th,
+  .dc-page .spec-table td {
+    font-size: 12px;
+    padding: 8px 10px 8px 0;
+  }
+}

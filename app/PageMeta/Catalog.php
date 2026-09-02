@@ -7,6 +7,7 @@ use App\PageMeta\Definitions\AiLightingDefinition;
 use App\PageMeta\Definitions\ArchitectDesignerDefinition;
 use App\PageMeta\Definitions\CasambiDefinition;
 use App\PageMeta\Definitions\ContactDefinition;
+use App\PageMeta\Definitions\DaliCentreDefinition;
 use App\PageMeta\Definitions\DataCentreDefinition;
 use App\PageMeta\Definitions\ElectricianBuilderDefinition;
 use App\PageMeta\Definitions\FooterDefinition;
@@ -34,6 +35,7 @@ final class Catalog
         'solutions' => SolutionsDefinition::class,
         'casambi' => CasambiDefinition::class,
         'silvair' => SilvairDefinition::class,
+        'dali-centre' => DaliCentreDefinition::class,
         'madrix' => MadrixDefinition::class,
         'ai-lighting' => AiLightingDefinition::class,
         'data-centre' => DataCentreDefinition::class,
