@@ -296,8 +296,10 @@ class DashboardTest extends TestCase
             ->assertSee('dash-visual-frame', false)
             ->assertSee('Page Meta', false)
             ->assertSee('Live preview', false)
-            ->assertSee('dash-drawer-meta', false)
+            ->assertSee('id="dash-drawer-meta" hidden', false)
             ->assertSee('name="meta_description"', false)
+            ->assertSee('Save section', false)
+            ->assertSee('>Close</button>', false)
             ->assertDontSee('View live', false)
             ->assertSee('/dashboard/content/pages/home/preview', false);
 

@@ -51,6 +51,7 @@
             </div>
         </div>
         <div class="dash-drawer-foot">
+            <button type="button" class="btn" data-close-drawer>Close</button>
             <button type="submit" class="btn primary">Save meta</button>
         </div>
     </form>
@@ -78,6 +79,7 @@
                 @include('dashboard.pages._section-fields', ['section' => $section, 'metaByKey' => $metaByKey])
             </div>
             <div class="dash-drawer-foot">
+                <button type="button" class="btn" data-close-drawer>Close</button>
                 <button type="submit" class="btn primary">Save section</button>
             </div>
         </form>
