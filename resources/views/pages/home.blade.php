@@ -13,15 +13,7 @@
 @php
     $slides = $meta->group('slide');
     $valueCards = $meta->group('values.card');
-    $rangeItems = [
-        ['title' => 'Garden Lights', 'body' => 'Flexible, high-output lighting for clean, modern installations.', 'image' => '/assets/img/GL001.webp', 'href' => '#'],
-        ['title' => 'Neon Range', 'body' => 'Seamless, uniform glow — easy to shape and mount.', 'image' => '/assets/img/neon.webp', 'href' => '/product-detail'],
-        ['title' => 'LED Strips', 'body' => 'Outdoor-ready lighting, built to install and last.', 'image' => '/assets/img/leds.webp', 'href' => '#'],
-        ['title' => 'LED Drivers', 'body' => 'Reliable power solutions, stocked and ready to go.', 'image' => '/assets/img/drivers.webp', 'href' => '#'],
-        ['title' => 'Downlights', 'body' => 'Precision-engineered downlights for residential & commercial.', 'image' => '/assets/img/dt.webp', 'href' => '#'],
-        ['title' => 'Pendant Lights', 'body' => 'Sculptural pendants to anchor a room.', 'image' => '/assets/img/prod-4.jpg', 'href' => '#'],
-        ['title' => 'Architectural', 'body' => 'Statement fittings designed for considered spaces.', 'image' => '/assets/img/prod-5.jpg', 'href' => '#'],
-    ];
+    $rangeItems = \App\Support\ProductCatalog::parentCategories();
     $stats = $meta->group('stats.item');
 @endphp
 <!-- ========== HERO SLIDER ========== -->

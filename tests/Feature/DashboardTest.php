@@ -288,8 +288,6 @@ class DashboardTest extends TestCase
         $this->assertNull($meta->fresh()->text_align);
     }
 
-<<<<<<< HEAD
-=======
     /**
      * @return array<string, array{0: string}>
      */
@@ -340,7 +338,6 @@ class DashboardTest extends TestCase
             ->assertSee('style="font-size: 32px; text-align: left"', false);
     }
 
->>>>>>> new_pages
     public function test_staff_can_create_and_soft_delete_projects(): void
     {
         $staff = User::factory()->staff()->create();

@@ -1254,7 +1254,6 @@ section {
 .marquee .card {
   flex: 0 0 260px;
   width: 260px;
-  max-height: 360px;
   display: flex;
   flex-direction: column;
   background: #fff;
@@ -1272,7 +1271,8 @@ section {
 }
 
 .marquee .card .img {
-  height: 160px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   flex: 0 0 auto;
   background-size: cover;
   background-position: center;
@@ -1345,11 +1345,10 @@ section {
   .marquee .card {
     flex-basis: min(220px, 72vw);
     width: min(220px, 72vw);
-    max-height: 340px;
   }
 
   .marquee .card .img {
-    height: 140px;
+    aspect-ratio: 1 / 1;
   }
 
   .marquee .track {
