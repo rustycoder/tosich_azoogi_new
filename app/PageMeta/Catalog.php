@@ -12,6 +12,7 @@ use App\PageMeta\Definitions\FooterDefinition;
 use App\PageMeta\Definitions\HeaderDefinition;
 use App\PageMeta\Definitions\HomeDefinition;
 use App\PageMeta\Definitions\HomeOwnerDefinition;
+use App\PageMeta\Definitions\MadrixDefinition;
 use App\PageMeta\Definitions\ModernSlaveryDefinition;
 use App\PageMeta\Definitions\PrivacyDefinition;
 use App\PageMeta\Definitions\SolutionsDefinition;
@@ -29,6 +30,7 @@ final class Catalog
         'home' => HomeDefinition::class,
         'about' => AboutDefinition::class,
         'solutions' => SolutionsDefinition::class,
+        'madrix' => MadrixDefinition::class,
         'ai-lighting' => AiLightingDefinition::class,
         'data-centre' => DataCentreDefinition::class,
         'contact' => ContactDefinition::class,
