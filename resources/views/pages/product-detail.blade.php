@@ -404,22 +404,67 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
 
       let product = null;
 
-      // Load product details exclusively from products_data.js (AZOOGI_PRODUCTS)
-      if (typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS.products) {
-        const allProducts = Array.isArray(AZOOGI_PRODUCTS.products)
-          ? AZOOGI_PRODUCTS.products
-          : Object.values(AZOOGI_PRODUCTS.products);
+      // Load product details from products_data.js (AZOOGI_PRODUCTS) - check both products array and tree variants
+      if (typeof AZOOGI_PRODUCTS !== 'undefined') {
+        const allProducts = [];
+        const seenKeys = new Set();
+
+        const addProduct = (p) => {
+          if (!p) return;
+          const key = p.id || p.sku || p.product_name || p.name;
+          if (key && !seenKeys.has(key)) {
+            seenKeys.add(key);
+            allProducts.push(p);
+          }
+        };
+
+        const productsById = {};
+        if (AZOOGI_PRODUCTS.products) {
+          const list = Array.isArray(AZOOGI_PRODUCTS.products)
+            ? AZOOGI_PRODUCTS.products
+            : Object.values(AZOOGI_PRODUCTS.products);
+          list.forEach(p => {
+            if (p && p.id) productsById[p.id] = p;
+            addProduct(p);
+          });
+        }
+
+        function collectFromTree(treeNodes) {
+          if (!treeNodes || !Array.isArray(treeNodes)) return;
+          treeNodes.forEach(node => {
+            if (node.variants) {
+              for (const vName in node.variants) {
+                if (node.variants.hasOwnProperty(vName)) {
+                  let vData = node.variants[vName];
+                  if (typeof vData === 'string' && productsById[vData]) {
+                    vData = productsById[vData];
+                  }
+                  if (vData && typeof vData === 'object') {
+                    vData.variantName = vName;
+                    vData.modelName = node.name || vName;
+                    addProduct(vData);
+                  }
+                }
+              }
+            }
+            if (node.children) collectFromTree(node.children);
+          });
+        }
+        if (AZOOGI_PRODUCTS.tree) collectFromTree(AZOOGI_PRODUCTS.tree);
 
         if (productId) {
-          product = allProducts.find(p => p.id === productId || p.id === decodeURIComponent(productId));
+          const idLower = decodeURIComponent(productId).toLowerCase().trim();
+          product = allProducts.find(p => p.id && p.id.toLowerCase() === idLower);
         }
         if (!product && productCode) {
           const codeLower = decodeURIComponent(productCode).toLowerCase().trim();
           product = allProducts.find(p =>
             (p.id && p.id.toLowerCase() === codeLower) ||
-            (p.product_name && p.product_name.toLowerCase() === codeLower) ||
-            (p.sku && p.sku.toLowerCase() === codeLower) ||
-            (p.category && p.category.toLowerCase() === codeLower) ||
+            (p.sku && String(p.sku).toLowerCase().trim() === codeLower) ||
+            (p.product_name && p.product_name.toLowerCase().trim() === codeLower) ||
+            (p.variantName && p.variantName.toLowerCase().trim() === codeLower) ||
+            (p.name && p.name.toLowerCase().trim() === codeLower) ||
+            (p.file_path && p.file_path.toLowerCase().trim() === codeLower) ||
             (p.product_name && p.product_name.toLowerCase().includes(codeLower))
           );
         }
@@ -474,10 +519,47 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
       const driverWarning = document.getElementById('driver-warning-msg');
       const calcPanel = document.querySelector('.calc-panel');
 
+      function getMappedSku(product, selectedOpts) {
+        const features = product.product_features || {};
+        const defaultCode = product.product_code || features["Product Code"] || features["Product code"] || product.id || "";
+        const mappings = product.sku_mappings;
+
+        if (!mappings || typeof mappings !== 'object' || Object.keys(mappings).length === 0) {
+          return defaultCode;
+        }
+
+        const selectedIds = Object.values(selectedOpts || {}).map(String).sort();
+        const options = product.options || {};
+        const selectedNames = [];
+
+        for (const optKey in (selectedOpts || {})) {
+          const id = selectedOpts[optKey];
+          const optVals = options[optKey] || [];
+          const valObj = optVals.find(v => String(v.id) === String(id));
+          if (valObj && valObj.name) {
+            selectedNames.push(String(valObj.name).trim());
+          }
+        }
+        selectedNames.sort();
+
+        for (const mKey in mappings) {
+          if (!mappings.hasOwnProperty(mKey)) continue;
+          const parts = mKey.split(/[|,]/).map(s => s.trim()).sort();
+          if (selectedIds.length > 0 && selectedIds.length === parts.length && selectedIds.every((val, idx) => val === parts[idx])) {
+            return mappings[mKey];
+          }
+          if (selectedNames.length > 0 && selectedNames.length === parts.length && selectedNames.every((val, idx) => val.toLowerCase() === parts[idx].toLowerCase())) {
+            return mappings[mKey];
+          }
+        }
+
+        return defaultCode;
+      }
+
       // Extract Product Name, SKU, Short & Long Descriptions
       const pName = product.product_name || product.name || "Azoogi Lighting Product";
       const features = product.product_features || {};
-      const sku = features.SKU || features.sku || features["Supplier Code"] || product.sku || product.id || "";
+      const sku = getMappedSku(product, selectedOptions);
       const pShortDesc = product.product_short_description || product.short_description || features["Product short description"] || "";
       const pLongDesc = product.product_description || product.description || features["Product long description"] || pShortDesc;
 
@@ -554,8 +636,11 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
 
       // Helper to get image path
       function resolveImg(url) {
-        if (!url || typeof url !== 'string') return '/assets/logo_dark.png';
-        return url;
+        if (!url || typeof url !== 'string' || !url.trim()) return '/assets/logo_dark.png';
+        var clean = url.trim();
+        if (clean.startsWith('http://') || clean.startsWith('https://')) return clean;
+        if (!clean.startsWith('/')) return '/' + clean;
+        return clean;
       }
 
       // Render Recommended Compatible Accessories from the same category
@@ -981,7 +1066,7 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
       function recalculate() {
         const pName = product.product_name || product.name || "Product";
         const features = product.product_features || {};
-        const skuDisplay = features.SKU || features["Supplier Code"] || product.sku || product.id || pName;
+        const skuDisplay = getMappedSku(product, selectedOptions);
 
         let wattageVal = 14.4;
         let selectedCctText = "";

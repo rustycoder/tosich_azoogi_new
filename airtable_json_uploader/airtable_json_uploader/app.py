@@ -173,14 +173,19 @@ def parse_json_route():
                         if isinstance(obj, dict):
                             items.append({"_source_file": filename, "_raw": obj, "_flat": flatten_json(obj)})
                 elif isinstance(data, dict):
-                    items.append({"_source_file": filename, "_raw": data, "_flat": flatten_json(data)})
+                    list_key = next((k for k in ["products", "items", "data", "records", "rows"] if k in data and isinstance(data[k], list)), None)
+                    if list_key:
+                        for obj in data[list_key]:
+                            if isinstance(obj, dict):
+                                items.append({"_source_file": filename, "_raw": obj, "_flat": flatten_json(obj)})
+                    else:
+                        items.append({"_source_file": filename, "_raw": data, "_flat": flatten_json(data)})
 
         else:
             payload = request.get_json() or {}
             target_path = payload.get("path")
             target_paths = payload.get("paths", [])
             raw_json_str = payload.get("raw_json")
-
 
             if raw_json_str:
                 data = json.loads(raw_json_str)
@@ -189,7 +194,13 @@ def parse_json_route():
                         if isinstance(obj, dict):
                             items.append({"_source_file": "Pasted JSON", "_raw": obj, "_flat": flatten_json(obj)})
                 elif isinstance(data, dict):
-                    items.append({"_source_file": "Pasted JSON", "_raw": data, "_flat": flatten_json(data)})
+                    list_key = next((k for k in ["products", "items", "data", "records", "rows"] if k in data and isinstance(data[k], list)), None)
+                    if list_key:
+                        for obj in data[list_key]:
+                            if isinstance(obj, dict):
+                                items.append({"_source_file": "Pasted JSON", "_raw": obj, "_flat": flatten_json(obj)})
+                    else:
+                        items.append({"_source_file": "Pasted JSON", "_raw": data, "_flat": flatten_json(data)})
             elif target_paths:
                 for p in target_paths:
                     if p == "ALL":
@@ -297,9 +308,9 @@ def preview_matches_route():
                 target_cols = [f.get("name") for f in t.get("fields", [])]
                 break
 
-        # Auto-detect primary key column if not specified (prefer SKU, Name)
+        # Auto-detect primary key column if not specified (prefer Product Code, SKU, Name)
         if not primary_col:
-            for candidate in ["SKU", "Name", "Product name", "Title", "ID"]:
+            for candidate in ["Product Code", "Product_Code", "SKU Code", "SKU", "Name", "Product name", "Title", "ID"]:
                 for tc in target_cols:
                     if candidate.lower() == tc.lower():
                         primary_col = tc

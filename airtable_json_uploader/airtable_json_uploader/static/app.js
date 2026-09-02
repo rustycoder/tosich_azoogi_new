@@ -502,7 +502,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const opt = document.createElement("option");
       opt.value = col;
       opt.textContent = col;
-      if (col.toLowerCase() === "sku" || col.toLowerCase() === "name") {
+      if (col.toLowerCase() === "product code" || col.toLowerCase() === "product_code" || col.toLowerCase() === "sku code" || col.toLowerCase() === "sku" || col.toLowerCase() === "name") {
         opt.selected = true;
       }
       elements.selectPrimaryCol.appendChild(opt);
@@ -571,8 +571,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const items = data.items || [];
     if (items.length === 0) return;
 
-    // Priority column order for display: #, Source File, SKU, Name, Product type, Product description, Categories, Status, Attributes, Options, Constraints, then others
-    const priorityCols = ["SKU", "Name", "Product type", "Product Type", "Product description", "Categories", "Status", "Attributes", "product_features", "Options", "options", "Constraints", "constraints"];
+    // Priority column order for display: #, Source File, Product Code, SKU Code, SKU, Name, Product type, Product description, Categories, Status, Attributes, Options, Constraints, then others
+    const priorityCols = ["Product Code", "SKU Code", "SKU", "Name", "Product type", "Product Type", "Product description", "Categories", "Status", "Attributes", "product_features", "Options", "options", "Constraints", "constraints"];
 
     const allKeys = data.keys || [];
     const displayCols = ["#", "Source File"];
@@ -732,8 +732,11 @@ document.addEventListener("DOMContentLoaded", () => {
       { jKey: "constraints", targets: ["Constraints"] },
       { jKey: "product_name", targets: ["Name", "Product name", "Title"] },
       { jKey: "product_description", targets: ["Product description", "Description"] },
-      { jKey: "SKU", targets: ["SKU"] },
-      { jKey: "sku", targets: ["SKU"] },
+      { jKey: "Product Code", targets: ["Product Code", "Product_Code", "SKU Code", "SKU"] },
+      { jKey: "product_code", targets: ["Product Code", "Product_Code", "SKU Code", "SKU"] },
+      { jKey: "SKU Code", targets: ["Product Code", "Product_Code", "SKU Code", "SKU"] },
+      { jKey: "SKU", targets: ["Product Code", "SKU"] },
+      { jKey: "sku", targets: ["Product Code", "SKU"] },
       { jKey: "product_images", targets: ["Product image", "Product gallery"] }
     ];
 

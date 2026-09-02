@@ -178,6 +178,61 @@ class TestAirtableDataExtractor(unittest.TestCase):
         self.assertEqual(parent2_node["children"][0]["name"], "Neon Flex IP68")
 
 
+class TestExcelAndJSONParser(unittest.TestCase):
+
+    def test_is_sku_empty_variations(self):
+        from airtable_json_uploader.parser import ExcelParser
+
+        # Exact SKU match
+        self.assertFalse(ExcelParser.is_sku_empty({"SKU": "PROD-101", "Name": "Product A"}))
+        # SKU Code match
+        self.assertFalse(ExcelParser.is_sku_empty({"SKU Code": "GL001", "Name": "Garden Light"}))
+        # Product Code match
+        self.assertFalse(ExcelParser.is_sku_empty({"Product Code": "GL001", "Name": "Garden Light"}))
+        # Empty SKU Code
+        self.assertTrue(ExcelParser.is_sku_empty({"SKU Code": "", "Name": "Garden Light"}))
+        # None SKU Code
+        self.assertTrue(ExcelParser.is_sku_empty({"SKU Code": None, "Name": "Garden Light"}))
+        # Fallback with data but no SKU column
+        self.assertFalse(ExcelParser.is_sku_empty({"Title": "Spotlight", "Price": 19.99}))
+        # Empty row
+        self.assertTrue(ExcelParser.is_sku_empty({"Title": "", "Price": None}))
+
+    def test_skip_sku_in_sync_linked_attributes(self):
+        from airtable_json_uploader.airtable_client import AirtableClient
+        client = AirtableClient(api_key="mock_key")
+        # Mock fetch_existing_records and list_tables
+        client.fetch_existing_records = MagicMock(return_value=[])
+        client.list_tables = MagicMock(return_value=[
+            {
+                "name": "Product attributes",
+                "fields": [
+                    {"name": "Attribute Name"},
+                    {"name": "Term Name"}
+                ]
+            }
+        ])
+        def mock_create(base_id, table, records):
+            return [{"id": f"rec_{i}"} for i in range(len(records))]
+        client.create_records = MagicMock(side_effect=mock_create)
+
+        attrs_input = {
+            "Power": "12W",
+            "SKU": "GL003",
+            "CCT": "3000K"
+        }
+        client.sync_linked_attributes("appTestBase", "Product attributes", attrs_input)
+        
+        # Check created records
+        created_records = client.create_records.call_args[0][2]
+        attr_names = [r["fields"]["Attribute Name"] for r in created_records]
+        self.assertIn("Power", attr_names)
+        self.assertIn("CCT", attr_names)
+        self.assertNotIn("SKU", attr_names)
+
+
 if __name__ == "__main__":
     unittest.main()
+
+
 

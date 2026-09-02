@@ -15,9 +15,9 @@
 <link rel="stylesheet" href="{{ asset('assets/css/style_demo.v-1.5.css') }}?v={{ config('app.asset_version') }}">
 @stack('styles')
 @if (trim($__env->yieldContent('chrome', 'full')) !== 'none')
-<script src="{{ asset('assets/js/products_data.js') }}?v={{ config('app.asset_version') }}"></script>
-<script src="{{ asset('assets/js/mega_menu.js') }}?v={{ config('app.asset_version') }}"></script>
-<script src="{{ asset('assets/js/site_header.js') }}?v={{ config('app.asset_version') }}"></script>
+<script defer src="{{ asset('assets/js/products_data.js') }}?v={{ config('app.asset_version') }}"></script>
+<script defer src="{{ asset('assets/js/mega_menu.js') }}?v={{ config('app.asset_version') }}"></script>
+<script defer src="{{ asset('assets/js/site_header.js') }}?v={{ config('app.asset_version') }}"></script>
 @endif
 @stack('head')
 @if (request()->routeIs('dashboard.pages.preview'))

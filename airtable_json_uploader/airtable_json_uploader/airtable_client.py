@@ -137,6 +137,10 @@ class AirtableClient:
                 attributes_input = attributes_input["attributes"]
 
             for k, v in attributes_input.items():
+                k_clean = str(k).strip().lower().replace("_", " ")
+                if k_clean in ["sku", "sku code", "product sku", "item sku"]:
+                    continue
+
                 if isinstance(v, list):
                     for sub_v in v:
                         if isinstance(sub_v, dict):
@@ -152,13 +156,16 @@ class AirtableClient:
                 elif v is not None:
                     attr_pairs.append((str(k), str(v)))
 
-
         elif isinstance(attributes_input, list):
             for item in attributes_input:
-                if isinstance(item, dict) and "name" in item and "value" in item:
-                    attr_pairs.append((str(item["name"]), str(item["value"])))
-                elif isinstance(item, dict) and "name" in item:
-                    attr_pairs.append(("Attribute", str(item["name"])))
+                if isinstance(item, dict):
+                    name_clean = str(item.get("name", "")).strip().lower().replace("_", " ")
+                    if name_clean in ["sku", "sku code", "product sku", "item sku"]:
+                        continue
+                    if "name" in item and "value" in item:
+                        attr_pairs.append((str(item["name"]), str(item["value"])))
+                    elif "name" in item:
+                        attr_pairs.append(("Attribute", str(item["name"])))
 
         elif isinstance(attributes_input, str):
             try:

@@ -336,7 +336,28 @@ class AirtableDataExtractor:
                                 add_feature_item(product_features, a_name, a_val, a_icon)
 
             # Extract Non-Attribute Columns for Top-Level Product Keys
-            sku = self.sanitize_field_value(fields.get("SKU") or fields.get("sku") or fields.get("Supplier Code") or "")
+            product_code = self.sanitize_field_value(
+                fields.get("Product Code") or 
+                fields.get("Product code") or 
+                fields.get("product_code") or ""
+            )
+            raw_sku_mappings = (
+                fields.get("SKU Mappings") or 
+                fields.get("SKU mappings") or 
+                fields.get("sku_mappings") or 
+                fields.get("SKU Mapping") or 
+                fields.get("sku_mapping") or {}
+            )
+            sku_mappings = self.parse_json_field(raw_sku_mappings, default_type={})
+            compact_sku_mappings = {}
+            if isinstance(sku_mappings, list):
+                for item in sku_mappings:
+                    if isinstance(item, dict) and "sku" in item and "combination" in item:
+                        comb_key = ",".join(str(c) for c in item["combination"])
+                        compact_sku_mappings[comb_key] = item["sku"]
+            elif isinstance(sku_mappings, dict):
+                compact_sku_mappings = sku_mappings
+
             dimension_drawing = self.sanitize_field_value(fields.get("Product Dimension") or fields.get("Product dimension") or "")
             stocked_item = self.sanitize_field_value(fields.get("Stocked Item") or fields.get("Stock / Quantity") or "")
             datasheet = self.sanitize_field_value(fields.get("Datasheet") or "")
@@ -355,11 +376,12 @@ class AirtableDataExtractor:
                         a_icon = a_data.get("icon", "")
                         add_feature_item(product_features, a_name, a_val, a_icon)
 
-            product_entry = {
+            raw_entry = {
                 "id": p_id,
                 "product_name": p_name,
                 "category": category_name,
-                "sku": sku,
+                "product_code": product_code,
+                "sku_mappings": compact_sku_mappings,
                 "product_short_description": p_short_desc,
                 "product_description": p_long_desc,
                 "product_images": images,
@@ -375,6 +397,10 @@ class AirtableDataExtractor:
                 "options": options,
                 "constraints": constraints
             }
+            product_entry = {}
+            for k, v in raw_entry.items():
+                if v and v != "No" and v != "draft" and v != "simple" and v != [""] and v != {}:
+                    product_entry[k] = v
 
             catalog["products"].append(product_entry)
 
@@ -531,7 +557,7 @@ class AirtableDataExtractor:
 
         # 1. Process top-level products
         for prod in catalog.get("products", []):
-            p_id = prod.get("id") or prod.get("sku") or "product"
+            p_id = prod.get("id") or prod.get("product_code") or prod.get("sku") or "product"
             if "product_images" in prod:
                 prod["product_images"] = process_url_list(prod["product_images"], str(p_id), "products")
             if "product_dimension" in prod:
@@ -742,11 +768,13 @@ class AirtableDataExtractor:
                     "children": []
                 }
                 for prod in prod_list:
+                    p_ref = prod.get("id") if isinstance(prod, dict) else prod
+                    p_title = prod.get("product_name", "Product") if isinstance(prod, dict) else "Product"
                     prod_row = {
                         "type": "product_row",
-                        "name": prod["product_name"],
+                        "name": p_title,
                         "variants": {
-                            prod["product_name"]: prod
+                            p_title: p_ref
                         }
                     }
                     cat_node["children"].append(prod_row)
@@ -772,11 +800,13 @@ class AirtableDataExtractor:
 
         # Then add direct products
         for prod in cat_info["products"]:
+            p_ref = prod.get("id") if isinstance(prod, dict) else prod
+            p_title = prod.get("product_name", "Product") if isinstance(prod, dict) else "Product"
             prod_row = {
                 "type": "product_row",
-                "name": prod["product_name"],
+                "name": p_title,
                 "variants": {
-                    prod["product_name"]: prod
+                    p_title: p_ref
                 }
             }
             node["children"].append(prod_row)
@@ -784,17 +814,20 @@ class AirtableDataExtractor:
         return node
 
     def save_outputs(self, catalog: Dict[str, Any], json_path: Path, js_path: Path) -> None:
-        """Save extracted catalog to static JSON and compiled JS file."""
+        """Save extracted catalog to minified JSON and compiled JS file."""
         json_path.parent.mkdir(parents=True, exist_ok=True)
         js_path.parent.mkdir(parents=True, exist_ok=True)
 
+        # Minified JSON string
+        minified_json = json.dumps(catalog, separators=(',', ':'), ensure_ascii=False)
+
         # Write products.json
         with open(json_path, "w", encoding="utf-8") as f:
-            json.dump(catalog, f, indent=2, ensure_ascii=False)
+            f.write(minified_json)
         logger.info(f"Saved extracted catalog JSON to {json_path}")
 
-        # Write products_data.js
-        js_content = f"// Azoogi Auto-Generated Product Database from Airtable\nconst AZOOGI_PRODUCTS = {json.dumps(catalog, indent=2, ensure_ascii=False)};\n"
+        # Write minified products_data.js
+        js_content = f"// Azoogi Auto-Generated Product Database from Airtable\nconst AZOOGI_PRODUCTS={minified_json};\n"
         with open(js_path, "w", encoding="utf-8") as f:
             f.write(js_content)
         logger.info(f"Saved compiled JavaScript bundle to {js_path}")
