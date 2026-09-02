@@ -39,8 +39,8 @@
 
 
       /* ===========================================================
-             BREADCRUMB STRIP
-          =========================================================== */
+                         BREADCRUMB STRIP
+                      =========================================================== */
       .page-head {
         padding: 12px 0 16px;
         border-bottom: 1px solid var(--line);
@@ -62,8 +62,8 @@
       }
 
       /* ===========================================================
-             TWO-COLUMN LAYOUT: narrow sidebar | product grid
-          =========================================================== */
+                         TWO-COLUMN LAYOUT: narrow sidebar | product grid
+                      =========================================================== */
       .prod-layout {
         display: grid;
         grid-template-columns: 240px 1fr;
@@ -91,8 +91,8 @@
       }
 
       /* ===========================================================
-             SIDEBAR
-          =========================================================== */
+                         SIDEBAR
+                      =========================================================== */
       .prod-sidebar {
         position: sticky;
         top: 120px;
@@ -334,8 +334,8 @@
       }
 
       /* ===========================================================
-             TOOLBAR
-          =========================================================== */
+                         TOOLBAR
+                      =========================================================== */
       .prod-toolbar {
         display: flex;
         align-items: center;
@@ -535,8 +535,8 @@
       }
 
       /* ===========================================================
-             PRODUCT CARD GRID — 4 columns
-          =========================================================== */
+                         PRODUCT CARD GRID — 4 columns
+                      =========================================================== */
       .prod-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -733,8 +733,8 @@
       }
 
       /* ===========================================================
-             PAGINATION
-          =========================================================== */
+                         PAGINATION
+                      =========================================================== */
       .pagination {
         display: flex;
         justify-content: center;
@@ -850,204 +850,13 @@
 @push('scripts')
   @verbatim
     <script>
-      /* ===== Header solid on scroll ===== */
-      const topbar = document.getElementById('topbar');
-      let lastScrolled = null;
-      const onScroll = () => {
-        const isScrolled = true; // Always solid on products page
-        if (isScrolled !== lastScrolled) {
-          topbar.classList.toggle('solid', isScrolled);
-          lastScrolled = isScrolled;
-          const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-          if (typeof updateLogos === 'function') updateLogos(currentTheme);
-        }
-      };
-      window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
-
-      /* ===== Hero slider with line progress + play/pause ===== */
-      (() => {
-        const slides = document.querySelectorAll('.hero .slide');
-        const n = slides.length;
-        const linesEl = document.getElementById('lines');
-        const cur = document.getElementById('cur');
-        const tot = document.getElementById('tot');
-        const pp = document.getElementById('pp');
-        const ppIcon = document.getElementById('ppIcon');
-        const DUR = 6000;
-        let idx = 0, playing = true, start = performance.now(), raf;
-
-        tot.textContent = String(n).padStart(2, '0');
-        for (let i = 0; i < n; i++) {
-          const ln = document.createElement('div'); ln.className = 'line'; ln.innerHTML = '<div class="fill"></div>';
-          ln.addEventListener('click', () => goto(i, true));
-          linesEl.appendChild(ln);
-        }
-        const lines = linesEl.querySelectorAll('.line');
-
-        function paint(p) {
-          lines.forEach((l, i) => {
-            l.classList.toggle('active', i === idx);
-            l.classList.toggle('done', i < idx);
-            if (i === idx) l.style.setProperty('--p', p.toFixed(3));
-            else if (i < idx) l.style.setProperty('--p', '1');
-            else l.style.setProperty('--p', '0');
-          });
-        }
-        function show(i) {
-          slides.forEach((s, k) => s.classList.toggle('active', k === i));
-          cur.textContent = String(i + 1).padStart(2, '0');
-        }
-        function goto(i, reset) {
-          idx = (i + n) % n; show(idx);
-          if (reset) { start = performance.now(); paint(0); }
-        }
-        function loop(t) {
-          if (!playing) { raf = requestAnimationFrame(loop); return; }
-          const p = Math.min(1, (t - start) / DUR);
-          paint(p);
-          if (p >= 1) { idx = (idx + 1) % n; show(idx); start = t; }
-          raf = requestAnimationFrame(loop);
-        }
-        pp.addEventListener('click', () => {
-          playing = !playing;
-          ppIcon.innerHTML = playing
-            ? '<rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/>'
-            : '<polygon points="7,4 20,12 7,20"/>';
-          if (playing) start = performance.now() - DUR * getCurrentP();
-        });
-        function getCurrentP() {
-          const f = lines[idx].querySelector('.fill');
-          const m = getComputedStyle(f).transform;
-          if (m && m !== 'none') { const v = m.match(/matrix\(([-\d.]+)/); if (v) return parseFloat(v[1]); }
-          return 0;
-        }
-        show(0); paint(0); raf = requestAnimationFrame(loop);
-      })();
-
-      /* ===== Reveal on scroll ===== */
-      const io = new IntersectionObserver((es) => {
-        es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-      }, { threshold: .12 });
-      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-      /* ===== Stat counter ===== */
-      const sio = new IntersectionObserver((es) => {
-        es.forEach(e => {
-          if (!e.isIntersecting) return;
-          const el = e.target; const target = parseInt(el.dataset.c, 10); const dur = 1600; const t0 = performance.now();
-          const step = (t) => {
-            const p = Math.min(1, (t - t0) / dur);
-            const v = Math.floor(target * (1 - Math.pow(1 - p, 3)));
-            el.textContent = v.toLocaleString() + (target >= 100 ? '+' : '');
-            if (p < 1) requestAnimationFrame(step);
-          };
-          requestAnimationFrame(step);
-          sio.unobserve(el);
-        });
-      }, { threshold: .5 });
-      document.querySelectorAll('.stat .num').forEach(el => sio.observe(el));
-
-      /* ===== Hero parallax zoom (background fixed feel) ===== */
-      const heroSlides = document.querySelectorAll('.hero .slide');
-      function heroParallax() {
-        const y = window.scrollY;
-        const vh = window.innerHeight;
-        const p = Math.min(1, Math.max(0, y / vh));
-        const scale = 1 + p * 0.18;
-        const ty = p * 40;
-        heroSlides.forEach(s => { s.style.setProperty('--z', scale.toFixed(4)); s.style.setProperty('--ty', ty.toFixed(1) + 'px'); });
-      }
-      heroParallax();
-      window.addEventListener('scroll', heroParallax, { passive: true });
-
-      /* ===== Pinned "Why Azoogi" — single-scroll step reveals ===== */
+      /* ===== PRODUCTS PAGE INTERACTION & CATALOG ===== */
       (function () {
-        const track = document.getElementById('pinTrack');
-        const head = document.getElementById('vHead');
-        const blocks = document.querySelectorAll('#vGrid .value');
-        if (!track || !head) return;
-        // Thresholds (as fraction of pinned scroll progress 0..1)
-        const blockAt = [0.12, 0.32, 0.52, 0.72];
-        function update() {
-          const r = track.getBoundingClientRect();
-          const total = track.offsetHeight - window.innerHeight;
-          const scrolled = Math.min(Math.max(-r.top, 0), Math.max(total, 1));
-          const p = total > 0 ? scrolled / total : 0;
-          const targetPanel = document.getElementById(targetId);
-          if (targetPanel) targetPanel.classList.add('active');
-        }
-
-
-        // Scroll indicator fade logic
-        const megaTabs = document.querySelector('.mega-tabs');
-        const megaPanelsWrapper = document.querySelector('.mega-panels');
-        const indLeft = document.querySelector('.scroll-indicator-left');
-        const indRight = document.querySelector('.scroll-indicator-right');
-
-        function handleScroll(el, indicator) {
-          if (!el || !indicator) return;
-          if (el.scrollHeight - el.scrollTop <= el.clientHeight + 2) {
-            indicator.classList.add('hidden');
-          } else {
-            indicator.classList.remove('hidden');
-          }
-        }
-
-        if (megaTabs && indLeft) {
-          megaTabs.addEventListener('scroll', () => handleScroll(megaTabs, indLeft));
-          // initial check
-          handleScroll(megaTabs, indLeft);
-        }
-
-        if (megaPanelsWrapper && indRight) {
-          megaPanelsWrapper.addEventListener('scroll', () => handleScroll(megaPanelsWrapper, indRight));
-          // We need to also listen to tab changes since the panel content changes height
-          tabs.forEach(tab => {
-            tab.addEventListener('mouseenter', () => setTimeout(() => handleScroll(megaPanelsWrapper, indRight), 50));
-            tab.addEventListener('click', () => setTimeout(() => handleScroll(megaPanelsWrapper, indRight), 50));
-          });
-          // initial check
-          handleScroll(megaPanelsWrapper, indRight);
-        }
-
-
-      })();
-
-
-      function toggleTheme() {
-        const root = document.documentElement;
-        const currentTheme = root.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        root.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateLogos(newTheme);
-      }
-
-      function updateLogos(theme) {
-        const isScrolled = window.scrollY > 40;
-        const logos = document.querySelectorAll('.logo img');
-        logos.forEach(img => {
-          if (img.closest('.topbar')) {
-            img.src = (theme === 'light' && isScrolled) ? '/assets/logo_dark.png' : '/assets/logo_dark.png';
-          } else {
-            img.src = theme === 'light' ? '/assets/logo_dark.png' : '/assets/logo_dark.png';
-          }
-        });
-      }
-
-      document.addEventListener("DOMContentLoaded", () => {
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        updateLogos(savedTheme);
-      });
-    </script>
-  @endverbatim
-  @verbatim
-    <script>
-      /* ===== PRODUCTS PAGE: Force topbar solid immediately (no hero) ===== */
-      (function () {
+        // Force topbar solid immediately
         var tb = document.getElementById('topbar');
         if (tb) tb.classList.add('solid');
 
+        // Mobile sidebar filter drawer
         var sidebar = document.getElementById('prodSidebar');
         var overlay = document.getElementById('prodFilterOverlay');
         var openBtn = document.getElementById('prodFilterOpen');
@@ -1074,7 +883,7 @@
           if (e.key === 'Escape') closeFilters();
         });
         window.addEventListener('resize', function () {
-          if (window.innerWidth > 960) closeFilters();
+          if (window.innerWidth > 1024) closeFilters();
         });
 
         // Touch: first tap reveals specs; second tap opens detail
@@ -1111,9 +920,18 @@
 
       /* ===== State & Active Filters ===== */
       var activeFilters = {
+        search: "",
+        sort: "relevance",
         categories: [],
         specs: {}
       };
+
+      var productsMap = {};
+      var products = [];
+      var extractedSpecsMap = {};
+      var rawProductsById = {};
+      var currentPage = 1;
+      var pageSize = 24;
 
       function getLocalImg(imgUrl, filePath) {
         if (typeof window.getLocalImagePath === 'function') {
@@ -1140,11 +958,6 @@
         }
         return clean;
       }
-
-      /* ===== Dynamic Category Taxonomy & Product Data (Full 893 Products) ===== */
-      var productsMap = {};
-      var products = [];
-      var extractedSpecsMap = {};
 
       function extractSpecsFromFeatures(features) {
         if (!features || typeof features !== 'object') return;
@@ -1201,13 +1014,6 @@
         return ' <span class="prod-card-code">' + code + '</span>';
       }
 
-      var rawProductsById = {};
-      if (typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS.products && Array.isArray(AZOOGI_PRODUCTS.products)) {
-        AZOOGI_PRODUCTS.products.forEach(function (p) {
-          if (p && p.id) rawProductsById[p.id] = p;
-        });
-      }
-
       function addProductToCatalog(vName, modelName, catPath, vData) {
         if (typeof vData === 'string' && rawProductsById[vData]) {
           vData = rawProductsById[vData];
@@ -1227,7 +1033,6 @@
         var localImgPath = getLocalImg(rawImg, vData.file_path);
         var features = vData.product_features || {};
 
-        // Extract unique features into extractedSpecsMap for dynamic filter accordions
         extractSpecsFromFeatures(features);
 
         var item = {
@@ -1267,57 +1072,6 @@
             collectProductsFromTree(node.children, currentPath);
           }
         });
-      }
-
-      if (typeof AZOOGI_PRODUCTS !== 'undefined') {
-        // 1. Collect products from AZOOGI_PRODUCTS.products array or map
-        if (AZOOGI_PRODUCTS.products) {
-          if (Array.isArray(AZOOGI_PRODUCTS.products)) {
-            AZOOGI_PRODUCTS.products.forEach(function (prod) {
-              var pName = prod.product_name || prod.name || "Product";
-              var images = prod.product_images || [];
-              var imgUrl = images.length > 0 ? images[0] : '/assets/logo_dark.png';
-              var feats = prod.product_features || {};
-
-              extractSpecsFromFeatures(feats);
-
-              var item = {
-                id: prod.id,
-                name: pName,
-                modelName: pName,
-                sub: prod.category || "General",
-                cat: prod.category || "General",
-                category_path: prod.category_path || [prod.category || "General"],
-                filePath: '',
-                img: getLocalImg(imgUrl, ''),
-                specs: feats,
-                sku: extractProductCode(prod),
-                rawProd: prod
-              };
-              var itemKey = prod.id || pName;
-              if (!productsMap[itemKey]) {
-                productsMap[itemKey] = true;
-                products.push(item);
-              }
-            });
-          } else {
-            for (var pKey in AZOOGI_PRODUCTS.products) {
-              if (!AZOOGI_PRODUCTS.products.hasOwnProperty(pKey)) continue;
-              var pRow = AZOOGI_PRODUCTS.products[pKey];
-              var variants = pRow.variants || {};
-              var catPath = pRow.category_path || [];
-              for (var vName in variants) {
-                if (!variants.hasOwnProperty(vName)) continue;
-                addProductToCatalog(vName, pRow.name || pKey, catPath, variants[vName]);
-              }
-            }
-          }
-        }
-
-        // 2. Collect products from AZOOGI_PRODUCTS.tree
-        if (AZOOGI_PRODUCTS.tree) {
-          collectProductsFromTree(AZOOGI_PRODUCTS.tree, []);
-        }
       }
 
       /* ===== Recursive Multi-Level Category Tree Generator ===== */
@@ -1397,37 +1151,6 @@
           } else {
             el.classList.remove('active');
           }
-        });
-      }
-
-      var catListEl = document.getElementById('catList');
-      if (catListEl && typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS.tree) {
-        catListEl.innerHTML = '';
-        renderCategoryTree(AZOOGI_PRODUCTS.tree, catListEl, 0);
-      }
-
-      /* ===== State & Search / Sort Controls ===== */
-      var activeFilters = {
-        search: "",
-        sort: "relevance",
-        categories: [],
-        specs: {}
-      };
-
-      var searchInputEl = document.getElementById('prodSearchInput');
-      if (searchInputEl) {
-        searchInputEl.addEventListener('input', function () {
-          activeFilters.search = this.value;
-          updateActiveTags();
-        });
-      }
-
-      var sortSelectEl = document.getElementById('sortSelect');
-      if (sortSelectEl) {
-        sortSelectEl.addEventListener('change', function () {
-          activeFilters.sort = this.value;
-          currentPage = 1;
-          renderGrid();
         });
       }
 
@@ -1575,6 +1298,7 @@
       }
 
       function removeFilter(type, val, group) {
+        var searchInputEl = document.getElementById('prodSearchInput');
         if (type === 'search') {
           activeFilters.search = "";
           if (searchInputEl) searchInputEl.value = "";
@@ -1593,6 +1317,7 @@
       }
 
       function clearFilters() {
+        var searchInputEl = document.getElementById('prodSearchInput');
         activeFilters.search = "";
         if (searchInputEl) searchInputEl.value = "";
         activeFilters.categories = [];
@@ -1601,10 +1326,6 @@
         renderFilterAccordion();
         updateActiveTags();
       }
-
-      /* ===== Pagination State ===== */
-      var currentPage = 1;
-      var pageSize = 24;
 
       function updateActiveTags() {
         currentPage = 1; // Reset to page 1 on filter changes
@@ -1632,11 +1353,9 @@
         renderGrid();
       }
 
-      var grid = document.getElementById('productGrid');
-
       function renderGrid() {
         var countEl = document.getElementById('resultCount');
-
+        var grid = document.getElementById('productGrid');
         var searchLower = activeFilters.search.trim().toLowerCase();
 
         var filtered = products.filter(function (p) {
@@ -1733,7 +1452,7 @@
         grid.innerHTML = pagedItems.map(function (p) {
           var detailUrl = p.id ? ('/product-detail?id=' + encodeURIComponent(p.id)) : (p.filePath ? ('/product-detail?file=' + encodeURIComponent(p.filePath)) : ('/product-detail?product=' + encodeURIComponent(p.name)));
 
-          var imgHtml = '<div class="prod-swatch" style="background-image:url(\'' + (p.img || '/assets/logo_dark.png') + '\'); background-size:cover; background-position:center;"></div>';
+          var imgHtml = '<div class="prod-swatch" style="background-image:url(\'' + (p.img || '/assets/bg_default.png') + '\'); background-size:contain; background-position:center; background-repeat:no-repeat;"></div>';
 
           var displayName = p.name;
           if (p.specs && p.specs.Power) {
@@ -1758,6 +1477,7 @@
 
       function renderPagination(totalPages) {
         var paginationEl = document.getElementById('paginationContainer');
+        var grid = document.getElementById('productGrid');
         if (!paginationEl) return;
 
         if (totalPages <= 1) {
@@ -1812,44 +1532,163 @@
             if (page && page !== currentPage) {
               currentPage = page;
               renderGrid();
-              grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
           });
         });
       }
 
-      // Initial category filter from URL parameter
-      var urlParams = new URLSearchParams(window.location.search);
-      var catParam = urlParams.get('category');
-      if (catParam) {
-        catParam = decodeURIComponent(catParam);
-        if (!activeFilters.categories.includes(catParam)) {
-          activeFilters.categories.push(catParam);
+      /* ===== Initialize Products Page on DOMContentLoaded ===== */
+      function initProductsPage() {
+        if (typeof AZOOGI_PRODUCTS === 'undefined') {
+          console.warn('AZOOGI_PRODUCTS is not loaded yet.');
+          return;
         }
-        updateActiveCategoryClasses();
-        document.querySelectorAll('.cat-label-text, .cat-sub-link').forEach(function (link) {
-          var cName = link.getAttribute('data-cat') || link.getAttribute('data-sub');
-          if (cName === catParam) {
-            link.classList.add('active');
-            var li = link.closest('li');
-            if (li) {
-              li.classList.add('open');
-              var toggle = li.querySelector('.cat-toggle');
-              if (toggle) toggle.innerHTML = '&ndash;';
-              var topLi = li.closest('.cat-list > li');
-              if (topLi) {
-                topLi.classList.add('open');
-                var topToggle = topLi.querySelector('.cat-toggle');
-                if (topToggle) topToggle.innerHTML = '&ndash;';
+
+        // 1. Index products by ID
+        rawProductsById = {};
+        if (AZOOGI_PRODUCTS.products && Array.isArray(AZOOGI_PRODUCTS.products)) {
+          AZOOGI_PRODUCTS.products.forEach(function (p) {
+            if (p && p.id) rawProductsById[p.id] = p;
+          });
+        }
+
+        // 2. Extract products from products array and tree
+        productsMap = {};
+        products = [];
+        extractedSpecsMap = {};
+
+        if (AZOOGI_PRODUCTS.products) {
+          if (Array.isArray(AZOOGI_PRODUCTS.products)) {
+            AZOOGI_PRODUCTS.products.forEach(function (prod) {
+              var pName = prod.product_name || prod.name || "Product";
+              var images = prod.product_images || [];
+              var imgUrl = images.length > 0 ? images[0] : '/assets/logo_dark.png';
+              var feats = prod.product_features || {};
+
+              extractSpecsFromFeatures(feats);
+
+              var item = {
+                id: prod.id,
+                name: pName,
+                modelName: pName,
+                sub: prod.category || "General",
+                cat: prod.category || "General",
+                category_path: prod.category_path || [prod.category || "General"],
+                filePath: '',
+                img: getLocalImg(imgUrl, ''),
+                specs: feats,
+                sku: extractProductCode(prod),
+                rawProd: prod
+              };
+              var itemKey = prod.id || pName;
+              if (!productsMap[itemKey]) {
+                productsMap[itemKey] = true;
+                products.push(item);
+              }
+            });
+          } else {
+            for (var pKey in AZOOGI_PRODUCTS.products) {
+              if (!AZOOGI_PRODUCTS.products.hasOwnProperty(pKey)) continue;
+              var pRow = AZOOGI_PRODUCTS.products[pKey];
+              var variants = pRow.variants || {};
+              var catPath = pRow.category_path || [];
+              for (var vName in variants) {
+                if (!variants.hasOwnProperty(vName)) continue;
+                addProductToCatalog(vName, pRow.name || pKey, catPath, variants[vName]);
               }
             }
           }
-        });
+        }
+
+        if (AZOOGI_PRODUCTS.tree) {
+          collectProductsFromTree(AZOOGI_PRODUCTS.tree, []);
+        }
+
+        // 3. Render categories in sidebar
+        var catListEl = document.getElementById('catList');
+        if (catListEl) {
+          catListEl.innerHTML = '';
+          if (AZOOGI_PRODUCTS.tree && AZOOGI_PRODUCTS.tree.length > 0) {
+            renderCategoryTree(AZOOGI_PRODUCTS.tree, catListEl, 0);
+          } else if (AZOOGI_PRODUCTS.categories && Array.isArray(AZOOGI_PRODUCTS.categories)) {
+            AZOOGI_PRODUCTS.categories.forEach(function (catName) {
+              var li = document.createElement('li');
+              li.className = 'cat-node level-0';
+              var link = document.createElement('a');
+              link.href = '#';
+              link.className = 'cat-sub-link level-0';
+              link.setAttribute('data-sub', catName);
+              link.textContent = catName;
+              link.addEventListener('click', function (e) {
+                e.preventDefault();
+                toggleCategoryFilter(catName);
+              });
+              li.appendChild(link);
+              catListEl.appendChild(li);
+            });
+          }
+        }
+
+        // 4. Attach search & sort input handlers
+        var searchInputEl = document.getElementById('prodSearchInput');
+        if (searchInputEl) {
+          searchInputEl.value = activeFilters.search || "";
+          searchInputEl.addEventListener('input', function () {
+            activeFilters.search = this.value;
+            updateActiveTags();
+          });
+        }
+
+        var sortSelectEl = document.getElementById('sortSelect');
+        if (sortSelectEl) {
+          sortSelectEl.value = activeFilters.sort || "relevance";
+          sortSelectEl.addEventListener('change', function () {
+            activeFilters.sort = this.value;
+            currentPage = 1;
+            renderGrid();
+          });
+        }
+
+        // 5. Initial category filter from URL parameter
+        var urlParams = new URLSearchParams(window.location.search);
+        var catParam = urlParams.get('category');
+        if (catParam) {
+          catParam = decodeURIComponent(catParam);
+          if (!activeFilters.categories.includes(catParam)) {
+            activeFilters.categories.push(catParam);
+          }
+          updateActiveCategoryClasses();
+          document.querySelectorAll('.cat-label-text, .cat-sub-link').forEach(function (link) {
+            var cName = link.getAttribute('data-cat') || link.getAttribute('data-sub');
+            if (cName === catParam) {
+              link.classList.add('active');
+              var li = link.closest('li');
+              if (li) {
+                li.classList.add('open');
+                var toggle = li.querySelector('.cat-toggle');
+                if (toggle) toggle.innerHTML = '&ndash;';
+                var topLi = li.closest('.cat-list > li');
+                if (topLi) {
+                  topLi.classList.add('open');
+                  var topToggle = topLi.querySelector('.cat-toggle');
+                  if (topToggle) topToggle.innerHTML = '&ndash;';
+                }
+              }
+            }
+          });
+        }
+
+        // 6. Initial render
+        renderFilterAccordion();
+        updateActiveTags();
       }
 
-      // Initial render
-      renderFilterAccordion();
-      updateActiveTags();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initProductsPage);
+      } else {
+        initProductsPage();
+      }
     </script>
   @endverbatim
 @endpush

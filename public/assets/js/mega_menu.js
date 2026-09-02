@@ -2,10 +2,19 @@
 (function() {
   let container = null;
   let innerWrapper = null;
+  let productsById = {};
 
   function initMegaMenu() {
     container = document.getElementById('dynamic-mega-menu');
     if (!container) return;
+
+    // Index products by ID for fast lookup
+    productsById = {};
+    if (typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS.products && Array.isArray(AZOOGI_PRODUCTS.products)) {
+      AZOOGI_PRODUCTS.products.forEach(p => {
+        if (p && p.id) productsById[p.id] = p;
+      });
+    }
 
     container.innerHTML = '';
 
@@ -236,7 +245,7 @@
   }
 
   function getLocalImagePath(imgUrl, filePath) {
-    const fallback = '/assets/logo_dark.png';
+    const fallback = '/assets/bg_default.png';
     if (!imgUrl || typeof imgUrl !== 'string') return fallback;
     if (!imgUrl.startsWith('http')) {
       return imgUrl.startsWith('/') ? imgUrl : '/'+imgUrl;
@@ -272,11 +281,14 @@
     const visibleVnames = vnames.slice(0, 3);
 
     visibleVnames.forEach(vname => {
-      const vdata = variants[vname];
+      let vdata = variants[vname];
+      if (typeof vdata === 'string' && productsById[vdata]) {
+        vdata = productsById[vdata];
+      }
 
       const rawImgSrc = (vdata && vdata.product_images && vdata.product_images.length > 0)
         ? vdata.product_images[0]
-        : '/assets/logo_dark.png';
+        : '/assets/bg_default.png';
 
       const imgSrc = getLocalImagePath(rawImgSrc, vdata ? vdata.file_path : '');
 
@@ -290,7 +302,7 @@
 
       const img = document.createElement('img');
       img.className = 'mega-variant-img';
-      if (imgSrc === '/assets/logo_dark.png') {
+      if (imgSrc === '/assets/bg_default.png' || imgSrc === '/assets/logo_dark.png') {
         img.className += ' placeholder-logo';
       }
       img.setAttribute('loading', 'lazy');
@@ -302,7 +314,7 @@
       img.onerror = () => {
         imgContainer.classList.remove('loading');
         img.classList.add('placeholder-logo');
-        img.src = '/assets/logo_dark.png';
+        img.src = '/assets/bg_default.png';
       };
       img.src = imgSrc;
 
