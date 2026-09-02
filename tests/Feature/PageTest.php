@@ -114,6 +114,14 @@ class PageTest extends TestCase
         $this->get('/footer')->assertNotFound();
     }
 
+    public function test_wholesaler_page_does_not_include_the_last_off_spec_card(): void
+    {
+        $this->get('/wholesaler')
+            ->assertOk()
+            ->assertSee('Solutions That Sell', false)
+            ->assertDontSee('Off-Spec Solutions That Win the Job', false);
+    }
+
     public function test_contact_form_validates_required_fields(): void
     {
         $this->from('/contact')
