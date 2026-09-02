@@ -826,13 +826,13 @@ body:has(.dash) {
 .dash-row-link {
   display: inline-flex;
   align-items: flex-start;
-  gap: 10px;
+  gap: 8px;
   max-width: 100%;
   color: var(--dash-ink);
   font-weight: 680;
   font-size: 16px;
   letter-spacing: -.015em;
-  line-height: 30px;
+  line-height: 24px;
 }
 
 .dash-row-link-text {
@@ -842,17 +842,17 @@ body:has(.dash) {
 .dash-row-link-actions {
   display: inline-flex;
   flex: none;
-  gap: 6px;
+  gap: 5px;
 }
 
 .dash-row-link-icon {
   box-sizing: border-box;
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   line-height: 0;
-  border-radius: 9px;
+  border-radius: 7px;
   border: 1px solid #e4e8e2;
   background: #f6f8f4;
   color: #3d463d;
@@ -862,8 +862,8 @@ body:has(.dash) {
 
 .dash-row-link-icon svg {
   display: block;
-  width: 15px;
-  height: 15px;
+  width: 13px;
+  height: 13px;
 }
 
 .dash-row-link-icon:hover {
@@ -959,8 +959,11 @@ body:has(.dash) {
   }
 
   .dash-list-card-copy,
-  .dash-list-card-meta {
+  .dash-list-card-meta,
+  .dash-list-card-meta.is-end {
     flex: 1 1 100%;
+    width: 100%;
+    margin-left: 0;
   }
 
   .dash-list-card-meta {
@@ -969,6 +972,10 @@ body:has(.dash) {
     border-left: 0;
     padding-top: 14px;
     border-top: 1px solid #e8ece6;
+  }
+
+  .dash-list-card-meta.is-end {
+    justify-content: flex-start;
   }
 
   .dash-list-card-meta > .dash-updated:last-child {
