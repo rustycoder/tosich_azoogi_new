@@ -198,6 +198,31 @@ h4 {
   object-fit: cover;
 }
 
+.thumb-card.is-dimension {
+  position: relative;
+  background: #ffffff;
+}
+
+.thumb-card.is-dimension img {
+  object-fit: contain;
+  padding: 3px;
+}
+
+.thumb-card.is-dimension::after {
+  content: 'CAD';
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  font-size: 7px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 2px 3px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  border-radius: 2px;
+  letter-spacing: 0.05em;
+}
+
 /* --- Configurator Details --- */
 .product-details-info {
   display: flex;
@@ -892,10 +917,14 @@ a.meta-badge:hover {
 /* Configurator Button Disabled State */
 .config-btn:disabled,
 .config-btn.disabled {
-  opacity: 0.25;
-  cursor: not-allowed;
-  border-color: var(--border-light);
-  pointer-events: none;
+  opacity: 0.25 !important;
+  cursor: not-allowed !important;
+  border-color: var(--border-light) !important;
+  pointer-events: none !important;
+  transform: none !important;
+  background: var(--card-bg) !important;
+  color: var(--muted) !important;
+  box-shadow: none !important;
 }
 
 /* Restructured Configurator & Accessories Grid Layouts */

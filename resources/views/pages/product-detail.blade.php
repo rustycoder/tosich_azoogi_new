@@ -104,252 +104,236 @@
       </div>
       <!-- ==================== PRODUCT DETAIL GRID END ==================== -->
 
-      <!-- ==================== TECHNICAL SPECIFICATIONS SECTION START ==================== -->
-      <div class="specifications-section" style="margin-top: 0; border-top: 1px solid var(--line); padding-top: 20px;">
-        <h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 0;">Technical Specifications</h3>
-        <div class="spec-grid-layout"
+      <!-- ==================== PRODUCT CONFIGURATION & TECHNICAL SPECIFICATIONS SECTION START ==================== -->
+      <div class="options-section"
+        style="margin-top: 25px; border-top: 1px solid var(--line); padding-top: 25px; margin-bottom: 25px;">
+
+        <div class="options-grid-layout"
           style="display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 48px; align-items: start;">
 
-          <!-- DYNAMIC FEATURES TABLE START -->
-          <table class="spec-table" style="width: 100%;">
-            <tbody id="spec-table-body">
-              <!-- Dynamically populated spec features from JSON -->
-            </tbody>
-          </table>
-          <!-- DYNAMIC FEATURES TABLE END -->
-
-          <!-- SPECIFICATIONS DIMENSION VECTOR DIAGRAM START -->
-          <div class="spec-dimension-image-wrapper"
-            style="background: #fff; border-radius: 8px; padding: 24px; display: none; align-items: center; justify-content: center; aspect-ratio: 4/3; overflow: hidden; flex-direction: column;">
-
-            <img id="spec-dimension-image" src="" alt="Product Dimensions"
-              style="max-width: 100%; max-height: 100%; object-fit: contain; display: none;">
-          </div>
-          <!-- SPECIFICATIONS DIMENSION VECTOR DIAGRAM END -->
-
-        </div>
-      </div>
-      <!-- ==================== TECHNICAL SPECIFICATIONS SECTION END ==================== -->
-
-      <!-- ==================== PRODUCT B2B ICONS ROW START ==================== -->
-      <div class="product-icons-row-wrapper"
-        style="display: none; margin-top: 0; padding-top: 10px; padding-bottom: 8px;">
-        <div class="product-icons-row" style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center;"></div>
-      </div>
-      <!-- ==================== PRODUCT B2B ICONS ROW END ==================== -->
-      <!--PRODUCT SPEICIFICATION IEF FILE DOWNLOAD OPTION START -->
-      <div class="specification-download-section"
-        style="margin-top: 20px; border-top: 1px solid var(--line); padding-top: 20px; margin-bottom: 20px;">
-        <h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px;">Downloadable Resources</h3>
-        <div class="download-options" style="display: flex; gap: 16px; flex-wrap: wrap;">
-          <a href="#" class="btn --accent" style="display:flex; align-items:center; justify-content:center; gap:8px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-            Datasheet
-          </a>
-          <a href="#" class="btn --accent" style="display:flex; align-items:center; justify-content:center; gap:8px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-            Installation Guide
-          </a>
-          <a href="#" class="btn --accent" style="display:flex; align-items:center; justify-content:center; gap:8px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-            User manual
-          </a>
-
-          <a href="#" class="btn --accent" style="display:flex; align-items:center; justify-content:center; gap:8px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-            IES files
-          </a>
-        </div>
-        <!--PRODUCT SPEICIFICATION IEF FILE DOWNLOAD OPTION END -->
-
-
-        <!-- ==================== PRODUCT OPTIONS SECTION START ==================== -->
-        <div class="options-section"
-          style="margin-top: 40px; border-top: 1px solid var(--line); padding-top: 30px; margin-bottom: 20px;">
-
-
-          <div class="options-grid-layout"
-            style="display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 48px; align-items: start;">
+          <!-- LEFT COLUMN: CONFIGURATOR + SPECS + ICONS + DOWNLOADS START -->
+          <div class="options-specs-left-col" style="display: flex; flex-direction: column; gap: 32px;">
 
             <!-- DYNAMIC CONFIGURATOR WORKSPACE START -->
-
             <div class="config-workspace" id="dynamic-configurator">
               <!-- Dynamically populated options with constraints -->
             </div>
             <!-- DYNAMIC CONFIGURATOR WORKSPACE END -->
 
-            <!-- ==================== SELECTED SUMMARY CARD START ==================== -->
-            <div class="config-summary-card"
-              style="background: var(--card-bg); border: 1px solid var(--border-light); border-radius: 8px; padding: 24px; display: flex; flex-direction: column; gap: 20px; position: sticky; top: 100px;">
-              <h4
-                style="font-family: var(--font-serif); font-size: 20px; margin: 0; color: var(--ink); border-bottom: 1px solid var(--line); padding-bottom: 12px;">
-                Selected Configuration</h4>
-
-              <div id="selected-summary-list"
-                style="display: flex; flex-direction: column; gap: 10px; font-size: 12px; color: var(--muted);">
-                <!-- Dynamically populated list from Javascript selection updates -->
+            <!-- PRODUCT B2B ICONS ROW START -->
+            <div class="product-icons-row-wrapper"
+              style="display: none; margin-top: 0; padding-top: 0; padding-bottom: 4px;">
+              <div class="product-icons-row" style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
               </div>
+            </div>
+            <!-- PRODUCT B2B ICONS ROW END -->
 
-              <!-- ACTION BUTTONS -->
-              <div class="gallery-actions" style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+            <!-- PRODUCT SPECIFICATION DOWNLOAD OPTION START -->
+            <div class="specification-download-section"
+              style="margin-top: 0; border-top: 1px solid var(--line); padding-top: 24px; margin-bottom: 0;">
+              <h3 style="font-family: var(--font-serif); font-size: 24px; margin-bottom: 20px;">Downloadable Resources
+              </h3>
+              <div class="download-options" style="display: flex; gap: 16px; flex-wrap: wrap;">
                 <a href="#" class="btn --accent"
-                  style="display:flex; align-items:center; justify-content:center; gap:8px; width: 100%;">
+                  style="display:flex; align-items:center; justify-content:center; gap:8px;">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                     <polyline points="7 10 12 15 17 10" />
                     <line x1="12" y1="15" x2="12" y2="3" />
                   </svg>
-                  Download Custom Datasheet
+                  Datasheet
                 </a>
-                <a href="#" class="btn --accent" style="display:flex;  justify-content:center; gap:8px; width: 100%;">
-                  <svg viewBox="0 -960 960 960" fill="#111111" stroke="currentColor" stroke-width="2" width="18"
-                    height="18">
-                    <path
-                      d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z" />
+                <a href="#" class="btn --accent"
+                  style="display:flex; align-items:center; justify-content:center; gap:8px;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
                   </svg>
-                  Enquiry
+                  Installation Guide
+                </a>
+                <a href="#" class="btn --accent"
+                  style="display:flex; align-items:center; justify-content:center; gap:8px;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  User manual
+                </a>
+                <a href="#" class="btn --accent"
+                  style="display:flex; align-items:center; justify-content:center; gap:8px;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  IES files
                 </a>
               </div>
             </div>
-            <!-- ==================== SELECTED SUMMARY CARD END ==================== -->
+            <!-- PRODUCT SPECIFICATION DOWNLOAD OPTION END -->
 
           </div>
-        </div>
-        <!-- ==================== PRODUCT OPTIONS SECTION END ==================== -->
+          <!-- LEFT COLUMN: CONFIGURATOR + SPECS + ICONS + DOWNLOADS END -->
 
-      </div>
+          <!-- RIGHT COLUMN: SELECTED SUMMARY CARD START -->
+          <div class="config-summary-card"
+            style="background: var(--card-bg); border: 1px solid var(--border-light); border-radius: 8px; padding: 24px; display: flex; flex-direction: column; gap: 20px; position: sticky; top: 100px;">
+            <h4
+              style="font-family: var(--font-serif); font-size: 20px; margin: 0; color: var(--ink); border-bottom: 1px solid var(--line); padding-bottom: 12px;">
+              Selected Configuration</h4>
 
-      <!-- ==================== COMPATIBLE ACCESSORIES SECTION START ==================== -->
-      <section class="accessories-section"
-        style="margin-top: 25px; border-top: 1px solid var(--line); padding-top: 20px; padding-bottom: 40px;">
+            <div id="selected-summary-list"
+              style="display: flex; flex-direction: column; gap: 10px; font-size: 12px; color: var(--muted);">
+              <!-- Dynamically populated list from Javascript selection updates -->
+            </div>
 
-        <h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px;">Recommended Products</h3>
-        <div class="prod-grid" id="productGrid">
-          <div class="prod-card-img">
-            <div class="prod-swatch"
-              style="background-image:url('/assets/img/drivers.webp'); background-size:cover; background-position:center;">
+            <!-- ACTION BUTTONS -->
+            <div class="gallery-actions" style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+              <a href="#" class="btn --accent"
+                style="display:flex; align-items:center; justify-content:center; gap:8px; width: 100%;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                Download Custom Datasheet
+              </a>
+              <a href="#quote-section-anchor" class="btn --accent"
+                style="display:flex; justify-content:center; gap:8px; width: 100%;">
+                <svg viewBox="0 -960 960 960" fill="#111111" stroke="currentColor" stroke-width="2" width="18"
+                  height="18">
+                  <path
+                    d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z" />
+                </svg>
+                Enquiry
+              </a>
             </div>
           </div>
-          <div class="prod-card-title">
-            <div class="prod-card-title-text"><span class="cat-label">DALI / DALI-2</span>DALI-2 Dimmable Driver</div>
-            <button class="add-quote-btn" aria-label="Add to quote"
-              onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
-          </div>
+          <!-- RIGHT COLUMN: SELECTED SUMMARY CARD END -->
+
         </div>
+      </div>
+      <!-- ==================== PRODUCT CONFIGURATION & TECHNICAL SPECIFICATIONS SECTION END ==================== -->
+
     </div>
 
-    </section>
-    <!-- ==================== COMPATIBLE ACCESSORIES SECTION END ==================== -->
+    <!-- ==================== COMPATIBLE ACCESSORIES SECTION START ==================== -->
+    <section class="accessories-section"
+      style="margin-top: 25px; border-top: 1px solid var(--line); padding-top: 20px; padding-bottom: 40px;">
 
-    <!-- ========== RELATED PROJECTS GALLERY ========== -->
-    <section class="related-projects-section">
-      <div class="wrap">
-        <h3>Featured Project Applications</h3>
-        <div class="projects-small-grid">
-          <div class="proj-small-card">
-            <img src="/assets/img/img-1.jpg" alt="Zushi Restaurant">
-            <div class="proj-small-overlay">
-              <small>Hospitality · Sydney</small>
-              <h4>Zushi Restaurant Custom Facade Outlines</h4>
-            </div>
+      <h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px;">Recommended Products</h3>
+      <div class="prod-grid" id="productGrid">
+        <div class="prod-card-img">
+          <div class="prod-swatch"
+            style="background-image:url('/assets/img/drivers.webp'); background-size:cover; background-position:center;">
           </div>
-          <div class="proj-small-card">
-            <img src="/assets/img/eve.jpg" alt="The Eve Hotel">
-            <div class="proj-small-overlay">
-              <small>Commercial · Redfern</small>
-              <h4>The Eve Hotel Curved Lounge Cove Illumination</h4>
-            </div>
+        </div>
+        <div class="prod-card-title">
+          <div class="prod-card-title-text"><span class="cat-label">DALI / DALI-2</span>DALI-2 Dimmable Driver</div>
+          <button class="add-quote-btn" aria-label="Add to quote"
+            onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+        </div>
+      </div>
+  </div>
+
+  </section>
+  <!-- ==================== COMPATIBLE ACCESSORIES SECTION END ==================== -->
+
+  <!-- ========== RELATED PROJECTS GALLERY ========== -->
+  <section class="related-projects-section">
+    <div class="wrap">
+      <h3>Featured Project Applications</h3>
+      <div class="projects-small-grid">
+        <div class="proj-small-card">
+          <img src="/assets/img/img-1.jpg" alt="Zushi Restaurant">
+          <div class="proj-small-overlay">
+            <small>Hospitality · Sydney</small>
+            <h4>Zushi Restaurant Custom Facade Outlines</h4>
+          </div>
+        </div>
+        <div class="proj-small-card">
+          <img src="/assets/img/eve.jpg" alt="The Eve Hotel">
+          <div class="proj-small-overlay">
+            <small>Commercial · Redfern</small>
+            <h4>The Eve Hotel Curved Lounge Cove Illumination</h4>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ========== B2B INQUIRY FORM SECTION ========== -->
-    <section class="quote-section" id="quote-section-anchor">
-      <div class="wrap">
-        <div class="quote-grid">
+  <!-- ========== B2B INQUIRY FORM SECTION ========== -->
+  <section class="quote-section" id="quote-section-anchor">
+    <div class="wrap">
+      <div class="quote-grid">
 
-          <div class="quote-intro">
-            <h2>Let's light up your project.</h2>
-            <p style="margin-bottom: 20px;">
-              Request a B2B project quote or coordinate a specsheet request. Fill out your details, and an Azoogi
-              commercial specialist will follow up with pricing, lead times, and trade discount rates.
-            </p>
-            <div style="font-size:13px; color:var(--muted); line-height: 2;">
-              <div><strong>Sales Support:</strong> 1300 AZOOGI</div>
-              <div><strong>Email Response:</strong> sales@azoogi.com</div>
-              <div><strong>B2B Turnaround:</strong> Within 4 business hours</div>
-            </div>
+        <div class="quote-intro">
+          <h2>Let's light up your project.</h2>
+          <p style="margin-bottom: 20px;">
+            Request a B2B project quote or coordinate a specsheet request. Fill out your details, and an Azoogi
+            commercial specialist will follow up with pricing, lead times, and trade discount rates.
+          </p>
+          <div style="font-size:13px; color:var(--muted); line-height: 2;">
+            <div><strong>Sales Support:</strong> 1300 AZOOGI</div>
+            <div><strong>Email Response:</strong> sales@azoogi.com</div>
+            <div><strong>B2B Turnaround:</strong> Within 4 business hours</div>
           </div>
-
-          <div class="quote-form-card">
-            <div id="quote-form-success" class="form-success-message">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="48" height="48">
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                <polyline points="22 4 12 14.01 9 11.01" />
-              </svg>
-              <h4>Quote Request Sent!</h4>
-              <p>Thank you. Our specification team is reviewing your project details. We will contact you shortly.</p>
-            </div>
-
-            <form id="quote-form" onsubmit="handleQuoteSubmit(event)">
-              <div class="form-row-2">
-                <div class="form-group">
-                  <label class="form-label" for="quote-name">Your Name *</label>
-                  <input class="form-input" id="quote-name" type="text" required placeholder="e.g. John Doe">
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="quote-email">Email Address *</label>
-                  <input class="form-input" id="quote-email" type="email" required placeholder="e.g. name@company.com.au">
-                </div>
-              </div>
-
-              <div class="form-row-2">
-                <div class="form-group">
-                  <label class="form-label" for="quote-company">Company / Trade Name</label>
-                  <input class="form-input" id="quote-company" type="text" placeholder="e.g. Summit Electrical">
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="quote-project">Project Name</label>
-                  <input class="form-input" id="quote-project" type="text" placeholder="e.g. Sydney Office fitout">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="quote-spec">Configured Specification</label>
-                <textarea class="form-textarea" id="quote-spec" readonly
-                  style="opacity: 0.8; background: var(--rgba-hover); cursor: not-allowed;"></textarea>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="quote-message">Additional Project Details</label>
-                <textarea class="form-textarea" id="quote-message"
-                  placeholder="Provide extra requirements, dimming requests, or custom connector feeds..."></textarea>
-              </div>
-
-              <button class="btn" type="submit">Submit Spec Inquiry</button>
-            </form>
-          </div>
-
         </div>
+
+        <div class="quote-form-card">
+          <div id="quote-form-success" class="form-success-message">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="48" height="48">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+            <h4>Quote Request Sent!</h4>
+            <p>Thank you. Our specification team is reviewing your project details. We will contact you shortly.</p>
+          </div>
+
+          <form id="quote-form" onsubmit="handleQuoteSubmit(event)">
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="quote-name">Your Name *</label>
+                <input class="form-input" id="quote-name" type="text" required placeholder="e.g. John Doe">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="quote-email">Email Address *</label>
+                <input class="form-input" id="quote-email" type="email" required placeholder="e.g. name@company.com.au">
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="quote-company">Company / Trade Name</label>
+                <input class="form-input" id="quote-company" type="text" placeholder="e.g. Summit Electrical">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="quote-project">Project Name</label>
+                <input class="form-input" id="quote-project" type="text" placeholder="e.g. Sydney Office fitout">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="quote-spec">Configured Specification</label>
+              <textarea class="form-textarea" id="quote-spec" readonly
+                style="opacity: 0.8; background: var(--rgba-hover); cursor: not-allowed;"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="quote-message">Additional Project Details</label>
+              <textarea class="form-textarea" id="quote-message"
+                placeholder="Provide extra requirements, dimming requests, or custom connector feeds..."></textarea>
+            </div>
+
+            <button class="btn" type="submit">Submit Spec Inquiry</button>
+          </form>
+        </div>
+
       </div>
-    </section>
+    </div>
+  </section>
 
   </div>
   <!-- ========== FOOTER ========== -->
@@ -440,6 +424,15 @@
                     if (vData && typeof vData === 'object') {
                       vData.variantName = vName;
                       vData.modelName = node.name || vName;
+                      if (!vData.sku_mappings && node.sku_mappings) {
+                        vData.sku_mappings = node.sku_mappings;
+                      }
+                      if (!vData.options && node.options) {
+                        vData.options = node.options;
+                      }
+                      if (!vData.constraints && node.constraints) {
+                        vData.constraints = node.constraints;
+                      }
                       addProduct(vData);
                     }
                   }
@@ -494,7 +487,7 @@
         }
         product.options = normalizedOptions;
 
-        // Configuration state: start empty by default (no options pre-selected)
+        // Configuration state: start with empty options by default
         let selectedOptions = {};
 
         let selectedLength = 5.0;
@@ -506,7 +499,6 @@
         const galleryMainImg = document.getElementById('gallery-main-img');
         const galleryThumbs = document.getElementById('gallery-thumbs');
         const configurator = document.getElementById('dynamic-configurator');
-        const specTableBody = document.getElementById('spec-table-body');
         const descEl = document.getElementById('product-desc');
 
         const calcPower = document.getElementById('calc-power');
@@ -519,36 +511,92 @@
 
         function getMappedSku(product, selectedOpts) {
           const features = product.product_features || {};
-          const defaultCode = product.product_code || features["Product Code"] || features["Product code"] || product.id || "";
+          const defaultCode = product.product_code || features["Product Code"] || features["Product code"] || product.sku || product.id || "";
           const mappings = product.sku_mappings;
 
           if (!mappings || typeof mappings !== 'object' || Object.keys(mappings).length === 0) {
             return defaultCode;
           }
 
-          const selectedIds = Object.values(selectedOpts || {}).map(String).sort();
+          const selectedEntries = Object.entries(selectedOpts || {}).filter(([k, v]) => v !== undefined && v !== null && String(v).trim() !== '');
+          if (selectedEntries.length === 0) {
+            return defaultCode;
+          }
+
+          const selectedIds = selectedEntries.map(([k, v]) => String(v).trim());
           const options = product.options || {};
           const selectedNames = [];
 
-          for (const optKey in (selectedOpts || {})) {
-            const id = selectedOpts[optKey];
+          for (const [optKey, optId] of selectedEntries) {
             const optVals = options[optKey] || [];
-            const valObj = optVals.find(v => String(v.id) === String(id));
+            const valObj = optVals.find(v => String(v.id) === String(optId));
             if (valObj && valObj.name) {
-              selectedNames.push(String(valObj.name).trim());
+              selectedNames.push(String(valObj.name).trim().toLowerCase());
             }
           }
-          selectedNames.sort();
 
-          for (const mKey in mappings) {
-            if (!mappings.hasOwnProperty(mKey)) continue;
-            const parts = mKey.split(/[|,]/).map(s => s.trim()).sort();
-            if (selectedIds.length > 0 && selectedIds.length === parts.length && selectedIds.every((val, idx) => val === parts[idx])) {
+          const mappingKeys = Object.keys(mappings);
+          const containsAll = (arr, subset) => subset.every(item => arr.includes(item));
+
+          // 1. Exact match by IDs
+          for (const mKey of mappingKeys) {
+            const parts = mKey.split(/[|,]/).map(s => s.trim());
+            if (parts.length === selectedIds.length && containsAll(parts, selectedIds)) {
               return mappings[mKey];
             }
-            if (selectedNames.length > 0 && selectedNames.length === parts.length && selectedNames.every((val, idx) => val.toLowerCase() === parts[idx].toLowerCase())) {
-              return mappings[mKey];
+          }
+
+          // 2. Exact match by names
+          if (selectedNames.length > 0) {
+            for (const mKey of mappingKeys) {
+              const parts = mKey.split(/[|,]/).map(s => s.trim().toLowerCase());
+              if (parts.length === selectedNames.length && containsAll(parts, selectedNames)) {
+                return mappings[mKey];
+              }
             }
+          }
+
+          // 3. Subset match by IDs: candidate must contain all selected IDs
+          const candidateIdKeys = mappingKeys.filter(mKey => {
+            const parts = mKey.split(/[|,]/).map(s => s.trim());
+            return containsAll(parts, selectedIds);
+          }).sort((a, b) => a.split(/[|,]/).length - b.split(/[|,]/).length);
+
+          if (candidateIdKeys.length > 0) {
+            return mappings[candidateIdKeys[0]];
+          }
+
+          // 4. Subset match by names
+          if (selectedNames.length > 0) {
+            const candidateNameKeys = mappingKeys.filter(mKey => {
+              const parts = mKey.split(/[|,]/).map(s => s.trim().toLowerCase());
+              return containsAll(parts, selectedNames);
+            }).sort((a, b) => a.split(/[|,]/).length - b.split(/[|,]/).length);
+
+            if (candidateNameKeys.length > 0) {
+              return mappings[candidateNameKeys[0]];
+            }
+          }
+
+          // 5. Maximum Overlap match
+          let bestMatchKey = null;
+          let maxMatchedCount = 0;
+          let minExtraCount = Infinity;
+
+          for (const mKey of mappingKeys) {
+            const parts = mKey.split(/[|,]/).map(s => s.trim());
+            const matchedCount = selectedIds.filter(id => parts.includes(id)).length;
+            const extraCount = parts.length - matchedCount;
+
+            if (matchedCount > maxMatchedCount || (matchedCount === maxMatchedCount && matchedCount > 0 && extraCount < minExtraCount)) {
+              maxMatchedCount = matchedCount;
+              minExtraCount = extraCount;
+              bestMatchKey = mKey;
+            }
+          }
+
+          if (bestMatchKey && maxMatchedCount > 0) {
+            return mappings[bestMatchKey];
           }
 
           return defaultCode;
@@ -563,7 +611,7 @@
 
         // Update Basic Info & Descriptions
         if (productNameEl) productNameEl.textContent = pName;
-        if (productCodeEl) productCodeEl.textContent = sku ? `SKU: ${sku}` : `SKU: ${pName}`;
+        if (productCodeEl) productCodeEl.textContent = sku ? `PRODUCT CODE: ${sku}` : `PRODUCT CODE: ${pName}`;
         if (descEl) descEl.innerHTML = pLongDesc || pShortDesc || "Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.";
 
         // Update Document Title
@@ -611,24 +659,24 @@
         }
 
         let breadcrumbHTML = `
-              <a href="/">Home</a>
-              <span>/</span>
-              <a href="/products">Products</a>
-            `;
+                      <a href="/">Home</a>
+                      <span>/</span>
+                      <a href="/products">Products</a>
+                    `;
 
         categorySegments.forEach(seg => {
           if (seg && seg.trim() && seg !== 'undefined') {
             breadcrumbHTML += `
-                  <span>/</span>
-                  <a href="/products">${seg}</a>
-                `;
+                          <span>/</span>
+                          <a href="/products">${seg}</a>
+                        `;
           }
         });
 
         breadcrumbHTML += `
-              <span>/</span>
-              <span style="color: var(--ink);">${pName}</span>
-            `;
+                      <span>/</span>
+                      <span style="color: var(--ink);">${pName}</span>
+                    `;
 
         breadcrumbsEl.innerHTML = breadcrumbHTML;
 
@@ -744,75 +792,102 @@
             const isFallback = !p.img || p.img === '/assets/bg_default.png' || p.img === '/assets/logo_dark.png';
             const fallbackStyle = isFallback ? ' filter: grayscale(100%); opacity: 0.7;' : '';
             return `
-                    <div class="prod-card" onclick="window.location.href='${detailUrl}'">
-                      <div class="prod-card-img">
-                        <div class="prod-swatch${isFallback ? ' is-fallback' : ''}" style="background-image:url('${p.img || '/assets/bg_default.png'}'); background-size:contain; background-position:center; background-repeat:no-repeat;${fallbackStyle}"></div>
-                      </div>
-                      <div class="prod-card-title">
-                        <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}${codeHtml}</div>
-                        <button class="add-quote-btn" aria-label="Add to quote" onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
-                      </div>
-                    </div>
-                  `;
+                            <div class="prod-card" onclick="window.location.href='${detailUrl}'">
+                              <div class="prod-card-img">
+                                <div class="prod-swatch${isFallback ? ' is-fallback' : ''}" style="background-image:url('${p.img || '/assets/bg_default.png'}'); background-size:contain; background-position:center; background-repeat:no-repeat;${fallbackStyle}"></div>
+                              </div>
+                              <div class="prod-card-title">
+                                <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}${codeHtml}</div>
+                                <button class="add-quote-btn" aria-label="Add to quote" onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+                              </div>
+                            </div>
+                          `;
           }).join('');
         }
 
-        // Render Gallery
+        // Render Gallery (including dimension diagrams)
         function renderGallery() {
           galleryThumbs.innerHTML = '';
           const features = product.product_features || {};
 
-          let images = [];
+          let galleryItems = []; // Array of { url: string, isDimension: boolean }
 
-          function addImagesFrom(source) {
+          function addImagesFrom(source, isDim) {
             if (!source) return;
             if (Array.isArray(source)) {
               source.forEach(item => {
                 if (typeof item === 'string' && item.trim()) {
-                  images.push(item.trim());
+                  galleryItems.push({ url: item.trim(), isDimension: !!isDim });
                 } else if (typeof item === 'object' && item !== null && item.url) {
-                  images.push(item.url);
+                  galleryItems.push({ url: item.url, isDimension: !!isDim });
                 }
               });
             } else if (typeof source === 'string' && source.trim()) {
-              images.push(source.trim());
+              galleryItems.push({ url: source.trim(), isDimension: !!isDim });
             }
           }
 
-          addImagesFrom(product.product_images);
-          addImagesFrom(features["Product image"]);
-          addImagesFrom(features["Product gallery"]);
-          addImagesFrom(features["Product Image"]);
-          addImagesFrom(features["Product Gallery"]);
+          // 1. Add standard product photos
+          addImagesFrom(product.product_images, false);
+          addImagesFrom(features["Product image"], false);
+          addImagesFrom(features["Product gallery"], false);
+          addImagesFrom(features["Product Image"], false);
+          addImagesFrom(features["Product Gallery"], false);
 
-          images = Array.from(new Set(images));
+          // 2. Add product dimension diagrams to gallery
+          addImagesFrom(product.product_dimension, true);
+          addImagesFrom(features["Product Dimension"], true);
+          addImagesFrom(features["Product dimension"], true);
 
-          if (!images || images.length === 0) {
+          // Remove duplicate URLs
+          const seenUrls = new Set();
+          galleryItems = galleryItems.filter(item => {
+            if (seenUrls.has(item.url)) return false;
+            seenUrls.add(item.url);
+            return true;
+          });
+
+          if (!galleryItems || galleryItems.length === 0) {
             galleryMainImg.src = '/assets/bg_default.png';
             galleryMainImg.style.filter = 'grayscale(100%)';
             galleryMainImg.style.display = 'block';
             return;
           }
 
-          const mainLocalSrc = resolveImg(images[0]);
-          galleryMainImg.src = mainLocalSrc;
-          galleryMainImg.style.display = 'block';
-          galleryMainImg.style.opacity = '1';
-          galleryMainImg.style.filter = (mainLocalSrc === '/assets/bg_default.png' || mainLocalSrc === '/assets/logo_dark.png') ? 'grayscale(100%)' : 'none';
+          function setMainImage(item) {
+            const localSrc = resolveImg(item.url);
+            galleryMainImg.src = localSrc;
+            galleryMainImg.style.display = 'block';
+            galleryMainImg.style.opacity = '1';
+            if (item.isDimension) {
+              galleryMainImg.style.objectFit = 'contain';
+              galleryMainImg.style.background = '#ffffff';
+              galleryMainImg.style.padding = '20px';
+              galleryMainImg.style.filter = 'none';
+            } else {
+              galleryMainImg.style.objectFit = 'contain';
+              galleryMainImg.style.background = '';
+              galleryMainImg.style.padding = '0';
+              galleryMainImg.style.filter = (localSrc === '/assets/bg_default.png' || localSrc === '/assets/logo_dark.png') ? 'grayscale(100%)' : 'none';
+            }
+          }
+
+          setMainImage(galleryItems[0]);
+
           galleryMainImg.onerror = () => {
             galleryMainImg.src = '/assets/bg_default.png';
             galleryMainImg.style.filter = 'grayscale(100%)';
           };
 
-          images.forEach((imgSrc, idx) => {
-            const localSrc = resolveImg(imgSrc);
+          galleryItems.forEach((item, idx) => {
+            const localSrc = resolveImg(item.url);
             const thumb = document.createElement('div');
-            thumb.className = `thumb-card${idx === 0 ? ' active' : ''}`;
+            thumb.className = `thumb-card${idx === 0 ? ' active' : ''}${item.isDimension ? ' is-dimension' : ''}`;
 
             const thumbImg = document.createElement('img');
             thumbImg.src = localSrc;
-            thumbImg.alt = `Product Thumbnail ${idx + 1}`;
-            if (localSrc === '/assets/bg_default.png' || localSrc === '/assets/logo_dark.png') {
+            thumbImg.alt = item.isDimension ? 'Product Dimension Diagram' : `Product Thumbnail ${idx + 1}`;
+            if (!item.isDimension && (localSrc === '/assets/bg_default.png' || localSrc === '/assets/logo_dark.png')) {
               thumbImg.style.filter = 'grayscale(100%)';
             }
             thumbImg.onerror = () => {
@@ -824,8 +899,7 @@
             thumb.addEventListener('click', () => {
               galleryThumbs.querySelectorAll('.thumb-card').forEach(t => t.classList.remove('active'));
               thumb.classList.add('active');
-              galleryMainImg.src = localSrc;
-              galleryMainImg.style.filter = (localSrc === '/assets/bg_default.png' || localSrc === '/assets/logo_dark.png') ? 'grayscale(100%)' : 'none';
+              setMainImage(item);
             });
 
             galleryThumbs.appendChild(thumb);
@@ -834,17 +908,19 @@
 
         // Render Configurator Options
         function renderConfigurator() {
-          const optionsSection = document.querySelector('.options-section');
+          const configuratorWrapper = document.getElementById('dynamic-configurator');
           const options = product.options || {};
           const optionKeys = Object.keys(options).filter(k => Array.isArray(options[k]) && options[k].length > 0);
 
           if (optionKeys.length === 0) {
-            if (optionsSection) optionsSection.style.display = 'none';
-            if (configurator) configurator.innerHTML = '';
+            if (configuratorWrapper) {
+              configuratorWrapper.style.display = 'none';
+              configuratorWrapper.innerHTML = '';
+            }
             return;
           }
 
-          if (optionsSection) optionsSection.style.display = 'block';
+          if (configuratorWrapper) configuratorWrapper.style.display = 'block';
 
           configurator.innerHTML = '<div class="reset-selection" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;"><h3 style="font-family: var(--font-serif); font-size: 28px; margin: 0;">Product Configuration</h3><a href="#" id="btn-clear-selection" class="btn sm" style="display: flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" height="15px" viewBox="0 -960 960 960" fill="currentColor"><path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>Reset Selection</a></div>';
 
@@ -866,20 +942,20 @@
 
             const optVals = options[optKey];
             if (!Array.isArray(optVals) || optVals.length === 0) continue;
-
+            const safeKey = optKey.replace(/[^a-zA-Z0-9_-]/g, '-');
             const group = document.createElement('div');
             group.className = 'config-group';
             group.style.marginBottom = '24px';
 
             group.innerHTML = `
-                  <div class="config-group-title" style="display: flex; justify-content: space-between; font-weight: 600; margin-bottom: 10px;">
-                    <span>${optKey}</span>
-                  </div>
-                  <div class="config-options-flex" id="options-flex-${optKey.replace(/\s+/g, '-')}" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
-                `;
+                          <div class="config-group-title" style="display: flex; justify-content: space-between; font-weight: 600; margin-bottom: 10px;">
+                            <span>${optKey}</span>
+                          </div>
+                          <div class="config-options-flex" id="options-flex-${safeKey}" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+                        `;
             configurator.appendChild(group);
 
-            const flex = group.querySelector(`#options-flex-${optKey.replace(/\s+/g, '-')}`);
+            const flex = group.querySelector(`#options-flex-${safeKey}`);
 
             optVals.forEach(valObj => {
               const btn = document.createElement('button');
@@ -928,97 +1004,6 @@
           }
         }
 
-        // Render Specifications
-        function renderSpecs() {
-          specTableBody.innerHTML = '';
-          const specsSection = document.querySelector('.specifications-section');
-          const specGridLayout = document.querySelector('.spec-grid-layout');
-          const features = product.product_features || {};
-          const ignoreKeys = [
-            "id", "file_path", "options", "constraints", "sku", "product_name", "name",
-            "supplier code", "product_short_description", "product_description", "product_images",
-            "product image", "product gallery", "product dimension", "product_dimension", "attachment", "images",
-            "meta keywords", "meta_keywords", "meta"
-          ];
-
-          let count = 0;
-          for (const key in features) {
-            if (!features.hasOwnProperty(key)) continue;
-            if (ignoreKeys.includes(key.toLowerCase())) continue;
-
-            const val = features[key];
-            if (val === null || val === undefined || val === '') continue;
-
-            let displayVal = '';
-
-            if (Array.isArray(val)) {
-              let valStrs = [];
-              val.forEach(item => {
-                if (typeof item === 'object' && item !== null) {
-                  if (item.value) valStrs.push(item.value);
-                } else if (item !== null && item !== undefined && String(item).trim() !== '') {
-                  valStrs.push(String(item));
-                }
-              });
-              displayVal = valStrs.join(', ');
-            } else if (typeof val === 'object' && val !== null) {
-              displayVal = val.value || '';
-            } else {
-              displayVal = String(val);
-            }
-
-            if (!displayVal) continue;
-
-            count++;
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                  <td style="padding: 12px 16px; font-weight: 600; color: var(--ink); border-bottom: 1px solid var(--line);">${key}</td>
-                  <td style="padding: 12px 16px; color: var(--muted); border-bottom: 1px solid var(--line);">${displayVal}</td>
-                `;
-            specTableBody.appendChild(row);
-          }
-
-          // Update Technical Specifications Product Dimension Image
-          const dimImgEl = document.getElementById('spec-dimension-image');
-          let dimUrl = null;
-          if (dimImgEl) {
-            const dimSource = product.product_dimension || features["Product Dimension"] || features["Product dimension"];
-
-            if (Array.isArray(dimSource) && dimSource.length > 0) {
-              const first = dimSource[0];
-              if (typeof first === 'object' && first !== null && first.url) {
-                dimUrl = first.url;
-              } else if (typeof first === 'string' && first.trim()) {
-                dimUrl = first.trim();
-              }
-            } else if (typeof dimSource === 'string' && dimSource.trim()) {
-              dimUrl = dimSource.trim();
-            }
-
-            const wrapper = dimImgEl.closest('.spec-dimension-image-wrapper') || dimImgEl.parentElement;
-
-            if (dimUrl) {
-              dimImgEl.src = resolveImg(dimUrl);
-              dimImgEl.style.display = 'block';
-              if (wrapper) wrapper.style.display = 'flex';
-            } else {
-              dimImgEl.src = '';
-              dimImgEl.style.display = 'none';
-              if (wrapper) wrapper.style.display = 'none';
-            }
-          }
-
-          const hasDimImg = !!dimUrl;
-          if (count === 0 && !hasDimImg) {
-            if (specsSection) specsSection.style.display = 'none';
-          } else {
-            if (specsSection) specsSection.style.display = 'block';
-            if (specGridLayout) {
-              specGridLayout.style.gridTemplateColumns = hasDimImg ? '1.25fr 0.75fr' : '1fr';
-            }
-          }
-        }
-
         // Render Product Icons from Airtable "Product Icons"
         function renderProductIcons() {
           const iconsRow = document.querySelector('.product-icons-row');
@@ -1033,16 +1018,12 @@
             rawIcons.forEach(item => {
               if (typeof item === 'string' && item.trim()) {
                 iconUrls.push(item.trim());
-              } else if (typeof item === 'object' && item !== null) {
-                if (item.url) iconUrls.push(item.url);
-                else if (item.filePath) iconUrls.push(item.filePath);
-                else if (item.path) iconUrls.push(item.path);
+              } else if (typeof item === 'object' && item !== null && item.url) {
+                iconUrls.push(item.url);
               }
             });
           } else if (typeof rawIcons === 'string' && rawIcons.trim()) {
-            rawIcons.split(',').forEach(item => {
-              if (item.trim()) iconUrls.push(item.trim());
-            });
+            iconUrls.push(rawIcons.trim());
           }
 
           iconUrls = Array.from(new Set(iconUrls));
@@ -1050,11 +1031,11 @@
           if (iconUrls.length > 0) {
             if (iconsWrapper) iconsWrapper.style.display = 'block';
             iconsRow.innerHTML = iconUrls.map((url, idx) => `
-                <img src="${resolveImg(url)}" alt="Product Icon ${idx + 1}"
-                  style="height: 42px; width: auto; opacity: 0.85; transition: opacity 0.2s; max-width: 100px; object-fit: contain;"
-                  onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"
-                  onerror="this.style.display='none'">
-              `).join('');
+                        <img src="${resolveImg(url)}" alt="Product Icon ${idx + 1}"
+                          style="height: 42px; width: auto; opacity: 0.85; transition: opacity 0.2s; max-width: 100px; object-fit: contain;"
+                          onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"
+                          onerror="this.style.display='none'">
+                      `).join('');
           } else {
             if (iconsWrapper) iconsWrapper.style.display = 'none';
             iconsRow.innerHTML = '';
@@ -1065,10 +1046,11 @@
         function checkConstraints() {
           const prohibitedIds = new Set();
 
-          const activeIds = Object.values(selectedOptions);
+          const activeIds = Object.values(selectedOptions).map(String);
           activeIds.forEach(id => {
             if (product.constraints && product.constraints[id]) {
-              product.constraints[id].forEach(forbiddenId => {
+              const forbiddenList = Array.isArray(product.constraints[id]) ? product.constraints[id] : [product.constraints[id]];
+              forbiddenList.forEach(forbiddenId => {
                 prohibitedIds.add(String(forbiddenId));
               });
             }
@@ -1087,24 +1069,25 @@
             if (!options.hasOwnProperty(optKey)) continue;
 
             const optVals = options[optKey];
-            const flex = document.getElementById(`options-flex-${optKey.replace(/\s+/g, '-')}`);
+            const safeKey = optKey.replace(/[^a-zA-Z0-9_-]/g, '-');
+            const flex = document.getElementById(`options-flex-${safeKey}`);
             if (!flex) continue;
-
-            let hasActiveValid = false;
-            let currentSelectedId = selectedOptions[optKey];
 
             const btns = flex.querySelectorAll('.config-btn');
             btns.forEach(btn => {
-              const optId = btn.getAttribute('data-opt-id');
+              const optId = String(btn.getAttribute('data-opt-id'));
 
-              if (prohibitedIds.has(String(optId)) || prohibitedIds.has(Number(optId))) {
+              if (prohibitedIds.has(optId)) {
                 btn.disabled = true;
                 btn.classList.add('disabled');
                 btn.classList.remove('active');
+                if (selectedOptions[optKey] && String(selectedOptions[optKey]) === optId) {
+                  delete selectedOptions[optKey];
+                }
               } else {
                 btn.disabled = false;
                 btn.classList.remove('disabled');
-                if (selectedOptions[optKey] && String(optId) === String(selectedOptions[optKey])) {
+                if (selectedOptions[optKey] && String(selectedOptions[optKey]) === optId) {
                   btn.classList.add('active');
                 } else {
                   btn.classList.remove('active');
@@ -1119,6 +1102,8 @@
           const pName = product.product_name || product.name || "Product";
           const features = product.product_features || {};
           const skuDisplay = getMappedSku(product, selectedOptions);
+
+          if (productCodeEl) productCodeEl.textContent = `PRODUCT CODE: ${skuDisplay}`;
 
           let wattageVal = 14.4;
           let selectedCctText = "";
@@ -1205,9 +1190,9 @@
             modelDiv.style.paddingBottom = '8px';
             modelDiv.style.marginBottom = '8px';
             modelDiv.innerHTML = `
-                  <strong style="color: var(--ink);">SKU / MODEL:</strong>
-                  <span style="color: var(--accent); font-weight: 600;">${skuDisplay}</span>
-                `;
+                          <strong style="color: var(--ink);">PRODUCT CODE:</strong>
+                          <span style="color: var(--accent); font-weight: 600;">${skuDisplay}</span>
+                        `;
             summaryListEl.appendChild(modelDiv);
 
             // Render each option key/value pair
@@ -1222,9 +1207,9 @@
                 itemDiv.style.fontSize = '12px';
                 itemDiv.style.marginBottom = '4px';
                 itemDiv.innerHTML = `
-                      <span style="font-weight: 500; text-transform: capitalize; color: var(--muted);">${key}:</span>
-                      <span style="color: var(--ink); font-weight: 600;">${valObj.name}</span>
-                    `;
+                              <span style="font-weight: 500; text-transform: capitalize; color: var(--muted);">${key}:</span>
+                              <span style="color: var(--ink); font-weight: 600;">${valObj.name}</span>
+                            `;
                 summaryListEl.appendChild(itemDiv);
               }
             }
@@ -1236,15 +1221,15 @@
           const pNameLower = pName.toLowerCase();
           const isLinear = catLower.includes('neon') || catLower.includes('linear') || pNameLower.includes('strip') || pNameLower.includes('nnr');
           let specSummary = `Product: ${pName} (${product.category || 'General'})
-    Variant Model: ${skuDisplay}
-    Selected Options:
-    ${selectedOptionsSummary.map(s => "  - " + s).join('\n')}`;
+            Variant Model: ${skuDisplay}
+            Selected Options:
+            ${selectedOptionsSummary.map(s => "  - " + s).join('\n')}`;
 
           if (isLinear) {
             specSummary += `
-    Requested custom cut length: ${selectedLength.toFixed(1)}m
-    Total power load: ${totalPower.toFixed(1)}W
-    Recommended system driver: ${driverRecommendation}`;
+            Requested custom cut length: ${selectedLength.toFixed(1)}m
+            Total power load: ${totalPower.toFixed(1)}W
+            Recommended system driver: ${driverRecommendation}`;
           }
 
           const specField = document.getElementById('quote-spec');
@@ -1277,7 +1262,6 @@
         // Initialize
         renderGallery();
         renderConfigurator();
-        renderSpecs();
         renderProductIcons();
         renderRecommendedAccessories();
         checkConstraints();
