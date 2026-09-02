@@ -1,17 +1,18 @@
 @extends('layouts.site')
 
 @section('title')
-Products — Azoogi LED Lighting
+  Products — Azoogi LED Lighting
 @endsection
 
 @section('description')
-Browse the full Azoogi LED lighting catalogue. COB Strips, SMD Strips, Neon, Outdoor Lights, Aluminium Profiles, LED Drivers and more.
+  Browse the full Azoogi LED lighting catalogue. COB Strips, SMD Strips, Neon, Outdoor Lights, Aluminium Profiles, LED
+  Drivers and more.
 @endsection
 
 @section('bodyClass', 'products-page')
 
 @section('bodyAttributes')
-style="padding-top: 120px;"
+  style="padding-top: 120px;"
 @endsection
 
 @section('chrome', 'full')
@@ -20,761 +21,766 @@ style="padding-top: 120px;"
 @section('logo', 'logo_dark.png')
 
 @push('styles')
-@verbatim
-<style>
-/* Product page — solid light header (matches site light mode) */
-    .topbar {
-      background: rgba(255, 255, 255, .96) !important;
-      border-bottom: 1px solid var(--line) !important;
-    }
-
-    .header-bg{
-      background-color: #333;
-      height: 400px;
-      background: url("/assets/hero02.jpg") no-repeat top left;
-      background-size: cover;
-      position: relative;
-    }
-
-
-    /* ===========================================================
-     BREADCRUMB STRIP
-  =========================================================== */
-    .page-head {
-      padding: 12px 0 16px;
-      border-bottom: 1px solid var(--line);
-      margin-bottom: 0;
-    }
-
-    .crumb {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .crumb a:hover {
-      color: var(--accent);
-    }
-
-    .crumb span {
-      margin: 0 6px;
-      opacity: .5;
-    }
-
-    /* ===========================================================
-     TWO-COLUMN LAYOUT: narrow sidebar | product grid
-  =========================================================== */
-    .prod-layout {
-      display: grid;
-      grid-template-columns: 240px 1fr;
-      gap: 28px;
-      padding: 28px 0 100px;
-      align-items: start;
-    }
-
-    .prod-layout > main {
-      min-width: 0;
-    }
-
-    @media(max-width:1280px) {
-      .prod-layout {
-        grid-template-columns: 220px 1fr;
-        gap: 22px;
+  @verbatim
+    <style>
+      /* Product page — solid light header (matches site light mode) */
+      .topbar {
+        background: rgba(255, 255, 255, .96) !important;
+        border-bottom: 1px solid var(--line) !important;
       }
-    }
 
-    @media(max-width:1024px) {
-      .prod-layout {
-        grid-template-columns: 1fr;
-        padding: 16px 0 72px;
+      .header-bg {
+        background-color: #333;
+        height: 400px;
+        background: url("/assets/hero02.jpg") no-repeat top left;
+        background-size: cover;
+        position: relative;
       }
-    }
 
-    /* ===========================================================
-     SIDEBAR
-  =========================================================== */
-    .prod-sidebar {
-      position: sticky;
-      top: 120px;
-      width: 100%;
-      margin: 0;
-      min-width: 0;
-      max-height: calc(100vh - 120px - 20px);
-      overflow-y: auto;
-      padding-right: 12px;
-    }
 
-    .prod-sidebar::-webkit-scrollbar {
-      width: 4px;
-    }
+      /* ===========================================================
+             BREADCRUMB STRIP
+          =========================================================== */
+      .page-head {
+        padding: 12px 0 16px;
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 0;
+      }
 
-    .prod-sidebar::-webkit-scrollbar-track {
-      background: transparent;
-    }
+      .crumb {
+        font-size: 13px;
+        color: var(--muted);
+      }
 
-    .prod-sidebar::-webkit-scrollbar-thumb {
-      background: var(--line);
-      border-radius: 4px;
-    }
+      .crumb a:hover {
+        color: var(--accent);
+      }
 
-    .sb-block {
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 16px;
-      margin-bottom: 16px;
-    }
+      .crumb span {
+        margin: 0 6px;
+        opacity: .5;
+      }
 
-    .sb-title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 12px;
-      cursor: pointer;
-    }
+      /* ===========================================================
+             TWO-COLUMN LAYOUT: narrow sidebar | product grid
+          =========================================================== */
+      .prod-layout {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        gap: 28px;
+        padding: 28px 0 100px;
+        align-items: start;
+      }
 
-    .sb-title:hover {
-      opacity: 0.8;
-    }
+      .prod-layout>main {
+        min-width: 0;
+      }
 
-    .sb-toggle {
-      font-size: 15px;
-      font-weight: 300;
-      line-height: 1;
-      color: var(--accent);
-    }
+      @media(max-width:1280px) {
+        .prod-layout {
+          grid-template-columns: 220px 1fr;
+          gap: 22px;
+        }
+      }
 
-    .sb-block.open .sb-title {
-      border-bottom: 1px solid var(--border-light);
-      padding-bottom: 12px;
-      margin-bottom: 12px;
-      padding-right: 12px;
-    }
+      @media(max-width:1024px) {
+        .prod-layout {
+          grid-template-columns: 1fr;
+          padding: 16px 0 72px;
+        }
+      }
 
-    .sb-block.open .sb-toggle::after {
-      content: '\2013';
-    }
+      /* ===========================================================
+             SIDEBAR
+          =========================================================== */
+      .prod-sidebar {
+        position: sticky;
+        top: 120px;
+        width: 100%;
+        margin: 0;
+        min-width: 0;
+        max-height: calc(100vh - 120px - 20px);
+        overflow-y: auto;
+        padding-right: 12px;
+      }
 
-    .sb-block:not(.open) .sb-toggle::after {
-      content: '+';
-    }
+      .prod-sidebar::-webkit-scrollbar {
+        width: 4px;
+      }
 
-    .sb-content {
-      max-height: 2000px;
-      overflow: hidden;
-      transition: max-height 0.3s ease, opacity 0.3s ease;
-      opacity: 1;
-    }
+      .prod-sidebar::-webkit-scrollbar-track {
+        background: transparent;
+      }
 
-    .sb-block:not(.open) .sb-content {
-      max-height: 0;
-      opacity: 0;
-    }
+      .prod-sidebar::-webkit-scrollbar-thumb {
+        background: var(--line);
+        border-radius: 4px;
+      }
 
-    .sb-block:not(.open) .sb-title {
-      margin-bottom: 0;
-      border-bottom: none;
-      padding-bottom: 0;
-      padding-right: 12px;
-    }
+      .sb-block {
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 16px;
+        margin-bottom: 16px;
+      }
 
-    .cat-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
+      .sb-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 12px;
+        cursor: pointer;
+      }
 
-    .cat-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 5px 6px;
-      cursor: pointer;
-      font-size: 11px;
-      font-weight: 600;
-      gap: 6px;
-    }
+      .sb-title:hover {
+        opacity: 0.8;
+      }
 
-    .cat-label-text {
-      flex: 1;
-      line-height: 1.3;
-      word-break: break-word;
-      cursor: pointer;
-    }
+      .sb-toggle {
+        font-size: 15px;
+        font-weight: 300;
+        line-height: 1;
+        color: var(--accent);
+      }
 
-    .cat-label-text.active,
-    .cat-label-text:hover,
-    .cat-row:hover {
-      color: var(--accent);
-    }
+      .sb-block.open .sb-title {
+        border-bottom: 1px solid var(--border-light);
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+        padding-right: 12px;
+      }
 
-    /* cleaner +/- toggle icon to match filter accordion */
-    .cat-toggle {
-      font-size: 14px;
-      font-weight: 300;
-      color: var(--muted);
-      width: 16px;
-      text-align: center;
-      line-height: 1;
-      flex-shrink: 0;
-    }
+      .sb-block.open .sb-toggle::after {
+        content: '\2013';
+      }
 
-    .cat-node.open > .cat-row > .cat-toggle {
-      color: var(--accent);
-    }
+      .sb-block:not(.open) .sb-toggle::after {
+        content: '+';
+      }
 
-    .sub-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .35s ease;
-    }
+      .sb-content {
+        max-height: 2000px;
+        overflow: hidden;
+        transition: max-height 0.3s ease, opacity 0.3s ease;
+        opacity: 1;
+      }
 
-    .cat-node.open > .sub-list {
-      max-height: 2000px;
-      margin-left: 6px;
-      padding-left: 8px;
-      border-left: 1px solid rgba(255, 255, 255, 0.1);
-    }
+      .sb-block:not(.open) .sb-content {
+        max-height: 0;
+        opacity: 0;
+      }
 
-    .sub-list li a,
-    .cat-sub-link {
-      display: block;
-      padding: 4px 6px;
-      font-size: 10.5px;
-      color: var(--muted);
-      line-height: 1.3;
-      text-decoration: none;
-    }
+      .sb-block:not(.open) .sb-title {
+        margin-bottom: 0;
+        border-bottom: none;
+        padding-bottom: 0;
+        padding-right: 12px;
+      }
 
-    .sub-list li a.active,
-    .sub-list li a:hover,
-    .cat-sub-link.active,
-    .cat-sub-link:hover {
-      color: var(--accent);
-    }
+      .cat-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
 
-    /* Filter accordion */
-   
-    .filter-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 10px;
-      cursor: pointer;
-      font-size: 10px;
-      font-weight: 600;
-    }
+      .cat-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px 6px;
+        cursor: pointer;
+        font-size: 11px;
+        font-weight: 600;
+        gap: 6px;
+      }
 
-    .filter-head:hover {
-      color: var(--accent);
-    }
+      .cat-label-text {
+        flex: 1;
+        line-height: 1.3;
+        word-break: break-word;
+        cursor: pointer;
+      }
 
-    .filter-toggle {
-      font-size: 15px;
-      font-weight: 300;
-      color: var(--muted);
-      width: 16px;
-      text-align: center;
-    }
+      .cat-label-text.active,
+      .cat-label-text:hover,
+      .cat-row:hover {
+        color: var(--accent);
+      }
 
-    .filter-body {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height .3s ease;
-    }
+      /* cleaner +/- toggle icon to match filter accordion */
+      .cat-toggle {
+        font-size: 14px;
+        font-weight: 300;
+        color: var(--muted);
+        width: 16px;
+        text-align: center;
+        line-height: 1;
+        flex-shrink: 0;
+      }
 
-    .filter-item.open .filter-body {
-      max-height: min(50vh, 320px);
-      overflow-y: auto;
-      padding: 0 10px;
-    }
+      .cat-node.open>.cat-row>.cat-toggle {
+        color: var(--accent);
+      }
 
-    .filter-item.open .filter-toggle {
-      color: var(--accent);
-    }
+      .sub-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .35s ease;
+      }
 
-    .opt-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 3px 0;
-      font-size: 10px;
-      color: var(--ink);
-      cursor: pointer;
-    }
+      .cat-node.open>.sub-list {
+        max-height: 2000px;
+        margin-left: 6px;
+        padding-left: 8px;
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+      }
 
-    .opt-row input {
-      accent-color: var(--accent);
-      width: 13px;
-      height: 13px;
-    }
+      .sub-list li a,
+      .cat-sub-link {
+        display: block;
+        padding: 4px 6px;
+        font-size: 10.5px;
+        color: var(--muted);
+        line-height: 1.3;
+        text-decoration: none;
+      }
 
-    .clear-filters {
-      font-size: 12px;
-      color: var(--accent)!important;
-      cursor: pointer;
-      display: inline-block;
-    }
+      .sub-list li a.active,
+      .sub-list li a:hover,
+      .cat-sub-link.active,
+      .cat-sub-link:hover {
+        color: var(--accent);
+      }
 
-    .clear-filters:hover {
-      color: var(--accent);
-    }
+      /* Filter accordion */
 
-    /* ===========================================================
-     TOOLBAR
-  =========================================================== */
-    .prod-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      border-bottom: 1px solid #CCC;
-    }
+      .filter-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 10px;
+        cursor: pointer;
+        font-size: 10px;
+        font-weight: 600;
+      }
 
-    .result-count {
-      font-size: 12px;
-      color: var(--muted);
-    }
+      .filter-head:hover {
+        color: var(--accent);
+      }
 
-    .result-count strong {
-      color: var(--ink);
-    }
+      .filter-toggle {
+        font-size: 15px;
+        font-weight: 300;
+        color: var(--muted);
+        width: 16px;
+        text-align: center;
+      }
 
-    .toolbar-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-    }
+      .filter-body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .3s ease;
+      }
 
-    .prod-search-input {
-      padding: 8px 12px;
-      border-radius: 4px;
-      border: 1px solid var(--border-light);
-      background: var(--bg-2);
-      color: var(--ink);
-      font-size: 13px;
-      width: 180px;
-      min-width: 0;
-      box-sizing: border-box;
-    }
+      .filter-item.open .filter-body {
+        max-height: min(50vh, 320px);
+        overflow-y: auto;
+        padding: 0 10px;
+      }
 
-    .sort-select {
-      border: 1px solid var(--line);
-      background: var(--bg);
-      color: var(--ink);
-      font-size: 12px;
-      padding: 8px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      min-width: 0;
-      max-width: 100%;
-    }
+      .filter-item.open .filter-toggle {
+        color: var(--accent);
+      }
 
-    .prod-mobile-filter-btn {
-      display: none;
-      border: 1px solid var(--line);
-      background: none;
-      color: var(--ink);
-      padding: 8px 12px;
-      font-size: 13px;
-      cursor: pointer;
-      border-radius: 4px;
-      white-space: nowrap;
-    }
+      .opt-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 3px 0;
+        font-size: 10px;
+        color: var(--ink);
+        cursor: pointer;
+      }
 
-    @media(max-width:1024px) {
+      .opt-row input {
+        accent-color: var(--accent);
+        width: 13px;
+        height: 13px;
+      }
+
+      .clear-filters {
+        font-size: 12px;
+        color: var(--accent) !important;
+        cursor: pointer;
+        display: inline-block;
+      }
+
+      .clear-filters:hover {
+        color: var(--accent);
+      }
+
+      /* ===========================================================
+             TOOLBAR
+          =========================================================== */
       .prod-toolbar {
-        align-items: stretch;
-        gap: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        border-bottom: 1px solid #CCC;
       }
 
       .result-count {
-        width: 100%;
-        margin-bottom: 2px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .result-count strong {
+        color: var(--ink);
       }
 
       .toolbar-right {
-        flex: 1 1 100%;
-        flex-wrap: wrap;
-        gap: 8px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
       }
 
       .prod-search-input {
-        flex: 1 1 100%;
-        width: 100%;
-        min-height: 44px;
+        padding: 8px 12px;
+        border-radius: 4px;
+        border: 1px solid var(--border-light);
+        background: var(--bg-2);
+        color: var(--ink);
+        font-size: 13px;
+        width: 180px;
+        min-width: 0;
+        box-sizing: border-box;
       }
 
-      .prod-mobile-filter-btn,
       .sort-select {
-        flex: 1 1 calc(50% - 4px);
-        min-height: 44px;
+        border: 1px solid var(--line);
+        background: var(--bg);
+        color: var(--ink);
+        font-size: 12px;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        min-width: 0;
+        max-width: 100%;
       }
 
       .prod-mobile-filter-btn {
-        display: inline-flex;
+        display: none;
+        border: 1px solid var(--line);
+        background: none;
+        color: var(--ink);
+        padding: 8px 12px;
+        font-size: 13px;
+        cursor: pointer;
+        border-radius: 4px;
+        white-space: nowrap;
+      }
+
+      @media(max-width:1024px) {
+        .prod-toolbar {
+          align-items: stretch;
+          gap: 10px;
+        }
+
+        .result-count {
+          width: 100%;
+          margin-bottom: 2px;
+        }
+
+        .toolbar-right {
+          flex: 1 1 100%;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+
+        .prod-search-input {
+          flex: 1 1 100%;
+          width: 100%;
+          min-height: 44px;
+        }
+
+        .prod-mobile-filter-btn,
+        .sort-select {
+          flex: 1 1 calc(50% - 4px);
+          min-height: 44px;
+        }
+
+        .prod-mobile-filter-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .prod-sidebar {
+          display: none;
+        }
+
+        .prod-sidebar.open {
+          display: block;
+          position: fixed;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: auto;
+          width: min(360px, 92vw);
+          z-index: 290;
+          background: var(--bg);
+          padding: 20px 20px 32px;
+          overflow-y: auto;
+          border-left: 1px solid var(--line);
+          box-shadow: -18px 0 48px rgba(0, 0, 0, .12);
+        }
+
+        .prod-filter-overlay {
+          display: none;
+          position: fixed;
+          inset: 0;
+          background: rgba(0, 0, 0, .4);
+          z-index: 280;
+        }
+
+        .prod-filter-overlay.open {
+          display: block;
+        }
+
+        .prod-sidebar-head {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          margin-bottom: 18px;
+          padding-bottom: 12px;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .prod-sidebar-head strong {
+          font-size: 14px;
+          letter-spacing: .08em;
+          text-transform: uppercase;
+        }
+
+        .prod-filter-close {
+          min-width: 44px;
+          min-height: 44px;
+          border: 1px solid var(--line);
+          background: none;
+          color: var(--ink);
+          font-size: 22px;
+          line-height: 1;
+          cursor: pointer;
+          border-radius: 4px;
+        }
+      }
+
+      @media (min-width: 1025px) {
+        .prod-sidebar-head {
+          display: none;
+        }
+
+        .prod-filter-overlay {
+          display: none !important;
+        }
+      }
+
+      .active-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+
+      .p-tag {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--card-bg);
+        border: 1px solid var(--line);
+        font-size: 12px;
+        padding: 5px 10px;
+        border-radius: 2px;
+      }
+
+      .p-tag .remove-tag {
+        cursor: pointer;
+        color: var(--muted);
+        line-height: 1;
+        padding-left: 4px;
+        font-weight: bold;
+      }
+
+      .p-tag .remove-tag:hover {
+        color: var(--accent);
+      }
+
+      /* ===========================================================
+             PRODUCT CARD GRID — 4 columns
+          =========================================================== */
+      .prod-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+
+      @media(max-width:1280px) {
+        .prod-grid {
+          grid-template-columns: repeat(4, 1fr);
+          gap: 12px;
+        }
+      }
+
+      @media(max-width:1024px) {
+        .prod-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px;
+        }
+      }
+
+      @media(max-width:480px) {
+        .prod-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .prod-card {
+        position: relative;
+        border: 1px solid var(--border-light);
+        background: var(--card-bg);
+        overflow: hidden;
+        border-radius: 3px;
+        transition: border-color .25s;
+        cursor: pointer;
+        min-width: 0;
+      }
+
+      .prod-card:hover {
+        border-color: var(--accent);
+      }
+
+      .prod-card-img {
+        position: relative;
+        aspect-ratio: 1/1;
+        overflow: hidden;
+      }
+
+      .prod-swatch {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, var(--sw1, #1c2e17), var(--sw2, #0b0b0b));
+        display: flex;
         align-items: center;
         justify-content: center;
       }
 
-      .prod-sidebar {
-        display: none;
+      .prod-swatch svg {
+        width: 38%;
+        opacity: .35;
       }
 
-      .prod-sidebar.open {
+      .prod-card-title {
+        padding: 12px 14px 14px;
+        font-size: 13.5px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 8px;
+        line-height: 1.3;
+      }
+
+      .prod-card-title-text {
+        flex: 1;
+      }
+
+      .prod-card-title .cat-label {
         display: block;
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: auto;
-        width: min(360px, 92vw);
-        z-index: 290;
-        background: var(--bg);
-        padding: 20px 20px 32px;
-        overflow-y: auto;
-        border-left: 1px solid var(--line);
-        box-shadow: -18px 0 48px rgba(0, 0, 0, .12);
+        font-size: 10px;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: .08em;
+        margin-bottom: 4px;
       }
 
-      .prod-filter-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, .4);
-        z-index: 280;
-      }
-
-      .prod-filter-overlay.open {
+      .prod-card-title .prod-card-code {
         display: block;
+        font-size: 10px;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: .08em;
+        margin-top: 4px;
+        font-weight: 400;
       }
 
-      .prod-sidebar-head {
+      .add-quote-btn {
+        background: var(--accent);
+        border: 1px solid var(--line);
+        color: var(--pure-bg);
+        width: 28px;
+        height: 28px;
+        border-radius: 4px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 18px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .prod-sidebar-head strong {
-        font-size: 14px;
-        letter-spacing: .08em;
-        text-transform: uppercase;
-      }
-
-      .prod-filter-close {
-        min-width: 44px;
-        min-height: 44px;
-        border: 1px solid var(--line);
-        background: none;
-        color: var(--ink);
-        font-size: 22px;
-        line-height: 1;
+        justify-content: center;
         cursor: pointer;
-        border-radius: 4px;
-      }
-    }
-
-    @media (min-width: 1025px) {
-      .prod-sidebar-head {
-        display: none;
+        transition: all .2s;
+        flex-shrink: 0;
+        font-size: 16px;
+        font-weight: 300;
+        padding: 0;
       }
 
-      .prod-filter-overlay {
+      .add-quote-btn:hover {
+        background: var(--card-bg);
+        color: var(--ink);
+        border-color: var(--accent);
+      }
+
+      .add-quote-btn.added {
+        background: var(--accent-2);
+        color: #fff;
+        border-color: var(--accent-2);
+      }
+
+      .prod-overlay {
         display: none !important;
       }
-    }
 
-    .active-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-
-    .p-tag {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--card-bg);
-      border: 1px solid var(--line);
-      font-size: 12px;
-      padding: 5px 10px;
-      border-radius: 2px;
-    }
-
-    .p-tag .remove-tag {
-      cursor: pointer;
-      color: var(--muted);
-      line-height: 1;
-      padding-left: 4px;
-      font-weight: bold;
-    }
-
-    .p-tag .remove-tag:hover {
-      color: var(--accent);
-    }
-
-    /* ===========================================================
-     PRODUCT CARD GRID — 4 columns
-  =========================================================== */
-    .prod-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-    }
-
-    @media(max-width:1280px) {
-      .prod-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 12px;
-      }
-    }
-
-    @media(max-width:1024px) {
-      .prod-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-      }
-    }
-
-    @media(max-width:480px) {
-      .prod-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .prod-card {
-      position: relative;
-      border: 1px solid var(--border-light);
-      background: var(--card-bg);
-      overflow: hidden;
-      border-radius: 3px;
-      transition: border-color .25s;
-      cursor: pointer;
-      min-width: 0;
-    }
-
-    .prod-card:hover {
-      border-color: var(--accent);
-    }
-
-    .prod-card-img {
-      position: relative;
-      aspect-ratio: 1/1;
-      overflow: hidden;
-    }
-
-    .prod-swatch {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, var(--sw1, #1c2e17), var(--sw2, #0b0b0b));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .prod-swatch svg {
-      width: 38%;
-      opacity: .35;
-    }
-
-    .prod-card-title {
-      padding: 12px 14px 14px;
-      font-size: 13.5px;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 8px;
-      line-height: 1.3;
-    }
-
-    .prod-card-title-text {
-      flex: 1;
-    }
-
-    .prod-card-title .cat-label {
-      display: block;
-      font-size: 10px;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      margin-bottom: 4px;
-    }
-
-    .prod-card-title .prod-card-code {
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    .add-quote-btn {
-      background: var(--accent);
-      border: 1px solid var(--line);
-      color: var(--pure-bg);
-      width: 28px;
-      height: 28px;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all .2s;
-      flex-shrink: 0;
-      font-size: 16px;
-      font-weight: 300;
-      padding: 0;
-    }
-
-    .add-quote-btn:hover {
-      background: var(--card-bg);
-      color: var(--ink);
-      border-color: var(--accent);
-    }
-
-    .add-quote-btn.added {
-      background: var(--accent-2);
-      color: #fff;
-      border-color: var(--accent-2);
-    }
-
-    .prod-overlay {
-      display: none !important;
-    }
-
-    .spec-item {
-      font-size: 11.5px;
-      color: rgba(255, 255, 255, 0.85);
-      line-height: 1.4;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding-bottom: 6px;
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .spec-item:last-child {
-      border-bottom: none;
-    }
-
-    .spec-item strong {
-      color: #fff;
-      font-weight: 500;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: .04em;
-    }
-
-    .spec-item span {
-      text-align: right;
-    }
-
-    .p-btn-row {
-      display: flex;
-      gap: 8px;
-    }
-
-    .ov-btn {
-      flex: 1;
-      text-align: center;
-      font-size: 11.5px;
-      padding: 9px 6px;
-      cursor: pointer;
-      border-radius: 2px;
-      transition: all .2s;
-      border: 1px solid rgba(255, 255, 255, .5);
-      color: #fff;
-      background: transparent;
-    }
-
-    .ov-btn:hover {
-      background: rgba(255, 255, 255, .12);
-    }
-
-    .ov-btn.solid {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: var(--pure-bg);
-      font-weight: 600;
-    }
-
-    .ov-btn.solid:hover {
-      background: #fff;
-      border-color: #fff;
-      color: #000;
-    }
-
-    .ov-btn.added {
-      background: var(--accent-2);
-      border-color: var(--accent-2);
-    }
-
-    /* ===========================================================
-     PAGINATION
-  =========================================================== */
-    .pagination {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 48px;
-      padding: 0 4px;
-    }
-
-    @media (max-width: 1024px) {
-      body.products-page {
-        padding-top: 72px !important;
+      .spec-item {
+        font-size: 11.5px;
+        color: rgba(255, 255, 255, 0.85);
+        line-height: 1.4;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 6px;
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
       }
 
-      .breadcrumbs {
-        margin: 8px 0 12px;
+      .spec-item:last-child {
+        border-bottom: none;
       }
-    }
 
-    .pg-btn {
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--line);
-      font-size: 13px;
-      cursor: pointer;
-      color: var(--muted);
-    }
+      .spec-item strong {
+        color: #fff;
+        font-weight: 500;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: .04em;
+      }
 
-    .pg-btn.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: var(--pure-bg);
-    }
+      .spec-item span {
+        text-align: right;
+      }
 
-    .pg-btn:hover:not(.active) {
-      color: var(--ink);
-      border-color: var(--accent);
-    }
-</style>
-@endverbatim
+      .p-btn-row {
+        display: flex;
+        gap: 8px;
+      }
+
+      .ov-btn {
+        flex: 1;
+        text-align: center;
+        font-size: 11.5px;
+        padding: 9px 6px;
+        cursor: pointer;
+        border-radius: 2px;
+        transition: all .2s;
+        border: 1px solid rgba(255, 255, 255, .5);
+        color: #fff;
+        background: transparent;
+      }
+
+      .ov-btn:hover {
+        background: rgba(255, 255, 255, .12);
+      }
+
+      .ov-btn.solid {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: var(--pure-bg);
+        font-weight: 600;
+      }
+
+      .ov-btn.solid:hover {
+        background: #fff;
+        border-color: #fff;
+        color: #000;
+      }
+
+      .ov-btn.added {
+        background: var(--accent-2);
+        border-color: var(--accent-2);
+      }
+
+      /* ===========================================================
+             PAGINATION
+          =========================================================== */
+      .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 48px;
+        padding: 0 4px;
+      }
+
+      @media (max-width: 1024px) {
+        body.products-page {
+          padding-top: 72px !important;
+        }
+
+        .breadcrumbs {
+          margin: 8px 0 12px;
+        }
+      }
+
+      .pg-btn {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--line);
+        font-size: 13px;
+        cursor: pointer;
+        color: var(--muted);
+      }
+
+      .pg-btn.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: var(--pure-bg);
+      }
+
+      .pg-btn:hover:not(.active) {
+        color: var(--ink);
+        border-color: var(--accent);
+      }
+    </style>
+  @endverbatim
 @endpush
 
 @section('content')
-<div class="wrap">
+  <div class="wrap">
     <!-- Breadcrumb only — no h1 / subtitle -->
     <div class="breadcrumbs" id="breadcrumbs">
-        <a href="/">Home</a>
-        <span>/</span>Products
-      </div>
+      <a href="/">Home</a>
+      <span>/</span>Products
+    </div>
 
 
     <div class="prod-layout">
@@ -805,7 +811,7 @@ style="padding-top: 120px;"
 
       <!-- ===== Main ===== -->
       <main>
-        
+
 
         <div class="prod-toolbar">
           <div class="result-count"><strong id="resultCount">0</strong> products found</div>
@@ -835,996 +841,996 @@ style="padding-top: 120px;"
 @endsection
 
 @push('scripts')
-@verbatim
-<script>
-/* ===== Header solid on scroll ===== */
-    const topbar = document.getElementById('topbar');
-    let lastScrolled = null;
-    const onScroll = () => {
-      const isScrolled = true; // Always solid on products page
-      if (isScrolled !== lastScrolled) {
-        topbar.classList.toggle('solid', isScrolled);
-        lastScrolled = isScrolled;
-        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-        if (typeof updateLogos === 'function') updateLogos(currentTheme);
+  @verbatim
+    <script>
+      /* ===== Header solid on scroll ===== */
+      const topbar = document.getElementById('topbar');
+      let lastScrolled = null;
+      const onScroll = () => {
+        const isScrolled = true; // Always solid on products page
+        if (isScrolled !== lastScrolled) {
+          topbar.classList.toggle('solid', isScrolled);
+          lastScrolled = isScrolled;
+          const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+          if (typeof updateLogos === 'function') updateLogos(currentTheme);
+        }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+      /* ===== Hero slider with line progress + play/pause ===== */
+      (() => {
+        const slides = document.querySelectorAll('.hero .slide');
+        const n = slides.length;
+        const linesEl = document.getElementById('lines');
+        const cur = document.getElementById('cur');
+        const tot = document.getElementById('tot');
+        const pp = document.getElementById('pp');
+        const ppIcon = document.getElementById('ppIcon');
+        const DUR = 6000;
+        let idx = 0, playing = true, start = performance.now(), raf;
+
+        tot.textContent = String(n).padStart(2, '0');
+        for (let i = 0; i < n; i++) {
+          const ln = document.createElement('div'); ln.className = 'line'; ln.innerHTML = '<div class="fill"></div>';
+          ln.addEventListener('click', () => goto(i, true));
+          linesEl.appendChild(ln);
+        }
+        const lines = linesEl.querySelectorAll('.line');
+
+        function paint(p) {
+          lines.forEach((l, i) => {
+            l.classList.toggle('active', i === idx);
+            l.classList.toggle('done', i < idx);
+            if (i === idx) l.style.setProperty('--p', p.toFixed(3));
+            else if (i < idx) l.style.setProperty('--p', '1');
+            else l.style.setProperty('--p', '0');
+          });
+        }
+        function show(i) {
+          slides.forEach((s, k) => s.classList.toggle('active', k === i));
+          cur.textContent = String(i + 1).padStart(2, '0');
+        }
+        function goto(i, reset) {
+          idx = (i + n) % n; show(idx);
+          if (reset) { start = performance.now(); paint(0); }
+        }
+        function loop(t) {
+          if (!playing) { raf = requestAnimationFrame(loop); return; }
+          const p = Math.min(1, (t - start) / DUR);
+          paint(p);
+          if (p >= 1) { idx = (idx + 1) % n; show(idx); start = t; }
+          raf = requestAnimationFrame(loop);
+        }
+        pp.addEventListener('click', () => {
+          playing = !playing;
+          ppIcon.innerHTML = playing
+            ? '<rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/>'
+            : '<polygon points="7,4 20,12 7,20"/>';
+          if (playing) start = performance.now() - DUR * getCurrentP();
+        });
+        function getCurrentP() {
+          const f = lines[idx].querySelector('.fill');
+          const m = getComputedStyle(f).transform;
+          if (m && m !== 'none') { const v = m.match(/matrix\(([-\d.]+)/); if (v) return parseFloat(v[1]); }
+          return 0;
+        }
+        show(0); paint(0); raf = requestAnimationFrame(loop);
+      })();
+
+      /* ===== Reveal on scroll ===== */
+      const io = new IntersectionObserver((es) => {
+        es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: .12 });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+      /* ===== Stat counter ===== */
+      const sio = new IntersectionObserver((es) => {
+        es.forEach(e => {
+          if (!e.isIntersecting) return;
+          const el = e.target; const target = parseInt(el.dataset.c, 10); const dur = 1600; const t0 = performance.now();
+          const step = (t) => {
+            const p = Math.min(1, (t - t0) / dur);
+            const v = Math.floor(target * (1 - Math.pow(1 - p, 3)));
+            el.textContent = v.toLocaleString() + (target >= 100 ? '+' : '');
+            if (p < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+          sio.unobserve(el);
+        });
+      }, { threshold: .5 });
+      document.querySelectorAll('.stat .num').forEach(el => sio.observe(el));
+
+      /* ===== Hero parallax zoom (background fixed feel) ===== */
+      const heroSlides = document.querySelectorAll('.hero .slide');
+      function heroParallax() {
+        const y = window.scrollY;
+        const vh = window.innerHeight;
+        const p = Math.min(1, Math.max(0, y / vh));
+        const scale = 1 + p * 0.18;
+        const ty = p * 40;
+        heroSlides.forEach(s => { s.style.setProperty('--z', scale.toFixed(4)); s.style.setProperty('--ty', ty.toFixed(1) + 'px'); });
       }
-    };
-    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+      heroParallax();
+      window.addEventListener('scroll', heroParallax, { passive: true });
 
-    /* ===== Hero slider with line progress + play/pause ===== */
-    (() => {
-      const slides = document.querySelectorAll('.hero .slide');
-      const n = slides.length;
-      const linesEl = document.getElementById('lines');
-      const cur = document.getElementById('cur');
-      const tot = document.getElementById('tot');
-      const pp = document.getElementById('pp');
-      const ppIcon = document.getElementById('ppIcon');
-      const DUR = 6000;
-      let idx = 0, playing = true, start = performance.now(), raf;
+      /* ===== Pinned "Why Azoogi" — single-scroll step reveals ===== */
+      (function () {
+        const track = document.getElementById('pinTrack');
+        const head = document.getElementById('vHead');
+        const blocks = document.querySelectorAll('#vGrid .value');
+        if (!track || !head) return;
+        // Thresholds (as fraction of pinned scroll progress 0..1)
+        const blockAt = [0.12, 0.32, 0.52, 0.72];
+        function update() {
+          const r = track.getBoundingClientRect();
+          const total = track.offsetHeight - window.innerHeight;
+          const scrolled = Math.min(Math.max(-r.top, 0), Math.max(total, 1));
+          const p = total > 0 ? scrolled / total : 0;
+          const targetPanel = document.getElementById(targetId);
+          if (targetPanel) targetPanel.classList.add('active');
+        }
 
-      tot.textContent = String(n).padStart(2, '0');
-      for (let i = 0; i < n; i++) {
-        const ln = document.createElement('div'); ln.className = 'line'; ln.innerHTML = '<div class="fill"></div>';
-        ln.addEventListener('click', () => goto(i, true));
-        linesEl.appendChild(ln);
+
+        // Scroll indicator fade logic
+        const megaTabs = document.querySelector('.mega-tabs');
+        const megaPanelsWrapper = document.querySelector('.mega-panels');
+        const indLeft = document.querySelector('.scroll-indicator-left');
+        const indRight = document.querySelector('.scroll-indicator-right');
+
+        function handleScroll(el, indicator) {
+          if (!el || !indicator) return;
+          if (el.scrollHeight - el.scrollTop <= el.clientHeight + 2) {
+            indicator.classList.add('hidden');
+          } else {
+            indicator.classList.remove('hidden');
+          }
+        }
+
+        if (megaTabs && indLeft) {
+          megaTabs.addEventListener('scroll', () => handleScroll(megaTabs, indLeft));
+          // initial check
+          handleScroll(megaTabs, indLeft);
+        }
+
+        if (megaPanelsWrapper && indRight) {
+          megaPanelsWrapper.addEventListener('scroll', () => handleScroll(megaPanelsWrapper, indRight));
+          // We need to also listen to tab changes since the panel content changes height
+          tabs.forEach(tab => {
+            tab.addEventListener('mouseenter', () => setTimeout(() => handleScroll(megaPanelsWrapper, indRight), 50));
+            tab.addEventListener('click', () => setTimeout(() => handleScroll(megaPanelsWrapper, indRight), 50));
+          });
+          // initial check
+          handleScroll(megaPanelsWrapper, indRight);
+        }
+
+
+      })();
+
+
+      function toggleTheme() {
+        const root = document.documentElement;
+        const currentTheme = root.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        root.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateLogos(newTheme);
       }
-      const lines = linesEl.querySelectorAll('.line');
 
-      function paint(p) {
-        lines.forEach((l, i) => {
-          l.classList.toggle('active', i === idx);
-          l.classList.toggle('done', i < idx);
-          if (i === idx) l.style.setProperty('--p', p.toFixed(3));
-          else if (i < idx) l.style.setProperty('--p', '1');
-          else l.style.setProperty('--p', '0');
+      function updateLogos(theme) {
+        const isScrolled = window.scrollY > 40;
+        const logos = document.querySelectorAll('.logo img');
+        logos.forEach(img => {
+          if (img.closest('.topbar')) {
+            img.src = (theme === 'light' && isScrolled) ? '/assets/logo_dark.png' : '/assets/logo_dark.png';
+          } else {
+            img.src = theme === 'light' ? '/assets/logo_dark.png' : '/assets/logo_dark.png';
+          }
         });
       }
-      function show(i) {
-        slides.forEach((s, k) => s.classList.toggle('active', k === i));
-        cur.textContent = String(i + 1).padStart(2, '0');
-      }
-      function goto(i, reset) {
-        idx = (i + n) % n; show(idx);
-        if (reset) { start = performance.now(); paint(0); }
-      }
-      function loop(t) {
-        if (!playing) { raf = requestAnimationFrame(loop); return; }
-        const p = Math.min(1, (t - start) / DUR);
-        paint(p);
-        if (p >= 1) { idx = (idx + 1) % n; show(idx); start = t; }
-        raf = requestAnimationFrame(loop);
-      }
-      pp.addEventListener('click', () => {
-        playing = !playing;
-        ppIcon.innerHTML = playing
-          ? '<rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/>'
-          : '<polygon points="7,4 20,12 7,20"/>';
-        if (playing) start = performance.now() - DUR * getCurrentP();
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        updateLogos(savedTheme);
       });
-      function getCurrentP() {
-        const f = lines[idx].querySelector('.fill');
-        const m = getComputedStyle(f).transform;
-        if (m && m !== 'none') { const v = m.match(/matrix\(([-\d.]+)/); if (v) return parseFloat(v[1]); }
-        return 0;
-      }
-      show(0); paint(0); raf = requestAnimationFrame(loop);
-    })();
+    </script>
+  @endverbatim
+  @verbatim
+    <script>
+      /* ===== PRODUCTS PAGE: Force topbar solid immediately (no hero) ===== */
+      (function () {
+        var tb = document.getElementById('topbar');
+        if (tb) tb.classList.add('solid');
 
-    /* ===== Reveal on scroll ===== */
-    const io = new IntersectionObserver((es) => {
-      es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold: .12 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+        var sidebar = document.getElementById('prodSidebar');
+        var overlay = document.getElementById('prodFilterOverlay');
+        var openBtn = document.getElementById('prodFilterOpen');
+        var closeBtn = document.getElementById('prodFilterClose');
 
-    /* ===== Stat counter ===== */
-    const sio = new IntersectionObserver((es) => {
-      es.forEach(e => {
-        if (!e.isIntersecting) return;
-        const el = e.target; const target = parseInt(el.dataset.c, 10); const dur = 1600; const t0 = performance.now();
-        const step = (t) => {
-          const p = Math.min(1, (t - t0) / dur);
-          const v = Math.floor(target * (1 - Math.pow(1 - p, 3)));
-          el.textContent = v.toLocaleString() + (target >= 100 ? '+' : '');
-          if (p < 1) requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step);
-        sio.unobserve(el);
-      });
-    }, { threshold: .5 });
-    document.querySelectorAll('.stat .num').forEach(el => sio.observe(el));
-
-    /* ===== Hero parallax zoom (background fixed feel) ===== */
-    const heroSlides = document.querySelectorAll('.hero .slide');
-    function heroParallax() {
-      const y = window.scrollY;
-      const vh = window.innerHeight;
-      const p = Math.min(1, Math.max(0, y / vh));
-      const scale = 1 + p * 0.18;
-      const ty = p * 40;
-      heroSlides.forEach(s => { s.style.setProperty('--z', scale.toFixed(4)); s.style.setProperty('--ty', ty.toFixed(1) + 'px'); });
-    }
-    heroParallax();
-    window.addEventListener('scroll', heroParallax, { passive: true });
-
-    /* ===== Pinned "Why Azoogi" — single-scroll step reveals ===== */
-    (function () {
-      const track = document.getElementById('pinTrack');
-      const head = document.getElementById('vHead');
-      const blocks = document.querySelectorAll('#vGrid .value');
-      if (!track || !head) return;
-      // Thresholds (as fraction of pinned scroll progress 0..1)
-      const blockAt = [0.12, 0.32, 0.52, 0.72];
-      function update() {
-        const r = track.getBoundingClientRect();
-        const total = track.offsetHeight - window.innerHeight;
-        const scrolled = Math.min(Math.max(-r.top, 0), Math.max(total, 1));
-        const p = total > 0 ? scrolled / total : 0;
-        const targetPanel = document.getElementById(targetId);
-        if (targetPanel) targetPanel.classList.add('active');
-      }
-
-
-      // Scroll indicator fade logic
-      const megaTabs = document.querySelector('.mega-tabs');
-      const megaPanelsWrapper = document.querySelector('.mega-panels');
-      const indLeft = document.querySelector('.scroll-indicator-left');
-      const indRight = document.querySelector('.scroll-indicator-right');
-
-      function handleScroll(el, indicator) {
-        if (!el || !indicator) return;
-        if (el.scrollHeight - el.scrollTop <= el.clientHeight + 2) {
-          indicator.classList.add('hidden');
-        } else {
-          indicator.classList.remove('hidden');
+        function openFilters() {
+          if (!sidebar) return;
+          sidebar.classList.add('open');
+          if (overlay) overlay.classList.add('open');
+          document.body.style.overflow = 'hidden';
         }
-      }
 
-      if (megaTabs && indLeft) {
-        megaTabs.addEventListener('scroll', () => handleScroll(megaTabs, indLeft));
-        // initial check
-        handleScroll(megaTabs, indLeft);
-      }
+        function closeFilters() {
+          if (!sidebar) return;
+          sidebar.classList.remove('open');
+          if (overlay) overlay.classList.remove('open');
+          document.body.style.overflow = '';
+        }
 
-      if (megaPanelsWrapper && indRight) {
-        megaPanelsWrapper.addEventListener('scroll', () => handleScroll(megaPanelsWrapper, indRight));
-        // We need to also listen to tab changes since the panel content changes height
-        tabs.forEach(tab => {
-          tab.addEventListener('mouseenter', () => setTimeout(() => handleScroll(megaPanelsWrapper, indRight), 50));
-          tab.addEventListener('click', () => setTimeout(() => handleScroll(megaPanelsWrapper, indRight), 50));
+        if (openBtn) openBtn.addEventListener('click', openFilters);
+        if (closeBtn) closeBtn.addEventListener('click', closeFilters);
+        if (overlay) overlay.addEventListener('click', closeFilters);
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') closeFilters();
         });
-        // initial check
-        handleScroll(megaPanelsWrapper, indRight);
-      }
+        window.addEventListener('resize', function () {
+          if (window.innerWidth > 960) closeFilters();
+        });
 
+        // Touch: first tap reveals specs; second tap opens detail
+        document.addEventListener('click', function (e) {
+          var card = e.target.closest('.prod-card');
+          var isTouch = window.matchMedia('(hover: none)').matches;
+          if (!card) {
+            document.querySelectorAll('.prod-card.is-specs').forEach(function (c) {
+              c.classList.remove('is-specs');
+            });
+            return;
+          }
+          if (e.target.closest('a, button')) return;
 
-    })();
+          var detailUrl = card.getAttribute('data-href');
+          if (!isTouch) {
+            if (detailUrl) window.location.href = detailUrl;
+            return;
+          }
 
-
-    function toggleTheme() {
-      const root = document.documentElement;
-      const currentTheme = root.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      root.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      updateLogos(newTheme);
-    }
-
-    function updateLogos(theme) {
-      const isScrolled = window.scrollY > 40;
-      const logos = document.querySelectorAll('.logo img');
-      logos.forEach(img => {
-        if (img.closest('.topbar')) {
-          img.src = (theme === 'light' && isScrolled) ? '/assets/logo_dark.png' : '/assets/logo_dark.png';
-        } else {
-          img.src = theme === 'light' ? '/assets/logo_dark.png' : '/assets/logo_dark.png';
-        }
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const savedTheme = localStorage.getItem('theme') || 'dark';
-      updateLogos(savedTheme);
-    });
-</script>
-@endverbatim
-@verbatim
-<script>
-/* ===== PRODUCTS PAGE: Force topbar solid immediately (no hero) ===== */
-    (function () {
-      var tb = document.getElementById('topbar');
-      if (tb) tb.classList.add('solid');
-
-      var sidebar = document.getElementById('prodSidebar');
-      var overlay = document.getElementById('prodFilterOverlay');
-      var openBtn = document.getElementById('prodFilterOpen');
-      var closeBtn = document.getElementById('prodFilterClose');
-
-      function openFilters() {
-        if (!sidebar) return;
-        sidebar.classList.add('open');
-        if (overlay) overlay.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeFilters() {
-        if (!sidebar) return;
-        sidebar.classList.remove('open');
-        if (overlay) overlay.classList.remove('open');
-        document.body.style.overflow = '';
-      }
-
-      if (openBtn) openBtn.addEventListener('click', openFilters);
-      if (closeBtn) closeBtn.addEventListener('click', closeFilters);
-      if (overlay) overlay.addEventListener('click', closeFilters);
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') closeFilters();
-      });
-      window.addEventListener('resize', function () {
-        if (window.innerWidth > 960) closeFilters();
-      });
-
-      // Touch: first tap reveals specs; second tap opens detail
-      document.addEventListener('click', function (e) {
-        var card = e.target.closest('.prod-card');
-        var isTouch = window.matchMedia('(hover: none)').matches;
-        if (!card) {
+          e.preventDefault();
+          e.stopPropagation();
+          var wasOpen = card.classList.contains('is-specs');
           document.querySelectorAll('.prod-card.is-specs').forEach(function (c) {
             c.classList.remove('is-specs');
           });
-          return;
-        }
-        if (e.target.closest('a, button')) return;
-
-        var detailUrl = card.getAttribute('data-href');
-        if (!isTouch) {
-          if (detailUrl) window.location.href = detailUrl;
-          return;
-        }
-
-        e.preventDefault();
-        e.stopPropagation();
-        var wasOpen = card.classList.contains('is-specs');
-        document.querySelectorAll('.prod-card.is-specs').forEach(function (c) {
-          c.classList.remove('is-specs');
-        });
-        if (!wasOpen) {
-          card.classList.add('is-specs');
-        } else if (detailUrl) {
-          window.location.href = detailUrl;
-        }
-      }, true);
-    })();
-
-    /* ===== State & Active Filters ===== */
-    var activeFilters = {
-      categories: [],
-      specs: {}
-    };
-
-    function getLocalImg(imgUrl, filePath) {
-      if (typeof window.getLocalImagePath === 'function') {
-        var pathFromWin = window.getLocalImagePath(imgUrl, filePath);
-        if (pathFromWin && !pathFromWin.startsWith('/') && !pathFromWin.startsWith('http')) {
-          return '/' + pathFromWin;
-        }
-        return pathFromWin;
-      }
-      if (!imgUrl || typeof imgUrl !== 'string' || !imgUrl.trim()) return '/assets/logo_dark.png';
-      var clean = imgUrl.trim();
-      if (!clean.startsWith('http')) {
-        return clean.startsWith('/') ? clean : '/' + clean;
-      }
-      var filename = clean.split('/').pop().split('?')[0];
-      if (!filename) return '/assets/logo_dark.png';
-      if (filePath) {
-        var cleanFilePath = decodeURIComponent(filePath);
-        var lastSlash = cleanFilePath.lastIndexOf('/');
-        if (lastSlash !== -1) {
-          var res = cleanFilePath.substring(0, lastSlash) + '/' + filename;
-          return res.startsWith('/') ? res : '/' + res;
-        }
-      }
-      return clean;
-    }
-
-    /* ===== Dynamic Category Taxonomy & Product Data (Full 893 Products) ===== */
-    var productsMap = {};
-    var products = [];
-    var extractedSpecsMap = {};
-
-    function extractSpecsFromFeatures(features) {
-      if (!features || typeof features !== 'object') return;
-      for (var featKey in features) {
-        if (!features.hasOwnProperty(featKey)) continue;
-        if (!featKey || typeof featKey !== 'string' || featKey.trim() === '') continue;
-        var featVal = features[featKey];
-        if (!extractedSpecsMap[featKey]) {
-          extractedSpecsMap[featKey] = new Set();
-        }
-        if (Array.isArray(featVal)) {
-          featVal.forEach(function(v) {
-            if (v !== null && v !== undefined) {
-              var sVal = (typeof v === 'object' && v !== null && v.value !== undefined) ? String(v.value).trim() : String(v).trim();
-              if (sVal.length > 0 && sVal.length < 80) {
-                extractedSpecsMap[featKey].add(sVal);
-              }
-            }
-          });
-        } else if (featVal !== null && featVal !== undefined) {
-          var sVal = (typeof featVal === 'object' && featVal !== null && featVal.value !== undefined) ? String(featVal.value).trim() : String(featVal).trim();
-          if (sVal.length > 0 && sVal.length < 80) {
-            extractedSpecsMap[featKey].add(sVal);
+          if (!wasOpen) {
+            card.classList.add('is-specs');
+          } else if (detailUrl) {
+            window.location.href = detailUrl;
           }
-        }
-      }
-    }
+        }, true);
+      })();
 
-    function extractProductCode(source) {
-      if (!source) return '';
-      var raw = source.product_code || source.productCode || '';
-      if (!raw && source.product_features) {
-        var feats = source.product_features;
-        raw = feats['Product Code'] || feats['Product code'] || '';
-      }
-      if (Array.isArray(raw)) {
-        raw = raw.map(function (v) {
-          return (v && typeof v === 'object' && v.value !== undefined) ? v.value : v;
-        }).filter(Boolean).join(', ');
-      } else if (raw && typeof raw === 'object' && raw.value !== undefined) {
-        raw = raw.value;
-      }
-      return String(raw || '').trim();
-    }
-
-    function primaryProductCode(sku) {
-      if (!sku) return '';
-      return String(sku).split(',')[0].trim();
-    }
-
-    function productCodeHtml(sku) {
-      var code = primaryProductCode(sku);
-      if (!code) return '';
-      return ' <span class="prod-card-code">(' + code + ')</span>';
-    }
-
-    function addProductToCatalog(vName, modelName, catPath, vData) {
-      var itemKey = (vData && vData.id) ? vData.id : vName;
-      if (!vName || productsMap[itemKey]) return;
-
-      var parentCat = catPath[0] || 'General';
-      var subCat = catPath.length > 1 ? catPath[catPath.length - 1] : parentCat;
-
-      var rawImg = (vData.product_images && vData.product_images.length > 0)
-        ? vData.product_images[0]
-        : '/assets/logo_dark.png';
-
-      var localImgPath = getLocalImg(rawImg, vData.file_path);
-      var features = vData.product_features || {};
-
-      // Extract unique features into extractedSpecsMap for dynamic filter accordions
-      extractSpecsFromFeatures(features);
-
-      var item = {
-        id: (vData && vData.id) ? vData.id : '',
-        name: vName,
-        modelName: modelName,
-        sub: subCat,
-        cat: parentCat,
-        category_path: catPath,
-        filePath: vData.file_path || '',
-        img: localImgPath,
-        specs: features,
-        sku: extractProductCode(vData)
+      /* ===== State & Active Filters ===== */
+      var activeFilters = {
+        categories: [],
+        specs: {}
       };
 
-      productsMap[itemKey] = true;
-      products.push(item);
-    }
-
-    function collectProductsFromTree(treeNodes, parentPath) {
-      if (!treeNodes || !Array.isArray(treeNodes)) return;
-      treeNodes.forEach(function(node) {
-        var nodeName = node.name || 'Category';
-        var currentPath = node.category_path || (parentPath ? parentPath.concat([nodeName]) : [nodeName]);
-
-        if (node.variants) {
-          for (var vName in node.variants) {
-            if (node.variants.hasOwnProperty(vName)) {
-              var vData = node.variants[vName];
-              var vPath = vData.category_path || currentPath;
-              addProductToCatalog(vName, node.name || nodeName, vPath, vData);
-            }
+      function getLocalImg(imgUrl, filePath) {
+        if (typeof window.getLocalImagePath === 'function') {
+          var pathFromWin = window.getLocalImagePath(imgUrl, filePath);
+          if (pathFromWin && !pathFromWin.startsWith('/') && !pathFromWin.startsWith('http')) {
+            return '/' + pathFromWin;
+          }
+          return pathFromWin;
+        }
+        if (!imgUrl || typeof imgUrl !== 'string' || !imgUrl.trim()) return '/assets/logo_dark.png';
+        var clean = imgUrl.trim();
+        if (!clean.startsWith('http')) {
+          return clean.startsWith('/') ? clean : '/' + clean;
+        }
+        var filename = clean.split('/').pop().split('?')[0];
+        if (!filename) return '/assets/logo_dark.png';
+        if (filePath) {
+          var cleanFilePath = decodeURIComponent(filePath);
+          var lastSlash = cleanFilePath.lastIndexOf('/');
+          if (lastSlash !== -1) {
+            var res = cleanFilePath.substring(0, lastSlash) + '/' + filename;
+            return res.startsWith('/') ? res : '/' + res;
           }
         }
-
-        if (node.children) {
-          collectProductsFromTree(node.children, currentPath);
-        }
-      });
-    }
-
-    if (typeof AZOOGI_PRODUCTS !== 'undefined') {
-      // 1. Collect products from AZOOGI_PRODUCTS.products array or map
-      if (AZOOGI_PRODUCTS.products) {
-        if (Array.isArray(AZOOGI_PRODUCTS.products)) {
-          AZOOGI_PRODUCTS.products.forEach(function(prod) {
-            var pName = prod.product_name || prod.name || "Product";
-            var images = prod.product_images || [];
-            var imgUrl = images.length > 0 ? images[0] : '/assets/logo_dark.png';
-            var feats = prod.product_features || {};
-            
-            extractSpecsFromFeatures(feats);
-
-            var item = {
-              id: prod.id,
-              name: pName,
-              modelName: pName,
-              sub: prod.category || "General",
-              cat: prod.category || "General",
-              category_path: prod.category_path || [prod.category || "General"],
-              filePath: '',
-              img: getLocalImg(imgUrl, ''),
-              specs: feats,
-              sku: extractProductCode(prod),
-              rawProd: prod
-            };
-            var itemKey = prod.id || pName;
-            if (!productsMap[itemKey]) {
-              productsMap[itemKey] = true;
-              products.push(item);
-            }
-          });
-        } else {
-          for (var pKey in AZOOGI_PRODUCTS.products) {
-            if (!AZOOGI_PRODUCTS.products.hasOwnProperty(pKey)) continue;
-            var pRow = AZOOGI_PRODUCTS.products[pKey];
-            var variants = pRow.variants || {};
-            var catPath = pRow.category_path || [];
-            for (var vName in variants) {
-              if (!variants.hasOwnProperty(vName)) continue;
-              addProductToCatalog(vName, pRow.name || pKey, catPath, variants[vName]);
-            }
-          }
-        }
+        return clean;
       }
 
-      // 2. Collect products from AZOOGI_PRODUCTS.tree
-      if (AZOOGI_PRODUCTS.tree) {
-        collectProductsFromTree(AZOOGI_PRODUCTS.tree, []);
-      }
-    }
+      /* ===== Dynamic Category Taxonomy & Product Data (Full 893 Products) ===== */
+      var productsMap = {};
+      var products = [];
+      var extractedSpecsMap = {};
 
-    /* ===== Recursive Multi-Level Category Tree Generator ===== */
-    function renderCategoryTree(treeNodes, containerEl, level) {
-      if (!treeNodes || !Array.isArray(treeNodes) || treeNodes.length === 0) return;
-
-      treeNodes.forEach(function (node) {
-        if (node.type === 'product_row') return;
-
-        var li = document.createElement('li');
-        li.className = 'cat-node level-' + level;
-
-        var nodeName = node.name || 'Category';
-        var subCats = (node.children || []).filter(function(c) { return c.type === 'category'; });
-        var hasChildren = subCats.length > 0;
-
-        if (hasChildren) {
-          var row = document.createElement('div');
-          row.className = 'cat-row level-' + level;
-          row.innerHTML = '<span class="cat-label-text" data-cat="' + nodeName + '">' + nodeName + '</span><span class="cat-toggle">+</span>';
-
-          row.querySelector('.cat-label-text').addEventListener('click', function(e) {
-            e.stopPropagation();
-            toggleCategoryFilter(nodeName);
-          });
-
-          row.addEventListener('click', function() {
-            li.classList.toggle('open');
-            var toggle = row.querySelector('.cat-toggle');
-            if (toggle) toggle.innerHTML = li.classList.contains('open') ? '&ndash;' : '+';
-          });
-
-          li.appendChild(row);
-
-          var subUl = document.createElement('ul');
-          subUl.className = 'sub-list level-' + (level + 1);
-          renderCategoryTree(subCats, subUl, level + 1);
-          li.appendChild(subUl);
-        } else {
-          var link = document.createElement('a');
-          link.href = '#';
-          link.className = 'cat-sub-link level-' + level;
-          link.setAttribute('data-sub', nodeName);
-          link.textContent = nodeName;
-          if (activeFilters.categories.includes(nodeName)) {
-            link.classList.add('active');
-          }
-
-          link.addEventListener('click', function(e) {
-            e.preventDefault();
-            toggleCategoryFilter(nodeName);
-          });
-
-          li.appendChild(link);
-        }
-
-        containerEl.appendChild(li);
-      });
-    }
-
-    function toggleCategoryFilter(categoryName) {
-      if (activeFilters.categories.length === 1 && activeFilters.categories[0] === categoryName) {
-        activeFilters.categories = []; // Deselect if clicking active category
-      } else {
-        activeFilters.categories = [categoryName]; // Filter exclusively to clicked category
-      }
-      updateActiveCategoryClasses();
-      renderFilterAccordion();
-      updateActiveTags();
-    }
-
-    function updateActiveCategoryClasses() {
-      document.querySelectorAll('.cat-label-text, .cat-sub-link').forEach(function(el) {
-        var catName = el.getAttribute('data-cat') || el.getAttribute('data-sub');
-        if (catName && activeFilters.categories.includes(catName)) {
-          el.classList.add('active');
-        } else {
-          el.classList.remove('active');
-        }
-      });
-    }
-
-    var catListEl = document.getElementById('catList');
-    if (catListEl && typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS.tree) {
-      catListEl.innerHTML = '';
-      renderCategoryTree(AZOOGI_PRODUCTS.tree, catListEl, 0);
-    }
-
-    /* ===== State & Search / Sort Controls ===== */
-    var activeFilters = {
-      search: "",
-      sort: "relevance",
-      categories: [],
-      specs: {}
-    };
-
-    var searchInputEl = document.getElementById('prodSearchInput');
-    if (searchInputEl) {
-      searchInputEl.addEventListener('input', function() {
-        activeFilters.search = this.value;
-        updateActiveTags();
-      });
-    }
-
-    var sortSelectEl = document.getElementById('sortSelect');
-    if (sortSelectEl) {
-      sortSelectEl.addEventListener('change', function() {
-        activeFilters.sort = this.value;
-        currentPage = 1;
-        renderGrid();
-      });
-    }
-
-    /* ===== Dynamic Category-Scoped Specification Filter Accordion ===== */
-    function renderFilterAccordion() {
-      // 1. Determine target products (filtered by active category, or all products if no category selected)
-      var targetProducts = products;
-      if (activeFilters.categories && activeFilters.categories.length > 0) {
-        targetProducts = products.filter(function(p) {
-          return activeFilters.categories.some(function(selectedCat) {
-            var selLower = selectedCat.trim().toLowerCase();
-            if (p.modelName && p.modelName.trim().toLowerCase() === selLower) return true;
-            if (p.name && p.name.trim().toLowerCase().indexOf(selLower) !== -1) return true;
-            if (p.sub && p.sub.trim().toLowerCase() === selLower) return true;
-            if (p.cat && p.cat.trim().toLowerCase() === selLower) return true;
-            if (p.category_path && p.category_path.some(function(cp) {
-              return cp.trim().toLowerCase() === selLower;
-            })) return true;
-            return false;
-          });
-        });
-      }
-
-      // 2. Extract specs map ONLY from targetProducts in selected category
-      var catSpecsMap = {};
-      targetProducts.forEach(function(prod) {
-        var features = prod.specs || {};
+      function extractSpecsFromFeatures(features) {
+        if (!features || typeof features !== 'object') return;
         for (var featKey in features) {
           if (!features.hasOwnProperty(featKey)) continue;
           if (!featKey || typeof featKey !== 'string' || featKey.trim() === '') continue;
           var featVal = features[featKey];
-          if (!catSpecsMap[featKey]) catSpecsMap[featKey] = new Set();
+          if (!extractedSpecsMap[featKey]) {
+            extractedSpecsMap[featKey] = new Set();
+          }
           if (Array.isArray(featVal)) {
-            featVal.forEach(function(v) {
+            featVal.forEach(function (v) {
               if (v !== null && v !== undefined) {
                 var sVal = (typeof v === 'object' && v !== null && v.value !== undefined) ? String(v.value).trim() : String(v).trim();
-                if (sVal.length > 0 && sVal.length < 80) catSpecsMap[featKey].add(sVal);
+                if (sVal.length > 0 && sVal.length < 80) {
+                  extractedSpecsMap[featKey].add(sVal);
+                }
               }
             });
           } else if (featVal !== null && featVal !== undefined) {
             var sVal = (typeof featVal === 'object' && featVal !== null && featVal.value !== undefined) ? String(featVal.value).trim() : String(featVal).trim();
-            if (sVal.length > 0 && sVal.length < 80) catSpecsMap[featKey].add(sVal);
+            if (sVal.length > 0 && sVal.length < 80) {
+              extractedSpecsMap[featKey].add(sVal);
+            }
           }
         }
-      });
+      }
 
-      // 3. Preserve open/collapsed accordion states
-      var openStateMap = {};
-      var filterAcc = document.getElementById('filterAccordion');
-      if (filterAcc) {
-        filterAcc.querySelectorAll('.filter-item').forEach(function(itemEl) {
-          var headSpan = itemEl.querySelector('.filter-head span');
-          if (headSpan) {
-            openStateMap[headSpan.textContent] = itemEl.classList.contains('open');
+      function extractProductCode(source) {
+        if (!source) return '';
+        var raw = source.product_code || source.productCode || '';
+        if (!raw && source.product_features) {
+          var feats = source.product_features;
+          raw = feats['Product Code'] || feats['Product code'] || '';
+        }
+        if (Array.isArray(raw)) {
+          raw = raw.map(function (v) {
+            return (v && typeof v === 'object' && v.value !== undefined) ? v.value : v;
+          }).filter(Boolean).join(', ');
+        } else if (raw && typeof raw === 'object' && raw.value !== undefined) {
+          raw = raw.value;
+        }
+        return String(raw || '').trim();
+      }
+
+      function primaryProductCode(sku) {
+        if (!sku) return '';
+        return String(sku).split(',')[0].trim();
+      }
+
+      function productCodeHtml(sku) {
+        var code = primaryProductCode(sku);
+        if (!code) return '';
+        return ' <span class="prod-card-code">' + code + '</span>';
+      }
+
+      function addProductToCatalog(vName, modelName, catPath, vData) {
+        var itemKey = (vData && vData.id) ? vData.id : vName;
+        if (!vName || productsMap[itemKey]) return;
+
+        var parentCat = catPath[0] || 'General';
+        var subCat = catPath.length > 1 ? catPath[catPath.length - 1] : parentCat;
+
+        var rawImg = (vData.product_images && vData.product_images.length > 0)
+          ? vData.product_images[0]
+          : '/assets/logo_dark.png';
+
+        var localImgPath = getLocalImg(rawImg, vData.file_path);
+        var features = vData.product_features || {};
+
+        // Extract unique features into extractedSpecsMap for dynamic filter accordions
+        extractSpecsFromFeatures(features);
+
+        var item = {
+          id: (vData && vData.id) ? vData.id : '',
+          name: vName,
+          modelName: modelName,
+          sub: subCat,
+          cat: parentCat,
+          category_path: catPath,
+          filePath: vData.file_path || '',
+          img: localImgPath,
+          specs: features,
+          sku: extractProductCode(vData)
+        };
+
+        productsMap[itemKey] = true;
+        products.push(item);
+      }
+
+      function collectProductsFromTree(treeNodes, parentPath) {
+        if (!treeNodes || !Array.isArray(treeNodes)) return;
+        treeNodes.forEach(function (node) {
+          var nodeName = node.name || 'Category';
+          var currentPath = node.category_path || (parentPath ? parentPath.concat([nodeName]) : [nodeName]);
+
+          if (node.variants) {
+            for (var vName in node.variants) {
+              if (node.variants.hasOwnProperty(vName)) {
+                var vData = node.variants[vName];
+                var vPath = vData.category_path || currentPath;
+                addProductToCatalog(vName, node.name || nodeName, vPath, vData);
+              }
+            }
+          }
+
+          if (node.children) {
+            collectProductsFromTree(node.children, currentPath);
           }
         });
       }
 
-      // 4. Build filters list
-      var filters = [];
-      var priorityKeywords = ["ip", "wattage", "power", "voltage", "cct", "color", "led", "certification", "warranty", "radius", "cut"];
+      if (typeof AZOOGI_PRODUCTS !== 'undefined') {
+        // 1. Collect products from AZOOGI_PRODUCTS.products array or map
+        if (AZOOGI_PRODUCTS.products) {
+          if (Array.isArray(AZOOGI_PRODUCTS.products)) {
+            AZOOGI_PRODUCTS.products.forEach(function (prod) {
+              var pName = prod.product_name || prod.name || "Product";
+              var images = prod.product_images || [];
+              var imgUrl = images.length > 0 ? images[0] : '/assets/logo_dark.png';
+              var feats = prod.product_features || {};
 
-      // Priority keys
-      for (var specKey in catSpecsMap) {
-        if (!catSpecsMap.hasOwnProperty(specKey)) continue;
-        var specLower = specKey.toLowerCase();
-        var isPriority = priorityKeywords.some(function(kw) { return specLower.indexOf(kw) !== -1; });
-        if (isPriority) {
-          var pVals = Array.from(catSpecsMap[specKey]).sort();
-          if (pVals.length >= 1) {
-            filters.push({
-              name: specKey,
-              options: pVals.slice(0, 20),
-              open: openStateMap.hasOwnProperty(specKey) ? openStateMap[specKey] : false
+              extractSpecsFromFeatures(feats);
+
+              var item = {
+                id: prod.id,
+                name: pName,
+                modelName: pName,
+                sub: prod.category || "General",
+                cat: prod.category || "General",
+                category_path: prod.category_path || [prod.category || "General"],
+                filePath: '',
+                img: getLocalImg(imgUrl, ''),
+                specs: feats,
+                sku: extractProductCode(prod),
+                rawProd: prod
+              };
+              var itemKey = prod.id || pName;
+              if (!productsMap[itemKey]) {
+                productsMap[itemKey] = true;
+                products.push(item);
+              }
             });
+          } else {
+            for (var pKey in AZOOGI_PRODUCTS.products) {
+              if (!AZOOGI_PRODUCTS.products.hasOwnProperty(pKey)) continue;
+              var pRow = AZOOGI_PRODUCTS.products[pKey];
+              var variants = pRow.variants || {};
+              var catPath = pRow.category_path || [];
+              for (var vName in variants) {
+                if (!variants.hasOwnProperty(vName)) continue;
+                addProductToCatalog(vName, pRow.name || pKey, catPath, variants[vName]);
+              }
+            }
           }
         }
+
+        // 2. Collect products from AZOOGI_PRODUCTS.tree
+        if (AZOOGI_PRODUCTS.tree) {
+          collectProductsFromTree(AZOOGI_PRODUCTS.tree, []);
+        }
       }
 
-      // Remaining keys
-      for (var specKey in catSpecsMap) {
-        if (!catSpecsMap.hasOwnProperty(specKey)) continue;
-        var specLower = specKey.toLowerCase();
-        var isPriority = priorityKeywords.some(function(kw) { return specLower.indexOf(kw) !== -1; });
-        if (!isPriority) {
-          var vals = Array.from(catSpecsMap[specKey]).sort();
-          if (vals.length >= 1) {
-            filters.push({
-              name: specKey,
-              options: vals.slice(0, 20),
-              open: openStateMap.hasOwnProperty(specKey) ? openStateMap[specKey] : false
+      /* ===== Recursive Multi-Level Category Tree Generator ===== */
+      function renderCategoryTree(treeNodes, containerEl, level) {
+        if (!treeNodes || !Array.isArray(treeNodes) || treeNodes.length === 0) return;
+
+        treeNodes.forEach(function (node) {
+          if (node.type === 'product_row') return;
+
+          var li = document.createElement('li');
+          li.className = 'cat-node level-' + level;
+
+          var nodeName = node.name || 'Category';
+          var subCats = (node.children || []).filter(function (c) { return c.type === 'category'; });
+          var hasChildren = subCats.length > 0;
+
+          if (hasChildren) {
+            var row = document.createElement('div');
+            row.className = 'cat-row level-' + level;
+            row.innerHTML = '<span class="cat-label-text" data-cat="' + nodeName + '">' + nodeName + '</span><span class="cat-toggle">+</span>';
+
+            row.querySelector('.cat-label-text').addEventListener('click', function (e) {
+              e.stopPropagation();
+              toggleCategoryFilter(nodeName);
             });
+
+            row.addEventListener('click', function () {
+              li.classList.toggle('open');
+              var toggle = row.querySelector('.cat-toggle');
+              if (toggle) toggle.innerHTML = li.classList.contains('open') ? '&ndash;' : '+';
+            });
+
+            li.appendChild(row);
+
+            var subUl = document.createElement('ul');
+            subUl.className = 'sub-list level-' + (level + 1);
+            renderCategoryTree(subCats, subUl, level + 1);
+            li.appendChild(subUl);
+          } else {
+            var link = document.createElement('a');
+            link.href = '#';
+            link.className = 'cat-sub-link level-' + level;
+            link.setAttribute('data-sub', nodeName);
+            link.textContent = nodeName;
+            if (activeFilters.categories.includes(nodeName)) {
+              link.classList.add('active');
+            }
+
+            link.addEventListener('click', function (e) {
+              e.preventDefault();
+              toggleCategoryFilter(nodeName);
+            });
+
+            li.appendChild(link);
+          }
+
+          containerEl.appendChild(li);
+        });
+      }
+
+      function toggleCategoryFilter(categoryName) {
+        if (activeFilters.categories.length === 1 && activeFilters.categories[0] === categoryName) {
+          activeFilters.categories = []; // Deselect if clicking active category
+        } else {
+          activeFilters.categories = [categoryName]; // Filter exclusively to clicked category
+        }
+        updateActiveCategoryClasses();
+        renderFilterAccordion();
+        updateActiveTags();
+      }
+
+      function updateActiveCategoryClasses() {
+        document.querySelectorAll('.cat-label-text, .cat-sub-link').forEach(function (el) {
+          var catName = el.getAttribute('data-cat') || el.getAttribute('data-sub');
+          if (catName && activeFilters.categories.includes(catName)) {
+            el.classList.add('active');
+          } else {
+            el.classList.remove('active');
+          }
+        });
+      }
+
+      var catListEl = document.getElementById('catList');
+      if (catListEl && typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS.tree) {
+        catListEl.innerHTML = '';
+        renderCategoryTree(AZOOGI_PRODUCTS.tree, catListEl, 0);
+      }
+
+      /* ===== State & Search / Sort Controls ===== */
+      var activeFilters = {
+        search: "",
+        sort: "relevance",
+        categories: [],
+        specs: {}
+      };
+
+      var searchInputEl = document.getElementById('prodSearchInput');
+      if (searchInputEl) {
+        searchInputEl.addEventListener('input', function () {
+          activeFilters.search = this.value;
+          updateActiveTags();
+        });
+      }
+
+      var sortSelectEl = document.getElementById('sortSelect');
+      if (sortSelectEl) {
+        sortSelectEl.addEventListener('change', function () {
+          activeFilters.sort = this.value;
+          currentPage = 1;
+          renderGrid();
+        });
+      }
+
+      /* ===== Dynamic Category-Scoped Specification Filter Accordion ===== */
+      function renderFilterAccordion() {
+        // 1. Determine target products (filtered by active category, or all products if no category selected)
+        var targetProducts = products;
+        if (activeFilters.categories && activeFilters.categories.length > 0) {
+          targetProducts = products.filter(function (p) {
+            return activeFilters.categories.some(function (selectedCat) {
+              var selLower = selectedCat.trim().toLowerCase();
+              if (p.modelName && p.modelName.trim().toLowerCase() === selLower) return true;
+              if (p.name && p.name.trim().toLowerCase().indexOf(selLower) !== -1) return true;
+              if (p.sub && p.sub.trim().toLowerCase() === selLower) return true;
+              if (p.cat && p.cat.trim().toLowerCase() === selLower) return true;
+              if (p.category_path && p.category_path.some(function (cp) {
+                return cp.trim().toLowerCase() === selLower;
+              })) return true;
+              return false;
+            });
+          });
+        }
+
+        // 2. Extract specs map ONLY from targetProducts in selected category
+        var catSpecsMap = {};
+        targetProducts.forEach(function (prod) {
+          var features = prod.specs || {};
+          for (var featKey in features) {
+            if (!features.hasOwnProperty(featKey)) continue;
+            if (!featKey || typeof featKey !== 'string' || featKey.trim() === '') continue;
+            var featVal = features[featKey];
+            if (!catSpecsMap[featKey]) catSpecsMap[featKey] = new Set();
+            if (Array.isArray(featVal)) {
+              featVal.forEach(function (v) {
+                if (v !== null && v !== undefined) {
+                  var sVal = (typeof v === 'object' && v !== null && v.value !== undefined) ? String(v.value).trim() : String(v).trim();
+                  if (sVal.length > 0 && sVal.length < 80) catSpecsMap[featKey].add(sVal);
+                }
+              });
+            } else if (featVal !== null && featVal !== undefined) {
+              var sVal = (typeof featVal === 'object' && featVal !== null && featVal.value !== undefined) ? String(featVal.value).trim() : String(featVal).trim();
+              if (sVal.length > 0 && sVal.length < 80) catSpecsMap[featKey].add(sVal);
+            }
+          }
+        });
+
+        // 3. Preserve open/collapsed accordion states
+        var openStateMap = {};
+        var filterAcc = document.getElementById('filterAccordion');
+        if (filterAcc) {
+          filterAcc.querySelectorAll('.filter-item').forEach(function (itemEl) {
+            var headSpan = itemEl.querySelector('.filter-head span');
+            if (headSpan) {
+              openStateMap[headSpan.textContent] = itemEl.classList.contains('open');
+            }
+          });
+        }
+
+        // 4. Build filters list
+        var filters = [];
+        var priorityKeywords = ["ip", "wattage", "power", "voltage", "cct", "color", "led", "certification", "warranty", "radius", "cut"];
+
+        // Priority keys
+        for (var specKey in catSpecsMap) {
+          if (!catSpecsMap.hasOwnProperty(specKey)) continue;
+          var specLower = specKey.toLowerCase();
+          var isPriority = priorityKeywords.some(function (kw) { return specLower.indexOf(kw) !== -1; });
+          if (isPriority) {
+            var pVals = Array.from(catSpecsMap[specKey]).sort();
+            if (pVals.length >= 1) {
+              filters.push({
+                name: specKey,
+                options: pVals.slice(0, 20),
+                open: openStateMap.hasOwnProperty(specKey) ? openStateMap[specKey] : false
+              });
+            }
           }
         }
-      }
 
-      // Clean activeFilters.specs if any spec keys no longer exist in the selected category
-      for (var activeGroup in activeFilters.specs) {
-        if (!catSpecsMap.hasOwnProperty(activeGroup)) {
-          delete activeFilters.specs[activeGroup];
+        // Remaining keys
+        for (var specKey in catSpecsMap) {
+          if (!catSpecsMap.hasOwnProperty(specKey)) continue;
+          var specLower = specKey.toLowerCase();
+          var isPriority = priorityKeywords.some(function (kw) { return specLower.indexOf(kw) !== -1; });
+          if (!isPriority) {
+            var vals = Array.from(catSpecsMap[specKey]).sort();
+            if (vals.length >= 1) {
+              filters.push({
+                name: specKey,
+                options: vals.slice(0, 20),
+                open: openStateMap.hasOwnProperty(specKey) ? openStateMap[specKey] : false
+              });
+            }
+          }
+        }
+
+        // Clean activeFilters.specs if any spec keys no longer exist in the selected category
+        for (var activeGroup in activeFilters.specs) {
+          if (!catSpecsMap.hasOwnProperty(activeGroup)) {
+            delete activeFilters.specs[activeGroup];
+          }
+        }
+
+        // 5. Render accordion HTML & attach events
+        if (filterAcc) {
+          filterAcc.innerHTML = '';
+          if (filters.length === 0) {
+            filterAcc.innerHTML = '<div style="padding:12px 0; font-size:12px; color:var(--muted);">No attributes available for this category.</div>';
+            return;
+          }
+
+          filters.forEach(function (f) {
+            var div = document.createElement('div');
+            div.className = 'filter-item' + (f.open ? ' open' : '');
+            var opts = f.options.map(function (o) {
+              var isChecked = activeFilters.specs[f.name] && activeFilters.specs[f.name].includes(o);
+              return '<label class="opt-row"><input type="checkbox" name="' + f.name + '" value="' + o + '"' + (isChecked ? ' checked' : '') + '> ' + o + '</label>';
+            }).join('');
+
+            div.innerHTML = '<div class="filter-head"><span>' + f.name + '</span><span class="filter-toggle">' + (f.open ? '&ndash;' : '+') + '</span></div><div class="filter-body">' + opts + '</div>';
+
+            div.querySelector('.filter-head').addEventListener('click', function () {
+              div.classList.toggle('open');
+              div.querySelector('.filter-toggle').innerHTML = div.classList.contains('open') ? '&ndash;' : '+';
+            });
+
+            div.querySelectorAll('.opt-row input').forEach(function (input) {
+              input.addEventListener('change', function () {
+                var group = this.name;
+                var val = this.value;
+                if (!activeFilters.specs[group]) activeFilters.specs[group] = [];
+                if (this.checked) {
+                  if (!activeFilters.specs[group].includes(val)) activeFilters.specs[group].push(val);
+                } else {
+                  activeFilters.specs[group] = activeFilters.specs[group].filter(function (x) { return x !== val; });
+                  if (activeFilters.specs[group].length === 0) delete activeFilters.specs[group];
+                }
+                updateActiveTags();
+              });
+            });
+
+            filterAcc.appendChild(div);
+          });
         }
       }
 
-      // 5. Render accordion HTML & attach events
-      if (filterAcc) {
-        filterAcc.innerHTML = '';
-        if (filters.length === 0) {
-          filterAcc.innerHTML = '<div style="padding:12px 0; font-size:12px; color:var(--muted);">No attributes available for this category.</div>';
+      function removeFilter(type, val, group) {
+        if (type === 'search') {
+          activeFilters.search = "";
+          if (searchInputEl) searchInputEl.value = "";
+        } else if (type === 'cat') {
+          activeFilters.categories = activeFilters.categories.filter(function (x) { return x !== val; });
+          updateActiveCategoryClasses();
+          renderFilterAccordion();
+        } else if (type === 'spec') {
+          activeFilters.specs[group] = activeFilters.specs[group].filter(function (x) { return x !== val; });
+          if (activeFilters.specs[group].length === 0) delete activeFilters.specs[group];
+          document.querySelectorAll('#filterAccordion .opt-row input').forEach(function (input) {
+            if (input.name === group && input.value === val) input.checked = false;
+          });
+        }
+        updateActiveTags();
+      }
+
+      function clearFilters() {
+        activeFilters.search = "";
+        if (searchInputEl) searchInputEl.value = "";
+        activeFilters.categories = [];
+        activeFilters.specs = {};
+        updateActiveCategoryClasses();
+        renderFilterAccordion();
+        updateActiveTags();
+      }
+
+      /* ===== Pagination State ===== */
+      var currentPage = 1;
+      var pageSize = 24;
+
+      function updateActiveTags() {
+        currentPage = 1; // Reset to page 1 on filter changes
+        var tagHtml = '';
+
+        if (activeFilters.search.trim()) {
+          tagHtml += '<div class="p-tag">Search: "' + activeFilters.search.trim() + '"<span class="remove-tag" onclick="removeFilter(\'search\')">&times;</span></div>';
+        }
+
+        activeFilters.categories.forEach(function (c) {
+          tagHtml += '<div class="p-tag">' + c + '<span class="remove-tag" onclick="removeFilter(\'cat\', \'' + c + '\')">&times;</span></div>';
+        });
+        for (var group in activeFilters.specs) {
+          activeFilters.specs[group].forEach(function (val) {
+            tagHtml += '<div class="p-tag">' + val + '<span class="remove-tag" onclick="removeFilter(\'spec\', \'' + val + '\', \'' + group + '\')">&times;</span></div>';
+          });
+        }
+
+        if (tagHtml !== '') {
+          tagHtml += '<span class="clear-filters" onclick="clearFilters()" style="margin-left:8px; font-size:12px; color:var(--muted); cursor:pointer; align-self:center;">Clear all filters</span>';
+        }
+
+        var activeTagsEl = document.getElementById('activeTags');
+        if (activeTagsEl) activeTagsEl.innerHTML = tagHtml;
+        renderGrid();
+      }
+
+      var grid = document.getElementById('productGrid');
+
+      function renderGrid() {
+        var countEl = document.getElementById('resultCount');
+
+        var searchLower = activeFilters.search.trim().toLowerCase();
+
+        var filtered = products.filter(function (p) {
+          if (searchLower !== "") {
+            var matchSearch = p.name.toLowerCase().indexOf(searchLower) !== -1 ||
+              p.modelName.toLowerCase().indexOf(searchLower) !== -1 ||
+              p.sub.toLowerCase().indexOf(searchLower) !== -1 ||
+              p.cat.toLowerCase().indexOf(searchLower) !== -1 ||
+              (p.sku && p.sku.toLowerCase().indexOf(searchLower) !== -1) ||
+              (p.category_path && p.category_path.some(function (cp) {
+                return cp.toLowerCase().indexOf(searchLower) !== -1;
+              }));
+
+            if (!matchSearch && p.specs) {
+              for (var skey in p.specs) {
+                if (!p.specs.hasOwnProperty(skey)) continue;
+                var sval = p.specs[skey];
+                var valStr = Array.isArray(sval)
+                  ? sval.map(function (item) { return (typeof item === 'object' && item !== null && item.value !== undefined) ? item.value : item; }).join(' ')
+                  : ((typeof sval === 'object' && sval !== null && sval.value !== undefined) ? sval.value : String(sval));
+                if (valStr.toLowerCase().indexOf(searchLower) !== -1) {
+                  matchSearch = true;
+                  break;
+                }
+              }
+            }
+            if (!matchSearch) return false;
+          }
+
+          if (activeFilters.categories.length > 0) {
+            var matchCat = activeFilters.categories.some(function (selectedCat) {
+              var selLower = selectedCat.trim().toLowerCase();
+              if (p.modelName && p.modelName.trim().toLowerCase() === selLower) return true;
+              if (p.name && p.name.trim().toLowerCase().indexOf(selLower) !== -1) return true;
+              if (p.sub && p.sub.trim().toLowerCase() === selLower) return true;
+              if (p.cat && p.cat.trim().toLowerCase() === selLower) return true;
+              if (p.category_path && p.category_path.some(function (cp) {
+                return cp.trim().toLowerCase() === selLower;
+              })) return true;
+              return false;
+            });
+            if (!matchCat) return false;
+          }
+          for (var group in activeFilters.specs) {
+            var selectedVals = activeFilters.specs[group];
+            if (selectedVals.length > 0) {
+              var productSpec = p.specs[group];
+              if (!productSpec) return false;
+
+              var matchesAny = selectedVals.some(function (selVal) {
+                if (Array.isArray(productSpec)) {
+                  return productSpec.some(function (psVal) {
+                    var rawVal = (typeof psVal === 'object' && psVal !== null && psVal.value !== undefined) ? psVal.value : psVal;
+                    return String(rawVal).toLowerCase().indexOf(String(selVal).toLowerCase()) !== -1 ||
+                      String(selVal).toLowerCase().indexOf(String(rawVal).toLowerCase()) !== -1;
+                  });
+                } else {
+                  var rawVal = (typeof productSpec === 'object' && productSpec !== null && productSpec.value !== undefined) ? productSpec.value : productSpec;
+                  return String(rawVal).toLowerCase().indexOf(String(selVal).toLowerCase()) !== -1 ||
+                    String(selVal).toLowerCase().indexOf(String(rawVal).toLowerCase()) !== -1;
+                }
+              });
+
+              if (!matchesAny) return false;
+            }
+          }
+          return true;
+        });
+
+        // Sort filtered products
+        if (activeFilters.sort === 'name_asc') {
+          filtered.sort(function (a, b) { return a.name.localeCompare(b.name); });
+        } else if (activeFilters.sort === 'name_desc') {
+          filtered.sort(function (a, b) { return b.name.localeCompare(a.name); });
+        } else if (activeFilters.sort === 'cat_asc') {
+          filtered.sort(function (a, b) { return a.sub.localeCompare(b.sub) || a.name.localeCompare(b.name); });
+        }
+
+        if (countEl) countEl.textContent = filtered.length;
+
+        if (!grid) return;
+
+        if (filtered.length === 0) {
+          grid.innerHTML = '<div style="padding: 40px; text-align: center; color: var(--muted); grid-column: 1 / -1;">No products found matching the selected filters.</div>';
+          renderPagination(0);
           return;
         }
 
-        filters.forEach(function (f) {
-          var div = document.createElement('div');
-          div.className = 'filter-item' + (f.open ? ' open' : '');
-          var opts = f.options.map(function (o) {
-            var isChecked = activeFilters.specs[f.name] && activeFilters.specs[f.name].includes(o);
-            return '<label class="opt-row"><input type="checkbox" name="' + f.name + '" value="' + o + '"' + (isChecked ? ' checked' : '') + '> ' + o + '</label>';
-          }).join('');
+        var totalPages = Math.ceil(filtered.length / pageSize);
+        if (currentPage > totalPages) currentPage = Math.max(1, totalPages);
 
-          div.innerHTML = '<div class="filter-head"><span>' + f.name + '</span><span class="filter-toggle">' + (f.open ? '&ndash;' : '+') + '</span></div><div class="filter-body">' + opts + '</div>';
+        var pagedItems = filtered.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
-          div.querySelector('.filter-head').addEventListener('click', function () {
-            div.classList.toggle('open');
-            div.querySelector('.filter-toggle').innerHTML = div.classList.contains('open') ? '&ndash;' : '+';
+        grid.innerHTML = pagedItems.map(function (p) {
+          var detailUrl = p.id ? ('/product-detail?id=' + encodeURIComponent(p.id)) : (p.filePath ? ('/product-detail?file=' + encodeURIComponent(p.filePath)) : ('/product-detail?product=' + encodeURIComponent(p.name)));
+
+          var imgHtml = '<div class="prod-swatch" style="background-image:url(\'' + (p.img || '/assets/logo_dark.png') + '\'); background-size:cover; background-position:center;"></div>';
+
+          var displayName = p.name;
+          if (p.specs && p.specs.Power) {
+            var pwr = p.specs.Power;
+            var pwrVal = Array.isArray(pwr) ? (pwr[0] && (typeof pwr[0] === 'object' && pwr[0].value ? pwr[0].value : pwr[0])) : ((typeof pwr === 'object' && pwr.value) ? pwr.value : pwr);
+            if (pwrVal && String(displayName).toLowerCase().indexOf(String(pwrVal).toLowerCase()) === -1) {
+              displayName += ' (' + pwrVal + ')';
+            }
+          }
+
+          return '<div class="prod-card" data-href="' + detailUrl + '" role="link" tabindex="0">' +
+            '<div class="prod-card-img">' + imgHtml + '</div>' +
+            '<div class="prod-card-title">' +
+            '<div class="prod-card-title-text"><span class="cat-label">' + p.sub + '</span>' + displayName + productCodeHtml(p.sku) + '</div>' +
+            '<button class="add-quote-btn" aria-label="Add to quote" onclick="event.stopPropagation(); this.classList.add(\'added\'); this.innerHTML=\'&check;\';">+</button>' +
+            '</div>' +
+            '</div>';
+        }).join('');
+
+        renderPagination(totalPages);
+      }
+
+      function renderPagination(totalPages) {
+        var paginationEl = document.getElementById('paginationContainer');
+        if (!paginationEl) return;
+
+        if (totalPages <= 1) {
+          paginationEl.style.display = 'none';
+          paginationEl.innerHTML = '';
+          return;
+        }
+
+        paginationEl.style.display = 'flex';
+        var html = '';
+
+        // Prev Button
+        if (currentPage > 1) {
+          html += '<div class="pg-btn" data-page="' + (currentPage - 1) + '">&lsaquo;</div>';
+        } else {
+          html += '<div class="pg-btn disabled" style="opacity:0.3; cursor:not-allowed;">&lsaquo;</div>';
+        }
+
+        var startPage = Math.max(1, currentPage - 2);
+        var endPage = Math.min(totalPages, startPage + 4);
+        if (endPage - startPage < 4) {
+          startPage = Math.max(1, endPage - 4);
+        }
+
+        if (startPage > 1) {
+          html += '<div class="pg-btn" data-page="1">1</div>';
+          if (startPage > 2) html += '<span style="color:var(--muted); align-self:center; margin:0 4px;">...</span>';
+        }
+
+        for (var i = startPage; i <= endPage; i++) {
+          var activeClass = (i === currentPage) ? ' active' : '';
+          html += '<div class="pg-btn' + activeClass + '" data-page="' + i + '">' + i + '</div>';
+        }
+
+        if (endPage < totalPages) {
+          if (endPage < totalPages - 1) html += '<span style="color:var(--muted); align-self:center; margin:0 4px;">...</span>';
+          html += '<div class="pg-btn" data-page="' + totalPages + '">' + totalPages + '</div>';
+        }
+
+        // Next Button
+        if (currentPage < totalPages) {
+          html += '<div class="pg-btn" data-page="' + (currentPage + 1) + '">&rsaquo;</div>';
+        } else {
+          html += '<div class="pg-btn disabled" style="opacity:0.3; cursor:not-allowed;">&rsaquo;</div>';
+        }
+
+        paginationEl.innerHTML = html;
+
+        paginationEl.querySelectorAll('.pg-btn[data-page]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var page = parseInt(this.getAttribute('data-page'), 10);
+            if (page && page !== currentPage) {
+              currentPage = page;
+              renderGrid();
+              grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
           });
-
-          div.querySelectorAll('.opt-row input').forEach(function (input) {
-            input.addEventListener('change', function () {
-              var group = this.name;
-              var val = this.value;
-              if (!activeFilters.specs[group]) activeFilters.specs[group] = [];
-              if (this.checked) {
-                if (!activeFilters.specs[group].includes(val)) activeFilters.specs[group].push(val);
-              } else {
-                activeFilters.specs[group] = activeFilters.specs[group].filter(function (x) { return x !== val; });
-                if (activeFilters.specs[group].length === 0) delete activeFilters.specs[group];
-              }
-              updateActiveTags();
-            });
-          });
-
-          filterAcc.appendChild(div);
         });
       }
-    }
 
-    function removeFilter(type, val, group) {
-      if (type === 'search') {
-        activeFilters.search = "";
-        if (searchInputEl) searchInputEl.value = "";
-      } else if (type === 'cat') {
-        activeFilters.categories = activeFilters.categories.filter(function (x) { return x !== val; });
+      // Initial category filter from URL parameter
+      var urlParams = new URLSearchParams(window.location.search);
+      var catParam = urlParams.get('category');
+      if (catParam) {
+        catParam = decodeURIComponent(catParam);
+        if (!activeFilters.categories.includes(catParam)) {
+          activeFilters.categories.push(catParam);
+        }
         updateActiveCategoryClasses();
-        renderFilterAccordion();
-      } else if (type === 'spec') {
-        activeFilters.specs[group] = activeFilters.specs[group].filter(function (x) { return x !== val; });
-        if (activeFilters.specs[group].length === 0) delete activeFilters.specs[group];
-        document.querySelectorAll('#filterAccordion .opt-row input').forEach(function (input) {
-          if (input.name === group && input.value === val) input.checked = false;
+        document.querySelectorAll('.cat-label-text, .cat-sub-link').forEach(function (link) {
+          var cName = link.getAttribute('data-cat') || link.getAttribute('data-sub');
+          if (cName === catParam) {
+            link.classList.add('active');
+            var li = link.closest('li');
+            if (li) {
+              li.classList.add('open');
+              var toggle = li.querySelector('.cat-toggle');
+              if (toggle) toggle.innerHTML = '&ndash;';
+              var topLi = li.closest('.cat-list > li');
+              if (topLi) {
+                topLi.classList.add('open');
+                var topToggle = topLi.querySelector('.cat-toggle');
+                if (topToggle) topToggle.innerHTML = '&ndash;';
+              }
+            }
+          }
         });
       }
-      updateActiveTags();
-    }
 
-    function clearFilters() {
-      activeFilters.search = "";
-      if (searchInputEl) searchInputEl.value = "";
-      activeFilters.categories = [];
-      activeFilters.specs = {};
-      updateActiveCategoryClasses();
+      // Initial render
       renderFilterAccordion();
       updateActiveTags();
-    }
-
-    /* ===== Pagination State ===== */
-    var currentPage = 1;
-    var pageSize = 24;
-
-    function updateActiveTags() {
-      currentPage = 1; // Reset to page 1 on filter changes
-      var tagHtml = '';
-
-      if (activeFilters.search.trim()) {
-        tagHtml += '<div class="p-tag">Search: "' + activeFilters.search.trim() + '"<span class="remove-tag" onclick="removeFilter(\'search\')">&times;</span></div>';
-      }
-
-      activeFilters.categories.forEach(function (c) {
-        tagHtml += '<div class="p-tag">' + c + '<span class="remove-tag" onclick="removeFilter(\'cat\', \'' + c + '\')">&times;</span></div>';
-      });
-      for (var group in activeFilters.specs) {
-        activeFilters.specs[group].forEach(function (val) {
-          tagHtml += '<div class="p-tag">' + val + '<span class="remove-tag" onclick="removeFilter(\'spec\', \'' + val + '\', \'' + group + '\')">&times;</span></div>';
-        });
-      }
-
-      if (tagHtml !== '') {
-        tagHtml += '<span class="clear-filters" onclick="clearFilters()" style="margin-left:8px; font-size:12px; color:var(--muted); cursor:pointer; align-self:center;">Clear all filters</span>';
-      }
-
-      var activeTagsEl = document.getElementById('activeTags');
-      if (activeTagsEl) activeTagsEl.innerHTML = tagHtml;
-      renderGrid();
-    }
-
-    var grid = document.getElementById('productGrid');
-
-    function renderGrid() {
-      var countEl = document.getElementById('resultCount');
-
-      var searchLower = activeFilters.search.trim().toLowerCase();
-
-      var filtered = products.filter(function (p) {
-        if (searchLower !== "") {
-          var matchSearch = p.name.toLowerCase().indexOf(searchLower) !== -1 ||
-                            p.modelName.toLowerCase().indexOf(searchLower) !== -1 ||
-                            p.sub.toLowerCase().indexOf(searchLower) !== -1 ||
-                            p.cat.toLowerCase().indexOf(searchLower) !== -1 ||
-                            (p.sku && p.sku.toLowerCase().indexOf(searchLower) !== -1) ||
-                            (p.category_path && p.category_path.some(function(cp) {
-                              return cp.toLowerCase().indexOf(searchLower) !== -1;
-                            }));
-
-          if (!matchSearch && p.specs) {
-            for (var skey in p.specs) {
-              if (!p.specs.hasOwnProperty(skey)) continue;
-              var sval = p.specs[skey];
-              var valStr = Array.isArray(sval)
-                ? sval.map(function(item) { return (typeof item === 'object' && item !== null && item.value !== undefined) ? item.value : item; }).join(' ')
-                : ((typeof sval === 'object' && sval !== null && sval.value !== undefined) ? sval.value : String(sval));
-              if (valStr.toLowerCase().indexOf(searchLower) !== -1) {
-                matchSearch = true;
-                break;
-              }
-            }
-          }
-          if (!matchSearch) return false;
-        }
-
-        if (activeFilters.categories.length > 0) {
-          var matchCat = activeFilters.categories.some(function(selectedCat) {
-            var selLower = selectedCat.trim().toLowerCase();
-            if (p.modelName && p.modelName.trim().toLowerCase() === selLower) return true;
-            if (p.name && p.name.trim().toLowerCase().indexOf(selLower) !== -1) return true;
-            if (p.sub && p.sub.trim().toLowerCase() === selLower) return true;
-            if (p.cat && p.cat.trim().toLowerCase() === selLower) return true;
-            if (p.category_path && p.category_path.some(function(cp) {
-              return cp.trim().toLowerCase() === selLower;
-            })) return true;
-            return false;
-          });
-          if (!matchCat) return false;
-        }
-        for (var group in activeFilters.specs) {
-          var selectedVals = activeFilters.specs[group];
-          if (selectedVals.length > 0) {
-            var productSpec = p.specs[group];
-            if (!productSpec) return false;
-
-            var matchesAny = selectedVals.some(function(selVal) {
-              if (Array.isArray(productSpec)) {
-                return productSpec.some(function(psVal) {
-                  var rawVal = (typeof psVal === 'object' && psVal !== null && psVal.value !== undefined) ? psVal.value : psVal;
-                  return String(rawVal).toLowerCase().indexOf(String(selVal).toLowerCase()) !== -1 ||
-                         String(selVal).toLowerCase().indexOf(String(rawVal).toLowerCase()) !== -1;
-                });
-              } else {
-                var rawVal = (typeof productSpec === 'object' && productSpec !== null && productSpec.value !== undefined) ? productSpec.value : productSpec;
-                return String(rawVal).toLowerCase().indexOf(String(selVal).toLowerCase()) !== -1 ||
-                       String(selVal).toLowerCase().indexOf(String(rawVal).toLowerCase()) !== -1;
-              }
-            });
-
-            if (!matchesAny) return false;
-          }
-        }
-        return true;
-      });
-
-      // Sort filtered products
-      if (activeFilters.sort === 'name_asc') {
-        filtered.sort(function(a, b) { return a.name.localeCompare(b.name); });
-      } else if (activeFilters.sort === 'name_desc') {
-        filtered.sort(function(a, b) { return b.name.localeCompare(a.name); });
-      } else if (activeFilters.sort === 'cat_asc') {
-        filtered.sort(function(a, b) { return a.sub.localeCompare(b.sub) || a.name.localeCompare(b.name); });
-      }
-
-      if (countEl) countEl.textContent = filtered.length;
-
-      if (!grid) return;
-
-      if (filtered.length === 0) {
-        grid.innerHTML = '<div style="padding: 40px; text-align: center; color: var(--muted); grid-column: 1 / -1;">No products found matching the selected filters.</div>';
-        renderPagination(0);
-        return;
-      }
-
-      var totalPages = Math.ceil(filtered.length / pageSize);
-      if (currentPage > totalPages) currentPage = Math.max(1, totalPages);
-
-      var pagedItems = filtered.slice((currentPage - 1) * pageSize, currentPage * pageSize);
-
-      grid.innerHTML = pagedItems.map(function (p) {
-        var detailUrl = p.id ? ('/product-detail?id=' + encodeURIComponent(p.id)) : (p.filePath ? ('/product-detail?file=' + encodeURIComponent(p.filePath)) : ('/product-detail?product=' + encodeURIComponent(p.name)));
-
-        var imgHtml = '<div class="prod-swatch" style="background-image:url(\'' + (p.img || '/assets/logo_dark.png') + '\'); background-size:cover; background-position:center;"></div>';
-
-        var displayName = p.name;
-        if (p.specs && p.specs.Power) {
-          var pwr = p.specs.Power;
-          var pwrVal = Array.isArray(pwr) ? (pwr[0] && (typeof pwr[0] === 'object' && pwr[0].value ? pwr[0].value : pwr[0])) : ((typeof pwr === 'object' && pwr.value) ? pwr.value : pwr);
-          if (pwrVal && String(displayName).toLowerCase().indexOf(String(pwrVal).toLowerCase()) === -1) {
-            displayName += ' (' + pwrVal + ')';
-          }
-        }
-
-        return '<div class="prod-card" data-href="' + detailUrl + '" role="link" tabindex="0">' +
-          '<div class="prod-card-img">' + imgHtml + '</div>' +
-          '<div class="prod-card-title">' +
-          '<div class="prod-card-title-text"><span class="cat-label">' + p.sub + '</span>' + displayName + productCodeHtml(p.sku) + '</div>' +
-          '<button class="add-quote-btn" aria-label="Add to quote" onclick="event.stopPropagation(); this.classList.add(\'added\'); this.innerHTML=\'&check;\';">+</button>' +
-          '</div>' +
-          '</div>';
-      }).join('');
-
-      renderPagination(totalPages);
-    }
-
-    function renderPagination(totalPages) {
-      var paginationEl = document.getElementById('paginationContainer');
-      if (!paginationEl) return;
-
-      if (totalPages <= 1) {
-        paginationEl.style.display = 'none';
-        paginationEl.innerHTML = '';
-        return;
-      }
-
-      paginationEl.style.display = 'flex';
-      var html = '';
-
-      // Prev Button
-      if (currentPage > 1) {
-        html += '<div class="pg-btn" data-page="' + (currentPage - 1) + '">&lsaquo;</div>';
-      } else {
-        html += '<div class="pg-btn disabled" style="opacity:0.3; cursor:not-allowed;">&lsaquo;</div>';
-      }
-
-      var startPage = Math.max(1, currentPage - 2);
-      var endPage = Math.min(totalPages, startPage + 4);
-      if (endPage - startPage < 4) {
-        startPage = Math.max(1, endPage - 4);
-      }
-
-      if (startPage > 1) {
-        html += '<div class="pg-btn" data-page="1">1</div>';
-        if (startPage > 2) html += '<span style="color:var(--muted); align-self:center; margin:0 4px;">...</span>';
-      }
-
-      for (var i = startPage; i <= endPage; i++) {
-        var activeClass = (i === currentPage) ? ' active' : '';
-        html += '<div class="pg-btn' + activeClass + '" data-page="' + i + '">' + i + '</div>';
-      }
-
-      if (endPage < totalPages) {
-        if (endPage < totalPages - 1) html += '<span style="color:var(--muted); align-self:center; margin:0 4px;">...</span>';
-        html += '<div class="pg-btn" data-page="' + totalPages + '">' + totalPages + '</div>';
-      }
-
-      // Next Button
-      if (currentPage < totalPages) {
-        html += '<div class="pg-btn" data-page="' + (currentPage + 1) + '">&rsaquo;</div>';
-      } else {
-        html += '<div class="pg-btn disabled" style="opacity:0.3; cursor:not-allowed;">&rsaquo;</div>';
-      }
-
-      paginationEl.innerHTML = html;
-
-      paginationEl.querySelectorAll('.pg-btn[data-page]').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var page = parseInt(this.getAttribute('data-page'), 10);
-          if (page && page !== currentPage) {
-            currentPage = page;
-            renderGrid();
-            grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        });
-      });
-    }
-
-    // Initial category filter from URL parameter
-    var urlParams = new URLSearchParams(window.location.search);
-    var catParam = urlParams.get('category');
-    if (catParam) {
-      catParam = decodeURIComponent(catParam);
-      if (!activeFilters.categories.includes(catParam)) {
-        activeFilters.categories.push(catParam);
-      }
-      updateActiveCategoryClasses();
-      document.querySelectorAll('.cat-label-text, .cat-sub-link').forEach(function (link) {
-        var cName = link.getAttribute('data-cat') || link.getAttribute('data-sub');
-        if (cName === catParam) {
-          link.classList.add('active');
-          var li = link.closest('li');
-          if (li) {
-            li.classList.add('open');
-            var toggle = li.querySelector('.cat-toggle');
-            if (toggle) toggle.innerHTML = '&ndash;';
-            var topLi = li.closest('.cat-list > li');
-            if (topLi) {
-              topLi.classList.add('open');
-              var topToggle = topLi.querySelector('.cat-toggle');
-              if (topToggle) topToggle.innerHTML = '&ndash;';
-            }
-          }
-        }
-      });
-    }
-
-    // Initial render
-    renderFilterAccordion();
-    updateActiveTags();
-</script>
-@endverbatim
+    </script>
+  @endverbatim
 @endpush
