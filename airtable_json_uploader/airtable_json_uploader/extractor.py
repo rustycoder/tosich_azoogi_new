@@ -798,17 +798,20 @@ class AirtableDataExtractor:
         return node
 
     def save_outputs(self, catalog: Dict[str, Any], json_path: Path, js_path: Path) -> None:
-        """Save extracted catalog to static JSON and compiled JS file."""
+        """Save extracted catalog to minified JSON and compiled JS file."""
         json_path.parent.mkdir(parents=True, exist_ok=True)
         js_path.parent.mkdir(parents=True, exist_ok=True)
 
+        # Minified JSON string
+        minified_json = json.dumps(catalog, separators=(',', ':'), ensure_ascii=False)
+
         # Write products.json
         with open(json_path, "w", encoding="utf-8") as f:
-            json.dump(catalog, f, indent=2, ensure_ascii=False)
+            f.write(minified_json)
         logger.info(f"Saved extracted catalog JSON to {json_path}")
 
-        # Write products_data.js
-        js_content = f"// Azoogi Auto-Generated Product Database from Airtable\nconst AZOOGI_PRODUCTS = {json.dumps(catalog, indent=2, ensure_ascii=False)};\n"
+        # Write minified products_data.js
+        js_content = f"// Azoogi Auto-Generated Product Database from Airtable\nconst AZOOGI_PRODUCTS={minified_json};\n"
         with open(js_path, "w", encoding="utf-8") as f:
             f.write(js_content)
         logger.info(f"Saved compiled JavaScript bundle to {js_path}")
