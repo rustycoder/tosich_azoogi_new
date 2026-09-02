@@ -9,19 +9,23 @@ use App\PageMeta\Catalog;
 use App\Services\Contracts\IPageService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View as PageView;
 
 class PageContentController extends Controller
 {
     public function __construct(private IPageService $pages) {}
 
-    public function index(): PageView
+    public function index(Request $request): PageView
     {
         $slugs = auth()->user()->managedPageSlugs();
         abort_unless($slugs !== [], 403);
 
+        $search = dash_search_query($request->query('q'));
+
         return view('dashboard.pages.index', [
-            'pages' => $this->pages->dashboardList($slugs),
+            'pages' => $this->pages->dashboardList($slugs, $search),
+            'search' => $search,
         ]);
     }
 

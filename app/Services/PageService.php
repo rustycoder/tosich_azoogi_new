@@ -43,7 +43,7 @@ class PageService implements IPageService
         return $this->present($page);
     }
 
-    public function dashboardList(array $slugs): Collection
+    public function dashboardList(array $slugs, string $search = ''): Collection
     {
         $pages = $this->pages->findBySlugs($slugs)->keyBy('slug');
 
@@ -51,6 +51,24 @@ class PageService implements IPageService
             ->filter(fn (string $slug): bool => in_array($slug, $slugs, true))
             ->map(fn (string $slug): ?Page => $pages->get($slug))
             ->filter()
+            ->filter(function (Page $page) use ($search): bool {
+                if ($search === '') {
+                    return true;
+                }
+
+                $titles = [
+                    $page->title,
+                    Catalog::for($page->slug)->navLabel(),
+                ];
+
+                foreach ($titles as $title) {
+                    if (mb_stripos($title, $search) !== false) {
+                        return true;
+                    }
+                }
+
+                return false;
+            })
             ->sortBy(fn (Page $page): string => mb_strtolower(Catalog::for($page->slug)->navLabel()), SORT_NATURAL)
             ->values();
     }

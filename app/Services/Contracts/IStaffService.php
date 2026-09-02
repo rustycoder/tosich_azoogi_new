@@ -11,7 +11,7 @@ interface IStaffService
     /**
      * @return Collection<int, User>
      */
-    public function all(): Collection;
+    public function all(string $search = ''): Collection;
 
     /**
      * @param  array<string, mixed>  $data

@@ -10,16 +10,20 @@ use App\Models\User;
 use App\Services\Contracts\IStaffService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class StaffController extends Controller
 {
     public function __construct(private IStaffService $staffMembers) {}
 
-    public function index(): View
+    public function index(Request $request): View
     {
+        $search = dash_search_query($request->query('q'));
+
         return view('dashboard.staff.index', [
-            'staff' => $this->staffMembers->all(),
+            'staff' => $this->staffMembers->all($search),
+            'search' => $search,
         ]);
     }
 

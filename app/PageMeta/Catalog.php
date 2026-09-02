@@ -57,6 +57,15 @@ final class Catalog
         return in_array($slug, self::sectionSlugs(), true);
     }
 
+    public static function sectionDescription(string $slug): string
+    {
+        return match ($slug) {
+            'header' => 'Logo, contact details, rotating words, and navigation shown at the top of every public page.',
+            'footer' => 'Company copy, menus, and legal links shown at the bottom of every public page.',
+            default => '',
+        };
+    }
+
     public static function for(string $slug): PageDefinition
     {
         $class = self::DEFINITIONS[$slug] ?? null;

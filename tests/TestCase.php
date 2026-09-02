@@ -23,6 +23,10 @@ abstract class TestCase extends BaseTestCase
      */
     private function isolateTestingDatabase(Application $app): void
     {
+        $app['env'] = 'testing';
+        $app['config']->set('app.env', 'testing');
+        $app['config']->set('session.driver', 'array');
+
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite.url', null);
         $app['config']->set('database.connections.sqlite.database', ':memory:');

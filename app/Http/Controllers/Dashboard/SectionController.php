@@ -8,23 +8,26 @@ use App\Models\Page;
 use App\PageMeta\Catalog;
 use App\Services\Contracts\IPageService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View as PageView;
 
 class SectionController extends Controller
 {
     public function __construct(private IPageService $pages) {}
 
-    public function index(): PageView
+    public function index(Request $request): PageView
     {
         $slugs = auth()->user()->managedSectionSlugs();
         abort_unless($slugs !== [], 403);
 
+        $search = dash_search_query($request->query('q'));
         $order = array_flip(Catalog::sectionSlugs());
 
         return view('dashboard.sections.index', [
-            'pages' => $this->pages->dashboardList($slugs)
+            'pages' => $this->pages->dashboardList($slugs, $search)
                 ->sortBy(fn (Page $page): int => $order[$page->slug] ?? 99)
                 ->values(),
+            'search' => $search,
         ]);
     }
 

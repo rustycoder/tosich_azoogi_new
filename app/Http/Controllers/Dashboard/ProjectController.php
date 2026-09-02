@@ -10,16 +10,20 @@ use App\Models\Project;
 use App\Services\Contracts\IProjectService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ProjectController extends Controller
 {
     public function __construct(private IProjectService $projects) {}
 
-    public function index(): View
+    public function index(Request $request): View
     {
+        $search = dash_search_query($request->query('q'));
+
         return view('dashboard.projects.index', [
-            'projects' => $this->projects->dashboardList(),
+            'projects' => $this->projects->dashboardList($search),
+            'search' => $search,
         ]);
     }
 

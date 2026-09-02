@@ -13,38 +13,38 @@
     <p class="dash-lead">Assign which pages and projects each staff member can edit.</p>
 </div>
 
-<div class="dash-table-wrap">
-    <table class="dash-table">
-        <thead><tr><th>Name</th><th>Email</th><th>Status</th><th>Last updated</th><th></th></tr></thead>
-        <tbody>
-            @forelse ($staff as $member)
-                <tr>
-                    <td><a class="dash-row-link" href="{{ route('dashboard.staff.edit', $member) }}">{{ $member->name }}</a></td>
-                    <td>{{ $member->email }}</td>
-                    <td>
-                        @include('dashboard.partials.toggle', [
-                            'url' => route('dashboard.staff.toggle-status', $member),
-                            'on' => $member->isActive(),
-                            'label' => $member->status->label(),
-                            'onClass' => 'is-active',
-                            'offClass' => 'is-inactive',
-                        ])
-                    </td>
-                    <td>
-                        @include('dashboard.partials.updated', ['record' => $member])
-                    </td>
-                    <td>
-                        @include('dashboard.partials.icon-actions', [
-                            'edit' => route('dashboard.staff.edit', $member),
-                        ])
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="5" class="dash-empty">No staff accounts yet.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+@include('dashboard.partials.search', [
+    'action' => route('dashboard.staff.index'),
+    'search' => $search,
+    'placeholder' => 'Search by name',
+])
+
+<div class="dash-list">
+    @forelse ($staff as $member)
+        <article class="dash-list-card">
+            <div class="dash-list-card-copy">
+                @include('dashboard.partials.title-link', [
+                    'href' => route('dashboard.staff.edit', $member),
+                    'label' => $member->name,
+                ])
+                <p class="dash-list-sub">{{ $member->email }}</p>
+            </div>
+            <div class="dash-list-card-meta">
+                <div class="dash-updated">
+                    <span class="dash-list-label">Status</span>
+                    @include('dashboard.partials.toggle', [
+                        'url' => route('dashboard.staff.toggle-status', $member),
+                        'on' => $member->isActive(),
+                        'label' => $member->status->label(),
+                        'onClass' => 'is-active',
+                        'offClass' => 'is-inactive',
+                    ])
+                </div>
+                @include('dashboard.partials.updated', ['record' => $member])
+            </div>
+        </article>
+    @empty
+        <div class="dash-card dash-empty">{{ $search === '' ? 'No staff accounts yet.' : 'No names match that search.' }}</div>
+    @endforelse
 </div>
 @endsection

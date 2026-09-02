@@ -39,7 +39,7 @@ class DashboardTest extends TestCase
         $this->actingAs($admin)->get('/dashboard/content/pages')->assertOk()->assertSee('Home', false);
         $this->actingAs($admin)->get('/dashboard/content/pages/home')->assertOk();
         $this->actingAs($admin)->get('/dashboard/content/pages/home-owner')->assertOk();
-        $this->actingAs($admin)->get('/dashboard/content/sections')->assertOk()->assertSee('Header', false)->assertSee('Footer', false);
+        $this->actingAs($admin)->get('/dashboard/content/sections')->assertOk()->assertSee('Header', false)->assertSee('Footer', false)->assertSee('top of every public page', false)->assertSee('bottom of every public page', false);
         $this->actingAs($admin)->get('/dashboard/content/sections/header')->assertOk()->assertSee('dash-card', false)->assertDontSee('dash-visual-frame', false);
         $this->actingAs($admin)->get('/dashboard/content/projects')->assertOk();
     }
@@ -51,10 +51,10 @@ class DashboardTest extends TestCase
         $project = Project::factory()->create();
 
         $this->actingAs($admin)->get('/dashboard')->assertOk()->assertSee('data-dash-menu', false);
-        $this->actingAs($admin)->get('/dashboard/staff')->assertOk()->assertSee('dash-table-wrap', false);
+        $this->actingAs($admin)->get('/dashboard/staff')->assertOk()->assertSee('dash-list-card', false)->assertSee('name="q"', false);
         $this->actingAs($admin)->get('/dashboard/staff/create')->assertOk()->assertSee('dash-card', false);
         $this->actingAs($admin)->get(route('dashboard.staff.edit', $staff))->assertOk()->assertSee('dash-card', false);
-        $this->actingAs($admin)->get('/dashboard/content/projects')->assertOk()->assertSee('dash-table-wrap', false);
+        $this->actingAs($admin)->get('/dashboard/content/projects')->assertOk()->assertSee('dash-list-card', false)->assertSee('name="q"', false);
         $this->actingAs($admin)
             ->get('/dashboard/content/projects/create')
             ->assertOk()
@@ -69,6 +69,8 @@ class DashboardTest extends TestCase
             ->assertSee('>Details</h2>', false)
             ->assertSee('>Gallery</h2>', false);
         $this->actingAs($admin)->get('/dashboard/settings')->assertOk()->assertSee('dash-card', false);
+        $this->actingAs($admin)->get('/dashboard/content/pages')->assertOk()->assertSee('dash-list', false)->assertSee('name="q"', false);
+        $this->actingAs($admin)->get('/dashboard/content/sections')->assertOk()->assertSee('dash-list', false)->assertSee('name="q"', false);
     }
 
     public function test_pages_index_is_ordered_by_title_ascending(): void
@@ -81,47 +83,98 @@ class DashboardTest extends TestCase
             ->assertOk()
             ->getContent();
 
-        $about = strpos($html, '>About</a>');
-        $home = strpos($html, '>Home</a>');
-        $wholesaler = strpos($html, '>Wholesaler</a>');
+        $about = strpos($html, '>About</span>');
+        $home = strpos($html, '>Home</span>');
+        $wholesaler = strpos($html, '>Wholesaler</span>');
 
         $this->assertNotFalse($about);
         $this->assertNotFalse($home);
         $this->assertNotFalse($wholesaler);
         $this->assertTrue($about < $home);
         $this->assertTrue($home < $wholesaler);
-        $this->assertStringNotContainsString('>Header</a>', $html);
-        $this->assertStringNotContainsString('>Footer</a>', $html);
+        $this->assertStringNotContainsString('>Header</span>', $html);
+        $this->assertStringNotContainsString('>Footer</span>', $html);
     }
 
-    public function test_index_tables_show_who_last_updated_and_when(): void
+    public function test_dashboard_indexes_can_search_by_title(): void
+    {
+        $this->seed([AdminUserSeeder::class, PageSeeder::class]);
+        $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
+
+        Project::factory()->create(['title' => 'Harbour Pavilion']);
+        Project::factory()->create(['title' => 'City Tower']);
+        User::factory()->staff()->create(['name' => 'Alex Editor']);
+        User::factory()->staff()->create(['name' => 'Blake Writer']);
+
+        $this->actingAs($admin)
+            ->get('/dashboard/content/projects?q=Harbour')
+            ->assertOk()
+            ->assertSee('Harbour Pavilion', false)
+            ->assertDontSee('City Tower', false);
+
+        $this->actingAs($admin)
+            ->get('/dashboard/content/pages?q=About')
+            ->assertOk()
+            ->assertSee('>About</span>', false)
+            ->assertDontSee('>Home</span>', false);
+
+        $this->actingAs($admin)
+            ->get('/dashboard/staff?q=Alex')
+            ->assertOk()
+            ->assertSee('Alex Editor', false)
+            ->assertDontSee('Blake Writer', false);
+
+        $this->actingAs($admin)
+            ->get('/dashboard/content/sections?q=Header')
+            ->assertOk()
+            ->assertSee('>Header</span>', false)
+            ->assertDontSee('>Footer</span>', false);
+    }
+
+    public function test_index_cards_show_who_last_updated_and_when(): void
     {
         $admin = User::factory()->admin()->create(['name' => 'Pat Admin']);
         $this->actingAs($admin);
 
         $staff = User::factory()->staff()->create();
-        $project = Project::factory()->create();
+        $project = Project::factory()->create([
+            'summary' => 'Harbour lighting retrofit for the pavilion.',
+        ]);
         $this->seed(PageSeeder::class);
         $page = Page::query()->where('slug', 'about')->firstOrFail();
         $page->update(['title' => $page->title]);
 
         $this->get('/dashboard/staff')
             ->assertOk()
+            ->assertSee('Status', false)
             ->assertSee('Last updated', false)
             ->assertSee('Pat Admin', false)
-            ->assertSee('dash-updated', false);
+            ->assertSee('dash-updated', false)
+            ->assertSee('aria-label="Edit"', false)
+            ->assertDontSee('aria-label="Preview"', false);
 
         $this->get('/dashboard/content/projects')
             ->assertOk()
+            ->assertSee('Harbour lighting retrofit for the pavilion.', false)
+            ->assertSee('Status', false)
+            ->assertSee('Featured', false)
+            ->assertSee('dash-pill', false)
             ->assertSee('Last updated', false)
             ->assertSee('Pat Admin', false)
             ->assertSee('dash-updated', false);
 
         $this->get('/dashboard/content/pages')
             ->assertOk()
+            ->assertDontSee('Slug', false)
+            ->assertDontSee('dash-pill is-slug', false)
+            ->assertSee('Status', false)
             ->assertSee('Last updated', false)
             ->assertSee('Pat Admin', false)
-            ->assertSee('dash-updated', false);
+            ->assertSee('dash-updated', false)
+            ->assertSee('dash-row-link-icon', false)
+            ->assertSee('aria-label="Edit"', false)
+            ->assertSee('aria-label="Preview"', false)
+            ->assertDontSee('aria-label="View"', false);
 
         $this->assertNotNull($staff->fresh()->updated_by);
         $this->assertNotNull($project->fresh()->updated_by);
@@ -369,7 +422,7 @@ class DashboardTest extends TestCase
         $this->actingAs($staff)->get('/dashboard/content/pages/home/preview')->assertForbidden();
     }
 
-    public function test_admin_can_toggle_project_status_and_featured_from_the_table(): void
+    public function test_admin_can_toggle_project_status_and_featured_from_the_index(): void
     {
         $admin = User::factory()->admin()->create();
         $project = Project::factory()->create([
@@ -394,7 +447,7 @@ class DashboardTest extends TestCase
         $this->assertTrue($project->fresh()->featured);
     }
 
-    public function test_admin_can_toggle_staff_status_from_the_table(): void
+    public function test_admin_can_toggle_staff_status_from_the_index(): void
     {
         $admin = User::factory()->admin()->create();
         $staff = User::factory()->staff()->create(['status' => Status::Active]);

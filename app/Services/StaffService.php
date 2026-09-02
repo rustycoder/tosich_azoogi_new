@@ -20,9 +20,17 @@ class StaffService implements IStaffService
         private IContentPermissionRepository $permissions,
     ) {}
 
-    public function all(): Collection
+    public function all(string $search = ''): Collection
     {
-        return $this->users->staffOrdered();
+        $staff = $this->users->staffOrdered();
+
+        if ($search === '') {
+            return $staff;
+        }
+
+        return $staff
+            ->filter(fn (User $member): bool => mb_stripos($member->name, $search) !== false)
+            ->values();
     }
 
     public function create(array $data, array $resources = []): User

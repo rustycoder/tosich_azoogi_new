@@ -122,10 +122,10 @@
         let dragging = null;
         let startOrder = [];
 
-        const rowOrder = () => [...sortBody.querySelectorAll('tr[data-id]')].map((row) => Number(row.dataset.id));
+        const rowOrder = () => [...sortBody.querySelectorAll('[data-id]')].map((row) => Number(row.dataset.id));
 
         const rowFromPoint = (y) => {
-            const rows = [...sortBody.querySelectorAll('tr[data-id]:not(.is-dragging)')];
+            const rows = [...sortBody.querySelectorAll('[data-id]:not(.is-dragging)')];
 
             return rows.reduce((closest, row) => {
                 const box = row.getBoundingClientRect();
@@ -173,7 +173,7 @@
 
         startOrder = rowOrder();
 
-        sortBody.querySelectorAll('tr[data-id]').forEach((row) => {
+        sortBody.querySelectorAll('[data-id]').forEach((row) => {
             const handle = row.querySelector('.dash-drag-handle');
 
             handle?.addEventListener('pointerdown', () => {

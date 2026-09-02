@@ -143,3 +143,12 @@ if (! function_exists('labelled_tick')) {
         return '<strong>'.e(substr($text, 0, $colon + 1)).'</strong>'.e(substr($text, $colon + 1));
     }
 }
+
+if (! function_exists('dash_search_query')) {
+    function dash_search_query(mixed $value = null): string
+    {
+        $value ??= request()->query('q');
+
+        return mb_substr(trim((string) $value), 0, 80);
+    }
+}

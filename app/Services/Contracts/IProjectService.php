@@ -11,7 +11,7 @@ interface IProjectService
     /**
      * @return Collection<int, Project>
      */
-    public function dashboardList(): Collection;
+    public function dashboardList(string $search = ''): Collection;
 
     /**
      * @return array{highlights: Collection<int, Project>, projects: Collection<int, Project>}

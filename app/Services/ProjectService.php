@@ -18,9 +18,17 @@ class ProjectService implements IProjectService
         private ContentStorage $storage,
     ) {}
 
-    public function dashboardList(): Collection
+    public function dashboardList(string $search = ''): Collection
     {
-        return $this->projects->allOrdered();
+        $projects = $this->projects->allOrdered();
+
+        if ($search === '') {
+            return $projects;
+        }
+
+        return $projects
+            ->filter(fn (Project $project): bool => mb_stripos($project->title, $search) !== false)
+            ->values();
     }
 
     public function publicListing(): array

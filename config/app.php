@@ -15,7 +15,7 @@ return [
 
     'name' => env('APP_NAME', 'Azoogi'),
 
-    'asset_version' => env('ASSET_VERSION', '2.35'),
+    'asset_version' => env('ASSET_VERSION', '2.66'),
 
     /*
     |--------------------------------------------------------------------------

@@ -10,36 +10,29 @@
     </div>
 </div>
 
-<div class="dash-table-wrap">
-    <table class="dash-table">
-        <thead>
-            <tr>
-                <th>Section</th>
-                <th>Last updated</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($pages as $page)
-                <tr>
-                    <td>
-                        <a class="dash-row-link" href="{{ route('dashboard.sections.edit', $page) }}">{{ \App\PageMeta\Catalog::for($page->slug)->navLabel() }}</a>
-                    </td>
-                    <td>
-                        @include('dashboard.partials.updated', ['record' => $page])
-                    </td>
-                    <td>
-                        @include('dashboard.partials.icon-actions', [
-                            'edit' => route('dashboard.sections.edit', $page),
-                        ])
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="3" class="dash-empty">No sections assigned to this account.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+@include('dashboard.partials.search', [
+    'action' => route('dashboard.sections.index'),
+    'search' => $search,
+])
+
+<div class="dash-list">
+    @forelse ($pages as $page)
+        <article class="dash-list-card">
+            <div class="dash-list-card-copy">
+                @include('dashboard.partials.title-link', [
+                    'href' => route('dashboard.sections.edit', $page),
+                    'label' => \App\PageMeta\Catalog::for($page->slug)->navLabel(),
+                ])
+                @if ($description = \App\PageMeta\Catalog::sectionDescription($page->slug))
+                    <p class="dash-list-sub">{{ $description }}</p>
+                @endif
+            </div>
+            <div class="dash-list-card-meta is-end">
+                @include('dashboard.partials.updated', ['record' => $page])
+            </div>
+        </article>
+    @empty
+        <div class="dash-card dash-empty">{{ $search === '' ? 'No sections assigned to this account.' : 'No titles match that search.' }}</div>
+    @endforelse
 </div>
 @endsection
