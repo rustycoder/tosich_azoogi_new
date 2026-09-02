@@ -27,21 +27,21 @@
       <img src="{{ media_url($meta->get('hero.image')) }}" alt="" loading="eager">
     </div>
     <div class="about-hero-copy">
-      <div class="kicker">{{ $meta->get('hero.kicker') }}</div>
-      <h1>{!! nl2br_html($meta->get('hero.title'), true) !!}</h1>
+      <div class="kicker"{!! cms_style($meta, 'hero.kicker') !!}>{{ $meta->get('hero.kicker') }}</div>
+      <h1{!! cms_style($meta, 'hero.title') !!}>{!! nl2br_html($meta->get('hero.title'), true) !!}</h1>
     </div>
   </section>
 
   <section class="about-band" {!! cms_section_attr('intro') !!}>
     <div class="wrap about-intro reveal">
-      <p>{{ $meta->get('intro.body') }}</p>
+      <p{!! cms_style($meta, 'intro.body') !!}>{{ $meta->get('intro.body') }}</p>
       @php
           $ctaLabel = $meta->get('intro.cta.label');
           $ctaHref = $meta->get('intro.cta.href', 0, '/contact');
       @endphp
       @if ($ctaLabel !== '')
         <div class="about-intro-action">
-          <a href="{{ chrome_url($ctaHref) }}" class="btn primary">{{ $ctaLabel }}</a>
+          <a href="{{ chrome_url($ctaHref) }}" class="btn primary"{!! cms_style($meta, 'intro.cta.label') !!}>{{ $ctaLabel }}</a>
         </div>
       @endif
     </div>
@@ -50,8 +50,8 @@
   <section class="about-band about-band--alt" id="why" {!! cms_section_attr('why') !!}>
     <div class="wrap">
       <div class="about-split-copy about-why-head reveal">
-        <div class="kicker">{{ $meta->get('why.kicker') }}</div>
-        <h2>{!! accent_html($meta->get('why.heading'), 'Azoogi') !!}</h2>
+        <div class="kicker"{!! cms_style($meta, 'why.kicker') !!}>{{ $meta->get('why.kicker') }}</div>
+        <h2{!! cms_style($meta, 'why.heading') !!}>{!! accent_html($meta->get('why.heading'), 'Azoogi') !!}</h2>
       </div>
 
       <div class="about-why">
@@ -77,8 +77,8 @@
           @foreach ($whyItems as $item)
             <li class="about-why-step">
               <span class="about-why-ghost" aria-hidden="true">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-              <h3>{{ $item['title'] ?? '' }}</h3>
-              <p>{{ $item['body'] ?? '' }}</p>
+              <h3{!! cms_style($meta, 'why.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h3>
+              <p{!! cms_style($meta, 'why.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
             </li>
           @endforeach
         </ol>
@@ -91,17 +91,17 @@
       <img src="{{ media_url($meta->get('reach.image')) }}" alt="" loading="lazy">
     </div>
     <div class="wrap about-reach-inner reveal">
-      <div class="kicker">{{ $meta->get('reach.kicker') }}</div>
-      <h2>{!! accent_html($meta->get('reach.heading'), 'Reach') !!}</h2>
-      <p>{{ $meta->get('reach.body') }}</p>
+      <div class="kicker"{!! cms_style($meta, 'reach.kicker') !!}>{{ $meta->get('reach.kicker') }}</div>
+      <h2{!! cms_style($meta, 'reach.heading') !!}>{!! accent_html($meta->get('reach.heading'), 'Reach') !!}</h2>
+      <p{!! cms_style($meta, 'reach.body') !!}>{{ $meta->get('reach.body') }}</p>
     </div>
   </section>
 
   <section class="about-band" {!! cms_section_attr('path') !!}>
     <div class="wrap about-path-section">
       <div class="about-split-copy reveal">
-        <div class="kicker">{{ $meta->get('path.kicker') }}</div>
-        <h2>{!! nl2br_html($meta->get('path.heading'), true) !!}</h2>
+        <div class="kicker"{!! cms_style($meta, 'path.kicker') !!}>{{ $meta->get('path.kicker') }}</div>
+        <h2{!! cms_style($meta, 'path.heading') !!}>{!! nl2br_html($meta->get('path.heading'), true) !!}</h2>
       </div>
       <div class="about-path-list">
         @foreach ($pathItems as $item)
@@ -110,8 +110,8 @@
               <img src="{{ media_url($item['image'] ?? '') }}" alt="" loading="lazy">
             </figure>
             <div>
-              <h3>{{ $item['title'] ?? '' }}</h3>
-              <p>{{ $item['body'] ?? '' }}</p>
+              <h3{!! cms_style($meta, 'path.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h3>
+              <p{!! cms_style($meta, 'path.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
             </div>
           </a>
         @endforeach

@@ -13,6 +13,7 @@ use Database\Seeders\AdminUserSeeder;
 use Database\Seeders\PageSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 class DashboardTest extends TestCase
@@ -184,6 +185,104 @@ class DashboardTest extends TestCase
 
         $this->assertSame('Updated Kicker', $meta->fresh()->value);
         $this->get('/about')->assertSee('Updated Kicker', false);
+    }
+
+    public function test_admin_can_override_page_text_typography(): void
+    {
+        $this->seed([AdminUserSeeder::class, PageSeeder::class]);
+        $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
+        $page = Page::query()->where('slug', 'about')->firstOrFail();
+        $meta = PageMeta::query()->where('page_id', $page->id)->where('key', 'hero.kicker')->firstOrFail();
+
+        $this->actingAs($admin)
+            ->put(route('dashboard.pages.update', $page), [
+                'title' => $page->title,
+                'meta_description' => $page->meta_description,
+                'status' => Status::Active->value,
+                'meta' => [
+                    $meta->id => [
+                        'value' => $meta->value,
+                        'font_size' => '24px',
+                        'text_align' => 'center',
+                    ],
+                ],
+            ])
+            ->assertRedirect();
+
+        $this->assertSame('24px', $meta->fresh()->font_size);
+        $this->assertSame('center', $meta->fresh()->text_align);
+
+        $this->get('/about')
+            ->assertOk()
+            ->assertSee('style="font-size: 24px; text-align: center"', false);
+
+        $this->actingAs($admin)
+            ->put(route('dashboard.pages.update', $page), [
+                'title' => $page->title,
+                'meta_description' => $page->meta_description,
+                'status' => Status::Active->value,
+                'meta' => [
+                    $meta->id => [
+                        'value' => $meta->value,
+                        'font_size' => '',
+                        'text_align' => '',
+                    ],
+                ],
+            ])
+            ->assertRedirect();
+
+        $this->assertNull($meta->fresh()->font_size);
+        $this->assertNull($meta->fresh()->text_align);
+    }
+
+    /**
+     * @return array<string, array{0: string}>
+     */
+    public static function newPageTypographyProvider(): array
+    {
+        return [
+            'casambi' => ['casambi'],
+            'silvair' => ['silvair'],
+            'dali-centre' => ['dali-centre'],
+            'madrix' => ['madrix'],
+        ];
+    }
+
+    #[DataProvider('newPageTypographyProvider')]
+    public function test_new_pages_accept_font_size_and_alignment(string $slug): void
+    {
+        $this->seed([AdminUserSeeder::class, PageSeeder::class]);
+        $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
+        $page = Page::query()->where('slug', $slug)->firstOrFail();
+        $meta = PageMeta::query()->where('page_id', $page->id)->where('key', 'hero.title')->firstOrFail();
+
+        $this->actingAs($admin)
+            ->get(route('dashboard.pages.edit', $page))
+            ->assertOk()
+            ->assertSee('Font size', false)
+            ->assertSee('Alignment', false);
+
+        $this->actingAs($admin)
+            ->put(route('dashboard.pages.update', $page), [
+                'title' => $page->title,
+                'meta_description' => $page->meta_description,
+                'status' => Status::Active->value,
+                'meta' => [
+                    $meta->id => [
+                        'value' => $meta->value,
+                        'font_size' => '32px',
+                        'text_align' => 'left',
+                    ],
+                ],
+            ])
+            ->assertRedirect();
+
+        $this->assertSame('32px', $meta->fresh()->font_size);
+        $this->assertSame('left', $meta->fresh()->text_align);
+
+        $this->get('/'.$slug)
+            ->assertOk()
+            ->assertSee('style="font-size: 32px; text-align: left"', false);
     }
 
     public function test_staff_can_create_and_soft_delete_projects(): void
