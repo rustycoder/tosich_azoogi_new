@@ -68,6 +68,15 @@ def update_cache_version(target_version=None):
         if write_env_version(path, new_ver):
             updated_files.append(path.name)
 
+    # Clear Laravel config cache so Laravel picks up the new ASSET_VERSION immediately
+    artisan_path = PROJECT_ROOT / "artisan"
+    if artisan_path.exists():
+        try:
+            import subprocess
+            subprocess.run(["php", "artisan", "config:clear"], cwd=PROJECT_ROOT, capture_output=True)
+        except Exception:
+            pass
+
     return current_ver, new_ver, updated_files
 
 

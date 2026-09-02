@@ -1104,20 +1104,28 @@ style="padding-top: 120px;"
 
     function getLocalImg(imgUrl, filePath) {
       if (typeof window.getLocalImagePath === 'function') {
-        return window.getLocalImagePath(imgUrl, filePath);
+        var pathFromWin = window.getLocalImagePath(imgUrl, filePath);
+        if (pathFromWin && !pathFromWin.startsWith('/') && !pathFromWin.startsWith('http')) {
+          return '/' + pathFromWin;
+        }
+        return pathFromWin;
       }
-      if (!imgUrl || typeof imgUrl !== 'string') return '/assets/logo_dark.png';
-      if (!imgUrl.startsWith('http')) return imgUrl;
-      var filename = imgUrl.split('/').pop().split('?')[0];
+      if (!imgUrl || typeof imgUrl !== 'string' || !imgUrl.trim()) return '/assets/logo_dark.png';
+      var clean = imgUrl.trim();
+      if (!clean.startsWith('http')) {
+        return clean.startsWith('/') ? clean : '/' + clean;
+      }
+      var filename = clean.split('/').pop().split('?')[0];
       if (!filename) return '/assets/logo_dark.png';
       if (filePath) {
         var cleanFilePath = decodeURIComponent(filePath);
         var lastSlash = cleanFilePath.lastIndexOf('/');
         if (lastSlash !== -1) {
-          return cleanFilePath.substring(0, lastSlash) + '/' + filename;
+          var res = cleanFilePath.substring(0, lastSlash) + '/' + filename;
+          return res.startsWith('/') ? res : '/' + res;
         }
       }
-      return imgUrl;
+      return clean;
     }
 
     /* ===== Dynamic Category Taxonomy & Product Data (Full 893 Products) ===== */
@@ -1256,7 +1264,7 @@ style="padding-top: 120px;"
               cat: prod.category || "General",
               category_path: prod.category_path || [prod.category || "General"],
               filePath: '',
-              img: imgUrl,
+              img: getLocalImg(imgUrl, ''),
               specs: feats,
               sku: extractProductCode(prod),
               rawProd: prod
