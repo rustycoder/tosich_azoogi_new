@@ -41,7 +41,17 @@ const AZOOGI_PRODUCTS = {
       "id": "rec01Zt9P07y6atqB",
       "product_name": "Aluminium Trimless Plaster Profile",
       "category": "Trimless",
-      "sku": "L886",
+      "product_code": "TP6014-DS-BEND",
+      "sku_mappings": [
+        {
+          "sku": "TP6014-DS-BEND",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        }
+      ],
       "product_short_description": "Transform your home into a breathtaking sanctuary of light. Enjoy discreet luxury and an enchanting glow that effortlessly elevates the ambiance of any room.\n",
       "product_description": "Transform your living spaces into a breathtaking sanctuary of light with this premium architectural lighting solution. Designed for those who cherish discreet luxury and sophisticated elegance, it seamlessly integrates into your environment to create an enchanting play of light and shadow. Bathe your home in a warm, inviting glow that effortlessly highlights your unique decor and elevates the ambiance of any room, making every moment spent at home feel like a tranquil, high-end retreat.\n",
       "product_images": [],
@@ -105,7 +115,8 @@ const AZOOGI_PRODUCTS = {
       "id": "rec0jhs14LdrlfVAy",
       "product_name": "Corner Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC107-VP",
+      "product_code": "Neon-CornerAluProfile-1004",
+      "sku_mappings": {},
       "product_short_description": "Turn overlooked edges into stunning visual highlights with corner profiles that frame your architectural spaces in soft, radiant light.\n",
       "product_description": "Elevate your lighting design with our sleek corner aluminum profile, expertly crafted to turn overlooked edges into stunning visual highlights. Designed for effortless architectural integration, it frames your spaces with a soft, continuous glow that adds modern depth and sophisticated ambiance to any room. Perfectly accentuating angles and architectural features, this profile transforms ordinary corners into captivating focal points of pure, elegant light.\n",
       "product_images": [
@@ -132,10 +143,13 @@ const AZOOGI_PRODUCTS = {
       "id": "rec0w7SRP0vJ1CZFQ",
       "product_name": "Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC020-CR",
+      "product_code": "Neon-AluProfile-0606",
+      "sku_mappings": {},
       "product_short_description": "Bring subtle architectural elegance to tight spaces with minimalist aluminum profiles that deliver seamless, ambient illumination.\n",
       "product_description": "Elevate your interior design with our ultra-compact aluminum profile, expertly designed to bring refined, seamless illumination to even the tightest architectural spaces. Crafted for modern aesthetics, this minimalist channel integrates effortlessly into your décor, transforming subtle lighting into a sophisticated ambient feature.\n",
-      "product_images": [],
+      "product_images": [
+        "assets/img/products/rec0w7SRP0vJ1CZFQ_876e1f7209.webp"
+      ],
       "product_dimension": "",
       "stocked_item": [
         ""
@@ -157,7 +171,8 @@ const AZOOGI_PRODUCTS = {
       "id": "rec1Ko8kRDmZJ29dk",
       "product_name": "Recessed Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC107-AP-EA",
+      "product_code": "Neon-RecessedAluProfile-1004",
+      "sku_mappings": {},
       "product_short_description": "Achieve an ultra-clean architectural finish by hiding light seamlessly within walls and ceilings for modern linear illumination.\n",
       "product_description": "Achieve a clean, architectural finish with our ultra-slim recessed aluminum profile, seamlessly integrating light directly into your walls and ceilings. Designed to hide effortlessly within your space, it crafts smooth, continuous lines of glow that enhance your interior with sophisticated modern elegance. Perfect for creating subtle ambient accents or striking linear illumination, this channel transforms lighting into a captivating architectural feature.\n",
       "product_images": [
@@ -184,7 +199,17 @@ const AZOOGI_PRODUCTS = {
       "id": "rec1LZE5F9fJ0Fcj7",
       "product_name": "Aluminium Trimless Plaster Profile",
       "category": "Trimless",
-      "sku": "L548",
+      "product_code": "TP6213-SS",
+      "sku_mappings": [
+        {
+          "sku": "TP6213-SS",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        }
+      ],
       "product_short_description": "Transform your home into a breathtaking visual journey. Experience discreet luxury and a sophisticated glow that beautifully enhances your space.\n",
       "product_description": "Transform your architectural spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless trimless integration into your walls and ceilings, casting a warm, sophisticated glow that effortlessly enhances the natural beauty of your environment. Crafted for those who appreciate discreet luxury and refined detail, it adds an unparalleled touch of ambiance, warmth, and captivating style to any setting, making it the ultimate choice for elevated modern illumination.\n",
       "product_images": [],
@@ -248,7 +273,8 @@ const AZOOGI_PRODUCTS = {
       "id": "rec1RWzMMC90tNSf0",
       "product_name": "Plaster Aluminium Profile",
       "category": "Accessories",
-      "sku": "AS-AFS(T)1616A5-1000",
+      "product_code": "Neon-FlexiPlasterAluProfile-1616",
+      "sku_mappings": {},
       "product_short_description": "Fluidly sculpt glowing ambient light with flexible aluminium profiles that seamlessly blend into your walls for a captivating, high-end look.\n",
       "product_description": "Bring your lighting vision to life with our flexible plaster aluminum profile, designed to shape around any detail for a sleek, seamless glow. Perfectly integrating into walls and ceilings for a flush, architectural finish, it transforms any room into a modern sanctuary of light. Elevate your interior aesthetics with soft, flowing illumination that contours effortlessly around your unique architectural features.\n",
       "product_images": [
@@ -275,7 +301,141 @@ const AZOOGI_PRODUCTS = {
       "id": "rec2bUDmZZi443DFK",
       "product_name": "Neon Side View",
       "category": "Side View",
-      "sku": "ACE 1220S WHT",
+      "product_code": "SV1220-10W-2.7K-IP68",
+      "sku_mappings": [
+        {
+          "sku": "SV1220-10W-2.7K-IP68",
+          "combination": [
+            "101",
+            "107",
+            "112",
+            "113",
+            "114",
+            "115"
+          ]
+        },
+        {
+          "sku": "SV1220-10W-3K-IP68",
+          "combination": [
+            "101",
+            "108",
+            "112",
+            "113",
+            "114",
+            "115"
+          ]
+        },
+        {
+          "sku": "SV1220-10W-4K-IP68",
+          "combination": [
+            "101",
+            "109",
+            "112",
+            "113",
+            "114",
+            "115"
+          ]
+        },
+        {
+          "sku": "SV1220-10W-5.3K-IP68",
+          "combination": [
+            "101",
+            "110",
+            "112",
+            "113",
+            "114",
+            "115"
+          ]
+        },
+        {
+          "sku": "SV1220-15W-RGBW-IP68-DMX",
+          "combination": [
+            "102",
+            "121",
+            "108",
+            "112",
+            "113",
+            "114",
+            "116",
+            "125",
+            "127"
+          ]
+        },
+        {
+          "sku": "SV1220-15W-RGB-IP68-DMX",
+          "combination": [
+            "102",
+            "122",
+            "112",
+            "113",
+            "114",
+            "116",
+            "125",
+            "127"
+          ]
+        },
+        {
+          "sku": "SV1220-22W-RGBW-IP68-SPI",
+          "combination": [
+            "103",
+            "121",
+            "108",
+            "112",
+            "113",
+            "114",
+            "117",
+            "126",
+            "127"
+          ]
+        },
+        {
+          "sku": "SV1220-16W-RGB-IP68-SPI",
+          "combination": [
+            "104",
+            "122",
+            "112",
+            "113",
+            "114",
+            "118",
+            "126",
+            "127"
+          ]
+        },
+        {
+          "sku": "SV1220-17W-RGBW-IP68",
+          "combination": [
+            "105",
+            "123",
+            "112",
+            "113",
+            "114",
+            "119"
+          ]
+        },
+        {
+          "sku": "SV1220-13W-RGB-IP68",
+          "combination": [
+            "106",
+            "122",
+            "112",
+            "113",
+            "114",
+            "120"
+          ]
+        },
+        {
+          "sku": "SV1220-13W-TW-IP68",
+          "combination": [
+            "106",
+            "124",
+            "111",
+            "112",
+            "113",
+            "114",
+            "118"
+          ]
+        }
+      ],
       "product_short_description": "Bring fluid brilliance to any environment with Side View IP68, a premium linear light designed to deliver a flawless, uniform glow that elevates your architectural vision.\n",
       "product_description": "Elevate your architectural and landscape designs with the Side View IP68, a premium linear lighting solution crafted to bring captivating elegance and fluid brilliance to any environment. Engineered for extraordinary side-bending flexibility, this luxurious neon-style light curves effortlessly around contours to create stunning visual features and dramatic accents. Perfect for transforming upscale commercial venues, creating sophisticated outdoor atmospheres, or adding a touch of modern luxury to residential spaces, its uniform, flawless glow delivers an unmatched aesthetic impact. Built to withstand the elements while maintaining its pristine radiance, it is the ultimate choice for designers who demand seamless elegance, adaptability, and style.\n",
       "product_images": [
@@ -566,7 +726,8 @@ const AZOOGI_PRODUCTS = {
       "id": "rec3HmOkoZMTmAbTD",
       "product_name": "PR008 Opal Diffuser",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "PR008-Diffuser-3m",
+      "sku_mappings": {},
       "product_short_description": "Transform your space with smooth, beautifully balanced illumination. This opal diffuser softens glare to create a warm, inviting, and sophisticated atmosphere.\n",
       "product_description": "Softly disperse light and eliminate harsh glare with the PR008 Opal Diffuser. Designed to transform raw LED output into a smooth, uniform glow, this essential lens effortlessly elevates your room's ambiance with refined elegance and serene, continuous illumination.\n",
       "product_images": [],
@@ -591,7 +752,8 @@ const AZOOGI_PRODUCTS = {
       "id": "rec3LdzaZIwqEbNKN",
       "product_name": "PR130 End Cap",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "PR130-Endcap-White",
+      "sku_mappings": {},
       "product_short_description": "Deliver a flawless, professional finish with our premium White End Caps. Add a sleek, refined touch that effortlessly completes your modern lighting setup.\n",
       "product_description": "Achieve a refined and pristine architectural aesthetic with the PR130 White End Caps. Tailored to provide a clean, elegant finish to your lighting profiles, these stylish end caps ensure every detail of your installation exudes sophistication. Perfectly completing your lighting setup, they bring effortless modern charm and a polished look to any high-end interior.\n",
       "product_images": [],
@@ -616,7 +778,8 @@ const AZOOGI_PRODUCTS = {
       "id": "rec3edapaZAfMj0tS",
       "product_name": "Bendable Plaster Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC167-CR",
+      "product_code": "Neon-FlexiAluProfile-1617",
+      "sku_mappings": {},
       "product_short_description": "Effortlessly sculpt flowing curves of ambient light with flexible plaster profiles designed to adapt to your unique architectural visions.\n",
       "product_description": "Effortlessly sculpt ambient light with our plaster flexible aluminum profile, designed to fluidly conform to your unique architectural visions. Seamlessly integrating into your walls or ceilings, it crafts smooth, flowing lines of light that elevate any interior with a touch of modern sophistication. Perfect for creating captivating ambient effects or sleek visual accents, this versatile profile provides the ultimate subtle canvas to let your custom lighting design shine with graceful perfection.\n",
       "product_images": [
@@ -643,7 +806,8 @@ const AZOOGI_PRODUCTS = {
       "id": "rec42hpTHZCGgmL6r",
       "product_name": "Closed endcaps",
       "category": "Accessories",
-      "sku": "AD110",
+      "product_code": "Neon-ClosedEndcap-1004",
+      "sku_mappings": {},
       "product_short_description": "Ensure a flawless, polished finish for your custom lighting setup while protecting your neon LED profiles with sleek closed endcaps.\n",
       "product_description": "Complete your custom lighting setup with our premium closed endcaps, designed to deliver a flawless, polished finish. Perfectly blending into your overall aesthetic, these essential accessories add that final touch of refined sophistication to bring your modern lighting vision together with seamless elegance.\n",
       "product_images": [],
@@ -668,7 +832,17 @@ const AZOOGI_PRODUCTS = {
       "id": "rec4Zh9Al9Ybt7Pif",
       "product_name": "Aluminium Trimless Plaster Profile",
       "category": "Trimless",
-      "sku": "L200",
+      "product_code": "TP5314-DS",
+      "sku_mappings": [
+        {
+          "sku": "TP5314-DS",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        }
+      ],
       "product_short_description": "Transform your home into a breathtaking visual journey. Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.\n",
       "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
@@ -740,7 +914,57 @@ const AZOOGI_PRODUCTS = {
       "id": "rec51oIsxN4i08e00",
       "product_name": "Mini Neon Side View",
       "category": "Side View",
-      "sku": "ACE 0408S FC WHT",
+      "product_code": "SV0408-6W-2.4K-IP65-FC",
+      "sku_mappings": [
+        {
+          "sku": "SV0408-6W-2.4K-IP65-FC",
+          "combination": [
+            "101",
+            "102",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110"
+          ]
+        },
+        {
+          "sku": "SV0408-6W-2.7K-IP65-FC",
+          "combination": [
+            "101",
+            "103",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110"
+          ]
+        },
+        {
+          "sku": "SV0408-6W-3K-IP65-FC",
+          "combination": [
+            "101",
+            "104",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110"
+          ]
+        },
+        {
+          "sku": "SV0408-6W-4K-IP65-FC",
+          "combination": [
+            "101",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110"
+          ]
+        }
+      ],
       "product_short_description": "Experience ultimate design freedom with the Mini Side Bend. This ultra-flexible linear light curves effortlessly to bring a flawless, captivating glow to any environment.\n",
       "product_description": "Discover the ultimate in design freedom with the Mini Side Bend neon-style light, crafted to bring a sleek, captivating elegance to any environment. Engineered for exceptional side-bending flexibility, this premium linear lighting solution curves seamlessly around intricate architectural contours, allowing you to create fluid, breathtaking visual statements. Its uniform, flawless glow adds a sophisticated ambiance to both interior and exterior spaces, transforming the ordinary into a showcase of luxurious light. Built to deliver reliable radiance and unmatched aesthetic beauty, it is the perfect choice for designers looking to elevate their projects with seamless style and effortless adaptability.\n",
       "product_images": [
@@ -887,7 +1111,165 @@ const AZOOGI_PRODUCTS = {
       "id": "rec5RzqLLALZEWVB3",
       "product_name": "5-in-1 Dimming Driver",
       "category": "5-in-1 Dimming Driver",
-      "sku": "OTM-TD30-12",
+      "product_code": "ADR003D",
+      "sku_mappings": [
+        {
+          "sku": "ADR003D",
+          "combination": [
+            "101",
+            "107",
+            "109",
+            "110",
+            "111",
+            "112",
+            "113",
+            "114"
+          ]
+        },
+        {
+          "sku": "ADR004D",
+          "combination": [
+            "101",
+            "108",
+            "109",
+            "110",
+            "111",
+            "112",
+            "113",
+            "114"
+          ]
+        },
+        {
+          "sku": "ADR005D",
+          "combination": [
+            "102",
+            "107",
+            "109",
+            "110",
+            "111",
+            "112",
+            "113",
+            "114"
+          ]
+        },
+        {
+          "sku": "ADR006D",
+          "combination": [
+            "102",
+            "108",
+            "109",
+            "110",
+            "111",
+            "112",
+            "113",
+            "114"
+          ]
+        },
+        {
+          "sku": "ADR007D",
+          "combination": [
+            "103",
+            "107",
+            "109",
+            "110",
+            "111",
+            "112",
+            "113",
+            "114"
+          ]
+        },
+        {
+          "sku": "ADR008D",
+          "combination": [
+            "103",
+            "108",
+            "109",
+            "110",
+            "111",
+            "112",
+            "113",
+            "114"
+          ]
+        },
+        {
+          "sku": "ADR009D",
+          "combination": [
+            "104",
+            "107",
+            "109",
+            "110",
+            "111",
+            "112",
+            "113",
+            "114"
+          ]
+        },
+        {
+          "sku": "ADR010D",
+          "combination": [
+            "104",
+            "108",
+            "109",
+            "110",
+            "111",
+            "112",
+            "113",
+            "114"
+          ]
+        },
+        {
+          "sku": "ADR011D",
+          "combination": [
+            "105",
+            "108",
+            "109",
+            "110",
+            "111",
+            "112",
+            "113",
+            "114"
+          ]
+        },
+        {
+          "sku": "ADR012D",
+          "combination": [
+            "105",
+            "107",
+            "109",
+            "110",
+            "111",
+            "112",
+            "113",
+            "114"
+          ]
+        },
+        {
+          "sku": "ADR015D",
+          "combination": [
+            "106",
+            "107",
+            "109",
+            "110",
+            "111",
+            "112",
+            "113",
+            "114"
+          ]
+        },
+        {
+          "sku": "ADR016D",
+          "combination": [
+            "106",
+            "108",
+            "109",
+            "110",
+            "111",
+            "112",
+            "113",
+            "114"
+          ]
+        }
+      ],
       "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
       "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
@@ -1069,7 +1451,17 @@ const AZOOGI_PRODUCTS = {
       "id": "rec5SOzFtkmxGImEI",
       "product_name": "Aluminium Trimless Plaster Profile",
       "category": "Trimless",
-      "sku": "L606",
+      "product_code": "TP3614-SS",
+      "sku_mappings": [
+        {
+          "sku": "TP3614-SS",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        }
+      ],
       "product_short_description": "Transform your living space into a captivating visual masterpiece. Experience discreet luxury and a soft, enchanting glow that effortlessly elevates your interior design.\n",
       "product_description": "Transform your living space into a captivating visual masterpiece with a seamless blend of modern elegance and refined design. This sleek lighting channel integrates effortlessly into your walls and ceilings, casting a soft, enchanting radiance that elevates your interior decor. Perfect for creating an inviting and sophisticated ambiance, it adds a touch of discreet luxury to any room, turning simple everyday moments into extraordinary experiences.\n",
       "product_images": [],
@@ -1133,7 +1525,45 @@ const AZOOGI_PRODUCTS = {
       "id": "rec5X0oI6wYrPOWTI",
       "product_name": "Dual Bend Neon",
       "category": "3D",
-      "sku": "AIR 1617 WHT",
+      "product_code": "3D1617-10W-2.7K-IP67-FC",
+      "sku_mappings": [
+        {
+          "sku": "3D1617-10W-2.7K-IP67-FC",
+          "combination": [
+            "101",
+            "102",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109"
+          ]
+        },
+        {
+          "sku": "3D1617-10W-3K-IP67-FC",
+          "combination": [
+            "101",
+            "103",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109"
+          ]
+        },
+        {
+          "sku": "3D1617-10W-4K-IP67-FC",
+          "combination": [
+            "101",
+            "104",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109"
+          ]
+        }
+      ],
       "product_short_description": "Sculpt light without limits using Free Cut 3D Bend Neon. Effortlessly bend in all directions to wrap your space in pure, flawless aesthetic elegance and bold artistic style.\n",
       "product_description": "Experience a new dimension of design freedom with the Free Cut 3D Bend Neon. This revolutionary linear lighting masterpiece bends effortlessly in all directions, allowing you to sculpt light around complex architecture, dramatic contours, and fluid custom shapes without limits. Perfect for creating unforgettable statements in luxury commercial spaces or premium modern venues, it delivers a flawless, completely uniform radiance that wraps your environment in pure aesthetic elegance. Striking the perfect balance between artistic versatility and bold visual impact, this stunning accent solution is crafted for visionary designers looking to bring their most imaginative concepts to life with absolute grace and sophistication.\n",
       "product_images": [
@@ -1273,7 +1703,118 @@ const AZOOGI_PRODUCTS = {
       "id": "rec5hhoeYZcLQKd2H",
       "product_name": "Neon Side View",
       "category": "Side View",
-      "sku": "AG 1617S",
+      "product_code": "SV1617-10W-2.2K-IP68-HC",
+      "sku_mappings": [
+        {
+          "sku": "SV1617-10W-2.2K-IP68-HC",
+          "combination": [
+            "101",
+            "104",
+            "109",
+            "110",
+            "111",
+            "112",
+            "114"
+          ]
+        },
+        {
+          "sku": "SV1617-10W-2.7K-IP68-HC",
+          "combination": [
+            "101",
+            "105",
+            "109",
+            "110",
+            "111",
+            "112",
+            "114"
+          ]
+        },
+        {
+          "sku": "SV1617-10W-3K-IP68-HC",
+          "combination": [
+            "101",
+            "106",
+            "109",
+            "110",
+            "111",
+            "112",
+            "114"
+          ]
+        },
+        {
+          "sku": "SV1617-10W-4K-IP68-HC",
+          "combination": [
+            "101",
+            "107",
+            "109",
+            "110",
+            "111",
+            "112",
+            "114"
+          ]
+        },
+        {
+          "sku": "SV1617-15W-2.2K-IP68-HC",
+          "combination": [
+            "102",
+            "104",
+            "109",
+            "110",
+            "111",
+            "113",
+            "114"
+          ]
+        },
+        {
+          "sku": "SV1617-15W-2.7K-IP68-HC",
+          "combination": [
+            "102",
+            "105",
+            "109",
+            "110",
+            "111",
+            "113",
+            "114"
+          ]
+        },
+        {
+          "sku": "SV1617-15W-3K-IP68-HC",
+          "combination": [
+            "102",
+            "106",
+            "109",
+            "110",
+            "111",
+            "113",
+            "114"
+          ]
+        },
+        {
+          "sku": "SV1617-15W-4K-IP68-HC",
+          "combination": [
+            "102",
+            "107",
+            "109",
+            "110",
+            "111",
+            "113",
+            "114"
+          ]
+        },
+        {
+          "sku": "SV1617-13W-TW-IP68-HC",
+          "combination": [
+            "103",
+            "115",
+            "108",
+            "109",
+            "110",
+            "111",
+            "113",
+            "114"
+          ]
+        }
+      ],
       "product_short_description": "Bring fluid brilliance and glare-free elegance to your design with Side View Honeycomb, offering a beautifully softened glow and ultimate flexibility.\n",
       "product_description": "Elevate your architectural designs with the Side View IP68 Honeycomb, a premium linear lighting solution crafted to bring captivating elegance and fluid brilliance to any environment. Engineered with advanced honeycomb anti-glare technology, this luxurious neon-style light delivers a beautifully softened, uniform glow that effortlessly enhances spaces without any harsh glare. Perfectly adapted for seamless side-bending flexibility, it gracefully curves around contours to create stunning visual features, dramatic accents, and a sophisticated atmosphere. Built to withstand demanding elements while maintaining its flawless aesthetic, it represents the ultimate fusion of contemporary style, innovative visual comfort, and breathtaking design freedom.\n",
       "product_images": [
@@ -1483,7 +2024,8 @@ const AZOOGI_PRODUCTS = {
       "id": "rec5jbYw44Pf24aTK",
       "product_name": "Open endcaps for 2-core wire",
       "category": "Accessories",
-      "sku": "AD110-3",
+      "product_code": "Neon-OpenEndcap-1004",
+      "sku_mappings": {},
       "product_short_description": "Complete your custom lighting installation with neat, professional open endcaps designed for smooth transitions and a polished finish.\n",
       "product_description": "Ensure a clean, flawless finish for your custom LED lighting installations with these essential open endcaps. Designed to provide a neat, professional transition for wiring while keeping your setup secure, they seamlessly blend into your architecture for a polished and modern aesthetic. Perfect for maintaining continuous lines of ambient glow, these endcaps give your tailored lighting projects the refined, high-end detail they deserve.\n",
       "product_images": [],
@@ -1508,10 +2050,13 @@ const AZOOGI_PRODUCTS = {
       "id": "rec6WoXmARxjrXfzf",
       "product_name": "Bendable Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC021-CR",
+      "product_code": "Neon-FlexiAluProfile-0408",
+      "sku_mappings": {},
       "product_short_description": "Unlock endless creative possibilities and shape stunning curves of light with this ultra-flexible aluminum profile for modern interiors.\n",
       "product_description": "Unlock endless creative possibilities with our ultra-flexible aluminum profile, masterfully designed to bend and shape around your unique architectural vision. Perfect for crafting custom curves and fluid, captivating lighting accents, this versatile track effortlessly transforms ordinary spaces into breathtaking modern visual statements.\n",
-      "product_images": [],
+      "product_images": [
+        "assets/img/products/rec6WoXmARxjrXfzf_facdc59d7b.webp"
+      ],
       "product_dimension": "",
       "stocked_item": [
         ""
@@ -1533,7 +2078,8 @@ const AZOOGI_PRODUCTS = {
       "id": "rec6YbaMRhFx6cacS",
       "product_name": "PR132 Diffuser",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "DIFF-132",
+      "sku_mappings": {},
       "product_short_description": "Elevate your lighting with the PR132 Diffuser. Effortlessly soften and blend light to create a smooth, continuous glow that brings warmth and modern sophistication.\n",
       "product_description": "Transform any atmosphere with the PR132 Diffuser. Effortlessly smoothing out bright light into a gentle, inviting radiance, this elegant diffuser adds a refined touch of modern sophistication to your lighting setup. Perfect for creating seamless visual comfort, it enhances the overall aesthetic appeal of your environment while establishing an ambiance of pure luxury and warmth.\n",
       "product_images": [],
@@ -1558,7 +2104,8 @@ const AZOOGI_PRODUCTS = {
       "id": "rec6lyegF7jCcVxCe",
       "product_name": "Neon Aluminium Profile",
       "category": "Accessories",
-      "sku": "AS-GMS/T1616A-1000",
+      "product_code": "Neon-AluProfile-1616",
+      "sku_mappings": {},
       "product_short_description": "Transform your space with our premium aluminium profile, designed to bring a sleek, modern edge and seamless ambient lighting to any interior.\n",
       "product_description": "Transform your space with the sleek elegance of our premium aluminum profile, designed to bring a modern, sophisticated edge to any room. Crafted for those who appreciate refined aesthetics, this versatile channel seamlessly integrates into your interior design, casting smooth, stunning illumination that elevates your overall decor. Whether creating subtle ambient accents or striking visual statements, it provides the perfect architectural framing to let your custom lighting visions shine with effortless style.\n",
       "product_images": [
@@ -1585,7 +2132,8 @@ const AZOOGI_PRODUCTS = {
       "id": "rec6ocWx9J05IU4fG",
       "product_name": "Bendable Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC023-CR",
+      "product_code": "Neon-FlexiAluProfile-1010",
+      "sku_mappings": {},
       "product_short_description": "Effortlessly sculpt light around curves and corners to bring breathtaking, custom illumination to any luxury space.\n",
       "product_description": "Unlock boundless creative freedom with our premium bendable aluminium profile, crafted to adapt effortlessly to unique architectural curves and custom lighting layouts. Designed to flow around corners and organic shapes, it brings smooth, continuous illumination to even the most ambitious design concepts. Turn challenging architectural angles into captivating visual highlights that exude modern luxury and artistic charm.\n",
       "product_images": [
@@ -1612,7 +2160,41 @@ const AZOOGI_PRODUCTS = {
       "id": "rec795G1RjMDoZy2s",
       "product_name": "Aluminium Round Corner Profile",
       "category": "Corner",
-      "sku": "ALP006",
+      "product_code": "PR008",
+      "sku_mappings": [
+        {
+          "sku": "PR008",
+          "combination": [
+            "101",
+            "102",
+            "105"
+          ]
+        },
+        {
+          "sku": "PR008-3m-Silver",
+          "combination": [
+            "101",
+            "102",
+            "105"
+          ]
+        },
+        {
+          "sku": "PR008-B",
+          "combination": [
+            "101",
+            "103",
+            "105"
+          ]
+        },
+        {
+          "sku": "PR008-W",
+          "combination": [
+            "101",
+            "104",
+            "105"
+          ]
+        }
+      ],
       "product_short_description": "\n",
       "product_description": "\n",
       "product_images": [
@@ -1698,7 +2280,20 @@ const AZOOGI_PRODUCTS = {
       "id": "rec7gengQm0proqz5",
       "product_name": "Garden Light",
       "category": "Garden Light",
-      "sku": "SC-J101A",
+      "product_code": "GL005",
+      "sku_mappings": [
+        {
+          "sku": "GL005",
+          "combination": [
+            "101",
+            "102",
+            "103",
+            "104",
+            "105",
+            "106"
+          ]
+        }
+      ],
       "product_short_description": "Transform your outdoor spaces into a breathtaking visual journey. Experience discreet luxury and a sophisticated glow that beautifully enhances your home.\n",
       "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
@@ -1809,7 +2404,33 @@ const AZOOGI_PRODUCTS = {
       "id": "rec7sFwR4rM69Tom5",
       "product_name": "Aluminium Surface/Suspended Profile",
       "category": "Suspended",
-      "sku": "ALP5075-R",
+      "product_code": "PR127-3m-Silver",
+      "sku_mappings": [
+        {
+          "sku": "PR127-3m-Silver",
+          "combination": [
+            "101",
+            "102",
+            "105"
+          ]
+        },
+        {
+          "sku": "PR127-3m-Black",
+          "combination": [
+            "101",
+            "103",
+            "105"
+          ]
+        },
+        {
+          "sku": "PR127-3m-White",
+          "combination": [
+            "101",
+            "104",
+            "105"
+          ]
+        }
+      ],
       "product_short_description": "\n",
       "product_description": "\n",
       "product_images": [
@@ -1885,7 +2506,69 @@ const AZOOGI_PRODUCTS = {
       "id": "rec9jtcuIzqsQ4cZ0",
       "product_name": "Mini Neon Side View",
       "category": "Side View",
-      "sku": "0612S FC WHT",
+      "product_code": "SV0612-10W-2.2K-IP67-FC",
+      "sku_mappings": [
+        {
+          "sku": "SV0612-10W-2.2K-IP67-FC",
+          "combination": [
+            "101",
+            "103",
+            "108",
+            "109",
+            "110",
+            "112",
+            "114"
+          ]
+        },
+        {
+          "sku": "SV0612-10W-2.7K-IP67-FC",
+          "combination": [
+            "101",
+            "104",
+            "108",
+            "109",
+            "110",
+            "112",
+            "114"
+          ]
+        },
+        {
+          "sku": "SV0612-10W-3K-IP67-FC",
+          "combination": [
+            "101",
+            "105",
+            "108",
+            "109",
+            "110",
+            "112",
+            "114"
+          ]
+        },
+        {
+          "sku": "SV0612-10W-4K-IP67-FC",
+          "combination": [
+            "101",
+            "106",
+            "108",
+            "109",
+            "110",
+            "112",
+            "114"
+          ]
+        },
+        {
+          "sku": "SV0612-13W-TW-IP67",
+          "combination": [
+            "102",
+            "107",
+            "108",
+            "109",
+            "111",
+            "113",
+            "115"
+          ]
+        }
+      ],
       "product_short_description": "Elevate your space with the ultra-sleek Mini Side Bend, a flexible masterpiece delivering a seamless, captivating glow that turns any environment into a work of art.\n",
       "product_description": "Discover the perfect blend of subtle elegance and dynamic versatility with the Mini (6mm x 12mm) Side Bend linear lighting solution. Crafted for designers who refuse to compromise on style, this ultra-sleek, flexible masterpiece effortlessly curves around architectural features to deliver a seamless, captivating glow. Ideal for adding sophisticated ambiance to modern interiors or transforming commercial spaces, its refined, uniform illumination provides an upscale aesthetic that elevates any environment into a work of art.\n",
       "product_images": [
@@ -2096,7 +2779,8 @@ const AZOOGI_PRODUCTS = {
       "id": "rec9uqTZexwy2RPeg",
       "product_name": "Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC167-AP",
+      "product_code": "Neon-AluProfile-1617",
+      "sku_mappings": {},
       "product_short_description": "Elevate your interior with sleek aluminum profiles crafted to create modern, seamless lines of light for a truly sophisticated atmosphere.\n",
       "product_description": "Transform your space with the sleek elegance of our premium aluminum profile, designed to bring a modern, sophisticated edge to any room. Crafted for those who appreciate refined aesthetics, this versatile channel seamlessly integrates into your décor, casting smooth, beautiful illumination that elevates your interior design. Whether creating subtle ambient accents or bold visual statements, it provides the perfect architectural framing to let your custom lighting visions shine with effortless style.\n",
       "product_images": [
@@ -2123,7 +2807,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recA3OuGBn36F1OnR",
       "product_name": "PC Bendable Profile",
       "category": "Accessories",
-      "sku": "AC167-CPC",
+      "product_code": "Neon-FlexiPC-16x17",
+      "sku_mappings": {},
       "product_short_description": "Craft fluid curves and captivating architectural accents with a flexible channel that seamlessly diffuses light into a mesmerizing glow.\n",
       "product_description": "Elevate your lighting design with the effortless flexibility and modern aesthetic of our flexible PC channel. Designed to seamlessly diffuse light into a smooth, mesmerizing glow, this versatile profile allows you to craft fluid curves and captivating architectural accents without compromising on style. Perfect for creating ambient moods or striking feature lighting, it adds a touch of sophisticated polish to any room, allowing your artistic vision to shine with flawless grace.\n",
       "product_images": [
@@ -2150,7 +2835,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recAwWhDGxq4EoNBk",
       "product_name": "Standard Diffuser",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "DIFF-STD",
+      "sku_mappings": {},
       "product_short_description": "Enhance your ambiance with soft, balanced illumination. This standard diffuser eliminates harsh shadows, bringing effortless elegance and refined style to your space.\n",
       "product_description": "Transform your space with our Standard Diffuser, crafted to deliver beautifully soft, even illumination. By gently smoothing out harsh LED points, it creates a warm, welcoming atmosphere that enhances your interior design with effortless, timeless elegance.\n",
       "product_images": [],
@@ -2175,7 +2861,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recBeL6slDE3FbGMJ",
       "product_name": "PR007 Diffuser",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "DIFF-007",
+      "sku_mappings": {},
       "product_short_description": "Create a smooth, continuous glow with the PR007 Diffuser. Soften harsh shadows and instantly elevate your space with a captivating, modern lighting experience.\n",
       "product_description": "Bring seamless beauty to your room with the PR007 Diffuser. Creating a smooth, continuous ribbon of light, it softens harsh shadows and infuses your architectural lighting scheme with effortless modern sophistication and comfortable visual warmth.\n",
       "product_images": [],
@@ -2200,7 +2887,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recCJftTBX3lGxxPA",
       "product_name": "L-Connector (Corner)",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "PR021-LC-BLK-DN",
+      "sku_mappings": {},
       "product_short_description": "Elevate your lighting design with our stylish L-Connector in sleek black. Effortlessly navigate angles and create seamless, modern lines of light for a high-end finish.\n",
       "product_description": "Elevate your architectural lighting design with the sleek and stylish L-Connector in versatile black. Engineered to create seamless, continuous lines of light, this essential accessory allows you to effortlessly navigate angles and transform any space with a modern, sophisticated aesthetic. Perfectly blending form and function, it adds dynamic visual interest and a polished, high-end finish to your custom lighting installation.\n",
       "product_images": [],
@@ -2225,7 +2913,177 @@ const AZOOGI_PRODUCTS = {
       "id": "recCK4wgGrmgtxSee",
       "product_name": "Neon",
       "category": "Side View",
-      "sku": "AHS1616-White light-24V",
+      "product_code": "SV1616-10W-2.7K-IP67-FC",
+      "sku_mappings": [
+        {
+          "sku": "SV1616-10W-2.7K-IP67-FC",
+          "combination": [
+            "101",
+            "105",
+            "109",
+            "110",
+            "111",
+            "112",
+            "113"
+          ]
+        },
+        {
+          "sku": "SV1616-10W-3K-IP67-FC",
+          "combination": [
+            "101",
+            "106",
+            "109",
+            "110",
+            "111",
+            "112",
+            "113"
+          ]
+        },
+        {
+          "sku": "SV1616-10W-4K-IP67-FC",
+          "combination": [
+            "101",
+            "107",
+            "109",
+            "110",
+            "111",
+            "112",
+            "113"
+          ]
+        },
+        {
+          "sku": "SV1616-12W-RGB-IP67",
+          "combination": [
+            "102",
+            "115",
+            "109",
+            "110",
+            "111",
+            "113"
+          ]
+        },
+        {
+          "sku": "SV1616-12W-RGB-IP67-DMX",
+          "combination": [
+            "103",
+            "115",
+            "109",
+            "110",
+            "111",
+            "116",
+            "117",
+            "113"
+          ]
+        },
+        {
+          "sku": "SV1616-12W-RGBW-IP67",
+          "combination": [
+            "102",
+            "108",
+            "109",
+            "110",
+            "111",
+            "113"
+          ]
+        },
+        {
+          "sku": "SV1616-12W-RGBW-IP67-DMX",
+          "combination": [
+            "104",
+            "108",
+            "109",
+            "110",
+            "111",
+            "116",
+            "117",
+            "113"
+          ]
+        },
+        {
+          "sku": "TV1616-10W-2.7K-IP67-FC",
+          "combination": [
+            "101",
+            "105",
+            "109",
+            "110",
+            "111",
+            "112",
+            "114"
+          ]
+        },
+        {
+          "sku": "TV1616-10W-3K-IP67-FC",
+          "combination": [
+            "101",
+            "106",
+            "109",
+            "110",
+            "111",
+            "112",
+            "114"
+          ]
+        },
+        {
+          "sku": "TV1616-10W-4K-IP67-FC",
+          "combination": [
+            "101",
+            "107",
+            "109",
+            "110",
+            "111",
+            "112",
+            "114"
+          ]
+        },
+        {
+          "sku": "TV1616-12W-RGB-IP67",
+          "combination": [
+            "102",
+            "115",
+            "109",
+            "110",
+            "111",
+            "114"
+          ]
+        },
+        {
+          "sku": "TV1616-12W-RGB-IP67-DMX",
+          "combination": [
+            "103",
+            "115",
+            "109",
+            "110",
+            "111",
+            "116",
+            "117",
+            "114"
+          ]
+        },
+        {
+          "sku": "TV1616-12W-RGBW-IP67",
+          "combination": [
+            "102",
+            "108",
+            "109",
+            "110",
+            "111",
+            "114"
+          ]
+        },
+        {
+          "sku": "TV1616-12W-RGBW-IP67-DMX",
+          "combination": [
+            "104",
+            "108",
+            "109",
+            "110",
+            "111",
+            "116",
+            "117",
+            "114"
+          ]
+        }
+      ],
       "product_short_description": "Bring a sophisticated brilliance to your space with premium neon linear lighting. Designed for ultimate flexibility, it effortlessly shapes your vision with a flawless glow.\n",
       "product_description": "Transform your surroundings with our premium neon linear lighting, expertly crafted to bring a modern, sophisticated brilliance to any setting. Designed with ultimate flexibility and artistic flair in mind, this sleek lighting solution effortlessly curves to follow your unique architectural contours, turning ordinary spaces into breathtaking design statements. Whether you are elevating a luxury interior or casting a captivating glow across a refined outdoor landscape, its flawless, uniform radiance offers an unparalleled upscale aesthetic. Embrace the perfect fusion of elegance and adaptability, and let your design visions shine with magnificent style.\n",
       "product_images": [
@@ -2443,7 +3301,159 @@ const AZOOGI_PRODUCTS = {
       "id": "recCeU16wqcIPxZNs",
       "product_name": "Neon Top View",
       "category": "Top View",
-      "sku": "WAVE 1617T WHT",
+      "product_code": "TV1617-10W-2.2K-IP69",
+      "sku_mappings": [
+        {
+          "sku": "TV1617-10W-2.2K-IP69",
+          "combination": [
+            "101",
+            "107",
+            "114",
+            "115",
+            "116",
+            "117"
+          ]
+        },
+        {
+          "sku": "TV1617-10W-2.7K-IP69",
+          "combination": [
+            "101",
+            "108",
+            "114",
+            "115",
+            "116",
+            "117"
+          ]
+        },
+        {
+          "sku": "TV1617-10W-3K-IP69",
+          "combination": [
+            "101",
+            "109",
+            "114",
+            "115",
+            "116",
+            "117"
+          ]
+        },
+        {
+          "sku": "TV1617-10W-4K-IP69",
+          "combination": [
+            "101",
+            "110",
+            "114",
+            "115",
+            "116",
+            "117"
+          ]
+        },
+        {
+          "sku": "TV1617-10W-5.3K-IP69",
+          "combination": [
+            "101",
+            "111",
+            "114",
+            "115",
+            "116",
+            "117"
+          ]
+        },
+        {
+          "sku": "TV1617-13W-RGB-IP69",
+          "combination": [
+            "102",
+            "118",
+            "114",
+            "115",
+            "116",
+            "121",
+            "117"
+          ]
+        },
+        {
+          "sku": "TV1617-15W-RGB-IP69-DMX",
+          "combination": [
+            "103",
+            "118",
+            "114",
+            "115",
+            "116",
+            "122",
+            "126",
+            "128",
+            "117"
+          ]
+        },
+        {
+          "sku": "TV1617-16W-RGB-IP69-SPI",
+          "combination": [
+            "104",
+            "118",
+            "114",
+            "115",
+            "116",
+            "123",
+            "127",
+            "128",
+            "117"
+          ]
+        },
+        {
+          "sku": "TV1617-17W-RGBW-IP69",
+          "combination": [
+            "105",
+            "119",
+            "109",
+            "114",
+            "115",
+            "116",
+            "124",
+            "117"
+          ]
+        },
+        {
+          "sku": "TV1617-15W-RGBW-IP69-DMX",
+          "combination": [
+            "103",
+            "119",
+            "109",
+            "114",
+            "115",
+            "116",
+            "122",
+            "126",
+            "128",
+            "117"
+          ]
+        },
+        {
+          "sku": "TV1617-22W-RGBW-IP69-SPI",
+          "combination": [
+            "106",
+            "112",
+            "114",
+            "115",
+            "116",
+            "125",
+            "127",
+            "128",
+            "117"
+          ]
+        },
+        {
+          "sku": "TV1617-13W-TW-IP69",
+          "combination": [
+            "102",
+            "120",
+            "113",
+            "114",
+            "115",
+            "116",
+            "123",
+            "117"
+          ]
+        }
+      ],
       "product_short_description": "Bring seamless radiance to any space with Top Bend IP69, a premium linear light designed to accentuate contours with a flawless uniform glow and ultimate style.\n",
       "product_description": "Illuminate your architectural visions with the Top Bend IP69, a premium linear lighting solution designed to bring seamless radiance to any space. Engineered for incredible flexibility and breathtaking visual impact, this top-bending neon-style light curves effortlessly to accentuate contours and create striking design statements. Whether you are transforming a high-end commercial venue or adding sophisticated atmosphere to an outdoor landscape, its pristine, uniform glow delivers an unmatched aesthetic elegance. Built to withstand the elements while maintaining its flawless brilliance, it is the ultimate choice for designers who refuse to compromise on beauty, adaptability, and style.\n",
       "product_images": [
@@ -2749,7 +3759,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recCudfga4O4CTRVo",
       "product_name": "Meta Mounting Clips",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "PR008-MetalClips",
+      "sku_mappings": {},
       "product_short_description": "Elevate your lighting design with durable mounting clips. Designed for seamless support, they keep your custom installations perfectly aligned and beautifully displayed.\n",
       "product_description": "Seamlessly secure your PR008 profile setup with these premium metal mounting clips. Engineered for invisible support and perfect structural alignment, they ensure your custom linear lighting mounts easily while maintaining a sleek, uninterrupted aesthetic.\n",
       "product_images": [],
@@ -2774,7 +3785,25 @@ const AZOOGI_PRODUCTS = {
       "id": "recDIZwVRPU6FJJu2",
       "product_name": "Aluminium Trimless Wall Washer Profile",
       "category": "Trimless",
-      "sku": "ALP126",
+      "product_code": "PR131-W",
+      "sku_mappings": [
+        {
+          "sku": "PR131-W",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        },
+        {
+          "sku": "PR131-3m-White",
+          "combination": [
+            "101",
+            "102",
+            "104"
+          ]
+        }
+      ],
       "product_short_description": "\n",
       "product_description": "\n",
       "product_images": [
@@ -2852,7 +3881,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recDjs7s288GZj3Oa",
       "product_name": "Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC028-AP",
+      "product_code": "Neon-AluProfile-0612",
+      "sku_mappings": {},
       "product_short_description": "Add an ultra-slim, sophisticated edge to modern spaces with smooth aluminum profiles designed for elegant, continuous illumination.\n",
       "product_description": "Elevate your space with the sleek elegance of our premium aluminum profile, meticulously designed to bring an ultra-slim, sophisticated edge to modern interiors. Crafted for seamless integration into any architectural layout, this versatile channel transforms ambient lighting into a smooth, stunning visual statement. Perfect for creating subtle accents or captivating features, it offers the ideal refined framing to let your custom lighting vision shine with effortless elegance.\n",
       "product_images": [
@@ -2879,7 +3909,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recDkEqui9gtlAFC3",
       "product_name": "PR126 Diffuser",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "DIFF-126",
+      "sku_mappings": {},
       "product_short_description": "Transform ordinary lighting into a luxurious visual experience. The PR126 Diffuser softens light to deliver a smooth, sophisticated glow in any room.\n",
       "product_description": "Upgrade your ambient lighting with the PR126 Diffuser. Crafted to deliver a soft, unbroken ribbon of light, it adds effortless elegance and modern luxury to your custom profile setup, ensuring a peaceful, glare-free environment.\n",
       "product_images": [],
@@ -2904,7 +3935,16 @@ const AZOOGI_PRODUCTS = {
       "id": "recFPunNXl5H7t48D",
       "product_name": "Aluminium Skirting Trimless Plaster Profile",
       "category": "Skirting Trimless",
-      "sku": "L512",
+      "product_code": "SKR1580",
+      "sku_mappings": [
+        {
+          "sku": "SKR1580",
+          "combination": [
+            "101",
+            "102"
+          ]
+        }
+      ],
       "product_short_description": "Elevate your space with an elegant fusion of modern luxury and subtle sophistication, creating a breathtaking, floating sanctuary of light.\n",
       "product_description": "Elevate your interior design with an elegant fusion of modern luxury and subtle sophistication. This premium trimless skirting illumination solution seamlessly embeds into your walls, casting a warm, floating glow that gracefully accentuates your space. Crafted for those who appreciate understated elegance and refined architectural detail, it transforms any room into a breathtaking sanctuary of light and style.\n",
       "product_images": [
@@ -2958,7 +3998,17 @@ const AZOOGI_PRODUCTS = {
       "id": "recFYMjZrA8POAzsM",
       "product_name": "Aluminium Trimless Deep Wall Washer Profile",
       "category": "Trimless",
-      "sku": "ALP127",
+      "product_code": "PR130-W",
+      "sku_mappings": [
+        {
+          "sku": "PR130-W",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        }
+      ],
       "product_short_description": "\n",
       "product_description": "\n",
       "product_images": [
@@ -3028,7 +4078,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recFfDwl8XQl4PcVr",
       "product_name": "Recessed Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC013-EP",
+      "product_code": "Neon-RecessedAluProfile-1615",
+      "sku_mappings": {},
       "product_short_description": "Blend illumination seamlessly into your architecture with recessed profiles designed for a trimless, built-in feel and luxury glow.\n",
       "product_description": "Elevate your space with the subtle sophistication of our recessed aluminum profile, designed to seamlessly blend modern illumination directly into your architecture. Crafted for a clean, flush aesthetic, this mounting channel buries the light source into walls or cabinetry for a trimless, built-in feel. It transforms ordinary room accents into stunning visual focal points, delivering a soft, captivating glow that feels both high-end and effortlessly stylish.\n",
       "product_images": [
@@ -3055,7 +4106,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recGesb2Qm4oMEWf3",
       "product_name": "PC Bendable Profile",
       "category": "Accessories",
-      "sku": "AC023-CPC",
+      "product_code": "Neon-FlexiPC-1010",
+      "sku_mappings": {},
       "product_short_description": "Effortlessly bring your lighting vision to life with flexible profiles that curve around any detail for a stunning glow.\n",
       "product_description": "Bring your lighting vision to life with our premium PC bendable profile, crafted to adapt seamlessly to any architectural contour or creative layout. Designed for smooth, flexible installation, this versatile channel effortlessly shapes around curves and unique details to deliver a soft, continuous glow. Perfect for adding a modern, sophisticated accent to both contemporary interiors and dynamic displays, it turns ordinary lighting setups into captivating, seamless visual art.\n",
       "product_images": [
@@ -3082,7 +4134,273 @@ const AZOOGI_PRODUCTS = {
       "id": "recGjn9VPGCa7RvKV",
       "product_name": "COB Strip",
       "category": "COB",
-      "sku": "CF300-24V-8mm",
+      "product_code": "COB001",
+      "sku_mappings": [
+        {
+          "sku": "COB001",
+          "combination": [
+            "101",
+            "104",
+            "108",
+            "109",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB002",
+          "combination": [
+            "101",
+            "105",
+            "108",
+            "109",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB003",
+          "combination": [
+            "101",
+            "106",
+            "108",
+            "109",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB004",
+          "combination": [
+            "101",
+            "107",
+            "108",
+            "109",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB005",
+          "combination": [
+            "101",
+            "104",
+            "108",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB006",
+          "combination": [
+            "101",
+            "105",
+            "108",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB007",
+          "combination": [
+            "101",
+            "106",
+            "108",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB008",
+          "combination": [
+            "101",
+            "107",
+            "108",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB009",
+          "combination": [
+            "102",
+            "104",
+            "108",
+            "109",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB010",
+          "combination": [
+            "102",
+            "105",
+            "108",
+            "109",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB011",
+          "combination": [
+            "102",
+            "106",
+            "108",
+            "109",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB012",
+          "combination": [
+            "102",
+            "107",
+            "108",
+            "109",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB013",
+          "combination": [
+            "102",
+            "104",
+            "108",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB014",
+          "combination": [
+            "102",
+            "105",
+            "108",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB015",
+          "combination": [
+            "102",
+            "106",
+            "108",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB016",
+          "combination": [
+            "102",
+            "107",
+            "108",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB017",
+          "combination": [
+            "103",
+            "104",
+            "108",
+            "109",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB018",
+          "combination": [
+            "103",
+            "105",
+            "108",
+            "109",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB019",
+          "combination": [
+            "103",
+            "106",
+            "108",
+            "109",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB020",
+          "combination": [
+            "103",
+            "107",
+            "108",
+            "109",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB021",
+          "combination": [
+            "103",
+            "104",
+            "108",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB022",
+          "combination": [
+            "103",
+            "105",
+            "108",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB023",
+          "combination": [
+            "103",
+            "106",
+            "108",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "COB024",
+          "combination": [
+            "103",
+            "107",
+            "108",
+            "110",
+            "111",
+            "112"
+          ]
+        }
+      ],
       "product_short_description": "Bring seamless radiance to your space with Top Bend IP69, a premium linear light designed to effortlessly curve and accentuate contours with a flawless, uniform glow.\n",
       "product_description": "Illuminate your architectural visions with the Top Bend IP69, a premium linear lighting solution designed to bring seamless radiance to any space. Engineered for incredible flexibility and breathtaking visual impact, this top-bending neon-style light curves effortlessly to accentuate contours and create striking design statements. Whether you are transforming a high-end commercial venue or adding sophisticated atmosphere to an outdoor landscape, its pristine, uniform glow delivers an unmatched aesthetic elegance. Built to withstand the elements while maintaining its flawless brilliance, it is the ultimate choice for designers who refuse to compromise on beauty, adaptability, and style.\n",
       "product_images": [
@@ -3234,7 +4552,99 @@ const AZOOGI_PRODUCTS = {
       "id": "recGmrXQFlAIuDcls",
       "product_name": "LED Sheet",
       "category": "LED Flex Sheet",
-      "sku": "RS-PL2835PRO-24V-288D-20",
+      "product_code": "SMD-SHEET-30W-3K-IP20",
+      "sku_mappings": [
+        {
+          "sku": "SMD-SHEET-30W-3K-IP20",
+          "combination": [
+            "101",
+            "102",
+            "105",
+            "106",
+            "109"
+          ]
+        },
+        {
+          "sku": "SMD-SHEET-30W-4K-IP20",
+          "combination": [
+            "101",
+            "103",
+            "105",
+            "106",
+            "109"
+          ]
+        },
+        {
+          "sku": "SMD-SHEET-30W-6K-IP20",
+          "combination": [
+            "101",
+            "104",
+            "105",
+            "106",
+            "109"
+          ]
+        },
+        {
+          "sku": "SMD-SHEET-30W-3K-IP54",
+          "combination": [
+            "101",
+            "102",
+            "105",
+            "107",
+            "109"
+          ]
+        },
+        {
+          "sku": "SMD-SHEET-30W-4K-IP54",
+          "combination": [
+            "101",
+            "103",
+            "105",
+            "107",
+            "109"
+          ]
+        },
+        {
+          "sku": "SMD-SHEET-30W-6K-IP54",
+          "combination": [
+            "101",
+            "104",
+            "105",
+            "107",
+            "109"
+          ]
+        },
+        {
+          "sku": "SMD-SHEET-30W-3K-IP67",
+          "combination": [
+            "101",
+            "102",
+            "105",
+            "108",
+            "109"
+          ]
+        },
+        {
+          "sku": "SMD-SHEET-30W-4K-IP67",
+          "combination": [
+            "101",
+            "103",
+            "105",
+            "108",
+            "109"
+          ]
+        },
+        {
+          "sku": "SMD-SHEET-30W-6K-IP67",
+          "combination": [
+            "101",
+            "104",
+            "105",
+            "108",
+            "109"
+          ]
+        }
+      ],
       "product_short_description": "Transform your home into a breathtaking visual journey. Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.\n",
       "product_description": "Transform your home into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers a sophisticated, seamless glow that beautifully enhances your elegant spaces, casting a warm and inviting atmosphere throughout. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating style to any room, making it the ultimate choice for elevated interior illumination.\n",
       "product_images": [
@@ -3356,7 +4766,97 @@ const AZOOGI_PRODUCTS = {
       "id": "recHbgdqI7oH13d98",
       "product_name": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
       "category": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
-      "sku": "OTM-DD60-12",
+      "product_code": "ADR005DA",
+      "sku_mappings": [
+        {
+          "sku": "ADR005DA",
+          "combination": [
+            "101",
+            "107",
+            "109"
+          ]
+        },
+        {
+          "sku": "ADR006DA",
+          "combination": [
+            "101",
+            "108",
+            "109"
+          ]
+        },
+        {
+          "sku": "ADR007DA",
+          "combination": [
+            "102",
+            "107",
+            "109"
+          ]
+        },
+        {
+          "sku": "ADR008DA",
+          "combination": [
+            "102",
+            "108",
+            "109"
+          ]
+        },
+        {
+          "sku": "ADR009DA",
+          "combination": [
+            "103",
+            "107",
+            "109"
+          ]
+        },
+        {
+          "sku": "ADR010DA",
+          "combination": [
+            "103",
+            "108",
+            "109"
+          ]
+        },
+        {
+          "sku": "ADR011DA",
+          "combination": [
+            "104",
+            "107",
+            "109"
+          ]
+        },
+        {
+          "sku": "ADR012DA",
+          "combination": [
+            "104",
+            "108",
+            "109"
+          ]
+        },
+        {
+          "sku": "ADR015DA",
+          "combination": [
+            "105",
+            "107",
+            "109"
+          ]
+        },
+        {
+          "sku": "ADR016DA",
+          "combination": [
+            "105",
+            "108",
+            "109"
+          ]
+        },
+        {
+          "sku": "ADR-360-24-DALI",
+          "combination": [
+            "106",
+            "108",
+            "109"
+          ]
+        }
+      ],
       "product_short_description": "Transform your space with elegant design and discreet luxury. Enjoy a sophisticated, seamless glow that brings your vision to life and makes every moment feel truly magical.\n",
       "product_description": "Elevate your spaces into a breathtaking visual journey of elegant design and discreet luxury with a sophisticated, seamless glow. This premium dimmable driver offers the perfect blend of modern innovation and refined elegance, effortlessly transforming your environment into a warm, welcoming retreat. Designed for those who appreciate flawless execution and an unparalleled touch of ambiance, it beautifully highlights your architecture to create a captivating and serene atmosphere. Unwind in the stunning, soft illumination that brings your vision to life and makes every evening feel truly magical.\n",
       "product_images": [
@@ -3482,7 +4982,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recIfIjlxciVaq5nT",
       "product_name": "Neon PC Mounting Clips",
       "category": "Accessories",
-      "sku": "AC085-10",
+      "product_code": "Neon-PCClips-1004",
+      "sku_mappings": {},
       "product_short_description": "Effortlessly secure your lighting channels with discreet mounting clips designed to make custom light installations sleek and simple.\n",
       "product_description": "Ensure a flawless, professional finish for your lighting installation with these premium mounting clips, designed to hold your neon channels securely in place. Effortlessly discreet, they provide reliable support while keeping the focus entirely on your stunning light display. Perfect for creating clean, continuous accents in any modern space, these clips make bringing your creative lighting vision to life simpler and more seamless than ever.\n",
       "product_images": [
@@ -3509,7 +5010,17 @@ const AZOOGI_PRODUCTS = {
       "id": "recJTZiTrn7SHXBzB",
       "product_name": "Aluminium Trimless Plaster Profile",
       "category": "Trimless",
-      "sku": "L874",
+      "product_code": "TP5213-DS-BEND",
+      "sku_mappings": [
+        {
+          "sku": "TP5213-DS-BEND",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        }
+      ],
       "product_short_description": "Elevate your space with fluid elegance and discreet luxury, casting a breathtaking, seamless glow that transforms any room into a sanctuary of modern style.\n",
       "product_description": "Elevate your interior design with an extraordinary lighting solution that seamlessly integrates into your architecture. Crafted for those who appreciate fluid elegance and discreet luxury, this versatile profile effortlessly bends to outline your space with a captivating, double-sided illumination. Transform any room into a sophisticated retreat filled with warm, ambient radiance and flawless modern style.\n",
       "product_images": [],
@@ -3573,7 +5084,49 @@ const AZOOGI_PRODUCTS = {
       "id": "recKoW7cZgrN4wNw8",
       "product_name": "Handrail Spot III",
       "category": "Handrail",
-      "sku": "HLS27-CV-SYM sym 60 deg for 3000K",
+      "product_code": "HRS021",
+      "sku_mappings": [
+        {
+          "sku": "HRS021",
+          "combination": [
+            "101",
+            "102",
+            "104",
+            "106",
+            "107"
+          ]
+        },
+        {
+          "sku": "HRS022",
+          "combination": [
+            "101",
+            "102",
+            "105",
+            "106",
+            "107"
+          ]
+        },
+        {
+          "sku": "HRS023",
+          "combination": [
+            "101",
+            "103",
+            "104",
+            "106",
+            "107"
+          ]
+        },
+        {
+          "sku": "HRS024",
+          "combination": [
+            "101",
+            "103",
+            "105",
+            "106",
+            "107"
+          ]
+        }
+      ],
       "product_short_description": "Elegantly illuminate your pathways with Handrail Spot III. It casts a warm, sophisticated glow that guides the way while enhancing your architectural space.\n",
       "product_description": "Discover a new dimension of architectural elegance with Handrail Spot III. Perfectly engineered to blend seamlessly into your indoor and outdoor environments, this exquisite lighting solution casts a mesmerizing, sophisticated glow that elegantly maps your pathways. Designed for connoisseurs of fine detail, it redefines standard walkways into spectacular visual corridors, infusing your surroundings with an unparalleled layer of luxurious ambiance and subtle, reassuring security. Sleek, minimal, and entirely captivating, it represents the absolute pinnacle of refined aesthetic illumination.\n",
       "product_images": [
@@ -3685,7 +5238,17 @@ const AZOOGI_PRODUCTS = {
       "id": "recLHJHB294BOHsnH",
       "product_name": "Aluminium Trimless Plaster Profile",
       "category": "Trimless",
-      "sku": "L872",
+      "product_code": "TP3414-SS-BEND",
+      "sku_mappings": [
+        {
+          "sku": "TP3414-SS-BEND",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        }
+      ],
       "product_short_description": "Elevate your space with an elegant, seamless glow. Experience subtle sophistication and discreet luxury that gracefully accentuates every corner of your home.\n",
       "product_description": "Transform your interior spaces with an elegant blend of modern design and subtle sophistication. This premium lighting profile integrates effortlessly into plasterwork to create a seamless, floating glow that gracefully elevates your architecture. Designed for those who value discreet luxury and refined detail, it bathes your surroundings in a soothing, captivating ambiance, bringing an inviting warmth and breathtaking style to every corner of your home.\n",
       "product_images": [],
@@ -3749,7 +5312,17 @@ const AZOOGI_PRODUCTS = {
       "id": "recLKFxsq3JNBDg9A",
       "product_name": "Aluminium Trimless Plaster Profile",
       "category": "Trimless",
-      "sku": "L878",
+      "product_code": "TP6013-DS-BEND",
+      "sku_mappings": [
+        {
+          "sku": "TP6013-DS-BEND",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        }
+      ],
       "product_short_description": "Elevate your home with seamless elegance and captivating illumination. Experience discreet luxury with a soft, sophisticated glow that enhances any room.\n",
       "product_description": "Elevate your living space with a seamless blend of modern design and captivating illumination. Designed to effortlessly integrate into your decor, this premium lighting solution bathes your surroundings in a soft, sophisticated glow that highlights the refined beauty of your home. Perfect for creating an inviting ambiance, it offers a touch of discreet luxury and timeless style, transforming any room into a breathtaking sanctuary of warmth and elegance.\n",
       "product_images": [],
@@ -3813,7 +5386,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recLcpvaYDSPflCG6",
       "product_name": "Neon PC Flexible Profile",
       "category": "Accessories",
-      "sku": "AC167-PC",
+      "product_code": "Neon-PC-1617",
+      "sku_mappings": {},
       "product_short_description": "Effortlessly shape soft, continuous light around any space with ultra-flexible channels designed to bring your modern lighting vision to life.\n",
       "product_description": "Effortlessly bring your lighting vision to life with this ultra-flexible PC channel, designed to curve and shape around any architectural detail with seamless grace. Perfect for creating fluid lines of soft, captivating light, it offers the ultimate versatility for modern design enthusiasts looking to add ambiance and flair to any space. Elevate your interior ambiance with a sleek, continuous glow that transforms ordinary walls into stunning visual masterpieces.\n",
       "product_images": [
@@ -3840,7 +5414,41 @@ const AZOOGI_PRODUCTS = {
       "id": "recLemdeWmwJ8cwLa",
       "product_name": "Aluminium Recessed Profile",
       "category": "Recessed",
-      "sku": "ALP001-R",
+      "product_code": "PR001",
+      "sku_mappings": [
+        {
+          "sku": "PR001",
+          "combination": [
+            "101",
+            "102",
+            "105"
+          ]
+        },
+        {
+          "sku": "PR001-3m-Silver",
+          "combination": [
+            "101",
+            "102",
+            "106"
+          ]
+        },
+        {
+          "sku": "PR001-B",
+          "combination": [
+            "101",
+            "103",
+            "105"
+          ]
+        },
+        {
+          "sku": "PR001-W",
+          "combination": [
+            "101",
+            "104",
+            "105"
+          ]
+        }
+      ],
       "product_short_description": "\n",
       "product_description": "\n",
       "product_images": [
@@ -3941,7 +5549,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recLkUxi6FelCD0y5",
       "product_name": "Neon Metal Mounting Clips",
       "category": "Accessories",
-      "sku": "AS-GMS/T1616A1-25",
+      "product_code": "Neon-MetalClips-1616",
+      "sku_mappings": {},
       "product_short_description": "Effortlessly secure your custom neon LED lighting with sleek mounting clips that deliver reliable support while keeping your aesthetic clean and hidden.\n",
       "product_description": "Ensure your custom lighting display is held in perfect alignment with our high-grade metal mounting clips. Built to deliver reliable stability with a subtle footprint, these clips keep your installation looking sleek, modern, and perfectly organized. Effortlessly maintain clean lines of light throughout your space while enjoying complete peace of mind and enduring design elegance.\n",
       "product_images": [
@@ -3968,7 +5577,18 @@ const AZOOGI_PRODUCTS = {
       "id": "recM1DAV2M0UnBGMB",
       "product_name": "Pool Light",
       "category": "Pool Light",
-      "sku": "SC-G101A",
+      "product_code": "PL001",
+      "sku_mappings": [
+        {
+          "sku": "PL001",
+          "combination": [
+            "101",
+            "102",
+            "103",
+            "104"
+          ]
+        }
+      ],
       "product_short_description": "Dive into an enchanting oasis of light and luxury. Elevate your pool into a sophisticated, glowing retreat, adding breathtaking allure and serene ambiance to every evening.\n",
       "product_description": "Dive into an enchanting oasis of light and luxury with our premium pool illumination solution. Designed to effortlessly elevate your outdoor experience, it bathes your aquatic retreat in a warm, sophisticated radiance that creates an unparalleled ambiance. Perfect for those with a discerning eye for discreet elegance and refined architectural detail, this lighting masterpiece transforms ordinary evenings into a breathtaking visual journey, adding both captivating allure and a profound sense of serenity to your home.\n",
       "product_images": [
@@ -4052,7 +5672,41 @@ const AZOOGI_PRODUCTS = {
       "id": "recMDfaLzV4GLvhgO",
       "product_name": "Aluminium Recessed Profile",
       "category": "Deep Recessed",
-      "sku": "ALP003-R",
+      "product_code": "PR005",
+      "sku_mappings": [
+        {
+          "sku": "PR005",
+          "combination": [
+            "101",
+            "102",
+            "105"
+          ]
+        },
+        {
+          "sku": "PR005-3m-Silver",
+          "combination": [
+            "101",
+            "102",
+            "106"
+          ]
+        },
+        {
+          "sku": "PR005-B",
+          "combination": [
+            "101",
+            "103",
+            "105"
+          ]
+        },
+        {
+          "sku": "PR005-W",
+          "combination": [
+            "101",
+            "104",
+            "105"
+          ]
+        }
+      ],
       "product_short_description": "\n",
       "product_description": "\n",
       "product_images": [
@@ -4153,7 +5807,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recMoaXiRVlGUAOzN",
       "product_name": "Neon End Cap",
       "category": "Accessories",
-      "sku": "AS-GMS1616GS0-EC",
+      "product_code": "Neon-EndCap-1616-Side",
+      "sku_mappings": {},
       "product_short_description": "Achieve a clean, flawless finish for your lighting installation with our premium end caps designed for effortless elegance and seamless style.\n",
       "product_description": "Achieve a flawless, professional presentation for your lighting installations with our sleek side-entry end caps. Designed to deliver a clean, continuous aesthetic, these essential accessories seamlessly seal your linear lighting for a polished, modern finish. Protect your setup while enhancing its overall visual appeal, ensuring every detail of your lighting display looks impeccably refined and complete.\n",
       "product_images": [],
@@ -4178,7 +5833,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recNb1eLWNvYFPCDt",
       "product_name": "Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC023-AP",
+      "product_code": "Neon-AluProfile-1010",
+      "sku_mappings": {},
       "product_short_description": "Elevate your space with sleek aluminium profiles designed to craft seamless, modern lines of light for a high-end finish.\n",
       "product_description": "Transform your space with the sleek elegance of our premium aluminum profile, designed to bring a modern, sophisticated edge to any room. Crafted for those who appreciate refined aesthetics, this versatile channel seamlessly integrates into your décor, casting smooth, beautiful illumination that elevates your interior design. Whether creating subtle ambient accents or bold visual statements, it provides the perfect architectural framing to let your custom lighting visions shine with effortless style.\n",
       "product_images": [
@@ -4205,7 +5861,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recNt9W0gDthIgO9P",
       "product_name": "PR127 Diffuser",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "DIFF-127",
+      "sku_mappings": {},
       "product_short_description": "Refine your space with a smooth, flawless glow. The PR127 Diffuser softens light to create a warm, stylish ambiance for residential and commercial settings.\n",
       "product_description": "Elevate your linear lighting with the PR127 Diffuser. Delivering a smooth, flawless spread of light, it effortlessly introduces warm elegance and sophisticated modernity to any room, giving your architectural fixtures a clean, refined presence.\n",
       "product_images": [],
@@ -4230,7 +5887,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recOG4r4bdox4aKn5",
       "product_name": "Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC107-AP-SA",
+      "product_code": "Neon-AluProfile-1004",
+      "sku_mappings": {},
       "product_short_description": "Engineered for modern elegance, this ultra-slim profile creates continuous lines of glow to transform everyday rooms into art.\n",
       "product_description": "Elevate your interior lighting design with our ultra-slim aluminum profile, engineered to deliver sleek, modern elegance to any space. Designed to integrate seamlessly into your décor, this discreet channel creates smooth, captivating lines of continuous glow that effortlessly transform everyday rooms into extraordinary visual experiences. Perfect for highlighting architectural details or creating sophisticated ambient accents, it provides the ultimate polished canvas for your unique lighting vision.\n",
       "product_images": [
@@ -4257,7 +5915,87 @@ const AZOOGI_PRODUCTS = {
       "id": "recOIplDvStVGEsyf",
       "product_name": "Neon Side View Sauna",
       "category": "Side View",
-      "sku": "SAUNA 1617S",
+      "product_code": "SV1617-6W-1.6K-IP68-Sauna",
+      "sku_mappings": [
+        {
+          "sku": "SV1617-6W-1.6K-IP68-Sauna",
+          "combination": [
+            "101",
+            "102",
+            "109",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "SV1617-6W-2.2K-IP68-Sauna",
+          "combination": [
+            "101",
+            "103",
+            "109",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "SV1617-6W-2.7K-IP68-Sauna",
+          "combination": [
+            "101",
+            "104",
+            "109",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "SV1617-6W-3K-IP68-Sauna",
+          "combination": [
+            "101",
+            "105",
+            "109",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "SV1617-6W-4K-IP68-Sauna",
+          "combination": [
+            "101",
+            "106",
+            "109",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "SV1617-6W-5.3K-IP68-Sauna",
+          "combination": [
+            "101",
+            "107",
+            "109",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "SV1617-6W-TW-IP68-Sauna",
+          "combination": [
+            "101",
+            "113",
+            "108",
+            "109",
+            "110",
+            "111",
+            "112"
+          ]
+        }
+      ],
       "product_short_description": "Transform your wellness space into a luxurious haven with Side View Sauna, offering a comforting, uniform glow that invites pure relaxation and elegant tranquility.\n",
       "product_description": "Step into a sanctuary of pure relaxation and elevated luxury with the Side View IP68 Sauna, a premium linear lighting solution crafted to transform wellness spaces into serene havens. Designed to wrap seamlessly around structural curves, this elegant accent light bathes your environment in a smooth, uniform glow that enhances tranquility and soothes the senses. Perfect for creating a high-end spa atmosphere, it brings a touch of sophisticated radiance and comforting warmth, inviting you to completely unwind and escape from the everyday world.\n",
       "product_images": [
@@ -4428,7 +6166,53 @@ const AZOOGI_PRODUCTS = {
       "id": "recOXyUP3wypRT0cL",
       "product_name": "Long Run Dual Bend Neon",
       "category": "3D",
-      "sku": "AXE 1617 SL WHT",
+      "product_code": "3D1617-10W-2.7K-IP68-SLR",
+      "sku_mappings": [
+        {
+          "sku": "3D1617-10W-2.7K-IP68-SLR",
+          "combination": [
+            "101",
+            "102",
+            "105",
+            "106",
+            "107",
+            "108"
+          ]
+        },
+        {
+          "sku": "3D1617-10W-3K-IP68-SLR",
+          "combination": [
+            "101",
+            "103",
+            "105",
+            "106",
+            "107",
+            "108"
+          ]
+        },
+        {
+          "sku": "3D1617-10W-4K-IP68-SLR",
+          "combination": [
+            "101",
+            "104",
+            "105",
+            "106",
+            "107",
+            "108"
+          ]
+        },
+        {
+          "sku": "3D1617-10W-RED-IP68-SLR",
+          "combination": [
+            "101",
+            "109",
+            "105",
+            "106",
+            "107",
+            "108"
+          ]
+        }
+      ],
       "product_short_description": "Transform your space with Long Run 3D Bend Neon, crafting a flawless, multi-dimensional glow that brings ultimate design freedom and fluid elegance to any environment.\n",
       "product_description": "Transform your architectural visions with the Long Run 3D Bend Neon, a premium linear lighting solution crafted to bring multi-directional flexibility and captivating elegance to any environment. Engineered to curve effortlessly in three dimensions, this luxurious neon-style light offers ultimate design freedom, allowing you to accentuate complex contours and create breathtaking visual statements. Its flawless, uniform glow delivers an unmatched aesthetic elegance, making it the perfect choice for transforming sophisticated spaces and adding a seamless, fluid brilliance that captivates and inspires.\n",
       "product_images": [
@@ -4568,7 +6352,33 @@ const AZOOGI_PRODUCTS = {
       "id": "recOZAtX6FTNm1T7E",
       "product_name": "Aluminium Surface/Suspended Profile",
       "category": "Suspended",
-      "sku": "ALP018-R3",
+      "product_code": "PR021-3m-Silver",
+      "sku_mappings": [
+        {
+          "sku": "PR021-3m-Silver",
+          "combination": [
+            "101",
+            "102",
+            "105"
+          ]
+        },
+        {
+          "sku": "PR021-W",
+          "combination": [
+            "101",
+            "103",
+            "106"
+          ]
+        },
+        {
+          "sku": "PR021-B",
+          "combination": [
+            "101",
+            "104",
+            "106"
+          ]
+        }
+      ],
       "product_short_description": "\n",
       "product_description": "\n",
       "product_images": [
@@ -4669,7 +6479,41 @@ const AZOOGI_PRODUCTS = {
       "id": "recOt3gpqBf4InEQR",
       "product_name": "Aluminium Mini Surfaced Profile",
       "category": "Mini Surface",
-      "sku": "ALP073",
+      "product_code": "PROM",
+      "sku_mappings": [
+        {
+          "sku": "PROM",
+          "combination": [
+            "101",
+            "102",
+            "105"
+          ]
+        },
+        {
+          "sku": "PROM-3m-silver",
+          "combination": [
+            "101",
+            "102",
+            "106"
+          ]
+        },
+        {
+          "sku": "PROM-B",
+          "combination": [
+            "101",
+            "103",
+            "105"
+          ]
+        },
+        {
+          "sku": "PROM-W",
+          "combination": [
+            "101",
+            "104",
+            "105"
+          ]
+        }
+      ],
       "product_short_description": "\n",
       "product_description": "\n",
       "product_images": [
@@ -4770,7 +6614,20 @@ const AZOOGI_PRODUCTS = {
       "id": "recPK6Vl33jblTwPP",
       "product_name": "Dual Bend Neon & Dual Colour",
       "category": "3D",
-      "sku": "AIR 1010 CS",
+      "product_code": "3D1010-10W-2.7-3K-IP67",
+      "sku_mappings": [
+        {
+          "sku": "3D1010-10W-2.7-3K-IP67",
+          "combination": [
+            "101",
+            "102",
+            "103",
+            "104",
+            "105",
+            "106"
+          ]
+        }
+      ],
       "product_short_description": "Step into the next dimension of luxury illumination with the Dual Colour 3D Bend Neon, wrapping your space in a seamless dual-colour glow of pure elegance and awe.\n",
       "product_description": "Step into the next dimension of luxury illumination with the Dual Colour 3D Bend Neon. Designed for visionaries who refuse to compromise on style, this revolutionary linear lighting masterpiece bends effortlessly in all directions to trace breathtaking architectural curves and create captivating visual features. Whether you are transforming a high-end commercial venue, designing a sophisticated modern lounge, or adding a touch of drama to an intimate space, its seamless, uniform dual-colour glow wraps your environment in a blanket of pure elegance. Crafted to elevate the ordinary into the extraordinary, it delivers an unmatched aesthetic ambiance that commands attention and inspires awe.\n",
       "product_images": [
@@ -4886,7 +6743,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recPQQPZDVSB8etMW",
       "product_name": "Neon Metal Mounting Clips",
       "category": "Accessories",
-      "sku": "AC025-MC",
+      "product_code": "Neon-MetalClips-1010",
+      "sku_mappings": {},
       "product_short_description": "Ensure effortless, secure installations and a clean finish for your custom neon LED profiles with our high-grade metal mounting clips.\n",
       "product_description": "Achieve a flawless, professional presentation with our ultra-durable neon metal mounting clips. Specially designed to seamlessly secure your lighting accents, these sleek clips ensure your light strips remain neatly aligned and stylishly anchored. Perfect for creating clean, continuous illumination in any setting, they offer a polished finish that lets your lighting take center stage without hardware getting in the way.\n",
       "product_images": [
@@ -4913,7 +6771,57 @@ const AZOOGI_PRODUCTS = {
       "id": "recPRKIdCvyys4nvA",
       "product_name": "Neon Side View",
       "category": "Side View",
-      "sku": "LEDLINE OPTIC 1617S",
+      "product_code": "SV1617-18W-2.2K-IP68-Optic",
+      "sku_mappings": [
+        {
+          "sku": "SV1617-18W-2.2K-IP68-Optic",
+          "combination": [
+            "101",
+            "102",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110"
+          ]
+        },
+        {
+          "sku": "SV1617-18W-2.7K-IP68-Optic",
+          "combination": [
+            "101",
+            "103",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110"
+          ]
+        },
+        {
+          "sku": "SV1617-18W-3K-IP68-Optic",
+          "combination": [
+            "101",
+            "104",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110"
+          ]
+        },
+        {
+          "sku": "SV1617-18W-4K-IP68-Optic",
+          "combination": [
+            "101",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110"
+          ]
+        }
+      ],
       "product_short_description": "Redefine luxury with the Side View IP68 Optic, projecting a focused, captivating beam to bring timeless elegance and precision to your visionary spaces.\n",
       "product_description": "Experience the epitome of precision and drama with the Side View IP68 Optic, a premium linear lighting masterpiece designed to redefine luxury illumination. Engineered with advanced optics, this sophisticated neon-style light projects a focused, captivating beam that beautifully accentuates architectural contours and artistic details. Its seamless side-bending flexibility unlocks unparalleled design freedom, allowing you to craft breathtaking visual statements in high-end commercial spaces, upscale residential interiors, and elite outdoor landscapes. Bring an atmosphere of timeless elegance and unmatched prestige to your visionary projects with a refined glow that transforms the ordinary into an extraordinary spectacle of light.\n",
       "product_images": [
@@ -5061,7 +6969,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recPfrtYKRI2MtOAk",
       "product_name": "PROM Diffuser",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "DIFF-PROM",
+      "sku_mappings": {},
       "product_short_description": "Bask in the smooth, elegant glow of the PROM diffuser. Designed to softly disperse light, it creates a warm, inviting ambiance with a clean, modern finish.\n",
       "product_description": "Elevate your interior environment with the PROM Diffuser. Skillfully engineered to soften illumination and eliminate harsh shadows, it crafts a warm, glare-free ambiance that adds a subtle, modern touch of luxury to your architectural lighting setup.\n",
       "product_images": [],
@@ -5086,7 +6995,137 @@ const AZOOGI_PRODUCTS = {
       "id": "recPo2yo4CpauRnwZ",
       "product_name": "Non-Dimmable Driver",
       "category": "Non-Dimmable Driver",
-      "sku": "OTM-W20-12",
+      "product_code": "ADR001",
+      "sku_mappings": [
+        {
+          "sku": "ADR001",
+          "combination": [
+            "101",
+            "110",
+            "112"
+          ]
+        },
+        {
+          "sku": "ADR002",
+          "combination": [
+            "101",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "ADR003",
+          "combination": [
+            "102",
+            "110",
+            "112"
+          ]
+        },
+        {
+          "sku": "ADR004",
+          "combination": [
+            "102",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "ADR005",
+          "combination": [
+            "103",
+            "110",
+            "112"
+          ]
+        },
+        {
+          "sku": "ADR006",
+          "combination": [
+            "103",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "ADR007",
+          "combination": [
+            "104",
+            "110",
+            "112"
+          ]
+        },
+        {
+          "sku": "ADR008",
+          "combination": [
+            "104",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "ADR009",
+          "combination": [
+            "105",
+            "110",
+            "112"
+          ]
+        },
+        {
+          "sku": "ADR010",
+          "combination": [
+            "105",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "ADR011",
+          "combination": [
+            "106",
+            "110",
+            "112"
+          ]
+        },
+        {
+          "sku": "ADR012",
+          "combination": [
+            "106",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "ADR015",
+          "combination": [
+            "107",
+            "110",
+            "112"
+          ]
+        },
+        {
+          "sku": "ADR016",
+          "combination": [
+            "107",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "ADR-400-24V",
+          "combination": [
+            "108",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "ADR-500-24V",
+          "combination": [
+            "109",
+            "111",
+            "112"
+          ]
+        }
+      ],
       "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
       "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
@@ -5239,7 +7278,157 @@ const AZOOGI_PRODUCTS = {
       "id": "recPsMCM5UstPHzTs",
       "product_name": "Neon Side View",
       "category": "Side View",
-      "sku": "WAVE 1617S WHT",
+      "product_code": "SV1617-10W-2.2K-IP69",
+      "sku_mappings": [
+        {
+          "sku": "SV1617-10W-2.2K-IP69",
+          "combination": [
+            "101",
+            "107",
+            "114",
+            "115",
+            "116",
+            "117"
+          ]
+        },
+        {
+          "sku": "SV1617-10W-2.7K-IP69",
+          "combination": [
+            "101",
+            "108",
+            "114",
+            "115",
+            "116",
+            "117"
+          ]
+        },
+        {
+          "sku": "SV1617-10W-3K-IP69",
+          "combination": [
+            "101",
+            "109",
+            "114",
+            "115",
+            "116",
+            "117"
+          ]
+        },
+        {
+          "sku": "SV1617-10W-4K-IP69",
+          "combination": [
+            "101",
+            "110",
+            "114",
+            "115",
+            "116",
+            "117"
+          ]
+        },
+        {
+          "sku": "SV1617-10W-5.3K-IP69",
+          "combination": [
+            "101",
+            "111",
+            "114",
+            "115",
+            "116",
+            "117"
+          ]
+        },
+        {
+          "sku": "SV1617-13W-RGB-IP69",
+          "combination": [
+            "102",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "120"
+          ]
+        },
+        {
+          "sku": "SV1617-15W-RGB-IP69-DMX",
+          "combination": [
+            "103",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "121",
+            "125",
+            "127"
+          ]
+        },
+        {
+          "sku": "SV1617-16W-RGB-IP69-SPI",
+          "combination": [
+            "104",
+            "114",
+            "115",
+            "116",
+            "117",
+            "118",
+            "122",
+            "126",
+            "127"
+          ]
+        },
+        {
+          "sku": "SV1617-17W-RGBW-IP69",
+          "combination": [
+            "105",
+            "109",
+            "114",
+            "115",
+            "116",
+            "117",
+            "119",
+            "123"
+          ]
+        },
+        {
+          "sku": "SV1617-15W-RGBW-IP69-DMX",
+          "combination": [
+            "103",
+            "109",
+            "114",
+            "115",
+            "116",
+            "117",
+            "119",
+            "121",
+            "125",
+            "127"
+          ]
+        },
+        {
+          "sku": "SV1617-22W-RGBW-IP69-SPI",
+          "combination": [
+            "106",
+            "112",
+            "114",
+            "115",
+            "116",
+            "117",
+            "124",
+            "126",
+            "127"
+          ]
+        },
+        {
+          "sku": "SV1617-13W-TW-IP69",
+          "combination": [
+            "102",
+            "113",
+            "114",
+            "115",
+            "116",
+            "117"
+          ]
+        }
+      ],
       "product_short_description": "Bring fluid brilliance to any space with Side Bend IP69, curving effortlessly to deliver a seamless, uniform glow that elevates your architectural vision.\n",
       "product_description": "Elevate your architectural and landscape designs with the Side Bend IP69, a premium linear lighting solution crafted to bring captivating elegance and fluid brilliance to any environment. Engineered for extraordinary side-bending flexibility, this luxurious neon-style light curves effortlessly around architectural contours to create stunning visual features and dramatic accents. Perfect for transforming upscale commercial venues, creating an inviting outdoor oasis, or adding a sophisticated glow to modern spaces, its seamless, uniform illumination delivers an unmatched upscale aesthetic. Combining ultimate durability with timeless style, it is the ultimate choice for visionary designers looking to push the boundaries of creative lighting expression.\n",
       "product_images": [
@@ -5537,7 +7726,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recQOQCMe7JoTX8GF",
       "product_name": "Plaster Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC167-SCRL",
+      "product_code": "Neon-FlexiPlasterAluProfile-1617",
+      "sku_mappings": {},
       "product_short_description": "Transform ordinary walls and ceilings into modern masterpieces with uninterrupted, flush lines of ambient light tailored for luxury spaces.\n",
       "product_description": "Seamlessly blend high-end illumination into your architectural design with our premium plaster aluminum profile. Specially crafted to integrate flush into plaster surfaces, this innovative mounting channel creates breathtaking, uninterrupted lines of light that transform ordinary walls and ceilings into modern masterpieces. Perfect for adding subtle ambiance, dramatic accents, or sophisticated structural highlighting, it provides an elevated, custom finish that effortlessly enhances the beauty and atmosphere of any luxury space.\n",
       "product_images": [
@@ -5564,7 +7754,64 @@ const AZOOGI_PRODUCTS = {
       "id": "recQUN4eYmVBcmrwp",
       "product_name": "Three-sided Emitting Mini Neon Top View",
       "category": "Top View",
-      "sku": "ACE 1010YT TW",
+      "product_code": "TV1010-12W-TW-IP68-270",
+      "sku_mappings": [
+        {
+          "sku": "TV1010-12W-TW-IP68-270",
+          "combination": [
+            "101",
+            "103",
+            "108",
+            "109",
+            "110",
+            "111"
+          ]
+        },
+        {
+          "sku": "TV1010-11W-2.2K-IP68-270",
+          "combination": [
+            "102",
+            "104",
+            "108",
+            "109",
+            "110",
+            "112"
+          ]
+        },
+        {
+          "sku": "TV1010-11W-2.7K-IP68-270",
+          "combination": [
+            "102",
+            "105",
+            "108",
+            "109",
+            "110",
+            "112"
+          ]
+        },
+        {
+          "sku": "TV1010-11W-3K-IP68-270",
+          "combination": [
+            "102",
+            "106",
+            "108",
+            "109",
+            "110",
+            "112"
+          ]
+        },
+        {
+          "sku": "TV1010-11W-4K-IP68-270",
+          "combination": [
+            "102",
+            "107",
+            "108",
+            "109",
+            "110",
+            "112"
+          ]
+        }
+      ],
       "product_short_description": "Wrap your space in pure luxury with the Three-sided Emitting Mini Neon, radiating a stunning, uniform glow from three sides for ultimate design freedom.\n",
       "product_description": "Experience the ultimate in design versatility with the Three-sided Emitting Mini Neon, a revolutionary linear lighting choice crafted to redefine modern luxury. Engineered to radiate a brilliant, uniform glow from three distinct sides, this remarkable neon-style masterpiece wraps any environment in a seamless blanket of sophisticated light. Its highly flexible profile effortlessly contours around architectural features, making it the perfect choice for designers looking to elevate spaces with dramatic ambiance and striking visual impact. Elevate your next project with an unmatched aesthetic elegance that blends artistic freedom with flawless illumination.\n",
       "product_images": [
@@ -5739,7 +7986,168 @@ const AZOOGI_PRODUCTS = {
       "id": "recQwlY740wz89Y7P",
       "product_name": "Slice",
       "category": "Top View",
-      "sku": "APO 10 FC",
+      "product_code": "TV1004-10W-2.2K-IP65-FC",
+      "sku_mappings": [
+        {
+          "sku": "TV1004-10W-2.2K-IP65-FC",
+          "combination": [
+            "101",
+            "104",
+            "109",
+            "110",
+            "111",
+            "112",
+            "116"
+          ]
+        },
+        {
+          "sku": "TV1004-10W-2.7K-IP65-FC",
+          "combination": [
+            "101",
+            "105",
+            "109",
+            "110",
+            "111",
+            "112",
+            "116"
+          ]
+        },
+        {
+          "sku": "TV1004-10W-3K-IP65-FC",
+          "combination": [
+            "101",
+            "106",
+            "109",
+            "110",
+            "111",
+            "112",
+            "116"
+          ]
+        },
+        {
+          "sku": "TV1004-10W-4K-IP65-FC",
+          "combination": [
+            "101",
+            "107",
+            "109",
+            "110",
+            "111",
+            "112",
+            "116"
+          ]
+        },
+        {
+          "sku": "TV1004-10W-5.7K-IP65-FC",
+          "combination": [
+            "101",
+            "108",
+            "109",
+            "110",
+            "111",
+            "112",
+            "116"
+          ]
+        },
+        {
+          "sku": "TV1004-14W-TW-IP65",
+          "combination": [
+            "102",
+            "117",
+            "109",
+            "110",
+            "111",
+            "113"
+          ]
+        },
+        {
+          "sku": "TV1004-10W-2.2K-IP65-XL",
+          "combination": [
+            "101",
+            "104",
+            "109",
+            "110",
+            "111",
+            "114"
+          ]
+        },
+        {
+          "sku": "TV1004-10W-2.7K-IP65-XL",
+          "combination": [
+            "101",
+            "105",
+            "109",
+            "110",
+            "111",
+            "114"
+          ]
+        },
+        {
+          "sku": "TV1004-10W-3K-IP65-XL",
+          "combination": [
+            "101",
+            "106",
+            "109",
+            "110",
+            "111",
+            "114"
+          ]
+        },
+        {
+          "sku": "TV1004-10W-4K-IP65-XL",
+          "combination": [
+            "101",
+            "107",
+            "109",
+            "110",
+            "111",
+            "114"
+          ]
+        },
+        {
+          "sku": "TV1004-15W-2.2K-IP65-XL",
+          "combination": [
+            "101",
+            "104",
+            "109",
+            "110",
+            "111",
+            "115"
+          ]
+        },
+        {
+          "sku": "TV1004-15W-2.7K-IP65-XL",
+          "combination": [
+            "103",
+            "105",
+            "109",
+            "110",
+            "111",
+            "115"
+          ]
+        },
+        {
+          "sku": "TV1004-15W-3K-IP65-XL",
+          "combination": [
+            "103",
+            "106",
+            "109",
+            "110",
+            "111",
+            "115"
+          ]
+        },
+        {
+          "sku": "TV1004-15W-4K-IP65-XL",
+          "combination": [
+            "103",
+            "107",
+            "109",
+            "110",
+            "111",
+            "115"
+          ]
+        }
+      ],
       "product_short_description": "Redefine your space with the ultra-slim Slice, blending flexibility and contemporary elegance to create a sleek, breathtaking visual statement anywhere.\n",
       "product_description": "Introducing the Slice (10mm x 4mm), an ultra-slim linear lighting solution crafted to redefine modern illumination. Designed with incredible flexibility and a minimal profile, this top-bending masterpiece seamlessly integrates into any architectural vision, effortlessly tracing elegant curves and contours. Its smooth, uniform glow creates a stunning visual statement that elevates the ambiance of sophisticated residential interiors, commercial venues, and luxury landscapes alike. Built to offer ultimate precision and artistic adaptability, the Slice brings a touch of sleek, contemporary elegance to any environment, proving that breathtaking design and exceptional style truly know no boundaries.\n",
       "product_images": [
@@ -5969,7 +8377,17 @@ const AZOOGI_PRODUCTS = {
       "id": "recQyEM5EtUdbuETD",
       "product_name": "Aluminium Square Corner Profile",
       "category": "Corner",
-      "sku": "ALP015-R",
+      "product_code": "PR017-3m-Silver",
+      "sku_mappings": [
+        {
+          "sku": "PR017-3m-Silver",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        }
+      ],
       "product_short_description": "\n",
       "product_description": "\n",
       "product_images": [],
@@ -6033,7 +8451,79 @@ const AZOOGI_PRODUCTS = {
       "id": "recRViawyUjnV7UJo",
       "product_name": "Bendable Zig Zag for curves LED SMD Strip",
       "category": "SMD Strip",
-      "sku": "RS-S2835MC-24V-100D-08-20",
+      "product_code": "SMD-BEND-2.7K-IP54",
+      "sku_mappings": [
+        {
+          "sku": "SMD-BEND-8W-2.7K-IP54",
+          "combination": [
+            "101",
+            "103",
+            "107",
+            "108",
+            "110"
+          ]
+        },
+        {
+          "sku": "SMD-BEND-8W-3K-IP54",
+          "combination": [
+            "101",
+            "104",
+            "107",
+            "108",
+            "110"
+          ]
+        },
+        {
+          "sku": "SMD-BEND-8W-4K-IP54",
+          "combination": [
+            "101",
+            "105",
+            "107",
+            "108",
+            "110"
+          ]
+        },
+        {
+          "sku": "SMD-BEND-5W-RGBW-IP54",
+          "combination": [
+            "102",
+            "106",
+            "107",
+            "109",
+            "111"
+          ]
+        },
+        {
+          "sku": "SMD-BEND-8W-2.7K-IP20",
+          "combination": [
+            "101",
+            "103",
+            "107",
+            "109",
+            "110"
+          ]
+        },
+        {
+          "sku": "SMD-BEND-8W-3K-IP20",
+          "combination": [
+            "101",
+            "104",
+            "107",
+            "109",
+            "110"
+          ]
+        },
+        {
+          "sku": "SMD-BEND-8W-4K-IP20",
+          "combination": [
+            "101",
+            "105",
+            "107",
+            "109",
+            "110"
+          ]
+        }
+      ],
       "product_short_description": "Transform your spaces with a stunning visual journey of elegant design and discreet luxury, creating a sophisticated and seamless glow that beautifully enhances your home.\n",
       "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
@@ -6195,7 +8685,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recSDjfGq7F56sEFc",
       "product_name": "Neon Metal Mounting Clips",
       "category": "Accessories",
-      "sku": "AC401-SET",
+      "product_code": "Neon-MetalClips-1615",
+      "sku_mappings": {},
       "product_short_description": "Secure your custom lighting with premium mounting clips that deliver a clean, professional finish and reliable support without distraction.\n",
       "product_description": "Secure your lighting installations with total confidence and effortless precision using these premium metal mounting clips. Designed to deliver a flawless, professional finish, these durable clips hold your fixtures seamlessly in place while keeping the focus entirely on your stunning light displays. Perfect for achieving clean lines and an elevated architectural aesthetic, they offer the dependable support your custom design deserves without compromising on style.\n",
       "product_images": [
@@ -6222,7 +8713,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recSwMwQIKKoyEFdo",
       "product_name": "Bendable Plaster Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC019-CR",
+      "product_code": "Neon-FlexiAluProfile-0612",
+      "sku_mappings": {},
       "product_short_description": "Conform to unique curves and plaster surfaces effortlessly, casting soft, continuous illumination that adds luxury to any interior.\n",
       "product_description": "Unlock endless design possibilities with our plaster flexible aluminum profile, expertly crafted to turn your custom lighting concepts into stunning architectural realities. Engineered to effortlessly conform to unique curves and fluid contours, this versatile profile blends seamlessly into plaster surfaces for a flawless, built-in finish. It transforms ordinary spaces with soft, continuous illumination that highlights every architectural detail, adding a touch of modern sophistication, warmth, and luxury to any interior landscape.\n",
       "product_images": [
@@ -6249,7 +8741,17 @@ const AZOOGI_PRODUCTS = {
       "id": "recTK17hwyPrPKVUU",
       "product_name": "Aluminium Surfaced Profile",
       "category": "Surfaced",
-      "sku": "ALP035-R",
+      "product_code": "PR036",
+      "sku_mappings": [
+        {
+          "sku": "PR036",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        }
+      ],
       "product_short_description": "\n",
       "product_description": "\n",
       "product_images": [],
@@ -6313,7 +8815,20 @@ const AZOOGI_PRODUCTS = {
       "id": "recTLVGmuHlG6RKYL",
       "product_name": "Garden Light",
       "category": "Garden Light",
-      "sku": "SC-J103A",
+      "product_code": "GL003",
+      "sku_mappings": [
+        {
+          "sku": "GL003",
+          "combination": [
+            "101",
+            "102",
+            "103",
+            "104",
+            "105",
+            "106"
+          ]
+        }
+      ],
       "product_short_description": "Transform your outdoor spaces into a breathtaking visual journey. Experience discreet luxury and a sophisticated glow that beautifully enhances your home.\n",
       "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
@@ -6426,7 +8941,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recTSHt3pDgBFJp7F",
       "product_name": "Bendable Plaster Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC013-CR",
+      "product_code": "Neon-FlexiAluProfile-16x15",
+      "sku_mappings": {},
       "product_short_description": "Unlock creative possibilities with plaster flexible profiles that create soft, continuous light curves blending into modern architecture.\n",
       "product_description": "Unlock endless design possibilities with our plaster flexi aluminum profile, meticulously designed to create soft, fluid curves and flawless continuous lighting. Effortlessly blending into your architecture, this versatile solution allows you to bend light around unique spaces and bring your most imaginative interior visions to life. Perfect for crafting custom accents and sophisticated ambient glows, it elevates any modern space with a seamless, high-end architectural finish.\n",
       "product_images": [
@@ -6453,7 +8969,49 @@ const AZOOGI_PRODUCTS = {
       "id": "recTUJJAO9kkhf54i",
       "product_name": "SMD Strip",
       "category": "SMD",
-      "sku": "DS8192-24V-12mm",
+      "product_code": "SMD-29W-2.7K-IP20",
+      "sku_mappings": [
+        {
+          "sku": "SMD-29W-2.7K-IP20",
+          "combination": [
+            "101",
+            "102",
+            "106",
+            "107",
+            "108"
+          ]
+        },
+        {
+          "sku": "SMD-29W-3K-IP20",
+          "combination": [
+            "101",
+            "103",
+            "106",
+            "107",
+            "108"
+          ]
+        },
+        {
+          "sku": "SMD-29W-4K-IP20",
+          "combination": [
+            "101",
+            "104",
+            "106",
+            "107",
+            "108"
+          ]
+        },
+        {
+          "sku": "SMD-29W-6K-IP20",
+          "combination": [
+            "101",
+            "105",
+            "106",
+            "107",
+            "108"
+          ]
+        }
+      ],
       "product_short_description": "Elevate your design visions with this premium linear lighting solution, crafted to bring seamless radiance and an unparalleled aesthetic elegance to any space.\n",
       "product_description": "Elevate your design visions with this premium linear lighting solution, crafted to bring seamless radiance and an unparalleled aesthetic elegance to any space. Engineered for exceptional flexibility and breathtaking visual impact, it accentuates contours effortlessly to create striking architectural design statements. Whether you are transforming a sophisticated commercial venue or adding a luxurious atmosphere to an interior landscape, its pristine, uniform glow delivers unmatched brilliance. It is the ultimate choice for designers and creators who refuse to compromise on beauty, modern adaptability, and pure style.\n",
       "product_images": [
@@ -6572,7 +9130,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recTZkbGM4UDdlb6S",
       "product_name": "PR0127 180-degree coupler with screws",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "PR127-180deg-Coupler",
+      "sku_mappings": {},
       "product_short_description": "Extend your light runs seamlessly with our premium 180-Degree Coupler. Create continuous, professional-grade illumination with flawless transitions and style.\n",
       "product_description": "Effortlessly expand your lighting horizons with the PR0127 180-degree coupler, designed to create seamless, uninterrupted runs of mesmerizing illumination. This indispensable connector allows you to achieve extended lines of light with perfectly smooth transitions, enhancing the architectural beauty and sophisticated flow of any modern setting. Bring your creative vision to life with flawless continuity and clean elegance.\n",
       "product_images": [],
@@ -6597,7 +9156,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recU8h3Tuiv0xvdWu",
       "product_name": "PR008 End Cap",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "PR008-EndCap",
+      "sku_mappings": {},
       "product_short_description": "Give your lighting setup a sleek, professional finish with premium end caps. Conceal wiring effortlessly for a refined and sophisticated modern aesthetic.\n",
       "product_description": "Achieve a refined and professional finish with our premium PR008 end caps. Designed to seamlessly cap your lighting channels, they conceal unfinished ends to deliver a sophisticated, polished look that elevates the ambiance of modern interiors with effortless style.\n",
       "product_images": [],
@@ -6622,7 +9182,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recUAtOFWSFt2WTTT",
       "product_name": "Bendable Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC107-CR",
+      "product_code": "Neon-FlexiAluProfile-1004",
+      "sku_mappings": {},
       "product_short_description": "Sculpt light with creative freedom using flexible profiles designed to adapt seamlessly to unique curves and dynamic accents.\n",
       "product_description": "Transform your space with the sleek elegance of our flexible aluminum profile, expertly designed to bring dynamic, modern illumination to any layout. Crafted to adapt seamlessly to unique curves and architectural contours, it allows you to sculpt light with complete creative freedom. Perfect for elevating ambient accents or crafting striking visual feature lines, this versatile channel provides the ideal foundation to let your bespoke lighting designs shine with effortless sophistication.\n",
       "product_images": [
@@ -6649,7 +9210,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recUBSkuhIqVvbSMv",
       "product_name": "Neon Metal Mounting Clips",
       "category": "Accessories",
-      "sku": "AC167-MC",
+      "product_code": "Neon-MetalClips-1617",
+      "sku_mappings": {},
       "product_short_description": "Secure your custom neon lighting with high-grade mounting clips designed for a clean, effortless installation and a seamless finish.\n",
       "product_description": "Achieve seamless, professional lighting installations with these high-grade metal mounting clips, designed to provide strong, dependable support for your neon LED profiles. Crafted for effortless integration and a clean, hidden finish, they ensure your custom lighting designs remain securely anchored while maintaining a sleek, modern aesthetic in any residential or commercial space.\n",
       "product_images": [
@@ -6676,7 +9238,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recUxGdX8SCUNDzNP",
       "product_name": "Black End cap",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "PR133 - Endcap",
+      "sku_mappings": {},
       "product_short_description": "Complete your custom lighting setup with our sleek black end caps. Add a refined, modern touch for a polished, professional finish in any space.\n",
       "product_description": "Complete your custom lighting installation with the sleek elegance of our Black End Caps. Masterfully designed to provide a smooth, professional border, these end caps add a touch of dramatic modern sophistication to your spaces. Enhance the clean lines of your linear lighting while delivering a beautifully finished appearance that captivates and inspires.\n",
       "product_images": [],
@@ -6701,7 +9264,124 @@ const AZOOGI_PRODUCTS = {
       "id": "recVL4lYoj9UVtXS9",
       "product_name": "COB Strip",
       "category": "COB",
-      "sku": "DP4RGB-24V-10mm",
+      "product_code": "COB-15W-RGB-IP20",
+      "sku_mappings": [
+        {
+          "sku": "COB-15W-RGB-IP20",
+          "combination": [
+            "101",
+            "104",
+            "106",
+            "107",
+            "110"
+          ]
+        },
+        {
+          "sku": "COB-15W-RGB-IP65-NA",
+          "combination": [
+            "101",
+            "104",
+            "106",
+            "108",
+            "110"
+          ]
+        },
+        {
+          "sku": "COB-18W-RGBTW-IP20",
+          "combination": [
+            "102",
+            "112",
+            "106",
+            "107",
+            "111"
+          ]
+        },
+        {
+          "sku": "COB-18W-RGBTW-IP65-NA",
+          "combination": [
+            "102",
+            "112",
+            "106",
+            "108",
+            "111"
+          ]
+        },
+        {
+          "sku": "COB-17W-RGBW-IP20",
+          "combination": [
+            "102",
+            "113",
+            "106",
+            "107",
+            "111"
+          ]
+        },
+        {
+          "sku": "COB-18W-RGBW-IP20-SPI",
+          "combination": [
+            "103",
+            "113",
+            "106",
+            "107",
+            "111",
+            "115",
+            "116"
+          ]
+        },
+        {
+          "sku": "COB-17W-RGBW-IP65-NA",
+          "combination": [
+            "102",
+            "113",
+            "106",
+            "108",
+            "111"
+          ]
+        },
+        {
+          "sku": "COB-18W-RGBW-IP65-NA-SPI",
+          "combination": [
+            "103",
+            "113",
+            "106",
+            "108",
+            "111",
+            "115",
+            "116"
+          ]
+        },
+        {
+          "sku": "COB-15W-RGBW-IP67",
+          "combination": [
+            "101",
+            "105",
+            "106",
+            "109",
+            "111",
+            "117"
+          ]
+        },
+        {
+          "sku": "COB-18W-TW-IP20",
+          "combination": [
+            "103",
+            "114",
+            "106",
+            "107",
+            "110"
+          ]
+        },
+        {
+          "sku": "COB-18W-TW-IP65-NA",
+          "combination": [
+            "103",
+            "114",
+            "106",
+            "108",
+            "110"
+          ]
+        }
+      ],
       "product_short_description": "Transform your space with a vibrant, sophisticated glow. Crafted for seamless flexibility, it brings captivating color and luxury to any design reality.\n",
       "product_description": "Elevate your architectural and interior designs with this premium linear lighting solution, engineered to infuse any environment with a vibrant, sophisticated glow. Crafted for seamless flexibility and unforgettable visual allure, it effortlessly curves to accentuate contours, define borders, and turn artistic visions into striking design realities. Perfect for enhancing high-end commercial spaces or bringing an ultimate touch of luxury to bespoke residential atmospheres, its flawlessly uniform brilliance offers an unmatched aesthetic elegance. Combining ultimate adaptability with timeless elegance, this stunning lighting choice is tailor-made for designers who want to transform spaces with captivating color and uncompromising style.\n",
       "product_images": [
@@ -6909,7 +9589,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recVQGcei82arV6iS",
       "product_name": "PR008 Diffuser",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "DIFF-008",
+      "sku_mappings": {},
       "product_short_description": "Elevate your room with a mesmerizing, soft glow. The PR008 Diffuser eliminates harsh glare to deliver a clean, sophisticated ambiance you'll love.\n",
       "product_description": "Reinvent your lighting experience with the PR008 Diffuser. Designed to effortlessly soften intense light source points into a captivating, gentle glow, it ensures your linear lighting delivers an alluring, sophisticated atmosphere in any setting.\n",
       "product_images": [],
@@ -6934,7 +9615,17 @@ const AZOOGI_PRODUCTS = {
       "id": "recVQXALxJLFoLOj7",
       "product_name": "Aluminium Square Corner Profile",
       "category": "Corner",
-      "sku": "ALP005",
+      "product_code": "PR007",
+      "sku_mappings": [
+        {
+          "sku": "PR007",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        }
+      ],
       "product_short_description": "\n",
       "product_description": "\n",
       "product_images": [
@@ -7004,7 +9695,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recVhV5eFQUdZhKEn",
       "product_name": "PR021 Diffuser",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "DIFF-021",
+      "sku_mappings": {},
       "product_short_description": "Achieve a sleek linear light effect with the PR021 Diffuser. Designed to soften harsh light into a continuous glow, it brings refined beauty to any room.\n",
       "product_description": "Transform bright LED strips into a seamless, captivating line of light with the PR021 Diffuser. Adding an effortlessly elegant, professional finish to your profile runs, it ensures your lighting produces a beautifully balanced glow without distracting glare.\n",
       "product_images": [],
@@ -7029,7 +9721,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recWFSWmFJr5W243o",
       "product_name": "Skirting Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC023-SP",
+      "product_code": "Neon-SkAluProfile-1010",
+      "sku_mappings": {},
       "product_short_description": "Transform your room with recessed lighting profiles that create continuous lines of glow for a dramatic, minimalist aesthetic.\n",
       "product_description": "Redefine your interior perimeter with our modern skirting aluminium profile, blending sophisticated architectural detailing with subtle illumination. Hiding discreetly along walls and ceilings, it emits an elegant glow that transforms ordinary spaces into extraordinary visual journeys. Experience a refined, floating atmosphere that enhances room dimensions while delivering clean lines and contemporary flair.\n",
       "product_images": [
@@ -7056,7 +9749,20 @@ const AZOOGI_PRODUCTS = {
       "id": "recWZxIcRR2ElJnvU",
       "product_name": "Dual Bend Neon & Dual Colour",
       "category": "3D",
-      "sku": "AIR 1617 CS",
+      "product_code": "3D1617-10W-2.7-3K-IP67",
+      "sku_mappings": [
+        {
+          "sku": "3D1617-10W-2.7-3K-IP67",
+          "combination": [
+            "101",
+            "102",
+            "103",
+            "104",
+            "105",
+            "106"
+          ]
+        }
+      ],
       "product_short_description": "Experience ultimate design freedom with the Dual Colour 3D Bend Neon, flowing effortlessly around complex contours to bring fluid brilliance and modern luxury to your vision.\n",
       "product_description": "Experience the pinnacle of design freedom with the Dual Colour 3D Bend Neon, a premium linear lighting masterpiece crafted to bring dynamic sophistication and seamless radiance to your most ambitious spaces. Engineered for multi-directional flexibility, this luxurious neon-style solution flows effortlessly around complex contours to create striking architectural statements and captivating visual depth. Perfect for transforming high-end environments into immersive sensory experiences, its elegant and fluid brilliance brings a breath of modern luxury to any design vision, making it the ultimate choice for those who dare to inspire.\n",
       "product_images": [
@@ -7172,7 +9878,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recWlcg02QquGqOQq",
       "product_name": "Neon Metal Mounting Clips",
       "category": "Accessories",
-      "sku": "AC016-SET",
+      "product_code": "Neon-MetalClips-1220",
+      "sku_mappings": {},
       "product_short_description": "Ensure a flawless, professional installation with sturdy mounting clips designed to maintain crisp, continuous light and clean lines.\n",
       "product_description": "Ensure a flawless, professional finish for your lighting installation with our high-grade metal mounting clips. Designed to secure your light channels seamlessly, these sturdy clips offer reliable support while maintaining a clean, minimalist aesthetic. Perfect for creating crisp, continuous lines of light, they allow you to transform any space into a beautifully illuminated showcase with complete confidence and effortless sophistication.\n",
       "product_images": [
@@ -7199,7 +9906,55 @@ const AZOOGI_PRODUCTS = {
       "id": "recXYurkK4iTYaDms",
       "product_name": "Dual Bend Neon",
       "category": "3D",
-      "sku": "AXE 1617 WHT",
+      "product_code": "3D1617-10W-2.7K-IP68",
+      "sku_mappings": [
+        {
+          "sku": "3D1617-10W-2.7K-IP68",
+          "combination": [
+            "101",
+            "103",
+            "106",
+            "107",
+            "108",
+            "109"
+          ]
+        },
+        {
+          "sku": "3D1617-10W-3K-IP68",
+          "combination": [
+            "101",
+            "104",
+            "106",
+            "107",
+            "108",
+            "109"
+          ]
+        },
+        {
+          "sku": "3D1617-10W-4K-IP68",
+          "combination": [
+            "101",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109"
+          ]
+        },
+        {
+          "sku": "3D1617-15W-RGBW-IP68-DMX",
+          "combination": [
+            "102",
+            "111",
+            "106",
+            "107",
+            "108",
+            "110",
+            "112",
+            "113"
+          ]
+        }
+      ],
       "product_short_description": "Transform your space with 3D Bend Neon. Its boundless flexibility creates a flawless ribbon of light, wrapping any environment in pure, uniform elegance.\n",
       "product_description": "Unlock a new dimension of design with the 3D Bend Neon, a revolutionary linear lighting masterpiece crafted to bring your boldest artistic concepts to life. Engineered for boundless multi-directional flexibility, this premium neon-style light bends effortlessly across any plane, wrapping architectural contours and spatial features in a flawless, seamless ribbon of light. Perfect for elevating high-end commercial spaces, luxury interiors, or modern landscapes, it creates a breathtaking visual statement that captures the imagination and completely transforms the atmosphere with its pure, uniform radiance.\n",
       "product_images": [
@@ -7379,7 +10134,33 @@ const AZOOGI_PRODUCTS = {
       "id": "recXxKwgBlSrEcrlv",
       "product_name": "Aluminium Surface/Suspended Profile",
       "category": "Suspended",
-      "sku": "ALP104-R",
+      "product_code": "PR126-3m-Silver",
+      "sku_mappings": [
+        {
+          "sku": "PR126-3m-Silver",
+          "combination": [
+            "101",
+            "102",
+            "105"
+          ]
+        },
+        {
+          "sku": "PR126-3m-Black",
+          "combination": [
+            "101",
+            "103",
+            "105"
+          ]
+        },
+        {
+          "sku": "PR126-3m-White",
+          "combination": [
+            "101",
+            "104",
+            "105"
+          ]
+        }
+      ],
       "product_short_description": "\n",
       "product_description": "\n",
       "product_images": [
@@ -7464,7 +10245,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recYUYtePFG8zU3e1",
       "product_name": "Plaster Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC167-LP",
+      "product_code": "Neon-PlasterAluProfile-1617",
+      "sku_mappings": {},
       "product_short_description": "Integrate stunning flush illumination directly into your walls for a trimless, ultra-clean architectural light effect that redefines modern luxury.\n",
       "product_description": "Seamlessly integrate stunning illumination directly into your walls with our premium plaster-in aluminum profile, designed to create flawless, trimless lines of light that elevate any modern interior. Craft sophisticated, architectural lighting effects that melt into your décor for an ultra-clean, high-end finish. Perfect for bringing warm ambient accents or bold visual interest to your favorite spaces, this channel offers an effortless way to achieve a sleek, flush lighting design that redefines contemporary elegance.\n",
       "product_images": [
@@ -7491,7 +10273,17 @@ const AZOOGI_PRODUCTS = {
       "id": "recYZQJDU2rJPKq1y",
       "product_name": "Aluminium Bendable Profile",
       "category": "Bendable",
-      "sku": "ALP114",
+      "product_code": "PR125",
+      "sku_mappings": [
+        {
+          "sku": "PR125",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        }
+      ],
       "product_short_description": "\n",
       "product_description": "\n",
       "product_images": [
@@ -7561,7 +10353,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recYs68iO6L1O7JAH",
       "product_name": "PR131 End Cap",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "PR131-EndCap-White",
+      "sku_mappings": {},
       "product_short_description": "Achieve a flawless finish with sleek white end caps. Perfect for a clean, modern edge, these accessories add a refined and polished touch to your custom lighting designs.\n",
       "product_description": "Elevate your linear LED lighting setup with these sleek white end caps. Engineered to deliver a clean, continuous aesthetic, they hide raw edges and complete your custom lighting design with refined simplicity, effortless modern elegance, and a pristine, high-end look.\n",
       "product_images": [],
@@ -7586,7 +10379,237 @@ const AZOOGI_PRODUCTS = {
       "id": "recZAGnwL5xp3AXeV",
       "product_name": "Mini Lumoflex",
       "category": "Lumoflex",
-      "sku": "NNR13-White light-24V",
+      "product_code": "LMF13-9W-2.7K-IP65",
+      "sku_mappings": [
+        {
+          "sku": "LMF13-9W-2.7K-IP65",
+          "combination": [
+            "101",
+            "105",
+            "111",
+            "112",
+            "113",
+            "118",
+            "119"
+          ]
+        },
+        {
+          "sku": "LMF13-9W-3K-IP65",
+          "combination": [
+            "101",
+            "106",
+            "111",
+            "112",
+            "113",
+            "118",
+            "119"
+          ]
+        },
+        {
+          "sku": "LMF13-9W-4K-IP65",
+          "combination": [
+            "101",
+            "107",
+            "111",
+            "112",
+            "113",
+            "118",
+            "119"
+          ]
+        },
+        {
+          "sku": "LMF18-15W-2.7K-IP65",
+          "combination": [
+            "102",
+            "105",
+            "111",
+            "112",
+            "114",
+            "118",
+            "119"
+          ]
+        },
+        {
+          "sku": "LMF18-15W-3K-IP65",
+          "combination": [
+            "102",
+            "106",
+            "111",
+            "112",
+            "114",
+            "118",
+            "119"
+          ]
+        },
+        {
+          "sku": "LMF18-15W-4K-IP65",
+          "combination": [
+            "102",
+            "107",
+            "111",
+            "112",
+            "114",
+            "118",
+            "119"
+          ]
+        },
+        {
+          "sku": "LMF18-13W-RGB-IP65",
+          "combination": [
+            "103",
+            "110",
+            "111",
+            "112",
+            "114",
+            "118",
+            "119"
+          ]
+        },
+        {
+          "sku": "LMF18-15W-TW-IP65",
+          "combination": [
+            "102",
+            "108",
+            "111",
+            "112",
+            "114",
+            "118",
+            "119"
+          ]
+        },
+        {
+          "sku": "LMF25-15W-2.7K-IP65",
+          "combination": [
+            "102",
+            "105",
+            "111",
+            "112",
+            "115",
+            "118",
+            "119"
+          ]
+        },
+        {
+          "sku": "LMF25-15W-3K-IP65",
+          "combination": [
+            "102",
+            "106",
+            "111",
+            "112",
+            "115",
+            "118",
+            "119"
+          ]
+        },
+        {
+          "sku": "LMF25-15W-4K-IP65",
+          "combination": [
+            "102",
+            "107",
+            "111",
+            "112",
+            "115",
+            "118",
+            "119"
+          ]
+        },
+        {
+          "sku": "LMF25-15W-RGB-IP65",
+          "combination": [
+            "102",
+            "110",
+            "111",
+            "112",
+            "115",
+            "118",
+            "119"
+          ]
+        },
+        {
+          "sku": "LMF25-15W-TW-IP65",
+          "combination": [
+            "102",
+            "108",
+            "111",
+            "112",
+            "115",
+            "118",
+            "119"
+          ]
+        },
+        {
+          "sku": "LMF25-18W-RGBW-IP65",
+          "combination": [
+            "104",
+            "109",
+            "111",
+            "112",
+            "115",
+            "118",
+            "119"
+          ]
+        },
+        {
+          "sku": "LMF30-15W-2.7K-IP65",
+          "combination": [
+            "102",
+            "105",
+            "111",
+            "112",
+            "116",
+            "118",
+            "119"
+          ]
+        },
+        {
+          "sku": "LMF30-15W-3K-IP65",
+          "combination": [
+            "102",
+            "106",
+            "111",
+            "112",
+            "116",
+            "118",
+            "119"
+          ]
+        },
+        {
+          "sku": "LMF30-15W-4K-IP65",
+          "combination": [
+            "102",
+            "107",
+            "111",
+            "112",
+            "116",
+            "118",
+            "119"
+          ]
+        },
+        {
+          "sku": "LMF30-18W-RGBW-IP65",
+          "combination": [
+            "104",
+            "109",
+            "111",
+            "112",
+            "116",
+            "118",
+            "119"
+          ]
+        },
+        {
+          "sku": "LMF40-18W-RGBW-IP65",
+          "combination": [
+            "104",
+            "109",
+            "111",
+            "112",
+            "117",
+            "118",
+            "119"
+          ]
+        }
+      ],
       "product_short_description": "Bring seamless, captivating radiance to your space with Lumoflex, the ultimate choice for injecting modern style and timeless sophistication into any project.\n",
       "product_description": "Elevate your design visions with Lumoflex, a premium neon lighting solution engineered to bring a seamless, captivating radiance to any space. Designed for exceptional adaptability and striking visual interest, this flexible linear light effortlessly curves to accentuate modern contours and carve out bold architectural narratives. Whether transforming a refined commercial interior or casting a sophisticated, atmospheric glow across a high-end venue, its flawless uniform brilliance delivers unparalleled aesthetic elegance. Perfect for creators who refuse to compromise on beauty and atmosphere, it stands as the ultimate choice for injecting modern style and timeless sophistication into any project.\n",
       "product_images": [
@@ -7825,7 +10848,17 @@ const AZOOGI_PRODUCTS = {
       "id": "recZAlkCPSXZAirZi",
       "product_name": "Aluminium Trimless Plaster Profile",
       "category": "Trimless",
-      "sku": "L730",
+      "product_code": "TP11636-SS-DL",
+      "sku_mappings": [
+        {
+          "sku": "TP11636-SS-DL",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        }
+      ],
       "product_short_description": "Elevate your home into a glowing sanctuary of modern luxury and discreet elegance with seamless, captivating radiance.\n",
       "product_description": "Elevate your interior design with an extraordinary lighting solution that seamlessly merges modern sophistication with subtle luxury. Engineered for a sleek, flush integration into your walls or ceilings, this premium plaster-in profile casts a soft, captivating radiance that brings warmth and depth to any architectural space. Perfect for creating ambient atmosphere and highlighting elegant contours, it offers a discreet yet impactful touch of refinement, transforming ordinary rooms into stunning, light-filled sanctuaries of style.\n",
       "product_images": [],
@@ -7889,7 +10922,39 @@ const AZOOGI_PRODUCTS = {
       "id": "recZP8OkTAEXqcrFt",
       "product_name": "Mini COB Strip",
       "category": "COB",
-      "sku": "DP7-24V-4mm",
+      "product_code": "COBM001",
+      "sku_mappings": [
+        {
+          "sku": "COBM001",
+          "combination": [
+            "101",
+            "102",
+            "105",
+            "106",
+            "107"
+          ]
+        },
+        {
+          "sku": "COBM002",
+          "combination": [
+            "101",
+            "103",
+            "105",
+            "106",
+            "107"
+          ]
+        },
+        {
+          "sku": "COBM003",
+          "combination": [
+            "101",
+            "104",
+            "105",
+            "106",
+            "107"
+          ]
+        }
+      ],
       "product_short_description": "Infuse your space with a seamless, enchanting glow using Mini COB. This ultra-sleek light source curves gracefully to elevate your design with flawless, luxurious brilliance.\n",
       "product_description": "Elevate your interior artistry with the Mini COB, a masterclass in minimalist linear lighting designed to infuse any room with a seamless, enchanting glow. Engineered to curve gracefully around the most delicate architectural details, this ultra-sleek light source disappears into your design while making a profound visual impact. Whether you are crafting a sophisticated mood in a contemporary lounge or adding subtle, luxurious ambiance to a refined workspace, its flawless brilliance accentuates contours effortlessly. It is the perfect choice for visionary designers who wish to transform ordinary spaces into breathtaking atmospheres of pure, unadulterated style.\n",
       "product_images": [
@@ -8000,7 +11065,87 @@ const AZOOGI_PRODUCTS = {
       "id": "recZyTvJc4ZEXIAkp",
       "product_name": "Mini Neon Side View",
       "category": "Side View",
-      "sku": "0606S FC WHT",
+      "product_code": "SV0606-6W-2.7K-IP65-FC",
+      "sku_mappings": [
+        {
+          "sku": "SV0606-6W-2.7K-IP65-FC",
+          "combination": [
+            "101",
+            "102",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110"
+          ]
+        },
+        {
+          "sku": "SV0606-6W-3K-IP65-FC",
+          "combination": [
+            "101",
+            "103",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110"
+          ]
+        },
+        {
+          "sku": "SV0606-6W-4K-IP65-FC",
+          "combination": [
+            "101",
+            "104",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110"
+          ]
+        },
+        {
+          "sku": "TV0606-6W-2.7K-IP65-FC",
+          "combination": [
+            "101",
+            "102",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109",
+            "111"
+          ]
+        },
+        {
+          "sku": "TV0606-6W-3K-IP65-FC",
+          "combination": [
+            "101",
+            "103",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109",
+            "111"
+          ]
+        },
+        {
+          "sku": "TV0606-6W-4K-IP65-FC",
+          "combination": [
+            "101",
+            "104",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109",
+            "111"
+          ]
+        }
+      ],
       "product_short_description": "Bring subtle sophistication to any space with the Mini, an ultra-compact linear light designed to deliver a flawless, uniform glow and timeless style.\n",
       "product_description": "Discover the ultimate in discreet elegance with the Mini (6mm x 6mm), a remarkably compact linear lighting solution designed to bring subtle sophistication and seamless radiance to any space. Crafted for extraordinary flexibility and an ultra-minimal profile, this sleek neon-style light curves effortlessly to accent intricate design details and create captivating visual effects. Perfect for adding a luxurious atmosphere to modern retail interiors, high-end lounges, or intimate architectural spaces, its smooth, uniform glow transforms the ordinary into the extraordinary. Embrace a new standard of design freedom with a flawless illumination that blends perfectly into your vision while delivering an unmatched aesthetic impact.\n",
       "product_images": [
@@ -8159,7 +11304,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recaWIeuS4LyWEYDt",
       "product_name": "PR016 Diffuser",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "DIFF-016",
+      "sku_mappings": {},
       "product_short_description": "Bring modern elegance to your lighting design. The PR016 Diffuser transforms harsh light into a smooth, warm glow for a polished and inviting atmosphere.\n",
       "product_description": "Elevate your interior lighting with the PR016 Diffuser. Turning harsh light into a smooth, enchanting radiance, it brings modern elegance and comforting warmth to your home or office, giving your linear fixtures a high-end, professionally finished feel.\n",
       "product_images": [],
@@ -8184,7 +11330,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recbPFQRGMGLDnvba",
       "product_name": "Neon PC Flexible Profile",
       "category": "Accessories",
-      "sku": "AC023-PC",
+      "product_code": "Neon-PC-1010",
+      "sku_mappings": {},
       "product_short_description": "Fluidly conform to any architectural vision with flexible profiles that craft smooth, flowing lines of ambient light.\n",
       "product_description": "Sculpt mesmerizing curves of luminous beauty with our flexible neon PC profile, designed to bring fluid, continuous light to high-end architectural and decorative spaces. Offering smooth diffusion and incredible versatility, it allows you to craft customized lighting art that enhances ambiance with pure, modern sophistication. Transform any atmosphere into a captivating luxury experience with glowing ribbons of soft, seamless light.\n",
       "product_images": [
@@ -8211,7 +11358,17 @@ const AZOOGI_PRODUCTS = {
       "id": "reccOtPM47SuMucCm",
       "product_name": "Aluminium Round Corner Profile",
       "category": "Corner",
-      "sku": "ALP016-R",
+      "product_code": "PR018-3m-Silver",
+      "sku_mappings": [
+        {
+          "sku": "PR018-3m-Silver",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        }
+      ],
       "product_short_description": "\n",
       "product_description": "\n",
       "product_images": [],
@@ -8275,7 +11432,8 @@ const AZOOGI_PRODUCTS = {
       "id": "reccx1RHqehgP4Mtq",
       "product_name": "PR001 End Cap",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "PR001-EndCap-Silver",
+      "sku_mappings": {},
       "product_short_description": "Achieve a flawless finish for your custom lighting project with our silver end caps. Bring elegant style and practical wire management versatility to your space.\n",
       "product_description": "Imbue your custom lighting projects with effortless sophistication using the PR001 Silver End Caps. Crafted to deliver a bright, polished accent to your linear light fixtures, these end caps add the perfect finishing touch of contemporary luxury. Transform your lighting displays into stunning architectural highlights with a clean, high-end finish.\n",
       "product_images": [],
@@ -8300,7 +11458,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recd9K4nGnWaxCrAQ",
       "product_name": "Side Opening Neon Aluminium Profile",
       "category": "Accessories",
-      "sku": "AS-AFS(T)1616A4-1000",
+      "product_code": "Neon-AluProfile-1616-Side",
+      "sku_mappings": {},
       "product_short_description": "Fluidly sculpt glowing ambient light with flexible aluminium profiles that seamlessly blend into your walls for a captivating, high-end look.\n",
       "product_description": "Sculpt mesmerizing curves and dramatic linear highlights with our side-opening aluminum profile. Engineered to blend seamlessly into sophisticated contemporary environments, this profile offers flexible architectural framing for pure, effortless illumination. Bring your creative lighting concepts to life and infuse your space with luxury, warmth, and artistic ambiance.\n",
       "product_images": [
@@ -8327,7 +11486,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recejFUfOyX2yqmQi",
       "product_name": "Suspension Kit",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "PR021-Suspension",
+      "sku_mappings": {},
       "product_short_description": "Transform your space with this sleek Suspension Kit. Give your lighting fixtures a floating, modern presence while creating an elegant architectural aesthetic.\n",
       "product_description": "Transform your environment with the sleek PR021 Suspension Kit, designed to give your lighting fixtures an enchanting, floating presence. By suspending your illumination effortlessly, this stylish accessory adds dynamic spatial dimension and a refined, contemporary aesthetic to any interior space. Experience the perfect harmony of modern design and effortless elegance as your lighting takes center stage.\n",
       "product_images": [],
@@ -8352,7 +11512,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recf7U0miuKk2TRxp",
       "product_name": "PR017 Diffuser",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "DIFF-017",
+      "sku_mappings": {},
       "product_short_description": "Enjoy mesmerizing illumination with flawless continuity. The PR017 Diffuser softens light seamlessly to provide the ultimate finishing touch for modern spaces.\n",
       "product_description": "Enhance your space with the stylish PR017 Diffuser. Engineered for optimal optical comfort, it converts raw illumination into a soft, captivating glow that creates an inviting atmosphere while delivering a clean, modern aesthetic to your custom light runs.\n",
       "product_images": [],
@@ -8377,7 +11538,20 @@ const AZOOGI_PRODUCTS = {
       "id": "recfLStd7V6LYugRf",
       "product_name": "Garden Light",
       "category": "Garden Light",
-      "sku": "SC-J103A",
+      "product_code": "GL001",
+      "sku_mappings": [
+        {
+          "sku": "GL001",
+          "combination": [
+            "101",
+            "102",
+            "103",
+            "104",
+            "105",
+            "106"
+          ]
+        }
+      ],
       "product_short_description": "Transform your outdoor space into an enchanting oasis. Enjoy discreet luxury and a warm, inviting glow that effortlessly elevates the natural beauty of your home.\n",
       "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
@@ -8490,7 +11664,69 @@ const AZOOGI_PRODUCTS = {
       "id": "recflG67FDEy6BDKx",
       "product_name": "Handrail Spot I",
       "category": "Handrail",
-      "sku": "HLS17-CV-SYM sym 30 deg for 3000K",
+      "product_code": "HRS001",
+      "sku_mappings": [
+        {
+          "sku": "HRS001",
+          "combination": [
+            "101",
+            "102",
+            "105",
+            "107",
+            "108"
+          ]
+        },
+        {
+          "sku": "HRS002",
+          "combination": [
+            "101",
+            "102",
+            "106",
+            "107",
+            "108"
+          ]
+        },
+        {
+          "sku": "HRS003",
+          "combination": [
+            "101",
+            "103",
+            "105",
+            "107",
+            "108"
+          ]
+        },
+        {
+          "sku": "HRS004",
+          "combination": [
+            "101",
+            "103",
+            "106",
+            "107",
+            "108"
+          ]
+        },
+        {
+          "sku": "HRS005",
+          "combination": [
+            "101",
+            "104",
+            "105",
+            "107",
+            "108"
+          ]
+        },
+        {
+          "sku": "HRS006",
+          "combination": [
+            "101",
+            "104",
+            "106",
+            "107",
+            "108"
+          ]
+        }
+      ],
       "product_short_description": "Elegantly illuminate your pathways with Handrail Spot I. It casts a warm, sophisticated glow that guides the way while beautifully enhancing your architectural space.\n",
       "product_description": "Illuminate your architectural masterpieces with the perfect blend of elegance and modern design. Handrail Spot I offers seamless integration into your outdoor or indoor pathways, casting a warm, sophisticated glow that guides the way while enhancing the beauty of your space. Crafted for those who appreciate refined detail, it transforms ordinary walkways into stunning visual journeys, adding an unparalleled touch of ambiance and security to any setting. Elegant, discreet, and captivating, it is the ultimate choice for elevated architectural lighting.\n",
       "product_images": [
@@ -8610,7 +11846,17 @@ const AZOOGI_PRODUCTS = {
       "id": "recfo9W5L1MsqGgzu",
       "product_name": "Aluminium Trimless Plaster Profile",
       "category": "Trimless",
-      "sku": "L870",
+      "product_code": "TP5113-DS-BEND",
+      "sku_mappings": [
+        {
+          "sku": "TP5113-DS-BEND",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        }
+      ],
       "product_short_description": "Elevate your home with seamless, fluid light. Experience discreet luxury and a sophisticated glow that transforms your space into a serene sanctuary of modern style.\n",
       "product_description": "Elevate your interior design with an extraordinary lighting solution that seamlessly integrates into your space for a sleek, modern finish. Designed to bring a touch of discreet luxury, this profile casts a warm, captivating glow that enhances architectural details while creating an inviting atmosphere. Perfect for creating fluid, elegant curves of light, it transforms any room into a sophisticated sanctuary of style and comfort.\n",
       "product_images": [],
@@ -8674,7 +11920,25 @@ const AZOOGI_PRODUCTS = {
       "id": "recfojDnYOhkEbowi",
       "product_name": "Aluminium Stair Profile",
       "category": "Stair",
-      "sku": "ALP024",
+      "product_code": "PR027",
+      "sku_mappings": [
+        {
+          "sku": "PR027",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        },
+        {
+          "sku": "PR027-3M",
+          "combination": [
+            "101",
+            "102",
+            "104"
+          ]
+        }
+      ],
       "product_short_description": "\n",
       "product_description": "\n",
       "product_images": [
@@ -8753,7 +12017,69 @@ const AZOOGI_PRODUCTS = {
       "id": "recgGwQHQQ5LPh0fb",
       "product_name": "Handrail Spot II",
       "category": "Handrail",
-      "sku": "HLS20-CV-SYM sym 30 deg for 3000K",
+      "product_code": "HRS011",
+      "sku_mappings": [
+        {
+          "sku": "HRS011",
+          "combination": [
+            "101",
+            "102",
+            "105",
+            "107",
+            "108"
+          ]
+        },
+        {
+          "sku": "HRS012",
+          "combination": [
+            "101",
+            "102",
+            "106",
+            "107",
+            "108"
+          ]
+        },
+        {
+          "sku": "HRS013",
+          "combination": [
+            "101",
+            "103",
+            "105",
+            "107",
+            "108"
+          ]
+        },
+        {
+          "sku": "HRS014",
+          "combination": [
+            "101",
+            "103",
+            "106",
+            "107",
+            "108"
+          ]
+        },
+        {
+          "sku": "HRS015",
+          "combination": [
+            "101",
+            "104",
+            "105",
+            "107",
+            "108"
+          ]
+        },
+        {
+          "sku": "HRS016",
+          "combination": [
+            "101",
+            "104",
+            "106",
+            "107",
+            "108"
+          ]
+        }
+      ],
       "product_short_description": "Elevate your pathways with Handrail Spot II. It casts a warm, sophisticated ambiance that seamlessly guides your steps with elegant architectural charm.\n",
       "product_description": "Elevate your architectural designs with Handrail Spot II, the premium lighting solution that effortlessly marries sophistication with modern functionality. Designed to seamlessly blend into any indoor or outdoor pathway, it casts a warm, inviting glow that gracefully guides your way while accentuating the elegant contours of your space. Perfect for those who demand meticulous attention to detail, this exquisite fixture turns ordinary walkways into enchanting visual experiences, adding a layer of sophisticated ambiance and subtle security to your surroundings. Discreet yet profoundly impactful, it is the quintessential choice for transforming your environment into a beautifully illuminated masterpiece.\n",
       "product_images": [
@@ -8873,7 +12199,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recgLLZnMSg2RXl9s",
       "product_name": "Meta Mounting Clips",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "PR002-MetalClips",
+      "sku_mappings": {},
       "product_short_description": "Secure your lighting setup with sleek metal mounting clips. Designed for ultimate stability, they offer hidden support and a clean, professional look for any modern space.\n",
       "product_description": "Effortlessly secure your architectural lighting vision with these sleek, reliable metal mounting clips. Designed for ultimate stability and seamless integration, they provide a strong, discrete anchor that lets your linear light fixtures take center stage with modern elegance and flawless precision.\n",
       "product_images": [],
@@ -8898,7 +12225,17 @@ const AZOOGI_PRODUCTS = {
       "id": "recgq2dRdLQvlvAYn",
       "product_name": "Aluminium Trimless Plaster Profile",
       "category": "Trimless",
-      "sku": "ALP068-R",
+      "product_code": "PR116",
+      "sku_mappings": [
+        {
+          "sku": "PR116",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        }
+      ],
       "product_short_description": "\n",
       "product_description": "\n",
       "product_images": [],
@@ -8962,7 +12299,41 @@ const AZOOGI_PRODUCTS = {
       "id": "recgxzIMLsJHz8j5v",
       "product_name": "Aluminium Surfaced Profile",
       "category": "Deep Surfaced",
-      "sku": "ALP004-R",
+      "product_code": "PR006",
+      "sku_mappings": [
+        {
+          "sku": "PR006",
+          "combination": [
+            "101",
+            "102",
+            "105"
+          ]
+        },
+        {
+          "sku": "PR006-3m-Silver",
+          "combination": [
+            "101",
+            "102",
+            "106"
+          ]
+        },
+        {
+          "sku": "PR006-B",
+          "combination": [
+            "101",
+            "103",
+            "105"
+          ]
+        },
+        {
+          "sku": "PR006-W",
+          "combination": [
+            "101",
+            "104",
+            "105"
+          ]
+        }
+      ],
       "product_short_description": "\n",
       "product_description": "\n",
       "product_images": [
@@ -9063,7 +12434,41 @@ const AZOOGI_PRODUCTS = {
       "id": "rech8EurLr3kmYTR2",
       "product_name": "Aluminium Surfaced Profile",
       "category": "Surfaced",
-      "sku": "ALP002-R",
+      "product_code": "PR002",
+      "sku_mappings": [
+        {
+          "sku": "PR002",
+          "combination": [
+            "101",
+            "102",
+            "105"
+          ]
+        },
+        {
+          "sku": "PR002-3m-Silver",
+          "combination": [
+            "101",
+            "102",
+            "106"
+          ]
+        },
+        {
+          "sku": "PR002-B",
+          "combination": [
+            "101",
+            "103",
+            "105"
+          ]
+        },
+        {
+          "sku": "PR002-W",
+          "combination": [
+            "101",
+            "104",
+            "105"
+          ]
+        }
+      ],
       "product_short_description": "\n",
       "product_description": "\n",
       "product_images": [
@@ -9164,7 +12569,8 @@ const AZOOGI_PRODUCTS = {
       "id": "rechgTsqWVSynL0rL",
       "product_name": "PR034 Diffuser",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "DIFF-034",
+      "sku_mappings": {},
       "product_short_description": "Elevate your interior design with soft, balanced light. The PR034 Diffuser creates continuous lines of glow for a high-end, modern finish that impresses.\n",
       "product_description": "Elevate your lighting design with the sleek PR034 Diffuser. Designed to soften glare into a smooth, mesmerizing beam, it produces seamless lines of light that bring architectural elegance and modern luxury to custom residential or commercial spaces.\n",
       "product_images": [],
@@ -9189,7 +12595,17 @@ const AZOOGI_PRODUCTS = {
       "id": "rechzIkxfMGHqLixG",
       "product_name": "Aluminium Trimless Plaster Profile",
       "category": "Trimless",
-      "sku": "L880",
+      "product_code": "TP6913-DS-BEND",
+      "sku_mappings": [
+        {
+          "sku": "TP6913-DS-BEND",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        }
+      ],
       "product_short_description": "Transform your home into a breathtaking sanctuary of light. Experience seamless elegance and a sophisticated glow that effortlessly elevates every room with timeless luxury.\n",
       "product_description": "Transform your living space into a breathtaking sanctuary of light with this premium architectural lighting solution. Designed to integrate seamlessly into your interior, it casts a warm, sophisticated glow that effortlessly enhances your home's natural beauty and elegance. Perfect for creating an ambiance of subtle luxury, it elevates every room with a captivating aura of warmth, modern refinement, and timeless allure.\n",
       "product_images": [],
@@ -9253,7 +12669,49 @@ const AZOOGI_PRODUCTS = {
       "id": "recjGZVEX4ISH4nwj",
       "product_name": "Switchable Driver",
       "category": "Switchable Driver",
-      "sku": "OTM-E20-VC",
+      "product_code": "ADR-S12V24V-20W",
+      "sku_mappings": [
+        {
+          "sku": "ADR-S12V24V-20W",
+          "combination": [
+            "101",
+            "102",
+            "107"
+          ]
+        },
+        {
+          "sku": "ADR-S12V24V-40W",
+          "combination": [
+            "101",
+            "103",
+            "107"
+          ]
+        },
+        {
+          "sku": "ADR-S12V24V-60W",
+          "combination": [
+            "101",
+            "104",
+            "107"
+          ]
+        },
+        {
+          "sku": "ADR-S12V24V-80W",
+          "combination": [
+            "101",
+            "105",
+            "107"
+          ]
+        },
+        {
+          "sku": "ADR-S12V24V-100W",
+          "combination": [
+            "101",
+            "106",
+            "107"
+          ]
+        }
+      ],
       "product_short_description": "Elevate your environment with a perfect blend of elegance and modern design, casting a warm, sophisticated glow that adds an unparalleled touch of ambiance and luxury.\n",
       "product_description": "Transform your spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your environment, casting a warm, sophisticated glow that effortlessly enhances the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and style to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
@@ -9358,7 +12816,45 @@ const AZOOGI_PRODUCTS = {
       "id": "recjUspW3CYqy6Gqd",
       "product_name": "Dual Bend Neon",
       "category": "3D",
-      "sku": "AIR 1010 WHT",
+      "product_code": "3D1010-10W-2.7K-IP67-FC",
+      "sku_mappings": [
+        {
+          "sku": "3D1010-10W-2.7K-IP67-FC",
+          "combination": [
+            "101",
+            "102",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109"
+          ]
+        },
+        {
+          "sku": "3D1010-10W-3K-IP67-FC",
+          "combination": [
+            "101",
+            "103",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109"
+          ]
+        },
+        {
+          "sku": "3D1010-10W-4K-IP67-FC",
+          "combination": [
+            "101",
+            "104",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109"
+          ]
+        }
+      ],
       "product_short_description": "Unleash your creative vision with Free Cut 3D Bend Neon. Curve it effortlessly in every direction for a seamless, radiant atmosphere that transforms any ordinary space.\n",
       "product_description": "Unleash your creative vision with the Free Cut 3D Bend Neon, a revolutionary linear lighting solution designed to bring complete design freedom and fluid brilliance to any environment. Engineered for exceptional three-dimensional flexibility, this luxurious masterpiece curves effortlessly in every direction, allowing you to trace intricate architectural contours and craft captivating, personalized lighting displays. Its pristine, uniform glow eliminates harsh shadows, filling your space with a seamless, radiant atmosphere. Perfect for designers who refuse to compromise on style and adaptability, this premium lighting choice transforms the ordinary into an extraordinary visual statement, capturing elegance and modern sophistication from every single angle.\n",
       "product_images": [
@@ -9498,7 +12994,8 @@ const AZOOGI_PRODUCTS = {
       "id": "reckFMheUHMgD5Zqh",
       "product_name": "PR027 End Cap",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "PR027-EndCap",
+      "sku_mappings": {},
       "product_short_description": "Add the perfect finishing touch to your custom lighting. These premium end caps deliver a clean, modern aesthetic that effortlessly elevates any architectural design.\n",
       "product_description": "Elevate your lighting layout with these sleek silver end caps designed for a refined, tailored appearance. Providing a clean and decorative closure to your profiles, they infuse modern elegance and metallic sophistication into every custom installation.\n",
       "product_images": [],
@@ -9523,7 +13020,16 @@ const AZOOGI_PRODUCTS = {
       "id": "reckjqGprGGLIL4h6",
       "product_name": "Flex Alu ZigZag Profile for 12mm RGBW Strip",
       "category": "RGBW Strip",
-      "sku": "Bendable Profile (RS-ZL-1515B)",
+      "product_code": "PR-BEND-1M",
+      "sku_mappings": [
+        {
+          "sku": "PR-BEND-1M",
+          "combination": [
+            "101",
+            "102"
+          ]
+        }
+      ],
       "product_short_description": "Elevate your spaces into a breathtaking visual journey of elegant design and discreet luxury with a sophisticated, seamless glow.\n",
       "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
       "product_images": [
@@ -9611,10 +13117,13 @@ const AZOOGI_PRODUCTS = {
       "id": "recldcbCBojZd0ANe",
       "product_name": "Neon Metal Mounting Clips",
       "category": "Accessories",
-      "sku": "AC021-SET",
+      "product_code": "Neon-MetalClips-0606",
+      "sku_mappings": {},
       "product_short_description": "Keep your custom lighting securely anchored with strong, discreet metal mounting clips crafted for a clean, minimalist aesthetic.\n",
       "product_description": "Ensure a flawless, professional installation with these premium metal mounting clips, engineered to provide strong, reliable support for your neon LED profiles. Designed for effortless setup and a discreet, seamless finish, they keep your tailored lighting designs securely in place while preserving a clean, minimalist aesthetic.\n",
-      "product_images": [],
+      "product_images": [
+        "assets/img/products/recldcbCBojZd0ANe_200815725f.webp"
+      ],
       "product_dimension": "",
       "stocked_item": [
         ""
@@ -9636,7 +13145,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recldlC5r98XZtdRA",
       "product_name": "PR115 Diffuser",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "DIFF-115",
+      "sku_mappings": {},
       "product_short_description": "Experience smooth, professional-grade light diffusion with the PR115. Eliminate glare and add warmth, sophistication, and elegance to your custom LED setup.\n",
       "product_description": "Transform your interior spaces with the PR115 Diffuser. Creating a beautifully continuous, softened glow, it effortlessly infuses warmth and modern elegance into your custom lighting, turning functional fixtures into impressive decorative statements.\n",
       "product_images": [],
@@ -9661,7 +13171,16 @@ const AZOOGI_PRODUCTS = {
       "id": "recltZ5J2L0upCu7p",
       "product_name": "Aluminium Trimless Plaster Profile",
       "category": "Trimless",
-      "sku": "L866",
+      "product_code": "TP5815-SS",
+      "sku_mappings": [
+        {
+          "sku": "TP5815-SS",
+          "combination": [
+            "101",
+            "102"
+          ]
+        }
+      ],
       "product_short_description": "Elevate your interior design with an exquisite lighting solution that merges modern sophistication with subtle luxury, creating a serene, warm sanctuary in your home.\n",
       "product_description": "Elevate your interior design with an exquisite lighting solution that seamlessly merges modern sophistication with subtle luxury. Designed to blend effortlessly into your architecture, this sleek profile casts a captivating, soft radiance that beautifully accentuates clean lines and refined spaces. Perfect for creating an enchanting, warm atmosphere, it transforms any room into a serene sanctuary of light, offering an elevated visual experience for those who appreciate discreet elegance and impeccable style.\n",
       "product_images": [],
@@ -9713,7 +13232,57 @@ const AZOOGI_PRODUCTS = {
       "id": "recmXW1LwoSgOKt3c",
       "product_name": "Neon Top View",
       "category": "Top View",
-      "sku": "OPTIC 1617T",
+      "product_code": "TV1617-22W-2.7K-IP68-Optic",
+      "sku_mappings": [
+        {
+          "sku": "TV1617-22W-2.7K-IP68-Optic",
+          "combination": [
+            "101",
+            "102",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110"
+          ]
+        },
+        {
+          "sku": "TV1617-22W-3K-IP68-Optic",
+          "combination": [
+            "101",
+            "103",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110"
+          ]
+        },
+        {
+          "sku": "TV1617-22W-4K-IP68-Optic",
+          "combination": [
+            "101",
+            "104",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110"
+          ]
+        },
+        {
+          "sku": "TV1617-22W-5K-IP68-Optic",
+          "combination": [
+            "101",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110"
+          ]
+        }
+      ],
       "product_short_description": "Elevate your space with the Top View IP68 Optic. This premier linear light brings sophisticated, focused radiance to your architectural artistry and modern aesthetics.\n",
       "product_description": "Elevate your architectural artistry with the Top View IP68 Optic, a premier linear lighting masterpiece designed to bring sophisticated, focused radiance to your design visions. Engineered for exceptional top-bending flexibility and breathtaking visual impact, this luxurious neon-style light effortlessly shapes your environment, casting a seamless, uniform glow that accentuates contours and elevates modern aesthetics. Whether capturing the essence of high-end commercial spaces or delivering a dramatic touch to premium landscapes, its refined elegance and flawless presentation offer an unmatched atmosphere. Built to perform with absolute grace under any conditions, it stands as the definitive choice for designers who demand pure brilliance, seamless adaptability, and uncompromised style.\n",
       "product_images": [
@@ -9860,7 +13429,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recmgOaCsNbjT074Z",
       "product_name": "PR002 End Cap",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "PR002-EndCap",
+      "sku_mappings": {},
       "product_short_description": "Complete your architectural lighting with a sleek, modern end cap. Designed to seamlessly seal profiles for a pristine, polished finish in any setting.\n",
       "product_description": "Give your architectural lighting a pristine, flawless finish with these premium end caps. Crafted to add effortless sophistication to any space, they neatly seal off profile ends, transforming custom LED runs into sleek, cohesive architectural features with an elevated modern aesthetic.\n",
       "product_images": [],
@@ -9885,7 +13455,18 @@ const AZOOGI_PRODUCTS = {
       "id": "recmtVr5MCYiXyVqt",
       "product_name": "Pool Light",
       "category": "Pool Light",
-      "sku": "SC-G101A",
+      "product_code": "PL002",
+      "sku_mappings": [
+        {
+          "sku": "PL002",
+          "combination": [
+            "101",
+            "102",
+            "103",
+            "104"
+          ]
+        }
+      ],
       "product_short_description": "Transform your pool into a breathtaking oasis. Elevate your outdoor space with a sophisticated glow that brings enchanting elegance and serene luxury to every evening.\n",
       "product_description": "Dive into an enchanting oasis of light and luxury with our premium pool illumination solution. Designed to effortlessly elevate your outdoor experience, it bathes your aquatic retreat in a warm, sophisticated radiance that creates an unparalleled ambiance. Perfect for those with a discerning eye for discreet elegance and refined architectural detail, this lighting masterpiece transforms ordinary evenings into a breathtaking visual journey, adding both captivating allure and a profound sense of serenity to your home.\n",
       "product_images": [
@@ -9969,7 +13550,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recoaE80UKJkYVl7L",
       "product_name": "Bendable Aluminium Profile",
       "category": "Accessories",
-      "sku": "AS-AFS(T)1616M-1000",
+      "product_code": "Neon-FlexiAluProfile-1616",
+      "sku_mappings": {},
       "product_short_description": "Elevate your lighting design with a flexible profile that effortlessly diffuses light into smooth, captivating curves for a modern aesthetic.\n",
       "product_description": "Effortlessly shape stunning light throughout your home or commercial space with this versatile flexible aluminum profile. Designed to bring a smooth, sophisticated glow to any environment, it allows you to create custom curves and striking lighting accents with ease. Add a luxurious, modern touch to your decor with soft, continuous light that highlights the finest details of your interior design.\n",
       "product_images": [
@@ -9996,7 +13578,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recpHG6unmCtb8yfa",
       "product_name": "Side Opening Metal Mounting Clips",
       "category": "Accessories",
-      "sku": "AS-AFS(T)1616A4-35",
+      "product_code": "Neon-MetalClips-1616-Side",
+      "sku_mappings": {},
       "product_short_description": "Upgrade your lighting setup with side-opening mounting clips designed to provide seamless architectural integration and a pristine, modern finish.\n",
       "product_description": "Elevate your lighting design with side-opening metal mounting clips that combine functional excellence with effortless installation. Designed to securely support your lighting fixtures while remaining discreetly out of sight, these clips help create smooth, continuous runs of light. Experience the perfect harmony of stability and minimalist aesthetics for a truly elevated interior look.\n",
       "product_images": [
@@ -10023,7 +13606,17 @@ const AZOOGI_PRODUCTS = {
       "id": "recpZqR9zzmSkasvq",
       "product_name": "Aluminium Flat Corner Profile",
       "category": "Corner",
-      "sku": "ALP007-R",
+      "product_code": "PR009",
+      "sku_mappings": [
+        {
+          "sku": "PR009",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        }
+      ],
       "product_short_description": "\n",
       "product_description": "\n",
       "product_images": [
@@ -10093,7 +13686,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recpfYGfb7O6G6ajg",
       "product_name": "Neon Metal Mounting Clips",
       "category": "Accessories",
-      "sku": "AC028-SET",
+      "product_code": "Neon-MetalClips-0612",
+      "sku_mappings": {},
       "product_short_description": "Achieve reliable support and a minimalist look with high-grade clips that keep the focus entirely on your stunning light displays.\n",
       "product_description": "Ensure a flawless, professional installation every time with our high-grade metal mounting clips, meticulously designed to hold your lighting seamlessly in place. Crafted for ultimate reliability and a clean, modern look, these essential accents secure your custom lighting setups with effortless strength, allowing your design vision to shine bright without distraction.\n",
       "product_images": [
@@ -10120,7 +13714,16 @@ const AZOOGI_PRODUCTS = {
       "id": "recq5brCQInmmm5bR",
       "product_name": "Aluminium Skirting Trimless Plaster Profile",
       "category": "Skirting Trimless",
-      "sku": "L835",
+      "product_code": "SKR1370",
+      "sku_mappings": [
+        {
+          "sku": "SKR1370",
+          "combination": [
+            "101",
+            "102"
+          ]
+        }
+      ],
       "product_short_description": "Dive into an enchanting oasis of light and luxury. Elevate your retreat into a sophisticated, glowing sanctuary, adding breathtaking allure and serene ambiance to every evening.\n",
       "product_description": "Dive into an enchanting oasis of light and luxury with our premium illumination solution. Designed to effortlessly elevate your living experience, it bathes your retreat in a warm, sophisticated radiance that creates an unparalleled ambiance. Perfect for those with a discerning eye for discreet elegance, this seamless lighting design adds a breathtaking allure and a serene, captivating glow to every evening, turning any space into a welcoming sanctuary of modern style.\n",
       "product_images": [
@@ -10180,10 +13783,13 @@ const AZOOGI_PRODUCTS = {
       "id": "recqJce2R1bVbF3hU",
       "product_name": "Bendable Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC021-CR",
+      "product_code": "Neon-FlexiAluProfile-0606",
+      "sku_mappings": {},
       "product_short_description": "Sculpt smooth, flowing ribbons of glow around custom curves with an ultra-pliant aluminum profile designed for luxury lighting.\n",
       "product_description": "Unlock endless creative possibilities and effortlessly sculpt ambient light with our flexible aluminum profile. Designed to adapt gracefully to complex curves and unique architectural contours, this pliant channel transforms ordinary interiors into extraordinary visual landscapes with smooth, flowing ribbons of glow.\n",
-      "product_images": [],
+      "product_images": [
+        "assets/img/products/recqJce2R1bVbF3hU_9d19d4cec6.webp"
+      ],
       "product_dimension": "",
       "stocked_item": [
         ""
@@ -10205,7 +13811,41 @@ const AZOOGI_PRODUCTS = {
       "id": "recqNuTzGC6vZ9jj1",
       "product_name": "Aluminium Surfaced Profile",
       "category": "Surfaced",
-      "sku": "ALP014",
+      "product_code": "PR016",
+      "sku_mappings": [
+        {
+          "sku": "PR016",
+          "combination": [
+            "101",
+            "102",
+            "105"
+          ]
+        },
+        {
+          "sku": "PR016-3m-Silver",
+          "combination": [
+            "101",
+            "102",
+            "106"
+          ]
+        },
+        {
+          "sku": "PR016-B",
+          "combination": [
+            "101",
+            "103",
+            "105"
+          ]
+        },
+        {
+          "sku": "PR016-W",
+          "combination": [
+            "101",
+            "104",
+            "105"
+          ]
+        }
+      ],
       "product_short_description": "\n",
       "product_description": "\n",
       "product_images": [],
@@ -10300,7 +13940,236 @@ const AZOOGI_PRODUCTS = {
       "id": "recqhKk4Txzlp6TgG",
       "product_name": "Neon Top View",
       "category": "Top View",
-      "sku": "AG 1617T BLACK",
+      "product_code": "TV1617-10W-2.2K-IP68-HC-BLK",
+      "sku_mappings": [
+        {
+          "sku": "TV1617-10W-2.2K-IP68-HC-BLK",
+          "combination": [
+            "101",
+            "104",
+            "109",
+            "110",
+            "111",
+            "112",
+            "114",
+            "115"
+          ]
+        },
+        {
+          "sku": "TV1617-10W-2.7K-IP68-HC-BLK",
+          "combination": [
+            "101",
+            "105",
+            "109",
+            "110",
+            "111",
+            "112",
+            "114",
+            "115"
+          ]
+        },
+        {
+          "sku": "TV1617-10W-3K-IP68-HC-BLK",
+          "combination": [
+            "101",
+            "106",
+            "109",
+            "110",
+            "111",
+            "112",
+            "114",
+            "115"
+          ]
+        },
+        {
+          "sku": "TV1617-10W-4K-IP68-HC-BLK",
+          "combination": [
+            "101",
+            "107",
+            "109",
+            "110",
+            "111",
+            "112",
+            "114",
+            "115"
+          ]
+        },
+        {
+          "sku": "TV1617-15W-2.2K-IP68-HC-BLK",
+          "combination": [
+            "102",
+            "104",
+            "109",
+            "110",
+            "111",
+            "113",
+            "114",
+            "115"
+          ]
+        },
+        {
+          "sku": "TV1617-15W-2.7K-IP68-HC-BLK",
+          "combination": [
+            "102",
+            "105",
+            "109",
+            "110",
+            "111",
+            "113",
+            "114",
+            "115"
+          ]
+        },
+        {
+          "sku": "TV1617-15W-3K-IP68-HC-BLK",
+          "combination": [
+            "102",
+            "106",
+            "109",
+            "110",
+            "111",
+            "113",
+            "114",
+            "115"
+          ]
+        },
+        {
+          "sku": "TV1617-15W-4K-IP68-HC-BLK",
+          "combination": [
+            "102",
+            "107",
+            "109",
+            "110",
+            "111",
+            "113",
+            "114",
+            "115"
+          ]
+        },
+        {
+          "sku": "TV1617-13W-TW-IP68-HC-BLK",
+          "combination": [
+            "103",
+            "116",
+            "108",
+            "109",
+            "110",
+            "111",
+            "113",
+            "114",
+            "115"
+          ]
+        },
+        {
+          "sku": "TV1617-10W-2.2K-IP68-HC",
+          "combination": [
+            "101",
+            "104",
+            "109",
+            "110",
+            "111",
+            "112",
+            "114"
+          ]
+        },
+        {
+          "sku": "TV1617-10W-2.7K-IP68-HC",
+          "combination": [
+            "101",
+            "105",
+            "109",
+            "110",
+            "111",
+            "112",
+            "114"
+          ]
+        },
+        {
+          "sku": "TV1617-10W-3K-IP68-HC",
+          "combination": [
+            "101",
+            "106",
+            "109",
+            "110",
+            "111",
+            "112",
+            "114"
+          ]
+        },
+        {
+          "sku": "TV1617-10W-4K-IP68-HC",
+          "combination": [
+            "101",
+            "107",
+            "109",
+            "110",
+            "111",
+            "112",
+            "114"
+          ]
+        },
+        {
+          "sku": "TV1617-15W-2.2K-IP68-HC",
+          "combination": [
+            "102",
+            "104",
+            "109",
+            "110",
+            "111",
+            "113",
+            "114"
+          ]
+        },
+        {
+          "sku": "TV1617-15W-2.7K-IP68-HC",
+          "combination": [
+            "102",
+            "105",
+            "109",
+            "110",
+            "111",
+            "113",
+            "114"
+          ]
+        },
+        {
+          "sku": "TV1617-15W-3K-IP68-HC",
+          "combination": [
+            "102",
+            "106",
+            "109",
+            "110",
+            "111",
+            "113",
+            "114"
+          ]
+        },
+        {
+          "sku": "TV1617-15W-4K-IP68-HC",
+          "combination": [
+            "102",
+            "107",
+            "109",
+            "110",
+            "111",
+            "113",
+            "114"
+          ]
+        },
+        {
+          "sku": "TV1617-13W-TW-IP68-HC",
+          "combination": [
+            "103",
+            "116",
+            "108",
+            "109",
+            "110",
+            "111",
+            "113",
+            "114"
+          ]
+        }
+      ],
       "product_short_description": "Elevate your designs with Top View Honeycomb, blending seamless radiance and sleek contemporary elegance to bring ultimate visual luxury and mystery to any modern space.\n",
       "product_description": "Elevate your architectural designs with the Top View IP68 Honeycomb, a sophisticated linear lighting solution crafted to deliver seamless radiance and ultimate visual comfort. Featuring a dramatic black finish that blends beautifully with modern aesthetics, this top-bending masterpiece gracefully follows elegant contours while its innovative anti-glare technology ensures a soft, flawless glow. Perfect for luxury commercial venues, minimalist interiors, or high-end landscape designs, it brings an atmosphere of pure mystery and contemporary elegance to any environment, making it the ultimate selection for designers who demand breathtaking impact without compromising on comfort.\n",
       "product_images": [
@@ -10512,7 +14381,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recquKNSIgLLnMCPw",
       "product_name": "Suspension Wire",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "Concord Suspension",
+      "sku_mappings": {},
       "product_short_description": "Bring an effortless sense of elegance to your space with our Suspension Wire. Create a sleek floating presence that complements any contemporary interior.\n",
       "product_description": "Elevate your lighting concept to new heights with our modern Suspension Wire. Designed to give your linear fixtures an intriguing, floating presence, this premium accessory creates an effortless sense of spatial elegance and contemporary luxury. Bring clean architectural lines and stunning visual impact to any floating installation with a sleek, minimalist touch.\n",
       "product_images": [],
@@ -10537,10 +14407,13 @@ const AZOOGI_PRODUCTS = {
       "id": "recri2EW7LNkAEiQP",
       "product_name": "Neon Metal Mounting Clips",
       "category": "Accessories",
-      "sku": "AC022-SET",
+      "product_code": "Neon-MetalClips-0408",
+      "sku_mappings": {},
       "product_short_description": "Achieve effortless, secure installations with premium metal mounting clips designed for a discreet, flawless, and professional look.\n",
       "product_description": "Achieve seamless, professional lighting installations with these high-grade metal mounting clips, designed to provide strong, dependable support for your neon LED profiles. Crafted for effortless integration and a clean, hidden finish, they ensure your custom lighting designs remain securely anchored while maintaining a sleek, modern aesthetic.\n",
-      "product_images": [],
+      "product_images": [
+        "assets/img/products/recri2EW7LNkAEiQP_a0815aa301.webp"
+      ],
       "product_dimension": "",
       "stocked_item": [
         ""
@@ -10562,7 +14435,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recsNbVUhVeweMWVg",
       "product_name": "Recessed Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC167-EP",
+      "product_code": "Neon-RecessedAluProfile-1617",
+      "sku_mappings": {},
       "product_short_description": "Create mesmerizing recessed lighting effects that blend seamlessly into your walls and ceilings for a sleek, minimalist aesthetic.\n",
       "product_description": "Achieve a clean, architectural look with our recessed aluminum profile, designed to hide seamlessly within your walls or ceilings for an ultra-modern lighting effect. By embedding the light directly into your surfaces, it creates stunning, continuous lines of glow that enhance your space with a sleek, minimalist aesthetic. Perfect for creating dramatic visual depth and sophisticated ambiance, this profile turns subtle lighting into an extraordinary interior feature.\n",
       "product_images": [
@@ -10589,7 +14463,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recsRLN74iwNeAiEI",
       "product_name": "PR018 Diffuser",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "DIFF-018",
+      "sku_mappings": {},
       "product_short_description": "Add a touch of high-end elegance with the PR018 Diffuser. It creates a smooth, ambient glow that effortlessly transforms your space into an inviting retreat.\n",
       "product_description": "Soften intense lighting into a smooth, ambient glow with the PR018 Diffuser. Perfectly diffusing output across the channel, it adds warmth, modern luxury, and a high-end architectural finish that enhances the visual comfort of any contemporary environment.\n",
       "product_images": [],
@@ -10614,7 +14489,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recslGMA8IExcuJnX",
       "product_name": "Plaster Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC023-LP",
+      "product_code": "Neon-PlasterAluProfile-1010",
+      "sku_mappings": {},
       "product_short_description": "Create flawless, trimless lines of light that melt into your walls for an ultra-clean, architectural lighting experience.\n",
       "product_description": "Elevate your interior design with our stunning plaster aluminium profile, engineered for a truly trimless, architectural lighting experience. By seamlessly embedding your lighting into walls and ceilings, it creates captivating, continuous ribbons of light that flow naturally through your space. Ideal for minimalist and contemporary aesthetics, this profile redefines room ambiance, adding depth, warmth, and luxury to any room.\n",
       "product_images": [
@@ -10641,7 +14517,8 @@ const AZOOGI_PRODUCTS = {
       "id": "rectvABW5bawSU6W4",
       "product_name": "Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC013-AP",
+      "product_code": "Neon-AluProfile-1615",
+      "sku_mappings": {},
       "product_short_description": "Elevate your lighting design with sleek aluminum profiles engineered to create smooth, captivating lines of illumination for modern interiors.\n",
       "product_description": "Elevate your lighting design with our premium aluminum profile, meticulously engineered to bring a touch of modern sophistication to any space. Designed to integrate seamlessly into your interior décor, this versatile channel creates smooth, captivating lines of illumination that enhance ambiance and highlight architectural details. Perfect for crafting ambient accents or striking lighting features, it offers the ideal foundation to showcase your unique design vision with understated elegance and flair.\n",
       "product_images": [
@@ -10668,7 +14545,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recudaSflCKcbfkhD",
       "product_name": "Neon End Cap",
       "category": "Accessories",
-      "sku": "AS-GMS1616GH0-EC",
+      "product_code": "Neon-EndCap-1616-Top",
+      "sku_mappings": {},
       "product_short_description": "Complete your modern lighting design with elegant top entry end caps, ensuring a polished look and continuous, trimless aesthetic in every room.\n",
       "product_description": "Complete your lighting installation with the ultimate finishing touch using our top-entry end caps. Offering a seamless integration into your space, they ensure your lighting features maintain a clean, high-end appearance from every angle. Perfect for modern interiors, they provide a smooth, elegant closure that secures your setup while upholding a minimalist, luxury aesthetic.\n",
       "product_images": [],
@@ -10693,7 +14571,17 @@ const AZOOGI_PRODUCTS = {
       "id": "recvAxmXm0jmqPe5T",
       "product_name": "Aluminium Trimless Plaster Profile",
       "category": "Trimless",
-      "sku": "L275",
+      "product_code": "TP5314-SS",
+      "sku_mappings": [
+        {
+          "sku": "TP5314-SS",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        }
+      ],
       "product_short_description": "Elevate your home with seamless modern elegance. Experience discreet luxury and a sophisticated glow that turns any space into a breathtaking sanctuary.\n",
       "product_description": "Elevate your living space with an exquisite architectural lighting solution that seamlessly merges modern elegance with understated luxury. Designed to effortlessly integrate into your walls or ceilings, this premium profile casts a smooth, sophisticated glow that redefines your interior environment. Perfect for creating a serene and captivating ambiance, it turns ordinary spaces into a breathtaking sanctuary of light, highlighting fine details while maintaining a clean, flawless aesthetic.\n",
       "product_images": [],
@@ -10757,7 +14645,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recvYdGtIffBtTxDS",
       "product_name": "Recessed Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC015-EP",
+      "product_code": "Neon-RecessedAluProfile-1220",
+      "sku_mappings": {},
       "product_short_description": "Tuck custom neon light neatly into walls and ceilings for a soft, captivating ambient glow with a sophisticated built-in aesthetic.\n",
       "product_description": "Seamlessly blend light and architecture with this recessed aluminum profile, designed to give your space a clean, built-in aesthetic with effortless charm. Crafting a sophisticated trimless look, it neatly tucks your custom neon lighting into walls or ceilings, casting a soft, captivating glow that enhances any interior. Perfect for creating modern lines of light and an elevated ambiance, this profile turns ordinary rooms into stunning, light-filled environments with a polished, luxury feel.\n",
       "product_images": [
@@ -10784,7 +14673,89 @@ const AZOOGI_PRODUCTS = {
       "id": "recw9jtxD9FJLvioh",
       "product_name": "SMD Strip",
       "category": "SMD",
-      "sku": "C8240-24V-10mm",
+      "product_code": "SMD-22W-2.7K-IP20",
+      "sku_mappings": [
+        {
+          "sku": "SMD-22W-2.7K-IP20",
+          "combination": [
+            "101",
+            "102",
+            "106",
+            "107",
+            "109"
+          ]
+        },
+        {
+          "sku": "SMD-22W-3K-IP20",
+          "combination": [
+            "101",
+            "103",
+            "106",
+            "107",
+            "109"
+          ]
+        },
+        {
+          "sku": "SMD-22W-4K-IP20",
+          "combination": [
+            "101",
+            "104",
+            "106",
+            "107",
+            "109"
+          ]
+        },
+        {
+          "sku": "SMD-22W-6K-IP20",
+          "combination": [
+            "101",
+            "105",
+            "106",
+            "107",
+            "109"
+          ]
+        },
+        {
+          "sku": "SMD-22W-2.7K-IP65",
+          "combination": [
+            "101",
+            "102",
+            "106",
+            "108",
+            "109"
+          ]
+        },
+        {
+          "sku": "SMD-22W-3K-IP65",
+          "combination": [
+            "101",
+            "103",
+            "106",
+            "108",
+            "109"
+          ]
+        },
+        {
+          "sku": "SMD-22W-4K-IP65",
+          "combination": [
+            "101",
+            "104",
+            "106",
+            "108",
+            "109"
+          ]
+        },
+        {
+          "sku": "SMD-22W-6K-IP65",
+          "combination": [
+            "101",
+            "105",
+            "106",
+            "108",
+            "109"
+          ]
+        }
+      ],
       "product_short_description": "Elevate your architectural vision with stunning linear lighting designed to bring seamless radiance, breathtaking visual impact, and unmatched elegance to any space.\n",
       "product_description": "Elevate your architectural visions with the 22W SMD, a premium linear lighting solution designed to bring seamless radiance to any space. Engineered for incredible flexibility and breathtaking visual impact, this brilliant light curves effortlessly to accentuate contours and create striking design statements. Whether you are transforming a high-end commercial venue or adding a sophisticated atmosphere to an outdoor landscape, its pristine, uniform glow delivers unmatched aesthetic elegance. Built to maintain its flawless brilliance, it is the ultimate choice for designers who refuse to compromise on beauty, adaptability, and style.\n",
       "product_images": [
@@ -10911,7 +14882,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recwcN4MsipG7pgaO",
       "product_name": "Meta Mounting Clips",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "PR009-MetalClips",
+      "sku_mappings": {},
       "product_short_description": "Secure your LED profiles with precision using premium metal mounting clips. Enjoy effortless installation and a sleek, professional finish for your lighting vision.\n",
       "product_description": "Securely mount your PR009 LED profiles with total confidence and style. These sleek metal mounting clips offer a clean, discrete installation solution, ensuring your linear lighting remains perfectly aligned while providing a crisp, modern finish for any contemporary space.\n",
       "product_images": [],
@@ -10936,7 +14908,17 @@ const AZOOGI_PRODUCTS = {
       "id": "recwjKMehMHxr19us",
       "product_name": "Aluminium Trimless Recessed Plaster Profile",
       "category": "Trimless",
-      "sku": "ALP071",
+      "product_code": "PR115",
+      "sku_mappings": [
+        {
+          "sku": "PR115",
+          "combination": [
+            "101",
+            "102",
+            "103"
+          ]
+        }
+      ],
       "product_short_description": "\n",
       "product_description": "\n",
       "product_images": [
@@ -11006,10 +14988,13 @@ const AZOOGI_PRODUCTS = {
       "id": "recxn7EUulTZE8jno",
       "product_name": "Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC021-AP",
+      "product_code": "Neon-AluProfile-0408",
+      "sku_mappings": {},
       "product_short_description": "Elevate your space with sleek aluminum profiles designed to craft seamless, modern lines of light for a refined, high-end finish.\n",
       "product_description": "Elevate your lighting design with our ultra-compact aluminum profile, engineered to deliver sleek architectural precision in a surprisingly slim footprint. Designed to create flawless lines of light, it seamlessly integrates into any modern space to turn subtle ambient accents into captivating focal points of high-end elegance.\n",
-      "product_images": [],
+      "product_images": [
+        "assets/img/products/recxn7EUulTZE8jno_ef9d77e7b4.webp"
+      ],
       "product_dimension": "",
       "stocked_item": [
         ""
@@ -11031,7 +15016,105 @@ const AZOOGI_PRODUCTS = {
       "id": "recy3gFvZS1Qb9pZ0",
       "product_name": "Neon Top View",
       "category": "Top View",
-      "sku": "LEDLINE ASTON 1615T BLACK",
+      "product_code": "TV1615-10W-2.7K-IP67-Black",
+      "sku_mappings": [
+        {
+          "sku": "TV1615-10W-2.7K-IP67-Black",
+          "combination": [
+            "101",
+            "103",
+            "107",
+            "108",
+            "109",
+            "110",
+            "113"
+          ]
+        },
+        {
+          "sku": "TV1615-10W-3K-IP67-Black",
+          "combination": [
+            "101",
+            "104",
+            "107",
+            "108",
+            "109",
+            "110",
+            "113"
+          ]
+        },
+        {
+          "sku": "TV1615-10W-4K-IP67-Black",
+          "combination": [
+            "101",
+            "105",
+            "107",
+            "108",
+            "109",
+            "110",
+            "113"
+          ]
+        },
+        {
+          "sku": "TV1615-15W-2.7K-IP67-Black",
+          "combination": [
+            "102",
+            "103",
+            "107",
+            "108",
+            "109",
+            "111",
+            "113"
+          ]
+        },
+        {
+          "sku": "TV1615-15W-3K-IP67-Black",
+          "combination": [
+            "102",
+            "104",
+            "107",
+            "108",
+            "109",
+            "111",
+            "113"
+          ]
+        },
+        {
+          "sku": "TV1615-15W-4K-IP67-Black",
+          "combination": [
+            "102",
+            "105",
+            "107",
+            "108",
+            "109",
+            "111",
+            "113"
+          ]
+        },
+        {
+          "sku": "TV1615-15W-RGB-IP67-Black",
+          "combination": [
+            "101",
+            "107",
+            "108",
+            "109",
+            "112",
+            "113",
+            "114"
+          ]
+        },
+        {
+          "sku": "TV1615-15W-TW-IP67-Black",
+          "combination": [
+            "101",
+            "106",
+            "107",
+            "108",
+            "109",
+            "112",
+            "113"
+          ]
+        }
+      ],
       "product_short_description": "Embrace mystery and sophistication with Black Neon, a sleek linear light designed to bring a dramatic, uniform glow and touch of pure luxury to any modern space.\n",
       "product_description": "Embrace the allure of mystery and sophistication with Black Neon, a captivating linear lighting choice designed to make a bold design statement. Featuring a sleek, dramatic black finish, this neon-style light blends seamlessly into dark aesthetics or acts as a striking contrast against minimalist backgrounds. It delivers a smooth, uniform glow that completely transforms the atmosphere of high-end lounges, modern retail spaces, or intimate outdoor patios. Engineered for incredible flexibility and built to withstand the elements, it allows designers to effortlessly map out artistic contours, adding an undeniable touch of luxury and architectural refinement wherever it is placed.\n",
       "product_images": [
@@ -11221,7 +15304,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recyCQ6BWZ2rSK9QV",
       "product_name": "Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC015-AP",
+      "product_code": "Neon-AluProfile-1220",
+      "sku_mappings": {},
       "product_short_description": "Bring sleek architectural style to your space with continuous lines of ambient glow, creating a refined backdrop for modern interiors.\n",
       "product_description": "Elevate your space with the sleek, modern aesthetic of our premium aluminum profile, meticulously designed to bring your lighting vision to life. Perfectly tailored for creating smooth, captivating lines of light, this versatile housing seamlessly integrates into any interior, adding a refined architectural touch to modern spaces. Whether you are looking to build a soft ambient atmosphere or highlight key visual features, it offers the ultimate backdrop to showcase your custom lighting with effortless elegance.\n",
       "product_images": [
@@ -11248,7 +15332,87 @@ const AZOOGI_PRODUCTS = {
       "id": "recyf3Kkxt5QXOXgU",
       "product_name": "Neon Top View Sauna",
       "category": "Top View",
-      "sku": "SAUNA 1617T",
+      "product_code": "TV1617-6W-1.6K-IP68-Sauna",
+      "sku_mappings": [
+        {
+          "sku": "TV1617-6W-1.6K-IP68-Sauna",
+          "combination": [
+            "101",
+            "102",
+            "109",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "TV1617-6W-2.2K-IP68-Sauna",
+          "combination": [
+            "101",
+            "103",
+            "109",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "TV1617-6W-2.7K-IP68-Sauna",
+          "combination": [
+            "101",
+            "104",
+            "109",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "TV1617-6W-3K-IP68-Sauna",
+          "combination": [
+            "101",
+            "105",
+            "109",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "TV1617-6W-4K-IP68-Sauna",
+          "combination": [
+            "101",
+            "106",
+            "109",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "TV1617-6W-5.3K-IP68-Sauna",
+          "combination": [
+            "101",
+            "107",
+            "109",
+            "110",
+            "111",
+            "112"
+          ]
+        },
+        {
+          "sku": "TV1617-6W-TW-IP68-Sauna",
+          "combination": [
+            "101",
+            "113",
+            "108",
+            "109",
+            "110",
+            "111",
+            "112"
+          ]
+        }
+      ],
       "product_short_description": "Transform your sauna into a luxurious oasis with a smooth, comforting glow that invites pure relaxation.\n",
       "product_description": "Step into a sanctuary of pure relaxation and elevated wellness with the Top View IP68 Sauna linear lighting. Expertly crafted to blend seamlessly into luxurious spa and thermal environments, this premium accent light wraps your space in a smooth, uniform glow that dissolves the stress of the outside world. Designed to enhance the serene atmosphere of your personal retreat, its breathtaking radiance casts a soft, tranquil light over contours and architectural features, creating an enchanting haven of comfort and calm. Perfect for designers seeking to cultivate an elite sensory experience, it brings a touch of pure, timeless sophistication to your wellness sanctuary.\n",
       "product_images": [
@@ -11419,7 +15583,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recyfZFoNktyzJimo",
       "product_name": "Bendable Plaster Aluminium Profile",
       "category": "Accessories",
-      "sku": "AC015-CR",
+      "product_code": "Neon-FlexiAluProfile-1220",
+      "sku_mappings": {},
       "product_short_description": "Transform modern interiors with plaster profiles that blend effortlessly into walls to turn lighting into a striking design feature.\n",
       "product_description": "Transform your space with the versatile charm of our premium plaster aluminum profile, designed to bring seamless sophistication to any interior setting. Crafted to blend effortlessly into walls and ceilings, this elegant channel transforms ordinary lighting into a captivating architectural feature, casting a smooth, inviting glow. Perfect for elevating modern interiors, it offers a clean, refined finish that turns ambient illumination into a breathtaking design statement.\n",
       "product_images": [
@@ -11446,7 +15611,8 @@ const AZOOGI_PRODUCTS = {
       "id": "recz1dyLH3uD6g1XI",
       "product_name": "PR130/PR131 Diffuser",
       "category": "Accessories",
-      "sku": "",
+      "product_code": "DIFF-130/131",
+      "sku_mappings": {},
       "product_short_description": "Transform your space with the PR130/PR131 Diffuser. Soften illumination into a continuous glow that adds elegant, modern sophistication to any custom lighting setup.\n",
       "product_description": "Elevate your interior ambiance with the PR130/PR131 Diffuser. Expertly designed to soften harsh illumination into a smooth, continuous glow, this stylish lens transforms bright light sources into a soothing visual experience. Bring modern warmth, seamless elegance, and sophisticated architectural flair to any residential or commercial space with this essential lighting companion.\n",
       "product_images": [],
@@ -11471,7 +15637,57 @@ const AZOOGI_PRODUCTS = {
       "id": "reczX8Y3eE6LxLyay",
       "product_name": "Neon Top View",
       "category": "Top View",
-      "sku": "SK-NTB1010V24-C27",
+      "product_code": "TV1010-BLK",
+      "sku_mappings": [
+        {
+          "sku": "TV1010-10W-2.7K-IP65-Black",
+          "combination": [
+            "101",
+            "102",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110"
+          ]
+        },
+        {
+          "sku": "TV1010-10W-3K-IP65-Black",
+          "combination": [
+            "101",
+            "103",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110"
+          ]
+        },
+        {
+          "sku": "TV1010-10W-4K-IP65-Black",
+          "combination": [
+            "101",
+            "104",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110"
+          ]
+        },
+        {
+          "sku": "TV1010-10W-6K-IP65-Black",
+          "combination": [
+            "101",
+            "105",
+            "106",
+            "107",
+            "108",
+            "109",
+            "110"
+          ]
+        }
+      ],
       "product_short_description": "Transform your space with a seamless, flexible glow designed to effortlessly accentuate contours and bring timeless, vibrant elegance to any environment.\n",
       "product_description": "Elevate your space with a mesmerizing, top-bending linear radiance designed to transform ordinary architectural lines into extraordinary visual statements. Crafted to curve effortlessly around contours, this flexible neon lighting solution casts a seamless, elegant glow that enhances high-end commercial environments and sophisticated outdoor landscapes alike. Perfect for visionary designers looking to infuse warmth and modern artistry into their surroundings, it delivers breathtaking atmosphere and timeless brilliance wherever it shines.\n",
       "product_images": [
@@ -11621,7 +15837,8 @@ const AZOOGI_PRODUCTS = {
               "id": "rec0jhs14LdrlfVAy",
               "product_name": "Corner Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC107-VP",
+              "product_code": "Neon-CornerAluProfile-1004",
+              "sku_mappings": {},
               "product_short_description": "Turn overlooked edges into stunning visual highlights with corner profiles that frame your architectural spaces in soft, radiant light.\n",
               "product_description": "Elevate your lighting design with our sleek corner aluminum profile, expertly crafted to turn overlooked edges into stunning visual highlights. Designed for effortless architectural integration, it frames your spaces with a soft, continuous glow that adds modern depth and sophisticated ambiance to any room. Perfectly accentuating angles and architectural features, this profile transforms ordinary corners into captivating focal points of pure, elegant light.\n",
               "product_images": [
@@ -11654,10 +15871,13 @@ const AZOOGI_PRODUCTS = {
               "id": "rec0w7SRP0vJ1CZFQ",
               "product_name": "Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC020-CR",
+              "product_code": "Neon-AluProfile-0606",
+              "sku_mappings": {},
               "product_short_description": "Bring subtle architectural elegance to tight spaces with minimalist aluminum profiles that deliver seamless, ambient illumination.\n",
               "product_description": "Elevate your interior design with our ultra-compact aluminum profile, expertly designed to bring refined, seamless illumination to even the tightest architectural spaces. Crafted for modern aesthetics, this minimalist channel integrates effortlessly into your décor, transforming subtle lighting into a sophisticated ambient feature.\n",
-              "product_images": [],
+              "product_images": [
+                "assets/img/products/rec0w7SRP0vJ1CZFQ_876e1f7209.webp"
+              ],
               "product_dimension": "",
               "stocked_item": [
                 ""
@@ -11685,7 +15905,8 @@ const AZOOGI_PRODUCTS = {
               "id": "rec1Ko8kRDmZJ29dk",
               "product_name": "Recessed Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC107-AP-EA",
+              "product_code": "Neon-RecessedAluProfile-1004",
+              "sku_mappings": {},
               "product_short_description": "Achieve an ultra-clean architectural finish by hiding light seamlessly within walls and ceilings for modern linear illumination.\n",
               "product_description": "Achieve a clean, architectural finish with our ultra-slim recessed aluminum profile, seamlessly integrating light directly into your walls and ceilings. Designed to hide effortlessly within your space, it crafts smooth, continuous lines of glow that enhance your interior with sophisticated modern elegance. Perfect for creating subtle ambient accents or striking linear illumination, this channel transforms lighting into a captivating architectural feature.\n",
               "product_images": [
@@ -11718,7 +15939,8 @@ const AZOOGI_PRODUCTS = {
               "id": "rec1RWzMMC90tNSf0",
               "product_name": "Plaster Aluminium Profile",
               "category": "Accessories",
-              "sku": "AS-AFS(T)1616A5-1000",
+              "product_code": "Neon-FlexiPlasterAluProfile-1616",
+              "sku_mappings": {},
               "product_short_description": "Fluidly sculpt glowing ambient light with flexible aluminium profiles that seamlessly blend into your walls for a captivating, high-end look.\n",
               "product_description": "Bring your lighting vision to life with our flexible plaster aluminum profile, designed to shape around any detail for a sleek, seamless glow. Perfectly integrating into walls and ceilings for a flush, architectural finish, it transforms any room into a modern sanctuary of light. Elevate your interior aesthetics with soft, flowing illumination that contours effortlessly around your unique architectural features.\n",
               "product_images": [
@@ -11751,7 +15973,8 @@ const AZOOGI_PRODUCTS = {
               "id": "rec3HmOkoZMTmAbTD",
               "product_name": "PR008 Opal Diffuser",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "PR008-Diffuser-3m",
+              "sku_mappings": {},
               "product_short_description": "Transform your space with smooth, beautifully balanced illumination. This opal diffuser softens glare to create a warm, inviting, and sophisticated atmosphere.\n",
               "product_description": "Softly disperse light and eliminate harsh glare with the PR008 Opal Diffuser. Designed to transform raw LED output into a smooth, uniform glow, this essential lens effortlessly elevates your room's ambiance with refined elegance and serene, continuous illumination.\n",
               "product_images": [],
@@ -11782,7 +16005,8 @@ const AZOOGI_PRODUCTS = {
               "id": "rec3LdzaZIwqEbNKN",
               "product_name": "PR130 End Cap",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "PR130-Endcap-White",
+              "sku_mappings": {},
               "product_short_description": "Deliver a flawless, professional finish with our premium White End Caps. Add a sleek, refined touch that effortlessly completes your modern lighting setup.\n",
               "product_description": "Achieve a refined and pristine architectural aesthetic with the PR130 White End Caps. Tailored to provide a clean, elegant finish to your lighting profiles, these stylish end caps ensure every detail of your installation exudes sophistication. Perfectly completing your lighting setup, they bring effortless modern charm and a polished look to any high-end interior.\n",
               "product_images": [],
@@ -11813,7 +16037,8 @@ const AZOOGI_PRODUCTS = {
               "id": "rec3edapaZAfMj0tS",
               "product_name": "Bendable Plaster Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC167-CR",
+              "product_code": "Neon-FlexiAluProfile-1617",
+              "sku_mappings": {},
               "product_short_description": "Effortlessly sculpt flowing curves of ambient light with flexible plaster profiles designed to adapt to your unique architectural visions.\n",
               "product_description": "Effortlessly sculpt ambient light with our plaster flexible aluminum profile, designed to fluidly conform to your unique architectural visions. Seamlessly integrating into your walls or ceilings, it crafts smooth, flowing lines of light that elevate any interior with a touch of modern sophistication. Perfect for creating captivating ambient effects or sleek visual accents, this versatile profile provides the ultimate subtle canvas to let your custom lighting design shine with graceful perfection.\n",
               "product_images": [
@@ -11846,7 +16071,8 @@ const AZOOGI_PRODUCTS = {
               "id": "rec42hpTHZCGgmL6r",
               "product_name": "Closed endcaps",
               "category": "Accessories",
-              "sku": "AD110",
+              "product_code": "Neon-ClosedEndcap-1004",
+              "sku_mappings": {},
               "product_short_description": "Ensure a flawless, polished finish for your custom lighting setup while protecting your neon LED profiles with sleek closed endcaps.\n",
               "product_description": "Complete your custom lighting setup with our premium closed endcaps, designed to deliver a flawless, polished finish. Perfectly blending into your overall aesthetic, these essential accessories add that final touch of refined sophistication to bring your modern lighting vision together with seamless elegance.\n",
               "product_images": [],
@@ -11877,7 +16103,8 @@ const AZOOGI_PRODUCTS = {
               "id": "rec5jbYw44Pf24aTK",
               "product_name": "Open endcaps for 2-core wire",
               "category": "Accessories",
-              "sku": "AD110-3",
+              "product_code": "Neon-OpenEndcap-1004",
+              "sku_mappings": {},
               "product_short_description": "Complete your custom lighting installation with neat, professional open endcaps designed for smooth transitions and a polished finish.\n",
               "product_description": "Ensure a clean, flawless finish for your custom LED lighting installations with these essential open endcaps. Designed to provide a neat, professional transition for wiring while keeping your setup secure, they seamlessly blend into your architecture for a polished and modern aesthetic. Perfect for maintaining continuous lines of ambient glow, these endcaps give your tailored lighting projects the refined, high-end detail they deserve.\n",
               "product_images": [],
@@ -11908,10 +16135,13 @@ const AZOOGI_PRODUCTS = {
               "id": "rec6WoXmARxjrXfzf",
               "product_name": "Bendable Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC021-CR",
+              "product_code": "Neon-FlexiAluProfile-0408",
+              "sku_mappings": {},
               "product_short_description": "Unlock endless creative possibilities and shape stunning curves of light with this ultra-flexible aluminum profile for modern interiors.\n",
               "product_description": "Unlock endless creative possibilities with our ultra-flexible aluminum profile, masterfully designed to bend and shape around your unique architectural vision. Perfect for crafting custom curves and fluid, captivating lighting accents, this versatile track effortlessly transforms ordinary spaces into breathtaking modern visual statements.\n",
-              "product_images": [],
+              "product_images": [
+                "assets/img/products/rec6WoXmARxjrXfzf_facdc59d7b.webp"
+              ],
               "product_dimension": "",
               "stocked_item": [
                 ""
@@ -11939,7 +16169,8 @@ const AZOOGI_PRODUCTS = {
               "id": "rec6YbaMRhFx6cacS",
               "product_name": "PR132 Diffuser",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "DIFF-132",
+              "sku_mappings": {},
               "product_short_description": "Elevate your lighting with the PR132 Diffuser. Effortlessly soften and blend light to create a smooth, continuous glow that brings warmth and modern sophistication.\n",
               "product_description": "Transform any atmosphere with the PR132 Diffuser. Effortlessly smoothing out bright light into a gentle, inviting radiance, this elegant diffuser adds a refined touch of modern sophistication to your lighting setup. Perfect for creating seamless visual comfort, it enhances the overall aesthetic appeal of your environment while establishing an ambiance of pure luxury and warmth.\n",
               "product_images": [],
@@ -11970,7 +16201,8 @@ const AZOOGI_PRODUCTS = {
               "id": "rec6lyegF7jCcVxCe",
               "product_name": "Neon Aluminium Profile",
               "category": "Accessories",
-              "sku": "AS-GMS/T1616A-1000",
+              "product_code": "Neon-AluProfile-1616",
+              "sku_mappings": {},
               "product_short_description": "Transform your space with our premium aluminium profile, designed to bring a sleek, modern edge and seamless ambient lighting to any interior.\n",
               "product_description": "Transform your space with the sleek elegance of our premium aluminum profile, designed to bring a modern, sophisticated edge to any room. Crafted for those who appreciate refined aesthetics, this versatile channel seamlessly integrates into your interior design, casting smooth, stunning illumination that elevates your overall decor. Whether creating subtle ambient accents or striking visual statements, it provides the perfect architectural framing to let your custom lighting visions shine with effortless style.\n",
               "product_images": [
@@ -12003,7 +16235,8 @@ const AZOOGI_PRODUCTS = {
               "id": "rec6ocWx9J05IU4fG",
               "product_name": "Bendable Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC023-CR",
+              "product_code": "Neon-FlexiAluProfile-1010",
+              "sku_mappings": {},
               "product_short_description": "Effortlessly sculpt light around curves and corners to bring breathtaking, custom illumination to any luxury space.\n",
               "product_description": "Unlock boundless creative freedom with our premium bendable aluminium profile, crafted to adapt effortlessly to unique architectural curves and custom lighting layouts. Designed to flow around corners and organic shapes, it brings smooth, continuous illumination to even the most ambitious design concepts. Turn challenging architectural angles into captivating visual highlights that exude modern luxury and artistic charm.\n",
               "product_images": [
@@ -12036,7 +16269,8 @@ const AZOOGI_PRODUCTS = {
               "id": "rec9uqTZexwy2RPeg",
               "product_name": "Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC167-AP",
+              "product_code": "Neon-AluProfile-1617",
+              "sku_mappings": {},
               "product_short_description": "Elevate your interior with sleek aluminum profiles crafted to create modern, seamless lines of light for a truly sophisticated atmosphere.\n",
               "product_description": "Transform your space with the sleek elegance of our premium aluminum profile, designed to bring a modern, sophisticated edge to any room. Crafted for those who appreciate refined aesthetics, this versatile channel seamlessly integrates into your décor, casting smooth, beautiful illumination that elevates your interior design. Whether creating subtle ambient accents or bold visual statements, it provides the perfect architectural framing to let your custom lighting visions shine with effortless style.\n",
               "product_images": [
@@ -12069,7 +16303,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recA3OuGBn36F1OnR",
               "product_name": "PC Bendable Profile",
               "category": "Accessories",
-              "sku": "AC167-CPC",
+              "product_code": "Neon-FlexiPC-16x17",
+              "sku_mappings": {},
               "product_short_description": "Craft fluid curves and captivating architectural accents with a flexible channel that seamlessly diffuses light into a mesmerizing glow.\n",
               "product_description": "Elevate your lighting design with the effortless flexibility and modern aesthetic of our flexible PC channel. Designed to seamlessly diffuse light into a smooth, mesmerizing glow, this versatile profile allows you to craft fluid curves and captivating architectural accents without compromising on style. Perfect for creating ambient moods or striking feature lighting, it adds a touch of sophisticated polish to any room, allowing your artistic vision to shine with flawless grace.\n",
               "product_images": [
@@ -12102,7 +16337,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recAwWhDGxq4EoNBk",
               "product_name": "Standard Diffuser",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "DIFF-STD",
+              "sku_mappings": {},
               "product_short_description": "Enhance your ambiance with soft, balanced illumination. This standard diffuser eliminates harsh shadows, bringing effortless elegance and refined style to your space.\n",
               "product_description": "Transform your space with our Standard Diffuser, crafted to deliver beautifully soft, even illumination. By gently smoothing out harsh LED points, it creates a warm, welcoming atmosphere that enhances your interior design with effortless, timeless elegance.\n",
               "product_images": [],
@@ -12133,7 +16369,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recBeL6slDE3FbGMJ",
               "product_name": "PR007 Diffuser",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "DIFF-007",
+              "sku_mappings": {},
               "product_short_description": "Create a smooth, continuous glow with the PR007 Diffuser. Soften harsh shadows and instantly elevate your space with a captivating, modern lighting experience.\n",
               "product_description": "Bring seamless beauty to your room with the PR007 Diffuser. Creating a smooth, continuous ribbon of light, it softens harsh shadows and infuses your architectural lighting scheme with effortless modern sophistication and comfortable visual warmth.\n",
               "product_images": [],
@@ -12164,7 +16401,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recCJftTBX3lGxxPA",
               "product_name": "L-Connector (Corner)",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "PR021-LC-BLK-DN",
+              "sku_mappings": {},
               "product_short_description": "Elevate your lighting design with our stylish L-Connector in sleek black. Effortlessly navigate angles and create seamless, modern lines of light for a high-end finish.\n",
               "product_description": "Elevate your architectural lighting design with the sleek and stylish L-Connector in versatile black. Engineered to create seamless, continuous lines of light, this essential accessory allows you to effortlessly navigate angles and transform any space with a modern, sophisticated aesthetic. Perfectly blending form and function, it adds dynamic visual interest and a polished, high-end finish to your custom lighting installation.\n",
               "product_images": [],
@@ -12195,7 +16433,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recCudfga4O4CTRVo",
               "product_name": "Meta Mounting Clips",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "PR008-MetalClips",
+              "sku_mappings": {},
               "product_short_description": "Elevate your lighting design with durable mounting clips. Designed for seamless support, they keep your custom installations perfectly aligned and beautifully displayed.\n",
               "product_description": "Seamlessly secure your PR008 profile setup with these premium metal mounting clips. Engineered for invisible support and perfect structural alignment, they ensure your custom linear lighting mounts easily while maintaining a sleek, uninterrupted aesthetic.\n",
               "product_images": [],
@@ -12226,7 +16465,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recDjs7s288GZj3Oa",
               "product_name": "Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC028-AP",
+              "product_code": "Neon-AluProfile-0612",
+              "sku_mappings": {},
               "product_short_description": "Add an ultra-slim, sophisticated edge to modern spaces with smooth aluminum profiles designed for elegant, continuous illumination.\n",
               "product_description": "Elevate your space with the sleek elegance of our premium aluminum profile, meticulously designed to bring an ultra-slim, sophisticated edge to modern interiors. Crafted for seamless integration into any architectural layout, this versatile channel transforms ambient lighting into a smooth, stunning visual statement. Perfect for creating subtle accents or captivating features, it offers the ideal refined framing to let your custom lighting vision shine with effortless elegance.\n",
               "product_images": [
@@ -12259,7 +16499,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recDkEqui9gtlAFC3",
               "product_name": "PR126 Diffuser",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "DIFF-126",
+              "sku_mappings": {},
               "product_short_description": "Transform ordinary lighting into a luxurious visual experience. The PR126 Diffuser softens light to deliver a smooth, sophisticated glow in any room.\n",
               "product_description": "Upgrade your ambient lighting with the PR126 Diffuser. Crafted to deliver a soft, unbroken ribbon of light, it adds effortless elegance and modern luxury to your custom profile setup, ensuring a peaceful, glare-free environment.\n",
               "product_images": [],
@@ -12290,7 +16531,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recFfDwl8XQl4PcVr",
               "product_name": "Recessed Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC013-EP",
+              "product_code": "Neon-RecessedAluProfile-1615",
+              "sku_mappings": {},
               "product_short_description": "Blend illumination seamlessly into your architecture with recessed profiles designed for a trimless, built-in feel and luxury glow.\n",
               "product_description": "Elevate your space with the subtle sophistication of our recessed aluminum profile, designed to seamlessly blend modern illumination directly into your architecture. Crafted for a clean, flush aesthetic, this mounting channel buries the light source into walls or cabinetry for a trimless, built-in feel. It transforms ordinary room accents into stunning visual focal points, delivering a soft, captivating glow that feels both high-end and effortlessly stylish.\n",
               "product_images": [
@@ -12323,7 +16565,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recGesb2Qm4oMEWf3",
               "product_name": "PC Bendable Profile",
               "category": "Accessories",
-              "sku": "AC023-CPC",
+              "product_code": "Neon-FlexiPC-1010",
+              "sku_mappings": {},
               "product_short_description": "Effortlessly bring your lighting vision to life with flexible profiles that curve around any detail for a stunning glow.\n",
               "product_description": "Bring your lighting vision to life with our premium PC bendable profile, crafted to adapt seamlessly to any architectural contour or creative layout. Designed for smooth, flexible installation, this versatile channel effortlessly shapes around curves and unique details to deliver a soft, continuous glow. Perfect for adding a modern, sophisticated accent to both contemporary interiors and dynamic displays, it turns ordinary lighting setups into captivating, seamless visual art.\n",
               "product_images": [
@@ -12356,7 +16599,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recIfIjlxciVaq5nT",
               "product_name": "Neon PC Mounting Clips",
               "category": "Accessories",
-              "sku": "AC085-10",
+              "product_code": "Neon-PCClips-1004",
+              "sku_mappings": {},
               "product_short_description": "Effortlessly secure your lighting channels with discreet mounting clips designed to make custom light installations sleek and simple.\n",
               "product_description": "Ensure a flawless, professional finish for your lighting installation with these premium mounting clips, designed to hold your neon channels securely in place. Effortlessly discreet, they provide reliable support while keeping the focus entirely on your stunning light display. Perfect for creating clean, continuous accents in any modern space, these clips make bringing your creative lighting vision to life simpler and more seamless than ever.\n",
               "product_images": [
@@ -12389,7 +16633,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recLcpvaYDSPflCG6",
               "product_name": "Neon PC Flexible Profile",
               "category": "Accessories",
-              "sku": "AC167-PC",
+              "product_code": "Neon-PC-1617",
+              "sku_mappings": {},
               "product_short_description": "Effortlessly shape soft, continuous light around any space with ultra-flexible channels designed to bring your modern lighting vision to life.\n",
               "product_description": "Effortlessly bring your lighting vision to life with this ultra-flexible PC channel, designed to curve and shape around any architectural detail with seamless grace. Perfect for creating fluid lines of soft, captivating light, it offers the ultimate versatility for modern design enthusiasts looking to add ambiance and flair to any space. Elevate your interior ambiance with a sleek, continuous glow that transforms ordinary walls into stunning visual masterpieces.\n",
               "product_images": [
@@ -12422,7 +16667,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recLkUxi6FelCD0y5",
               "product_name": "Neon Metal Mounting Clips",
               "category": "Accessories",
-              "sku": "AS-GMS/T1616A1-25",
+              "product_code": "Neon-MetalClips-1616",
+              "sku_mappings": {},
               "product_short_description": "Effortlessly secure your custom neon LED lighting with sleek mounting clips that deliver reliable support while keeping your aesthetic clean and hidden.\n",
               "product_description": "Ensure your custom lighting display is held in perfect alignment with our high-grade metal mounting clips. Built to deliver reliable stability with a subtle footprint, these clips keep your installation looking sleek, modern, and perfectly organized. Effortlessly maintain clean lines of light throughout your space while enjoying complete peace of mind and enduring design elegance.\n",
               "product_images": [
@@ -12455,7 +16701,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recMoaXiRVlGUAOzN",
               "product_name": "Neon End Cap",
               "category": "Accessories",
-              "sku": "AS-GMS1616GS0-EC",
+              "product_code": "Neon-EndCap-1616-Side",
+              "sku_mappings": {},
               "product_short_description": "Achieve a clean, flawless finish for your lighting installation with our premium end caps designed for effortless elegance and seamless style.\n",
               "product_description": "Achieve a flawless, professional presentation for your lighting installations with our sleek side-entry end caps. Designed to deliver a clean, continuous aesthetic, these essential accessories seamlessly seal your linear lighting for a polished, modern finish. Protect your setup while enhancing its overall visual appeal, ensuring every detail of your lighting display looks impeccably refined and complete.\n",
               "product_images": [],
@@ -12486,7 +16733,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recNb1eLWNvYFPCDt",
               "product_name": "Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC023-AP",
+              "product_code": "Neon-AluProfile-1010",
+              "sku_mappings": {},
               "product_short_description": "Elevate your space with sleek aluminium profiles designed to craft seamless, modern lines of light for a high-end finish.\n",
               "product_description": "Transform your space with the sleek elegance of our premium aluminum profile, designed to bring a modern, sophisticated edge to any room. Crafted for those who appreciate refined aesthetics, this versatile channel seamlessly integrates into your décor, casting smooth, beautiful illumination that elevates your interior design. Whether creating subtle ambient accents or bold visual statements, it provides the perfect architectural framing to let your custom lighting visions shine with effortless style.\n",
               "product_images": [
@@ -12519,7 +16767,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recNt9W0gDthIgO9P",
               "product_name": "PR127 Diffuser",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "DIFF-127",
+              "sku_mappings": {},
               "product_short_description": "Refine your space with a smooth, flawless glow. The PR127 Diffuser softens light to create a warm, stylish ambiance for residential and commercial settings.\n",
               "product_description": "Elevate your linear lighting with the PR127 Diffuser. Delivering a smooth, flawless spread of light, it effortlessly introduces warm elegance and sophisticated modernity to any room, giving your architectural fixtures a clean, refined presence.\n",
               "product_images": [],
@@ -12550,7 +16799,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recOG4r4bdox4aKn5",
               "product_name": "Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC107-AP-SA",
+              "product_code": "Neon-AluProfile-1004",
+              "sku_mappings": {},
               "product_short_description": "Engineered for modern elegance, this ultra-slim profile creates continuous lines of glow to transform everyday rooms into art.\n",
               "product_description": "Elevate your interior lighting design with our ultra-slim aluminum profile, engineered to deliver sleek, modern elegance to any space. Designed to integrate seamlessly into your décor, this discreet channel creates smooth, captivating lines of continuous glow that effortlessly transform everyday rooms into extraordinary visual experiences. Perfect for highlighting architectural details or creating sophisticated ambient accents, it provides the ultimate polished canvas for your unique lighting vision.\n",
               "product_images": [
@@ -12583,7 +16833,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recPQQPZDVSB8etMW",
               "product_name": "Neon Metal Mounting Clips",
               "category": "Accessories",
-              "sku": "AC025-MC",
+              "product_code": "Neon-MetalClips-1010",
+              "sku_mappings": {},
               "product_short_description": "Ensure effortless, secure installations and a clean finish for your custom neon LED profiles with our high-grade metal mounting clips.\n",
               "product_description": "Achieve a flawless, professional presentation with our ultra-durable neon metal mounting clips. Specially designed to seamlessly secure your lighting accents, these sleek clips ensure your light strips remain neatly aligned and stylishly anchored. Perfect for creating clean, continuous illumination in any setting, they offer a polished finish that lets your lighting take center stage without hardware getting in the way.\n",
               "product_images": [
@@ -12616,7 +16867,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recPfrtYKRI2MtOAk",
               "product_name": "PROM Diffuser",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "DIFF-PROM",
+              "sku_mappings": {},
               "product_short_description": "Bask in the smooth, elegant glow of the PROM diffuser. Designed to softly disperse light, it creates a warm, inviting ambiance with a clean, modern finish.\n",
               "product_description": "Elevate your interior environment with the PROM Diffuser. Skillfully engineered to soften illumination and eliminate harsh shadows, it crafts a warm, glare-free ambiance that adds a subtle, modern touch of luxury to your architectural lighting setup.\n",
               "product_images": [],
@@ -12647,7 +16899,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recQOQCMe7JoTX8GF",
               "product_name": "Plaster Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC167-SCRL",
+              "product_code": "Neon-FlexiPlasterAluProfile-1617",
+              "sku_mappings": {},
               "product_short_description": "Transform ordinary walls and ceilings into modern masterpieces with uninterrupted, flush lines of ambient light tailored for luxury spaces.\n",
               "product_description": "Seamlessly blend high-end illumination into your architectural design with our premium plaster aluminum profile. Specially crafted to integrate flush into plaster surfaces, this innovative mounting channel creates breathtaking, uninterrupted lines of light that transform ordinary walls and ceilings into modern masterpieces. Perfect for adding subtle ambiance, dramatic accents, or sophisticated structural highlighting, it provides an elevated, custom finish that effortlessly enhances the beauty and atmosphere of any luxury space.\n",
               "product_images": [
@@ -12680,7 +16933,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recSDjfGq7F56sEFc",
               "product_name": "Neon Metal Mounting Clips",
               "category": "Accessories",
-              "sku": "AC401-SET",
+              "product_code": "Neon-MetalClips-1615",
+              "sku_mappings": {},
               "product_short_description": "Secure your custom lighting with premium mounting clips that deliver a clean, professional finish and reliable support without distraction.\n",
               "product_description": "Secure your lighting installations with total confidence and effortless precision using these premium metal mounting clips. Designed to deliver a flawless, professional finish, these durable clips hold your fixtures seamlessly in place while keeping the focus entirely on your stunning light displays. Perfect for achieving clean lines and an elevated architectural aesthetic, they offer the dependable support your custom design deserves without compromising on style.\n",
               "product_images": [
@@ -12713,7 +16967,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recSwMwQIKKoyEFdo",
               "product_name": "Bendable Plaster Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC019-CR",
+              "product_code": "Neon-FlexiAluProfile-0612",
+              "sku_mappings": {},
               "product_short_description": "Conform to unique curves and plaster surfaces effortlessly, casting soft, continuous illumination that adds luxury to any interior.\n",
               "product_description": "Unlock endless design possibilities with our plaster flexible aluminum profile, expertly crafted to turn your custom lighting concepts into stunning architectural realities. Engineered to effortlessly conform to unique curves and fluid contours, this versatile profile blends seamlessly into plaster surfaces for a flawless, built-in finish. It transforms ordinary spaces with soft, continuous illumination that highlights every architectural detail, adding a touch of modern sophistication, warmth, and luxury to any interior landscape.\n",
               "product_images": [
@@ -12746,7 +17001,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recTSHt3pDgBFJp7F",
               "product_name": "Bendable Plaster Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC013-CR",
+              "product_code": "Neon-FlexiAluProfile-16x15",
+              "sku_mappings": {},
               "product_short_description": "Unlock creative possibilities with plaster flexible profiles that create soft, continuous light curves blending into modern architecture.\n",
               "product_description": "Unlock endless design possibilities with our plaster flexi aluminum profile, meticulously designed to create soft, fluid curves and flawless continuous lighting. Effortlessly blending into your architecture, this versatile solution allows you to bend light around unique spaces and bring your most imaginative interior visions to life. Perfect for crafting custom accents and sophisticated ambient glows, it elevates any modern space with a seamless, high-end architectural finish.\n",
               "product_images": [
@@ -12779,7 +17035,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recTZkbGM4UDdlb6S",
               "product_name": "PR0127 180-degree coupler with screws",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "PR127-180deg-Coupler",
+              "sku_mappings": {},
               "product_short_description": "Extend your light runs seamlessly with our premium 180-Degree Coupler. Create continuous, professional-grade illumination with flawless transitions and style.\n",
               "product_description": "Effortlessly expand your lighting horizons with the PR0127 180-degree coupler, designed to create seamless, uninterrupted runs of mesmerizing illumination. This indispensable connector allows you to achieve extended lines of light with perfectly smooth transitions, enhancing the architectural beauty and sophisticated flow of any modern setting. Bring your creative vision to life with flawless continuity and clean elegance.\n",
               "product_images": [],
@@ -12810,7 +17067,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recU8h3Tuiv0xvdWu",
               "product_name": "PR008 End Cap",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "PR008-EndCap",
+              "sku_mappings": {},
               "product_short_description": "Give your lighting setup a sleek, professional finish with premium end caps. Conceal wiring effortlessly for a refined and sophisticated modern aesthetic.\n",
               "product_description": "Achieve a refined and professional finish with our premium PR008 end caps. Designed to seamlessly cap your lighting channels, they conceal unfinished ends to deliver a sophisticated, polished look that elevates the ambiance of modern interiors with effortless style.\n",
               "product_images": [],
@@ -12841,7 +17099,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recUAtOFWSFt2WTTT",
               "product_name": "Bendable Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC107-CR",
+              "product_code": "Neon-FlexiAluProfile-1004",
+              "sku_mappings": {},
               "product_short_description": "Sculpt light with creative freedom using flexible profiles designed to adapt seamlessly to unique curves and dynamic accents.\n",
               "product_description": "Transform your space with the sleek elegance of our flexible aluminum profile, expertly designed to bring dynamic, modern illumination to any layout. Crafted to adapt seamlessly to unique curves and architectural contours, it allows you to sculpt light with complete creative freedom. Perfect for elevating ambient accents or crafting striking visual feature lines, this versatile channel provides the ideal foundation to let your bespoke lighting designs shine with effortless sophistication.\n",
               "product_images": [
@@ -12874,7 +17133,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recUBSkuhIqVvbSMv",
               "product_name": "Neon Metal Mounting Clips",
               "category": "Accessories",
-              "sku": "AC167-MC",
+              "product_code": "Neon-MetalClips-1617",
+              "sku_mappings": {},
               "product_short_description": "Secure your custom neon lighting with high-grade mounting clips designed for a clean, effortless installation and a seamless finish.\n",
               "product_description": "Achieve seamless, professional lighting installations with these high-grade metal mounting clips, designed to provide strong, dependable support for your neon LED profiles. Crafted for effortless integration and a clean, hidden finish, they ensure your custom lighting designs remain securely anchored while maintaining a sleek, modern aesthetic in any residential or commercial space.\n",
               "product_images": [
@@ -12907,7 +17167,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recUxGdX8SCUNDzNP",
               "product_name": "Black End cap",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "PR133 - Endcap",
+              "sku_mappings": {},
               "product_short_description": "Complete your custom lighting setup with our sleek black end caps. Add a refined, modern touch for a polished, professional finish in any space.\n",
               "product_description": "Complete your custom lighting installation with the sleek elegance of our Black End Caps. Masterfully designed to provide a smooth, professional border, these end caps add a touch of dramatic modern sophistication to your spaces. Enhance the clean lines of your linear lighting while delivering a beautifully finished appearance that captivates and inspires.\n",
               "product_images": [],
@@ -12938,7 +17199,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recVQGcei82arV6iS",
               "product_name": "PR008 Diffuser",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "DIFF-008",
+              "sku_mappings": {},
               "product_short_description": "Elevate your room with a mesmerizing, soft glow. The PR008 Diffuser eliminates harsh glare to deliver a clean, sophisticated ambiance you'll love.\n",
               "product_description": "Reinvent your lighting experience with the PR008 Diffuser. Designed to effortlessly soften intense light source points into a captivating, gentle glow, it ensures your linear lighting delivers an alluring, sophisticated atmosphere in any setting.\n",
               "product_images": [],
@@ -12969,7 +17231,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recVhV5eFQUdZhKEn",
               "product_name": "PR021 Diffuser",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "DIFF-021",
+              "sku_mappings": {},
               "product_short_description": "Achieve a sleek linear light effect with the PR021 Diffuser. Designed to soften harsh light into a continuous glow, it brings refined beauty to any room.\n",
               "product_description": "Transform bright LED strips into a seamless, captivating line of light with the PR021 Diffuser. Adding an effortlessly elegant, professional finish to your profile runs, it ensures your lighting produces a beautifully balanced glow without distracting glare.\n",
               "product_images": [],
@@ -13000,7 +17263,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recWFSWmFJr5W243o",
               "product_name": "Skirting Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC023-SP",
+              "product_code": "Neon-SkAluProfile-1010",
+              "sku_mappings": {},
               "product_short_description": "Transform your room with recessed lighting profiles that create continuous lines of glow for a dramatic, minimalist aesthetic.\n",
               "product_description": "Redefine your interior perimeter with our modern skirting aluminium profile, blending sophisticated architectural detailing with subtle illumination. Hiding discreetly along walls and ceilings, it emits an elegant glow that transforms ordinary spaces into extraordinary visual journeys. Experience a refined, floating atmosphere that enhances room dimensions while delivering clean lines and contemporary flair.\n",
               "product_images": [
@@ -13033,7 +17297,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recWlcg02QquGqOQq",
               "product_name": "Neon Metal Mounting Clips",
               "category": "Accessories",
-              "sku": "AC016-SET",
+              "product_code": "Neon-MetalClips-1220",
+              "sku_mappings": {},
               "product_short_description": "Ensure a flawless, professional installation with sturdy mounting clips designed to maintain crisp, continuous light and clean lines.\n",
               "product_description": "Ensure a flawless, professional finish for your lighting installation with our high-grade metal mounting clips. Designed to secure your light channels seamlessly, these sturdy clips offer reliable support while maintaining a clean, minimalist aesthetic. Perfect for creating crisp, continuous lines of light, they allow you to transform any space into a beautifully illuminated showcase with complete confidence and effortless sophistication.\n",
               "product_images": [
@@ -13066,7 +17331,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recYUYtePFG8zU3e1",
               "product_name": "Plaster Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC167-LP",
+              "product_code": "Neon-PlasterAluProfile-1617",
+              "sku_mappings": {},
               "product_short_description": "Integrate stunning flush illumination directly into your walls for a trimless, ultra-clean architectural light effect that redefines modern luxury.\n",
               "product_description": "Seamlessly integrate stunning illumination directly into your walls with our premium plaster-in aluminum profile, designed to create flawless, trimless lines of light that elevate any modern interior. Craft sophisticated, architectural lighting effects that melt into your décor for an ultra-clean, high-end finish. Perfect for bringing warm ambient accents or bold visual interest to your favorite spaces, this channel offers an effortless way to achieve a sleek, flush lighting design that redefines contemporary elegance.\n",
               "product_images": [
@@ -13099,7 +17365,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recYs68iO6L1O7JAH",
               "product_name": "PR131 End Cap",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "PR131-EndCap-White",
+              "sku_mappings": {},
               "product_short_description": "Achieve a flawless finish with sleek white end caps. Perfect for a clean, modern edge, these accessories add a refined and polished touch to your custom lighting designs.\n",
               "product_description": "Elevate your linear LED lighting setup with these sleek white end caps. Engineered to deliver a clean, continuous aesthetic, they hide raw edges and complete your custom lighting design with refined simplicity, effortless modern elegance, and a pristine, high-end look.\n",
               "product_images": [],
@@ -13130,7 +17397,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recaWIeuS4LyWEYDt",
               "product_name": "PR016 Diffuser",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "DIFF-016",
+              "sku_mappings": {},
               "product_short_description": "Bring modern elegance to your lighting design. The PR016 Diffuser transforms harsh light into a smooth, warm glow for a polished and inviting atmosphere.\n",
               "product_description": "Elevate your interior lighting with the PR016 Diffuser. Turning harsh light into a smooth, enchanting radiance, it brings modern elegance and comforting warmth to your home or office, giving your linear fixtures a high-end, professionally finished feel.\n",
               "product_images": [],
@@ -13161,7 +17429,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recbPFQRGMGLDnvba",
               "product_name": "Neon PC Flexible Profile",
               "category": "Accessories",
-              "sku": "AC023-PC",
+              "product_code": "Neon-PC-1010",
+              "sku_mappings": {},
               "product_short_description": "Fluidly conform to any architectural vision with flexible profiles that craft smooth, flowing lines of ambient light.\n",
               "product_description": "Sculpt mesmerizing curves of luminous beauty with our flexible neon PC profile, designed to bring fluid, continuous light to high-end architectural and decorative spaces. Offering smooth diffusion and incredible versatility, it allows you to craft customized lighting art that enhances ambiance with pure, modern sophistication. Transform any atmosphere into a captivating luxury experience with glowing ribbons of soft, seamless light.\n",
               "product_images": [
@@ -13194,7 +17463,8 @@ const AZOOGI_PRODUCTS = {
               "id": "reccx1RHqehgP4Mtq",
               "product_name": "PR001 End Cap",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "PR001-EndCap-Silver",
+              "sku_mappings": {},
               "product_short_description": "Achieve a flawless finish for your custom lighting project with our silver end caps. Bring elegant style and practical wire management versatility to your space.\n",
               "product_description": "Imbue your custom lighting projects with effortless sophistication using the PR001 Silver End Caps. Crafted to deliver a bright, polished accent to your linear light fixtures, these end caps add the perfect finishing touch of contemporary luxury. Transform your lighting displays into stunning architectural highlights with a clean, high-end finish.\n",
               "product_images": [],
@@ -13225,7 +17495,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recd9K4nGnWaxCrAQ",
               "product_name": "Side Opening Neon Aluminium Profile",
               "category": "Accessories",
-              "sku": "AS-AFS(T)1616A4-1000",
+              "product_code": "Neon-AluProfile-1616-Side",
+              "sku_mappings": {},
               "product_short_description": "Fluidly sculpt glowing ambient light with flexible aluminium profiles that seamlessly blend into your walls for a captivating, high-end look.\n",
               "product_description": "Sculpt mesmerizing curves and dramatic linear highlights with our side-opening aluminum profile. Engineered to blend seamlessly into sophisticated contemporary environments, this profile offers flexible architectural framing for pure, effortless illumination. Bring your creative lighting concepts to life and infuse your space with luxury, warmth, and artistic ambiance.\n",
               "product_images": [
@@ -13258,7 +17529,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recejFUfOyX2yqmQi",
               "product_name": "Suspension Kit",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "PR021-Suspension",
+              "sku_mappings": {},
               "product_short_description": "Transform your space with this sleek Suspension Kit. Give your lighting fixtures a floating, modern presence while creating an elegant architectural aesthetic.\n",
               "product_description": "Transform your environment with the sleek PR021 Suspension Kit, designed to give your lighting fixtures an enchanting, floating presence. By suspending your illumination effortlessly, this stylish accessory adds dynamic spatial dimension and a refined, contemporary aesthetic to any interior space. Experience the perfect harmony of modern design and effortless elegance as your lighting takes center stage.\n",
               "product_images": [],
@@ -13289,7 +17561,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recf7U0miuKk2TRxp",
               "product_name": "PR017 Diffuser",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "DIFF-017",
+              "sku_mappings": {},
               "product_short_description": "Enjoy mesmerizing illumination with flawless continuity. The PR017 Diffuser softens light seamlessly to provide the ultimate finishing touch for modern spaces.\n",
               "product_description": "Enhance your space with the stylish PR017 Diffuser. Engineered for optimal optical comfort, it converts raw illumination into a soft, captivating glow that creates an inviting atmosphere while delivering a clean, modern aesthetic to your custom light runs.\n",
               "product_images": [],
@@ -13320,7 +17593,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recgLLZnMSg2RXl9s",
               "product_name": "Meta Mounting Clips",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "PR002-MetalClips",
+              "sku_mappings": {},
               "product_short_description": "Secure your lighting setup with sleek metal mounting clips. Designed for ultimate stability, they offer hidden support and a clean, professional look for any modern space.\n",
               "product_description": "Effortlessly secure your architectural lighting vision with these sleek, reliable metal mounting clips. Designed for ultimate stability and seamless integration, they provide a strong, discrete anchor that lets your linear light fixtures take center stage with modern elegance and flawless precision.\n",
               "product_images": [],
@@ -13351,7 +17625,8 @@ const AZOOGI_PRODUCTS = {
               "id": "rechgTsqWVSynL0rL",
               "product_name": "PR034 Diffuser",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "DIFF-034",
+              "sku_mappings": {},
               "product_short_description": "Elevate your interior design with soft, balanced light. The PR034 Diffuser creates continuous lines of glow for a high-end, modern finish that impresses.\n",
               "product_description": "Elevate your lighting design with the sleek PR034 Diffuser. Designed to soften glare into a smooth, mesmerizing beam, it produces seamless lines of light that bring architectural elegance and modern luxury to custom residential or commercial spaces.\n",
               "product_images": [],
@@ -13382,7 +17657,8 @@ const AZOOGI_PRODUCTS = {
               "id": "reckFMheUHMgD5Zqh",
               "product_name": "PR027 End Cap",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "PR027-EndCap",
+              "sku_mappings": {},
               "product_short_description": "Add the perfect finishing touch to your custom lighting. These premium end caps deliver a clean, modern aesthetic that effortlessly elevates any architectural design.\n",
               "product_description": "Elevate your lighting layout with these sleek silver end caps designed for a refined, tailored appearance. Providing a clean and decorative closure to your profiles, they infuse modern elegance and metallic sophistication into every custom installation.\n",
               "product_images": [],
@@ -13413,10 +17689,13 @@ const AZOOGI_PRODUCTS = {
               "id": "recldcbCBojZd0ANe",
               "product_name": "Neon Metal Mounting Clips",
               "category": "Accessories",
-              "sku": "AC021-SET",
+              "product_code": "Neon-MetalClips-0606",
+              "sku_mappings": {},
               "product_short_description": "Keep your custom lighting securely anchored with strong, discreet metal mounting clips crafted for a clean, minimalist aesthetic.\n",
               "product_description": "Ensure a flawless, professional installation with these premium metal mounting clips, engineered to provide strong, reliable support for your neon LED profiles. Designed for effortless setup and a discreet, seamless finish, they keep your tailored lighting designs securely in place while preserving a clean, minimalist aesthetic.\n",
-              "product_images": [],
+              "product_images": [
+                "assets/img/products/recldcbCBojZd0ANe_200815725f.webp"
+              ],
               "product_dimension": "",
               "stocked_item": [
                 ""
@@ -13444,7 +17723,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recldlC5r98XZtdRA",
               "product_name": "PR115 Diffuser",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "DIFF-115",
+              "sku_mappings": {},
               "product_short_description": "Experience smooth, professional-grade light diffusion with the PR115. Eliminate glare and add warmth, sophistication, and elegance to your custom LED setup.\n",
               "product_description": "Transform your interior spaces with the PR115 Diffuser. Creating a beautifully continuous, softened glow, it effortlessly infuses warmth and modern elegance into your custom lighting, turning functional fixtures into impressive decorative statements.\n",
               "product_images": [],
@@ -13475,7 +17755,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recmgOaCsNbjT074Z",
               "product_name": "PR002 End Cap",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "PR002-EndCap",
+              "sku_mappings": {},
               "product_short_description": "Complete your architectural lighting with a sleek, modern end cap. Designed to seamlessly seal profiles for a pristine, polished finish in any setting.\n",
               "product_description": "Give your architectural lighting a pristine, flawless finish with these premium end caps. Crafted to add effortless sophistication to any space, they neatly seal off profile ends, transforming custom LED runs into sleek, cohesive architectural features with an elevated modern aesthetic.\n",
               "product_images": [],
@@ -13506,7 +17787,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recoaE80UKJkYVl7L",
               "product_name": "Bendable Aluminium Profile",
               "category": "Accessories",
-              "sku": "AS-AFS(T)1616M-1000",
+              "product_code": "Neon-FlexiAluProfile-1616",
+              "sku_mappings": {},
               "product_short_description": "Elevate your lighting design with a flexible profile that effortlessly diffuses light into smooth, captivating curves for a modern aesthetic.\n",
               "product_description": "Effortlessly shape stunning light throughout your home or commercial space with this versatile flexible aluminum profile. Designed to bring a smooth, sophisticated glow to any environment, it allows you to create custom curves and striking lighting accents with ease. Add a luxurious, modern touch to your decor with soft, continuous light that highlights the finest details of your interior design.\n",
               "product_images": [
@@ -13539,7 +17821,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recpHG6unmCtb8yfa",
               "product_name": "Side Opening Metal Mounting Clips",
               "category": "Accessories",
-              "sku": "AS-AFS(T)1616A4-35",
+              "product_code": "Neon-MetalClips-1616-Side",
+              "sku_mappings": {},
               "product_short_description": "Upgrade your lighting setup with side-opening mounting clips designed to provide seamless architectural integration and a pristine, modern finish.\n",
               "product_description": "Elevate your lighting design with side-opening metal mounting clips that combine functional excellence with effortless installation. Designed to securely support your lighting fixtures while remaining discreetly out of sight, these clips help create smooth, continuous runs of light. Experience the perfect harmony of stability and minimalist aesthetics for a truly elevated interior look.\n",
               "product_images": [
@@ -13572,7 +17855,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recpfYGfb7O6G6ajg",
               "product_name": "Neon Metal Mounting Clips",
               "category": "Accessories",
-              "sku": "AC028-SET",
+              "product_code": "Neon-MetalClips-0612",
+              "sku_mappings": {},
               "product_short_description": "Achieve reliable support and a minimalist look with high-grade clips that keep the focus entirely on your stunning light displays.\n",
               "product_description": "Ensure a flawless, professional installation every time with our high-grade metal mounting clips, meticulously designed to hold your lighting seamlessly in place. Crafted for ultimate reliability and a clean, modern look, these essential accents secure your custom lighting setups with effortless strength, allowing your design vision to shine bright without distraction.\n",
               "product_images": [
@@ -13605,10 +17889,13 @@ const AZOOGI_PRODUCTS = {
               "id": "recqJce2R1bVbF3hU",
               "product_name": "Bendable Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC021-CR",
+              "product_code": "Neon-FlexiAluProfile-0606",
+              "sku_mappings": {},
               "product_short_description": "Sculpt smooth, flowing ribbons of glow around custom curves with an ultra-pliant aluminum profile designed for luxury lighting.\n",
               "product_description": "Unlock endless creative possibilities and effortlessly sculpt ambient light with our flexible aluminum profile. Designed to adapt gracefully to complex curves and unique architectural contours, this pliant channel transforms ordinary interiors into extraordinary visual landscapes with smooth, flowing ribbons of glow.\n",
-              "product_images": [],
+              "product_images": [
+                "assets/img/products/recqJce2R1bVbF3hU_9d19d4cec6.webp"
+              ],
               "product_dimension": "",
               "stocked_item": [
                 ""
@@ -13636,7 +17923,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recquKNSIgLLnMCPw",
               "product_name": "Suspension Wire",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "Concord Suspension",
+              "sku_mappings": {},
               "product_short_description": "Bring an effortless sense of elegance to your space with our Suspension Wire. Create a sleek floating presence that complements any contemporary interior.\n",
               "product_description": "Elevate your lighting concept to new heights with our modern Suspension Wire. Designed to give your linear fixtures an intriguing, floating presence, this premium accessory creates an effortless sense of spatial elegance and contemporary luxury. Bring clean architectural lines and stunning visual impact to any floating installation with a sleek, minimalist touch.\n",
               "product_images": [],
@@ -13667,10 +17955,13 @@ const AZOOGI_PRODUCTS = {
               "id": "recri2EW7LNkAEiQP",
               "product_name": "Neon Metal Mounting Clips",
               "category": "Accessories",
-              "sku": "AC022-SET",
+              "product_code": "Neon-MetalClips-0408",
+              "sku_mappings": {},
               "product_short_description": "Achieve effortless, secure installations with premium metal mounting clips designed for a discreet, flawless, and professional look.\n",
               "product_description": "Achieve seamless, professional lighting installations with these high-grade metal mounting clips, designed to provide strong, dependable support for your neon LED profiles. Crafted for effortless integration and a clean, hidden finish, they ensure your custom lighting designs remain securely anchored while maintaining a sleek, modern aesthetic.\n",
-              "product_images": [],
+              "product_images": [
+                "assets/img/products/recri2EW7LNkAEiQP_a0815aa301.webp"
+              ],
               "product_dimension": "",
               "stocked_item": [
                 ""
@@ -13698,7 +17989,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recsNbVUhVeweMWVg",
               "product_name": "Recessed Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC167-EP",
+              "product_code": "Neon-RecessedAluProfile-1617",
+              "sku_mappings": {},
               "product_short_description": "Create mesmerizing recessed lighting effects that blend seamlessly into your walls and ceilings for a sleek, minimalist aesthetic.\n",
               "product_description": "Achieve a clean, architectural look with our recessed aluminum profile, designed to hide seamlessly within your walls or ceilings for an ultra-modern lighting effect. By embedding the light directly into your surfaces, it creates stunning, continuous lines of glow that enhance your space with a sleek, minimalist aesthetic. Perfect for creating dramatic visual depth and sophisticated ambiance, this profile turns subtle lighting into an extraordinary interior feature.\n",
               "product_images": [
@@ -13731,7 +18023,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recsRLN74iwNeAiEI",
               "product_name": "PR018 Diffuser",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "DIFF-018",
+              "sku_mappings": {},
               "product_short_description": "Add a touch of high-end elegance with the PR018 Diffuser. It creates a smooth, ambient glow that effortlessly transforms your space into an inviting retreat.\n",
               "product_description": "Soften intense lighting into a smooth, ambient glow with the PR018 Diffuser. Perfectly diffusing output across the channel, it adds warmth, modern luxury, and a high-end architectural finish that enhances the visual comfort of any contemporary environment.\n",
               "product_images": [],
@@ -13762,7 +18055,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recslGMA8IExcuJnX",
               "product_name": "Plaster Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC023-LP",
+              "product_code": "Neon-PlasterAluProfile-1010",
+              "sku_mappings": {},
               "product_short_description": "Create flawless, trimless lines of light that melt into your walls for an ultra-clean, architectural lighting experience.\n",
               "product_description": "Elevate your interior design with our stunning plaster aluminium profile, engineered for a truly trimless, architectural lighting experience. By seamlessly embedding your lighting into walls and ceilings, it creates captivating, continuous ribbons of light that flow naturally through your space. Ideal for minimalist and contemporary aesthetics, this profile redefines room ambiance, adding depth, warmth, and luxury to any room.\n",
               "product_images": [
@@ -13795,7 +18089,8 @@ const AZOOGI_PRODUCTS = {
               "id": "rectvABW5bawSU6W4",
               "product_name": "Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC013-AP",
+              "product_code": "Neon-AluProfile-1615",
+              "sku_mappings": {},
               "product_short_description": "Elevate your lighting design with sleek aluminum profiles engineered to create smooth, captivating lines of illumination for modern interiors.\n",
               "product_description": "Elevate your lighting design with our premium aluminum profile, meticulously engineered to bring a touch of modern sophistication to any space. Designed to integrate seamlessly into your interior décor, this versatile channel creates smooth, captivating lines of illumination that enhance ambiance and highlight architectural details. Perfect for crafting ambient accents or striking lighting features, it offers the ideal foundation to showcase your unique design vision with understated elegance and flair.\n",
               "product_images": [
@@ -13828,7 +18123,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recudaSflCKcbfkhD",
               "product_name": "Neon End Cap",
               "category": "Accessories",
-              "sku": "AS-GMS1616GH0-EC",
+              "product_code": "Neon-EndCap-1616-Top",
+              "sku_mappings": {},
               "product_short_description": "Complete your modern lighting design with elegant top entry end caps, ensuring a polished look and continuous, trimless aesthetic in every room.\n",
               "product_description": "Complete your lighting installation with the ultimate finishing touch using our top-entry end caps. Offering a seamless integration into your space, they ensure your lighting features maintain a clean, high-end appearance from every angle. Perfect for modern interiors, they provide a smooth, elegant closure that secures your setup while upholding a minimalist, luxury aesthetic.\n",
               "product_images": [],
@@ -13859,7 +18155,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recvYdGtIffBtTxDS",
               "product_name": "Recessed Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC015-EP",
+              "product_code": "Neon-RecessedAluProfile-1220",
+              "sku_mappings": {},
               "product_short_description": "Tuck custom neon light neatly into walls and ceilings for a soft, captivating ambient glow with a sophisticated built-in aesthetic.\n",
               "product_description": "Seamlessly blend light and architecture with this recessed aluminum profile, designed to give your space a clean, built-in aesthetic with effortless charm. Crafting a sophisticated trimless look, it neatly tucks your custom neon lighting into walls or ceilings, casting a soft, captivating glow that enhances any interior. Perfect for creating modern lines of light and an elevated ambiance, this profile turns ordinary rooms into stunning, light-filled environments with a polished, luxury feel.\n",
               "product_images": [
@@ -13892,7 +18189,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recwcN4MsipG7pgaO",
               "product_name": "Meta Mounting Clips",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "PR009-MetalClips",
+              "sku_mappings": {},
               "product_short_description": "Secure your LED profiles with precision using premium metal mounting clips. Enjoy effortless installation and a sleek, professional finish for your lighting vision.\n",
               "product_description": "Securely mount your PR009 LED profiles with total confidence and style. These sleek metal mounting clips offer a clean, discrete installation solution, ensuring your linear lighting remains perfectly aligned while providing a crisp, modern finish for any contemporary space.\n",
               "product_images": [],
@@ -13923,10 +18221,13 @@ const AZOOGI_PRODUCTS = {
               "id": "recxn7EUulTZE8jno",
               "product_name": "Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC021-AP",
+              "product_code": "Neon-AluProfile-0408",
+              "sku_mappings": {},
               "product_short_description": "Elevate your space with sleek aluminum profiles designed to craft seamless, modern lines of light for a refined, high-end finish.\n",
               "product_description": "Elevate your lighting design with our ultra-compact aluminum profile, engineered to deliver sleek architectural precision in a surprisingly slim footprint. Designed to create flawless lines of light, it seamlessly integrates into any modern space to turn subtle ambient accents into captivating focal points of high-end elegance.\n",
-              "product_images": [],
+              "product_images": [
+                "assets/img/products/recxn7EUulTZE8jno_ef9d77e7b4.webp"
+              ],
               "product_dimension": "",
               "stocked_item": [
                 ""
@@ -13954,7 +18255,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recyCQ6BWZ2rSK9QV",
               "product_name": "Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC015-AP",
+              "product_code": "Neon-AluProfile-1220",
+              "sku_mappings": {},
               "product_short_description": "Bring sleek architectural style to your space with continuous lines of ambient glow, creating a refined backdrop for modern interiors.\n",
               "product_description": "Elevate your space with the sleek, modern aesthetic of our premium aluminum profile, meticulously designed to bring your lighting vision to life. Perfectly tailored for creating smooth, captivating lines of light, this versatile housing seamlessly integrates into any interior, adding a refined architectural touch to modern spaces. Whether you are looking to build a soft ambient atmosphere or highlight key visual features, it offers the ultimate backdrop to showcase your custom lighting with effortless elegance.\n",
               "product_images": [
@@ -13987,7 +18289,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recyfZFoNktyzJimo",
               "product_name": "Bendable Plaster Aluminium Profile",
               "category": "Accessories",
-              "sku": "AC015-CR",
+              "product_code": "Neon-FlexiAluProfile-1220",
+              "sku_mappings": {},
               "product_short_description": "Transform modern interiors with plaster profiles that blend effortlessly into walls to turn lighting into a striking design feature.\n",
               "product_description": "Transform your space with the versatile charm of our premium plaster aluminum profile, designed to bring seamless sophistication to any interior setting. Crafted to blend effortlessly into walls and ceilings, this elegant channel transforms ordinary lighting into a captivating architectural feature, casting a smooth, inviting glow. Perfect for elevating modern interiors, it offers a clean, refined finish that turns ambient illumination into a breathtaking design statement.\n",
               "product_images": [
@@ -14020,7 +18323,8 @@ const AZOOGI_PRODUCTS = {
               "id": "recz1dyLH3uD6g1XI",
               "product_name": "PR130/PR131 Diffuser",
               "category": "Accessories",
-              "sku": "",
+              "product_code": "DIFF-130/131",
+              "sku_mappings": {},
               "product_short_description": "Transform your space with the PR130/PR131 Diffuser. Soften illumination into a continuous glow that adds elegant, modern sophistication to any custom lighting setup.\n",
               "product_description": "Elevate your interior ambiance with the PR130/PR131 Diffuser. Expertly designed to soften harsh illumination into a smooth, continuous glow, this stylish lens transforms bright light sources into a soothing visual experience. Bring modern warmth, seamless elegance, and sophisticated architectural flair to any residential or commercial space with this essential lighting companion.\n",
               "product_images": [],
@@ -14051,6 +18355,529 @@ const AZOOGI_PRODUCTS = {
       "children": [
         {
           "type": "category",
+          "name": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
+              "variants": {
+                "DALI-2 & PUSH 2 in 1 Dimmable Driver": {
+                  "id": "recHbgdqI7oH13d98",
+                  "product_name": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
+                  "category": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
+                  "product_code": "ADR005DA",
+                  "sku_mappings": [
+                    {
+                      "sku": "ADR005DA",
+                      "combination": [
+                        "101",
+                        "107",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "ADR006DA",
+                      "combination": [
+                        "101",
+                        "108",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "ADR007DA",
+                      "combination": [
+                        "102",
+                        "107",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "ADR008DA",
+                      "combination": [
+                        "102",
+                        "108",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "ADR009DA",
+                      "combination": [
+                        "103",
+                        "107",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "ADR010DA",
+                      "combination": [
+                        "103",
+                        "108",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "ADR011DA",
+                      "combination": [
+                        "104",
+                        "107",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "ADR012DA",
+                      "combination": [
+                        "104",
+                        "108",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "ADR015DA",
+                      "combination": [
+                        "105",
+                        "107",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "ADR016DA",
+                      "combination": [
+                        "105",
+                        "108",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "ADR-360-24-DALI",
+                      "combination": [
+                        "106",
+                        "108",
+                        "109"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Transform your space with elegant design and discreet luxury. Enjoy a sophisticated, seamless glow that brings your vision to life and makes every moment feel truly magical.\n",
+                  "product_description": "Elevate your spaces into a breathtaking visual journey of elegant design and discreet luxury with a sophisticated, seamless glow. This premium dimmable driver offers the perfect blend of modern innovation and refined elegance, effortlessly transforming your environment into a warm, welcoming retreat. Designed for those who appreciate flawless execution and an unparalleled touch of ambiance, it beautifully highlights your architecture to create a captivating and serene atmosphere. Unwind in the stunning, soft illumination that brings your vision to life and makes every evening feel truly magical.\n",
+                  "product_images": [
+                    "assets/img/products/recHbgdqI7oH13d98_b375a4936f.jpg"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/recHbgdqI7oH13d98_dim_92c2cc630c.jpg"
+                  ],
+                  "stocked_item": [
+                    "In Stock"
+                  ],
+                  "datasheet": "Yes",
+                  "technical_icons": [
+                    "assets/img/icons/rec5RzqLLALZEWVB3_icon_184e7d1b09.svg",
+                    "assets/img/icons/rec5RzqLLALZEWVB3_icon_44a0d4bb97.svg",
+                    "assets/img/icons/rec5RzqLLALZEWVB3_icon_a6da012531.svg",
+                    "assets/img/icons/rec5RzqLLALZEWVB3_icon_891d90f4de.svg",
+                    "assets/img/icons/recHbgdqI7oH13d98_icon_4ec2025611.svg"
+                  ],
+                  "meta_keywords": "DALI-2 dimmable driver, PUSH dimmable driver, 60W LED driver, 12V power supply, IP67 waterproof driver, 2-in-1 LED driver",
+                  "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "IP Rating": [
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
+                    "Power": [
+                      {
+                        "value": "60W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "100W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "150W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "200W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "300W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "360W",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "12V",
+                        "icon": ""
+                      },
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "60W",
+                        "id": "101"
+                      },
+                      {
+                        "name": "100W",
+                        "id": "102"
+                      },
+                      {
+                        "name": "150W",
+                        "id": "103"
+                      },
+                      {
+                        "name": "200W",
+                        "id": "104"
+                      },
+                      {
+                        "name": "300W",
+                        "id": "105"
+                      },
+                      {
+                        "name": "360W",
+                        "id": "106"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "12V",
+                        "id": "107"
+                      },
+                      {
+                        "name": "24V",
+                        "id": "108"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP67",
+                        "id": "109"
+                      }
+                    ]
+                  },
+                  "constraints": {
+                    "106": [
+                      "107"
+                    ]
+                  },
+                  "category_path": [
+                    "Drivers",
+                    "DALI-2 & PUSH 2 in 1 Dimmable Driver"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "name": "Non-Dimmable Driver",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Non-Dimmable Driver",
+              "variants": {
+                "Non-Dimmable Driver": {
+                  "id": "recPo2yo4CpauRnwZ",
+                  "product_name": "Non-Dimmable Driver",
+                  "category": "Non-Dimmable Driver",
+                  "product_code": "ADR001",
+                  "sku_mappings": [
+                    {
+                      "sku": "ADR001",
+                      "combination": [
+                        "101",
+                        "110",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "ADR002",
+                      "combination": [
+                        "101",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "ADR003",
+                      "combination": [
+                        "102",
+                        "110",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "ADR004",
+                      "combination": [
+                        "102",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "ADR005",
+                      "combination": [
+                        "103",
+                        "110",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "ADR006",
+                      "combination": [
+                        "103",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "ADR007",
+                      "combination": [
+                        "104",
+                        "110",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "ADR008",
+                      "combination": [
+                        "104",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "ADR009",
+                      "combination": [
+                        "105",
+                        "110",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "ADR010",
+                      "combination": [
+                        "105",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "ADR011",
+                      "combination": [
+                        "106",
+                        "110",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "ADR012",
+                      "combination": [
+                        "106",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "ADR015",
+                      "combination": [
+                        "107",
+                        "110",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "ADR016",
+                      "combination": [
+                        "107",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "ADR-400-24V",
+                      "combination": [
+                        "108",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "ADR-500-24V",
+                      "combination": [
+                        "109",
+                        "111",
+                        "112"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
+                  "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
+                  "product_images": [
+                    "assets/img/products/recPo2yo4CpauRnwZ_889f1c7c10.jpg"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/recPo2yo4CpauRnwZ_dim_3c0c74fc81.jpg"
+                  ],
+                  "stocked_item": [
+                    "In Stock"
+                  ],
+                  "datasheet": "Yes",
+                  "technical_icons": [
+                    "assets/img/icons/rec5RzqLLALZEWVB3_icon_184e7d1b09.svg",
+                    "assets/img/icons/rec5RzqLLALZEWVB3_icon_44a0d4bb97.svg",
+                    "assets/img/icons/rec5RzqLLALZEWVB3_icon_a6da012531.svg",
+                    "assets/img/icons/rec5RzqLLALZEWVB3_icon_891d90f4de.svg",
+                    "assets/img/icons/recPo2yo4CpauRnwZ_icon_43dcbda418.svg"
+                  ],
+                  "meta_keywords": "non-dimmable driver, 20W LED driver, 12V power supply, IP67 waterproof driver, outdoor lighting power, architectural LED driver",
+                  "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "IP Rating": [
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "12V",
+                        "icon": ""
+                      },
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ],
+                    "Power": [
+                      {
+                        "value": "20W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "40W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "60W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "100W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "150W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "200W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "300W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "400W",
+                        "icon": ""
+                      },
+                      {
+                        "value": "500W",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "20W",
+                        "id": "101"
+                      },
+                      {
+                        "name": "40W",
+                        "id": "102"
+                      },
+                      {
+                        "name": "60W",
+                        "id": "103"
+                      },
+                      {
+                        "name": "100W",
+                        "id": "104"
+                      },
+                      {
+                        "name": "150W",
+                        "id": "105"
+                      },
+                      {
+                        "name": "200W",
+                        "id": "106"
+                      },
+                      {
+                        "name": "300W",
+                        "id": "107"
+                      },
+                      {
+                        "name": "400W",
+                        "id": "108"
+                      },
+                      {
+                        "name": "500W",
+                        "id": "109"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "12V",
+                        "id": "110"
+                      },
+                      {
+                        "name": "24V",
+                        "id": "111"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP67",
+                        "id": "112"
+                      }
+                    ]
+                  },
+                  "constraints": {
+                    "108": [
+                      "110"
+                    ],
+                    "109": [
+                      "110"
+                    ]
+                  },
+                  "category_path": [
+                    "Drivers",
+                    "Non-Dimmable Driver"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
           "name": "Switchable Driver",
           "children": [
             {
@@ -14061,7 +18888,49 @@ const AZOOGI_PRODUCTS = {
                   "id": "recjGZVEX4ISH4nwj",
                   "product_name": "Switchable Driver",
                   "category": "Switchable Driver",
-                  "sku": "OTM-E20-VC",
+                  "product_code": "ADR-S12V24V-20W",
+                  "sku_mappings": [
+                    {
+                      "sku": "ADR-S12V24V-20W",
+                      "combination": [
+                        "101",
+                        "102",
+                        "107"
+                      ]
+                    },
+                    {
+                      "sku": "ADR-S12V24V-40W",
+                      "combination": [
+                        "101",
+                        "103",
+                        "107"
+                      ]
+                    },
+                    {
+                      "sku": "ADR-S12V24V-60W",
+                      "combination": [
+                        "101",
+                        "104",
+                        "107"
+                      ]
+                    },
+                    {
+                      "sku": "ADR-S12V24V-80W",
+                      "combination": [
+                        "101",
+                        "105",
+                        "107"
+                      ]
+                    },
+                    {
+                      "sku": "ADR-S12V24V-100W",
+                      "combination": [
+                        "101",
+                        "106",
+                        "107"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Elevate your environment with a perfect blend of elegance and modern design, casting a warm, sophisticated glow that adds an unparalleled touch of ambiance and luxury.\n",
                   "product_description": "Transform your spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your environment, casting a warm, sophisticated glow that effortlessly enhances the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and style to any setting, making it the ultimate choice for elevated architectural illumination.\n",
                   "product_images": [
@@ -14178,7 +19047,165 @@ const AZOOGI_PRODUCTS = {
                   "id": "rec5RzqLLALZEWVB3",
                   "product_name": "5-in-1 Dimming Driver",
                   "category": "5-in-1 Dimming Driver",
-                  "sku": "OTM-TD30-12",
+                  "product_code": "ADR003D",
+                  "sku_mappings": [
+                    {
+                      "sku": "ADR003D",
+                      "combination": [
+                        "101",
+                        "107",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "113",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "ADR004D",
+                      "combination": [
+                        "101",
+                        "108",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "113",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "ADR005D",
+                      "combination": [
+                        "102",
+                        "107",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "113",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "ADR006D",
+                      "combination": [
+                        "102",
+                        "108",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "113",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "ADR007D",
+                      "combination": [
+                        "103",
+                        "107",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "113",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "ADR008D",
+                      "combination": [
+                        "103",
+                        "108",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "113",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "ADR009D",
+                      "combination": [
+                        "104",
+                        "107",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "113",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "ADR010D",
+                      "combination": [
+                        "104",
+                        "108",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "113",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "ADR011D",
+                      "combination": [
+                        "105",
+                        "108",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "113",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "ADR012D",
+                      "combination": [
+                        "105",
+                        "107",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "113",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "ADR015D",
+                      "combination": [
+                        "106",
+                        "107",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "113",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "ADR016D",
+                      "combination": [
+                        "106",
+                        "108",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "113",
+                        "114"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
                   "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
                   "product_images": [
@@ -14359,309 +19386,6 @@ const AZOOGI_PRODUCTS = {
               }
             }
           ]
-        },
-        {
-          "type": "category",
-          "name": "Non-Dimmable Driver",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "Non-Dimmable Driver",
-              "variants": {
-                "Non-Dimmable Driver": {
-                  "id": "recPo2yo4CpauRnwZ",
-                  "product_name": "Non-Dimmable Driver",
-                  "category": "Non-Dimmable Driver",
-                  "sku": "OTM-W20-12",
-                  "product_short_description": "Elevate your space with elegant design and discreet luxury, creating a sophisticated, seamless glow.\n",
-                  "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
-                  "product_images": [
-                    "assets/img/products/recPo2yo4CpauRnwZ_889f1c7c10.jpg"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/recPo2yo4CpauRnwZ_dim_3c0c74fc81.jpg"
-                  ],
-                  "stocked_item": [
-                    "In Stock"
-                  ],
-                  "datasheet": "Yes",
-                  "technical_icons": [
-                    "assets/img/icons/rec5RzqLLALZEWVB3_icon_184e7d1b09.svg",
-                    "assets/img/icons/rec5RzqLLALZEWVB3_icon_44a0d4bb97.svg",
-                    "assets/img/icons/rec5RzqLLALZEWVB3_icon_a6da012531.svg",
-                    "assets/img/icons/rec5RzqLLALZEWVB3_icon_891d90f4de.svg",
-                    "assets/img/icons/recPo2yo4CpauRnwZ_icon_43dcbda418.svg"
-                  ],
-                  "meta_keywords": "non-dimmable driver, 20W LED driver, 12V power supply, IP67 waterproof driver, outdoor lighting power, architectural LED driver",
-                  "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "IP Rating": [
-                      {
-                        "value": "IP67",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "12V",
-                        "icon": ""
-                      },
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ],
-                    "Power": [
-                      {
-                        "value": "20W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "40W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "60W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "100W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "150W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "200W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "300W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "400W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "500W",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power": [
-                      {
-                        "name": "20W",
-                        "id": "101"
-                      },
-                      {
-                        "name": "40W",
-                        "id": "102"
-                      },
-                      {
-                        "name": "60W",
-                        "id": "103"
-                      },
-                      {
-                        "name": "100W",
-                        "id": "104"
-                      },
-                      {
-                        "name": "150W",
-                        "id": "105"
-                      },
-                      {
-                        "name": "200W",
-                        "id": "106"
-                      },
-                      {
-                        "name": "300W",
-                        "id": "107"
-                      },
-                      {
-                        "name": "400W",
-                        "id": "108"
-                      },
-                      {
-                        "name": "500W",
-                        "id": "109"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "12V",
-                        "id": "110"
-                      },
-                      {
-                        "name": "24V",
-                        "id": "111"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP67",
-                        "id": "112"
-                      }
-                    ]
-                  },
-                  "constraints": {
-                    "108": [
-                      "110"
-                    ],
-                    "109": [
-                      "110"
-                    ]
-                  },
-                  "category_path": [
-                    "Drivers",
-                    "Non-Dimmable Driver"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
-          "name": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
-              "variants": {
-                "DALI-2 & PUSH 2 in 1 Dimmable Driver": {
-                  "id": "recHbgdqI7oH13d98",
-                  "product_name": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
-                  "category": "DALI-2 & PUSH 2 in 1 Dimmable Driver",
-                  "sku": "OTM-DD60-12",
-                  "product_short_description": "Transform your space with elegant design and discreet luxury. Enjoy a sophisticated, seamless glow that brings your vision to life and makes every moment feel truly magical.\n",
-                  "product_description": "Elevate your spaces into a breathtaking visual journey of elegant design and discreet luxury with a sophisticated, seamless glow. This premium dimmable driver offers the perfect blend of modern innovation and refined elegance, effortlessly transforming your environment into a warm, welcoming retreat. Designed for those who appreciate flawless execution and an unparalleled touch of ambiance, it beautifully highlights your architecture to create a captivating and serene atmosphere. Unwind in the stunning, soft illumination that brings your vision to life and makes every evening feel truly magical.\n",
-                  "product_images": [
-                    "assets/img/products/recHbgdqI7oH13d98_b375a4936f.jpg"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/recHbgdqI7oH13d98_dim_92c2cc630c.jpg"
-                  ],
-                  "stocked_item": [
-                    "In Stock"
-                  ],
-                  "datasheet": "Yes",
-                  "technical_icons": [
-                    "assets/img/icons/rec5RzqLLALZEWVB3_icon_184e7d1b09.svg",
-                    "assets/img/icons/rec5RzqLLALZEWVB3_icon_44a0d4bb97.svg",
-                    "assets/img/icons/rec5RzqLLALZEWVB3_icon_a6da012531.svg",
-                    "assets/img/icons/rec5RzqLLALZEWVB3_icon_891d90f4de.svg",
-                    "assets/img/icons/recHbgdqI7oH13d98_icon_4ec2025611.svg"
-                  ],
-                  "meta_keywords": "DALI-2 dimmable driver, PUSH dimmable driver, 60W LED driver, 12V power supply, IP67 waterproof driver, 2-in-1 LED driver",
-                  "supplier_name": "CHINA - OTTIMA TECHNOLOGY",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "IP Rating": [
-                      {
-                        "value": "IP67",
-                        "icon": ""
-                      }
-                    ],
-                    "Power": [
-                      {
-                        "value": "60W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "100W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "150W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "200W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "300W",
-                        "icon": ""
-                      },
-                      {
-                        "value": "360W",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "12V",
-                        "icon": ""
-                      },
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power": [
-                      {
-                        "name": "60W",
-                        "id": "101"
-                      },
-                      {
-                        "name": "100W",
-                        "id": "102"
-                      },
-                      {
-                        "name": "150W",
-                        "id": "103"
-                      },
-                      {
-                        "name": "200W",
-                        "id": "104"
-                      },
-                      {
-                        "name": "300W",
-                        "id": "105"
-                      },
-                      {
-                        "name": "360W",
-                        "id": "106"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "12V",
-                        "id": "107"
-                      },
-                      {
-                        "name": "24V",
-                        "id": "108"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP67",
-                        "id": "109"
-                      }
-                    ]
-                  },
-                  "constraints": {
-                    "106": [
-                      "107"
-                    ]
-                  },
-                  "category_path": [
-                    "Drivers",
-                    "DALI-2 & PUSH 2 in 1 Dimmable Driver"
-                  ]
-                }
-              }
-            }
-          ]
         }
       ]
     },
@@ -14669,6 +19393,617 @@ const AZOOGI_PRODUCTS = {
       "type": "category",
       "name": "Profiles",
       "children": [
+        {
+          "type": "category",
+          "name": "Corner",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Aluminium Round Corner Profile",
+              "variants": {
+                "Aluminium Round Corner Profile": {
+                  "id": "rec795G1RjMDoZy2s",
+                  "product_name": "Aluminium Round Corner Profile",
+                  "category": "Corner",
+                  "product_code": "PR008",
+                  "sku_mappings": [
+                    {
+                      "sku": "PR008",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105"
+                      ]
+                    },
+                    {
+                      "sku": "PR008-3m-Silver",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105"
+                      ]
+                    },
+                    {
+                      "sku": "PR008-B",
+                      "combination": [
+                        "101",
+                        "103",
+                        "105"
+                      ]
+                    },
+                    {
+                      "sku": "PR008-W",
+                      "combination": [
+                        "101",
+                        "104",
+                        "105"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "\n",
+                  "product_description": "\n",
+                  "product_images": [
+                    "assets/img/products/rec795G1RjMDoZy2s_84513c6f59.jpg"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/rec795G1RjMDoZy2s_dim_c96cb479c7.jpg"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "Yes",
+                  "technical_icons": [
+                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
+                  ],
+                  "meta_keywords": "Round corner LED channel, Aluminium extrusion profile, Curved corner LED housing, 16mm round aluminum profile, LED strip corner channel, Round profile LED light diffuser",
+                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Dimension": [
+                      {
+                        "value": "16mm (W) x 16mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      },
+                      {
+                        "value": "Black",
+                        "icon": ""
+                      },
+                      {
+                        "value": "White",
+                        "icon": ""
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "value": "2m",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Dimension": [
+                      {
+                        "name": "16mm (W) x 16mm (H)",
+                        "id": "101"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "102"
+                      },
+                      {
+                        "name": "Black",
+                        "id": "103"
+                      },
+                      {
+                        "name": "White",
+                        "id": "104"
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "name": "2m",
+                        "id": "105"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Corner"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Aluminium Square Corner Profile",
+              "variants": {
+                "Aluminium Square Corner Profile": {
+                  "id": "recQyEM5EtUdbuETD",
+                  "product_name": "Aluminium Square Corner Profile",
+                  "category": "Corner",
+                  "product_code": "PR017-3m-Silver",
+                  "sku_mappings": [
+                    {
+                      "sku": "PR017-3m-Silver",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "\n",
+                  "product_description": "\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "Aluminium square corner profile, LED corner channel, Corner LED light strip housing, Silver aluminium profile 3m, Angle LED extrusion, 30mm corner light channel",
+                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "value": "3m",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "30mm (W) x 30mm (H)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Dimension": [
+                      {
+                        "name": "30mm (W) x 30mm (H)",
+                        "id": "101"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "102"
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "name": "3m",
+                        "id": "103"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Corner"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Aluminium Square Corner Profile",
+              "variants": {
+                "Aluminium Square Corner Profile": {
+                  "id": "recVQXALxJLFoLOj7",
+                  "product_name": "Aluminium Square Corner Profile",
+                  "category": "Corner",
+                  "product_code": "PR007",
+                  "sku_mappings": [
+                    {
+                      "sku": "PR007",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "\n",
+                  "product_description": "\n",
+                  "product_images": [
+                    "assets/img/products/recVQXALxJLFoLOj7_1e8c81820c.jpg"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/recVQXALxJLFoLOj7_dim_77f76387bc.jpg"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "Yes",
+                  "technical_icons": [
+                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
+                  ],
+                  "meta_keywords": "Square corner LED channel, Aluminium extrusion profile, Corner LED light housing, 16mm square aluminum profile, LED strip corner channel, Silver aluminum LED profile",
+                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Dimension": [
+                      {
+                        "value": "16mm (W) x 16mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "value": "2m",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Dimension": [
+                      {
+                        "name": "16mm (W) x 16mm (H)",
+                        "id": "101"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "102"
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "name": "2m",
+                        "id": "103"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Corner"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Aluminium Round Corner Profile",
+              "variants": {
+                "Aluminium Round Corner Profile": {
+                  "id": "reccOtPM47SuMucCm",
+                  "product_name": "Aluminium Round Corner Profile",
+                  "category": "Corner",
+                  "product_code": "PR018-3m-Silver",
+                  "sku_mappings": [
+                    {
+                      "sku": "PR018-3m-Silver",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "\n",
+                  "product_description": "\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "Aluminium round corner profile, Curved LED corner channel, Round corner LED diffuser, Silver aluminium profile 3m, Rounded LED extrusion, 30mm corner light channel",
+                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Dimension": [
+                      {
+                        "value": "30mm (W) x 30mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "value": "3m",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Dimension": [
+                      {
+                        "name": "30mm (W) x 30mm (H)",
+                        "id": "101"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "102"
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "name": "3m",
+                        "id": "103"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Corner"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Aluminium Flat Corner Profile",
+              "variants": {
+                "Aluminium Flat Corner Profile": {
+                  "id": "recpZqR9zzmSkasvq",
+                  "product_name": "Aluminium Flat Corner Profile",
+                  "category": "Corner",
+                  "product_code": "PR009",
+                  "sku_mappings": [
+                    {
+                      "sku": "PR009",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "\n",
+                  "product_description": "\n",
+                  "product_images": [
+                    "assets/img/products/recpZqR9zzmSkasvq_662dca8247.jpg"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/recpZqR9zzmSkasvq_dim_a91580f699.jpg"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "Yes",
+                  "technical_icons": [
+                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
+                  ],
+                  "meta_keywords": "Aluminium flat corner profile, Corner LED channel, Silver aluminum extrusion, 90 degree LED profile, Corner mounted light channel, Linear corner diffuser",
+                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "value": "2m",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "18.4mm (W) x 18.4mm (H)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Dimension": [
+                      {
+                        "name": "18.4mm (W) x 18.4mm (H)",
+                        "id": "101"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "102"
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "name": "2m",
+                        "id": "103"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Corner"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "name": "Recessed",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Aluminium Recessed Profile",
+              "variants": {
+                "Aluminium Recessed Profile": {
+                  "id": "recLemdeWmwJ8cwLa",
+                  "product_name": "Aluminium Recessed Profile",
+                  "category": "Recessed",
+                  "product_code": "PR001",
+                  "sku_mappings": [
+                    {
+                      "sku": "PR001",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105"
+                      ]
+                    },
+                    {
+                      "sku": "PR001-3m-Silver",
+                      "combination": [
+                        "101",
+                        "102",
+                        "106"
+                      ]
+                    },
+                    {
+                      "sku": "PR001-B",
+                      "combination": [
+                        "101",
+                        "103",
+                        "105"
+                      ]
+                    },
+                    {
+                      "sku": "PR001-W",
+                      "combination": [
+                        "101",
+                        "104",
+                        "105"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "\n",
+                  "product_description": "\n",
+                  "product_images": [
+                    "assets/img/products/recLemdeWmwJ8cwLa_037b2d9c3c.jpg"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/recLemdeWmwJ8cwLa_dim_ce6afdf253.jpg"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "Yes",
+                  "technical_icons": [
+                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
+                  ],
+                  "meta_keywords": "Recessed LED Profile, Aluminium Light Channel, Flush Mount LED Extrusion, Architectural Linear Lighting, LED Strip Diffuser Channel, Recessed Aluminium Housing",
+                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      },
+                      {
+                        "value": "Black",
+                        "icon": ""
+                      },
+                      {
+                        "value": "White",
+                        "icon": ""
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "value": "2m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "3m",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "23.1mm (W) x 8.5mm (H)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Dimension": [
+                      {
+                        "name": "23.1mm (W) x 8.5mm (H)",
+                        "id": "101"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "102"
+                      },
+                      {
+                        "name": "Black",
+                        "id": "103"
+                      },
+                      {
+                        "name": "White",
+                        "id": "104"
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "name": "2m",
+                        "id": "105"
+                      },
+                      {
+                        "name": "3m",
+                        "id": "106"
+                      }
+                    ]
+                  },
+                  "constraints": {
+                    "103": [
+                      "106"
+                    ],
+                    "104": [
+                      "106"
+                    ]
+                  },
+                  "category_path": [
+                    "Profiles",
+                    "Recessed"
+                  ]
+                }
+              }
+            }
+          ]
+        },
         {
           "type": "category",
           "name": "Surfaced",
@@ -14681,7 +20016,17 @@ const AZOOGI_PRODUCTS = {
                   "id": "recTK17hwyPrPKVUU",
                   "product_name": "Aluminium Surfaced Profile",
                   "category": "Surfaced",
-                  "sku": "ALP035-R",
+                  "product_code": "PR036",
+                  "sku_mappings": [
+                    {
+                      "sku": "PR036",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    }
+                  ],
                   "product_short_description": "\n",
                   "product_description": "\n",
                   "product_images": [],
@@ -14751,7 +20096,41 @@ const AZOOGI_PRODUCTS = {
                   "id": "rech8EurLr3kmYTR2",
                   "product_name": "Aluminium Surfaced Profile",
                   "category": "Surfaced",
-                  "sku": "ALP002-R",
+                  "product_code": "PR002",
+                  "sku_mappings": [
+                    {
+                      "sku": "PR002",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105"
+                      ]
+                    },
+                    {
+                      "sku": "PR002-3m-Silver",
+                      "combination": [
+                        "101",
+                        "102",
+                        "106"
+                      ]
+                    },
+                    {
+                      "sku": "PR002-B",
+                      "combination": [
+                        "101",
+                        "103",
+                        "105"
+                      ]
+                    },
+                    {
+                      "sku": "PR002-W",
+                      "combination": [
+                        "101",
+                        "104",
+                        "105"
+                      ]
+                    }
+                  ],
                   "product_short_description": "\n",
                   "product_description": "\n",
                   "product_images": [
@@ -14858,7 +20237,41 @@ const AZOOGI_PRODUCTS = {
                   "id": "recqNuTzGC6vZ9jj1",
                   "product_name": "Aluminium Surfaced Profile",
                   "category": "Surfaced",
-                  "sku": "ALP014",
+                  "product_code": "PR016",
+                  "sku_mappings": [
+                    {
+                      "sku": "PR016",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105"
+                      ]
+                    },
+                    {
+                      "sku": "PR016-3m-Silver",
+                      "combination": [
+                        "101",
+                        "102",
+                        "106"
+                      ]
+                    },
+                    {
+                      "sku": "PR016-B",
+                      "combination": [
+                        "101",
+                        "103",
+                        "105"
+                      ]
+                    },
+                    {
+                      "sku": "PR016-W",
+                      "combination": [
+                        "101",
+                        "104",
+                        "105"
+                      ]
+                    }
+                  ],
                   "product_short_description": "\n",
                   "product_description": "\n",
                   "product_images": [],
@@ -14955,1267 +20368,6 @@ const AZOOGI_PRODUCTS = {
         },
         {
           "type": "category",
-          "name": "Mini Surface",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "Aluminium Mini Surfaced Profile",
-              "variants": {
-                "Aluminium Mini Surfaced Profile": {
-                  "id": "recOt3gpqBf4InEQR",
-                  "product_name": "Aluminium Mini Surfaced Profile",
-                  "category": "Mini Surface",
-                  "sku": "ALP073",
-                  "product_short_description": "\n",
-                  "product_description": "\n",
-                  "product_images": [
-                    "assets/img/products/recOt3gpqBf4InEQR_1dabcde837.jpg"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/recOt3gpqBf4InEQR_dim_12139f1981.jpg"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "Yes",
-                  "technical_icons": [
-                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
-                  ],
-                  "meta_keywords": "Mini surfaced profile, Aluminium LED channel, Compact linear profile, Surface mount light channel, Slim LED extrusion, Architectural mini profile",
-                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      },
-                      {
-                        "value": "Black",
-                        "icon": ""
-                      },
-                      {
-                        "value": "White",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "7.8mm (W) x 9mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "value": "2m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "3m",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Dimension": [
-                      {
-                        "name": "7.8mm (W) x 9mm (H)",
-                        "id": "101"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "102"
-                      },
-                      {
-                        "name": "Black",
-                        "id": "103"
-                      },
-                      {
-                        "name": "White",
-                        "id": "104"
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "name": "2m",
-                        "id": "105"
-                      },
-                      {
-                        "name": "3m",
-                        "id": "106"
-                      }
-                    ]
-                  },
-                  "constraints": {
-                    "103": [
-                      "106"
-                    ],
-                    "104": [
-                      "106"
-                    ]
-                  },
-                  "category_path": [
-                    "Profiles",
-                    "Mini Surface"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
-          "name": "Trimless",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "Aluminium Trimless Plaster Profile",
-              "variants": {
-                "Aluminium Trimless Plaster Profile": {
-                  "id": "rec01Zt9P07y6atqB",
-                  "product_name": "Aluminium Trimless Plaster Profile",
-                  "category": "Trimless",
-                  "sku": "L886",
-                  "product_short_description": "Transform your home into a breathtaking sanctuary of light. Enjoy discreet luxury and an enchanting glow that effortlessly elevates the ambiance of any room.\n",
-                  "product_description": "Transform your living spaces into a breathtaking sanctuary of light with this premium architectural lighting solution. Designed for those who cherish discreet luxury and sophisticated elegance, it seamlessly integrates into your environment to create an enchanting play of light and shadow. Bathe your home in a warm, inviting glow that effortlessly highlights your unique decor and elevates the ambiance of any room, making every moment spent at home feel like a tranquil, high-end retreat.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "Bendable LED profile, Flexible plaster channel, Double-sided trimless profile, Curved plaster-in profile, Architectural bendable channel, Recessed flexible channel",
-                  "supplier_name": "BAIWEI",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Channel Configuration": [
-                      {
-                        "value": "Bendable Double-Sided",
-                        "icon": ""
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "60mm (W) x 14.7mm (H)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Channel Configuration": [
-                      {
-                        "name": "Bendable Double-Sided",
-                        "id": "101"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "60mm (W) x 14.7mm (H)",
-                        "id": "102"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "103"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Trimless"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Aluminium Trimless Plaster Profile",
-              "variants": {
-                "Aluminium Trimless Plaster Profile": {
-                  "id": "rec1LZE5F9fJ0Fcj7",
-                  "product_name": "Aluminium Trimless Plaster Profile",
-                  "category": "Trimless",
-                  "sku": "L548",
-                  "product_short_description": "Transform your home into a breathtaking visual journey. Experience discreet luxury and a sophisticated glow that beautifully enhances your space.\n",
-                  "product_description": "Transform your architectural spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless trimless integration into your walls and ceilings, casting a warm, sophisticated glow that effortlessly enhances the natural beauty of your environment. Crafted for those who appreciate discreet luxury and refined detail, it adds an unparalleled touch of ambiance, warmth, and captivating style to any setting, making it the ultimate choice for elevated modern illumination.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "Wide trimless profile, Plaster-in aluminum channel, Seamless ceiling channel, Architectural LED profile, Recessed plaster profile, Flush LED extrusion",
-                  "supplier_name": "BAIWEI",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Channel Configuration": [
-                      {
-                        "value": "Single-Sided",
-                        "icon": ""
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "62mm (W) x 13mm (H)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Channel Configuration": [
-                      {
-                        "name": "Single-Sided",
-                        "id": "101"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "62mm (W) x 13mm (H)",
-                        "id": "102"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "103"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Trimless"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Aluminium Trimless Plaster Profile",
-              "variants": {
-                "Aluminium Trimless Plaster Profile": {
-                  "id": "rec4Zh9Al9Ybt7Pif",
-                  "product_name": "Aluminium Trimless Plaster Profile",
-                  "category": "Trimless",
-                  "sku": "L200",
-                  "product_short_description": "Transform your home into a breathtaking visual journey. Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.\n",
-                  "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
-                  "product_images": [
-                    "assets/img/products/rec4Zh9Al9Ybt7Pif_9183f16308.webp",
-                    "assets/img/products/rec4Zh9Al9Ybt7Pif_68ff5f25a9.webp",
-                    "assets/img/products/rec4Zh9Al9Ybt7Pif_3c3f281499.webp"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/rec4Zh9Al9Ybt7Pif_dim_58cfd05d54.webp"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": [
-                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
-                  ],
-                  "meta_keywords": "Trimless LED profile, Plaster-in aluminum channel, Double-sided LED profile, Architectural plaster channel, Recessed profile lighting, Seamless LED channel",
-                  "supplier_name": "BAIWEI",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Channel Configuration": [
-                      {
-                        "value": "Double-Sided",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "53mm (W) x 14mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Channel Configuration": [
-                      {
-                        "name": "Double-Sided",
-                        "id": "101"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "53mm (W) x 14mm (H)",
-                        "id": "102"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "103"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Trimless"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Aluminium Trimless Plaster Profile",
-              "variants": {
-                "Aluminium Trimless Plaster Profile": {
-                  "id": "rec5SOzFtkmxGImEI",
-                  "product_name": "Aluminium Trimless Plaster Profile",
-                  "category": "Trimless",
-                  "sku": "L606",
-                  "product_short_description": "Transform your living space into a captivating visual masterpiece. Experience discreet luxury and a soft, enchanting glow that effortlessly elevates your interior design.\n",
-                  "product_description": "Transform your living space into a captivating visual masterpiece with a seamless blend of modern elegance and refined design. This sleek lighting channel integrates effortlessly into your walls and ceilings, casting a soft, enchanting radiance that elevates your interior decor. Perfect for creating an inviting and sophisticated ambiance, it adds a touch of discreet luxury to any room, turning simple everyday moments into extraordinary experiences.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "Trimless aluminium profile, Plaster-in LED channel, Single-sided lighting profile, Recessed wall profile, Flush architectural channel, Silver LED extrusion",
-                  "supplier_name": "BAIWEI",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Channel Configuration": [
-                      {
-                        "value": "Single-Sided",
-                        "icon": ""
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "36.19mm (W) x 14mm (H)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Channel Configuration": [
-                      {
-                        "name": "Single-Sided",
-                        "id": "101"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "36.19mm (W) x 14mm (H)",
-                        "id": "102"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "103"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Trimless"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Aluminium Trimless Wall Washer Profile",
-              "variants": {
-                "Aluminium Trimless Wall Washer Profile": {
-                  "id": "recDIZwVRPU6FJJu2",
-                  "product_name": "Aluminium Trimless Wall Washer Profile",
-                  "category": "Trimless",
-                  "sku": "ALP126",
-                  "product_short_description": "\n",
-                  "product_description": "\n",
-                  "product_images": [
-                    "assets/img/products/recDIZwVRPU6FJJu2_45df1863d4.jpg"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/recDIZwVRPU6FJJu2_dim_4fd1c67799.jpg"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "Yes",
-                  "technical_icons": [
-                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
-                  ],
-                  "meta_keywords": "Trimless LED channel, Plaster-in wall washer profile, Recessed aluminium extrusion, Linear wall washer housing, Architectural LED profile, Flush mount wall wash channel",
-                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Finish": [
-                      {
-                        "value": "White",
-                        "icon": ""
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "value": "2m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "3m",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "94.4mm (W) x 34mm (H)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Dimension": [
-                      {
-                        "name": "94.4mm (W) x 34mm (H)",
-                        "id": "101"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "White",
-                        "id": "102"
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "name": "2m",
-                        "id": "103"
-                      },
-                      {
-                        "name": "3m",
-                        "id": "104"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Trimless"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Aluminium Trimless Deep Wall Washer Profile",
-              "variants": {
-                "Aluminium Trimless Deep Wall Washer Profile": {
-                  "id": "recFYMjZrA8POAzsM",
-                  "product_name": "Aluminium Trimless Deep Wall Washer Profile",
-                  "category": "Trimless",
-                  "sku": "ALP127",
-                  "product_short_description": "\n",
-                  "product_description": "\n",
-                  "product_images": [
-                    "assets/img/products/recFYMjZrA8POAzsM_9cb8f8094e.jpg"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/recFYMjZrA8POAzsM_dim_eb18b215ae.jpg"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "Yes",
-                  "technical_icons": [
-                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
-                  ],
-                  "meta_keywords": "Trimless LED wall washer, Deep recessed aluminium channel, Plaster-in LED profile, Architectural wall wash light, Recessed linear extrusion, Flush wall washer channel",
-                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Dimension": [
-                      {
-                        "value": "50mm (W) x 75mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "value": "White",
-                        "icon": ""
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "value": "3m",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Dimension": [
-                      {
-                        "name": "85.5mm (W) x 56.8mm (H)",
-                        "id": "101"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "White",
-                        "id": "102"
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "name": "2m",
-                        "id": "103"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Trimless"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Aluminium Trimless Plaster Profile",
-              "variants": {
-                "Aluminium Trimless Plaster Profile": {
-                  "id": "recJTZiTrn7SHXBzB",
-                  "product_name": "Aluminium Trimless Plaster Profile",
-                  "category": "Trimless",
-                  "sku": "L874",
-                  "product_short_description": "Elevate your space with fluid elegance and discreet luxury, casting a breathtaking, seamless glow that transforms any room into a sanctuary of modern style.\n",
-                  "product_description": "Elevate your interior design with an extraordinary lighting solution that seamlessly integrates into your architecture. Crafted for those who appreciate fluid elegance and discreet luxury, this versatile profile effortlessly bends to outline your space with a captivating, double-sided illumination. Transform any room into a sophisticated retreat filled with warm, ambient radiance and flawless modern style.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "Flexible double-sided LED profile, Trimless plaster-in aluminum channel, Bendable architectural channel, Recessed double-sided lighting, Seamless plaster LED profile, Curved plaster channel",
-                  "supplier_name": "BAIWEI",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Channel Configuration": [
-                      {
-                        "value": "Bendable Double-Sided",
-                        "icon": ""
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "52.6mm (W) x 13.7mm (H)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Channel Configuration": [
-                      {
-                        "name": "Bendable Double-Sided",
-                        "id": "101"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "52.6mm (W) x 13.7mm (H)",
-                        "id": "102"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "103"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Trimless"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Aluminium Trimless Plaster Profile",
-              "variants": {
-                "Aluminium Trimless Plaster Profile": {
-                  "id": "recLHJHB294BOHsnH",
-                  "product_name": "Aluminium Trimless Plaster Profile",
-                  "category": "Trimless",
-                  "sku": "L872",
-                  "product_short_description": "Elevate your space with an elegant, seamless glow. Experience subtle sophistication and discreet luxury that gracefully accentuates every corner of your home.\n",
-                  "product_description": "Transform your interior spaces with an elegant blend of modern design and subtle sophistication. This premium lighting profile integrates effortlessly into plasterwork to create a seamless, floating glow that gracefully elevates your architecture. Designed for those who value discreet luxury and refined detail, it bathes your surroundings in a soothing, captivating ambiance, bringing an inviting warmth and breathtaking style to every corner of your home.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "Bendable single-sided profile, Trimless plaster LED channel, Flexible plaster-in channel, Recessed aluminum profile, Architectural plaster lighting, Seamless bendable LED channel",
-                  "supplier_name": "BAIWEI",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ],
-                    "Channel Configuration": [
-                      {
-                        "value": "Bendable Single-Sided",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "34.4mm (W) x 14mm (H)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Channel Configuration": [
-                      {
-                        "name": "Bendable Single-Sided",
-                        "id": "101"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "34.4mm (W) x 14mm (H)",
-                        "id": "102"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "103"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Trimless"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Aluminium Trimless Plaster Profile",
-              "variants": {
-                "Aluminium Trimless Plaster Profile": {
-                  "id": "recLKFxsq3JNBDg9A",
-                  "product_name": "Aluminium Trimless Plaster Profile",
-                  "category": "Trimless",
-                  "sku": "L878",
-                  "product_short_description": "Elevate your home with seamless elegance and captivating illumination. Experience discreet luxury with a soft, sophisticated glow that enhances any room.\n",
-                  "product_description": "Elevate your living space with a seamless blend of modern design and captivating illumination. Designed to effortlessly integrate into your decor, this premium lighting solution bathes your surroundings in a soft, sophisticated glow that highlights the refined beauty of your home. Perfect for creating an inviting ambiance, it offers a touch of discreet luxury and timeless style, transforming any room into a breathtaking sanctuary of warmth and elegance.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "60mm trimless LED channel, Bendable double-sided profile, Plaster-in aluminum LED channel, Recessed architectural profile, Seamless plaster-in lighting, Flexible double LED channel",
-                  "supplier_name": "BAIWEI",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Channel Configuration": [
-                      {
-                        "value": "Bendable Double-Sided",
-                        "icon": ""
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "60mm (W) x 12.9mm (H)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Channel Configuration": [
-                      {
-                        "name": "Bendable Double-Sided",
-                        "id": "101"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "60mm (W) x 12.9mm (H)",
-                        "id": "102"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "103"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Trimless"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Aluminium Trimless Plaster Profile",
-              "variants": {
-                "Aluminium Trimless Plaster Profile": {
-                  "id": "recZAlkCPSXZAirZi",
-                  "product_name": "Aluminium Trimless Plaster Profile",
-                  "category": "Trimless",
-                  "sku": "L730",
-                  "product_short_description": "Elevate your home into a glowing sanctuary of modern luxury and discreet elegance with seamless, captivating radiance.\n",
-                  "product_description": "Elevate your interior design with an extraordinary lighting solution that seamlessly merges modern sophistication with subtle luxury. Engineered for a sleek, flush integration into your walls or ceilings, this premium plaster-in profile casts a soft, captivating radiance that brings warmth and depth to any architectural space. Perfect for creating ambient atmosphere and highlighting elegant contours, it offers a discreet yet impactful touch of refinement, transforming ordinary rooms into stunning, light-filled sanctuaries of style.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "Dual LED plaster profile, Wide trimless channel, Plaster-in architectural profile, Single-side dual strip profile, Recessed LED channel, Silver extrusion",
-                  "supplier_name": "BAIWEI",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ],
-                    "Channel Configuration": [
-                      {
-                        "value": "Single-Side & Dual LED",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "116.1mm (W) x 36.5mm (H)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Channel Configuration": [
-                      {
-                        "name": "Single-Side & Dual LED",
-                        "id": "101"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "116.1mm (W) x 36.5mm (H)",
-                        "id": "102"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "103"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Trimless"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Aluminium Trimless Plaster Profile",
-              "variants": {
-                "Aluminium Trimless Plaster Profile": {
-                  "id": "recfo9W5L1MsqGgzu",
-                  "product_name": "Aluminium Trimless Plaster Profile",
-                  "category": "Trimless",
-                  "sku": "L870",
-                  "product_short_description": "Elevate your home with seamless, fluid light. Experience discreet luxury and a sophisticated glow that transforms your space into a serene sanctuary of modern style.\n",
-                  "product_description": "Elevate your interior design with an extraordinary lighting solution that seamlessly integrates into your space for a sleek, modern finish. Designed to bring a touch of discreet luxury, this profile casts a warm, captivating glow that enhances architectural details while creating an inviting atmosphere. Perfect for creating fluid, elegant curves of light, it transforms any room into a sophisticated sanctuary of style and comfort.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "Bendable double-sided profile, Trimless plaster LED channel, Double-sided plaster-in profile, Curved aluminum LED channel, Recessed plaster lighting, Architectural double LED channel",
-                  "supplier_name": "BAIWEI",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ],
-                    "Channel Configuration": [
-                      {
-                        "value": "Bendable Double-Sided",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "51mm (W) x 13.1mm (H)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Channel Configuration": [
-                      {
-                        "name": "Bendable Double-Sided",
-                        "id": "101"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "51mm (W) x 13.1mm (H)",
-                        "id": "102"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "103"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Trimless"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Aluminium Trimless Plaster Profile",
-              "variants": {
-                "Aluminium Trimless Plaster Profile": {
-                  "id": "recgq2dRdLQvlvAYn",
-                  "product_name": "Aluminium Trimless Plaster Profile",
-                  "category": "Trimless",
-                  "sku": "ALP068-R",
-                  "product_short_description": "\n",
-                  "product_description": "\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "Plaster-in LED extrusion, Trimless aluminium profile, Drywall recessed channel, Seamless linear housing, Architectural plaster light, Recessed LED profile",
-                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Dimension": [
-                      {
-                        "value": "53mm (W) x 14mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "value": "2m",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Dimension": [
-                      {
-                        "name": "53mm (W) x 14mm (H)",
-                        "id": "101"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "102"
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "name": "2m",
-                        "id": "103"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Trimless"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Aluminium Trimless Plaster Profile",
-              "variants": {
-                "Aluminium Trimless Plaster Profile": {
-                  "id": "rechzIkxfMGHqLixG",
-                  "product_name": "Aluminium Trimless Plaster Profile",
-                  "category": "Trimless",
-                  "sku": "L880",
-                  "product_short_description": "Transform your home into a breathtaking sanctuary of light. Experience seamless elegance and a sophisticated glow that effortlessly elevates every room with timeless luxury.\n",
-                  "product_description": "Transform your living space into a breathtaking sanctuary of light with this premium architectural lighting solution. Designed to integrate seamlessly into your interior, it casts a warm, sophisticated glow that effortlessly enhances your home's natural beauty and elegance. Perfect for creating an ambiance of subtle luxury, it elevates every room with a captivating aura of warmth, modern refinement, and timeless allure.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "Wide trimless LED channel, Bendable double-sided plaster channel, Plaster-in aluminum LED housing, Architectural recessed channel, Flexible double-sided lighting, Seamless plaster channel",
-                  "supplier_name": "BAIWEI",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Channel Configuration": [
-                      {
-                        "value": "Bendable Double-Sided",
-                        "icon": ""
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "69mm (W) x 13.5mm (H)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Channel Configuration": [
-                      {
-                        "name": "Bendable Double-Sided",
-                        "id": "101"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "69mm (W) x 13.5mm (H)",
-                        "id": "102"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "103"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Trimless"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Aluminium Trimless Plaster Profile",
-              "variants": {
-                "Aluminium Trimless Plaster Profile": {
-                  "id": "recltZ5J2L0upCu7p",
-                  "product_name": "Aluminium Trimless Plaster Profile",
-                  "category": "Trimless",
-                  "sku": "L866",
-                  "product_short_description": "Elevate your interior design with an exquisite lighting solution that merges modern sophistication with subtle luxury, creating a serene, warm sanctuary in your home.\n",
-                  "product_description": "Elevate your interior design with an exquisite lighting solution that seamlessly merges modern sophistication with subtle luxury. Designed to blend effortlessly into your architecture, this sleek profile casts a captivating, soft radiance that beautifully accentuates clean lines and refined spaces. Perfect for creating an enchanting, warm atmosphere, it transforms any room into a serene sanctuary of light, offering an elevated visual experience for those who appreciate discreet elegance and impeccable style.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "Plaster-in LED extrusion, Trimless aluminum profile, Flush wall channel, Recessed lighting profile, Modern plaster channel, Silver LED profile",
-                  "supplier_name": "BAIWEI",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "53mm (W) x 16mm (H)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Dimension": [
-                      {
-                        "name": "53mm (W) x 16mm (H)",
-                        "id": "101"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "102"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Trimless"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Aluminium Trimless Plaster Profile",
-              "variants": {
-                "Aluminium Trimless Plaster Profile": {
-                  "id": "recvAxmXm0jmqPe5T",
-                  "product_name": "Aluminium Trimless Plaster Profile",
-                  "category": "Trimless",
-                  "sku": "L275",
-                  "product_short_description": "Elevate your home with seamless modern elegance. Experience discreet luxury and a sophisticated glow that turns any space into a breathtaking sanctuary.\n",
-                  "product_description": "Elevate your living space with an exquisite architectural lighting solution that seamlessly merges modern elegance with understated luxury. Designed to effortlessly integrate into your walls or ceilings, this premium profile casts a smooth, sophisticated glow that redefines your interior environment. Perfect for creating a serene and captivating ambiance, it turns ordinary spaces into a breathtaking sanctuary of light, highlighting fine details while maintaining a clean, flawless aesthetic.\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "Single-sided trimless LED profile, Plaster-in aluminum channel, Architectural plaster channel, Recessed profile lighting, Seamless LED channel, Linear plaster-in profile",
-                  "supplier_name": "BAIWEI",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ],
-                    "Channel Configuration": [
-                      {
-                        "value": "Single-Sided",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "53mm (W) x 14.5mm (H)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Channel Configuration": [
-                      {
-                        "name": "Single-Sided",
-                        "id": "101"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "53mm (W) x 14.5mm (H)",
-                        "id": "102"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "103"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Trimless"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Aluminium Trimless Recessed Plaster Profile",
-              "variants": {
-                "Aluminium Trimless Recessed Plaster Profile": {
-                  "id": "recwjKMehMHxr19us",
-                  "product_name": "Aluminium Trimless Recessed Plaster Profile",
-                  "category": "Trimless",
-                  "sku": "ALP071",
-                  "product_short_description": "\n",
-                  "product_description": "\n",
-                  "product_images": [
-                    "assets/img/products/recwjKMehMHxr19us_cc2aa3856e.jpg"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/recwjKMehMHxr19us_dim_43c8fd49e9.jpg"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "Yes",
-                  "technical_icons": [
-                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
-                  ],
-                  "meta_keywords": "Trimless recessed plaster profile, Recessed plaster-in channel, Architectural LED extrusion, Seamless drywall lighting, Flush plaster LED profile, Wide recessed channel",
-                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "value": "2m",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "61.5mm (W) x 14mm (H)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Dimension": [
-                      {
-                        "name": "61.5mm (W) x 14mm (H)",
-                        "id": "101"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "102"
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "name": "2m",
-                        "id": "103"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Trimless"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
           "name": "Deep Surfaced",
           "children": [
             {
@@ -16226,7 +20378,41 @@ const AZOOGI_PRODUCTS = {
                   "id": "recgxzIMLsJHz8j5v",
                   "product_name": "Aluminium Surfaced Profile",
                   "category": "Deep Surfaced",
-                  "sku": "ALP004-R",
+                  "product_code": "PR006",
+                  "sku_mappings": [
+                    {
+                      "sku": "PR006",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105"
+                      ]
+                    },
+                    {
+                      "sku": "PR006-3m-Silver",
+                      "combination": [
+                        "101",
+                        "102",
+                        "106"
+                      ]
+                    },
+                    {
+                      "sku": "PR006-B",
+                      "combination": [
+                        "101",
+                        "103",
+                        "105"
+                      ]
+                    },
+                    {
+                      "sku": "PR006-W",
+                      "combination": [
+                        "101",
+                        "104",
+                        "105"
+                      ]
+                    }
+                  ],
                   "product_short_description": "\n",
                   "product_description": "\n",
                   "product_images": [
@@ -16329,932 +20515,6 @@ const AZOOGI_PRODUCTS = {
         },
         {
           "type": "category",
-          "name": "Stair",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "Aluminium Stair Profile",
-              "variants": {
-                "Aluminium Stair Profile": {
-                  "id": "recfojDnYOhkEbowi",
-                  "product_name": "Aluminium Stair Profile",
-                  "category": "Stair",
-                  "sku": "ALP024",
-                  "product_short_description": "\n",
-                  "product_description": "\n",
-                  "product_images": [
-                    "assets/img/products/recfojDnYOhkEbowi_78fb2bfda7.webp",
-                    "assets/img/products/recfojDnYOhkEbowi_e30f47dd98.webp"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/recfojDnYOhkEbowi_dim_35e5c1b47c.webp"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": [
-                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
-                  ],
-                  "meta_keywords": "Aluminium stair profile, LED stair tread housing, Non-slip step channel, Architectural stair lighting, Heavy-duty step profile, LED stair extrusion",
-                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "value": "2m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "3m",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "80mm (W) x 50mm (H)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Dimension": [
-                      {
-                        "name": "80mm (W) x 50mm (H)",
-                        "id": "101"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "102"
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "name": "2m",
-                        "id": "103"
-                      },
-                      {
-                        "name": "3m",
-                        "id": "104"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Stair"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
-          "name": "Bendable",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "Aluminium Bendable Profile",
-              "variants": {
-                "Aluminium Bendable Profile": {
-                  "id": "recYZQJDU2rJPKq1y",
-                  "product_name": "Aluminium Bendable Profile",
-                  "category": "Bendable",
-                  "sku": "ALP114",
-                  "product_short_description": "\n",
-                  "product_description": "\n",
-                  "product_images": [
-                    "assets/img/products/recYZQJDU2rJPKq1y_d8350f1a57.jpg"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/recYZQJDU2rJPKq1y_dim_102dcd76ae.jpg"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "Yes",
-                  "technical_icons": [
-                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
-                  ],
-                  "meta_keywords": "Bendable aluminium profile, Flexible LED channel, Curved LED extrusion, Flexible linear housing, Bendable LED channel, Slim flexible profile",
-                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "value": "2m",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "18mm (W) x 5.6mm (H)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Dimension": [
-                      {
-                        "name": "18mm (W) x 5.6mm (H)",
-                        "id": "101"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "102"
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "name": "2m",
-                        "id": "103"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Bendable"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
-          "name": "Skirting Trimless",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "Aluminium Skirting Trimless Plaster Profile",
-              "variants": {
-                "Aluminium Skirting Trimless Plaster Profile": {
-                  "id": "recFPunNXl5H7t48D",
-                  "product_name": "Aluminium Skirting Trimless Plaster Profile",
-                  "category": "Skirting Trimless",
-                  "sku": "L512",
-                  "product_short_description": "Elevate your space with an elegant fusion of modern luxury and subtle sophistication, creating a breathtaking, floating sanctuary of light.\n",
-                  "product_description": "Elevate your interior design with an elegant fusion of modern luxury and subtle sophistication. This premium trimless skirting illumination solution seamlessly embeds into your walls, casting a warm, floating glow that gracefully accentuates your space. Crafted for those who appreciate understated elegance and refined architectural detail, it transforms any room into a breathtaking sanctuary of light and style.\n",
-                  "product_images": [
-                    "assets/img/products/recFPunNXl5H7t48D_3292dd7f86.webp"
-                  ],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "Skirting LED profile, Plaster-in skirting channel, Aluminium baseboard profile, Trimless skirting light, Floor-level plaster channel, Recessed baseboard profile",
-                  "supplier_name": "BAIWEI",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "15.5mm (W) x 80mm (H)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Dimension": [
-                      {
-                        "name": "15.5mm (W) x 80mm (H)",
-                        "id": "101"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "102"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Skirting Trimless"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Aluminium Skirting Trimless Plaster Profile",
-              "variants": {
-                "Aluminium Skirting Trimless Plaster Profile": {
-                  "id": "recq5brCQInmmm5bR",
-                  "product_name": "Aluminium Skirting Trimless Plaster Profile",
-                  "category": "Skirting Trimless",
-                  "sku": "L835",
-                  "product_short_description": "Dive into an enchanting oasis of light and luxury. Elevate your retreat into a sophisticated, glowing sanctuary, adding breathtaking allure and serene ambiance to every evening.\n",
-                  "product_description": "Dive into an enchanting oasis of light and luxury with our premium illumination solution. Designed to effortlessly elevate your living experience, it bathes your retreat in a warm, sophisticated radiance that creates an unparalleled ambiance. Perfect for those with a discerning eye for discreet elegance, this seamless lighting design adds a breathtaking allure and a serene, captivating glow to every evening, turning any space into a welcoming sanctuary of modern style.\n",
-                  "product_images": [
-                    "assets/img/products/recq5brCQInmmm5bR_a75a0b3d46.jpg",
-                    "assets/img/products/recq5brCQInmmm5bR_c89497469c.jpg",
-                    "assets/img/products/recq5brCQInmmm5bR_4463c98409.jpg"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/recq5brCQInmmm5bR_dim_f0afd2c94c.webp"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": [
-                    "assets/img/icons/reckjqGprGGLIL4h6_icon_85e2b69e3e.svg"
-                  ],
-                  "meta_keywords": "Skirting LED profile, Plaster-in skirting channel, Aluminium baseboard profile, Trimless skirting light, Floor-level plaster channel, Architectural skirting profile",
-                  "supplier_name": "BAIWEI",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "13.1mm (W) x 70mm (H)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Dimension": [
-                      {
-                        "name": "13.1mm (W) x 70mm (H)",
-                        "id": "101"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "102"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Skirting Trimless"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
-          "name": "Deep Recessed",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "Aluminium Recessed Profile",
-              "variants": {
-                "Aluminium Recessed Profile": {
-                  "id": "recMDfaLzV4GLvhgO",
-                  "product_name": "Aluminium Recessed Profile",
-                  "category": "Deep Recessed",
-                  "sku": "ALP003-R",
-                  "product_short_description": "\n",
-                  "product_description": "\n",
-                  "product_images": [
-                    "assets/img/products/recMDfaLzV4GLvhgO_86ca820536.webp"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/recMDfaLzV4GLvhgO_dim_1239ee5b1c.webp"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "Yes",
-                  "technical_icons": [
-                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
-                  ],
-                  "meta_keywords": "Deep recessed LED channel, Aluminium extrusion profile, Architectural linear housing, Flush mount LED channel, Deep LED light diffuser, Ceiling recessed extrusion",
-                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      },
-                      {
-                        "value": "Black",
-                        "icon": ""
-                      },
-                      {
-                        "value": "White",
-                        "icon": ""
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "value": "2m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "3m",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "23.2mm (W) x 15.3mm (H)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Dimension": [
-                      {
-                        "name": "23.2mm (W) x 15.3mm (H)",
-                        "id": "101"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "102"
-                      },
-                      {
-                        "name": "Black",
-                        "id": "103"
-                      },
-                      {
-                        "name": "White",
-                        "id": "104"
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "name": "2m",
-                        "id": "105"
-                      },
-                      {
-                        "name": "3m",
-                        "id": "106"
-                      }
-                    ]
-                  },
-                  "constraints": {
-                    "103": [
-                      "106"
-                    ],
-                    "104": [
-                      "106"
-                    ]
-                  },
-                  "category_path": [
-                    "Profiles",
-                    "Deep Recessed"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
-          "name": "Recessed",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "Aluminium Recessed Profile",
-              "variants": {
-                "Aluminium Recessed Profile": {
-                  "id": "recLemdeWmwJ8cwLa",
-                  "product_name": "Aluminium Recessed Profile",
-                  "category": "Recessed",
-                  "sku": "ALP001-R",
-                  "product_short_description": "\n",
-                  "product_description": "\n",
-                  "product_images": [
-                    "assets/img/products/recLemdeWmwJ8cwLa_037b2d9c3c.jpg"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/recLemdeWmwJ8cwLa_dim_ce6afdf253.jpg"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "Yes",
-                  "technical_icons": [
-                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
-                  ],
-                  "meta_keywords": "Recessed LED Profile, Aluminium Light Channel, Flush Mount LED Extrusion, Architectural Linear Lighting, LED Strip Diffuser Channel, Recessed Aluminium Housing",
-                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      },
-                      {
-                        "value": "Black",
-                        "icon": ""
-                      },
-                      {
-                        "value": "White",
-                        "icon": ""
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "value": "2m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "3m",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "23.1mm (W) x 8.5mm (H)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Dimension": [
-                      {
-                        "name": "23.1mm (W) x 8.5mm (H)",
-                        "id": "101"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "102"
-                      },
-                      {
-                        "name": "Black",
-                        "id": "103"
-                      },
-                      {
-                        "name": "White",
-                        "id": "104"
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "name": "2m",
-                        "id": "105"
-                      },
-                      {
-                        "name": "3m",
-                        "id": "106"
-                      }
-                    ]
-                  },
-                  "constraints": {
-                    "103": [
-                      "106"
-                    ],
-                    "104": [
-                      "106"
-                    ]
-                  },
-                  "category_path": [
-                    "Profiles",
-                    "Recessed"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
-          "name": "Wall Washer",
-          "children": []
-        },
-        {
-          "type": "category",
-          "name": "Corner",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "Aluminium Round Corner Profile",
-              "variants": {
-                "Aluminium Round Corner Profile": {
-                  "id": "rec795G1RjMDoZy2s",
-                  "product_name": "Aluminium Round Corner Profile",
-                  "category": "Corner",
-                  "sku": "ALP006",
-                  "product_short_description": "\n",
-                  "product_description": "\n",
-                  "product_images": [
-                    "assets/img/products/rec795G1RjMDoZy2s_84513c6f59.jpg"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/rec795G1RjMDoZy2s_dim_c96cb479c7.jpg"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "Yes",
-                  "technical_icons": [
-                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
-                  ],
-                  "meta_keywords": "Round corner LED channel, Aluminium extrusion profile, Curved corner LED housing, 16mm round aluminum profile, LED strip corner channel, Round profile LED light diffuser",
-                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Dimension": [
-                      {
-                        "value": "16mm (W) x 16mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      },
-                      {
-                        "value": "Black",
-                        "icon": ""
-                      },
-                      {
-                        "value": "White",
-                        "icon": ""
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "value": "2m",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Dimension": [
-                      {
-                        "name": "16mm (W) x 16mm (H)",
-                        "id": "101"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "102"
-                      },
-                      {
-                        "name": "Black",
-                        "id": "103"
-                      },
-                      {
-                        "name": "White",
-                        "id": "104"
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "name": "2m",
-                        "id": "105"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Corner"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Aluminium Square Corner Profile",
-              "variants": {
-                "Aluminium Square Corner Profile": {
-                  "id": "recQyEM5EtUdbuETD",
-                  "product_name": "Aluminium Square Corner Profile",
-                  "category": "Corner",
-                  "sku": "ALP015-R",
-                  "product_short_description": "\n",
-                  "product_description": "\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "Aluminium square corner profile, LED corner channel, Corner LED light strip housing, Silver aluminium profile 3m, Angle LED extrusion, 30mm corner light channel",
-                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "value": "3m",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "30mm (W) x 30mm (H)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Dimension": [
-                      {
-                        "name": "30mm (W) x 30mm (H)",
-                        "id": "101"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "102"
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "name": "3m",
-                        "id": "103"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Corner"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Aluminium Square Corner Profile",
-              "variants": {
-                "Aluminium Square Corner Profile": {
-                  "id": "recVQXALxJLFoLOj7",
-                  "product_name": "Aluminium Square Corner Profile",
-                  "category": "Corner",
-                  "sku": "ALP005",
-                  "product_short_description": "\n",
-                  "product_description": "\n",
-                  "product_images": [
-                    "assets/img/products/recVQXALxJLFoLOj7_1e8c81820c.jpg"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/recVQXALxJLFoLOj7_dim_77f76387bc.jpg"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "Yes",
-                  "technical_icons": [
-                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
-                  ],
-                  "meta_keywords": "Square corner LED channel, Aluminium extrusion profile, Corner LED light housing, 16mm square aluminum profile, LED strip corner channel, Silver aluminum LED profile",
-                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Dimension": [
-                      {
-                        "value": "16mm (W) x 16mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "value": "2m",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Dimension": [
-                      {
-                        "name": "16mm (W) x 16mm (H)",
-                        "id": "101"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "102"
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "name": "2m",
-                        "id": "103"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Corner"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Aluminium Round Corner Profile",
-              "variants": {
-                "Aluminium Round Corner Profile": {
-                  "id": "reccOtPM47SuMucCm",
-                  "product_name": "Aluminium Round Corner Profile",
-                  "category": "Corner",
-                  "sku": "ALP016-R",
-                  "product_short_description": "\n",
-                  "product_description": "\n",
-                  "product_images": [],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "Aluminium round corner profile, Curved LED corner channel, Round corner LED diffuser, Silver aluminium profile 3m, Rounded LED extrusion, 30mm corner light channel",
-                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Dimension": [
-                      {
-                        "value": "30mm (W) x 30mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "value": "3m",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Dimension": [
-                      {
-                        "name": "30mm (W) x 30mm (H)",
-                        "id": "101"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "102"
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "name": "3m",
-                        "id": "103"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Corner"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Aluminium Flat Corner Profile",
-              "variants": {
-                "Aluminium Flat Corner Profile": {
-                  "id": "recpZqR9zzmSkasvq",
-                  "product_name": "Aluminium Flat Corner Profile",
-                  "category": "Corner",
-                  "sku": "ALP007-R",
-                  "product_short_description": "\n",
-                  "product_description": "\n",
-                  "product_images": [
-                    "assets/img/products/recpZqR9zzmSkasvq_662dca8247.jpg"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/recpZqR9zzmSkasvq_dim_a91580f699.jpg"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "Yes",
-                  "technical_icons": [
-                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
-                  ],
-                  "meta_keywords": "Aluminium flat corner profile, Corner LED channel, Silver aluminum extrusion, 90 degree LED profile, Corner mounted light channel, Linear corner diffuser",
-                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Finish": [
-                      {
-                        "value": "Silver",
-                        "icon": ""
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "value": "2m",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "18.4mm (W) x 18.4mm (H)",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Dimension": [
-                      {
-                        "name": "18.4mm (W) x 18.4mm (H)",
-                        "id": "101"
-                      }
-                    ],
-                    "Finish": [
-                      {
-                        "name": "Silver",
-                        "id": "102"
-                      }
-                    ],
-                    "Profile Length": [
-                      {
-                        "name": "2m",
-                        "id": "103"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Profiles",
-                    "Corner"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
           "name": "Suspended",
           "children": [
             {
@@ -17265,7 +20525,33 @@ const AZOOGI_PRODUCTS = {
                   "id": "rec7sFwR4rM69Tom5",
                   "product_name": "Aluminium Surface/Suspended Profile",
                   "category": "Suspended",
-                  "sku": "ALP5075-R",
+                  "product_code": "PR127-3m-Silver",
+                  "sku_mappings": [
+                    {
+                      "sku": "PR127-3m-Silver",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105"
+                      ]
+                    },
+                    {
+                      "sku": "PR127-3m-Black",
+                      "combination": [
+                        "101",
+                        "103",
+                        "105"
+                      ]
+                    },
+                    {
+                      "sku": "PR127-3m-White",
+                      "combination": [
+                        "101",
+                        "104",
+                        "105"
+                      ]
+                    }
+                  ],
                   "product_short_description": "\n",
                   "product_description": "\n",
                   "product_images": [
@@ -17347,7 +20633,33 @@ const AZOOGI_PRODUCTS = {
                   "id": "recOZAtX6FTNm1T7E",
                   "product_name": "Aluminium Surface/Suspended Profile",
                   "category": "Suspended",
-                  "sku": "ALP018-R3",
+                  "product_code": "PR021-3m-Silver",
+                  "sku_mappings": [
+                    {
+                      "sku": "PR021-3m-Silver",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105"
+                      ]
+                    },
+                    {
+                      "sku": "PR021-W",
+                      "combination": [
+                        "101",
+                        "103",
+                        "106"
+                      ]
+                    },
+                    {
+                      "sku": "PR021-B",
+                      "combination": [
+                        "101",
+                        "104",
+                        "106"
+                      ]
+                    }
+                  ],
                   "product_short_description": "\n",
                   "product_description": "\n",
                   "product_images": [
@@ -17454,7 +20766,33 @@ const AZOOGI_PRODUCTS = {
                   "id": "recXxKwgBlSrEcrlv",
                   "product_name": "Aluminium Surface/Suspended Profile",
                   "category": "Suspended",
-                  "sku": "ALP104-R",
+                  "product_code": "PR126-3m-Silver",
+                  "sku_mappings": [
+                    {
+                      "sku": "PR126-3m-Silver",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105"
+                      ]
+                    },
+                    {
+                      "sku": "PR126-3m-Black",
+                      "combination": [
+                        "101",
+                        "103",
+                        "105"
+                      ]
+                    },
+                    {
+                      "sku": "PR126-3m-White",
+                      "combination": [
+                        "101",
+                        "104",
+                        "105"
+                      ]
+                    }
+                  ],
                   "product_short_description": "\n",
                   "product_description": "\n",
                   "product_images": [
@@ -17538,6 +20876,1971 @@ const AZOOGI_PRODUCTS = {
               }
             }
           ]
+        },
+        {
+          "type": "category",
+          "name": "Trimless",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Aluminium Trimless Plaster Profile",
+              "variants": {
+                "Aluminium Trimless Plaster Profile": {
+                  "id": "rec01Zt9P07y6atqB",
+                  "product_name": "Aluminium Trimless Plaster Profile",
+                  "category": "Trimless",
+                  "product_code": "TP6014-DS-BEND",
+                  "sku_mappings": [
+                    {
+                      "sku": "TP6014-DS-BEND",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Transform your home into a breathtaking sanctuary of light. Enjoy discreet luxury and an enchanting glow that effortlessly elevates the ambiance of any room.\n",
+                  "product_description": "Transform your living spaces into a breathtaking sanctuary of light with this premium architectural lighting solution. Designed for those who cherish discreet luxury and sophisticated elegance, it seamlessly integrates into your environment to create an enchanting play of light and shadow. Bathe your home in a warm, inviting glow that effortlessly highlights your unique decor and elevates the ambiance of any room, making every moment spent at home feel like a tranquil, high-end retreat.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "Bendable LED profile, Flexible plaster channel, Double-sided trimless profile, Curved plaster-in profile, Architectural bendable channel, Recessed flexible channel",
+                  "supplier_name": "BAIWEI",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Channel Configuration": [
+                      {
+                        "value": "Bendable Double-Sided",
+                        "icon": ""
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "60mm (W) x 14.7mm (H)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Channel Configuration": [
+                      {
+                        "name": "Bendable Double-Sided",
+                        "id": "101"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "60mm (W) x 14.7mm (H)",
+                        "id": "102"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "103"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Trimless"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Aluminium Trimless Plaster Profile",
+              "variants": {
+                "Aluminium Trimless Plaster Profile": {
+                  "id": "rec1LZE5F9fJ0Fcj7",
+                  "product_name": "Aluminium Trimless Plaster Profile",
+                  "category": "Trimless",
+                  "product_code": "TP6213-SS",
+                  "sku_mappings": [
+                    {
+                      "sku": "TP6213-SS",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Transform your home into a breathtaking visual journey. Experience discreet luxury and a sophisticated glow that beautifully enhances your space.\n",
+                  "product_description": "Transform your architectural spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless trimless integration into your walls and ceilings, casting a warm, sophisticated glow that effortlessly enhances the natural beauty of your environment. Crafted for those who appreciate discreet luxury and refined detail, it adds an unparalleled touch of ambiance, warmth, and captivating style to any setting, making it the ultimate choice for elevated modern illumination.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "Wide trimless profile, Plaster-in aluminum channel, Seamless ceiling channel, Architectural LED profile, Recessed plaster profile, Flush LED extrusion",
+                  "supplier_name": "BAIWEI",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Channel Configuration": [
+                      {
+                        "value": "Single-Sided",
+                        "icon": ""
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "62mm (W) x 13mm (H)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Channel Configuration": [
+                      {
+                        "name": "Single-Sided",
+                        "id": "101"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "62mm (W) x 13mm (H)",
+                        "id": "102"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "103"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Trimless"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Aluminium Trimless Plaster Profile",
+              "variants": {
+                "Aluminium Trimless Plaster Profile": {
+                  "id": "rec4Zh9Al9Ybt7Pif",
+                  "product_name": "Aluminium Trimless Plaster Profile",
+                  "category": "Trimless",
+                  "product_code": "TP5314-DS",
+                  "sku_mappings": [
+                    {
+                      "sku": "TP5314-DS",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Transform your home into a breathtaking visual journey. Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.\n",
+                  "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
+                  "product_images": [
+                    "assets/img/products/rec4Zh9Al9Ybt7Pif_9183f16308.webp",
+                    "assets/img/products/rec4Zh9Al9Ybt7Pif_68ff5f25a9.webp",
+                    "assets/img/products/rec4Zh9Al9Ybt7Pif_3c3f281499.webp"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/rec4Zh9Al9Ybt7Pif_dim_58cfd05d54.webp"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": [
+                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
+                  ],
+                  "meta_keywords": "Trimless LED profile, Plaster-in aluminum channel, Double-sided LED profile, Architectural plaster channel, Recessed profile lighting, Seamless LED channel",
+                  "supplier_name": "BAIWEI",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Channel Configuration": [
+                      {
+                        "value": "Double-Sided",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "53mm (W) x 14mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Channel Configuration": [
+                      {
+                        "name": "Double-Sided",
+                        "id": "101"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "53mm (W) x 14mm (H)",
+                        "id": "102"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "103"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Trimless"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Aluminium Trimless Plaster Profile",
+              "variants": {
+                "Aluminium Trimless Plaster Profile": {
+                  "id": "rec5SOzFtkmxGImEI",
+                  "product_name": "Aluminium Trimless Plaster Profile",
+                  "category": "Trimless",
+                  "product_code": "TP3614-SS",
+                  "sku_mappings": [
+                    {
+                      "sku": "TP3614-SS",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Transform your living space into a captivating visual masterpiece. Experience discreet luxury and a soft, enchanting glow that effortlessly elevates your interior design.\n",
+                  "product_description": "Transform your living space into a captivating visual masterpiece with a seamless blend of modern elegance and refined design. This sleek lighting channel integrates effortlessly into your walls and ceilings, casting a soft, enchanting radiance that elevates your interior decor. Perfect for creating an inviting and sophisticated ambiance, it adds a touch of discreet luxury to any room, turning simple everyday moments into extraordinary experiences.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "Trimless aluminium profile, Plaster-in LED channel, Single-sided lighting profile, Recessed wall profile, Flush architectural channel, Silver LED extrusion",
+                  "supplier_name": "BAIWEI",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Channel Configuration": [
+                      {
+                        "value": "Single-Sided",
+                        "icon": ""
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "36.19mm (W) x 14mm (H)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Channel Configuration": [
+                      {
+                        "name": "Single-Sided",
+                        "id": "101"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "36.19mm (W) x 14mm (H)",
+                        "id": "102"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "103"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Trimless"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Aluminium Trimless Wall Washer Profile",
+              "variants": {
+                "Aluminium Trimless Wall Washer Profile": {
+                  "id": "recDIZwVRPU6FJJu2",
+                  "product_name": "Aluminium Trimless Wall Washer Profile",
+                  "category": "Trimless",
+                  "product_code": "PR131-W",
+                  "sku_mappings": [
+                    {
+                      "sku": "PR131-W",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    },
+                    {
+                      "sku": "PR131-3m-White",
+                      "combination": [
+                        "101",
+                        "102",
+                        "104"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "\n",
+                  "product_description": "\n",
+                  "product_images": [
+                    "assets/img/products/recDIZwVRPU6FJJu2_45df1863d4.jpg"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/recDIZwVRPU6FJJu2_dim_4fd1c67799.jpg"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "Yes",
+                  "technical_icons": [
+                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
+                  ],
+                  "meta_keywords": "Trimless LED channel, Plaster-in wall washer profile, Recessed aluminium extrusion, Linear wall washer housing, Architectural LED profile, Flush mount wall wash channel",
+                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Finish": [
+                      {
+                        "value": "White",
+                        "icon": ""
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "value": "2m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "3m",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "94.4mm (W) x 34mm (H)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Dimension": [
+                      {
+                        "name": "94.4mm (W) x 34mm (H)",
+                        "id": "101"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "White",
+                        "id": "102"
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "name": "2m",
+                        "id": "103"
+                      },
+                      {
+                        "name": "3m",
+                        "id": "104"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Trimless"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Aluminium Trimless Deep Wall Washer Profile",
+              "variants": {
+                "Aluminium Trimless Deep Wall Washer Profile": {
+                  "id": "recFYMjZrA8POAzsM",
+                  "product_name": "Aluminium Trimless Deep Wall Washer Profile",
+                  "category": "Trimless",
+                  "product_code": "PR130-W",
+                  "sku_mappings": [
+                    {
+                      "sku": "PR130-W",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "\n",
+                  "product_description": "\n",
+                  "product_images": [
+                    "assets/img/products/recFYMjZrA8POAzsM_9cb8f8094e.jpg"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/recFYMjZrA8POAzsM_dim_eb18b215ae.jpg"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "Yes",
+                  "technical_icons": [
+                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
+                  ],
+                  "meta_keywords": "Trimless LED wall washer, Deep recessed aluminium channel, Plaster-in LED profile, Architectural wall wash light, Recessed linear extrusion, Flush wall washer channel",
+                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Dimension": [
+                      {
+                        "value": "50mm (W) x 75mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "value": "White",
+                        "icon": ""
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "value": "3m",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Dimension": [
+                      {
+                        "name": "85.5mm (W) x 56.8mm (H)",
+                        "id": "101"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "White",
+                        "id": "102"
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "name": "2m",
+                        "id": "103"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Trimless"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Aluminium Trimless Plaster Profile",
+              "variants": {
+                "Aluminium Trimless Plaster Profile": {
+                  "id": "recJTZiTrn7SHXBzB",
+                  "product_name": "Aluminium Trimless Plaster Profile",
+                  "category": "Trimless",
+                  "product_code": "TP5213-DS-BEND",
+                  "sku_mappings": [
+                    {
+                      "sku": "TP5213-DS-BEND",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Elevate your space with fluid elegance and discreet luxury, casting a breathtaking, seamless glow that transforms any room into a sanctuary of modern style.\n",
+                  "product_description": "Elevate your interior design with an extraordinary lighting solution that seamlessly integrates into your architecture. Crafted for those who appreciate fluid elegance and discreet luxury, this versatile profile effortlessly bends to outline your space with a captivating, double-sided illumination. Transform any room into a sophisticated retreat filled with warm, ambient radiance and flawless modern style.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "Flexible double-sided LED profile, Trimless plaster-in aluminum channel, Bendable architectural channel, Recessed double-sided lighting, Seamless plaster LED profile, Curved plaster channel",
+                  "supplier_name": "BAIWEI",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Channel Configuration": [
+                      {
+                        "value": "Bendable Double-Sided",
+                        "icon": ""
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "52.6mm (W) x 13.7mm (H)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Channel Configuration": [
+                      {
+                        "name": "Bendable Double-Sided",
+                        "id": "101"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "52.6mm (W) x 13.7mm (H)",
+                        "id": "102"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "103"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Trimless"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Aluminium Trimless Plaster Profile",
+              "variants": {
+                "Aluminium Trimless Plaster Profile": {
+                  "id": "recLHJHB294BOHsnH",
+                  "product_name": "Aluminium Trimless Plaster Profile",
+                  "category": "Trimless",
+                  "product_code": "TP3414-SS-BEND",
+                  "sku_mappings": [
+                    {
+                      "sku": "TP3414-SS-BEND",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Elevate your space with an elegant, seamless glow. Experience subtle sophistication and discreet luxury that gracefully accentuates every corner of your home.\n",
+                  "product_description": "Transform your interior spaces with an elegant blend of modern design and subtle sophistication. This premium lighting profile integrates effortlessly into plasterwork to create a seamless, floating glow that gracefully elevates your architecture. Designed for those who value discreet luxury and refined detail, it bathes your surroundings in a soothing, captivating ambiance, bringing an inviting warmth and breathtaking style to every corner of your home.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "Bendable single-sided profile, Trimless plaster LED channel, Flexible plaster-in channel, Recessed aluminum profile, Architectural plaster lighting, Seamless bendable LED channel",
+                  "supplier_name": "BAIWEI",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Channel Configuration": [
+                      {
+                        "value": "Bendable Single-Sided",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "34.4mm (W) x 14mm (H)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Channel Configuration": [
+                      {
+                        "name": "Bendable Single-Sided",
+                        "id": "101"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "34.4mm (W) x 14mm (H)",
+                        "id": "102"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "103"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Trimless"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Aluminium Trimless Plaster Profile",
+              "variants": {
+                "Aluminium Trimless Plaster Profile": {
+                  "id": "recLKFxsq3JNBDg9A",
+                  "product_name": "Aluminium Trimless Plaster Profile",
+                  "category": "Trimless",
+                  "product_code": "TP6013-DS-BEND",
+                  "sku_mappings": [
+                    {
+                      "sku": "TP6013-DS-BEND",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Elevate your home with seamless elegance and captivating illumination. Experience discreet luxury with a soft, sophisticated glow that enhances any room.\n",
+                  "product_description": "Elevate your living space with a seamless blend of modern design and captivating illumination. Designed to effortlessly integrate into your decor, this premium lighting solution bathes your surroundings in a soft, sophisticated glow that highlights the refined beauty of your home. Perfect for creating an inviting ambiance, it offers a touch of discreet luxury and timeless style, transforming any room into a breathtaking sanctuary of warmth and elegance.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "60mm trimless LED channel, Bendable double-sided profile, Plaster-in aluminum LED channel, Recessed architectural profile, Seamless plaster-in lighting, Flexible double LED channel",
+                  "supplier_name": "BAIWEI",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Channel Configuration": [
+                      {
+                        "value": "Bendable Double-Sided",
+                        "icon": ""
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "60mm (W) x 12.9mm (H)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Channel Configuration": [
+                      {
+                        "name": "Bendable Double-Sided",
+                        "id": "101"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "60mm (W) x 12.9mm (H)",
+                        "id": "102"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "103"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Trimless"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Aluminium Trimless Plaster Profile",
+              "variants": {
+                "Aluminium Trimless Plaster Profile": {
+                  "id": "recZAlkCPSXZAirZi",
+                  "product_name": "Aluminium Trimless Plaster Profile",
+                  "category": "Trimless",
+                  "product_code": "TP11636-SS-DL",
+                  "sku_mappings": [
+                    {
+                      "sku": "TP11636-SS-DL",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Elevate your home into a glowing sanctuary of modern luxury and discreet elegance with seamless, captivating radiance.\n",
+                  "product_description": "Elevate your interior design with an extraordinary lighting solution that seamlessly merges modern sophistication with subtle luxury. Engineered for a sleek, flush integration into your walls or ceilings, this premium plaster-in profile casts a soft, captivating radiance that brings warmth and depth to any architectural space. Perfect for creating ambient atmosphere and highlighting elegant contours, it offers a discreet yet impactful touch of refinement, transforming ordinary rooms into stunning, light-filled sanctuaries of style.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "Dual LED plaster profile, Wide trimless channel, Plaster-in architectural profile, Single-side dual strip profile, Recessed LED channel, Silver extrusion",
+                  "supplier_name": "BAIWEI",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Channel Configuration": [
+                      {
+                        "value": "Single-Side & Dual LED",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "116.1mm (W) x 36.5mm (H)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Channel Configuration": [
+                      {
+                        "name": "Single-Side & Dual LED",
+                        "id": "101"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "116.1mm (W) x 36.5mm (H)",
+                        "id": "102"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "103"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Trimless"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Aluminium Trimless Plaster Profile",
+              "variants": {
+                "Aluminium Trimless Plaster Profile": {
+                  "id": "recfo9W5L1MsqGgzu",
+                  "product_name": "Aluminium Trimless Plaster Profile",
+                  "category": "Trimless",
+                  "product_code": "TP5113-DS-BEND",
+                  "sku_mappings": [
+                    {
+                      "sku": "TP5113-DS-BEND",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Elevate your home with seamless, fluid light. Experience discreet luxury and a sophisticated glow that transforms your space into a serene sanctuary of modern style.\n",
+                  "product_description": "Elevate your interior design with an extraordinary lighting solution that seamlessly integrates into your space for a sleek, modern finish. Designed to bring a touch of discreet luxury, this profile casts a warm, captivating glow that enhances architectural details while creating an inviting atmosphere. Perfect for creating fluid, elegant curves of light, it transforms any room into a sophisticated sanctuary of style and comfort.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "Bendable double-sided profile, Trimless plaster LED channel, Double-sided plaster-in profile, Curved aluminum LED channel, Recessed plaster lighting, Architectural double LED channel",
+                  "supplier_name": "BAIWEI",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Channel Configuration": [
+                      {
+                        "value": "Bendable Double-Sided",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "51mm (W) x 13.1mm (H)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Channel Configuration": [
+                      {
+                        "name": "Bendable Double-Sided",
+                        "id": "101"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "51mm (W) x 13.1mm (H)",
+                        "id": "102"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "103"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Trimless"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Aluminium Trimless Plaster Profile",
+              "variants": {
+                "Aluminium Trimless Plaster Profile": {
+                  "id": "recgq2dRdLQvlvAYn",
+                  "product_name": "Aluminium Trimless Plaster Profile",
+                  "category": "Trimless",
+                  "product_code": "PR116",
+                  "sku_mappings": [
+                    {
+                      "sku": "PR116",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "\n",
+                  "product_description": "\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "Plaster-in LED extrusion, Trimless aluminium profile, Drywall recessed channel, Seamless linear housing, Architectural plaster light, Recessed LED profile",
+                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Dimension": [
+                      {
+                        "value": "53mm (W) x 14mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "value": "2m",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Dimension": [
+                      {
+                        "name": "53mm (W) x 14mm (H)",
+                        "id": "101"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "102"
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "name": "2m",
+                        "id": "103"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Trimless"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Aluminium Trimless Plaster Profile",
+              "variants": {
+                "Aluminium Trimless Plaster Profile": {
+                  "id": "rechzIkxfMGHqLixG",
+                  "product_name": "Aluminium Trimless Plaster Profile",
+                  "category": "Trimless",
+                  "product_code": "TP6913-DS-BEND",
+                  "sku_mappings": [
+                    {
+                      "sku": "TP6913-DS-BEND",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Transform your home into a breathtaking sanctuary of light. Experience seamless elegance and a sophisticated glow that effortlessly elevates every room with timeless luxury.\n",
+                  "product_description": "Transform your living space into a breathtaking sanctuary of light with this premium architectural lighting solution. Designed to integrate seamlessly into your interior, it casts a warm, sophisticated glow that effortlessly enhances your home's natural beauty and elegance. Perfect for creating an ambiance of subtle luxury, it elevates every room with a captivating aura of warmth, modern refinement, and timeless allure.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "Wide trimless LED channel, Bendable double-sided plaster channel, Plaster-in aluminum LED housing, Architectural recessed channel, Flexible double-sided lighting, Seamless plaster channel",
+                  "supplier_name": "BAIWEI",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Channel Configuration": [
+                      {
+                        "value": "Bendable Double-Sided",
+                        "icon": ""
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "69mm (W) x 13.5mm (H)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Channel Configuration": [
+                      {
+                        "name": "Bendable Double-Sided",
+                        "id": "101"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "69mm (W) x 13.5mm (H)",
+                        "id": "102"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "103"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Trimless"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Aluminium Trimless Plaster Profile",
+              "variants": {
+                "Aluminium Trimless Plaster Profile": {
+                  "id": "recltZ5J2L0upCu7p",
+                  "product_name": "Aluminium Trimless Plaster Profile",
+                  "category": "Trimless",
+                  "product_code": "TP5815-SS",
+                  "sku_mappings": [
+                    {
+                      "sku": "TP5815-SS",
+                      "combination": [
+                        "101",
+                        "102"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Elevate your interior design with an exquisite lighting solution that merges modern sophistication with subtle luxury, creating a serene, warm sanctuary in your home.\n",
+                  "product_description": "Elevate your interior design with an exquisite lighting solution that seamlessly merges modern sophistication with subtle luxury. Designed to blend effortlessly into your architecture, this sleek profile casts a captivating, soft radiance that beautifully accentuates clean lines and refined spaces. Perfect for creating an enchanting, warm atmosphere, it transforms any room into a serene sanctuary of light, offering an elevated visual experience for those who appreciate discreet elegance and impeccable style.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "Plaster-in LED extrusion, Trimless aluminum profile, Flush wall channel, Recessed lighting profile, Modern plaster channel, Silver LED profile",
+                  "supplier_name": "BAIWEI",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "53mm (W) x 16mm (H)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Dimension": [
+                      {
+                        "name": "53mm (W) x 16mm (H)",
+                        "id": "101"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "102"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Trimless"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Aluminium Trimless Plaster Profile",
+              "variants": {
+                "Aluminium Trimless Plaster Profile": {
+                  "id": "recvAxmXm0jmqPe5T",
+                  "product_name": "Aluminium Trimless Plaster Profile",
+                  "category": "Trimless",
+                  "product_code": "TP5314-SS",
+                  "sku_mappings": [
+                    {
+                      "sku": "TP5314-SS",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Elevate your home with seamless modern elegance. Experience discreet luxury and a sophisticated glow that turns any space into a breathtaking sanctuary.\n",
+                  "product_description": "Elevate your living space with an exquisite architectural lighting solution that seamlessly merges modern elegance with understated luxury. Designed to effortlessly integrate into your walls or ceilings, this premium profile casts a smooth, sophisticated glow that redefines your interior environment. Perfect for creating a serene and captivating ambiance, it turns ordinary spaces into a breathtaking sanctuary of light, highlighting fine details while maintaining a clean, flawless aesthetic.\n",
+                  "product_images": [],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "Single-sided trimless LED profile, Plaster-in aluminum channel, Architectural plaster channel, Recessed profile lighting, Seamless LED channel, Linear plaster-in profile",
+                  "supplier_name": "BAIWEI",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Channel Configuration": [
+                      {
+                        "value": "Single-Sided",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "53mm (W) x 14.5mm (H)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Channel Configuration": [
+                      {
+                        "name": "Single-Sided",
+                        "id": "101"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "53mm (W) x 14.5mm (H)",
+                        "id": "102"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "103"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Trimless"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Aluminium Trimless Recessed Plaster Profile",
+              "variants": {
+                "Aluminium Trimless Recessed Plaster Profile": {
+                  "id": "recwjKMehMHxr19us",
+                  "product_name": "Aluminium Trimless Recessed Plaster Profile",
+                  "category": "Trimless",
+                  "product_code": "PR115",
+                  "sku_mappings": [
+                    {
+                      "sku": "PR115",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "\n",
+                  "product_description": "\n",
+                  "product_images": [
+                    "assets/img/products/recwjKMehMHxr19us_cc2aa3856e.jpg"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/recwjKMehMHxr19us_dim_43c8fd49e9.jpg"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "Yes",
+                  "technical_icons": [
+                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
+                  ],
+                  "meta_keywords": "Trimless recessed plaster profile, Recessed plaster-in channel, Architectural LED extrusion, Seamless drywall lighting, Flush plaster LED profile, Wide recessed channel",
+                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "value": "2m",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "61.5mm (W) x 14mm (H)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Dimension": [
+                      {
+                        "name": "61.5mm (W) x 14mm (H)",
+                        "id": "101"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "102"
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "name": "2m",
+                        "id": "103"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Trimless"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "name": "Stair",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Aluminium Stair Profile",
+              "variants": {
+                "Aluminium Stair Profile": {
+                  "id": "recfojDnYOhkEbowi",
+                  "product_name": "Aluminium Stair Profile",
+                  "category": "Stair",
+                  "product_code": "PR027",
+                  "sku_mappings": [
+                    {
+                      "sku": "PR027",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    },
+                    {
+                      "sku": "PR027-3M",
+                      "combination": [
+                        "101",
+                        "102",
+                        "104"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "\n",
+                  "product_description": "\n",
+                  "product_images": [
+                    "assets/img/products/recfojDnYOhkEbowi_78fb2bfda7.webp",
+                    "assets/img/products/recfojDnYOhkEbowi_e30f47dd98.webp"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/recfojDnYOhkEbowi_dim_35e5c1b47c.webp"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": [
+                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
+                  ],
+                  "meta_keywords": "Aluminium stair profile, LED stair tread housing, Non-slip step channel, Architectural stair lighting, Heavy-duty step profile, LED stair extrusion",
+                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "value": "2m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "3m",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "80mm (W) x 50mm (H)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Dimension": [
+                      {
+                        "name": "80mm (W) x 50mm (H)",
+                        "id": "101"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "102"
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "name": "2m",
+                        "id": "103"
+                      },
+                      {
+                        "name": "3m",
+                        "id": "104"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Stair"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "name": "Deep Recessed",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Aluminium Recessed Profile",
+              "variants": {
+                "Aluminium Recessed Profile": {
+                  "id": "recMDfaLzV4GLvhgO",
+                  "product_name": "Aluminium Recessed Profile",
+                  "category": "Deep Recessed",
+                  "product_code": "PR005",
+                  "sku_mappings": [
+                    {
+                      "sku": "PR005",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105"
+                      ]
+                    },
+                    {
+                      "sku": "PR005-3m-Silver",
+                      "combination": [
+                        "101",
+                        "102",
+                        "106"
+                      ]
+                    },
+                    {
+                      "sku": "PR005-B",
+                      "combination": [
+                        "101",
+                        "103",
+                        "105"
+                      ]
+                    },
+                    {
+                      "sku": "PR005-W",
+                      "combination": [
+                        "101",
+                        "104",
+                        "105"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "\n",
+                  "product_description": "\n",
+                  "product_images": [
+                    "assets/img/products/recMDfaLzV4GLvhgO_86ca820536.webp"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/recMDfaLzV4GLvhgO_dim_1239ee5b1c.webp"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "Yes",
+                  "technical_icons": [
+                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
+                  ],
+                  "meta_keywords": "Deep recessed LED channel, Aluminium extrusion profile, Architectural linear housing, Flush mount LED channel, Deep LED light diffuser, Ceiling recessed extrusion",
+                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      },
+                      {
+                        "value": "Black",
+                        "icon": ""
+                      },
+                      {
+                        "value": "White",
+                        "icon": ""
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "value": "2m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "3m",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "23.2mm (W) x 15.3mm (H)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Dimension": [
+                      {
+                        "name": "23.2mm (W) x 15.3mm (H)",
+                        "id": "101"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "102"
+                      },
+                      {
+                        "name": "Black",
+                        "id": "103"
+                      },
+                      {
+                        "name": "White",
+                        "id": "104"
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "name": "2m",
+                        "id": "105"
+                      },
+                      {
+                        "name": "3m",
+                        "id": "106"
+                      }
+                    ]
+                  },
+                  "constraints": {
+                    "103": [
+                      "106"
+                    ],
+                    "104": [
+                      "106"
+                    ]
+                  },
+                  "category_path": [
+                    "Profiles",
+                    "Deep Recessed"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "name": "Bendable",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Aluminium Bendable Profile",
+              "variants": {
+                "Aluminium Bendable Profile": {
+                  "id": "recYZQJDU2rJPKq1y",
+                  "product_name": "Aluminium Bendable Profile",
+                  "category": "Bendable",
+                  "product_code": "PR125",
+                  "sku_mappings": [
+                    {
+                      "sku": "PR125",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "\n",
+                  "product_description": "\n",
+                  "product_images": [
+                    "assets/img/products/recYZQJDU2rJPKq1y_d8350f1a57.jpg"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/recYZQJDU2rJPKq1y_dim_102dcd76ae.jpg"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "Yes",
+                  "technical_icons": [
+                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
+                  ],
+                  "meta_keywords": "Bendable aluminium profile, Flexible LED channel, Curved LED extrusion, Flexible linear housing, Bendable LED channel, Slim flexible profile",
+                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "value": "2m",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "18mm (W) x 5.6mm (H)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Dimension": [
+                      {
+                        "name": "18mm (W) x 5.6mm (H)",
+                        "id": "101"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "102"
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "name": "2m",
+                        "id": "103"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Bendable"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "name": "Wall Washer",
+          "children": []
+        },
+        {
+          "type": "category",
+          "name": "Skirting Trimless",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Aluminium Skirting Trimless Plaster Profile",
+              "variants": {
+                "Aluminium Skirting Trimless Plaster Profile": {
+                  "id": "recFPunNXl5H7t48D",
+                  "product_name": "Aluminium Skirting Trimless Plaster Profile",
+                  "category": "Skirting Trimless",
+                  "product_code": "SKR1580",
+                  "sku_mappings": [
+                    {
+                      "sku": "SKR1580",
+                      "combination": [
+                        "101",
+                        "102"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Elevate your space with an elegant fusion of modern luxury and subtle sophistication, creating a breathtaking, floating sanctuary of light.\n",
+                  "product_description": "Elevate your interior design with an elegant fusion of modern luxury and subtle sophistication. This premium trimless skirting illumination solution seamlessly embeds into your walls, casting a warm, floating glow that gracefully accentuates your space. Crafted for those who appreciate understated elegance and refined architectural detail, it transforms any room into a breathtaking sanctuary of light and style.\n",
+                  "product_images": [
+                    "assets/img/products/recFPunNXl5H7t48D_3292dd7f86.webp"
+                  ],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "Skirting LED profile, Plaster-in skirting channel, Aluminium baseboard profile, Trimless skirting light, Floor-level plaster channel, Recessed baseboard profile",
+                  "supplier_name": "BAIWEI",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "15.5mm (W) x 80mm (H)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Dimension": [
+                      {
+                        "name": "15.5mm (W) x 80mm (H)",
+                        "id": "101"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "102"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Skirting Trimless"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Aluminium Skirting Trimless Plaster Profile",
+              "variants": {
+                "Aluminium Skirting Trimless Plaster Profile": {
+                  "id": "recq5brCQInmmm5bR",
+                  "product_name": "Aluminium Skirting Trimless Plaster Profile",
+                  "category": "Skirting Trimless",
+                  "product_code": "SKR1370",
+                  "sku_mappings": [
+                    {
+                      "sku": "SKR1370",
+                      "combination": [
+                        "101",
+                        "102"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Dive into an enchanting oasis of light and luxury. Elevate your retreat into a sophisticated, glowing sanctuary, adding breathtaking allure and serene ambiance to every evening.\n",
+                  "product_description": "Dive into an enchanting oasis of light and luxury with our premium illumination solution. Designed to effortlessly elevate your living experience, it bathes your retreat in a warm, sophisticated radiance that creates an unparalleled ambiance. Perfect for those with a discerning eye for discreet elegance, this seamless lighting design adds a breathtaking allure and a serene, captivating glow to every evening, turning any space into a welcoming sanctuary of modern style.\n",
+                  "product_images": [
+                    "assets/img/products/recq5brCQInmmm5bR_a75a0b3d46.jpg",
+                    "assets/img/products/recq5brCQInmmm5bR_c89497469c.jpg",
+                    "assets/img/products/recq5brCQInmmm5bR_4463c98409.jpg"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/recq5brCQInmmm5bR_dim_f0afd2c94c.webp"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": [
+                    "assets/img/icons/reckjqGprGGLIL4h6_icon_85e2b69e3e.svg"
+                  ],
+                  "meta_keywords": "Skirting LED profile, Plaster-in skirting channel, Aluminium baseboard profile, Trimless skirting light, Floor-level plaster channel, Architectural skirting profile",
+                  "supplier_name": "BAIWEI",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "13.1mm (W) x 70mm (H)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Dimension": [
+                      {
+                        "name": "13.1mm (W) x 70mm (H)",
+                        "id": "101"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "102"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Profiles",
+                    "Skirting Trimless"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "name": "Mini Surface",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Aluminium Mini Surfaced Profile",
+              "variants": {
+                "Aluminium Mini Surfaced Profile": {
+                  "id": "recOt3gpqBf4InEQR",
+                  "product_name": "Aluminium Mini Surfaced Profile",
+                  "category": "Mini Surface",
+                  "product_code": "PROM",
+                  "sku_mappings": [
+                    {
+                      "sku": "PROM",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105"
+                      ]
+                    },
+                    {
+                      "sku": "PROM-3m-silver",
+                      "combination": [
+                        "101",
+                        "102",
+                        "106"
+                      ]
+                    },
+                    {
+                      "sku": "PROM-B",
+                      "combination": [
+                        "101",
+                        "103",
+                        "105"
+                      ]
+                    },
+                    {
+                      "sku": "PROM-W",
+                      "combination": [
+                        "101",
+                        "104",
+                        "105"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "\n",
+                  "product_description": "\n",
+                  "product_images": [
+                    "assets/img/products/recOt3gpqBf4InEQR_1dabcde837.jpg"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/recOt3gpqBf4InEQR_dim_12139f1981.jpg"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "Yes",
+                  "technical_icons": [
+                    "assets/img/icons/rec4Zh9Al9Ybt7Pif_icon_dbb762fc3e.svg"
+                  ],
+                  "meta_keywords": "Mini surfaced profile, Aluminium LED channel, Compact linear profile, Surface mount light channel, Slim LED extrusion, Architectural mini profile",
+                  "supplier_name": "CHINA - LEDLUZ CO. LIMITED",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Finish": [
+                      {
+                        "value": "Silver",
+                        "icon": ""
+                      },
+                      {
+                        "value": "Black",
+                        "icon": ""
+                      },
+                      {
+                        "value": "White",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "7.8mm (W) x 9mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "value": "2m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "3m",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Dimension": [
+                      {
+                        "name": "7.8mm (W) x 9mm (H)",
+                        "id": "101"
+                      }
+                    ],
+                    "Finish": [
+                      {
+                        "name": "Silver",
+                        "id": "102"
+                      },
+                      {
+                        "name": "Black",
+                        "id": "103"
+                      },
+                      {
+                        "name": "White",
+                        "id": "104"
+                      }
+                    ],
+                    "Profile Length": [
+                      {
+                        "name": "2m",
+                        "id": "105"
+                      },
+                      {
+                        "name": "3m",
+                        "id": "106"
+                      }
+                    ]
+                  },
+                  "constraints": {
+                    "103": [
+                      "106"
+                    ],
+                    "104": [
+                      "106"
+                    ]
+                  },
+                  "category_path": [
+                    "Profiles",
+                    "Mini Surface"
+                  ]
+                }
+              }
+            }
+          ]
         }
       ]
     },
@@ -17545,1919 +22848,6 @@ const AZOOGI_PRODUCTS = {
       "type": "category",
       "name": "NEON",
       "children": [
-        {
-          "type": "category",
-          "name": "Side View",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "Neon Side View",
-              "variants": {
-                "Neon Side View": {
-                  "id": "rec2bUDmZZi443DFK",
-                  "product_name": "Neon Side View",
-                  "category": "Side View",
-                  "sku": "ACE 1220S WHT",
-                  "product_short_description": "Bring fluid brilliance to any environment with Side View IP68, a premium linear light designed to deliver a flawless, uniform glow that elevates your architectural vision.\n",
-                  "product_description": "Elevate your architectural and landscape designs with the Side View IP68, a premium linear lighting solution crafted to bring captivating elegance and fluid brilliance to any environment. Engineered for extraordinary side-bending flexibility, this luxurious neon-style light curves effortlessly around contours to create stunning visual features and dramatic accents. Perfect for transforming upscale commercial venues, creating sophisticated outdoor atmospheres, or adding a touch of modern luxury to residential spaces, its uniform, flawless glow delivers an unmatched aesthetic impact. Built to withstand the elements while maintaining its pristine radiance, it is the ultimate choice for designers who demand seamless elegance, adaptability, and style.\n",
-                  "product_images": [
-                    "assets/img/products/rec2bUDmZZi443DFK_1691996d06.webp"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/rec2bUDmZZi443DFK_dim_cb72752f55.webp"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": [
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_170164ffff.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_53534690f3.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_1c357751ce.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_25465d1691.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_4fca773db2.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_a6d2f104b6.svg"
-                  ],
-                  "meta_keywords": "Side view neon, Flexible linear LED, Architectural accent lighting, Landscape contour light, Waterproof light ribbon, Premium commercial lighting",
-                  "supplier_name": "CHINA - JR Lite",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "2700K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "3000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "5300K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "2700K-5300K",
-                        "icon": ""
-                      }
-                    ],
-                    "Control Protocol": [
-                      {
-                        "value": "DMX",
-                        "icon": ""
-                      },
-                      {
-                        "value": "SPI",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "12mm (W) x 20mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP68",
-                        "icon": ""
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "value": "Max 20,000mm (L)",
-                        "icon": ""
-                      },
-                      {
-                        "value": "Max 5,000mm (L)",
-                        "icon": ""
-                      },
-                      {
-                        "value": "Max 10,000mm (L)",
-                        "icon": ""
-                      },
-                      {
-                        "value": "Max 15,000mm (L)",
-                        "icon": ""
-                      },
-                      {
-                        "value": "Max 9,000mm (L)",
-                        "icon": ""
-                      },
-                      {
-                        "value": "Max 13,000mm (L)",
-                        "icon": ""
-                      }
-                    ],
-                    "Light Color": [
-                      {
-                        "value": "RGBW",
-                        "icon": ""
-                      },
-                      {
-                        "value": "RGB",
-                        "icon": ""
-                      },
-                      {
-                        "value": "RGBW (3000K)",
-                        "icon": ""
-                      },
-                      {
-                        "value": "TW",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "10W/m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "15W/m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "22W/m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "16W/m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "17W/m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "13W/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Resolution": [
-                      {
-                        "value": "12 Pixels/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "10W/m",
-                        "id": "101"
-                      },
-                      {
-                        "name": "15W/m",
-                        "id": "102"
-                      },
-                      {
-                        "name": "22W/m",
-                        "id": "103"
-                      },
-                      {
-                        "name": "16W/m",
-                        "id": "104"
-                      },
-                      {
-                        "name": "17W/m",
-                        "id": "105"
-                      },
-                      {
-                        "name": "13W/m",
-                        "id": "106"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "2700K",
-                        "id": "107"
-                      },
-                      {
-                        "name": "3000K",
-                        "id": "108"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "109"
-                      },
-                      {
-                        "name": "5300K",
-                        "id": "110"
-                      },
-                      {
-                        "name": "2700K-5300K",
-                        "id": "111"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "112"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP68",
-                        "id": "113"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "12mm (W) x 20mm (H)",
-                        "id": "114"
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "name": "Max 20,000mm (L)",
-                        "id": "115"
-                      },
-                      {
-                        "name": "Max 5,000mm (L)",
-                        "id": "116"
-                      },
-                      {
-                        "name": "Max 10,000mm (L)",
-                        "id": "117"
-                      },
-                      {
-                        "name": "Max 15,000mm (L)",
-                        "id": "118"
-                      },
-                      {
-                        "name": "Max 9,000mm (L)",
-                        "id": "119"
-                      },
-                      {
-                        "name": "Max 13,000mm (L)",
-                        "id": "120"
-                      }
-                    ],
-                    "Light Color": [
-                      {
-                        "name": "RGBW",
-                        "id": "121"
-                      },
-                      {
-                        "name": "RGB",
-                        "id": "122"
-                      },
-                      {
-                        "name": "RGBW (3000K)",
-                        "id": "123"
-                      },
-                      {
-                        "name": "TW",
-                        "id": "124"
-                      }
-                    ],
-                    "Control Protocol": [
-                      {
-                        "name": "DMX",
-                        "id": "125"
-                      },
-                      {
-                        "name": "SPI",
-                        "id": "126"
-                      }
-                    ],
-                    "Resolution": [
-                      {
-                        "name": "12 Pixels/m",
-                        "id": "127"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "NEON",
-                    "Side View"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Mini Neon Side View",
-              "variants": {
-                "Mini Neon Side View": {
-                  "id": "rec51oIsxN4i08e00",
-                  "product_name": "Mini Neon Side View",
-                  "category": "Side View",
-                  "sku": "ACE 0408S FC WHT",
-                  "product_short_description": "Experience ultimate design freedom with the Mini Side Bend. This ultra-flexible linear light curves effortlessly to bring a flawless, captivating glow to any environment.\n",
-                  "product_description": "Discover the ultimate in design freedom with the Mini Side Bend neon-style light, crafted to bring a sleek, captivating elegance to any environment. Engineered for exceptional side-bending flexibility, this premium linear lighting solution curves seamlessly around intricate architectural contours, allowing you to create fluid, breathtaking visual statements. Its uniform, flawless glow adds a sophisticated ambiance to both interior and exterior spaces, transforming the ordinary into a showcase of luxurious light. Built to deliver reliable radiance and unmatched aesthetic beauty, it is the perfect choice for designers looking to elevate their projects with seamless style and effortless adaptability.\n",
-                  "product_images": [
-                    "assets/img/products/rec51oIsxN4i08e00_630a2019f1.jpg"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/rec51oIsxN4i08e00_dim_746c029591.webp"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": [
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_170164ffff.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_53534690f3.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_1c357751ce.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_25465d1691.svg",
-                    "assets/img/icons/rec51oIsxN4i08e00_icon_9ec0ac17ef.svg",
-                    "assets/img/icons/rec51oIsxN4i08e00_icon_29f2b79d71.svg"
-                  ],
-                  "meta_keywords": "Mini Side Bend, Ultra-flexible linear light, Side View neon, Slim architectural lighting, Waterproof LED ribbon, Fluid contour illumination",
-                  "supplier_name": "CHINA - JR Lite",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "2400K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "2700K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "3000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": ""
-                      }
-                    ],
-                    "Cut Interval": [
-                      {
-                        "value": "Free Cut",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "4mm (W) x 8mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP65",
-                        "icon": ""
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "value": "Max 7000mm (L)",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "6W/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "6W/m",
-                        "id": "101"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "2400K",
-                        "id": "102"
-                      },
-                      {
-                        "name": "2700K",
-                        "id": "103"
-                      },
-                      {
-                        "name": "3000K",
-                        "id": "104"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "105"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "106"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP65",
-                        "id": "107"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "4mm (W) x 8mm (H)",
-                        "id": "108"
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "name": "Max 7000mm (L)",
-                        "id": "109"
-                      }
-                    ],
-                    "Cut Interval": [
-                      {
-                        "name": "Free Cut",
-                        "id": "110"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "NEON",
-                    "Side View"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Neon Side View",
-              "variants": {
-                "Neon Side View": {
-                  "id": "rec5hhoeYZcLQKd2H",
-                  "product_name": "Neon Side View",
-                  "category": "Side View",
-                  "sku": "AG 1617S",
-                  "product_short_description": "Bring fluid brilliance and glare-free elegance to your design with Side View Honeycomb, offering a beautifully softened glow and ultimate flexibility.\n",
-                  "product_description": "Elevate your architectural designs with the Side View IP68 Honeycomb, a premium linear lighting solution crafted to bring captivating elegance and fluid brilliance to any environment. Engineered with advanced honeycomb anti-glare technology, this luxurious neon-style light delivers a beautifully softened, uniform glow that effortlessly enhances spaces without any harsh glare. Perfectly adapted for seamless side-bending flexibility, it gracefully curves around contours to create stunning visual features, dramatic accents, and a sophisticated atmosphere. Built to withstand demanding elements while maintaining its flawless aesthetic, it represents the ultimate fusion of contemporary style, innovative visual comfort, and breathtaking design freedom.\n",
-                  "product_images": [
-                    "assets/img/products/rec5hhoeYZcLQKd2H_0808ed9e32.webp",
-                    "assets/img/products/rec5hhoeYZcLQKd2H_8f990b58ee.webp"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/rec5hhoeYZcLQKd2H_dim_29739d1632.webp"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": [
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_170164ffff.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_53534690f3.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_1c357751ce.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_25465d1691.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_4fca773db2.svg",
-                    "assets/img/icons/rec5hhoeYZcLQKd2H_icon_e2f84e7ae4.svg"
-                  ],
-                  "meta_keywords": "Architectural lighting, Linear LED, Side View neon, Anti-glare honeycomb, Waterproof light ribbon, Flexible contour illumination",
-                  "supplier_name": "CHINA - JR Lite",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "2200K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "2700K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "3000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "2700K-5300K",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "16mm (W) x 17mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "Glare Control": [
-                      {
-                        "value": "Honeycomb Anti Glare Louvre",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP68",
-                        "icon": ""
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "value": "Max 20,000mm (L)",
-                        "icon": ""
-                      },
-                      {
-                        "value": "Max 15,000mm (L)",
-                        "icon": ""
-                      }
-                    ],
-                    "Light Color": [
-                      {
-                        "value": "TW",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "10W/m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "15W/m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "13W/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "10W/m",
-                        "id": "101"
-                      },
-                      {
-                        "name": "15W/m",
-                        "id": "102"
-                      },
-                      {
-                        "name": "13W/m",
-                        "id": "103"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "2200K",
-                        "id": "104"
-                      },
-                      {
-                        "name": "2700K",
-                        "id": "105"
-                      },
-                      {
-                        "name": "3000K",
-                        "id": "106"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "107"
-                      },
-                      {
-                        "name": "2700K-5300K",
-                        "id": "108"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "109"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP68",
-                        "id": "110"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "16mm (W) x 17mm (H)",
-                        "id": "111"
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "name": "Max 20,000mm (L)",
-                        "id": "112"
-                      },
-                      {
-                        "name": "Max 15,000mm (L)",
-                        "id": "113"
-                      }
-                    ],
-                    "Glare Control": [
-                      {
-                        "name": "Honeycomb Anti Glare Louvre",
-                        "id": "114"
-                      }
-                    ],
-                    "Light Color": [
-                      {
-                        "name": "TW",
-                        "id": "115"
-                      }
-                    ]
-                  },
-                  "constraints": {
-                    "101": [
-                      "113",
-                      "108",
-                      "115"
-                    ],
-                    "102": [
-                      "112",
-                      "108",
-                      "115"
-                    ],
-                    "103": [
-                      "112",
-                      "104",
-                      "105",
-                      "106",
-                      "107"
-                    ]
-                  },
-                  "category_path": [
-                    "NEON",
-                    "Side View"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Mini Neon Side View",
-              "variants": {
-                "Mini Neon Side View": {
-                  "id": "rec9jtcuIzqsQ4cZ0",
-                  "product_name": "Mini Neon Side View",
-                  "category": "Side View",
-                  "sku": "0612S FC WHT",
-                  "product_short_description": "Elevate your space with the ultra-sleek Mini Side Bend, a flexible masterpiece delivering a seamless, captivating glow that turns any environment into a work of art.\n",
-                  "product_description": "Discover the perfect blend of subtle elegance and dynamic versatility with the Mini (6mm x 12mm) Side Bend linear lighting solution. Crafted for designers who refuse to compromise on style, this ultra-sleek, flexible masterpiece effortlessly curves around architectural features to deliver a seamless, captivating glow. Ideal for adding sophisticated ambiance to modern interiors or transforming commercial spaces, its refined, uniform illumination provides an upscale aesthetic that elevates any environment into a work of art.\n",
-                  "product_images": [
-                    "assets/img/products/rec9jtcuIzqsQ4cZ0_4c9bb3e054.webp"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/rec9jtcuIzqsQ4cZ0_dim_583dc675d6.webp"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": [
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_170164ffff.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_53534690f3.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_1c357751ce.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_25465d1691.svg",
-                    "assets/img/icons/rec9jtcuIzqsQ4cZ0_icon_ade928ce92.svg",
-                    "assets/img/icons/rec9jtcuIzqsQ4cZ0_icon_f2f36ee210.svg"
-                  ],
-                  "meta_keywords": "Mini side bend, Ultra-sleek neon, Seamless flexible glow, Free cut linear LED, Precise length lighting, Architectural ambiance neon",
-                  "supplier_name": "CHINA - JR Lite",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "2200K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "2700K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "3000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "2700K-5300K",
-                        "icon": ""
-                      }
-                    ],
-                    "Cut Interval": [
-                      {
-                        "value": "Free Cut",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "6mm (W) x 12mm (H)",
-                        "icon": ""
-                      },
-                      {
-                        "value": "6.8mm (W) x 12mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP67",
-                        "icon": ""
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "value": "Max 7,000mm (L)",
-                        "icon": ""
-                      },
-                      {
-                        "value": "Max 10,000mm (L)",
-                        "icon": ""
-                      }
-                    ],
-                    "Light Color": [
-                      {
-                        "value": "TW",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "10W/m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "13W/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "10W/m",
-                        "id": "101"
-                      },
-                      {
-                        "name": "13W/m",
-                        "id": "102"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "2200K",
-                        "id": "103"
-                      },
-                      {
-                        "name": "2700K",
-                        "id": "104"
-                      },
-                      {
-                        "name": "3000K",
-                        "id": "105"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "106"
-                      },
-                      {
-                        "name": "2700K-5300K",
-                        "id": "107"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "108"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP67",
-                        "id": "109"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "6mm (W) x 12mm (H)",
-                        "id": "110"
-                      },
-                      {
-                        "name": "6.8mm (W) x 12mm (H)",
-                        "id": "111"
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "name": "Max 7,000mm (L)",
-                        "id": "112"
-                      },
-                      {
-                        "name": "Max 10,000mm (L)",
-                        "id": "113"
-                      }
-                    ],
-                    "Cut Interval": [
-                      {
-                        "name": "Free Cut",
-                        "id": "114"
-                      }
-                    ],
-                    "Light Color": [
-                      {
-                        "name": "TW",
-                        "id": "115"
-                      }
-                    ]
-                  },
-                  "constraints": {
-                    "102": [
-                      "103",
-                      "104",
-                      "105",
-                      "106",
-                      "110",
-                      "112",
-                      "114"
-                    ],
-                    "115": [
-                      "101",
-                      "103",
-                      "104",
-                      "105",
-                      "106",
-                      "110",
-                      "112",
-                      "114"
-                    ]
-                  },
-                  "category_path": [
-                    "NEON",
-                    "Side View"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Neon",
-              "variants": {
-                "Neon": {
-                  "id": "recCK4wgGrmgtxSee",
-                  "product_name": "Neon",
-                  "category": "Side View",
-                  "sku": "AHS1616-White light-24V",
-                  "product_short_description": "Bring a sophisticated brilliance to your space with premium neon linear lighting. Designed for ultimate flexibility, it effortlessly shapes your vision with a flawless glow.\n",
-                  "product_description": "Transform your surroundings with our premium neon linear lighting, expertly crafted to bring a modern, sophisticated brilliance to any setting. Designed with ultimate flexibility and artistic flair in mind, this sleek lighting solution effortlessly curves to follow your unique architectural contours, turning ordinary spaces into breathtaking design statements. Whether you are elevating a luxury interior or casting a captivating glow across a refined outdoor landscape, its flawless, uniform radiance offers an unparalleled upscale aesthetic. Embrace the perfect fusion of elegance and adaptability, and let your design visions shine with magnificent style.\n",
-                  "product_images": [
-                    "assets/img/products/recCK4wgGrmgtxSee_119282b040.webp",
-                    "assets/img/products/recCK4wgGrmgtxSee_9d42d6a67e.webp",
-                    "assets/img/products/recCK4wgGrmgtxSee_765cc99ed5.webp"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/recCK4wgGrmgtxSee_dim_6fda387eb9.webp"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "Yes",
-                  "technical_icons": [
-                    "assets/img/icons/recCK4wgGrmgtxSee_icon_e93f9d2610.svg",
-                    "assets/img/icons/recCK4wgGrmgtxSee_icon_3c850467c4.svg",
-                    "assets/img/icons/recCK4wgGrmgtxSee_icon_a089f7881a.svg",
-                    "assets/img/icons/recCK4wgGrmgtxSee_icon_14811e84f8.svg",
-                    "assets/img/icons/recCK4wgGrmgtxSee_icon_2c06c64f30.svg",
-                    "assets/img/icons/recCK4wgGrmgtxSee_icon_717c560179.svg",
-                    "assets/img/icons/recCK4wgGrmgtxSee_icon_22ba69d4b1.svg"
-                  ],
-                  "meta_keywords": "Neon Linear Lighting, Premium Flexible LED, Modern Architectural Contour, High-End Luxury Interior, Waterproof Landscape Glow, Flawless Uniform Radiance",
-                  "supplier_name": "CHINA - Colorsled",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "2700K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "3000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "RGBW (3000K)",
-                        "icon": ""
-                      }
-                    ],
-                    "Control Protocol": [
-                      {
-                        "value": "DMX",
-                        "icon": ""
-                      }
-                    ],
-                    "Cut Interval": [
-                      {
-                        "value": "Free-Cut",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "16mm (W) x 16mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP67",
-                        "icon": ""
-                      }
-                    ],
-                    "Light Color": [
-                      {
-                        "value": "RGB",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "10W/m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "12W/m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "14W/m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "17W/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Resolution": [
-                      {
-                        "value": "12 Pixels/m",
-                        "icon": ""
-                      }
-                    ],
-                    "View": [
-                      {
-                        "value": "Side View",
-                        "icon": ""
-                      },
-                      {
-                        "value": "Top View",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "10W/m",
-                        "id": "101"
-                      },
-                      {
-                        "name": "12W/m",
-                        "id": "102"
-                      },
-                      {
-                        "name": "14W/m",
-                        "id": "103"
-                      },
-                      {
-                        "name": "17W/m",
-                        "id": "104"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "2700K",
-                        "id": "105"
-                      },
-                      {
-                        "name": "3000K",
-                        "id": "106"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "107"
-                      },
-                      {
-                        "name": "RGBW (3000K)",
-                        "id": "108"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "109"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP67",
-                        "id": "110"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "16mm (W) x 16mm (H)",
-                        "id": "111"
-                      }
-                    ],
-                    "Cut Interval": [
-                      {
-                        "name": "Free-Cut",
-                        "id": "112"
-                      }
-                    ],
-                    "View": [
-                      {
-                        "name": "Side View",
-                        "id": "113"
-                      },
-                      {
-                        "name": "Top View",
-                        "id": "114"
-                      }
-                    ],
-                    "Light Color": [
-                      {
-                        "name": "RGB",
-                        "id": "115"
-                      }
-                    ],
-                    "Control Protocol": [
-                      {
-                        "name": "DMX",
-                        "id": "116"
-                      }
-                    ],
-                    "Resolution": [
-                      {
-                        "name": "12 Pixels/m",
-                        "id": "117"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "NEON",
-                    "Side View"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Neon Side View Sauna",
-              "variants": {
-                "Neon Side View Sauna": {
-                  "id": "recOIplDvStVGEsyf",
-                  "product_name": "Neon Side View Sauna",
-                  "category": "Side View",
-                  "sku": "SAUNA 1617S",
-                  "product_short_description": "Transform your wellness space into a luxurious haven with Side View Sauna, offering a comforting, uniform glow that invites pure relaxation and elegant tranquility.\n",
-                  "product_description": "Step into a sanctuary of pure relaxation and elevated luxury with the Side View IP68 Sauna, a premium linear lighting solution crafted to transform wellness spaces into serene havens. Designed to wrap seamlessly around structural curves, this elegant accent light bathes your environment in a smooth, uniform glow that enhances tranquility and soothes the senses. Perfect for creating a high-end spa atmosphere, it brings a touch of sophisticated radiance and comforting warmth, inviting you to completely unwind and escape from the everyday world.\n",
-                  "product_images": [
-                    "assets/img/products/recOIplDvStVGEsyf_b814eea9e7.webp",
-                    "assets/img/products/recOIplDvStVGEsyf_4f3effcd54.webp"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/recOIplDvStVGEsyf_dim_a68949aae7.webp"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": [
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_170164ffff.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_53534690f3.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_25465d1691.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_4fca773db2.svg",
-                    "assets/img/icons/recOIplDvStVGEsyf_icon_63d90068bf.svg"
-                  ],
-                  "meta_keywords": "Sauna lighting, Spa linear LED, Side View neon, Waterproof light ribbon, Wellness space accent, Flexible contour illumination",
-                  "supplier_name": "CHINA - JR Lite",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "1600K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "2200K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "2700K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "3000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "5300K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "2700K-5300K",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "16mm (W) x 17mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP68",
-                        "icon": ""
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "value": "Max 10,000mm (L)",
-                        "icon": ""
-                      }
-                    ],
-                    "Light Color": [
-                      {
-                        "value": "TW",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "6W/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "6W/m",
-                        "id": "101"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "1600K",
-                        "id": "102"
-                      },
-                      {
-                        "name": "2200K",
-                        "id": "103"
-                      },
-                      {
-                        "name": "2700K",
-                        "id": "104"
-                      },
-                      {
-                        "name": "3000K",
-                        "id": "105"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "106"
-                      },
-                      {
-                        "name": "5300K",
-                        "id": "107"
-                      },
-                      {
-                        "name": "2700K-5300K",
-                        "id": "108"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "109"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP68",
-                        "id": "110"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "16mm (W) x 17mm (H)",
-                        "id": "111"
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "name": "Max 10,000mm (L)",
-                        "id": "112"
-                      }
-                    ],
-                    "Light Color": [
-                      {
-                        "name": "TW",
-                        "id": "113"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "NEON",
-                    "Side View"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Neon Side View",
-              "variants": {
-                "Neon Side View": {
-                  "id": "recPRKIdCvyys4nvA",
-                  "product_name": "Neon Side View",
-                  "category": "Side View",
-                  "sku": "LEDLINE OPTIC 1617S",
-                  "product_short_description": "Redefine luxury with the Side View IP68 Optic, projecting a focused, captivating beam to bring timeless elegance and precision to your visionary spaces.\n",
-                  "product_description": "Experience the epitome of precision and drama with the Side View IP68 Optic, a premium linear lighting masterpiece designed to redefine luxury illumination. Engineered with advanced optics, this sophisticated neon-style light projects a focused, captivating beam that beautifully accentuates architectural contours and artistic details. Its seamless side-bending flexibility unlocks unparalleled design freedom, allowing you to craft breathtaking visual statements in high-end commercial spaces, upscale residential interiors, and elite outdoor landscapes. Bring an atmosphere of timeless elegance and unmatched prestige to your visionary projects with a refined glow that transforms the ordinary into an extraordinary spectacle of light.\n",
-                  "product_images": [
-                    "assets/img/products/recPRKIdCvyys4nvA_dc43361601.webp",
-                    "assets/img/products/recPRKIdCvyys4nvA_2de88eab7a.webp"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/recPRKIdCvyys4nvA_dim_6fe2deb00d.webp"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": [
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_170164ffff.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_53534690f3.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_1c357751ce.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_25465d1691.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_4fca773db2.svg",
-                    "assets/img/icons/recPRKIdCvyys4nvA_icon_2b526a0ef1.svg"
-                  ],
-                  "meta_keywords": "Side view neon, Focused beam optics, Waterproof linear LED, Precision architectural lighting, Narrow beam accent, Premium luxury illumination",
-                  "supplier_name": "CHINA - JR Lite",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "Beam Angle": [
-                      {
-                        "value": "36°",
-                        "icon": ""
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "value": "2200K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "2700K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "3000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "16mm (W) x 17mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP68",
-                        "icon": ""
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "value": "Max 5,000mm (L)",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "18W/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "18W/m",
-                        "id": "101"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "2200K",
-                        "id": "102"
-                      },
-                      {
-                        "name": "2700K",
-                        "id": "103"
-                      },
-                      {
-                        "name": "3000K",
-                        "id": "104"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "105"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "106"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP68",
-                        "id": "107"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "16mm (W) x 17mm (H)",
-                        "id": "108"
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "name": "Max 5,000mm (L)",
-                        "id": "109"
-                      }
-                    ],
-                    "Beam Angle": [
-                      {
-                        "name": "36°",
-                        "id": "110"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "NEON",
-                    "Side View"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Neon Side View",
-              "variants": {
-                "Neon Side View": {
-                  "id": "recPsMCM5UstPHzTs",
-                  "product_name": "Neon Side View",
-                  "category": "Side View",
-                  "sku": "WAVE 1617S WHT",
-                  "product_short_description": "Bring fluid brilliance to any space with Side Bend IP69, curving effortlessly to deliver a seamless, uniform glow that elevates your architectural vision.\n",
-                  "product_description": "Elevate your architectural and landscape designs with the Side Bend IP69, a premium linear lighting solution crafted to bring captivating elegance and fluid brilliance to any environment. Engineered for extraordinary side-bending flexibility, this luxurious neon-style light curves effortlessly around architectural contours to create stunning visual features and dramatic accents. Perfect for transforming upscale commercial venues, creating an inviting outdoor oasis, or adding a sophisticated glow to modern spaces, its seamless, uniform illumination delivers an unmatched upscale aesthetic. Combining ultimate durability with timeless style, it is the ultimate choice for visionary designers looking to push the boundaries of creative lighting expression.\n",
-                  "product_images": [
-                    "assets/img/products/recPsMCM5UstPHzTs_9961832b5b.jpg",
-                    "assets/img/products/recPsMCM5UstPHzTs_432d663ece.jpg",
-                    "assets/img/products/recPsMCM5UstPHzTs_6ec6d005e8.jpg",
-                    "assets/img/products/recPsMCM5UstPHzTs_b8dcc032b0.jpg"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/recPsMCM5UstPHzTs_dim_3ca9733fc5.webp"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": [
-                    "assets/img/icons/recCeU16wqcIPxZNs_icon_f35fe71d4d.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_170164ffff.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_53534690f3.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_1c357751ce.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_25465d1691.svg",
-                    "assets/img/icons/recPsMCM5UstPHzTs_icon_649fdf7ff0.svg"
-                  ],
-                  "meta_keywords": "Side bend neon, Flexible linear LED, Architectural accent lighting, Landscape contour light, Waterproof light ribbon, Premium commercial lighting",
-                  "supplier_name": "CHINA - JR Lite",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "2200K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "2700K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "3000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "5300K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "RGBW (3000K)",
-                        "icon": ""
-                      },
-                      {
-                        "value": "TW (2700K-5300K)",
-                        "icon": ""
-                      }
-                    ],
-                    "Control Protocol": [
-                      {
-                        "value": "DMX",
-                        "icon": ""
-                      },
-                      {
-                        "value": "SPI",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "16mm (W) x 17mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP69",
-                        "icon": ""
-                      }
-                    ],
-                    "Impact Strength": [
-                      {
-                        "value": "IK10 with Neon-AluProfile-1617",
-                        "icon": ""
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "value": "Max 11,000mm (L)",
-                        "icon": ""
-                      },
-                      {
-                        "value": "Max 5,000mm (L)",
-                        "icon": ""
-                      },
-                      {
-                        "value": "Max 13,000mm (L)",
-                        "icon": ""
-                      },
-                      {
-                        "value": "Max 7,000mm (L)",
-                        "icon": ""
-                      },
-                      {
-                        "value": "Max 8,000mm (L)",
-                        "icon": ""
-                      }
-                    ],
-                    "Light Color": [
-                      {
-                        "value": "RGB",
-                        "icon": ""
-                      },
-                      {
-                        "value": "RGBW",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "10W/m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "13W/m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "15W/m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "16W/m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "17W/m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "22W/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Resolution": [
-                      {
-                        "value": "12 Pixels/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "10W/m",
-                        "id": "101"
-                      },
-                      {
-                        "name": "13W/m",
-                        "id": "102"
-                      },
-                      {
-                        "name": "15W/m",
-                        "id": "103"
-                      },
-                      {
-                        "name": "16W/m",
-                        "id": "104"
-                      },
-                      {
-                        "name": "17W/m",
-                        "id": "105"
-                      },
-                      {
-                        "name": "22W/m",
-                        "id": "106"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "2200K",
-                        "id": "107"
-                      },
-                      {
-                        "name": "2700K",
-                        "id": "108"
-                      },
-                      {
-                        "name": "3000K",
-                        "id": "109"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "110"
-                      },
-                      {
-                        "name": "5300K",
-                        "id": "111"
-                      },
-                      {
-                        "name": "RGBW (3000K)",
-                        "id": "112"
-                      },
-                      {
-                        "name": "TW (2700K-5300K)",
-                        "id": "113"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "114"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP69",
-                        "id": "115"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "16mm (W) x 17mm (H)",
-                        "id": "116"
-                      }
-                    ],
-                    "Impact Strength": [
-                      {
-                        "name": "IK10 with Neon-AluProfile-1617",
-                        "id": "117"
-                      }
-                    ],
-                    "Light Color": [
-                      {
-                        "name": "RGB",
-                        "id": "118"
-                      },
-                      {
-                        "name": "RGBW",
-                        "id": "119"
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "name": "Max 11,000mm (L)",
-                        "id": "120"
-                      },
-                      {
-                        "name": "Max 5,000mm (L)",
-                        "id": "121"
-                      },
-                      {
-                        "name": "Max 13,000mm (L)",
-                        "id": "122"
-                      },
-                      {
-                        "name": "Max 7,000mm (L)",
-                        "id": "123"
-                      },
-                      {
-                        "name": "Max 8,000mm (L)",
-                        "id": "124"
-                      }
-                    ],
-                    "Control Protocol": [
-                      {
-                        "name": "DMX",
-                        "id": "125"
-                      },
-                      {
-                        "name": "SPI",
-                        "id": "126"
-                      }
-                    ],
-                    "Resolution": [
-                      {
-                        "name": "12 Pixels/m",
-                        "id": "127"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "NEON",
-                    "Side View"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Mini Neon Side View",
-              "variants": {
-                "Mini Neon Side View": {
-                  "id": "recZyTvJc4ZEXIAkp",
-                  "product_name": "Mini Neon Side View",
-                  "category": "Side View",
-                  "sku": "0606S FC WHT",
-                  "product_short_description": "Bring subtle sophistication to any space with the Mini, an ultra-compact linear light designed to deliver a flawless, uniform glow and timeless style.\n",
-                  "product_description": "Discover the ultimate in discreet elegance with the Mini (6mm x 6mm), a remarkably compact linear lighting solution designed to bring subtle sophistication and seamless radiance to any space. Crafted for extraordinary flexibility and an ultra-minimal profile, this sleek neon-style light curves effortlessly to accent intricate design details and create captivating visual effects. Perfect for adding a luxurious atmosphere to modern retail interiors, high-end lounges, or intimate architectural spaces, its smooth, uniform glow transforms the ordinary into the extraordinary. Embrace a new standard of design freedom with a flawless illumination that blends perfectly into your vision while delivering an unmatched aesthetic impact.\n",
-                  "product_images": [
-                    "assets/img/products/recZyTvJc4ZEXIAkp_212a42c789.jpg"
-                  ],
-                  "product_dimension": [
-                    "assets/img/products/recZyTvJc4ZEXIAkp_dim_18e95c29c4.webp"
-                  ],
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": [
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_170164ffff.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_53534690f3.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_1c357751ce.svg",
-                    "assets/img/icons/rec2bUDmZZi443DFK_icon_25465d1691.svg",
-                    "assets/img/icons/rec51oIsxN4i08e00_icon_9ec0ac17ef.svg",
-                    "assets/img/icons/recZyTvJc4ZEXIAkp_icon_5bd4f0248b.svg"
-                  ],
-                  "meta_keywords": "Discreet elegance, Ultra-compact neon, Subtle sophistication, Minimal lighting profile, Flexible contour accent, Architectural detail illumination",
-                  "supplier_name": "CHINA - JR Lite",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "2700K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "3000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": ""
-                      }
-                    ],
-                    "Cut Interval": [
-                      {
-                        "value": "Free Cut",
-                        "icon": ""
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "6mm (W) x 6mm (H)",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP65",
-                        "icon": ""
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "value": "Max 5,000mm (L)",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "6W/m",
-                        "icon": ""
-                      }
-                    ],
-                    "View": [
-                      {
-                        "value": "Side View",
-                        "icon": ""
-                      },
-                      {
-                        "value": "Top View",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "6W/m",
-                        "id": "101"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "2700K",
-                        "id": "102"
-                      },
-                      {
-                        "name": "3000K",
-                        "id": "103"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "104"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "105"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP65",
-                        "id": "106"
-                      }
-                    ],
-                    "Dimension": [
-                      {
-                        "name": "6mm (W) x 6mm (H)",
-                        "id": "107"
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "name": "Max 5,000mm (L)",
-                        "id": "108"
-                      }
-                    ],
-                    "Cut Interval": [
-                      {
-                        "name": "Free Cut",
-                        "id": "109"
-                      }
-                    ],
-                    "View": [
-                      {
-                        "name": "Side View",
-                        "id": "110"
-                      },
-                      {
-                        "name": "Top View",
-                        "id": "111"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "NEON",
-                    "Side View"
-                  ]
-                }
-              }
-            }
-          ]
-        },
         {
           "type": "category",
           "name": "3D",
@@ -19470,7 +22860,45 @@ const AZOOGI_PRODUCTS = {
                   "id": "rec5X0oI6wYrPOWTI",
                   "product_name": "Dual Bend Neon",
                   "category": "3D",
-                  "sku": "AIR 1617 WHT",
+                  "product_code": "3D1617-10W-2.7K-IP67-FC",
+                  "sku_mappings": [
+                    {
+                      "sku": "3D1617-10W-2.7K-IP67-FC",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105",
+                        "106",
+                        "107",
+                        "108",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "3D1617-10W-3K-IP67-FC",
+                      "combination": [
+                        "101",
+                        "103",
+                        "105",
+                        "106",
+                        "107",
+                        "108",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "3D1617-10W-4K-IP67-FC",
+                      "combination": [
+                        "101",
+                        "104",
+                        "105",
+                        "106",
+                        "107",
+                        "108",
+                        "109"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Sculpt light without limits using Free Cut 3D Bend Neon. Effortlessly bend in all directions to wrap your space in pure, flawless aesthetic elegance and bold artistic style.\n",
                   "product_description": "Experience a new dimension of design freedom with the Free Cut 3D Bend Neon. This revolutionary linear lighting masterpiece bends effortlessly in all directions, allowing you to sculpt light around complex architecture, dramatic contours, and fluid custom shapes without limits. Perfect for creating unforgettable statements in luxury commercial spaces or premium modern venues, it delivers a flawless, completely uniform radiance that wraps your environment in pure aesthetic elegance. Striking the perfect balance between artistic versatility and bold visual impact, this stunning accent solution is crafted for visionary designers looking to bring their most imaginative concepts to life with absolute grace and sophistication.\n",
                   "product_images": [
@@ -19616,7 +23044,53 @@ const AZOOGI_PRODUCTS = {
                   "id": "recOXyUP3wypRT0cL",
                   "product_name": "Long Run Dual Bend Neon",
                   "category": "3D",
-                  "sku": "AXE 1617 SL WHT",
+                  "product_code": "3D1617-10W-2.7K-IP68-SLR",
+                  "sku_mappings": [
+                    {
+                      "sku": "3D1617-10W-2.7K-IP68-SLR",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105",
+                        "106",
+                        "107",
+                        "108"
+                      ]
+                    },
+                    {
+                      "sku": "3D1617-10W-3K-IP68-SLR",
+                      "combination": [
+                        "101",
+                        "103",
+                        "105",
+                        "106",
+                        "107",
+                        "108"
+                      ]
+                    },
+                    {
+                      "sku": "3D1617-10W-4K-IP68-SLR",
+                      "combination": [
+                        "101",
+                        "104",
+                        "105",
+                        "106",
+                        "107",
+                        "108"
+                      ]
+                    },
+                    {
+                      "sku": "3D1617-10W-RED-IP68-SLR",
+                      "combination": [
+                        "101",
+                        "109",
+                        "105",
+                        "106",
+                        "107",
+                        "108"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Transform your space with Long Run 3D Bend Neon, crafting a flawless, multi-dimensional glow that brings ultimate design freedom and fluid elegance to any environment.\n",
                   "product_description": "Transform your architectural visions with the Long Run 3D Bend Neon, a premium linear lighting solution crafted to bring multi-directional flexibility and captivating elegance to any environment. Engineered to curve effortlessly in three dimensions, this luxurious neon-style light offers ultimate design freedom, allowing you to accentuate complex contours and create breathtaking visual statements. Its flawless, uniform glow delivers an unmatched aesthetic elegance, making it the perfect choice for transforming sophisticated spaces and adding a seamless, fluid brilliance that captivates and inspires.\n",
                   "product_images": [
@@ -19762,7 +23236,20 @@ const AZOOGI_PRODUCTS = {
                   "id": "recPK6Vl33jblTwPP",
                   "product_name": "Dual Bend Neon & Dual Colour",
                   "category": "3D",
-                  "sku": "AIR 1010 CS",
+                  "product_code": "3D1010-10W-2.7-3K-IP67",
+                  "sku_mappings": [
+                    {
+                      "sku": "3D1010-10W-2.7-3K-IP67",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103",
+                        "104",
+                        "105",
+                        "106"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Step into the next dimension of luxury illumination with the Dual Colour 3D Bend Neon, wrapping your space in a seamless dual-colour glow of pure elegance and awe.\n",
                   "product_description": "Step into the next dimension of luxury illumination with the Dual Colour 3D Bend Neon. Designed for visionaries who refuse to compromise on style, this revolutionary linear lighting masterpiece bends effortlessly in all directions to trace breathtaking architectural curves and create captivating visual features. Whether you are transforming a high-end commercial venue, designing a sophisticated modern lounge, or adding a touch of drama to an intimate space, its seamless, uniform dual-colour glow wraps your environment in a blanket of pure elegance. Crafted to elevate the ordinary into the extraordinary, it delivers an unmatched aesthetic ambiance that commands attention and inspires awe.\n",
                   "product_images": [
@@ -19884,7 +23371,20 @@ const AZOOGI_PRODUCTS = {
                   "id": "recWZxIcRR2ElJnvU",
                   "product_name": "Dual Bend Neon & Dual Colour",
                   "category": "3D",
-                  "sku": "AIR 1617 CS",
+                  "product_code": "3D1617-10W-2.7-3K-IP67",
+                  "sku_mappings": [
+                    {
+                      "sku": "3D1617-10W-2.7-3K-IP67",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103",
+                        "104",
+                        "105",
+                        "106"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Experience ultimate design freedom with the Dual Colour 3D Bend Neon, flowing effortlessly around complex contours to bring fluid brilliance and modern luxury to your vision.\n",
                   "product_description": "Experience the pinnacle of design freedom with the Dual Colour 3D Bend Neon, a premium linear lighting masterpiece crafted to bring dynamic sophistication and seamless radiance to your most ambitious spaces. Engineered for multi-directional flexibility, this luxurious neon-style solution flows effortlessly around complex contours to create striking architectural statements and captivating visual depth. Perfect for transforming high-end environments into immersive sensory experiences, its elegant and fluid brilliance brings a breath of modern luxury to any design vision, making it the ultimate choice for those who dare to inspire.\n",
                   "product_images": [
@@ -20006,7 +23506,55 @@ const AZOOGI_PRODUCTS = {
                   "id": "recXYurkK4iTYaDms",
                   "product_name": "Dual Bend Neon",
                   "category": "3D",
-                  "sku": "AXE 1617 WHT",
+                  "product_code": "3D1617-10W-2.7K-IP68",
+                  "sku_mappings": [
+                    {
+                      "sku": "3D1617-10W-2.7K-IP68",
+                      "combination": [
+                        "101",
+                        "103",
+                        "106",
+                        "107",
+                        "108",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "3D1617-10W-3K-IP68",
+                      "combination": [
+                        "101",
+                        "104",
+                        "106",
+                        "107",
+                        "108",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "3D1617-10W-4K-IP68",
+                      "combination": [
+                        "101",
+                        "105",
+                        "106",
+                        "107",
+                        "108",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "3D1617-15W-RGBW-IP68-DMX",
+                      "combination": [
+                        "102",
+                        "111",
+                        "106",
+                        "107",
+                        "108",
+                        "110",
+                        "112",
+                        "113"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Transform your space with 3D Bend Neon. Its boundless flexibility creates a flawless ribbon of light, wrapping any environment in pure, uniform elegance.\n",
                   "product_description": "Unlock a new dimension of design with the 3D Bend Neon, a revolutionary linear lighting masterpiece crafted to bring your boldest artistic concepts to life. Engineered for boundless multi-directional flexibility, this premium neon-style light bends effortlessly across any plane, wrapping architectural contours and spatial features in a flawless, seamless ribbon of light. Perfect for elevating high-end commercial spaces, luxury interiors, or modern landscapes, it creates a breathtaking visual statement that captures the imagination and completely transforms the atmosphere with its pure, uniform radiance.\n",
                   "product_images": [
@@ -20192,7 +23740,45 @@ const AZOOGI_PRODUCTS = {
                   "id": "recjUspW3CYqy6Gqd",
                   "product_name": "Dual Bend Neon",
                   "category": "3D",
-                  "sku": "AIR 1010 WHT",
+                  "product_code": "3D1010-10W-2.7K-IP67-FC",
+                  "sku_mappings": [
+                    {
+                      "sku": "3D1010-10W-2.7K-IP67-FC",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105",
+                        "106",
+                        "107",
+                        "108",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "3D1010-10W-3K-IP67-FC",
+                      "combination": [
+                        "101",
+                        "103",
+                        "105",
+                        "106",
+                        "107",
+                        "108",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "3D1010-10W-4K-IP67-FC",
+                      "combination": [
+                        "101",
+                        "104",
+                        "105",
+                        "106",
+                        "107",
+                        "108",
+                        "109"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Unleash your creative vision with Free Cut 3D Bend Neon. Curve it effortlessly in every direction for a seamless, radiant atmosphere that transforms any ordinary space.\n",
                   "product_description": "Unleash your creative vision with the Free Cut 3D Bend Neon, a revolutionary linear lighting solution designed to bring complete design freedom and fluid brilliance to any environment. Engineered for exceptional three-dimensional flexibility, this luxurious masterpiece curves effortlessly in every direction, allowing you to trace intricate architectural contours and craft captivating, personalized lighting displays. Its pristine, uniform glow eliminates harsh shadows, filling your space with a seamless, radiant atmosphere. Perfect for designers who refuse to compromise on style and adaptability, this premium lighting choice transforms the ordinary into an extraordinary visual statement, capturing elegance and modern sophistication from every single angle.\n",
                   "product_images": [
@@ -20344,7 +23930,159 @@ const AZOOGI_PRODUCTS = {
                   "id": "recCeU16wqcIPxZNs",
                   "product_name": "Neon Top View",
                   "category": "Top View",
-                  "sku": "WAVE 1617T WHT",
+                  "product_code": "TV1617-10W-2.2K-IP69",
+                  "sku_mappings": [
+                    {
+                      "sku": "TV1617-10W-2.2K-IP69",
+                      "combination": [
+                        "101",
+                        "107",
+                        "114",
+                        "115",
+                        "116",
+                        "117"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-10W-2.7K-IP69",
+                      "combination": [
+                        "101",
+                        "108",
+                        "114",
+                        "115",
+                        "116",
+                        "117"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-10W-3K-IP69",
+                      "combination": [
+                        "101",
+                        "109",
+                        "114",
+                        "115",
+                        "116",
+                        "117"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-10W-4K-IP69",
+                      "combination": [
+                        "101",
+                        "110",
+                        "114",
+                        "115",
+                        "116",
+                        "117"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-10W-5.3K-IP69",
+                      "combination": [
+                        "101",
+                        "111",
+                        "114",
+                        "115",
+                        "116",
+                        "117"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-13W-RGB-IP69",
+                      "combination": [
+                        "102",
+                        "118",
+                        "114",
+                        "115",
+                        "116",
+                        "121",
+                        "117"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-15W-RGB-IP69-DMX",
+                      "combination": [
+                        "103",
+                        "118",
+                        "114",
+                        "115",
+                        "116",
+                        "122",
+                        "126",
+                        "128",
+                        "117"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-16W-RGB-IP69-SPI",
+                      "combination": [
+                        "104",
+                        "118",
+                        "114",
+                        "115",
+                        "116",
+                        "123",
+                        "127",
+                        "128",
+                        "117"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-17W-RGBW-IP69",
+                      "combination": [
+                        "105",
+                        "119",
+                        "109",
+                        "114",
+                        "115",
+                        "116",
+                        "124",
+                        "117"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-15W-RGBW-IP69-DMX",
+                      "combination": [
+                        "103",
+                        "119",
+                        "109",
+                        "114",
+                        "115",
+                        "116",
+                        "122",
+                        "126",
+                        "128",
+                        "117"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-22W-RGBW-IP69-SPI",
+                      "combination": [
+                        "106",
+                        "112",
+                        "114",
+                        "115",
+                        "116",
+                        "125",
+                        "127",
+                        "128",
+                        "117"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-13W-TW-IP69",
+                      "combination": [
+                        "102",
+                        "120",
+                        "113",
+                        "114",
+                        "115",
+                        "116",
+                        "123",
+                        "117"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Bring seamless radiance to any space with Top Bend IP69, a premium linear light designed to accentuate contours with a flawless uniform glow and ultimate style.\n",
                   "product_description": "Illuminate your architectural visions with the Top Bend IP69, a premium linear lighting solution designed to bring seamless radiance to any space. Engineered for incredible flexibility and breathtaking visual impact, this top-bending neon-style light curves effortlessly to accentuate contours and create striking design statements. Whether you are transforming a high-end commercial venue or adding sophisticated atmosphere to an outdoor landscape, its pristine, uniform glow delivers an unmatched aesthetic elegance. Built to withstand the elements while maintaining its flawless brilliance, it is the ultimate choice for designers who refuse to compromise on beauty, adaptability, and style.\n",
                   "product_images": [
@@ -20656,7 +24394,64 @@ const AZOOGI_PRODUCTS = {
                   "id": "recQUN4eYmVBcmrwp",
                   "product_name": "Three-sided Emitting Mini Neon Top View",
                   "category": "Top View",
-                  "sku": "ACE 1010YT TW",
+                  "product_code": "TV1010-12W-TW-IP68-270",
+                  "sku_mappings": [
+                    {
+                      "sku": "TV1010-12W-TW-IP68-270",
+                      "combination": [
+                        "101",
+                        "103",
+                        "108",
+                        "109",
+                        "110",
+                        "111"
+                      ]
+                    },
+                    {
+                      "sku": "TV1010-11W-2.2K-IP68-270",
+                      "combination": [
+                        "102",
+                        "104",
+                        "108",
+                        "109",
+                        "110",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "TV1010-11W-2.7K-IP68-270",
+                      "combination": [
+                        "102",
+                        "105",
+                        "108",
+                        "109",
+                        "110",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "TV1010-11W-3K-IP68-270",
+                      "combination": [
+                        "102",
+                        "106",
+                        "108",
+                        "109",
+                        "110",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "TV1010-11W-4K-IP68-270",
+                      "combination": [
+                        "102",
+                        "107",
+                        "108",
+                        "109",
+                        "110",
+                        "112"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Wrap your space in pure luxury with the Three-sided Emitting Mini Neon, radiating a stunning, uniform glow from three sides for ultimate design freedom.\n",
                   "product_description": "Experience the ultimate in design versatility with the Three-sided Emitting Mini Neon, a revolutionary linear lighting choice crafted to redefine modern luxury. Engineered to radiate a brilliant, uniform glow from three distinct sides, this remarkable neon-style masterpiece wraps any environment in a seamless blanket of sophisticated light. Its highly flexible profile effortlessly contours around architectural features, making it the perfect choice for designers looking to elevate spaces with dramatic ambiance and striking visual impact. Elevate your next project with an unmatched aesthetic elegance that blends artistic freedom with flawless illumination.\n",
                   "product_images": [
@@ -20837,7 +24632,168 @@ const AZOOGI_PRODUCTS = {
                   "id": "recQwlY740wz89Y7P",
                   "product_name": "Slice",
                   "category": "Top View",
-                  "sku": "APO 10 FC",
+                  "product_code": "TV1004-10W-2.2K-IP65-FC",
+                  "sku_mappings": [
+                    {
+                      "sku": "TV1004-10W-2.2K-IP65-FC",
+                      "combination": [
+                        "101",
+                        "104",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "116"
+                      ]
+                    },
+                    {
+                      "sku": "TV1004-10W-2.7K-IP65-FC",
+                      "combination": [
+                        "101",
+                        "105",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "116"
+                      ]
+                    },
+                    {
+                      "sku": "TV1004-10W-3K-IP65-FC",
+                      "combination": [
+                        "101",
+                        "106",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "116"
+                      ]
+                    },
+                    {
+                      "sku": "TV1004-10W-4K-IP65-FC",
+                      "combination": [
+                        "101",
+                        "107",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "116"
+                      ]
+                    },
+                    {
+                      "sku": "TV1004-10W-5.7K-IP65-FC",
+                      "combination": [
+                        "101",
+                        "108",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "116"
+                      ]
+                    },
+                    {
+                      "sku": "TV1004-14W-TW-IP65",
+                      "combination": [
+                        "102",
+                        "117",
+                        "109",
+                        "110",
+                        "111",
+                        "113"
+                      ]
+                    },
+                    {
+                      "sku": "TV1004-10W-2.2K-IP65-XL",
+                      "combination": [
+                        "101",
+                        "104",
+                        "109",
+                        "110",
+                        "111",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "TV1004-10W-2.7K-IP65-XL",
+                      "combination": [
+                        "101",
+                        "105",
+                        "109",
+                        "110",
+                        "111",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "TV1004-10W-3K-IP65-XL",
+                      "combination": [
+                        "101",
+                        "106",
+                        "109",
+                        "110",
+                        "111",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "TV1004-10W-4K-IP65-XL",
+                      "combination": [
+                        "101",
+                        "107",
+                        "109",
+                        "110",
+                        "111",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "TV1004-15W-2.2K-IP65-XL",
+                      "combination": [
+                        "101",
+                        "104",
+                        "109",
+                        "110",
+                        "111",
+                        "115"
+                      ]
+                    },
+                    {
+                      "sku": "TV1004-15W-2.7K-IP65-XL",
+                      "combination": [
+                        "103",
+                        "105",
+                        "109",
+                        "110",
+                        "111",
+                        "115"
+                      ]
+                    },
+                    {
+                      "sku": "TV1004-15W-3K-IP65-XL",
+                      "combination": [
+                        "103",
+                        "106",
+                        "109",
+                        "110",
+                        "111",
+                        "115"
+                      ]
+                    },
+                    {
+                      "sku": "TV1004-15W-4K-IP65-XL",
+                      "combination": [
+                        "103",
+                        "107",
+                        "109",
+                        "110",
+                        "111",
+                        "115"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Redefine your space with the ultra-slim Slice, blending flexibility and contemporary elegance to create a sleek, breathtaking visual statement anywhere.\n",
                   "product_description": "Introducing the Slice (10mm x 4mm), an ultra-slim linear lighting solution crafted to redefine modern illumination. Designed with incredible flexibility and a minimal profile, this top-bending masterpiece seamlessly integrates into any architectural vision, effortlessly tracing elegant curves and contours. Its smooth, uniform glow creates a stunning visual statement that elevates the ambiance of sophisticated residential interiors, commercial venues, and luxury landscapes alike. Built to offer ultimate precision and artistic adaptability, the Slice brings a touch of sleek, contemporary elegance to any environment, proving that breathtaking design and exceptional style truly know no boundaries.\n",
                   "product_images": [
@@ -21073,7 +25029,57 @@ const AZOOGI_PRODUCTS = {
                   "id": "recmXW1LwoSgOKt3c",
                   "product_name": "Neon Top View",
                   "category": "Top View",
-                  "sku": "OPTIC 1617T",
+                  "product_code": "TV1617-22W-2.7K-IP68-Optic",
+                  "sku_mappings": [
+                    {
+                      "sku": "TV1617-22W-2.7K-IP68-Optic",
+                      "combination": [
+                        "101",
+                        "102",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-22W-3K-IP68-Optic",
+                      "combination": [
+                        "101",
+                        "103",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-22W-4K-IP68-Optic",
+                      "combination": [
+                        "101",
+                        "104",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-22W-5K-IP68-Optic",
+                      "combination": [
+                        "101",
+                        "105",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "110"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Elevate your space with the Top View IP68 Optic. This premier linear light brings sophisticated, focused radiance to your architectural artistry and modern aesthetics.\n",
                   "product_description": "Elevate your architectural artistry with the Top View IP68 Optic, a premier linear lighting masterpiece designed to bring sophisticated, focused radiance to your design visions. Engineered for exceptional top-bending flexibility and breathtaking visual impact, this luxurious neon-style light effortlessly shapes your environment, casting a seamless, uniform glow that accentuates contours and elevates modern aesthetics. Whether capturing the essence of high-end commercial spaces or delivering a dramatic touch to premium landscapes, its refined elegance and flawless presentation offer an unmatched atmosphere. Built to perform with absolute grace under any conditions, it stands as the definitive choice for designers who demand pure brilliance, seamless adaptability, and uncompromised style.\n",
                   "product_images": [
@@ -21226,7 +25232,236 @@ const AZOOGI_PRODUCTS = {
                   "id": "recqhKk4Txzlp6TgG",
                   "product_name": "Neon Top View",
                   "category": "Top View",
-                  "sku": "AG 1617T BLACK",
+                  "product_code": "TV1617-10W-2.2K-IP68-HC-BLK",
+                  "sku_mappings": [
+                    {
+                      "sku": "TV1617-10W-2.2K-IP68-HC-BLK",
+                      "combination": [
+                        "101",
+                        "104",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "114",
+                        "115"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-10W-2.7K-IP68-HC-BLK",
+                      "combination": [
+                        "101",
+                        "105",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "114",
+                        "115"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-10W-3K-IP68-HC-BLK",
+                      "combination": [
+                        "101",
+                        "106",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "114",
+                        "115"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-10W-4K-IP68-HC-BLK",
+                      "combination": [
+                        "101",
+                        "107",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "114",
+                        "115"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-15W-2.2K-IP68-HC-BLK",
+                      "combination": [
+                        "102",
+                        "104",
+                        "109",
+                        "110",
+                        "111",
+                        "113",
+                        "114",
+                        "115"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-15W-2.7K-IP68-HC-BLK",
+                      "combination": [
+                        "102",
+                        "105",
+                        "109",
+                        "110",
+                        "111",
+                        "113",
+                        "114",
+                        "115"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-15W-3K-IP68-HC-BLK",
+                      "combination": [
+                        "102",
+                        "106",
+                        "109",
+                        "110",
+                        "111",
+                        "113",
+                        "114",
+                        "115"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-15W-4K-IP68-HC-BLK",
+                      "combination": [
+                        "102",
+                        "107",
+                        "109",
+                        "110",
+                        "111",
+                        "113",
+                        "114",
+                        "115"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-13W-TW-IP68-HC-BLK",
+                      "combination": [
+                        "103",
+                        "116",
+                        "108",
+                        "109",
+                        "110",
+                        "111",
+                        "113",
+                        "114",
+                        "115"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-10W-2.2K-IP68-HC",
+                      "combination": [
+                        "101",
+                        "104",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-10W-2.7K-IP68-HC",
+                      "combination": [
+                        "101",
+                        "105",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-10W-3K-IP68-HC",
+                      "combination": [
+                        "101",
+                        "106",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-10W-4K-IP68-HC",
+                      "combination": [
+                        "101",
+                        "107",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-15W-2.2K-IP68-HC",
+                      "combination": [
+                        "102",
+                        "104",
+                        "109",
+                        "110",
+                        "111",
+                        "113",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-15W-2.7K-IP68-HC",
+                      "combination": [
+                        "102",
+                        "105",
+                        "109",
+                        "110",
+                        "111",
+                        "113",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-15W-3K-IP68-HC",
+                      "combination": [
+                        "102",
+                        "106",
+                        "109",
+                        "110",
+                        "111",
+                        "113",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-15W-4K-IP68-HC",
+                      "combination": [
+                        "102",
+                        "107",
+                        "109",
+                        "110",
+                        "111",
+                        "113",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-13W-TW-IP68-HC",
+                      "combination": [
+                        "103",
+                        "116",
+                        "108",
+                        "109",
+                        "110",
+                        "111",
+                        "113",
+                        "114"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Elevate your designs with Top View Honeycomb, blending seamless radiance and sleek contemporary elegance to bring ultimate visual luxury and mystery to any modern space.\n",
                   "product_description": "Elevate your architectural designs with the Top View IP68 Honeycomb, a sophisticated linear lighting solution crafted to deliver seamless radiance and ultimate visual comfort. Featuring a dramatic black finish that blends beautifully with modern aesthetics, this top-bending masterpiece gracefully follows elegant contours while its innovative anti-glare technology ensures a soft, flawless glow. Perfect for luxury commercial venues, minimalist interiors, or high-end landscape designs, it brings an atmosphere of pure mystery and contemporary elegance to any environment, making it the ultimate selection for designers who demand breathtaking impact without compromising on comfort.\n",
                   "product_images": [
@@ -21444,7 +25679,105 @@ const AZOOGI_PRODUCTS = {
                   "id": "recy3gFvZS1Qb9pZ0",
                   "product_name": "Neon Top View",
                   "category": "Top View",
-                  "sku": "LEDLINE ASTON 1615T BLACK",
+                  "product_code": "TV1615-10W-2.7K-IP67-Black",
+                  "sku_mappings": [
+                    {
+                      "sku": "TV1615-10W-2.7K-IP67-Black",
+                      "combination": [
+                        "101",
+                        "103",
+                        "107",
+                        "108",
+                        "109",
+                        "110",
+                        "113"
+                      ]
+                    },
+                    {
+                      "sku": "TV1615-10W-3K-IP67-Black",
+                      "combination": [
+                        "101",
+                        "104",
+                        "107",
+                        "108",
+                        "109",
+                        "110",
+                        "113"
+                      ]
+                    },
+                    {
+                      "sku": "TV1615-10W-4K-IP67-Black",
+                      "combination": [
+                        "101",
+                        "105",
+                        "107",
+                        "108",
+                        "109",
+                        "110",
+                        "113"
+                      ]
+                    },
+                    {
+                      "sku": "TV1615-15W-2.7K-IP67-Black",
+                      "combination": [
+                        "102",
+                        "103",
+                        "107",
+                        "108",
+                        "109",
+                        "111",
+                        "113"
+                      ]
+                    },
+                    {
+                      "sku": "TV1615-15W-3K-IP67-Black",
+                      "combination": [
+                        "102",
+                        "104",
+                        "107",
+                        "108",
+                        "109",
+                        "111",
+                        "113"
+                      ]
+                    },
+                    {
+                      "sku": "TV1615-15W-4K-IP67-Black",
+                      "combination": [
+                        "102",
+                        "105",
+                        "107",
+                        "108",
+                        "109",
+                        "111",
+                        "113"
+                      ]
+                    },
+                    {
+                      "sku": "TV1615-15W-RGB-IP67-Black",
+                      "combination": [
+                        "101",
+                        "107",
+                        "108",
+                        "109",
+                        "112",
+                        "113",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "TV1615-15W-TW-IP67-Black",
+                      "combination": [
+                        "101",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "112",
+                        "113"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Embrace mystery and sophistication with Black Neon, a sleek linear light designed to bring a dramatic, uniform glow and touch of pure luxury to any modern space.\n",
                   "product_description": "Embrace the allure of mystery and sophistication with Black Neon, a captivating linear lighting choice designed to make a bold design statement. Featuring a sleek, dramatic black finish, this neon-style light blends seamlessly into dark aesthetics or acts as a striking contrast against minimalist backgrounds. It delivers a smooth, uniform glow that completely transforms the atmosphere of high-end lounges, modern retail spaces, or intimate outdoor patios. Engineered for incredible flexibility and built to withstand the elements, it allows designers to effortlessly map out artistic contours, adding an undeniable touch of luxury and architectural refinement wherever it is placed.\n",
                   "product_images": [
@@ -21640,7 +25973,87 @@ const AZOOGI_PRODUCTS = {
                   "id": "recyf3Kkxt5QXOXgU",
                   "product_name": "Neon Top View Sauna",
                   "category": "Top View",
-                  "sku": "SAUNA 1617T",
+                  "product_code": "TV1617-6W-1.6K-IP68-Sauna",
+                  "sku_mappings": [
+                    {
+                      "sku": "TV1617-6W-1.6K-IP68-Sauna",
+                      "combination": [
+                        "101",
+                        "102",
+                        "109",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-6W-2.2K-IP68-Sauna",
+                      "combination": [
+                        "101",
+                        "103",
+                        "109",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-6W-2.7K-IP68-Sauna",
+                      "combination": [
+                        "101",
+                        "104",
+                        "109",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-6W-3K-IP68-Sauna",
+                      "combination": [
+                        "101",
+                        "105",
+                        "109",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-6W-4K-IP68-Sauna",
+                      "combination": [
+                        "101",
+                        "106",
+                        "109",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-6W-5.3K-IP68-Sauna",
+                      "combination": [
+                        "101",
+                        "107",
+                        "109",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "TV1617-6W-TW-IP68-Sauna",
+                      "combination": [
+                        "101",
+                        "113",
+                        "108",
+                        "109",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Transform your sauna into a luxurious oasis with a smooth, comforting glow that invites pure relaxation.\n",
                   "product_description": "Step into a sanctuary of pure relaxation and elevated wellness with the Top View IP68 Sauna linear lighting. Expertly crafted to blend seamlessly into luxurious spa and thermal environments, this premium accent light wraps your space in a smooth, uniform glow that dissolves the stress of the outside world. Designed to enhance the serene atmosphere of your personal retreat, its breathtaking radiance casts a soft, tranquil light over contours and architectural features, creating an enchanting haven of comfort and calm. Perfect for designers seeking to cultivate an elite sensory experience, it brings a touch of pure, timeless sophistication to your wellness sanctuary.\n",
                   "product_images": [
@@ -21817,7 +26230,57 @@ const AZOOGI_PRODUCTS = {
                   "id": "reczX8Y3eE6LxLyay",
                   "product_name": "Neon Top View",
                   "category": "Top View",
-                  "sku": "SK-NTB1010V24-C27",
+                  "product_code": "TV1010-BLK",
+                  "sku_mappings": [
+                    {
+                      "sku": "TV1010-10W-2.7K-IP65-Black",
+                      "combination": [
+                        "101",
+                        "102",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "TV1010-10W-3K-IP65-Black",
+                      "combination": [
+                        "101",
+                        "103",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "TV1010-10W-4K-IP65-Black",
+                      "combination": [
+                        "101",
+                        "104",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "TV1010-10W-6K-IP65-Black",
+                      "combination": [
+                        "101",
+                        "105",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "110"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Transform your space with a seamless, flexible glow designed to effortlessly accentuate contours and bring timeless, vibrant elegance to any environment.\n",
                   "product_description": "Elevate your space with a mesmerizing, top-bending linear radiance designed to transform ordinary architectural lines into extraordinary visual statements. Crafted to curve effortlessly around contours, this flexible neon lighting solution casts a seamless, elegant glow that enhances high-end commercial environments and sophisticated outdoor landscapes alike. Perfect for visionary designers looking to infuse warmth and modern artistry into their surroundings, it delivers breathtaking atmosphere and timeless brilliance wherever it shines.\n",
                   "product_images": [
@@ -21956,6 +26419,2806 @@ const AZOOGI_PRODUCTS = {
               }
             }
           ]
+        },
+        {
+          "type": "category",
+          "name": "Side View",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "Neon Side View",
+              "variants": {
+                "Neon Side View": {
+                  "id": "rec2bUDmZZi443DFK",
+                  "product_name": "Neon Side View",
+                  "category": "Side View",
+                  "product_code": "SV1220-10W-2.7K-IP68",
+                  "sku_mappings": [
+                    {
+                      "sku": "SV1220-10W-2.7K-IP68",
+                      "combination": [
+                        "101",
+                        "107",
+                        "112",
+                        "113",
+                        "114",
+                        "115"
+                      ]
+                    },
+                    {
+                      "sku": "SV1220-10W-3K-IP68",
+                      "combination": [
+                        "101",
+                        "108",
+                        "112",
+                        "113",
+                        "114",
+                        "115"
+                      ]
+                    },
+                    {
+                      "sku": "SV1220-10W-4K-IP68",
+                      "combination": [
+                        "101",
+                        "109",
+                        "112",
+                        "113",
+                        "114",
+                        "115"
+                      ]
+                    },
+                    {
+                      "sku": "SV1220-10W-5.3K-IP68",
+                      "combination": [
+                        "101",
+                        "110",
+                        "112",
+                        "113",
+                        "114",
+                        "115"
+                      ]
+                    },
+                    {
+                      "sku": "SV1220-15W-RGBW-IP68-DMX",
+                      "combination": [
+                        "102",
+                        "121",
+                        "108",
+                        "112",
+                        "113",
+                        "114",
+                        "116",
+                        "125",
+                        "127"
+                      ]
+                    },
+                    {
+                      "sku": "SV1220-15W-RGB-IP68-DMX",
+                      "combination": [
+                        "102",
+                        "122",
+                        "112",
+                        "113",
+                        "114",
+                        "116",
+                        "125",
+                        "127"
+                      ]
+                    },
+                    {
+                      "sku": "SV1220-22W-RGBW-IP68-SPI",
+                      "combination": [
+                        "103",
+                        "121",
+                        "108",
+                        "112",
+                        "113",
+                        "114",
+                        "117",
+                        "126",
+                        "127"
+                      ]
+                    },
+                    {
+                      "sku": "SV1220-16W-RGB-IP68-SPI",
+                      "combination": [
+                        "104",
+                        "122",
+                        "112",
+                        "113",
+                        "114",
+                        "118",
+                        "126",
+                        "127"
+                      ]
+                    },
+                    {
+                      "sku": "SV1220-17W-RGBW-IP68",
+                      "combination": [
+                        "105",
+                        "123",
+                        "112",
+                        "113",
+                        "114",
+                        "119"
+                      ]
+                    },
+                    {
+                      "sku": "SV1220-13W-RGB-IP68",
+                      "combination": [
+                        "106",
+                        "122",
+                        "112",
+                        "113",
+                        "114",
+                        "120"
+                      ]
+                    },
+                    {
+                      "sku": "SV1220-13W-TW-IP68",
+                      "combination": [
+                        "106",
+                        "124",
+                        "111",
+                        "112",
+                        "113",
+                        "114",
+                        "118"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Bring fluid brilliance to any environment with Side View IP68, a premium linear light designed to deliver a flawless, uniform glow that elevates your architectural vision.\n",
+                  "product_description": "Elevate your architectural and landscape designs with the Side View IP68, a premium linear lighting solution crafted to bring captivating elegance and fluid brilliance to any environment. Engineered for extraordinary side-bending flexibility, this luxurious neon-style light curves effortlessly around contours to create stunning visual features and dramatic accents. Perfect for transforming upscale commercial venues, creating sophisticated outdoor atmospheres, or adding a touch of modern luxury to residential spaces, its uniform, flawless glow delivers an unmatched aesthetic impact. Built to withstand the elements while maintaining its pristine radiance, it is the ultimate choice for designers who demand seamless elegance, adaptability, and style.\n",
+                  "product_images": [
+                    "assets/img/products/rec2bUDmZZi443DFK_1691996d06.webp"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/rec2bUDmZZi443DFK_dim_cb72752f55.webp"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": [
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_170164ffff.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_53534690f3.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_1c357751ce.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_25465d1691.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_4fca773db2.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_a6d2f104b6.svg"
+                  ],
+                  "meta_keywords": "Side view neon, Flexible linear LED, Architectural accent lighting, Landscape contour light, Waterproof light ribbon, Premium commercial lighting",
+                  "supplier_name": "CHINA - JR Lite",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "2700K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "3000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "5300K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "2700K-5300K",
+                        "icon": ""
+                      }
+                    ],
+                    "Control Protocol": [
+                      {
+                        "value": "DMX",
+                        "icon": ""
+                      },
+                      {
+                        "value": "SPI",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "12mm (W) x 20mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP68",
+                        "icon": ""
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "value": "Max 20,000mm (L)",
+                        "icon": ""
+                      },
+                      {
+                        "value": "Max 5,000mm (L)",
+                        "icon": ""
+                      },
+                      {
+                        "value": "Max 10,000mm (L)",
+                        "icon": ""
+                      },
+                      {
+                        "value": "Max 15,000mm (L)",
+                        "icon": ""
+                      },
+                      {
+                        "value": "Max 9,000mm (L)",
+                        "icon": ""
+                      },
+                      {
+                        "value": "Max 13,000mm (L)",
+                        "icon": ""
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "value": "RGBW",
+                        "icon": ""
+                      },
+                      {
+                        "value": "RGB",
+                        "icon": ""
+                      },
+                      {
+                        "value": "RGBW (3000K)",
+                        "icon": ""
+                      },
+                      {
+                        "value": "TW",
+                        "icon": ""
+                      }
+                    ],
+                    "Power Consumption Rate": [
+                      {
+                        "value": "10W/m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "15W/m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "22W/m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "16W/m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "17W/m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "13W/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Resolution": [
+                      {
+                        "value": "12 Pixels/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "10W/m",
+                        "id": "101"
+                      },
+                      {
+                        "name": "15W/m",
+                        "id": "102"
+                      },
+                      {
+                        "name": "22W/m",
+                        "id": "103"
+                      },
+                      {
+                        "name": "16W/m",
+                        "id": "104"
+                      },
+                      {
+                        "name": "17W/m",
+                        "id": "105"
+                      },
+                      {
+                        "name": "13W/m",
+                        "id": "106"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "2700K",
+                        "id": "107"
+                      },
+                      {
+                        "name": "3000K",
+                        "id": "108"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "109"
+                      },
+                      {
+                        "name": "5300K",
+                        "id": "110"
+                      },
+                      {
+                        "name": "2700K-5300K",
+                        "id": "111"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "112"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP68",
+                        "id": "113"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "12mm (W) x 20mm (H)",
+                        "id": "114"
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "name": "Max 20,000mm (L)",
+                        "id": "115"
+                      },
+                      {
+                        "name": "Max 5,000mm (L)",
+                        "id": "116"
+                      },
+                      {
+                        "name": "Max 10,000mm (L)",
+                        "id": "117"
+                      },
+                      {
+                        "name": "Max 15,000mm (L)",
+                        "id": "118"
+                      },
+                      {
+                        "name": "Max 9,000mm (L)",
+                        "id": "119"
+                      },
+                      {
+                        "name": "Max 13,000mm (L)",
+                        "id": "120"
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "name": "RGBW",
+                        "id": "121"
+                      },
+                      {
+                        "name": "RGB",
+                        "id": "122"
+                      },
+                      {
+                        "name": "RGBW (3000K)",
+                        "id": "123"
+                      },
+                      {
+                        "name": "TW",
+                        "id": "124"
+                      }
+                    ],
+                    "Control Protocol": [
+                      {
+                        "name": "DMX",
+                        "id": "125"
+                      },
+                      {
+                        "name": "SPI",
+                        "id": "126"
+                      }
+                    ],
+                    "Resolution": [
+                      {
+                        "name": "12 Pixels/m",
+                        "id": "127"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "NEON",
+                    "Side View"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Mini Neon Side View",
+              "variants": {
+                "Mini Neon Side View": {
+                  "id": "rec51oIsxN4i08e00",
+                  "product_name": "Mini Neon Side View",
+                  "category": "Side View",
+                  "product_code": "SV0408-6W-2.4K-IP65-FC",
+                  "sku_mappings": [
+                    {
+                      "sku": "SV0408-6W-2.4K-IP65-FC",
+                      "combination": [
+                        "101",
+                        "102",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "SV0408-6W-2.7K-IP65-FC",
+                      "combination": [
+                        "101",
+                        "103",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "SV0408-6W-3K-IP65-FC",
+                      "combination": [
+                        "101",
+                        "104",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "SV0408-6W-4K-IP65-FC",
+                      "combination": [
+                        "101",
+                        "105",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "110"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Experience ultimate design freedom with the Mini Side Bend. This ultra-flexible linear light curves effortlessly to bring a flawless, captivating glow to any environment.\n",
+                  "product_description": "Discover the ultimate in design freedom with the Mini Side Bend neon-style light, crafted to bring a sleek, captivating elegance to any environment. Engineered for exceptional side-bending flexibility, this premium linear lighting solution curves seamlessly around intricate architectural contours, allowing you to create fluid, breathtaking visual statements. Its uniform, flawless glow adds a sophisticated ambiance to both interior and exterior spaces, transforming the ordinary into a showcase of luxurious light. Built to deliver reliable radiance and unmatched aesthetic beauty, it is the perfect choice for designers looking to elevate their projects with seamless style and effortless adaptability.\n",
+                  "product_images": [
+                    "assets/img/products/rec51oIsxN4i08e00_630a2019f1.jpg"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/rec51oIsxN4i08e00_dim_746c029591.webp"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": [
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_170164ffff.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_53534690f3.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_1c357751ce.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_25465d1691.svg",
+                    "assets/img/icons/rec51oIsxN4i08e00_icon_9ec0ac17ef.svg",
+                    "assets/img/icons/rec51oIsxN4i08e00_icon_29f2b79d71.svg"
+                  ],
+                  "meta_keywords": "Mini Side Bend, Ultra-flexible linear light, Side View neon, Slim architectural lighting, Waterproof LED ribbon, Fluid contour illumination",
+                  "supplier_name": "CHINA - JR Lite",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "2400K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "2700K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "3000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": ""
+                      }
+                    ],
+                    "Cut Interval": [
+                      {
+                        "value": "Free Cut",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "4mm (W) x 8mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP65",
+                        "icon": ""
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "value": "Max 7000mm (L)",
+                        "icon": ""
+                      }
+                    ],
+                    "Power Consumption Rate": [
+                      {
+                        "value": "6W/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "6W/m",
+                        "id": "101"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "2400K",
+                        "id": "102"
+                      },
+                      {
+                        "name": "2700K",
+                        "id": "103"
+                      },
+                      {
+                        "name": "3000K",
+                        "id": "104"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "105"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "106"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP65",
+                        "id": "107"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "4mm (W) x 8mm (H)",
+                        "id": "108"
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "name": "Max 7000mm (L)",
+                        "id": "109"
+                      }
+                    ],
+                    "Cut Interval": [
+                      {
+                        "name": "Free Cut",
+                        "id": "110"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "NEON",
+                    "Side View"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Neon Side View",
+              "variants": {
+                "Neon Side View": {
+                  "id": "rec5hhoeYZcLQKd2H",
+                  "product_name": "Neon Side View",
+                  "category": "Side View",
+                  "product_code": "SV1617-10W-2.2K-IP68-HC",
+                  "sku_mappings": [
+                    {
+                      "sku": "SV1617-10W-2.2K-IP68-HC",
+                      "combination": [
+                        "101",
+                        "104",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-10W-2.7K-IP68-HC",
+                      "combination": [
+                        "101",
+                        "105",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-10W-3K-IP68-HC",
+                      "combination": [
+                        "101",
+                        "106",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-10W-4K-IP68-HC",
+                      "combination": [
+                        "101",
+                        "107",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-15W-2.2K-IP68-HC",
+                      "combination": [
+                        "102",
+                        "104",
+                        "109",
+                        "110",
+                        "111",
+                        "113",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-15W-2.7K-IP68-HC",
+                      "combination": [
+                        "102",
+                        "105",
+                        "109",
+                        "110",
+                        "111",
+                        "113",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-15W-3K-IP68-HC",
+                      "combination": [
+                        "102",
+                        "106",
+                        "109",
+                        "110",
+                        "111",
+                        "113",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-15W-4K-IP68-HC",
+                      "combination": [
+                        "102",
+                        "107",
+                        "109",
+                        "110",
+                        "111",
+                        "113",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-13W-TW-IP68-HC",
+                      "combination": [
+                        "103",
+                        "115",
+                        "108",
+                        "109",
+                        "110",
+                        "111",
+                        "113",
+                        "114"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Bring fluid brilliance and glare-free elegance to your design with Side View Honeycomb, offering a beautifully softened glow and ultimate flexibility.\n",
+                  "product_description": "Elevate your architectural designs with the Side View IP68 Honeycomb, a premium linear lighting solution crafted to bring captivating elegance and fluid brilliance to any environment. Engineered with advanced honeycomb anti-glare technology, this luxurious neon-style light delivers a beautifully softened, uniform glow that effortlessly enhances spaces without any harsh glare. Perfectly adapted for seamless side-bending flexibility, it gracefully curves around contours to create stunning visual features, dramatic accents, and a sophisticated atmosphere. Built to withstand demanding elements while maintaining its flawless aesthetic, it represents the ultimate fusion of contemporary style, innovative visual comfort, and breathtaking design freedom.\n",
+                  "product_images": [
+                    "assets/img/products/rec5hhoeYZcLQKd2H_0808ed9e32.webp",
+                    "assets/img/products/rec5hhoeYZcLQKd2H_8f990b58ee.webp"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/rec5hhoeYZcLQKd2H_dim_29739d1632.webp"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": [
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_170164ffff.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_53534690f3.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_1c357751ce.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_25465d1691.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_4fca773db2.svg",
+                    "assets/img/icons/rec5hhoeYZcLQKd2H_icon_e2f84e7ae4.svg"
+                  ],
+                  "meta_keywords": "Architectural lighting, Linear LED, Side View neon, Anti-glare honeycomb, Waterproof light ribbon, Flexible contour illumination",
+                  "supplier_name": "CHINA - JR Lite",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "2200K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "2700K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "3000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "2700K-5300K",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "16mm (W) x 17mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "Glare Control": [
+                      {
+                        "value": "Honeycomb Anti Glare Louvre",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP68",
+                        "icon": ""
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "value": "Max 20,000mm (L)",
+                        "icon": ""
+                      },
+                      {
+                        "value": "Max 15,000mm (L)",
+                        "icon": ""
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "value": "TW",
+                        "icon": ""
+                      }
+                    ],
+                    "Power Consumption Rate": [
+                      {
+                        "value": "10W/m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "15W/m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "13W/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "10W/m",
+                        "id": "101"
+                      },
+                      {
+                        "name": "15W/m",
+                        "id": "102"
+                      },
+                      {
+                        "name": "13W/m",
+                        "id": "103"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "2200K",
+                        "id": "104"
+                      },
+                      {
+                        "name": "2700K",
+                        "id": "105"
+                      },
+                      {
+                        "name": "3000K",
+                        "id": "106"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "107"
+                      },
+                      {
+                        "name": "2700K-5300K",
+                        "id": "108"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "109"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP68",
+                        "id": "110"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "16mm (W) x 17mm (H)",
+                        "id": "111"
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "name": "Max 20,000mm (L)",
+                        "id": "112"
+                      },
+                      {
+                        "name": "Max 15,000mm (L)",
+                        "id": "113"
+                      }
+                    ],
+                    "Glare Control": [
+                      {
+                        "name": "Honeycomb Anti Glare Louvre",
+                        "id": "114"
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "name": "TW",
+                        "id": "115"
+                      }
+                    ]
+                  },
+                  "constraints": {
+                    "101": [
+                      "113",
+                      "108",
+                      "115"
+                    ],
+                    "102": [
+                      "112",
+                      "108",
+                      "115"
+                    ],
+                    "103": [
+                      "112",
+                      "104",
+                      "105",
+                      "106",
+                      "107"
+                    ]
+                  },
+                  "category_path": [
+                    "NEON",
+                    "Side View"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Mini Neon Side View",
+              "variants": {
+                "Mini Neon Side View": {
+                  "id": "rec9jtcuIzqsQ4cZ0",
+                  "product_name": "Mini Neon Side View",
+                  "category": "Side View",
+                  "product_code": "SV0612-10W-2.2K-IP67-FC",
+                  "sku_mappings": [
+                    {
+                      "sku": "SV0612-10W-2.2K-IP67-FC",
+                      "combination": [
+                        "101",
+                        "103",
+                        "108",
+                        "109",
+                        "110",
+                        "112",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "SV0612-10W-2.7K-IP67-FC",
+                      "combination": [
+                        "101",
+                        "104",
+                        "108",
+                        "109",
+                        "110",
+                        "112",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "SV0612-10W-3K-IP67-FC",
+                      "combination": [
+                        "101",
+                        "105",
+                        "108",
+                        "109",
+                        "110",
+                        "112",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "SV0612-10W-4K-IP67-FC",
+                      "combination": [
+                        "101",
+                        "106",
+                        "108",
+                        "109",
+                        "110",
+                        "112",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "SV0612-13W-TW-IP67",
+                      "combination": [
+                        "102",
+                        "107",
+                        "108",
+                        "109",
+                        "111",
+                        "113",
+                        "115"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Elevate your space with the ultra-sleek Mini Side Bend, a flexible masterpiece delivering a seamless, captivating glow that turns any environment into a work of art.\n",
+                  "product_description": "Discover the perfect blend of subtle elegance and dynamic versatility with the Mini (6mm x 12mm) Side Bend linear lighting solution. Crafted for designers who refuse to compromise on style, this ultra-sleek, flexible masterpiece effortlessly curves around architectural features to deliver a seamless, captivating glow. Ideal for adding sophisticated ambiance to modern interiors or transforming commercial spaces, its refined, uniform illumination provides an upscale aesthetic that elevates any environment into a work of art.\n",
+                  "product_images": [
+                    "assets/img/products/rec9jtcuIzqsQ4cZ0_4c9bb3e054.webp"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/rec9jtcuIzqsQ4cZ0_dim_583dc675d6.webp"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": [
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_170164ffff.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_53534690f3.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_1c357751ce.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_25465d1691.svg",
+                    "assets/img/icons/rec9jtcuIzqsQ4cZ0_icon_ade928ce92.svg",
+                    "assets/img/icons/rec9jtcuIzqsQ4cZ0_icon_f2f36ee210.svg"
+                  ],
+                  "meta_keywords": "Mini side bend, Ultra-sleek neon, Seamless flexible glow, Free cut linear LED, Precise length lighting, Architectural ambiance neon",
+                  "supplier_name": "CHINA - JR Lite",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "2200K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "2700K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "3000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "2700K-5300K",
+                        "icon": ""
+                      }
+                    ],
+                    "Cut Interval": [
+                      {
+                        "value": "Free Cut",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "6mm (W) x 12mm (H)",
+                        "icon": ""
+                      },
+                      {
+                        "value": "6.8mm (W) x 12mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "value": "Max 7,000mm (L)",
+                        "icon": ""
+                      },
+                      {
+                        "value": "Max 10,000mm (L)",
+                        "icon": ""
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "value": "TW",
+                        "icon": ""
+                      }
+                    ],
+                    "Power Consumption Rate": [
+                      {
+                        "value": "10W/m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "13W/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "10W/m",
+                        "id": "101"
+                      },
+                      {
+                        "name": "13W/m",
+                        "id": "102"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "2200K",
+                        "id": "103"
+                      },
+                      {
+                        "name": "2700K",
+                        "id": "104"
+                      },
+                      {
+                        "name": "3000K",
+                        "id": "105"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "106"
+                      },
+                      {
+                        "name": "2700K-5300K",
+                        "id": "107"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "108"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP67",
+                        "id": "109"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "6mm (W) x 12mm (H)",
+                        "id": "110"
+                      },
+                      {
+                        "name": "6.8mm (W) x 12mm (H)",
+                        "id": "111"
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "name": "Max 7,000mm (L)",
+                        "id": "112"
+                      },
+                      {
+                        "name": "Max 10,000mm (L)",
+                        "id": "113"
+                      }
+                    ],
+                    "Cut Interval": [
+                      {
+                        "name": "Free Cut",
+                        "id": "114"
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "name": "TW",
+                        "id": "115"
+                      }
+                    ]
+                  },
+                  "constraints": {
+                    "102": [
+                      "103",
+                      "104",
+                      "105",
+                      "106",
+                      "110",
+                      "112",
+                      "114"
+                    ],
+                    "115": [
+                      "101",
+                      "103",
+                      "104",
+                      "105",
+                      "106",
+                      "110",
+                      "112",
+                      "114"
+                    ]
+                  },
+                  "category_path": [
+                    "NEON",
+                    "Side View"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Neon",
+              "variants": {
+                "Neon": {
+                  "id": "recCK4wgGrmgtxSee",
+                  "product_name": "Neon",
+                  "category": "Side View",
+                  "product_code": "SV1616-10W-2.7K-IP67-FC",
+                  "sku_mappings": [
+                    {
+                      "sku": "SV1616-10W-2.7K-IP67-FC",
+                      "combination": [
+                        "101",
+                        "105",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "113"
+                      ]
+                    },
+                    {
+                      "sku": "SV1616-10W-3K-IP67-FC",
+                      "combination": [
+                        "101",
+                        "106",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "113"
+                      ]
+                    },
+                    {
+                      "sku": "SV1616-10W-4K-IP67-FC",
+                      "combination": [
+                        "101",
+                        "107",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "113"
+                      ]
+                    },
+                    {
+                      "sku": "SV1616-12W-RGB-IP67",
+                      "combination": [
+                        "102",
+                        "115",
+                        "109",
+                        "110",
+                        "111",
+                        "113"
+                      ]
+                    },
+                    {
+                      "sku": "SV1616-12W-RGB-IP67-DMX",
+                      "combination": [
+                        "103",
+                        "115",
+                        "109",
+                        "110",
+                        "111",
+                        "116",
+                        "117",
+                        "113"
+                      ]
+                    },
+                    {
+                      "sku": "SV1616-12W-RGBW-IP67",
+                      "combination": [
+                        "102",
+                        "108",
+                        "109",
+                        "110",
+                        "111",
+                        "113"
+                      ]
+                    },
+                    {
+                      "sku": "SV1616-12W-RGBW-IP67-DMX",
+                      "combination": [
+                        "104",
+                        "108",
+                        "109",
+                        "110",
+                        "111",
+                        "116",
+                        "117",
+                        "113"
+                      ]
+                    },
+                    {
+                      "sku": "TV1616-10W-2.7K-IP67-FC",
+                      "combination": [
+                        "101",
+                        "105",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "TV1616-10W-3K-IP67-FC",
+                      "combination": [
+                        "101",
+                        "106",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "TV1616-10W-4K-IP67-FC",
+                      "combination": [
+                        "101",
+                        "107",
+                        "109",
+                        "110",
+                        "111",
+                        "112",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "TV1616-12W-RGB-IP67",
+                      "combination": [
+                        "102",
+                        "115",
+                        "109",
+                        "110",
+                        "111",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "TV1616-12W-RGB-IP67-DMX",
+                      "combination": [
+                        "103",
+                        "115",
+                        "109",
+                        "110",
+                        "111",
+                        "116",
+                        "117",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "TV1616-12W-RGBW-IP67",
+                      "combination": [
+                        "102",
+                        "108",
+                        "109",
+                        "110",
+                        "111",
+                        "114"
+                      ]
+                    },
+                    {
+                      "sku": "TV1616-12W-RGBW-IP67-DMX",
+                      "combination": [
+                        "104",
+                        "108",
+                        "109",
+                        "110",
+                        "111",
+                        "116",
+                        "117",
+                        "114"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Bring a sophisticated brilliance to your space with premium neon linear lighting. Designed for ultimate flexibility, it effortlessly shapes your vision with a flawless glow.\n",
+                  "product_description": "Transform your surroundings with our premium neon linear lighting, expertly crafted to bring a modern, sophisticated brilliance to any setting. Designed with ultimate flexibility and artistic flair in mind, this sleek lighting solution effortlessly curves to follow your unique architectural contours, turning ordinary spaces into breathtaking design statements. Whether you are elevating a luxury interior or casting a captivating glow across a refined outdoor landscape, its flawless, uniform radiance offers an unparalleled upscale aesthetic. Embrace the perfect fusion of elegance and adaptability, and let your design visions shine with magnificent style.\n",
+                  "product_images": [
+                    "assets/img/products/recCK4wgGrmgtxSee_119282b040.webp",
+                    "assets/img/products/recCK4wgGrmgtxSee_9d42d6a67e.webp",
+                    "assets/img/products/recCK4wgGrmgtxSee_765cc99ed5.webp"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/recCK4wgGrmgtxSee_dim_6fda387eb9.webp"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "Yes",
+                  "technical_icons": [
+                    "assets/img/icons/recCK4wgGrmgtxSee_icon_e93f9d2610.svg",
+                    "assets/img/icons/recCK4wgGrmgtxSee_icon_3c850467c4.svg",
+                    "assets/img/icons/recCK4wgGrmgtxSee_icon_a089f7881a.svg",
+                    "assets/img/icons/recCK4wgGrmgtxSee_icon_14811e84f8.svg",
+                    "assets/img/icons/recCK4wgGrmgtxSee_icon_2c06c64f30.svg",
+                    "assets/img/icons/recCK4wgGrmgtxSee_icon_717c560179.svg",
+                    "assets/img/icons/recCK4wgGrmgtxSee_icon_22ba69d4b1.svg"
+                  ],
+                  "meta_keywords": "Neon Linear Lighting, Premium Flexible LED, Modern Architectural Contour, High-End Luxury Interior, Waterproof Landscape Glow, Flawless Uniform Radiance",
+                  "supplier_name": "CHINA - Colorsled",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "2700K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "3000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "RGBW (3000K)",
+                        "icon": ""
+                      }
+                    ],
+                    "Control Protocol": [
+                      {
+                        "value": "DMX",
+                        "icon": ""
+                      }
+                    ],
+                    "Cut Interval": [
+                      {
+                        "value": "Free-Cut",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "16mm (W) x 16mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "value": "RGB",
+                        "icon": ""
+                      }
+                    ],
+                    "Power Consumption Rate": [
+                      {
+                        "value": "10W/m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "12W/m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "14W/m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "17W/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Resolution": [
+                      {
+                        "value": "12 Pixels/m",
+                        "icon": ""
+                      }
+                    ],
+                    "View": [
+                      {
+                        "value": "Side View",
+                        "icon": ""
+                      },
+                      {
+                        "value": "Top View",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "10W/m",
+                        "id": "101"
+                      },
+                      {
+                        "name": "12W/m",
+                        "id": "102"
+                      },
+                      {
+                        "name": "14W/m",
+                        "id": "103"
+                      },
+                      {
+                        "name": "17W/m",
+                        "id": "104"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "2700K",
+                        "id": "105"
+                      },
+                      {
+                        "name": "3000K",
+                        "id": "106"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "107"
+                      },
+                      {
+                        "name": "RGBW (3000K)",
+                        "id": "108"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "109"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP67",
+                        "id": "110"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "16mm (W) x 16mm (H)",
+                        "id": "111"
+                      }
+                    ],
+                    "Cut Interval": [
+                      {
+                        "name": "Free-Cut",
+                        "id": "112"
+                      }
+                    ],
+                    "View": [
+                      {
+                        "name": "Side View",
+                        "id": "113"
+                      },
+                      {
+                        "name": "Top View",
+                        "id": "114"
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "name": "RGB",
+                        "id": "115"
+                      }
+                    ],
+                    "Control Protocol": [
+                      {
+                        "name": "DMX",
+                        "id": "116"
+                      }
+                    ],
+                    "Resolution": [
+                      {
+                        "name": "12 Pixels/m",
+                        "id": "117"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "NEON",
+                    "Side View"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Neon Side View Sauna",
+              "variants": {
+                "Neon Side View Sauna": {
+                  "id": "recOIplDvStVGEsyf",
+                  "product_name": "Neon Side View Sauna",
+                  "category": "Side View",
+                  "product_code": "SV1617-6W-1.6K-IP68-Sauna",
+                  "sku_mappings": [
+                    {
+                      "sku": "SV1617-6W-1.6K-IP68-Sauna",
+                      "combination": [
+                        "101",
+                        "102",
+                        "109",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-6W-2.2K-IP68-Sauna",
+                      "combination": [
+                        "101",
+                        "103",
+                        "109",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-6W-2.7K-IP68-Sauna",
+                      "combination": [
+                        "101",
+                        "104",
+                        "109",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-6W-3K-IP68-Sauna",
+                      "combination": [
+                        "101",
+                        "105",
+                        "109",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-6W-4K-IP68-Sauna",
+                      "combination": [
+                        "101",
+                        "106",
+                        "109",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-6W-5.3K-IP68-Sauna",
+                      "combination": [
+                        "101",
+                        "107",
+                        "109",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-6W-TW-IP68-Sauna",
+                      "combination": [
+                        "101",
+                        "113",
+                        "108",
+                        "109",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Transform your wellness space into a luxurious haven with Side View Sauna, offering a comforting, uniform glow that invites pure relaxation and elegant tranquility.\n",
+                  "product_description": "Step into a sanctuary of pure relaxation and elevated luxury with the Side View IP68 Sauna, a premium linear lighting solution crafted to transform wellness spaces into serene havens. Designed to wrap seamlessly around structural curves, this elegant accent light bathes your environment in a smooth, uniform glow that enhances tranquility and soothes the senses. Perfect for creating a high-end spa atmosphere, it brings a touch of sophisticated radiance and comforting warmth, inviting you to completely unwind and escape from the everyday world.\n",
+                  "product_images": [
+                    "assets/img/products/recOIplDvStVGEsyf_b814eea9e7.webp",
+                    "assets/img/products/recOIplDvStVGEsyf_4f3effcd54.webp"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/recOIplDvStVGEsyf_dim_a68949aae7.webp"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": [
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_170164ffff.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_53534690f3.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_25465d1691.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_4fca773db2.svg",
+                    "assets/img/icons/recOIplDvStVGEsyf_icon_63d90068bf.svg"
+                  ],
+                  "meta_keywords": "Sauna lighting, Spa linear LED, Side View neon, Waterproof light ribbon, Wellness space accent, Flexible contour illumination",
+                  "supplier_name": "CHINA - JR Lite",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "1600K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "2200K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "2700K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "3000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "5300K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "2700K-5300K",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "16mm (W) x 17mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP68",
+                        "icon": ""
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "value": "Max 10,000mm (L)",
+                        "icon": ""
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "value": "TW",
+                        "icon": ""
+                      }
+                    ],
+                    "Power Consumption Rate": [
+                      {
+                        "value": "6W/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "6W/m",
+                        "id": "101"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "1600K",
+                        "id": "102"
+                      },
+                      {
+                        "name": "2200K",
+                        "id": "103"
+                      },
+                      {
+                        "name": "2700K",
+                        "id": "104"
+                      },
+                      {
+                        "name": "3000K",
+                        "id": "105"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "106"
+                      },
+                      {
+                        "name": "5300K",
+                        "id": "107"
+                      },
+                      {
+                        "name": "2700K-5300K",
+                        "id": "108"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "109"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP68",
+                        "id": "110"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "16mm (W) x 17mm (H)",
+                        "id": "111"
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "name": "Max 10,000mm (L)",
+                        "id": "112"
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "name": "TW",
+                        "id": "113"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "NEON",
+                    "Side View"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Neon Side View",
+              "variants": {
+                "Neon Side View": {
+                  "id": "recPRKIdCvyys4nvA",
+                  "product_name": "Neon Side View",
+                  "category": "Side View",
+                  "product_code": "SV1617-18W-2.2K-IP68-Optic",
+                  "sku_mappings": [
+                    {
+                      "sku": "SV1617-18W-2.2K-IP68-Optic",
+                      "combination": [
+                        "101",
+                        "102",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-18W-2.7K-IP68-Optic",
+                      "combination": [
+                        "101",
+                        "103",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-18W-3K-IP68-Optic",
+                      "combination": [
+                        "101",
+                        "104",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-18W-4K-IP68-Optic",
+                      "combination": [
+                        "101",
+                        "105",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "110"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Redefine luxury with the Side View IP68 Optic, projecting a focused, captivating beam to bring timeless elegance and precision to your visionary spaces.\n",
+                  "product_description": "Experience the epitome of precision and drama with the Side View IP68 Optic, a premium linear lighting masterpiece designed to redefine luxury illumination. Engineered with advanced optics, this sophisticated neon-style light projects a focused, captivating beam that beautifully accentuates architectural contours and artistic details. Its seamless side-bending flexibility unlocks unparalleled design freedom, allowing you to craft breathtaking visual statements in high-end commercial spaces, upscale residential interiors, and elite outdoor landscapes. Bring an atmosphere of timeless elegance and unmatched prestige to your visionary projects with a refined glow that transforms the ordinary into an extraordinary spectacle of light.\n",
+                  "product_images": [
+                    "assets/img/products/recPRKIdCvyys4nvA_dc43361601.webp",
+                    "assets/img/products/recPRKIdCvyys4nvA_2de88eab7a.webp"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/recPRKIdCvyys4nvA_dim_6fe2deb00d.webp"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": [
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_170164ffff.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_53534690f3.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_1c357751ce.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_25465d1691.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_4fca773db2.svg",
+                    "assets/img/icons/recPRKIdCvyys4nvA_icon_2b526a0ef1.svg"
+                  ],
+                  "meta_keywords": "Side view neon, Focused beam optics, Waterproof linear LED, Precision architectural lighting, Narrow beam accent, Premium luxury illumination",
+                  "supplier_name": "CHINA - JR Lite",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "Beam Angle": [
+                      {
+                        "value": "36°",
+                        "icon": ""
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "value": "2200K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "2700K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "3000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "16mm (W) x 17mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP68",
+                        "icon": ""
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "value": "Max 5,000mm (L)",
+                        "icon": ""
+                      }
+                    ],
+                    "Power Consumption Rate": [
+                      {
+                        "value": "18W/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "18W/m",
+                        "id": "101"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "2200K",
+                        "id": "102"
+                      },
+                      {
+                        "name": "2700K",
+                        "id": "103"
+                      },
+                      {
+                        "name": "3000K",
+                        "id": "104"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "105"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "106"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP68",
+                        "id": "107"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "16mm (W) x 17mm (H)",
+                        "id": "108"
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "name": "Max 5,000mm (L)",
+                        "id": "109"
+                      }
+                    ],
+                    "Beam Angle": [
+                      {
+                        "name": "36°",
+                        "id": "110"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "NEON",
+                    "Side View"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Neon Side View",
+              "variants": {
+                "Neon Side View": {
+                  "id": "recPsMCM5UstPHzTs",
+                  "product_name": "Neon Side View",
+                  "category": "Side View",
+                  "product_code": "SV1617-10W-2.2K-IP69",
+                  "sku_mappings": [
+                    {
+                      "sku": "SV1617-10W-2.2K-IP69",
+                      "combination": [
+                        "101",
+                        "107",
+                        "114",
+                        "115",
+                        "116",
+                        "117"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-10W-2.7K-IP69",
+                      "combination": [
+                        "101",
+                        "108",
+                        "114",
+                        "115",
+                        "116",
+                        "117"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-10W-3K-IP69",
+                      "combination": [
+                        "101",
+                        "109",
+                        "114",
+                        "115",
+                        "116",
+                        "117"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-10W-4K-IP69",
+                      "combination": [
+                        "101",
+                        "110",
+                        "114",
+                        "115",
+                        "116",
+                        "117"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-10W-5.3K-IP69",
+                      "combination": [
+                        "101",
+                        "111",
+                        "114",
+                        "115",
+                        "116",
+                        "117"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-13W-RGB-IP69",
+                      "combination": [
+                        "102",
+                        "114",
+                        "115",
+                        "116",
+                        "117",
+                        "118",
+                        "120"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-15W-RGB-IP69-DMX",
+                      "combination": [
+                        "103",
+                        "114",
+                        "115",
+                        "116",
+                        "117",
+                        "118",
+                        "121",
+                        "125",
+                        "127"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-16W-RGB-IP69-SPI",
+                      "combination": [
+                        "104",
+                        "114",
+                        "115",
+                        "116",
+                        "117",
+                        "118",
+                        "122",
+                        "126",
+                        "127"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-17W-RGBW-IP69",
+                      "combination": [
+                        "105",
+                        "109",
+                        "114",
+                        "115",
+                        "116",
+                        "117",
+                        "119",
+                        "123"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-15W-RGBW-IP69-DMX",
+                      "combination": [
+                        "103",
+                        "109",
+                        "114",
+                        "115",
+                        "116",
+                        "117",
+                        "119",
+                        "121",
+                        "125",
+                        "127"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-22W-RGBW-IP69-SPI",
+                      "combination": [
+                        "106",
+                        "112",
+                        "114",
+                        "115",
+                        "116",
+                        "117",
+                        "124",
+                        "126",
+                        "127"
+                      ]
+                    },
+                    {
+                      "sku": "SV1617-13W-TW-IP69",
+                      "combination": [
+                        "102",
+                        "113",
+                        "114",
+                        "115",
+                        "116",
+                        "117"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Bring fluid brilliance to any space with Side Bend IP69, curving effortlessly to deliver a seamless, uniform glow that elevates your architectural vision.\n",
+                  "product_description": "Elevate your architectural and landscape designs with the Side Bend IP69, a premium linear lighting solution crafted to bring captivating elegance and fluid brilliance to any environment. Engineered for extraordinary side-bending flexibility, this luxurious neon-style light curves effortlessly around architectural contours to create stunning visual features and dramatic accents. Perfect for transforming upscale commercial venues, creating an inviting outdoor oasis, or adding a sophisticated glow to modern spaces, its seamless, uniform illumination delivers an unmatched upscale aesthetic. Combining ultimate durability with timeless style, it is the ultimate choice for visionary designers looking to push the boundaries of creative lighting expression.\n",
+                  "product_images": [
+                    "assets/img/products/recPsMCM5UstPHzTs_9961832b5b.jpg",
+                    "assets/img/products/recPsMCM5UstPHzTs_432d663ece.jpg",
+                    "assets/img/products/recPsMCM5UstPHzTs_6ec6d005e8.jpg",
+                    "assets/img/products/recPsMCM5UstPHzTs_b8dcc032b0.jpg"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/recPsMCM5UstPHzTs_dim_3ca9733fc5.webp"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": [
+                    "assets/img/icons/recCeU16wqcIPxZNs_icon_f35fe71d4d.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_170164ffff.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_53534690f3.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_1c357751ce.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_25465d1691.svg",
+                    "assets/img/icons/recPsMCM5UstPHzTs_icon_649fdf7ff0.svg"
+                  ],
+                  "meta_keywords": "Side bend neon, Flexible linear LED, Architectural accent lighting, Landscape contour light, Waterproof light ribbon, Premium commercial lighting",
+                  "supplier_name": "CHINA - JR Lite",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "2200K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "2700K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "3000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "5300K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "RGBW (3000K)",
+                        "icon": ""
+                      },
+                      {
+                        "value": "TW (2700K-5300K)",
+                        "icon": ""
+                      }
+                    ],
+                    "Control Protocol": [
+                      {
+                        "value": "DMX",
+                        "icon": ""
+                      },
+                      {
+                        "value": "SPI",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "16mm (W) x 17mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP69",
+                        "icon": ""
+                      }
+                    ],
+                    "Impact Strength": [
+                      {
+                        "value": "IK10 with Neon-AluProfile-1617",
+                        "icon": ""
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "value": "Max 11,000mm (L)",
+                        "icon": ""
+                      },
+                      {
+                        "value": "Max 5,000mm (L)",
+                        "icon": ""
+                      },
+                      {
+                        "value": "Max 13,000mm (L)",
+                        "icon": ""
+                      },
+                      {
+                        "value": "Max 7,000mm (L)",
+                        "icon": ""
+                      },
+                      {
+                        "value": "Max 8,000mm (L)",
+                        "icon": ""
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "value": "RGB",
+                        "icon": ""
+                      },
+                      {
+                        "value": "RGBW",
+                        "icon": ""
+                      }
+                    ],
+                    "Power Consumption Rate": [
+                      {
+                        "value": "10W/m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "13W/m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "15W/m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "16W/m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "17W/m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "22W/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Resolution": [
+                      {
+                        "value": "12 Pixels/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "10W/m",
+                        "id": "101"
+                      },
+                      {
+                        "name": "13W/m",
+                        "id": "102"
+                      },
+                      {
+                        "name": "15W/m",
+                        "id": "103"
+                      },
+                      {
+                        "name": "16W/m",
+                        "id": "104"
+                      },
+                      {
+                        "name": "17W/m",
+                        "id": "105"
+                      },
+                      {
+                        "name": "22W/m",
+                        "id": "106"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "2200K",
+                        "id": "107"
+                      },
+                      {
+                        "name": "2700K",
+                        "id": "108"
+                      },
+                      {
+                        "name": "3000K",
+                        "id": "109"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "110"
+                      },
+                      {
+                        "name": "5300K",
+                        "id": "111"
+                      },
+                      {
+                        "name": "RGBW (3000K)",
+                        "id": "112"
+                      },
+                      {
+                        "name": "TW (2700K-5300K)",
+                        "id": "113"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "114"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP69",
+                        "id": "115"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "16mm (W) x 17mm (H)",
+                        "id": "116"
+                      }
+                    ],
+                    "Impact Strength": [
+                      {
+                        "name": "IK10 with Neon-AluProfile-1617",
+                        "id": "117"
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "name": "RGB",
+                        "id": "118"
+                      },
+                      {
+                        "name": "RGBW",
+                        "id": "119"
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "name": "Max 11,000mm (L)",
+                        "id": "120"
+                      },
+                      {
+                        "name": "Max 5,000mm (L)",
+                        "id": "121"
+                      },
+                      {
+                        "name": "Max 13,000mm (L)",
+                        "id": "122"
+                      },
+                      {
+                        "name": "Max 7,000mm (L)",
+                        "id": "123"
+                      },
+                      {
+                        "name": "Max 8,000mm (L)",
+                        "id": "124"
+                      }
+                    ],
+                    "Control Protocol": [
+                      {
+                        "name": "DMX",
+                        "id": "125"
+                      },
+                      {
+                        "name": "SPI",
+                        "id": "126"
+                      }
+                    ],
+                    "Resolution": [
+                      {
+                        "name": "12 Pixels/m",
+                        "id": "127"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "NEON",
+                    "Side View"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Mini Neon Side View",
+              "variants": {
+                "Mini Neon Side View": {
+                  "id": "recZyTvJc4ZEXIAkp",
+                  "product_name": "Mini Neon Side View",
+                  "category": "Side View",
+                  "product_code": "SV0606-6W-2.7K-IP65-FC",
+                  "sku_mappings": [
+                    {
+                      "sku": "SV0606-6W-2.7K-IP65-FC",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "SV0606-6W-3K-IP65-FC",
+                      "combination": [
+                        "101",
+                        "103",
+                        "105",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "SV0606-6W-4K-IP65-FC",
+                      "combination": [
+                        "101",
+                        "104",
+                        "105",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "TV0606-6W-2.7K-IP65-FC",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "111"
+                      ]
+                    },
+                    {
+                      "sku": "TV0606-6W-3K-IP65-FC",
+                      "combination": [
+                        "101",
+                        "103",
+                        "105",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "111"
+                      ]
+                    },
+                    {
+                      "sku": "TV0606-6W-4K-IP65-FC",
+                      "combination": [
+                        "101",
+                        "104",
+                        "105",
+                        "106",
+                        "107",
+                        "108",
+                        "109",
+                        "111"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Bring subtle sophistication to any space with the Mini, an ultra-compact linear light designed to deliver a flawless, uniform glow and timeless style.\n",
+                  "product_description": "Discover the ultimate in discreet elegance with the Mini (6mm x 6mm), a remarkably compact linear lighting solution designed to bring subtle sophistication and seamless radiance to any space. Crafted for extraordinary flexibility and an ultra-minimal profile, this sleek neon-style light curves effortlessly to accent intricate design details and create captivating visual effects. Perfect for adding a luxurious atmosphere to modern retail interiors, high-end lounges, or intimate architectural spaces, its smooth, uniform glow transforms the ordinary into the extraordinary. Embrace a new standard of design freedom with a flawless illumination that blends perfectly into your vision while delivering an unmatched aesthetic impact.\n",
+                  "product_images": [
+                    "assets/img/products/recZyTvJc4ZEXIAkp_212a42c789.jpg"
+                  ],
+                  "product_dimension": [
+                    "assets/img/products/recZyTvJc4ZEXIAkp_dim_18e95c29c4.webp"
+                  ],
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": [
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_170164ffff.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_53534690f3.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_1c357751ce.svg",
+                    "assets/img/icons/rec2bUDmZZi443DFK_icon_25465d1691.svg",
+                    "assets/img/icons/rec51oIsxN4i08e00_icon_9ec0ac17ef.svg",
+                    "assets/img/icons/recZyTvJc4ZEXIAkp_icon_5bd4f0248b.svg"
+                  ],
+                  "meta_keywords": "Discreet elegance, Ultra-compact neon, Subtle sophistication, Minimal lighting profile, Flexible contour accent, Architectural detail illumination",
+                  "supplier_name": "CHINA - JR Lite",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "2700K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "3000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": ""
+                      }
+                    ],
+                    "Cut Interval": [
+                      {
+                        "value": "Free Cut",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "6mm (W) x 6mm (H)",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP65",
+                        "icon": ""
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "value": "Max 5,000mm (L)",
+                        "icon": ""
+                      }
+                    ],
+                    "Power Consumption Rate": [
+                      {
+                        "value": "6W/m",
+                        "icon": ""
+                      }
+                    ],
+                    "View": [
+                      {
+                        "value": "Side View",
+                        "icon": ""
+                      },
+                      {
+                        "value": "Top View",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "6W/m",
+                        "id": "101"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "2700K",
+                        "id": "102"
+                      },
+                      {
+                        "name": "3000K",
+                        "id": "103"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "104"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "105"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP65",
+                        "id": "106"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "6mm (W) x 6mm (H)",
+                        "id": "107"
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "name": "Max 5,000mm (L)",
+                        "id": "108"
+                      }
+                    ],
+                    "Cut Interval": [
+                      {
+                        "name": "Free Cut",
+                        "id": "109"
+                      }
+                    ],
+                    "View": [
+                      {
+                        "name": "Side View",
+                        "id": "110"
+                      },
+                      {
+                        "name": "Top View",
+                        "id": "111"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "NEON",
+                    "Side View"
+                  ]
+                }
+              }
+            }
+          ]
         }
       ]
     },
@@ -21975,7 +29238,20 @@ const AZOOGI_PRODUCTS = {
                   "id": "rec7gengQm0proqz5",
                   "product_name": "Garden Light",
                   "category": "Garden Light",
-                  "sku": "SC-J101A",
+                  "product_code": "GL005",
+                  "sku_mappings": [
+                    {
+                      "sku": "GL005",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103",
+                        "104",
+                        "105",
+                        "106"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Transform your outdoor spaces into a breathtaking visual journey. Experience discreet luxury and a sophisticated glow that beautifully enhances your home.\n",
                   "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
                   "product_images": [
@@ -22092,7 +29368,20 @@ const AZOOGI_PRODUCTS = {
                   "id": "recTLVGmuHlG6RKYL",
                   "product_name": "Garden Light",
                   "category": "Garden Light",
-                  "sku": "SC-J103A",
+                  "product_code": "GL003",
+                  "sku_mappings": [
+                    {
+                      "sku": "GL003",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103",
+                        "104",
+                        "105",
+                        "106"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Transform your outdoor spaces into a breathtaking visual journey. Experience discreet luxury and a sophisticated glow that beautifully enhances your home.\n",
                   "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
                   "product_images": [
@@ -22211,7 +29500,20 @@ const AZOOGI_PRODUCTS = {
                   "id": "recfLStd7V6LYugRf",
                   "product_name": "Garden Light",
                   "category": "Garden Light",
-                  "sku": "SC-J103A",
+                  "product_code": "GL001",
+                  "sku_mappings": [
+                    {
+                      "sku": "GL001",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103",
+                        "104",
+                        "105",
+                        "106"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Transform your outdoor space into an enchanting oasis. Enjoy discreet luxury and a warm, inviting glow that effortlessly elevates the natural beauty of your home.\n",
                   "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
                   "product_images": [
@@ -22336,7 +29638,49 @@ const AZOOGI_PRODUCTS = {
                   "id": "recKoW7cZgrN4wNw8",
                   "product_name": "Handrail Spot III",
                   "category": "Handrail",
-                  "sku": "HLS27-CV-SYM sym 60 deg for 3000K",
+                  "product_code": "HRS021",
+                  "sku_mappings": [
+                    {
+                      "sku": "HRS021",
+                      "combination": [
+                        "101",
+                        "102",
+                        "104",
+                        "106",
+                        "107"
+                      ]
+                    },
+                    {
+                      "sku": "HRS022",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105",
+                        "106",
+                        "107"
+                      ]
+                    },
+                    {
+                      "sku": "HRS023",
+                      "combination": [
+                        "101",
+                        "103",
+                        "104",
+                        "106",
+                        "107"
+                      ]
+                    },
+                    {
+                      "sku": "HRS024",
+                      "combination": [
+                        "101",
+                        "103",
+                        "105",
+                        "106",
+                        "107"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Elegantly illuminate your pathways with Handrail Spot III. It casts a warm, sophisticated glow that guides the way while enhancing your architectural space.\n",
                   "product_description": "Discover a new dimension of architectural elegance with Handrail Spot III. Perfectly engineered to blend seamlessly into your indoor and outdoor environments, this exquisite lighting solution casts a mesmerizing, sophisticated glow that elegantly maps your pathways. Designed for connoisseurs of fine detail, it redefines standard walkways into spectacular visual corridors, infusing your surroundings with an unparalleled layer of luxurious ambiance and subtle, reassuring security. Sleek, minimal, and entirely captivating, it represents the absolute pinnacle of refined aesthetic illumination.\n",
                   "product_images": [
@@ -22454,7 +29798,69 @@ const AZOOGI_PRODUCTS = {
                   "id": "recflG67FDEy6BDKx",
                   "product_name": "Handrail Spot I",
                   "category": "Handrail",
-                  "sku": "HLS17-CV-SYM sym 30 deg for 3000K",
+                  "product_code": "HRS001",
+                  "sku_mappings": [
+                    {
+                      "sku": "HRS001",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105",
+                        "107",
+                        "108"
+                      ]
+                    },
+                    {
+                      "sku": "HRS002",
+                      "combination": [
+                        "101",
+                        "102",
+                        "106",
+                        "107",
+                        "108"
+                      ]
+                    },
+                    {
+                      "sku": "HRS003",
+                      "combination": [
+                        "101",
+                        "103",
+                        "105",
+                        "107",
+                        "108"
+                      ]
+                    },
+                    {
+                      "sku": "HRS004",
+                      "combination": [
+                        "101",
+                        "103",
+                        "106",
+                        "107",
+                        "108"
+                      ]
+                    },
+                    {
+                      "sku": "HRS005",
+                      "combination": [
+                        "101",
+                        "104",
+                        "105",
+                        "107",
+                        "108"
+                      ]
+                    },
+                    {
+                      "sku": "HRS006",
+                      "combination": [
+                        "101",
+                        "104",
+                        "106",
+                        "107",
+                        "108"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Elegantly illuminate your pathways with Handrail Spot I. It casts a warm, sophisticated glow that guides the way while beautifully enhancing your architectural space.\n",
                   "product_description": "Illuminate your architectural masterpieces with the perfect blend of elegance and modern design. Handrail Spot I offers seamless integration into your outdoor or indoor pathways, casting a warm, sophisticated glow that guides the way while enhancing the beauty of your space. Crafted for those who appreciate refined detail, it transforms ordinary walkways into stunning visual journeys, adding an unparalleled touch of ambiance and security to any setting. Elegant, discreet, and captivating, it is the ultimate choice for elevated architectural lighting.\n",
                   "product_images": [
@@ -22580,7 +29986,69 @@ const AZOOGI_PRODUCTS = {
                   "id": "recgGwQHQQ5LPh0fb",
                   "product_name": "Handrail Spot II",
                   "category": "Handrail",
-                  "sku": "HLS20-CV-SYM sym 30 deg for 3000K",
+                  "product_code": "HRS011",
+                  "sku_mappings": [
+                    {
+                      "sku": "HRS011",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105",
+                        "107",
+                        "108"
+                      ]
+                    },
+                    {
+                      "sku": "HRS012",
+                      "combination": [
+                        "101",
+                        "102",
+                        "106",
+                        "107",
+                        "108"
+                      ]
+                    },
+                    {
+                      "sku": "HRS013",
+                      "combination": [
+                        "101",
+                        "103",
+                        "105",
+                        "107",
+                        "108"
+                      ]
+                    },
+                    {
+                      "sku": "HRS014",
+                      "combination": [
+                        "101",
+                        "103",
+                        "106",
+                        "107",
+                        "108"
+                      ]
+                    },
+                    {
+                      "sku": "HRS015",
+                      "combination": [
+                        "101",
+                        "104",
+                        "105",
+                        "107",
+                        "108"
+                      ]
+                    },
+                    {
+                      "sku": "HRS016",
+                      "combination": [
+                        "101",
+                        "104",
+                        "106",
+                        "107",
+                        "108"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Elevate your pathways with Handrail Spot II. It casts a warm, sophisticated ambiance that seamlessly guides your steps with elegant architectural charm.\n",
                   "product_description": "Elevate your architectural designs with Handrail Spot II, the premium lighting solution that effortlessly marries sophistication with modern functionality. Designed to seamlessly blend into any indoor or outdoor pathway, it casts a warm, inviting glow that gracefully guides your way while accentuating the elegant contours of your space. Perfect for those who demand meticulous attention to detail, this exquisite fixture turns ordinary walkways into enchanting visual experiences, adding a layer of sophisticated ambiance and subtle security to your surroundings. Discreet yet profoundly impactful, it is the quintessential choice for transforming your environment into a beautifully illuminated masterpiece.\n",
                   "product_images": [
@@ -22712,7 +30180,18 @@ const AZOOGI_PRODUCTS = {
                   "id": "recM1DAV2M0UnBGMB",
                   "product_name": "Pool Light",
                   "category": "Pool Light",
-                  "sku": "SC-G101A",
+                  "product_code": "PL001",
+                  "sku_mappings": [
+                    {
+                      "sku": "PL001",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103",
+                        "104"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Dive into an enchanting oasis of light and luxury. Elevate your pool into a sophisticated, glowing retreat, adding breathtaking allure and serene ambiance to every evening.\n",
                   "product_description": "Dive into an enchanting oasis of light and luxury with our premium pool illumination solution. Designed to effortlessly elevate your outdoor experience, it bathes your aquatic retreat in a warm, sophisticated radiance that creates an unparalleled ambiance. Perfect for those with a discerning eye for discreet elegance and refined architectural detail, this lighting masterpiece transforms ordinary evenings into a breathtaking visual journey, adding both captivating allure and a profound sense of serenity to your home.\n",
                   "product_images": [
@@ -22802,7 +30281,18 @@ const AZOOGI_PRODUCTS = {
                   "id": "recmtVr5MCYiXyVqt",
                   "product_name": "Pool Light",
                   "category": "Pool Light",
-                  "sku": "SC-G101A",
+                  "product_code": "PL002",
+                  "sku_mappings": [
+                    {
+                      "sku": "PL002",
+                      "combination": [
+                        "101",
+                        "102",
+                        "103",
+                        "104"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Transform your pool into a breathtaking oasis. Elevate your outdoor space with a sophisticated glow that brings enchanting elegance and serene luxury to every evening.\n",
                   "product_description": "Dive into an enchanting oasis of light and luxury with our premium pool illumination solution. Designed to effortlessly elevate your outdoor experience, it bathes your aquatic retreat in a warm, sophisticated radiance that creates an unparalleled ambiance. Perfect for those with a discerning eye for discreet elegance and refined architectural detail, this lighting masterpiece transforms ordinary evenings into a breathtaking visual journey, adding both captivating allure and a profound sense of serenity to your home.\n",
                   "product_images": [
@@ -22904,7 +30394,16 @@ const AZOOGI_PRODUCTS = {
                   "id": "reckjqGprGGLIL4h6",
                   "product_name": "Flex Alu ZigZag Profile for 12mm RGBW Strip",
                   "category": "RGBW Strip",
-                  "sku": "Bendable Profile (RS-ZL-1515B)",
+                  "product_code": "PR-BEND-1M",
+                  "sku_mappings": [
+                    {
+                      "sku": "PR-BEND-1M",
+                      "combination": [
+                        "101",
+                        "102"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Elevate your spaces into a breathtaking visual journey of elegant design and discreet luxury with a sophisticated, seamless glow.\n",
                   "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
                   "product_images": [
@@ -22994,6 +30493,232 @@ const AZOOGI_PRODUCTS = {
         },
         {
           "type": "category",
+          "name": "LED Flex Sheet",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "LED Sheet",
+              "variants": {
+                "LED Sheet": {
+                  "id": "recGmrXQFlAIuDcls",
+                  "product_name": "LED Sheet",
+                  "category": "LED Flex Sheet",
+                  "product_code": "SMD-SHEET-30W-3K-IP20",
+                  "sku_mappings": [
+                    {
+                      "sku": "SMD-SHEET-30W-3K-IP20",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105",
+                        "106",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-SHEET-30W-4K-IP20",
+                      "combination": [
+                        "101",
+                        "103",
+                        "105",
+                        "106",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-SHEET-30W-6K-IP20",
+                      "combination": [
+                        "101",
+                        "104",
+                        "105",
+                        "106",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-SHEET-30W-3K-IP54",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105",
+                        "107",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-SHEET-30W-4K-IP54",
+                      "combination": [
+                        "101",
+                        "103",
+                        "105",
+                        "107",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-SHEET-30W-6K-IP54",
+                      "combination": [
+                        "101",
+                        "104",
+                        "105",
+                        "107",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-SHEET-30W-3K-IP67",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105",
+                        "108",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-SHEET-30W-4K-IP67",
+                      "combination": [
+                        "101",
+                        "103",
+                        "105",
+                        "108",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-SHEET-30W-6K-IP67",
+                      "combination": [
+                        "101",
+                        "104",
+                        "105",
+                        "108",
+                        "109"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Transform your home into a breathtaking visual journey. Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.\n",
+                  "product_description": "Transform your home into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers a sophisticated, seamless glow that beautifully enhances your elegant spaces, casting a warm and inviting atmosphere throughout. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating style to any room, making it the ultimate choice for elevated interior illumination.\n",
+                  "product_images": [
+                    "assets/img/products/recGmrXQFlAIuDcls_8c7ecf547b.webp"
+                  ],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": "",
+                  "meta_keywords": "LED sheet lighting, flexible LED sheet, backlighting panel, 30W LED sheet, 24V flexible LED, 3000K warm white",
+                  "supplier_name": "CHINA - Rising Sun",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "3000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "6000K",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP20",
+                        "icon": ""
+                      },
+                      {
+                        "value": "IP54",
+                        "icon": ""
+                      },
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
+                    "Power": [
+                      {
+                        "value": "30W",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "value": "480mm (L) x 240mm (W)",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power": [
+                      {
+                        "name": "30W",
+                        "id": "101"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "3000K",
+                        "id": "102"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "103"
+                      },
+                      {
+                        "name": "6000K",
+                        "id": "104"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "105"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP20",
+                        "id": "106"
+                      },
+                      {
+                        "name": "IP54",
+                        "id": "107"
+                      },
+                      {
+                        "name": "IP67",
+                        "id": "108"
+                      }
+                    ],
+                    "Dimension": [
+                      {
+                        "name": "480mm (L) x 240mm (W)",
+                        "id": "109"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Strips and Flex",
+                    "LED Flex Sheet"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
           "name": "SMD Strip",
           "children": [
             {
@@ -23004,7 +30729,79 @@ const AZOOGI_PRODUCTS = {
                   "id": "recRViawyUjnV7UJo",
                   "product_name": "Bendable Zig Zag for curves LED SMD Strip",
                   "category": "SMD Strip",
-                  "sku": "RS-S2835MC-24V-100D-08-20",
+                  "product_code": "SMD-BEND-2.7K-IP54",
+                  "sku_mappings": [
+                    {
+                      "sku": "SMD-BEND-8W-2.7K-IP54",
+                      "combination": [
+                        "101",
+                        "103",
+                        "107",
+                        "108",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-BEND-8W-3K-IP54",
+                      "combination": [
+                        "101",
+                        "104",
+                        "107",
+                        "108",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-BEND-8W-4K-IP54",
+                      "combination": [
+                        "101",
+                        "105",
+                        "107",
+                        "108",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-BEND-5W-RGBW-IP54",
+                      "combination": [
+                        "102",
+                        "106",
+                        "107",
+                        "109",
+                        "111"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-BEND-8W-2.7K-IP20",
+                      "combination": [
+                        "101",
+                        "103",
+                        "107",
+                        "109",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-BEND-8W-3K-IP20",
+                      "combination": [
+                        "101",
+                        "104",
+                        "107",
+                        "109",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-BEND-8W-4K-IP20",
+                      "combination": [
+                        "101",
+                        "105",
+                        "107",
+                        "109",
+                        "110"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Transform your spaces with a stunning visual journey of elegant design and discreet luxury, creating a sophisticated and seamless glow that beautifully enhances your home.\n",
                   "product_description": "Transform your outdoor spaces into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers seamless integration into your pathways, casting a warm, sophisticated glow that effortlessly guides the way while enhancing the natural beauty of your architecture. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating security to any setting, making it the ultimate choice for elevated architectural illumination.\n",
                   "product_images": [
@@ -23165,37 +30962,1004 @@ const AZOOGI_PRODUCTS = {
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "name": "Linear Lights",
+      "children": [
         {
           "type": "category",
-          "name": "LED Flex Sheet",
+          "name": "COB",
           "children": [
             {
               "type": "product_row",
-              "name": "LED Sheet",
+              "name": "COB Strip",
               "variants": {
-                "LED Sheet": {
-                  "id": "recGmrXQFlAIuDcls",
-                  "product_name": "LED Sheet",
-                  "category": "LED Flex Sheet",
-                  "sku": "RS-PL2835PRO-24V-288D-20",
-                  "product_short_description": "Transform your home into a breathtaking visual journey. Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.\n",
-                  "product_description": "Transform your home into a breathtaking visual journey with a perfect blend of elegance and modern design. This premium lighting solution offers a sophisticated, seamless glow that beautifully enhances your elegant spaces, casting a warm and inviting atmosphere throughout. Crafted for those who appreciate refined detail and discreet luxury, it adds an unparalleled touch of ambiance, warmth, and captivating style to any room, making it the ultimate choice for elevated interior illumination.\n",
+                "COB Strip": {
+                  "id": "recGjn9VPGCa7RvKV",
+                  "product_name": "COB Strip",
+                  "category": "COB",
+                  "product_code": "COB001",
+                  "sku_mappings": [
+                    {
+                      "sku": "COB001",
+                      "combination": [
+                        "101",
+                        "104",
+                        "108",
+                        "109",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB002",
+                      "combination": [
+                        "101",
+                        "105",
+                        "108",
+                        "109",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB003",
+                      "combination": [
+                        "101",
+                        "106",
+                        "108",
+                        "109",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB004",
+                      "combination": [
+                        "101",
+                        "107",
+                        "108",
+                        "109",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB005",
+                      "combination": [
+                        "101",
+                        "104",
+                        "108",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB006",
+                      "combination": [
+                        "101",
+                        "105",
+                        "108",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB007",
+                      "combination": [
+                        "101",
+                        "106",
+                        "108",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB008",
+                      "combination": [
+                        "101",
+                        "107",
+                        "108",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB009",
+                      "combination": [
+                        "102",
+                        "104",
+                        "108",
+                        "109",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB010",
+                      "combination": [
+                        "102",
+                        "105",
+                        "108",
+                        "109",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB011",
+                      "combination": [
+                        "102",
+                        "106",
+                        "108",
+                        "109",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB012",
+                      "combination": [
+                        "102",
+                        "107",
+                        "108",
+                        "109",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB013",
+                      "combination": [
+                        "102",
+                        "104",
+                        "108",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB014",
+                      "combination": [
+                        "102",
+                        "105",
+                        "108",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB015",
+                      "combination": [
+                        "102",
+                        "106",
+                        "108",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB016",
+                      "combination": [
+                        "102",
+                        "107",
+                        "108",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB017",
+                      "combination": [
+                        "103",
+                        "104",
+                        "108",
+                        "109",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB018",
+                      "combination": [
+                        "103",
+                        "105",
+                        "108",
+                        "109",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB019",
+                      "combination": [
+                        "103",
+                        "106",
+                        "108",
+                        "109",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB020",
+                      "combination": [
+                        "103",
+                        "107",
+                        "108",
+                        "109",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB021",
+                      "combination": [
+                        "103",
+                        "104",
+                        "108",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB022",
+                      "combination": [
+                        "103",
+                        "105",
+                        "108",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB023",
+                      "combination": [
+                        "103",
+                        "106",
+                        "108",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    },
+                    {
+                      "sku": "COB024",
+                      "combination": [
+                        "103",
+                        "107",
+                        "108",
+                        "110",
+                        "111",
+                        "112"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Bring seamless radiance to your space with Top Bend IP69, a premium linear light designed to effortlessly curve and accentuate contours with a flawless, uniform glow.\n",
+                  "product_description": "Illuminate your architectural visions with the Top Bend IP69, a premium linear lighting solution designed to bring seamless radiance to any space. Engineered for incredible flexibility and breathtaking visual impact, this top-bending neon-style light curves effortlessly to accentuate contours and create striking design statements. Whether you are transforming a high-end commercial venue or adding sophisticated atmosphere to an outdoor landscape, its pristine, uniform glow delivers an unmatched aesthetic elegance. Built to withstand the elements while maintaining its flawless brilliance, it is the ultimate choice for designers who refuse to compromise on beauty, adaptability, and style.\n",
                   "product_images": [
-                    "assets/img/products/recGmrXQFlAIuDcls_8c7ecf547b.webp"
+                    "assets/img/products/recGjn9VPGCa7RvKV_715914b596.webp"
                   ],
                   "product_dimension": "",
                   "stocked_item": [
                     ""
                   ],
                   "datasheet": "No",
-                  "technical_icons": "",
-                  "meta_keywords": "LED sheet lighting, flexible LED sheet, backlighting panel, 30W LED sheet, 24V flexible LED, 3000K warm white",
-                  "supplier_name": "CHINA - Rising Sun",
+                  "technical_icons": [
+                    "assets/img/icons/recGjn9VPGCa7RvKV_icon_e1ab86bbb0.svg",
+                    "assets/img/icons/recGjn9VPGCa7RvKV_icon_d679b2282c.svg",
+                    "assets/img/icons/recGjn9VPGCa7RvKV_icon_bd8089083c.svg",
+                    "assets/img/icons/recGjn9VPGCa7RvKV_icon_529d8c94e1.svg",
+                    "assets/img/icons/recGjn9VPGCa7RvKV_icon_87df1513b1.svg"
+                  ],
+                  "meta_keywords": "Top Bend IP69, Premium Linear Lighting, Flexible Neon LED, Architectural Contour Light, Uniform Glow Strip, Waterproof Decorative Light",
+                  "supplier_name": "CHINA - Colorsled",
                   "status": "draft",
                   "product_type": "simple",
                   "product_features": {
                     "CCT": [
+                      {
+                        "value": "2700K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "3000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "6000K",
+                        "icon": ""
+                      }
+                    ],
+                    "Cut Interval": [
+                      {
+                        "value": "Free Cut",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP20",
+                        "icon": ""
+                      },
+                      {
+                        "value": "IP65 (Nano-Coated)",
+                        "icon": ""
+                      }
+                    ],
+                    "Power Consumption Rate": [
+                      {
+                        "value": "5W/m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "10W/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Strip Width": [
+                      {
+                        "value": "8mm (W)",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "5W/m",
+                        "id": "101"
+                      },
+                      {
+                        "name": "10W/m",
+                        "id": "102"
+                      },
+                      {
+                        "name": "15W/m",
+                        "id": "103"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "2700K",
+                        "id": "104"
+                      },
+                      {
+                        "name": "3000K",
+                        "id": "105"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "106"
+                      },
+                      {
+                        "name": "6000K",
+                        "id": "107"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "108"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP20",
+                        "id": "109"
+                      },
+                      {
+                        "name": "IP65 (Nano-Coated)",
+                        "id": "110"
+                      }
+                    ],
+                    "Strip Width": [
+                      {
+                        "name": "8mm (W)",
+                        "id": "111"
+                      }
+                    ],
+                    "Cut Interval": [
+                      {
+                        "name": "Free Cut",
+                        "id": "112"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Linear Lights",
+                    "COB"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "COB Strip",
+              "variants": {
+                "COB Strip": {
+                  "id": "recVL4lYoj9UVtXS9",
+                  "product_name": "COB Strip",
+                  "category": "COB",
+                  "product_code": "COB-15W-RGB-IP20",
+                  "sku_mappings": [
+                    {
+                      "sku": "COB-15W-RGB-IP20",
+                      "combination": [
+                        "101",
+                        "104",
+                        "106",
+                        "107",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "COB-15W-RGB-IP65-NA",
+                      "combination": [
+                        "101",
+                        "104",
+                        "106",
+                        "108",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "COB-18W-RGBTW-IP20",
+                      "combination": [
+                        "102",
+                        "112",
+                        "106",
+                        "107",
+                        "111"
+                      ]
+                    },
+                    {
+                      "sku": "COB-18W-RGBTW-IP65-NA",
+                      "combination": [
+                        "102",
+                        "112",
+                        "106",
+                        "108",
+                        "111"
+                      ]
+                    },
+                    {
+                      "sku": "COB-17W-RGBW-IP20",
+                      "combination": [
+                        "102",
+                        "113",
+                        "106",
+                        "107",
+                        "111"
+                      ]
+                    },
+                    {
+                      "sku": "COB-18W-RGBW-IP20-SPI",
+                      "combination": [
+                        "103",
+                        "113",
+                        "106",
+                        "107",
+                        "111",
+                        "115",
+                        "116"
+                      ]
+                    },
+                    {
+                      "sku": "COB-17W-RGBW-IP65-NA",
+                      "combination": [
+                        "102",
+                        "113",
+                        "106",
+                        "108",
+                        "111"
+                      ]
+                    },
+                    {
+                      "sku": "COB-18W-RGBW-IP65-NA-SPI",
+                      "combination": [
+                        "103",
+                        "113",
+                        "106",
+                        "108",
+                        "111",
+                        "115",
+                        "116"
+                      ]
+                    },
+                    {
+                      "sku": "COB-15W-RGBW-IP67",
+                      "combination": [
+                        "101",
+                        "105",
+                        "106",
+                        "109",
+                        "111",
+                        "117"
+                      ]
+                    },
+                    {
+                      "sku": "COB-18W-TW-IP20",
+                      "combination": [
+                        "103",
+                        "114",
+                        "106",
+                        "107",
+                        "110"
+                      ]
+                    },
+                    {
+                      "sku": "COB-18W-TW-IP65-NA",
+                      "combination": [
+                        "103",
+                        "114",
+                        "106",
+                        "108",
+                        "110"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Transform your space with a vibrant, sophisticated glow. Crafted for seamless flexibility, it brings captivating color and luxury to any design reality.\n",
+                  "product_description": "Elevate your architectural and interior designs with this premium linear lighting solution, engineered to infuse any environment with a vibrant, sophisticated glow. Crafted for seamless flexibility and unforgettable visual allure, it effortlessly curves to accentuate contours, define borders, and turn artistic visions into striking design realities. Perfect for enhancing high-end commercial spaces or bringing an ultimate touch of luxury to bespoke residential atmospheres, its flawlessly uniform brilliance offers an unmatched aesthetic elegance. Combining ultimate adaptability with timeless elegance, this stunning lighting choice is tailor-made for designers who want to transform spaces with captivating color and uncompromising style.\n",
+                  "product_images": [
+                    "assets/img/products/recVL4lYoj9UVtXS9_b6293d2bb7.webp"
+                  ],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": [
+                    "assets/img/icons/recVL4lYoj9UVtXS9_icon_475a703774.svg",
+                    "assets/img/icons/recVL4lYoj9UVtXS9_icon_66b0467668.svg",
+                    "assets/img/icons/recVL4lYoj9UVtXS9_icon_2c6cd6ed88.svg",
+                    "assets/img/icons/recVL4lYoj9UVtXS9_icon_d44dd2dbe4.svg",
+                    "assets/img/icons/recVL4lYoj9UVtXS9_icon_9123b8a186.svg"
+                  ],
+                  "meta_keywords": "Colour COB, Premium Linear Lighting, Flexible LED Strip, Vibrant Uniform Glow, Architectural Contour Lighting, High-End Interior Light",
+                  "supplier_name": "CHINA - Colorsled",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "RGB+TW (2700K-6500K)",
+                        "icon": ""
+                      },
+                      {
+                        "value": "RGBW (3000K)",
+                        "icon": ""
+                      },
+                      {
+                        "value": "TW (2700K-6500K)",
+                        "icon": ""
+                      }
+                    ],
+                    "Control Protocol": [
+                      {
+                        "value": "SPI",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP20",
+                        "icon": ""
+                      },
+                      {
+                        "value": "IP65 (Nano-Coated)",
+                        "icon": ""
+                      },
+                      {
+                        "value": "IP67",
+                        "icon": ""
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "value": "Max 5,000mm (L)",
+                        "icon": ""
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "value": "RGB",
+                        "icon": ""
+                      },
+                      {
+                        "value": "RGBW",
+                        "icon": ""
+                      }
+                    ],
+                    "Power Consumption Rate": [
+                      {
+                        "value": "15W/m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "17W/m",
+                        "icon": ""
+                      },
+                      {
+                        "value": "18W/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Resolution": [
+                      {
+                        "value": "12 Pixels/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Strip Width": [
+                      {
+                        "value": "10mm (W)",
+                        "icon": ""
+                      },
+                      {
+                        "value": "12mm (W)",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "15W/m",
+                        "id": "101"
+                      },
+                      {
+                        "name": "17W/m",
+                        "id": "102"
+                      },
+                      {
+                        "name": "18W/m",
+                        "id": "103"
+                      }
+                    ],
+                    "Light Color": [
+                      {
+                        "name": "RGB",
+                        "id": "104"
+                      },
+                      {
+                        "name": "RGBW",
+                        "id": "105"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "106"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP20",
+                        "id": "107"
+                      },
+                      {
+                        "name": "IP65 (Nano-Coated)",
+                        "id": "108"
+                      },
+                      {
+                        "name": "IP67",
+                        "id": "109"
+                      }
+                    ],
+                    "Strip Width": [
+                      {
+                        "name": "10mm (W)",
+                        "id": "110"
+                      },
+                      {
+                        "name": "12mm (W)",
+                        "id": "111"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "RGB+TW (2700K-6500K)",
+                        "id": "112"
+                      },
+                      {
+                        "name": "RGBW (3000K)",
+                        "id": "113"
+                      },
+                      {
+                        "name": "TW (2700K-6500K)",
+                        "id": "114"
+                      }
+                    ],
+                    "Control Protocol": [
+                      {
+                        "name": "SPI",
+                        "id": "115"
+                      }
+                    ],
+                    "Resolution": [
+                      {
+                        "name": "12 Pixels/m",
+                        "id": "116"
+                      }
+                    ],
+                    "Length": [
+                      {
+                        "name": "Max 5,000mm (L)",
+                        "id": "117"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Linear Lights",
+                    "COB"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "Mini COB Strip",
+              "variants": {
+                "Mini COB Strip": {
+                  "id": "recZP8OkTAEXqcrFt",
+                  "product_name": "Mini COB Strip",
+                  "category": "COB",
+                  "product_code": "COBM001",
+                  "sku_mappings": [
+                    {
+                      "sku": "COBM001",
+                      "combination": [
+                        "101",
+                        "102",
+                        "105",
+                        "106",
+                        "107"
+                      ]
+                    },
+                    {
+                      "sku": "COBM002",
+                      "combination": [
+                        "101",
+                        "103",
+                        "105",
+                        "106",
+                        "107"
+                      ]
+                    },
+                    {
+                      "sku": "COBM003",
+                      "combination": [
+                        "101",
+                        "104",
+                        "105",
+                        "106",
+                        "107"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Infuse your space with a seamless, enchanting glow using Mini COB. This ultra-sleek light source curves gracefully to elevate your design with flawless, luxurious brilliance.\n",
+                  "product_description": "Elevate your interior artistry with the Mini COB, a masterclass in minimalist linear lighting designed to infuse any room with a seamless, enchanting glow. Engineered to curve gracefully around the most delicate architectural details, this ultra-sleek light source disappears into your design while making a profound visual impact. Whether you are crafting a sophisticated mood in a contemporary lounge or adding subtle, luxurious ambiance to a refined workspace, its flawless brilliance accentuates contours effortlessly. It is the perfect choice for visionary designers who wish to transform ordinary spaces into breathtaking atmospheres of pure, unadulterated style.\n",
+                  "product_images": [
+                    "assets/img/products/recZP8OkTAEXqcrFt_8e450854c1.webp"
+                  ],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "Yes",
+                  "technical_icons": [
+                    "assets/img/icons/recZP8OkTAEXqcrFt_icon_5eccbf2997.svg",
+                    "assets/img/icons/recTUJJAO9kkhf54i_icon_9e6e0f95b2.svg",
+                    "assets/img/icons/recTUJJAO9kkhf54i_icon_f0abf39cd3.svg",
+                    "assets/img/icons/recZP8OkTAEXqcrFt_icon_d4ca705eb0.svg"
+                  ],
+                  "meta_keywords": "Mini COB, Minimalist Linear Lighting, Ultra Sleek LED, Architectural Detail Light, Flawless Brilliance Strip, Luxury Ambiance Light",
+                  "supplier_name": "CHINA - Colorsled",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "2700K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "3000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP20",
+                        "icon": ""
+                      }
+                    ],
+                    "Power Consumption Rate": [
+                      {
+                        "value": "10W/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Strip Width": [
+                      {
+                        "value": "4mm (W)",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "10W/m",
+                        "id": "101"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "2700K",
+                        "id": "102"
+                      },
+                      {
+                        "name": "3000K",
+                        "id": "103"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "104"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "105"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP20",
+                        "id": "106"
+                      }
+                    ],
+                    "Strip Width": [
+                      {
+                        "name": "4mm (W)",
+                        "id": "107"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Linear Lights",
+                    "COB"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "name": "SMD",
+          "children": [
+            {
+              "type": "product_row",
+              "name": "SMD Strip",
+              "variants": {
+                "SMD Strip": {
+                  "id": "recTUJJAO9kkhf54i",
+                  "product_name": "SMD Strip",
+                  "category": "SMD",
+                  "product_code": "SMD-29W-2.7K-IP20",
+                  "sku_mappings": [
+                    {
+                      "sku": "SMD-29W-2.7K-IP20",
+                      "combination": [
+                        "101",
+                        "102",
+                        "106",
+                        "107",
+                        "108"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-29W-3K-IP20",
+                      "combination": [
+                        "101",
+                        "103",
+                        "106",
+                        "107",
+                        "108"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-29W-4K-IP20",
+                      "combination": [
+                        "101",
+                        "104",
+                        "106",
+                        "107",
+                        "108"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-29W-6K-IP20",
+                      "combination": [
+                        "101",
+                        "105",
+                        "106",
+                        "107",
+                        "108"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Elevate your design visions with this premium linear lighting solution, crafted to bring seamless radiance and an unparalleled aesthetic elegance to any space.\n",
+                  "product_description": "Elevate your design visions with this premium linear lighting solution, crafted to bring seamless radiance and an unparalleled aesthetic elegance to any space. Engineered for exceptional flexibility and breathtaking visual impact, it accentuates contours effortlessly to create striking architectural design statements. Whether you are transforming a sophisticated commercial venue or adding a luxurious atmosphere to an interior landscape, its pristine, uniform glow delivers unmatched brilliance. It is the ultimate choice for designers and creators who refuse to compromise on beauty, modern adaptability, and pure style.\n",
+                  "product_images": [
+                    "assets/img/products/recTUJJAO9kkhf54i_0772a4d1af.webp",
+                    "assets/img/products/recTUJJAO9kkhf54i_27520805cb.webp"
+                  ],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": [
+                    "assets/img/icons/recTUJJAO9kkhf54i_icon_f0abf39cd3.svg",
+                    "assets/img/icons/recTUJJAO9kkhf54i_icon_9e6e0f95b2.svg",
+                    "assets/img/icons/recTUJJAO9kkhf54i_icon_c6c40de7b4.svg"
+                  ],
+                  "meta_keywords": "29W SMD, Premium Linear Lighting, Architectural Design Light, Uniform Glow Strip, Elegant Contour Light, High Power LED Strip",
+                  "supplier_name": "CHINA - Colorsled",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "2700K",
+                        "icon": ""
+                      },
                       {
                         "value": "3000K",
                         "icon": ""
@@ -23213,19 +31977,17 @@ const AZOOGI_PRODUCTS = {
                       {
                         "value": "IP20",
                         "icon": ""
-                      },
+                      }
+                    ],
+                    "Power Consumption Rate": [
                       {
-                        "value": "IP54",
-                        "icon": ""
-                      },
-                      {
-                        "value": "IP67",
+                        "value": "29W/m",
                         "icon": ""
                       }
                     ],
-                    "Power": [
+                    "Strip Width": [
                       {
-                        "value": "30W",
+                        "value": "12mm",
                         "icon": ""
                       }
                     ],
@@ -23234,78 +31996,277 @@ const AZOOGI_PRODUCTS = {
                         "value": "24V",
                         "icon": ""
                       }
-                    ],
-                    "Dimension": [
-                      {
-                        "value": "480mm (L) x 240mm (W)",
-                        "icon": ""
-                      }
                     ]
                   },
                   "options": {
-                    "Power": [
+                    "Power Consumption Rate": [
                       {
-                        "name": "30W",
+                        "name": "29W/m",
                         "id": "101"
                       }
                     ],
                     "CCT": [
                       {
-                        "name": "3000K",
+                        "name": "2700K",
                         "id": "102"
                       },
                       {
-                        "name": "4000K",
+                        "name": "3000K",
                         "id": "103"
                       },
                       {
-                        "name": "6000K",
+                        "name": "4000K",
                         "id": "104"
+                      },
+                      {
+                        "name": "6000K",
+                        "id": "105"
                       }
                     ],
                     "Voltage": [
                       {
                         "name": "24V",
-                        "id": "105"
+                        "id": "106"
                       }
                     ],
                     "IP Rating": [
                       {
                         "name": "IP20",
-                        "id": "106"
+                        "id": "107"
+                      }
+                    ],
+                    "Strip Width": [
+                      {
+                        "name": "12mm",
+                        "id": "108"
+                      }
+                    ]
+                  },
+                  "constraints": {},
+                  "category_path": [
+                    "Linear Lights",
+                    "SMD"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "product_row",
+              "name": "SMD Strip",
+              "variants": {
+                "SMD Strip": {
+                  "id": "recw9jtxD9FJLvioh",
+                  "product_name": "SMD Strip",
+                  "category": "SMD",
+                  "product_code": "SMD-22W-2.7K-IP20",
+                  "sku_mappings": [
+                    {
+                      "sku": "SMD-22W-2.7K-IP20",
+                      "combination": [
+                        "101",
+                        "102",
+                        "106",
+                        "107",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-22W-3K-IP20",
+                      "combination": [
+                        "101",
+                        "103",
+                        "106",
+                        "107",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-22W-4K-IP20",
+                      "combination": [
+                        "101",
+                        "104",
+                        "106",
+                        "107",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-22W-6K-IP20",
+                      "combination": [
+                        "101",
+                        "105",
+                        "106",
+                        "107",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-22W-2.7K-IP65",
+                      "combination": [
+                        "101",
+                        "102",
+                        "106",
+                        "108",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-22W-3K-IP65",
+                      "combination": [
+                        "101",
+                        "103",
+                        "106",
+                        "108",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-22W-4K-IP65",
+                      "combination": [
+                        "101",
+                        "104",
+                        "106",
+                        "108",
+                        "109"
+                      ]
+                    },
+                    {
+                      "sku": "SMD-22W-6K-IP65",
+                      "combination": [
+                        "101",
+                        "105",
+                        "106",
+                        "108",
+                        "109"
+                      ]
+                    }
+                  ],
+                  "product_short_description": "Elevate your architectural vision with stunning linear lighting designed to bring seamless radiance, breathtaking visual impact, and unmatched elegance to any space.\n",
+                  "product_description": "Elevate your architectural visions with the 22W SMD, a premium linear lighting solution designed to bring seamless radiance to any space. Engineered for incredible flexibility and breathtaking visual impact, this brilliant light curves effortlessly to accentuate contours and create striking design statements. Whether you are transforming a high-end commercial venue or adding a sophisticated atmosphere to an outdoor landscape, its pristine, uniform glow delivers unmatched aesthetic elegance. Built to maintain its flawless brilliance, it is the ultimate choice for designers who refuse to compromise on beauty, adaptability, and style.\n",
+                  "product_images": [
+                    "assets/img/products/recw9jtxD9FJLvioh_1c31dd9262.webp"
+                  ],
+                  "product_dimension": "",
+                  "stocked_item": [
+                    ""
+                  ],
+                  "datasheet": "No",
+                  "technical_icons": [
+                    "assets/img/icons/recZP8OkTAEXqcrFt_icon_5eccbf2997.svg",
+                    "assets/img/icons/recTUJJAO9kkhf54i_icon_9e6e0f95b2.svg",
+                    "assets/img/icons/recTUJJAO9kkhf54i_icon_f0abf39cd3.svg",
+                    "assets/img/icons/recZP8OkTAEXqcrFt_icon_d4ca705eb0.svg"
+                  ],
+                  "meta_keywords": "22W SMD Linear Light, Premium Linear Lighting, Flexible LED Strip, Architectural Contour Light, Uniform Glow Lighting, High Efficiency LED Tape",
+                  "supplier_name": "CHINA - Colorsled",
+                  "status": "draft",
+                  "product_type": "simple",
+                  "product_features": {
+                    "CCT": [
+                      {
+                        "value": "2700K",
+                        "icon": ""
                       },
                       {
-                        "name": "IP54",
+                        "value": "3000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "4000K",
+                        "icon": ""
+                      },
+                      {
+                        "value": "6000K",
+                        "icon": ""
+                      }
+                    ],
+                    "Cut Interval": [
+                      {
+                        "value": "Free Cut",
+                        "icon": ""
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "value": "IP20",
+                        "icon": ""
+                      },
+                      {
+                        "value": "IP65 (Nano-Coated)",
+                        "icon": ""
+                      }
+                    ],
+                    "Power Consumption Rate": [
+                      {
+                        "value": "22W/m",
+                        "icon": ""
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "value": "24V",
+                        "icon": ""
+                      }
+                    ]
+                  },
+                  "options": {
+                    "Power Consumption Rate": [
+                      {
+                        "name": "22W/m",
+                        "id": "101"
+                      }
+                    ],
+                    "CCT": [
+                      {
+                        "name": "2700K",
+                        "id": "102"
+                      },
+                      {
+                        "name": "3000K",
+                        "id": "103"
+                      },
+                      {
+                        "name": "4000K",
+                        "id": "104"
+                      },
+                      {
+                        "name": "6000K",
+                        "id": "105"
+                      }
+                    ],
+                    "Voltage": [
+                      {
+                        "name": "24V",
+                        "id": "106"
+                      }
+                    ],
+                    "IP Rating": [
+                      {
+                        "name": "IP20",
                         "id": "107"
                       },
                       {
-                        "name": "IP67",
+                        "name": "IP65 (Nano-Coated)",
                         "id": "108"
                       }
                     ],
-                    "Dimension": [
+                    "Cut Interval": [
                       {
-                        "name": "480mm (L) x 240mm (W)",
+                        "name": "Free Cut",
                         "id": "109"
                       }
                     ]
                   },
                   "constraints": {},
                   "category_path": [
-                    "Strips and Flex",
-                    "LED Flex Sheet"
+                    "Linear Lights",
+                    "SMD"
                   ]
                 }
               }
             }
           ]
-        }
-      ]
-    },
-    {
-      "type": "category",
-      "name": "Linear Lights",
-      "children": [
+        },
         {
           "type": "category",
           "name": "Lumoflex",
@@ -23318,7 +32279,237 @@ const AZOOGI_PRODUCTS = {
                   "id": "recZAGnwL5xp3AXeV",
                   "product_name": "Mini Lumoflex",
                   "category": "Lumoflex",
-                  "sku": "NNR13-White light-24V",
+                  "product_code": "LMF13-9W-2.7K-IP65",
+                  "sku_mappings": [
+                    {
+                      "sku": "LMF13-9W-2.7K-IP65",
+                      "combination": [
+                        "101",
+                        "105",
+                        "111",
+                        "112",
+                        "113",
+                        "118",
+                        "119"
+                      ]
+                    },
+                    {
+                      "sku": "LMF13-9W-3K-IP65",
+                      "combination": [
+                        "101",
+                        "106",
+                        "111",
+                        "112",
+                        "113",
+                        "118",
+                        "119"
+                      ]
+                    },
+                    {
+                      "sku": "LMF13-9W-4K-IP65",
+                      "combination": [
+                        "101",
+                        "107",
+                        "111",
+                        "112",
+                        "113",
+                        "118",
+                        "119"
+                      ]
+                    },
+                    {
+                      "sku": "LMF18-15W-2.7K-IP65",
+                      "combination": [
+                        "102",
+                        "105",
+                        "111",
+                        "112",
+                        "114",
+                        "118",
+                        "119"
+                      ]
+                    },
+                    {
+                      "sku": "LMF18-15W-3K-IP65",
+                      "combination": [
+                        "102",
+                        "106",
+                        "111",
+                        "112",
+                        "114",
+                        "118",
+                        "119"
+                      ]
+                    },
+                    {
+                      "sku": "LMF18-15W-4K-IP65",
+                      "combination": [
+                        "102",
+                        "107",
+                        "111",
+                        "112",
+                        "114",
+                        "118",
+                        "119"
+                      ]
+                    },
+                    {
+                      "sku": "LMF18-13W-RGB-IP65",
+                      "combination": [
+                        "103",
+                        "110",
+                        "111",
+                        "112",
+                        "114",
+                        "118",
+                        "119"
+                      ]
+                    },
+                    {
+                      "sku": "LMF18-15W-TW-IP65",
+                      "combination": [
+                        "102",
+                        "108",
+                        "111",
+                        "112",
+                        "114",
+                        "118",
+                        "119"
+                      ]
+                    },
+                    {
+                      "sku": "LMF25-15W-2.7K-IP65",
+                      "combination": [
+                        "102",
+                        "105",
+                        "111",
+                        "112",
+                        "115",
+                        "118",
+                        "119"
+                      ]
+                    },
+                    {
+                      "sku": "LMF25-15W-3K-IP65",
+                      "combination": [
+                        "102",
+                        "106",
+                        "111",
+                        "112",
+                        "115",
+                        "118",
+                        "119"
+                      ]
+                    },
+                    {
+                      "sku": "LMF25-15W-4K-IP65",
+                      "combination": [
+                        "102",
+                        "107",
+                        "111",
+                        "112",
+                        "115",
+                        "118",
+                        "119"
+                      ]
+                    },
+                    {
+                      "sku": "LMF25-15W-RGB-IP65",
+                      "combination": [
+                        "102",
+                        "110",
+                        "111",
+                        "112",
+                        "115",
+                        "118",
+                        "119"
+                      ]
+                    },
+                    {
+                      "sku": "LMF25-15W-TW-IP65",
+                      "combination": [
+                        "102",
+                        "108",
+                        "111",
+                        "112",
+                        "115",
+                        "118",
+                        "119"
+                      ]
+                    },
+                    {
+                      "sku": "LMF25-18W-RGBW-IP65",
+                      "combination": [
+                        "104",
+                        "109",
+                        "111",
+                        "112",
+                        "115",
+                        "118",
+                        "119"
+                      ]
+                    },
+                    {
+                      "sku": "LMF30-15W-2.7K-IP65",
+                      "combination": [
+                        "102",
+                        "105",
+                        "111",
+                        "112",
+                        "116",
+                        "118",
+                        "119"
+                      ]
+                    },
+                    {
+                      "sku": "LMF30-15W-3K-IP65",
+                      "combination": [
+                        "102",
+                        "106",
+                        "111",
+                        "112",
+                        "116",
+                        "118",
+                        "119"
+                      ]
+                    },
+                    {
+                      "sku": "LMF30-15W-4K-IP65",
+                      "combination": [
+                        "102",
+                        "107",
+                        "111",
+                        "112",
+                        "116",
+                        "118",
+                        "119"
+                      ]
+                    },
+                    {
+                      "sku": "LMF30-18W-RGBW-IP65",
+                      "combination": [
+                        "104",
+                        "109",
+                        "111",
+                        "112",
+                        "116",
+                        "118",
+                        "119"
+                      ]
+                    },
+                    {
+                      "sku": "LMF40-18W-RGBW-IP65",
+                      "combination": [
+                        "104",
+                        "109",
+                        "111",
+                        "112",
+                        "117",
+                        "118",
+                        "119"
+                      ]
+                    }
+                  ],
                   "product_short_description": "Bring seamless, captivating radiance to your space with Lumoflex, the ultimate choice for injecting modern style and timeless sophistication into any project.\n",
                   "product_description": "Elevate your design visions with Lumoflex, a premium neon lighting solution engineered to bring a seamless, captivating radiance to any space. Designed for exceptional adaptability and striking visual interest, this flexible linear light effortlessly curves to accentuate modern contours and carve out bold architectural narratives. Whether transforming a refined commercial interior or casting a sophisticated, atmospheric glow across a high-end venue, its flawless uniform brilliance delivers unparalleled aesthetic elegance. Perfect for creators who refuse to compromise on beauty and atmosphere, it stands as the ultimate choice for injecting modern style and timeless sophistication into any project.\n",
                   "product_images": [
@@ -23551,765 +32742,6 @@ const AZOOGI_PRODUCTS = {
                   "category_path": [
                     "Linear Lights",
                     "Lumoflex"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
-          "name": "SMD",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "SMD Strip",
-              "variants": {
-                "SMD Strip": {
-                  "id": "recTUJJAO9kkhf54i",
-                  "product_name": "SMD Strip",
-                  "category": "SMD",
-                  "sku": "DS8192-24V-12mm",
-                  "product_short_description": "Elevate your design visions with this premium linear lighting solution, crafted to bring seamless radiance and an unparalleled aesthetic elegance to any space.\n",
-                  "product_description": "Elevate your design visions with this premium linear lighting solution, crafted to bring seamless radiance and an unparalleled aesthetic elegance to any space. Engineered for exceptional flexibility and breathtaking visual impact, it accentuates contours effortlessly to create striking architectural design statements. Whether you are transforming a sophisticated commercial venue or adding a luxurious atmosphere to an interior landscape, its pristine, uniform glow delivers unmatched brilliance. It is the ultimate choice for designers and creators who refuse to compromise on beauty, modern adaptability, and pure style.\n",
-                  "product_images": [
-                    "assets/img/products/recTUJJAO9kkhf54i_0772a4d1af.webp",
-                    "assets/img/products/recTUJJAO9kkhf54i_27520805cb.webp"
-                  ],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": [
-                    "assets/img/icons/recTUJJAO9kkhf54i_icon_f0abf39cd3.svg",
-                    "assets/img/icons/recTUJJAO9kkhf54i_icon_9e6e0f95b2.svg",
-                    "assets/img/icons/recTUJJAO9kkhf54i_icon_c6c40de7b4.svg"
-                  ],
-                  "meta_keywords": "29W SMD, Premium Linear Lighting, Architectural Design Light, Uniform Glow Strip, Elegant Contour Light, High Power LED Strip",
-                  "supplier_name": "CHINA - Colorsled",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "2700K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "3000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "6000K",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP20",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "29W/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Strip Width": [
-                      {
-                        "value": "12mm",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "29W/m",
-                        "id": "101"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "2700K",
-                        "id": "102"
-                      },
-                      {
-                        "name": "3000K",
-                        "id": "103"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "104"
-                      },
-                      {
-                        "name": "6000K",
-                        "id": "105"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "106"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP20",
-                        "id": "107"
-                      }
-                    ],
-                    "Strip Width": [
-                      {
-                        "name": "12mm",
-                        "id": "108"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Linear Lights",
-                    "SMD"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "SMD Strip",
-              "variants": {
-                "SMD Strip": {
-                  "id": "recw9jtxD9FJLvioh",
-                  "product_name": "SMD Strip",
-                  "category": "SMD",
-                  "sku": "C8240-24V-10mm",
-                  "product_short_description": "Elevate your architectural vision with stunning linear lighting designed to bring seamless radiance, breathtaking visual impact, and unmatched elegance to any space.\n",
-                  "product_description": "Elevate your architectural visions with the 22W SMD, a premium linear lighting solution designed to bring seamless radiance to any space. Engineered for incredible flexibility and breathtaking visual impact, this brilliant light curves effortlessly to accentuate contours and create striking design statements. Whether you are transforming a high-end commercial venue or adding a sophisticated atmosphere to an outdoor landscape, its pristine, uniform glow delivers unmatched aesthetic elegance. Built to maintain its flawless brilliance, it is the ultimate choice for designers who refuse to compromise on beauty, adaptability, and style.\n",
-                  "product_images": [
-                    "assets/img/products/recw9jtxD9FJLvioh_1c31dd9262.webp"
-                  ],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": [
-                    "assets/img/icons/recZP8OkTAEXqcrFt_icon_5eccbf2997.svg",
-                    "assets/img/icons/recTUJJAO9kkhf54i_icon_9e6e0f95b2.svg",
-                    "assets/img/icons/recTUJJAO9kkhf54i_icon_f0abf39cd3.svg",
-                    "assets/img/icons/recZP8OkTAEXqcrFt_icon_d4ca705eb0.svg"
-                  ],
-                  "meta_keywords": "22W SMD Linear Light, Premium Linear Lighting, Flexible LED Strip, Architectural Contour Light, Uniform Glow Lighting, High Efficiency LED Tape",
-                  "supplier_name": "CHINA - Colorsled",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "2700K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "3000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "6000K",
-                        "icon": ""
-                      }
-                    ],
-                    "Cut Interval": [
-                      {
-                        "value": "Free Cut",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP20",
-                        "icon": ""
-                      },
-                      {
-                        "value": "IP65 (Nano-Coated)",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "22W/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "22W/m",
-                        "id": "101"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "2700K",
-                        "id": "102"
-                      },
-                      {
-                        "name": "3000K",
-                        "id": "103"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "104"
-                      },
-                      {
-                        "name": "6000K",
-                        "id": "105"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "106"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP20",
-                        "id": "107"
-                      },
-                      {
-                        "name": "IP65 (Nano-Coated)",
-                        "id": "108"
-                      }
-                    ],
-                    "Cut Interval": [
-                      {
-                        "name": "Free Cut",
-                        "id": "109"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Linear Lights",
-                    "SMD"
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "category",
-          "name": "COB",
-          "children": [
-            {
-              "type": "product_row",
-              "name": "COB Strip",
-              "variants": {
-                "COB Strip": {
-                  "id": "recGjn9VPGCa7RvKV",
-                  "product_name": "COB Strip",
-                  "category": "COB",
-                  "sku": "CF300-24V-8mm",
-                  "product_short_description": "Bring seamless radiance to your space with Top Bend IP69, a premium linear light designed to effortlessly curve and accentuate contours with a flawless, uniform glow.\n",
-                  "product_description": "Illuminate your architectural visions with the Top Bend IP69, a premium linear lighting solution designed to bring seamless radiance to any space. Engineered for incredible flexibility and breathtaking visual impact, this top-bending neon-style light curves effortlessly to accentuate contours and create striking design statements. Whether you are transforming a high-end commercial venue or adding sophisticated atmosphere to an outdoor landscape, its pristine, uniform glow delivers an unmatched aesthetic elegance. Built to withstand the elements while maintaining its flawless brilliance, it is the ultimate choice for designers who refuse to compromise on beauty, adaptability, and style.\n",
-                  "product_images": [
-                    "assets/img/products/recGjn9VPGCa7RvKV_715914b596.webp"
-                  ],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": [
-                    "assets/img/icons/recGjn9VPGCa7RvKV_icon_e1ab86bbb0.svg",
-                    "assets/img/icons/recGjn9VPGCa7RvKV_icon_d679b2282c.svg",
-                    "assets/img/icons/recGjn9VPGCa7RvKV_icon_bd8089083c.svg",
-                    "assets/img/icons/recGjn9VPGCa7RvKV_icon_529d8c94e1.svg",
-                    "assets/img/icons/recGjn9VPGCa7RvKV_icon_87df1513b1.svg"
-                  ],
-                  "meta_keywords": "Top Bend IP69, Premium Linear Lighting, Flexible Neon LED, Architectural Contour Light, Uniform Glow Strip, Waterproof Decorative Light",
-                  "supplier_name": "CHINA - Colorsled",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "2700K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "3000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "6000K",
-                        "icon": ""
-                      }
-                    ],
-                    "Cut Interval": [
-                      {
-                        "value": "Free Cut",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP20",
-                        "icon": ""
-                      },
-                      {
-                        "value": "IP65 (Nano-Coated)",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "5W/m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "10W/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Strip Width": [
-                      {
-                        "value": "8mm (W)",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "5W/m",
-                        "id": "101"
-                      },
-                      {
-                        "name": "10W/m",
-                        "id": "102"
-                      },
-                      {
-                        "name": "15W/m",
-                        "id": "103"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "2700K",
-                        "id": "104"
-                      },
-                      {
-                        "name": "3000K",
-                        "id": "105"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "106"
-                      },
-                      {
-                        "name": "6000K",
-                        "id": "107"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "108"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP20",
-                        "id": "109"
-                      },
-                      {
-                        "name": "IP65 (Nano-Coated)",
-                        "id": "110"
-                      }
-                    ],
-                    "Strip Width": [
-                      {
-                        "name": "8mm (W)",
-                        "id": "111"
-                      }
-                    ],
-                    "Cut Interval": [
-                      {
-                        "name": "Free Cut",
-                        "id": "112"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Linear Lights",
-                    "COB"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "COB Strip",
-              "variants": {
-                "COB Strip": {
-                  "id": "recVL4lYoj9UVtXS9",
-                  "product_name": "COB Strip",
-                  "category": "COB",
-                  "sku": "DP4RGB-24V-10mm",
-                  "product_short_description": "Transform your space with a vibrant, sophisticated glow. Crafted for seamless flexibility, it brings captivating color and luxury to any design reality.\n",
-                  "product_description": "Elevate your architectural and interior designs with this premium linear lighting solution, engineered to infuse any environment with a vibrant, sophisticated glow. Crafted for seamless flexibility and unforgettable visual allure, it effortlessly curves to accentuate contours, define borders, and turn artistic visions into striking design realities. Perfect for enhancing high-end commercial spaces or bringing an ultimate touch of luxury to bespoke residential atmospheres, its flawlessly uniform brilliance offers an unmatched aesthetic elegance. Combining ultimate adaptability with timeless elegance, this stunning lighting choice is tailor-made for designers who want to transform spaces with captivating color and uncompromising style.\n",
-                  "product_images": [
-                    "assets/img/products/recVL4lYoj9UVtXS9_b6293d2bb7.webp"
-                  ],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "No",
-                  "technical_icons": [
-                    "assets/img/icons/recVL4lYoj9UVtXS9_icon_475a703774.svg",
-                    "assets/img/icons/recVL4lYoj9UVtXS9_icon_66b0467668.svg",
-                    "assets/img/icons/recVL4lYoj9UVtXS9_icon_2c6cd6ed88.svg",
-                    "assets/img/icons/recVL4lYoj9UVtXS9_icon_d44dd2dbe4.svg",
-                    "assets/img/icons/recVL4lYoj9UVtXS9_icon_9123b8a186.svg"
-                  ],
-                  "meta_keywords": "Colour COB, Premium Linear Lighting, Flexible LED Strip, Vibrant Uniform Glow, Architectural Contour Lighting, High-End Interior Light",
-                  "supplier_name": "CHINA - Colorsled",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "RGB+TW (2700K-6500K)",
-                        "icon": ""
-                      },
-                      {
-                        "value": "RGBW (3000K)",
-                        "icon": ""
-                      },
-                      {
-                        "value": "TW (2700K-6500K)",
-                        "icon": ""
-                      }
-                    ],
-                    "Control Protocol": [
-                      {
-                        "value": "SPI",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP20",
-                        "icon": ""
-                      },
-                      {
-                        "value": "IP65 (Nano-Coated)",
-                        "icon": ""
-                      },
-                      {
-                        "value": "IP67",
-                        "icon": ""
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "value": "Max 5,000mm (L)",
-                        "icon": ""
-                      }
-                    ],
-                    "Light Color": [
-                      {
-                        "value": "RGB",
-                        "icon": ""
-                      },
-                      {
-                        "value": "RGBW",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "15W/m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "17W/m",
-                        "icon": ""
-                      },
-                      {
-                        "value": "18W/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Resolution": [
-                      {
-                        "value": "12 Pixels/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Strip Width": [
-                      {
-                        "value": "10mm (W)",
-                        "icon": ""
-                      },
-                      {
-                        "value": "12mm (W)",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "15W/m",
-                        "id": "101"
-                      },
-                      {
-                        "name": "17W/m",
-                        "id": "102"
-                      },
-                      {
-                        "name": "18W/m",
-                        "id": "103"
-                      }
-                    ],
-                    "Light Color": [
-                      {
-                        "name": "RGB",
-                        "id": "104"
-                      },
-                      {
-                        "name": "RGBW",
-                        "id": "105"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "106"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP20",
-                        "id": "107"
-                      },
-                      {
-                        "name": "IP65 (Nano-Coated)",
-                        "id": "108"
-                      },
-                      {
-                        "name": "IP67",
-                        "id": "109"
-                      }
-                    ],
-                    "Strip Width": [
-                      {
-                        "name": "10mm (W)",
-                        "id": "110"
-                      },
-                      {
-                        "name": "12mm (W)",
-                        "id": "111"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "RGB+TW (2700K-6500K)",
-                        "id": "112"
-                      },
-                      {
-                        "name": "RGBW (3000K)",
-                        "id": "113"
-                      },
-                      {
-                        "name": "TW (2700K-6500K)",
-                        "id": "114"
-                      }
-                    ],
-                    "Control Protocol": [
-                      {
-                        "name": "SPI",
-                        "id": "115"
-                      }
-                    ],
-                    "Resolution": [
-                      {
-                        "name": "12 Pixels/m",
-                        "id": "116"
-                      }
-                    ],
-                    "Length": [
-                      {
-                        "name": "Max 5,000mm (L)",
-                        "id": "117"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Linear Lights",
-                    "COB"
-                  ]
-                }
-              }
-            },
-            {
-              "type": "product_row",
-              "name": "Mini COB Strip",
-              "variants": {
-                "Mini COB Strip": {
-                  "id": "recZP8OkTAEXqcrFt",
-                  "product_name": "Mini COB Strip",
-                  "category": "COB",
-                  "sku": "DP7-24V-4mm",
-                  "product_short_description": "Infuse your space with a seamless, enchanting glow using Mini COB. This ultra-sleek light source curves gracefully to elevate your design with flawless, luxurious brilliance.\n",
-                  "product_description": "Elevate your interior artistry with the Mini COB, a masterclass in minimalist linear lighting designed to infuse any room with a seamless, enchanting glow. Engineered to curve gracefully around the most delicate architectural details, this ultra-sleek light source disappears into your design while making a profound visual impact. Whether you are crafting a sophisticated mood in a contemporary lounge or adding subtle, luxurious ambiance to a refined workspace, its flawless brilliance accentuates contours effortlessly. It is the perfect choice for visionary designers who wish to transform ordinary spaces into breathtaking atmospheres of pure, unadulterated style.\n",
-                  "product_images": [
-                    "assets/img/products/recZP8OkTAEXqcrFt_8e450854c1.webp"
-                  ],
-                  "product_dimension": "",
-                  "stocked_item": [
-                    ""
-                  ],
-                  "datasheet": "Yes",
-                  "technical_icons": [
-                    "assets/img/icons/recZP8OkTAEXqcrFt_icon_5eccbf2997.svg",
-                    "assets/img/icons/recTUJJAO9kkhf54i_icon_9e6e0f95b2.svg",
-                    "assets/img/icons/recTUJJAO9kkhf54i_icon_f0abf39cd3.svg",
-                    "assets/img/icons/recZP8OkTAEXqcrFt_icon_d4ca705eb0.svg"
-                  ],
-                  "meta_keywords": "Mini COB, Minimalist Linear Lighting, Ultra Sleek LED, Architectural Detail Light, Flawless Brilliance Strip, Luxury Ambiance Light",
-                  "supplier_name": "CHINA - Colorsled",
-                  "status": "draft",
-                  "product_type": "simple",
-                  "product_features": {
-                    "CCT": [
-                      {
-                        "value": "2700K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "3000K",
-                        "icon": ""
-                      },
-                      {
-                        "value": "4000K",
-                        "icon": ""
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "value": "IP20",
-                        "icon": ""
-                      }
-                    ],
-                    "Power Consumption Rate": [
-                      {
-                        "value": "10W/m",
-                        "icon": ""
-                      }
-                    ],
-                    "Strip Width": [
-                      {
-                        "value": "4mm (W)",
-                        "icon": ""
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "value": "24V",
-                        "icon": ""
-                      }
-                    ]
-                  },
-                  "options": {
-                    "Power Consumption Rate": [
-                      {
-                        "name": "10W/m",
-                        "id": "101"
-                      }
-                    ],
-                    "CCT": [
-                      {
-                        "name": "2700K",
-                        "id": "102"
-                      },
-                      {
-                        "name": "3000K",
-                        "id": "103"
-                      },
-                      {
-                        "name": "4000K",
-                        "id": "104"
-                      }
-                    ],
-                    "Voltage": [
-                      {
-                        "name": "24V",
-                        "id": "105"
-                      }
-                    ],
-                    "IP Rating": [
-                      {
-                        "name": "IP20",
-                        "id": "106"
-                      }
-                    ],
-                    "Strip Width": [
-                      {
-                        "name": "4mm (W)",
-                        "id": "107"
-                      }
-                    ]
-                  },
-                  "constraints": {},
-                  "category_path": [
-                    "Linear Lights",
-                    "COB"
                   ]
                 }
               }

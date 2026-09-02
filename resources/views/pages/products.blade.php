@@ -1162,10 +1162,10 @@ style="padding-top: 120px;"
 
     function extractProductCode(source) {
       if (!source) return '';
-      var raw = source.sku || '';
+      var raw = source.product_code || source.productCode || '';
       if (!raw && source.product_features) {
         var feats = source.product_features;
-        raw = feats.SKU || feats.sku || feats['Supplier Code'] || '';
+        raw = feats['Product Code'] || feats['Product code'] || '';
       }
       if (Array.isArray(raw)) {
         raw = raw.map(function (v) {

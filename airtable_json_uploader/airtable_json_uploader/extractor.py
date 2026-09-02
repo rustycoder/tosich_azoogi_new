@@ -336,7 +336,20 @@ class AirtableDataExtractor:
                                 add_feature_item(product_features, a_name, a_val, a_icon)
 
             # Extract Non-Attribute Columns for Top-Level Product Keys
-            sku = self.sanitize_field_value(fields.get("SKU") or fields.get("sku") or fields.get("Supplier Code") or "")
+            product_code = self.sanitize_field_value(
+                fields.get("Product Code") or 
+                fields.get("Product code") or 
+                fields.get("product_code") or ""
+            )
+            raw_sku_mappings = (
+                fields.get("SKU Mappings") or 
+                fields.get("SKU mappings") or 
+                fields.get("sku_mappings") or 
+                fields.get("SKU Mapping") or 
+                fields.get("sku_mapping") or {}
+            )
+            sku_mappings = self.parse_json_field(raw_sku_mappings, default_type={})
+
             dimension_drawing = self.sanitize_field_value(fields.get("Product Dimension") or fields.get("Product dimension") or "")
             stocked_item = self.sanitize_field_value(fields.get("Stocked Item") or fields.get("Stock / Quantity") or "")
             datasheet = self.sanitize_field_value(fields.get("Datasheet") or "")
@@ -359,7 +372,8 @@ class AirtableDataExtractor:
                 "id": p_id,
                 "product_name": p_name,
                 "category": category_name,
-                "sku": sku,
+                "product_code": product_code,
+                "sku_mappings": sku_mappings,
                 "product_short_description": p_short_desc,
                 "product_description": p_long_desc,
                 "product_images": images,
@@ -531,7 +545,7 @@ class AirtableDataExtractor:
 
         # 1. Process top-level products
         for prod in catalog.get("products", []):
-            p_id = prod.get("id") or prod.get("sku") or "product"
+            p_id = prod.get("id") or prod.get("product_code") or prod.get("sku") or "product"
             if "product_images" in prod:
                 prod["product_images"] = process_url_list(prod["product_images"], str(p_id), "products")
             if "product_dimension" in prod:
