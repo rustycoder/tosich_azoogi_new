@@ -582,12 +582,13 @@
         position: relative;
         aspect-ratio: 1/1;
         overflow: hidden;
+        background-color: #ffffff;
       }
 
       .prod-swatch {
         position: absolute;
         inset: 0;
-        background: linear-gradient(135deg, var(--sw1, #1c2e17), var(--sw2, #0b0b0b));
+        background-color: #ffffff;
         display: flex;
         align-items: center;
         justify-content: center;
