@@ -35,6 +35,7 @@ class PageTest extends TestCase
             'project-detail' => ['/project-detail?slug=zushi-restaurant', 'Zushi'],
             'about' => ['/about', 'About'],
             'solutions' => ['/solutions', 'Solutions'],
+            'casambi' => ['/casambi', 'Casambi'],
             'madrix' => ['/madrix', 'MADRIX'],
             'contact' => ['/contact', 'Contact'],
             'ai-lighting' => ['/ai-lighting', 'AI Lighting'],

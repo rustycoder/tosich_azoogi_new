@@ -5,6 +5,7 @@ namespace App\PageMeta;
 use App\PageMeta\Definitions\AboutDefinition;
 use App\PageMeta\Definitions\AiLightingDefinition;
 use App\PageMeta\Definitions\ArchitectDesignerDefinition;
+use App\PageMeta\Definitions\CasambiDefinition;
 use App\PageMeta\Definitions\ContactDefinition;
 use App\PageMeta\Definitions\DataCentreDefinition;
 use App\PageMeta\Definitions\ElectricianBuilderDefinition;
@@ -30,6 +31,7 @@ final class Catalog
         'home' => HomeDefinition::class,
         'about' => AboutDefinition::class,
         'solutions' => SolutionsDefinition::class,
+        'casambi' => CasambiDefinition::class,
         'madrix' => MadrixDefinition::class,
         'ai-lighting' => AiLightingDefinition::class,
         'data-centre' => DataCentreDefinition::class,

@@ -55,7 +55,7 @@ class SolutionsDefinition implements PageDefinition
     public function seed(): array
     {
         $eco = [
-            ['Casambi', 'Wireless BLE Mesh', '#'],
+            ['Casambi', 'Wireless BLE Mesh', '/casambi'],
             ['MADRIX', 'Pixel Mapping & Visuals', '/madrix'],
             ['Silvair', 'Enterprise Bluetooth Mesh', '#'],
             ['DALI Center', 'Centralized DALI-2 Management & Analytics', '#'],

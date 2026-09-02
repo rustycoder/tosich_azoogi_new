@@ -76,6 +76,7 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
 Route::get('/', [PageController::class, '__invoke'])->name('home');
 Route::get('/about', [PageController::class, '__invoke'])->defaults('slug', 'about')->name('about');
 Route::get('/solutions', [PageController::class, '__invoke'])->defaults('slug', 'solutions')->name('solutions');
+Route::get('/casambi', [PageController::class, '__invoke'])->defaults('slug', 'casambi')->name('casambi');
 Route::get('/madrix', [PageController::class, '__invoke'])->defaults('slug', 'madrix')->name('madrix');
 Route::get('/ai-lighting', [PageController::class, '__invoke'])->defaults('slug', 'ai-lighting')->name('ai-lighting');
 Route::get('/data-centre', [PageController::class, '__invoke'])->defaults('slug', 'data-centre')->name('data-centre');
@@ -120,6 +121,7 @@ $htmlAliases = [
     'project-detail.html' => '/project-detail',
     'about.html' => '/about',
     'solutions.html' => '/solutions',
+    'casambi.html' => '/casambi',
     'madrix.html' => '/madrix',
     'contact.html' => '/contact',
     'ai-lighting.html' => '/ai-lighting',

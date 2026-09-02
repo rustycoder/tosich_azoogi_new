@@ -7,6 +7,7 @@ enum ContentResource: string
     case Home = 'home';
     case About = 'about';
     case Solutions = 'solutions';
+    case Casambi = 'casambi';
     case Madrix = 'madrix';
     case AiLighting = 'ai-lighting';
     case DataCentre = 'data-centre';
@@ -29,6 +30,7 @@ enum ContentResource: string
             self::Home => 'Home',
             self::About => 'About',
             self::Solutions => 'Solutions',
+            self::Casambi => 'Casambi',
             self::Madrix => 'MADRIX',
             self::AiLighting => 'AI Lighting',
             self::DataCentre => 'Data Centre',
