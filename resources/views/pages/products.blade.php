@@ -39,8 +39,8 @@
 
 
       /* ===========================================================
-                         BREADCRUMB STRIP
-                      =========================================================== */
+                                         BREADCRUMB STRIP
+                                      =========================================================== */
       .page-head {
         padding: 12px 0 16px;
         border-bottom: 1px solid var(--line);
@@ -62,8 +62,8 @@
       }
 
       /* ===========================================================
-                         TWO-COLUMN LAYOUT: narrow sidebar | product grid
-                      =========================================================== */
+                                         TWO-COLUMN LAYOUT: narrow sidebar | product grid
+                                      =========================================================== */
       .prod-layout {
         display: grid;
         grid-template-columns: 240px 1fr;
@@ -91,8 +91,8 @@
       }
 
       /* ===========================================================
-                         SIDEBAR
-                      =========================================================== */
+                                         SIDEBAR
+                                      =========================================================== */
       .prod-sidebar {
         position: sticky;
         top: 120px;
@@ -334,8 +334,8 @@
       }
 
       /* ===========================================================
-                         TOOLBAR
-                      =========================================================== */
+                                         TOOLBAR
+                                      =========================================================== */
       .prod-toolbar {
         display: flex;
         align-items: center;
@@ -535,8 +535,8 @@
       }
 
       /* ===========================================================
-                         PRODUCT CARD GRID — 4 columns
-                      =========================================================== */
+                                         PRODUCT CARD GRID — 4 columns
+                                      =========================================================== */
       .prod-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -591,6 +591,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
+      }
+
+      .prod-swatch.is-fallback {
+        filter: grayscale(100%);
+        opacity: 0.7;
       }
 
       .prod-swatch svg {
@@ -733,8 +738,8 @@
       }
 
       /* ===========================================================
-                         PAGINATION
-                      =========================================================== */
+                                         PAGINATION
+                                      =========================================================== */
       .pagination {
         display: flex;
         justify-content: center;
@@ -941,13 +946,13 @@
           }
           return pathFromWin;
         }
-        if (!imgUrl || typeof imgUrl !== 'string' || !imgUrl.trim()) return '/assets/logo_dark.png';
+        if (!imgUrl || typeof imgUrl !== 'string' || !imgUrl.trim()) return '/assets/bg_default.png';
         var clean = imgUrl.trim();
         if (!clean.startsWith('http')) {
           return clean.startsWith('/') ? clean : '/' + clean;
         }
         var filename = clean.split('/').pop().split('?')[0];
-        if (!filename) return '/assets/logo_dark.png';
+        if (!filename) return '/assets/bg_default.png';
         if (filePath) {
           var cleanFilePath = decodeURIComponent(filePath);
           var lastSlash = cleanFilePath.lastIndexOf('/');
@@ -1028,7 +1033,7 @@
 
         var rawImg = (vData.product_images && vData.product_images.length > 0)
           ? vData.product_images[0]
-          : '/assets/logo_dark.png';
+          : '/assets/bg_default.png';
 
         var localImgPath = getLocalImg(rawImg, vData.file_path);
         var features = vData.product_features || {};
@@ -1452,7 +1457,8 @@
         grid.innerHTML = pagedItems.map(function (p) {
           var detailUrl = p.id ? ('/product-detail?id=' + encodeURIComponent(p.id)) : (p.filePath ? ('/product-detail?file=' + encodeURIComponent(p.filePath)) : ('/product-detail?product=' + encodeURIComponent(p.name)));
 
-          var imgHtml = '<div class="prod-swatch" style="background-image:url(\'' + (p.img || '/assets/bg_default.png') + '\'); background-size:contain; background-position:center; background-repeat:no-repeat;"></div>';
+          var isFallback = !p.img || p.img === '/assets/bg_default.png' || p.img === '/assets/logo_dark.png';
+          var imgHtml = '<div class="prod-swatch' + (isFallback ? ' is-fallback' : '') + '" style="background-image:url(\'' + (p.img || '/assets/bg_default.png') + '\'); background-size:contain; background-position:center; background-repeat:no-repeat;' + (isFallback ? ' filter: grayscale(100%);' : '') + '"></div>';
 
           var displayName = p.name;
           if (p.specs && p.specs.Power) {
@@ -1563,7 +1569,7 @@
             AZOOGI_PRODUCTS.products.forEach(function (prod) {
               var pName = prod.product_name || prod.name || "Product";
               var images = prod.product_images || [];
-              var imgUrl = images.length > 0 ? images[0] : '/assets/logo_dark.png';
+              var imgUrl = images.length > 0 ? images[0] : '/assets/bg_default.png';
               var feats = prod.product_features || {};
 
               extractSpecsFromFeatures(feats);

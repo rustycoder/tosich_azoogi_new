@@ -636,7 +636,7 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
 
       // Helper to get image path
       function resolveImg(url) {
-        if (!url || typeof url !== 'string' || !url.trim()) return '/assets/logo_dark.png';
+        if (!url || typeof url !== 'string' || !url.trim()) return '/assets/bg_default.png';
         var clean = url.trim();
         if (clean.startsWith('http://') || clean.startsWith('https://')) return clean;
         if (!clean.startsWith('/')) return '/' + clean;
@@ -674,7 +674,7 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
           const pSubCat = catPath.length > 1 ? catPath[catPath.length - 1] : pTopCat;
 
           const images = firstVar.product_images || pRow.product_images || [];
-          const rawImg = images.length > 0 ? images[0] : '/assets/logo_dark.png';
+          const rawImg = images.length > 0 ? images[0] : '/assets/bg_default.png';
           const localImg = resolveImg(rawImg, firstVar.file_path);
 
           const item = {
@@ -708,10 +708,12 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
           const detailUrl = p.id ? ('/product-detail?id=' + encodeURIComponent(p.id)) : (p.filePath ? ('/product-detail?file=' + encodeURIComponent(p.filePath)) : ('/product-detail?product=' + encodeURIComponent(p.name)));
           const code = (p.sku || '').split(',')[0].trim();
           const codeHtml = code ? ` <span class="prod-card-code">(${code})</span>` : '';
+          const isFallback = !p.img || p.img === '/assets/bg_default.png' || p.img === '/assets/logo_dark.png';
+          const fallbackStyle = isFallback ? ' filter: grayscale(100%); opacity: 0.7;' : '';
           return `
                 <div class="prod-card" onclick="window.location.href='${detailUrl}'">
                   <div class="prod-card-img">
-                    <div class="prod-swatch" style="background-image:url('${p.img}'); background-size:cover; background-position:center;"></div>
+                    <div class="prod-swatch${isFallback ? ' is-fallback' : ''}" style="background-image:url('${p.img || '/assets/bg_default.png'}'); background-size:contain; background-position:center; background-repeat:no-repeat;${fallbackStyle}"></div>
                   </div>
                   <div class="prod-card-title">
                     <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}${codeHtml}</div>
@@ -753,7 +755,8 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
         images = Array.from(new Set(images));
 
         if (!images || images.length === 0) {
-          galleryMainImg.src = '/assets/logo_dark.png';
+          galleryMainImg.src = '/assets/bg_default.png';
+          galleryMainImg.style.filter = 'grayscale(100%)';
           galleryMainImg.style.display = 'block';
           return;
         }
@@ -762,8 +765,10 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
         galleryMainImg.src = mainLocalSrc;
         galleryMainImg.style.display = 'block';
         galleryMainImg.style.opacity = '1';
+        galleryMainImg.style.filter = (mainLocalSrc === '/assets/bg_default.png' || mainLocalSrc === '/assets/logo_dark.png') ? 'grayscale(100%)' : 'none';
         galleryMainImg.onerror = () => {
-          galleryMainImg.src = '/assets/logo_dark.png';
+          galleryMainImg.src = '/assets/bg_default.png';
+          galleryMainImg.style.filter = 'grayscale(100%)';
         };
 
         images.forEach((imgSrc, idx) => {
@@ -774,8 +779,12 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
           const thumbImg = document.createElement('img');
           thumbImg.src = localSrc;
           thumbImg.alt = `Product Thumbnail ${idx + 1}`;
+          if (localSrc === '/assets/bg_default.png' || localSrc === '/assets/logo_dark.png') {
+            thumbImg.style.filter = 'grayscale(100%)';
+          }
           thumbImg.onerror = () => {
-            thumbImg.src = '/assets/logo_dark.png';
+            thumbImg.src = '/assets/bg_default.png';
+            thumbImg.style.filter = 'grayscale(100%)';
           };
           thumb.appendChild(thumbImg);
 
@@ -783,6 +792,7 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
             galleryThumbs.querySelectorAll('.thumb-card').forEach(t => t.classList.remove('active'));
             thumb.classList.add('active');
             galleryMainImg.src = localSrc;
+            galleryMainImg.style.filter = (localSrc === '/assets/bg_default.png' || localSrc === '/assets/logo_dark.png') ? 'grayscale(100%)' : 'none';
           });
 
           galleryThumbs.appendChild(thumb);

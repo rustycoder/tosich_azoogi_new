@@ -3218,6 +3218,7 @@ a.mega-variant-card:after{
   box-sizing: border-box !important;
   background: #ffffff !important;
   opacity: 0.9 !important;
+  filter: grayscale(100%) !important;
 }
 
 .mega-variant-product {
