@@ -45,12 +45,12 @@
         </video>
       @endif
       <div class="slide-inner">
-        <div class="eyebrow">{{ $slide['eyebrow'] ?? '' }}</div>
-        <h1 class="slide-title">{!! nl2br_html($slide['title'] ?? '') !!}</h1>
-        <p class="slide-sub">{{ $slide['subtitle'] ?? '' }}</p>
+        <div class="eyebrow"{!! cms_style($meta, 'slide.eyebrow', $loop->index) !!}>{{ $slide['eyebrow'] ?? '' }}</div>
+        <h1 class="slide-title"{!! cms_style($meta, 'slide.title', $loop->index) !!}>{!! nl2br_html($slide['title'] ?? '') !!}</h1>
+        <p class="slide-sub"{!! cms_style($meta, 'slide.subtitle', $loop->index) !!}>{{ $slide['subtitle'] ?? '' }}</p>
         <div class="slide-actions">
-          <a class="btn primary" href="{{ $slide['cta.primary.href'] ?? '#' }}">{{ $slide['cta.primary.label'] ?? '' }}</a>
-          <a class="btn" href="{{ $slide['cta.secondary.href'] ?? '#' }}">{{ $slide['cta.secondary.label'] ?? '' }}</a>
+          <a class="btn primary" href="{{ $slide['cta.primary.href'] ?? '#' }}"{!! cms_style($meta, 'slide.cta.primary.label', $loop->index) !!}>{{ $slide['cta.primary.label'] ?? '' }}</a>
+          <a class="btn" href="{{ $slide['cta.secondary.href'] ?? '#' }}"{!! cms_style($meta, 'slide.cta.secondary.label', $loop->index) !!}>{{ $slide['cta.secondary.label'] ?? '' }}</a>
         </div>
       </div>
     </div>
@@ -68,8 +68,8 @@
 <!-- ========== INTRO ========== -->
 <section class="intro" {!! cms_section_attr('intro') !!}>
   <div class="wrap v-head">
-    <div class="kicker reveal ">{{ $meta->get('intro.kicker') }}</div>
-    <h2 class="h2 reveal">{{ $meta->get('intro.heading') }}</h2>
+    <div class="kicker reveal"{!! cms_style($meta, 'intro.kicker') !!}>{{ $meta->get('intro.kicker') }}</div>
+    <h2 class="h2 reveal"{!! cms_style($meta, 'intro.heading') !!}>{{ $meta->get('intro.heading') }}</h2>
     <div class="audience reveal">
       <a href="{{ url('/architect-designer') }}">Architect / Designer</a>
       <a href="{{ url('/electrician-builder') }}">Electrician / Builder</a>
@@ -85,8 +85,8 @@
 <section class="card-in" id="about" {!! cms_section_attr('values') !!}>
   <div class="wrap-sm">
     <div class="head">
-      <div class="kicker reveal">{{ $meta->get('values.kicker') }}</div>
-      <h2 class="h2 reveal">{{ $meta->get('values.heading') }}</h2>
+      <div class="kicker reveal"{!! cms_style($meta, 'values.kicker') !!}>{{ $meta->get('values.kicker') }}</div>
+      <h2 class="h2 reveal"{!! cms_style($meta, 'values.heading') !!}>{{ $meta->get('values.heading') }}</h2>
     </div>
   
     <div class="container max-width-adaptive-md">
@@ -95,8 +95,8 @@
           <li class="card-main" id="card_{{ $loop->iteration }}">
             <div class="card__content">
               <div>
-                <h2>{{ $card['title'] ?? '' }}</h2>
-                <p>{{ $card['body'] ?? '' }}</p>
+                <h2{!! cms_style($meta, 'values.card.title', $loop->index) !!}>{{ $card['title'] ?? '' }}</h2>
+                <p{!! cms_style($meta, 'values.card.body', $loop->index) !!}>{{ $card['body'] ?? '' }}</p>
                 <p><a href="{{ $card['href'] ?? '#top' }}" class="btn --accent">Read more</a></p>
               </div>
               <figure>
@@ -116,10 +116,10 @@
   <div class="wrap">
     <div class="head">
       <div>
-        <div class="kicker reveal">{{ $meta->get('range.kicker') }}</div>
-        <h2 class="h2 reveal">{{ $meta->get('range.heading') }}</h2>
+        <div class="kicker reveal"{!! cms_style($meta, 'range.kicker') !!}>{{ $meta->get('range.kicker') }}</div>
+        <h2 class="h2 reveal"{!! cms_style($meta, 'range.heading') !!}>{{ $meta->get('range.heading') }}</h2>
       </div>
-      <a href="{{ $meta->get('range.cta.href', 0, '/products') }}" class="btn --accent reveal">{{ $meta->get('range.cta.label') }}</a>
+      <a href="{{ $meta->get('range.cta.href', 0, '/products') }}" class="btn --accent reveal"{!! cms_style($meta, 'range.cta.label') !!}>{{ $meta->get('range.cta.label') }}</a>
     </div>
   </div>
   <div class="marquee">
@@ -138,10 +138,10 @@
   <div class="wrap">
     <div class="head" style="display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap">
       <div>
-        <div class="kicker reveal">{{ $meta->get('projects.kicker') }}</div>
-        <h2 class="h2 reveal">{{ $meta->get('projects.heading') }}</h2>
+        <div class="kicker reveal"{!! cms_style($meta, 'projects.kicker') !!}>{{ $meta->get('projects.kicker') }}</div>
+        <h2 class="h2 reveal"{!! cms_style($meta, 'projects.heading') !!}>{{ $meta->get('projects.heading') }}</h2>
       </div>
-      <a href="{{ $meta->get('projects.cta.href', 0, '/projects') }}" class="btn reveal">{{ $meta->get('projects.cta.label') }}</a>
+      <a href="{{ $meta->get('projects.cta.href', 0, '/projects') }}" class="btn reveal"{!! cms_style($meta, 'projects.cta.label') !!}>{{ $meta->get('projects.cta.label') }}</a>
     </div>
 
     <div class="grid">
@@ -155,11 +155,11 @@
 <!-- ========== STATS ========== -->
 <section class="stats" {!! cms_section_attr('stats') !!}>
   <div class="wrap">
-    <div class="kicker reveal" style="text-align:center">{{ $meta->get('stats.kicker') }}</div>
-    <h2 class="h2 reveal" style="text-align:center;max-width:900px;margin:0 auto">{!! nl2br_html($meta->get('stats.heading')) !!}</h2>
+    <div class="kicker reveal"{!! cms_style($meta, 'stats.kicker', 0, 'text-align:center') !!}>{{ $meta->get('stats.kicker') }}</div>
+    <h2 class="h2 reveal"{!! cms_style($meta, 'stats.heading', 0, 'text-align:center; max-width:900px; margin:0 auto') !!}>{!! nl2br_html($meta->get('stats.heading')) !!}</h2>
     <div class="stats-grid">
       @foreach ($stats as $stat)
-        <div class="stat reveal"><div class="num" data-c="{{ (int) ($stat['value'] ?? 0) }}">0</div><div class="lbl">{{ $stat['label'] ?? '' }}</div></div>
+        <div class="stat reveal"><div class="num" data-c="{{ (int) ($stat['value'] ?? 0) }}"{!! cms_style($meta, 'stats.item.value', $loop->index) !!}>0</div><div class="lbl"{!! cms_style($meta, 'stats.item.label', $loop->index) !!}>{{ $stat['label'] ?? '' }}</div></div>
       @endforeach
     </div>
   </div>

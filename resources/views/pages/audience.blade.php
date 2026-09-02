@@ -20,13 +20,13 @@
   <section class="audience-hero" {!! cms_section_attr('hero') !!}>
     <div class="wrap">
       @if ($meta->get('hero.eyebrow'))
-        <div class="kicker">{{ $meta->get('hero.eyebrow') }}</div>
+        <div class="kicker"{!! cms_style($meta, 'hero.eyebrow') !!}>{{ $meta->get('hero.eyebrow') }}</div>
       @endif
-      <h1 class="h2">{!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
+      <h1 class="h2"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
       @if ($leads)
         <div class="audience-lead">
-          @foreach ($leads as $paragraph)
-            <p>{!! linkify_emails($paragraph) !!}</p>
+          @foreach ($leads as $index => $paragraph)
+            <p{!! cms_style($meta, 'hero.lead', $index) !!}>{!! linkify_emails($paragraph) !!}</p>
           @endforeach
         </div>
       @endif
@@ -40,8 +40,8 @@
           <li class="card-main" id="card_{{ $loop->iteration }}" style="--index: {{ $loop->iteration }}">
             <div class="card__content">
               <div class="card__body">
-                <h2>{!! accent_html($card['heading'] ?? '', $card['heading_accent'] ?? '') !!}</h2>
-                <div class="card__copy">
+                <h2{!! cms_style($meta, 'card.heading', $loop->index) !!}>{!! accent_html($card['heading'] ?? '', $card['heading_accent'] ?? '') !!}</h2>
+                <div class="card__copy"{!! cms_style($meta, 'card.body', $loop->index) !!}>
                   @foreach (preg_split("/\n\n+/", $card['body'] ?? '') as $paragraph)
                     @if (trim($paragraph) !== '')
                       <p>{!! linkify_emails($paragraph) !!}</p>
@@ -49,7 +49,7 @@
                   @endforeach
                 </div>
                 @if (! empty($card['cta.label']))
-                  <div class="card__cta"><a href="{{ $card['cta.href'] ?? '#' }}" class="btn">{{ $card['cta.label'] }}</a></div>
+                  <div class="card__cta"><a href="{{ $card['cta.href'] ?? '#' }}" class="btn"{!! cms_style($meta, 'card.cta.label', $loop->index) !!}>{{ $card['cta.label'] }}</a></div>
                 @endif
               </div>
               <figure>

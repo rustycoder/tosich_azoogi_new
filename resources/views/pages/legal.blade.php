@@ -19,9 +19,9 @@
 <main class="legal-main">
     <div class="wrap legal-page-wrap" {!! cms_section_attr('legal') !!}>
     <div class="legal-hero">
-      <div class="kicker legal-kicker">{{ $meta->get('legal.kicker') }}</div>
-      <h1 class="h2 legal-title">{{ $meta->get('legal.title') }}</h1>
-      <p class="legal-intro">{{ $meta->get('legal.lead') }}</p>
+      <div class="kicker legal-kicker"{!! cms_style($meta, 'legal.kicker') !!}>{{ $meta->get('legal.kicker') }}</div>
+      <h1 class="h2 legal-title"{!! cms_style($meta, 'legal.title') !!}>{{ $meta->get('legal.title') }}</h1>
+      <p class="legal-intro"{!! cms_style($meta, 'legal.lead') !!}>{{ $meta->get('legal.lead') }}</p>
     </div>
 
     <div class="legal-shell">
@@ -34,9 +34,9 @@
 
       <div class="legal-wrap">
         <article class="legal-block" id="{{ $page->slug }}">
-          <h2 class="legal-block-title">{{ $meta->get('legal.title') }}</h2>
-          <p class="legal-block-lead">{{ $meta->get('legal.lead') }}</p>
-          <div class="legal-body">
+          <h2 class="legal-block-title"{!! cms_style($meta, 'legal.title') !!}>{{ $meta->get('legal.title') }}</h2>
+          <p class="legal-block-lead"{!! cms_style($meta, 'legal.lead') !!}>{{ $meta->get('legal.lead') }}</p>
+          <div class="legal-body"{!! cms_style($meta, 'legal.html') !!}>
             {!! $meta->get('legal.html') !!}
           </div>
         </article>

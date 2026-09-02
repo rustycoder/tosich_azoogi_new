@@ -1,5 +1,7 @@
 <?php
 
+use App\Support\PageMetaBag;
+
 if (! function_exists('cms_section_attr')) {
     function cms_section_attr(string $section): string
     {
@@ -8,6 +10,13 @@ if (! function_exists('cms_section_attr')) {
         }
 
         return 'data-cms-section="'.e($section).'"';
+    }
+}
+
+if (! function_exists('cms_style')) {
+    function cms_style(?PageMetaBag $meta, string $key, int $sortOrder = 0, string $extra = ''): string
+    {
+        return $meta?->style($key, $sortOrder, $extra) ?? ($extra === '' ? '' : ' style="'.e($extra).'"');
     }
 }
 

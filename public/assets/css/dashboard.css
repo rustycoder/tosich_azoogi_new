@@ -406,6 +406,12 @@ body:has(.dash) {
   color: var(--dash-muted);
 }
 
+.dash-type-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
 .dash-repeat {
   display: grid;
   gap: 16px;
@@ -1040,10 +1046,13 @@ code {
   right: 0;
   width: min(440px, 100vw);
   height: 100vh;
+  height: 100dvh;
   background: #fff;
   z-index: 70;
   box-shadow: -16px 0 40px rgba(16, 20, 16, .18);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .dash-drawer.is-wide {
@@ -1051,11 +1060,13 @@ code {
 }
 
 .dash-drawer .dash-form {
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   max-width: none;
   display: flex;
   flex-direction: column;
   gap: 0;
+  overflow: hidden;
 }
 
 @media (min-width: 960px) {
@@ -1118,12 +1129,20 @@ code {
   flex-direction: column;
   gap: 20px;
   flex: 1;
+  min-height: 0;
 }
 
 .dash-drawer-foot {
-  padding: 16px 20px;
+  padding: 16px 20px max(16px, env(safe-area-inset-bottom));
   border-top: 1px solid var(--dash-line);
   flex-shrink: 0;
+  background: #fff;
+  position: relative;
+  z-index: 5;
+}
+
+.dash-drawer-foot .btn {
+  width: 100%;
 }
 
 @media (max-width: 1024px) {
@@ -1213,5 +1232,6 @@ code {
 }
 
 .dash-drawer .cke_contents {
-  min-height: 280px;
+  min-height: 160px !important;
+  max-height: min(240px, 32vh) !important;
 }

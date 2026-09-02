@@ -7,7 +7,7 @@
     const backdrop = document.getElementById('dash-drawer-backdrop');
 
     const editorConfig = {
-        height: 360,
+        height: 220,
         allowedContent: true,
         versionCheck: false,
         removePlugins: 'elementspath,link,sourcearea',

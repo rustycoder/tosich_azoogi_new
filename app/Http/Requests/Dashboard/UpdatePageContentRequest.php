@@ -4,6 +4,7 @@ namespace App\Http\Requests\Dashboard;
 
 use App\Enums\Status;
 use App\Models\Page;
+use App\PageMeta\Typography;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -27,6 +28,8 @@ class UpdatePageContentRequest extends FormRequest
             'status' => ['required', Rule::enum(Status::class)],
             'meta' => ['nullable', 'array'],
             'meta.*.value' => ['nullable', 'string'],
+            'meta.*.font_size' => ['nullable', 'string', Rule::in(['', ...array_keys(Typography::sizes())])],
+            'meta.*.text_align' => ['nullable', 'string', Rule::in(['', ...array_keys(Typography::alignments())])],
             'meta.*.file' => ['nullable', 'file', 'max:12288', 'mimes:jpg,jpeg,png,webp,gif,webm,mp4'],
             'items' => ['nullable', 'array'],
         ];

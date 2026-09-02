@@ -7,6 +7,7 @@ use App\PageMeta\Catalog;
 use App\PageMeta\Definitions\AudiencePageDefinition;
 use App\PageMeta\EditorSections;
 use App\PageMeta\SectionItems;
+use App\PageMeta\Typography;
 use App\Repositories\Contracts\IPageRepository;
 use App\Repositories\Contracts\IProjectRepository;
 use App\Services\Contracts\IPageService;
@@ -92,6 +93,14 @@ class PageService implements IPageService
                 );
             } elseif (array_key_exists('value', $payload)) {
                 $meta->value = $payload['value'];
+            }
+
+            if (array_key_exists('font_size', $payload)) {
+                $meta->font_size = Typography::size(is_string($payload['font_size'] ?? null) ? $payload['font_size'] : null);
+            }
+
+            if (array_key_exists('text_align', $payload)) {
+                $meta->text_align = Typography::align(is_string($payload['text_align'] ?? null) ? $payload['text_align'] : null);
             }
 
             $this->pages->saveMeta($meta);

@@ -29,24 +29,24 @@
       <img src="{{ media_url($meta->get('hero.image')) }}" alt="" loading="eager">
     </div>
     <div class="ai-hero-copy">
-      <div class="kicker">{{ $meta->get('hero.kicker') }}</div>
-      <h1>{!! accent_html($meta->get('hero.title'), 'thinks') !!}</h1>
-      <p>{{ $meta->get('hero.lead') }}</p>
+      <div class="kicker"{!! cms_style($meta, 'hero.kicker') !!}>{{ $meta->get('hero.kicker') }}</div>
+      <h1{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), 'thinks') !!}</h1>
+      <p{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
     </div>
   </section>
 
   <section class="ai-band" {!! cms_section_attr('caps') !!}>
     <div class="wrap ai-split">
       <div class="ai-split-copy">
-        <div class="kicker">{{ $meta->get('caps.kicker') }}</div>
-        <h2>{!! nl2br_html($meta->get('caps.heading'), true) !!}</h2>
-        <p>{{ $meta->get('caps.body') }}</p>
+        <div class="kicker"{!! cms_style($meta, 'caps.kicker') !!}>{{ $meta->get('caps.kicker') }}</div>
+        <h2{!! cms_style($meta, 'caps.heading') !!}>{!! nl2br_html($meta->get('caps.heading'), true) !!}</h2>
+        <p{!! cms_style($meta, 'caps.body') !!}>{{ $meta->get('caps.body') }}</p>
       </div>
       <ol class="ai-caps">
         @foreach ($caps as $title)
           <li>
             <span class="ai-num">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-            <h3>{{ $title }}</h3>
+            <h3{!! cms_style($meta, 'caps.item.title', $loop->index) !!}>{{ $title }}</h3>
           </li>
         @endforeach
       </ol>
@@ -56,23 +56,23 @@
   <section class="ai-band ai-band--tight" {!! cms_section_attr('spectrum') !!}>
     <div class="wrap ai-feature">
       <div class="ai-feature-copy">
-        <div class="kicker">{{ $meta->get('spectrum.kicker') }}</div>
-        <h2>{!! accent_html($meta->get('spectrum.heading'), 'spectrum') !!}</h2>
-        <p>{{ $meta->get('spectrum.body') }}</p>
+        <div class="kicker"{!! cms_style($meta, 'spectrum.kicker') !!}>{{ $meta->get('spectrum.kicker') }}</div>
+        <h2{!! cms_style($meta, 'spectrum.heading') !!}>{!! accent_html($meta->get('spectrum.heading'), 'spectrum') !!}</h2>
+        <p{!! cms_style($meta, 'spectrum.body') !!}>{{ $meta->get('spectrum.body') }}</p>
         <ul class="ai-ticks">
           @foreach ($ticks as $tick)
-            <li>{{ $tick }}</li>
+            <li{!! cms_style($meta, 'spectrum.tick', $loop->index) !!}>{{ $tick }}</li>
           @endforeach
         </ul>
       </div>
       <div class="ai-compare">
         <figure>
           <img src="{{ media_url($meta->get('spectrum.compare.traditional.image')) }}" alt="{{ $meta->get('spectrum.compare.traditional.caption') }}" loading="lazy">
-          <figcaption>{{ $meta->get('spectrum.compare.traditional.caption') }}</figcaption>
+          <figcaption{!! cms_style($meta, 'spectrum.compare.traditional.caption') !!}>{{ $meta->get('spectrum.compare.traditional.caption') }}</figcaption>
         </figure>
         <figure class="is-accent">
           <img src="{{ media_url($meta->get('spectrum.compare.ai.image')) }}" alt="{{ $meta->get('spectrum.compare.ai.caption') }}" loading="lazy">
-          <figcaption>{{ $meta->get('spectrum.compare.ai.caption') }}</figcaption>
+          <figcaption{!! cms_style($meta, 'spectrum.compare.ai.caption') !!}>{{ $meta->get('spectrum.compare.ai.caption') }}</figcaption>
         </figure>
       </div>
     </div>
@@ -82,10 +82,10 @@
     <div class="wrap-sm">
       <div class="ai-row-head">
         <div>
-          <div class="kicker">{{ $meta->get('insights.kicker') }}</div>
-          <h2>{!! accent_html($meta->get('insights.heading'), 'analysis') !!}</h2>
+          <div class="kicker"{!! cms_style($meta, 'insights.kicker') !!}>{{ $meta->get('insights.kicker') }}</div>
+          <h2{!! cms_style($meta, 'insights.heading') !!}>{!! accent_html($meta->get('insights.heading'), 'analysis') !!}</h2>
         </div>
-        <p>{{ $meta->get('insights.lead') }}</p>
+        <p{!! cms_style($meta, 'insights.lead') !!}>{{ $meta->get('insights.lead') }}</p>
       </div>
 
       <div class="container max-width-adaptive-md">
@@ -95,8 +95,8 @@
               <div class="card__content">
                 <div>
                   <span class="ai-num">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-                  <h2>{{ $item['title'] ?? '' }}</h2>
-                  <p>{{ $item['body'] ?? '' }}</p>
+                  <h2{!! cms_style($meta, 'insights.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h2>
+                  <p{!! cms_style($meta, 'insights.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
                 </div>
                 <figure>
                   <img src="{{ media_url($item['image'] ?? '') }}" alt="{{ $item['title'] ?? '' }}">
@@ -114,9 +114,9 @@
       <img src="{{ media_url($meta->get('cct.image')) }}" alt="" loading="lazy">
     </div>
     <div class="wrap ai-cct-inner">
-      <div class="kicker">{{ $meta->get('cct.kicker') }}</div>
-      <h2>{!! accent_html($meta->get('cct.heading'), 'temperature') !!}</h2>
-      <p>{{ $meta->get('cct.body') }}</p>
+      <div class="kicker"{!! cms_style($meta, 'cct.kicker') !!}>{{ $meta->get('cct.kicker') }}</div>
+      <h2{!! cms_style($meta, 'cct.heading') !!}>{!! accent_html($meta->get('cct.heading'), 'temperature') !!}</h2>
+      <p{!! cms_style($meta, 'cct.body') !!}>{{ $meta->get('cct.body') }}</p>
     </div>
   </section>
 
@@ -124,10 +124,10 @@
     <div class="wrap">
       <div class="ai-row-head">
         <div>
-          <div class="kicker">{{ $meta->get('space.kicker') }}</div>
-          <h2>{!! accent_html($meta->get('space.heading'), 'management') !!}</h2>
+          <div class="kicker"{!! cms_style($meta, 'space.kicker') !!}>{{ $meta->get('space.kicker') }}</div>
+          <h2{!! cms_style($meta, 'space.heading') !!}>{!! accent_html($meta->get('space.heading'), 'management') !!}</h2>
         </div>
-        <p>{{ $meta->get('space.lead') }}</p>
+        <p{!! cms_style($meta, 'space.lead') !!}>{{ $meta->get('space.lead') }}</p>
       </div>
 
       <div class="ai-space">
@@ -142,11 +142,11 @@
             <div class="ai-acc-item {{ $loop->first ? 'is-open' : '' }}">
               <button type="button" class="ai-acc-btn" aria-expanded="{{ $loop->first ? 'true' : 'false' }}">
                 <span class="ai-num">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-                <h3>{{ $item['title'] ?? '' }}</h3>
+                <h3{!! cms_style($meta, 'space.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h3>
                 <span class="chev" aria-hidden="true"></span>
               </button>
               <div class="ai-acc-panel">
-                <p>{{ $item['body'] ?? '' }}</p>
+                <p{!! cms_style($meta, 'space.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
               </div>
             </div>
           @endforeach
@@ -163,10 +163,10 @@
         </svg>
       </span>
       <span class="ai-cta-copy">
-        <h3>{{ $meta->get('cta.heading') }}</h3>
-        <p>{{ $meta->get('cta.body') }}</p>
+        <h3{!! cms_style($meta, 'cta.heading') !!}>{{ $meta->get('cta.heading') }}</h3>
+        <p{!! cms_style($meta, 'cta.body') !!}>{{ $meta->get('cta.body') }}</p>
       </span>
-      <span class="btn primary">{{ $meta->get('cta.label') }}</span>
+      <span class="btn primary"{!! cms_style($meta, 'cta.label') !!}>{{ $meta->get('cta.label') }}</span>
     </a>
   </div>
 

@@ -4,6 +4,7 @@ namespace App\Support;
 
 use App\Models\Page;
 use App\Models\PageMeta;
+use App\PageMeta\Typography;
 use Illuminate\Support\Collection;
 
 final class PageMetaBag
@@ -35,6 +36,49 @@ final class PageMetaBag
         );
 
         return $row?->value ?? $default;
+    }
+
+    public function style(string $key, int $sortOrder = 0, string $extra = ''): string
+    {
+        $row = $this->rows->first(
+            fn (PageMeta $meta): bool => $meta->key === $key && $meta->sort_order === $sortOrder,
+        );
+
+        $rules = [];
+
+        if ($extra !== '') {
+            foreach (explode(';', $extra) as $rule) {
+                $rule = trim($rule);
+                if ($rule !== '') {
+                    $rules[] = $rule;
+                }
+            }
+        }
+
+        $size = Typography::size($row?->font_size);
+        $align = Typography::align($row?->text_align);
+
+        if ($size !== null) {
+            $rules = array_values(array_filter(
+                $rules,
+                fn (string $rule): bool => ! str_starts_with(strtolower($rule), 'font-size:'),
+            ));
+            $rules[] = 'font-size: '.$size;
+        }
+
+        if ($align !== null) {
+            $rules = array_values(array_filter(
+                $rules,
+                fn (string $rule): bool => ! str_starts_with(strtolower($rule), 'text-align:'),
+            ));
+            $rules[] = 'text-align: '.$align;
+        }
+
+        if ($rules === []) {
+            return '';
+        }
+
+        return ' style="'.e(implode('; ', $rules)).'"';
     }
 
     /**

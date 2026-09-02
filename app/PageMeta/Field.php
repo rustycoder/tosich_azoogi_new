@@ -53,4 +53,9 @@ final class Field
     {
         return new self($key, $label, FieldType::Select, $repeatable, $group, $options);
     }
+
+    public function isTypographic(): bool
+    {
+        return in_array($this->type, [FieldType::Text, FieldType::Textarea, FieldType::Html], true);
+    }
 }
