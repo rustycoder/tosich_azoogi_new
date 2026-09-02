@@ -1169,7 +1169,6 @@
             return activeFilters.categories.some(function (selectedCat) {
               var selLower = selectedCat.trim().toLowerCase();
               if (p.modelName && p.modelName.trim().toLowerCase() === selLower) return true;
-              if (p.name && p.name.trim().toLowerCase().indexOf(selLower) !== -1) return true;
               if (p.sub && p.sub.trim().toLowerCase() === selLower) return true;
               if (p.cat && p.cat.trim().toLowerCase() === selLower) return true;
               if (p.category_path && p.category_path.some(function (cp) {
@@ -1395,7 +1394,6 @@
             var matchCat = activeFilters.categories.some(function (selectedCat) {
               var selLower = selectedCat.trim().toLowerCase();
               if (p.modelName && p.modelName.trim().toLowerCase() === selLower) return true;
-              if (p.name && p.name.trim().toLowerCase().indexOf(selLower) !== -1) return true;
               if (p.sub && p.sub.trim().toLowerCase() === selLower) return true;
               if (p.cat && p.cat.trim().toLowerCase() === selLower) return true;
               if (p.category_path && p.category_path.some(function (cp) {
