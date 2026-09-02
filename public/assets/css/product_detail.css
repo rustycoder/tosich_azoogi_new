@@ -200,16 +200,14 @@ h4 {
 
 .thumb-card.is-dimension {
   position: relative;
-  background: #ffffff;
 }
 
 .thumb-card.is-dimension img {
   object-fit: contain;
-  padding: 3px;
 }
 
 .thumb-card.is-dimension::after {
-  content: 'CAD';
+  content: 'DIM';
   position: absolute;
   bottom: 2px;
   right: 2px;

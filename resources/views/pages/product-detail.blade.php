@@ -858,17 +858,10 @@
             galleryMainImg.src = localSrc;
             galleryMainImg.style.display = 'block';
             galleryMainImg.style.opacity = '1';
-            if (item.isDimension) {
-              galleryMainImg.style.objectFit = 'contain';
-              galleryMainImg.style.background = '#ffffff';
-              galleryMainImg.style.padding = '20px';
-              galleryMainImg.style.filter = 'none';
-            } else {
-              galleryMainImg.style.objectFit = 'contain';
-              galleryMainImg.style.background = '';
-              galleryMainImg.style.padding = '0';
-              galleryMainImg.style.filter = (localSrc === '/assets/bg_default.png' || localSrc === '/assets/logo_dark.png') ? 'grayscale(100%)' : 'none';
-            }
+            galleryMainImg.style.objectFit = 'contain';
+            galleryMainImg.style.background = '';
+            galleryMainImg.style.padding = '0';
+            galleryMainImg.style.filter = (!item.isDimension && (localSrc === '/assets/bg_default.png' || localSrc === '/assets/logo_dark.png')) ? 'grayscale(100%)' : 'none';
           }
 
           setMainImage(galleryItems[0]);
