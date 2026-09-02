@@ -13,6 +13,10 @@
     $nav = collect($headerMeta->group('header.nav'))
         ->filter(fn (array $item): bool => trim($item['label'] ?? '') !== '')
         ->values();
+
+    if ($nav->isEmpty()) {
+        $nav = collect(\App\PageMeta\Definitions\HeaderDefinition::defaultNav());
+    }
 @endphp
 <header class="topbar {{ $topbarClass }}" id="topbar">
     <div class="util">

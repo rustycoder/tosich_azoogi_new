@@ -40,6 +40,20 @@ class HeaderDefinition implements PageDefinition
         ];
     }
 
+    /**
+     * @return list<array{label: string, href: string, target: string}>
+     */
+    public static function defaultNav(): array
+    {
+        return [
+            ['label' => 'Projects', 'href' => '/projects', 'target' => '_self'],
+            ['label' => 'About Us', 'href' => '/about', 'target' => '_self'],
+            ['label' => 'Solutions', 'href' => '/solutions', 'target' => '_self'],
+            ['label' => 'Contact', 'href' => '/contact', 'target' => '_self'],
+            ['label' => 'AI Lighting', 'href' => '/ai-lighting', 'target' => '_self'],
+        ];
+    }
+
     public function seed(): array
     {
         $rows = [
@@ -52,16 +66,10 @@ class HeaderDefinition implements PageDefinition
             $rows[] = ['key' => 'header.word.text', 'sort_order' => $order, 'value' => $word];
         }
 
-        foreach ([
-            ['Projects', '/projects'],
-            ['About Us', '/about'],
-            ['Solutions', '/solutions'],
-            ['Contact', '/contact'],
-            ['AI Lighting', '/ai-lighting'],
-        ] as $order => $item) {
-            $rows[] = ['key' => 'header.nav.label', 'sort_order' => $order, 'value' => $item[0]];
-            $rows[] = ['key' => 'header.nav.href', 'sort_order' => $order, 'value' => $item[1]];
-            $rows[] = ['key' => 'header.nav.target', 'sort_order' => $order, 'value' => '_self'];
+        foreach (self::defaultNav() as $order => $item) {
+            $rows[] = ['key' => 'header.nav.label', 'sort_order' => $order, 'value' => $item['label']];
+            $rows[] = ['key' => 'header.nav.href', 'sort_order' => $order, 'value' => $item['href']];
+            $rows[] = ['key' => 'header.nav.target', 'sort_order' => $order, 'value' => $item['target']];
         }
 
         return $rows;

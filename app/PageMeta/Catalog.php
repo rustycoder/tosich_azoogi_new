@@ -5,15 +5,19 @@ namespace App\PageMeta;
 use App\PageMeta\Definitions\AboutDefinition;
 use App\PageMeta\Definitions\AiLightingDefinition;
 use App\PageMeta\Definitions\ArchitectDesignerDefinition;
+use App\PageMeta\Definitions\CasambiDefinition;
 use App\PageMeta\Definitions\ContactDefinition;
+use App\PageMeta\Definitions\DaliCentreDefinition;
 use App\PageMeta\Definitions\DataCentreDefinition;
 use App\PageMeta\Definitions\ElectricianBuilderDefinition;
 use App\PageMeta\Definitions\FooterDefinition;
 use App\PageMeta\Definitions\HeaderDefinition;
 use App\PageMeta\Definitions\HomeDefinition;
 use App\PageMeta\Definitions\HomeOwnerDefinition;
+use App\PageMeta\Definitions\MadrixDefinition;
 use App\PageMeta\Definitions\ModernSlaveryDefinition;
 use App\PageMeta\Definitions\PrivacyDefinition;
+use App\PageMeta\Definitions\SilvairDefinition;
 use App\PageMeta\Definitions\SolutionsDefinition;
 use App\PageMeta\Definitions\TermsDefinition;
 use App\PageMeta\Definitions\WarrantyReturnsDefinition;
@@ -29,6 +33,10 @@ final class Catalog
         'home' => HomeDefinition::class,
         'about' => AboutDefinition::class,
         'solutions' => SolutionsDefinition::class,
+        'casambi' => CasambiDefinition::class,
+        'silvair' => SilvairDefinition::class,
+        'dali-centre' => DaliCentreDefinition::class,
+        'madrix' => MadrixDefinition::class,
         'ai-lighting' => AiLightingDefinition::class,
         'data-centre' => DataCentreDefinition::class,
         'contact' => ContactDefinition::class,

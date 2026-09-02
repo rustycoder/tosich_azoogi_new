@@ -25,12 +25,21 @@ abstract class TestCase extends BaseTestCase
     {
         $app['env'] = 'testing';
         $app['config']->set('app.env', 'testing');
+<<<<<<< HEAD
         $app['config']->set('session.driver', 'array');
 
+=======
+>>>>>>> new_pages
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite.url', null);
         $app['config']->set('database.connections.sqlite.database', ':memory:');
         $app['config']->set('database.connections.sqlite.prefix', '');
+<<<<<<< HEAD
+=======
+        $app['config']->set('session.driver', 'array');
+        $app['config']->set('cache.default', 'array');
+        $app['config']->set('queue.default', 'sync');
+>>>>>>> new_pages
 
         foreach (['mysql', 'mariadb', 'pgsql', 'sqlsrv'] as $connection) {
             if ($app['config']->has("database.connections.{$connection}")) {

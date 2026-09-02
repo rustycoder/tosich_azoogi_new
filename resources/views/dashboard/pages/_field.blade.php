@@ -56,5 +56,9 @@
                 </select>
             </div>
         </div>
+<<<<<<< HEAD
+=======
+        <small>Default keeps the page design. Change these only if you need an override.</small>
+>>>>>>> new_pages
     @endif
 </div>

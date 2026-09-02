@@ -55,10 +55,10 @@ class SolutionsDefinition implements PageDefinition
     public function seed(): array
     {
         $eco = [
-            ['Casambi', 'Wireless BLE Mesh', '#'],
-            ['MADRIX', 'Pixel Mapping & Visuals', '#'],
-            ['Silvair', 'Enterprise Bluetooth Mesh', '#'],
-            ['DALI Center', 'Centralized DALI-2 Management & Analytics', '#'],
+            ['Casambi', 'Wireless BLE Mesh', '/casambi'],
+            ['MADRIX', 'Pixel Mapping & Visuals', '/madrix'],
+            ['Silvair', 'Enterprise Bluetooth Mesh', '/silvair'],
+            ['DALI Center', 'Centralized DALI-2 Management & Analytics', '/dali-centre'],
         ];
 
         $sectors = [
