@@ -698,11 +698,15 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
         });
 
         const recommended = [...sameSubCatProducts, ...sameTopCatProducts, ...otherProducts].slice(0, 4);
+        const accessoriesSection = document.querySelector('.accessories-section');
 
         if (recommended.length === 0) {
-          accessoriesGrid.innerHTML = '<div style="padding: 20px; color: var(--muted); grid-column: 1 / -1;">No accessories found.</div>';
+          if (accessoriesSection) accessoriesSection.style.display = 'none';
+          accessoriesGrid.innerHTML = '';
           return;
         }
+
+        if (accessoriesSection) accessoriesSection.style.display = 'block';
 
         accessoriesGrid.innerHTML = recommended.map(p => {
           const detailUrl = p.id ? ('/product-detail?id=' + encodeURIComponent(p.id)) : (p.filePath ? ('/product-detail?file=' + encodeURIComponent(p.filePath)) : ('/product-detail?product=' + encodeURIComponent(p.name)));
@@ -801,6 +805,18 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
 
       // Render Configurator Options
       function renderConfigurator() {
+        const optionsSection = document.querySelector('.options-section');
+        const options = product.options || {};
+        const optionKeys = Object.keys(options).filter(k => Array.isArray(options[k]) && options[k].length > 0);
+
+        if (optionKeys.length === 0) {
+          if (optionsSection) optionsSection.style.display = 'none';
+          if (configurator) configurator.innerHTML = '';
+          return;
+        }
+
+        if (optionsSection) optionsSection.style.display = 'block';
+
         configurator.innerHTML = '<div class="reset-selection" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;"><h3 style="font-family: var(--font-serif); font-size: 28px; margin: 0;">Product Configuration</h3><a href="#" id="btn-clear-selection" class="btn sm" style="display: flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" height="15px" viewBox="0 -960 960 960" fill="currentColor"><path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>Reset Selection</a></div>';
 
         const clearBtn = document.getElementById('btn-clear-selection');
@@ -812,17 +828,6 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
             checkConstraints();
             recalculate();
           });
-        }
-
-        const options = product.options || {};
-        const optionKeys = Object.keys(options);
-
-        if (optionKeys.length === 0) {
-          const infoBox = document.createElement('div');
-          infoBox.style.cssText = "padding: 16px; background: var(--card-bg); border: 1px solid var(--border-light); border-radius: 6px; color: var(--muted); font-size: 13px;";
-          infoBox.textContent = "Standard configuration. No customizable options for this model.";
-          configurator.appendChild(infoBox);
-          return;
         }
 
         const features = product.product_features || {};
@@ -897,6 +902,8 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
       // Render Specifications
       function renderSpecs() {
         specTableBody.innerHTML = '';
+        const specsSection = document.querySelector('.specifications-section');
+        const specGridLayout = document.querySelector('.spec-grid-layout');
         const features = product.product_features || {};
         const ignoreKeys = [
           "id", "file_path", "options", "constraints", "sku", "product_name", "name",
@@ -942,14 +949,10 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
           specTableBody.appendChild(row);
         }
 
-        if (count === 0) {
-          specTableBody.innerHTML = '<tr><td colspan="2" style="padding: 16px; color: var(--muted);">No specifications available.</td></tr>';
-        }
-
         // Update Technical Specifications Product Dimension Image
         const dimImgEl = document.getElementById('spec-dimension-image');
+        let dimUrl = null;
         if (dimImgEl) {
-          let dimUrl = null;
           const dimSource = product.product_dimension || features["Product Dimension"] || features["Product dimension"];
 
           if (Array.isArray(dimSource) && dimSource.length > 0) {
@@ -973,6 +976,16 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
             dimImgEl.src = '';
             dimImgEl.style.display = 'none';
             if (wrapper) wrapper.style.display = 'none';
+          }
+        }
+
+        const hasDimImg = !!dimUrl;
+        if (count === 0 && !hasDimImg) {
+          if (specsSection) specsSection.style.display = 'none';
+        } else {
+          if (specsSection) specsSection.style.display = 'block';
+          if (specGridLayout) {
+            specGridLayout.style.gridTemplateColumns = hasDimImg ? '1.25fr 0.75fr' : '1fr';
           }
         }
       }
