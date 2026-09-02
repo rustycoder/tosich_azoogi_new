@@ -1201,8 +1201,20 @@
         return ' <span class="prod-card-code">' + code + '</span>';
       }
 
+      var rawProductsById = {};
+      if (typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS.products && Array.isArray(AZOOGI_PRODUCTS.products)) {
+        AZOOGI_PRODUCTS.products.forEach(function (p) {
+          if (p && p.id) rawProductsById[p.id] = p;
+        });
+      }
+
       function addProductToCatalog(vName, modelName, catPath, vData) {
-        var itemKey = (vData && vData.id) ? vData.id : vName;
+        if (typeof vData === 'string' && rawProductsById[vData]) {
+          vData = rawProductsById[vData];
+        }
+        if (!vData || typeof vData !== 'object') vData = {};
+
+        var itemKey = vData.id ? vData.id : vName;
         if (!vName || productsMap[itemKey]) return;
 
         var parentCat = catPath[0] || 'General';

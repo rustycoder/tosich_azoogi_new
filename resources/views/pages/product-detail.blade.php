@@ -418,11 +418,15 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
           }
         };
 
+        const productsById = {};
         if (AZOOGI_PRODUCTS.products) {
           const list = Array.isArray(AZOOGI_PRODUCTS.products)
             ? AZOOGI_PRODUCTS.products
             : Object.values(AZOOGI_PRODUCTS.products);
-          list.forEach(addProduct);
+          list.forEach(p => {
+            if (p && p.id) productsById[p.id] = p;
+            addProduct(p);
+          });
         }
 
         function collectFromTree(treeNodes) {
@@ -431,10 +435,15 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
             if (node.variants) {
               for (const vName in node.variants) {
                 if (node.variants.hasOwnProperty(vName)) {
-                  const vData = node.variants[vName];
-                  vData.variantName = vName;
-                  vData.modelName = node.name || vName;
-                  addProduct(vData);
+                  let vData = node.variants[vName];
+                  if (typeof vData === 'string' && productsById[vData]) {
+                    vData = productsById[vData];
+                  }
+                  if (vData && typeof vData === 'object') {
+                    vData.variantName = vName;
+                    vData.modelName = node.name || vName;
+                    addProduct(vData);
+                  }
                 }
               }
             }
