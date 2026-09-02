@@ -288,6 +288,19 @@ class AirtableDataExtractor:
             p_id = p_rec.get("id")
             fields = p_rec.get("fields", {})
 
+            # Filter out non-published products (draft, pending, private, trash, future)
+            raw_status = fields.get("Status") or fields.get("status") or ""
+            if isinstance(raw_status, dict):
+                status_val = str(raw_status.get("name", "")).strip().lower()
+            elif isinstance(raw_status, list) and raw_status:
+                status_val = str(raw_status[0]).strip().lower()
+            else:
+                status_val = str(raw_status).strip().lower()
+
+            # Only export products with status 'publish'
+            if status_val and status_val != "publish":
+                continue
+
             # Product Name & Descriptions
             p_name = fields.get("Product_Name") or fields.get("Product Name") or fields.get("Name") or fields.get("Title") or "Unnamed Product"
             p_short_desc = fields.get("Product short description") or fields.get("Short description") or fields.get("short_description") or fields.get("Short Description") or ""

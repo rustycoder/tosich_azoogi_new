@@ -12,7 +12,9 @@
     productsById = {};
     if (typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS.products && Array.isArray(AZOOGI_PRODUCTS.products)) {
       AZOOGI_PRODUCTS.products.forEach(p => {
-        if (p && p.id) productsById[p.id] = p;
+        if (p && p.id && (!p.status || String(p.status).toLowerCase().trim() === 'publish')) {
+          productsById[p.id] = p;
+        }
       });
     }
 
@@ -285,6 +287,8 @@
       if (typeof vdata === 'string' && productsById[vdata]) {
         vdata = productsById[vdata];
       }
+
+      if (vdata && vdata.status && String(vdata.status).toLowerCase().trim() !== 'publish') return;
 
       const rawImgSrc = (vdata && vdata.product_images && vdata.product_images.length > 0)
         ? vdata.product_images[0]

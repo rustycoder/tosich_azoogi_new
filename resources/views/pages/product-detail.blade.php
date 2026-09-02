@@ -392,6 +392,7 @@
 
           const addProduct = (p) => {
             if (!p) return;
+            if (p.status && String(p.status).toLowerCase().trim() !== 'publish') return;
             const key = p.id || p.sku || p.product_name || p.name;
             if (key && !seenKeys.has(key)) {
               seenKeys.add(key);
@@ -737,6 +738,7 @@
             : Object.values(AZOOGI_PRODUCTS.products);
 
           rawList.forEach(pRow => {
+            if (pRow.status && String(pRow.status).toLowerCase().trim() !== 'publish') return;
             const pId = pRow.id || '';
             const pName = pRow.product_name || pRow.name || '';
             if (pId === product.id || pName === product.product_name || pName === product.name) return;

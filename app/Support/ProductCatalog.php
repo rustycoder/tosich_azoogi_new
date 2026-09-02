@@ -71,6 +71,10 @@ class ProductCatalog
                     continue;
                 }
 
+                if (! empty($product['status']) && strtolower(trim((string) $product['status'])) !== 'publish') {
+                    continue;
+                }
+
                 $pathCategory = $product['category_path'][0] ?? null;
                 $directCategory = $product['category'] ?? null;
 

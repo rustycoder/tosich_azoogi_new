@@ -1026,6 +1026,9 @@
         }
         if (!vData || typeof vData !== 'object') vData = {};
 
+        // Only show products with status 'publish'
+        if (vData.status && String(vData.status).toLowerCase().trim() !== 'publish') return;
+
         var itemKey = vData.id ? vData.id : vName;
         if (!vName || productsMap[itemKey]) return;
 
@@ -1566,6 +1569,7 @@
         if (AZOOGI_PRODUCTS.products) {
           if (Array.isArray(AZOOGI_PRODUCTS.products)) {
             AZOOGI_PRODUCTS.products.forEach(function (prod) {
+              if (prod.status && String(prod.status).toLowerCase().trim() !== 'publish') return;
               var pName = prod.product_name || prod.name || "Product";
               var images = prod.product_images || [];
               var imgUrl = images.length > 0 ? images[0] : '/assets/bg_default.png';
