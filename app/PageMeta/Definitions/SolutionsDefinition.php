@@ -57,7 +57,7 @@ class SolutionsDefinition implements PageDefinition
         $eco = [
             ['Casambi', 'Wireless BLE Mesh', '/casambi'],
             ['MADRIX', 'Pixel Mapping & Visuals', '/madrix'],
-            ['Silvair', 'Enterprise Bluetooth Mesh', '#'],
+            ['Silvair', 'Enterprise Bluetooth Mesh', '/silvair'],
             ['DALI Center', 'Centralized DALI-2 Management & Analytics', '#'],
         ];
 

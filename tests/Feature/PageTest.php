@@ -36,6 +36,7 @@ class PageTest extends TestCase
             'about' => ['/about', 'About'],
             'solutions' => ['/solutions', 'Solutions'],
             'casambi' => ['/casambi', 'Casambi'],
+            'silvair' => ['/silvair', 'Silvair'],
             'madrix' => ['/madrix', 'MADRIX'],
             'contact' => ['/contact', 'Contact'],
             'ai-lighting' => ['/ai-lighting', 'AI Lighting'],

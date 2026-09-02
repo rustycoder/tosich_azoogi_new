@@ -16,6 +16,7 @@ use App\PageMeta\Definitions\HomeOwnerDefinition;
 use App\PageMeta\Definitions\MadrixDefinition;
 use App\PageMeta\Definitions\ModernSlaveryDefinition;
 use App\PageMeta\Definitions\PrivacyDefinition;
+use App\PageMeta\Definitions\SilvairDefinition;
 use App\PageMeta\Definitions\SolutionsDefinition;
 use App\PageMeta\Definitions\TermsDefinition;
 use App\PageMeta\Definitions\WarrantyReturnsDefinition;
@@ -32,6 +33,7 @@ final class Catalog
         'about' => AboutDefinition::class,
         'solutions' => SolutionsDefinition::class,
         'casambi' => CasambiDefinition::class,
+        'silvair' => SilvairDefinition::class,
         'madrix' => MadrixDefinition::class,
         'ai-lighting' => AiLightingDefinition::class,
         'data-centre' => DataCentreDefinition::class,

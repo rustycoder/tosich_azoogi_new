@@ -194,6 +194,7 @@ class PageService implements IPageService
             'about' => 'pages.about',
             'solutions' => 'pages.solutions',
             'casambi' => 'pages.casambi',
+            'silvair' => 'pages.silvair',
             'madrix' => 'pages.madrix',
             'ai-lighting' => 'pages.ai-lighting',
             'data-centre' => 'pages.data-centre',
