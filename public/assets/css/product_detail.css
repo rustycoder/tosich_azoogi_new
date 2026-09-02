@@ -1010,8 +1010,13 @@ a.meta-badge:hover {
 }
 
 .prod-card-title .prod-card-code {
+  display: block;
+  font-size: 10px;
   color: var(--accent);
-  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-top: 4px;
+  font-weight: 400;
 }
 
 .add-quote-btn {

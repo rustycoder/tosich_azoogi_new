@@ -1,11 +1,12 @@
 @extends('layouts.site')
 
 @section('title')
-AZ-NF360 Neon Flex Series 360 — Azoogi LED Lighting Solutions
+  AZ-NF360 Neon Flex Series 360 — Azoogi LED Lighting Solutions
 @endsection
 
 @section('description')
-Azoogi designs and supplies premium LED lighting — strips, neon, garden lights, drivers and architectural fittings for projects that demand more.
+  Azoogi designs and supplies premium LED lighting — strips, neon, garden lights, drivers and architectural fittings for
+  projects that demand more.
 @endsection
 
 @section('chrome', 'full')
@@ -14,11 +15,11 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
 @section('logo', 'logo_dark.png')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('assets/css/product_detail.css') }}?v={{ config('app.asset_version') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/product_detail.css') }}?v={{ config('app.asset_version') }}">
 @endpush
 
 @section('content')
-<!-- ========== BREADCRUMBS ========== -->
+  <!-- ========== BREADCRUMBS ========== -->
   <div class="product-page-wrapper">
     <div class="wrap">
       <!-- ==================== BREADCRUMBS START ==================== -->
@@ -74,8 +75,7 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
 
             <a class="btn --outline" id="add-to-spec-btn"
               style="display:flex; align-items:center; justify-content:center; gap:8px;">
-              <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px"
-                fill="#1f1f1f">
+              <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#1f1f1f">
                 <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
               </svg> Add to Quote List</a>
           </div>
@@ -239,8 +239,7 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
       <section class="accessories-section"
         style="margin-top: 25px; border-top: 1px solid var(--line); padding-top: 20px; padding-bottom: 40px;">
 
-        <h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px;">Recommended Compatible
-          Accessories</h3>
+        <h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px;">Recommended Products</h3>
         <div class="prod-grid" id="productGrid">
           <div class="prod-card-img">
             <div class="prod-swatch"
@@ -317,8 +316,7 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="quote-email">Email Address *</label>
-                  <input class="form-input" id="quote-email" type="email" required
-                    placeholder="e.g. name@company.com.au">
+                  <input class="form-input" id="quote-email" type="email" required placeholder="e.g. name@company.com.au">
                 </div>
               </div>
 
@@ -358,963 +356,994 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
 @endsection
 
 @push('scripts')
-@verbatim
-<script>
-/* ===== Header solid ===== */
-    document.getElementById('topbar')?.classList.add('solid');
+  @verbatim
+    <script>
+      /* ===== Header solid ===== */
+      document.getElementById('topbar')?.classList.add('solid');
 
-    /* ===== Mega Menu Tabs ===== */
-    (function () {
-      const tabs = document.querySelectorAll('.mega-tab');
-      const panels = document.querySelectorAll('.mega-panel');
+      /* ===== Mega Menu Tabs ===== */
+      (function () {
+        const tabs = document.querySelectorAll('.mega-tab');
+        const panels = document.querySelectorAll('.mega-panel');
 
-      tabs.forEach(tab => {
-        tab.addEventListener('mouseenter', () => {
-          if (window.innerWidth > 960) switchTab(tab);
-        });
-        tab.addEventListener('click', (e) => {
-          e.preventDefault();
-          switchTab(tab);
-        });
-      });
-
-      function switchTab(activeTab) {
-        tabs.forEach(t => t.classList.remove('active'));
-        panels.forEach(p => p.classList.remove('active'));
-
-        activeTab.classList.add('active');
-        const targetId = activeTab.getAttribute('data-target');
-        const targetPanel = document.getElementById(targetId);
-        if (targetPanel) targetPanel.classList.add('active');
-      }
-
-    })();
-
-    document.addEventListener("DOMContentLoaded", () => {
-      document.querySelectorAll('.logo img').forEach((img) => {
-        img.src = '/assets/logo_dark.png';
-      });
-      initDynamicProductPage();
-    });
-
-    function initDynamicProductPage() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const productId = urlParams.get('id');
-      const productCode = urlParams.get('product') || urlParams.get('name') || urlParams.get('variant') || urlParams.get('file');
-
-      let product = null;
-
-      // Load product details from products_data.js (AZOOGI_PRODUCTS) - check both products array and tree variants
-      if (typeof AZOOGI_PRODUCTS !== 'undefined') {
-        const allProducts = [];
-        const seenKeys = new Set();
-
-        const addProduct = (p) => {
-          if (!p) return;
-          const key = p.id || p.sku || p.product_name || p.name;
-          if (key && !seenKeys.has(key)) {
-            seenKeys.add(key);
-            allProducts.push(p);
-          }
-        };
-
-        const productsById = {};
-        if (AZOOGI_PRODUCTS.products) {
-          const list = Array.isArray(AZOOGI_PRODUCTS.products)
-            ? AZOOGI_PRODUCTS.products
-            : Object.values(AZOOGI_PRODUCTS.products);
-          list.forEach(p => {
-            if (p && p.id) productsById[p.id] = p;
-            addProduct(p);
+        tabs.forEach(tab => {
+          tab.addEventListener('mouseenter', () => {
+            if (window.innerWidth > 960) switchTab(tab);
           });
+          tab.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchTab(tab);
+          });
+        });
+
+        function switchTab(activeTab) {
+          tabs.forEach(t => t.classList.remove('active'));
+          panels.forEach(p => p.classList.remove('active'));
+
+          activeTab.classList.add('active');
+          const targetId = activeTab.getAttribute('data-target');
+          const targetPanel = document.getElementById(targetId);
+          if (targetPanel) targetPanel.classList.add('active');
         }
 
-        function collectFromTree(treeNodes) {
-          if (!treeNodes || !Array.isArray(treeNodes)) return;
-          treeNodes.forEach(node => {
-            if (node.variants) {
-              for (const vName in node.variants) {
-                if (node.variants.hasOwnProperty(vName)) {
-                  let vData = node.variants[vName];
-                  if (typeof vData === 'string' && productsById[vData]) {
-                    vData = productsById[vData];
-                  }
-                  if (vData && typeof vData === 'object') {
-                    vData.variantName = vName;
-                    vData.modelName = node.name || vName;
-                    addProduct(vData);
+      })();
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll('.logo img').forEach((img) => {
+          img.src = '/assets/logo_dark.png';
+        });
+        initDynamicProductPage();
+      });
+
+      function initDynamicProductPage() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+        const productCode = urlParams.get('product') || urlParams.get('name') || urlParams.get('variant') || urlParams.get('file');
+
+        let product = null;
+
+        // Load product details from products_data.js (AZOOGI_PRODUCTS) - check both products array and tree variants
+        if (typeof AZOOGI_PRODUCTS !== 'undefined') {
+          const allProducts = [];
+          const seenKeys = new Set();
+
+          const addProduct = (p) => {
+            if (!p) return;
+            const key = p.id || p.sku || p.product_name || p.name;
+            if (key && !seenKeys.has(key)) {
+              seenKeys.add(key);
+              allProducts.push(p);
+            }
+          };
+
+          const productsById = {};
+          if (AZOOGI_PRODUCTS.products) {
+            const list = Array.isArray(AZOOGI_PRODUCTS.products)
+              ? AZOOGI_PRODUCTS.products
+              : Object.values(AZOOGI_PRODUCTS.products);
+            list.forEach(p => {
+              if (p && p.id) productsById[p.id] = p;
+              addProduct(p);
+            });
+          }
+
+          function collectFromTree(treeNodes) {
+            if (!treeNodes || !Array.isArray(treeNodes)) return;
+            treeNodes.forEach(node => {
+              if (node.variants) {
+                for (const vName in node.variants) {
+                  if (node.variants.hasOwnProperty(vName)) {
+                    let vData = node.variants[vName];
+                    if (typeof vData === 'string' && productsById[vData]) {
+                      vData = productsById[vData];
+                    }
+                    if (vData && typeof vData === 'object') {
+                      vData.variantName = vName;
+                      vData.modelName = node.name || vName;
+                      addProduct(vData);
+                    }
                   }
                 }
               }
-            }
-            if (node.children) collectFromTree(node.children);
-          });
-        }
-        if (AZOOGI_PRODUCTS.tree) collectFromTree(AZOOGI_PRODUCTS.tree);
+              if (node.children) collectFromTree(node.children);
+            });
+          }
+          if (AZOOGI_PRODUCTS.tree) collectFromTree(AZOOGI_PRODUCTS.tree);
 
-        if (productId) {
-          const idLower = decodeURIComponent(productId).toLowerCase().trim();
-          product = allProducts.find(p => p.id && p.id.toLowerCase() === idLower);
+          if (productId) {
+            const idLower = decodeURIComponent(productId).toLowerCase().trim();
+            product = allProducts.find(p => p.id && p.id.toLowerCase() === idLower);
+          }
+          if (!product && productCode) {
+            const codeLower = decodeURIComponent(productCode).toLowerCase().trim();
+            product = allProducts.find(p =>
+              (p.id && p.id.toLowerCase() === codeLower) ||
+              (p.sku && String(p.sku).toLowerCase().trim() === codeLower) ||
+              (p.product_name && p.product_name.toLowerCase().trim() === codeLower) ||
+              (p.variantName && p.variantName.toLowerCase().trim() === codeLower) ||
+              (p.name && p.name.toLowerCase().trim() === codeLower) ||
+              (p.file_path && p.file_path.toLowerCase().trim() === codeLower) ||
+              (p.product_name && p.product_name.toLowerCase().includes(codeLower))
+            );
+          }
+          if (!product && allProducts.length > 0) {
+            product = allProducts[0];
+          }
         }
-        if (!product && productCode) {
-          const codeLower = decodeURIComponent(productCode).toLowerCase().trim();
-          product = allProducts.find(p =>
-            (p.id && p.id.toLowerCase() === codeLower) ||
-            (p.sku && String(p.sku).toLowerCase().trim() === codeLower) ||
-            (p.product_name && p.product_name.toLowerCase().trim() === codeLower) ||
-            (p.variantName && p.variantName.toLowerCase().trim() === codeLower) ||
-            (p.name && p.name.toLowerCase().trim() === codeLower) ||
-            (p.file_path && p.file_path.toLowerCase().trim() === codeLower) ||
-            (p.product_name && p.product_name.toLowerCase().includes(codeLower))
-          );
-        }
-        if (!product && allProducts.length > 0) {
-          product = allProducts[0];
-        }
+
+        if (!product) return;
+
+        setupPageWithData(product);
       }
 
-      if (!product) return;
-
-      setupPageWithData(product);
-    }
-
-    function setupPageWithData(product) {
-      // Normalize options so values are objects { id, name }
-      const rawOptions = product.options || {};
-      const normalizedOptions = {};
-      for (const optKey in rawOptions) {
-        if (!rawOptions.hasOwnProperty(optKey)) continue;
-        const rawVals = rawOptions[optKey];
-        if (Array.isArray(rawVals)) {
-          normalizedOptions[optKey] = rawVals.map((item, idx) => {
-            if (typeof item === 'object' && item !== null) {
-              return { id: String(item.id || idx + 1), name: String(item.name || item.id || idx + 1) };
-            }
-            return { id: String(item), name: String(item) };
-          });
+      function setupPageWithData(product) {
+        // Normalize options so values are objects { id, name }
+        const rawOptions = product.options || {};
+        const normalizedOptions = {};
+        for (const optKey in rawOptions) {
+          if (!rawOptions.hasOwnProperty(optKey)) continue;
+          const rawVals = rawOptions[optKey];
+          if (Array.isArray(rawVals)) {
+            normalizedOptions[optKey] = rawVals.map((item, idx) => {
+              if (typeof item === 'object' && item !== null) {
+                return { id: String(item.id || idx + 1), name: String(item.name || item.id || idx + 1) };
+              }
+              return { id: String(item), name: String(item) };
+            });
+          }
         }
-      }
-      product.options = normalizedOptions;
+        product.options = normalizedOptions;
 
-      // Configuration state: start empty by default (no options pre-selected)
-      let selectedOptions = {};
+        // Configuration state: start empty by default (no options pre-selected)
+        let selectedOptions = {};
 
-      let selectedLength = 5.0;
+        let selectedLength = 5.0;
 
-      // DOM Elements
-      const productNameEl = document.getElementById('product-name');
-      const productCodeEl = document.getElementById('product-code-label');
-      const breadcrumbsEl = document.getElementById('breadcrumbs');
-      const galleryMainImg = document.getElementById('gallery-main-img');
-      const galleryThumbs = document.getElementById('gallery-thumbs');
-      const configurator = document.getElementById('dynamic-configurator');
-      const specTableBody = document.getElementById('spec-table-body');
-      const descEl = document.getElementById('product-desc');
+        // DOM Elements
+        const productNameEl = document.getElementById('product-name');
+        const productCodeEl = document.getElementById('product-code-label');
+        const breadcrumbsEl = document.getElementById('breadcrumbs');
+        const galleryMainImg = document.getElementById('gallery-main-img');
+        const galleryThumbs = document.getElementById('gallery-thumbs');
+        const configurator = document.getElementById('dynamic-configurator');
+        const specTableBody = document.getElementById('spec-table-body');
+        const descEl = document.getElementById('product-desc');
 
-      const calcPower = document.getElementById('calc-power');
-      const calcLumens = document.getElementById('calc-lumens');
-      const calcDriver = document.getElementById('calc-driver');
-      const capacityPct = document.getElementById('calc-capacity-pct');
-      const driverBarFill = document.getElementById('driver-bar-fill');
-      const driverWarning = document.getElementById('driver-warning-msg');
-      const calcPanel = document.querySelector('.calc-panel');
+        const calcPower = document.getElementById('calc-power');
+        const calcLumens = document.getElementById('calc-lumens');
+        const calcDriver = document.getElementById('calc-driver');
+        const capacityPct = document.getElementById('calc-capacity-pct');
+        const driverBarFill = document.getElementById('driver-bar-fill');
+        const driverWarning = document.getElementById('driver-warning-msg');
+        const calcPanel = document.querySelector('.calc-panel');
 
-      function getMappedSku(product, selectedOpts) {
-        const features = product.product_features || {};
-        const defaultCode = product.product_code || features["Product Code"] || features["Product code"] || product.id || "";
-        const mappings = product.sku_mappings;
+        function getMappedSku(product, selectedOpts) {
+          const features = product.product_features || {};
+          const defaultCode = product.product_code || features["Product Code"] || features["Product code"] || product.id || "";
+          const mappings = product.sku_mappings;
 
-        if (!mappings || typeof mappings !== 'object' || Object.keys(mappings).length === 0) {
+          if (!mappings || typeof mappings !== 'object' || Object.keys(mappings).length === 0) {
+            return defaultCode;
+          }
+
+          const selectedIds = Object.values(selectedOpts || {}).map(String).sort();
+          const options = product.options || {};
+          const selectedNames = [];
+
+          for (const optKey in (selectedOpts || {})) {
+            const id = selectedOpts[optKey];
+            const optVals = options[optKey] || [];
+            const valObj = optVals.find(v => String(v.id) === String(id));
+            if (valObj && valObj.name) {
+              selectedNames.push(String(valObj.name).trim());
+            }
+          }
+          selectedNames.sort();
+
+          for (const mKey in mappings) {
+            if (!mappings.hasOwnProperty(mKey)) continue;
+            const parts = mKey.split(/[|,]/).map(s => s.trim()).sort();
+            if (selectedIds.length > 0 && selectedIds.length === parts.length && selectedIds.every((val, idx) => val === parts[idx])) {
+              return mappings[mKey];
+            }
+            if (selectedNames.length > 0 && selectedNames.length === parts.length && selectedNames.every((val, idx) => val.toLowerCase() === parts[idx].toLowerCase())) {
+              return mappings[mKey];
+            }
+          }
+
           return defaultCode;
         }
 
-        const selectedIds = Object.values(selectedOpts || {}).map(String).sort();
-        const options = product.options || {};
-        const selectedNames = [];
-
-        for (const optKey in (selectedOpts || {})) {
-          const id = selectedOpts[optKey];
-          const optVals = options[optKey] || [];
-          const valObj = optVals.find(v => String(v.id) === String(id));
-          if (valObj && valObj.name) {
-            selectedNames.push(String(valObj.name).trim());
-          }
-        }
-        selectedNames.sort();
-
-        for (const mKey in mappings) {
-          if (!mappings.hasOwnProperty(mKey)) continue;
-          const parts = mKey.split(/[|,]/).map(s => s.trim()).sort();
-          if (selectedIds.length > 0 && selectedIds.length === parts.length && selectedIds.every((val, idx) => val === parts[idx])) {
-            return mappings[mKey];
-          }
-          if (selectedNames.length > 0 && selectedNames.length === parts.length && selectedNames.every((val, idx) => val.toLowerCase() === parts[idx].toLowerCase())) {
-            return mappings[mKey];
-          }
-        }
-
-        return defaultCode;
-      }
-
-      // Extract Product Name, SKU, Short & Long Descriptions
-      const pName = product.product_name || product.name || "Azoogi Lighting Product";
-      const features = product.product_features || {};
-      const sku = getMappedSku(product, selectedOptions);
-      const pShortDesc = product.product_short_description || product.short_description || features["Product short description"] || "";
-      const pLongDesc = product.product_description || product.description || features["Product long description"] || pShortDesc;
-
-      // Update Basic Info & Descriptions
-      if (productNameEl) productNameEl.textContent = pName;
-      if (productCodeEl) productCodeEl.textContent = sku ? `SKU: ${sku}` : `SKU: ${pName}`;
-      if (descEl) descEl.innerHTML = pLongDesc || pShortDesc || "Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.";
-
-      // Update Document Title
-      document.title = `${pName} — Azoogi LED Lighting Solutions`;
-
-      // Render Meta Keywords Badges
-      const metaBadgesEl = document.querySelector('.product-meta-badges');
-      if (metaBadgesEl) {
-        const rawMeta = product.meta_keywords || features["Meta Keywords"] || features["Meta keywords"] || features["meta_keywords"] || "";
-        let metaItems = [];
-        if (Array.isArray(rawMeta)) {
-          rawMeta.forEach(item => {
-            if (typeof item === 'string') {
-              item.split(',').forEach(k => { if (k.trim()) metaItems.push(k.trim()); });
-            }
-          });
-        } else if (typeof rawMeta === 'string' && rawMeta.trim()) {
-          rawMeta.split(',').forEach(k => { if (k.trim()) metaItems.push(k.trim()); });
-        }
-
-        function toTitleCase(str) {
-          if (!str) return '';
-          return str.split(' ').map(w => w ? (w.charAt(0).toUpperCase() + w.slice(1)) : '').join(' ');
-        }
-
-        metaItems = Array.from(new Set(metaItems)).map(toTitleCase);
-
-        if (metaItems.length > 0) {
-          metaBadgesEl.style.display = 'flex';
-          metaBadgesEl.innerHTML = metaItems.map(item => `<span class="meta-badge">${item}</span>`).join('');
-        } else {
-          metaBadgesEl.style.display = 'none';
-          metaBadgesEl.innerHTML = '';
-        }
-      }
-
-      // Resolve Category Path values dynamically
-      const categoryName = product.category || (product.category_path && product.category_path[0]) || "Products";
-      const subcategoryName = (product.category_path && product.category_path.slice(1, -1).join(' / ')) || "";
-
-      // Update Breadcrumbs to show exact category structure
-      let categorySegments = product.category_path || [categoryName];
-      if (subcategoryName && !categorySegments.includes(subcategoryName)) {
-        categorySegments.push(subcategoryName);
-      }
-
-      let breadcrumbHTML = `
-          <a href="/">Home</a>
-          <span>/</span>
-          <a href="/products">Products</a>
-        `;
-
-      categorySegments.forEach(seg => {
-        if (seg && seg.trim() && seg !== 'undefined') {
-          breadcrumbHTML += `
-              <span>/</span>
-              <a href="/products">${seg}</a>
-            `;
-        }
-      });
-
-      breadcrumbHTML += `
-          <span>/</span>
-          <span style="color: var(--ink);">${pName}</span>
-        `;
-
-      breadcrumbsEl.innerHTML = breadcrumbHTML;
-
-      // Helper to get image path
-      function resolveImg(url) {
-        if (!url || typeof url !== 'string' || !url.trim()) return '/assets/bg_default.png';
-        var clean = url.trim();
-        if (clean.startsWith('http://') || clean.startsWith('https://')) return clean;
-        if (!clean.startsWith('/')) return '/' + clean;
-        return clean;
-      }
-
-      // Render Recommended Compatible Accessories from the same category
-      function renderRecommendedAccessories() {
-        const accessoriesGrid = document.getElementById('productGrid');
-        if (!accessoriesGrid || typeof AZOOGI_PRODUCTS === 'undefined' || !AZOOGI_PRODUCTS.products) return;
-
-        const currentCatPath = product.category_path || [product.category || ''];
-        const topCat = currentCatPath[0] || '';
-        const subCat = currentCatPath.length > 1 ? currentCatPath[currentCatPath.length - 1] : topCat;
-
-        const sameSubCatProducts = [];
-        const sameTopCatProducts = [];
-        const otherProducts = [];
-
-        const rawList = Array.isArray(AZOOGI_PRODUCTS.products)
-          ? AZOOGI_PRODUCTS.products
-          : Object.values(AZOOGI_PRODUCTS.products);
-
-        rawList.forEach(pRow => {
-          const pId = pRow.id || '';
-          const pName = pRow.product_name || pRow.name || '';
-          if (pId === product.id || pName === product.product_name || pName === product.name) return;
-
-          const variants = pRow.variants || {};
-          const vKeys = Object.keys(variants);
-          const firstVar = vKeys.length > 0 ? variants[vKeys[0]] : pRow;
-
-          const catPath = pRow.category_path || [pRow.category || ''];
-          const pTopCat = catPath[0] || '';
-          const pSubCat = catPath.length > 1 ? catPath[catPath.length - 1] : pTopCat;
-
-          const images = firstVar.product_images || pRow.product_images || [];
-          const rawImg = images.length > 0 ? images[0] : '/assets/bg_default.png';
-          const localImg = resolveImg(rawImg, firstVar.file_path);
-
-          const item = {
-            id: pId,
-            name: pName,
-            sub: pSubCat,
-            cat: pTopCat,
-            filePath: firstVar.file_path || '',
-            img: localImg,
-            sku: firstVar.sku || pRow.sku || '',
-            specs: firstVar.product_features || pRow.product_features || {}
-          };
-
-          if (subCat && (pSubCat === subCat || catPath.includes(subCat))) {
-            sameSubCatProducts.push(item);
-          } else if (topCat && (pTopCat === topCat || catPath.includes(topCat))) {
-            sameTopCatProducts.push(item);
-          } else {
-            otherProducts.push(item);
-          }
-        });
-
-        const recommended = [...sameSubCatProducts, ...sameTopCatProducts, ...otherProducts].slice(0, 4);
-        const accessoriesSection = document.querySelector('.accessories-section');
-
-        if (recommended.length === 0) {
-          if (accessoriesSection) accessoriesSection.style.display = 'none';
-          accessoriesGrid.innerHTML = '';
-          return;
-        }
-
-        if (accessoriesSection) accessoriesSection.style.display = 'block';
-
-        accessoriesGrid.innerHTML = recommended.map(p => {
-          const detailUrl = p.id ? ('/product-detail?id=' + encodeURIComponent(p.id)) : (p.filePath ? ('/product-detail?file=' + encodeURIComponent(p.filePath)) : ('/product-detail?product=' + encodeURIComponent(p.name)));
-          const code = (p.sku || '').split(',')[0].trim();
-          const codeHtml = code ? ` <span class="prod-card-code">(${code})</span>` : '';
-          const isFallback = !p.img || p.img === '/assets/bg_default.png' || p.img === '/assets/logo_dark.png';
-          const fallbackStyle = isFallback ? ' filter: grayscale(100%); opacity: 0.7;' : '';
-          return `
-                <div class="prod-card" onclick="window.location.href='${detailUrl}'">
-                  <div class="prod-card-img">
-                    <div class="prod-swatch${isFallback ? ' is-fallback' : ''}" style="background-image:url('${p.img || '/assets/bg_default.png'}'); background-size:contain; background-position:center; background-repeat:no-repeat;${fallbackStyle}"></div>
-                  </div>
-                  <div class="prod-card-title">
-                    <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}${codeHtml}</div>
-                    <button class="add-quote-btn" aria-label="Add to quote" onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
-                  </div>
-                </div>
-              `;
-        }).join('');
-      }
-
-      // Render Gallery
-      function renderGallery() {
-        galleryThumbs.innerHTML = '';
+        // Extract Product Name, SKU, Short & Long Descriptions
+        const pName = product.product_name || product.name || "Azoogi Lighting Product";
         const features = product.product_features || {};
+        const sku = getMappedSku(product, selectedOptions);
+        const pShortDesc = product.product_short_description || product.short_description || features["Product short description"] || "";
+        const pLongDesc = product.product_description || product.description || features["Product long description"] || pShortDesc;
 
-        let images = [];
+        // Update Basic Info & Descriptions
+        if (productNameEl) productNameEl.textContent = pName;
+        if (productCodeEl) productCodeEl.textContent = sku ? `SKU: ${sku}` : `SKU: ${pName}`;
+        if (descEl) descEl.innerHTML = pLongDesc || pShortDesc || "Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.";
 
-        function addImagesFrom(source) {
-          if (!source) return;
-          if (Array.isArray(source)) {
-            source.forEach(item => {
-              if (typeof item === 'string' && item.trim()) {
-                images.push(item.trim());
-              } else if (typeof item === 'object' && item !== null && item.url) {
-                images.push(item.url);
+        // Update Document Title
+        document.title = `${pName} — Azoogi LED Lighting Solutions`;
+
+        // Render Meta Keywords Badges
+        const metaBadgesEl = document.querySelector('.product-meta-badges');
+        if (metaBadgesEl) {
+          const rawMeta = product.meta_keywords || features["Meta Keywords"] || features["Meta keywords"] || features["meta_keywords"] || "";
+          let metaItems = [];
+          if (Array.isArray(rawMeta)) {
+            rawMeta.forEach(item => {
+              if (typeof item === 'string') {
+                item.split(',').forEach(k => { if (k.trim()) metaItems.push(k.trim()); });
               }
             });
-          } else if (typeof source === 'string' && source.trim()) {
-            images.push(source.trim());
+          } else if (typeof rawMeta === 'string' && rawMeta.trim()) {
+            rawMeta.split(',').forEach(k => { if (k.trim()) metaItems.push(k.trim()); });
+          }
+
+          function toTitleCase(str) {
+            if (!str) return '';
+            return str.split(' ').map(w => w ? (w.charAt(0).toUpperCase() + w.slice(1)) : '').join(' ');
+          }
+
+          metaItems = Array.from(new Set(metaItems)).map(toTitleCase);
+
+          if (metaItems.length > 0) {
+            metaBadgesEl.style.display = 'flex';
+            metaBadgesEl.innerHTML = metaItems.map(item => `<span class="meta-badge">${item}</span>`).join('');
+          } else {
+            metaBadgesEl.style.display = 'none';
+            metaBadgesEl.innerHTML = '';
           }
         }
 
-        addImagesFrom(product.product_images);
-        addImagesFrom(features["Product image"]);
-        addImagesFrom(features["Product gallery"]);
-        addImagesFrom(features["Product Image"]);
-        addImagesFrom(features["Product Gallery"]);
+        // Resolve Category Path values dynamically
+        const categoryName = product.category || (product.category_path && product.category_path[0]) || "Products";
+        const subcategoryName = (product.category_path && product.category_path.slice(1, -1).join(' / ')) || "";
 
-        images = Array.from(new Set(images));
-
-        if (!images || images.length === 0) {
-          galleryMainImg.src = '/assets/bg_default.png';
-          galleryMainImg.style.filter = 'grayscale(100%)';
-          galleryMainImg.style.display = 'block';
-          return;
+        // Update Breadcrumbs to show exact category structure
+        let categorySegments = product.category_path || [categoryName];
+        if (subcategoryName && !categorySegments.includes(subcategoryName)) {
+          categorySegments.push(subcategoryName);
         }
 
-        const mainLocalSrc = resolveImg(images[0]);
-        galleryMainImg.src = mainLocalSrc;
-        galleryMainImg.style.display = 'block';
-        galleryMainImg.style.opacity = '1';
-        galleryMainImg.style.filter = (mainLocalSrc === '/assets/bg_default.png' || mainLocalSrc === '/assets/logo_dark.png') ? 'grayscale(100%)' : 'none';
-        galleryMainImg.onerror = () => {
-          galleryMainImg.src = '/assets/bg_default.png';
-          galleryMainImg.style.filter = 'grayscale(100%)';
-        };
-
-        images.forEach((imgSrc, idx) => {
-          const localSrc = resolveImg(imgSrc);
-          const thumb = document.createElement('div');
-          thumb.className = `thumb-card${idx === 0 ? ' active' : ''}`;
-
-          const thumbImg = document.createElement('img');
-          thumbImg.src = localSrc;
-          thumbImg.alt = `Product Thumbnail ${idx + 1}`;
-          if (localSrc === '/assets/bg_default.png' || localSrc === '/assets/logo_dark.png') {
-            thumbImg.style.filter = 'grayscale(100%)';
-          }
-          thumbImg.onerror = () => {
-            thumbImg.src = '/assets/bg_default.png';
-            thumbImg.style.filter = 'grayscale(100%)';
-          };
-          thumb.appendChild(thumbImg);
-
-          thumb.addEventListener('click', () => {
-            galleryThumbs.querySelectorAll('.thumb-card').forEach(t => t.classList.remove('active'));
-            thumb.classList.add('active');
-            galleryMainImg.src = localSrc;
-            galleryMainImg.style.filter = (localSrc === '/assets/bg_default.png' || localSrc === '/assets/logo_dark.png') ? 'grayscale(100%)' : 'none';
-          });
-
-          galleryThumbs.appendChild(thumb);
-        });
-      }
-
-      // Render Configurator Options
-      function renderConfigurator() {
-        const optionsSection = document.querySelector('.options-section');
-        const options = product.options || {};
-        const optionKeys = Object.keys(options).filter(k => Array.isArray(options[k]) && options[k].length > 0);
-
-        if (optionKeys.length === 0) {
-          if (optionsSection) optionsSection.style.display = 'none';
-          if (configurator) configurator.innerHTML = '';
-          return;
-        }
-
-        if (optionsSection) optionsSection.style.display = 'block';
-
-        configurator.innerHTML = '<div class="reset-selection" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;"><h3 style="font-family: var(--font-serif); font-size: 28px; margin: 0;">Product Configuration</h3><a href="#" id="btn-clear-selection" class="btn sm" style="display: flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" height="15px" viewBox="0 -960 960 960" fill="currentColor"><path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>Reset Selection</a></div>';
-
-        const clearBtn = document.getElementById('btn-clear-selection');
-        if (clearBtn) {
-          clearBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            selectedOptions = {};
-            renderConfigurator();
-            checkConstraints();
-            recalculate();
-          });
-        }
-
-        const features = product.product_features || {};
-
-        for (const optKey in options) {
-          if (!options.hasOwnProperty(optKey)) continue;
-
-          const optVals = options[optKey];
-          if (!Array.isArray(optVals) || optVals.length === 0) continue;
-
-          const group = document.createElement('div');
-          group.className = 'config-group';
-          group.style.marginBottom = '24px';
-
-          group.innerHTML = `
-              <div class="config-group-title" style="display: flex; justify-content: space-between; font-weight: 600; margin-bottom: 10px;">
-                <span>${optKey}</span>
-              </div>
-              <div class="config-options-flex" id="options-flex-${optKey.replace(/\s+/g, '-')}" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+        let breadcrumbHTML = `
+              <a href="/">Home</a>
+              <span>/</span>
+              <a href="/products">Products</a>
             `;
-          configurator.appendChild(group);
 
-          const flex = group.querySelector(`#options-flex-${optKey.replace(/\s+/g, '-')}`);
+        categorySegments.forEach(seg => {
+          if (seg && seg.trim() && seg !== 'undefined') {
+            breadcrumbHTML += `
+                  <span>/</span>
+                  <a href="/products">${seg}</a>
+                `;
+          }
+        });
 
-          optVals.forEach(valObj => {
-            const btn = document.createElement('button');
-            btn.className = 'config-btn';
-            btn.setAttribute('data-opt-key', optKey);
-            btn.setAttribute('data-opt-id', valObj.id);
-            btn.setAttribute('data-opt-name', valObj.name);
+        breadcrumbHTML += `
+              <span>/</span>
+              <span style="color: var(--ink);">${pName}</span>
+            `;
 
-            // Check if an attribute icon is available for this option value in product_features
-            let iconUrl = null;
-            const featureGroup = features[optKey];
-            if (Array.isArray(featureGroup)) {
-              const match = featureGroup.find(item => typeof item === 'object' && item !== null && (item.value === valObj.name || String(item.value).toLowerCase() === String(valObj.name).toLowerCase()));
-              if (match && match.icon) {
-                iconUrl = match.icon;
-              }
+        breadcrumbsEl.innerHTML = breadcrumbHTML;
+
+        // Helper to get image path
+        function resolveImg(url) {
+          if (!url || typeof url !== 'string' || !url.trim()) return '/assets/bg_default.png';
+          var clean = url.trim();
+          if (clean.startsWith('http://') || clean.startsWith('https://')) return clean;
+          if (!clean.startsWith('/')) return '/' + clean;
+          return clean;
+        }
+
+        function extractProductCode(source) {
+          if (!source) return '';
+          var raw = source.product_code || source.productCode || '';
+          if (!raw && source.product_features) {
+            var feats = source.product_features;
+            raw = feats['Product Code'] || feats['Product code'] || '';
+          }
+          if (!raw && source.sku) {
+            raw = source.sku;
+          }
+          if (Array.isArray(raw)) {
+            raw = raw.map(function (v) {
+              return (v && typeof v === 'object' && v.value !== undefined) ? v.value : v;
+            }).filter(Boolean).join(', ');
+          } else if (raw && typeof raw === 'object' && raw.value !== undefined) {
+            raw = raw.value;
+          }
+          return String(raw || '').trim();
+        }
+
+        function primaryProductCode(sku) {
+          if (!sku) return '';
+          return String(sku).split(',')[0].trim();
+        }
+
+        function productCodeHtml(sku) {
+          var code = primaryProductCode(sku);
+          if (!code) return '';
+          return ' <span class="prod-card-code">' + code + '</span>';
+        }
+
+        // Render Recommended Compatible Accessories from the same category
+        function renderRecommendedAccessories() {
+          const accessoriesGrid = document.getElementById('productGrid');
+          if (!accessoriesGrid || typeof AZOOGI_PRODUCTS === 'undefined' || !AZOOGI_PRODUCTS.products) return;
+
+          const currentCatPath = product.category_path || [product.category || ''];
+          const topCat = currentCatPath[0] || '';
+          const subCat = currentCatPath.length > 1 ? currentCatPath[currentCatPath.length - 1] : topCat;
+
+          const sameSubCatProducts = [];
+          const sameTopCatProducts = [];
+          const otherProducts = [];
+
+          const rawList = Array.isArray(AZOOGI_PRODUCTS.products)
+            ? AZOOGI_PRODUCTS.products
+            : Object.values(AZOOGI_PRODUCTS.products);
+
+          rawList.forEach(pRow => {
+            const pId = pRow.id || '';
+            const pName = pRow.product_name || pRow.name || '';
+            if (pId === product.id || pName === product.product_name || pName === product.name) return;
+
+            const variants = pRow.variants || {};
+            const vKeys = Object.keys(variants);
+            const firstVar = vKeys.length > 0 ? variants[vKeys[0]] : pRow;
+
+            const catPath = pRow.category_path || [pRow.category || ''];
+            const pTopCat = catPath[0] || '';
+            const pSubCat = catPath.length > 1 ? catPath[catPath.length - 1] : pTopCat;
+
+            const images = firstVar.product_images || pRow.product_images || [];
+            const rawImg = images.length > 0 ? images[0] : '/assets/bg_default.png';
+            const localImg = resolveImg(rawImg, firstVar.file_path);
+            const sku = extractProductCode(firstVar) || extractProductCode(pRow) || '';
+
+            const item = {
+              id: pId,
+              name: pName,
+              sub: pSubCat,
+              cat: pTopCat,
+              filePath: firstVar.file_path || '',
+              img: localImg,
+              sku: sku,
+              specs: firstVar.product_features || pRow.product_features || {}
+            };
+
+            if (subCat && (pSubCat === subCat || catPath.includes(subCat))) {
+              sameSubCatProducts.push(item);
+            } else if (topCat && (pTopCat === topCat || catPath.includes(topCat))) {
+              sameTopCatProducts.push(item);
+            } else {
+              otherProducts.push(item);
             }
+          });
 
-            let iconHtml = '';
-            if (iconUrl) {
-              iconHtml = `<img class="config-btn-icon attr-icon" src="${resolveImg(iconUrl)}" alt="${valObj.name}" style="width: 14px; height: 14px; object-fit: contain; flex-shrink: 0;" />`;
+          const recommended = [...sameSubCatProducts, ...sameTopCatProducts, ...otherProducts].slice(0, 4);
+          const accessoriesSection = document.querySelector('.accessories-section');
+
+          if (recommended.length === 0) {
+            if (accessoriesSection) accessoriesSection.style.display = 'none';
+            accessoriesGrid.innerHTML = '';
+            return;
+          }
+
+          if (accessoriesSection) accessoriesSection.style.display = 'block';
+
+          accessoriesGrid.innerHTML = recommended.map(p => {
+            const detailUrl = p.id ? ('/product-detail?id=' + encodeURIComponent(p.id)) : (p.filePath ? ('/product-detail?file=' + encodeURIComponent(p.filePath)) : ('/product-detail?product=' + encodeURIComponent(p.name)));
+            const codeHtml = productCodeHtml(p.sku);
+            const isFallback = !p.img || p.img === '/assets/bg_default.png' || p.img === '/assets/logo_dark.png';
+            const fallbackStyle = isFallback ? ' filter: grayscale(100%); opacity: 0.7;' : '';
+            return `
+                    <div class="prod-card" onclick="window.location.href='${detailUrl}'">
+                      <div class="prod-card-img">
+                        <div class="prod-swatch${isFallback ? ' is-fallback' : ''}" style="background-image:url('${p.img || '/assets/bg_default.png'}'); background-size:contain; background-position:center; background-repeat:no-repeat;${fallbackStyle}"></div>
+                      </div>
+                      <div class="prod-card-title">
+                        <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}${codeHtml}</div>
+                        <button class="add-quote-btn" aria-label="Add to quote" onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+                      </div>
+                    </div>
+                  `;
+          }).join('');
+        }
+
+        // Render Gallery
+        function renderGallery() {
+          galleryThumbs.innerHTML = '';
+          const features = product.product_features || {};
+
+          let images = [];
+
+          function addImagesFrom(source) {
+            if (!source) return;
+            if (Array.isArray(source)) {
+              source.forEach(item => {
+                if (typeof item === 'string' && item.trim()) {
+                  images.push(item.trim());
+                } else if (typeof item === 'object' && item !== null && item.url) {
+                  images.push(item.url);
+                }
+              });
+            } else if (typeof source === 'string' && source.trim()) {
+              images.push(source.trim());
             }
+          }
 
-            btn.innerHTML = `${iconHtml}<span>${valObj.name}</span>`;
+          addImagesFrom(product.product_images);
+          addImagesFrom(features["Product image"]);
+          addImagesFrom(features["Product gallery"]);
+          addImagesFrom(features["Product Image"]);
+          addImagesFrom(features["Product Gallery"]);
 
-            if (selectedOptions[optKey] && String(selectedOptions[optKey]) === String(valObj.id)) {
-              btn.classList.add('active');
+          images = Array.from(new Set(images));
+
+          if (!images || images.length === 0) {
+            galleryMainImg.src = '/assets/bg_default.png';
+            galleryMainImg.style.filter = 'grayscale(100%)';
+            galleryMainImg.style.display = 'block';
+            return;
+          }
+
+          const mainLocalSrc = resolveImg(images[0]);
+          galleryMainImg.src = mainLocalSrc;
+          galleryMainImg.style.display = 'block';
+          galleryMainImg.style.opacity = '1';
+          galleryMainImg.style.filter = (mainLocalSrc === '/assets/bg_default.png' || mainLocalSrc === '/assets/logo_dark.png') ? 'grayscale(100%)' : 'none';
+          galleryMainImg.onerror = () => {
+            galleryMainImg.src = '/assets/bg_default.png';
+            galleryMainImg.style.filter = 'grayscale(100%)';
+          };
+
+          images.forEach((imgSrc, idx) => {
+            const localSrc = resolveImg(imgSrc);
+            const thumb = document.createElement('div');
+            thumb.className = `thumb-card${idx === 0 ? ' active' : ''}`;
+
+            const thumbImg = document.createElement('img');
+            thumbImg.src = localSrc;
+            thumbImg.alt = `Product Thumbnail ${idx + 1}`;
+            if (localSrc === '/assets/bg_default.png' || localSrc === '/assets/logo_dark.png') {
+              thumbImg.style.filter = 'grayscale(100%)';
             }
+            thumbImg.onerror = () => {
+              thumbImg.src = '/assets/bg_default.png';
+              thumbImg.style.filter = 'grayscale(100%)';
+            };
+            thumb.appendChild(thumbImg);
 
-            btn.addEventListener('click', () => {
-              if (selectedOptions[optKey] === valObj.id) {
-                delete selectedOptions[optKey];
-                btn.classList.remove('active');
-              } else {
-                selectedOptions[optKey] = valObj.id;
-                flex.querySelectorAll('.config-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-              }
+            thumb.addEventListener('click', () => {
+              galleryThumbs.querySelectorAll('.thumb-card').forEach(t => t.classList.remove('active'));
+              thumb.classList.add('active');
+              galleryMainImg.src = localSrc;
+              galleryMainImg.style.filter = (localSrc === '/assets/bg_default.png' || localSrc === '/assets/logo_dark.png') ? 'grayscale(100%)' : 'none';
+            });
 
+            galleryThumbs.appendChild(thumb);
+          });
+        }
+
+        // Render Configurator Options
+        function renderConfigurator() {
+          const optionsSection = document.querySelector('.options-section');
+          const options = product.options || {};
+          const optionKeys = Object.keys(options).filter(k => Array.isArray(options[k]) && options[k].length > 0);
+
+          if (optionKeys.length === 0) {
+            if (optionsSection) optionsSection.style.display = 'none';
+            if (configurator) configurator.innerHTML = '';
+            return;
+          }
+
+          if (optionsSection) optionsSection.style.display = 'block';
+
+          configurator.innerHTML = '<div class="reset-selection" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;"><h3 style="font-family: var(--font-serif); font-size: 28px; margin: 0;">Product Configuration</h3><a href="#" id="btn-clear-selection" class="btn sm" style="display: flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" height="15px" viewBox="0 -960 960 960" fill="currentColor"><path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>Reset Selection</a></div>';
+
+          const clearBtn = document.getElementById('btn-clear-selection');
+          if (clearBtn) {
+            clearBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              selectedOptions = {};
+              renderConfigurator();
               checkConstraints();
               recalculate();
             });
+          }
 
-            flex.appendChild(btn);
-          });
-        }
-      }
+          const features = product.product_features || {};
 
-      // Render Specifications
-      function renderSpecs() {
-        specTableBody.innerHTML = '';
-        const specsSection = document.querySelector('.specifications-section');
-        const specGridLayout = document.querySelector('.spec-grid-layout');
-        const features = product.product_features || {};
-        const ignoreKeys = [
-          "id", "file_path", "options", "constraints", "sku", "product_name", "name",
-          "supplier code", "product_short_description", "product_description", "product_images",
-          "product image", "product gallery", "product dimension", "product_dimension", "attachment", "images",
-          "meta keywords", "meta_keywords", "meta"
-        ];
+          for (const optKey in options) {
+            if (!options.hasOwnProperty(optKey)) continue;
 
-        let count = 0;
-        for (const key in features) {
-          if (!features.hasOwnProperty(key)) continue;
-          if (ignoreKeys.includes(key.toLowerCase())) continue;
+            const optVals = options[optKey];
+            if (!Array.isArray(optVals) || optVals.length === 0) continue;
 
-          const val = features[key];
-          if (val === null || val === undefined || val === '') continue;
+            const group = document.createElement('div');
+            group.className = 'config-group';
+            group.style.marginBottom = '24px';
 
-          let displayVal = '';
+            group.innerHTML = `
+                  <div class="config-group-title" style="display: flex; justify-content: space-between; font-weight: 600; margin-bottom: 10px;">
+                    <span>${optKey}</span>
+                  </div>
+                  <div class="config-options-flex" id="options-flex-${optKey.replace(/\s+/g, '-')}" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+                `;
+            configurator.appendChild(group);
 
-          if (Array.isArray(val)) {
-            let valStrs = [];
-            val.forEach(item => {
-              if (typeof item === 'object' && item !== null) {
-                if (item.value) valStrs.push(item.value);
-              } else if (item !== null && item !== undefined && String(item).trim() !== '') {
-                valStrs.push(String(item));
+            const flex = group.querySelector(`#options-flex-${optKey.replace(/\s+/g, '-')}`);
+
+            optVals.forEach(valObj => {
+              const btn = document.createElement('button');
+              btn.className = 'config-btn';
+              btn.setAttribute('data-opt-key', optKey);
+              btn.setAttribute('data-opt-id', valObj.id);
+              btn.setAttribute('data-opt-name', valObj.name);
+
+              // Check if an attribute icon is available for this option value in product_features
+              let iconUrl = null;
+              const featureGroup = features[optKey];
+              if (Array.isArray(featureGroup)) {
+                const match = featureGroup.find(item => typeof item === 'object' && item !== null && (item.value === valObj.name || String(item.value).toLowerCase() === String(valObj.name).toLowerCase()));
+                if (match && match.icon) {
+                  iconUrl = match.icon;
+                }
               }
-            });
-            displayVal = valStrs.join(', ');
-          } else if (typeof val === 'object' && val !== null) {
-            displayVal = val.value || '';
-          } else {
-            displayVal = String(val);
-          }
 
-          if (!displayVal) continue;
-
-          count++;
-          const row = document.createElement('tr');
-          row.innerHTML = `
-              <td style="padding: 12px 16px; font-weight: 600; color: var(--ink); border-bottom: 1px solid var(--line);">${key}</td>
-              <td style="padding: 12px 16px; color: var(--muted); border-bottom: 1px solid var(--line);">${displayVal}</td>
-            `;
-          specTableBody.appendChild(row);
-        }
-
-        // Update Technical Specifications Product Dimension Image
-        const dimImgEl = document.getElementById('spec-dimension-image');
-        let dimUrl = null;
-        if (dimImgEl) {
-          const dimSource = product.product_dimension || features["Product Dimension"] || features["Product dimension"];
-
-          if (Array.isArray(dimSource) && dimSource.length > 0) {
-            const first = dimSource[0];
-            if (typeof first === 'object' && first !== null && first.url) {
-              dimUrl = first.url;
-            } else if (typeof first === 'string' && first.trim()) {
-              dimUrl = first.trim();
-            }
-          } else if (typeof dimSource === 'string' && dimSource.trim()) {
-            dimUrl = dimSource.trim();
-          }
-
-          const wrapper = dimImgEl.closest('.spec-dimension-image-wrapper') || dimImgEl.parentElement;
-
-          if (dimUrl) {
-            dimImgEl.src = resolveImg(dimUrl);
-            dimImgEl.style.display = 'block';
-            if (wrapper) wrapper.style.display = 'flex';
-          } else {
-            dimImgEl.src = '';
-            dimImgEl.style.display = 'none';
-            if (wrapper) wrapper.style.display = 'none';
-          }
-        }
-
-        const hasDimImg = !!dimUrl;
-        if (count === 0 && !hasDimImg) {
-          if (specsSection) specsSection.style.display = 'none';
-        } else {
-          if (specsSection) specsSection.style.display = 'block';
-          if (specGridLayout) {
-            specGridLayout.style.gridTemplateColumns = hasDimImg ? '1.25fr 0.75fr' : '1fr';
-          }
-        }
-      }
-
-      // Render Product Icons from Airtable "Product Icons"
-      function renderProductIcons() {
-        const iconsRow = document.querySelector('.product-icons-row');
-        const iconsWrapper = document.querySelector('.product-icons-row-wrapper');
-        if (!iconsRow) return;
-
-        const features = product.product_features || {};
-        const rawIcons = product.technical_icons || product.product_icons || features["Technical Icons"] || features["Technical icons"] || features["technical_icons"] || features["Product Icons"] || features["Product icons"] || features["product_icons"] || features["Icons"] || features["Icon"];
-
-        let iconUrls = [];
-        if (Array.isArray(rawIcons)) {
-          rawIcons.forEach(item => {
-            if (typeof item === 'string' && item.trim()) {
-              iconUrls.push(item.trim());
-            } else if (typeof item === 'object' && item !== null) {
-              if (item.url) iconUrls.push(item.url);
-              else if (item.filePath) iconUrls.push(item.filePath);
-              else if (item.path) iconUrls.push(item.path);
-            }
-          });
-        } else if (typeof rawIcons === 'string' && rawIcons.trim()) {
-          rawIcons.split(',').forEach(item => {
-            if (item.trim()) iconUrls.push(item.trim());
-          });
-        }
-
-        iconUrls = Array.from(new Set(iconUrls));
-
-        if (iconUrls.length > 0) {
-          if (iconsWrapper) iconsWrapper.style.display = 'block';
-          iconsRow.innerHTML = iconUrls.map((url, idx) => `
-            <img src="${resolveImg(url)}" alt="Product Icon ${idx + 1}"
-              style="height: 42px; width: auto; opacity: 0.85; transition: opacity 0.2s; max-width: 100px; object-fit: contain;"
-              onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"
-              onerror="this.style.display='none'">
-          `).join('');
-        } else {
-          if (iconsWrapper) iconsWrapper.style.display = 'none';
-          iconsRow.innerHTML = '';
-        }
-      }
-
-      // Constraints Logic Checker
-      function checkConstraints() {
-        const prohibitedIds = new Set();
-
-        const activeIds = Object.values(selectedOptions);
-        activeIds.forEach(id => {
-          if (product.constraints && product.constraints[id]) {
-            product.constraints[id].forEach(forbiddenId => {
-              prohibitedIds.add(String(forbiddenId));
-            });
-          }
-          if (product.constraints) {
-            for (const cKey in product.constraints) {
-              const forbiddenList = product.constraints[cKey];
-              if (Array.isArray(forbiddenList) && forbiddenList.map(String).includes(String(id))) {
-                prohibitedIds.add(String(cKey));
+              let iconHtml = '';
+              if (iconUrl) {
+                iconHtml = `<img class="config-btn-icon attr-icon" src="${resolveImg(iconUrl)}" alt="${valObj.name}" style="width: 14px; height: 14px; object-fit: contain; flex-shrink: 0;" />`;
               }
-            }
-          }
-        });
 
-        const options = product.options || {};
-        for (const optKey in options) {
-          if (!options.hasOwnProperty(optKey)) continue;
+              btn.innerHTML = `${iconHtml}<span>${valObj.name}</span>`;
 
-          const optVals = options[optKey];
-          const flex = document.getElementById(`options-flex-${optKey.replace(/\s+/g, '-')}`);
-          if (!flex) continue;
-
-          let hasActiveValid = false;
-          let currentSelectedId = selectedOptions[optKey];
-
-          const btns = flex.querySelectorAll('.config-btn');
-          btns.forEach(btn => {
-            const optId = btn.getAttribute('data-opt-id');
-
-            if (prohibitedIds.has(String(optId)) || prohibitedIds.has(Number(optId))) {
-              btn.disabled = true;
-              btn.classList.add('disabled');
-              btn.classList.remove('active');
-            } else {
-              btn.disabled = false;
-              btn.classList.remove('disabled');
-              if (selectedOptions[optKey] && String(optId) === String(selectedOptions[optKey])) {
+              if (selectedOptions[optKey] && String(selectedOptions[optKey]) === String(valObj.id)) {
                 btn.classList.add('active');
-              } else {
-                btn.classList.remove('active');
+              }
+
+              btn.addEventListener('click', () => {
+                if (selectedOptions[optKey] === valObj.id) {
+                  delete selectedOptions[optKey];
+                  btn.classList.remove('active');
+                } else {
+                  selectedOptions[optKey] = valObj.id;
+                  flex.querySelectorAll('.config-btn').forEach(b => b.classList.remove('active'));
+                  btn.classList.add('active');
+                }
+
+                checkConstraints();
+                recalculate();
+              });
+
+              flex.appendChild(btn);
+            });
+          }
+        }
+
+        // Render Specifications
+        function renderSpecs() {
+          specTableBody.innerHTML = '';
+          const specsSection = document.querySelector('.specifications-section');
+          const specGridLayout = document.querySelector('.spec-grid-layout');
+          const features = product.product_features || {};
+          const ignoreKeys = [
+            "id", "file_path", "options", "constraints", "sku", "product_name", "name",
+            "supplier code", "product_short_description", "product_description", "product_images",
+            "product image", "product gallery", "product dimension", "product_dimension", "attachment", "images",
+            "meta keywords", "meta_keywords", "meta"
+          ];
+
+          let count = 0;
+          for (const key in features) {
+            if (!features.hasOwnProperty(key)) continue;
+            if (ignoreKeys.includes(key.toLowerCase())) continue;
+
+            const val = features[key];
+            if (val === null || val === undefined || val === '') continue;
+
+            let displayVal = '';
+
+            if (Array.isArray(val)) {
+              let valStrs = [];
+              val.forEach(item => {
+                if (typeof item === 'object' && item !== null) {
+                  if (item.value) valStrs.push(item.value);
+                } else if (item !== null && item !== undefined && String(item).trim() !== '') {
+                  valStrs.push(String(item));
+                }
+              });
+              displayVal = valStrs.join(', ');
+            } else if (typeof val === 'object' && val !== null) {
+              displayVal = val.value || '';
+            } else {
+              displayVal = String(val);
+            }
+
+            if (!displayVal) continue;
+
+            count++;
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                  <td style="padding: 12px 16px; font-weight: 600; color: var(--ink); border-bottom: 1px solid var(--line);">${key}</td>
+                  <td style="padding: 12px 16px; color: var(--muted); border-bottom: 1px solid var(--line);">${displayVal}</td>
+                `;
+            specTableBody.appendChild(row);
+          }
+
+          // Update Technical Specifications Product Dimension Image
+          const dimImgEl = document.getElementById('spec-dimension-image');
+          let dimUrl = null;
+          if (dimImgEl) {
+            const dimSource = product.product_dimension || features["Product Dimension"] || features["Product dimension"];
+
+            if (Array.isArray(dimSource) && dimSource.length > 0) {
+              const first = dimSource[0];
+              if (typeof first === 'object' && first !== null && first.url) {
+                dimUrl = first.url;
+              } else if (typeof first === 'string' && first.trim()) {
+                dimUrl = first.trim();
+              }
+            } else if (typeof dimSource === 'string' && dimSource.trim()) {
+              dimUrl = dimSource.trim();
+            }
+
+            const wrapper = dimImgEl.closest('.spec-dimension-image-wrapper') || dimImgEl.parentElement;
+
+            if (dimUrl) {
+              dimImgEl.src = resolveImg(dimUrl);
+              dimImgEl.style.display = 'block';
+              if (wrapper) wrapper.style.display = 'flex';
+            } else {
+              dimImgEl.src = '';
+              dimImgEl.style.display = 'none';
+              if (wrapper) wrapper.style.display = 'none';
+            }
+          }
+
+          const hasDimImg = !!dimUrl;
+          if (count === 0 && !hasDimImg) {
+            if (specsSection) specsSection.style.display = 'none';
+          } else {
+            if (specsSection) specsSection.style.display = 'block';
+            if (specGridLayout) {
+              specGridLayout.style.gridTemplateColumns = hasDimImg ? '1.25fr 0.75fr' : '1fr';
+            }
+          }
+        }
+
+        // Render Product Icons from Airtable "Product Icons"
+        function renderProductIcons() {
+          const iconsRow = document.querySelector('.product-icons-row');
+          const iconsWrapper = document.querySelector('.product-icons-row-wrapper');
+          if (!iconsRow) return;
+
+          const features = product.product_features || {};
+          const rawIcons = product.technical_icons || product.product_icons || features["Technical Icons"] || features["Technical icons"] || features["technical_icons"] || features["Product Icons"] || features["Product icons"] || features["product_icons"] || features["Icons"] || features["Icon"];
+
+          let iconUrls = [];
+          if (Array.isArray(rawIcons)) {
+            rawIcons.forEach(item => {
+              if (typeof item === 'string' && item.trim()) {
+                iconUrls.push(item.trim());
+              } else if (typeof item === 'object' && item !== null) {
+                if (item.url) iconUrls.push(item.url);
+                else if (item.filePath) iconUrls.push(item.filePath);
+                else if (item.path) iconUrls.push(item.path);
+              }
+            });
+          } else if (typeof rawIcons === 'string' && rawIcons.trim()) {
+            rawIcons.split(',').forEach(item => {
+              if (item.trim()) iconUrls.push(item.trim());
+            });
+          }
+
+          iconUrls = Array.from(new Set(iconUrls));
+
+          if (iconUrls.length > 0) {
+            if (iconsWrapper) iconsWrapper.style.display = 'block';
+            iconsRow.innerHTML = iconUrls.map((url, idx) => `
+                <img src="${resolveImg(url)}" alt="Product Icon ${idx + 1}"
+                  style="height: 42px; width: auto; opacity: 0.85; transition: opacity 0.2s; max-width: 100px; object-fit: contain;"
+                  onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"
+                  onerror="this.style.display='none'">
+              `).join('');
+          } else {
+            if (iconsWrapper) iconsWrapper.style.display = 'none';
+            iconsRow.innerHTML = '';
+          }
+        }
+
+        // Constraints Logic Checker
+        function checkConstraints() {
+          const prohibitedIds = new Set();
+
+          const activeIds = Object.values(selectedOptions);
+          activeIds.forEach(id => {
+            if (product.constraints && product.constraints[id]) {
+              product.constraints[id].forEach(forbiddenId => {
+                prohibitedIds.add(String(forbiddenId));
+              });
+            }
+            if (product.constraints) {
+              for (const cKey in product.constraints) {
+                const forbiddenList = product.constraints[cKey];
+                if (Array.isArray(forbiddenList) && forbiddenList.map(String).includes(String(id))) {
+                  prohibitedIds.add(String(cKey));
+                }
               }
             }
           });
+
+          const options = product.options || {};
+          for (const optKey in options) {
+            if (!options.hasOwnProperty(optKey)) continue;
+
+            const optVals = options[optKey];
+            const flex = document.getElementById(`options-flex-${optKey.replace(/\s+/g, '-')}`);
+            if (!flex) continue;
+
+            let hasActiveValid = false;
+            let currentSelectedId = selectedOptions[optKey];
+
+            const btns = flex.querySelectorAll('.config-btn');
+            btns.forEach(btn => {
+              const optId = btn.getAttribute('data-opt-id');
+
+              if (prohibitedIds.has(String(optId)) || prohibitedIds.has(Number(optId))) {
+                btn.disabled = true;
+                btn.classList.add('disabled');
+                btn.classList.remove('active');
+              } else {
+                btn.disabled = false;
+                btn.classList.remove('disabled');
+                if (selectedOptions[optKey] && String(optId) === String(selectedOptions[optKey])) {
+                  btn.classList.add('active');
+                } else {
+                  btn.classList.remove('active');
+                }
+              }
+            });
+          }
         }
-      }
 
-      // Recalculate parameters, SKU, lumens, drivers
-      function recalculate() {
-        const pName = product.product_name || product.name || "Product";
-        const features = product.product_features || {};
-        const skuDisplay = getMappedSku(product, selectedOptions);
+        // Recalculate parameters, SKU, lumens, drivers
+        function recalculate() {
+          const pName = product.product_name || product.name || "Product";
+          const features = product.product_features || {};
+          const skuDisplay = getMappedSku(product, selectedOptions);
 
-        let wattageVal = 14.4;
-        let selectedCctText = "";
-        let selectedFinishText = "";
+          let wattageVal = 14.4;
+          let selectedCctText = "";
+          let selectedFinishText = "";
 
-        const options = product.options || {};
-        for (const optKey in options) {
-          const optVals = options[optKey] || [];
-          const selectedId = selectedOptions[optKey];
-          const valObj = optVals.find(v => String(v.id) === String(selectedId));
-          if (valObj) {
-            if (optKey.toUpperCase() === 'WATTAGE') {
-              wattageVal = parseFloat(valObj.name.replace(/[^\d.]/g, '')) || 14.4;
-            } else if (optKey.toUpperCase() === 'CCT') {
-              selectedCctText = valObj.name;
-            } else if (optKey.toUpperCase() === 'FINISH' || optKey.toUpperCase() === 'COLOUR') {
-              selectedFinishText = valObj.name;
+          const options = product.options || {};
+          for (const optKey in options) {
+            const optVals = options[optKey] || [];
+            const selectedId = selectedOptions[optKey];
+            const valObj = optVals.find(v => String(v.id) === String(selectedId));
+            if (valObj) {
+              if (optKey.toUpperCase() === 'WATTAGE') {
+                wattageVal = parseFloat(valObj.name.replace(/[^\d.]/g, '')) || 14.4;
+              } else if (optKey.toUpperCase() === 'CCT') {
+                selectedCctText = valObj.name;
+              } else if (optKey.toUpperCase() === 'FINISH' || optKey.toUpperCase() === 'COLOUR') {
+                selectedFinishText = valObj.name;
+              }
             }
           }
-        }
 
-        const totalPower = selectedLength * wattageVal;
-        const totalLumens = selectedLength * (wattageVal * 85);
+          const totalPower = selectedLength * wattageVal;
+          const totalLumens = selectedLength * (wattageVal * 85);
 
-        if (calcPower) calcPower.textContent = totalPower.toFixed(1) + ' W';
-        if (calcLumens) calcLumens.textContent = Math.round(totalLumens).toLocaleString() + ' lm';
+          if (calcPower) calcPower.textContent = totalPower.toFixed(1) + ' W';
+          if (calcLumens) calcLumens.textContent = Math.round(totalLumens).toLocaleString() + ' lm';
 
-        const requiredCapacity = totalPower * 1.20;
-        let driverRecommendation = "Azoogi 20W 24V IP67";
-        let driverPowerLimit = 20;
+          const requiredCapacity = totalPower * 1.20;
+          let driverRecommendation = "Azoogi 20W 24V IP67";
+          let driverPowerLimit = 20;
 
-        if (requiredCapacity > 200) {
-          driverRecommendation = "Multiple feeds / 2x Azoogi 150W Drivers";
-          driverPowerLimit = 300;
-        } else if (requiredCapacity > 150) {
-          driverRecommendation = "Azoogi 240W 24V IP67";
-          driverPowerLimit = 240;
-        } else if (requiredCapacity > 120) {
-          driverRecommendation = "Azoogi 150W 24V IP67";
-          driverPowerLimit = 150;
-        } else if (requiredCapacity > 80) {
-          driverRecommendation = "Azoogi 120W 24V IP67";
-          driverPowerLimit = 120;
-        } else if (requiredCapacity > 50) {
-          driverRecommendation = "Azoogi 80W 24V IP67";
-          driverPowerLimit = 80;
-        } else if (requiredCapacity > 20) {
-          driverRecommendation = "Azoogi 50W 24V IP67";
-          driverPowerLimit = 50;
-        }
-
-        if (calcDriver) calcDriver.textContent = driverRecommendation;
-
-        const percentage = Math.min(100, Math.round((totalPower / driverPowerLimit) * 100));
-        if (capacityPct) capacityPct.textContent = percentage + '%';
-        if (driverBarFill) driverBarFill.style.width = percentage + '%';
-
-        if (selectedLength > 10.0) {
-          if (driverWarning) driverWarning.style.display = 'block';
-        } else {
-          if (driverWarning) driverWarning.style.display = 'none';
-        }
-
-        let selectedOptionsSummary = [];
-
-        for (const key in selectedOptions) {
-          const id = selectedOptions[key];
-          const optVals = options[key] || [];
-          const valObj = optVals.find(v => String(v.id) === String(id)) || { name: String(id) };
-          if (valObj) {
-            selectedOptionsSummary.push(`${key}: ${valObj.name}`);
+          if (requiredCapacity > 200) {
+            driverRecommendation = "Multiple feeds / 2x Azoogi 150W Drivers";
+            driverPowerLimit = 300;
+          } else if (requiredCapacity > 150) {
+            driverRecommendation = "Azoogi 240W 24V IP67";
+            driverPowerLimit = 240;
+          } else if (requiredCapacity > 120) {
+            driverRecommendation = "Azoogi 150W 24V IP67";
+            driverPowerLimit = 150;
+          } else if (requiredCapacity > 80) {
+            driverRecommendation = "Azoogi 120W 24V IP67";
+            driverPowerLimit = 120;
+          } else if (requiredCapacity > 50) {
+            driverRecommendation = "Azoogi 80W 24V IP67";
+            driverPowerLimit = 80;
+          } else if (requiredCapacity > 20) {
+            driverRecommendation = "Azoogi 50W 24V IP67";
+            driverPowerLimit = 50;
           }
-        }
 
-        // Render dynamic summary card list
-        const summaryListEl = document.getElementById('selected-summary-list');
-        if (summaryListEl) {
-          summaryListEl.innerHTML = '';
+          if (calcDriver) calcDriver.textContent = driverRecommendation;
 
-          const modelDiv = document.createElement('div');
-          modelDiv.style.display = 'flex';
-          modelDiv.style.justifyContent = 'space-between';
-          modelDiv.style.borderBottom = '1px solid var(--line)';
-          modelDiv.style.paddingBottom = '8px';
-          modelDiv.style.marginBottom = '8px';
-          modelDiv.innerHTML = `
-              <strong style="color: var(--ink);">SKU / MODEL:</strong>
-              <span style="color: var(--accent); font-weight: 600;">${skuDisplay}</span>
-            `;
-          summaryListEl.appendChild(modelDiv);
+          const percentage = Math.min(100, Math.round((totalPower / driverPowerLimit) * 100));
+          if (capacityPct) capacityPct.textContent = percentage + '%';
+          if (driverBarFill) driverBarFill.style.width = percentage + '%';
 
-          // Render each option key/value pair
+          if (selectedLength > 10.0) {
+            if (driverWarning) driverWarning.style.display = 'block';
+          } else {
+            if (driverWarning) driverWarning.style.display = 'none';
+          }
+
+          let selectedOptionsSummary = [];
+
           for (const key in selectedOptions) {
             const id = selectedOptions[key];
             const optVals = options[key] || [];
             const valObj = optVals.find(v => String(v.id) === String(id)) || { name: String(id) };
             if (valObj) {
-              const itemDiv = document.createElement('div');
-              itemDiv.style.display = 'flex';
-              itemDiv.style.justifyContent = 'space-between';
-              itemDiv.style.fontSize = '12px';
-              itemDiv.style.marginBottom = '4px';
-              itemDiv.innerHTML = `
-                  <span style="font-weight: 500; text-transform: capitalize; color: var(--muted);">${key}:</span>
-                  <span style="color: var(--ink); font-weight: 600;">${valObj.name}</span>
-                `;
-              summaryListEl.appendChild(itemDiv);
+              selectedOptionsSummary.push(`${key}: ${valObj.name}`);
             }
           }
+
+          // Render dynamic summary card list
+          const summaryListEl = document.getElementById('selected-summary-list');
+          if (summaryListEl) {
+            summaryListEl.innerHTML = '';
+
+            const modelDiv = document.createElement('div');
+            modelDiv.style.display = 'flex';
+            modelDiv.style.justifyContent = 'space-between';
+            modelDiv.style.borderBottom = '1px solid var(--line)';
+            modelDiv.style.paddingBottom = '8px';
+            modelDiv.style.marginBottom = '8px';
+            modelDiv.innerHTML = `
+                  <strong style="color: var(--ink);">SKU / MODEL:</strong>
+                  <span style="color: var(--accent); font-weight: 600;">${skuDisplay}</span>
+                `;
+            summaryListEl.appendChild(modelDiv);
+
+            // Render each option key/value pair
+            for (const key in selectedOptions) {
+              const id = selectedOptions[key];
+              const optVals = options[key] || [];
+              const valObj = optVals.find(v => String(v.id) === String(id)) || { name: String(id) };
+              if (valObj) {
+                const itemDiv = document.createElement('div');
+                itemDiv.style.display = 'flex';
+                itemDiv.style.justifyContent = 'space-between';
+                itemDiv.style.fontSize = '12px';
+                itemDiv.style.marginBottom = '4px';
+                itemDiv.innerHTML = `
+                      <span style="font-weight: 500; text-transform: capitalize; color: var(--muted);">${key}:</span>
+                      <span style="color: var(--ink); font-weight: 600;">${valObj.name}</span>
+                    `;
+                summaryListEl.appendChild(itemDiv);
+              }
+            }
+          }
+
+          if (productCodeEl) productCodeEl.textContent = `SKU: ${skuDisplay}`;
+
+          const catLower = (product.category || "").toLowerCase();
+          const pNameLower = pName.toLowerCase();
+          const isLinear = catLower.includes('neon') || catLower.includes('linear') || pNameLower.includes('strip') || pNameLower.includes('nnr');
+          let specSummary = `Product: ${pName} (${product.category || 'General'})
+    Variant Model: ${skuDisplay}
+    Selected Options:
+    ${selectedOptionsSummary.map(s => "  - " + s).join('\n')}`;
+
+          if (isLinear) {
+            specSummary += `
+    Requested custom cut length: ${selectedLength.toFixed(1)}m
+    Total power load: ${totalPower.toFixed(1)}W
+    Recommended system driver: ${driverRecommendation}`;
+          }
+
+          const specField = document.getElementById('quote-spec');
+          if (specField) specField.value = specSummary;
+
+          // Visual color glow update
+          // const glowArea = document.getElementById('glow-area');
+          const neonPath = document.getElementById('neon-path');
+          const neonSvg = document.getElementById('neon-svg');
+          // if (glowArea) {
+          //   let glowColor = '103, 208, 78';
+          //   if (selectedCctText.includes('2300K') || selectedCctText.includes('2200K')) glowColor = '255, 166, 77';
+          //   else if (selectedCctText.includes('2700K')) glowColor = '255, 180, 90';
+          //   else if (selectedCctText.includes('3000K')) glowColor = '255, 200, 120';
+          //   else if (selectedCctText.includes('4000K') || selectedCctText.includes('4300K')) glowColor = '255, 235, 200';
+          //   else if (selectedCctText.includes('6000K') || selectedCctText.includes('6500K')) glowColor = '220, 240, 255';
+          //   document.documentElement.style.setProperty('--glow-rgb', glowColor);
+
+          //   if (neonPath) {
+          //     neonPath.style.transition = 'none';
+          //     neonPath.style.strokeWidth = '22';
+          //     setTimeout(() => {
+          //       neonPath.style.transition = 'stroke-width 0.8s ease, filter 0.5s ease';
+          //       neonPath.style.strokeWidth = '14';
+          //     }, 50);
+          //   }
+          // }
         }
 
-        if (productCodeEl) productCodeEl.textContent = `SKU: ${skuDisplay}`;
+        // Initialize
+        renderGallery();
+        renderConfigurator();
+        renderSpecs();
+        renderProductIcons();
+        renderRecommendedAccessories();
+        checkConstraints();
+        recalculate();
 
-        const catLower = (product.category || "").toLowerCase();
-        const pNameLower = pName.toLowerCase();
-        const isLinear = catLower.includes('neon') || catLower.includes('linear') || pNameLower.includes('strip') || pNameLower.includes('nnr');
-        let specSummary = `Product: ${pName} (${product.category || 'General'})
-Variant Model: ${skuDisplay}
-Selected Options:
-${selectedOptionsSummary.map(s => "  - " + s).join('\n')}`;
+        // Accordion Tab controllers
+        document.querySelectorAll('.tab-nav-btn').forEach(btn => {
+          btn.addEventListener('click', function () {
+            document.querySelectorAll('.tab-nav-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
 
-        if (isLinear) {
-          specSummary += `
-Requested custom cut length: ${selectedLength.toFixed(1)}m
-Total power load: ${totalPower.toFixed(1)}W
-Recommended system driver: ${driverRecommendation}`;
+            this.classList.add('active');
+            const tabId = this.getAttribute('data-tab');
+            const panel = document.getElementById(tabId);
+            if (panel) panel.classList.add('active');
+          });
+        });
+
+        // Spec button click animation for both details and summary buttons
+        const handleSpecAdd = function () {
+          const originalText = this.textContent;
+          this.textContent = 'Added to Quote List!';
+          this.style.background = 'var(--rgba-hover)';
+          this.style.borderColor = 'var(--accent)';
+          this.style.color = 'var(--accent)';
+
+          setTimeout(() => {
+            this.textContent = originalText;
+            this.style.background = 'none';
+            this.style.borderColor = 'var(--border-light)';
+            this.style.color = 'var(--ink)';
+          }, 2000);
+        };
+
+        const specBtn = document.getElementById('add-to-spec-btn');
+        if (specBtn) {
+          specBtn.addEventListener('click', handleSpecAdd);
+        }
+        const specSummaryBtn = document.getElementById('add-to-spec-btn-summary');
+        if (specSummaryBtn) {
+          specSummaryBtn.addEventListener('click', handleSpecAdd);
         }
 
-        const specField = document.getElementById('quote-spec');
-        if (specField) specField.value = specSummary;
+        // Hover Zoom effect on main image
+        if (galleryMainImg) {
+          galleryMainImg.addEventListener('mousemove', (e) => {
+            const rect = galleryMainImg.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            galleryMainImg.style.transformOrigin = `${x}% ${y}%`;
+            galleryMainImg.style.transform = 'scale(1.8)';
+          });
 
-        // Visual color glow update
-        // const glowArea = document.getElementById('glow-area');
-        const neonPath = document.getElementById('neon-path');
-        const neonSvg = document.getElementById('neon-svg');
-        // if (glowArea) {
-        //   let glowColor = '103, 208, 78';
-        //   if (selectedCctText.includes('2300K') || selectedCctText.includes('2200K')) glowColor = '255, 166, 77';
-        //   else if (selectedCctText.includes('2700K')) glowColor = '255, 180, 90';
-        //   else if (selectedCctText.includes('3000K')) glowColor = '255, 200, 120';
-        //   else if (selectedCctText.includes('4000K') || selectedCctText.includes('4300K')) glowColor = '255, 235, 200';
-        //   else if (selectedCctText.includes('6000K') || selectedCctText.includes('6500K')) glowColor = '220, 240, 255';
-        //   document.documentElement.style.setProperty('--glow-rgb', glowColor);
-
-        //   if (neonPath) {
-        //     neonPath.style.transition = 'none';
-        //     neonPath.style.strokeWidth = '22';
-        //     setTimeout(() => {
-        //       neonPath.style.transition = 'stroke-width 0.8s ease, filter 0.5s ease';
-        //       neonPath.style.strokeWidth = '14';
-        //     }, 50);
-        //   }
-        // }
+          galleryMainImg.addEventListener('mouseleave', () => {
+            galleryMainImg.style.transform = 'scale(1)';
+            galleryMainImg.style.transformOrigin = 'center center';
+          });
+        }
       }
 
-      // Initialize
-      renderGallery();
-      renderConfigurator();
-      renderSpecs();
-      renderProductIcons();
-      renderRecommendedAccessories();
-      checkConstraints();
-      recalculate();
-
-      // Accordion Tab controllers
-      document.querySelectorAll('.tab-nav-btn').forEach(btn => {
-        btn.addEventListener('click', function () {
-          document.querySelectorAll('.tab-nav-btn').forEach(b => b.classList.remove('active'));
-          document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-
-          this.classList.add('active');
-          const tabId = this.getAttribute('data-tab');
-          const panel = document.getElementById(tabId);
-          if (panel) panel.classList.add('active');
-        });
-      });
-
-      // Spec button click animation for both details and summary buttons
-      const handleSpecAdd = function () {
-        const originalText = this.textContent;
-        this.textContent = 'Added to Quote List!';
-        this.style.background = 'var(--rgba-hover)';
-        this.style.borderColor = 'var(--accent)';
-        this.style.color = 'var(--accent)';
-
-        setTimeout(() => {
-          this.textContent = originalText;
-          this.style.background = 'none';
-          this.style.borderColor = 'var(--border-light)';
-          this.style.color = 'var(--ink)';
-        }, 2000);
-      };
-
-      const specBtn = document.getElementById('add-to-spec-btn');
-      if (specBtn) {
-        specBtn.addEventListener('click', handleSpecAdd);
+      // Inquiry Quote form submit
+      function handleQuoteSubmit(event) {
+        event.preventDefault();
+        document.getElementById('quote-form').style.display = 'none';
+        document.getElementById('quote-form-success').style.display = 'block';
       }
-      const specSummaryBtn = document.getElementById('add-to-spec-btn-summary');
-      if (specSummaryBtn) {
-        specSummaryBtn.addEventListener('click', handleSpecAdd);
-      }
-
-      // Hover Zoom effect on main image
-      if (galleryMainImg) {
-        galleryMainImg.addEventListener('mousemove', (e) => {
-          const rect = galleryMainImg.getBoundingClientRect();
-          const x = ((e.clientX - rect.left) / rect.width) * 100;
-          const y = ((e.clientY - rect.top) / rect.height) * 100;
-          galleryMainImg.style.transformOrigin = `${x}% ${y}%`;
-          galleryMainImg.style.transform = 'scale(1.8)';
-        });
-
-        galleryMainImg.addEventListener('mouseleave', () => {
-          galleryMainImg.style.transform = 'scale(1)';
-          galleryMainImg.style.transformOrigin = 'center center';
-        });
-      }
-    }
-
-    // Inquiry Quote form submit
-    function handleQuoteSubmit(event) {
-      event.preventDefault();
-      document.getElementById('quote-form').style.display = 'none';
-      document.getElementById('quote-form-success').style.display = 'block';
-    }
-</script>
-@endverbatim
+    </script>
+  @endverbatim
 @endpush
