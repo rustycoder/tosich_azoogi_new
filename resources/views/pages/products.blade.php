@@ -252,6 +252,13 @@
         text-decoration: none;
       }
 
+      .cat-sub-link.level-0 {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--ink);
+        padding: 5px 6px;
+      }
+
       .sub-list li a.active,
       .sub-list li a:hover,
       .cat-sub-link.active,
