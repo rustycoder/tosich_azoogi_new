@@ -122,7 +122,7 @@
 
             <!-- PRODUCT B2B ICONS ROW START -->
             <div class="product-icons-row-wrapper"
-              style="display: none; margin-top: 0; padding-top: 0; padding-bottom: 4px;">
+              style="display: none; margin-top: 0; padding-top: 0; padding-bottom: 24px; border-bottom: 1px solid var(--line);">
               <div class="product-icons-row" style="display: flex; flex-wrap: wrap; gap: 20px; align-items: center;">
               </div>
             </div>
@@ -130,7 +130,7 @@
 
             <!-- PRODUCT SPECIFICATION DOWNLOAD OPTION START -->
             <div class="specification-download-section"
-              style="margin-top: 0; border-top: 1px solid var(--line); padding-top: 24px; margin-bottom: 0;">
+              style="margin-top: 0; padding-top: 0; margin-bottom: 0;">
               <h3 style="font-family: var(--font-serif); font-size: 24px; margin-bottom: 20px;">Downloadable Resources
               </h3>
               <div class="download-options" style="display: flex; gap: 16px; flex-wrap: wrap;">
@@ -218,11 +218,12 @@
       <!-- ==================== PRODUCT CONFIGURATION & TECHNICAL SPECIFICATIONS SECTION END ==================== -->
 
     </div>
+  </div>
 
-    <!-- ==================== COMPATIBLE ACCESSORIES SECTION START ==================== -->
-    <section class="accessories-section"
-      style="margin-top: 25px; border-top: 1px solid var(--line); padding-top: 20px; padding-bottom: 40px;">
-
+  <!-- ==================== COMPATIBLE ACCESSORIES SECTION START ==================== -->
+  <section class="accessories-section"
+    style="margin-top: 25px; border-top: 1px solid var(--line); padding-top: 20px; padding-bottom: 40px;">
+    <div class="wrap">
       <h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px;">Recommended Products</h3>
       <div class="prod-grid" id="productGrid">
         <div class="prod-card-img">
@@ -236,8 +237,7 @@
             onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
         </div>
       </div>
-  </div>
-
+    </div>
   </section>
   <!-- ==================== COMPATIBLE ACCESSORIES SECTION END ==================== -->
 
@@ -335,7 +335,6 @@
     </div>
   </section>
 
-  </div>
   <!-- ========== FOOTER ========== -->
 @endsection
 
@@ -909,6 +908,8 @@
         // Render Configurator Options
         function renderConfigurator() {
           const configuratorWrapper = document.getElementById('dynamic-configurator');
+          const summaryCard = document.querySelector('.config-summary-card');
+          const optionsGridLayout = document.querySelector('.options-grid-layout');
           const options = product.options || {};
           const optionKeys = Object.keys(options).filter(k => Array.isArray(options[k]) && options[k].length > 0);
 
@@ -917,10 +918,18 @@
               configuratorWrapper.style.display = 'none';
               configuratorWrapper.innerHTML = '';
             }
+            if (summaryCard) {
+              summaryCard.style.display = 'none';
+            }
+            if (optionsGridLayout) {
+              optionsGridLayout.style.gridTemplateColumns = '1fr';
+            }
             return;
           }
 
           if (configuratorWrapper) configuratorWrapper.style.display = 'block';
+          if (summaryCard) summaryCard.style.display = 'flex';
+          if (optionsGridLayout) optionsGridLayout.style.gridTemplateColumns = '1.25fr 0.75fr';
 
           configurator.innerHTML = '<div class="reset-selection" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;"><h3 style="font-family: var(--font-serif); font-size: 28px; margin: 0;">Product Configuration</h3><a href="#" id="btn-clear-selection" class="btn sm" style="display: flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" height="15px" viewBox="0 -960 960 960" fill="currentColor"><path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>Reset Selection</a></div>';
 
