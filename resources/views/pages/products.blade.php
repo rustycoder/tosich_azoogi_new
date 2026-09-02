@@ -39,8 +39,8 @@
 
 
       /* ===========================================================
-             BREADCRUMB STRIP
-          =========================================================== */
+                         BREADCRUMB STRIP
+                      =========================================================== */
       .page-head {
         padding: 12px 0 16px;
         border-bottom: 1px solid var(--line);
@@ -62,8 +62,8 @@
       }
 
       /* ===========================================================
-             TWO-COLUMN LAYOUT: narrow sidebar | product grid
-          =========================================================== */
+                         TWO-COLUMN LAYOUT: narrow sidebar | product grid
+                      =========================================================== */
       .prod-layout {
         display: grid;
         grid-template-columns: 240px 1fr;
@@ -91,8 +91,8 @@
       }
 
       /* ===========================================================
-             SIDEBAR
-          =========================================================== */
+                         SIDEBAR
+                      =========================================================== */
       .prod-sidebar {
         position: sticky;
         top: 120px;
@@ -334,8 +334,8 @@
       }
 
       /* ===========================================================
-             TOOLBAR
-          =========================================================== */
+                         TOOLBAR
+                      =========================================================== */
       .prod-toolbar {
         display: flex;
         align-items: center;
@@ -535,8 +535,8 @@
       }
 
       /* ===========================================================
-             PRODUCT CARD GRID — 4 columns
-          =========================================================== */
+                         PRODUCT CARD GRID — 4 columns
+                      =========================================================== */
       .prod-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -733,8 +733,8 @@
       }
 
       /* ===========================================================
-             PAGINATION
-          =========================================================== */
+                         PAGINATION
+                      =========================================================== */
       .pagination {
         display: flex;
         justify-content: center;
@@ -1452,7 +1452,7 @@
         grid.innerHTML = pagedItems.map(function (p) {
           var detailUrl = p.id ? ('/product-detail?id=' + encodeURIComponent(p.id)) : (p.filePath ? ('/product-detail?file=' + encodeURIComponent(p.filePath)) : ('/product-detail?product=' + encodeURIComponent(p.name)));
 
-          var imgHtml = '<div class="prod-swatch" style="background-image:url(\'' + (p.img || '/assets/logo_dark.png') + '\'); background-size:cover; background-position:center;"></div>';
+          var imgHtml = '<div class="prod-swatch" style="background-image:url(\'' + (p.img || '/assets/bg_default.png') + '\'); background-size:contain; background-position:center; background-repeat:no-repeat;"></div>';
 
           var displayName = p.name;
           if (p.specs && p.specs.Power) {
