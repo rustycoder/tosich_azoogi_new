@@ -142,33 +142,33 @@
                   </svg>
                   Datasheet
                 </a>
-                <a href="#" class="btn --accent"
-                  style="display:flex; align-items:center; justify-content:center; gap:8px;">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                    <polyline points="7 10 12 15 17 10" />
-                    <line x1="12" y1="15" x2="12" y2="3" />
-                  </svg>
-                  Installation Guide
-                </a>
-                <a href="#" class="btn --accent"
-                  style="display:flex; align-items:center; justify-content:center; gap:8px;">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                    <polyline points="7 10 12 15 17 10" />
-                    <line x1="12" y1="15" x2="12" y2="3" />
-                  </svg>
-                  User manual
-                </a>
-                <a href="#" class="btn --accent"
-                  style="display:flex; align-items:center; justify-content:center; gap:8px;">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                    <polyline points="7 10 12 15 17 10" />
-                    <line x1="12" y1="15" x2="12" y2="3" />
-                  </svg>
-                  IES files
-                </a>
+                <!-- <a href="#" class="btn --accent"
+                      style="display:flex; align-items:center; justify-content:center; gap:8px;">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                      </svg>
+                      Installation Guide
+                    </a>
+                    <a href="#" class="btn --accent"
+                      style="display:flex; align-items:center; justify-content:center; gap:8px;">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                      </svg>
+                      User manual
+                    </a>
+                    <a href="#" class="btn --accent"
+                      style="display:flex; align-items:center; justify-content:center; gap:8px;">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                      </svg>
+                      IES files
+                    </a> -->
               </div>
             </div>
             <!-- PRODUCT SPECIFICATION DOWNLOAD OPTION END -->
@@ -709,22 +709,22 @@
         categorySegments = Array.from(new Set(categorySegments));
 
         let breadcrumbHTML = `
-                                                                              <a href="/">Home</a>
-                                                                              <span>/</span>
-                                                                              <a href="/products">Products</a>
-                                                                            `;
+                                                                                      <a href="/">Home</a>
+                                                                                      <span>/</span>
+                                                                                      <a href="/products">Products</a>
+                                                                                    `;
 
         categorySegments.forEach(seg => {
           breadcrumbHTML += `
-                                                                                  <span>/</span>
-                                                                                  <a href="/products?category=${encodeURIComponent(seg)}">${seg}</a>
-                                                                                `;
+                                                                                          <span>/</span>
+                                                                                          <a href="/products?category=${encodeURIComponent(seg)}">${seg}</a>
+                                                                                        `;
         });
 
         breadcrumbHTML += `
-                                                                              <span>/</span>
-                                                                              <span style="color: var(--ink);">${pName}</span>
-                                                                            `;
+                                                                                      <span>/</span>
+                                                                                      <span style="color: var(--ink);">${pName}</span>
+                                                                                    `;
 
         breadcrumbsEl.innerHTML = breadcrumbHTML;
 
@@ -841,16 +841,16 @@
             const isFallback = !p.img || p.img === '/assets/bg_default.png' || p.img === '/assets/logo_dark.png';
             const fallbackStyle = isFallback ? ' filter: grayscale(100%); opacity: 0.7;' : '';
             return `
-                                                                                    <div class="prod-card" onclick="window.location.href='${detailUrl}'">
-                                                                                      <div class="prod-card-img">
-                                                                                        <img class="prod-swatch${isFallback ? ' is-fallback' : ''}" src="${p.img || '/assets/bg_default.png'}" alt="${p.name || 'Recommended Product'}" loading="lazy" onerror="this.onerror=null; this.src='/assets/bg_default.png'; this.classList.add('is-fallback');" style="${fallbackStyle}">
-                                                                                      </div>
-                                                                                      <div class="prod-card-title">
-                                                                                        <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}${codeHtml}</div>
-                                                                                        <button class="add-quote-btn" aria-label="Add to quote" onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
-                                                                                      </div>
-                                                                                    </div>
-                                                                                  `;
+                                                                                            <div class="prod-card" onclick="window.location.href='${detailUrl}'">
+                                                                                              <div class="prod-card-img">
+                                                                                                <img class="prod-swatch${isFallback ? ' is-fallback' : ''}" src="${p.img || '/assets/bg_default.png'}" alt="${p.name || 'Recommended Product'}" loading="lazy" onerror="this.onerror=null; this.src='/assets/bg_default.png'; this.classList.add('is-fallback');" style="${fallbackStyle}">
+                                                                                              </div>
+                                                                                              <div class="prod-card-title">
+                                                                                                <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}${codeHtml}</div>
+                                                                                                <button class="add-quote-btn" aria-label="Add to quote" onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+                                                                                              </div>
+                                                                                            </div>
+                                                                                          `;
           }).join('');
         }
 
@@ -999,11 +999,11 @@
             group.className = 'config-group';
 
             group.innerHTML = `
-                                                                                  <div class="config-group-title">
-                                                                                    <span>${optKey}</span>
-                                                                                  </div>
-                                                                                  <div class="config-options-flex" id="options-flex-${safeKey}" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
-                                                                                `;
+                                                                                          <div class="config-group-title">
+                                                                                            <span>${optKey}</span>
+                                                                                          </div>
+                                                                                          <div class="config-options-flex" id="options-flex-${safeKey}" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+                                                                                        `;
             configurator.appendChild(group);
 
             const flex = group.querySelector(`#options-flex-${safeKey}`);
@@ -1082,11 +1082,11 @@
           if (iconUrls.length > 0) {
             if (iconsWrapper) iconsWrapper.style.display = 'block';
             iconsRow.innerHTML = iconUrls.map((url, idx) => `
-                                                                                <img src="${resolveImg(url)}" alt="Product Icon ${idx + 1}"
-                                                                                  style="height: 42px; width: auto; opacity: 0.85; transition: opacity 0.2s; max-width: 100px; object-fit: contain;"
-                                                                                  onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"
-                                                                                  onerror="this.style.display='none'">
-                                                                              `).join('');
+                                                                                        <img src="${resolveImg(url)}" alt="Product Icon ${idx + 1}"
+                                                                                          style="height: 42px; width: auto; opacity: 0.85; transition: opacity 0.2s; max-width: 100px; object-fit: contain;"
+                                                                                          onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"
+                                                                                          onerror="this.style.display='none'">
+                                                                                      `).join('');
           } else {
             if (iconsWrapper) iconsWrapper.style.display = 'none';
             iconsRow.innerHTML = '';
@@ -1244,9 +1244,9 @@
                 modelDiv.style.borderBottom = '1px solid var(--line)';
                 modelDiv.style.paddingBottom = '8px';
                 modelDiv.innerHTML = `
-                  <strong style="color: var(--ink);">PRODUCT CODE:</strong>
-                  <span style="color: var(--accent); font-weight: 600;">${skuDisplay}</span>
-                `;
+                          <strong style="color: var(--ink);">PRODUCT CODE:</strong>
+                          <span style="color: var(--accent); font-weight: 600;">${skuDisplay}</span>
+                        `;
                 summaryListEl.appendChild(modelDiv);
               }
 
@@ -1262,9 +1262,9 @@
                   itemDiv.style.fontSize = '12px';
                   itemDiv.style.marginBottom = '4px';
                   itemDiv.innerHTML = `
-                    <span style="font-weight: 500; text-transform: capitalize; color: var(--muted);">${key}:</span>
-                    <span style="color: var(--ink); font-weight: 600;">${valObj.name}</span>
-                  `;
+                            <span style="font-weight: 500; text-transform: capitalize; color: var(--muted);">${key}:</span>
+                            <span style="color: var(--ink); font-weight: 600;">${valObj.name}</span>
+                          `;
                   summaryListEl.appendChild(itemDiv);
                 }
               }
@@ -1279,15 +1279,15 @@
           const pNameLower = pName.toLowerCase();
           const isLinear = catLower.includes('neon') || catLower.includes('linear') || pNameLower.includes('strip') || pNameLower.includes('nnr');
           let specSummary = `Product: ${pName} (${product.category || 'General'})
-                                                                    Variant Model: ${skuDisplay}
-                                                                    Selected Options:
-                                                                    ${selectedOptionsSummary.map(s => "  - " + s).join('\n')}`;
+                                                                            Variant Model: ${skuDisplay}
+                                                                            Selected Options:
+                                                                            ${selectedOptionsSummary.map(s => "  - " + s).join('\n')}`;
 
           if (isLinear) {
             specSummary += `
-                                                                    Requested custom cut length: ${selectedLength.toFixed(1)}m
-                                                                    Total power load: ${totalPower.toFixed(1)}W
-                                                                    Recommended system driver: ${driverRecommendation}`;
+                                                                            Requested custom cut length: ${selectedLength.toFixed(1)}m
+                                                                            Total power load: ${totalPower.toFixed(1)}W
+                                                                            Recommended system driver: ${driverRecommendation}`;
           }
 
           const specField = document.getElementById('quote-spec');
