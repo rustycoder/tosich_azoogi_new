@@ -438,19 +438,24 @@
         }
 
         .prod-sidebar.open {
-          display: block;
+          display: flex;
+          flex-direction: column;
           position: fixed;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: auto;
-          width: min(360px, 92vw);
+          top: max(12px, env(safe-area-inset-top, 0px));
+          right: 16px;
+          bottom: max(12px, env(safe-area-inset-bottom, 0px));
+          left: 16px;
+          width: auto;
+          max-width: 400px;
+          max-height: calc(100dvh - 24px);
+          margin-inline: auto;
           z-index: 290;
           background: var(--bg);
-          padding: 20px 20px 32px;
+          padding: 18px 18px 28px;
           overflow-y: auto;
-          border-left: 1px solid var(--line);
-          box-shadow: -18px 0 48px rgba(0, 0, 0, .12);
+          border: 1px solid var(--line);
+          border-radius: 8px;
+          box-shadow: 0 18px 48px rgba(0, 0, 0, .18);
         }
 
         .prod-filter-overlay {
