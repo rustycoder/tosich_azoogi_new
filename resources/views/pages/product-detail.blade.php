@@ -178,7 +178,7 @@
 
           <!-- RIGHT COLUMN: SELECTED SUMMARY CARD START -->
           <div class="config-summary-card"
-            style="background: var(--card-bg); border: 1px solid var(--border-light); border-radius: 8px; padding: 24px; display: flex; flex-direction: column; gap: 20px; position: sticky; top: 100px;">
+            style="background: var(--card-bg); border: 1px solid var(--border-light); border-radius: 8px; padding: 24px; display: flex; flex-direction: column; gap: 10px; position: sticky; top: 100px;">
             <h4
               style="font-family: var(--font-serif); font-size: 20px; margin: 0; color: var(--ink); border-bottom: 1px solid var(--line); padding-bottom: 12px;">
               Selected Configuration</h4>
@@ -659,22 +659,22 @@
         categorySegments = Array.from(new Set(categorySegments));
 
         let breadcrumbHTML = `
-                                                  <a href="/">Home</a>
-                                                  <span>/</span>
-                                                  <a href="/products">Products</a>
-                                                `;
+                                                          <a href="/">Home</a>
+                                                          <span>/</span>
+                                                          <a href="/products">Products</a>
+                                                        `;
 
         categorySegments.forEach(seg => {
           breadcrumbHTML += `
-                                                      <span>/</span>
-                                                      <a href="/products?category=${encodeURIComponent(seg)}">${seg}</a>
-                                                    `;
+                                                              <span>/</span>
+                                                              <a href="/products?category=${encodeURIComponent(seg)}">${seg}</a>
+                                                            `;
         });
 
         breadcrumbHTML += `
-                                                  <span>/</span>
-                                                  <span style="color: var(--ink);">${pName}</span>
-                                                `;
+                                                          <span>/</span>
+                                                          <span style="color: var(--ink);">${pName}</span>
+                                                        `;
 
         breadcrumbsEl.innerHTML = breadcrumbHTML;
 
@@ -791,16 +791,16 @@
             const isFallback = !p.img || p.img === '/assets/bg_default.png' || p.img === '/assets/logo_dark.png';
             const fallbackStyle = isFallback ? ' filter: grayscale(100%); opacity: 0.7;' : '';
             return `
-                                                        <div class="prod-card" onclick="window.location.href='${detailUrl}'">
-                                                          <div class="prod-card-img">
-                                                            <div class="prod-swatch${isFallback ? ' is-fallback' : ''}" style="background-image:url('${p.img || '/assets/bg_default.png'}'); background-size:contain; background-position:center; background-repeat:no-repeat;${fallbackStyle}"></div>
-                                                          </div>
-                                                          <div class="prod-card-title">
-                                                            <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}${codeHtml}</div>
-                                                            <button class="add-quote-btn" aria-label="Add to quote" onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
-                                                          </div>
-                                                        </div>
-                                                      `;
+                                                                <div class="prod-card" onclick="window.location.href='${detailUrl}'">
+                                                                  <div class="prod-card-img">
+                                                                    <div class="prod-swatch${isFallback ? ' is-fallback' : ''}" style="background-image:url('${p.img || '/assets/bg_default.png'}'); background-size:contain; background-position:center; background-repeat:no-repeat;${fallbackStyle}"></div>
+                                                                  </div>
+                                                                  <div class="prod-card-title">
+                                                                    <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}${codeHtml}</div>
+                                                                    <button class="add-quote-btn" aria-label="Add to quote" onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+                                                                  </div>
+                                                                </div>
+                                                              `;
           }).join('');
         }
 
@@ -949,11 +949,11 @@
             group.className = 'config-group';
 
             group.innerHTML = `
-                                                      <div class="config-group-title">
-                                                        <span>${optKey}</span>
-                                                      </div>
-                                                      <div class="config-options-flex" id="options-flex-${safeKey}" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
-                                                    `;
+                                                              <div class="config-group-title">
+                                                                <span>${optKey}</span>
+                                                              </div>
+                                                              <div class="config-options-flex" id="options-flex-${safeKey}" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+                                                            `;
             configurator.appendChild(group);
 
             const flex = group.querySelector(`#options-flex-${safeKey}`);
@@ -1032,11 +1032,11 @@
           if (iconUrls.length > 0) {
             if (iconsWrapper) iconsWrapper.style.display = 'block';
             iconsRow.innerHTML = iconUrls.map((url, idx) => `
-                                                    <img src="${resolveImg(url)}" alt="Product Icon ${idx + 1}"
-                                                      style="height: 42px; width: auto; opacity: 0.85; transition: opacity 0.2s; max-width: 100px; object-fit: contain;"
-                                                      onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"
-                                                      onerror="this.style.display='none'">
-                                                  `).join('');
+                                                            <img src="${resolveImg(url)}" alt="Product Icon ${idx + 1}"
+                                                              style="height: 42px; width: auto; opacity: 0.85; transition: opacity 0.2s; max-width: 100px; object-fit: contain;"
+                                                              onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"
+                                                              onerror="this.style.display='none'">
+                                                          `).join('');
           } else {
             if (iconsWrapper) iconsWrapper.style.display = 'none';
             iconsRow.innerHTML = '';
@@ -1189,11 +1189,10 @@
             modelDiv.style.justifyContent = 'space-between';
             modelDiv.style.borderBottom = '1px solid var(--line)';
             modelDiv.style.paddingBottom = '8px';
-            modelDiv.style.marginBottom = '8px';
             modelDiv.innerHTML = `
-                                                      <strong style="color: var(--ink);">PRODUCT CODE:</strong>
-                                                      <span style="color: var(--accent); font-weight: 600;">${skuDisplay}</span>
-                                                    `;
+                                                              <strong style="color: var(--ink);">PRODUCT CODE:</strong>
+                                                              <span style="color: var(--accent); font-weight: 600;">${skuDisplay}</span>
+                                                            `;
             summaryListEl.appendChild(modelDiv);
 
             // Render each option key/value pair
@@ -1208,9 +1207,9 @@
                 itemDiv.style.fontSize = '12px';
                 itemDiv.style.marginBottom = '4px';
                 itemDiv.innerHTML = `
-                                                          <span style="font-weight: 500; text-transform: capitalize; color: var(--muted);">${key}:</span>
-                                                          <span style="color: var(--ink); font-weight: 600;">${valObj.name}</span>
-                                                        `;
+                                                                  <span style="font-weight: 500; text-transform: capitalize; color: var(--muted);">${key}:</span>
+                                                                  <span style="color: var(--ink); font-weight: 600;">${valObj.name}</span>
+                                                                `;
                 summaryListEl.appendChild(itemDiv);
               }
             }
@@ -1222,15 +1221,15 @@
           const pNameLower = pName.toLowerCase();
           const isLinear = catLower.includes('neon') || catLower.includes('linear') || pNameLower.includes('strip') || pNameLower.includes('nnr');
           let specSummary = `Product: ${pName} (${product.category || 'General'})
-                                        Variant Model: ${skuDisplay}
-                                        Selected Options:
-                                        ${selectedOptionsSummary.map(s => "  - " + s).join('\n')}`;
+                                                Variant Model: ${skuDisplay}
+                                                Selected Options:
+                                                ${selectedOptionsSummary.map(s => "  - " + s).join('\n')}`;
 
           if (isLinear) {
             specSummary += `
-                                        Requested custom cut length: ${selectedLength.toFixed(1)}m
-                                        Total power load: ${totalPower.toFixed(1)}W
-                                        Recommended system driver: ${driverRecommendation}`;
+                                                Requested custom cut length: ${selectedLength.toFixed(1)}m
+                                                Total power load: ${totalPower.toFixed(1)}W
+                                                Recommended system driver: ${driverRecommendation}`;
           }
 
           const specField = document.getElementById('quote-spec');
