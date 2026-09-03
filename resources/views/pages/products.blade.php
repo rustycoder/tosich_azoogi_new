@@ -1478,13 +1478,6 @@
           var imgHtml = '<img src="' + (p.img || '/assets/bg_default.png') + '" alt="' + (p.name || 'Product') + '" class="prod-swatch' + (isFallback ? ' is-fallback' : '') + '" loading="lazy" onerror="this.onerror=null; this.src=\'/assets/bg_default.png\'; this.classList.add(\'is-fallback\');"' + (isFallback ? ' style="filter: grayscale(100%); opacity: 0.7;"' : '') + '>';
 
           var displayName = p.name;
-          if (p.specs && p.specs.Power) {
-            var pwr = p.specs.Power;
-            var pwrVal = Array.isArray(pwr) ? (pwr[0] && (typeof pwr[0] === 'object' && pwr[0].value ? pwr[0].value : pwr[0])) : ((typeof pwr === 'object' && pwr.value) ? pwr.value : pwr);
-            if (pwrVal && String(displayName).toLowerCase().indexOf(String(pwrVal).toLowerCase()) === -1) {
-              displayName += ' (' + pwrVal + ')';
-            }
-          }
 
           return '<div class="prod-card" data-href="' + detailUrl + '" role="link" tabindex="0">' +
             '<div class="prod-card-img">' + imgHtml + '</div>' +
