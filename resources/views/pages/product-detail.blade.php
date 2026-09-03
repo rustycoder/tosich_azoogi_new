@@ -511,18 +511,26 @@
           const features = product.product_features || {};
           const defaultCode = product.product_code || features["Product Code"] || features["Product code"] || product.sku || product.id || "";
           const mappings = product.sku_mappings;
+          const options = product.options || {};
+          const optionKeys = Object.keys(options).filter(k => Array.isArray(options[k]) && options[k].length > 0);
 
-          if (!mappings || typeof mappings !== 'object' || Object.keys(mappings).length === 0) {
+          // If no options exist for this product, defaultCode is the matching code
+          if (optionKeys.length === 0) {
             return defaultCode;
           }
 
           const selectedEntries = Object.entries(selectedOpts || {}).filter(([k, v]) => v !== undefined && v !== null && String(v).trim() !== '');
           if (selectedEntries.length === 0) {
-            return defaultCode;
+            return "";
+          }
+
+          const allOptionsSelected = optionKeys.every(k => selectedOpts && selectedOpts[k] !== undefined && selectedOpts[k] !== null && String(selectedOpts[k]).trim() !== '');
+
+          if (!mappings || typeof mappings !== 'object' || Object.keys(mappings).length === 0) {
+            return allOptionsSelected ? defaultCode : "";
           }
 
           const selectedIds = selectedEntries.map(([k, v]) => String(v).trim());
-          const options = product.options || {};
           const selectedNames = [];
 
           for (const [optKey, optId] of selectedEntries) {
@@ -554,50 +562,31 @@
             }
           }
 
-          // 3. Subset match by IDs: candidate must contain all selected IDs
-          const candidateIdKeys = mappingKeys.filter(mKey => {
-            const parts = mKey.split(/[|,]/).map(s => s.trim());
-            return containsAll(parts, selectedIds);
-          }).sort((a, b) => a.split(/[|,]/).length - b.split(/[|,]/).length);
-
-          if (candidateIdKeys.length > 0) {
-            return mappings[candidateIdKeys[0]];
-          }
-
-          // 4. Subset match by names
-          if (selectedNames.length > 0) {
-            const candidateNameKeys = mappingKeys.filter(mKey => {
-              const parts = mKey.split(/[|,]/).map(s => s.trim().toLowerCase());
-              return containsAll(parts, selectedNames);
+          // 3. Complete combination subset match (when all option groups are selected)
+          if (allOptionsSelected) {
+            const candidateIdKeys = mappingKeys.filter(mKey => {
+              const parts = mKey.split(/[|,]/).map(s => s.trim());
+              return containsAll(parts, selectedIds);
             }).sort((a, b) => a.split(/[|,]/).length - b.split(/[|,]/).length);
 
-            if (candidateNameKeys.length > 0) {
-              return mappings[candidateNameKeys[0]];
+            if (candidateIdKeys.length > 0) {
+              return mappings[candidateIdKeys[0]];
+            }
+
+            if (selectedNames.length > 0) {
+              const candidateNameKeys = mappingKeys.filter(mKey => {
+                const parts = mKey.split(/[|,]/).map(s => s.trim().toLowerCase());
+                return containsAll(parts, selectedNames);
+              }).sort((a, b) => a.split(/[|,]/).length - b.split(/[|,]/).length);
+
+              if (candidateNameKeys.length > 0) {
+                return mappings[candidateNameKeys[0]];
+              }
             }
           }
 
-          // 5. Maximum Overlap match
-          let bestMatchKey = null;
-          let maxMatchedCount = 0;
-          let minExtraCount = Infinity;
-
-          for (const mKey of mappingKeys) {
-            const parts = mKey.split(/[|,]/).map(s => s.trim());
-            const matchedCount = selectedIds.filter(id => parts.includes(id)).length;
-            const extraCount = parts.length - matchedCount;
-
-            if (matchedCount > maxMatchedCount || (matchedCount === maxMatchedCount && matchedCount > 0 && extraCount < minExtraCount)) {
-              maxMatchedCount = matchedCount;
-              minExtraCount = extraCount;
-              bestMatchKey = mKey;
-            }
-          }
-
-          if (bestMatchKey && maxMatchedCount > 0) {
-            return mappings[bestMatchKey];
-          }
-
-          return defaultCode;
+          // No matching combination yet
+          return "";
         }
 
         // Extract Product Name, SKU, Short & Long Descriptions
@@ -1198,16 +1187,18 @@
             const selectedKeys = Object.keys(selectedOptions).filter(k => selectedOptions[k] !== undefined && selectedOptions[k] !== null && String(selectedOptions[k]).trim() !== '');
 
             if (selectedKeys.length > 0) {
-              const modelDiv = document.createElement('div');
-              modelDiv.style.display = 'flex';
-              modelDiv.style.justifyContent = 'space-between';
-              modelDiv.style.borderBottom = '1px solid var(--line)';
-              modelDiv.style.paddingBottom = '8px';
-              modelDiv.innerHTML = `
-                <strong style="color: var(--ink);">PRODUCT CODE:</strong>
-                <span style="color: var(--accent); font-weight: 600;">${skuDisplay}</span>
-              `;
-              summaryListEl.appendChild(modelDiv);
+              if (skuDisplay) {
+                const modelDiv = document.createElement('div');
+                modelDiv.style.display = 'flex';
+                modelDiv.style.justifyContent = 'space-between';
+                modelDiv.style.borderBottom = '1px solid var(--line)';
+                modelDiv.style.paddingBottom = '8px';
+                modelDiv.innerHTML = `
+                  <strong style="color: var(--ink);">PRODUCT CODE:</strong>
+                  <span style="color: var(--accent); font-weight: 600;">${skuDisplay}</span>
+                `;
+                summaryListEl.appendChild(modelDiv);
+              }
 
               // Render each option key/value pair
               for (const key of selectedKeys) {
