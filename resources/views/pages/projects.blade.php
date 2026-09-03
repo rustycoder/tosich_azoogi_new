@@ -16,7 +16,7 @@ Explore Azoogi LED lighting projects across hospitality, residential, medical, i
 @section('logo', 'logo_dark.png')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('assets/css/projects.css') }}?v={{ config('app.asset_version') }}">
+<link rel="stylesheet" href="{{ versioned_asset('assets/css/projects.css') }}">
 @endpush
 
 @section('content')

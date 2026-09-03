@@ -12,7 +12,7 @@
 @section('logo', 'logo_dark.png')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('assets/css/silvair.v-1.0.css') }}?v={{ config('app.asset_version') }}">
+<link rel="stylesheet" href="{{ versioned_asset('assets/css/silvair.css') }}">
 @endpush
 
 @section('content')

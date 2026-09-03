@@ -12,7 +12,7 @@
 @section('logo', 'logo_dark.png')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('assets/css/solutions.v-1.7.css') }}?v={{ config('app.asset_version') }}">
+<link rel="stylesheet" href="{{ versioned_asset('assets/css/solutions.css') }}">
 @endpush
 
 @section('content')

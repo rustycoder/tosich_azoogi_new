@@ -12,7 +12,7 @@
 @section('logo', 'logo_dark.png')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('assets/css/casambi.v-1.1.css') }}?v={{ config('app.asset_version') }}">
+<link rel="stylesheet" href="{{ versioned_asset('assets/css/casambi.css') }}">
 @endpush
 
 @section('content')

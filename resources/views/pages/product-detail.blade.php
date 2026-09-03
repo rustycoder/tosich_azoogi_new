@@ -14,7 +14,7 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
 @section('logo', 'logo_dark.png')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('assets/css/product_detail.css') }}?v={{ config('app.asset_version') }}">
+<link rel="stylesheet" href="{{ versioned_asset('assets/css/product_detail.css') }}">
 @endpush
 
 @section('content')
