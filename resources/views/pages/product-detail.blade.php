@@ -485,8 +485,58 @@
         }
         product.options = normalizedOptions;
 
-        // Configuration state: start with empty options by default
+        // Configuration state: initialize by default from the first SKU mapping
         let selectedOptions = {};
+
+        function initDefaultOptionsFromFirstMapping() {
+          selectedOptions = {};
+          const mappings = product.sku_mappings;
+          const options = product.options || {};
+          const optionKeys = Object.keys(options).filter(k => Array.isArray(options[k]) && options[k].length > 0);
+
+          if (optionKeys.length === 0) return;
+
+          if (!mappings || typeof mappings !== 'object' || Object.keys(mappings).length === 0) {
+            optionKeys.forEach(optKey => {
+              if (options[optKey] && options[optKey].length > 0) {
+                selectedOptions[optKey] = options[optKey][0].id;
+              }
+            });
+            return;
+          }
+
+          const mappingKeys = Object.keys(mappings);
+          if (mappingKeys.length > 0) {
+            const firstMappingKey = mappingKeys[0];
+            const parts = firstMappingKey.split(/[|,]/).map(s => s.trim());
+
+            parts.forEach(part => {
+              const partLower = part.toLowerCase();
+              for (const optKey of optionKeys) {
+                const optVals = options[optKey] || [];
+                const matchById = optVals.find(v => String(v.id) === part);
+                if (matchById) {
+                  selectedOptions[optKey] = matchById.id;
+                  break;
+                }
+                const matchByName = optVals.find(v => String(v.name).trim().toLowerCase() === partLower);
+                if (matchByName) {
+                  selectedOptions[optKey] = matchByName.id;
+                  break;
+                }
+              }
+            });
+          }
+
+          // Fallback for any unselected option groups to their first option
+          optionKeys.forEach(optKey => {
+            if (!selectedOptions[optKey] && options[optKey] && options[optKey].length > 0) {
+              selectedOptions[optKey] = options[optKey][0].id;
+            }
+          });
+        }
+
+        initDefaultOptionsFromFirstMapping();
 
         let selectedLength = 5.0;
 
