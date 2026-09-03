@@ -286,7 +286,7 @@ a.meta-badge:hover {
 
 /* Configurator selection blocks */
 .config-group {
-  margin-bottom: 10px;
+  margin-bottom: 10px !important;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -305,7 +305,7 @@ a.meta-badge:hover {
   gap: 4px;
   width: 200px;
   flex-shrink: 0;
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
 }
 
 .config-options-flex {
@@ -334,7 +334,7 @@ a.meta-badge:hover {
   padding: 5px 10px;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   transition: all 0.2s ease;
   display: inline-flex;
