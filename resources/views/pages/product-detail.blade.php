@@ -1195,34 +1195,40 @@
           if (summaryListEl) {
             summaryListEl.innerHTML = '';
 
-            const modelDiv = document.createElement('div');
-            modelDiv.style.display = 'flex';
-            modelDiv.style.justifyContent = 'space-between';
-            modelDiv.style.borderBottom = '1px solid var(--line)';
-            modelDiv.style.paddingBottom = '8px';
-            modelDiv.innerHTML = `
-                                                                                  <strong style="color: var(--ink);">PRODUCT CODE:</strong>
-                                                                                  <span style="color: var(--accent); font-weight: 600;">${skuDisplay}</span>
-                                                                                `;
-            summaryListEl.appendChild(modelDiv);
+            const selectedKeys = Object.keys(selectedOptions).filter(k => selectedOptions[k] !== undefined && selectedOptions[k] !== null && String(selectedOptions[k]).trim() !== '');
 
-            // Render each option key/value pair
-            for (const key in selectedOptions) {
-              const id = selectedOptions[key];
-              const optVals = options[key] || [];
-              const valObj = optVals.find(v => String(v.id) === String(id)) || { name: String(id) };
-              if (valObj) {
-                const itemDiv = document.createElement('div');
-                itemDiv.style.display = 'flex';
-                itemDiv.style.justifyContent = 'space-between';
-                itemDiv.style.fontSize = '12px';
-                itemDiv.style.marginBottom = '4px';
-                itemDiv.innerHTML = `
-                                                                                      <span style="font-weight: 500; text-transform: capitalize; color: var(--muted);">${key}:</span>
-                                                                                      <span style="color: var(--ink); font-weight: 600;">${valObj.name}</span>
-                                                                                    `;
-                summaryListEl.appendChild(itemDiv);
+            if (selectedKeys.length > 0) {
+              const modelDiv = document.createElement('div');
+              modelDiv.style.display = 'flex';
+              modelDiv.style.justifyContent = 'space-between';
+              modelDiv.style.borderBottom = '1px solid var(--line)';
+              modelDiv.style.paddingBottom = '8px';
+              modelDiv.innerHTML = `
+                <strong style="color: var(--ink);">PRODUCT CODE:</strong>
+                <span style="color: var(--accent); font-weight: 600;">${skuDisplay}</span>
+              `;
+              summaryListEl.appendChild(modelDiv);
+
+              // Render each option key/value pair
+              for (const key of selectedKeys) {
+                const id = selectedOptions[key];
+                const optVals = options[key] || [];
+                const valObj = optVals.find(v => String(v.id) === String(id)) || { name: String(id) };
+                if (valObj) {
+                  const itemDiv = document.createElement('div');
+                  itemDiv.style.display = 'flex';
+                  itemDiv.style.justifyContent = 'space-between';
+                  itemDiv.style.fontSize = '12px';
+                  itemDiv.style.marginBottom = '4px';
+                  itemDiv.innerHTML = `
+                    <span style="font-weight: 500; text-transform: capitalize; color: var(--muted);">${key}:</span>
+                    <span style="color: var(--ink); font-weight: 600;">${valObj.name}</span>
+                  `;
+                  summaryListEl.appendChild(itemDiv);
+                }
               }
+            } else {
+              summaryListEl.innerHTML = '<div style="color: var(--muted); font-size: 13px; font-style: italic; padding: 4px 0;">Please select configuration options to view product code and summary.</div>';
             }
           }
 
