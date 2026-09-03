@@ -132,7 +132,7 @@
                 <tr>
                   <td>
                     @if ($preview !== '')
-                      <span class="mx-product" data-preview="{{ $preview }}"{!! cms_style($meta, 'hardware.row.product', $loop->index) !!}>{{ $row['product'] ?? '' }}</span>
+                      <span class="mx-product" data-preview="{{ $preview }}" tabindex="0"{!! cms_style($meta, 'hardware.row.product', $loop->index) !!}>{{ $row['product'] ?? '' }}</span>
                     @else
                       <span{!! cms_style($meta, 'hardware.row.product', $loop->index) !!}>{{ $row['product'] ?? '' }}</span>
                     @endif
@@ -191,7 +191,7 @@
     </div>
   </div>
 
-  <div class="mx-cursor-preview" hidden aria-hidden="true">
+  <div class="mx-cursor-preview" data-product-preview="mx-product" hidden aria-hidden="true">
     <img alt="">
   </div>
 
@@ -199,6 +199,7 @@
 @endsection
 
 @push('scripts')
+<script src="{{ versioned_asset('assets/js/product-preview.js') }}"></script>
 @verbatim
 <script>
 (function () {
@@ -320,67 +321,6 @@
   }, { passive: true });
 
   play();
-})();
-
-(function () {
-  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    return;
-  }
-
-  const preview = document.querySelector('.mx-cursor-preview');
-  const image = preview?.querySelector('img');
-  const products = Array.from(document.querySelectorAll('.mx-product[data-preview]'));
-  if (!preview || !image || products.length === 0) {
-    return;
-  }
-
-  let visible = false;
-  let mouseX = 0;
-  let mouseY = 0;
-  let frame = 0;
-
-  function place() {
-    const offset = 20;
-    const width = preview.offsetWidth;
-    const height = preview.offsetHeight;
-    const maxX = window.innerWidth - width - 16;
-    const maxY = window.innerHeight - height - 16;
-    const left = Math.max(16, Math.min(mouseX + offset, maxX));
-    const top = Math.max(16, Math.min(mouseY + offset, maxY));
-    preview.style.transform = 'translate('+left+'px, '+top+'px)';
-    frame = 0;
-  }
-
-  function show(src, alt) {
-    if (image.getAttribute('src') !== src) {
-      image.src = src;
-    }
-    image.alt = alt;
-    preview.hidden = false;
-    visible = true;
-    place();
-  }
-
-  function hide() {
-    visible = false;
-    preview.hidden = true;
-    image.removeAttribute('src');
-    image.alt = '';
-  }
-
-  products.forEach(function (product) {
-    product.addEventListener('mouseenter', function () {
-      show(product.getAttribute('data-preview') || '', product.textContent.trim());
-    });
-    product.addEventListener('mousemove', function (event) {
-      mouseX = event.clientX;
-      mouseY = event.clientY;
-      if (!frame) {
-        frame = window.requestAnimationFrame(place);
-      }
-    });
-    product.addEventListener('mouseleave', hide);
-  });
 })();
 </script>
 @endverbatim
