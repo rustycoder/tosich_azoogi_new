@@ -589,6 +589,9 @@
       .prod-swatch {
         position: absolute;
         inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
         background-color: #ffffff;
         display: flex;
         align-items: center;
@@ -1461,7 +1464,7 @@
           var detailUrl = p.id ? ('/product-detail?id=' + encodeURIComponent(p.id)) : (p.filePath ? ('/product-detail?file=' + encodeURIComponent(p.filePath)) : ('/product-detail?product=' + encodeURIComponent(p.name)));
 
           var isFallback = !p.img || p.img === '/assets/bg_default.png' || p.img === '/assets/logo_dark.png';
-          var imgHtml = '<div class="prod-swatch' + (isFallback ? ' is-fallback' : '') + '" style="background-image:url(\'' + (p.img || '/assets/bg_default.png') + '\'); background-size:contain; background-position:center; background-repeat:no-repeat;' + (isFallback ? ' filter: grayscale(100%);' : '') + '"></div>';
+          var imgHtml = '<img src="' + (p.img || '/assets/bg_default.png') + '" alt="' + (p.name || 'Product') + '" class="prod-swatch' + (isFallback ? ' is-fallback' : '') + '" loading="lazy" onerror="this.onerror=null; this.src=\'/assets/bg_default.png\'; this.classList.add(\'is-fallback\');"' + (isFallback ? ' style="filter: grayscale(100%); opacity: 0.7;"' : '') + '>';
 
           var displayName = p.name;
           if (p.specs && p.specs.Power) {

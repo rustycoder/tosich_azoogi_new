@@ -226,9 +226,7 @@
       <h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px;">Recommended Products</h3>
       <div class="prod-grid" id="productGrid">
         <div class="prod-card-img">
-          <div class="prod-swatch"
-            style="background-image:url('/assets/img/drivers.webp'); background-size:cover; background-position:center;">
-          </div>
+          <img class="prod-swatch" src="/assets/img/drivers.webp" alt="DALI-2 Dimmable Driver" loading="lazy" style="object-fit: cover;">
         </div>
         <div class="prod-card-title">
           <div class="prod-card-title-text"><span class="cat-label">DALI / DALI-2</span>DALI-2 Dimmable Driver</div>
@@ -793,7 +791,7 @@
             return `
                                                                 <div class="prod-card" onclick="window.location.href='${detailUrl}'">
                                                                   <div class="prod-card-img">
-                                                                    <div class="prod-swatch${isFallback ? ' is-fallback' : ''}" style="background-image:url('${p.img || '/assets/bg_default.png'}'); background-size:contain; background-position:center; background-repeat:no-repeat;${fallbackStyle}"></div>
+                                                                    <img class="prod-swatch${isFallback ? ' is-fallback' : ''}" src="${p.img || '/assets/bg_default.png'}" alt="${p.name || 'Recommended Product'}" loading="lazy" onerror="this.onerror=null; this.src='/assets/bg_default.png'; this.classList.add('is-fallback');" style="${fallbackStyle}">
                                                                   </div>
                                                                   <div class="prod-card-title">
                                                                     <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}${codeHtml}</div>
