@@ -195,7 +195,7 @@ h3 {
   font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: .08em;
+  letter-spacing: .04em;
   align-items: center;
 }
 
@@ -599,7 +599,7 @@ h3 {
   color: var(--nav-text);
   font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: .12em;
+  letter-spacing: .04em;
   transition: all .3s;
   border-radius: 4px;
   position: relative;
@@ -2970,7 +2970,7 @@ aside p {
 /* Variants Grid & Mini Cards */
 .mega-variant-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 10px;
   align-items: stretch;
 }
@@ -3065,6 +3065,8 @@ a.mega-variant-card:after {
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: left;
+  text-transform: capitalize;
+  letter-spacing: 0;
 }
 
 .mega-variant-code {
@@ -3073,7 +3075,7 @@ a.mega-variant-card:after {
   font-size: 9px;
   color: var(--accent) !important;
   text-transform: uppercase;
-  letter-spacing: .08em;
+  letter-spacing: .04em;
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
@@ -3167,7 +3169,7 @@ a.mega-variant-card:after {
 }
 
 .mega-direct-products-container {
-  padding: 10px 15px 0 15px
+  padding: 10px 0px;
 }
 
 .mega-accordion-header {

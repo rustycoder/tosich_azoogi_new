@@ -213,26 +213,6 @@
       grid.appendChild(createProductCard(c));
     });
 
-    if (cardsList.length > maxLimit) {
-      const viewAllCard = document.createElement('a');
-      viewAllCard.className = 'mega-variant-card view-all-card';
-      viewAllCard.href = `/products?category=${encodeURIComponent(categoryName)}`;
-      viewAllCard.innerHTML = `
-        <div class="view-all-card-inner">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="color: var(--accent);">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-          <span style="font-size: 11px; font-weight: 600; color: var(--accent);">View all ${cardsList.length}</span>
-        </div>
-      `;
-      viewAllCard.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.location.href = viewAllCard.href;
-      });
-      grid.appendChild(viewAllCard);
-    }
-
     parentContainer.appendChild(grid);
   }
 
