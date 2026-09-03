@@ -18,6 +18,18 @@
   /* Shared shell — header, wraps, and media banners */
   --site-max: 1400px;
 
+  --font-sans: "Google Sans Flex", sans-serif;
+  --fs-kicker: clamp(10px, 0.9vw, 13px);
+  --fs-caption: clamp(7px, 0.8vw, 11px);
+  --fs-card-title: clamp(11px, 1.85vw, 26px);
+  --fs-card-title-sm: clamp(13px, 1.6vw, 22px);
+  --fs-meta: clamp(12px, 1vw, 14px);
+  --fs-body: clamp(14px, 1.15vw, 17px);
+  --fs-lead: clamp(15px, 1.2vw, 18px);
+  --fs-h2: clamp(36px, 4.5vw, 64px);
+  --fs-h2-section: clamp(28px, 3.2vw, 48px);
+  --fs-h3: clamp(22px, 2.4vw, 36px);
+
   --pure-bg: #ffffff;
   --pure-text: #111111;
   --always-white: #ffffff;
@@ -41,7 +53,7 @@ html,
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   /* visible required — overflow-x:hidden breaks position:sticky stacking cards */
@@ -828,7 +840,7 @@ body.nav-open .nav-overlay {
   margin-top: 22px;
   max-width: 560px;
   color: #dadada;
-  font-size: 16px;
+  font-size: var(--fs-lead);
   opacity: 0;
   transform: translateY(20px);
   transition: all 1.1s .65s ease
@@ -1035,7 +1047,7 @@ section {
 }
 
 .kicker {
-  font-size: 13px;
+  font-size: var(--fs-kicker);
   letter-spacing: .4em;
   text-transform: uppercase;
   color: var(--accent);
@@ -1044,9 +1056,9 @@ section {
 }
 
 .h2 {
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: var(--font-sans);
   font-weight: 400;
-  font-size: clamp(36px, 4.5vw, 64px);
+  font-size: var(--fs-h2);
   line-height: 1.05;
   letter-spacing: -.01em
 }
@@ -1055,7 +1067,7 @@ section {
   color: var(--muted);
   max-width: 680px;
   margin-top: 22px;
-  font-size: 17px
+  font-size: var(--fs-lead)
 }
 
 .intro {
@@ -1214,7 +1226,7 @@ section {
 }
 
 .products .head .h2 {
-  font-size: clamp(28px, 3.2vw, 48px);
+  font-size: var(--fs-h2-section);
 }
 
 .marquee {
@@ -1252,8 +1264,8 @@ section {
 }
 
 .marquee .card {
-  flex: 0 0 260px;
-  width: 260px;
+  flex: 0 0 clamp(160px, 22vw, 260px);
+  width: clamp(160px, 22vw, 260px);
   max-height: 360px;
   display: flex;
   flex-direction: column;
@@ -1272,7 +1284,7 @@ section {
 }
 
 .marquee .card .img {
-  height: 160px;
+  height: clamp(100px, 12vw, 160px);
   flex: 0 0 auto;
   background-size: cover;
   background-position: center;
@@ -1303,9 +1315,9 @@ section {
 }
 
 .marquee .card h4 {
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: var(--font-sans);
   font-weight: 500;
-  font-size: 17px;
+  font-size: clamp(13px, 1.2vw, 17px);
   letter-spacing: -.01em;
   margin-bottom: 6px;
   color: var(--ink);
@@ -1313,7 +1325,7 @@ section {
 
 .marquee .card p {
   color: var(--muted);
-  font-size: 13px;
+  font-size: clamp(11px, 0.95vw, 13px);
   line-height: 1.45;
   margin-bottom: 12px;
   flex: 1;
@@ -1342,16 +1354,6 @@ section {
 }
 
 @media (max-width: 640px) {
-  .marquee .card {
-    flex-basis: min(220px, 72vw);
-    width: min(220px, 72vw);
-    max-height: 340px;
-  }
-
-  .marquee .card .img {
-    height: 140px;
-  }
-
   .marquee .track {
     padding-left: 16px;
     padding-right: 16px;
@@ -1578,18 +1580,23 @@ section {
   background: var(--bg)
 }
 
+.projects .wrap {
+  padding-left: clamp(12px, 2vw, 28px);
+  padding-right: clamp(12px, 2vw, 28px);
+}
+
 .projects .grid {
-  margin-top: 28px;
+  margin-top: clamp(14px, 2vw, 28px);
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 24px
+  gap: clamp(8px, 1.7vw, 24px)
 }
 
 .proj {
   position: relative;
   overflow: hidden;
   background: #111;
-  min-height: 380px;
+  min-height: 0;
   cursor: pointer;
   border-radius: 4px;
 }
@@ -1621,7 +1628,7 @@ section {
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 20px 24px;
+  padding: clamp(8px, 1.4vw, 20px) clamp(8px, 1.7vw, 24px);
   color: var(--always-white);
   transition: transform .6s cubic-bezier(.22, .61, .36, 1);
   z-index: 2;
@@ -1629,17 +1636,18 @@ section {
 }
 
 .proj .cap small {
-  font-size: 11px;
-  letter-spacing: .3em;
+  font-size: var(--fs-caption);
+  letter-spacing: clamp(.12em, .3vw, .3em);
   text-transform: uppercase;
   color: var(--accent)
 }
 
 .proj .cap h3 {
-  font-family: "Google Sans Flex", sans-serif;;
+  font-family: var(--font-sans);
   font-weight: 500;
-  font-size: 26px;
-  margin-top: 8px
+  font-size: var(--fs-card-title);
+  line-height: 1.15;
+  margin-top: clamp(3px, 0.55vw, 8px)
 }
 
 .project-products {
@@ -1696,20 +1704,22 @@ section {
 
 .projects .grid .proj:nth-child(4n + 1) {
   grid-column: span 7;
-  min-height: 520px
+  aspect-ratio: 770 / 520
 }
 
 .projects .grid .proj:nth-child(4n + 2) {
   grid-column: span 5;
-  min-height: 520px
+  aspect-ratio: 550 / 520
 }
 
 .projects .grid .proj:nth-child(4n + 3) {
-  grid-column: span 5
+  grid-column: span 5;
+  aspect-ratio: 550 / 380
 }
 
 .projects .grid .proj:nth-child(4n + 4) {
-  grid-column: span 7
+  grid-column: span 7;
+  aspect-ratio: 770 / 380
 }
 
 /* ====== Stats CTA ====== */
@@ -1742,8 +1752,8 @@ section {
 }
 
 .stat .num {
-  font-family: "Google Sans Flex", sans-serif;;
-  font-size: 72px;
+  font-family: var(--font-sans);
+  font-size: clamp(36px, 5vw, 72px);
   color: var(--accent);
   font-weight: 400;
   line-height: 1
@@ -2257,11 +2267,6 @@ footer {
     gap: 40px;
   }
 
-  .projects .grid .proj {
-    grid-column: span 12;
-    min-height: 340px;
-  }
-
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2278,8 +2283,6 @@ footer {
 }
 
 @media (max-width: 640px) {
-  .value-grid,
-  .stats-grid,
   .foot {
     grid-template-columns: 1fr;
     gap: 28px;
@@ -2295,17 +2298,9 @@ footer {
     padding: 0 5% 22vh;
   }
 
-  .slide-title {
-    font-size: clamp(32px, 9vw, 52px);
-  }
-
   .slide-actions .btn {
     width: 100%;
     text-align: center;
-  }
-
-  .stat .num {
-    font-size: clamp(40px, 12vw, 64px);
   }
 
   .products-grid {

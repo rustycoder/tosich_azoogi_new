@@ -42,4 +42,38 @@ class VersionedAssetTest extends TestCase
             ->assertSee('/assets/css/solutions.css?v='.$mtime, false)
             ->assertDontSee('solutions.v-', false);
     }
+
+    public function test_site_stylesheet_defines_shared_type_tokens(): void
+    {
+        $css = File::get(public_path('assets/css/style_demo.css'));
+
+        foreach (['--font-sans', '--fs-caption', '--fs-card-title', '--fs-h2', '--fs-h2-section', '--fs-lead'] as $token) {
+            $this->assertStringContainsString($token, $css);
+        }
+    }
+
+    public function test_public_stylesheets_do_not_use_legacy_serif_headings(): void
+    {
+        foreach (File::files(public_path('assets/css')) as $file) {
+            if ($file->getExtension() !== 'css' || $file->getFilename() === 'dashboard.css') {
+                continue;
+            }
+
+            $this->assertStringNotContainsString(
+                'Cormorant Garamond',
+                $file->getContents(),
+                $file->getFilename().' still uses Cormorant Garamond.',
+            );
+        }
+    }
+
+    public function test_layout_loads_the_shared_sans_font(): void
+    {
+        $this->seed(PageSeeder::class);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('Google+Sans+Flex', false)
+            ->assertDontSee('Cormorant+Garamond', false);
+    }
 }
