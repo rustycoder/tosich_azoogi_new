@@ -647,10 +647,22 @@
 
         // Resolve Category Path values dynamically
         let categorySegments = [];
-        if (product.category_path && Array.isArray(product.category_path) && product.category_path.length > 0) {
-          categorySegments = product.category_path.filter(s => s && s.trim() && s !== 'undefined');
-        } else if (product.category && product.category.trim()) {
-          categorySegments = [product.category.trim()];
+        const urlParams = new URLSearchParams(window.location.search);
+        const queryCat = urlParams.get('category');
+
+        if (queryCat && product.category_paths && Array.isArray(product.category_paths)) {
+          const matchingPath = product.category_paths.find(cp => cp && cp.some(s => s.trim().toLowerCase() === queryCat.trim().toLowerCase()));
+          if (matchingPath) {
+            categorySegments = matchingPath.filter(s => s && s.trim() && s !== 'undefined');
+          }
+        }
+
+        if (categorySegments.length === 0) {
+          if (product.category_path && Array.isArray(product.category_path) && product.category_path.length > 0) {
+            categorySegments = product.category_path.filter(s => s && s.trim() && s !== 'undefined');
+          } else if (product.category && product.category.trim()) {
+            categorySegments = [product.category.trim()];
+          }
         }
 
         // Deduplicate segments while preserving order

@@ -264,6 +264,49 @@ class TestAirtableDataExtractor(unittest.TestCase):
         ordered_ids = list(attr_index.keys())
         self.assertEqual(ordered_ids, ["a1", "a2", "a3", "a_unset"])
 
+    def test_multiple_categories_product_support(self):
+        mock_categories = [
+            {"id": "cat_pool", "fields": {"Name": "Pool Lights", "Order": 1}},
+            {"id": "cat_outdoor", "fields": {"Name": "Outdoor & Architectural", "Order": 2}},
+        ]
+        mock_products = [
+            {
+                "id": "recMulti",
+                "fields": {
+                    "Product_Name": "Universal Underwater Light",
+                    "Status": "publish",
+                    "Category": ["cat_pool", "cat_outdoor"],
+                    "Order": 1
+                }
+            }
+        ]
+
+        def mock_fetch(base_id, table, **kwargs):
+            if table == "Products":
+                return list(mock_products)
+            elif table == "Categories":
+                return list(mock_categories)
+            return []
+
+        self.mock_client.fetch_existing_records.side_effect = mock_fetch
+
+        catalog = self.extractor.run_extraction()
+
+        # Check product entry in catalog["products"]
+        prod = next(p for p in catalog["products"] if p["id"] == "recMulti")
+        self.assertEqual(prod["category"], "Pool Lights")
+        self.assertEqual(prod["categories"], ["Pool Lights", "Outdoor & Architectural"])
+
+        # Check product appears in BOTH category nodes in catalog["tree"]
+        pool_node = next(n for n in catalog["tree"] if n["name"] == "Pool Lights")
+        outdoor_node = next(n for n in catalog["tree"] if n["name"] == "Outdoor & Architectural")
+
+        pool_prods = [c["name"] for c in pool_node["children"] if c["type"] == "product_row"]
+        outdoor_prods = [c["name"] for c in outdoor_node["children"] if c["type"] == "product_row"]
+
+        self.assertIn("Universal Underwater Light", pool_prods)
+        self.assertIn("Universal Underwater Light", outdoor_prods)
+
 
 class TestExcelAndJSONParser(unittest.TestCase):
 

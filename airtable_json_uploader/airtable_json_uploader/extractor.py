@@ -3,6 +3,7 @@ import json
 import logging
 import hashlib
 import ssl
+import re
 import urllib.request
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Union
@@ -353,13 +354,24 @@ class AirtableDataExtractor:
             p_short_desc = fields.get("Product short description") or fields.get("Short description") or fields.get("short_description") or fields.get("Short Description") or ""
             p_long_desc = fields.get("Product long description") or fields.get("Product description") or fields.get("Long description") or fields.get("Description") or fields.get("description") or ""
 
-            # Category resolution (Single Select / Text / Linked Record ID)
+            # Category resolution (Single Select / Text / Linked Record ID / Multi-Select list)
             raw_cat = fields.get("Category") or fields.get("Product Category") or fields.get("Categories") or "General"
+            resolved_categories = []
             if isinstance(raw_cat, list) and raw_cat:
-                first_cat = raw_cat[0]
-                category_name = cat_index.get(first_cat, str(first_cat))
-            else:
-                category_name = str(raw_cat).strip() if raw_cat else "General"
+                for c_item in raw_cat:
+                    c_name = cat_index.get(c_item, str(c_item)).strip()
+                    if c_name and c_name not in resolved_categories:
+                        resolved_categories.append(c_name)
+            elif isinstance(raw_cat, str) and raw_cat:
+                for c_part in re.split(r'[,|]', raw_cat):
+                    c_name = c_part.strip()
+                    if c_name and c_name not in resolved_categories:
+                        resolved_categories.append(c_name)
+
+            if not resolved_categories:
+                resolved_categories = ["General"]
+
+            category_name = resolved_categories[0]
 
             # Extract Attached Images
             images = self.extract_image_urls(fields)
@@ -442,6 +454,7 @@ class AirtableDataExtractor:
                 "product_name": p_name,
                 "order": product_order,
                 "category": category_name,
+                "categories": resolved_categories,
                 "product_code": product_code,
                 "sku_mappings": compact_sku_mappings,
                 "product_short_description": p_short_desc,
@@ -469,9 +482,10 @@ class AirtableDataExtractor:
 
             catalog["products"].append(product_entry)
 
-            if category_name not in category_groups:
-                category_groups[category_name] = []
-            category_groups[category_name].append(product_entry)
+            for cat_n in resolved_categories:
+                if cat_n not in category_groups:
+                    category_groups[cat_n] = []
+                category_groups[cat_n].append(product_entry)
 
         # Build Tree format matching AZOOGI_PRODUCTS structure from Categories table and products
         all_categories, tree_categories = self.build_category_tree(categories_raw, catalog["products"])
@@ -764,69 +778,85 @@ class AirtableDataExtractor:
         all_cat_names = []
 
         for prod in products_list:
-            cat_val = prod.get("category") or "General"
-            matched_cat = None
+            raw_cats = prod.get("categories") or ([prod.get("category")] if prod.get("category") else ["General"])
+            if not isinstance(raw_cats, list):
+                raw_cats = [raw_cats]
 
-            if isinstance(cat_val, list) and cat_val:
-                for c_item in cat_val:
-                    c_str = str(c_item).strip()
-                    if c_str in cat_by_id:
-                        matched_cat = cat_by_id[c_str]
-                        break
-                    elif c_str.lower() in cat_by_name:
-                        matched_cat = cat_by_name[c_str.lower()]
-                        break
-            else:
-                c_str = str(cat_val).strip()
+            matched_cats = []
+            for c_item in raw_cats:
+                c_str = str(c_item).strip()
                 if c_str in cat_by_id:
-                    matched_cat = cat_by_id[c_str]
+                    matched_cats.append(cat_by_id[c_str])
                 elif c_str.lower() in cat_by_name:
-                    matched_cat = cat_by_name[c_str.lower()]
+                    matched_cats.append(cat_by_name[c_str.lower()])
 
-            if matched_cat:
-                cat_name = matched_cat["name"]
-                prod["category"] = cat_name
+            category_paths = []
+            resolved_cat_names = []
 
-                # Build category path [Parent, Child]
-                path = []
-                curr = matched_cat
-                visited = set()
-                while curr and curr["id"] not in visited:
-                    visited.add(curr["id"])
-                    path.insert(0, curr["name"])
-                    if curr["parent_ids"]:
-                        parent_id = curr["parent_ids"][0]
-                        curr = cat_by_id.get(parent_id)
-                    else:
-                        break
+            if matched_cats:
+                for matched_cat in matched_cats:
+                    cat_name = matched_cat["name"]
+                    if cat_name not in resolved_cat_names:
+                        resolved_cat_names.append(cat_name)
 
-                prod["category_path"] = path
-                matched_cat["products"].append(prod)
-                if cat_name not in all_cat_names:
-                    all_cat_names.append(cat_name)
-                if path and len(path) > 1 and path[0] not in all_cat_names:
-                    all_cat_names.append(path[0])
+                    # Build category path [Parent, Child]
+                    path = []
+                    curr = matched_cat
+                    visited = set()
+                    while curr and curr["id"] not in visited:
+                        visited.add(curr["id"])
+                        path.insert(0, curr["name"])
+                        if curr["parent_ids"]:
+                            parent_id = curr["parent_ids"][0]
+                            curr = cat_by_id.get(parent_id)
+                        else:
+                            break
+
+                    if path and path not in category_paths:
+                        category_paths.append(path)
+
+                    if prod not in matched_cat["products"]:
+                        matched_cat["products"].append(prod)
+
+                    if cat_name not in all_cat_names:
+                        all_cat_names.append(cat_name)
+                    if path and len(path) > 1 and path[0] not in all_cat_names:
+                        all_cat_names.append(path[0])
+
+                prod["category"] = resolved_cat_names[0]
+                prod["categories"] = resolved_cat_names
+                prod["category_path"] = category_paths[0] if category_paths else [resolved_cat_names[0]]
+                prod["category_paths"] = category_paths
             else:
-                # Handle path delimiters if category name has '/' or '>'
-                raw_cat_name = str(cat_val).strip()
-                delimiters = [" > ", " / ", ">", "/"]
-                path_parts = [raw_cat_name]
-                for delim in delimiters:
-                    if delim in raw_cat_name:
-                        path_parts = [p.strip() for p in raw_cat_name.split(delim) if p.strip()]
-                        break
+                for cat_val in raw_cats:
+                    raw_cat_name = str(cat_val).strip()
+                    delimiters = [" > ", " / ", ">", "/"]
+                    path_parts = [raw_cat_name]
+                    for delim in delimiters:
+                        if delim in raw_cat_name:
+                            path_parts = [p.strip() for p in raw_cat_name.split(delim) if p.strip()]
+                            break
 
-                prod["category"] = path_parts[-1]
-                prod["category_path"] = path_parts
-                cat_name = path_parts[-1]
-                if cat_name not in all_cat_names:
-                    all_cat_names.append(cat_name)
-                if len(path_parts) > 1 and path_parts[0] not in all_cat_names:
-                    all_cat_names.append(path_parts[0])
+                    cat_name = path_parts[-1]
+                    if cat_name not in resolved_cat_names:
+                        resolved_cat_names.append(cat_name)
+                    if path_parts not in category_paths:
+                        category_paths.append(path_parts)
 
-                if cat_name not in category_product_map:
-                    category_product_map[cat_name] = []
-                category_product_map[cat_name].append(prod)
+                    if cat_name not in all_cat_names:
+                        all_cat_names.append(cat_name)
+                    if len(path_parts) > 1 and path_parts[0] not in all_cat_names:
+                        all_cat_names.append(path_parts[0])
+
+                    if cat_name not in category_product_map:
+                        category_product_map[cat_name] = []
+                    if prod not in category_product_map[cat_name]:
+                        category_product_map[cat_name].append(prod)
+
+                prod["category"] = resolved_cat_names[0] if resolved_cat_names else "General"
+                prod["categories"] = resolved_cat_names if resolved_cat_names else ["General"]
+                prod["category_path"] = category_paths[0] if category_paths else [prod["category"]]
+                prod["category_paths"] = category_paths
 
         # 4. Build Tree data structure
         tree_nodes = []

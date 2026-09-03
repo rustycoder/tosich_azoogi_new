@@ -1045,10 +1045,33 @@
         if (vData.status && String(vData.status).toLowerCase().trim() !== 'publish') return;
 
         var itemKey = vData.id ? vData.id : vName;
-        if (!vName || productsMap[itemKey]) return;
+        if (!vName) return;
 
         var parentCat = catPath[0] || 'General';
         var subCat = catPath.length > 1 ? catPath[catPath.length - 1] : parentCat;
+
+        if (productsMap[itemKey]) {
+          var existingItem = products.find(function (p) {
+            return (p.id && p.id === itemKey) || p.name === vName;
+          });
+          if (existingItem) {
+            if (!existingItem.category_paths) {
+              existingItem.category_paths = existingItem.category_path ? [existingItem.category_path] : [];
+            }
+            if (!existingItem.categories) {
+              existingItem.categories = [existingItem.sub, existingItem.cat].filter(Boolean);
+            }
+            if (catPath && catPath.length > 0) {
+              existingItem.category_paths.push(catPath);
+              catPath.forEach(function (c) {
+                if (existingItem.categories.indexOf(c) === -1) {
+                  existingItem.categories.push(c);
+                }
+              });
+            }
+          }
+          return;
+        }
 
         var rawImg = (vData.product_images && vData.product_images.length > 0)
           ? vData.product_images[0]
@@ -1059,13 +1082,22 @@
 
         extractSpecsFromFeatures(features);
 
+        var initialCategories = (vData.categories && Array.isArray(vData.categories)) ? vData.categories.slice() : [];
+        if (initialCategories.indexOf(parentCat) === -1) initialCategories.push(parentCat);
+        if (initialCategories.indexOf(subCat) === -1) initialCategories.push(subCat);
+
+        var initialCategoryPaths = (vData.category_paths && Array.isArray(vData.category_paths)) ? vData.category_paths.slice() : [];
+        if (catPath && catPath.length > 0) initialCategoryPaths.push(catPath);
+
         var item = {
           id: (vData && vData.id) ? vData.id : '',
           name: vName,
           modelName: modelName,
           sub: subCat,
           cat: parentCat,
+          categories: initialCategories,
           category_path: catPath,
+          category_paths: initialCategoryPaths,
           filePath: vData.file_path || '',
           img: localImgPath,
           specs: features,
@@ -1414,6 +1446,12 @@
               if (p.modelName && p.modelName.trim().toLowerCase() === selLower) return true;
               if (p.sub && p.sub.trim().toLowerCase() === selLower) return true;
               if (p.cat && p.cat.trim().toLowerCase() === selLower) return true;
+              if (p.categories && p.categories.some(function (c) {
+                return String(c).trim().toLowerCase() === selLower;
+              })) return true;
+              if (p.category_paths && p.category_paths.some(function (cpath) {
+                return cpath && cpath.some(function (cp) { return cp.trim().toLowerCase() === selLower; });
+              })) return true;
               if (p.category_path && p.category_path.some(function (cp) {
                 return cp.trim().toLowerCase() === selLower;
               })) return true;
@@ -1585,13 +1623,18 @@
 
               extractSpecsFromFeatures(feats);
 
+              var cats = (prod.categories && Array.isArray(prod.categories)) ? prod.categories.slice() : [prod.category || "General"];
+              var catPaths = (prod.category_paths && Array.isArray(prod.category_paths)) ? prod.category_paths.slice() : (prod.category_path ? [prod.category_path] : [[prod.category || "General"]]);
+
               var item = {
                 id: prod.id,
                 name: pName,
                 modelName: pName,
                 sub: prod.category || "General",
                 cat: prod.category || "General",
+                categories: cats,
                 category_path: prod.category_path || [prod.category || "General"],
+                category_paths: catPaths,
                 filePath: '',
                 img: getLocalImg(imgUrl, ''),
                 specs: feats,
