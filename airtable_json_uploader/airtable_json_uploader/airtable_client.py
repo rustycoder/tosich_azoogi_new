@@ -72,8 +72,15 @@ class AirtableClient:
         else:
             raise Exception(f"Failed to fetch tables for base {base_id} ({response.status_code}): {response.text}")
 
-    def fetch_existing_records(self, base_id: str, table_id_or_name: str) -> List[Dict[str, Any]]:
-        """Fetch all existing records from a table with offset pagination."""
+    def fetch_existing_records(
+        self,
+        base_id: str,
+        table_id_or_name: str,
+        view: Optional[str] = None,
+        sort_field: Optional[str] = None,
+        sort_direction: str = "asc"
+    ) -> List[Dict[str, Any]]:
+        """Fetch all existing records from a table with offset pagination and optional view/sort parameters."""
         records = []
         offset = None
         url = f"{BASE_URL}/{base_id}/{table_id_or_name}"
@@ -82,6 +89,11 @@ class AirtableClient:
             params = {}
             if offset:
                 params["offset"] = offset
+            if view:
+                params["view"] = view
+            if sort_field:
+                params["sort[0][field]"] = sort_field
+                params["sort[0][direction]"] = sort_direction
 
             response = self._request("GET", url, params=params)
             if response.status_code != 200:
