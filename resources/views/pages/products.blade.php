@@ -39,8 +39,8 @@
 
 
       /* ===========================================================
-                                                             BREADCRUMB STRIP
-                                                          =========================================================== */
+                                                                 BREADCRUMB STRIP
+                                                              =========================================================== */
       .page-head {
         padding: 12px 0 16px;
         border-bottom: 1px solid var(--line);
@@ -62,8 +62,8 @@
       }
 
       /* ===========================================================
-                                                             TWO-COLUMN LAYOUT: narrow sidebar | product grid
-                                                          =========================================================== */
+                                                                 TWO-COLUMN LAYOUT: narrow sidebar | product grid
+                                                              =========================================================== */
       .prod-layout {
         display: grid;
         grid-template-columns: 240px 1fr;
@@ -91,8 +91,8 @@
       }
 
       /* ===========================================================
-                                                             SIDEBAR
-                                                          =========================================================== */
+                                                                 SIDEBAR
+                                                              =========================================================== */
       .prod-sidebar {
         position: sticky;
         top: 120px;
@@ -334,8 +334,8 @@
       }
 
       /* ===========================================================
-                                                             TOOLBAR
-                                                          =========================================================== */
+                                                                 TOOLBAR
+                                                              =========================================================== */
       .prod-toolbar {
         display: flex;
         align-items: flex-end;
@@ -536,8 +536,8 @@
       }
 
       /* ===========================================================
-                                                             PRODUCT CARD GRID — 4 columns
-                                                          =========================================================== */
+                                                                 PRODUCT CARD GRID — 4 columns
+                                                              =========================================================== */
       .prod-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -584,6 +584,17 @@
         aspect-ratio: 1/1;
         overflow: hidden;
         background-color: #ffffff;
+      }
+
+      .prod-card .prod-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 1.2s ease;
+      }
+
+      .prod-card:hover .prod-card-img img {
+        transform: scale(1.08);
       }
 
       .prod-swatch {
@@ -743,8 +754,8 @@
       }
 
       /* ===========================================================
-                                                             PAGINATION
-                                                          =========================================================== */
+                                                                 PAGINATION
+                                                              =========================================================== */
       .pagination {
         display: flex;
         justify-content: center;
