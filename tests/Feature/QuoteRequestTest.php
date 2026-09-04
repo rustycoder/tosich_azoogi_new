@@ -2,6 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Enums\Status;
+use App\Models\Page;
+use App\Models\PageMeta;
+use App\Models\User;
+use Database\Seeders\AdminUserSeeder;
 use Database\Seeders\PageSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -53,6 +58,59 @@ class QuoteRequestTest extends TestCase
             ->assertSee('Which describes you best', false)
             ->assertSee('Preferred contact method', false)
             ->assertSee('Suburb or Retailer', false)
-            ->assertSee('Get a Custom Quote', false);
+            ->assertSee('Get a Custom Quote', false)
+            ->assertSee('action="'.route('quote.submit').'"', false);
+    }
+
+    public function test_quote_form_validates_required_fields(): void
+    {
+        $this->from('/request-a-quote')
+            ->post('/request-a-quote', [])
+            ->assertRedirect('/request-a-quote')
+            ->assertSessionHasErrors(['your-name', 'your-email', 'your-phone']);
+    }
+
+    public function test_quote_form_accepts_a_valid_submission(): void
+    {
+        $this->from('/request-a-quote')
+            ->post('/request-a-quote', [
+                'your-name' => 'Jane Example',
+                'your-email' => 'jane@example.com',
+                'your-phone' => '0400 000 000',
+                'your-description' => 'Hotel lobby',
+                'your-products' => '2x Neon Flex',
+                'radio-choice' => 'I’m an Architect',
+                'contact-choice' => 'Email',
+                'suburb-retailer' => 'Matraville',
+            ])
+            ->assertRedirect('/request-a-quote')
+            ->assertSessionHas('status');
+    }
+
+    public function test_quote_page_accepts_font_size_and_alignment(): void
+    {
+        $this->seed(AdminUserSeeder::class);
+        $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
+        $page = Page::query()->where('slug', 'request-a-quote')->firstOrFail();
+        $meta = PageMeta::query()->where('page_id', $page->id)->where('key', 'intro.title')->firstOrFail();
+
+        $this->actingAs($admin)
+            ->put(route('dashboard.pages.update', $page), [
+                'title' => $page->title,
+                'meta_description' => $page->meta_description,
+                'status' => Status::Active->value,
+                'meta' => [
+                    $meta->id => [
+                        'value' => $meta->value,
+                        'font_size' => '32px',
+                        'text_align' => 'center',
+                    ],
+                ],
+            ])
+            ->assertRedirect();
+
+        $this->get('/request-a-quote')
+            ->assertOk()
+            ->assertSee('style="font-size: 32px; text-align: center"', false);
     }
 }

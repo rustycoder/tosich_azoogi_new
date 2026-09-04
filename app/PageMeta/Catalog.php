@@ -17,6 +17,8 @@ use App\PageMeta\Definitions\HomeOwnerDefinition;
 use App\PageMeta\Definitions\MadrixDefinition;
 use App\PageMeta\Definitions\ModernSlaveryDefinition;
 use App\PageMeta\Definitions\PrivacyDefinition;
+use App\PageMeta\Definitions\ProjectsDefinition;
+use App\PageMeta\Definitions\QuoteRequestDefinition;
 use App\PageMeta\Definitions\SilvairDefinition;
 use App\PageMeta\Definitions\SolutionsDefinition;
 use App\PageMeta\Definitions\TermsDefinition;
@@ -40,6 +42,8 @@ final class Catalog
         'ai-lighting' => AiLightingDefinition::class,
         'data-centre' => DataCentreDefinition::class,
         'contact' => ContactDefinition::class,
+        'projects' => ProjectsDefinition::class,
+        'request-a-quote' => QuoteRequestDefinition::class,
         'home-owner' => HomeOwnerDefinition::class,
         'architect-designer' => ArchitectDesignerDefinition::class,
         'electrician-builder' => ElectricianBuilderDefinition::class,

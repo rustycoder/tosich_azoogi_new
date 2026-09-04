@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\ProjectController;
 use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\Dashboard\StaffController;
+use App\Http\Controllers\QuoteRequestController;
 use App\Http\Controllers\Site\PageController;
 use App\Http\Controllers\Site\ProjectController as SiteProjectController;
 use Illuminate\Support\Facades\Route;
@@ -102,7 +103,8 @@ Route::get('/project-detail', [SiteProjectController::class, 'show'])->name('pro
 Route::view('/products', 'pages.products')->name('products');
 Route::view('/product-detail', 'pages.product-detail')->name('product-detail');
 Route::view('/led-strip-calculator', 'pages.led-strip-calculator')->name('led-strip-calculator');
-Route::view('/request-a-quote', 'pages.quote-request')->name('request-a-quote');
+Route::get('/request-a-quote', [PageController::class, '__invoke'])->defaults('slug', 'request-a-quote')->name('request-a-quote');
 Route::view('/trade-login', 'pages.trade-login')->name('trade-login');
 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.submit');
+Route::post('/request-a-quote', [QuoteRequestController::class, 'store'])->name('quote.submit');

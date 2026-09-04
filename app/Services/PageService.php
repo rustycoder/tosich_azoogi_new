@@ -208,6 +208,11 @@ class PageService implements IPageService
             $data['cards'] = $meta->group('card');
         }
 
+        if ($page->slug === 'projects') {
+            $data['highlights'] = $this->projects->activeFeatured(4);
+            $data['projects'] = $this->projects->activeOrdered();
+        }
+
         return [
             'view' => $this->viewName($page->slug),
             'data' => $data,
@@ -227,6 +232,8 @@ class PageService implements IPageService
             'ai-lighting' => 'pages.ai-lighting',
             'data-centre' => 'pages.data-centre',
             'contact' => 'pages.contact',
+            'projects' => 'pages.projects',
+            'request-a-quote' => 'pages.quote-request',
             'home-owner', 'architect-designer', 'electrician-builder', 'wholesaler' => 'pages.audience',
             'privacy', 'terms', 'warranty-returns', 'modern-slavery' => 'pages.legal',
             default => throw new NotFoundHttpException,

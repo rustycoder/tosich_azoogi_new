@@ -42,7 +42,7 @@
         </div>
         <div class="nav-actions">
             <a href="{{ url('/led-strip-calculator') }}" class="cta">LED Calculator</a>
-            <button type="button" class="quote-trigger" id="quote-trigger" aria-label="Quote list" aria-expanded="false" aria-controls="quote-drawer">
+            <button type="button" class="quote-trigger" id="quote-trigger" aria-label="{{ $quoteMeta->get('drawer.trigger_label', 0, 'Quote list') }}" aria-expanded="false" aria-controls="quote-drawer">
                 <span class="quote-trigger-icon" aria-hidden="true"></span>
                 <span class="count" data-quote-count hidden>0</span>
             </button>

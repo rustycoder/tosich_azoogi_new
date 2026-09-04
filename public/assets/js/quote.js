@@ -377,13 +377,14 @@
 
     const form = document.getElementById('quote-request-form');
     if (form) {
-      form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const status = document.getElementById('quote-form-status');
-        if (status) {
-          status.hidden = false;
-          status.textContent = 'Thanks. Your quote request is ready to send once the form is connected.';
-          status.className = 'form-status is-success';
+      form.addEventListener('submit', () => {
+        const products = form.querySelector('#your-products');
+        if (products && !String(products.value || '').trim()) {
+          products.value = readItems().map((item) => {
+            const qty = Number(item.qty) || 1;
+            const sku = item.sku ? ` (${item.sku})` : '';
+            return `${qty}x ${item.name}${sku}`;
+          }).join('\n');
         }
       });
     }

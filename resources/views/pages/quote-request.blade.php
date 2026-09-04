@@ -1,12 +1,8 @@
 @extends('layouts.site')
 
-@section('title')
-Request a Quote — Azoogi
-@endsection
+@section('title', $page->title)
 
-@section('description')
-Review the products in your quote list and send a request to the Azoogi trade team.
-@endsection
+@section('description', $page->meta_description)
 
 @section('bodyClass', 'quote-request-page')
 
@@ -18,20 +14,20 @@ Review the products in your quote list and send a request to the Azoogi trade te
 @section('content')
 <main class="quote-page">
   <div class="wrap quote-page-wrap">
-    <div class="quote-page-intro">
-      <div class="quote-page-kicker">Trade quote</div>
-      <h1>Get A Quote For Your Project</h1>
-      <p>Looking for tailored lighting solutions for your next project? Whether you're an architect, builder, designer or wholesaler, our team is here to help. Simply tell us what you need — and we'll provide a fast, accurate quote with expert support every step of the way.</p>
+    <div class="quote-page-intro" {!! cms_section_attr('intro') !!}>
+      <div class="quote-page-kicker"{!! cms_style($meta, 'intro.kicker') !!}>{{ $meta->get('intro.kicker') }}</div>
+      <h1{!! cms_style($meta, 'intro.title') !!}>{{ $meta->get('intro.title') }}</h1>
+      <p{!! cms_style($meta, 'intro.body') !!}>{{ $meta->get('intro.body') }}</p>
     </div>
 
     <div class="quote-page-grid">
-      <section class="quote-page-list" aria-labelledby="quote-products-title">
-        <h2 id="quote-products-title">Products in this quote</h2>
+      <section class="quote-page-list" aria-labelledby="quote-products-title" {!! cms_section_attr('list') !!}>
+        <h2 id="quote-products-title"{!! cms_style($meta, 'list.title') !!}>{{ $meta->get('list.title') }}</h2>
         <div data-quote-list="page"></div>
       </section>
 
-      <section class="quote-page-form" aria-labelledby="quote-form-title">
-        <h2 id="quote-form-title">Request details</h2>
+      <section class="quote-page-form" aria-labelledby="quote-form-title" {!! cms_section_attr('form') !!}>
+        <h2 id="quote-form-title"{!! cms_style($meta, 'form.title') !!}>{{ $meta->get('form.title') }}</h2>
         @include('partials.quote-request-form')
       </section>
     </div>

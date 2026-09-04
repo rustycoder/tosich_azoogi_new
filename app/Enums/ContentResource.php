@@ -26,6 +26,7 @@ enum ContentResource: string
     case Footer = 'footer';
     case Projects = 'projects';
     case Products = 'products';
+    case RequestAQuote = 'request-a-quote';
 
     public function label(): string
     {
@@ -52,6 +53,7 @@ enum ContentResource: string
             self::Footer => 'Footer',
             self::Projects => 'Projects',
             self::Products => 'Products',
+            self::RequestAQuote => 'Request a Quote',
         };
     }
 
@@ -62,7 +64,7 @@ enum ContentResource: string
 
     public function isPage(): bool
     {
-        return $this !== self::Projects && $this !== self::Products && ! $this->isSection();
+        return $this !== self::Products && ! $this->isSection();
     }
 
     /**

@@ -69,7 +69,7 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer('layouts.site', function ($view): void {
             $pages = Page::query()
-                ->whereIn('slug', Catalog::sectionSlugs())
+                ->whereIn('slug', [...Catalog::sectionSlugs(), 'request-a-quote'])
                 ->with('meta')
                 ->get()
                 ->keyBy('slug');
@@ -77,6 +77,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with([
                 'headerMeta' => isset($pages['header']) ? PageMetaBag::for($pages['header']) : PageMetaBag::empty(),
                 'footerMeta' => isset($pages['footer']) ? PageMetaBag::for($pages['footer']) : PageMetaBag::empty(),
+                'quoteMeta' => isset($pages['request-a-quote']) ? PageMetaBag::for($pages['request-a-quote']) : PageMetaBag::empty(),
                 'productCatalog' => $this->app->make(IProductRepository::class)->compiled(),
             ]);
         });

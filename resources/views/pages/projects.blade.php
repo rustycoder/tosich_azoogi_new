@@ -1,12 +1,8 @@
 @extends('layouts.site')
 
-@section('title')
-Projects — Azoogi
-@endsection
+@section('title', $page->title)
 
-@section('description')
-Explore Azoogi LED lighting projects across hospitality, residential, medical, industrial and commercial spaces.
-@endsection
+@section('description', $page->meta_description)
 
 @section('bodyClass', 'projects-page')
 
@@ -20,21 +16,19 @@ Explore Azoogi LED lighting projects across hospitality, residential, medical, i
 @endpush
 
 @section('content')
-<section class="projects-hero">
+<section class="projects-hero" {!! cms_section_attr('hero') !!}>
   <div class="wrap" id="projectsIntro">
-    <h1 class="h2"><span>Projects Powered by Azoogi</span></h1>
-    <p class="projects-hero-lead">
-      From a new strip light in your kitchen to landmark Tier-1 developments — we deliver LED lighting solutions for projects of all sizes. Whether it’s a heritage restoration, boutique hospitality venue, residential upgrade, or a large-scale commercial build, our in-house engineering and assembly line ensure precision, speed, efficiency and quality — no matter the scale.
-      For a copy of our capability statement, contact us at
-      <a href="mailto:majorprojects@azoogi.com">majorprojects@azoogi.com</a>.
+    <h1 class="h2"{!! cms_style($meta, 'hero.title') !!}><span>{{ $meta->get('hero.title') }}</span></h1>
+    <p class="projects-hero-lead"{!! cms_style($meta, 'hero.body') !!}>
+      {!! nl2br(linkify_emails($meta->get('hero.body')), false) !!}
     </p>
   </div>
 </section>
 
-<section class="projects-highlights">
+<section class="projects-highlights" {!! cms_section_attr('highlights') !!}>
   <div class="wrap">
     <div class="section-head">
-      <h2>Recent <span>Highlights</span></h2>
+      <h2{!! cms_style($meta, 'highlights.heading') !!}>{!! accent_html($meta->get('highlights.heading'), $meta->get('highlights.heading_accent')) !!}</h2>
     </div>
     <div class="highlights-grid" id="highlightsGrid">
       @foreach ($highlights as $project)
@@ -50,9 +44,9 @@ Explore Azoogi LED lighting projects across hospitality, residential, medical, i
   </div>
 </section>
 
-<section class="projects-grid-section">
+<section class="projects-grid-section" {!! cms_section_attr('list') !!}>
   <div class="wrap">
-    <div class="projects-count" id="projectsCount">Showing {{ $projects->count() }} project{{ $projects->count() === 1 ? '' : 's' }}</div>
+    <div class="projects-count" id="projectsCount"{!! cms_style($meta, 'list.showing') !!}>{{ $meta->get('list.showing') }} {{ $projects->count() }} {{ $projects->count() === 1 ? $meta->get('list.singular') : $meta->get('list.plural') }}</div>
     <div class="projects-grid" id="projectsGrid">
       @foreach ($projects as $project)
         <a class="project-card" href="{{ route('project-detail', ['slug' => $project->slug]) }}">
@@ -60,7 +54,7 @@ Explore Azoogi LED lighting projects across hospitality, residential, medical, i
             <img src="{{ $project->coverUrl() }}" alt="{{ $project->title }}" loading="lazy">
           </div>
           <div class="project-card-body">
-            <span class="project-tag">{{ $project->tag ?: $project->type ?: 'Project' }}</span>
+            <span class="project-tag">{{ $project->tag ?: $project->type ?: $meta->get('list.fallback_tag') }}</span>
             <h3>{{ $project->title }}</h3>
           </div>
         </a>

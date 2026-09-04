@@ -29,5 +29,8 @@ class CatalogPageSyncTest extends TestCase
         $this->get('/silvair')->assertOk();
         $this->get('/dali-centre')->assertOk();
         $this->get('/madrix')->assertOk();
+        $this->get('/products')->assertOk();
+        $this->get('/projects')->assertOk();
+        $this->get('/request-a-quote')->assertOk();
     }
 }
