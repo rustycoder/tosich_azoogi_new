@@ -11,7 +11,7 @@ h4 {
 .product-page-wrapper {
   padding-top: 110px;
   /* offset for fixed topbar */
-  min-height: 100vh;
+  min-height: auto;
   background: var(--bg);
   color: var(--ink);
   transition: background 0.4s ease, color 0.4s ease;
@@ -198,6 +198,29 @@ h4 {
   object-fit: cover;
 }
 
+.thumb-card.is-dimension {
+  position: relative;
+}
+
+.thumb-card.is-dimension img {
+  object-fit: contain;
+}
+
+.thumb-card.is-dimension::after {
+  content: 'DIM';
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  font-size: 7px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 2px 3px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  border-radius: 2px;
+  letter-spacing: 0.05em;
+}
+
 /* --- Configurator Details --- */
 .product-details-info {
   display: flex;
@@ -263,7 +286,7 @@ a.meta-badge:hover {
 
 /* Configurator selection blocks */
 .config-group {
-  margin-bottom: 10px;
+  margin-bottom: 10px !important;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -282,7 +305,7 @@ a.meta-badge:hover {
   gap: 4px;
   width: 200px;
   flex-shrink: 0;
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
 }
 
 .config-options-flex {
@@ -311,7 +334,7 @@ a.meta-badge:hover {
   padding: 5px 10px;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   transition: all 0.2s ease;
   display: inline-flex;
@@ -892,10 +915,14 @@ a.meta-badge:hover {
 /* Configurator Button Disabled State */
 .config-btn:disabled,
 .config-btn.disabled {
-  opacity: 0.25;
-  cursor: not-allowed;
-  border-color: var(--border-light);
-  pointer-events: none;
+  opacity: 0.25 !important;
+  cursor: not-allowed !important;
+  border-color: var(--border-light) !important;
+  pointer-events: none !important;
+  transform: none !important;
+  background: var(--card-bg) !important;
+  color: var(--muted) !important;
+  box-shadow: none !important;
 }
 
 /* Restructured Configurator & Accessories Grid Layouts */
@@ -964,15 +991,35 @@ a.meta-badge:hover {
   position: relative;
   aspect-ratio: 1/1;
   overflow: hidden;
+  background-color: #ffffff;
+}
+
+.prod-card .prod-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s ease;
+}
+
+.prod-card:hover .prod-card-img img {
+  transform: scale(1.08);
 }
 
 .prod-swatch {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, var(--sw1, #1c2e17), var(--sw2, #0b0b0b));
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.prod-swatch.is-fallback {
+  filter: grayscale(100%);
+  opacity: 0.7;
 }
 
 .prod-swatch svg {
@@ -1004,8 +1051,13 @@ a.meta-badge:hover {
 }
 
 .prod-card-title .prod-card-code {
+  display: block;
+  font-size: 10px;
   color: var(--accent);
-  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-top: 4px;
+  font-weight: 400;
 }
 
 .add-quote-btn {

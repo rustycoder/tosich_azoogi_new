@@ -1,3 +1,5 @@
+import tempfile
+from pathlib import Path
 import unittest
 from unittest.mock import MagicMock, patch
 from airtable_json_uploader.extractor import AirtableDataExtractor
@@ -11,6 +13,8 @@ class TestAirtableDataExtractor(unittest.TestCase):
         self.mock_client = MagicMock()
         self.mock_client_cls.return_value = self.mock_client
 
+        self.temp_dir = tempfile.TemporaryDirectory()
+
         self.extractor = AirtableDataExtractor(
             api_key="mock_pat_key",
             base_id="appTestBase123",
@@ -18,11 +22,13 @@ class TestAirtableDataExtractor(unittest.TestCase):
             categories_table="Categories",
             attributes_table="Attributes"
         )
-        # Override client with mock instance
+        # Override client with mock instance and isolate image directory to temp
         self.extractor.client = self.mock_client
+        self.extractor.media_root = Path(self.temp_dir.name)
 
     def tearDown(self):
         self.patcher.stop()
+        self.temp_dir.cleanup()
 
     def test_extract_image_urls(self):
         fields = {
@@ -176,6 +182,130 @@ class TestAirtableDataExtractor(unittest.TestCase):
         # Parent 2: Neon Flex has no child categories, direct product
         parent2_node = next(n for n in tree if n["name"] == "Neon Flex")
         self.assertEqual(parent2_node["children"][0]["name"], "Neon Flex IP68")
+
+    def test_get_order_helper(self):
+        self.assertEqual(AirtableDataExtractor._get_order({"Order": 1}), 1.0)
+        self.assertEqual(AirtableDataExtractor._get_order({"Order": "2.5"}), 2.5)
+        self.assertEqual(AirtableDataExtractor._get_order({"order": 3}), 3.0)
+        self.assertEqual(AirtableDataExtractor._get_order({"Order": ""}), float('inf'))
+        self.assertEqual(AirtableDataExtractor._get_order({"Order": None}), float('inf'))
+        self.assertEqual(AirtableDataExtractor._get_order({}), float('inf'))
+        self.assertEqual(AirtableDataExtractor._get_order(None), float('inf'))
+        self.assertEqual(AirtableDataExtractor._get_order({"raw_fields": {"Order": 10}}), 10.0)
+
+    def test_category_and_product_ordering_by_order_field(self):
+        mock_categories = [
+            {"id": "cat3", "fields": {"Name": "Category C", "Order": 3}},
+            {"id": "cat1", "fields": {"Name": "Category A", "Order": 1}},
+            {"id": "cat2", "fields": {"Name": "Category B", "Order": 2}},
+            {"id": "cat_sub2", "fields": {"Name": "Sub B2", "Parent": ["cat2"], "Order": 20}},
+            {"id": "cat_sub1", "fields": {"Name": "Sub B1", "Parent": ["cat2"], "Order": 10}},
+            {"id": "cat_unset", "fields": {"Name": "Category Unset", "Order": ""}},
+        ]
+        mock_products = [
+            {"id": "p3", "fields": {"Product_Name": "Prod 3 (Order 30)", "Category": "Category A", "Order": 30}},
+            {"id": "p1", "fields": {"Product_Name": "Prod 1 (Order 10)", "Category": "Category A", "Order": 10}},
+            {"id": "p2", "fields": {"Product_Name": "Prod 2 (Order 20)", "Category": "Category A", "Order": 20}},
+            {"id": "p_empty", "fields": {"Product_Name": "Prod Empty Order", "Category": "Category A"}},
+        ]
+
+        def mock_fetch(base_id, table, **kwargs):
+            if table == "Products":
+                return list(mock_products)
+            elif table == "Categories":
+                return list(mock_categories)
+            return []
+
+        self.mock_client.fetch_existing_records.side_effect = mock_fetch
+
+        catalog = self.extractor.run_extraction()
+
+        # 1. Check products array ordering: p1 (10), p2 (20), p3 (30), p_empty (inf)
+        product_names = [p["product_name"] for p in catalog["products"]]
+        self.assertEqual(product_names, [
+            "Prod 1 (Order 10)",
+            "Prod 2 (Order 20)",
+            "Prod 3 (Order 30)",
+            "Prod Empty Order"
+        ])
+
+        # 2. Check top-level categories ordering in tree: Cat A (1), Cat B (2), Cat C (3), Cat Unset (inf)
+        tree_root_names = [n["name"] for n in catalog["tree"]]
+        self.assertEqual(tree_root_names, [
+            "Category A",
+            "Category B",
+            "Category C",
+            "Category Unset"
+        ])
+
+        # 3. Check subcategories under Category B: Sub B1 (10), Sub B2 (20)
+        cat_b_node = next(n for n in catalog["tree"] if n["name"] == "Category B")
+        sub_names = [sub["name"] for sub in cat_b_node["children"]]
+        self.assertEqual(sub_names, ["Sub B1", "Sub B2"])
+
+        # 4. Check all_categories list retains the tree sequence
+        self.assertEqual(catalog["categories"][:4], [
+            "Category A",
+            "Category B",
+            "Sub B1",
+            "Sub B2"
+        ])
+
+    def test_attributes_ordering_by_order(self):
+        mock_attributes = [
+            {"id": "a3", "fields": {"Attribute_Name": "Power", "Attribute_Value": "50W", "Order": 3}},
+            {"id": "a1", "fields": {"Attribute_Name": "CCT", "Attribute_Value": "3000K", "Order": 1}},
+            {"id": "a2", "fields": {"Attribute_Name": "IP Rating", "Attribute_Value": "IP68", "Order": 2}},
+            {"id": "a_unset", "fields": {"Attribute_Name": "Warranty", "Attribute_Value": "5Y"}},
+        ]
+        attr_index = self.extractor.extract_attributes(mock_attributes)
+        
+        # Keys in attr_index should be ordered a1, a2, a3, a_unset
+        ordered_ids = list(attr_index.keys())
+        self.assertEqual(ordered_ids, ["a1", "a2", "a3", "a_unset"])
+
+    def test_multiple_categories_product_support(self):
+        mock_categories = [
+            {"id": "cat_pool", "fields": {"Name": "Pool Lights", "Order": 1}},
+            {"id": "cat_outdoor", "fields": {"Name": "Outdoor & Architectural", "Order": 2}},
+        ]
+        mock_products = [
+            {
+                "id": "recMulti",
+                "fields": {
+                    "Product_Name": "Universal Underwater Light",
+                    "Status": "publish",
+                    "Category": ["cat_pool", "cat_outdoor"],
+                    "Order": 1
+                }
+            }
+        ]
+
+        def mock_fetch(base_id, table, **kwargs):
+            if table == "Products":
+                return list(mock_products)
+            elif table == "Categories":
+                return list(mock_categories)
+            return []
+
+        self.mock_client.fetch_existing_records.side_effect = mock_fetch
+
+        catalog = self.extractor.run_extraction()
+
+        # Check product entry in catalog["products"]
+        prod = next(p for p in catalog["products"] if p["id"] == "recMulti")
+        self.assertEqual(prod["category"], "Pool Lights")
+        self.assertEqual(prod["categories"], ["Pool Lights", "Outdoor & Architectural"])
+
+        # Check product appears in BOTH category nodes in catalog["tree"]
+        pool_node = next(n for n in catalog["tree"] if n["name"] == "Pool Lights")
+        outdoor_node = next(n for n in catalog["tree"] if n["name"] == "Outdoor & Architectural")
+
+        pool_prods = [c["name"] for c in pool_node["children"] if c["type"] == "product_row"]
+        outdoor_prods = [c["name"] for c in outdoor_node["children"] if c["type"] == "product_row"]
+
+        self.assertIn("Universal Underwater Light", pool_prods)
+        self.assertIn("Universal Underwater Light", outdoor_prods)
 
 
 class TestExcelAndJSONParser(unittest.TestCase):

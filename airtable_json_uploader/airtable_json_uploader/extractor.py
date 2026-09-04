@@ -3,6 +3,7 @@ import json
 import logging
 import hashlib
 import ssl
+import re
 import urllib.request
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Union
@@ -40,6 +41,32 @@ class AirtableDataExtractor:
 
         self.client = AirtableClient(api_key=self.api_key)
 
+    @staticmethod
+    def _get_order(fields_or_item: Any, default: float = float('inf')) -> float:
+        """Safely extract numeric 'Order' / 'order' value from Airtable record fields, product dict, or int/float."""
+        if fields_or_item is None:
+            return default
+        if isinstance(fields_or_item, (int, float)):
+            return float(fields_or_item)
+
+        fields = fields_or_item
+        if isinstance(fields_or_item, dict):
+            if "fields" in fields_or_item and isinstance(fields_or_item["fields"], dict):
+                fields = fields_or_item["fields"]
+            elif "raw_fields" in fields_or_item and isinstance(fields_or_item["raw_fields"], dict):
+                fields = fields_or_item["raw_fields"]
+
+        if isinstance(fields, dict):
+            raw = fields.get("Order")
+            if raw is None:
+                raw = fields.get("order")
+            if raw is not None and raw != "":
+                try:
+                    return float(raw)
+                except (ValueError, TypeError):
+                    pass
+        return default
+
     def extract_image_urls(self, record_fields: Dict[str, Any]) -> List[str]:
         """Extract image URLs from Airtable Attachment fields or plain string/URL fields."""
         images = []
@@ -67,8 +94,9 @@ class AirtableDataExtractor:
         Build an index of Attribute Record ID -> Attribute details.
         Handles schemas with 'Attribute Name', 'Name', 'Value', 'Product', etc.
         """
+        sorted_records = sorted(attribute_records, key=lambda r: self._get_order(r.get("fields", {})))
         attr_map = {}
-        for rec in attribute_records:
+        for rec in sorted_records:
             rec_id = rec.get("id")
             fields = rec.get("fields", {})
 
@@ -122,11 +150,14 @@ class AirtableDataExtractor:
             if isinstance(product_links, str):
                 product_links = [product_links]
 
+            attr_order = self._get_order(fields, default=None)
+
             attr_map[rec_id] = {
                 "id": rec_id,
                 "name": str(name).strip(),
                 "value": str(val).strip() if val is not None else "",
                 "icon": icon_url,
+                "order": attr_order,
                 "product_ids": product_links,
                 "raw_fields": fields
             }
@@ -201,27 +232,44 @@ class AirtableDataExtractor:
         # 1. Fetch Products
         products_raw = []
         try:
-            products_raw = self.client.fetch_existing_records(self.base_id, self.products_table)
-            logger.info(f"Fetched {len(products_raw)} records from '{self.products_table}'")
+            products_raw = self.client.fetch_existing_records(self.base_id, self.products_table, sort_field="Order")
+            logger.info(f"Fetched {len(products_raw)} records from '{self.products_table}' (sorted by Order)")
         except Exception as e:
-            logger.error(f"Failed to fetch products from '{self.products_table}': {e}")
-            raise
+            try:
+                products_raw = self.client.fetch_existing_records(self.base_id, self.products_table)
+                logger.info(f"Fetched {len(products_raw)} records from '{self.products_table}' (fallback)")
+            except Exception as ex:
+                logger.error(f"Failed to fetch products from '{self.products_table}': {ex}")
+                raise
 
         # 2. Fetch Attributes (Optional/Safe fallback)
         attributes_raw = []
         try:
-            attributes_raw = self.client.fetch_existing_records(self.base_id, self.attributes_table)
-            logger.info(f"Fetched {len(attributes_raw)} records from '{self.attributes_table}'")
+            attributes_raw = self.client.fetch_existing_records(self.base_id, self.attributes_table, sort_field="Order")
+            logger.info(f"Fetched {len(attributes_raw)} records from '{self.attributes_table}' (sorted by Order)")
         except Exception as e:
-            logger.warning(f"Could not fetch attributes from '{self.attributes_table}' (ignoring if not present): {e}")
+            try:
+                attributes_raw = self.client.fetch_existing_records(self.base_id, self.attributes_table)
+                logger.info(f"Fetched {len(attributes_raw)} records from '{self.attributes_table}' (fallback)")
+            except Exception as ex:
+                logger.warning(f"Could not fetch attributes from '{self.attributes_table}' (ignoring if not present): {ex}")
 
         # 3. Fetch Categories (Optional/Safe fallback)
         categories_raw = []
         try:
-            categories_raw = self.client.fetch_existing_records(self.base_id, self.categories_table)
-            logger.info(f"Fetched {len(categories_raw)} records from '{self.categories_table}'")
+            categories_raw = self.client.fetch_existing_records(self.base_id, self.categories_table, sort_field="Order")
+            logger.info(f"Fetched {len(categories_raw)} records from '{self.categories_table}' (sorted by Order)")
         except Exception as e:
-            logger.warning(f"Could not fetch categories from '{self.categories_table}' (ignoring if not present): {e}")
+            try:
+                categories_raw = self.client.fetch_existing_records(self.base_id, self.categories_table)
+                logger.info(f"Fetched {len(categories_raw)} records from '{self.categories_table}' (fallback)")
+            except Exception as ex:
+                logger.warning(f"Could not fetch categories from '{self.categories_table}' (ignoring if not present): {ex}")
+
+        # In-memory stable sort by Order for products, categories, and attributes
+        products_raw.sort(key=lambda p: self._get_order(p.get("fields", {})))
+        categories_raw.sort(key=lambda c: self._get_order(c.get("fields", {})))
+        attributes_raw.sort(key=lambda a: self._get_order(a.get("fields", {})))
 
         # Process Attributes Map & Fast Lookup Cache
         attr_index = self.extract_attributes(attributes_raw)
@@ -288,18 +336,42 @@ class AirtableDataExtractor:
             p_id = p_rec.get("id")
             fields = p_rec.get("fields", {})
 
+            # Filter out non-published products (draft, pending, private, trash, future)
+            raw_status = fields.get("Status") or fields.get("status") or ""
+            if isinstance(raw_status, dict):
+                status_val = str(raw_status.get("name", "")).strip().lower()
+            elif isinstance(raw_status, list) and raw_status:
+                status_val = str(raw_status[0]).strip().lower()
+            else:
+                status_val = str(raw_status).strip().lower()
+
+            # Only export products with status 'publish'
+            if status_val and status_val != "publish":
+                continue
+
             # Product Name & Descriptions
             p_name = fields.get("Product_Name") or fields.get("Product Name") or fields.get("Name") or fields.get("Title") or "Unnamed Product"
             p_short_desc = fields.get("Product short description") or fields.get("Short description") or fields.get("short_description") or fields.get("Short Description") or ""
             p_long_desc = fields.get("Product long description") or fields.get("Product description") or fields.get("Long description") or fields.get("Description") or fields.get("description") or ""
 
-            # Category resolution (Single Select / Text / Linked Record ID)
+            # Category resolution (Single Select / Text / Linked Record ID / Multi-Select list)
             raw_cat = fields.get("Category") or fields.get("Product Category") or fields.get("Categories") or "General"
+            resolved_categories = []
             if isinstance(raw_cat, list) and raw_cat:
-                first_cat = raw_cat[0]
-                category_name = cat_index.get(first_cat, str(first_cat))
-            else:
-                category_name = str(raw_cat).strip() if raw_cat else "General"
+                for c_item in raw_cat:
+                    c_name = cat_index.get(c_item, str(c_item)).strip()
+                    if c_name and c_name not in resolved_categories:
+                        resolved_categories.append(c_name)
+            elif isinstance(raw_cat, str) and raw_cat:
+                for c_part in re.split(r'[,|]', raw_cat):
+                    c_name = c_part.strip()
+                    if c_name and c_name not in resolved_categories:
+                        resolved_categories.append(c_name)
+
+            if not resolved_categories:
+                resolved_categories = ["General"]
+
+            category_name = resolved_categories[0]
 
             # Extract Attached Images
             images = self.extract_image_urls(fields)
@@ -366,6 +438,7 @@ class AirtableDataExtractor:
             supplier_name = self.sanitize_field_value(fields.get("Supplier Name") or "")
             status = self.sanitize_field_value(fields.get("Status") or "")
             product_type = self.sanitize_field_value(fields.get("Product type") or "")
+            product_order = self._get_order(fields, default=None)
 
             # Also check Attributes table referencing Product ID
             if attr_index:
@@ -379,7 +452,9 @@ class AirtableDataExtractor:
             raw_entry = {
                 "id": p_id,
                 "product_name": p_name,
+                "order": product_order,
                 "category": category_name,
+                "categories": resolved_categories,
                 "product_code": product_code,
                 "sku_mappings": compact_sku_mappings,
                 "product_short_description": p_short_desc,
@@ -395,18 +470,22 @@ class AirtableDataExtractor:
                 "product_type": product_type,
                 "product_features": product_features,
                 "options": options,
-                "constraints": constraints
+                "constraints": constraints,
+                "raw_fields": fields
             }
             product_entry = {}
             for k, v in raw_entry.items():
-                if v and v != "No" and v != "draft" and v != "simple" and v != [""] and v != {}:
+                if k == "raw_fields":
+                    continue
+                if v is not None and v != "" and v != "No" and v != "draft" and v != "simple" and v != [""] and v != {}:
                     product_entry[k] = v
 
             catalog["products"].append(product_entry)
 
-            if category_name not in category_groups:
-                category_groups[category_name] = []
-            category_groups[category_name].append(product_entry)
+            for cat_n in resolved_categories:
+                if cat_n not in category_groups:
+                    category_groups[cat_n] = []
+                category_groups[cat_n].append(product_entry)
 
         # Build Tree format matching AZOOGI_PRODUCTS structure from Categories table and products
         all_categories, tree_categories = self.build_category_tree(categories_raw, catalog["products"])
@@ -508,8 +587,11 @@ class AirtableDataExtractor:
     def localize_catalog_images(self, catalog: Dict[str, Any], media_root: Optional[Path] = None, clear_existing: bool = True) -> None:
         """Traverse catalog dictionary and replace expiring Airtable image URLs with local static image paths."""
         if media_root is None:
-            project_root = Path(__file__).parent.parent.parent
-            media_root = project_root / "public" / "assets" / "img"
+            if hasattr(self, "media_root") and self.media_root:
+                media_root = self.media_root
+            else:
+                project_root = Path(__file__).parent.parent.parent
+                media_root = project_root / "public" / "assets" / "img"
 
         # Clear existing images and icons folders to perform a 100% fresh download
         if clear_existing:
@@ -598,12 +680,14 @@ class AirtableDataExtractor:
         """
         Builds hierarchical categories and category tree from Airtable Categories table records.
         Handles Parent / Child linked category records, as well as string path delimiters ('/', '>', '|').
+        Maintains category and product ordering based on 'Order' column or natural sequence.
         """
         cat_by_id = {}
         cat_by_name = {}
 
-        # 1. First pass: Index all Category records from Categories table
-        for cat_rec in categories_raw:
+        # 1. First pass: Index all Category records from Categories table (sorted by Order)
+        sorted_categories = sorted(categories_raw, key=lambda c: self._get_order(c.get("fields", {})))
+        for cat_rec in sorted_categories:
             c_id = cat_rec.get("id")
             c_fields = cat_rec.get("fields", {})
 
@@ -618,6 +702,8 @@ class AirtableDataExtractor:
             name = str(name).strip()
             if not name:
                 continue
+
+            order = self._get_order(c_fields)
 
             # Extract parent category references (linked record IDs or text names)
             parent_refs = (
@@ -646,104 +732,131 @@ class AirtableDataExtractor:
             cat_info = {
                 "id": c_id,
                 "name": name,
+                "order": order,
                 "parent_refs": [str(r).strip() for r in parent_refs if r],
                 "child_refs": [str(r).strip() for r in child_refs if r],
-                "parent_ids": set(),
-                "child_ids": set(),
+                "parent_ids": [],
+                "child_ids": [],
                 "products": []
             }
 
             cat_by_id[c_id] = cat_info
             cat_by_name[name.lower()] = cat_info
 
-        # 2. Second pass: Establish Parent-Child links
+        # 2. Second pass: Establish Parent-Child links maintaining insertion/order
         for c_id, cat in cat_by_id.items():
             # Resolve parent references
             for pref in cat["parent_refs"]:
                 if pref in cat_by_id:
-                    cat["parent_ids"].add(pref)
-                    cat_by_id[pref]["child_ids"].add(c_id)
+                    if pref not in cat["parent_ids"]:
+                        cat["parent_ids"].append(pref)
+                    if c_id not in cat_by_id[pref]["child_ids"]:
+                        cat_by_id[pref]["child_ids"].append(c_id)
                 elif pref.lower() in cat_by_name:
                     parent_node = cat_by_name[pref.lower()]
-                    cat["parent_ids"].add(parent_node["id"])
-                    parent_node["child_ids"].add(c_id)
+                    if parent_node["id"] not in cat["parent_ids"]:
+                        cat["parent_ids"].append(parent_node["id"])
+                    if c_id not in parent_node["child_ids"]:
+                        parent_node["child_ids"].append(c_id)
 
             # Resolve child references
             for cref in cat["child_refs"]:
                 if cref in cat_by_id:
-                    cat["child_ids"].add(cref)
-                    cat_by_id[cref]["parent_ids"].add(c_id)
+                    if cref not in cat["child_ids"]:
+                        cat["child_ids"].append(cref)
+                    if c_id not in cat_by_id[cref]["parent_ids"]:
+                        cat_by_id[cref]["parent_ids"].append(c_id)
                 elif cref.lower() in cat_by_name:
                     child_node = cat_by_name[cref.lower()]
-                    cat["child_ids"].add(child_node["id"])
-                    child_node["parent_ids"].add(c_id)
+                    if child_node["id"] not in cat["child_ids"]:
+                        cat["child_ids"].append(child_node["id"])
+                    if c_id not in child_node["parent_ids"]:
+                        child_node["parent_ids"].append(c_id)
 
         # 3. Associate Products with Categories & compute Category Path
         category_product_map = {}
-        all_cat_names = set()
+        all_cat_names = []
 
         for prod in products_list:
-            cat_val = prod.get("category") or "General"
-            matched_cat = None
+            raw_cats = prod.get("categories") or ([prod.get("category")] if prod.get("category") else ["General"])
+            if not isinstance(raw_cats, list):
+                raw_cats = [raw_cats]
 
-            if isinstance(cat_val, list) and cat_val:
-                for c_item in cat_val:
-                    c_str = str(c_item).strip()
-                    if c_str in cat_by_id:
-                        matched_cat = cat_by_id[c_str]
-                        break
-                    elif c_str.lower() in cat_by_name:
-                        matched_cat = cat_by_name[c_str.lower()]
-                        break
-            else:
-                c_str = str(cat_val).strip()
+            matched_cats = []
+            for c_item in raw_cats:
+                c_str = str(c_item).strip()
                 if c_str in cat_by_id:
-                    matched_cat = cat_by_id[c_str]
+                    matched_cats.append(cat_by_id[c_str])
                 elif c_str.lower() in cat_by_name:
-                    matched_cat = cat_by_name[c_str.lower()]
+                    matched_cats.append(cat_by_name[c_str.lower()])
 
-            if matched_cat:
-                cat_name = matched_cat["name"]
-                prod["category"] = cat_name
+            category_paths = []
+            resolved_cat_names = []
 
-                # Build category path [Parent, Child]
-                path = []
-                curr = matched_cat
-                visited = set()
-                while curr and curr["id"] not in visited:
-                    visited.add(curr["id"])
-                    path.insert(0, curr["name"])
-                    if curr["parent_ids"]:
-                        parent_id = list(curr["parent_ids"])[0]
-                        curr = cat_by_id.get(parent_id)
-                    else:
-                        break
+            if matched_cats:
+                for matched_cat in matched_cats:
+                    cat_name = matched_cat["name"]
+                    if cat_name not in resolved_cat_names:
+                        resolved_cat_names.append(cat_name)
 
-                prod["category_path"] = path
-                matched_cat["products"].append(prod)
-                all_cat_names.add(cat_name)
-                if path and len(path) > 1:
-                    all_cat_names.add(path[0])
+                    # Build category path [Parent, Child]
+                    path = []
+                    curr = matched_cat
+                    visited = set()
+                    while curr and curr["id"] not in visited:
+                        visited.add(curr["id"])
+                        path.insert(0, curr["name"])
+                        if curr["parent_ids"]:
+                            parent_id = curr["parent_ids"][0]
+                            curr = cat_by_id.get(parent_id)
+                        else:
+                            break
+
+                    if path and path not in category_paths:
+                        category_paths.append(path)
+
+                    if prod not in matched_cat["products"]:
+                        matched_cat["products"].append(prod)
+
+                    if cat_name not in all_cat_names:
+                        all_cat_names.append(cat_name)
+                    if path and len(path) > 1 and path[0] not in all_cat_names:
+                        all_cat_names.append(path[0])
+
+                prod["category"] = resolved_cat_names[0]
+                prod["categories"] = resolved_cat_names
+                prod["category_path"] = category_paths[0] if category_paths else [resolved_cat_names[0]]
+                prod["category_paths"] = category_paths
             else:
-                # Handle path delimiters if category name has '/' or '>'
-                raw_cat_name = str(cat_val).strip()
-                delimiters = [" > ", " / ", ">", "/"]
-                path_parts = [raw_cat_name]
-                for delim in delimiters:
-                    if delim in raw_cat_name:
-                        path_parts = [p.strip() for p in raw_cat_name.split(delim) if p.strip()]
-                        break
+                for cat_val in raw_cats:
+                    raw_cat_name = str(cat_val).strip()
+                    delimiters = [" > ", " / ", ">", "/"]
+                    path_parts = [raw_cat_name]
+                    for delim in delimiters:
+                        if delim in raw_cat_name:
+                            path_parts = [p.strip() for p in raw_cat_name.split(delim) if p.strip()]
+                            break
 
-                prod["category"] = path_parts[-1]
-                prod["category_path"] = path_parts
-                cat_name = path_parts[-1]
-                all_cat_names.add(cat_name)
-                if len(path_parts) > 1:
-                    all_cat_names.add(path_parts[0])
+                    cat_name = path_parts[-1]
+                    if cat_name not in resolved_cat_names:
+                        resolved_cat_names.append(cat_name)
+                    if path_parts not in category_paths:
+                        category_paths.append(path_parts)
 
-                if cat_name not in category_product_map:
-                    category_product_map[cat_name] = []
-                category_product_map[cat_name].append(prod)
+                    if cat_name not in all_cat_names:
+                        all_cat_names.append(cat_name)
+                    if len(path_parts) > 1 and path_parts[0] not in all_cat_names:
+                        all_cat_names.append(path_parts[0])
+
+                    if cat_name not in category_product_map:
+                        category_product_map[cat_name] = []
+                    if prod not in category_product_map[cat_name]:
+                        category_product_map[cat_name].append(prod)
+
+                prod["category"] = resolved_cat_names[0] if resolved_cat_names else "General"
+                prod["categories"] = resolved_cat_names if resolved_cat_names else ["General"]
+                prod["category_path"] = category_paths[0] if category_paths else [prod["category"]]
+                prod["category_paths"] = category_paths
 
         # 4. Build Tree data structure
         tree_nodes = []
@@ -753,6 +866,9 @@ class AirtableDataExtractor:
             root_cats = [c for c in cat_by_id.values() if not c["parent_ids"]]
             if not root_cats:
                 root_cats = list(cat_by_id.values())
+
+            # Sort root categories by Order
+            root_cats.sort(key=lambda c: c.get("order", float('inf')))
 
             for root_cat in root_cats:
                 root_node = self._build_category_node(root_cat, cat_by_id)
@@ -767,7 +883,8 @@ class AirtableDataExtractor:
                     "name": cat_name,
                     "children": []
                 }
-                for prod in prod_list:
+                sorted_prods = sorted(prod_list, key=lambda p: self._get_order(p))
+                for prod in sorted_prods:
                     p_ref = prod.get("id") if isinstance(prod, dict) else prod
                     p_title = prod.get("product_name", "Product") if isinstance(prod, dict) else "Product"
                     prod_row = {
@@ -780,7 +897,26 @@ class AirtableDataExtractor:
                     cat_node["children"].append(prod_row)
                 tree_nodes.append(cat_node)
 
-        all_categories = sorted(list(all_cat_names or [c["name"] for c in cat_by_id.values()]))
+        # 5. Build ordered category list preserving Order sequence
+        ordered_category_names = []
+        def collect_tree_cat_names(nodes: List[Dict[str, Any]]):
+            for n in nodes:
+                if n.get("type") == "category" and n.get("name"):
+                    if n["name"] not in ordered_category_names:
+                        ordered_category_names.append(n["name"])
+                if n.get("children"):
+                    collect_tree_cat_names(n["children"])
+
+        collect_tree_cat_names(tree_nodes)
+
+        for c_name in all_cat_names:
+            if c_name and c_name not in ordered_category_names:
+                ordered_category_names.append(c_name)
+
+        if not ordered_category_names:
+            ordered_category_names = [c["name"] for c in sorted(cat_by_id.values(), key=lambda c: c.get("order", float('inf')))]
+
+        all_categories = ordered_category_names
         return all_categories, tree_nodes
 
     def _build_category_node(self, cat_info: Dict[str, Any], cat_by_id: Dict[str, Any]) -> Dict[str, Any]:
@@ -790,16 +926,22 @@ class AirtableDataExtractor:
             "children": []
         }
 
-        # First add child categories
+        # First add and sort child categories by Order
+        child_infos = []
         for child_id in cat_info["child_ids"]:
             child_info = cat_by_id.get(child_id)
             if child_info:
-                child_node = self._build_category_node(child_info, cat_by_id)
-                if child_node:
-                    node["children"].append(child_node)
+                child_infos.append(child_info)
+        child_infos.sort(key=lambda c: c.get("order", float('inf')))
 
-        # Then add direct products
-        for prod in cat_info["products"]:
+        for child_info in child_infos:
+            child_node = self._build_category_node(child_info, cat_by_id)
+            if child_node:
+                node["children"].append(child_node)
+
+        # Then sort and add direct products by Order
+        sorted_products = sorted(cat_info["products"], key=lambda p: self._get_order(p))
+        for prod in sorted_products:
             p_ref = prod.get("id") if isinstance(prod, dict) else prod
             p_title = prod.get("product_name", "Product") if isinstance(prod, dict) else "Product"
             prod_row = {

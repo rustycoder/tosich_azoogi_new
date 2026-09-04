@@ -146,4 +146,14 @@ class PageTest extends TestCase
             ->assertRedirect('/contact')
             ->assertSessionHas('status');
     }
+
+    public function test_home_page_renders_parent_categories_in_products_marquee(): void
+    {
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('section class="products"', false)
+            ->assertSee('<h4>NEON</h4>', false)
+            ->assertSee('<h4>Profiles</h4>', false)
+            ->assertSee('/products?category=NEON', false);
+    }
 }

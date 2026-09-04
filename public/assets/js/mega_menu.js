@@ -12,7 +12,9 @@
     productsById = {};
     if (typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS.products && Array.isArray(AZOOGI_PRODUCTS.products)) {
       AZOOGI_PRODUCTS.products.forEach(p => {
-        if (p && p.id) productsById[p.id] = p;
+        if (p && p.id && (!p.status || String(p.status).toLowerCase().trim() === 'publish')) {
+          productsById[p.id] = p;
+        }
       });
     }
 
@@ -102,6 +104,118 @@
     }
   }
 
+  function extractProductCards(rowNodes) {
+    const cards = [];
+    rowNodes.forEach(rowNode => {
+      const variants = rowNode.variants || {};
+      const vnames = Object.keys(variants);
+      vnames.forEach(vname => {
+        let vdata = variants[vname];
+        if (typeof vdata === 'string' && productsById[vdata]) {
+          vdata = productsById[vdata];
+        }
+
+        if (vdata && vdata.status && String(vdata.status).toLowerCase().trim() !== 'publish') return;
+
+        cards.push({
+          vname: vname,
+          vdata: vdata,
+          rowName: rowNode.name
+        });
+      });
+    });
+    return cards;
+  }
+
+  function extractProductCode(source) {
+    if (!source) return '';
+    let raw = source.product_code || source.productCode || '';
+    if (!raw && source.product_features) {
+      const feats = source.product_features;
+      raw = feats['Product Code'] || feats['Product code'] || '';
+    }
+    if (Array.isArray(raw)) {
+      raw = raw.map(v => (v && typeof v === 'object' && v.value !== undefined) ? v.value : v).filter(Boolean).join(', ');
+    } else if (raw && typeof raw === 'object' && raw.value !== undefined) {
+      raw = raw.value;
+    }
+    return String(raw || '').trim();
+  }
+
+  function primaryProductCode(sku) {
+    if (!sku) return '';
+    return String(sku).split(',')[0].trim();
+  }
+
+  function createProductCard(cardData) {
+    const { vname, vdata } = cardData;
+    const rawImgSrc = (vdata && vdata.product_images && vdata.product_images.length > 0)
+      ? vdata.product_images[0]
+      : '/assets/bg_default.png';
+
+    const imgSrc = getLocalImagePath(rawImgSrc, vdata ? vdata.file_path : '');
+    const prodCode = primaryProductCode(extractProductCode(vdata));
+    const prodCodeHtml = prodCode ? `<div class="mega-variant-code">${prodCode}</div>` : '';
+
+    const card = document.createElement('a');
+    const pId = (vdata && vdata.id) ? vdata.id : (vdata && vdata.product_name ? vdata.product_name : vname);
+    card.href = `/product-detail?id=${encodeURIComponent(pId)}`;
+    card.className = 'mega-variant-card';
+
+    const imgContainer = document.createElement('div');
+    imgContainer.className = 'mega-variant-img-container loading';
+
+    const img = document.createElement('img');
+    img.className = 'mega-variant-img';
+    if (imgSrc === '/assets/bg_default.png' || imgSrc === '/assets/logo_dark.png') {
+      img.className += ' placeholder-logo';
+    }
+    img.setAttribute('loading', 'lazy');
+    img.alt = vname;
+
+    img.onload = () => {
+      imgContainer.classList.remove('loading');
+    };
+    img.onerror = () => {
+      imgContainer.classList.remove('loading');
+      img.classList.add('placeholder-logo');
+      img.src = '/assets/bg_default.png';
+    };
+    img.src = imgSrc;
+
+    const info = document.createElement('div');
+    info.className = 'mega-variant-info';
+    info.innerHTML = `
+      <div class="mega-variant-name" title="${vname}">${vname}</div>
+      ${prodCodeHtml}
+    `;
+
+    imgContainer.appendChild(img);
+    card.appendChild(imgContainer);
+    card.appendChild(info);
+
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = card.href;
+    });
+
+    return card;
+  }
+
+  function renderProductsGrid(cardsList, categoryName, parentContainer, maxLimit = 12) {
+    if (!cardsList || cardsList.length === 0) return;
+
+    const grid = document.createElement('div');
+    grid.className = 'mega-variant-grid';
+
+    const visibleCards = cardsList.slice(0, maxLimit);
+    visibleCards.forEach(c => {
+      grid.appendChild(createProductCard(c));
+    });
+
+    parentContainer.appendChild(grid);
+  }
+
   function renderProductsView(node, columnIndex) {
     const productsView = document.createElement('div');
     productsView.className = 'mega-menu-column mega-products-view active';
@@ -124,22 +238,20 @@
       directRowNodes = (node.children || []).filter(c => c.type === 'product_row');
     }
 
-    if (folderNodes.length === 0 && directRowNodes.length === 0) {
+    const directCards = extractProductCards(directRowNodes);
+
+    if (folderNodes.length === 0 && directCards.length === 0) {
       productsView.innerHTML += `<div style="padding:20px;color:var(--muted);">No products found in this category.</div>`;
       innerWrapper.appendChild(productsView);
       return;
     }
 
-    // Apply Max 3 limiter on folders/rows inside products view
-    const visibleFolders = folderNodes.slice(0, 3);
-    const visibleDirectRows = directRowNodes.slice(0, 3);
-
     // 1. Render subfolders as collapsible accordions
-    if (visibleFolders.length > 0) {
+    if (folderNodes.length > 0) {
       const accordionsContainer = document.createElement('div');
       accordionsContainer.className = 'mega-accordions-container';
 
-      visibleFolders.forEach((folderNode, gIdx) => {
+      folderNodes.forEach((folderNode, gIdx) => {
         const group = document.createElement('div');
         group.className = `mega-accordion-group${gIdx === 0 ? ' open' : ''}`;
 
@@ -170,25 +282,24 @@
       productsView.appendChild(accordionsContainer);
     }
 
-    // 2. Render direct product rows below the accordions (e.g. GIANT)
-    if (visibleDirectRows.length > 0) {
+    // 2. Render direct products in a shared grid (max 12)
+    if (directCards.length > 0) {
       const directContainer = document.createElement('div');
       directContainer.className = 'mega-direct-products-container';
-      if (visibleFolders.length > 0) {
-        directContainer.style.marginTop = '0';
+      if (folderNodes.length > 0) {
+        directContainer.style.marginTop = '16px';
       }
-      visibleDirectRows.forEach(rowNode => {
-        renderProductRowElement(rowNode, directContainer);
-      });
+      renderProductsGrid(directCards, node.name, directContainer, 12);
       productsView.appendChild(directContainer);
     }
 
-    // 3. Range buttons if total folders or rows exceed 3
-    if (folderNodes.length > 3 || directRowNodes.length > 3) {
+    // 3. View all range button if total items exceed 12
+    const totalItemsCount = folderNodes.length + directCards.length;
+    if (totalItemsCount > 12) {
       const viewAllRangeBtn = document.createElement('a');
       viewAllRangeBtn.className = 'view-all-range-btn';
       viewAllRangeBtn.href = `/products?category=${encodeURIComponent(node.name)}`;
-      viewAllRangeBtn.innerHTML = `View all ${folderNodes.length + directRowNodes.length} items in range &rarr;`;
+      viewAllRangeBtn.innerHTML = `View all ${totalItemsCount} items in range &rarr;`;
       viewAllRangeBtn.addEventListener('click', (e) => {
         e.preventDefault();
         window.location.href = viewAllRangeBtn.href;
@@ -202,20 +313,18 @@
   // Recursive folder structure renderer
   function renderFolderContent(currentNode, parentContainer) {
     if (currentNode.type === 'product_row') {
-      renderProductRowElement(currentNode, parentContainer);
+      const cards = extractProductCards([currentNode]);
+      renderProductsGrid(cards, currentNode.name, parentContainer, 12);
     } else if (currentNode.children) {
       const childRows = currentNode.children.filter(c => c.type === 'product_row');
       const childCats = currentNode.children.filter(c => c.type === 'category');
       
-      // Limit to 3 child rows
-      const visibleRows = childRows.slice(0, 3);
-      visibleRows.forEach(row => {
-        renderProductRowElement(row, parentContainer);
-      });
+      const childCards = extractProductCards(childRows);
+      if (childCards.length > 0) {
+        renderProductsGrid(childCards, currentNode.name, parentContainer, 12);
+      }
       
-      // Limit to 3 child subfolders
-      const visibleCats = childCats.slice(0, 3);
-      visibleCats.forEach(cat => {
+      childCats.forEach(cat => {
         const subHeader = document.createElement('div');
         subHeader.className = 'mega-product-subfolder-title';
         subHeader.textContent = cat.name;
@@ -228,13 +337,14 @@
         renderFolderContent(cat, subContainer);
       });
 
-      // Range button if subfolder items exceed 3
-      if (childRows.length > 3 || childCats.length > 3) {
+      // Range button if subfolder items exceed 12
+      const totalFolderCount = childCards.length + childCats.length;
+      if (totalFolderCount > 12) {
         const viewAllRangeBtn = document.createElement('a');
         viewAllRangeBtn.className = 'view-all-range-btn';
         viewAllRangeBtn.style.marginTop = '12px';
         viewAllRangeBtn.href = `/products?category=${encodeURIComponent(currentNode.name)}`;
-        viewAllRangeBtn.innerHTML = `View all ${childRows.length + childCats.length} items &rarr;`;
+        viewAllRangeBtn.innerHTML = `View all ${totalFolderCount} items &rarr;`;
         viewAllRangeBtn.addEventListener('click', (e) => {
           e.preventDefault();
           window.location.href = viewAllRangeBtn.href;
@@ -264,111 +374,6 @@
     return imgUrl;
   }
   window.getLocalImagePath = getLocalImagePath;
-
-  // Product Row & Cards generator (shows max 3 variants)
-  function renderProductRowElement(rowNode, parentContainer) {
-    const row = document.createElement('div');
-    row.className = 'mega-product-row';
-    row.innerHTML = `
-      <div class="mega-product-row-title">${rowNode.name}</div>
-    `;
-
-    const grid = document.createElement('div');
-    grid.className = 'mega-variant-grid';
-
-    const variants = rowNode.variants || {};
-    const vnames = Object.keys(variants);
-    const visibleVnames = vnames.slice(0, 3);
-
-    visibleVnames.forEach(vname => {
-      let vdata = variants[vname];
-      if (typeof vdata === 'string' && productsById[vdata]) {
-        vdata = productsById[vdata];
-      }
-
-      const rawImgSrc = (vdata && vdata.product_images && vdata.product_images.length > 0)
-        ? vdata.product_images[0]
-        : '/assets/bg_default.png';
-
-      const imgSrc = getLocalImagePath(rawImgSrc, vdata ? vdata.file_path : '');
-
-      const card = document.createElement('a');
-      const pId = (vdata && vdata.id) ? vdata.id : (vdata && vdata.product_name ? vdata.product_name : vname);
-      card.href = `/product-detail?id=${encodeURIComponent(pId)}`;
-      card.className = 'mega-variant-card';
-
-      const imgContainer = document.createElement('div');
-      imgContainer.className = 'mega-variant-img-container loading';
-
-      const img = document.createElement('img');
-      img.className = 'mega-variant-img';
-      if (imgSrc === '/assets/bg_default.png' || imgSrc === '/assets/logo_dark.png') {
-        img.className += ' placeholder-logo';
-      }
-      img.setAttribute('loading', 'lazy');
-      img.alt = vname;
-
-      img.onload = () => {
-        imgContainer.classList.remove('loading');
-      };
-      img.onerror = () => {
-        imgContainer.classList.remove('loading');
-        img.classList.add('placeholder-logo');
-        img.src = '/assets/bg_default.png';
-      };
-      img.src = imgSrc;
-
-      const info = document.createElement('div');
-      info.className = 'mega-variant-info';
-      info.innerHTML = `
-        <div class="mega-variant-name" title="${vname}">${vname}</div>
-      `;
-
-      imgContainer.appendChild(img);
-      card.appendChild(imgContainer);
-      card.appendChild(info);
-
-      card.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.location.href = card.href;
-      });
-
-      grid.appendChild(card);
-    });
-
-    // Append View All Variants card at the end of the grid if items > 3
-    if (vnames.length > 3) {
-      const viewAllCard = document.createElement('a');
-      viewAllCard.className = 'mega-variant-card view-all-card';
-      viewAllCard.href = `/products?category=${encodeURIComponent(rowNode.name)}`;
-      viewAllCard.innerHTML = `
-        <div class="view-all-card-inner">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="color: var(--accent);">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-          <span style="font-size: 11px; font-weight: 600; color: var(--accent);">View all ${vnames.length}</span>
-        </div>
-      `;
-      viewAllCard.innerHTML = `
-        <div class="view-all-card-inner">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="color: var(--accent);">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-          <span style="font-size: 11px; font-weight: 600; color: var(--accent);">View all ${vnames.length}</span>
-        </div>
-      `;
-      viewAllCard.addEventListener('click', (e) => {
-        e.preventDefault();
-        window.location.href = viewAllCard.href;
-      });
-      grid.appendChild(viewAllCard);
-    }
-
-    row.appendChild(grid);
-    parentContainer.appendChild(row);
-  }
 
   // Run on DOM load
   document.addEventListener('DOMContentLoaded', () => {

@@ -39,8 +39,8 @@
 
 
       /* ===========================================================
-                         BREADCRUMB STRIP
-                      =========================================================== */
+                                                                 BREADCRUMB STRIP
+                                                              =========================================================== */
       .page-head {
         padding: 12px 0 16px;
         border-bottom: 1px solid var(--line);
@@ -62,8 +62,8 @@
       }
 
       /* ===========================================================
-                         TWO-COLUMN LAYOUT: narrow sidebar | product grid
-                      =========================================================== */
+                                                                 TWO-COLUMN LAYOUT: narrow sidebar | product grid
+                                                              =========================================================== */
       .prod-layout {
         display: grid;
         grid-template-columns: 240px 1fr;
@@ -91,8 +91,8 @@
       }
 
       /* ===========================================================
-                         SIDEBAR
-                      =========================================================== */
+                                                                 SIDEBAR
+                                                              =========================================================== */
       .prod-sidebar {
         position: sticky;
         top: 120px;
@@ -334,16 +334,17 @@
       }
 
       /* ===========================================================
-                         TOOLBAR
-                      =========================================================== */
+                                                                 TOOLBAR
+                                                              =========================================================== */
       .prod-toolbar {
         display: flex;
-        align-items: center;
+        align-items: flex-end;
         justify-content: space-between;
         gap: 14px;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         flex-wrap: wrap;
         border-bottom: 1px solid #CCC;
+        padding-bottom: 10px;
       }
 
       .result-count {
@@ -508,7 +509,7 @@
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
       }
 
       .p-tag {
@@ -535,8 +536,8 @@
       }
 
       /* ===========================================================
-                         PRODUCT CARD GRID — 4 columns
-                      =========================================================== */
+                                                                 PRODUCT CARD GRID — 4 columns
+                                                              =========================================================== */
       .prod-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -582,15 +583,35 @@
         position: relative;
         aspect-ratio: 1/1;
         overflow: hidden;
+        background-color: #ffffff;
+      }
+
+      .prod-card .prod-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 1.2s ease;
+      }
+
+      .prod-card:hover .prod-card-img img {
+        transform: scale(1.08);
       }
 
       .prod-swatch {
         position: absolute;
         inset: 0;
-        background: linear-gradient(135deg, var(--sw1, #1c2e17), var(--sw2, #0b0b0b));
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background-color: #ffffff;
         display: flex;
         align-items: center;
         justify-content: center;
+      }
+
+      .prod-swatch.is-fallback {
+        filter: grayscale(100%);
+        opacity: 0.7;
       }
 
       .prod-swatch svg {
@@ -733,8 +754,8 @@
       }
 
       /* ===========================================================
-                         PAGINATION
-                      =========================================================== */
+                                                                 PAGINATION
+                                                              =========================================================== */
       .pagination {
         display: flex;
         justify-content: center;
@@ -941,13 +962,13 @@
           }
           return pathFromWin;
         }
-        if (!imgUrl || typeof imgUrl !== 'string' || !imgUrl.trim()) return '/assets/logo_dark.png';
+        if (!imgUrl || typeof imgUrl !== 'string' || !imgUrl.trim()) return '/assets/bg_default.png';
         var clean = imgUrl.trim();
         if (!clean.startsWith('http')) {
           return clean.startsWith('/') ? clean : '/' + clean;
         }
         var filename = clean.split('/').pop().split('?')[0];
-        if (!filename) return '/assets/logo_dark.png';
+        if (!filename) return '/assets/bg_default.png';
         if (filePath) {
           var cleanFilePath = decodeURIComponent(filePath);
           var lastSlash = cleanFilePath.lastIndexOf('/');
@@ -1020,20 +1041,53 @@
         }
         if (!vData || typeof vData !== 'object') vData = {};
 
+        // Only show products with status 'publish'
+        if (vData.status && String(vData.status).toLowerCase().trim() !== 'publish') return;
+
         var itemKey = vData.id ? vData.id : vName;
-        if (!vName || productsMap[itemKey]) return;
+        if (!vName) return;
 
         var parentCat = catPath[0] || 'General';
         var subCat = catPath.length > 1 ? catPath[catPath.length - 1] : parentCat;
 
+        if (productsMap[itemKey]) {
+          var existingItem = products.find(function (p) {
+            return (p.id && p.id === itemKey) || p.name === vName;
+          });
+          if (existingItem) {
+            if (!existingItem.category_paths) {
+              existingItem.category_paths = existingItem.category_path ? [existingItem.category_path] : [];
+            }
+            if (!existingItem.categories) {
+              existingItem.categories = [existingItem.sub, existingItem.cat].filter(Boolean);
+            }
+            if (catPath && catPath.length > 0) {
+              existingItem.category_paths.push(catPath);
+              catPath.forEach(function (c) {
+                if (existingItem.categories.indexOf(c) === -1) {
+                  existingItem.categories.push(c);
+                }
+              });
+            }
+          }
+          return;
+        }
+
         var rawImg = (vData.product_images && vData.product_images.length > 0)
           ? vData.product_images[0]
-          : '/assets/logo_dark.png';
+          : '/assets/bg_default.png';
 
         var localImgPath = getLocalImg(rawImg, vData.file_path);
         var features = vData.product_features || {};
 
         extractSpecsFromFeatures(features);
+
+        var initialCategories = (vData.categories && Array.isArray(vData.categories)) ? vData.categories.slice() : [];
+        if (initialCategories.indexOf(parentCat) === -1) initialCategories.push(parentCat);
+        if (initialCategories.indexOf(subCat) === -1) initialCategories.push(subCat);
+
+        var initialCategoryPaths = (vData.category_paths && Array.isArray(vData.category_paths)) ? vData.category_paths.slice() : [];
+        if (catPath && catPath.length > 0) initialCategoryPaths.push(catPath);
 
         var item = {
           id: (vData && vData.id) ? vData.id : '',
@@ -1041,7 +1095,9 @@
           modelName: modelName,
           sub: subCat,
           cat: parentCat,
+          categories: initialCategories,
           category_path: catPath,
+          category_paths: initialCategoryPaths,
           filePath: vData.file_path || '',
           img: localImgPath,
           specs: features,
@@ -1163,7 +1219,6 @@
             return activeFilters.categories.some(function (selectedCat) {
               var selLower = selectedCat.trim().toLowerCase();
               if (p.modelName && p.modelName.trim().toLowerCase() === selLower) return true;
-              if (p.name && p.name.trim().toLowerCase().indexOf(selLower) !== -1) return true;
               if (p.sub && p.sub.trim().toLowerCase() === selLower) return true;
               if (p.cat && p.cat.trim().toLowerCase() === selLower) return true;
               if (p.category_path && p.category_path.some(function (cp) {
@@ -1389,9 +1444,14 @@
             var matchCat = activeFilters.categories.some(function (selectedCat) {
               var selLower = selectedCat.trim().toLowerCase();
               if (p.modelName && p.modelName.trim().toLowerCase() === selLower) return true;
-              if (p.name && p.name.trim().toLowerCase().indexOf(selLower) !== -1) return true;
               if (p.sub && p.sub.trim().toLowerCase() === selLower) return true;
               if (p.cat && p.cat.trim().toLowerCase() === selLower) return true;
+              if (p.categories && p.categories.some(function (c) {
+                return String(c).trim().toLowerCase() === selLower;
+              })) return true;
+              if (p.category_paths && p.category_paths.some(function (cpath) {
+                return cpath && cpath.some(function (cp) { return cp.trim().toLowerCase() === selLower; });
+              })) return true;
               if (p.category_path && p.category_path.some(function (cp) {
                 return cp.trim().toLowerCase() === selLower;
               })) return true;
@@ -1452,16 +1512,10 @@
         grid.innerHTML = pagedItems.map(function (p) {
           var detailUrl = p.id ? ('/product-detail?id=' + encodeURIComponent(p.id)) : (p.filePath ? ('/product-detail?file=' + encodeURIComponent(p.filePath)) : ('/product-detail?product=' + encodeURIComponent(p.name)));
 
-          var imgHtml = '<div class="prod-swatch" style="background-image:url(\'' + (p.img || '/assets/bg_default.png') + '\'); background-size:contain; background-position:center; background-repeat:no-repeat;"></div>';
+          var isFallback = !p.img || p.img === '/assets/bg_default.png' || p.img === '/assets/logo_dark.png';
+          var imgHtml = '<img src="' + (p.img || '/assets/bg_default.png') + '" alt="' + (p.name || 'Product') + '" class="prod-swatch' + (isFallback ? ' is-fallback' : '') + '" loading="lazy" onerror="this.onerror=null; this.src=\'/assets/bg_default.png\'; this.classList.add(\'is-fallback\');"' + (isFallback ? ' style="filter: grayscale(100%); opacity: 0.7;"' : '') + '>';
 
           var displayName = p.name;
-          if (p.specs && p.specs.Power) {
-            var pwr = p.specs.Power;
-            var pwrVal = Array.isArray(pwr) ? (pwr[0] && (typeof pwr[0] === 'object' && pwr[0].value ? pwr[0].value : pwr[0])) : ((typeof pwr === 'object' && pwr.value) ? pwr.value : pwr);
-            if (pwrVal && String(displayName).toLowerCase().indexOf(String(pwrVal).toLowerCase()) === -1) {
-              displayName += ' (' + pwrVal + ')';
-            }
-          }
 
           return '<div class="prod-card" data-href="' + detailUrl + '" role="link" tabindex="0">' +
             '<div class="prod-card-img">' + imgHtml + '</div>' +
@@ -1561,12 +1615,16 @@
         if (AZOOGI_PRODUCTS.products) {
           if (Array.isArray(AZOOGI_PRODUCTS.products)) {
             AZOOGI_PRODUCTS.products.forEach(function (prod) {
+              if (prod.status && String(prod.status).toLowerCase().trim() !== 'publish') return;
               var pName = prod.product_name || prod.name || "Product";
               var images = prod.product_images || [];
-              var imgUrl = images.length > 0 ? images[0] : '/assets/logo_dark.png';
+              var imgUrl = images.length > 0 ? images[0] : '/assets/bg_default.png';
               var feats = prod.product_features || {};
 
               extractSpecsFromFeatures(feats);
+
+              var cats = (prod.categories && Array.isArray(prod.categories)) ? prod.categories.slice() : [prod.category || "General"];
+              var catPaths = (prod.category_paths && Array.isArray(prod.category_paths)) ? prod.category_paths.slice() : (prod.category_path ? [prod.category_path] : [[prod.category || "General"]]);
 
               var item = {
                 id: prod.id,
@@ -1574,7 +1632,9 @@
                 modelName: pName,
                 sub: prod.category || "General",
                 cat: prod.category || "General",
+                categories: cats,
                 category_path: prod.category_path || [prod.category || "General"],
+                category_paths: catPaths,
                 filePath: '',
                 img: getLocalImg(imgUrl, ''),
                 specs: feats,
