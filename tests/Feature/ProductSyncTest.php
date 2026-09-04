@@ -160,6 +160,12 @@ class ProductSyncTest extends TestCase
             ->assertOk()
             ->assertSee('Garden Light', false)
             ->assertDontSee('Hidden Draft', false);
+
+        $sync = ProductSync::query()->latest('id')->first();
+        $this->assertNotNull($sync);
+        $this->assertSame(ProductSyncStatus::Ok, $sync->status);
+        $this->assertStringContainsString('Fetching products from Airtable', (string) $sync->log);
+        $this->assertStringContainsString('Sync finished.', (string) $sync->log);
     }
 
     public function test_sync_fetches_all_airtable_pages_before_saving(): void
@@ -305,5 +311,53 @@ class ProductSyncTest extends TestCase
         $this->expectExceptionMessage('A product sync is already running.');
 
         app(IProductSyncService::class)->sync('test');
+    }
+
+    public function test_failed_sync_job_records_the_error_on_the_running_run(): void
+    {
+        $run = ProductSync::query()->create([
+            'status' => ProductSyncStatus::Running,
+            'products_count' => 0,
+            'started_at' => now(),
+            'triggered_by' => 'schedule',
+            'log' => '16:00:00 Sync started (schedule).',
+        ]);
+
+        $job = new SyncProductsJob('schedule');
+        $job->failed(new \RuntimeException('Maximum execution time exceeded'));
+
+        $run->refresh();
+
+        $this->assertSame(ProductSyncStatus::Failed, $run->status);
+        $this->assertSame('Maximum execution time exceeded', $run->error);
+        $this->assertStringContainsString('Job failed: Maximum execution time exceeded', (string) $run->log);
+    }
+
+    public function test_stale_running_sync_is_marked_failed_so_another_run_can_start(): void
+    {
+        ProductSync::query()->create([
+            'status' => ProductSyncStatus::Running,
+            'products_count' => 0,
+            'started_at' => now()->subMinutes(30),
+            'triggered_by' => 'schedule',
+            'log' => '15:00:00 Sync started (schedule).',
+        ]);
+
+        config([
+            'airtable.api_key' => 'test-key',
+            'airtable.base_id' => 'appTest',
+        ]);
+
+        Http::fake([
+            '*' => Http::response(['records' => []]),
+        ]);
+
+        $sync = app(IProductSyncService::class)->sync('test');
+
+        $this->assertSame(ProductSyncStatus::Ok, $sync->status);
+        $this->assertDatabaseHas('product_syncs', [
+            'status' => ProductSyncStatus::Failed->value,
+            'error' => 'Sync timed out.',
+        ]);
     }
 }

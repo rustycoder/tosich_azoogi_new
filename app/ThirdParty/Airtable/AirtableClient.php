@@ -5,6 +5,7 @@ namespace App\ThirdParty\Airtable;
 use App\ThirdParty\Airtable\Contracts\IAirtableClient;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use RuntimeException;
 
 class AirtableClient implements IAirtableClient
@@ -53,6 +54,7 @@ class AirtableClient implements IAirtableClient
     private function iteratePages(string $baseId, string $apiKey, string $table, ?string $sortField): iterable
     {
         $offset = null;
+        $pageNumber = 0;
 
         do {
             $query = [];
@@ -65,9 +67,23 @@ class AirtableClient implements IAirtableClient
                 $query['sort'] = [['field' => $sortField, 'direction' => 'asc']];
             }
 
+            $pageNumber++;
+            Log::info('Airtable fetch page.', [
+                'table' => $table,
+                'page' => $pageNumber,
+                'sorted' => $sortField,
+            ]);
+
             $response = $this->request($apiKey, $baseId, $table, $query);
 
             if (! $response->successful()) {
+                Log::error('Airtable request failed.', [
+                    'table' => $table,
+                    'page' => $pageNumber,
+                    'status' => $response->status(),
+                    'body' => $response->body(),
+                ]);
+
                 throw new RuntimeException(
                     'Airtable request failed ('.$response->status().'): '.$response->body(),
                 );
@@ -87,6 +103,13 @@ class AirtableClient implements IAirtableClient
                     }
                 }
             }
+
+            Log::info('Airtable page received.', [
+                'table' => $table,
+                'page' => $pageNumber,
+                'records' => count($page),
+                'has_more' => is_string($data['offset'] ?? null),
+            ]);
 
             yield $page;
 
@@ -111,6 +134,12 @@ class AirtableClient implements IAirtableClient
             if ($response->status() !== 429) {
                 return $response;
             }
+
+            Log::warning('Airtable rate limited; retrying.', [
+                'table' => $table,
+                'attempt' => $attempt + 1,
+                'wait_seconds' => $backoff,
+            ]);
 
             usleep((int) ($backoff * 1_000_000));
             $backoff *= 2;

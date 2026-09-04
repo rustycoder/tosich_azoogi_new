@@ -24,10 +24,18 @@ class SyncProductsCommand extends Command
         } catch (Throwable $exception) {
             $this->error($exception->getMessage());
 
+            $log = $products->latestSync()?->log;
+            if (filled($log)) {
+                $this->line($log);
+            }
+
             return self::FAILURE;
         }
 
         $this->info('Synced '.$sync->products_count.' product(s).');
+        if (filled($sync->log)) {
+            $this->line($sync->log);
+        }
 
         return self::SUCCESS;
     }

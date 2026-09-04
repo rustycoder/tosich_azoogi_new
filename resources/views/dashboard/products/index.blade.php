@@ -15,6 +15,34 @@
     </div>
 </div>
 
+@if ($latestSync)
+    <section class="dash-sync-log is-{{ $latestSync->status->value }}" aria-label="Airtable sync log">
+        <div class="dash-sync-log-head">
+            <strong>Airtable sync</strong>
+            <span class="dash-pill is-{{ $latestSync->status->value === 'ok' ? 'active' : ($latestSync->status->value === 'running' ? 'pending' : 'cancelled') }}">
+                {{ $latestSync->status->value === 'ok' ? 'OK' : ucfirst($latestSync->status->value) }}
+            </span>
+            <span class="dash-sync-log-meta">
+                @if ($latestSync->started_at)
+                    started {{ $latestSync->started_at->timezone(config('app.timezone'))->format('d M Y, g:ia') }}
+                @endif
+                @if ($latestSync->finished_at)
+                    · finished {{ $latestSync->finished_at->timezone(config('app.timezone'))->format('g:ia') }}
+                @endif
+                @if ($latestSync->products_count)
+                    · {{ $latestSync->products_count }} products
+                @endif
+            </span>
+        </div>
+        @if ($latestSync->error)
+            <p class="dash-sync-log-error">{{ $latestSync->error }}</p>
+        @endif
+        @if (filled($latestSync->log))
+            <pre class="dash-sync-log-body">{{ $latestSync->log }}</pre>
+        @endif
+    </section>
+@endif
+
 @include('dashboard.partials.search', [
     'action' => route('dashboard.products.index'),
     'search' => $search,

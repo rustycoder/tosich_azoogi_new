@@ -40,5 +40,9 @@ interface IProductRepository
 
     public function startSync(string $triggeredBy): ProductSync;
 
+    public function appendSyncLog(ProductSync $sync, string $line): void;
+
     public function finishSync(ProductSync $sync, bool $ok, int $productCount, ?string $error = null): void;
+
+    public function failStaleRunningSyncs(): void;
 }

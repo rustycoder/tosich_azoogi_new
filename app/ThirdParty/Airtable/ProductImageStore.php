@@ -3,10 +3,17 @@
 namespace App\ThirdParty\Airtable;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class ProductImageStore
 {
+    private int $downloaded = 0;
+
+    private int $reused = 0;
+
+    private int $failed = 0;
+
     /**
      * @param  array{categories: list<mixed>, products: list<array<string, mixed>>, tree: list<array<string, mixed>>}  $catalog
      * @return array{categories: list<mixed>, products: list<array<string, mixed>>, tree: list<array<string, mixed>>}
@@ -25,12 +32,33 @@ class ProductImageStore
      */
     public function localizeProducts(array $products): array
     {
+        $this->downloaded = 0;
+        $this->reused = 0;
+        $this->failed = 0;
+
+        $total = count($products);
+
         foreach ($products as $index => $product) {
             $prefix = (string) ($product['id'] ?? $product['product_code'] ?? 'product');
             $products[$index] = $this->localizeProduct($product, $prefix);
+
+            if (($index + 1) % 25 === 0 || $index + 1 === $total) {
+                Log::info('Product image localize progress.', [
+                    'done' => $index + 1,
+                    'total' => $total,
+                    'downloaded' => $this->downloaded,
+                    'reused' => $this->reused,
+                    'failed' => $this->failed,
+                ]);
+            }
         }
 
         return $products;
+    }
+
+    public function lastSummary(): string
+    {
+        return 'Images: '.$this->downloaded.' downloaded, '.$this->reused.' reused, '.$this->failed.' failed.';
     }
 
     /**
@@ -121,23 +149,44 @@ class ProductImageStore
             mkdir($directory, 0755, true);
         }
 
+        $existing = $this->existingPath($directory, $safe, $hash, $folder);
+
+        if ($existing !== null) {
+            $this->reused++;
+
+            return $existing;
+        }
+
         try {
-            $response = Http::timeout(30)->withHeaders([
+            $response = Http::timeout(20)->withHeaders([
                 'User-Agent' => 'AzoogiProductSync/1.0',
             ])->get($url);
 
             if (! $response->successful()) {
-                return $this->existingPath($directory, $safe, $hash, $folder) ?? $url;
+                $this->failed++;
+                Log::warning('Product image download failed.', [
+                    'url' => $url,
+                    'status' => $response->status(),
+                ]);
+
+                return $url;
             }
 
             $body = $response->body();
             $ext = $this->extension($response->header('Content-Type'), $body, $clean);
             $filename = $safe.'_'.$hash.$ext;
             file_put_contents($directory.DIRECTORY_SEPARATOR.$filename, $body);
+            $this->downloaded++;
 
             return 'assets/img/'.$folder.'/'.$filename;
-        } catch (\Throwable) {
-            return $this->existingPath($directory, $safe, $hash, $folder) ?? $url;
+        } catch (\Throwable $exception) {
+            $this->failed++;
+            Log::warning('Product image download error.', [
+                'url' => $url,
+                'message' => $exception->getMessage(),
+            ]);
+
+            return $url;
         }
     }
 

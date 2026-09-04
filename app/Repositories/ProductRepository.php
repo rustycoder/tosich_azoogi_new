@@ -202,6 +202,8 @@ class ProductRepository implements IProductRepository
 
     public function isSyncRunning(): bool
     {
+        $this->failStaleRunningSyncs();
+
         return ProductSync::query()
             ->where('status', ProductSyncStatus::Running)
             ->exists();
@@ -214,10 +216,18 @@ class ProductRepository implements IProductRepository
             'products_count' => 0,
             'started_at' => now(),
             'triggered_by' => $triggeredBy,
+            'log' => now()->format('H:i:s').' Sync started ('.$triggeredBy.').',
         ]);
         $sync->save();
 
         return $sync;
+    }
+
+    public function appendSyncLog(ProductSync $sync, string $line): void
+    {
+        $entry = now()->format('H:i:s').' '.$line;
+        $sync->log = trim((string) $sync->log."\n".$entry);
+        $sync->save();
     }
 
     public function finishSync(ProductSync $sync, bool $ok, int $productCount, ?string $error = null): void
@@ -229,6 +239,18 @@ class ProductRepository implements IProductRepository
             'error' => $error,
         ]);
         $sync->save();
+    }
+
+    public function failStaleRunningSyncs(): void
+    {
+        ProductSync::query()
+            ->where('status', ProductSyncStatus::Running)
+            ->where('started_at', '<', now()->subMinutes(25))
+            ->get()
+            ->each(function (ProductSync $sync): void {
+                $this->appendSyncLog($sync, 'Marked failed after 25 minutes without finishing.');
+                $this->finishSync($sync, false, (int) $sync->products_count, 'Sync timed out.');
+            });
     }
 
     private function storedString(mixed $value, int $max = 191): ?string

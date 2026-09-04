@@ -19,6 +19,7 @@ class ProductController extends Controller
         return view('dashboard.products.index', [
             'products' => $this->products->dashboardList($search),
             'search' => $search,
+            'latestSync' => $this->products->latestSync(),
         ]);
     }
 

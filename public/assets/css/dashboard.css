@@ -392,6 +392,48 @@ body:has(.dash) {
   border-radius: 10px;
 }
 
+.dash-sync-log {
+  background: #fff;
+  border: 1px solid var(--dash-line);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin: 0 0 16px;
+}
+
+.dash-sync-log-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+}
+
+.dash-sync-log-head strong {
+  font-size: 14px;
+}
+
+.dash-sync-log-meta {
+  color: var(--dash-muted);
+  font-size: 13px;
+}
+
+.dash-sync-log-error {
+  margin: 10px 0 0;
+  color: #9b2c2c;
+  font-size: 13px;
+}
+
+.dash-sync-log-body {
+  margin: 10px 0 0;
+  max-height: 220px;
+  overflow: auto;
+  padding: 10px 12px;
+  background: #f6f8f4;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
 .dash-form {
   display: grid;
   gap: 20px;

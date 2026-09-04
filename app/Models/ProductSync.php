@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
     'started_at',
     'finished_at',
     'error',
+    'log',
     'triggered_by',
     'created_by',
     'updated_by',
