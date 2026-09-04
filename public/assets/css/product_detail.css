@@ -229,7 +229,7 @@ h4 {
 }
 
 .product-title-group h1 {
-  font-size: clamp(32px, 3.5vw, 48px);
+  font-size: var(--fs-h2-section);
   line-height: 1.1;
   font-weight: 500;
   margin-bottom: 8px;
@@ -445,8 +445,8 @@ a.meta-badge:hover {
 }
 
 .calc-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 20px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-card-title-sm);
   margin-bottom: 16px;
   font-weight: 500;
   display: flex;
@@ -812,8 +812,8 @@ a.meta-badge:hover {
 }
 
 .form-success-message h4 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 24px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-h3);
   margin-bottom: 8px;
 }
 
@@ -829,7 +829,7 @@ a.meta-badge:hover {
 }
 
 .related-projects-section h3 {
-  font-size: 28px;
+  font-size: var(--fs-h2-section);
   margin-bottom: 24px;
   font-weight: 500;
 }
@@ -837,13 +837,7 @@ a.meta-badge:hover {
 .projects-small-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-
-@media (max-width: 768px) {
-  .projects-small-grid {
-    grid-template-columns: 1fr;
-  }
+  gap: clamp(10px, 1.6vw, 24px);
 }
 
 .proj-small-card {
@@ -873,22 +867,23 @@ a.meta-badge:hover {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 20px;
+  padding: clamp(8px, 1.4vw, 20px);
 }
 
 .proj-small-overlay small {
-  font-size: 10px;
+  font-size: var(--fs-caption);
   color: var(--accent);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: clamp(.12em, .2vw, .2em);
   font-weight: 600;
   margin-bottom: 4px;
 }
 
 .proj-small-overlay h4 {
-  font-size: 18px;
+  font-size: var(--fs-card-title);
   color: #ffffff;
   font-weight: 400;
+  line-height: 1.15;
 }
 
 .reset-selection {

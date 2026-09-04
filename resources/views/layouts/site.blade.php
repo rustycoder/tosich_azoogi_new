@@ -11,8 +11,8 @@
 @endif
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ asset('assets/css/style_demo.v-1.5.css') }}?v={{ config('app.asset_version') }}">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ versioned_asset('assets/css/style_demo.css') }}">
 @stack('styles')
 @if (trim($__env->yieldContent('chrome', 'full')) !== 'none')
 <script defer src="{{ asset('assets/js/products_data.js') }}?v={{ config('app.asset_version') }}"></script>
@@ -21,7 +21,7 @@
 @endif
 @stack('head')
 @if (request()->routeIs('dashboard.pages.preview'))
-<link rel="stylesheet" href="{{ asset('assets/css/cms-editor.css') }}?v={{ config('app.asset_version') }}">
+<link rel="stylesheet" href="{{ versioned_asset('assets/css/cms-editor.css') }}">
 @endif
 </head>
 <body class="@yield('bodyClass')" {!! trim($__env->yieldContent('bodyAttributes')) !!}>

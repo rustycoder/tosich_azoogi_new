@@ -16,7 +16,7 @@ Build your perfect LED strip setup with Azoogi’s LED Strip Calculator. Choose 
 @section('logo', 'logo_dark.png')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('assets/css/led_calculator.css') }}?v={{ config('app.asset_version') }}">
+<link rel="stylesheet" href="{{ versioned_asset('assets/css/led_calculator.css') }}">
 @endpush
 
 @section('content')

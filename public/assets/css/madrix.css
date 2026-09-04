@@ -97,7 +97,7 @@
     max-width: 22ch;
     font-family: "Google Sans Flex", sans-serif;
     font-weight: 400;
-    font-size: clamp(32px, 4.5vw, 54px);
+    font-size: var(--fs-h2);
     line-height: 1.05;
     letter-spacing: -0.025em;
     color: #fff;
@@ -360,6 +360,9 @@
     display: inline;
     color: var(--ink);
     border-bottom: 1px dotted var(--accent);
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -368,7 +371,8 @@
     }
 }
 
-.mx-product:hover {
+.mx-product:hover,
+.mx-product.is-previewing {
     color: var(--accent);
 }
 
@@ -470,6 +474,13 @@
     color: var(--muted);
 }
 
+.mx-cta .btn.primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
 .reveal {
     opacity: 0;
     transform: translateY(16px);
@@ -512,7 +523,7 @@
 
     .mx-hero-copy h1 {
         max-width: none;
-        font-size: clamp(28px, 8vw, 38px);
+        font-size: var(--fs-h2);
     }
 
     .mx-band {
@@ -521,6 +532,19 @@
 
     .mx-cta-wrap {
         padding: 8px 0 56px;
+    }
+
+    .mx-cta-wrap .wrap {
+        padding-inline: 16px;
+    }
+
+    .mx-cta {
+        padding-inline: 16px;
+    }
+
+    .mx-cta .btn.primary {
+        width: 100%;
+        padding-inline: 16px;
     }
 
     .spec-table th,

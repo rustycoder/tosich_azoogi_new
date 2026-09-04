@@ -62,7 +62,7 @@
     max-width: 24ch;
     font-family: "Google Sans Flex", sans-serif;
     font-weight: 400;
-    font-size: clamp(27px, 3.4vw, 44px);
+    font-size: var(--fs-h2-section);
     line-height: 1.1;
     letter-spacing: -0.02em;
     color: var(--ink);
@@ -77,7 +77,7 @@
     margin: 0 auto;
     padding: 0;
     color: var(--muted);
-    font-size: clamp(15px, 1.2vw, 18px);
+    font-size: var(--fs-lead);
     font-weight: 400;
     line-height: 1.65;
 }
@@ -264,6 +264,9 @@
     display: inline;
     color: var(--ink);
     border-bottom: 1px dotted var(--accent);
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -272,7 +275,8 @@
     }
 }
 
-.cb-product:hover {
+.cb-product:hover,
+.cb-product.is-previewing {
     color: var(--accent);
 }
 
@@ -374,6 +378,13 @@
     color: var(--muted);
 }
 
+.cb-cta .btn.primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
 .reveal {
     opacity: 0;
     transform: translateY(16px);
@@ -416,6 +427,19 @@
 
     .cb-cta-wrap {
         padding: 8px 0 56px;
+    }
+
+    .cb-cta-wrap .wrap {
+        padding-inline: 16px;
+    }
+
+    .cb-cta {
+        padding-inline: 16px;
+    }
+
+    .cb-cta .btn.primary {
+        width: 100%;
+        padding-inline: 16px;
     }
 
     .spec-table th,

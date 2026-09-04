@@ -94,7 +94,7 @@
   max-width: 22ch;
   font-family: "Google Sans Flex", sans-serif;
   font-weight: 400;
-  font-size: clamp(32px, 4.5vw, 54px);
+  font-size: var(--fs-h2);
   line-height: 1.05;
   letter-spacing: -.025em;
   color: #fff;
@@ -596,7 +596,7 @@
 
   .dc-hero-copy h1 {
     max-width: none;
-    font-size: clamp(28px, 8vw, 38px);
+    font-size: var(--fs-h2);
   }
 
   .dc-cta-wrap {

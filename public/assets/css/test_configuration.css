@@ -22,8 +22,8 @@
 }
 
 .test-hero-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(32px, 4.5vw, 48px);
+  font-family: var(--font-sans);
+  font-size: var(--fs-h2-section);
   font-weight: 600;
   margin: 0;
   line-height: 1.1;
@@ -37,7 +37,7 @@
 
 .test-hero-subtitle {
   color: var(--muted);
-  font-size: 15px;
+  font-size: var(--fs-lead);
   max-width: 780px;
   margin: 0;
   line-height: 1.6;
@@ -303,8 +303,8 @@
 }
 
 .reset-selection h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 28px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-h2-section);
   font-weight: 600;
   margin: 0;
   color: var(--ink);

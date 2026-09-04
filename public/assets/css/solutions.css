@@ -36,7 +36,7 @@
   max-width: 24ch;
   font-family: "Google Sans Flex", sans-serif;
   font-weight: 400;
-  font-size: clamp(27px, 3.4vw, 44px);
+  font-size: var(--fs-h2-section);
   line-height: 1.1;
   letter-spacing: -.02em;
   color: var(--ink);
@@ -51,7 +51,7 @@
   margin: 0 auto;
   padding: 0;
   color: var(--muted);
-  font-size: clamp(15px, 1.2vw, 18px);
+  font-size: var(--fs-lead);
   font-weight: 400;
   line-height: 1.65;
 }
@@ -278,7 +278,7 @@
   margin: 0 auto 10px;
   font-family: "Google Sans Flex", sans-serif;
   font-weight: 400;
-  font-size: clamp(24px, 2.8vw, 38px);
+  font-size: var(--fs-h2-section);
   line-height: 1.1;
   letter-spacing: -.02em;
   color: var(--ink);
@@ -466,7 +466,8 @@
 @media (max-width: 560px) {
   .solutions-eco-grid,
   .sol-sectors {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
   }
 
   .solutions-cta {
@@ -474,7 +475,20 @@
   }
 
   .sol-sector-inner {
-    min-height: 130px;
+    min-height: 0;
+  }
+
+  .sol-sector-face {
+    padding: 14px 12px;
+    gap: 6px;
+  }
+
+  .sol-sector-title {
+    font-size: clamp(12px, 3.2vw, 16px);
+  }
+
+  .sol-sector-desc {
+    font-size: 12px;
   }
 
   .solutions-sector-cta .btn {

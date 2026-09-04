@@ -2,6 +2,22 @@
 
 use App\Support\PageMetaBag;
 
+if (! function_exists('versioned_asset')) {
+    /**
+     * Public asset URL with a filemtime query so browsers fetch CSS/JS after each save.
+     */
+    function versioned_asset(string $path): string
+    {
+        $path = ltrim($path, '/');
+        $fullPath = public_path($path);
+        $version = is_file($fullPath)
+            ? (string) filemtime($fullPath)
+            : (string) config('app.asset_version');
+
+        return asset($path).'?v='.$version;
+    }
+}
+
 if (! function_exists('cms_section_attr')) {
     function cms_section_attr(string $section): string
     {

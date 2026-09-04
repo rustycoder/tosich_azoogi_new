@@ -12,7 +12,7 @@
 @section('logo', 'logo_dark.png')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('assets/css/dali-centre.v-1.0.css') }}?v={{ config('app.asset_version') }}">
+<link rel="stylesheet" href="{{ versioned_asset('assets/css/dali-centre.css') }}">
 @endpush
 
 @section('content')
@@ -122,7 +122,7 @@
               <tr>
                 <td>
                   @if ($preview !== '')
-                    <span class="dc-product" data-preview="{{ $preview }}"{!! cms_style($meta, 'hardware.row.product', $loop->index) !!}>{{ $row['product'] ?? '' }}</span>
+                    <span class="dc-product" data-preview="{{ $preview }}" tabindex="0"{!! cms_style($meta, 'hardware.row.product', $loop->index) !!}>{{ $row['product'] ?? '' }}</span>
                   @else
                     <span{!! cms_style($meta, 'hardware.row.product', $loop->index) !!}>{{ $row['product'] ?? '' }}</span>
                   @endif
@@ -166,10 +166,15 @@
     </div>
   </div>
 
+  <div class="dc-cursor-preview" data-product-preview="dc-product" hidden aria-hidden="true">
+    <img alt="">
+  </div>
+
 </main>
 @endsection
 
 @push('scripts')
+<script src="{{ versioned_asset('assets/js/product-preview.js') }}"></script>
 @verbatim
 <script>
 document.getElementById('topbar')?.classList.add('solid');

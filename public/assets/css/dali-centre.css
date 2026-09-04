@@ -52,7 +52,7 @@
     max-width: 18ch;
     font-family: "Google Sans Flex", sans-serif;
     font-weight: 400;
-    font-size: clamp(27px, 3.4vw, 44px);
+    font-size: var(--fs-h2-section);
     line-height: 1.1;
     letter-spacing: -0.02em;
     color: var(--ink);
@@ -66,7 +66,7 @@
     margin: 0;
     max-width: 46ch;
     color: var(--muted);
-    font-size: clamp(15px, 1.2vw, 18px);
+    font-size: var(--fs-lead);
     font-weight: 400;
     line-height: 1.65;
 }
@@ -291,6 +291,50 @@
     color: var(--muted);
 }
 
+.dc-product {
+    display: inline;
+    color: var(--ink);
+    border-bottom: 1px dotted var(--accent);
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .dc-product {
+        cursor: none;
+    }
+}
+
+.dc-product:hover,
+.dc-product.is-previewing {
+    color: var(--accent);
+}
+
+.dc-cursor-preview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 400;
+    width: min(260px, 46vw);
+    pointer-events: none;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+}
+
+.dc-cursor-preview[hidden] {
+    display: none;
+}
+
+.dc-cursor-preview img {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #f4f4f4;
+}
+
 .dc-cta-wrap {
     padding: 8px 0 80px;
 }
@@ -316,6 +360,13 @@
     font-size: 16px;
     line-height: 1.6;
     color: var(--muted);
+}
+
+.dc-cta .btn.primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
 }
 
 .reveal {
@@ -351,6 +402,19 @@
 
     .dc-cta-wrap {
         padding: 8px 0 56px;
+    }
+
+    .dc-cta-wrap .wrap {
+        padding-inline: 16px;
+    }
+
+    .dc-cta {
+        padding-inline: 16px;
+    }
+
+    .dc-cta .btn.primary {
+        width: 100%;
+        padding-inline: 16px;
     }
 
     .dc-page .spec-table th,

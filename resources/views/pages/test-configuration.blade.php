@@ -18,8 +18,8 @@ data-theme="dark"
 @section('logo', 'logo_dark.png')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('assets/css/product_detail.css') }}?v={{ config('app.asset_version') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/test_configuration.css') }}?v={{ config('app.asset_version') }}">
+<link rel="stylesheet" href="{{ versioned_asset('assets/css/product_detail.css') }}">
+<link rel="stylesheet" href="{{ versioned_asset('assets/css/test_configuration.css') }}">
 @endpush
 
 @push('head')

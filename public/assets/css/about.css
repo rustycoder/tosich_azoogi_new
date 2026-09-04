@@ -85,7 +85,7 @@
   max-width: 16ch;
   font-family: "Google Sans Flex", sans-serif;
   font-weight: 400;
-  font-size: clamp(32px, 4.8vw, 58px);
+  font-size: var(--fs-h2);
   line-height: 1.04;
   letter-spacing: -.025em;
   color: #fff;
@@ -678,7 +678,7 @@
 
   .about-hero-copy h1 {
     max-width: none;
-    font-size: clamp(28px, 8vw, 38px);
+    font-size: var(--fs-h2);
   }
 
   .about-why-visual {
