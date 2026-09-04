@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🧪 Test Sync Attributes Only - Azoogi Airtable Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .page-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+    .hero-box {
+      margin-bottom: 24px;
+    }
+    .json-editor-box {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 13px;
+      color: var(--accent);
+      min-height: 280px;
+      width: 100%;
+      box-sizing: border-box;
+      resize: vertical;
+    }
+    .sync-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding: 20px;
+      background: rgba(103, 208, 78, 0.08);
+      border: 1px solid rgba(103, 208, 78, 0.3);
+      border-radius: 8px;
+    }
+    .btn-large-sync {
+      background: var(--accent);
+      color: #0b0b0b;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 14px 32px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 20px rgba(103, 208, 78, 0.3);
+    }
+    .btn-large-sync:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(103, 208, 78, 0.5);
+    }
+    .btn-large-sync:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .attr-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      margin: 4px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <header class="topbar solid">
+    <div class="wrap header-content">
+      <div class="logo-group">
+        <a href="/" class="brand-logo">AZOOGI</a>
+        <span class="version-tag">Attributes Studio</span>
+      </div>
+      <div class="nav-links">
+        <a href="/" class="nav-link">&larr; Back to Main Studio</a>
+        <a href="/test-attributes" class="nav-link active">🧪 Test Attributes Sync</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-container">
+
+    <div class="hero-box">
+      <h1>🧪 Test Sync Attributes Only</h1>
+      <p class="subtitle">Sync product features directly into your secondary <strong>Product Attributes</strong> table in Airtable.</p>
+    </div>
+
+    <div class="grid-2" style="gap: 24px;">
+
+      <!-- Left Panel: Target Base & Preloaded JSON -->
+      <div class="card glass-card">
+        <div class="card-header">
+          <h3>1. Target Airtable Base & Preloaded JSON</h3>
+          <p>Select your base and review the preloaded features JSON payload.</p>
+        </div>
+
+        <div class="card-body">
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label for="select-base">Target Airtable Base <span class="req">*</span></label>
+            <select id="select-base" class="form-control">
+              <option value="">Loading bases...</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label for="select-attr-table">Target Attributes Table <span class="req">*</span></label>
+            <select id="select-attr-table" class="form-control">
+              <option value="Product attributes">Product attributes</option>
+              <option value="Product Attributes">Product Attributes</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="json-payload-editor">Preloaded Product Features JSON</label>
+            <textarea id="json-payload-editor" class="json-editor-box">{
+  "product_features": {
+    "Material": [
+      "ADC12",
+      "spraying surface"
+    ],
+    "Driver Installation": "Remote",
+    "Lighting direction": "downward",
+    "Beam angle": [
+      "15°",
+      "24°",
+      "36°",
+      "45°"
+    ],
+    "UGR(X=4H, Y=8H)": [
+      "≤8(15°/24°/36°)",
+      "≤16(45° )"
+    ],
+    "Opening size": "φ55mm",
+    "Dimming": [
+      "Non",
+      "0-10V",
+      "Traic",
+      "DALI"
+    ],
+    "SDCM(Light source)": "<3 Step",
+    "CRI": "90",
+    "CCT": [
+      "2700K",
+      "3000K",
+      "3500K",
+      "4000K",
+      "2700-6500K"
+    ],
+    "Input voltage": "AC220-240V",
+    "Application": "Indoor",
+    "Installation": "Recessed",
+    "IP Rating": "IP20",
+    "Certification": [
+      "CE",
+      "UKCA",
+      "ROHS",
+      "Reach"
+    ],
+    "Warranty": "5 years"
+  }
+}</textarea>
+          </div>
+
+          <div class="sync-banner">
+            <div>
+              <div style="font-weight: 600; font-size: 15px;">Ready to Sync Features</div>
+              <div style="font-size: 12px; color: var(--muted);">Syncs features directly into Product Attributes table</div>
+            </div>
+            <button id="btn-sync-attributes-now" class="btn-large-sync">⚡ SYNC ATTRIBUTES NOW</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel: Extracted Attributes Preview & Results -->
+      <div class="card glass-card">
+        <div class="card-header">
+          <h3>2. Sync Results & Airtable Record IDs</h3>
+          <p>Extracted attribute entries and Airtable record creation status.</p>
+        </div>
+
+        <div class="card-body">
+
+          <div id="results-status-box" class="sync-progress-box hidden" style="margin-bottom: 20px;">
+            <div id="results-status-msg" style="font-weight: 600; font-size: 14px; color: var(--accent);">
+              Syncing attributes...
+            </div>
+          </div>
+
+          <div class="stat-grid" style="grid-template-columns: repeat(2, 1fr); margin-bottom: 20px;">
+            <div class="stat-card">
+              <span class="stat-val" id="stat-attr-pairs">31</span>
+              <span class="stat-lbl">Attribute Pairs</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-val" id="stat-record-ids" style="color: var(--accent);">0</span>
+              <span class="stat-lbl">Synced Record IDs</span>
+            </div>
+          </div>
+
+          <h4>Extracted Attribute Pairs to Sync:</h4>
+          <div id="attr-pairs-container" style="max-height: 200px; overflow-y: auto; background: rgba(0,0,0,0.2); border: 1px solid var(--line); border-radius: 6px; padding: 10px; margin-bottom: 20px;">
+            <!-- Extracted pills rendered here -->
+          </div>
+
+          <h4>Airtable Record IDs Returned:</h4>
+          <div id="record-ids-container" style="max-height: 220px; overflow-y: auto; background: rgba(0,0,0,0.3); border: 1px solid var(--line); border-radius: 6px; padding: 10px; font-family: monospace; font-size: 12px;">
+            <div style="color: var(--muted); font-style: italic;">Click '⚡ SYNC ATTRIBUTES NOW' to sync and retrieve Record IDs.</div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script src="{{ url_for('static', filename='test_attributes.js') }}"></script>
+</body>
+</html>
