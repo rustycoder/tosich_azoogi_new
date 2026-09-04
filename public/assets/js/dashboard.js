@@ -228,8 +228,13 @@
     const dialogTitle = dialog?.querySelector('[data-enquiry-dialog-title]');
     const dialogMeta = dialog?.querySelector('[data-enquiry-dialog-meta]');
     const dialogBody = dialog?.querySelector('[data-enquiry-dialog-body]');
+    const dialogMove = dialog?.querySelector('[data-enquiry-move]');
     let openCard = null;
     let statusLabels = {};
+
+    if (dialogMove) {
+        statusLabels = Object.fromEntries([...dialogMove.options].map((option) => [option.value, option.text]));
+    }
 
     const refreshCounts = (root) => {
         root.querySelectorAll('[data-kanban-col]').forEach((column) => {
@@ -273,6 +278,26 @@
         setStatusPill(template?.content?.querySelector('[data-enquiry-status]'), status, label);
     };
 
+    const syncUpdated = (root, name, iso, label) => {
+        if (!root) {
+            return;
+        }
+
+        root.querySelectorAll('[data-updater-name]').forEach((el) => {
+            el.textContent = name || '—';
+        });
+
+        root.querySelectorAll('[data-updated-at]').forEach((el) => {
+            if (iso) {
+                el.setAttribute('datetime', iso);
+            }
+
+            if (label) {
+                el.textContent = label;
+            }
+        });
+    };
+
     const persistStatus = async (card, status) => {
         try {
             const response = await fetch(card.dataset.url, {
@@ -292,11 +317,46 @@
 
             const data = await response.json();
             syncCardStatus(card, data.status, data.label);
+            syncUpdated(card, data.updated_by, data.updated_at_iso, data.updated_at);
+            syncUpdated(card.querySelector('[data-enquiry-detail]')?.content, data.updated_by, data.updated_at_iso, data.updated_at);
+            syncUpdated(dialog, data.updated_by, data.updated_at_iso, data.updated_at);
             toast(data.message);
+
+            return data;
         } catch {
             toast('Could not update. Try again.', 'error');
             window.location.reload();
+
+            return null;
         }
+    };
+
+    const placeCard = (card, status) => {
+        const kanban = card.closest('[data-enquiry-kanban]');
+        const column = kanban?.querySelector(`[data-kanban-drop][data-status="${status}"]`);
+
+        if (column) {
+            const empty = column.querySelector('.dash-kanban-empty');
+
+            if (empty) {
+                column.insertBefore(card, empty);
+            } else {
+                column.append(card);
+            }
+
+            refreshCounts(kanban);
+
+            return 'moved';
+        }
+
+        if (kanban?.hasAttribute('data-pending-only') && status !== 'pending') {
+            card.remove();
+            refreshCounts(kanban);
+
+            return 'removed';
+        }
+
+        return 'kept';
     };
 
     const clearDialog = () => {
@@ -333,6 +393,12 @@
         }
 
         dialogBody.replaceChildren(clone);
+
+        if (dialogMove) {
+            dialogMove.disabled = false;
+            dialogMove.value = cardStatus(card) || 'pending';
+        }
+
         dialog.showModal();
     };
 
@@ -387,6 +453,33 @@
     dialog?.querySelector('[data-enquiry-delete]')?.addEventListener('click', () => {
         if (openCard) {
             deleteEnquiry(openCard);
+        }
+    });
+
+    dialogMove?.addEventListener('change', async () => {
+        if (!openCard || dialogMove.disabled) {
+            return;
+        }
+
+        const status = dialogMove.value;
+        const card = openCard;
+
+        if (status === '' || status === cardStatus(card)) {
+            return;
+        }
+
+        dialogMove.disabled = true;
+        const data = await persistStatus(card, status);
+        dialogMove.disabled = false;
+
+        if (!data) {
+            return;
+        }
+
+        setStatusPill(dialog.querySelector('[data-enquiry-status]'), data.status, data.label);
+
+        if (placeCard(card, data.status) === 'removed') {
+            closeDialog();
         }
     });
 

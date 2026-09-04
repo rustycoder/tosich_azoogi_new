@@ -1,8 +1,8 @@
 @php
-    $when = $enquiry->created_at?->timezone(config('app.timezone'))->format('d M Y, g:ia');
     $rows = $enquiry->detailRows();
     $facts = array_values(array_filter($rows, fn (array $row): bool => ! $row['wide']));
     $notes = array_values(array_filter($rows, fn (array $row): bool => $row['wide']));
+    $updatedAt = $enquiry->updated_at?->timezone(config('app.timezone'));
 @endphp
 <article
     class="dash-kanban-card"
@@ -25,12 +25,12 @@
     <button type="button" class="dash-kanban-card-open" data-enquiry-open aria-haspopup="dialog">
         <strong>{{ $enquiry->name }}</strong>
         <p class="dash-kanban-email">{{ $enquiry->email }}</p>
-        <p class="dash-kanban-when">{{ $when }}</p>
+        @include('dashboard.enquiries._updated', ['enquiry' => $enquiry, 'updatedAt' => $updatedAt])
     </button>
     <template data-enquiry-detail>
         <div class="dash-enquiry-dialog-meta" data-enquiry-meta>
             <span class="dash-pill is-{{ $status->value }}" data-enquiry-status>{{ $status->label() }}</span>
-            <span>{{ $when }}</span>
+            @include('dashboard.enquiries._updated', ['enquiry' => $enquiry, 'updatedAt' => $updatedAt])
         </div>
         @if ($facts !== [])
             <dl class="dash-enquiry-facts">

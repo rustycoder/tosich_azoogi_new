@@ -13,6 +13,7 @@ class EnquiryRepository implements IEnquiryRepository
     public function kanban(EnquiryType $type, ?EnquiryStatus $status = null): Collection
     {
         return Enquiry::query()
+            ->with('updater:id,name')
             ->where('type', $type)
             ->when($status, fn ($query) => $query->where('status', $status))
             ->latest()

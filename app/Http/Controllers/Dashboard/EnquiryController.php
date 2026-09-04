@@ -41,11 +41,16 @@ class EnquiryController extends Controller
         $enquiry = $this->enquiries->updateStatus(
             $enquiry,
             EnquiryStatus::from($request->validated('status')),
-        );
+        )->load('updater:id,name');
+
+        $updatedAt = $enquiry->updated_at?->timezone(config('app.timezone'));
 
         return response()->json([
             'status' => $enquiry->status->value,
             'label' => $enquiry->status->label(),
+            'updated_by' => $enquiry->updater?->name,
+            'updated_at' => $updatedAt?->format('j M Y, g:i A'),
+            'updated_at_iso' => $enquiry->updated_at?->toIso8601String(),
             'message' => 'Enquiry marked '.$enquiry->status->label().'.',
         ]);
     }

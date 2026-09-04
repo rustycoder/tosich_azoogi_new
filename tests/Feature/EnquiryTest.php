@@ -58,6 +58,8 @@ class EnquiryTest extends TestCase
             ->assertOk()
             ->assertSee('data-enquiry-kanban', false)
             ->assertSee('data-pending-only', false)
+            ->assertSee('data-enquiry-move', false)
+            ->assertSee('Move to', false)
             ->assertDontSee('dash-drag-handle', false)
             ->assertSee('Quote Person', false)
             ->assertSee('Product Person', false)
@@ -78,6 +80,7 @@ class EnquiryTest extends TestCase
             ->assertSee('data-enquiry-kanban', false)
             ->assertSee('dash-drag-handle', false)
             ->assertSee('data-enquiry-dialog', false)
+            ->assertSee('data-enquiry-move', false)
             ->assertSee('data-enquiry-open', false)
             ->assertDontSee('dash-kanban-preview', false)
             ->assertSeeInOrder(['Pending', 'Active', 'Done', 'Cancelled'], false)
@@ -130,22 +133,24 @@ class EnquiryTest extends TestCase
                 'status' => EnquiryStatus::Active->value,
             ])
             ->assertOk()
-            ->assertJsonPath('status', EnquiryStatus::Active->value);
+            ->assertJsonPath('status', EnquiryStatus::Active->value)
+            ->assertJsonPath('updated_by', $admin->name)
+            ->assertJsonPath('updated_at', $enquiry->fresh()->updated_at?->timezone(config('app.timezone'))->format('j M Y, g:i A'));
 
         $this->assertSame(EnquiryStatus::Active, $enquiry->fresh()->status);
     }
 
     public function test_enquiry_card_keeps_details_for_the_dialog(): void
     {
-        $admin = User::factory()->admin()->create();
+        $admin = User::factory()->admin()->create(['name' => 'Pat Admin']);
+        $this->actingAs($admin);
         Enquiry::factory()->contact()->pending()->create([
             'name' => 'Pratik Man Joshi',
             'email' => 'pratik.man.joshi@gmail.com',
             'message' => 'Need a site visit next week.',
         ]);
 
-        $this->actingAs($admin)
-            ->get('/dashboard/enquiries/contacts')
+        $this->get('/dashboard/enquiries/contacts')
             ->assertOk()
             ->assertSee('Pratik Man Joshi', false)
             ->assertSee('pratik.man.joshi@gmail.com', false)
@@ -153,7 +158,13 @@ class EnquiryTest extends TestCase
             ->assertSee('mailto:pratik.man.joshi@gmail.com', false)
             ->assertSee('dash-enquiry-facts', false)
             ->assertSee('dash-enquiry-note', false)
+            ->assertSee('Pat Admin', false)
+            ->assertSee('data-updater-name', false)
+            ->assertSee('data-updated-at', false)
+            ->assertDontSee('Last updated', false)
             ->assertSee('data-enquiry-delete', false)
+            ->assertSee('data-enquiry-move', false)
+            ->assertSee('Move to', false)
             ->assertSee('data-status-labels', false)
             ->assertSee('data-enquiry-status', false)
             ->assertDontSee('>Name</dt>', false)
