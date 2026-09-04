@@ -1893,8 +1893,11 @@ footer {
     padding: 10px 16px;
   }
 
-  .nav > .cta {
+  .nav-actions {
     margin-left: auto;
+  }
+
+  .nav-actions .cta {
     font-size: 11px;
   }
 

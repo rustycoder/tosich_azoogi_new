@@ -462,7 +462,7 @@ const savedTheme = localStorage.getItem('theme'); if (savedTheme) { document.doc
             <div class="prod-card-title">
               <div class="prod-card-title-text"><span class="cat-label">Recessed</span>L90-BH5470 Linear Profile</div>
               <button class="add-quote-btn" aria-label="Add to quote"
-                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+                onclick="event.stopPropagation();">+</button>
             </div>
           </div>
 
@@ -481,7 +481,7 @@ const savedTheme = localStorage.getItem('theme'); if (savedTheme) { document.doc
             <div class="prod-card-title">
               <div class="prod-card-title-text"><span class="cat-label">Recessed Downlights</span>Plug-in System
                 Downlight</div><button class="add-quote-btn" aria-label="Add to quote"
-                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+                onclick="event.stopPropagation();">+</button>
             </div>
           </div>
 
@@ -504,7 +504,7 @@ const savedTheme = localStorage.getItem('theme'); if (savedTheme) { document.doc
             <div class="prod-card-title">
               <div class="prod-card-title-text"><span class="cat-label">RGB / RGBW</span>RGBW Outdoor COB</div><button
                 class="add-quote-btn" aria-label="Add to quote"
-                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+                onclick="event.stopPropagation();">+</button>
             </div>
           </div>
           <div class="prod-card" onclick="window.location.href='/product-detail'">
@@ -525,7 +525,7 @@ const savedTheme = localStorage.getItem('theme'); if (savedTheme) { document.doc
             <div class="prod-card-title">
               <div class="prod-card-title-text"><span class="cat-label">High Efficiency</span>HE Series 130lm/W COB
               </div><button class="add-quote-btn" aria-label="Add to quote"
-                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+                onclick="event.stopPropagation();">+</button>
             </div>
           </div>
           <div class="prod-card" onclick="window.location.href='/product-detail'">
@@ -543,7 +543,7 @@ const savedTheme = localStorage.getItem('theme'); if (savedTheme) { document.doc
             <div class="prod-card-title">
               <div class="prod-card-title-text"><span class="cat-label">DALI / DALI-2</span>DALI-2 Dimmable Driver</div>
               <button class="add-quote-btn" aria-label="Add to quote"
-                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+                onclick="event.stopPropagation();">+</button>
             </div>
           </div>
           <div class="prod-card" onclick="window.location.href='/product-detail'">
@@ -561,7 +561,7 @@ const savedTheme = localStorage.getItem('theme'); if (savedTheme) { document.doc
             <div class="prod-card-title">
               <div class="prod-card-title-text"><span class="cat-label">Bluetooth / Casambi</span>Bluetooth Casambi
                 Controller</div><button class="add-quote-btn" aria-label="Add to quote"
-                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+                onclick="event.stopPropagation();">+</button>
             </div>
           </div>
           <div class="prod-card" onclick="window.location.href='/product-detail'">
@@ -579,7 +579,7 @@ const savedTheme = localStorage.getItem('theme'); if (savedTheme) { document.doc
             <div class="prod-card-title">
               <div class="prod-card-title-text"><span class="cat-label">Asymmetrical</span>Asymmetrical Handrail Puck
               </div><button class="add-quote-btn" aria-label="Add to quote"
-                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+                onclick="event.stopPropagation();">+</button>
             </div>
           </div>
           <div class="prod-card" onclick="window.location.href='/product-detail'">
@@ -600,7 +600,7 @@ const savedTheme = localStorage.getItem('theme'); if (savedTheme) { document.doc
             <div class="prod-card-title">
               <div class="prod-card-title-text"><span class="cat-label">Single Colour</span>Single Colour SMD 5050</div>
               <button class="add-quote-btn" aria-label="Add to quote"
-                onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+                onclick="event.stopPropagation();">+</button>
             </div>
           </div>
         </div>

@@ -1019,6 +1019,14 @@
         return ' <span class="prod-card-code">' + code + '</span>';
       }
 
+      function escapeHtml(value) {
+        return String(value || '')
+          .replace(/&/g, '&amp;')
+          .replace(/"/g, '&quot;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+      }
+
       function addProductToCatalog(vName, modelName, catPath, vData) {
         if (typeof vData === 'string' && rawProductsById[vData]) {
           vData = rawProductsById[vData];
@@ -1472,10 +1480,14 @@
             '<div class="prod-card-img">' + imgHtml + '</div>' +
             '<div class="prod-card-title">' +
             '<div class="prod-card-title-text"><span class="cat-label">' + p.sub + '</span>' + displayName + productCodeHtml(p.sku) + '</div>' +
-            '<button class="add-quote-btn" aria-label="Add to quote" onclick="event.stopPropagation(); this.classList.add(\'added\'); this.innerHTML=\'&check;\';">+</button>' +
+            '<button class="add-quote-btn" aria-label="Add to quote" data-quote-id="' + escapeHtml(p.id || p.sku || p.name) + '" data-quote-name="' + escapeHtml(p.name) + '" data-quote-sku="' + escapeHtml(p.sku || '') + '" data-quote-image="' + escapeHtml(p.img || '') + '" data-quote-url="' + escapeHtml(detailUrl) + '" onclick="event.stopPropagation();">+</button>' +
             '</div>' +
             '</div>';
         }).join('');
+
+        if (window.AzoogiQuote && typeof window.AzoogiQuote.refresh === 'function') {
+          window.AzoogiQuote.refresh();
+        }
 
         renderPagination(totalPages);
       }

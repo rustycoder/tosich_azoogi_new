@@ -250,7 +250,7 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
           <div class="prod-card-title">
             <div class="prod-card-title-text"><span class="cat-label">DALI / DALI-2</span>DALI-2 Dimmable Driver</div>
             <button class="add-quote-btn" aria-label="Add to quote"
-              onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+              onclick="event.stopPropagation();">+</button>
           </div>
         </div>
     </div>
@@ -708,6 +708,10 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
           const detailUrl = p.id ? ('/product-detail?id=' + encodeURIComponent(p.id)) : (p.filePath ? ('/product-detail?file=' + encodeURIComponent(p.filePath)) : ('/product-detail?product=' + encodeURIComponent(p.name)));
           const code = (p.sku || '').split(',')[0].trim();
           const codeHtml = code ? ` <span class="prod-card-code">(${code})</span>` : '';
+          const quoteId = String(p.id || p.sku || p.name || '').replace(/"/g, '&quot;');
+          const quoteName = String(p.name || '').replace(/"/g, '&quot;');
+          const quoteSku = String(p.sku || '').replace(/"/g, '&quot;');
+          const quoteImage = String(p.img || '').replace(/"/g, '&quot;');
           return `
                 <div class="prod-card" onclick="window.location.href='${detailUrl}'">
                   <div class="prod-card-img">
@@ -715,11 +719,15 @@ Azoogi designs and supplies premium LED lighting — strips, neon, garden lights
                   </div>
                   <div class="prod-card-title">
                     <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}${codeHtml}</div>
-                    <button class="add-quote-btn" aria-label="Add to quote" onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+                    <button class="add-quote-btn" aria-label="Add to quote" data-quote-id="${quoteId}" data-quote-name="${quoteName}" data-quote-sku="${quoteSku}" data-quote-image="${quoteImage}" data-quote-url="${detailUrl}" onclick="event.stopPropagation();">+</button>
                   </div>
                 </div>
               `;
         }).join('');
+
+        if (window.AzoogiQuote && typeof window.AzoogiQuote.refresh === 'function') {
+          window.AzoogiQuote.refresh();
+        }
       }
 
       // Render Gallery

@@ -13,11 +13,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ versioned_asset('assets/css/style_demo.css') }}">
+<link rel="stylesheet" href="{{ versioned_asset('assets/css/quote.css') }}">
 @stack('styles')
 @if (trim($__env->yieldContent('chrome', 'full')) !== 'none')
 <script defer src="{{ asset('assets/js/products_data.js') }}?v={{ config('app.asset_version') }}"></script>
 <script defer src="{{ asset('assets/js/mega_menu.js') }}?v={{ config('app.asset_version') }}"></script>
 <script defer src="{{ asset('assets/js/site_header.js') }}?v={{ config('app.asset_version') }}"></script>
+<script defer src="{{ versioned_asset('assets/js/quote.js') }}"></script>
 @endif
 @stack('head')
 @if (request()->routeIs('dashboard.pages.preview'))
@@ -27,6 +29,7 @@
 <body class="@yield('bodyClass')" {!! trim($__env->yieldContent('bodyAttributes')) !!}>
 @if (trim($__env->yieldContent('chrome', 'full')) !== 'none')
     @include('partials.header')
+    @include('partials.quote-drawer')
 @endif
 
 @yield('content')

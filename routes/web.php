@@ -106,6 +106,7 @@ Route::get('/project-detail', [SiteProjectController::class, 'show'])->name('pro
 Route::view('/products', 'pages.products')->name('products');
 Route::view('/product-detail', 'pages.product-detail')->name('product-detail');
 Route::view('/led-strip-calculator', 'pages.led-strip-calculator')->name('led-strip-calculator');
+Route::view('/request-a-quote', 'pages.quote-request')->name('request-a-quote');
 Route::view('/trade-login', 'pages.trade-login')->name('trade-login');
 Route::view('/jr-neon', 'pages.jr-neon')->name('jr-neon');
 Route::view('/test-configuration', 'pages.test-configuration')->name('test-configuration');

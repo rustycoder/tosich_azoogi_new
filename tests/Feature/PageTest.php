@@ -42,6 +42,7 @@ class PageTest extends TestCase
             'contact' => ['/contact', 'Contact'],
             'ai-lighting' => ['/ai-lighting', 'AI Lighting'],
             'calculator' => ['/led-strip-calculator', 'LED Strip Calculator'],
+            'quote-request' => ['/request-a-quote', 'Request a Quote'],
             'privacy' => ['/privacy', 'Privacy'],
             'terms' => ['/terms', 'Terms'],
             'warranty' => ['/warranty-returns', 'Warranty'],
