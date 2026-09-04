@@ -155,32 +155,32 @@
                                     Datasheet
                                 </a>
                                 <!-- <a href="#" class="btn --accent"
-                            style="display:flex; align-items:center; justify-content:center; gap:8px;">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                              <polyline points="7 10 12 15 17 10" />
-                              <line x1="12" y1="15" x2="12" y2="3" />
-                            </svg>
-                            Installation Guide
-                          </a>
-                          <a href="#" class="btn --accent"
-                            style="display:flex; align-items:center; justify-content:center; gap:8px;">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                              <polyline points="7 10 12 15 17 10" />
-                              <line x1="12" y1="15" x2="12" y2="3" />
-                            </svg>
-                            User manual
-                          </a>
-                          <a href="#" class="btn --accent"
-                            style="display:flex; align-items:center; justify-content:center; gap:8px;">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                              <polyline points="7 10 12 15 17 10" />
-                              <line x1="12" y1="15" x2="12" y2="3" />
-                            </svg>
-                            IES files
-                          </a> -->
+                                style="display:flex; align-items:center; justify-content:center; gap:8px;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                  <polyline points="7 10 12 15 17 10" />
+                                  <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>
+                                Installation Guide
+                              </a>
+                              <a href="#" class="btn --accent"
+                                style="display:flex; align-items:center; justify-content:center; gap:8px;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                  <polyline points="7 10 12 15 17 10" />
+                                  <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>
+                                User manual
+                              </a>
+                              <a href="#" class="btn --accent"
+                                style="display:flex; align-items:center; justify-content:center; gap:8px;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                  <polyline points="7 10 12 15 17 10" />
+                                  <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>
+                                IES files
+                              </a> -->
                             </div>
                         </div>
                         <!-- PRODUCT SPECIFICATION DOWNLOAD OPTION END -->
@@ -256,26 +256,26 @@
 
     <!-- ========== RELATED PROJECTS GALLERY ========== -->
     <!-- <section class="related-projects-section">
-          <div class="wrap">
-            <h3>Featured Project Applications</h3>
-            <div class="projects-small-grid">
-              <div class="proj-small-card">
-                <img src="/assets/img/img-1.jpg" alt="Zushi Restaurant">
-                <div class="proj-small-overlay">
-                  <small>Hospitality · Sydney</small>
-                  <h4>Zushi Restaurant Custom Facade Outlines</h4>
+              <div class="wrap">
+                <h3>Featured Project Applications</h3>
+                <div class="projects-small-grid">
+                  <div class="proj-small-card">
+                    <img src="/assets/img/img-1.jpg" alt="Zushi Restaurant">
+                    <div class="proj-small-overlay">
+                      <small>Hospitality · Sydney</small>
+                      <h4>Zushi Restaurant Custom Facade Outlines</h4>
+                    </div>
+                  </div>
+                  <div class="proj-small-card">
+                    <img src="/assets/img/eve.jpg" alt="The Eve Hotel">
+                    <div class="proj-small-overlay">
+                      <small>Commercial · Redfern</small>
+                      <h4>The Eve Hotel Curved Lounge Cove Illumination</h4>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="proj-small-card">
-                <img src="/assets/img/eve.jpg" alt="The Eve Hotel">
-                <div class="proj-small-overlay">
-                  <small>Commercial · Redfern</small>
-                  <h4>The Eve Hotel Curved Lounge Cove Illumination</h4>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section> -->
+            </section> -->
 
     <!-- ========== B2B INQUIRY FORM SECTION ========== -->
     <section class="quote-section" id="quote-section-anchor">
@@ -549,7 +549,7 @@
                                     break;
                                 }
                                 const matchByName = optVals.find(v => String(v.name).trim().toLowerCase() ===
-                                partLower);
+                                    partLower);
                                 if (matchByName) {
                                     selectedOptions[optKey] = matchByName.id;
                                     break;

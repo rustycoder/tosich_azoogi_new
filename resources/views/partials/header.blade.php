@@ -40,7 +40,13 @@
                 <a href="{{ chrome_url($item['href'] ?? '') }}"{!! chrome_target_attrs($item['target'] ?? null) !!}>{{ $item['label'] }}</a>
             @endforeach
         </div>
-        <a href="{{ url('/led-strip-calculator') }}" class="cta">LED Calculator</a>
+        <div class="nav-actions">
+            <a href="{{ url('/led-strip-calculator') }}" class="cta">LED Calculator</a>
+            <button type="button" class="quote-trigger" id="quote-trigger" aria-label="Quote list" aria-expanded="false" aria-controls="quote-drawer">
+                <span class="quote-trigger-icon" aria-hidden="true"></span>
+                <span class="count" data-quote-count hidden>0</span>
+            </button>
+        </div>
         <div class="burger"><span></span><span></span><span></span></div>
     </nav>
 </header>
