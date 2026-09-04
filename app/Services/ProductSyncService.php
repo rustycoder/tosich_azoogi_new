@@ -33,18 +33,16 @@ class ProductSyncService implements IProductSyncService
         try {
             $categories = $this->safeFetch((string) config('airtable.categories_table'));
             $attributes = $this->safeFetch((string) config('airtable.attributes_table'));
+            $records = $this->airtable->fetchRecords((string) config('airtable.products_table'));
+            $compiled = $this->normalizer->compileProducts($records, $categories, $attributes);
+            $localized = $this->images->localizeProducts($compiled);
+            $keepIds = array_values(array_filter(array_map(
+                fn (array $product): string => (string) ($product['id'] ?? ''),
+                $localized,
+            )));
+
             $this->products->persistLookups($categories, $attributes);
-
-            $keepIds = [];
-
-            foreach ($this->airtable->eachPage((string) config('airtable.products_table')) as $page) {
-                foreach ($this->normalizer->compileProducts($page, $categories, $attributes) as $product) {
-                    $localized = $this->images->localizeProducts([$product]);
-                    $this->products->persistProducts($localized);
-                    $keepIds[] = (string) ($localized[0]['id'] ?? $product['id']);
-                }
-            }
-
+            $this->products->persistProducts($localized);
             $this->products->pruneMissingProducts($keepIds);
             $this->products->finishSync($run, true, count($keepIds));
         } catch (Throwable $exception) {

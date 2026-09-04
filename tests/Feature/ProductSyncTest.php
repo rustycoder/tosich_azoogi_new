@@ -161,7 +161,7 @@ class ProductSyncTest extends TestCase
             ->assertDontSee('Hidden Draft', false);
     }
 
-    public function test_sync_saves_each_airtable_page_before_fetching_the_next(): void
+    public function test_sync_fetches_all_airtable_pages_before_saving(): void
     {
         config([
             'airtable.api_key' => 'test-key',
@@ -190,12 +190,8 @@ class ProductSyncTest extends TestCase
             $offset = $request->data()['offset'] ?? $query['offset'] ?? null;
 
             if ($offset === 'page2') {
-                $this->assertDatabaseHas('products', [
-                    'airtable_id' => 'recPage1',
-                    'product_name' => 'First Light',
-                ]);
                 $this->assertDatabaseMissing('products', [
-                    'airtable_id' => 'recPage2',
+                    'airtable_id' => 'recPage1',
                 ]);
 
                 return Http::response(['records' => [
