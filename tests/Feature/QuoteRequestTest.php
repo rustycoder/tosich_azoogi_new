@@ -27,7 +27,8 @@ class QuoteRequestTest extends TestCase
         $this->get('/products')
             ->assertOk()
             ->assertSee('id="quote-trigger"', false)
-            ->assertSee('aria-label="Quote list"', false)
+            ->assertSee('aria-label="Quote List"', false)
+            ->assertSee('quote-trigger-icon', false)
             ->assertSee('id="quote-drawer"', false)
             ->assertSee('Quote List', false)
             ->assertSee('Request a Quote', false)
@@ -43,23 +44,42 @@ class QuoteRequestTest extends TestCase
             ->assertSee('assets/js/quote.js', false);
     }
 
+    public function test_quote_script_shows_sku_and_uses_a_delete_icon(): void
+    {
+        $script = file_get_contents(public_path('assets/js/quote.js'));
+
+        $this->assertNotFalse($script);
+        $this->assertStringContainsString("sku.textContent = 'SKU: ' + item.sku;", $script);
+        $this->assertStringContainsString("setAttribute('aria-label', 'Remove')", $script);
+        $this->assertStringContainsString('row.append(img, copy, actions);', $script);
+        $this->assertStringContainsString('pageSubmit.disabled = items.length === 0', $script);
+        $this->assertStringContainsString("hasAttribute('data-clear-quote')", $script);
+        $this->assertStringContainsString('writeItems([]);', $script);
+        $this->assertStringNotContainsString('row.append(img, copy);', $script);
+    }
+
     public function test_quote_request_page_has_product_list_and_form(): void
     {
         $this->get('/request-a-quote')
             ->assertOk()
             ->assertSee('Request a Quote', false)
-            ->assertSee('Products in this quote', false)
             ->assertSee('data-quote-list="page"', false)
             ->assertSee('id="quote-request-form"', false)
             ->assertSee('Get A Quote For Your Project', false)
-            ->assertSee('Request details', false)
+            ->assertSeeInOrder([
+                'quote-page-form',
+                'Request details',
+                'quote-page-list',
+                'Products in this quote',
+            ], false)
             ->assertSee('First Name*', false)
             ->assertSee('Products Needed + Quantities', false)
             ->assertSee('Which describes you best', false)
             ->assertSee('Preferred contact method', false)
             ->assertSee('Suburb or Retailer', false)
             ->assertSee('Get a Custom Quote', false)
-            ->assertSee('action="'.route('quote.submit').'"', false);
+            ->assertSee('action="'.route('quote.submit').'"', false)
+            ->assertSee('disabled', false);
     }
 
     public function test_quote_form_validates_required_fields(): void
@@ -67,7 +87,7 @@ class QuoteRequestTest extends TestCase
         $this->from('/request-a-quote')
             ->post('/request-a-quote', [])
             ->assertRedirect('/request-a-quote')
-            ->assertSessionHasErrors(['your-name', 'your-email', 'your-phone']);
+            ->assertSessionHasErrors(['your-name', 'your-email', 'your-phone', 'your-products', 'radio-choice', 'contact-choice']);
     }
 
     public function test_quote_form_accepts_a_valid_submission(): void
@@ -84,7 +104,22 @@ class QuoteRequestTest extends TestCase
                 'suburb-retailer' => 'Matraville',
             ])
             ->assertRedirect('/request-a-quote')
-            ->assertSessionHas('status');
+            ->assertSessionHas('status')
+            ->assertSessionHas('clear_quote', true);
+
+        $this->get('/request-a-quote')
+            ->assertOk()
+            ->assertSee('id="site-toasts"', false)
+            ->assertSee('data-flash="Thanks', false)
+            ->assertSee('data-clear-quote', false)
+            ->assertDontSee('form-status is-success', false);
+
+        $this->assertDatabaseHas('enquiries', [
+            'type' => 'quote',
+            'status' => 'pending',
+            'email' => 'jane@example.com',
+            'name' => 'Jane Example',
+        ]);
     }
 
     public function test_quote_page_accepts_font_size_and_alignment(): void

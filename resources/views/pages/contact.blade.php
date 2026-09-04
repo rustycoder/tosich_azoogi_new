@@ -79,8 +79,6 @@
           </div>
           @if ($errors->any())
             <p class="form-status is-error">{{ $errors->first() }}</p>
-          @elseif (session('status'))
-            <p class="form-status is-success">{{ session('status') }}</p>
           @endif
         </form>
       </div>

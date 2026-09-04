@@ -24,7 +24,7 @@
         @if ($canManageProducts)
             <a class="dash-home-card" href="{{ route('dashboard.products.index') }}">
                 <span class="dash-home-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 9h8M8 13h5"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8.5 12 4l9 4.5-9 4.5L3 8.5z"/><path d="M3 8.5v7L12 20l9-4.5v-7M12 13v7"/></svg>
                 </span>
                 <h2>Products</h2>
                 <p>Preview products and sync from Airtable.</p>
@@ -58,9 +58,42 @@
             </a>
         @endif
     </div>
-@else
+@elseif ($pendingBoards === [])
     <div class="dash-card">
         <p class="dash-lead">Content tools for this account will be planned later.</p>
     </div>
+@endif
+
+@if ($pendingBoards !== [])
+    <div class="dash-home-boards" data-enquiry-kanban data-pending-only>
+        @foreach ($pendingBoards as $board)
+            <section class="dash-kanban-col is-pending" data-kanban-col aria-labelledby="dash-home-board-{{ $board['type']->value }}">
+                <header class="dash-kanban-col-head">
+                    <h2 id="dash-home-board-{{ $board['type']->value }}">{{ $board['type']->menuLabel() }}</h2>
+                    <span data-kanban-count>{{ $board['enquiries']->count() }}</span>
+                    <a
+                        class="dash-row-link-icon"
+                        href="{{ route('dashboard.enquiries.index', ['type' => $board['type']->menuSlug()]) }}"
+                        title="View all"
+                        aria-label="View all"
+                    >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                    </a>
+                </header>
+                <div class="dash-kanban-col-body" data-status="{{ $pendingStatus->value }}">
+                    @foreach ($board['enquiries'] as $enquiry)
+                        @include('dashboard.enquiries._card', [
+                            'enquiry' => $enquiry,
+                            'status' => $pendingStatus,
+                            'draggable' => false,
+                        ])
+                    @endforeach
+                    <p class="dash-kanban-empty">No pending cards.</p>
+                </div>
+            </section>
+        @endforeach
+    </div>
+
+    @include('dashboard.enquiries._dialog')
 @endif
 @endsection

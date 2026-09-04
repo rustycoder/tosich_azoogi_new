@@ -71,7 +71,14 @@ class Product extends Model
 
     public function coverUrl(): string
     {
-        return media_url($this->cover);
+        $path = $this->cover;
+
+        if (($path === null || $path === '') && is_array($this->product_images) && $this->product_images !== []) {
+            $first = $this->product_images[0];
+            $path = is_string($first) ? $first : '';
+        }
+
+        return media_url((string) $path);
     }
 
     /**

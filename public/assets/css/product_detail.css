@@ -753,6 +753,8 @@ a.meta-badge:hover {
 
 .form-input,
 .form-textarea {
+  width: 100%;
+  min-width: 0;
   background: rgba(0, 0, 0, 0.1);
   border: 1px solid var(--border-light);
   color: var(--ink);
@@ -778,6 +780,14 @@ a.meta-badge:hover {
 .form-textarea {
   resize: vertical;
   min-height: 120px;
+}
+
+#quote-spec {
+  white-space: pre;
+  overflow-x: auto;
+  text-align: left;
+  line-height: 1.55;
+  min-height: 160px;
 }
 
 .form-submit-btn {

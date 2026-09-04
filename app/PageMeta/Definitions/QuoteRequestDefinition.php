@@ -62,7 +62,7 @@ class QuoteRequestDefinition implements PageDefinition
             ['key' => 'intro.kicker', 'sort_order' => 0, 'value' => 'Trade quote'],
             ['key' => 'intro.title', 'sort_order' => 0, 'value' => 'Get A Quote For Your Project'],
             ['key' => 'intro.body', 'sort_order' => 0, 'value' => 'Looking for tailored lighting solutions for your next project? Whether you\'re an architect, builder, designer or wholesaler, our team is here to help. Simply tell us what you need — and we\'ll provide a fast, accurate quote with expert support every step of the way.'],
-            ['key' => 'drawer.trigger_label', 'sort_order' => 0, 'value' => 'Quote list'],
+            ['key' => 'drawer.trigger_label', 'sort_order' => 0, 'value' => 'Quote List'],
             ['key' => 'drawer.title', 'sort_order' => 0, 'value' => 'Quote List'],
             ['key' => 'drawer.close', 'sort_order' => 0, 'value' => 'Close quote list'],
             ['key' => 'drawer.submit', 'sort_order' => 0, 'value' => 'Request a Quote'],

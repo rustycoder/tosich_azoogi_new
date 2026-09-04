@@ -42,8 +42,12 @@
         </div>
         <div class="nav-actions">
             <a href="{{ url('/led-strip-calculator') }}" class="cta">LED Calculator</a>
-            <button type="button" class="quote-trigger" id="quote-trigger" aria-label="{{ $quoteMeta->get('drawer.trigger_label', 0, 'Quote list') }}" aria-expanded="false" aria-controls="quote-drawer">
-                <span class="quote-trigger-icon" aria-hidden="true"></span>
+            <button type="button" class="quote-trigger" id="quote-trigger" aria-label="{{ $quoteMeta->get('drawer.trigger_label', 0, 'Quote List') }}" aria-expanded="false" aria-controls="quote-drawer">
+                <svg class="quote-trigger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="7" y="3.5" width="10" height="3" rx="1.2"/>
+                    <path d="M8 5H6.5A1.5 1.5 0 0 0 5 6.5v13A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5v-13A1.5 1.5 0 0 0 17.5 5H16"/>
+                    <path d="M9 11h6M9 15h4"/>
+                </svg>
                 <span class="count" data-quote-count hidden>0</span>
             </button>
         </div>

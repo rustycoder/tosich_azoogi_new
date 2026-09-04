@@ -23,13 +23,38 @@
 </div>
 
 <div class="dash-field">
-    <label>Content access</label>
-    <div class="dash-checks">
-        @foreach ($resources as $resource)
-            <label class="dash-check">
-                <input type="checkbox" name="resources[]" value="{{ $resource->value }}" @checked(in_array($resource->value, $assigned, true))>
-                {{ $resource->label() }}
-            </label>
+    <label>Access</label>
+    <p class="dash-access-hint">Choose which enquiry boards and pages this person can manage.</p>
+    <div class="dash-access-groups">
+        @foreach ($resources as $group)
+            @php
+                $hasLabeledSections = collect($group['sections'])->contains(fn (array $section): bool => $section['label'] !== '');
+            @endphp
+            <section class="dash-access-group">
+                @if ($hasLabeledSections)
+                    <p class="dash-access-group-title">{{ $group['label'] }}</p>
+                @endif
+                @foreach ($group['sections'] as $section)
+                    <div class="dash-access-section" data-access-section>
+                        <div class="dash-access-section-head">
+                            @if ($section['label'] !== '')
+                                <p class="dash-access-section-title">{{ $section['label'] }}</p>
+                            @else
+                                <p class="dash-access-group-title">{{ $group['label'] }}</p>
+                            @endif
+                            <button type="button" class="dash-access-toggle" data-access-toggle>Select all</button>
+                        </div>
+                        <div class="dash-checks">
+                            @foreach ($section['resources'] as $resource)
+                                <label class="dash-check">
+                                    <input type="checkbox" name="resources[]" value="{{ $resource->value }}" @checked(in_array($resource->value, $assigned, true))>
+                                    <span>{{ $resource->label() }}</span>
+                                </label>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            </section>
         @endforeach
     </div>
 </div>

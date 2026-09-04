@@ -3727,3 +3727,40 @@ a.mega-variant-card:after {
         grid-template-columns: 1fr;
     }
 }
+
+.site-toasts {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1200;
+    display: grid;
+    gap: 10px;
+    width: min(420px, calc(100vw - 32px));
+    pointer-events: none;
+}
+
+.site-toast {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--pure-bg);
+    background: var(--pure-text);
+    padding: 14px 16px;
+    border-radius: 8px;
+    border-left: 4px solid var(--accent);
+    box-shadow: 0 16px 40px rgba(17, 17, 17, .22);
+    pointer-events: auto;
+    animation: site-toast-in .22s ease;
+}
+
+.site-toast.is-out {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .2s ease, transform .2s ease;
+}
+
+@keyframes site-toast-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: none; }
+}

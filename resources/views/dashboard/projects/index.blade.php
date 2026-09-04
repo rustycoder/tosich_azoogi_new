@@ -31,15 +31,21 @@
                     <circle cx="11" cy="13" r="1.2"/>
                 </svg>
             </button>
-            <div class="dash-list-card-copy">
-                @include('dashboard.partials.title-link', [
-                    'href' => route('dashboard.projects.edit', $project),
-                    'label' => $project->title,
-                    'view' => $project->publicPath(),
+            <div class="dash-list-card-main">
+                @include('dashboard.partials.thumb', [
+                    'src' => $project->coverUrl(),
+                    'alt' => $project->title,
                 ])
-                @if ($project->summary)
-                    <p class="dash-list-sub">{{ \Illuminate\Support\Str::limit($project->summary, 160) }}</p>
-                @endif
+                <div class="dash-list-card-copy">
+                    @include('dashboard.partials.title-link', [
+                        'href' => route('dashboard.projects.edit', $project),
+                        'label' => $project->title,
+                        'view' => $project->publicPath(),
+                    ])
+                    @if ($project->summary)
+                        <p class="dash-list-sub">{{ \Illuminate\Support\Str::limit($project->summary, 160) }}</p>
+                    @endif
+                </div>
             </div>
             <div class="dash-list-card-meta">
                 <div class="dash-updated">

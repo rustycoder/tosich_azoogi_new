@@ -30,7 +30,7 @@ class StaffController extends Controller
     public function create(): View
     {
         return view('dashboard.staff.create', [
-            'resources' => ContentResource::cases(),
+            'resources' => ContentResource::staffGroups(),
         ]);
     }
 

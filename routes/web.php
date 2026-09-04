@@ -3,12 +3,14 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\EnquiryController;
 use App\Http\Controllers\Dashboard\PageContentController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\ProjectController;
 use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\Dashboard\StaffController;
+use App\Http\Controllers\ProductEnquiryController;
 use App\Http\Controllers\QuoteRequestController;
 use App\Http\Controllers\Site\PageController;
 use App\Http\Controllers\Site\ProjectController as SiteProjectController;
@@ -35,6 +37,13 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         Route::get('staff/{staff}/edit', [StaffController::class, 'edit'])->name('staff.edit');
         Route::put('staff/{staff}', [StaffController::class, 'update'])->name('staff.update');
         Route::patch('staff/{staff}/status', [StaffController::class, 'toggleStatus'])->name('staff.toggle-status');
+    });
+
+    Route::middleware('can.manage:enquiries')->group(function () {
+        Route::get('enquiries/{type?}', [EnquiryController::class, 'index'])
+            ->name('enquiries.index');
+        Route::patch('enquiries/{enquiry}/status', [EnquiryController::class, 'updateStatus'])->name('enquiries.status');
+        Route::delete('enquiries/{enquiry}', [EnquiryController::class, 'destroy'])->name('enquiries.destroy');
     });
 
     Route::middleware('can.manage:products')->group(function () {
@@ -108,3 +117,4 @@ Route::view('/trade-login', 'pages.trade-login')->name('trade-login');
 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.submit');
 Route::post('/request-a-quote', [QuoteRequestController::class, 'store'])->name('quote.submit');
+Route::post('/product-enquiry', [ProductEnquiryController::class, 'store'])->name('product-enquiry.submit');

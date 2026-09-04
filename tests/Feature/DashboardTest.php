@@ -52,13 +52,14 @@ class DashboardTest extends TestCase
         $admin = User::factory()->admin()->create();
         $staff = User::factory()->staff()->create();
         $project = Project::factory()->create();
+        Product::factory()->create();
 
         $this->actingAs($admin)->get('/dashboard')->assertOk()->assertSee('data-dash-menu', false);
         $this->actingAs($admin)->get('/dashboard/staff')->assertOk()->assertSee('dash-list-card', false)->assertSee('name="q"', false);
         $this->actingAs($admin)->get('/dashboard/staff/create')->assertOk()->assertSee('dash-card', false);
         $this->actingAs($admin)->get(route('dashboard.staff.edit', $staff))->assertOk()->assertSee('dash-card', false);
-        $this->actingAs($admin)->get('/dashboard/content/projects')->assertOk()->assertSee('dash-list-card', false)->assertSee('name="q"', false);
-        $this->actingAs($admin)->get('/dashboard/content/products')->assertOk()->assertSee('name="q"', false)->assertSee('Sync', false);
+        $this->actingAs($admin)->get('/dashboard/content/projects')->assertOk()->assertSee('dash-list-card', false)->assertSee('dash-list-card-main', false)->assertSee('dash-list-thumb', false)->assertSee('name="q"', false);
+        $this->actingAs($admin)->get('/dashboard/content/products')->assertOk()->assertSee('name="q"', false)->assertSee('Sync', false)->assertSee('dash-list-card-main', false)->assertSee('dash-list-thumb', false);
         $this->actingAs($admin)
             ->get('/dashboard/content/projects/create')
             ->assertOk()
@@ -521,6 +522,30 @@ class DashboardTest extends TestCase
         $this->assertTrue($staff->isActive());
         $this->assertTrue($staff->canManage('contact'));
         $this->assertFalse($staff->canManage('home'));
+    }
+
+    public function test_staff_form_groups_enquiries_and_content_management(): void
+    {
+        $admin = User::factory()->admin()->create();
+
+        $this->actingAs($admin)
+            ->get('/dashboard/staff/create')
+            ->assertOk()
+            ->assertSee('dash-access-group-title', false)
+            ->assertSee('data-access-toggle', false)
+            ->assertSeeInOrder([
+                'Enquiries',
+                'Quote Enquiries',
+                'Product Enquiries',
+                'Contact Enquiries',
+                'Content Management',
+                'Pages',
+                'Site',
+                'Catalog',
+                'Request a Quote',
+                'Projects',
+                'Products',
+            ], false);
     }
 
     public function test_page_editor_shows_the_live_frontend_preview(): void

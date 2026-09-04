@@ -24,9 +24,12 @@ enum ContentResource: string
     case ModernSlavery = 'modern-slavery';
     case Header = 'header';
     case Footer = 'footer';
+    case RequestAQuote = 'request-a-quote';
     case Projects = 'projects';
     case Products = 'products';
-    case RequestAQuote = 'request-a-quote';
+    case QuoteEnquiries = 'quote-enquiries';
+    case ProductEnquiries = 'product-enquiries';
+    case ContactEnquiry = 'contact-enquiry';
 
     public function label(): string
     {
@@ -51,9 +54,12 @@ enum ContentResource: string
             self::ModernSlavery => 'Modern Slavery Statement',
             self::Header => 'Header',
             self::Footer => 'Footer',
+            self::RequestAQuote => 'Request a Quote',
             self::Projects => 'Projects',
             self::Products => 'Products',
-            self::RequestAQuote => 'Request a Quote',
+            self::QuoteEnquiries => 'Quote Enquiries',
+            self::ProductEnquiries => 'Product Enquiries',
+            self::ContactEnquiry => 'Contact Enquiries',
         };
     }
 
@@ -62,9 +68,17 @@ enum ContentResource: string
         return $this === self::Header || $this === self::Footer;
     }
 
+    public function isEnquiry(): bool
+    {
+        return match ($this) {
+            self::QuoteEnquiries, self::ProductEnquiries, self::ContactEnquiry => true,
+            default => false,
+        };
+    }
+
     public function isPage(): bool
     {
-        return $this !== self::Products && ! $this->isSection();
+        return ! $this->isSection() && ! $this->isEnquiry() && $this !== self::Products;
     }
 
     /**
@@ -76,5 +90,45 @@ enum ContentResource: string
             self::cases(),
             fn (self $resource): bool => $resource->isPage(),
         ));
+    }
+
+    /**
+     * @return list<array{label: string, sections: list<array{label: string, resources: list<self>}>}>
+     */
+    public static function staffGroups(): array
+    {
+        $enquiries = [];
+        $pages = [];
+        $site = [];
+        $catalog = [];
+
+        foreach (self::cases() as $resource) {
+            if ($resource->isEnquiry()) {
+                $enquiries[] = $resource;
+            } elseif ($resource->isSection()) {
+                $site[] = $resource;
+            } elseif (in_array($resource, [self::RequestAQuote, self::Projects, self::Products], true)) {
+                $catalog[] = $resource;
+            } else {
+                $pages[] = $resource;
+            }
+        }
+
+        return [
+            [
+                'label' => 'Enquiries',
+                'sections' => [
+                    ['label' => '', 'resources' => $enquiries],
+                ],
+            ],
+            [
+                'label' => 'Content Management',
+                'sections' => [
+                    ['label' => 'Pages', 'resources' => $pages],
+                    ['label' => 'Site', 'resources' => $site],
+                    ['label' => 'Catalog', 'resources' => $catalog],
+                ],
+            ],
+        ];
     }
 }

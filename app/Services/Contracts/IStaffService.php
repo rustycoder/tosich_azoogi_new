@@ -20,7 +20,7 @@ interface IStaffService
     public function create(array $data, array $resources = []): User;
 
     /**
-     * @return array{staff: User, resources: list<ContentResource>, assigned: list<string>}
+     * @return array{staff: User, resources: list<array{label: string, sections: list<array{label: string, resources: list<ContentResource>}>}>, assigned: list<string>}
      */
     public function editorData(User $staff): array;
 

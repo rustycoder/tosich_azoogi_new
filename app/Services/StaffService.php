@@ -49,7 +49,7 @@ class StaffService implements IStaffService
 
         return [
             'staff' => $staff,
-            'resources' => ContentResource::cases(),
+            'resources' => ContentResource::staffGroups(),
             'assigned' => $staff->contentPermissions
                 ->map(fn (ContentPermission $permission): string => $permission->resource->value)
                 ->all(),

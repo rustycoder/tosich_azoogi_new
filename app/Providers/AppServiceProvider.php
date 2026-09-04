@@ -6,19 +6,23 @@ use App\Models\Page;
 use App\PageMeta\Catalog;
 use App\Repositories\ContentPermissionRepository;
 use App\Repositories\Contracts\IContentPermissionRepository;
+use App\Repositories\Contracts\IEnquiryRepository;
 use App\Repositories\Contracts\IPageRepository;
 use App\Repositories\Contracts\IProductRepository;
 use App\Repositories\Contracts\IProjectRepository;
 use App\Repositories\Contracts\IUserRepository;
+use App\Repositories\EnquiryRepository;
 use App\Repositories\PageRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\ProjectRepository;
 use App\Repositories\UserRepository;
+use App\Services\Contracts\IEnquiryService;
 use App\Services\Contracts\IPageService;
 use App\Services\Contracts\IProductSyncService;
 use App\Services\Contracts\IProfileService;
 use App\Services\Contracts\IProjectService;
 use App\Services\Contracts\IStaffService;
+use App\Services\EnquiryService;
 use App\Services\PageService;
 use App\Services\ProductSyncService;
 use App\Services\ProfileService;
@@ -40,6 +44,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IUserRepository::class, UserRepository::class);
         $this->app->bind(IContentPermissionRepository::class, ContentPermissionRepository::class);
         $this->app->bind(IProductRepository::class, ProductRepository::class);
+        $this->app->bind(IEnquiryRepository::class, EnquiryRepository::class);
         $this->app->bind(IAirtableClient::class, AirtableClient::class);
 
         $this->app->bind(IPageService::class, PageService::class);
@@ -47,6 +52,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IStaffService::class, StaffService::class);
         $this->app->bind(IProfileService::class, ProfileService::class);
         $this->app->bind(IProductSyncService::class, ProductSyncService::class);
+        $this->app->bind(IEnquiryService::class, EnquiryService::class);
     }
 
     public function boot(): void
@@ -62,6 +68,10 @@ class AppServiceProvider extends ServiceProvider
                 'canManagePages' => $user?->canManagePages() ?? false,
                 'canManageProjects' => $user?->canManageProjects() ?? false,
                 'canManageProducts' => $user?->canManageProducts() ?? false,
+                'canManageQuoteEnquiries' => $user?->canManageQuoteEnquiries() ?? false,
+                'canManageProductEnquiries' => $user?->canManageProductEnquiries() ?? false,
+                'canManageContactEnquiries' => $user?->canManageContactEnquiries() ?? false,
+                'canManageEnquiries' => $user?->canManageEnquiries() ?? false,
                 'canManageSections' => $user?->canManageSections() ?? false,
                 'isAdmin' => $user?->isAdmin() ?? false,
             ]);

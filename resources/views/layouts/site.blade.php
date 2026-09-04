@@ -38,6 +38,8 @@
     @include('partials.footer')
 @endif
 
+<div id="site-toasts" class="site-toasts" aria-live="polite" @if (session('status')) data-flash="{{ session('status') }}" @endif @if (session('clear_quote')) data-clear-quote @endif></div>
+
 @stack('scripts')
 @if (request()->routeIs('dashboard.pages.preview'))
 <script src="{{ asset('assets/js/cms-editor.js') }}?v={{ config('app.asset_version') }}"></script>

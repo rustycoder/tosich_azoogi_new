@@ -24,14 +24,20 @@
 <div class="dash-list">
     @forelse ($products as $product)
         <article class="dash-list-card">
-            <div class="dash-list-card-copy">
-                @include('dashboard.partials.title-link', [
-                    'label' => $product->product_code ?: $product->product_name,
-                    'view' => $product->publicPath(),
+            <div class="dash-list-card-main">
+                @include('dashboard.partials.thumb', [
+                    'src' => $product->coverUrl(),
+                    'alt' => $product->product_name,
                 ])
-                @if ($product->product_code && $product->product_name)
-                    <p class="dash-list-sub">{{ $product->product_name }}</p>
-                @endif
+                <div class="dash-list-card-copy">
+                    @include('dashboard.partials.title-link', [
+                        'label' => $product->product_code ?: $product->product_name,
+                        'view' => $product->publicPath(),
+                    ])
+                    @if ($product->product_code && $product->product_name)
+                        <p class="dash-list-sub">{{ $product->product_name }}</p>
+                    @endif
+                </div>
             </div>
             <div class="dash-list-card-meta">
                 <div class="dash-updated">

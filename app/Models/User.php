@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\ContentResource;
+use App\Enums\EnquiryType;
 use App\Enums\Status;
 use App\Enums\UserType;
 use App\Models\Concerns\Auditable;
@@ -143,5 +144,32 @@ class User extends Authenticatable
     public function canManageProducts(): bool
     {
         return $this->canManage(ContentResource::Products->value);
+    }
+
+    public function canManageQuoteEnquiries(): bool
+    {
+        return $this->canManage(ContentResource::QuoteEnquiries->value);
+    }
+
+    public function canManageProductEnquiries(): bool
+    {
+        return $this->canManage(ContentResource::ProductEnquiries->value);
+    }
+
+    public function canManageContactEnquiries(): bool
+    {
+        return $this->canManage(ContentResource::ContactEnquiry->value);
+    }
+
+    public function canManageEnquiries(): bool
+    {
+        return $this->canManageQuoteEnquiries()
+            || $this->canManageProductEnquiries()
+            || $this->canManageContactEnquiries();
+    }
+
+    public function canManageEnquiryType(EnquiryType $type): bool
+    {
+        return $this->canManage($type->contentResource()->value);
     }
 }

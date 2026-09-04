@@ -26,7 +26,7 @@
     </div>
     <div class="form-group">
       <label for="your-products"{!! cms_style($meta, 'form.products_label') !!}>{{ $meta->get('form.products_label') }}</label>
-      <textarea id="your-products" name="your-products" rows="8" maxlength="2000">{{ old('your-products') }}</textarea>
+      <textarea id="your-products" name="your-products" rows="8" maxlength="8000" required>{{ old('your-products') }}</textarea>
     </div>
   </div>
 
@@ -35,7 +35,7 @@
     <div class="quote-radios">
       @foreach ($meta->list('form.role.label') as $index => $role)
         @if (trim($role) !== '')
-          <label{!! cms_style($meta, 'form.role.label', $index) !!}><input type="radio" name="radio-choice" value="{{ $role }}" @checked(old('radio-choice') === $role)> {{ $role }}</label>
+          <label{!! cms_style($meta, 'form.role.label', $index) !!}><input type="radio" name="radio-choice" value="{{ $role }}" required @checked(old('radio-choice') === $role)> {{ $role }}</label>
         @endif
       @endforeach
     </div>
@@ -46,7 +46,7 @@
     <div class="quote-radios quote-radios-inline">
       @foreach ($meta->list('form.method.label') as $index => $method)
         @if (trim($method) !== '')
-          <label{!! cms_style($meta, 'form.method.label', $index) !!}><input type="radio" name="contact-choice" value="{{ $method }}" @checked(old('contact-choice') === $method)> {{ $method }}</label>
+          <label{!! cms_style($meta, 'form.method.label', $index) !!}><input type="radio" name="contact-choice" value="{{ $method }}" required @checked(old('contact-choice') === $method)> {{ $method }}</label>
         @endif
       @endforeach
     </div>
@@ -61,12 +61,10 @@
   </div>
 
   <div class="form-actions">
-    <button type="submit" class="btn primary"{!! cms_style($meta, 'form.submit') !!}>{{ $meta->get('form.submit') }}</button>
+    <button type="submit" class="btn primary" disabled aria-disabled="true"{!! cms_style($meta, 'form.submit') !!}>{{ $meta->get('form.submit') }}</button>
   </div>
   @if ($errors->any())
     <p class="form-status is-error">{{ $errors->first() }}</p>
-  @elseif (session('status'))
-    <p class="form-status is-success">{{ session('status') }}</p>
   @else
     <p class="form-status" id="quote-form-status" hidden></p>
   @endif

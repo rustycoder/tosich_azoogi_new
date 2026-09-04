@@ -296,55 +296,49 @@
                 </div>
 
                 <div class="quote-form-card">
-                    <div id="quote-form-success" class="form-success-message">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="48"
-                            height="48">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                            <polyline points="22 4 12 14.01 9 11.01" />
-                        </svg>
-                        <h4>Quote Request Sent!</h4>
-                        <p>Thank you. Our specification team is reviewing your project details. We will contact you shortly.
-                        </p>
-                    </div>
-
-                    <form id="quote-form" onsubmit="handleQuoteSubmit(event)">
+                    <form id="quote-form" action="{{ route('product-enquiry.submit') }}" method="post">
+                        @csrf
                         <div class="form-row-2">
                             <div class="form-group">
                                 <label class="form-label" for="quote-name">Your Name *</label>
-                                <input class="form-input" id="quote-name" type="text" required
-                                    placeholder="e.g. John Doe">
+                                <input class="form-input" id="quote-name" name="quote-name" type="text" required
+                                    maxlength="191" placeholder="e.g. John Doe" value="{{ old('quote-name') }}">
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="quote-email">Email Address *</label>
-                                <input class="form-input" id="quote-email" type="email" required
-                                    placeholder="e.g. name@company.com.au">
+                                <input class="form-input" id="quote-email" name="quote-email" type="email" required
+                                    maxlength="191" placeholder="e.g. name@company.com.au" value="{{ old('quote-email') }}">
                             </div>
                         </div>
 
                         <div class="form-row-2">
                             <div class="form-group">
-                                <label class="form-label" for="quote-company">Company / Trade Name</label>
-                                <input class="form-input" id="quote-company" type="text"
-                                    placeholder="e.g. Summit Electrical">
+                                <label class="form-label" for="quote-company">Company / Trade Name *</label>
+                                <input class="form-input" id="quote-company" name="quote-company" type="text" required
+                                    maxlength="191" placeholder="e.g. Summit Electrical" value="{{ old('quote-company') }}">
                             </div>
                             <div class="form-group">
-                                <label class="form-label" for="quote-project">Project Name</label>
-                                <input class="form-input" id="quote-project" type="text"
-                                    placeholder="e.g. Sydney Office fitout">
+                                <label class="form-label" for="quote-project">Project Name *</label>
+                                <input class="form-input" id="quote-project" name="quote-project" type="text" required
+                                    maxlength="191" placeholder="e.g. Sydney Office fitout" value="{{ old('quote-project') }}">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label" for="quote-spec">Configured Specification</label>
-                            <textarea class="form-textarea" id="quote-spec" readonly
-                                style="opacity: 0.8; background: var(--rgba-hover); cursor: not-allowed;"></textarea>
+                            <label class="form-label" for="quote-spec">Configured Specification *</label>
+                            <textarea class="form-textarea" id="quote-spec" name="quote-spec" required readonly wrap="off" rows="10"
+                                style="opacity: 0.8; background: var(--rgba-hover); cursor: not-allowed;">{{ old('quote-spec') }}</textarea>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label" for="quote-message">Additional Project Details</label>
-                            <textarea class="form-textarea" id="quote-message"
-                                placeholder="Provide extra requirements, dimming requests, or custom connector feeds..."></textarea>
+                            <textarea class="form-textarea" id="quote-message" name="quote-message"
+                                placeholder="Provide extra requirements, dimming requests, or custom connector feeds...">{{ old('quote-message') }}</textarea>
                         </div>
+
+                        @if ($errors->any())
+                            <p class="form-status is-error">{{ $errors->first() }}</p>
+                        @endif
 
                         <button class="btn" type="submit">Submit Spec Inquiry</button>
                     </form>
@@ -892,7 +886,7 @@
                                                                                                   </div>
                                                                                                   <div class="prod-card-title">
                                                                                                     <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}${codeHtml}</div>
-                                                                                                    <button class="add-quote-btn" aria-label="Add to quote" onclick="event.stopPropagation(); this.classList.add('added'); this.innerHTML='✓';">+</button>
+                                                                                                    <button class="add-quote-btn" aria-label="Add to quote" data-quote-id="${p.id || p.sku || p.name || ''}" data-quote-name="${p.name || ''}" data-quote-sku="${primaryProductCode(p.sku)}" data-quote-image="${p.img || ''}" data-quote-url="${detailUrl}" onclick="event.stopPropagation();">+</button>
                                                                                                   </div>
                                                                                                 </div>
                                                                                               `;
@@ -1220,6 +1214,10 @@
                     const pName = product.product_name || product.name || "Product";
                     const features = product.product_features || {};
                     const skuDisplay = getMappedSku(product, selectedOptions);
+                    const specAddBtn = document.getElementById('add-to-spec-btn');
+                    if (specAddBtn) {
+                        specAddBtn.dataset.quoteSku = skuDisplay || '';
+                    }
 
                     // if (productCodeEl) productCodeEl.textContent = `PRODUCT CODE: ${skuDisplay}`;
 
@@ -1352,22 +1350,25 @@
                     const pNameLower = pName.toLowerCase();
                     const isLinear = catLower.includes('neon') || catLower.includes('linear') || pNameLower.includes('strip') ||
                         pNameLower.includes('nnr');
-                    let specSummary =
-                        `Product: ${pName} (${product.category || 'General'})
-                                                                                Variant Model: ${skuDisplay}
-                                                                                Selected Options:
-                                                                                ${selectedOptionsSummary.map(s => "  - " + s).join('\n')}`;
+                    const specLines = [
+                        `Product: ${pName} (${product.category || 'General'})`,
+                        `Variant Model: ${skuDisplay}`,
+                        'Selected Options:',
+                        ...selectedOptionsSummary.map((s) => `  - ${s}`),
+                    ];
 
                     if (isLinear) {
-                        specSummary +=
-                            `
-                                                                                Requested custom cut length: ${selectedLength.toFixed(1)}m
-                                                                                Total power load: ${totalPower.toFixed(1)}W
-                                                                                Recommended system driver: ${driverRecommendation}`;
+                        specLines.push(
+                            `Requested custom cut length: ${selectedLength.toFixed(1)}m`,
+                            `Total power load: ${totalPower.toFixed(1)}W`,
+                            `Recommended system driver: ${driverRecommendation}`,
+                        );
                     }
 
                     const specField = document.getElementById('quote-spec');
-                    if (specField) specField.value = specSummary;
+                    if (specField) {
+                        specField.value = specLines.map((line) => String(line).replace(/[ \t]+$/g, '')).join('\n');
+                    }
 
                     // Visual color glow update
                     // const glowArea = document.getElementById('glow-area');
@@ -1456,12 +1457,7 @@
                 }
             }
 
-            // Inquiry Quote form submit
-            function handleQuoteSubmit(event) {
-                event.preventDefault();
-                document.getElementById('quote-form').style.display = 'none';
-                document.getElementById('quote-form-success').style.display = 'block';
-            }
+            // Inquiry form posts to the server; success is shown after redirect.
         </script>
     @endverbatim
 @endpush

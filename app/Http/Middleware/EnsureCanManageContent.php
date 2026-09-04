@@ -17,6 +17,14 @@ class EnsureCanManageContent
             $resource = is_object($page) ? $page->slug : (string) $request->route('resource');
         }
 
+        if ($resource === 'enquiries') {
+            if ($user && $user->canManageEnquiries()) {
+                return $next($request);
+            }
+
+            abort(403);
+        }
+
         if ($user && $user->canManage($resource)) {
             return $next($request);
         }

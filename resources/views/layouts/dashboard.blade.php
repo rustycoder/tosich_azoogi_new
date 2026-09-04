@@ -36,6 +36,27 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1z"/></svg>
                 Dashboard
             </a>
+            @if ($canManageQuoteEnquiries || $canManageProductEnquiries || $canManageContactEnquiries)
+                <div class="dash-group">Enquiries</div>
+                @if ($canManageQuoteEnquiries)
+                    <a href="{{ route('dashboard.enquiries.index', ['type' => 'quote']) }}" class="{{ request()->routeIs('dashboard.enquiries.*') && (request()->route('type') === 'quote' || request()->route('type') === null) ? 'is-active' : '' }}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="6" y="5" width="12" height="15" rx="2"/><path d="M9 5V4h6v1M9 11h6M9 15h4"/></svg>
+                        Quote
+                    </a>
+                @endif
+                @if ($canManageProductEnquiries)
+                    <a href="{{ route('dashboard.enquiries.index', ['type' => 'products']) }}" class="{{ request()->routeIs('dashboard.enquiries.*') && request()->route('type') === 'products' ? 'is-active' : '' }}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8.5 12 4l9 4.5-9 4.5L3 8.5z"/><path d="M3 8.5v7L12 20l9-4.5v-7M12 13v7"/></svg>
+                        Product
+                    </a>
+                @endif
+                @if ($canManageContactEnquiries)
+                    <a href="{{ route('dashboard.enquiries.index', ['type' => 'contacts']) }}" class="{{ request()->routeIs('dashboard.enquiries.*') && request()->route('type') === 'contacts' ? 'is-active' : '' }}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="m3 8 9 6 9-6"/></svg>
+                        Contact
+                    </a>
+                @endif
+            @endif
             @if ($canManageProjects || $canManageProducts || $canManagePages || $canManageSections)
                 <div class="dash-group">Content Management</div>
                 @if ($canManageProjects)
@@ -46,8 +67,8 @@
                 @endif
                 @if ($canManageProducts)
                     <a href="{{ route('dashboard.products.index') }}" class="{{ request()->routeIs('dashboard.products.*') ? 'is-active' : '' }}">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 9h8M8 13h5"/></svg>
-                        Products
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8.5 12 4l9 4.5-9 4.5L3 8.5z"/><path d="M3 8.5v7L12 20l9-4.5v-7M12 13v7"/></svg>
+                    Products
                     </a>
                 @endif
                 @if ($canManagePages)
@@ -105,7 +126,7 @@
     </main>
 </div>
 <div id="dash-toasts" class="dash-toasts" aria-live="polite" @if (session('status')) data-flash="{{ session('status') }}" @endif></div>
-<script src="{{ asset('assets/js/dashboard.js') }}?v={{ config('app.asset_version') }}"></script>
+<script src="{{ versioned_asset('assets/js/dashboard.js') }}"></script>
 @stack('scripts')
 </body>
 </html>

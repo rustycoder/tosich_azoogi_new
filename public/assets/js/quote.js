@@ -11,7 +11,7 @@
       }
 
       return items.map((item) => {
-        const sku = normalizeSku(item.sku);
+        const sku = primarySku(item.sku);
         return {
           ...item,
           sku,
@@ -29,11 +29,20 @@
   }
 
   function normalizeSku(value) {
-    return String(value || '').replace(/^(MODEL|SKU):\s*/i, '').trim();
+    return String(value || '').replace(/^(MODEL|SKU|PRODUCT CODE):\s*/i, '').trim();
+  }
+
+  function primarySku(value) {
+    const sku = normalizeSku(value);
+    if (!sku) {
+      return '';
+    }
+
+    return sku.split(',')[0].trim();
   }
 
   function itemKey(item) {
-    return normalizeSku(item.sku) || String(item.id || item.name || '').trim();
+    return primarySku(item.sku) || String(item.id || item.name || '').trim();
   }
 
   function countItems(items) {
@@ -48,9 +57,9 @@
 
     const items = readItems();
     const incoming = {
-      id: normalizeSku(next.sku) || String(next.id || name),
+      id: primarySku(next.sku) || String(next.id || name),
       name,
-      sku: normalizeSku(next.sku),
+      sku: primarySku(next.sku),
       image: String(next.image || '').trim() || FALLBACK_IMAGE,
       url: String(next.url || '').trim(),
       qty: 1,
@@ -92,7 +101,7 @@
       return {
         id: button.dataset.quoteId || button.dataset.quoteSku || button.dataset.quoteName,
         name: button.dataset.quoteName,
-        sku: normalizeSku(button.dataset.quoteSku),
+        sku: primarySku(button.dataset.quoteSku),
         image: button.dataset.quoteImage || '',
         url: button.dataset.quoteUrl || '',
       };
@@ -123,7 +132,7 @@
     return {
       id: (code ? code.textContent.replace(/[()]/g, '').trim() : '') || name.trim(),
       name: name.replace(/\s+/g, ' ').trim(),
-      sku: normalizeSku(code ? code.textContent.replace(/[()]/g, '') : ''),
+      sku: primarySku(code ? code.textContent.replace(/[()]/g, '') : ''),
       image,
       url: card.dataset.href || (fromOnclick ? fromOnclick[1] : ''),
     };
@@ -131,10 +140,13 @@
 
   function extractFromProductDetail() {
     const nameEl = document.getElementById('product-name');
+    const specBtn = document.getElementById('add-to-spec-btn');
     const codeEl = document.getElementById('product-code-label');
     const imgEl = document.getElementById('gallery-main-img');
     const name = nameEl ? nameEl.textContent.trim() : '';
-    const sku = codeEl ? normalizeSku(codeEl.textContent) : '';
+    const sku = primarySku(
+      (specBtn && specBtn.dataset.quoteSku) || (codeEl ? codeEl.textContent : ''),
+    );
 
     return {
       id: sku || name,
@@ -168,17 +180,8 @@
     if (item.sku) {
       const sku = document.createElement('span');
       sku.className = variant === 'page' ? 'quote-page-item-sku' : 'quote-item-sku';
-      sku.textContent = item.sku;
+      sku.textContent = 'SKU: ' + item.sku;
       copy.appendChild(sku);
-    }
-
-    if (variant === 'page') {
-      const qty = document.createElement('span');
-      qty.className = 'quote-page-item-qty';
-      qty.textContent = 'Qty ' + (item.qty || 1);
-      copy.appendChild(qty);
-      row.append(img, copy);
-      return row;
     }
 
     const actions = document.createElement('div');
@@ -208,7 +211,8 @@
     remove.type = 'button';
     remove.className = 'quote-item-remove';
     remove.dataset.quoteRemove = '1';
-    remove.textContent = 'Remove';
+    remove.setAttribute('aria-label', 'Remove');
+    remove.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V5.8A1.8 1.8 0 0 1 10.8 4h2.4A1.8 1.8 0 0 1 15 5.8V7"/><path d="M6.5 7l.8 12.2A1.8 1.8 0 0 0 9.1 21h5.8a1.8 1.8 0 0 0 1.8-1.8L17.5 7"/><path d="M10 11v6M14 11v6"/></svg>';
 
     actions.append(stepper, remove);
     row.append(img, copy, actions);
@@ -261,6 +265,13 @@
         link.removeAttribute('aria-disabled');
       }
     });
+
+    const pageSubmit = document.querySelector('#quote-request-form button[type="submit"]');
+    if (pageSubmit) {
+      pageSubmit.disabled = items.length === 0;
+      pageSubmit.classList.toggle('is-disabled', items.length === 0);
+      pageSubmit.setAttribute('aria-disabled', items.length === 0 ? 'true' : 'false');
+    }
 
     if (payload) {
       payload.value = items.map((item) => (item.sku ? item.name + ' (' + item.sku + ') x' + (item.qty || 1) : item.name + ' x' + (item.qty || 1))).join('\n');
@@ -377,7 +388,12 @@
 
     const form = document.getElementById('quote-request-form');
     if (form) {
-      form.addEventListener('submit', () => {
+      form.addEventListener('submit', (event) => {
+        if (readItems().length === 0) {
+          event.preventDefault();
+          return;
+        }
+
         const products = form.querySelector('#your-products');
         if (products && !String(products.value || '').trim()) {
           products.value = readItems().map((item) => {
@@ -387,6 +403,10 @@
           }).join('\n');
         }
       });
+    }
+
+    if (document.getElementById('site-toasts')?.hasAttribute('data-clear-quote')) {
+      writeItems([]);
     }
 
     window.addEventListener('quote:changed', renderLists);
@@ -404,6 +424,9 @@
     open: openDrawer,
     close: closeDrawer,
     items: readItems,
+    clear: function () {
+      writeItems([]);
+    },
     refresh: function () {
       markAddedButtons(readItems());
     },
@@ -414,4 +437,37 @@
   } else {
     bind();
   }
+})();
+
+(() => {
+  const stack = document.getElementById('site-toasts');
+
+  if (!stack) {
+    return;
+  }
+
+  const toast = (message) => {
+    if (!message) {
+      return;
+    }
+
+    const item = document.createElement('div');
+    item.className = 'site-toast';
+    item.textContent = message;
+    stack.append(item);
+
+    window.setTimeout(() => {
+      item.classList.add('is-out');
+      window.setTimeout(() => item.remove(), 220);
+    }, 4200);
+  };
+
+  const flash = stack.dataset.flash;
+
+  if (flash) {
+    toast(flash);
+    delete stack.dataset.flash;
+  }
+
+  window.siteToast = toast;
 })();

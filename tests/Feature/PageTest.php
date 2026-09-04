@@ -102,6 +102,16 @@ class PageTest extends TestCase
         $this->get('/project-detail')->assertNotFound();
     }
 
+    public function test_product_detail_configured_specification_is_built_without_padded_lines(): void
+    {
+        $this->get('/product-detail')
+            ->assertOk()
+            ->assertSee('id="quote-spec"', false)
+            ->assertSee('wrap="off"', false)
+            ->assertSee(".join('\\n')", false)
+            ->assertDontSee('                                                                                Variant Model:', false);
+    }
+
     public function test_about_intro_cta_links_to_contact(): void
     {
         $this->get('/about')
@@ -143,6 +153,19 @@ class PageTest extends TestCase
             ])
             ->assertRedirect('/contact')
             ->assertSessionHas('status');
+
+        $this->get('/contact')
+            ->assertOk()
+            ->assertSee('id="site-toasts"', false)
+            ->assertSee('data-flash="Thanks', false)
+            ->assertDontSee('form-status is-success', false);
+
+        $this->assertDatabaseHas('enquiries', [
+            'type' => 'contact',
+            'status' => 'pending',
+            'email' => 'jane@example.com',
+            'company' => 'Example Lighting',
+        ]);
     }
 
     public function test_home_page_renders_parent_categories_in_products_marquee(): void
