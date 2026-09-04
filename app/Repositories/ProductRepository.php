@@ -31,7 +31,7 @@ class ProductRepository implements IProductRepository
                 'product_name' => (string) ($product['product_name'] ?? 'Unnamed Product'),
                 'category' => $this->storedString($product['category'] ?? null),
                 'status' => $this->storedString($product['status'] ?? null, 32),
-                'sort_order' => isset($product['order']) && is_numeric($product['order']) ? (int) $product['order'] : null,
+                'sort_order' => $this->storedOrder($product),
                 'cover' => $cover !== '' ? $cover : null,
                 'product_code' => $this->storedString($product['product_code'] ?? null),
                 'product_type' => $this->storedString($product['product_type'] ?? null),
@@ -250,6 +250,26 @@ class ProductRepository implements IProductRepository
         }
 
         return mb_substr((string) $value, 0, $max);
+    }
+
+    /**
+     * @param  array<string, mixed>  $product
+     */
+    private function storedOrder(array $product): ?int
+    {
+        foreach (['order', 'sort_order'] as $key) {
+            if (! isset($product[$key]) || ! is_numeric($product[$key])) {
+                continue;
+            }
+
+            $value = (float) $product[$key];
+
+            if (is_finite($value)) {
+                return (int) $value;
+            }
+        }
+
+        return null;
     }
 
     private function storedText(mixed $value): ?string

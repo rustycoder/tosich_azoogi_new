@@ -20,22 +20,26 @@ class ProductSeeder extends Seeder
 
         $catalog = is_array($payload['products'] ?? null) ? $payload['products'] : [];
         $tree = is_array($payload['tree'] ?? null) ? $payload['tree'] : [];
+        $catalog = $this->withListOrder($catalog);
         [$catalog, $attributes] = $this->attributesFromProducts($catalog);
 
         if (Product::query()->exists()) {
-            if (ProductAttribute::query()->exists()) {
-                $this->command?->info('Products already seeded; skipping JSON import.');
-
-                return;
+            if (! ProductAttribute::query()->exists()) {
+                $products->persistLookups([], $attributes);
+                $this->command?->info('Seeded '.count($attributes).' product attribute(s) from products.json.');
             }
 
-            $products->persistLookups([], $attributes);
-            $this->command?->info('Seeded '.count($attributes).' product attribute(s) from products.json.');
+            $this->backfillProductSortOrder($catalog);
+
+            if (ProductAttribute::query()->exists() && ! Product::query()->whereNull('sort_order')->exists()) {
+                $this->command?->info('Products already seeded; skipping JSON import.');
+            }
 
             return;
         }
 
-        $products->persistLookups($this->categoryRecords($tree), $attributes);
+        $order = 1;
+        $products->persistLookups($this->categoryRecords($tree, null, $order), $attributes);
         $products->persistProducts($catalog);
 
         $this->command?->info('Seeded '.count($catalog).' product(s) from products.json.');
@@ -69,7 +73,7 @@ class ProductSeeder extends Seeder
      * @param  list<mixed>  $nodes
      * @return list<array{id: string, fields: array<string, mixed>}>
      */
-    private function categoryRecords(array $nodes, ?string $parentId = null): array
+    private function categoryRecords(array $nodes, ?string $parentId, int &$order): array
     {
         $records = [];
 
@@ -87,7 +91,9 @@ class ProductSeeder extends Seeder
             $id = md5(($parentId ?? '').'|'.$name);
             $fields = [
                 'Name' => $name,
+                'Order' => $order,
             ];
+            $order++;
 
             if ($parentId !== null) {
                 $fields['Parent'] = [$parentId];
@@ -99,10 +105,54 @@ class ProductSeeder extends Seeder
             ];
 
             $children = is_array($node['children'] ?? null) ? $node['children'] : [];
-            $records = [...$records, ...$this->categoryRecords($children, $id)];
+            $records = [...$records, ...$this->categoryRecords($children, $id, $order)];
         }
 
         return $records;
+    }
+
+    /**
+     * @param  list<mixed>  $products
+     * @return list<mixed>
+     */
+    private function withListOrder(array $products): array
+    {
+        foreach ($products as $index => $product) {
+            if (! is_array($product)) {
+                continue;
+            }
+
+            $order = $product['order'] ?? $product['sort_order'] ?? null;
+
+            if (is_numeric($order) && is_finite((float) $order)) {
+                $products[$index]['order'] = (int) $order;
+
+                continue;
+            }
+
+            $products[$index]['order'] = $index + 1;
+        }
+
+        return $products;
+    }
+
+    /**
+     * @param  list<mixed>  $products
+     */
+    private function backfillProductSortOrder(array $products): void
+    {
+        foreach ($products as $index => $product) {
+            if (! is_array($product) || ! isset($product['id'])) {
+                continue;
+            }
+
+            $order = $product['order'] ?? $index + 1;
+
+            Product::query()
+                ->where('airtable_id', $product['id'])
+                ->whereNull('sort_order')
+                ->update(['sort_order' => (int) $order]);
+        }
     }
 
     /**
@@ -134,15 +184,18 @@ class ProductSeeder extends Seeder
                     $icon = trim((string) ($item['icon'] ?? ''));
                     $existing = $records[$id]['fields']['Icon'] ?? '';
 
-                    if (! isset($records[$id]) || ($existing === '' && $icon !== '')) {
+                    if (! isset($records[$id])) {
                         $records[$id] = [
                             'id' => $id,
                             'fields' => [
                                 'Attribute name' => $name,
                                 'Term Name' => $value,
                                 'Icon' => $icon,
+                                'Order' => count($records) + 1,
                             ],
                         ];
+                    } elseif ($existing === '' && $icon !== '') {
+                        $records[$id]['fields']['Icon'] = $icon;
                     }
                 }
             }

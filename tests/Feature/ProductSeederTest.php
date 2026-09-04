@@ -27,8 +27,9 @@ class ProductSeederTest extends TestCase
             'airtable_id' => 'rec7gengQm0proqz5',
             'product_name' => 'Garden Light',
             'product_code' => 'GL005',
+            'sort_order' => 1,
         ]);
-        $this->assertTrue(ProductCategory::query()->where('name', 'NEON')->exists());
+        $this->assertTrue(ProductCategory::query()->where('name', 'NEON')->whereNotNull('sort_order')->exists());
         $this->assertGreaterThan(1, Product::query()->count());
         $this->assertDatabaseHas('products', [
             'airtable_id' => 'recHbgdqI7oH13d98',
@@ -69,5 +70,20 @@ class ProductSeederTest extends TestCase
             'name' => 'Finish',
             'value' => 'Black',
         ]);
+    }
+
+    public function test_seeder_backfills_missing_sort_order(): void
+    {
+        $this->seed(ProductSeeder::class);
+
+        Product::query()->update(['sort_order' => null]);
+
+        $this->seed(ProductSeeder::class);
+
+        $this->assertDatabaseHas('products', [
+            'airtable_id' => 'rec7gengQm0proqz5',
+            'sort_order' => 1,
+        ]);
+        $this->assertSame(0, Product::query()->whereNull('sort_order')->count());
     }
 }

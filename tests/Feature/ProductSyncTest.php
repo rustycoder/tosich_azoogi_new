@@ -145,6 +145,7 @@ class ProductSyncTest extends TestCase
             'airtable_id' => 'recPublish',
             'product_name' => 'Garden Light',
             'category' => 'NEON',
+            'sort_order' => 1,
         ]);
         $this->assertFalse(Schema::hasColumn('products', 'payload'));
         $this->assertDatabaseMissing('products', [
