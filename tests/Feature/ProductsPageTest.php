@@ -21,6 +21,8 @@ class ProductsPageTest extends TestCase
     {
         $this->get('/products')
             ->assertOk()
+            ->assertSee('const AZOOGI_PRODUCTS', false)
+            ->assertDontSee('products_data.js', false)
             ->assertSee('id="prodSidebar"', false)
             ->assertSee('id="prodFilterOverlay"', false)
             ->assertSee('id="prodFilterOpen"', false)

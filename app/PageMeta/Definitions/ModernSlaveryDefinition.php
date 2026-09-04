@@ -21,7 +21,7 @@ class ModernSlaveryDefinition extends LegalDefinition
 
     public function navLabel(): string
     {
-        return 'Modern Slavery';
+        return 'Modern Slavery Statement';
     }
 
     public function seed(): array

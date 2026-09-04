@@ -3,15 +3,16 @@
 namespace App\Services\Contracts;
 
 use App\Models\Project;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 
 interface IProjectService
 {
     /**
-     * @return Collection<int, Project>
+     * @return LengthAwarePaginator<int, Project>
      */
-    public function dashboardList(string $search = ''): Collection;
+    public function dashboardList(string $search = ''): LengthAwarePaginator;
 
     /**
      * @return array{highlights: Collection<int, Project>, projects: Collection<int, Project>}

@@ -1,12 +1,11 @@
 # Azoogi Website
 
-Laravel 13 application for the Azoogi lighting website, with the existing Airtable extraction pipeline for product catalogue data.
+Laravel 13 application for the Azoogi lighting website.
 
 ## Requirements
 
 - PHP 8.3+
 - Composer
-- Python 3 (optional, for Airtable sync)
 
 ## Setup
 
@@ -15,6 +14,12 @@ composer install
 cp .env.example .env
 php artisan key:generate
 php artisan migrate
+```
+
+Seed the database (products load from `public/assets/data/products.json`):
+
+```bash
+php artisan db:seed
 ```
 
 Serve the app:
@@ -38,42 +43,21 @@ Then open [http://localhost:8000](http://localhost:8000). The web root is `publi
 | `/contact` | Contact |
 | `/ai-lighting` | AI Lighting |
 | `/led-strip-calculator` | LED Calculator |
-| `/policies` | Policies |
 | `/trade-login` | Trade login (coming soon) |
 
-Legacy `*.html` URLs redirect to the new routes (for example `/products.html` → `/products`).
+## Product catalogue
 
-## Airtable extraction
-
-Product categories, details, and attributes still sync from Airtable via the Python package.
-
-1. Configure `airtable_json_uploader/.env` with your Airtable PAT and base IDs (see `airtable_json_uploader/.env.example`).
-2. Install and run:
+The first seed imports the catalogue snapshot in `public/assets/data/products.json`. Later refreshes pull from Airtable (`AIRTABLE_API_KEY` and `AIRTABLE_BASE_ID` in `.env`):
 
 ```bash
-cd airtable_json_uploader
-pip install -e .
-airtable-extract
+php artisan products:sync
 ```
 
-Output files:
-
-- `public/assets/data/products.json`
-- `public/assets/js/products_data.js`
-
-The extractor also writes product images under `public/assets/img/`.
-
-Web Studio (optional):
-
-```bash
-airtable-web
-```
-
-Open `http://127.0.0.1:5050/extract`.
+The dashboard Sync button queues the same job. A host cron should run `php artisan schedule:run` every minute so products refresh every two hours.
 
 ## Cache version (`?v=...`)
 
-Front-end CSS/JS cache-busting uses `ASSET_VERSION` in `.env`. Bump it after catalogue extracts:
+Front-end CSS/JS cache-busting uses `ASSET_VERSION` in `.env`, or `versioned_asset()` which appends the file's modification time.
 
 ```bash
 python update_version.py bump
@@ -81,14 +65,10 @@ python update_version.py status
 python update_version.py 2.11
 ```
 
-`airtable-extract` bumps this automatically.
-
 ## Project layout
 
 ```
-app/Http/Controllers/     Contact form handling
+app/Http/Controllers/     HTTP controllers
 resources/views/          Blade layouts and pages
-public/assets/            CSS, JS, images, catalogue JSON
-airtable_json_uploader/   Airtable extraction engine
-v3/                       Source product JSON used by the extractor
+public/assets/            CSS, JS, images
 ```

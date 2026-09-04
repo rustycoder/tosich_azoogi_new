@@ -4,14 +4,14 @@ namespace App\Services\Contracts;
 
 use App\Enums\ContentResource;
 use App\Models\User;
-use Illuminate\Support\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface IStaffService
 {
     /**
-     * @return Collection<int, User>
+     * @return LengthAwarePaginator<int, User>
      */
-    public function all(string $search = ''): Collection;
+    public function all(string $search = ''): LengthAwarePaginator;
 
     /**
      * @param  array<string, mixed>  $data

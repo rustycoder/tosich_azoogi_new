@@ -139,4 +139,9 @@ class User extends Authenticatable
     {
         return $this->canManage(ContentResource::Projects->value);
     }
+
+    public function canManageProducts(): bool
+    {
+        return $this->canManage(ContentResource::Products->value);
+    }
 }

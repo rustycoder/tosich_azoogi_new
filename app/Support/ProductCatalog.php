@@ -2,31 +2,25 @@
 
 namespace App\Support;
 
-use Illuminate\Support\Facades\File;
+use App\Repositories\Contracts\IProductRepository;
 
 class ProductCatalog
 {
     /**
-     * Get parent categories dynamically extracted from public/assets/data/products.json.
+     * Get parent categories from products and product categories stored in MySQL.
      *
      * @return array<int, array{title: string, body: string, image: string, href: string, count: int}>
      */
     public static function parentCategories(): array
     {
-        $path = public_path('assets/data/products.json');
+        $data = app(IProductRepository::class)->compiled();
 
-        if (! File::exists($path)) {
-            return [];
-        }
-
-        $data = json_decode((string) File::get($path), true);
-
-        if (! is_array($data) || empty($data['tree']) || ! is_array($data['tree'])) {
+        if ($data['tree'] === []) {
             return [];
         }
 
         $tree = $data['tree'];
-        $products = is_array($data['products'] ?? null) ? $data['products'] : [];
+        $products = $data['products'];
 
         // Preferred order for core lighting categories
         $priorityOrder = [

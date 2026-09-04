@@ -18,7 +18,7 @@
     'search' => $search,
 ])
 
-<div class="dash-list" @if ($projects->isNotEmpty() && $search === '') data-dash-sort="{{ route('dashboard.projects.reorder') }}" @endif>
+<div class="dash-list" @if ($projects->isNotEmpty() && $search === '' && ! $projects->hasPages()) data-dash-sort="{{ route('dashboard.projects.reorder') }}" @endif>
     @forelse ($projects as $project)
         <article class="dash-list-card is-sortable" data-id="{{ $project->id }}">
             <button type="button" class="dash-drag-handle" aria-label="Drag to set featured order">
@@ -69,4 +69,6 @@
         <div class="dash-card dash-empty">{{ $search === '' ? 'No projects yet.' : 'No titles match that search.' }}</div>
     @endforelse
 </div>
+
+{{ $projects->links('dashboard.partials.pagination') }}
 @endsection

@@ -25,6 +25,7 @@ enum ContentResource: string
     case Header = 'header';
     case Footer = 'footer';
     case Projects = 'projects';
+    case Products = 'products';
 
     public function label(): string
     {
@@ -46,10 +47,11 @@ enum ContentResource: string
             self::Privacy => 'Privacy',
             self::Terms => 'Terms',
             self::WarrantyReturns => 'Warranty & Returns',
-            self::ModernSlavery => 'Modern Slavery',
+            self::ModernSlavery => 'Modern Slavery Statement',
             self::Header => 'Header',
             self::Footer => 'Footer',
             self::Projects => 'Projects',
+            self::Products => 'Products',
         };
     }
 
@@ -60,7 +62,7 @@ enum ContentResource: string
 
     public function isPage(): bool
     {
-        return $this !== self::Projects && ! $this->isSection();
+        return $this !== self::Projects && $this !== self::Products && ! $this->isSection();
     }
 
     /**

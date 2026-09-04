@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Project;
 use App\Repositories\Contracts\IProjectRepository;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -12,6 +13,19 @@ class ProjectRepository implements IProjectRepository
     public function allOrdered(): Collection
     {
         return Project::query()->with('updater:id,name')->orderBy('featured_order')->orderBy('title')->get();
+    }
+
+    public function dashboardList(string $search = ''): LengthAwarePaginator
+    {
+        return Project::query()
+            ->with('updater:id,name')
+            ->when($search !== '', function ($query) use ($search): void {
+                $query->where('title', 'like', '%'.$search.'%');
+            })
+            ->orderBy('featured_order')
+            ->orderBy('title')
+            ->paginate(15)
+            ->withQueryString();
     }
 
     public function activeOrdered(): Collection

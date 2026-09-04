@@ -4,13 +4,13 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\PageContentController;
+use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\ProjectController;
 use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\Dashboard\StaffController;
 use App\Http\Controllers\Site\PageController;
 use App\Http\Controllers\Site\ProjectController as SiteProjectController;
-use App\PageMeta\Definitions\AudiencePageDefinition;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -34,6 +34,11 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         Route::get('staff/{staff}/edit', [StaffController::class, 'edit'])->name('staff.edit');
         Route::put('staff/{staff}', [StaffController::class, 'update'])->name('staff.update');
         Route::patch('staff/{staff}/status', [StaffController::class, 'toggleStatus'])->name('staff.toggle-status');
+    });
+
+    Route::middleware('can.manage:products')->group(function () {
+        Route::get('content/products', [ProductController::class, 'index'])->name('products.index');
+        Route::post('content/products/sync', [ProductController::class, 'sync'])->name('products.sync');
     });
 
     Route::middleware('can.manage:projects')->group(function () {
@@ -91,15 +96,6 @@ Route::get('/home-owner', [PageController::class, '__invoke'])->defaults('slug',
 Route::get('/architect-designer', [PageController::class, '__invoke'])->defaults('slug', 'architect-designer')->name('architect-designer');
 Route::get('/electrician-builder', [PageController::class, '__invoke'])->defaults('slug', 'electrician-builder')->name('electrician-builder');
 Route::get('/wholesaler', [PageController::class, '__invoke'])->defaults('slug', 'wholesaler')->name('wholesaler');
-Route::get('/audience', function () {
-    $slug = request()->query('slug', 'home-owner');
-
-    if (! in_array($slug, AudiencePageDefinition::SLUGS, true)) {
-        $slug = 'home-owner';
-    }
-
-    return redirect('/'.$slug, 301);
-})->name('audience');
 Route::get('/projects', [SiteProjectController::class, 'index'])->name('projects');
 Route::get('/project-detail', [SiteProjectController::class, 'show'])->name('project-detail');
 
@@ -107,36 +103,5 @@ Route::view('/products', 'pages.products')->name('products');
 Route::view('/product-detail', 'pages.product-detail')->name('product-detail');
 Route::view('/led-strip-calculator', 'pages.led-strip-calculator')->name('led-strip-calculator');
 Route::view('/trade-login', 'pages.trade-login')->name('trade-login');
-Route::view('/jr-neon', 'pages.jr-neon')->name('jr-neon');
-Route::view('/test-configuration', 'pages.test-configuration')->name('test-configuration');
 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.submit');
-
-Route::redirect('/policies', '/privacy', 301);
-Route::redirect('policies.html', '/privacy', 301);
-
-$htmlAliases = [
-    'index.html' => '/',
-    'products.html' => '/products',
-    'product-detail.html' => '/product-detail',
-    'projects.html' => '/projects',
-    'project-detail.html' => '/project-detail',
-    'about.html' => '/about',
-    'solutions.html' => '/solutions',
-    'casambi.html' => '/casambi',
-    'silvair.html' => '/silvair',
-    'dali-centre.html' => '/dali-centre',
-    'madrix.html' => '/madrix',
-    'contact.html' => '/contact',
-    'ai-lighting.html' => '/ai-lighting',
-    'led-strip-calculator.html' => '/led-strip-calculator',
-    'trade_login.html' => '/trade-login',
-    'audience.html' => '/audience',
-    'data-centre.html' => '/data-centre',
-    'jr-neon.html' => '/jr-neon',
-    'test-configuration.html' => '/test-configuration',
-];
-
-foreach ($htmlAliases as $from => $to) {
-    Route::redirect($from, $to, 301);
-}

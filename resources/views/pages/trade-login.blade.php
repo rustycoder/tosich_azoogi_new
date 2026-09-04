@@ -200,7 +200,7 @@ html, body {
       &nbsp;&middot;&nbsp;
       <a href="/warranty-returns">Warranty</a>
       &nbsp;&middot;&nbsp;
-      <a href="/modern-slavery">Modern Slavery</a>
+      <a href="/modern-slavery">Modern Slavery Statement</a>
     </div>
   </div>
 </section>

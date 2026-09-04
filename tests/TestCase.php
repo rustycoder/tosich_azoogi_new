@@ -32,6 +32,8 @@ abstract class TestCase extends BaseTestCase
         $app['config']->set('session.driver', 'array');
         $app['config']->set('cache.default', 'array');
         $app['config']->set('queue.default', 'sync');
+        $app['config']->set('airtable.api_key', '');
+        $app['config']->set('airtable.base_id', '');
 
         foreach (['mysql', 'mariadb', 'pgsql', 'sqlsrv'] as $connection) {
             if ($app['config']->has("database.connections.{$connection}")) {

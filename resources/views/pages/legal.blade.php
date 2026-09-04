@@ -29,7 +29,7 @@
         <a href="{{ route('privacy') }}" class="{{ $page->slug === 'privacy' ? 'is-active' : '' }}">Privacy</a>
         <a href="{{ route('terms') }}" class="{{ $page->slug === 'terms' ? 'is-active' : '' }}">Terms</a>
         <a href="{{ route('warranty-returns') }}" class="{{ $page->slug === 'warranty-returns' ? 'is-active' : '' }}">Warranty &amp; Returns</a>
-        <a href="{{ route('modern-slavery') }}" class="{{ $page->slug === 'modern-slavery' ? 'is-active' : '' }}">Modern Slavery</a>
+        <a href="{{ route('modern-slavery') }}" class="{{ $page->slug === 'modern-slavery' ? 'is-active' : '' }}">Modern Slavery Statement</a>
       </nav>
 
       <div class="legal-wrap">

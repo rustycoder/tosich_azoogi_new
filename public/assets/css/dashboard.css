@@ -755,6 +755,69 @@ body:has(.dash) {
   grid-column: 1 / -1;
 }
 
+.dash-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  margin-top: 16px;
+}
+
+.dash-pagination-meta {
+  margin: 0;
+  color: var(--dash-muted);
+  font-size: 13px;
+}
+
+.dash-pagination-meta span {
+  font-weight: 600;
+  color: var(--dash-ink);
+}
+
+.dash-pagination-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dash-pagination-link {
+  min-width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  padding: 0 10px;
+  border-radius: 8px;
+  color: var(--dash-muted);
+  border: 1px solid var(--dash-line);
+  background: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+}
+
+a.dash-pagination-link:hover {
+  color: var(--dash-green-dark);
+  border-color: #c9d8c4;
+  background: #f7faf5;
+}
+
+.dash-pagination-link.is-current {
+  color: #fff;
+  border-color: var(--dash-green);
+  background: var(--dash-green);
+}
+
+.dash-pagination-link.is-disabled {
+  color: #b4bbb0;
+  background: #f7f8f6;
+}
+
 .dash-list-card {
   display: flex;
   align-items: center;

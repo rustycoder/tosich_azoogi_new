@@ -7,6 +7,7 @@ use App\Enums\Status;
 use App\Models\ContentPermission;
 use App\Models\Page;
 use App\Models\PageMeta;
+use App\Models\Product;
 use App\Models\Project;
 use App\Models\User;
 use Database\Seeders\AdminUserSeeder;
@@ -43,6 +44,7 @@ class DashboardTest extends TestCase
         $this->actingAs($admin)->get('/dashboard/content/sections')->assertOk()->assertSee('Header', false)->assertSee('Footer', false)->assertSee('top of every public page', false)->assertSee('bottom of every public page', false);
         $this->actingAs($admin)->get('/dashboard/content/sections/header')->assertOk()->assertSee('dash-card', false)->assertDontSee('dash-visual-frame', false);
         $this->actingAs($admin)->get('/dashboard/content/projects')->assertOk();
+        $this->actingAs($admin)->get('/dashboard/content/products')->assertOk()->assertSee('Sync', false);
     }
 
     public function test_staff_project_and_profile_screens_use_full_width_cards(): void
@@ -56,6 +58,7 @@ class DashboardTest extends TestCase
         $this->actingAs($admin)->get('/dashboard/staff/create')->assertOk()->assertSee('dash-card', false);
         $this->actingAs($admin)->get(route('dashboard.staff.edit', $staff))->assertOk()->assertSee('dash-card', false);
         $this->actingAs($admin)->get('/dashboard/content/projects')->assertOk()->assertSee('dash-list-card', false)->assertSee('name="q"', false);
+        $this->actingAs($admin)->get('/dashboard/content/products')->assertOk()->assertSee('name="q"', false)->assertSee('Sync', false);
         $this->actingAs($admin)
             ->get('/dashboard/content/projects/create')
             ->assertOk()
@@ -106,6 +109,16 @@ class DashboardTest extends TestCase
         Project::factory()->create(['title' => 'City Tower']);
         User::factory()->staff()->create(['name' => 'Alex Editor']);
         User::factory()->staff()->create(['name' => 'Blake Writer']);
+        Product::factory()->create([
+            'product_name' => 'Garden Light',
+            'product_code' => 'GL-100',
+            'category' => 'Profiles',
+        ]);
+        Product::factory()->create([
+            'product_name' => 'Neon Flex',
+            'product_code' => 'NF-200',
+            'category' => 'Garden',
+        ]);
 
         $this->actingAs($admin)
             ->get('/dashboard/content/projects?q=Harbour')
@@ -130,6 +143,125 @@ class DashboardTest extends TestCase
             ->assertOk()
             ->assertSee('>Header</span>', false)
             ->assertDontSee('>Footer</span>', false);
+
+        $this->actingAs($admin)
+            ->get('/dashboard/content/products?q=Garden')
+            ->assertOk()
+            ->assertSee('Garden Light', false)
+            ->assertDontSee('Neon Flex', false);
+
+        $this->actingAs($admin)
+            ->get('/dashboard/content/products?q=NF-200')
+            ->assertOk()
+            ->assertSee('Neon Flex', false)
+            ->assertDontSee('Garden Light', false);
+    }
+
+    public function test_products_index_is_ordered_by_sku(): void
+    {
+        $admin = User::factory()->admin()->create();
+        Product::factory()->create([
+            'product_name' => 'Zebra Light',
+            'product_code' => 'ZZ-9',
+        ]);
+        Product::factory()->create([
+            'product_name' => 'Apple Light',
+            'product_code' => 'AA-1',
+        ]);
+        Product::factory()->create([
+            'product_name' => 'No Sku Light',
+            'product_code' => null,
+        ]);
+
+        $html = $this->actingAs($admin)
+            ->get('/dashboard/content/products')
+            ->assertOk()
+            ->assertSee('Search by title or SKU', false)
+            ->getContent();
+
+        $apple = strpos($html, 'AA-1');
+        $zebra = strpos($html, 'ZZ-9');
+        $missing = strpos($html, 'No Sku Light');
+
+        $this->assertNotFalse($apple);
+        $this->assertNotFalse($zebra);
+        $this->assertNotFalse($missing);
+        $this->assertTrue($apple < $zebra);
+        $this->assertTrue($zebra < $missing);
+    }
+
+    public function test_dashboard_lists_paginate_except_pages_and_sections(): void
+    {
+        $this->seed(PageSeeder::class);
+        $admin = User::factory()->admin()->create();
+
+        foreach (range(1, 16) as $index) {
+            $label = sprintf('%02d', $index);
+            Product::factory()->create([
+                'product_name' => 'Catalog Item '.$label,
+                'product_code' => 'SKU-'.$label,
+            ]);
+            Project::factory()->create([
+                'title' => 'Catalog Project '.$label,
+                'featured_order' => $index,
+            ]);
+            User::factory()->staff()->create([
+                'name' => 'Catalog Staff '.$label,
+            ]);
+        }
+
+        $this->actingAs($admin)
+            ->get('/dashboard/content/products')
+            ->assertOk()
+            ->assertSee('Catalog Item 01', false)
+            ->assertSee('Catalog Item 15', false)
+            ->assertDontSee('Catalog Item 16', false)
+            ->assertSee('dash-pagination', false);
+
+        $this->actingAs($admin)
+            ->get('/dashboard/content/products?page=2')
+            ->assertOk()
+            ->assertSee('Catalog Item 16', false)
+            ->assertDontSee('Catalog Item 01', false);
+
+        $this->actingAs($admin)
+            ->get('/dashboard/content/projects')
+            ->assertOk()
+            ->assertSee('Catalog Project 01', false)
+            ->assertSee('Catalog Project 15', false)
+            ->assertDontSee('Catalog Project 16', false)
+            ->assertSee('dash-pagination', false)
+            ->assertDontSee('data-dash-sort', false);
+
+        $this->actingAs($admin)
+            ->get('/dashboard/content/projects?page=2')
+            ->assertOk()
+            ->assertSee('Catalog Project 16', false)
+            ->assertDontSee('Catalog Project 01', false);
+
+        $this->actingAs($admin)
+            ->get('/dashboard/staff')
+            ->assertOk()
+            ->assertSee('Catalog Staff 01', false)
+            ->assertSee('Catalog Staff 15', false)
+            ->assertDontSee('Catalog Staff 16', false)
+            ->assertSee('dash-pagination', false);
+
+        $this->actingAs($admin)
+            ->get('/dashboard/staff?page=2')
+            ->assertOk()
+            ->assertSee('Catalog Staff 16', false)
+            ->assertDontSee('Catalog Staff 01', false);
+
+        $this->actingAs($admin)
+            ->get('/dashboard/content/pages')
+            ->assertOk()
+            ->assertDontSee('dash-pagination', false);
+
+        $this->actingAs($admin)
+            ->get('/dashboard/content/sections')
+            ->assertOk()
+            ->assertDontSee('dash-pagination', false);
     }
 
     public function test_index_cards_show_who_last_updated_and_when(): void
@@ -198,6 +330,7 @@ class DashboardTest extends TestCase
         $this->actingAs($staff)->get('/dashboard/content/pages/home')->assertForbidden();
         $this->actingAs($staff)->get('/dashboard/content/sections')->assertForbidden();
         $this->actingAs($staff)->get('/dashboard/content/projects')->assertForbidden();
+        $this->actingAs($staff)->get('/dashboard/content/products')->assertForbidden();
         $this->actingAs($staff)->get('/dashboard/staff')->assertForbidden();
     }
 
@@ -214,6 +347,7 @@ class DashboardTest extends TestCase
             $this->actingAs($user)->get('/dashboard/content/pages')->assertForbidden();
             $this->actingAs($user)->get('/dashboard/content/pages/home')->assertForbidden();
             $this->actingAs($user)->get('/dashboard/content/sections')->assertForbidden();
+            $this->actingAs($user)->get('/dashboard/content/products')->assertForbidden();
             $this->actingAs($user)->get('/dashboard/staff')->assertForbidden();
         }
     }

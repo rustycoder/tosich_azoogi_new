@@ -3,14 +3,14 @@
 namespace App\Repositories\Contracts;
 
 use App\Models\User;
-use Illuminate\Support\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface IUserRepository
 {
     /**
-     * @return Collection<int, User>
+     * @return LengthAwarePaginator<int, User>
      */
-    public function staffOrdered(): Collection;
+    public function dashboardList(string $search = ''): LengthAwarePaginator;
 
     public function findStaffOrFail(int|string $id): User;
 

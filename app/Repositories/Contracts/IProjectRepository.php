@@ -3,6 +3,7 @@
 namespace App\Repositories\Contracts;
 
 use App\Models\Project;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 
 interface IProjectRepository
@@ -11,6 +12,11 @@ interface IProjectRepository
      * @return Collection<int, Project>
      */
     public function allOrdered(): Collection;
+
+    /**
+     * @return LengthAwarePaginator<int, Project>
+     */
+    public function dashboardList(string $search = ''): LengthAwarePaginator;
 
     /**
      * @return Collection<int, Project>

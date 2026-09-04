@@ -7,8 +7,8 @@ use App\Models\Project;
 use App\Repositories\Contracts\IProjectRepository;
 use App\Services\Contracts\IProjectService;
 use App\Support\ContentStorage;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class ProjectService implements IProjectService
@@ -18,17 +18,9 @@ class ProjectService implements IProjectService
         private ContentStorage $storage,
     ) {}
 
-    public function dashboardList(string $search = ''): Collection
+    public function dashboardList(string $search = ''): LengthAwarePaginator
     {
-        $projects = $this->projects->allOrdered();
-
-        if ($search === '') {
-            return $projects;
-        }
-
-        return $projects
-            ->filter(fn (Project $project): bool => mb_stripos($project->title, $search) !== false)
-            ->values();
+        return $this->projects->dashboardList($search);
     }
 
     public function publicListing(): array

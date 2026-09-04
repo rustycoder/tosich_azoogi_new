@@ -406,7 +406,7 @@
 
                 let product = null;
 
-                // Load product details from products_data.js (AZOOGI_PRODUCTS) - check both products array and tree variants
+                // Load product details from AZOOGI_PRODUCTS (products array and tree variants)
                 if (typeof AZOOGI_PRODUCTS !== 'undefined') {
                     const allProducts = [];
                     const seenKeys = new Set();

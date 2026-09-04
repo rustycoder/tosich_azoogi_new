@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="{{ versioned_asset('assets/css/style_demo.css') }}">
 @stack('styles')
 @if (trim($__env->yieldContent('chrome', 'full')) !== 'none')
-<script defer src="{{ asset('assets/js/products_data.js') }}?v={{ config('app.asset_version') }}"></script>
+<script>const AZOOGI_PRODUCTS = @json($productCatalog, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);</script>
 <script defer src="{{ asset('assets/js/mega_menu.js') }}?v={{ config('app.asset_version') }}"></script>
 <script defer src="{{ asset('assets/js/site_header.js') }}?v={{ config('app.asset_version') }}"></script>
 @endif

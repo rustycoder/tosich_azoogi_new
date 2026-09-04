@@ -10,7 +10,7 @@ use App\Models\User;
 use App\Repositories\Contracts\IContentPermissionRepository;
 use App\Repositories\Contracts\IUserRepository;
 use App\Services\Contracts\IStaffService;
-use Illuminate\Support\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class StaffService implements IStaffService
@@ -20,17 +20,9 @@ class StaffService implements IStaffService
         private IContentPermissionRepository $permissions,
     ) {}
 
-    public function all(string $search = ''): Collection
+    public function all(string $search = ''): LengthAwarePaginator
     {
-        $staff = $this->users->staffOrdered();
-
-        if ($search === '') {
-            return $staff;
-        }
-
-        return $staff
-            ->filter(fn (User $member): bool => mb_stripos($member->name, $search) !== false)
-            ->values();
+        return $this->users->dashboardList($search);
     }
 
     public function create(array $data, array $resources = []): User

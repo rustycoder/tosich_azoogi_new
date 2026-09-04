@@ -47,4 +47,6 @@
         <div class="dash-card dash-empty">{{ $search === '' ? 'No staff accounts yet.' : 'No names match that search.' }}</div>
     @endforelse
 </div>
+
+{{ $staff->links('dashboard.partials.pagination') }}
 @endsection

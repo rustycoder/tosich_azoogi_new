@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\Product;
+use App\Models\ProductCategory;
 use Database\Seeders\PageSeeder;
 use Database\Seeders\ProjectSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -45,7 +47,7 @@ class PageTest extends TestCase
             'privacy' => ['/privacy', 'Privacy'],
             'terms' => ['/terms', 'Terms'],
             'warranty' => ['/warranty-returns', 'Warranty'],
-            'modern-slavery' => ['/modern-slavery', 'Modern Slavery'],
+            'modern-slavery' => ['/modern-slavery', 'Modern Slavery Statement'],
             'trade-login' => ['/trade-login', 'Coming Soon'],
             'home-owner' => ['/home-owner', 'Home Owner'],
             'architect-designer' => ['/architect-designer', 'Designers'],
@@ -63,13 +65,17 @@ class PageTest extends TestCase
             ->assertSee($expected, false);
     }
 
-    public function test_legacy_html_urls_redirect(): void
+    public function test_legacy_static_site_urls_are_gone(): void
     {
-        $this->get('/products.html')->assertRedirect('/products');
-        $this->get('/index.html')->assertRedirect('/');
-        $this->get('/trade_login.html')->assertRedirect('/trade-login');
-        $this->get('/policies.html')->assertRedirect('/privacy');
-        $this->get('/audience.html')->assertRedirect('/audience');
+        $this->get('/products.html')->assertNotFound();
+        $this->get('/index.html')->assertNotFound();
+        $this->get('/trade_login.html')->assertNotFound();
+        $this->get('/policies.html')->assertNotFound();
+        $this->get('/audience.html')->assertNotFound();
+        $this->get('/jr-neon')->assertNotFound();
+        $this->get('/test-configuration')->assertNotFound();
+        $this->get('/jr-neon.html')->assertNotFound();
+        $this->get('/test-configuration.html')->assertNotFound();
     }
 
     public function test_home_links_to_dedicated_audience_pages(): void
@@ -83,20 +89,11 @@ class PageTest extends TestCase
             ->assertDontSee('/audience?slug=', false);
     }
 
-    public function test_legacy_audience_urls_redirect_to_dedicated_pages(): void
+    public function test_legacy_audience_and_policies_urls_are_gone(): void
     {
-        $this->get('/audience')->assertRedirect('/home-owner')->assertStatus(301);
-        $this->get('/audience?slug=architect-designer')->assertRedirect('/architect-designer')->assertStatus(301);
-        $this->get('/audience?slug=electrician-builder')->assertRedirect('/electrician-builder')->assertStatus(301);
-        $this->get('/audience?slug=wholesaler')->assertRedirect('/wholesaler')->assertStatus(301);
-        $this->get('/audience?slug=unknown')->assertRedirect('/home-owner')->assertStatus(301);
-    }
-
-    public function test_policies_redirects_to_privacy(): void
-    {
-        $this->get('/policies')
-            ->assertRedirect('/privacy')
-            ->assertStatus(301);
+        $this->get('/audience')->assertNotFound();
+        $this->get('/audience?slug=architect-designer')->assertNotFound();
+        $this->get('/policies')->assertNotFound();
     }
 
     public function test_project_detail_without_slug_is_not_found(): void
@@ -149,6 +146,21 @@ class PageTest extends TestCase
 
     public function test_home_page_renders_parent_categories_in_products_marquee(): void
     {
+        ProductCategory::query()->create(['airtable_id' => 'recNeon', 'name' => 'NEON', 'sort_order' => 1]);
+        ProductCategory::query()->create(['airtable_id' => 'recProfiles', 'name' => 'Profiles', 'sort_order' => 2]);
+        Product::factory()->create([
+            'product_name' => 'Neon Flex',
+            'category' => 'NEON',
+            'categories' => ['NEON'],
+            'category_path' => ['NEON'],
+        ]);
+        Product::factory()->create([
+            'product_name' => 'Trimless Profile',
+            'category' => 'Profiles',
+            'categories' => ['Profiles'],
+            'category_path' => ['Profiles'],
+        ]);
+
         $this->get('/')
             ->assertOk()
             ->assertSee('section class="products"', false)

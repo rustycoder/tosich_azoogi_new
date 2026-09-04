@@ -10,7 +10,7 @@
     </div>
 </div>
 
-@if ($canManagePages || $canManageProjects || $canManageSections || $isAdmin)
+@if ($canManagePages || $canManageProjects || $canManageProducts || $canManageSections || $isAdmin)
     <div class="dash-home-grid">
         @if ($canManageProjects)
             <a class="dash-home-card" href="{{ route('dashboard.projects.index') }}">
@@ -19,6 +19,15 @@
                 </span>
                 <h2>Projects</h2>
                 <p>Add, update, and archive project case studies.</p>
+            </a>
+        @endif
+        @if ($canManageProducts)
+            <a class="dash-home-card" href="{{ route('dashboard.products.index') }}">
+                <span class="dash-home-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 9h8M8 13h5"/></svg>
+                </span>
+                <h2>Products</h2>
+                <p>Preview products and sync from Airtable.</p>
             </a>
         @endif
         @if ($canManagePages)

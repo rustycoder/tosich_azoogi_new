@@ -24,7 +24,6 @@
 __pycache__/
 *.py[cod]
 *.egg-info/
-/airtable_json_uploader/.env
 _ide_helper.php
 Homestead.json
 Homestead.yaml
