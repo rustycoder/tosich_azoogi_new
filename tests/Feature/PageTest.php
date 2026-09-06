@@ -90,6 +90,31 @@ class PageTest extends TestCase
             ->assertDontSee('/audience?slug=', false);
     }
 
+    public function test_home_range_section_shows_remote_product_images(): void
+    {
+        $remoteUrl = 'https://v5.airtableusercontent.com/v3/full/hero.jpg';
+
+        ProductCategory::query()->create([
+            'airtable_id' => 'recNeon',
+            'name' => 'NEON',
+            'sort_order' => 1,
+        ]);
+        Product::factory()->create([
+            'product_name' => 'Neon Flex',
+            'category' => 'NEON',
+            'status' => 'publish',
+            'categories' => ['NEON'],
+            'category_path' => ['NEON'],
+            'product_images' => [$remoteUrl],
+        ]);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('Explore the full Azoogi lighting catalogue.', false)
+            ->assertSee("background-image:url('{$remoteUrl}')", false)
+            ->assertDontSee('/https://v5.airtableusercontent.com', false);
+    }
+
     public function test_legacy_audience_and_policies_urls_are_gone(): void
     {
         $this->get('/audience')->assertNotFound();

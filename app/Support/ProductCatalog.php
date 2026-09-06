@@ -90,7 +90,7 @@ class ProductCatalog
             $categories[] = [
                 'title' => $name,
                 'body' => $body,
-                'image' => $image ? '/'.ltrim($image, '/') : '/assets/img/neon.webp',
+                'image' => self::rangeImage($image),
                 'href' => url('/products').'?category='.urlencode($name),
                 'count' => $count,
                 '_priority' => $priorityOrder[$name] ?? 99,
@@ -104,5 +104,18 @@ class ProductCatalog
 
             return $item;
         }, $categories);
+    }
+
+    private static function rangeImage(?string $image): string
+    {
+        if ($image === null || $image === '') {
+            return '/assets/img/neon.webp';
+        }
+
+        if (str_starts_with($image, 'http://') || str_starts_with($image, 'https://')) {
+            return $image;
+        }
+
+        return '/'.ltrim($image, '/');
     }
 }
