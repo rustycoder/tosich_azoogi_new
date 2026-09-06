@@ -224,6 +224,69 @@ class ProductSyncTest extends TestCase
         Http::assertNotSent(fn (Request $request): bool => $request->url() === $remoteUrl);
     }
 
+    public function test_sync_saves_only_the_first_full_airtable_image(): void
+    {
+        config([
+            'airtable.api_key' => 'test-key',
+            'airtable.base_id' => 'appTest',
+        ]);
+
+        $fullUrl = 'https://v5.airtableusercontent.com/v3/full/hero.jpg';
+        $secondUrl = 'https://v5.airtableusercontent.com/v3/full/detail.jpg';
+
+        Http::fake(function (Request $request) use ($fullUrl, $secondUrl) {
+            $url = $request->url();
+
+            if (str_contains($url, 'Categories')) {
+                return Http::response(['records' => [
+                    ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
+                ]]);
+            }
+
+            if (str_contains($url, 'attributes') || str_contains($url, 'Attributes')) {
+                return Http::response(['records' => []]);
+            }
+
+            return Http::response(['records' => [
+                [
+                    'id' => 'recPublish',
+                    'fields' => [
+                        'Product Name' => 'Garden Light',
+                        'Status' => 'publish',
+                        'Order' => 1,
+                        'Category' => 'NEON',
+                        'Product Images' => [
+                            [
+                                'url' => $fullUrl,
+                                'filename' => 'hero.jpg',
+                                'thumbnails' => [
+                                    'small' => ['url' => 'https://v5.airtableusercontent.com/v3/small/hero.jpg'],
+                                    'large' => ['url' => 'https://v5.airtableusercontent.com/v3/large/hero.jpg'],
+                                    'full' => ['url' => 'https://v5.airtableusercontent.com/v3/full/hero-thumb.jpg'],
+                                ],
+                            ],
+                            [
+                                'url' => $secondUrl,
+                                'filename' => 'detail.jpg',
+                                'thumbnails' => [
+                                    'large' => ['url' => 'https://v5.airtableusercontent.com/v3/large/detail.jpg'],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ]]);
+        });
+
+        app(IProductSyncService::class)->sync('test');
+
+        $product = Product::query()->where('airtable_id', 'recPublish')->first();
+
+        $this->assertNotNull($product);
+        $this->assertSame([$fullUrl], $product->product_images);
+        $this->assertSame($fullUrl, $product->cover);
+    }
+
     public function test_persist_products_upserts_in_one_write_and_restores_deleted_rows(): void
     {
         $creator = User::factory()->create();

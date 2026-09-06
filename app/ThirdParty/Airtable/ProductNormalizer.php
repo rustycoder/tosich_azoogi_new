@@ -108,7 +108,7 @@ final class ProductNormalizer
                 'sku_mappings' => $skuMappings,
                 'product_short_description' => (string) ($fields['Product short description'] ?? $fields['Short description'] ?? $fields['short_description'] ?? $fields['Short Description'] ?? ''),
                 'product_description' => (string) ($fields['Product long description'] ?? $fields['Product description'] ?? $fields['Long description'] ?? $fields['Description'] ?? $fields['description'] ?? ''),
-                'product_images' => $this->imageUrls($fields),
+                'product_images' => $this->imageUrls($fields, 1),
                 'product_dimension' => $this->sanitize($fields['Product Dimension'] ?? $fields['Product dimension'] ?? ''),
                 'stocked_item' => $this->sanitize($fields['Stocked Item'] ?? $fields['Stock / Quantity'] ?? ''),
                 'datasheet' => $this->sanitize($fields['Datasheet'] ?? ''),
@@ -182,7 +182,7 @@ final class ProductNormalizer
      * @param  array<string, mixed>  $fields
      * @return list<string>
      */
-    public function imageUrls(array $fields): array
+    public function imageUrls(array $fields, int $limit = 0): array
     {
         $images = [];
         $keys = ['images', 'product_images', 'image', 'attachments', 'photos', 'media', 'product image', 'product gallery', 'gallery', 'photo'];
@@ -199,7 +199,13 @@ final class ProductNormalizer
             }
         }
 
-        return array_values(array_unique($images));
+        $images = array_values(array_unique($images));
+
+        if ($limit > 0) {
+            return array_slice($images, 0, $limit);
+        }
+
+        return $images;
     }
 
     /**
@@ -427,20 +433,28 @@ final class ProductNormalizer
      */
     private function urlList(mixed $value): array
     {
-        $urls = [];
-
-        if (is_array($value)) {
-            foreach ($value as $item) {
-                foreach ($this->urlList($item) as $url) {
-                    $urls[] = $url;
-                }
-            }
-        } elseif (is_string($value) && str_starts_with($value, 'http')) {
-            $urls[] = $value;
+        if (is_string($value) && str_starts_with($value, 'http')) {
+            return [$value];
         }
 
-        if (is_array($value) && isset($value['url']) && is_string($value['url']) && str_starts_with($value['url'], 'http')) {
-            $urls[] = $value['url'];
+        if (! is_array($value)) {
+            return [];
+        }
+
+        if (isset($value['url']) && is_string($value['url']) && str_starts_with($value['url'], 'http')) {
+            return [$value['url']];
+        }
+
+        $urls = [];
+
+        foreach ($value as $key => $item) {
+            if ($key === 'thumbnails') {
+                continue;
+            }
+
+            foreach ($this->urlList($item) as $url) {
+                $urls[] = $url;
+            }
         }
 
         return $urls;
