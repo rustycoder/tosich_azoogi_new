@@ -13,7 +13,7 @@ class SyncProductsJob implements ShouldQueue
 {
     use Queueable;
 
-    public int $timeout = 1200;
+    public int $timeout = 300;
 
     public function __construct(public string $triggeredBy = 'schedule') {}
 

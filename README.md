@@ -53,7 +53,7 @@ The first seed imports the catalogue snapshot in `public/assets/data/products.js
 php artisan products:sync
 ```
 
-The dashboard Sync button queues the same job. A host cron should run `php artisan schedule:run` every minute so products refresh every two hours.
+The dashboard Sync button queues the same job. A host cron should run `php artisan schedule:run` every minute so products refresh every hour.
 
 ## Cache version (`?v=...`)
 

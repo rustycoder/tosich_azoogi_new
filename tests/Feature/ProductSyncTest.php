@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Services\Contracts\IProductSyncService;
 use App\Support\ProductCatalog;
 use Database\Seeders\PageSeeder;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
@@ -165,7 +166,68 @@ class ProductSyncTest extends TestCase
         $this->assertNotNull($sync);
         $this->assertSame(ProductSyncStatus::Ok, $sync->status);
         $this->assertStringContainsString('Fetching products from Airtable', (string) $sync->log);
+        $this->assertStringContainsString('Keeping Airtable image URLs (not localizing).', (string) $sync->log);
         $this->assertStringContainsString('Sync finished.', (string) $sync->log);
+        $this->assertStringNotContainsString('Localizing product images', (string) $sync->log);
+    }
+
+    public function test_sync_keeps_remote_airtable_image_urls(): void
+    {
+        config([
+            'airtable.api_key' => 'test-key',
+            'airtable.base_id' => 'appTest',
+        ]);
+
+        $remoteUrl = 'https://dl.airtable.com/.attachments/abc123/photo.jpg';
+
+        Http::fake(function (Request $request) use ($remoteUrl) {
+            $url = $request->url();
+
+            if (str_contains($url, 'Categories')) {
+                return Http::response(['records' => [
+                    ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
+                ]]);
+            }
+
+            if (str_contains($url, 'attributes') || str_contains($url, 'Attributes')) {
+                return Http::response(['records' => []]);
+            }
+
+            return Http::response(['records' => [
+                [
+                    'id' => 'recPublish',
+                    'fields' => [
+                        'Product Name' => 'Garden Light',
+                        'Status' => 'publish',
+                        'Order' => 1,
+                        'Category' => 'NEON',
+                        'Product Images' => [
+                            ['url' => $remoteUrl],
+                        ],
+                    ],
+                ],
+            ]]);
+        });
+
+        app(IProductSyncService::class)->sync('test');
+
+        $product = Product::query()->where('airtable_id', 'recPublish')->first();
+
+        $this->assertNotNull($product);
+        $this->assertSame([$remoteUrl], $product->product_images);
+        $this->assertSame($remoteUrl, $product->cover);
+        $this->assertSame($remoteUrl, $product->coverUrl());
+
+        Http::assertNotSent(fn (Request $request): bool => $request->url() === $remoteUrl);
+    }
+
+    public function test_product_sync_is_scheduled_hourly(): void
+    {
+        $event = collect(app(Schedule::class)->events())
+            ->first(fn ($scheduled): bool => str_contains((string) $scheduled->command, 'products:sync'));
+
+        $this->assertNotNull($event);
+        $this->assertSame('0 * * * *', $event->expression);
     }
 
     public function test_sync_fetches_all_airtable_pages_before_saving(): void
@@ -404,6 +466,9 @@ class ProductSyncTest extends TestCase
         $this->assertNotEmpty($events);
         $this->assertSame(100, end($events)['percentage']);
         $this->assertSame('completed', end($events)['status']);
+        $this->assertFalse(collect($events)->contains(
+            fn (array $event): bool => str_contains((string) $event['step'], 'Downloading assets'),
+        ));
 
         $response = $this->actingAs($admin)
             ->post(route('dashboard.products.sync.stream'));

@@ -7,7 +7,6 @@ use App\Models\ProductSync;
 use App\Repositories\Contracts\IProductRepository;
 use App\Services\Contracts\IProductSyncService;
 use App\ThirdParty\Airtable\Contracts\IAirtableClient;
-use App\ThirdParty\Airtable\ProductImageStore;
 use App\ThirdParty\Airtable\ProductNormalizer;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
@@ -20,7 +19,6 @@ class ProductSyncService implements IProductSyncService
         private IAirtableClient $airtable,
         private IProductRepository $products,
         private ProductNormalizer $normalizer,
-        private ProductImageStore $images,
     ) {}
 
     /**
@@ -109,41 +107,19 @@ class ProductSyncService implements IProductSyncService
             $this->log($run, 'Compiled '.$totalProducts.' published product'.($totalProducts === 1 ? '' : 's').'.');
             $emit(38, 'Catalog compiled', "Compiled {$totalProducts} published products for processing.", 0, $totalProducts);
 
-            $this->log($run, 'Localizing product images.');
-            $localizeStartTime = microtime(true);
-            $localized = $this->images->localizeProducts(
-                $compiled,
-                function (int $current, int $total, array $product) use ($emit, $localizeStartTime): void {
-                    $elapsedLoc = microtime(true) - $localizeStartTime;
-                    $avgPerItem = $current > 0 ? ($elapsedLoc / $current) : 0;
-                    $remainingItems = max(0, $total - $current);
-                    $etaSec = (int) ceil($remainingItems * $avgPerItem);
-                    $pct = 38 + (int) round(($current / max(1, $total)) * 47); // 38% to 85%
-                    $name = (string) ($product['product_name'] ?? $product['product_code'] ?? "Product #{$current}");
-
-                    $emit(
-                        $pct,
-                        "Downloading assets ({$current}/{$total})...",
-                        "Cached assets for \"{$name}\" ({$current}/{$total})",
-                        $current,
-                        $total,
-                        $etaSec,
-                    );
-                },
-            );
-            $this->log($run, $this->images->lastSummary());
+            $this->log($run, 'Keeping Airtable image URLs (not localizing).');
 
             $keepIds = array_values(array_filter(array_map(
                 fn (array $product): string => (string) ($product['id'] ?? ''),
-                $localized,
+                $compiled,
             )));
 
             $emit(88, 'Saving lookups...', 'Persisting category and attribute records to database...');
             $this->log($run, 'Saving categories, attributes, and products.');
             $this->products->persistLookups($categories, $attributes);
 
-            $emit(92, 'Saving products...', 'Persisting '.count($localized).' products to database...');
-            $this->products->persistProducts($localized);
+            $emit(92, 'Saving products...', 'Persisting '.count($compiled).' products to database...');
+            $this->products->persistProducts($compiled);
 
             $emit(96, 'Pruning stale records...', 'Pruning removed products...');
             $this->products->pruneMissingProducts($keepIds);

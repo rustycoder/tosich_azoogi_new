@@ -35,7 +35,7 @@ class ProductController extends Controller
 
     public function syncStream(Request $request): StreamedResponse
     {
-        set_time_limit(1200);
+        set_time_limit(300);
 
         return response()->stream(function (): void {
             while (ob_get_level() > 0) {
