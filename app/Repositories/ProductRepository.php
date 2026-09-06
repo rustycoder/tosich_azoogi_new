@@ -10,6 +10,9 @@ use App\Models\ProductSync;
 use App\Repositories\Contracts\IProductRepository;
 use App\ThirdParty\Airtable\ProductNormalizer;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductRepository implements IProductRepository
 {
@@ -17,6 +20,9 @@ class ProductRepository implements IProductRepository
 
     public function persistProducts(array $products): void
     {
+        $userId = Auth::id();
+        $rows = [];
+
         foreach ($products as $product) {
             if (! is_array($product) || ! isset($product['id'])) {
                 continue;
@@ -26,8 +32,8 @@ class ProductRepository implements IProductRepository
             $images = $product['product_images'] ?? [];
             $cover = is_array($images) ? (string) ($images[0] ?? '') : (is_string($images) ? $images : '');
 
-            $row = Product::withTrashed()->firstOrNew(['airtable_id' => $airtableId]);
-            $row->fill([
+            $rows[$airtableId] = [
+                'airtable_id' => $airtableId,
                 'product_name' => (string) ($product['product_name'] ?? 'Unnamed Product'),
                 'category' => $this->storedString($product['category'] ?? null),
                 'status' => $this->storedString($product['status'] ?? null, 32),
@@ -40,104 +46,143 @@ class ProductRepository implements IProductRepository
                 'product_short_description' => $this->storedText($product['product_short_description'] ?? null),
                 'product_description' => $this->storedText($product['product_description'] ?? null),
                 'meta_keywords' => $this->storedText($product['meta_keywords'] ?? null),
-                'datasheet' => $this->storedArray($product['datasheet'] ?? null),
-                'product_images' => $this->storedArray($images),
-                'product_dimension' => $this->storedArray($product['product_dimension'] ?? null),
-                'technical_icons' => $this->storedArray($product['technical_icons'] ?? null),
-                'categories' => $this->storedArray($product['categories'] ?? null),
-                'category_path' => $this->storedArray($product['category_path'] ?? null),
-                'category_paths' => $this->storedArray($product['category_paths'] ?? null),
-                'sku_mappings' => $this->storedArray($product['sku_mappings'] ?? null),
-                'product_features' => $this->storedArray($product['product_features'] ?? null),
-                'options' => $this->storedArray($product['options'] ?? null),
-                'constraints' => $this->storedArray($product['constraints'] ?? null),
-            ]);
-            $row->deleted_at = null;
-            $row->deleted_by = null;
-            $row->save();
+                'datasheet' => $this->storedJson($product['datasheet'] ?? null),
+                'product_images' => $this->storedJson($images),
+                'product_dimension' => $this->storedJson($product['product_dimension'] ?? null),
+                'technical_icons' => $this->storedJson($product['technical_icons'] ?? null),
+                'categories' => $this->storedJson($product['categories'] ?? null),
+                'category_path' => $this->storedJson($product['category_path'] ?? null),
+                'category_paths' => $this->storedJson($product['category_paths'] ?? null),
+                'sku_mappings' => $this->storedJson($product['sku_mappings'] ?? null),
+                'product_features' => $this->storedJson($product['product_features'] ?? null),
+                'options' => $this->storedJson($product['options'] ?? null),
+                'constraints' => $this->storedJson($product['constraints'] ?? null),
+                'created_by' => $userId,
+                'updated_by' => $userId,
+                'deleted_by' => null,
+                'deleted_at' => null,
+            ];
         }
+
+        DB::transaction(function () use ($rows): void {
+            $this->upsertByAirtableId(Product::class, array_values($rows), [
+                'product_name',
+                'category',
+                'status',
+                'sort_order',
+                'cover',
+                'product_code',
+                'product_type',
+                'stocked_item',
+                'supplier_name',
+                'product_short_description',
+                'product_description',
+                'meta_keywords',
+                'datasheet',
+                'product_images',
+                'product_dimension',
+                'technical_icons',
+                'categories',
+                'category_path',
+                'category_paths',
+                'sku_mappings',
+                'product_features',
+                'options',
+                'constraints',
+                'updated_by',
+                'deleted_by',
+                'deleted_at',
+            ]);
+        });
     }
 
     public function pruneMissingProducts(array $keepAirtableIds): void
     {
-        $stale = Product::query();
-
-        if ($keepAirtableIds !== []) {
-            $stale->whereNotIn('airtable_id', $keepAirtableIds);
-        }
-
-        $stale->get()->each(fn (Product $product) => $product->delete());
+        $this->pruneMissing(Product::class, $keepAirtableIds);
     }
 
     public function persistLookups(array $categories, array $attributes): void
     {
-        if ($categories !== []) {
-            $ids = [];
+        $userId = Auth::id();
+        $categoryRows = [];
+        $attributeRows = [];
 
-            foreach ($categories as $record) {
-                if (! is_array($record) || ! isset($record['id'])) {
-                    continue;
-                }
-
-                $airtableId = (string) $record['id'];
-                $ids[] = $airtableId;
-                $fields = is_array($record['fields'] ?? null) ? $record['fields'] : [];
-                $name = trim((string) ($fields['Name'] ?? $fields['Category_Name'] ?? $fields['Category Name'] ?? $fields['Title'] ?? $fields['Category'] ?? ''));
-                $parents = $fields['Parent'] ?? $fields['Parent Category'] ?? $fields['Parent_Category'] ?? [];
-                $parentId = is_array($parents) ? (string) ($parents[0] ?? '') : (string) $parents;
-
-                $row = ProductCategory::withTrashed()->firstOrNew(['airtable_id' => $airtableId]);
-                $row->fill([
-                    'name' => $name !== '' ? mb_substr($name, 0, 191) : 'Category',
-                    'parent_airtable_id' => $parentId !== '' ? $parentId : null,
-                    'sort_order' => isset($fields['Order']) && is_numeric($fields['Order']) ? (int) $fields['Order'] : null,
-                ]);
-                $row->deleted_at = null;
-                $row->deleted_by = null;
-                $row->save();
+        foreach ($categories as $record) {
+            if (! is_array($record) || ! isset($record['id'])) {
+                continue;
             }
 
-            if ($ids !== []) {
-                ProductCategory::query()->whereNotIn('airtable_id', $ids)->get()->each(
-                    fn (ProductCategory $category) => $category->delete(),
-                );
-            }
+            $airtableId = (string) $record['id'];
+            $fields = is_array($record['fields'] ?? null) ? $record['fields'] : [];
+            $name = trim((string) ($fields['Name'] ?? $fields['Category_Name'] ?? $fields['Category Name'] ?? $fields['Title'] ?? $fields['Category'] ?? ''));
+            $parents = $fields['Parent'] ?? $fields['Parent Category'] ?? $fields['Parent_Category'] ?? [];
+            $parentId = is_array($parents) ? (string) ($parents[0] ?? '') : (string) $parents;
+
+            $categoryRows[$airtableId] = [
+                'airtable_id' => $airtableId,
+                'name' => $name !== '' ? mb_substr($name, 0, 191) : 'Category',
+                'parent_airtable_id' => $parentId !== '' ? $parentId : null,
+                'sort_order' => isset($fields['Order']) && is_numeric($fields['Order']) ? (int) $fields['Order'] : null,
+                'created_by' => $userId,
+                'updated_by' => $userId,
+                'deleted_by' => null,
+                'deleted_at' => null,
+            ];
         }
 
-        if ($attributes !== []) {
-            $ids = [];
-
-            foreach ($attributes as $record) {
-                if (! is_array($record) || ! isset($record['id'])) {
-                    continue;
-                }
-
-                $airtableId = (string) $record['id'];
-                $ids[] = $airtableId;
-                $fields = is_array($record['fields'] ?? null) ? $record['fields'] : [];
-                $name = trim((string) ($fields['Attribute name'] ?? $fields['Attribute_Name'] ?? $fields['Attribute Name'] ?? $fields['Name'] ?? $fields['Attribute'] ?? ''));
-                $value = $fields['Term Name'] ?? $fields['Attribute Value'] ?? $fields['Attribute_Value'] ?? $fields['Value'] ?? $fields['Option'] ?? $fields['Term Value'] ?? '';
-
-                $row = ProductAttribute::withTrashed()->firstOrNew(['airtable_id' => $airtableId]);
-                $row->fill([
-                    'name' => $name !== '' ? mb_substr($name, 0, 191) : 'Attribute',
-                    'value' => $value === null || $value === '' ? null : mb_substr((string) $value, 0, 191),
-                    'icon' => $this->storedAssetPath(
-                        $fields['Attribute Icon'] ?? $fields['Attribute_Icon'] ?? $fields['Attribute icon'] ?? $fields['Icon'] ?? null,
-                    ),
-                    'sort_order' => isset($fields['Order']) && is_numeric($fields['Order']) ? (int) $fields['Order'] : null,
-                ]);
-                $row->deleted_at = null;
-                $row->deleted_by = null;
-                $row->save();
+        foreach ($attributes as $record) {
+            if (! is_array($record) || ! isset($record['id'])) {
+                continue;
             }
 
-            if ($ids !== []) {
-                ProductAttribute::query()->whereNotIn('airtable_id', $ids)->get()->each(
-                    fn (ProductAttribute $attribute) => $attribute->delete(),
-                );
-            }
+            $airtableId = (string) $record['id'];
+            $fields = is_array($record['fields'] ?? null) ? $record['fields'] : [];
+            $name = trim((string) ($fields['Attribute name'] ?? $fields['Attribute_Name'] ?? $fields['Attribute Name'] ?? $fields['Name'] ?? $fields['Attribute'] ?? ''));
+            $value = $fields['Term Name'] ?? $fields['Attribute Value'] ?? $fields['Attribute_Value'] ?? $fields['Value'] ?? $fields['Option'] ?? $fields['Term Value'] ?? '';
+
+            $attributeRows[$airtableId] = [
+                'airtable_id' => $airtableId,
+                'name' => $name !== '' ? mb_substr($name, 0, 191) : 'Attribute',
+                'value' => $value === null || $value === '' ? null : mb_substr((string) $value, 0, 191),
+                'icon' => $this->storedAssetPath(
+                    $fields['Attribute Icon'] ?? $fields['Attribute_Icon'] ?? $fields['Attribute icon'] ?? $fields['Icon'] ?? null,
+                ),
+                'sort_order' => isset($fields['Order']) && is_numeric($fields['Order']) ? (int) $fields['Order'] : null,
+                'created_by' => $userId,
+                'updated_by' => $userId,
+                'deleted_by' => null,
+                'deleted_at' => null,
+            ];
         }
+
+        DB::transaction(function () use ($categoryRows, $attributeRows): void {
+            $this->upsertByAirtableId(ProductCategory::class, array_values($categoryRows), [
+                'name',
+                'parent_airtable_id',
+                'sort_order',
+                'updated_by',
+                'deleted_by',
+                'deleted_at',
+            ], 100);
+
+            if ($categoryRows !== []) {
+                $this->pruneMissing(ProductCategory::class, array_keys($categoryRows));
+            }
+
+            $this->upsertByAirtableId(ProductAttribute::class, array_values($attributeRows), [
+                'name',
+                'value',
+                'icon',
+                'sort_order',
+                'updated_by',
+                'deleted_by',
+                'deleted_at',
+            ], 100);
+
+            if ($attributeRows !== []) {
+                $this->pruneMissing(ProductAttribute::class, array_keys($attributeRows));
+            }
+        });
     }
 
     public function compiled(): array
@@ -251,6 +296,52 @@ class ProductRepository implements IProductRepository
                 $this->appendSyncLog($sync, 'Marked failed after 25 minutes without finishing.');
                 $this->finishSync($sync, false, (int) $sync->products_count, 'Sync timed out.');
             });
+    }
+
+    /**
+     * @param  class-string<Model>  $model
+     * @param  list<array<string, mixed>>  $rows
+     * @param  list<string>  $update
+     */
+    private function upsertByAirtableId(string $model, array $rows, array $update, int $chunkSize = 50): void
+    {
+        if ($rows === []) {
+            return;
+        }
+
+        foreach (array_chunk($rows, $chunkSize) as $chunk) {
+            $model::upsert($chunk, uniqueBy: ['airtable_id'], update: $update);
+        }
+    }
+
+    /**
+     * @param  class-string<Model>  $model
+     * @param  list<string>  $keepAirtableIds
+     */
+    private function pruneMissing(string $model, array $keepAirtableIds): void
+    {
+        $query = $model::query();
+
+        if ($keepAirtableIds !== []) {
+            $query->whereNotIn('airtable_id', $keepAirtableIds);
+        }
+
+        $query->update([
+            'deleted_at' => now(),
+            'deleted_by' => Auth::id(),
+            'updated_at' => now(),
+        ]);
+    }
+
+    private function storedJson(mixed $value): ?string
+    {
+        $items = $this->storedArray($value);
+
+        if ($items === null) {
+            return null;
+        }
+
+        return json_encode($items);
     }
 
     private function storedString(mixed $value, int $max = 191): ?string

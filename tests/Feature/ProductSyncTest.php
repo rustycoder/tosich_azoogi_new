@@ -6,15 +6,18 @@ use App\Enums\ContentResource;
 use App\Enums\ProductSyncStatus;
 use App\Jobs\SyncProductsJob;
 use App\Models\Product;
+use App\Models\ProductAttribute;
 use App\Models\ProductCategory;
 use App\Models\ProductSync;
 use App\Models\User;
+use App\Repositories\Contracts\IProductRepository;
 use App\Services\Contracts\IProductSyncService;
 use App\Support\ProductCatalog;
 use Database\Seeders\PageSeeder;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Schema;
@@ -219,6 +222,110 @@ class ProductSyncTest extends TestCase
         $this->assertSame($remoteUrl, $product->coverUrl());
 
         Http::assertNotSent(fn (Request $request): bool => $request->url() === $remoteUrl);
+    }
+
+    public function test_persist_products_upserts_in_one_write_and_restores_deleted_rows(): void
+    {
+        $creator = User::factory()->create();
+        $existing = Product::factory()->create([
+            'airtable_id' => 'recExisting',
+            'product_name' => 'Old Name',
+            'created_by' => $creator->id,
+        ]);
+        $deleted = Product::factory()->create([
+            'airtable_id' => 'recDeleted',
+            'product_name' => 'Gone',
+        ]);
+        $deleted->delete();
+
+        $rows = [];
+
+        for ($index = 1; $index <= 3; $index++) {
+            $rows[] = [
+                'id' => 'recNew'.$index,
+                'product_name' => 'Light '.$index,
+                'product_images' => ['https://example.com/'.$index.'.jpg'],
+                'product_features' => ['Finish' => [['value' => 'Black']]],
+            ];
+        }
+
+        $rows[] = [
+            'id' => 'recExisting',
+            'product_name' => 'New Name',
+            'product_images' => ['https://example.com/old.jpg'],
+        ];
+        $rows[] = [
+            'id' => 'recDeleted',
+            'product_name' => 'Back',
+        ];
+
+        DB::flushQueryLog();
+        DB::enableQueryLog();
+        app(IProductRepository::class)->persistProducts($rows);
+        $inserts = collect(DB::getQueryLog())->filter(
+            fn (array $query): bool => str_contains(strtolower($query['query']), 'insert'),
+        );
+
+        $this->assertCount(1, $inserts);
+        $this->assertDatabaseHas('products', [
+            'airtable_id' => 'recExisting',
+            'product_name' => 'New Name',
+            'created_by' => $existing->created_by,
+        ]);
+        $this->assertNotSoftDeleted('products', ['airtable_id' => 'recDeleted']);
+        $this->assertDatabaseHas('products', ['airtable_id' => 'recNew1']);
+
+        $created = Product::query()->where('airtable_id', 'recNew1')->first();
+        $this->assertNotNull($created);
+        $this->assertSame(['https://example.com/1.jpg'], $created->product_images);
+        $this->assertSame(['Finish' => [['value' => 'Black']]], $created->product_features);
+    }
+
+    public function test_persist_lookups_upserts_categories_and_attributes_in_batches(): void
+    {
+        ProductCategory::query()->create([
+            'airtable_id' => 'recStaleCat',
+            'name' => 'Stale',
+        ]);
+        ProductAttribute::query()->create([
+            'airtable_id' => 'recStaleAttr',
+            'name' => 'Finish',
+            'value' => 'Gold',
+        ]);
+
+        DB::flushQueryLog();
+        DB::enableQueryLog();
+        app(IProductRepository::class)->persistLookups(
+            [
+                ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
+                ['id' => 'recGarden', 'fields' => ['Name' => 'Garden', 'Order' => 2, 'Parent' => ['recNeon']]],
+            ],
+            [
+                ['id' => 'recBlack', 'fields' => ['Attribute name' => 'Finish', 'Term Name' => 'Black', 'Order' => 1, 'Icon' => 'https://dl.airtable.com/black.svg']],
+                ['id' => 'recWhite', 'fields' => ['Attribute Name' => 'Finish', 'Value' => 'White', 'Order' => 2]],
+            ],
+        );
+        $inserts = collect(DB::getQueryLog())->filter(
+            fn (array $query): bool => str_contains(strtolower($query['query']), 'insert'),
+        );
+
+        $this->assertCount(2, $inserts);
+        $this->assertDatabaseHas('product_categories', [
+            'airtable_id' => 'recNeon',
+            'name' => 'NEON',
+        ]);
+        $this->assertDatabaseHas('product_categories', [
+            'airtable_id' => 'recGarden',
+            'parent_airtable_id' => 'recNeon',
+        ]);
+        $this->assertDatabaseHas('product_attributes', [
+            'airtable_id' => 'recBlack',
+            'name' => 'Finish',
+            'value' => 'Black',
+            'icon' => 'https://dl.airtable.com/black.svg',
+        ]);
+        $this->assertSoftDeleted('product_categories', ['airtable_id' => 'recStaleCat']);
+        $this->assertSoftDeleted('product_attributes', ['airtable_id' => 'recStaleAttr']);
     }
 
     public function test_product_sync_is_scheduled_hourly(): void
