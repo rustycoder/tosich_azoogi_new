@@ -2173,3 +2173,183 @@ code {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   Product Sync Live Progress & Log Console
+   ========================================================================== */
+.dash-sync-panel {
+  background: var(--dash-card);
+  border: 1px solid var(--dash-line);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+
+.dash-sync-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.dash-sync-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dash-sync-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--dash-ink);
+  margin: 0;
+}
+
+.dash-sync-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  margin-right: 4px;
+}
+
+.dash-sync-dot.is-pulsing {
+  animation: dashPulse 1.4s infinite ease-in-out;
+}
+
+@keyframes dashPulse {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.6; }
+}
+
+.dash-sync-progress-wrap {
+  margin-bottom: 16px;
+}
+
+.dash-sync-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--dash-ink);
+}
+
+.dash-sync-step {
+  color: var(--dash-muted);
+}
+
+.dash-sync-pct {
+  font-weight: 700;
+  color: var(--dash-green-dark);
+}
+
+.dash-sync-bar-track {
+  width: 100%;
+  height: 8px;
+  background: #e9ece6;
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.dash-sync-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--dash-green), #4ec936);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.dash-sync-bar-fill.is-failed {
+  background: #d32f2f;
+}
+
+.dash-sync-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--dash-bg);
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.dash-sync-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dash-sync-stat-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--dash-muted);
+  font-weight: 600;
+}
+
+.dash-sync-stat-val {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dash-ink);
+}
+
+.dash-sync-stat-val.is-highlight {
+  color: var(--dash-green-dark);
+}
+
+.dash-sync-log-terminal {
+  background: #101410;
+  color: #e2e8e0;
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  max-height: 240px;
+  overflow-y: auto;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.3);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+
+.dash-sync-log-line {
+  display: flex;
+  gap: 10px;
+  word-break: break-word;
+}
+
+.dash-sync-log-time {
+  color: #6b7a6b;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.dash-sync-log-msg {
+  color: #c8d4c6;
+}
+
+.dash-sync-log-msg.is-highlight {
+  color: #72e05a;
+  font-weight: 600;
+}
+
+.dash-sync-log-msg.is-error {
+  color: #ff6b6b;
+  font-weight: 600;
+}
+
+.dash-sync-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 14px;
+}
+

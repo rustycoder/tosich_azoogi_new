@@ -7,11 +7,59 @@
     <div class="dash-head-title">
         <h1>Products</h1>
         <div class="dash-head-actions">
-            <form method="post" action="{{ route('dashboard.products.sync') }}">
+            <form id="dash-product-sync-form" method="post" action="{{ route('dashboard.products.sync') }}" data-stream-url="{{ route('dashboard.products.sync.stream') }}">
                 @csrf
-                <button class="btn primary" type="submit">Sync</button>
+                <button id="dash-product-sync-btn" class="btn primary" type="submit">
+                    <svg class="dash-sync-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px; margin-right: 6px; display: inline-block; vertical-align: -2px;"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+                    <span>Sync</span>
+                </button>
             </form>
         </div>
+    </div>
+</div>
+
+<div id="dash-sync-panel" class="dash-sync-panel" style="display: none;">
+    <div class="dash-sync-header">
+        <div class="dash-sync-title-group">
+            <h2 class="dash-sync-title">Product Synchronization</h2>
+            <span id="dash-sync-status-badge" class="dash-pill is-active">
+                <span class="dash-sync-dot is-pulsing"></span>
+                <span id="dash-sync-status-text">Connecting...</span>
+            </span>
+        </div>
+        <div class="dash-sync-actions">
+            <button type="button" id="dash-sync-toggle-logs" class="btn secondary" style="padding: 6px 12px; font-size: 12px; margin-right: 6px;">Hide Logs</button>
+            <button type="button" id="dash-sync-close-panel" class="btn secondary" style="padding: 6px 12px; font-size: 12px; display: none;">Close</button>
+        </div>
+    </div>
+
+    <div class="dash-sync-progress-wrap">
+        <div class="dash-sync-progress-labels">
+            <span id="dash-sync-step" class="dash-sync-step">Initializing sync...</span>
+            <span id="dash-sync-pct" class="dash-sync-pct">0%</span>
+        </div>
+        <div class="dash-sync-bar-track">
+            <div id="dash-sync-bar-fill" class="dash-sync-bar-fill" style="width: 0%;"></div>
+        </div>
+    </div>
+
+    <div class="dash-sync-stats-grid">
+        <div class="dash-sync-stat">
+            <span class="dash-sync-stat-label">Elapsed Time</span>
+            <span id="dash-sync-elapsed" class="dash-sync-stat-val">0s</span>
+        </div>
+        <div class="dash-sync-stat">
+            <span class="dash-sync-stat-label">Estimated Remaining</span>
+            <span id="dash-sync-eta" class="dash-sync-stat-val is-highlight">Calculating...</span>
+        </div>
+        <div class="dash-sync-stat">
+            <span class="dash-sync-stat-label">Processed Items</span>
+            <span id="dash-sync-counts" class="dash-sync-stat-val">—</span>
+        </div>
+    </div>
+
+    <div id="dash-sync-log-terminal" class="dash-sync-log-terminal">
+        <!-- Log lines will be appended here dynamically -->
     </div>
 </div>
 

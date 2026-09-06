@@ -360,4 +360,54 @@ class ProductSyncTest extends TestCase
             'error' => 'Sync timed out.',
         ]);
     }
+
+    public function test_sync_stream_emits_realtime_progress_and_logs(): void
+    {
+        $admin = User::factory()->admin()->create();
+
+        config([
+            'airtable.api_key' => 'test-key',
+            'airtable.base_id' => 'appTest',
+        ]);
+
+        Http::fake(function (Request $request) {
+            $url = $request->url();
+
+            if (str_contains($url, 'Categories')) {
+                return Http::response(['records' => [
+                    ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
+                ]]);
+            }
+
+            if (str_contains($url, 'attributes') || str_contains($url, 'Attributes')) {
+                return Http::response(['records' => []]);
+            }
+
+            return Http::response(['records' => [
+                [
+                    'id' => 'recPublish',
+                    'fields' => [
+                        'Product Name' => 'Stream Light',
+                        'Status' => 'publish',
+                        'Order' => 1,
+                        'Category' => 'NEON',
+                    ],
+                ],
+            ]]);
+        });
+
+        $events = [];
+        app(IProductSyncService::class)->sync('test', function (array $event) use (&$events): void {
+            $events[] = $event;
+        });
+
+        $this->assertNotEmpty($events);
+        $this->assertSame(100, end($events)['percentage']);
+        $this->assertSame('completed', end($events)['status']);
+
+        $response = $this->actingAs($admin)
+            ->post(route('dashboard.products.sync.stream'));
+
+        $this->assertStringStartsWith('text/event-stream', (string) $response->headers->get('Content-Type'));
+    }
 }

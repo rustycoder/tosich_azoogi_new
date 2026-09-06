@@ -597,4 +597,183 @@
 
         syncToggle();
     });
+
+    // Product Sync Live Progress & Log Stream
+    const syncForm = document.getElementById('dash-product-sync-form');
+    if (syncForm) {
+        const syncBtn = document.getElementById('dash-product-sync-btn');
+        const syncPanel = document.getElementById('dash-sync-panel');
+        const statusBadge = document.getElementById('dash-sync-status-badge');
+        const statusText = document.getElementById('dash-sync-status-text');
+        const statusDot = statusBadge?.querySelector('.dash-sync-dot');
+        const stepText = document.getElementById('dash-sync-step');
+        const pctText = document.getElementById('dash-sync-pct');
+        const barFill = document.getElementById('dash-sync-bar-fill');
+        const elapsedText = document.getElementById('dash-sync-elapsed');
+        const etaText = document.getElementById('dash-sync-eta');
+        const countsText = document.getElementById('dash-sync-counts');
+        const terminal = document.getElementById('dash-sync-log-terminal');
+        const toggleLogsBtn = document.getElementById('dash-sync-toggle-logs');
+        const closeBtn = document.getElementById('dash-sync-close-panel');
+
+        toggleLogsBtn?.addEventListener('click', () => {
+            if (terminal.style.display === 'none') {
+                terminal.style.display = 'block';
+                toggleLogsBtn.textContent = 'Hide Logs';
+            } else {
+                terminal.style.display = 'none';
+                toggleLogsBtn.textContent = 'Show Logs';
+            }
+        });
+
+        closeBtn?.addEventListener('click', () => {
+            syncPanel.style.display = 'none';
+        });
+
+        const escapeHtml = (str) => {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        };
+
+        const appendLog = (time, msg, highlight = false, error = false) => {
+            if (!terminal) return;
+            const line = document.createElement('div');
+            line.className = 'dash-sync-log-line';
+            line.innerHTML = `<span class="dash-sync-log-time">[${time}]</span> <span class="dash-sync-log-msg${highlight ? ' is-highlight' : ''}${error ? ' is-error' : ''}">${escapeHtml(msg)}</span>`;
+            terminal.appendChild(line);
+            terminal.scrollTop = terminal.scrollHeight;
+        };
+
+        syncForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (syncBtn.disabled) return;
+
+            syncBtn.disabled = true;
+            syncPanel.style.display = 'block';
+            closeBtn.style.display = 'none';
+            if (terminal) terminal.innerHTML = '';
+
+            barFill.style.width = '0%';
+            barFill.classList.remove('is-failed');
+            pctText.textContent = '0%';
+            stepText.textContent = 'Connecting to Airtable...';
+            statusText.textContent = 'In Progress...';
+            statusBadge.className = 'dash-pill is-active';
+            statusDot?.classList.add('is-pulsing');
+            elapsedText.textContent = '0s';
+            etaText.textContent = 'Calculating...';
+            countsText.textContent = '—';
+
+            const streamUrl = syncForm.dataset.streamUrl || syncForm.action;
+            const startTime = Date.now();
+
+            const elapsedInterval = setInterval(() => {
+                const elSec = Math.floor((Date.now() - startTime) / 1000);
+                if (elapsedText) {
+                    elapsedText.textContent = elSec < 60 ? `${elSec}s` : `${Math.floor(elSec / 60)}m ${elSec % 60}s`;
+                }
+            }, 1000);
+
+            try {
+                const response = await fetch(streamUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'text/event-stream',
+                        'X-CSRF-TOKEN': csrf,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder('utf-8');
+                let buffer = '';
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    buffer += decoder.decode(value, { stream: true });
+                    const parts = buffer.split('\n\n');
+                    buffer = parts.pop();
+
+                    for (const chunk of parts) {
+                        const trimmed = chunk.trim();
+                        if (!trimmed.startsWith('data:')) continue;
+                        const jsonStr = trimmed.replace(/^data:\s*/, '');
+                        try {
+                            const data = JSON.parse(jsonStr);
+
+                            if (data.percentage !== undefined) {
+                                barFill.style.width = `${data.percentage}%`;
+                                pctText.textContent = `${data.percentage}%`;
+                            }
+
+                            if (data.step) {
+                                stepText.textContent = data.step;
+                            }
+
+                            if (data.eta_human !== undefined) {
+                                etaText.textContent = data.eta_human || '—';
+                            }
+
+                            if (data.total > 0) {
+                                countsText.textContent = `${data.current} / ${data.total}`;
+                            }
+
+                            if (data.log) {
+                                appendLog(
+                                    data.time || new Date().toTimeString().split(' ')[0],
+                                    data.log,
+                                    data.status === 'completed',
+                                    data.status === 'failed' || !!data.error
+                                );
+                            }
+
+                            if (data.status === 'completed') {
+                                clearInterval(elapsedInterval);
+                                statusText.textContent = 'Completed';
+                                statusBadge.className = 'dash-pill is-active';
+                                statusDot?.classList.remove('is-pulsing');
+                                etaText.textContent = '0s';
+                                closeBtn.style.display = 'inline-block';
+                                toast('Product sync completed successfully!');
+                            } else if (data.status === 'failed') {
+                                clearInterval(elapsedInterval);
+                                statusText.textContent = 'Failed';
+                                statusBadge.className = 'dash-pill is-inactive';
+                                statusDot?.classList.remove('is-pulsing');
+                                barFill.classList.add('is-failed');
+                                etaText.textContent = '—';
+                                closeBtn.style.display = 'inline-block';
+                                toast(data.error || 'Product sync failed', 'error');
+                            }
+                        } catch (err) {
+                            console.error('Error parsing SSE chunk', err, jsonStr);
+                        }
+                    }
+                }
+
+                clearInterval(elapsedInterval);
+            } catch (err) {
+                clearInterval(elapsedInterval);
+                statusText.textContent = 'Connection Error';
+                statusBadge.className = 'dash-pill is-inactive';
+                statusDot?.classList.remove('is-pulsing');
+                barFill.classList.add('is-failed');
+                appendLog(new Date().toTimeString().split(' ')[0], err.message, false, true);
+                toast('Failed to connect to sync stream: ' + err.message, 'error');
+                closeBtn.style.display = 'inline-block';
+            } finally {
+                syncBtn.disabled = false;
+                closeBtn.style.display = 'inline-block';
+            }
+        });
+    }
 })();
+

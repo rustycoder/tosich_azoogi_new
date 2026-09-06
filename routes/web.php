@@ -49,6 +49,7 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::middleware('can.manage:products')->group(function () {
         Route::get('content/products', [ProductController::class, 'index'])->name('products.index');
         Route::post('content/products/sync', [ProductController::class, 'sync'])->name('products.sync');
+        Route::match(['get', 'post'], 'content/products/sync/stream', [ProductController::class, 'syncStream'])->name('products.sync.stream');
     });
 
     Route::middleware('can.manage:projects')->group(function () {

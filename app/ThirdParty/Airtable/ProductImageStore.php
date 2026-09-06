@@ -28,9 +28,10 @@ class ProductImageStore
 
     /**
      * @param  list<array<string, mixed>>  $products
+     * @param  (callable(int $current, int $total, array<string, mixed> $product): void)|null  $onProgress
      * @return list<array<string, mixed>>
      */
-    public function localizeProducts(array $products): array
+    public function localizeProducts(array $products, ?callable $onProgress = null): array
     {
         $this->downloaded = 0;
         $this->reused = 0;
@@ -50,6 +51,10 @@ class ProductImageStore
                     'reused' => $this->reused,
                     'failed' => $this->failed,
                 ]);
+            }
+
+            if ($onProgress !== null) {
+                $onProgress($index + 1, $total, $products[$index]);
             }
         }
 
