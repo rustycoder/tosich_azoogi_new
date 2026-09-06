@@ -108,7 +108,7 @@ final class ProductNormalizer
                 'sku_mappings' => $skuMappings,
                 'product_short_description' => (string) ($fields['Product short description'] ?? $fields['Short description'] ?? $fields['short_description'] ?? $fields['Short Description'] ?? ''),
                 'product_description' => (string) ($fields['Product long description'] ?? $fields['Product description'] ?? $fields['Long description'] ?? $fields['Description'] ?? $fields['description'] ?? ''),
-                'product_images' => $this->imageUrls($fields, 1),
+                'product_images' => $this->imageUrls($fields),
                 'product_dimension' => $this->sanitize($fields['Product Dimension'] ?? $fields['Product dimension'] ?? ''),
                 'stocked_item' => $this->sanitize($fields['Stocked Item'] ?? $fields['Stock / Quantity'] ?? ''),
                 'datasheet' => $this->sanitize($fields['Datasheet'] ?? ''),
@@ -182,7 +182,7 @@ final class ProductNormalizer
      * @param  array<string, mixed>  $fields
      * @return list<string>
      */
-    public function imageUrls(array $fields, int $limit = 0): array
+    public function imageUrls(array $fields): array
     {
         $images = [];
         $keys = ['images', 'product_images', 'image', 'attachments', 'photos', 'media', 'product image', 'product gallery', 'gallery', 'photo'];
@@ -199,13 +199,7 @@ final class ProductNormalizer
             }
         }
 
-        $images = array_values(array_unique($images));
-
-        if ($limit > 0) {
-            return array_slice($images, 0, $limit);
-        }
-
-        return $images;
+        return array_values(array_unique($images));
     }
 
     /**

@@ -224,7 +224,7 @@ class ProductSyncTest extends TestCase
         Http::assertNotSent(fn (Request $request): bool => $request->url() === $remoteUrl);
     }
 
-    public function test_sync_saves_only_the_first_full_airtable_image(): void
+    public function test_sync_saves_one_url_per_airtable_attachment_not_thumbnails(): void
     {
         config([
             'airtable.api_key' => 'test-key',
@@ -283,7 +283,7 @@ class ProductSyncTest extends TestCase
         $product = Product::query()->where('airtable_id', 'recPublish')->first();
 
         $this->assertNotNull($product);
-        $this->assertSame([$fullUrl], $product->product_images);
+        $this->assertSame([$fullUrl, $secondUrl], $product->product_images);
         $this->assertSame($fullUrl, $product->cover);
     }
 
