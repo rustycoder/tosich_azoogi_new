@@ -1,5 +1,5 @@
 // Dynamic 2-Sidebar & Accordion Mega Menu Renderer for Azoogi
-(function() {
+(function () {
   let container = null;
   let innerWrapper = null;
   let productsById = {};
@@ -154,8 +154,8 @@
       : '/assets/bg_default.png';
 
     const imgSrc = getLocalImagePath(rawImgSrc, vdata ? vdata.file_path : '');
-    const prodCode = primaryProductCode(extractProductCode(vdata));
-    const prodCodeHtml = prodCode ? `<div class="mega-variant-code">${prodCode}</div>` : '';
+    // const prodCode = primaryProductCode(extractProductCode(vdata));
+    // const prodCodeHtml = prodCode ? `<div class="mega-variant-code">${prodCode}</div>` : '';
 
     const card = document.createElement('a');
     const pId = (vdata && vdata.id) ? vdata.id : (vdata && vdata.product_name ? vdata.product_name : vname);
@@ -187,7 +187,6 @@
     info.className = 'mega-variant-info';
     info.innerHTML = `
       <div class="mega-variant-name" title="${vname}">${vname}</div>
-      ${prodCodeHtml}
     `;
 
     imgContainer.appendChild(img);
@@ -230,7 +229,7 @@
 
     let folderNodes = [];
     let directRowNodes = [];
-    
+
     if (node.type === 'product_row') {
       directRowNodes = [node];
     } else {
@@ -318,22 +317,22 @@
     } else if (currentNode.children) {
       const childRows = currentNode.children.filter(c => c.type === 'product_row');
       const childCats = currentNode.children.filter(c => c.type === 'category');
-      
+
       const childCards = extractProductCards(childRows);
       if (childCards.length > 0) {
         renderProductsGrid(childCards, currentNode.name, parentContainer, 12);
       }
-      
+
       childCats.forEach(cat => {
         const subHeader = document.createElement('div');
         subHeader.className = 'mega-product-subfolder-title';
         subHeader.textContent = cat.name;
         parentContainer.appendChild(subHeader);
-        
+
         const subContainer = document.createElement('div');
         subContainer.className = 'mega-product-subfolder-container';
         parentContainer.appendChild(subContainer);
-        
+
         renderFolderContent(cat, subContainer);
       });
 
@@ -358,7 +357,7 @@
     const fallback = '/assets/bg_default.png';
     if (!imgUrl || typeof imgUrl !== 'string') return fallback;
     if (!imgUrl.startsWith('http')) {
-      return imgUrl.startsWith('/') ? imgUrl : '/'+imgUrl;
+      return imgUrl.startsWith('/') ? imgUrl : '/' + imgUrl;
     }
     const filename = imgUrl.split('/').pop().split('?')[0];
     if (!filename) return fallback;
@@ -368,7 +367,7 @@
       if (lastSlash !== -1) {
         const folderPath = cleanFilePath.substring(0, lastSlash);
         const local = `${folderPath}/${filename}`;
-        return local.startsWith('/') ? local : '/'+local;
+        return local.startsWith('/') ? local : '/' + local;
       }
     }
     return imgUrl;
