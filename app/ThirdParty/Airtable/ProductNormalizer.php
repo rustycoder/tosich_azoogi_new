@@ -8,7 +8,7 @@ final class ProductNormalizer
      * @param  list<array{id: string, fields: array<string, mixed>}>  $products
      * @param  list<array{id: string, fields: array<string, mixed>}>  $categories
      * @param  list<array{id: string, fields: array<string, mixed>}>  $attributes
-     * @return array{categories: list<string>, products: list<array<string, mixed>>, tree: list<array<string, mixed>>, filterable_attributes: list<string>}
+     * @return array{categories: list<string>, products: list<array<string, mixed>>, tree: list<array<string, mixed>>, filterable_attributes: list<string>, attribute_values_order: array<string, list<string>>}
      */
     public function compile(array $products, array $categories, array $attributes): array
     {
@@ -16,9 +16,13 @@ final class ProductNormalizer
         [$categoryNames, $tree] = $this->buildCategoryTree($categories, $compiled);
 
         $filterableAttributes = [];
+        $attributeValuesOrder = [];
 
         foreach ($attributes as $attr) {
             $fields = $attr['fields'] ?? [];
+            $name = trim((string) ($fields['Attribute name'] ?? $fields['Attribute_Name'] ?? $fields['Attribute Name'] ?? $fields['Name'] ?? $fields['Attribute'] ?? ''));
+            $val = trim((string) ($fields['Term Name'] ?? $fields['Attribute Value'] ?? $fields['Attribute_Value'] ?? $fields['Value'] ?? $fields['Option'] ?? $fields['Term Value'] ?? ''));
+
             $visible = ! empty(
                 $fields['Visible on the product filters']
                 ?? $fields['Visible on the Product Filters']
@@ -30,10 +34,14 @@ final class ProductNormalizer
                 ?? false
             );
 
-            if ($visible) {
-                $name = trim((string) ($fields['Attribute name'] ?? $fields['Attribute_Name'] ?? $fields['Attribute Name'] ?? $fields['Name'] ?? $fields['Attribute'] ?? ''));
-                if ($name !== '' && ! in_array($name, $filterableAttributes, true)) {
-                    $filterableAttributes[] = $name;
+            if ($visible && $name !== '' && ! in_array($name, $filterableAttributes, true)) {
+                $filterableAttributes[] = $name;
+            }
+
+            if ($name !== '' && $val !== '') {
+                $attributeValuesOrder[$name] ??= [];
+                if (! in_array($val, $attributeValuesOrder[$name], true)) {
+                    $attributeValuesOrder[$name][] = $val;
                 }
             }
         }
@@ -43,6 +51,7 @@ final class ProductNormalizer
             'products' => $compiled,
             'tree' => $tree,
             'filterable_attributes' => $filterableAttributes,
+            'attribute_values_order' => $attributeValuesOrder,
         ];
     }
 
@@ -166,9 +175,10 @@ final class ProductNormalizer
      * @param  list<array<string, mixed>>  $products
      * @param  list<array{id: string, fields: array<string, mixed>}>  $categories
      * @param  list<string>  $filterableAttributes
-     * @return array{categories: list<string>, products: list<array<string, mixed>>, tree: list<array<string, mixed>>, filterable_attributes: list<string>}
+     * @param  array<string, list<string>>  $attributeValuesOrder
+     * @return array{categories: list<string>, products: list<array<string, mixed>>, tree: list<array<string, mixed>>, filterable_attributes: list<string>, attribute_values_order: array<string, list<string>>}
      */
-    public function fromStored(array $products, array $categories, array $filterableAttributes = []): array
+    public function fromStored(array $products, array $categories, array $filterableAttributes = [], array $attributeValuesOrder = []): array
     {
         [$categoryNames, $tree] = $this->buildCategoryTree($categories, $products);
 
@@ -177,6 +187,7 @@ final class ProductNormalizer
             'products' => $products,
             'tree' => $tree,
             'filterable_attributes' => $filterableAttributes,
+            'attribute_values_order' => $attributeValuesOrder,
         ];
     }
 
@@ -195,7 +206,7 @@ final class ProductNormalizer
      */
     public function orderValue(array $fields): float
     {
-        $raw = $fields['Order'] ?? $fields['order'] ?? null;
+        $raw = $fields['Order'] ?? $fields['order'] ?? $fields['Sort Order'] ?? $fields['Sort order'] ?? $fields['sort_order'] ?? null;
 
         if ($raw === null || $raw === '') {
             return INF;

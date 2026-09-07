@@ -429,6 +429,8 @@ class ProductSyncTest extends TestCase
         $this->assertContains('Wattage', $compiled['filterable_attributes']);
         $this->assertContains('IP Rating', $compiled['filterable_attributes']);
         $this->assertNotContains('Finish', $compiled['filterable_attributes']);
+        $this->assertArrayHasKey('attribute_values_order', $compiled);
+        $this->assertSame(['10W'], $compiled['attribute_values_order']['Wattage'] ?? []);
     }
 
     public function test_product_sync_is_scheduled_hourly(): void

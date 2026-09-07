@@ -1223,6 +1223,42 @@
         });
       }
 
+      /* ===== Sort Attribute Values by Airtable Order or Natural Alphanumeric ===== */
+      function sortAttributeValues(specName, values) {
+        var orderMap = null;
+        if (typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS.attribute_values_order) {
+          var targetLower = String(specName).trim().toLowerCase();
+          for (var k in AZOOGI_PRODUCTS.attribute_values_order) {
+            if (k.trim().toLowerCase() === targetLower) {
+              var list = AZOOGI_PRODUCTS.attribute_values_order[k];
+              if (Array.isArray(list)) {
+                orderMap = {};
+                list.forEach(function (val, idx) {
+                  orderMap[String(val).trim().toLowerCase()] = idx;
+                });
+              }
+              break;
+            }
+          }
+        }
+
+        return values.slice().sort(function (a, b) {
+          var aStr = String(a).trim();
+          var bStr = String(b).trim();
+          var aLower = aStr.toLowerCase();
+          var bLower = bStr.toLowerCase();
+
+          if (orderMap) {
+            var aIdx = orderMap.hasOwnProperty(aLower) ? orderMap[aLower] : 999999;
+            var bIdx = orderMap.hasOwnProperty(bLower) ? orderMap[bLower] : 999999;
+            if (aIdx !== bIdx) return aIdx - bIdx;
+          }
+
+          // Natural alphanumeric sorting fallback so 10mm < 13.1mm < 116.1mm
+          return aStr.localeCompare(bStr, undefined, { numeric: true, sensitivity: 'base' });
+        });
+      }
+
       /* ===== Dynamic Category-Scoped Specification Filter Accordion ===== */
       function renderFilterAccordion() {
         // 0. Determine allowed filterable attributes from Airtable config
@@ -1288,41 +1324,41 @@
           });
         }
 
-        // 4. Build filters list
+        // 4. Build filters list in the order defined by filterable_attributes (Airtable Order column)
         var filters = [];
-        var priorityKeywords = ["ip", "wattage", "power", "voltage", "cct", "color", "led", "certification", "warranty", "radius", "cut"];
+        var addedKeys = new Set();
 
-        // Priority keys
-        for (var specKey in catSpecsMap) {
-          if (!catSpecsMap.hasOwnProperty(specKey)) continue;
-          var specLower = specKey.toLowerCase();
-          var isPriority = priorityKeywords.some(function (kw) { return specLower.indexOf(kw) !== -1; });
-          if (isPriority) {
-            var pVals = Array.from(catSpecsMap[specKey]).sort();
-            if (pVals.length >= 1) {
-              filters.push({
-                name: specKey,
-                options: pVals.slice(0, 20),
-                open: openStateMap.hasOwnProperty(specKey) ? openStateMap[specKey] : false
-              });
+        if (typeof AZOOGI_PRODUCTS !== 'undefined' && Array.isArray(AZOOGI_PRODUCTS.filterable_attributes)) {
+          AZOOGI_PRODUCTS.filterable_attributes.forEach(function (specName) {
+            var targetLower = String(specName).trim().toLowerCase();
+            var matchedKey = Object.keys(catSpecsMap).find(function (k) {
+              return k.trim().toLowerCase() === targetLower;
+            });
+            if (matchedKey && !addedKeys.has(matchedKey.toLowerCase())) {
+              addedKeys.add(matchedKey.toLowerCase());
+              var pVals = sortAttributeValues(matchedKey, Array.from(catSpecsMap[matchedKey]));
+              if (pVals.length >= 1) {
+                filters.push({
+                  name: matchedKey,
+                  options: pVals,
+                  open: openStateMap.hasOwnProperty(matchedKey) ? openStateMap[matchedKey] : false
+                });
+              }
             }
-          }
+          });
         }
 
-        // Remaining keys
+        // Add any remaining keys that were not explicitly listed in filterable_attributes
         for (var specKey in catSpecsMap) {
           if (!catSpecsMap.hasOwnProperty(specKey)) continue;
-          var specLower = specKey.toLowerCase();
-          var isPriority = priorityKeywords.some(function (kw) { return specLower.indexOf(kw) !== -1; });
-          if (!isPriority) {
-            var vals = Array.from(catSpecsMap[specKey]).sort();
-            if (vals.length >= 1) {
-              filters.push({
-                name: specKey,
-                options: vals.slice(0, 20),
-                open: openStateMap.hasOwnProperty(specKey) ? openStateMap[specKey] : false
-              });
-            }
+          if (addedKeys.has(specKey.toLowerCase())) continue;
+          var vals = sortAttributeValues(specKey, Array.from(catSpecsMap[specKey]));
+          if (vals.length >= 1) {
+            filters.push({
+              name: specKey,
+              options: vals,
+              open: openStateMap.hasOwnProperty(specKey) ? openStateMap[specKey] : false
+            });
           }
         }
 
