@@ -1225,6 +1225,16 @@
 
       /* ===== Dynamic Category-Scoped Specification Filter Accordion ===== */
       function renderFilterAccordion() {
+        // 0. Determine allowed filterable attributes from Airtable config
+        var allowedFilterKeys = null;
+        if (typeof AZOOGI_PRODUCTS !== 'undefined' && Array.isArray(AZOOGI_PRODUCTS.filterable_attributes)) {
+          allowedFilterKeys = new Set(
+            AZOOGI_PRODUCTS.filterable_attributes.map(function (k) {
+              return String(k).trim().toLowerCase();
+            }).filter(Boolean)
+          );
+        }
+
         // 1. Determine target products (filtered by active category, or all products if no category selected)
         var targetProducts = products;
         if (activeFilters.categories && activeFilters.categories.length > 0) {
@@ -1242,13 +1252,14 @@
           });
         }
 
-        // 2. Extract specs map ONLY from targetProducts in selected category
+        // 2. Extract specs map ONLY from targetProducts in selected category (filtered by allowedFilterKeys)
         var catSpecsMap = {};
         targetProducts.forEach(function (prod) {
           var features = prod.specs || {};
           for (var featKey in features) {
             if (!features.hasOwnProperty(featKey)) continue;
             if (!featKey || typeof featKey !== 'string' || featKey.trim() === '') continue;
+            if (allowedFilterKeys !== null && !allowedFilterKeys.has(featKey.trim().toLowerCase())) continue;
             var featVal = features[featKey];
             if (!catSpecsMap[featKey]) catSpecsMap[featKey] = new Set();
             if (Array.isArray(featVal)) {
@@ -1317,7 +1328,7 @@
 
         // Clean activeFilters.specs if any spec keys no longer exist in the selected category
         for (var activeGroup in activeFilters.specs) {
-          if (!catSpecsMap.hasOwnProperty(activeGroup)) {
+          if (!catSpecsMap.hasOwnProperty(activeGroup) || (allowedFilterKeys !== null && !allowedFilterKeys.has(activeGroup.trim().toLowerCase()))) {
             delete activeFilters.specs[activeGroup];
           }
         }

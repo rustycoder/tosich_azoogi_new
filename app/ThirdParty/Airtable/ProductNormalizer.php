@@ -8,17 +8,41 @@ final class ProductNormalizer
      * @param  list<array{id: string, fields: array<string, mixed>}>  $products
      * @param  list<array{id: string, fields: array<string, mixed>}>  $categories
      * @param  list<array{id: string, fields: array<string, mixed>}>  $attributes
-     * @return array{categories: list<string>, products: list<array<string, mixed>>, tree: list<array<string, mixed>>}
+     * @return array{categories: list<string>, products: list<array<string, mixed>>, tree: list<array<string, mixed>>, filterable_attributes: list<string>}
      */
     public function compile(array $products, array $categories, array $attributes): array
     {
         $compiled = $this->compileProducts($products, $categories, $attributes);
         [$categoryNames, $tree] = $this->buildCategoryTree($categories, $compiled);
 
+        $filterableAttributes = [];
+
+        foreach ($attributes as $attr) {
+            $fields = $attr['fields'] ?? [];
+            $visible = ! empty(
+                $fields['Visible on the product filters']
+                ?? $fields['Visible on the Product Filters']
+                ?? $fields['Visible on product filters']
+                ?? $fields['Visible on Product Filters']
+                ?? $fields['visible_on_the_product_filters']
+                ?? $fields['Visible on Filters']
+                ?? $fields['Visible on filters']
+                ?? false
+            );
+
+            if ($visible) {
+                $name = trim((string) ($fields['Attribute name'] ?? $fields['Attribute_Name'] ?? $fields['Attribute Name'] ?? $fields['Name'] ?? $fields['Attribute'] ?? ''));
+                if ($name !== '' && ! in_array($name, $filterableAttributes, true)) {
+                    $filterableAttributes[] = $name;
+                }
+            }
+        }
+
         return [
             'categories' => $categoryNames,
             'products' => $compiled,
             'tree' => $tree,
+            'filterable_attributes' => $filterableAttributes,
         ];
     }
 
@@ -141,9 +165,10 @@ final class ProductNormalizer
      *
      * @param  list<array<string, mixed>>  $products
      * @param  list<array{id: string, fields: array<string, mixed>}>  $categories
-     * @return array{categories: list<string>, products: list<array<string, mixed>>, tree: list<array<string, mixed>>}
+     * @param  list<string>  $filterableAttributes
+     * @return array{categories: list<string>, products: list<array<string, mixed>>, tree: list<array<string, mixed>>, filterable_attributes: list<string>}
      */
-    public function fromStored(array $products, array $categories): array
+    public function fromStored(array $products, array $categories, array $filterableAttributes = []): array
     {
         [$categoryNames, $tree] = $this->buildCategoryTree($categories, $products);
 
@@ -151,6 +176,7 @@ final class ProductNormalizer
             'categories' => $categoryNames,
             'products' => $products,
             'tree' => $tree,
+            'filterable_attributes' => $filterableAttributes,
         ];
     }
 

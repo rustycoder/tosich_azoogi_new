@@ -45,6 +45,7 @@ class ProductSyncTest extends TestCase
         $this->assertTrue(Schema::hasColumn('products', 'product_images'));
         $this->assertTrue(Schema::hasColumn('products', 'product_features'));
         $this->assertTrue(Schema::hasColumn('product_attributes', 'icon'));
+        $this->assertTrue(Schema::hasColumn('product_attributes', 'is_visible_on_filters'));
         $this->assertStringContainsString("longText('product_images')", $migration);
         $this->assertStringNotContainsString('$table->json(', $migration);
     }
@@ -364,7 +365,7 @@ class ProductSyncTest extends TestCase
                 ['id' => 'recGarden', 'fields' => ['Name' => 'Garden', 'Order' => 2, 'Parent' => ['recNeon']]],
             ],
             [
-                ['id' => 'recBlack', 'fields' => ['Attribute name' => 'Finish', 'Term Name' => 'Black', 'Order' => 1, 'Icon' => 'https://dl.airtable.com/black.svg']],
+                ['id' => 'recBlack', 'fields' => ['Attribute name' => 'Finish', 'Term Name' => 'Black', 'Order' => 1, 'Icon' => 'https://dl.airtable.com/black.svg', 'Visible on the product filters' => true]],
                 ['id' => 'recWhite', 'fields' => ['Attribute Name' => 'Finish', 'Value' => 'White', 'Order' => 2]],
             ],
         );
@@ -386,9 +387,48 @@ class ProductSyncTest extends TestCase
             'name' => 'Finish',
             'value' => 'Black',
             'icon' => 'https://dl.airtable.com/black.svg',
+            'is_visible_on_filters' => 1,
+        ]);
+        $this->assertDatabaseHas('product_attributes', [
+            'airtable_id' => 'recWhite',
+            'name' => 'Finish',
+            'value' => 'White',
+            'is_visible_on_filters' => 0,
         ]);
         $this->assertSoftDeleted('product_categories', ['airtable_id' => 'recStaleCat']);
         $this->assertSoftDeleted('product_attributes', ['airtable_id' => 'recStaleAttr']);
+    }
+
+    public function test_compiled_catalog_includes_only_attributes_marked_visible_on_the_product_filters(): void
+    {
+        ProductAttribute::query()->create([
+            'airtable_id' => 'recWattage',
+            'name' => 'Wattage',
+            'value' => '10W',
+            'sort_order' => 1,
+            'is_visible_on_filters' => true,
+        ]);
+        ProductAttribute::query()->create([
+            'airtable_id' => 'recIP',
+            'name' => 'IP Rating',
+            'value' => 'IP65',
+            'sort_order' => 2,
+            'is_visible_on_filters' => true,
+        ]);
+        ProductAttribute::query()->create([
+            'airtable_id' => 'recFinish',
+            'name' => 'Finish',
+            'value' => 'Black',
+            'sort_order' => 3,
+            'is_visible_on_filters' => false,
+        ]);
+
+        $compiled = app(IProductRepository::class)->compiled();
+
+        $this->assertArrayHasKey('filterable_attributes', $compiled);
+        $this->assertContains('Wattage', $compiled['filterable_attributes']);
+        $this->assertContains('IP Rating', $compiled['filterable_attributes']);
+        $this->assertNotContains('Finish', $compiled['filterable_attributes']);
     }
 
     public function test_product_sync_is_scheduled_hourly(): void

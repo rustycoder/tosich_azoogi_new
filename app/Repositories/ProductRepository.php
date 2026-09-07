@@ -140,6 +140,17 @@ class ProductRepository implements IProductRepository
             $name = trim((string) ($fields['Attribute name'] ?? $fields['Attribute_Name'] ?? $fields['Attribute Name'] ?? $fields['Name'] ?? $fields['Attribute'] ?? ''));
             $value = $fields['Term Name'] ?? $fields['Attribute Value'] ?? $fields['Attribute_Value'] ?? $fields['Value'] ?? $fields['Option'] ?? $fields['Term Value'] ?? '';
 
+            $isVisibleOnFilters = ! empty(
+                $fields['Visible on the product filters']
+                ?? $fields['Visible on the Product Filters']
+                ?? $fields['Visible on product filters']
+                ?? $fields['Visible on Product Filters']
+                ?? $fields['visible_on_the_product_filters']
+                ?? $fields['Visible on Filters']
+                ?? $fields['Visible on filters']
+                ?? false
+            );
+
             $attributeRows[$airtableId] = [
                 'airtable_id' => $airtableId,
                 'name' => $name !== '' ? mb_substr($name, 0, 191) : 'Attribute',
@@ -148,6 +159,7 @@ class ProductRepository implements IProductRepository
                     $fields['Attribute Icon'] ?? $fields['Attribute_Icon'] ?? $fields['Attribute icon'] ?? $fields['Icon'] ?? null,
                 ),
                 'sort_order' => isset($fields['Order']) && is_numeric($fields['Order']) ? (int) $fields['Order'] : null,
+                'is_visible_on_filters' => $isVisibleOnFilters,
                 'created_by' => $userId,
                 'updated_by' => $userId,
                 'deleted_by' => null,
@@ -174,6 +186,7 @@ class ProductRepository implements IProductRepository
                 'value',
                 'icon',
                 'sort_order',
+                'is_visible_on_filters',
                 'updated_by',
                 'deleted_by',
                 'deleted_at',
@@ -220,7 +233,17 @@ class ProductRepository implements IProductRepository
             })
             ->all();
 
-        return $this->normalizer->fromStored($products, $categories);
+        $filterableAttributes = ProductAttribute::query()
+            ->where('is_visible_on_filters', true)
+            ->orderByRaw('sort_order is null')
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->pluck('name')
+            ->unique()
+            ->values()
+            ->all();
+
+        return $this->normalizer->fromStored($products, $categories, $filterableAttributes);
     }
 
     public function dashboardList(string $search = ''): LengthAwarePaginator

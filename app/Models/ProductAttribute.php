@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'value',
     'icon',
     'sort_order',
+    'is_visible_on_filters',
     'created_by',
     'updated_by',
     'deleted_by',
@@ -28,6 +29,7 @@ class ProductAttribute extends Model
     {
         return [
             'sort_order' => 'integer',
+            'is_visible_on_filters' => 'boolean',
         ];
     }
 }
