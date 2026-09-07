@@ -25,18 +25,16 @@ interface IDashboardMetricsService
     /**
      * @return array{
      *     year: int,
+     *     plot_left: float,
+     *     plot_right: float,
      *     months: list<array{label: string, x: float}>,
      *     ticks: list<array{label: int, y: float}>,
      *     show_enquiries: bool,
      *     show_datasheets: bool,
      *     enquiries: list<int>,
      *     datasheets: list<int>,
-     *     enquiry_line: string,
-     *     enquiry_area: string,
-     *     enquiry_points: list<array{x: float, y: float, value: int}>,
-     *     datasheet_line: string,
-     *     datasheet_area: string,
-     *     datasheet_points: list<array{x: float, y: float, value: int}>
+     *     enquiry_bars: list<array{x: float, y: float, width: float, height: float, value: int}>,
+     *     datasheet_bars: list<array{x: float, y: float, width: float, height: float, value: int}>
      * }|null
      */
     public function engagement(User $user): ?array;

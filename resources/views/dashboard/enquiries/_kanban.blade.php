@@ -11,11 +11,9 @@
             $enquiries = $columns[$status->value] ?? collect();
         @endphp
         <section class="dash-kanban-col is-{{ $status->value }}" data-kanban-col aria-labelledby="kanban-{{ $kanbanId }}-{{ $status->value }}">
-            <header class="dash-metric-head">
-                <div class="dash-metric-title">
-                    <h2 id="kanban-{{ $kanbanId }}-{{ $status->value }}">{{ $status->label() }}</h2>
-                    <span class="dash-metric-year" data-kanban-count>{{ $enquiries->count() }}</span>
-                </div>
+            <header class="dash-kanban-col-head">
+                <h2 id="kanban-{{ $kanbanId }}-{{ $status->value }}">{{ $status->label() }}</h2>
+                <span data-kanban-count>{{ $enquiries->count() }}</span>
             </header>
             <div class="dash-kanban-col-body" data-kanban-drop data-status="{{ $status->value }}">
                 @foreach ($enquiries as $enquiry)

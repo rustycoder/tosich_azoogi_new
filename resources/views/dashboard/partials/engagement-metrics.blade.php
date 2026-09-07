@@ -1,25 +1,23 @@
 @php
     /** @var array{
      *     year: int,
+     *     plot_left: float,
+     *     plot_right: float,
      *     months: list<array{label: string, x: float}>,
      *     ticks: list<array{label: int, y: float}>,
      *     show_enquiries: bool,
      *     show_datasheets: bool,
      *     enquiries: list<int>,
      *     datasheets: list<int>,
-     *     enquiry_line: string,
-     *     enquiry_area: string,
-     *     enquiry_points: list<array{x: float, y: float, value: int}>,
-     *     datasheet_line: string,
-     *     datasheet_area: string,
-     *     datasheet_points: list<array{x: float, y: float, value: int}>
+     *     enquiry_bars: list<array{x: float, y: float, width: float, height: float, value: int}>,
+     *     datasheet_bars: list<array{x: float, y: float, width: float, height: float, value: int}>
      * } $metrics
      */
 @endphp
 <article class="dash-metric-card is-wide">
     <header class="dash-metric-head">
         <div class="dash-metric-title">
-            <h2>Engagement</h2>
+            <h2>Audience Engagement Metrics</h2>
             <span class="dash-metric-year">{{ $metrics['year'] }}</span>
         </div>
         <ul class="dash-metric-key">
@@ -38,50 +36,55 @@
         </ul>
     </header>
     <svg
-        class="dash-metric-area"
-        viewBox="0 0 760 248"
+        class="dash-metric-chart"
+        viewBox="0 0 760 168"
         role="img"
         aria-label="Monthly enquiries and datasheet exports for {{ $metrics['year'] }}"
         @if ($metrics['show_enquiries']) data-enquiries="{{ implode(',', $metrics['enquiries']) }}" @endif
         @if ($metrics['show_datasheets']) data-datasheets="{{ implode(',', $metrics['datasheets']) }}" @endif
     >
-        <defs>
-            <linearGradient id="dash-metric-fill-enquiries" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#8ed89a" stop-opacity="0.5"/>
-                <stop offset="100%" stop-color="#8ed89a" stop-opacity="0"/>
-            </linearGradient>
-            <linearGradient id="dash-metric-fill-datasheets" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#f0a3a0" stop-opacity="0.5"/>
-                <stop offset="100%" stop-color="#f0a3a0" stop-opacity="0"/>
-            </linearGradient>
-        </defs>
+        @foreach ($metrics['ticks'] as $tick)
+            <line
+                class="dash-metric-grid{{ $tick['label'] === 0 ? ' is-base' : '' }}"
+                x1="{{ $metrics['plot_left'] }}"
+                y1="{{ $tick['y'] }}"
+                x2="{{ $metrics['plot_right'] }}"
+                y2="{{ $tick['y'] }}"
+            />
+            <text class="dash-metric-axis is-y" x="{{ $metrics['plot_left'] - 10 }}" y="{{ $tick['y'] }}" text-anchor="end" dominant-baseline="middle">{{ $tick['label'] }}</text>
+        @endforeach
         @if ($metrics['show_enquiries'])
-            <path class="dash-metric-area-fill is-enquiries" data-series="enquiries" d="{{ $metrics['enquiry_area'] }}"/>
-        @endif
-        @if ($metrics['show_datasheets'])
-            <path class="dash-metric-area-fill is-datasheets" data-series="datasheets" d="{{ $metrics['datasheet_area'] }}"/>
-        @endif
-        @if ($metrics['show_enquiries'])
-            <path class="dash-metric-area-line is-enquiries" d="{{ $metrics['enquiry_line'] }}" fill="none"/>
-            @foreach ($metrics['enquiry_points'] as $point)
-                <circle class="dash-metric-dot is-enquiries" cx="{{ $point['x'] }}" cy="{{ $point['y'] }}" r="2.6"/>
-                @if ($point['value'] > 0)
-                    @include('dashboard.partials.engagement-badge', ['point' => $point, 'tone' => 'is-enquiries', 'above' => true])
+            @foreach ($metrics['enquiry_bars'] as $bar)
+                @if ($bar['height'] > 0)
+                    <rect
+                        class="dash-metric-col is-enquiries"
+                        data-series="enquiries"
+                        x="{{ $bar['x'] }}"
+                        y="{{ $bar['y'] }}"
+                        width="{{ $bar['width'] }}"
+                        height="{{ $bar['height'] }}"
+                        rx="1.8"
+                    />
                 @endif
             @endforeach
         @endif
         @if ($metrics['show_datasheets'])
-            <path class="dash-metric-area-line is-datasheets" d="{{ $metrics['datasheet_line'] }}" fill="none"/>
-            @foreach ($metrics['datasheet_points'] as $point)
-                <circle class="dash-metric-dot is-datasheets" cx="{{ $point['x'] }}" cy="{{ $point['y'] }}" r="2.6"/>
-                @if ($point['value'] > 0)
-                    @include('dashboard.partials.engagement-badge', ['point' => $point, 'tone' => 'is-datasheets', 'above' => false])
+            @foreach ($metrics['datasheet_bars'] as $bar)
+                @if ($bar['height'] > 0)
+                    <rect
+                        class="dash-metric-col is-datasheets"
+                        data-series="datasheets"
+                        x="{{ $bar['x'] }}"
+                        y="{{ $bar['y'] }}"
+                        width="{{ $bar['width'] }}"
+                        height="{{ $bar['height'] }}"
+                        rx="1.8"
+                    />
                 @endif
             @endforeach
         @endif
-        <line class="dash-metric-baseline" x1="16" y1="210" x2="744" y2="210"/>
         @foreach ($metrics['months'] as $month)
-            <text class="dash-metric-axis is-x" x="{{ $month['x'] }}" y="238" text-anchor="middle">{{ $month['label'] }}</text>
+            <text class="dash-metric-axis is-x" x="{{ $month['x'] }}" y="160" text-anchor="middle">{{ $month['label'] }}</text>
         @endforeach
     </svg>
 </article>

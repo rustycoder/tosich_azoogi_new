@@ -75,12 +75,7 @@ class EnquiryTest extends TestCase
             ->assertSee('Quote Person', false)
             ->assertSee('Product Person', false)
             ->assertDontSee('Done Contact', false)
-            ->assertDontSee('>Projects</h2>', false)
-            ->assertDontSee('>Products</h2>', false)
-            ->assertDontSee('>Pages</h2>', false)
-            ->assertDontSee('>Sections</h2>', false)
-            ->assertDontSee('>Staff</h2>', false)
-            ->assertSeeInOrder(['>Quote</h2>', '>Product</h2>', '>Contact</h2>'], false)
+            ->assertSeeInOrder(['>Projects</h2>', '>Quote Enquiries</h2>', '>Product Enquiries</h2>', '>Contact Enquiries</h2>'], false)
             ->assertSee('aria-label="View all"', false)
             ->assertDontSee('>View all</a>', false)
             ->assertSeeInOrder(['>Enquiries</div>', 'Quote', 'Product', 'Contact'], false);
@@ -134,9 +129,9 @@ class EnquiryTest extends TestCase
         $this->actingAs($staff->fresh())
             ->get('/dashboard')
             ->assertOk()
-            ->assertSee('>Quote</h2>', false)
-            ->assertDontSee('>Product</h2>', false)
-            ->assertDontSee('>Contact</h2>', false);
+            ->assertSee('Quote Enquiries', false)
+            ->assertDontSee('Product Enquiries', false)
+            ->assertDontSee('Contact Enquiries', false);
     }
 
     public function test_enquiry_status_can_be_updated(): void

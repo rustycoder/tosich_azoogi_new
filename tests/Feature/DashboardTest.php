@@ -328,7 +328,7 @@ class DashboardTest extends TestCase
         $this->actingAs($staff)->get('/dashboard')
             ->assertOk()
             ->assertSee('Pages', false)
-            ->assertDontSee('>Pages</h2>', false)
+            ->assertSee('>Pages</h2>', false)
             ->assertDontSee('Content tools for this account will be planned later', false)
             ->assertDontSee('content/pages/home', false);
         $this->actingAs($staff)->get('/dashboard/content/pages')->assertOk()->assertSee('About', false)->assertDontSee('content/pages/home', false);

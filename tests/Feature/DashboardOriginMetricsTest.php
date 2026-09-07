@@ -63,7 +63,7 @@ class DashboardOriginMetricsTest extends TestCase
             ->assertSee('data-metric-tab="device"', false)
             ->assertSee('data-metric-panel="country"', false)
             ->assertSee('data-metric-panel="device"', false)
-            ->assertSeeInOrder(['>Enquiries</h2>', '>Datasheets</h2>'], false)
+            ->assertSeeInOrder(['>Enquiries Metrics</h2>', '>Datasheet Metrics</h2>'], false)
             ->assertDontSee('dash-metric-total', false)
             ->assertDontSee('4 total', false)
             ->assertDontSee('2 total', false)
@@ -124,11 +124,11 @@ class DashboardOriginMetricsTest extends TestCase
         $this->actingAs($staff)
             ->get('/dashboard')
             ->assertOk()
-            ->assertSee('>Enquiries</h2>', false)
+            ->assertSee('>Enquiries Metrics</h2>', false)
             ->assertSee('Australia', false)
             ->assertSee('100%', false)
             ->assertSee('Chrome on macOS', false)
-            ->assertDontSee('>Datasheets</h2>', false)
+            ->assertDontSee('>Datasheet Metrics</h2>', false)
             ->assertDontSee('United States', false)
             ->assertDontSee('United Kingdom', false)
             ->assertDontSee('Safari on iPhone', false);
@@ -150,11 +150,11 @@ class DashboardOriginMetricsTest extends TestCase
         $this->actingAs($staff)
             ->get('/dashboard')
             ->assertOk()
-            ->assertSee('>Datasheets</h2>', false)
+            ->assertSee('>Datasheet Metrics</h2>', false)
             ->assertSee('Australia', false)
             ->assertSee('100%', false)
             ->assertSee('Chrome on macOS', false)
-            ->assertDontSee('>Enquiries</h2>', false)
+            ->assertDontSee('>Enquiries Metrics</h2>', false)
             ->assertDontSee('Content tools for this account will be planned later', false);
     }
 
@@ -170,14 +170,14 @@ class DashboardOriginMetricsTest extends TestCase
         $this->actingAs($customer)
             ->get('/dashboard')
             ->assertOk()
-            ->assertDontSee('>Enquiries</h2>', false)
-            ->assertDontSee('>Datasheets</h2>', false)
+            ->assertDontSee('>Enquiries Metrics</h2>', false)
+            ->assertDontSee('>Datasheet Metrics</h2>', false)
             ->assertDontSee('dash-metrics', false)
-            ->assertDontSee('>Engagement</h2>', false)
+            ->assertDontSee('>Audience Engagement Metrics</h2>', false)
             ->assertSee('Content tools for this account will be planned later', false);
     }
 
-    public function test_admin_sees_yearly_engagement_area_chart(): void
+    public function test_admin_sees_yearly_engagement_column_chart(): void
     {
         Carbon::setTestNow(Carbon::parse('2026-09-07 12:00:00', 'Australia/Sydney'));
 
@@ -199,20 +199,22 @@ class DashboardOriginMetricsTest extends TestCase
         $this->actingAs($admin)
             ->get('/dashboard')
             ->assertOk()
-            ->assertSee('>Engagement</h2>', false)
+            ->assertSee('>Audience Engagement Metrics</h2>', false)
             ->assertSee('dash-metric-year">2026</span>', false)
-            ->assertSee('dash-metric-area', false)
+            ->assertSee('dash-metric-chart', false)
+            ->assertSee('dash-metric-col is-enquiries', false)
+            ->assertSee('dash-metric-col is-datasheets', false)
             ->assertSee('data-series="enquiries"', false)
             ->assertSee('data-series="datasheets"', false)
             ->assertSee('data-enquiries="2,0,0,0,0,0,0,0,0,0,0,0"', false)
             ->assertSee('data-datasheets="0,0,1,0,0,0,0,0,0,0,0,0"', false)
-            ->assertSee('dash-metric-badge is-enquiries', false)
-            ->assertSee('dash-metric-badge is-datasheets', false)
-            ->assertSee('dash-metric-count is-enquiries', false)
-            ->assertSee('dash-metric-count is-datasheets', false)
+            ->assertSee('dash-metric-grid', false)
+            ->assertSee('dash-metric-axis is-y', false)
             ->assertSee('>2</text>', false)
             ->assertSee('>1</text>', false)
-            ->assertDontSee('dash-metric-axis is-y', false)
+            ->assertSee('>0</text>', false)
+            ->assertDontSee('dash-metric-area', false)
+            ->assertDontSee('dash-metric-badge', false)
             ->assertSee('>Jan</text>', false)
             ->assertSee('>Dec</text>', false);
 
@@ -245,9 +247,11 @@ class DashboardOriginMetricsTest extends TestCase
         $this->actingAs($staff)
             ->get('/dashboard')
             ->assertOk()
-            ->assertSee('>Engagement</h2>', false)
+            ->assertSee('>Audience Engagement Metrics</h2>', false)
+            ->assertSee('dash-metric-col is-enquiries', false)
             ->assertSee('data-series="enquiries"', false)
             ->assertSee('data-enquiries="0,1,0,0,0,0,0,0,0,0,0,0"', false)
+            ->assertDontSee('dash-metric-col is-datasheets', false)
             ->assertDontSee('data-series="datasheets"', false)
             ->assertDontSee('data-datasheets=', false)
             ->assertDontSee('dash-metric-swatch is-datasheets', false);

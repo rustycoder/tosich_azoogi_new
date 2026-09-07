@@ -1382,62 +1382,73 @@ button.dash-pill:disabled {
   margin-bottom: 4px;
 }
 
+.dash-home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr));
+  gap: 16px;
+}
+
+.dash-home-card {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  background: var(--dash-card);
+  border: 1px solid var(--dash-line);
+  border-radius: 14px;
+  padding: 22px 22px 18px;
+  text-decoration: none;
+  color: inherit;
+  min-height: 148px;
+  align-content: start;
+}
+
+.dash-home-card:hover {
+  border-color: #c9d8c4;
+  box-shadow: 0 8px 24px rgba(20, 24, 20, .06);
+}
+
+.dash-home-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #eef6ea;
+  color: var(--dash-green-dark);
+  display: grid;
+  place-items: center;
+  margin-bottom: 4px;
+}
+
+.dash-home-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.dash-home-card h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.dash-home-card p {
+  margin: 0;
+  color: var(--dash-muted);
+  font-size: 14px;
+}
+
 .dash-home-boards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: 16px;
   align-items: stretch;
+  height: min(480px, 58vh);
 }
 
-.dash-home-boards .dash-metric-title {
+.dash-home-boards .dash-kanban-col {
+  height: 100%;
+}
+
+.dash-home-boards .dash-kanban-col-head h2 {
   flex: 1;
   min-width: 0;
-}
-
-.dash-home-board-body {
-  display: grid;
-  align-content: start;
-  min-height: 0;
-  max-height: 340px;
-  overflow: auto;
-}
-
-.dash-home-board-body .dash-kanban-card {
-  gap: 0;
-  padding: 12px 0;
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid var(--dash-line);
-  border-radius: 0;
-}
-
-.dash-home-board-body .dash-kanban-card:last-of-type {
-  border-bottom: 0;
-  padding-bottom: 2px;
-}
-
-.dash-home-board-body .dash-kanban-card-open {
-  padding: 0;
-  gap: 2px;
-}
-
-.dash-home-board-body .dash-kanban-card-open strong {
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.dash-home-board-body .dash-kanban-email,
-.dash-home-board-body .dash-kanban-when {
-  font-size: 12px;
-}
-
-.dash-home-board-body .dash-kanban-empty {
-  padding: 20px 0 4px;
-  text-align: center;
-}
-
-.dash-home-board-body:has([data-enquiry-id]) .dash-kanban-empty {
-  display: none;
 }
 
 .dash-metrics {
@@ -1465,35 +1476,42 @@ button.dash-pill:disabled {
   display: inline-flex;
   align-items: center;
   margin: 0;
-  padding: 0;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f3f5f1;
   color: var(--dash-muted);
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 11px;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
 
 .dash-metric-key {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
+  gap: 6px;
   margin: 0;
   padding: 0;
   list-style: none;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--dash-muted);
+  font-size: 11px;
+  font-weight: 600;
 }
 
 .dash-metric-key li {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
 }
 
-.dash-metric-key li.is-enquiries,
+.dash-metric-key li.is-enquiries {
+  background: #eef8ec;
+  color: #3d8a3a;
+}
+
 .dash-metric-key li.is-datasheets {
-  background: none;
-  color: var(--dash-muted);
+  background: #fbefee;
+  color: #c45b57;
 }
 
 .dash-metric-swatch {
@@ -1502,70 +1520,35 @@ button.dash-pill:disabled {
   border-radius: 999px;
 }
 
-.dash-metric-swatch.is-enquiries { background: #8ed89a; }
-.dash-metric-swatch.is-datasheets { background: #f0a3a0; }
+.dash-metric-swatch.is-enquiries { background: #3aa028; }
+.dash-metric-swatch.is-datasheets { background: #c45b57; }
 
-.dash-metric-area {
+.dash-metric-chart {
   display: block;
   width: 100%;
   height: auto;
   overflow: visible;
 }
 
-.dash-metric-baseline {
-  stroke: var(--dash-line);
+.dash-metric-grid {
+  stroke: #edf0ea;
   stroke-width: 1;
 }
 
-.dash-metric-axis.is-x {
-  fill: var(--dash-muted);
-  font-size: 10px;
+.dash-metric-grid.is-base {
+  stroke: var(--dash-line);
+}
+
+.dash-metric-axis.is-x,
+.dash-metric-axis.is-y {
+  fill: #8b9388;
+  font-size: 7px;
   font-weight: 500;
   font-family: Inter, system-ui, sans-serif;
 }
 
-.dash-metric-badge rect {
-  stroke-width: 0.8;
-}
-
-.dash-metric-badge.is-enquiries rect {
-  fill: #eef8ec;
-  stroke: #cfe9c8;
-}
-
-.dash-metric-badge.is-datasheets rect {
-  fill: #fbefee;
-  stroke: #f3d4d2;
-}
-
-.dash-metric-count {
-  font-size: 8px;
-  font-weight: 700;
-  font-family: Inter, system-ui, sans-serif;
-}
-
-.dash-metric-count.is-enquiries { fill: #3d8a3a; }
-.dash-metric-count.is-datasheets { fill: #c45b57; }
-
-.dash-metric-area-fill.is-enquiries { fill: url(#dash-metric-fill-enquiries); }
-.dash-metric-area-fill.is-datasheets { fill: url(#dash-metric-fill-datasheets); }
-
-.dash-metric-area-line {
-  stroke-width: 2.4;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-}
-
-.dash-metric-area-line.is-enquiries { stroke: #8ed89a; }
-.dash-metric-area-line.is-datasheets { stroke: #f0a3a0; }
-
-.dash-metric-dot {
-  stroke-width: 1.8;
-  fill: #fff;
-}
-
-.dash-metric-dot.is-enquiries { stroke: #8ed89a; }
-.dash-metric-dot.is-datasheets { stroke: #f0a3a0; }
+.dash-metric-col.is-enquiries { fill: #3aa028; }
+.dash-metric-col.is-datasheets { fill: #c45b57; }
 
 .dash-metric-card {
   display: grid;
@@ -2099,25 +2082,47 @@ code {
   min-width: 0;
   min-height: 0;
   height: 100%;
-  background: var(--dash-card);
+  background: #eef1ec;
   border: 1px solid var(--dash-line);
   border-radius: 14px;
   overflow: hidden;
 }
 
-.dash-kanban-col .dash-metric-head {
-  flex-shrink: 0;
-  padding: 16px 18px 14px;
+.dash-kanban-col-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--dash-line);
+  background: var(--dash-card);
+}
+
+.dash-kanban-col-head h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.dash-kanban-col-head span {
+  min-width: 24px;
+  height: 24px;
+  padding: 0 8px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #e4f6de;
+  color: #1f6a18;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .dash-kanban-col-body {
   display: grid;
   gap: 10px;
-  padding: 12px 18px 18px;
+  padding: 12px;
   overflow: auto;
   align-content: start;
   min-height: 180px;
-  background: #f6f8f4;
 }
 
 .dash-kanban-card {
@@ -2428,10 +2433,15 @@ code {
 }
 
 @media (max-width: 720px) {
+  .dash-home-grid,
   .dash-home-boards,
   .dash-kanban,
   .dash-metrics {
     grid-template-columns: 1fr;
+  }
+
+  .dash-home-boards {
+    height: auto;
   }
 
   .dash-kanban-col {

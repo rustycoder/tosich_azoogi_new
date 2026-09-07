@@ -34,13 +34,13 @@ class DashboardMetricsService implements IDashboardMetricsService
      */
     private const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-    private const CHART_LEFT = 16.0;
+    private const CHART_LEFT = 40.0;
 
-    private const CHART_RIGHT = 744.0;
+    private const CHART_RIGHT = 752.0;
 
-    private const CHART_TOP = 28.0;
+    private const CHART_TOP = 10.0;
 
-    private const CHART_BOTTOM = 210.0;
+    private const CHART_BOTTOM = 142.0;
 
     public function __construct(
         private IEnquiryRepository $enquiries,
@@ -101,15 +101,20 @@ class DashboardMetricsService implements IDashboardMetricsService
         }
 
         $max = max(1, ...$enquiries, ...$datasheets);
-        $enquiryPaths = $this->seriesPaths($enquiries, $max);
-        $datasheetPaths = $this->seriesPaths($datasheets, $max);
-        $span = 11;
+        $seriesCount = ($showEnquiries ? 1 : 0) + ($showDatasheets ? 1 : 0);
+        $enquiryBars = $showEnquiries
+            ? $this->columnBars($enquiries, $max, 0, $seriesCount)
+            : [];
+        $datasheetBars = $showDatasheets
+            ? $this->columnBars($datasheets, $max, $showEnquiries ? 1 : 0, $seriesCount)
+            : [];
+        $groupWidth = (self::CHART_RIGHT - self::CHART_LEFT) / 12;
         $months = [];
 
         foreach (self::MONTHS as $index => $label) {
             $months[] = [
                 'label' => $label,
-                'x' => round(self::CHART_LEFT + ((self::CHART_RIGHT - self::CHART_LEFT) * ($index / $span)), 1),
+                'x' => round(self::CHART_LEFT + ($groupWidth * ($index + 0.5)), 1),
             ];
         }
 
@@ -124,18 +129,16 @@ class DashboardMetricsService implements IDashboardMetricsService
 
         return [
             'year' => $year,
+            'plot_left' => self::CHART_LEFT,
+            'plot_right' => self::CHART_RIGHT,
             'months' => $months,
             'ticks' => $ticks,
             'show_enquiries' => $showEnquiries,
             'show_datasheets' => $showDatasheets,
             'enquiries' => $enquiries,
             'datasheets' => $datasheets,
-            'enquiry_line' => $enquiryPaths['line'],
-            'enquiry_area' => $enquiryPaths['area'],
-            'enquiry_points' => $enquiryPaths['points'],
-            'datasheet_line' => $datasheetPaths['line'],
-            'datasheet_area' => $datasheetPaths['area'],
-            'datasheet_points' => $datasheetPaths['points'],
+            'enquiry_bars' => $enquiryBars,
+            'datasheet_bars' => $datasheetBars,
         ];
     }
 
@@ -226,61 +229,29 @@ class DashboardMetricsService implements IDashboardMetricsService
 
     /**
      * @param  list<int>  $values
-     * @return array{line: string, area: string, points: list<array{x: float, y: float, value: int}>}
+     * @return list<array{x: float, y: float, width: float, height: float, value: int}>
      */
-    private function seriesPaths(array $values, int $max): array
+    private function columnBars(array $values, int $max, int $seriesIndex, int $seriesCount): array
     {
-        $points = [];
-        $coords = [];
-        $span = max(1, count($values) - 1);
+        $groupWidth = (self::CHART_RIGHT - self::CHART_LEFT) / 12;
+        $pad = $groupWidth * 0.2;
+        $gap = $seriesCount > 1 ? 2.4 : 0.0;
+        $barWidth = round(($groupWidth - (2 * $pad) - (($seriesCount - 1) * $gap)) / max(1, $seriesCount), 1);
+        $range = self::CHART_BOTTOM - self::CHART_TOP;
+        $bars = [];
 
         foreach ($values as $index => $value) {
-            $x = round(self::CHART_LEFT + ((self::CHART_RIGHT - self::CHART_LEFT) * ($index / $span)), 1);
-            $y = round(self::CHART_BOTTOM - (($value / $max) * (self::CHART_BOTTOM - self::CHART_TOP)), 1);
-            $coords[] = [$x, $y];
-            $points[] = [
-                'x' => $x,
-                'y' => $y,
+            $height = $value > 0 ? round(max(2.5, ($value / $max) * $range), 1) : 0.0;
+
+            $bars[] = [
+                'x' => round(self::CHART_LEFT + ($index * $groupWidth) + $pad + ($seriesIndex * ($barWidth + $gap)), 1),
+                'y' => round(self::CHART_BOTTOM - $height, 1),
+                'width' => $barWidth,
+                'height' => $height,
                 'value' => $value,
             ];
         }
 
-        $line = $this->smoothLine($coords);
-        $first = $coords[0];
-        $last = $coords[array_key_last($coords)];
-
-        return [
-            'line' => $line,
-            'area' => $line.' L '.$last[0].' '.self::CHART_BOTTOM.' L '.$first[0].' '.self::CHART_BOTTOM.' Z',
-            'points' => $points,
-        ];
-    }
-
-    /**
-     * @param  list<array{0: float, 1: float}>  $points
-     */
-    private function smoothLine(array $points): string
-    {
-        $count = count($points);
-        $line = 'M '.$points[0][0].' '.$points[0][1];
-
-        for ($index = 0; $index < $count - 1; $index++) {
-            $previous = $points[max(0, $index - 1)];
-            $current = $points[$index];
-            $next = $points[$index + 1];
-            $after = $points[min($count - 1, $index + 2)];
-            $controlX1 = round($current[0] + (($next[0] - $previous[0]) / 6), 1);
-            $controlY1 = $this->clampChartY($current[1] + (($next[1] - $previous[1]) / 6));
-            $controlX2 = round($next[0] - (($after[0] - $current[0]) / 6), 1);
-            $controlY2 = $this->clampChartY($next[1] - (($after[1] - $current[1]) / 6));
-            $line .= " C {$controlX1} {$controlY1} {$controlX2} {$controlY2} {$next[0]} {$next[1]}";
-        }
-
-        return $line;
-    }
-
-    private function clampChartY(float $y): float
-    {
-        return round(min(self::CHART_BOTTOM, max(self::CHART_TOP, $y)), 1);
+        return $bars;
     }
 }
