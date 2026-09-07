@@ -38,4 +38,19 @@ interface IDashboardMetricsService
      * }|null
      */
     public function engagement(User $user): ?array;
+
+    /**
+     * @return list<array{label: string, percent: int, color: string}>|null
+     */
+    public function visitedPages(User $user): ?array;
+
+    /**
+     * @return list<array{label: string, percent: int, color: string}>|null
+     */
+    public function visitedCountries(User $user): ?array;
+
+    /**
+     * @return list<array{label: string, sku: string, icon: string, url: string}>|null
+     */
+    public function topProducts(User $user): ?array;
 }

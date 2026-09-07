@@ -39,6 +39,9 @@ class DashboardController extends Controller
             'enquiryMetrics' => $user ? $this->metrics->enquiries($user) : null,
             'datasheetMetrics' => $user ? $this->metrics->datasheets($user) : null,
             'engagementMetrics' => $user ? $this->metrics->engagement($user) : null,
+            'visitedPageMetrics' => $user ? $this->metrics->visitedPages($user) : null,
+            'visitedCountryMetrics' => $user ? $this->metrics->visitedCountries($user) : null,
+            'topProductMetrics' => $user ? $this->metrics->topProducts($user) : null,
         ]);
     }
 }

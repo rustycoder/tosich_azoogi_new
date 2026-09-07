@@ -39,14 +39,41 @@ class VisitorOriginService implements IVisitorOriginService
     public function capture(?Request $request = null): array
     {
         $request ??= request();
+        $origin = $this->captureVisit($request);
+        $origin['country'] = $this->countryCode($request, $origin['ip_address']);
+
+        return $origin;
+    }
+
+    /**
+     * @return array{ip_address: ?string, country: ?string, user_agent: ?string}
+     */
+    public function captureVisit(?Request $request = null): array
+    {
+        $request ??= request();
         $ipAddress = $this->ipAddress($request);
         $userAgent = trim((string) $request->userAgent());
 
         return [
             'ip_address' => $ipAddress,
-            'country' => $this->countryCode($request, $ipAddress),
+            'country' => $this->captureCountryFromHeaders($request),
             'user_agent' => $userAgent !== '' ? mb_substr($userAgent, 0, 191) : null,
         ];
+    }
+
+    public function captureCountryFromHeaders(?Request $request = null): ?string
+    {
+        $request ??= request();
+
+        foreach (self::COUNTRY_HEADERS as $header) {
+            $code = $this->normalizeCountry((string) $request->headers->get($header, ''));
+
+            if ($code !== null) {
+                return $code;
+            }
+        }
+
+        return null;
     }
 
     private function ipAddress(Request $request): ?string
@@ -64,15 +91,7 @@ class VisitorOriginService implements IVisitorOriginService
 
     private function countryCode(Request $request, ?string $ipAddress): ?string
     {
-        foreach (self::COUNTRY_HEADERS as $header) {
-            $code = $this->normalizeCountry((string) $request->headers->get($header, ''));
-
-            if ($code !== null) {
-                return $code;
-            }
-        }
-
-        return $this->lookupCountry($ipAddress);
+        return $this->captureCountryFromHeaders($request) ?? $this->lookupCountry($ipAddress);
     }
 
     private function lookupCountry(?string $ipAddress): ?string

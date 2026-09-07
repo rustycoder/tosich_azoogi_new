@@ -37,4 +37,9 @@ interface IEnquiryRepository
      * @return array<int, int>
      */
     public function monthlyCounts(array $types, int $year): array;
+
+    /**
+     * @return Collection<int, string>
+     */
+    public function quoteProductTexts(): Collection;
 }

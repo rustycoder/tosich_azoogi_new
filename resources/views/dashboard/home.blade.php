@@ -65,6 +65,27 @@
         @include('dashboard.partials.engagement-metrics', ['metrics' => $engagementMetrics])
     @endif
 
+    @if ($topProductMetrics !== null)
+        @include('dashboard.partials.top-products', ['rows' => $topProductMetrics])
+    @endif
+
+    @if ($visitedPageMetrics !== null || $visitedCountryMetrics !== null)
+        <div class="dash-metrics">
+            @if ($visitedPageMetrics !== null)
+                @include('dashboard.partials.rank-metrics', [
+                    'title' => 'Most Visited Pages',
+                    'rows' => $visitedPageMetrics,
+                ])
+            @endif
+            @if ($visitedCountryMetrics !== null)
+                @include('dashboard.partials.rank-metrics', [
+                    'title' => 'Most Visited Countries',
+                    'rows' => $visitedCountryMetrics,
+                ])
+            @endif
+        </div>
+    @endif
+
     @if ($enquiryMetrics !== null || $datasheetMetrics !== null)
         <div class="dash-metrics">
             @if ($enquiryMetrics !== null)
@@ -82,7 +103,7 @@
         </div>
     @endif
 
-    @if ($pendingBoards === [] && $enquiryMetrics === null && $datasheetMetrics === null && $engagementMetrics === null)
+    @if ($pendingBoards === [] && $enquiryMetrics === null && $datasheetMetrics === null && $engagementMetrics === null && $visitedPageMetrics === null && $visitedCountryMetrics === null && $topProductMetrics === null)
         @unless ($canManagePages || $canManageProjects || $canManageProducts || $canManageSections || $isAdmin || $canManageDatasheets || $canManageEnquiries)
             <div class="dash-metric-card">
                 <p class="dash-lead">Content tools for this account will be planned later.</p>

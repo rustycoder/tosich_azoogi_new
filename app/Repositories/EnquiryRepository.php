@@ -72,4 +72,17 @@ class EnquiryRepository implements IEnquiryRepository
     {
         return $this->countsByMonth(Enquiry::query()->whereIn('type', $types), $year);
     }
+
+    /**
+     * @return Collection<int, string>
+     */
+    public function quoteProductTexts(): Collection
+    {
+        return Enquiry::query()
+            ->where('type', EnquiryType::Quote)
+            ->get(['payload'])
+            ->map(fn (Enquiry $enquiry): string => trim((string) ($enquiry->payload['products'] ?? '')))
+            ->filter(fn (string $products): bool => $products !== '')
+            ->values();
+    }
 }

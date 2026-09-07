@@ -30,4 +30,9 @@ interface IProductDatasheetRepository
      * @return array<int, int>
      */
     public function monthlyCounts(int $year): array;
+
+    /**
+     * @return Collection<int, object>
+     */
+    public function productBuckets(): Collection;
 }

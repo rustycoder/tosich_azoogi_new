@@ -13,23 +13,7 @@
     </header>
     @foreach (['country' => $metrics['country'], 'device' => $metrics['device']] as $view => $rows)
         <div class="dash-metric-body" data-metric-panel="{{ $view }}" role="tabpanel" @if ($view !== 'country') hidden @endif>
-            @if ($rows === [])
-                <p class="dash-metric-empty">No records yet.</p>
-            @else
-                <ul class="dash-metric-bars">
-                    @foreach ($rows as $row)
-                        <li style="--n: {{ $row['percent'] }}%; --bar: {{ $row['color'] }}">
-                            <div class="dash-metric-bar-meta">
-                                <span class="dash-metric-bar-label" title="{{ $row['label'] }}">{{ $row['label'] }}</span>
-                                <span class="dash-metric-bar-value">{{ $row['percent'] }}%</span>
-                            </div>
-                            <span class="dash-metric-bar-track">
-                                <span class="dash-metric-bar-fill"></span>
-                            </span>
-                        </li>
-                    @endforeach
-                </ul>
-            @endif
+            @include('dashboard.partials.metric-bars', ['rows' => $rows])
         </div>
     @endforeach
 </article>

@@ -74,4 +74,37 @@ class VisitorOriginTest extends TestCase
         $this->assertNull($origin['country']);
         Http::assertNothingSent();
     }
+
+    public function test_it_reads_country_from_headers_without_looking_up_ip(): void
+    {
+        Http::fake();
+
+        $request = Request::create('/', 'GET', server: [
+            'REMOTE_ADDR' => '8.8.8.8',
+            'HTTP_CF_IPCOUNTRY' => 'NP',
+        ]);
+
+        $service = new VisitorOriginService;
+
+        $this->assertSame('NP', $service->captureCountryFromHeaders($request));
+        Http::assertNothingSent();
+    }
+
+    public function test_visit_capture_stores_ip_and_user_agent_without_looking_up_country(): void
+    {
+        Http::fake();
+
+        $request = Request::create('/', 'GET', server: [
+            'REMOTE_ADDR' => '8.8.8.8',
+            'HTTP_CF_CONNECTING_IP' => '203.0.113.10',
+            'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+        ]);
+
+        $origin = (new VisitorOriginService)->captureVisit($request);
+
+        $this->assertSame('203.0.113.10', $origin['ip_address']);
+        $this->assertNull($origin['country']);
+        $this->assertSame('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36', $origin['user_agent']);
+        Http::assertNothingSent();
+    }
 }

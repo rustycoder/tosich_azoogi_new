@@ -71,4 +71,16 @@ class ProductDatasheetRepository implements IProductDatasheetRepository
     {
         return $this->countsByMonth(ProductDatasheetExport::query(), $year);
     }
+
+    /**
+     * @return Collection<int, object>
+     */
+    public function productBuckets(): Collection
+    {
+        return ProductDatasheetExport::query()
+            ->selectRaw("COALESCE(NULLIF(airtable_id, ''), CONCAT('code:', COALESCE(product_code, ''))) as origin_key, count(*) as total")
+            ->groupByRaw("COALESCE(NULLIF(airtable_id, ''), CONCAT('code:', COALESCE(product_code, '')))")
+            ->orderByDesc('total')
+            ->get();
+    }
 }

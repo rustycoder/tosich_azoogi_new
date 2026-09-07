@@ -5,6 +5,7 @@ namespace App\Repositories\Contracts;
 use App\Models\Product;
 use App\Models\ProductSync;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 interface IProductRepository
 {
@@ -35,6 +36,11 @@ interface IProductRepository
     public function dashboardList(string $search = ''): LengthAwarePaginator;
 
     public function publishedByAirtableId(string $airtableId): ?Product;
+
+    /**
+     * @return Collection<int, Product>
+     */
+    public function metricIdentities(): Collection;
 
     public function latestSync(): ?ProductSync;
 

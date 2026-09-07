@@ -2,10 +2,15 @@
 
 namespace App\Services;
 
+use App\Enums\ContentResource;
 use App\Enums\EnquiryType;
 use App\Models\User;
+use App\PageMeta\Catalog;
 use App\Repositories\Contracts\IEnquiryRepository;
+use App\Repositories\Contracts\IPageRepository;
+use App\Repositories\Contracts\IPageVisitRepository;
 use App\Repositories\Contracts\IProductDatasheetRepository;
+use App\Repositories\Contracts\IProductRepository;
 use App\Services\Contracts\IDashboardMetricsService;
 use Illuminate\Support\Collection;
 
@@ -45,6 +50,9 @@ class DashboardMetricsService implements IDashboardMetricsService
     public function __construct(
         private IEnquiryRepository $enquiries,
         private IProductDatasheetRepository $datasheets,
+        private IPageVisitRepository $visits,
+        private IPageRepository $pages,
+        private IProductRepository $products,
     ) {}
 
     public function enquiries(User $user): ?array
@@ -140,6 +148,256 @@ class DashboardMetricsService implements IDashboardMetricsService
             'enquiry_bars' => $enquiryBars,
             'datasheet_bars' => $datasheetBars,
         ];
+    }
+
+    /**
+     * @return list<array{label: string, percent: int, color: string}>|null
+     */
+    public function visitedPages(User $user): ?array
+    {
+        if (! $this->canSeeVisitMetrics($user)) {
+            return null;
+        }
+
+        $buckets = $this->visits->pageBuckets();
+        $titles = $this->pages->findBySlugs(
+            $buckets->pluck('origin_key')->filter()->map(fn (mixed $key): string => (string) $key)->all()
+        )->keyBy('slug');
+
+        return $this->rows($buckets, function (?string $slug) use ($titles): string {
+            if ($slug === null || $slug === '') {
+                return 'Unknown';
+            }
+
+            $title = trim((string) ($titles->get($slug)?->title ?? ''));
+
+            if ($title !== '') {
+                return $title;
+            }
+
+            $resource = ContentResource::tryFrom($slug);
+
+            if ($resource !== null) {
+                return $resource->label();
+            }
+
+            if (Catalog::has($slug)) {
+                return Catalog::for($slug)->navLabel();
+            }
+
+            return $slug;
+        });
+    }
+
+    /**
+     * @return list<array{label: string, percent: int, color: string}>|null
+     */
+    public function visitedCountries(User $user): ?array
+    {
+        if (! $this->canSeeVisitMetrics($user)) {
+            return null;
+        }
+
+        return $this->rows($this->visits->countryBuckets(), function (?string $key): string {
+            $name = country_name($key);
+
+            return $name !== '' ? $name : 'Unknown';
+        });
+    }
+
+    /**
+     * @return list<array{label: string, sku: string, icon: string, url: string}>|null
+     */
+    public function topProducts(User $user): ?array
+    {
+        if (! $this->canSeeTopProducts($user)) {
+            return null;
+        }
+
+        $identities = $this->products->metricIdentities();
+        $byAirtable = [];
+        $airtableByCode = [];
+
+        foreach ($identities as $product) {
+            $airtableId = trim((string) $product->airtable_id);
+            $code = strtoupper(trim((string) $product->product_code));
+            $name = trim((string) $product->product_name);
+
+            if ($airtableId === '') {
+                continue;
+            }
+
+            $byAirtable[$airtableId] = [
+                'label' => $name !== '' ? $name : ($code !== '' ? $code : $airtableId),
+                'sku' => $code,
+                'icon' => $product->coverUrl(),
+                'url' => $product->publicPath(),
+            ];
+
+            if ($code !== '') {
+                $airtableByCode[$code] ??= $airtableId;
+            }
+        }
+
+        $totals = [];
+        $meta = [];
+
+        foreach ($this->visits->productViewBuckets() as $bucket) {
+            $key = is_string($bucket->origin_key) ? $bucket->origin_key : '';
+            [$canonical, $identity] = $this->canonicalProduct($key, $byAirtable, $airtableByCode);
+            $this->addProductScore($totals, $meta, $canonical, (int) $bucket->total, $identity);
+        }
+
+        foreach ($this->datasheets->productBuckets() as $bucket) {
+            $key = is_string($bucket->origin_key) ? $bucket->origin_key : '';
+            [$canonical, $identity] = $this->canonicalProduct($key, $byAirtable, $airtableByCode);
+            $this->addProductScore($totals, $meta, $canonical, (int) $bucket->total, $identity);
+        }
+
+        foreach ($this->enquiries->quoteProductTexts() as $products) {
+            foreach (array_unique($this->quoteSkus($products)) as $sku) {
+                [$canonical, $identity] = $this->canonicalProduct('code:'.$sku, $byAirtable, $airtableByCode);
+                $this->addProductScore($totals, $meta, $canonical, 1, $identity);
+            }
+        }
+
+        return $this->productRows($totals, $meta);
+    }
+
+    private function canSeeVisitMetrics(User $user): bool
+    {
+        return $user->canManagePages()
+            || $user->canManageProducts()
+            || $user->canManageDatasheets()
+            || $user->canManageEnquiries();
+    }
+
+    private function canSeeTopProducts(User $user): bool
+    {
+        return $user->canManageProducts()
+            || $user->canManageDatasheets()
+            || $user->canManageQuoteEnquiries();
+    }
+
+    /**
+     * @param  array<string, int>  $totals
+     * @param  array<string, array{label: string, sku: string, icon: string, url: string}>  $meta
+     * @param  array{label: string, sku: string, icon: string, url: string}  $identity
+     */
+    private function addProductScore(array &$totals, array &$meta, string $key, int $count, array $identity): void
+    {
+        if ($key === '' || $count < 1) {
+            return;
+        }
+
+        $totals[$key] = ($totals[$key] ?? 0) + $count;
+
+        if (! isset($meta[$key]) || ($meta[$key]['icon'] === '' && $identity['icon'] !== '') || ($meta[$key]['url'] === '' && $identity['url'] !== '')) {
+            $meta[$key] = $identity;
+        }
+    }
+
+    /**
+     * @param  array<string, array{label: string, sku: string, icon: string, url: string}>  $byAirtable
+     * @param  array<string, string>  $airtableByCode
+     * @return array{0: string, 1: array{label: string, sku: string, icon: string, url: string}}
+     */
+    private function canonicalProduct(string $key, array $byAirtable, array $airtableByCode): array
+    {
+        if (str_starts_with($key, 'code:')) {
+            $code = strtoupper(substr($key, 5));
+
+            if ($code === '') {
+                return ['', $this->productIdentity('')];
+            }
+
+            $airtableId = $airtableByCode[$code] ?? null;
+
+            if ($airtableId !== null) {
+                return [$airtableId, $byAirtable[$airtableId] ?? $this->productIdentity($code, $code, '', $airtableId)];
+            }
+
+            return ['code:'.$code, $this->productIdentity($code, $code)];
+        }
+
+        if ($key === '') {
+            return ['', $this->productIdentity('')];
+        }
+
+        return [$key, $byAirtable[$key] ?? $this->productIdentity($key, '', '', $key)];
+    }
+
+    /**
+     * @return array{label: string, sku: string, icon: string, url: string}
+     */
+    private function productIdentity(string $label, string $sku = '', string $icon = '', ?string $airtableId = null): array
+    {
+        return [
+            'label' => $label,
+            'sku' => $sku,
+            'icon' => $icon,
+            'url' => $airtableId !== null && $airtableId !== ''
+                ? '/product-detail?id='.rawurlencode($airtableId)
+                : '',
+        ];
+    }
+
+    /**
+     * @param  array<string, int>  $totals
+     * @param  array<string, array{label: string, sku: string, icon: string, url: string}>  $meta
+     * @return list<array{label: string, sku: string, icon: string, url: string}>
+     */
+    private function productRows(array $totals, array $meta): array
+    {
+        arsort($totals);
+
+        $totals = array_slice($totals, 0, self::LIMIT, true);
+
+        if ($totals === [] || array_sum($totals) < 1) {
+            return [];
+        }
+
+        $rows = [];
+
+        foreach ($totals as $key => $count) {
+            if ($count < 1) {
+                continue;
+            }
+
+            $airtableId = str_starts_with((string) $key, 'code:') ? null : (string) $key;
+            $identity = $meta[$key] ?? $this->productIdentity((string) $key, '', '', $airtableId);
+
+            $rows[] = [
+                'label' => $identity['label'] !== '' ? $identity['label'] : (string) $key,
+                'sku' => $identity['sku'],
+                'icon' => $identity['icon'],
+                'url' => $identity['url'],
+            ];
+        }
+
+        return $rows;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function quoteSkus(string $products): array
+    {
+        if (! preg_match_all('/\(([^)\n]+)\)(?:\s*x\s*\d+)?/i', $products, $matches)) {
+            return [];
+        }
+
+        $codes = [];
+
+        foreach ($matches[1] as $match) {
+            $code = strtoupper(trim($match));
+
+            if ($code !== '') {
+                $codes[$code] = $code;
+            }
+        }
+
+        return array_values($codes);
     }
 
     /**

@@ -11,6 +11,7 @@ use App\Repositories\Contracts\IProductRepository;
 use App\ThirdParty\Airtable\ProductNormalizer;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -309,6 +310,15 @@ class ProductRepository implements IProductRepository
         }
 
         return $product;
+    }
+
+    /**
+     * @return Collection<int, Product>
+     */
+    public function metricIdentities(): Collection
+    {
+        return Product::query()
+            ->get(['airtable_id', 'product_name', 'product_code', 'cover', 'product_images']);
     }
 
     public function latestSync(): ?ProductSync

@@ -8,12 +8,14 @@ use App\Repositories\ContentPermissionRepository;
 use App\Repositories\Contracts\IContentPermissionRepository;
 use App\Repositories\Contracts\IEnquiryRepository;
 use App\Repositories\Contracts\IPageRepository;
+use App\Repositories\Contracts\IPageVisitRepository;
 use App\Repositories\Contracts\IProductDatasheetRepository;
 use App\Repositories\Contracts\IProductRepository;
 use App\Repositories\Contracts\IProjectRepository;
 use App\Repositories\Contracts\IUserRepository;
 use App\Repositories\EnquiryRepository;
 use App\Repositories\PageRepository;
+use App\Repositories\PageVisitRepository;
 use App\Repositories\ProductDatasheetRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\ProjectRepository;
@@ -22,6 +24,7 @@ use App\Services\Contracts\IDashboardMetricsService;
 use App\Services\Contracts\IEnquiryService;
 use App\Services\Contracts\ILedCalculatorService;
 use App\Services\Contracts\IPageService;
+use App\Services\Contracts\IPageVisitService;
 use App\Services\Contracts\IProductDatasheetService;
 use App\Services\Contracts\IProductSyncService;
 use App\Services\Contracts\IProfileService;
@@ -32,6 +35,7 @@ use App\Services\DashboardMetricsService;
 use App\Services\EnquiryService;
 use App\Services\LedCalculatorService;
 use App\Services\PageService;
+use App\Services\PageVisitService;
 use App\Services\ProductDatasheetService;
 use App\Services\ProductSyncService;
 use App\Services\ProfileService;
@@ -56,6 +60,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IProductRepository::class, ProductRepository::class);
         $this->app->bind(IProductDatasheetRepository::class, ProductDatasheetRepository::class);
         $this->app->bind(IEnquiryRepository::class, EnquiryRepository::class);
+        $this->app->bind(IPageVisitRepository::class, PageVisitRepository::class);
         $this->app->bind(IAirtableClient::class, AirtableClient::class);
 
         $this->app->bind(IPageService::class, PageService::class);
@@ -68,6 +73,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ILedCalculatorService::class, LedCalculatorService::class);
         $this->app->bind(IProductDatasheetService::class, ProductDatasheetService::class);
         $this->app->bind(IVisitorOriginService::class, VisitorOriginService::class);
+        $this->app->bind(IPageVisitService::class, PageVisitService::class);
     }
 
     public function boot(): void
