@@ -201,7 +201,31 @@
     return card;
   }
 
-  function renderProductsGrid(cardsList, categoryName, parentContainer, maxLimit = 12) {
+  function collectAllProductCards(node) {
+    const cards = [];
+    const visitedIds = new Set();
+
+    function traverse(curr) {
+      if (!curr) return;
+      if (curr.type === 'product_row') {
+        const rowCards = extractProductCards([curr]);
+        rowCards.forEach(c => {
+          const id = (c.vdata && c.vdata.id) ? c.vdata.id : c.vname;
+          if (!visitedIds.has(id)) {
+            visitedIds.add(id);
+            cards.push(c);
+          }
+        });
+      } else if (curr.children && Array.isArray(curr.children)) {
+        curr.children.forEach(child => traverse(child));
+      }
+    }
+
+    traverse(node);
+    return cards;
+  }
+
+  function renderProductsGrid(cardsList, categoryName, parentContainer, maxLimit = 10) {
     if (!cardsList || cardsList.length === 0) return;
 
     const grid = document.createElement('div');
@@ -220,85 +244,40 @@
     productsView.className = 'mega-menu-column mega-products-view active';
     productsView.setAttribute('data-column-index', columnIndex + 1);
 
+    const categoryUrl = `/products?category=${encodeURIComponent(node.name)}`;
+
     const viewHeader = document.createElement('div');
     viewHeader.className = 'mega-panel-header';
+    viewHeader.style.display = 'flex';
+    viewHeader.style.justifyContent = 'space-between';
+    viewHeader.style.alignItems = 'center';
+    viewHeader.style.marginBottom = '16px';
     viewHeader.innerHTML = `
       <h3 class="mega-panel-title">${node.name}</h3>
+      <a href="${categoryUrl}" class="view-all-btn">View All &rarr;</a>
     `;
     productsView.appendChild(viewHeader);
 
-    let folderNodes = [];
-    let directRowNodes = [];
+    const allCards = collectAllProductCards(node);
 
-    if (node.type === 'product_row') {
-      directRowNodes = [node];
-    } else {
-      folderNodes = (node.children || []).filter(c => c.type === 'category');
-      directRowNodes = (node.children || []).filter(c => c.type === 'product_row');
-    }
-
-    const directCards = extractProductCards(directRowNodes);
-
-    if (folderNodes.length === 0 && directCards.length === 0) {
+    if (allCards.length === 0) {
       productsView.innerHTML += `<div style="padding:20px;color:var(--muted);">No products found in this category.</div>`;
       innerWrapper.appendChild(productsView);
       return;
     }
 
-    // 1. Render subfolders as collapsible accordions
-    if (folderNodes.length > 0) {
-      const accordionsContainer = document.createElement('div');
-      accordionsContainer.className = 'mega-accordions-container';
+    // Render up to 10 products in the flat grid
+    const directContainer = document.createElement('div');
+    directContainer.className = 'mega-direct-products-container';
+    renderProductsGrid(allCards, node.name, directContainer, 10);
+    productsView.appendChild(directContainer);
 
-      folderNodes.forEach((folderNode, gIdx) => {
-        const group = document.createElement('div');
-        group.className = `mega-accordion-group${gIdx === 0 ? ' open' : ''}`;
-
-        const header = document.createElement('div');
-        header.className = 'mega-accordion-header';
-        header.innerHTML = `
-          <span class="mega-accordion-title">${folderNode.name}</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" class="mega-accordion-chevron">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        `;
-
-        const content = document.createElement('div');
-        content.className = 'mega-accordion-content';
-
-        renderFolderContent(folderNode, content);
-
-        group.appendChild(header);
-        group.appendChild(content);
-
-        header.addEventListener('click', () => {
-          group.classList.toggle('open');
-        });
-
-        accordionsContainer.appendChild(group);
-      });
-
-      productsView.appendChild(accordionsContainer);
-    }
-
-    // 2. Render direct products in a shared grid (max 12)
-    if (directCards.length > 0) {
-      const directContainer = document.createElement('div');
-      directContainer.className = 'mega-direct-products-container';
-      if (folderNodes.length > 0) {
-        directContainer.style.marginTop = '16px';
-      }
-      renderProductsGrid(directCards, node.name, directContainer, 12);
-      productsView.appendChild(directContainer);
-    }
-
-    // 3. View all range button if total items exceed 12
-    const totalItemsCount = folderNodes.length + directCards.length;
-    if (totalItemsCount > 12) {
+    // View all button when there are more than 10 products
+    if (allCards.length > 10) {
       const viewAllRangeBtn = document.createElement('a');
       viewAllRangeBtn.className = 'view-all-range-btn';
-      viewAllRangeBtn.href = `/products?category=${encodeURIComponent(node.name)}`;
-      viewAllRangeBtn.innerHTML = `View all ${totalItemsCount} items in range &rarr;`;
+      viewAllRangeBtn.href = categoryUrl;
+      viewAllRangeBtn.innerHTML = `View all ${allCards.length} products &rarr;`;
       viewAllRangeBtn.addEventListener('click', (e) => {
         e.preventDefault();
         window.location.href = viewAllRangeBtn.href;
@@ -307,50 +286,6 @@
     }
 
     innerWrapper.appendChild(productsView);
-  }
-
-  // Recursive folder structure renderer
-  function renderFolderContent(currentNode, parentContainer) {
-    if (currentNode.type === 'product_row') {
-      const cards = extractProductCards([currentNode]);
-      renderProductsGrid(cards, currentNode.name, parentContainer, 12);
-    } else if (currentNode.children) {
-      const childRows = currentNode.children.filter(c => c.type === 'product_row');
-      const childCats = currentNode.children.filter(c => c.type === 'category');
-
-      const childCards = extractProductCards(childRows);
-      if (childCards.length > 0) {
-        renderProductsGrid(childCards, currentNode.name, parentContainer, 12);
-      }
-
-      childCats.forEach(cat => {
-        const subHeader = document.createElement('div');
-        subHeader.className = 'mega-product-subfolder-title';
-        subHeader.textContent = cat.name;
-        parentContainer.appendChild(subHeader);
-
-        const subContainer = document.createElement('div');
-        subContainer.className = 'mega-product-subfolder-container';
-        parentContainer.appendChild(subContainer);
-
-        renderFolderContent(cat, subContainer);
-      });
-
-      // Range button if subfolder items exceed 12
-      const totalFolderCount = childCards.length + childCats.length;
-      if (totalFolderCount > 12) {
-        const viewAllRangeBtn = document.createElement('a');
-        viewAllRangeBtn.className = 'view-all-range-btn';
-        viewAllRangeBtn.style.marginTop = '12px';
-        viewAllRangeBtn.href = `/products?category=${encodeURIComponent(currentNode.name)}`;
-        viewAllRangeBtn.innerHTML = `View all ${totalFolderCount} items &rarr;`;
-        viewAllRangeBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          window.location.href = viewAllRangeBtn.href;
-        });
-        parentContainer.appendChild(viewAllRangeBtn);
-      }
-    }
   }
 
   function getLocalImagePath(imgUrl, filePath) {
