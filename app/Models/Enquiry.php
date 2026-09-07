@@ -21,6 +21,9 @@ use Illuminate\Support\Str;
     'company',
     'message',
     'payload',
+    'ip_address',
+    'country',
+    'user_agent',
     'created_by',
     'updated_by',
     'deleted_by',
@@ -111,6 +114,13 @@ class Enquiry extends Model
         if (filled($this->message) && trim((string) ($payload['description'] ?? '')) !== trim((string) $this->message)) {
             $rows[] = $this->detailRow('Message', (string) $this->message, wide: true);
         }
+
+        $country = country_name($this->country);
+        $device = device_name($this->user_agent);
+
+        $rows[] = $this->detailRow('Country', $country !== '' ? $country : '—');
+        $rows[] = $this->detailRow('IP', filled($this->ip_address) ? (string) $this->ip_address : '—');
+        $rows[] = $this->detailRow('Device', $device !== '' ? $device : '—');
 
         return $rows;
     }

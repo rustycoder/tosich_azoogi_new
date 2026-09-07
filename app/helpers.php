@@ -160,6 +160,63 @@ if (! function_exists('labelled_tick')) {
     }
 }
 
+if (! function_exists('country_name')) {
+    function country_name(?string $code): string
+    {
+        $code = strtoupper(trim((string) $code));
+
+        if ($code === '' || strlen($code) !== 2 || ! ctype_alpha($code)) {
+            return '';
+        }
+
+        if (class_exists(Locale::class)) {
+            $name = Locale::getDisplayRegion('-'.$code, 'en');
+
+            if (is_string($name) && $name !== '' && strtoupper($name) !== $code) {
+                return $name;
+            }
+        }
+
+        return $code;
+    }
+}
+
+if (! function_exists('device_name')) {
+    function device_name(?string $userAgent): string
+    {
+        $ua = trim((string) $userAgent);
+
+        if ($ua === '') {
+            return '';
+        }
+
+        $os = match (true) {
+            str_contains($ua, 'iPhone') => 'iPhone',
+            str_contains($ua, 'iPad') => 'iPad',
+            str_contains($ua, 'Android') => 'Android',
+            str_contains($ua, 'Windows') => 'Windows',
+            str_contains($ua, 'Mac OS X'), str_contains($ua, 'Macintosh') => 'macOS',
+            str_contains($ua, 'Linux') => 'Linux',
+            default => '',
+        };
+
+        $browser = match (true) {
+            str_contains($ua, 'Edg/') || str_contains($ua, 'EdgA/') => 'Edge',
+            str_contains($ua, 'OPR/') || str_contains($ua, 'Opera') => 'Opera',
+            str_contains($ua, 'Chrome/') || str_contains($ua, 'CriOS/') => 'Chrome',
+            str_contains($ua, 'Firefox/') || str_contains($ua, 'FxiOS/') => 'Firefox',
+            str_contains($ua, 'Safari/') => 'Safari',
+            default => '',
+        };
+
+        if ($browser !== '' && $os !== '') {
+            return $browser.' on '.$os;
+        }
+
+        return $browser !== '' ? $browser : ($os !== '' ? $os : $ua);
+    }
+}
+
 if (! function_exists('dash_search_query')) {
     function dash_search_query(mixed $value = null): string
     {

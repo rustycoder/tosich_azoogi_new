@@ -775,5 +775,70 @@
             }
         });
     }
+
+    const exportDialog = document.querySelector('[data-export-dialog]');
+    const exportDialogTitle = exportDialog?.querySelector('[data-export-dialog-title]');
+    const exportDialogSub = exportDialog?.querySelector('[data-export-dialog-sub]');
+    const exportDialogBody = exportDialog?.querySelector('[data-export-dialog-body]');
+
+    const closeExportDialog = () => {
+        if (exportDialog?.open) {
+            exportDialog.close();
+        }
+    };
+
+    document.querySelectorAll('[data-export-info]').forEach((button) => {
+        button.addEventListener('click', () => {
+            const card = button.closest('[data-export-card]');
+            const detail = card?.querySelector('[data-export-detail]');
+
+            if (!exportDialog || !exportDialogBody || !detail) {
+                return;
+            }
+
+            if (exportDialogTitle) {
+                exportDialogTitle.textContent = card.dataset.exportTitle?.trim() || 'Export details';
+            }
+
+            const subtitle = card.dataset.exportSub?.trim() || '';
+
+            if (exportDialogSub) {
+                exportDialogSub.textContent = subtitle;
+                exportDialogSub.hidden = subtitle === '';
+            }
+
+            exportDialogBody.replaceChildren(detail.content.cloneNode(true));
+            exportDialog.showModal();
+        });
+    });
+
+    exportDialog?.addEventListener('click', (event) => {
+        if (event.target === exportDialog) {
+            closeExportDialog();
+        }
+    });
+
+    exportDialog?.querySelectorAll('[data-export-dialog-close]').forEach((button) => {
+        button.addEventListener('click', () => closeExportDialog());
+    });
+
+    document.querySelectorAll('[data-metric]').forEach((card) => {
+        const tabs = [...card.querySelectorAll('[data-metric-tab]')];
+        const panels = [...card.querySelectorAll('[data-metric-panel]')];
+
+        tabs.forEach((tab) => {
+            tab.addEventListener('click', () => {
+                const view = tab.dataset.metricTab;
+
+                tabs.forEach((item) => {
+                    item.setAttribute('aria-selected', item === tab ? 'true' : 'false');
+                });
+
+                panels.forEach((panel) => {
+                    panel.hidden = panel.dataset.metricPanel !== view;
+                });
+            });
+        });
+    });
 })();
 

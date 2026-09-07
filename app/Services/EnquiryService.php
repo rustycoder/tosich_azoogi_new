@@ -7,10 +7,14 @@ use App\Enums\EnquiryType;
 use App\Models\Enquiry;
 use App\Repositories\Contracts\IEnquiryRepository;
 use App\Services\Contracts\IEnquiryService;
+use App\Services\Contracts\IVisitorOriginService;
 
 class EnquiryService implements IEnquiryService
 {
-    public function __construct(private IEnquiryRepository $enquiries) {}
+    public function __construct(
+        private IEnquiryRepository $enquiries,
+        private IVisitorOriginService $origin,
+    ) {}
 
     public function kanban(EnquiryType $type, ?EnquiryStatus $status = null): array
     {
@@ -26,6 +30,8 @@ class EnquiryService implements IEnquiryService
 
     public function submit(EnquiryType $type, array $data): Enquiry
     {
+        $origin = $this->origin->capture();
+
         return $this->enquiries->create([
             'type' => $type,
             'status' => EnquiryStatus::Pending,
@@ -35,6 +41,9 @@ class EnquiryService implements IEnquiryService
             'company' => $data['company'] ?? null,
             'message' => $data['message'] ?? null,
             'payload' => $data['payload'] ?? [],
+            'ip_address' => $origin['ip_address'],
+            'country' => $origin['country'],
+            'user_agent' => $origin['user_agent'],
         ]);
     }
 

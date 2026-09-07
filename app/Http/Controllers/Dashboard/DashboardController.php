@@ -5,13 +5,17 @@ namespace App\Http\Controllers\Dashboard;
 use App\Enums\EnquiryStatus;
 use App\Enums\EnquiryType;
 use App\Http\Controllers\Controller;
+use App\Services\Contracts\IDashboardMetricsService;
 use App\Services\Contracts\IEnquiryService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
-    public function __construct(private IEnquiryService $enquiries) {}
+    public function __construct(
+        private IEnquiryService $enquiries,
+        private IDashboardMetricsService $metrics,
+    ) {}
 
     public function __invoke(Request $request): View
     {
@@ -32,6 +36,9 @@ class DashboardController extends Controller
         return view('dashboard.home', [
             'pendingBoards' => $boards,
             'pendingStatus' => EnquiryStatus::Pending,
+            'enquiryMetrics' => $user ? $this->metrics->enquiries($user) : null,
+            'datasheetMetrics' => $user ? $this->metrics->datasheets($user) : null,
+            'engagementMetrics' => $user ? $this->metrics->engagement($user) : null,
         ]);
     }
 }

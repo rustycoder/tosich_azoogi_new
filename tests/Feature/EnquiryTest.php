@@ -26,6 +26,11 @@ class EnquiryTest extends TestCase
     public function test_product_enquiry_is_stored_as_pending(): void
     {
         $this->from('/product-detail')
+            ->withHeaders([
+                'CF-Connecting-IP' => '203.0.113.10',
+                'CF-IPCountry' => 'AU',
+                'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            ])
             ->post('/product-enquiry', [
                 'quote-name' => 'Pat Buyer',
                 'quote-email' => 'pat@example.com',
@@ -43,7 +48,13 @@ class EnquiryTest extends TestCase
             'name' => 'Pat Buyer',
             'email' => 'pat@example.com',
             'company' => 'Summit Electrical',
+            'ip_address' => '203.0.113.10',
+            'country' => 'AU',
         ]);
+
+        $enquiry = Enquiry::query()->first();
+        $this->assertNotNull($enquiry);
+        $this->assertSame('Chrome on macOS', device_name($enquiry->user_agent));
     }
 
     public function test_admin_sees_enquiries_kanban_and_pending_counts(): void
@@ -64,7 +75,12 @@ class EnquiryTest extends TestCase
             ->assertSee('Quote Person', false)
             ->assertSee('Product Person', false)
             ->assertDontSee('Done Contact', false)
-            ->assertSeeInOrder(['>Projects</h2>', '>Quote Enquiries</h2>', '>Product Enquiries</h2>', '>Contact Enquiries</h2>'], false)
+            ->assertDontSee('>Projects</h2>', false)
+            ->assertDontSee('>Products</h2>', false)
+            ->assertDontSee('>Pages</h2>', false)
+            ->assertDontSee('>Sections</h2>', false)
+            ->assertDontSee('>Staff</h2>', false)
+            ->assertSeeInOrder(['>Quote</h2>', '>Product</h2>', '>Contact</h2>'], false)
             ->assertSee('aria-label="View all"', false)
             ->assertDontSee('>View all</a>', false)
             ->assertSeeInOrder(['>Enquiries</div>', 'Quote', 'Product', 'Contact'], false);
@@ -118,9 +134,9 @@ class EnquiryTest extends TestCase
         $this->actingAs($staff->fresh())
             ->get('/dashboard')
             ->assertOk()
-            ->assertSee('Quote Enquiries', false)
-            ->assertDontSee('Product Enquiries', false)
-            ->assertDontSee('Contact Enquiries', false);
+            ->assertSee('>Quote</h2>', false)
+            ->assertDontSee('>Product</h2>', false)
+            ->assertDontSee('>Contact</h2>', false);
     }
 
     public function test_enquiry_status_can_be_updated(): void
@@ -148,6 +164,9 @@ class EnquiryTest extends TestCase
             'name' => 'Pratik Man Joshi',
             'email' => 'pratik.man.joshi@gmail.com',
             'message' => 'Need a site visit next week.',
+            'ip_address' => '203.0.113.10',
+            'country' => 'AU',
+            'user_agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
         ]);
 
         $this->get('/dashboard/enquiries/contacts')
@@ -156,6 +175,12 @@ class EnquiryTest extends TestCase
             ->assertSee('pratik.man.joshi@gmail.com', false)
             ->assertSee('Need a site visit next week.', false)
             ->assertSee('mailto:pratik.man.joshi@gmail.com', false)
+            ->assertSee('>Country</dt>', false)
+            ->assertSee('Australia', false)
+            ->assertSee('>IP</dt>', false)
+            ->assertSee('203.0.113.10', false)
+            ->assertSee('>Device</dt>', false)
+            ->assertSee('Chrome on macOS', false)
             ->assertSee('dash-enquiry-facts', false)
             ->assertSee('dash-enquiry-note', false)
             ->assertSee('Pat Admin', false)

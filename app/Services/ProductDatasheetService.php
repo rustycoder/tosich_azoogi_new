@@ -7,6 +7,7 @@ use App\Models\ProductDatasheetExport;
 use App\Repositories\Contracts\IProductDatasheetRepository;
 use App\Repositories\Contracts\IProductRepository;
 use App\Services\Contracts\IProductDatasheetService;
+use App\Services\Contracts\IVisitorOriginService;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -34,9 +35,10 @@ class ProductDatasheetService implements IProductDatasheetService
     public function __construct(
         private IProductRepository $products,
         private IProductDatasheetRepository $exports,
+        private IVisitorOriginService $origin,
     ) {}
 
-    public function export(array $data, ?string $ipAddress = null, ?string $userAgent = null): ProductDatasheetExport
+    public function export(array $data): ProductDatasheetExport
     {
         $product = $this->products->publishedByAirtableId($data['product_id']);
 
@@ -47,6 +49,7 @@ class ProductDatasheetService implements IProductDatasheetService
         $selectedOptions = $this->stringMap($data['selected_options'] ?? []);
         $productCode = trim((string) ($data['product_code'] ?? '')) ?: (string) ($product->product_code ?? '');
         $length = isset($data['length']) && is_numeric($data['length']) ? (float) $data['length'] : null;
+        $origin = $this->origin->capture();
 
         return $this->exports->create([
             'uuid' => (string) Str::uuid(),
@@ -57,13 +60,15 @@ class ProductDatasheetService implements IProductDatasheetService
             'project_name' => mb_substr(trim($data['project_name']), 0, 191),
             'person_name' => mb_substr(trim($data['person_name']), 0, 191),
             'configuration' => $this->snapshot($product, $productCode, $selectedOptions, $length),
-            'ip_address' => $ipAddress !== null && $ipAddress !== '' ? mb_substr($ipAddress, 0, 45) : null,
-            'user_agent' => $userAgent !== null && $userAgent !== '' ? mb_substr($userAgent, 0, 191) : null,
+            'ip_address' => $origin['ip_address'],
+            'country' => $origin['country'],
+            'user_agent' => $origin['user_agent'],
         ]);
     }
 
     public function sheet(ProductDatasheetExport $export): array
     {
+        $export->loadMissing('product');
         $configuration = is_array($export->configuration) ? $export->configuration : [];
         $specifications = [];
 
@@ -87,18 +92,19 @@ class ProductDatasheetService implements IProductDatasheetService
 
         return [
             'title' => $export->product_code ?: $export->product_name,
+            'name' => (string) $export->product_name,
             'category' => (string) ($configuration['category'] ?? ''),
             'description' => (string) ($configuration['description'] ?? ''),
             'specifications' => $specifications,
-            'product_image' => media_url((string) ($configuration['product_image'] ?? '')),
-            'dimension_image' => media_url((string) ($configuration['dimension_image'] ?? '')),
+            'product_image' => $export->listingImageUrl(),
+            'dimension_image' => $this->dimensionImageUrl($export, $configuration),
             'project_name' => $export->project_name,
             'person_name' => $export->person_name,
             'reviewed_on' => $export->created_at?->timezone(config('app.timezone'))->format('d/m/Y') ?? now()->format('d/m/Y'),
             'email' => 'sales@azoogi.com',
             'phone' => '1300 641 261',
             'website' => 'www.azoogi.com.au',
-            'address' => 'Unit 47, 10-12 Girawah Place, Matraville NSW 2036',
+            'address' => 'Unit 47, 10-12 Girawah Place, Matraville, NSW, 2036',
         ];
     }
 
@@ -294,6 +300,22 @@ class ProductDatasheetService implements IProductDatasheetService
         }
 
         return $map;
+    }
+
+    /**
+     * @param  array<string, mixed>  $configuration
+     */
+    private function dimensionImageUrl(ProductDatasheetExport $export, array $configuration): string
+    {
+        $live = $export->product !== null
+            ? media_url($this->firstAsset($export->product->product_dimension))
+            : '';
+
+        if ($live !== '') {
+            return $live;
+        }
+
+        return media_url((string) ($configuration['dimension_image'] ?? ''));
     }
 
     private function firstAsset(mixed $value): string

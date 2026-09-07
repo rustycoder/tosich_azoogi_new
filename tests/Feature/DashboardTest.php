@@ -325,7 +325,12 @@ class DashboardTest extends TestCase
             'resource' => ContentResource::About,
         ]);
 
-        $this->actingAs($staff)->get('/dashboard')->assertOk()->assertSee('Pages', false)->assertDontSee('content/pages/home', false);
+        $this->actingAs($staff)->get('/dashboard')
+            ->assertOk()
+            ->assertSee('Pages', false)
+            ->assertDontSee('>Pages</h2>', false)
+            ->assertDontSee('Content tools for this account will be planned later', false)
+            ->assertDontSee('content/pages/home', false);
         $this->actingAs($staff)->get('/dashboard/content/pages')->assertOk()->assertSee('About', false)->assertDontSee('content/pages/home', false);
         $this->actingAs($staff)->get('/dashboard/content/pages/about')->assertOk();
         $this->actingAs($staff)->get('/dashboard/content/pages/home')->assertForbidden();
@@ -540,11 +545,12 @@ class DashboardTest extends TestCase
                 'Contact Enquiries',
                 'Content Management',
                 'Pages',
+                'Request a Quote',
                 'Site',
                 'Catalog',
-                'Request a Quote',
                 'Projects',
                 'Products',
+                'Datasheet',
             ], false);
     }
 

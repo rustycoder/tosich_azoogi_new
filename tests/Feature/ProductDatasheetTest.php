@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Enums\ContentResource;
+use App\Models\ContentPermission;
 use App\Models\Product;
 use App\Models\ProductDatasheetExport;
 use App\Models\User;
@@ -65,7 +67,10 @@ class ProductDatasheetTest extends TestCase
             ],
         ]);
 
-        $response = $this->postJson('/product-datasheet', [
+        $response = $this->withHeaders([
+            'CF-Connecting-IP' => '203.0.113.10',
+            'CF-IPCountry' => 'AU',
+        ])->postJson('/product-datasheet', [
             'product_id' => 'recGarden',
             'project_name' => 'White City',
             'person_name' => 'Alex Chen',
@@ -84,6 +89,8 @@ class ProductDatasheetTest extends TestCase
         $this->assertSame('White City', $export->project_name);
         $this->assertSame('Alex Chen', $export->person_name);
         $this->assertSame('GL005-BLK', $export->product_code);
+        $this->assertSame('203.0.113.10', $export->ip_address);
+        $this->assertSame('AU', $export->country);
         $this->assertStringContainsString((string) $export->uuid, $response->json('url'));
 
         $this->get($response->json('url'))
@@ -94,12 +101,22 @@ class ProductDatasheetTest extends TestCase
             ->assertSee('Alex Chen', false)
             ->assertSee('SPECIFICATIONS', false)
             ->assertSee('Lighting Technical Review', false)
+            ->assertSee('Matched to Specifcation', false)
+            ->assertSee('This technical review indicates general conformity', false)
             ->assertSee('IP67', false)
             ->assertSee('2700K', false)
             ->assertSee('Black', false)
             ->assertSee('https://example.com/garden.jpg', false)
             ->assertSee('https://example.com/garden-dim.jpg', false)
-            ->assertSee('sales@azoogi.com', false);
+            ->assertSee('sales@azoogi.com', false)
+            ->assertSee('family=Open+Sans', false)
+            ->assertSee('assets/img/datasheet-logo.png', false)
+            ->assertSee('assets/logo_dark.png', false)
+            ->assertSee('assets/img/lighting-council.png', false)
+            ->assertSee('Unit 47, 10-12 Girawah Place, Matraville, NSW, 2036', false)
+            ->assertSee('class="ds-print"', false)
+            ->assertSee('aria-label="Print / Save PDF"', false)
+            ->assertDontSee('class="ds-toolbar"', false);
     }
 
     public function test_unpublished_products_cannot_export_a_datasheet(): void
@@ -129,27 +146,122 @@ class ProductDatasheetTest extends TestCase
             'project_name' => 'Harbour pavilion',
             'person_name' => 'Pat Buyer',
             'product_code' => 'GL005',
+            'ip_address' => '203.0.113.10',
+            'country' => 'AU',
+            'user_agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
         ]);
+
+        $this->actingAs($admin)
+            ->get('/dashboard')
+            ->assertOk()
+            ->assertSeeInOrder(['>Datasheet</div>', 'Exports'], false)
+            ->assertDontSee('<h2>Datasheet</h2>', false)
+            ->assertDontSee('Review generated datasheet exports.', false)
+            ->assertDontSee('Datasheet exports', false);
 
         $this->actingAs($admin)
             ->get('/dashboard/content/products')
             ->assertOk()
-            ->assertSee('Datasheet exports', false);
+            ->assertDontSee('>Datasheet exports</a>', false);
 
         $this->actingAs($admin)
-            ->get('/dashboard/content/products/datasheets')
+            ->get('/dashboard/datasheets/exports')
             ->assertOk()
-            ->assertSee('Harbour pavilion', false)
-            ->assertSee('Pat Buyer', false)
-            ->assertSee('GL005', false);
+            ->assertSee('dash-row-link-text">GL005</span>', false)
+            ->assertSee('dash-list-sub">Garden Light</p>', false)
+            ->assertSee('class="dash-list-thumb"', false)
+            ->assertSee('src="/assets/img/neon.webp"', false)
+            ->assertSee('dash-list-card-meta is-end', false)
+            ->assertSee('Exported', false)
+            ->assertSee('<strong>Pat Buyer</strong>', false)
+            ->assertSee('data-export-info', false)
+            ->assertSee('data-export-dialog', false)
+            ->assertSee('data-export-title="GL005"', false)
+            ->assertSee('data-export-sub="Garden Light"', false)
+            ->assertSee('dash-enquiry-dialog-sub', false)
+            ->assertSee('>Client name</dt>', false)
+            ->assertSee('>Project name</dt>', false)
+            ->assertSee('>Country</dt>', false)
+            ->assertSee('Australia', false)
+            ->assertSee('>IP</dt>', false)
+            ->assertSee('203.0.113.10', false)
+            ->assertSee('>Device</dt>', false)
+            ->assertSee('Chrome on macOS', false)
+            ->assertDontSee('Origin', false)
+            ->assertDontSee('Last updated', false)
+            ->assertDontSee('dash-pill is-slug', false);
     }
 
-    public function test_staff_need_products_permission_for_datasheet_exports(): void
+    public function test_export_list_thumb_follows_the_live_product_image(): void
+    {
+        $admin = User::factory()->admin()->create();
+        $product = Product::factory()->create([
+            'cover' => '',
+            'product_images' => ['https://example.com/synced.jpg'],
+        ]);
+        ProductDatasheetExport::factory()->create([
+            'product_id' => $product->id,
+            'configuration' => [
+                'product_image' => '/assets/img/neon.webp',
+            ],
+        ]);
+
+        $this->actingAs($admin)
+            ->get('/dashboard/datasheets/exports')
+            ->assertOk()
+            ->assertSee('src="https://example.com/synced.jpg"', false)
+            ->assertDontSee('src="/assets/img/neon.webp"', false);
+    }
+
+    public function test_datasheet_sheet_follows_live_product_images(): void
+    {
+        $product = Product::factory()->create([
+            'cover' => '',
+            'product_images' => ['https://example.com/synced.jpg'],
+            'product_dimension' => ['https://example.com/synced-dim.jpg'],
+        ]);
+        $export = ProductDatasheetExport::factory()->create([
+            'product_id' => $product->id,
+            'configuration' => [
+                'product_image' => '/assets/img/neon.webp',
+                'dimension_image' => '/assets/img/old-dim.webp',
+                'specifications' => [],
+            ],
+        ]);
+
+        $this->get(route('products.datasheet.show', $export))
+            ->assertOk()
+            ->assertSee('https://example.com/synced.jpg', false)
+            ->assertSee('https://example.com/synced-dim.jpg', false)
+            ->assertDontSee('/assets/img/neon.webp', false)
+            ->assertDontSee('/assets/img/old-dim.webp', false);
+    }
+
+    public function test_staff_need_datasheet_permission_for_exports(): void
     {
         $staff = User::factory()->staff()->create();
 
         $this->actingAs($staff)
-            ->get('/dashboard/content/products/datasheets')
+            ->get('/dashboard/datasheets/exports')
             ->assertForbidden();
+
+        ContentPermission::query()->create([
+            'user_id' => $staff->id,
+            'resource' => ContentResource::Products,
+        ]);
+
+        $this->actingAs($staff->fresh())
+            ->get('/dashboard/datasheets/exports')
+            ->assertForbidden();
+
+        ContentPermission::query()->create([
+            'user_id' => $staff->id,
+            'resource' => ContentResource::Datasheet,
+        ]);
+
+        $this->actingAs($staff->fresh())
+            ->get('/dashboard')
+            ->assertOk()
+            ->assertSeeInOrder(['>Datasheet</div>', 'Exports'], false);
     }
 }

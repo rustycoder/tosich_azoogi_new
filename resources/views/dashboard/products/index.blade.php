@@ -7,7 +7,6 @@
     <div class="dash-head-title">
         <h1>Products</h1>
         <div class="dash-head-actions">
-            <a class="btn secondary" href="{{ route('dashboard.products.datasheets') }}">Datasheet exports</a>
             <form id="dash-product-sync-form" method="post" action="{{ route('dashboard.products.sync') }}" data-stream-url="{{ route('dashboard.products.sync.stream') }}">
                 @csrf
                 <button id="dash-product-sync-btn" class="btn primary" type="submit">

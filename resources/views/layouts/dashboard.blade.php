@@ -84,6 +84,13 @@
                     </a>
                 @endif
             @endif
+            @if ($canManageDatasheets)
+                <div class="dash-group">Datasheet</div>
+                <a href="{{ route('dashboard.datasheets.exports') }}" class="{{ request()->routeIs('dashboard.datasheets.*') ? 'is-active' : '' }}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>
+                    Exports
+                </a>
+            @endif
             @if ($isAdmin)
                 <div class="dash-group">Administration</div>
                 <a href="{{ route('dashboard.staff.index') }}" class="{{ request()->routeIs('dashboard.staff.*') ? 'is-active' : '' }}">

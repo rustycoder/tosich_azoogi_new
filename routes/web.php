@@ -51,9 +51,13 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
 
     Route::middleware('can.manage:products')->group(function () {
         Route::get('content/products', [ProductController::class, 'index'])->name('products.index');
-        Route::get('content/products/datasheets', [ProductDatasheetExportController::class, 'index'])->name('products.datasheets');
         Route::post('content/products/sync', [ProductController::class, 'sync'])->name('products.sync');
         Route::match(['get', 'post'], 'content/products/sync/stream', [ProductController::class, 'syncStream'])->name('products.sync.stream');
+    });
+
+    Route::middleware('can.manage:datasheet')->group(function () {
+        Route::get('datasheets/exports', [ProductDatasheetExportController::class, 'index'])->name('datasheets.exports');
+        Route::redirect('content/products/datasheets', '/dashboard/datasheets/exports');
     });
 
     Route::middleware('can.manage:projects')->group(function () {

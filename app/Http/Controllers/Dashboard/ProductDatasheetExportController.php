@@ -15,7 +15,7 @@ class ProductDatasheetExportController extends Controller
     {
         $search = dash_search_query($request->query('q'));
 
-        return view('dashboard.products.datasheets', [
+        return view('dashboard.datasheets.exports', [
             'exports' => $this->datasheets->dashboardList($search),
             'search' => $search,
         ]);

@@ -17,11 +17,12 @@ interface IProductDatasheetService
      *     length?: int|float|string|null
      * }  $data
      */
-    public function export(array $data, ?string $ipAddress = null, ?string $userAgent = null): ProductDatasheetExport;
+    public function export(array $data): ProductDatasheetExport;
 
     /**
      * @return array{
      *     title: string,
+     *     name: string,
      *     category: string,
      *     description: string,
      *     specifications: list<array{label: string, value: string}>,

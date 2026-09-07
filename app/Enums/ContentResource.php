@@ -27,6 +27,7 @@ enum ContentResource: string
     case RequestAQuote = 'request-a-quote';
     case Projects = 'projects';
     case Products = 'products';
+    case Datasheet = 'datasheet';
     case QuoteEnquiries = 'quote-enquiries';
     case ProductEnquiries = 'product-enquiries';
     case ContactEnquiry = 'contact-enquiry';
@@ -57,6 +58,7 @@ enum ContentResource: string
             self::RequestAQuote => 'Request a Quote',
             self::Projects => 'Projects',
             self::Products => 'Products',
+            self::Datasheet => 'Datasheet',
             self::QuoteEnquiries => 'Quote Enquiries',
             self::ProductEnquiries => 'Product Enquiries',
             self::ContactEnquiry => 'Contact Enquiries',
@@ -78,7 +80,7 @@ enum ContentResource: string
 
     public function isPage(): bool
     {
-        return ! $this->isSection() && ! $this->isEnquiry() && $this !== self::Products;
+        return ! $this->isSection() && ! $this->isEnquiry() && $this !== self::Products && $this !== self::Datasheet;
     }
 
     /**
@@ -107,7 +109,7 @@ enum ContentResource: string
                 $enquiries[] = $resource;
             } elseif ($resource->isSection()) {
                 $site[] = $resource;
-            } elseif (in_array($resource, [self::RequestAQuote, self::Projects, self::Products], true)) {
+            } elseif (in_array($resource, [self::Projects, self::Products, self::Datasheet], true)) {
                 $catalog[] = $resource;
             } else {
                 $pages[] = $resource;

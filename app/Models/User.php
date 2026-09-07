@@ -146,6 +146,11 @@ class User extends Authenticatable
         return $this->canManage(ContentResource::Products->value);
     }
 
+    public function canManageDatasheets(): bool
+    {
+        return $this->canManage(ContentResource::Datasheet->value);
+    }
+
     public function canManageQuoteEnquiries(): bool
     {
         return $this->canManage(ContentResource::QuoteEnquiries->value);

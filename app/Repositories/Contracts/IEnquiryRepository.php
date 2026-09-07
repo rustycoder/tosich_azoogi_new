@@ -22,4 +22,19 @@ interface IEnquiryRepository
     public function save(Enquiry $enquiry): void;
 
     public function delete(Enquiry $enquiry): void;
+
+    /**
+     * @param  list<EnquiryType>  $types
+     * @return array{
+     *     countries: Collection<int, object>,
+     *     user_agents: Collection<int, object>
+     * }
+     */
+    public function originBuckets(array $types): array;
+
+    /**
+     * @param  list<EnquiryType>  $types
+     * @return array<int, int>
+     */
+    public function monthlyCounts(array $types, int $year): array;
 }

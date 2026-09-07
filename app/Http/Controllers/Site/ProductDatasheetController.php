@@ -15,11 +15,7 @@ class ProductDatasheetController extends Controller
 
     public function store(StoreProductDatasheetRequest $request): JsonResponse
     {
-        $export = $this->datasheets->export(
-            $request->validated(),
-            $request->ip(),
-            $request->userAgent(),
-        );
+        $export = $this->datasheets->export($request->validated());
 
         return response()->json([
             'url' => route('products.datasheet.show', [

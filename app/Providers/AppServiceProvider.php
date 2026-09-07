@@ -18,6 +18,7 @@ use App\Repositories\ProductDatasheetRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\ProjectRepository;
 use App\Repositories\UserRepository;
+use App\Services\Contracts\IDashboardMetricsService;
 use App\Services\Contracts\IEnquiryService;
 use App\Services\Contracts\ILedCalculatorService;
 use App\Services\Contracts\IPageService;
@@ -26,6 +27,8 @@ use App\Services\Contracts\IProductSyncService;
 use App\Services\Contracts\IProfileService;
 use App\Services\Contracts\IProjectService;
 use App\Services\Contracts\IStaffService;
+use App\Services\Contracts\IVisitorOriginService;
+use App\Services\DashboardMetricsService;
 use App\Services\EnquiryService;
 use App\Services\LedCalculatorService;
 use App\Services\PageService;
@@ -34,6 +37,7 @@ use App\Services\ProductSyncService;
 use App\Services\ProfileService;
 use App\Services\ProjectService;
 use App\Services\StaffService;
+use App\Services\VisitorOriginService;
 use App\Support\PageMetaBag;
 use App\ThirdParty\Airtable\AirtableClient;
 use App\ThirdParty\Airtable\Contracts\IAirtableClient;
@@ -60,8 +64,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IProfileService::class, ProfileService::class);
         $this->app->bind(IProductSyncService::class, ProductSyncService::class);
         $this->app->bind(IEnquiryService::class, EnquiryService::class);
+        $this->app->bind(IDashboardMetricsService::class, DashboardMetricsService::class);
         $this->app->bind(ILedCalculatorService::class, LedCalculatorService::class);
         $this->app->bind(IProductDatasheetService::class, ProductDatasheetService::class);
+        $this->app->bind(IVisitorOriginService::class, VisitorOriginService::class);
     }
 
     public function boot(): void
@@ -77,6 +83,7 @@ class AppServiceProvider extends ServiceProvider
                 'canManagePages' => $user?->canManagePages() ?? false,
                 'canManageProjects' => $user?->canManageProjects() ?? false,
                 'canManageProducts' => $user?->canManageProducts() ?? false,
+                'canManageDatasheets' => $user?->canManageDatasheets() ?? false,
                 'canManageQuoteEnquiries' => $user?->canManageQuoteEnquiries() ?? false,
                 'canManageProductEnquiries' => $user?->canManageProductEnquiries() ?? false,
                 'canManageContactEnquiries' => $user?->canManageContactEnquiries() ?? false,
