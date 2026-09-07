@@ -1,9 +1,7 @@
 @php
     $rows = $enquiry->detailRows();
-    $originLabels = ['Country', 'IP', 'Device'];
-    $facts = array_values(array_filter($rows, fn (array $row): bool => ! $row['wide'] && ! in_array($row['label'], $originLabels, true)));
+    $facts = array_values(array_filter($rows, fn (array $row): bool => ! $row['wide']));
     $notes = array_values(array_filter($rows, fn (array $row): bool => $row['wide']));
-    $origin = array_values(array_filter($rows, fn (array $row): bool => in_array($row['label'], $originLabels, true)));
     $updatedAt = $enquiry->updated_at?->timezone(config('app.timezone'));
 @endphp
 <article
@@ -41,6 +39,5 @@
                 <p>{{ $row['value'] }}</p>
             </section>
         @endforeach
-        @include('dashboard.enquiries._facts', ['rows' => $origin])
     </template>
 </article>

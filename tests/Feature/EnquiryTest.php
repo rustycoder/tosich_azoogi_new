@@ -191,10 +191,10 @@ class EnquiryTest extends TestCase
             ->assertDontSee('dash-kanban-preview', false)
             ->getContent();
 
-        $this->assertGreaterThan(
+        $this->assertLessThan(
             strpos($html, 'Need a site visit next week.'),
             strpos($html, '>Country</dt>'),
-            'Country, IP, and Device should render after the message so they stay visible on mobile.'
+            'Country, IP, and Device should stay with the other facts, before the message.'
         );
     }
 
