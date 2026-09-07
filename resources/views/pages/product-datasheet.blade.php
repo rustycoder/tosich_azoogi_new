@@ -82,8 +82,8 @@
                                 <div class="box" role="checkbox" aria-checked="false" aria-label="Minor variations"></div>
                             </div>
                         </section>
-                        <section class="row line">Checked By: <span>{{ $sheet['person_name'] }}</span></section>
-                        <section class="row line">Date: <span>{{ $sheet['reviewed_on'] }}</span></section>
+                        <section class="row line">Checked By: <span></span></section>
+                        <section class="row line">Date: <span></span></section>
                         <section class="row notes">
                             <ul>
                                 <li>This technical review indicates general conformity with the project design intent only.</li>
