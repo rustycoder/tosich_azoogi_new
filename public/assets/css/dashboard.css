@@ -1436,19 +1436,63 @@ button.dash-pill:disabled {
 
 .dash-home-boards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 20px;
   align-items: stretch;
-  height: min(480px, 58vh);
 }
 
-.dash-home-boards .dash-kanban-col {
-  height: 100%;
+.dash-home-board {
+  min-height: 0;
 }
 
-.dash-home-boards .dash-kanban-col-head h2 {
+.dash-home-board .dash-metric-title {
   flex: 1;
   min-width: 0;
+}
+
+.dash-home-board-body {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  min-height: 0;
+  max-height: 280px;
+  overflow: auto;
+}
+
+.dash-home-board-body .dash-kanban-card {
+  padding: 10px 12px;
+  background: #f6f8f4;
+  border: 1px solid transparent;
+  border-radius: 10px;
+}
+
+.dash-home-board-body .dash-kanban-card:hover {
+  background: #fff;
+  border-color: var(--dash-line);
+}
+
+.dash-home-board-body .dash-kanban-card-open {
+  gap: 3px;
+  padding: 0;
+}
+
+.dash-home-board-body .dash-kanban-card-open strong {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+}
+
+.dash-home-board-body .dash-kanban-email,
+.dash-home-board-body .dash-kanban-when {
+  font-size: 12px;
+}
+
+.dash-home-board-body .dash-kanban-empty {
+  padding: 16px 0 4px;
+}
+
+.dash-home-board-body:has([data-enquiry-id]) .dash-kanban-empty {
+  display: none;
 }
 
 .dash-metrics {
@@ -2100,10 +2144,12 @@ code {
 
 .dash-kanban-col-head h2 {
   margin: 0;
-  font-size: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -.02em;
 }
 
-.dash-kanban-col-head span {
+.dash-kanban-count {
   min-width: 24px;
   height: 24px;
   padding: 0 8px;
@@ -2438,10 +2484,6 @@ code {
   .dash-kanban,
   .dash-metrics {
     grid-template-columns: 1fr;
-  }
-
-  .dash-home-boards {
-    height: auto;
   }
 
   .dash-kanban-col {

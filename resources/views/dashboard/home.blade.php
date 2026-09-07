@@ -93,10 +93,12 @@
     @if ($pendingBoards !== [])
         <div class="dash-home-boards" data-enquiry-kanban data-pending-only>
             @foreach ($pendingBoards as $board)
-                <section class="dash-kanban-col is-pending" data-kanban-col aria-labelledby="dash-home-board-{{ $board['type']->value }}">
-                    <header class="dash-kanban-col-head">
-                        <h2 id="dash-home-board-{{ $board['type']->value }}">{{ $board['type']->menuLabel() }}</h2>
-                        <span data-kanban-count>{{ $board['enquiries']->count() }}</span>
+                <article class="dash-metric-card dash-home-board" data-kanban-col aria-labelledby="dash-home-board-{{ $board['type']->value }}">
+                    <header class="dash-metric-head">
+                        <div class="dash-metric-title">
+                            <h2 id="dash-home-board-{{ $board['type']->value }}">{{ $board['type']->menuLabel() }}</h2>
+                            <span class="dash-kanban-count" data-kanban-count>{{ $board['enquiries']->count() }}</span>
+                        </div>
                         <a
                             class="dash-row-link-icon"
                             href="{{ route('dashboard.enquiries.index', ['type' => $board['type']->menuSlug()]) }}"
@@ -106,7 +108,7 @@
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
                         </a>
                     </header>
-                    <div class="dash-kanban-col-body" data-status="{{ $pendingStatus->value }}">
+                    <div class="dash-home-board-body" data-status="{{ $pendingStatus->value }}">
                         @foreach ($board['enquiries'] as $enquiry)
                             @include('dashboard.enquiries._card', [
                                 'enquiry' => $enquiry,
@@ -116,7 +118,7 @@
                         @endforeach
                         <p class="dash-kanban-empty">No pending cards.</p>
                     </div>
-                </section>
+                </article>
             @endforeach
         </div>
 

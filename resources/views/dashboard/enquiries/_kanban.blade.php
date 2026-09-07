@@ -13,7 +13,7 @@
         <section class="dash-kanban-col is-{{ $status->value }}" data-kanban-col aria-labelledby="kanban-{{ $kanbanId }}-{{ $status->value }}">
             <header class="dash-kanban-col-head">
                 <h2 id="kanban-{{ $kanbanId }}-{{ $status->value }}">{{ $status->label() }}</h2>
-                <span data-kanban-count>{{ $enquiries->count() }}</span>
+                <span class="dash-kanban-count" data-kanban-count>{{ $enquiries->count() }}</span>
             </header>
             <div class="dash-kanban-col-body" data-kanban-drop data-status="{{ $status->value }}">
                 @foreach ($enquiries as $enquiry)
