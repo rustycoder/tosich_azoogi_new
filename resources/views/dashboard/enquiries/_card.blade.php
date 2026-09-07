@@ -1,7 +1,9 @@
 @php
     $rows = $enquiry->detailRows();
-    $facts = array_values(array_filter($rows, fn (array $row): bool => ! $row['wide']));
+    $originLabels = ['Country', 'IP', 'Device'];
+    $facts = array_values(array_filter($rows, fn (array $row): bool => ! $row['wide'] && ! in_array($row['label'], $originLabels, true)));
     $notes = array_values(array_filter($rows, fn (array $row): bool => $row['wide']));
+    $origin = array_values(array_filter($rows, fn (array $row): bool => in_array($row['label'], $originLabels, true)));
     $updatedAt = $enquiry->updated_at?->timezone(config('app.timezone'));
 @endphp
 <article
@@ -32,27 +34,13 @@
             <span class="dash-pill is-{{ $status->value }}" data-enquiry-status>{{ $status->label() }}</span>
             @include('dashboard.enquiries._updated', ['enquiry' => $enquiry, 'updatedAt' => $updatedAt])
         </div>
-        @if ($facts !== [])
-            <dl class="dash-enquiry-facts">
-                @foreach ($facts as $row)
-                    <div>
-                        <dt>{{ $row['label'] }}</dt>
-                        <dd>
-                            @if ($row['href'])
-                                <a href="{{ $row['href'] }}">{{ $row['value'] }}</a>
-                            @else
-                                {{ $row['value'] }}
-                            @endif
-                        </dd>
-                    </div>
-                @endforeach
-            </dl>
-        @endif
+        @include('dashboard.enquiries._facts', ['rows' => $facts])
         @foreach ($notes as $row)
             <section class="dash-enquiry-note">
                 <h3>{{ $row['label'] }}</h3>
                 <p>{{ $row['value'] }}</p>
             </section>
         @endforeach
+        @include('dashboard.enquiries._facts', ['rows' => $origin])
     </template>
 </article>

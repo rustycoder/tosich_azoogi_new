@@ -164,7 +164,7 @@ class EnquiryTest extends TestCase
             'user_agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
         ]);
 
-        $this->get('/dashboard/enquiries/contacts')
+        $html = $this->get('/dashboard/enquiries/contacts')
             ->assertOk()
             ->assertSee('Pratik Man Joshi', false)
             ->assertSee('pratik.man.joshi@gmail.com', false)
@@ -188,7 +188,14 @@ class EnquiryTest extends TestCase
             ->assertSee('data-status-labels', false)
             ->assertSee('data-enquiry-status', false)
             ->assertDontSee('>Name</dt>', false)
-            ->assertDontSee('dash-kanban-preview', false);
+            ->assertDontSee('dash-kanban-preview', false)
+            ->getContent();
+
+        $this->assertGreaterThan(
+            strpos($html, 'Need a site visit next week.'),
+            strpos($html, '>Country</dt>'),
+            'Country, IP, and Device should render after the message so they stay visible on mobile.'
+        );
     }
 
     public function test_enquiry_can_be_deleted(): void
