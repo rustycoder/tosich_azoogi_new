@@ -8,7 +8,7 @@ final class ProductNormalizer
      * @param  list<array{id: string, fields: array<string, mixed>}>  $products
      * @param  list<array{id: string, fields: array<string, mixed>}>  $categories
      * @param  list<array{id: string, fields: array<string, mixed>}>  $attributes
-     * @return array{categories: list<string>, products: list<array<string, mixed>>, tree: list<array<string, mixed>>, filterable_attributes: list<string>, attribute_values_order: array<string, list<string>>}
+     * @return array{categories: list<string>, products: list<array<string, mixed>>, tree: list<array<string, mixed>>, filterable_attributes: list<string>, attribute_groups_order: list<string>, attribute_values_order: array<string, list<string>>}
      */
     public function compile(array $products, array $categories, array $attributes): array
     {
@@ -16,6 +16,7 @@ final class ProductNormalizer
         [$categoryNames, $tree] = $this->buildCategoryTree($categories, $compiled);
 
         $filterableAttributes = [];
+        $attributeGroupsOrder = [];
         $attributeValuesOrder = [];
 
         foreach ($attributes as $attr) {
@@ -38,6 +39,10 @@ final class ProductNormalizer
                 $filterableAttributes[] = $name;
             }
 
+            if ($name !== '' && ! in_array($name, $attributeGroupsOrder, true)) {
+                $attributeGroupsOrder[] = $name;
+            }
+
             if ($name !== '' && $val !== '') {
                 $attributeValuesOrder[$name] ??= [];
                 if (! in_array($val, $attributeValuesOrder[$name], true)) {
@@ -51,6 +56,7 @@ final class ProductNormalizer
             'products' => $compiled,
             'tree' => $tree,
             'filterable_attributes' => $filterableAttributes,
+            'attribute_groups_order' => $attributeGroupsOrder,
             'attribute_values_order' => $attributeValuesOrder,
         ];
     }
@@ -176,9 +182,10 @@ final class ProductNormalizer
      * @param  list<array{id: string, fields: array<string, mixed>}>  $categories
      * @param  list<string>  $filterableAttributes
      * @param  array<string, list<string>>  $attributeValuesOrder
-     * @return array{categories: list<string>, products: list<array<string, mixed>>, tree: list<array<string, mixed>>, filterable_attributes: list<string>, attribute_values_order: array<string, list<string>>}
+     * @param  list<string>  $attributeGroupsOrder
+     * @return array{categories: list<string>, products: list<array<string, mixed>>, tree: list<array<string, mixed>>, filterable_attributes: list<string>, attribute_groups_order: list<string>, attribute_values_order: array<string, list<string>>}
      */
-    public function fromStored(array $products, array $categories, array $filterableAttributes = [], array $attributeValuesOrder = []): array
+    public function fromStored(array $products, array $categories, array $filterableAttributes = [], array $attributeValuesOrder = [], array $attributeGroupsOrder = []): array
     {
         [$categoryNames, $tree] = $this->buildCategoryTree($categories, $products);
 
@@ -187,6 +194,7 @@ final class ProductNormalizer
             'products' => $products,
             'tree' => $tree,
             'filterable_attributes' => $filterableAttributes,
+            'attribute_groups_order' => $attributeGroupsOrder,
             'attribute_values_order' => $attributeValuesOrder,
         ];
     }

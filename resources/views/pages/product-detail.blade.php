@@ -993,13 +993,68 @@
                     });
                 }
 
+                // Helper to sort configurator option groups using Airtable Product Attributes order
+                function getOrderedOptionKeys(options) {
+                    const rawKeys = Object.keys(options).filter(k => Array.isArray(options[k]) && options[k].length > 0);
+                    if (typeof AZOOGI_PRODUCTS !== 'undefined' && Array.isArray(AZOOGI_PRODUCTS.attribute_groups_order || AZOOGI_PRODUCTS.filterable_attributes)) {
+                        const masterOrder = AZOOGI_PRODUCTS.attribute_groups_order || AZOOGI_PRODUCTS.filterable_attributes;
+                        const orderMap = {};
+                        masterOrder.forEach((name, idx) => {
+                            orderMap[String(name).trim().toLowerCase()] = idx;
+                        });
+                        return rawKeys.slice().sort((a, b) => {
+                            const aIdx = orderMap.hasOwnProperty(a.trim().toLowerCase()) ? orderMap[a.trim().toLowerCase()] : 999999;
+                            const bIdx = orderMap.hasOwnProperty(b.trim().toLowerCase()) ? orderMap[b.trim().toLowerCase()] : 999999;
+                            if (aIdx !== bIdx) return aIdx - bIdx;
+                            return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
+                        });
+                    }
+                    return rawKeys;
+                }
+
+                // Helper to sort configurator option values (buttons) using Airtable Product Attributes term order
+                function sortConfigOptionValues(groupKey, valList) {
+                    if (!Array.isArray(valList)) return [];
+                    let orderMap = null;
+                    if (typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS.attribute_values_order) {
+                        const targetLower = String(groupKey).trim().toLowerCase();
+                        for (const k in AZOOGI_PRODUCTS.attribute_values_order) {
+                            if (k.trim().toLowerCase() === targetLower) {
+                                const list = AZOOGI_PRODUCTS.attribute_values_order[k];
+                                if (Array.isArray(list)) {
+                                    orderMap = {};
+                                    list.forEach((val, idx) => {
+                                        orderMap[String(val).trim().toLowerCase()] = idx;
+                                    });
+                                }
+                                break;
+                            }
+                        }
+                    }
+
+                    return valList.slice().sort((a, b) => {
+                        const aName = String(a.name || '').trim();
+                        const bName = String(b.name || '').trim();
+                        const aLower = aName.toLowerCase();
+                        const bLower = bName.toLowerCase();
+
+                        if (orderMap) {
+                            const aIdx = orderMap.hasOwnProperty(aLower) ? orderMap[aLower] : 999999;
+                            const bIdx = orderMap.hasOwnProperty(bLower) ? orderMap[bLower] : 999999;
+                            if (aIdx !== bIdx) return aIdx - bIdx;
+                        }
+
+                        return aName.localeCompare(bName, undefined, { numeric: true, sensitivity: 'base' });
+                    });
+                }
+
                 // Render Configurator Options
                 function renderConfigurator() {
                     const configuratorWrapper = document.getElementById('dynamic-configurator');
                     const summaryCard = document.querySelector('.config-summary-card');
                     const optionsGridLayout = document.querySelector('.options-grid-layout');
                     const options = product.options || {};
-                    const optionKeys = Object.keys(options).filter(k => Array.isArray(options[k]) && options[k].length > 0);
+                    const optionKeys = getOrderedOptionKeys(options);
 
                     if (optionKeys.length === 0) {
                         if (configuratorWrapper) {
@@ -1035,11 +1090,9 @@
 
                     const features = product.product_features || {};
 
-                    for (const optKey in options) {
-                        if (!options.hasOwnProperty(optKey)) continue;
-
-                        const optVals = options[optKey];
-                        if (!Array.isArray(optVals) || optVals.length === 0) continue;
+                    optionKeys.forEach(optKey => {
+                        const optVals = sortConfigOptionValues(optKey, options[optKey]);
+                        if (!Array.isArray(optVals) || optVals.length === 0) return;
                         const safeKey = optKey.replace(/[^a-zA-Z0-9_-]/g, '-');
                         const group = document.createElement('div');
                         group.className = 'config-group';

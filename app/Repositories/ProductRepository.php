@@ -245,6 +245,15 @@ class ProductRepository implements IProductRepository
             ->values()
             ->all();
 
+        $attributeGroupsOrder = ProductAttribute::query()
+            ->orderByRaw('sort_order is null')
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->pluck('name')
+            ->unique()
+            ->values()
+            ->all();
+
         $attributesList = ProductAttribute::query()
             ->whereNotNull('value')
             ->where('value', '!=', '')
@@ -265,7 +274,7 @@ class ProductRepository implements IProductRepository
             }
         }
 
-        return $this->normalizer->fromStored($products, $categories, $filterableAttributes, $attributeValuesOrder);
+        return $this->normalizer->fromStored($products, $categories, $filterableAttributes, $attributeValuesOrder, $attributeGroupsOrder);
     }
 
     public function dashboardList(string $search = ''): LengthAwarePaginator
