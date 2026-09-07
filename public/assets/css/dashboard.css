@@ -2486,6 +2486,11 @@ code {
     grid-template-columns: 1fr;
   }
 
+  .dash-metric-axis.is-x,
+  .dash-metric-axis.is-y {
+    font-size: 10px;
+  }
+
   .dash-kanban-col {
     height: auto;
     min-height: 280px;
