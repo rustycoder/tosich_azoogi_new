@@ -151,6 +151,8 @@ class ProductRepository implements IProductRepository
                 ?? false
             );
 
+            $orderRaw = $fields['Order'] ?? $fields['order'] ?? $fields['Sort Order'] ?? $fields['Sort order'] ?? $fields['sort_order'] ?? null;
+
             $attributeRows[$airtableId] = [
                 'airtable_id' => $airtableId,
                 'name' => $name !== '' ? mb_substr($name, 0, 191) : 'Attribute',
@@ -158,7 +160,7 @@ class ProductRepository implements IProductRepository
                 'icon' => $this->storedAssetPath(
                     $fields['Attribute Icon'] ?? $fields['Attribute_Icon'] ?? $fields['Attribute icon'] ?? $fields['Icon'] ?? null,
                 ),
-                'sort_order' => isset($fields['Order']) && is_numeric($fields['Order']) ? (int) $fields['Order'] : null,
+                'sort_order' => $orderRaw !== null && is_numeric($orderRaw) ? (int) $orderRaw : null,
                 'is_visible_on_filters' => $isVisibleOnFilters,
                 'created_by' => $userId,
                 'updated_by' => $userId,
@@ -243,7 +245,36 @@ class ProductRepository implements IProductRepository
             ->values()
             ->all();
 
-        return $this->normalizer->fromStored($products, $categories, $filterableAttributes);
+        $attributeGroupsOrder = ProductAttribute::query()
+            ->orderByRaw('sort_order is null')
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->pluck('name')
+            ->unique()
+            ->values()
+            ->all();
+
+        $attributesList = ProductAttribute::query()
+            ->whereNotNull('value')
+            ->where('value', '!=', '')
+            ->orderByRaw('sort_order is null')
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get(['name', 'value', 'sort_order']);
+
+        $attributeValuesOrder = [];
+        foreach ($attributesList as $attr) {
+            $attrName = trim($attr->name);
+            $attrVal = trim((string) $attr->value);
+            if ($attrName !== '' && $attrVal !== '') {
+                $attributeValuesOrder[$attrName] ??= [];
+                if (! in_array($attrVal, $attributeValuesOrder[$attrName], true)) {
+                    $attributeValuesOrder[$attrName][] = $attrVal;
+                }
+            }
+        }
+
+        return $this->normalizer->fromStored($products, $categories, $filterableAttributes, $attributeValuesOrder, $attributeGroupsOrder);
     }
 
     public function dashboardList(string $search = ''): LengthAwarePaginator
