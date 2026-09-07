@@ -1,9 +1,12 @@
 @php
     /** @var array{country: list<array{label: string, percent: int, color: string}>, device: list<array{label: string, percent: int, color: string}>} $metrics */
+    /** @var string $title */
+    /** @var string $icon */
 @endphp
-<article class="dash-metric-card" data-metric>
+<article class="dash-metric-card dash-share-card" data-metric>
     <header class="dash-metric-head">
         <div class="dash-metric-title">
+            @include('dashboard.partials.share-mark', ['icon' => $icon])
             <h2>{{ $title }}</h2>
         </div>
         <div class="dash-metric-switch" role="tablist" aria-label="{{ $title }} breakdown">

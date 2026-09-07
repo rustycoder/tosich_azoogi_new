@@ -1522,13 +1522,6 @@ button.dash-pill:disabled {
   margin: 0;
 }
 
-.dash-metric-title {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 10px;
-}
-
 .dash-metric-year {
   display: inline-flex;
   align-items: center;
@@ -1610,12 +1603,13 @@ button.dash-pill:disabled {
 .dash-metric-card {
   display: grid;
   align-content: start;
-  gap: 16px;
+  gap: 0;
   min-width: 0;
   background: var(--dash-card);
   border: 1px solid var(--dash-line);
   border-radius: 14px;
-  padding: 18px 20px 20px;
+  padding: 0;
+  overflow: hidden;
 }
 
 .dash-metric-head {
@@ -1625,8 +1619,9 @@ button.dash-pill:disabled {
   justify-content: space-between;
   gap: 10px 16px;
   min-height: 32px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--dash-line);
+  padding: 16px 18px 28px;
+  border-bottom: 0;
+  background: linear-gradient(180deg, #f5faf2 0%, #fff 72%);
 }
 
 .dash-metric-head h2 {
@@ -1634,6 +1629,36 @@ button.dash-pill:disabled {
   font-size: 15px;
   font-weight: 600;
   letter-spacing: -.02em;
+}
+
+.dash-metric-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  min-width: 0;
+}
+
+.dash-share-mark {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #e4f6de;
+  color: #1f6a18;
+}
+
+.dash-share-mark svg {
+  width: 17px;
+  height: 17px;
+}
+
+.dash-metric-card > .dash-metric-body,
+.dash-home-board-body,
+.dash-metric-card > .dash-lead {
+  padding: 4px 16px 18px;
 }
 
 .dash-metric-switch {
@@ -1739,6 +1764,61 @@ button.dash-pill:disabled {
   text-align: center;
   background: #f6f8f4;
   border-radius: 12px;
+}
+
+.dash-share-card .dash-metric-bars {
+  gap: 8px;
+}
+
+.dash-share-card .dash-metric-bars li {
+  gap: 8px;
+  padding: 11px 12px;
+  border-radius: 12px;
+  background: #f7f9f5;
+}
+
+.dash-share-card .dash-metric-bars li:first-child {
+  background: #f1f8ee;
+}
+
+.dash-share-card .dash-metric-bar-meta {
+  align-items: center;
+  gap: 10px;
+}
+
+.dash-share-card .dash-metric-bar-dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--bar, var(--dash-green));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--bar, var(--dash-green)) 16%, transparent);
+}
+
+.dash-share-card .dash-metric-bar-label {
+  flex: 1;
+}
+
+.dash-share-card .dash-metric-bar-value {
+  padding: 3px 8px;
+  border: 1px solid #d7ead0;
+  border-radius: 999px;
+  background: #fff;
+  color: #1f6a18;
+  font-size: 12px;
+}
+
+.dash-share-card .dash-metric-bar-track {
+  height: 8px;
+  background: #e7eee6;
+}
+
+.dash-share-card .dash-metric-bar-fill {
+  background: linear-gradient(
+    90deg,
+    var(--bar, var(--dash-green)),
+    color-mix(in srgb, var(--bar, var(--dash-green)) 72%, #fff)
+  );
 }
 
 .dash-top-products-grid {

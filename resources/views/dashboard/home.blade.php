@@ -65,25 +65,27 @@
         @include('dashboard.partials.engagement-metrics', ['metrics' => $engagementMetrics])
     @endif
 
-    @if ($topProductMetrics !== null)
-        @include('dashboard.partials.top-products', ['rows' => $topProductMetrics])
-    @endif
-
     @if ($visitedPageMetrics !== null || $visitedCountryMetrics !== null)
         <div class="dash-metrics">
             @if ($visitedPageMetrics !== null)
                 @include('dashboard.partials.rank-metrics', [
                     'title' => 'Most Visited Pages',
+                    'icon' => 'pages',
                     'rows' => $visitedPageMetrics,
                 ])
             @endif
             @if ($visitedCountryMetrics !== null)
                 @include('dashboard.partials.rank-metrics', [
-                    'title' => 'Most Visited Countries',
+                    'title' => 'Visitors by Country',
+                    'icon' => 'globe',
                     'rows' => $visitedCountryMetrics,
                 ])
             @endif
         </div>
+    @endif
+
+    @if ($topProductMetrics !== null)
+        @include('dashboard.partials.top-products', ['rows' => $topProductMetrics])
     @endif
 
     @if ($enquiryMetrics !== null || $datasheetMetrics !== null)
@@ -91,12 +93,14 @@
             @if ($enquiryMetrics !== null)
                 @include('dashboard.partials.origin-metrics', [
                     'title' => 'Enquiries Metrics',
+                    'icon' => 'enquiries',
                     'metrics' => $enquiryMetrics,
                 ])
             @endif
             @if ($datasheetMetrics !== null)
                 @include('dashboard.partials.origin-metrics', [
                     'title' => 'Datasheet Metrics',
+                    'icon' => 'datasheets',
                     'metrics' => $datasheetMetrics,
                 ])
             @endif
@@ -117,6 +121,7 @@
                 <article class="dash-metric-card dash-home-board" data-kanban-col aria-labelledby="dash-home-board-{{ $board['type']->value }}">
                     <header class="dash-metric-head">
                         <div class="dash-metric-title">
+                            @include('dashboard.partials.share-mark', ['icon' => $board['type']->value])
                             <h2 id="dash-home-board-{{ $board['type']->value }}">{{ $board['type']->menuLabel() }}</h2>
                             <span class="dash-kanban-count" data-kanban-count>{{ $board['enquiries']->count() }}</span>
                         </div>

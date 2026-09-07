@@ -4,6 +4,7 @@
 <article class="dash-metric-card is-wide dash-top-products">
     <header class="dash-metric-head">
         <div class="dash-metric-title">
+            @include('dashboard.partials.share-mark', ['icon' => 'products'])
             <h2>Top Products</h2>
         </div>
     </header>

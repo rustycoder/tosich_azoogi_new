@@ -8,6 +8,7 @@
         @foreach ($rows as $row)
             <li style="--n: {{ $row['percent'] }}%; --bar: {{ $row['color'] }}">
                 <div class="dash-metric-bar-meta">
+                    <span class="dash-metric-bar-dot" aria-hidden="true"></span>
                     <span class="dash-metric-bar-label" title="{{ $row['label'] }}">{{ $row['label'] }}</span>
                     <span class="dash-metric-bar-value">{{ $row['percent'] }}%</span>
                 </div>

@@ -17,6 +17,7 @@
 <article class="dash-metric-card is-wide">
     <header class="dash-metric-head">
         <div class="dash-metric-title">
+            @include('dashboard.partials.share-mark', ['icon' => 'chart'])
             <h2>Audience Engagement Metrics</h2>
             <span class="dash-metric-year">{{ $metrics['year'] }}</span>
         </div>
@@ -35,6 +36,7 @@
             @endif
         </ul>
     </header>
+    <div class="dash-metric-body">
     <svg
         class="dash-metric-chart"
         viewBox="0 0 760 168"
@@ -87,4 +89,5 @@
             <text class="dash-metric-axis is-x" x="{{ $month['x'] }}" y="160" text-anchor="middle">{{ $month['label'] }}</text>
         @endforeach
     </svg>
+    </div>
 </article>

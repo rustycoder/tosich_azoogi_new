@@ -53,13 +53,14 @@ class DashboardVisitMetricsTest extends TestCase
             ->assertOk()
             ->assertSeeInOrder([
                 '>Audience Engagement Metrics</h2>',
-                '>Top Products</h2>',
                 '>Most Visited Pages</h2>',
-                '>Most Visited Countries</h2>',
+                '>Visitors by Country</h2>',
+                '>Top Products</h2>',
                 '>Enquiries Metrics</h2>',
                 '>Datasheet Metrics</h2>',
             ], false)
             ->assertSee('dash-top-products', false)
+            ->assertSee('dash-share-card', false)
             ->assertDontSee('>Pages</li>', false)
             ->assertDontSee('>Datasheets</li>', false)
             ->assertDontSee('>Quotes</li>', false)
@@ -187,7 +188,7 @@ class DashboardVisitMetricsTest extends TestCase
             ->get('/dashboard')
             ->assertOk()
             ->assertDontSee('>Most Visited Pages</h2>', false)
-            ->assertDontSee('>Most Visited Countries</h2>', false)
+            ->assertDontSee('>Visitors by Country</h2>', false)
             ->assertDontSee('>Top Products</h2>', false);
     }
 
@@ -206,7 +207,7 @@ class DashboardVisitMetricsTest extends TestCase
             ->get('/dashboard')
             ->assertOk()
             ->assertSee('>Most Visited Pages</h2>', false)
-            ->assertSee('>Most Visited Countries</h2>', false)
+            ->assertSee('>Visitors by Country</h2>', false)
             ->assertDontSee('>Top Products</h2>', false);
     }
 
@@ -219,7 +220,7 @@ class DashboardVisitMetricsTest extends TestCase
             ->get('/dashboard')
             ->assertOk()
             ->assertDontSee('>Most Visited Pages</h2>', false)
-            ->assertDontSee('>Most Visited Countries</h2>', false)
+            ->assertDontSee('>Visitors by Country</h2>', false)
             ->assertDontSee('>Top Products</h2>', false);
     }
 }
