@@ -1155,7 +1155,7 @@
 
                             flex.appendChild(btn);
                         });
-                    }
+                    });
                 }
 
                 // Render Product Icons from Airtable "Product Icons"
