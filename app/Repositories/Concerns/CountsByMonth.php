@@ -11,14 +11,18 @@ trait CountsByMonth
      */
     private function countsByMonth(Builder $query, int $year): array
     {
-        $month = $query->getConnection()->getDriverName() === 'sqlite'
+        $driver = $query->getConnection()->getDriverName();
+        $month = $driver === 'sqlite'
             ? "CAST(strftime('%m', created_at) AS INTEGER)"
             : 'MONTH(created_at)';
+        $group = $driver === 'sqlite'
+            ? $month
+            : 'YEAR(created_at), MONTH(created_at)';
 
         $rows = $query
             ->whereYear('created_at', $year)
             ->selectRaw($month.' as month, count(*) as total')
-            ->groupByRaw($month)
+            ->groupByRaw($group)
             ->pluck('total', 'month');
 
         $counts = array_fill(1, 12, 0);

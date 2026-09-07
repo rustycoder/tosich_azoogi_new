@@ -73,14 +73,28 @@ class ProductDatasheetRepository implements IProductDatasheetRepository
     }
 
     /**
-     * @return Collection<int, object>
+     * @return Collection<int, object{origin_key: string, total: int}>
      */
     public function productBuckets(): Collection
     {
         return ProductDatasheetExport::query()
-            ->selectRaw("COALESCE(NULLIF(airtable_id, ''), CONCAT('code:', COALESCE(product_code, ''))) as origin_key, count(*) as total")
-            ->groupByRaw("COALESCE(NULLIF(airtable_id, ''), CONCAT('code:', COALESCE(product_code, '')))")
-            ->orderByDesc('total')
-            ->get();
+            ->selectRaw('airtable_id, product_code, count(*) as total')
+            ->groupBy('airtable_id', 'product_code')
+            ->get()
+            ->groupBy(function (object $row): string {
+                $airtableId = trim((string) $row->airtable_id);
+
+                if ($airtableId !== '') {
+                    return $airtableId;
+                }
+
+                return 'code:'.trim((string) $row->product_code);
+            })
+            ->map(fn (Collection $group, string $key): object => (object) [
+                'origin_key' => $key,
+                'total' => (int) $group->sum('total'),
+            ])
+            ->sortByDesc('total')
+            ->values();
     }
 }
