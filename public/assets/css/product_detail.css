@@ -532,6 +532,12 @@ a.meta-badge:hover {
   font-size: 12px;
 }
 
+#download-custom-datasheet:disabled {
+  opacity: 0.45;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 /* --- Specification Tabs --- */
 .tabs-container {
   margin: 60px 0;
@@ -1178,4 +1184,133 @@ a.meta-badge:hover {
 .ov-btn.added {
   background: var(--accent-2);
   border-color: var(--accent-2);
+}
+
+.datasheet-dialog {
+  width: min(520px, calc(100vw - 36px));
+  max-height: min(90vh, 640px);
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--pure-bg);
+  color: var(--ink);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.18);
+  font-family: var(--font-sans);
+}
+
+.datasheet-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.52);
+}
+
+.datasheet-dialog-panel {
+  display: flex;
+  flex-direction: column;
+  max-height: min(90vh, 640px);
+}
+
+.datasheet-dialog-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 28px 28px 0;
+}
+
+.datasheet-dialog-head h2 {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 24px;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.datasheet-dialog-close {
+  appearance: none;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  margin: -8px -8px 0 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.datasheet-dialog-close:hover {
+  color: var(--ink);
+  background: var(--rgba-hover);
+}
+
+.datasheet-dialog-form {
+  padding: 12px 28px 28px;
+  overflow: auto;
+}
+
+.datasheet-dialog-lead,
+.datasheet-field-error {
+  padding-bottom: 0;
+}
+
+.datasheet-dialog-lead {
+  margin: 0 0 22px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.datasheet-dialog .form-group {
+  margin-bottom: 16px;
+}
+
+.datasheet-dialog .form-input {
+  background: var(--pure-bg);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.datasheet-dialog .form-input:focus {
+  border-color: var(--accent);
+  box-shadow: none;
+}
+
+.datasheet-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.datasheet-dialog-actions .btn {
+  flex: 1;
+  min-width: 140px;
+  font-family: var(--font-sans);
+  text-align: center;
+}
+
+.datasheet-field-error {
+  margin: 0;
+  color: #c0392b;
+  font-size: 12px;
+}
+
+@media (max-width: 640px) {
+  .datasheet-dialog-head,
+  .datasheet-dialog-form {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .datasheet-dialog-head {
+    padding-top: 24px;
+  }
+
+  .datasheet-dialog-form {
+    padding-bottom: 24px;
+  }
 }

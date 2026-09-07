@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\EnquiryController;
 use App\Http\Controllers\Dashboard\PageContentController;
 use App\Http\Controllers\Dashboard\ProductController;
+use App\Http\Controllers\Dashboard\ProductDatasheetExportController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\ProjectController;
 use App\Http\Controllers\Dashboard\SectionController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\ProductEnquiryController;
 use App\Http\Controllers\QuoteRequestController;
 use App\Http\Controllers\Site\LedCalculatorController;
 use App\Http\Controllers\Site\PageController;
+use App\Http\Controllers\Site\ProductDatasheetController;
 use App\Http\Controllers\Site\ProjectController as SiteProjectController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +51,7 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
 
     Route::middleware('can.manage:products')->group(function () {
         Route::get('content/products', [ProductController::class, 'index'])->name('products.index');
+        Route::get('content/products/datasheets', [ProductDatasheetExportController::class, 'index'])->name('products.datasheets');
         Route::post('content/products/sync', [ProductController::class, 'sync'])->name('products.sync');
         Route::match(['get', 'post'], 'content/products/sync/stream', [ProductController::class, 'syncStream'])->name('products.sync.stream');
     });
@@ -120,3 +123,7 @@ Route::view('/trade-login', 'pages.trade-login')->name('trade-login');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.submit');
 Route::post('/request-a-quote', [QuoteRequestController::class, 'store'])->name('quote.submit');
 Route::post('/product-enquiry', [ProductEnquiryController::class, 'store'])->name('product-enquiry.submit');
+Route::post('/product-datasheet', [ProductDatasheetController::class, 'store'])
+    ->middleware('throttle:20,1')
+    ->name('products.datasheet.store');
+Route::get('/product-datasheet/{export}', [ProductDatasheetController::class, 'show'])->name('products.datasheet.show');

@@ -240,6 +240,23 @@ class ProductRepository implements IProductRepository
             ->withQueryString();
     }
 
+    public function publishedByAirtableId(string $airtableId): ?Product
+    {
+        $product = Product::query()->where('airtable_id', $airtableId)->first();
+
+        if ($product === null) {
+            return null;
+        }
+
+        $status = strtolower(trim((string) ($product->status ?? 'publish')));
+
+        if ($status !== '' && $status !== 'publish') {
+            return null;
+        }
+
+        return $product;
+    }
+
     public function latestSync(): ?ProductSync
     {
         return ProductSync::query()->latest('id')->first();

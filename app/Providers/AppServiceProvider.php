@@ -8,17 +8,20 @@ use App\Repositories\ContentPermissionRepository;
 use App\Repositories\Contracts\IContentPermissionRepository;
 use App\Repositories\Contracts\IEnquiryRepository;
 use App\Repositories\Contracts\IPageRepository;
+use App\Repositories\Contracts\IProductDatasheetRepository;
 use App\Repositories\Contracts\IProductRepository;
 use App\Repositories\Contracts\IProjectRepository;
 use App\Repositories\Contracts\IUserRepository;
 use App\Repositories\EnquiryRepository;
 use App\Repositories\PageRepository;
+use App\Repositories\ProductDatasheetRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\ProjectRepository;
 use App\Repositories\UserRepository;
 use App\Services\Contracts\IEnquiryService;
 use App\Services\Contracts\ILedCalculatorService;
 use App\Services\Contracts\IPageService;
+use App\Services\Contracts\IProductDatasheetService;
 use App\Services\Contracts\IProductSyncService;
 use App\Services\Contracts\IProfileService;
 use App\Services\Contracts\IProjectService;
@@ -26,6 +29,7 @@ use App\Services\Contracts\IStaffService;
 use App\Services\EnquiryService;
 use App\Services\LedCalculatorService;
 use App\Services\PageService;
+use App\Services\ProductDatasheetService;
 use App\Services\ProductSyncService;
 use App\Services\ProfileService;
 use App\Services\ProjectService;
@@ -46,6 +50,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IUserRepository::class, UserRepository::class);
         $this->app->bind(IContentPermissionRepository::class, ContentPermissionRepository::class);
         $this->app->bind(IProductRepository::class, ProductRepository::class);
+        $this->app->bind(IProductDatasheetRepository::class, ProductDatasheetRepository::class);
         $this->app->bind(IEnquiryRepository::class, EnquiryRepository::class);
         $this->app->bind(IAirtableClient::class, AirtableClient::class);
 
@@ -56,6 +61,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IProductSyncService::class, ProductSyncService::class);
         $this->app->bind(IEnquiryService::class, EnquiryService::class);
         $this->app->bind(ILedCalculatorService::class, LedCalculatorService::class);
+        $this->app->bind(IProductDatasheetService::class, ProductDatasheetService::class);
     }
 
     public function boot(): void

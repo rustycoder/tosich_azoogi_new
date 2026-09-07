@@ -9,3 +9,4 @@ Map file globs to the rule files in this directory. Read every matching file bef
 | `app/helpers.php` | [css-assets.md](css-assets.md) |
 | `app/Services/ProductSyncService.php`, `routes/console.php` | [product-sync.md](product-sync.md) |
 | `app/Services/LedCalculatorService.php`, `public/assets/js/led_calculator.js` | [led-calculator.md](led-calculator.md) |
+| `app/Services/ProductDatasheetService.php`, `resources/views/pages/product-datasheet.blade.php`, `public/assets/css/datasheet.css` | [datasheet.md](datasheet.md) |

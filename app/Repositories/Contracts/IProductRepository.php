@@ -34,6 +34,8 @@ interface IProductRepository
      */
     public function dashboardList(string $search = ''): LengthAwarePaginator;
 
+    public function publishedByAirtableId(string $airtableId): ?Product;
+
     public function latestSync(): ?ProductSync;
 
     public function isSyncRunning(): bool;

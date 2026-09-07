@@ -144,8 +144,9 @@
                                 Resources
                             </h3>
                             <div class="download-options" style="display: flex; gap: 16px; flex-wrap: wrap;">
-                                <a href="#" class="btn --accent"
-                                    style="display:flex; align-items:center; justify-content:center; gap:8px;">
+                                <a href="#" id="product-datasheet-link" class="btn --accent"
+                                    style="display:none; align-items:center; justify-content:center; gap:8px;"
+                                    target="_blank" rel="noopener noreferrer">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                         width="18" height="18">
                                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -203,7 +204,8 @@
                         <!-- ACTION BUTTONS -->
                         <div class="gallery-actions"
                             style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
-                            <a href="#" class="btn --accent"
+                            <button type="button" id="download-custom-datasheet" class="btn --accent"
+                                disabled aria-disabled="true" title="Select configuration options first"
                                 style="display:flex; align-items:center; justify-content:center; gap:8px; width: 100%;">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                     width="18" height="18">
@@ -212,7 +214,7 @@
                                     <line x1="12" y1="15" x2="12" y2="3" />
                                 </svg>
                                 Download Custom Datasheet
-                            </a>
+                            </button>
                             <a href="#quote-section-anchor" class="btn --accent"
                                 style="display:flex; justify-content:center; gap:8px; width: 100%;">
                                 <svg viewBox="0 -960 960 960" fill="#111111" stroke="currentColor" stroke-width="2"
@@ -348,7 +350,33 @@
         </div>
     </section>
 
-    <!-- ========== FOOTER ========== -->
+    <dialog class="datasheet-dialog" id="datasheet-export-dialog" aria-labelledby="datasheet-export-title">
+        <div class="datasheet-dialog-panel">
+            <header class="datasheet-dialog-head">
+                <h2 id="datasheet-export-title">Download custom datasheet</h2>
+                <button type="button" class="datasheet-dialog-close" id="datasheet-export-close" aria-label="Close">&times;</button>
+            </header>
+            <form id="datasheet-export-form" class="datasheet-dialog-form" method="post" action="{{ route('products.datasheet.store') }}">
+                @csrf
+                <p class="datasheet-dialog-lead">Enter the project and client name. Both are saved with the export.</p>
+                <div class="form-group">
+                    <label class="form-label" for="datasheet-project-name">Project name *</label>
+                    <input class="form-input" id="datasheet-project-name" name="project_name" type="text" required maxlength="191" placeholder="e.g. White City" autocomplete="organization">
+                    <p class="datasheet-field-error" data-error-for="project_name" hidden></p>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="datasheet-person-name">Client name *</label>
+                    <input class="form-input" id="datasheet-person-name" name="person_name" type="text" required maxlength="191" placeholder="e.g. Alex Chen" autocomplete="name">
+                    <p class="datasheet-field-error" data-error-for="person_name" hidden></p>
+                </div>
+                <p class="datasheet-field-error" data-error-for="form" hidden></p>
+                <div class="datasheet-dialog-actions">
+                    <button type="button" class="btn" id="datasheet-export-cancel">Cancel</button>
+                    <button type="submit" class="btn primary" id="datasheet-export-submit">Generate datasheet</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
 @endsection
 
 @push('scripts')
@@ -512,6 +540,7 @@
                 let selectedOptions = {};
 
                 let selectedLength = 5.0;
+                let datasheetSku = '';
 
                 // DOM Elements
                 const productNameEl = document.getElementById('product-name');
@@ -626,6 +655,21 @@
 
                 // Update Basic Info & Descriptions
                 if (productNameEl) productNameEl.textContent = pName;
+
+                const manufacturerDatasheet = document.getElementById('product-datasheet-link');
+                if (manufacturerDatasheet) {
+                    const sheets = Array.isArray(product.datasheet)
+                        ? product.datasheet
+                        : (product.datasheet ? [product.datasheet] : []);
+                    const sheetUrl = sheets.find((item) => typeof item === 'string' && /^https?:\/\//i.test(item));
+                    if (sheetUrl) {
+                        manufacturerDatasheet.href = sheetUrl;
+                        manufacturerDatasheet.style.display = 'flex';
+                    } else {
+                        manufacturerDatasheet.removeAttribute('href');
+                        manufacturerDatasheet.style.display = 'none';
+                    }
+                }
                 // if (productCodeEl) productCodeEl.textContent = sku ? `PRODUCT CODE: ${sku}` : `PRODUCT CODE: ${pName}`;
                 if (descEl) descEl.innerHTML = pLongDesc || pShortDesc ||
                     "Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.";
@@ -1163,6 +1207,7 @@
                     const pName = product.product_name || product.name || "Product";
                     const features = product.product_features || {};
                     const skuDisplay = getMappedSku(product, selectedOptions);
+                    datasheetSku = skuDisplay || product.product_code || '';
                     const specAddBtn = document.getElementById('add-to-spec-btn');
                     if (specAddBtn) {
                         specAddBtn.dataset.quoteSku = skuDisplay || '';
@@ -1319,6 +1364,18 @@
                         specField.value = specLines.map((line) => String(line).replace(/[ \t]+$/g, '')).join('\n');
                     }
 
+                    const datasheetBtn = document.getElementById('download-custom-datasheet');
+                    if (datasheetBtn) {
+                        const optionKeys = Object.keys(product.options || {}).filter((key) => Array.isArray(product.options[key]) && product.options[key].length > 0);
+                        const hasConfiguration = optionKeys.length === 0 || optionKeys.some((key) => {
+                            const value = selectedOptions[key];
+                            return value !== undefined && value !== null && String(value).trim() !== '';
+                        });
+                        datasheetBtn.disabled = !hasConfiguration;
+                        datasheetBtn.setAttribute('aria-disabled', hasConfiguration ? 'false' : 'true');
+                        datasheetBtn.title = hasConfiguration ? '' : 'Select configuration options first';
+                    }
+
                     // Visual color glow update
                     // const glowArea = document.getElementById('glow-area');
                     const neonPath = document.getElementById('neon-path');
@@ -1404,6 +1461,125 @@
                         galleryMainImg.style.transformOrigin = 'center center';
                     });
                 }
+
+                const datasheetDialog = document.getElementById('datasheet-export-dialog');
+                const datasheetForm = document.getElementById('datasheet-export-form');
+                const datasheetOpen = document.getElementById('download-custom-datasheet');
+                const datasheetCancel = document.getElementById('datasheet-export-cancel');
+                const datasheetClose = document.getElementById('datasheet-export-close');
+                const datasheetSubmit = document.getElementById('datasheet-export-submit');
+
+                function setDatasheetError(name, message) {
+                    const el = datasheetForm?.querySelector('[data-error-for="' + name + '"]');
+                    if (!el) {
+                        return;
+                    }
+                    if (message) {
+                        el.hidden = false;
+                        el.textContent = message;
+                    } else {
+                        el.hidden = true;
+                        el.textContent = '';
+                    }
+                }
+
+                function clearDatasheetErrors() {
+                    datasheetForm?.querySelectorAll('[data-error-for]').forEach((el) => {
+                        el.hidden = true;
+                        el.textContent = '';
+                    });
+                }
+
+                datasheetOpen?.addEventListener('click', () => {
+                    if (datasheetOpen.disabled) {
+                        return;
+                    }
+                    clearDatasheetErrors();
+                    datasheetDialog?.showModal();
+                    document.getElementById('datasheet-project-name')?.focus();
+                });
+
+                const closeDatasheetDialog = () => datasheetDialog?.close();
+                datasheetCancel?.addEventListener('click', closeDatasheetDialog);
+                datasheetClose?.addEventListener('click', closeDatasheetDialog);
+                datasheetDialog?.addEventListener('click', (event) => {
+                    if (event.target === datasheetDialog) {
+                        closeDatasheetDialog();
+                    }
+                });
+
+                datasheetForm?.addEventListener('submit', async (event) => {
+                    event.preventDefault();
+                    clearDatasheetErrors();
+
+                    const token = datasheetForm.querySelector('input[name="_token"]')?.value || '';
+                    const selected = {};
+                    const optionSet = product.options || {};
+                    Object.keys(selectedOptions).forEach((key) => {
+                        const id = selectedOptions[key];
+                        if (id === undefined || id === null || String(id).trim() === '') {
+                            return;
+                        }
+                        const optVals = optionSet[key] || [];
+                        const valObj = optVals.find((item) => String(item.id) === String(id)) || { name: String(id) };
+                        selected[key] = valObj.name;
+                    });
+
+                    const pNameLower = (product.product_name || product.name || '').toLowerCase();
+                    const catLower = (product.category || '').toLowerCase();
+                    const isLinear = catLower.includes('neon') || catLower.includes('linear') || pNameLower.includes('strip') || pNameLower.includes('nnr');
+
+                    if (datasheetSubmit) {
+                        datasheetSubmit.disabled = true;
+                    }
+
+                    try {
+                        const response = await fetch(datasheetForm.action, {
+                            method: 'POST',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': token,
+                                'X-Requested-With': 'XMLHttpRequest',
+                            },
+                            body: JSON.stringify({
+                                product_id: product.id,
+                                project_name: document.getElementById('datasheet-project-name')?.value || '',
+                                person_name: document.getElementById('datasheet-person-name')?.value || '',
+                                product_code: datasheetSku || product.product_code || '',
+                                selected_options: selected,
+                                length: isLinear ? selectedLength : null,
+                            }),
+                        });
+
+                        const payload = await response.json().catch(() => ({}));
+
+                        if (response.status === 422) {
+                            const errors = payload.errors || {};
+                            Object.keys(errors).forEach((key) => {
+                                setDatasheetError(key, Array.isArray(errors[key]) ? errors[key][0] : String(errors[key]));
+                            });
+                            if (!Object.keys(errors).length) {
+                                setDatasheetError('form', 'Enter the project name and client name.');
+                            }
+                            return;
+                        }
+
+                        if (!response.ok || !payload.url) {
+                            setDatasheetError('form', 'The datasheet could not be generated. Try again.');
+                            return;
+                        }
+
+                        datasheetDialog?.close();
+                        window.open(payload.url, '_blank', 'noopener');
+                    } catch (error) {
+                        setDatasheetError('form', 'The datasheet could not be generated. Try again.');
+                    } finally {
+                        if (datasheetSubmit) {
+                            datasheetSubmit.disabled = false;
+                        }
+                    }
+                });
             }
 
             // Inquiry form posts to the server; success is shown after redirect.
