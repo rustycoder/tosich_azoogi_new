@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Services\Contracts\IVisitorOriginService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Throwable;
 
@@ -16,6 +17,7 @@ class VisitorOriginService implements IVisitorOriginService
         'CF-Connecting-IP',
         'True-Client-IP',
         'X-Real-IP',
+        'X-Forwarded-For',
     ];
 
     /**
@@ -38,11 +40,7 @@ class VisitorOriginService implements IVisitorOriginService
      */
     public function capture(?Request $request = null): array
     {
-        $request ??= request();
-        $origin = $this->captureVisit($request);
-        $origin['country'] = $this->countryCode($request, $origin['ip_address']);
-
-        return $origin;
+        return $this->captureVisit($request);
     }
 
     /**
@@ -56,7 +54,7 @@ class VisitorOriginService implements IVisitorOriginService
 
         return [
             'ip_address' => $ipAddress,
-            'country' => $this->captureCountryFromHeaders($request),
+            'country' => $this->countryCode($request, $ipAddress),
             'user_agent' => $userAgent !== '' ? mb_substr($userAgent, 0, 191) : null,
         ];
     }
@@ -79,10 +77,12 @@ class VisitorOriginService implements IVisitorOriginService
     private function ipAddress(Request $request): ?string
     {
         foreach (self::IP_HEADERS as $header) {
-            $candidate = $this->validIp((string) $request->headers->get($header, ''));
+            foreach (explode(',', (string) $request->headers->get($header, '')) as $candidate) {
+                $ip = $this->validIp($candidate);
 
-            if ($candidate !== null) {
-                return $candidate;
+                if ($ip !== null) {
+                    return $ip;
+                }
             }
         }
 
@@ -100,6 +100,17 @@ class VisitorOriginService implements IVisitorOriginService
             return null;
         }
 
+        $cached = Cache::remember(
+            'visitor-origin-country:'.$ipAddress,
+            now()->addDay(),
+            fn (): string => $this->fetchCountry($ipAddress) ?? '',
+        );
+
+        return $this->normalizeCountry($cached);
+    }
+
+    private function fetchCountry(string $ipAddress): ?string
+    {
         try {
             $response = Http::timeout(1.5)
                 ->connectTimeout(1)

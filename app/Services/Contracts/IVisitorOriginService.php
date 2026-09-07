@@ -12,8 +12,6 @@ interface IVisitorOriginService
     public function capture(?Request $request = null): array;
 
     /**
-     * IP, user agent, and country from CDN headers only — never looks up ipwho.is.
-     *
      * @return array{ip_address: ?string, country: ?string, user_agent: ?string}
      */
     public function captureVisit(?Request $request = null): array;

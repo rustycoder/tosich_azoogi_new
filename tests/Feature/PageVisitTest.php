@@ -37,6 +37,27 @@ class PageVisitTest extends TestCase
         Http::assertNothingSent();
     }
 
+    public function test_cms_get_looks_up_country_when_headers_are_missing(): void
+    {
+        Http::fake([
+            'ipwho.is/*' => Http::response([
+                'success' => true,
+                'country_code' => 'AU',
+            ]),
+        ]);
+
+        $this->withServerVariables(['REMOTE_ADDR' => '8.8.8.8'])
+            ->get('/about')
+            ->assertOk();
+
+        $this->assertDatabaseHas('page_visits', [
+            'kind' => PageVisitKind::Page->value,
+            'page_slug' => 'about',
+            'country' => 'AU',
+            'ip_address' => '8.8.8.8',
+        ]);
+    }
+
     public function test_home_records_the_home_slug(): void
     {
         $this->get('/')->assertOk();
