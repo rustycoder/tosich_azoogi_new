@@ -17,12 +17,14 @@ use App\Repositories\ProductRepository;
 use App\Repositories\ProjectRepository;
 use App\Repositories\UserRepository;
 use App\Services\Contracts\IEnquiryService;
+use App\Services\Contracts\ILedCalculatorService;
 use App\Services\Contracts\IPageService;
 use App\Services\Contracts\IProductSyncService;
 use App\Services\Contracts\IProfileService;
 use App\Services\Contracts\IProjectService;
 use App\Services\Contracts\IStaffService;
 use App\Services\EnquiryService;
+use App\Services\LedCalculatorService;
 use App\Services\PageService;
 use App\Services\ProductSyncService;
 use App\Services\ProfileService;
@@ -53,6 +55,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IProfileService::class, ProfileService::class);
         $this->app->bind(IProductSyncService::class, ProductSyncService::class);
         $this->app->bind(IEnquiryService::class, EnquiryService::class);
+        $this->app->bind(ILedCalculatorService::class, LedCalculatorService::class);
     }
 
     public function boot(): void

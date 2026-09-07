@@ -1,5 +1,10 @@
 (() => {
   const STEP_COUNT = 9;
+  const CATALOG = window.AZOOGI_LED_CALC || { lights: [], drivers: [], controllers: [] };
+  const LIGHTS = Array.isArray(CATALOG.lights) ? CATALOG.lights : [];
+  const DRIVERS = Array.isArray(CATALOG.drivers) ? CATALOG.drivers : [];
+  const CONTROLLERS = Array.isArray(CATALOG.controllers) ? CATALOG.controllers : [];
+
   const CHIP_COPY = {
     csp: {
       title: 'CSP (Chip Scale Package)',
@@ -12,25 +17,73 @@
     smd: {
       title: 'SMD (Surface Mounted Diode)',
       body: 'A flexible, budget-friendly option suited to general lighting or decorative use across many brightness levels.'
+    },
+    neon: {
+      title: 'NEON Integrated',
+      body: 'Flexible encapsulated linear neon for indoor and outdoor architectural contours.'
     }
+  };
+
+  const IP_LABELS = {
+    IP20: ['Indoor and Dry', 'IP20'],
+    IP54: ['Semi-outdoor', 'IP54'],
+    IP65: ['Indoor/Outdoor Shelter', 'IP65'],
+    IP67: ['Outdoor', 'IP67'],
+    IP68: ['Underwater', 'IP68'],
+    IP69: ['Extreme / Washdown', 'IP69']
+  };
+
+  const GROUP_LABELS = {
+    'strip-single': 'LED Strips (Single Colour)',
+    'strip-multi': 'LED Strips (Multi Colour)',
+    'strip-nano-single': 'Nano-coated (Single Colour)',
+    'strip-nano-multi': 'Nano-coated (Multi Colour)',
+    'neon-side': 'Side Bend Neon',
+    'neon-top': 'Top Bend Neon',
+    'neon-360': '360° / Dual Bend Neon'
+  };
+
+  const COLOR_HINTS = {
+    '1600K': 'Ultra Warm',
+    '2200K': 'Very Warm',
+    '2400K': 'Warm Glow',
+    '2700K': 'Warm White',
+    '3000K': 'Soft White',
+    '4000K': 'Natural White',
+    '5000K': 'Cool White',
+    '5300K': 'Cool White',
+    '5700K': 'Daylight',
+    '6000K': 'Cool White',
+    RGB: 'Multi Colour',
+    RGBW: 'Multi Colour + White',
+    CCT: 'Tunable White',
+    'RGB+CCT': 'RGB + Tunable White'
+  };
+
+  const DRIVER_LABELS = {
+    'non-dimmable': 'Non-Dimmable',
+    dimmable: 'Dimmable (5-in-1)',
+    'dali-2': 'DALI-2'
+  };
+
+  const CHIP_LABELS = {
+    csp: 'CSP',
+    cob: 'COB',
+    smd: 'SMD',
+    neon: 'NEON Integrated'
   };
 
   const state = {
     step: 1,
-    pa_ip_rating: null,
-    led_category: null,
-    led_subcategory: null,
-    neon_type: null,
-    path: null, // multi-colour | single-colour | neon
-    chip_type: null,
-    color_type: null,
-    cct: null,
-    neon_color: null,
+    ip: null,
+    group: null,
+    chip: null,
+    color: null,
     voltage: null,
     power: null,
     width: null,
     driver_type: null,
-    controller: null
+    controller: 'none'
   };
 
   const stepList = document.getElementById('calcStepList');
@@ -42,96 +95,191 @@
   const resultsSection = document.getElementById('led-selector-results');
   const resultsGrid = document.getElementById('resultsGrid');
   const chipInfo = document.getElementById('chipInfoDynamic');
-  const widthOptions = document.getElementById('widthOptions');
+
+  function unique(values) {
+    return [...new Set(values.filter(Boolean))];
+  }
+
+  function ipCodes(light) {
+    return (light.ips || []).map((item) => item.code);
+  }
+
+  function groupsFor(light, ip) {
+    const entry = (light.ips || []).find((item) => item.code === ip);
+    if (!entry) {
+      return [];
+    }
+
+    if (light.family === 'neon') {
+      return [light.neon_type || 'neon-side'];
+    }
+
+    const prefix = entry.nano ? 'strip-nano-' : 'strip-';
+    const groups = [];
+    if (light.has_single) {
+      groups.push(prefix + 'single');
+    }
+    if (light.has_multi) {
+      groups.push(prefix + 'multi');
+    }
+    return groups;
+  }
+
+  function isMultiGroup(group) {
+    return String(group || '').endsWith('-multi');
+  }
+
+  function matchingLights(upToStep) {
+    return LIGHTS.filter((light) => {
+      if (upToStep >= 1 && state.ip && !ipCodes(light).includes(state.ip)) {
+        return false;
+      }
+      if (upToStep >= 2 && state.group && !groupsFor(light, state.ip).includes(state.group)) {
+        return false;
+      }
+      if (upToStep >= 3 && state.chip && light.chip !== state.chip) {
+        return false;
+      }
+      if (upToStep >= 4 && state.color) {
+        const colors = isMultiGroup(state.group) ? (light.color_types || []) : (light.ccts || []).concat(light.family === 'neon' ? (light.color_types || []) : []);
+        if (light.family === 'neon') {
+          if (!(light.ccts || []).includes(state.color) && !(light.color_types || []).includes(state.color)) {
+            return false;
+          }
+        } else if (!colors.includes(state.color)) {
+          return false;
+        }
+      }
+      if (upToStep >= 5 && state.voltage && !(light.voltages || []).includes(state.voltage)) {
+        return false;
+      }
+      if (upToStep >= 6 && state.power && !(light.powers || []).includes(state.power)) {
+        return false;
+      }
+      if (upToStep >= 7 && state.width && (light.widths || []).length > 0 && !(light.widths || []).includes(state.width)) {
+        return false;
+      }
+      return true;
+    });
+  }
+
+  function optionsForStep(step) {
+    const pool = matchingLights(step - 1);
+
+    if (step === 1) {
+      return unique(LIGHTS.flatMap(ipCodes)).sort().map((code) => {
+        const label = IP_LABELS[code] || [code, code];
+        return { value: code, html: `${label[0]}<br><small>${label[1]}</small>` };
+      });
+    }
+
+    if (step === 2) {
+      return unique(pool.flatMap((light) => groupsFor(light, state.ip)))
+        .sort()
+        .map((value) => ({ value, html: GROUP_LABELS[value] || value }));
+    }
+
+    if (step === 3) {
+      return unique(pool.map((light) => light.chip)).map((value) => ({
+        value,
+        html: CHIP_LABELS[value] || value.toUpperCase()
+      }));
+    }
+
+    if (step === 4) {
+      const values = unique(pool.flatMap((light) => {
+        if (light.family === 'neon') {
+          return (light.ccts || []).concat(light.color_types || []);
+        }
+        return isMultiGroup(state.group) ? (light.color_types || []) : (light.ccts || []);
+      }));
+      return values.map((value) => {
+        const hintText = COLOR_HINTS[value];
+        return { value, html: hintText ? `${value}<br><small>${hintText}</small>` : value };
+      });
+    }
+
+    if (step === 5) {
+      return unique(pool.flatMap((light) => light.voltages || [])).sort().map((value) => ({ value, html: value }));
+    }
+
+    if (step === 6) {
+      return unique(pool.flatMap((light) => light.powers || []))
+        .sort((a, b) => parseFloat(a) - parseFloat(b))
+        .map((value) => ({ value, html: value }));
+    }
+
+    if (step === 7) {
+      const widths = unique(pool.flatMap((light) => light.widths || []));
+      if (widths.length === 0) {
+        return [{ value: 'standard', html: 'Standard size' }];
+      }
+      return widths.map((value) => ({ value, html: value.replace('x', ' × ') }));
+    }
+
+    if (step === 8) {
+      const types = unique(DRIVERS.map((driver) => driver.type));
+      const fallback = ['non-dimmable', 'dimmable', 'dali-2'];
+      return (types.length ? types : fallback).map((value) => ({
+        value,
+        html: DRIVER_LABELS[value] || value
+      }));
+    }
+
+    const extras = CONTROLLERS.map((item) => ({
+      value: item.id,
+      html: item.name
+    }));
+    return [{ value: 'none', html: 'None' }].concat(extras);
+  }
 
   function currentKeyForStep(step) {
-    const map = {
-      1: 'pa_ip_rating',
-      2: state.pa_ip_rating === 'IP20' ? 'led_category'
-        : state.pa_ip_rating === 'IP65' ? 'led_subcategory'
-          : 'neon_type',
-      3: 'chip_type',
-      4: state.path === 'multi-colour' ? 'color_type'
-        : state.path === 'single-colour' ? 'cct'
-          : 'neon_color',
+    return {
+      1: 'ip',
+      2: 'group',
+      3: 'chip',
+      4: 'color',
       5: 'voltage',
       6: 'power',
       7: 'width',
       8: 'driver_type',
       9: 'controller'
-    };
-    return map[step];
-  }
-
-  function selectionForStep(step) {
-    return state[currentKeyForStep(step)];
-  }
-
-  function derivePath() {
-    if (state.pa_ip_rating === 'IP20') {
-      state.path = state.led_category;
-    } else if (state.pa_ip_rating === 'IP65') {
-      if (state.led_subcategory === 'ip65-nano-single') state.path = 'single-colour';
-      else state.path = 'multi-colour';
-    } else if (state.pa_ip_rating === 'IP67' || state.pa_ip_rating === 'IP68') {
-      state.path = 'neon';
-    } else {
-      state.path = null;
-    }
+    }[step];
   }
 
   function clearFromStep(fromStep) {
-    const keysByStep = {
-      1: ['pa_ip_rating', 'led_category', 'led_subcategory', 'neon_type', 'path', 'chip_type', 'color_type', 'cct', 'neon_color', 'voltage', 'power', 'width', 'driver_type', 'controller'],
-      2: ['led_category', 'led_subcategory', 'neon_type', 'path', 'chip_type', 'color_type', 'cct', 'neon_color', 'voltage', 'power', 'width', 'driver_type', 'controller'],
-      3: ['chip_type', 'color_type', 'cct', 'neon_color', 'voltage', 'power', 'width', 'driver_type', 'controller'],
-      4: ['color_type', 'cct', 'neon_color', 'voltage', 'power', 'width', 'driver_type', 'controller'],
-      5: ['voltage', 'power', 'width', 'driver_type', 'controller'],
-      6: ['power', 'width', 'driver_type', 'controller'],
-      7: ['width', 'driver_type', 'controller'],
-      8: ['driver_type', 'controller'],
-      9: ['controller']
-    };
-    (keysByStep[fromStep] || []).forEach((k) => {
-      if (k === 'path') state.path = null;
-      else state[k] = null;
-    });
-
-    document.querySelectorAll('.options button.is-selected').forEach((btn) => {
-      const key = btn.closest('.options')?.dataset.key;
-      if (key && state[key] == null) btn.classList.remove('is-selected');
+    const keys = ['ip', 'group', 'chip', 'color', 'voltage', 'power', 'width', 'driver_type', 'controller'];
+    keys.slice(fromStep - 1).forEach((key) => {
+      state[key] = key === 'controller' ? 'none' : null;
     });
   }
 
-  function updateConditionals() {
-    document.querySelectorAll('.conditional').forEach((el) => {
-      const when = el.dataset.showWhen;
-      let show = false;
-      if (['IP20', 'IP65', 'IP67', 'IP68'].includes(when)) {
-        show = state.pa_ip_rating === when;
-      } else if (['multi-colour', 'single-colour', 'neon'].includes(when)) {
-        show = state.path === when;
-      }
-      el.hidden = !show;
-    });
-
-    // Width filter
-    if (widthOptions) {
-      const isNeon = state.path === 'neon';
-      widthOptions.querySelectorAll('button').forEach((btn) => {
-        const kind = btn.dataset.for;
-        btn.hidden = isNeon ? kind !== 'neon' : kind !== 'strip';
-      });
+  function fillOptions(step) {
+    const host = document.getElementById('step' + step + 'Options');
+    if (!host) {
+      return;
     }
 
-    // Chip info
-    if (chipInfo && state.path === 'single-colour' && state.chip_type) {
-      const info = CHIP_COPY[state.chip_type];
-      chipInfo.innerHTML = info
-        ? `<strong>${info.title}</strong><p>${info.body}</p>`
-        : '';
-    } else if (chipInfo) {
-      chipInfo.innerHTML = '';
+    const key = currentKeyForStep(step);
+    const options = optionsForStep(step);
+    const columns = options.length >= 4 ? 'options-4' : options.length === 3 ? 'options-3' : options.length === 2 ? 'options-2' : 'options-row';
+    host.className = 'options ' + columns;
+    host.dataset.key = key;
+    host.innerHTML = options.map((option) => {
+      const selected = state[key] === option.value ? ' is-selected' : '';
+      return `<button type="button" data-value="${option.value}" class="${selected.trim()}">${option.html}</button>`;
+    }).join('');
+
+    if (step === 3 && chipInfo) {
+      const info = CHIP_COPY[state.chip];
+      chipInfo.innerHTML = info ? `<strong>${info.title}</strong><p>${info.body}</p>` : '';
+    }
+
+    if (step === 4) {
+      const title = document.getElementById('step4Title');
+      if (title) {
+        title.textContent = isMultiGroup(state.group) ? 'Select colour type' : 'Select colour temperature';
+      }
     }
   }
 
@@ -150,121 +298,132 @@
       li.setAttribute('aria-current', n === state.step ? 'step' : 'false');
     });
 
-    updateConditionals();
+    fillOptions(state.step);
 
-    const hasSelection = Boolean(selectionForStep(state.step));
-    nextBtn.disabled = !hasSelection;
+    const options = optionsForStep(state.step);
+    if (options.length === 1 && !state[currentKeyForStep(state.step)]) {
+      state[currentKeyForStep(state.step)] = options[0].value;
+      fillOptions(state.step);
+    }
+
+    const hasSelection = Boolean(state[currentKeyForStep(state.step)]) || state.step === 9;
+    nextBtn.disabled = !hasSelection || (state.step < 8 && matchingLights(state.step).length === 0 && state.step !== 8);
     nextBtn.textContent = state.step === STEP_COUNT ? 'See Results' : 'Next';
     backBtn.hidden = state.step === 1;
-    hint.textContent = hasSelection
-      ? (state.step === STEP_COUNT ? 'Ready to view your setup' : 'Selection saved — continue')
-      : 'Select an option to continue';
+    hint.textContent = LIGHTS.length === 0
+      ? 'No catalogue products are available yet. Run a product sync.'
+      : hasSelection
+        ? (state.step === STEP_COUNT ? 'Ready to view your setup' : 'Selection saved — continue')
+        : 'Select an option to continue';
 
     resultsSection.hidden = true;
   }
 
   function selectOption(button) {
     const group = button.closest('.options');
-    if (!group || group.closest('.step')?.dataset.step != state.step) return;
+    if (!group || group.closest('.step')?.dataset.step != state.step) {
+      return;
+    }
     const key = group.dataset.key;
     const value = button.dataset.value;
-    if (!key || !value) return;
+    if (!key || !value) {
+      return;
+    }
 
     clearFromStep(state.step);
     state[key] = value;
-    if (state.step === 1 || state.step === 2) derivePath();
-
-    group.querySelectorAll('button').forEach((b) => b.classList.remove('is-selected'));
-    button.classList.add('is-selected');
     renderStep();
   }
 
-  function buildResults() {
-    const color =
-      state.color_type || state.cct || state.neon_color || '—';
-    const chip = (state.chip_type || 'smd').toUpperCase();
-    const power = state.power || '15W/m';
-    const voltage = state.voltage || '24V';
-    const width = state.width || '8mm';
-    const ip = state.pa_ip_rating || 'IP20';
-    const leds = state.path === 'neon' ? '120 LEDs/m' : chip === 'COB' ? '544 LEDs/m' : '120 LEDs/m';
-    const stripName = `${power} | ${voltage} | ${leds} | ${ip} | ${color} | ${width}`;
-    const stripSku = state.path === 'neon'
-      ? 'NEON-' + (state.neon_type || 'TB').slice(0, 2).toUpperCase() + '01'
-      : chip === 'COB' ? 'COB019' : chip === 'CSP' ? 'CSP012' : 'SMD024';
+  function pickLight() {
+    return matchingLights(7)[0] || null;
+  }
 
-    const driverLabel = {
-      'non-dimmable': 'Non-Dimmable',
-      'dimmable': '5-in-1 Dimmable',
-      'dali-2': 'DALI-2'
-    }[state.driver_type] || '5-in-1 Dimmable';
+  function pickDriver(light) {
+    const voltage = state.voltage || (light && light.voltages[0]) || '24V';
+    const stripWatts = parseFloat(state.power || '0') || 0;
+    const typed = DRIVERS.filter((driver) => driver.type === state.driver_type);
+    const pool = (typed.length ? typed : DRIVERS).filter((driver) => {
+      return !driver.voltages || driver.voltages.length === 0 || driver.voltages.includes(voltage);
+    });
+    const ranked = pool.slice().sort((a, b) => {
+      const aFit = (a.watts || []).some((watt) => watt >= stripWatts) ? 0 : 1;
+      const bFit = (b.watts || []).some((watt) => watt >= stripWatts) ? 0 : 1;
+      return aFit - bFit;
+    });
+    return ranked[0] || null;
+  }
 
-    const driverWatts = String(power).includes('29') ? '150W'
-      : String(power).includes('22') || String(power).includes('19') ? '100W'
-        : '60W';
-    const driverName = `${driverWatts} | ${voltage} | IP67 | ${driverLabel}`;
-    const driverSku = state.driver_type === 'dali-2' ? 'ADR012D'
-      : state.driver_type === 'non-dimmable' ? 'ADR003' : 'ADR008D';
+  function pickController() {
+    if (!state.controller || state.controller === 'none') {
+      return null;
+    }
+    return CONTROLLERS.find((item) => item.id === state.controller) || null;
+  }
 
-    const controllerMap = {
-      none: null,
-      remote: { name: 'Remote Controller | RF', sku: 'AREC003', img: 'https://azoogi.com.au/wp-content/uploads/2025/07/AREC011.jpg' },
-      'wifi-rf': { name: 'Controller | CCT | RGB | RGBW | RGB+CCT | WiFi + RF', sku: 'AREC011', img: 'https://azoogi.com.au/wp-content/uploads/2025/07/AREC011.jpg' },
-      'wall-panel': { name: 'Wall Panel Controller | Touch', sku: 'AREC021', img: 'https://azoogi.com.au/wp-content/uploads/2025/07/AREC011.jpg' }
-    };
-    const controller = controllerMap[state.controller];
-
-    const stripImg = state.path === 'neon'
-      ? 'https://azoogi.com.au/wp-content/uploads/2025/12/image434.png'
-      : 'https://azoogi.com.au/wp-content/uploads/2025/12/image434.png';
-    const driverImg = 'https://azoogi.com.au/wp-content/uploads/2025/07/ADR003D.jpg';
-
-    const accessories = `
-      <div class="ls-section ls-section-2">
-        <div class="ls-product-card">
-          <div class="ls-card-image"><img src="${driverImg}" alt="${driverName}"></div>
-          <div class="ls-card-info">
-            <div class="ls-card-label">DRIVER</div>
-            <div class="ls-card-name">${driverName}</div>
-            <div class="ls-card-sku">SKU: ${driverSku}</div>
-          </div>
+  function productCard(label, product, extraName) {
+    if (!product) {
+      return '';
+    }
+    const name = extraName || product.name;
+    const sku = product.sku ? `SKU: ${product.sku}` : '';
+    return `
+      <div class="ls-product-card">
+        <div class="ls-card-image"><img src="${product.image}" alt="${name}"></div>
+        <div class="ls-card-info">
+          <div class="ls-card-label">${label}</div>
+          <div class="ls-card-name">${name}</div>
+          <div class="ls-card-sku">${sku}</div>
         </div>
-        ${controller ? `
-        <div class="ls-product-card">
-          <div class="ls-card-image"><img src="${controller.img}" alt="${controller.name}"></div>
-          <div class="ls-card-info">
-            <div class="ls-card-label">STRIP CONTROLLER</div>
-            <div class="ls-card-name">${controller.name}</div>
-            <div class="ls-card-sku">SKU: ${controller.sku}</div>
-          </div>
-        </div>` : ''}
       </div>`;
+  }
+
+  function buildResults() {
+    const light = pickLight();
+    const driver = pickDriver(light);
+    const controller = pickController();
+
+    if (!light) {
+      resultsGrid.innerHTML = '<p class="step-hint">No catalogue product matches this combination. Go back and try another option.</p>';
+      return;
+    }
+
+    const color = state.color || '—';
+    const voltage = state.voltage || (light.voltages[0] || '24V');
+    const power = state.power || (light.powers[0] || '—');
+    const width = state.width && state.width !== 'standard' ? state.width.replace('x', ' × ') : (light.widths[0] || '—');
+    const lightName = [light.name, power, voltage, state.ip, color].filter(Boolean).join(' | ');
+    const driverWatts = driver && driver.watts && driver.watts.length
+      ? driver.watts.find((watt) => watt >= (parseFloat(power) || 0)) || driver.watts[0]
+      : null;
+    const driverName = driver
+      ? [driver.name, driverWatts ? driverWatts + 'W' : null, voltage, driver.ip, DRIVER_LABELS[driver.type]]
+        .filter(Boolean).join(' | ')
+      : '';
 
     resultsGrid.innerHTML = `
       <div class="ls-section ls-section-1">
-        <div class="ls-product-card">
-          <div class="ls-card-image"><img src="${stripImg}" alt="${stripName}"></div>
-          <div class="ls-card-info">
-            <div class="ls-card-label">${state.path === 'neon' ? 'NEON LIGHT' : 'STRIP LIGHT'}</div>
-            <div class="ls-card-name">${stripName}</div>
-            <div class="ls-card-sku">SKU: ${stripSku}</div>
-          </div>
-        </div>
+        ${productCard(light.family === 'neon' ? 'NEON LIGHT' : 'STRIP LIGHT', light, lightName)}
       </div>
-      ${accessories}
+      <div class="ls-section ls-section-2">
+        ${driver ? productCard('DRIVER', driver, driverName) : '<p class="step-hint">No matching driver in the catalogue.</p>'}
+        ${controller ? productCard('STRIP CONTROLLER', controller) : ''}
+      </div>
       <div class="ls-section ls-section-3">
         <div class="ls-specs-list">
+          <div class="ls-spec-row"><span class="ls-spec-label">Product</span><span class="ls-spec-value">${light.name}</span></div>
           <div class="ls-spec-row"><span class="ls-spec-label">LED Strip Input (V)</span><span class="ls-spec-value">${voltage}</span></div>
           <div class="ls-spec-row"><span class="ls-spec-label">Cutting Interval / Width</span><span class="ls-spec-value">${width}</span></div>
           <div class="ls-spec-row"><span class="ls-spec-label">Strip Watts</span><span class="ls-spec-value">${power}</span></div>
-          <div class="ls-spec-row"><span class="ls-spec-label">LEDs/m</span><span class="ls-spec-value">${leds}</span></div>
           <div class="ls-spec-row"><span class="ls-spec-label">Colour / CCT</span><span class="ls-spec-value">${color}</span></div>
-          <div class="ls-spec-row"><span class="ls-spec-label">CRI</span><span class="ls-spec-value">&gt;90</span></div>
-          <div class="ls-spec-row"><span class="ls-spec-label">IP Rating</span><span class="ls-spec-value">${ip}</span></div>
-          <div class="ls-spec-row"><span class="ls-spec-label">Warranty</span><span class="ls-spec-value">5 Years</span></div>
+          <div class="ls-spec-row"><span class="ls-spec-label">Chip</span><span class="ls-spec-value">${(CHIP_LABELS[light.chip] || light.chip).toUpperCase()}</span></div>
+          <div class="ls-spec-row"><span class="ls-spec-label">IP Rating</span><span class="ls-spec-value">${state.ip}${state.group && state.group.includes('nano') ? ' Nano' : ''}</span></div>
+          <div class="ls-spec-row"><span class="ls-spec-label">CRI</span><span class="ls-spec-value">${light.cri || '>90'}</span></div>
+          <div class="ls-spec-row"><span class="ls-spec-label">Warranty</span><span class="ls-spec-value">${light.warranty || '5 Years'}</span></div>
         </div>
         <div class="ls-results-actions">
           <button type="button" class="btn-add-to-cart" id="btnAddEnquiry">Add to Enquiry Cart</button>
+          <a class="btn-edit" id="btnViewProduct" href="${light.url}">View Product</a>
           <button type="button" class="btn-edit" id="btnEdit">Make Edits</button>
         </div>
       </div>
@@ -277,7 +436,21 @@
     });
 
     document.getElementById('btnAddEnquiry').addEventListener('click', () => {
-      showToast('Added to enquiry cart (demo)');
+      const add = window.AzoogiQuote && window.AzoogiQuote.add;
+      if (typeof add === 'function') {
+        add({ id: light.id, name: light.name, sku: light.sku, image: light.image, url: light.url });
+        if (driver) {
+          add({ id: driver.id, name: driver.name, sku: driver.sku, image: driver.image, url: driver.url });
+        }
+        if (controller) {
+          add({ id: controller.id, name: controller.name, sku: controller.sku, image: controller.image, url: controller.url });
+        }
+      }
+      if (typeof window.siteToast === 'function') {
+        window.siteToast('Added to enquiry cart');
+      } else {
+        showToast('Added to enquiry cart');
+      }
     });
   }
 
@@ -295,7 +468,9 @@
   }
 
   function goNext() {
-    if (!selectionForStep(state.step)) return;
+    if (!state[currentKeyForStep(state.step)] && state.step !== 9) {
+      return;
+    }
     if (state.step === STEP_COUNT) {
       buildResults();
       selectorSection.hidden = true;
@@ -308,14 +483,18 @@
   }
 
   function goBack() {
-    if (state.step <= 1) return;
+    if (state.step <= 1) {
+      return;
+    }
     state.step -= 1;
     renderStep();
   }
 
   document.getElementById('stepsContainer').addEventListener('click', (e) => {
     const btn = e.target.closest('.options button');
-    if (btn) selectOption(btn);
+    if (btn) {
+      selectOption(btn);
+    }
   });
 
   nextBtn.addEventListener('click', goNext);

@@ -12,6 +12,7 @@ use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\Dashboard\StaffController;
 use App\Http\Controllers\ProductEnquiryController;
 use App\Http\Controllers\QuoteRequestController;
+use App\Http\Controllers\Site\LedCalculatorController;
 use App\Http\Controllers\Site\PageController;
 use App\Http\Controllers\Site\ProjectController as SiteProjectController;
 use Illuminate\Support\Facades\Route;
@@ -112,7 +113,7 @@ Route::get('/project-detail', [SiteProjectController::class, 'show'])->name('pro
 
 Route::view('/products', 'pages.products')->name('products');
 Route::view('/product-detail', 'pages.product-detail')->name('product-detail');
-Route::view('/led-strip-calculator', 'pages.led-strip-calculator')->name('led-strip-calculator');
+Route::get('/led-strip-calculator', LedCalculatorController::class)->name('led-strip-calculator');
 Route::get('/request-a-quote', [PageController::class, '__invoke'])->defaults('slug', 'request-a-quote')->name('request-a-quote');
 Route::view('/trade-login', 'pages.trade-login')->name('trade-login');
 
