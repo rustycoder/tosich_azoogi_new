@@ -1,5 +1,5 @@
 @php
-    /** @var list<array{label: string, sku: string, icon: string, url: string}> $rows */
+    /** @var list<array{label: string, sku: string, icon: string, url: string, color: string}> $rows */
 @endphp
 <article class="dash-metric-card is-wide dash-top-products">
     <header class="dash-metric-head">
@@ -14,7 +14,7 @@
         @else
             <ol class="dash-top-products-grid">
                 @foreach ($rows as $index => $row)
-                    <li class="{{ $index === 0 ? 'is-lead' : '' }}">
+                    <li class="{{ $index === 0 ? 'is-lead' : '' }}" style="--rank: {{ $row['color'] }}">
                         <span class="dash-top-products-rank" aria-hidden="true">{{ $index + 1 }}</span>
                         @include('dashboard.partials.thumb', [
                             'src' => $row['icon'],

@@ -50,7 +50,7 @@ interface IDashboardMetricsService
     public function visitedCountries(User $user): ?array;
 
     /**
-     * @return list<array{label: string, sku: string, icon: string, url: string}>|null
+     * @return list<array{label: string, sku: string, icon: string, url: string, color: string}>|null
      */
     public function topProducts(User $user): ?array;
 }

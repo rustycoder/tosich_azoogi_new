@@ -166,8 +166,11 @@ class DashboardVisitMetricsTest extends TestCase
             ->assertOk()
             ->assertSeeInOrder([
                 '>Top Products</h2>',
+                '--rank: #2d7a1e',
                 'title="Spot Light"',
+                '--rank: #3aa028',
                 'title="Garden Light"',
+                '--rank: #4eae3a',
                 'title="Neon Flex"',
             ], false)
             ->assertSee('>GL005</span>', false)

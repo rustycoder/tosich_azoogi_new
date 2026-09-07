@@ -1830,6 +1830,7 @@ button.dash-pill:disabled {
 }
 
 .dash-top-products-grid li {
+  --rank: #a3b89e;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -1838,11 +1839,12 @@ button.dash-pill:disabled {
   border: 1px solid var(--dash-line);
   border-radius: 12px;
   background: #f7f9f5;
+  box-shadow: inset 3px 0 0 var(--rank);
 }
 
 .dash-top-products-grid li.is-lead {
-  background: #f3faf1;
-  border-color: #d7ead0;
+  background: color-mix(in srgb, var(--rank) 10%, #fff);
+  border-color: color-mix(in srgb, var(--rank) 28%, #fff);
 }
 
 .dash-top-products-rank {
@@ -1852,16 +1854,11 @@ button.dash-pill:disabled {
   display: grid;
   place-items: center;
   border-radius: 8px;
-  background: #eef3ee;
-  color: var(--dash-muted);
+  background: color-mix(in srgb, var(--rank) 22%, #fff);
+  color: var(--rank);
   font-size: 12px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-}
-
-.dash-top-products-grid li.is-lead .dash-top-products-rank {
-  background: #e4f6de;
-  color: #1f6a18;
 }
 
 .dash-top-products-copy {

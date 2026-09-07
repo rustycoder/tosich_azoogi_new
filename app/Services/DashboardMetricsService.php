@@ -345,7 +345,7 @@ class DashboardMetricsService implements IDashboardMetricsService
     /**
      * @param  array<string, int>  $totals
      * @param  array<string, array{label: string, sku: string, icon: string, url: string}>  $meta
-     * @return list<array{label: string, sku: string, icon: string, url: string}>
+     * @return list<array{label: string, sku: string, icon: string, url: string, color: string}>
      */
     private function productRows(array $totals, array $meta): array
     {
@@ -372,6 +372,7 @@ class DashboardMetricsService implements IDashboardMetricsService
                 'sku' => $identity['sku'],
                 'icon' => $identity['icon'],
                 'url' => $identity['url'],
+                'color' => self::COLORS[count($rows)],
             ];
         }
 
