@@ -1015,7 +1015,6 @@ body.nav-open .nav-overlay {
 .breadcrumbs {
     font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
     color: var(--muted);
     margin-top: 10px;
     display: flex;

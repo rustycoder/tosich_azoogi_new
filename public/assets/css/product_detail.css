@@ -29,7 +29,6 @@ h4 {
 .breadcrumbs {
   font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
   color: var(--muted);
   margin-bottom: 24px;
   display: flex;
