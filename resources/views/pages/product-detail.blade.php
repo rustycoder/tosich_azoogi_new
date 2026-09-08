@@ -559,6 +559,83 @@
                 const driverWarning = document.getElementById('driver-warning-msg');
                 const calcPanel = document.querySelector('.calc-panel');
 
+                // Helper to parse SKU mappings matrix
+                function getParsedSkuMatrix(prod) {
+                    const mappings = prod.sku_mappings;
+                    if (!mappings || typeof mappings !== 'object') return [];
+
+                    const rows = [];
+                    for (const [rawKey, sku] of Object.entries(mappings)) {
+                        if (!sku && sku !== 0) continue;
+                        const rawTokens = String(rawKey)
+                            .split(/[|,;]/)
+                            .map(s => s.trim().toLowerCase())
+                            .filter(Boolean);
+                        if (rawTokens.length === 0) continue;
+                        rows.push({
+                            sku: String(sku),
+                            rawKey: String(rawKey),
+                            tokens: rawTokens,
+                        });
+                    }
+                    return rows;
+                }
+
+                // Check if an option value matches any token in a SKU row
+                function optionMatchesRowToken(valObj, rowTokens) {
+                    if (!valObj) return false;
+                    const id = String(valObj.id || '').trim().toLowerCase();
+                    const name = String(valObj.name || '').trim().toLowerCase();
+
+                    return rowTokens.some(token => {
+                        const t = String(token || '').trim().toLowerCase();
+                        if (!t) return false;
+
+                        // Direct exact match
+                        if (t === id || t === name) return true;
+
+                        // Substring match (e.g. token "3000k" in name "3000k warm white" or vice versa)
+                        if (id && (t.includes(id) || id.includes(t))) return true;
+                        if (name && (t.includes(name) || name.includes(t))) return true;
+
+                        return false;
+                    });
+                }
+
+                // Check if an option group participates in the SKU mappings matrix
+                function groupParticipatesInMatrix(groupKey, allOptions, skuMatrix) {
+                    const groupVals = allOptions[groupKey] || [];
+                    return groupVals.some(valObj => {
+                        return skuMatrix.some(row => optionMatchesRowToken(valObj, row.tokens));
+                    });
+                }
+
+                // Check if a candidate option value is available given other current selections
+                function isCombinationAvailable(testingKey, testingValObj, existingSelections, skuMatrix, allOptions) {
+                    const candidateSelections = { ...existingSelections, [testingKey]: testingValObj.id };
+                    const candidateEntries = Object.entries(candidateSelections).filter(([k, v]) => 
+                        v !== undefined && v !== null && String(v).trim() !== ''
+                    );
+
+                    if (candidateEntries.length === 0) return true;
+
+                    // Filter candidate entries to only those option groups that participate in the SKU matrix
+                    const matrixEntries = candidateEntries.filter(([k]) => groupParticipatesInMatrix(k, allOptions, skuMatrix));
+                    if (matrixEntries.length === 0) return true;
+
+                    // Check if at least one row in skuMatrix satisfies all candidate matrix selections
+                    return skuMatrix.some(row => {
+                        return matrixEntries.every(([k, optId]) => {
+                            const groupVals = allOptions[k] || [];
+                            const valObj = (k === testingKey)
+                                ? testingValObj
+                                : groupVals.find(v => String(v.id) === String(optId));
+                            if (!valObj) return true;
+                            return optionMatchesRowToken(valObj, row.tokens);
+                        });
+                    });
+                }
+
                 function getMappedSku(product, selectedOpts) {
                     const features = product.product_features || {};
                     const defaultCode = product.product_code || features["Product Code"] || features["Product code"] || product
@@ -585,62 +662,42 @@
                         return allOptionsSelected ? defaultCode : "";
                     }
 
-                    const selectedIds = selectedEntries.map(([k, v]) => String(v).trim());
-                    const selectedNames = [];
+                    const skuMatrix = getParsedSkuMatrix(product);
+                    if (skuMatrix.length === 0) {
+                        return allOptionsSelected ? defaultCode : "";
+                    }
 
-                    for (const [optKey, optId] of selectedEntries) {
-                        const optVals = options[optKey] || [];
-                        const valObj = optVals.find(v => String(v.id) === String(optId));
-                        if (valObj && valObj.name) {
-                            selectedNames.push(String(valObj.name).trim().toLowerCase());
+                    // Check each SKU row in the matrix:
+                    // 1. All user selections must match this row's tokens (for participating groups)
+                    // 2. All tokens in this row must be satisfied by the user's selections
+                    for (const row of skuMatrix) {
+                        const allSelectionsMatchRow = selectedEntries.every(([k, optId]) => {
+                            if (!groupParticipatesInMatrix(k, options, skuMatrix)) return true;
+                            const groupVals = options[k] || [];
+                            const valObj = groupVals.find(v => String(v.id) === String(optId));
+                            if (!valObj) return false;
+                            return optionMatchesRowToken(valObj, row.tokens);
+                        });
+
+                        if (!allSelectionsMatchRow) continue;
+
+                        const allRowTokensSatisfied = row.tokens.every(token => {
+                            return selectedEntries.some(([k, optId]) => {
+                                const groupVals = options[k] || [];
+                                const valObj = groupVals.find(v => String(v.id) === String(optId));
+                                return valObj && optionMatchesRowToken(valObj, [token]);
+                            });
+                        });
+
+                        if (allRowTokensSatisfied) {
+                            return row.sku;
                         }
                     }
 
-                    const mappingKeys = Object.keys(mappings);
-                    const containsAll = (arr, subset) => subset.every(item => arr.includes(item));
-
-                    // 1. Exact match by IDs
-                    for (const mKey of mappingKeys) {
-                        const parts = mKey.split(/[|,]/).map(s => s.trim());
-                        if (parts.length === selectedIds.length && containsAll(parts, selectedIds)) {
-                            return mappings[mKey];
-                        }
-                    }
-
-                    // 2. Exact match by names
-                    if (selectedNames.length > 0) {
-                        for (const mKey of mappingKeys) {
-                            const parts = mKey.split(/[|,]/).map(s => s.trim().toLowerCase());
-                            if (parts.length === selectedNames.length && containsAll(parts, selectedNames)) {
-                                return mappings[mKey];
-                            }
-                        }
-                    }
-
-                    // 3. Complete combination subset match (when all option groups are selected)
                     if (allOptionsSelected) {
-                        const candidateIdKeys = mappingKeys.filter(mKey => {
-                            const parts = mKey.split(/[|,]/).map(s => s.trim());
-                            return containsAll(parts, selectedIds);
-                        }).sort((a, b) => a.split(/[|,]/).length - b.split(/[|,]/).length);
-
-                        if (candidateIdKeys.length > 0) {
-                            return mappings[candidateIdKeys[0]];
-                        }
-
-                        if (selectedNames.length > 0) {
-                            const candidateNameKeys = mappingKeys.filter(mKey => {
-                                const parts = mKey.split(/[|,]/).map(s => s.trim().toLowerCase());
-                                return containsAll(parts, selectedNames);
-                            }).sort((a, b) => a.split(/[|,]/).length - b.split(/[|,]/).length);
-
-                            if (candidateNameKeys.length > 0) {
-                                return mappings[candidateNameKeys[0]];
-                            }
-                        }
+                        return defaultCode;
                     }
 
-                    // No matching combination yet
                     return "";
                 }
 
@@ -1198,10 +1255,76 @@
                     }
                 }
 
-                // Constraints Logic Checker
+                // Constraints & Matrix Availability Checker
                 function checkConstraints() {
-                    const prohibitedIds = new Set();
+                    const skuMatrix = getParsedSkuMatrix(product);
+                    const hasSkuMatrix = skuMatrix.length > 0;
+                    const options = product.options || {};
+                    const optionKeys = getOrderedOptionKeys(options);
 
+                    // 1. Matrix-Driven Availability (derived from sku_mappings)
+                    if (hasSkuMatrix) {
+                        // Auto-clean any currently selected options that are no longer valid with the active selections
+                        optionKeys.forEach(optKey => {
+                            const currentSelectedId = selectedOptions[optKey];
+                            if (!currentSelectedId) return;
+
+                            const optVals = options[optKey] || [];
+                            const valObj = optVals.find(v => String(v.id) === String(currentSelectedId));
+                            if (!valObj) {
+                                delete selectedOptions[optKey];
+                                return;
+                            }
+
+                            const otherSelections = { ...selectedOptions };
+                            delete otherSelections[optKey];
+
+                            const isValid = isCombinationAvailable(optKey, valObj, otherSelections, skuMatrix, options);
+                            if (!isValid) {
+                                delete selectedOptions[optKey];
+                            }
+                        });
+
+                        // Update button disabled/enabled & active states
+                        optionKeys.forEach(optKey => {
+                            const optVals = options[optKey] || [];
+                            const safeKey = optKey.replace(/[^a-zA-Z0-9_-]/g, '-');
+                            const flex = document.getElementById(`options-flex-${safeKey}`);
+                            if (!flex) return;
+
+                            const otherSelections = { ...selectedOptions };
+                            delete otherSelections[optKey];
+
+                            const btns = flex.querySelectorAll('.config-btn');
+                            btns.forEach(btn => {
+                                const optId = String(btn.getAttribute('data-opt-id'));
+                                const valObj = optVals.find(v => String(v.id) === optId);
+
+                                const isAvailable = valObj
+                                    ? isCombinationAvailable(optKey, valObj, otherSelections, skuMatrix, options)
+                                    : true;
+
+                                if (!isAvailable) {
+                                    btn.disabled = true;
+                                    btn.classList.add('disabled');
+                                    btn.classList.remove('active');
+                                } else {
+                                    btn.disabled = false;
+                                    btn.classList.remove('disabled');
+                                    if (selectedOptions[optKey] && String(selectedOptions[optKey]) === optId) {
+                                        btn.classList.add('active');
+                                    } else {
+                                        btn.classList.remove('active');
+                                    }
+                                }
+                            });
+                        });
+
+                        return;
+                    }
+
+                    // 2. Legacy Fallback: Negative constraints if sku_mappings is not present
+                    const prohibitedIds = new Set();
                     const activeIds = Object.values(selectedOptions).map(String);
                     activeIds.forEach(id => {
                         if (product.constraints && product.constraints[id]) {
@@ -1222,7 +1345,6 @@
                         }
                     });
 
-                    const options = product.options || {};
                     for (const optKey in options) {
                         if (!options.hasOwnProperty(optKey)) continue;
 
