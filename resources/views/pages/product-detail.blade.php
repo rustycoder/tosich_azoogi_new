@@ -1142,6 +1142,14 @@
                         });
                     }
 
+                    // Pre-select inherently solitary option groups (options with only 1 choice)
+                    optionKeys.forEach(optKey => {
+                        const optVals = options[optKey] || [];
+                        if (optVals.length === 1 && !selectedOptions[optKey]) {
+                            selectedOptions[optKey] = String(optVals[0].id);
+                        }
+                    });
+
                     const features = product.product_features || {};
 
                     optionKeys.forEach(optKey => {
@@ -1262,8 +1270,8 @@
                         return;
                     }
 
-                    // Auto-clean any currently selected options that are no longer valid with the active selections
-                    optionKeys.forEach(optKey => {
+                    // 1. Auto-clean any currently selected options that are no longer valid with the active upstream selections
+                    optionKeys.forEach((optKey, idx) => {
                         const currentSelectedId = selectedOptions[optKey];
                         if (!currentSelectedId) return;
 
@@ -1274,24 +1282,38 @@
                             return;
                         }
 
-                        const otherSelections = { ...selectedOptions };
-                        delete otherSelections[optKey];
+                        // Collect upstream selections that constrain this option
+                        const upstreamSelections = {};
+                        optionKeys.forEach((k, kIdx) => {
+                            if (k === optKey) return;
+                            const isSolitary = (options[k] || []).length === 1;
+                            if ((kIdx < idx || isSolitary) && selectedOptions[k]) {
+                                upstreamSelections[k] = selectedOptions[k];
+                            }
+                        });
 
-                        const isValid = isCombinationAvailable(optKey, valObj, otherSelections, skuMatrix, options);
+                        const isValid = isCombinationAvailable(optKey, valObj, upstreamSelections, skuMatrix, options);
                         if (!isValid) {
                             delete selectedOptions[optKey];
                         }
                     });
 
-                    // Update button disabled/enabled & active states
-                    optionKeys.forEach(optKey => {
+                    // 2. Update button disabled/enabled & active states based on upstream selections
+                    optionKeys.forEach((optKey, idx) => {
                         const optVals = options[optKey] || [];
                         const safeKey = optKey.replace(/[^a-zA-Z0-9_-]/g, '-');
                         const flex = document.getElementById(`options-flex-${safeKey}`);
                         if (!flex) return;
 
-                        const otherSelections = { ...selectedOptions };
-                        delete otherSelections[optKey];
+                        // Only upstream selections and solitary groups constrain this group's options
+                        const constrainingSelections = {};
+                        optionKeys.forEach((k, kIdx) => {
+                            if (k === optKey) return;
+                            const isSolitary = (options[k] || []).length === 1;
+                            if ((kIdx < idx || isSolitary) && selectedOptions[k]) {
+                                constrainingSelections[k] = selectedOptions[k];
+                            }
+                        });
 
                         const btns = flex.querySelectorAll('.config-btn');
                         btns.forEach(btn => {
@@ -1299,7 +1321,7 @@
                             const valObj = optVals.find(v => String(v.id) === optId);
 
                             const isAvailable = valObj
-                                ? isCombinationAvailable(optKey, valObj, otherSelections, skuMatrix, options)
+                                ? isCombinationAvailable(optKey, valObj, constrainingSelections, skuMatrix, options)
                                 : true;
 
                             if (!isAvailable) {
