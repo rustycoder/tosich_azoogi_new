@@ -222,26 +222,26 @@
 
     <!-- ========== RELATED PROJECTS GALLERY ========== -->
     <!-- <section class="related-projects-section">
-                                          <div class="wrap">
-                                            <h3>Featured Project Applications</h3>
-                                            <div class="projects-small-grid">
-                                              <div class="proj-small-card">
-                                                <img src="/assets/img/img-1.jpg" alt="Zushi Restaurant">
-                                                <div class="proj-small-overlay">
-                                                  <small>Hospitality · Sydney</small>
-                                                  <h4>Zushi Restaurant Custom Facade Outlines</h4>
+                                              <div class="wrap">
+                                                <h3>Featured Project Applications</h3>
+                                                <div class="projects-small-grid">
+                                                  <div class="proj-small-card">
+                                                    <img src="/assets/img/img-1.jpg" alt="Zushi Restaurant">
+                                                    <div class="proj-small-overlay">
+                                                      <small>Hospitality · Sydney</small>
+                                                      <h4>Zushi Restaurant Custom Facade Outlines</h4>
+                                                    </div>
+                                                  </div>
+                                                  <div class="proj-small-card">
+                                                    <img src="/assets/img/eve.jpg" alt="The Eve Hotel">
+                                                    <div class="proj-small-overlay">
+                                                      <small>Commercial · Redfern</small>
+                                                      <h4>The Eve Hotel Curved Lounge Cove Illumination</h4>
+                                                    </div>
+                                                  </div>
                                                 </div>
                                               </div>
-                                              <div class="proj-small-card">
-                                                <img src="/assets/img/eve.jpg" alt="The Eve Hotel">
-                                                <div class="proj-small-overlay">
-                                                  <small>Commercial · Redfern</small>
-                                                  <h4>The Eve Hotel Curved Lounge Cove Illumination</h4>
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </section> -->
+                                            </section> -->
 
     <!-- ========== B2B INQUIRY FORM SECTION ========== -->
     <section class="quote-section" id="quote-section-anchor">
@@ -802,22 +802,22 @@
                 categorySegments = Array.from(new Set(categorySegments));
 
                 let breadcrumbHTML = `
-                                                                                                                                                  <a href="/">Home</a>
-                                                                                                                                                  <span>/</span>
-                                                                                                                                                  <a href="/products">Products</a>
-                                                                                                                                                `;
+                                                                                                                                                          <a href="/">Home</a>
+                                                                                                                                                          <span>/</span>
+                                                                                                                                                          <a href="/products">Products</a>
+                                                                                                                                                        `;
 
                 categorySegments.forEach(seg => {
                     breadcrumbHTML += `
-                                                                                                                                                      <span>/</span>
-                                                                                                                                                      <a href="/products?category=${encodeURIComponent(seg)}">${seg}</a>
-                                                                                                                                                    `;
+                                                                                                                                                              <span>/</span>
+                                                                                                                                                              <a href="/products?category=${encodeURIComponent(seg)}">${seg}</a>
+                                                                                                                                                            `;
                 });
 
                 breadcrumbHTML += `
-                                                                                                                                                  <span>/</span>
-                                                                                                                                                  <span style="color: var(--ink);">${pName}</span>
-                                                                                                                                                `;
+                                                                                                                                                          <span>/</span>
+                                                                                                                                                          <span style="color: var(--ink);">${pName}</span>
+                                                                                                                                                        `;
 
                 breadcrumbsEl.innerHTML = breadcrumbHTML;
 
@@ -937,16 +937,16 @@
                             '/assets/logo_dark.png';
                         const fallbackStyle = isFallback ? ' filter: grayscale(100%); opacity: 0.7;' : '';
                         return `
-                                                                                                                                                        <div class="prod-card" onclick="window.location.href='${detailUrl}'">
-                                                                                                                                                          <div class="prod-card-img">
-                                                                                                                                                            <img class="prod-swatch${isFallback ? ' is-fallback' : ''}" src="${p.img || '/assets/bg_default.png'}" alt="${p.name || 'Recommended Product'}" loading="lazy" onerror="this.onerror=null; this.src='/assets/bg_default.png'; this.classList.add('is-fallback');" style="${fallbackStyle}">
-                                                                                                                                                          </div>
-                                                                                                                                                          <div class="prod-card-title">
-                                                                                                                                                            <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}${codeHtml}</div>
-                                                                                                                                                            <button class="add-quote-btn" aria-label="Add to quote" data-quote-id="${p.id || p.sku || p.name || ''}" data-quote-name="${p.name || ''}" data-quote-sku="${primaryProductCode(p.sku)}" data-quote-image="${p.img || ''}" data-quote-url="${detailUrl}" onclick="event.stopPropagation();">+</button>
-                                                                                                                                                          </div>
-                                                                                                                                                        </div>
-                                                                                                                                                      `;
+                                                                                                                                                                <div class="prod-card" onclick="window.location.href='${detailUrl}'">
+                                                                                                                                                                  <div class="prod-card-img">
+                                                                                                                                                                    <img class="prod-swatch${isFallback ? ' is-fallback' : ''}" src="${p.img || '/assets/bg_default.png'}" alt="${p.name || 'Recommended Product'}" loading="lazy" onerror="this.onerror=null; this.src='/assets/bg_default.png'; this.classList.add('is-fallback');" style="${fallbackStyle}">
+                                                                                                                                                                  </div>
+                                                                                                                                                                  <div class="prod-card-title">
+                                                                                                                                                                    <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}${codeHtml}</div>
+                                                                                                                                                                    <button class="add-quote-btn" aria-label="Add to quote" data-quote-id="${p.id || p.sku || p.name || ''}" data-quote-name="${p.name || ''}" data-quote-sku="${primaryProductCode(p.sku)}" data-quote-image="${p.img || ''}" data-quote-url="${detailUrl}" onclick="event.stopPropagation();">+</button>
+                                                                                                                                                                  </div>
+                                                                                                                                                                </div>
+                                                                                                                                                              `;
                     }).join('');
                 }
 
@@ -1166,7 +1166,7 @@
                     if (optionsGridLayout) optionsGridLayout.style.gridTemplateColumns = '1.25fr 0.75fr';
 
                     configurator.innerHTML =
-                        '<div class="reset-selection" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;"><h3 style="font-family: var(--font-serif); font-size: 28px; margin: 0;">Product Configuration</h3><a href="#" id="btn-clear-selection" class="btn sm" style="display: flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" zoomAndPan="magnify" viewBox="0 0 97.5 129.000003" height="15" preserveAspectRatio="xMidYMid meet" version="1.0"><defs><g/><clipPath id="19baf0d6ae"><path d="M 0.125 19.070312 L 96.527344 19.070312 L 96.527344 115.472656 L 0.125 115.472656 Z M 0.125 19.070312 " clip-rule="nonzero"/></clipPath><clipPath id="79dc47164a"><path d="M 48.328125 19.070312 C 21.707031 19.070312 0.125 40.648438 0.125 67.269531 C 0.125 93.890625 21.707031 115.472656 48.328125 115.472656 C 74.949219 115.472656 96.527344 93.890625 96.527344 67.269531 C 96.527344 40.648438 74.949219 19.070312 48.328125 19.070312 Z M 48.328125 19.070312 " clip-rule="nonzero"/></clipPath><clipPath id="19295492b8"><rect x="0" width="42" y="0" height="91"/></clipPath></defs><g clip-path="url(#19baf0d6ae)"><g clip-path="url(#79dc47164a)"><path stroke-linecap="butt" transform="matrix(0.744231, 0, 0, 0.744231, 0.126922, 19.070008)" fill="none" stroke-linejoin="miter" d="M 64.766476 0.000409245 C 28.99653 0.000409245 -0.00258246 28.994273 -0.00258246 64.764219 C -0.00258246 100.534164 28.99653 129.533277 64.766476 129.533277 C 100.536421 129.533277 129.530285 100.534164 129.530285 64.764219 C 129.530285 28.994273 100.536421 0.000409245 64.766476 0.000409245 Z M 64.766476 0.000409245 " stroke="#000000" stroke-width="24" stroke-opacity="1" stroke-miterlimit="4"/></g></g><g transform="matrix(1, 0, 0, 1, 27, 18)"><g clip-path="url(#19295492b8)"><g fill="#000000" fill-opacity="1"><g transform="translate(1.141728, 69.356989)"><g><path d="M 7.015625 0.375 C 6.015625 0.375 5.226562 0.0585938 4.65625 -0.5625 C 4.09375 -1.1875 3.8125 -2.019531 3.8125 -3.0625 C 3.8125 -3.8125 4.054688 -4.507812 4.546875 -5.15625 L 16.125 -18.8125 L 4.546875 -32.921875 C 4.003906 -33.617188 3.734375 -34.335938 3.734375 -35.078125 C 3.734375 -36.078125 4.054688 -36.882812 4.703125 -37.5 C 5.347656 -38.125 6.144531 -38.4375 7.09375 -38.4375 C 8.28125 -38.4375 9.175781 -38.015625 9.78125 -37.171875 L 20.234375 -24.265625 L 30.609375 -37.171875 C 31.203125 -38.015625 32.070312 -38.4375 33.21875 -38.4375 C 34.207031 -38.4375 35.023438 -38.125 35.671875 -37.5 C 36.328125 -36.882812 36.65625 -36.128906 36.65625 -35.234375 C 36.65625 -34.484375 36.40625 -33.785156 35.90625 -33.140625 L 24.109375 -19.25 L 35.75 -5.21875 C 36.300781 -4.625 36.578125 -3.90625 36.578125 -3.0625 C 36.578125 -2.113281 36.273438 -1.300781 35.671875 -0.625 C 35.078125 0.0390625 34.234375 0.375 33.140625 0.375 C 32.046875 0.375 31.175781 -0.0703125 30.53125 -0.96875 L 19.921875 -13.65625 L 9.921875 -1.125 C 9.179688 -0.125 8.210938 0.375 7.015625 0.375 Z M 7.015625 0.375 "/></g></g></g></g></g></svg>Reset Selection</a></div>';
+                        '<div class="reset-selection" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;"><h3 style="font-family: var(--font-serif); font-size: 28px; margin: 0;">Product Configuration</h3><a href="#" id="btn-clear-selection" class="btn sm" style="display: flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" zoomAndPan="magnify" viewBox="0 0 97.5 129.000003" height="18" preserveAspectRatio="xMidYMid meet" version="1.0"><defs><g/><clipPath id="19baf0d6ae"><path d="M 0.125 19.070312 L 96.527344 19.070312 L 96.527344 115.472656 L 0.125 115.472656 Z M 0.125 19.070312 " clip-rule="nonzero"/></clipPath><clipPath id="79dc47164a"><path d="M 48.328125 19.070312 C 21.707031 19.070312 0.125 40.648438 0.125 67.269531 C 0.125 93.890625 21.707031 115.472656 48.328125 115.472656 C 74.949219 115.472656 96.527344 93.890625 96.527344 67.269531 C 96.527344 40.648438 74.949219 19.070312 48.328125 19.070312 Z M 48.328125 19.070312 " clip-rule="nonzero"/></clipPath><clipPath id="19295492b8"><rect x="0" width="42" y="0" height="91"/></clipPath></defs><g clip-path="url(#19baf0d6ae)"><g clip-path="url(#79dc47164a)"><path stroke-linecap="butt" transform="matrix(0.744231, 0, 0, 0.744231, 0.126922, 19.070008)" fill="none" stroke-linejoin="miter" d="M 64.766476 0.000409245 C 28.99653 0.000409245 -0.00258246 28.994273 -0.00258246 64.764219 C -0.00258246 100.534164 28.99653 129.533277 64.766476 129.533277 C 100.536421 129.533277 129.530285 100.534164 129.530285 64.764219 C 129.530285 28.994273 100.536421 0.000409245 64.766476 0.000409245 Z M 64.766476 0.000409245 " stroke="currentColor" stroke-width="24" stroke-opacity="1" stroke-miterlimit="4"/></g></g><g transform="matrix(1, 0, 0, 1, 27, 18)"><g clip-path="url(#19295492b8)"><g fill="currentColor" fill-opacity="1"><g transform="translate(1.141728, 69.356989)"><g><path d="M 7.015625 0.375 C 6.015625 0.375 5.226562 0.0585938 4.65625 -0.5625 C 4.09375 -1.1875 3.8125 -2.019531 3.8125 -3.0625 C 3.8125 -3.8125 4.054688 -4.507812 4.546875 -5.15625 L 16.125 -18.8125 L 4.546875 -32.921875 C 4.003906 -33.617188 3.734375 -34.335938 3.734375 -35.078125 C 3.734375 -36.078125 4.054688 -36.882812 4.703125 -37.5 C 5.347656 -38.125 6.144531 -38.4375 7.09375 -38.4375 C 8.28125 -38.4375 9.175781 -38.015625 9.78125 -37.171875 L 20.234375 -24.265625 L 30.609375 -37.171875 C 31.203125 -38.015625 32.070312 -38.4375 33.21875 -38.4375 C 34.207031 -38.4375 35.023438 -38.125 35.671875 -37.5 C 36.328125 -36.882812 36.65625 -36.128906 36.65625 -35.234375 C 36.65625 -34.484375 36.40625 -33.785156 35.90625 -33.140625 L 24.109375 -19.25 L 35.75 -5.21875 C 36.300781 -4.625 36.578125 -3.90625 36.578125 -3.0625 C 36.578125 -2.113281 36.273438 -1.300781 35.671875 -0.625 C 35.078125 0.0390625 34.234375 0.375 33.140625 0.375 C 32.046875 0.375 31.175781 -0.0703125 30.53125 -0.96875 L 19.921875 -13.65625 L 9.921875 -1.125 C 9.179688 -0.125 8.210938 0.375 7.015625 0.375 Z M 7.015625 0.375 "/></g></g></g></g></g></svg>Reset Selection</a></div>';
 
                     const clearBtn = document.getElementById('btn-clear-selection');
                     if (clearBtn) {
@@ -1189,11 +1189,11 @@
                         group.className = 'config-group';
 
                         group.innerHTML = `
-                                                                                                                                                      <div class="config-group-title">
-                                                                                                                                                        <span>${optKey}</span>
-                                                                                                                                                      </div>
-                                                                                                                                                      <div class="config-options-flex" id="options-flex-${safeKey}" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
-                                                                                                                                                    `;
+                                                                                                                                                              <div class="config-group-title">
+                                                                                                                                                                <span>${optKey}</span>
+                                                                                                                                                              </div>
+                                                                                                                                                              <div class="config-options-flex" id="options-flex-${safeKey}" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+                                                                                                                                                            `;
                         configurator.appendChild(group);
 
                         const flex = group.querySelector(`#options-flex-${safeKey}`);
@@ -1278,11 +1278,11 @@
                     if (iconUrls.length > 0) {
                         if (iconsWrapper) iconsWrapper.style.display = 'block';
                         iconsRow.innerHTML = iconUrls.map((url, idx) => `
-                                                                                                                                                    <img src="${resolveImg(url)}" alt="Product Icon ${idx + 1}"
-                                                                                                                                                      style="height: 42px; width: auto; opacity: 0.85; transition: opacity 0.2s; max-width: 100px; object-fit: contain;"
-                                                                                                                                                      onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"
-                                                                                                                                                      onerror="this.style.display='none'">
-                                                                                                                                                  `).join('');
+                                                                                                                                                            <img src="${resolveImg(url)}" alt="Product Icon ${idx + 1}"
+                                                                                                                                                              style="height: 42px; width: auto; opacity: 0.85; transition: opacity 0.2s; max-width: 100px; object-fit: contain;"
+                                                                                                                                                              onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"
+                                                                                                                                                              onerror="this.style.display='none'">
+                                                                                                                                                          `).join('');
                     } else {
                         if (iconsWrapper) iconsWrapper.style.display = 'none';
                         iconsRow.innerHTML = '';
@@ -1558,9 +1558,9 @@
                                 modelDiv.style.borderBottom = '1px solid var(--line)';
                                 modelDiv.style.paddingBottom = '8px';
                                 modelDiv.innerHTML = `
-                                                                                      <strong style="color: var(--ink);">PRODUCT CODE:</strong>
-                                                                                      <span style="color: var(--accent); font-weight: 600;">${skuDisplay}</span>
-                                                                                    `;
+                                                                                              <strong style="color: var(--ink);">PRODUCT CODE:</strong>
+                                                                                              <span style="color: var(--accent); font-weight: 600;">${skuDisplay}</span>
+                                                                                            `;
                                 summaryListEl.appendChild(modelDiv);
                             }
 
@@ -1578,9 +1578,9 @@
                                     itemDiv.style.fontSize = '12px';
                                     itemDiv.style.marginBottom = '4px';
                                     itemDiv.innerHTML = `
-                                                                                        <span style="font-weight: 500; text-transform: capitalize; color: var(--muted);">${key}:</span>
-                                                                                        <span style="color: var(--ink); font-weight: 600;">${valObj.name}</span>
-                                                                                      `;
+                                                                                                <span style="font-weight: 500; text-transform: capitalize; color: var(--muted);">${key}:</span>
+                                                                                                <span style="color: var(--ink); font-weight: 600;">${valObj.name}</span>
+                                                                                              `;
                                     summaryListEl.appendChild(itemDiv);
                                 }
                             }

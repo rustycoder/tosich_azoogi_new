@@ -917,15 +917,26 @@ a.meta-badge:hover {
   font-size: 10px;
   padding: 5px 10px !important;
   display: flex;
+  align-items: center;
+  gap: 6px;
   transition: all .3s;
 }
 
-.reset-selection a:hover svg {
-  fill: var(--pure-bg);
+.reset-selection a svg {
+  transition: stroke 0.3s ease, fill 0.3s ease;
 }
 
-.reset-selection a svg {
-  padding-right: 5px;
+.reset-selection a svg path,
+.reset-selection a svg g {
+  transition: stroke 0.3s ease, fill 0.3s ease;
+}
+
+.reset-selection a:hover svg path {
+  stroke: var(--always-white, #ffffff) !important;
+}
+
+.reset-selection a:hover svg g {
+  fill: var(--always-white, #ffffff) !important;
 }
 
 /* Configurator Button Disabled State */
