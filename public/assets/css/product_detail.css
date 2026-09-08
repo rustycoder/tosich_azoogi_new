@@ -617,7 +617,7 @@ a.meta-badge:hover {
 }
 
 .product-icons-row img {
-  height: 48px !important;
+  height: 54px !important;
   width: auto;
 }
 
@@ -1300,6 +1300,7 @@ a.meta-badge:hover {
 }
 
 @media (max-width: 640px) {
+
   .datasheet-dialog-head,
   .datasheet-dialog-form {
     padding-left: 20px;
