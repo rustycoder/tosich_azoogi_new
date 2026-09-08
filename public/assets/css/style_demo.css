@@ -1919,7 +1919,11 @@ footer {
     }
 
     .util .top-con {
-        display: none;
+        display: none !important;
+    }
+
+    .util-inner {
+        text-align: center;
     }
 
     .burger {

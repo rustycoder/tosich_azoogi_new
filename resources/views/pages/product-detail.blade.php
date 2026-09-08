@@ -140,10 +140,12 @@
                         <!-- PRODUCT SPECIFICATION DOWNLOAD OPTION START -->
                         <div class="specification-download-section" id="specification-download-section"
                             style="margin-top: 0; padding-top: 0; margin-bottom: 0; display: none;">
-                            <h3 id="downloadable-resources-title" style="font-family: var(--font-serif); font-size: 24px; margin-bottom: 20px;">Downloadable
+                            <h3 id="downloadable-resources-title"
+                                style="font-family: var(--font-serif); font-size: 24px; margin-bottom: 20px;">Downloadable
                                 Resources
                             </h3>
-                            <div class="download-options" id="download-resources-list" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                            <div class="download-options" id="download-resources-list"
+                                style="display: flex; gap: 16px; flex-wrap: wrap;">
                             </div>
                         </div>
                         <!-- PRODUCT SPECIFICATION DOWNLOAD OPTION END -->
@@ -166,11 +168,11 @@
                         <!-- ACTION BUTTONS -->
                         <div class="gallery-actions"
                             style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
-                            <button type="button" id="download-custom-datasheet" class="btn --accent"
-                                disabled aria-disabled="true" title="Select configuration options first"
+                            <button type="button" id="download-custom-datasheet" class="btn --accent" disabled
+                                aria-disabled="true" title="Select configuration options first"
                                 style="display:flex; align-items:center; justify-content:center; gap:8px; width: 100%;">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    width="18" height="18">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18"
+                                    height="18">
                                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                                     <polyline points="7 10 12 15 17 10" />
                                     <line x1="12" y1="15" x2="12" y2="3" />
@@ -220,26 +222,26 @@
 
     <!-- ========== RELATED PROJECTS GALLERY ========== -->
     <!-- <section class="related-projects-section">
-              <div class="wrap">
-                <h3>Featured Project Applications</h3>
-                <div class="projects-small-grid">
-                  <div class="proj-small-card">
-                    <img src="/assets/img/img-1.jpg" alt="Zushi Restaurant">
-                    <div class="proj-small-overlay">
-                      <small>Hospitality · Sydney</small>
-                      <h4>Zushi Restaurant Custom Facade Outlines</h4>
-                    </div>
-                  </div>
-                  <div class="proj-small-card">
-                    <img src="/assets/img/eve.jpg" alt="The Eve Hotel">
-                    <div class="proj-small-overlay">
-                      <small>Commercial · Redfern</small>
-                      <h4>The Eve Hotel Curved Lounge Cove Illumination</h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section> -->
+                                          <div class="wrap">
+                                            <h3>Featured Project Applications</h3>
+                                            <div class="projects-small-grid">
+                                              <div class="proj-small-card">
+                                                <img src="/assets/img/img-1.jpg" alt="Zushi Restaurant">
+                                                <div class="proj-small-overlay">
+                                                  <small>Hospitality · Sydney</small>
+                                                  <h4>Zushi Restaurant Custom Facade Outlines</h4>
+                                                </div>
+                                              </div>
+                                              <div class="proj-small-card">
+                                                <img src="/assets/img/eve.jpg" alt="The Eve Hotel">
+                                                <div class="proj-small-overlay">
+                                                  <small>Commercial · Redfern</small>
+                                                  <h4>The Eve Hotel Curved Lounge Cove Illumination</h4>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </section> -->
 
     <!-- ========== B2B INQUIRY FORM SECTION ========== -->
     <section class="quote-section" id="quote-section-anchor">
@@ -284,13 +286,15 @@
                             <div class="form-group">
                                 <label class="form-label" for="quote-project">Project Name *</label>
                                 <input class="form-input" id="quote-project" name="quote-project" type="text" required
-                                    maxlength="191" placeholder="e.g. Sydney Office fitout" value="{{ old('quote-project') }}">
+                                    maxlength="191" placeholder="e.g. Sydney Office fitout"
+                                    value="{{ old('quote-project') }}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label" for="quote-spec">Configured Specification *</label>
-                            <textarea class="form-textarea" id="quote-spec" name="quote-spec" required readonly wrap="off" rows="10"
+                            <textarea class="form-textarea" id="quote-spec" name="quote-spec" required readonly wrap="off"
+                                rows="10"
                                 style="opacity: 0.8; background: var(--rgba-hover); cursor: not-allowed;">{{ old('quote-spec') }}</textarea>
                         </div>
 
@@ -316,19 +320,23 @@
         <div class="datasheet-dialog-panel">
             <header class="datasheet-dialog-head">
                 <h2 id="datasheet-export-title">Download custom datasheet</h2>
-                <button type="button" class="datasheet-dialog-close" id="datasheet-export-close" aria-label="Close">&times;</button>
+                <button type="button" class="datasheet-dialog-close" id="datasheet-export-close"
+                    aria-label="Close">&times;</button>
             </header>
-            <form id="datasheet-export-form" class="datasheet-dialog-form" method="post" action="{{ route('products.datasheet.store') }}">
+            <form id="datasheet-export-form" class="datasheet-dialog-form" method="post"
+                action="{{ route('products.datasheet.store') }}">
                 @csrf
                 <p class="datasheet-dialog-lead">Enter the project and client name. Both are saved with the export.</p>
                 <div class="form-group">
                     <label class="form-label" for="datasheet-project-name">Project name *</label>
-                    <input class="form-input" id="datasheet-project-name" name="project_name" type="text" required maxlength="191" placeholder="e.g. White City" autocomplete="organization">
+                    <input class="form-input" id="datasheet-project-name" name="project_name" type="text" required
+                        maxlength="191" placeholder="e.g. White City" autocomplete="organization">
                     <p class="datasheet-field-error" data-error-for="project_name" hidden></p>
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="datasheet-person-name">Client name *</label>
-                    <input class="form-input" id="datasheet-person-name" name="person_name" type="text" required maxlength="191" placeholder="e.g. Alex Chen" autocomplete="name">
+                    <input class="form-input" id="datasheet-person-name" name="person_name" type="text" required
+                        maxlength="191" placeholder="e.g. Alex Chen" autocomplete="name">
                     <p class="datasheet-field-error" data-error-for="person_name" hidden></p>
                 </div>
                 <p class="datasheet-field-error" data-error-for="form" hidden></p>
@@ -348,7 +356,7 @@
             document.getElementById('topbar')?.classList.add('solid');
 
             /* ===== Mega Menu Tabs ===== */
-            (function() {
+            (function () {
                 const tabs = document.querySelectorAll('.mega-tab');
                 const panels = document.querySelectorAll('.mega-panel');
 
@@ -373,7 +381,7 @@
                 }
 
             })
-            ();
+                ();
 
             document.addEventListener("DOMContentLoaded", () => {
                 document.querySelectorAll('.logo img').forEach((img) => {
@@ -626,7 +634,7 @@
                 // Check if a candidate option value is available given other current selections
                 function isCombinationAvailable(testingKey, testingValObj, existingSelections, skuMatrix, allOptions) {
                     const candidateSelections = { ...existingSelections, [testingKey]: testingValObj.id };
-                    const candidateEntries = Object.entries(candidateSelections).filter(([k, v]) => 
+                    const candidateEntries = Object.entries(candidateSelections).filter(([k, v]) =>
                         v !== undefined && v !== null && String(v).trim() !== ''
                     );
 
@@ -794,22 +802,22 @@
                 categorySegments = Array.from(new Set(categorySegments));
 
                 let breadcrumbHTML = `
-                                                                                          <a href="/">Home</a>
-                                                                                          <span>/</span>
-                                                                                          <a href="/products">Products</a>
-                                                                                        `;
+                                                                                                                                                  <a href="/">Home</a>
+                                                                                                                                                  <span>/</span>
+                                                                                                                                                  <a href="/products">Products</a>
+                                                                                                                                                `;
 
                 categorySegments.forEach(seg => {
                     breadcrumbHTML += `
-                                                                                              <span>/</span>
-                                                                                              <a href="/products?category=${encodeURIComponent(seg)}">${seg}</a>
-                                                                                            `;
+                                                                                                                                                      <span>/</span>
+                                                                                                                                                      <a href="/products?category=${encodeURIComponent(seg)}">${seg}</a>
+                                                                                                                                                    `;
                 });
 
                 breadcrumbHTML += `
-                                                                                          <span>/</span>
-                                                                                          <span style="color: var(--ink);">${pName}</span>
-                                                                                        `;
+                                                                                                                                                  <span>/</span>
+                                                                                                                                                  <span style="color: var(--ink);">${pName}</span>
+                                                                                                                                                `;
 
                 breadcrumbsEl.innerHTML = breadcrumbHTML;
 
@@ -833,7 +841,7 @@
                         raw = source.sku;
                     }
                     if (Array.isArray(raw)) {
-                        raw = raw.map(function(v) {
+                        raw = raw.map(function (v) {
                             return (v && typeof v === 'object' && v.value !== undefined) ? v.value : v;
                         }).filter(Boolean).join(', ');
                     } else if (raw && typeof raw === 'object' && raw.value !== undefined) {
@@ -929,16 +937,16 @@
                             '/assets/logo_dark.png';
                         const fallbackStyle = isFallback ? ' filter: grayscale(100%); opacity: 0.7;' : '';
                         return `
-                                                                                                <div class="prod-card" onclick="window.location.href='${detailUrl}'">
-                                                                                                  <div class="prod-card-img">
-                                                                                                    <img class="prod-swatch${isFallback ? ' is-fallback' : ''}" src="${p.img || '/assets/bg_default.png'}" alt="${p.name || 'Recommended Product'}" loading="lazy" onerror="this.onerror=null; this.src='/assets/bg_default.png'; this.classList.add('is-fallback');" style="${fallbackStyle}">
-                                                                                                  </div>
-                                                                                                  <div class="prod-card-title">
-                                                                                                    <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}${codeHtml}</div>
-                                                                                                    <button class="add-quote-btn" aria-label="Add to quote" data-quote-id="${p.id || p.sku || p.name || ''}" data-quote-name="${p.name || ''}" data-quote-sku="${primaryProductCode(p.sku)}" data-quote-image="${p.img || ''}" data-quote-url="${detailUrl}" onclick="event.stopPropagation();">+</button>
-                                                                                                  </div>
-                                                                                                </div>
-                                                                                              `;
+                                                                                                                                                        <div class="prod-card" onclick="window.location.href='${detailUrl}'">
+                                                                                                                                                          <div class="prod-card-img">
+                                                                                                                                                            <img class="prod-swatch${isFallback ? ' is-fallback' : ''}" src="${p.img || '/assets/bg_default.png'}" alt="${p.name || 'Recommended Product'}" loading="lazy" onerror="this.onerror=null; this.src='/assets/bg_default.png'; this.classList.add('is-fallback');" style="${fallbackStyle}">
+                                                                                                                                                          </div>
+                                                                                                                                                          <div class="prod-card-title">
+                                                                                                                                                            <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}${codeHtml}</div>
+                                                                                                                                                            <button class="add-quote-btn" aria-label="Add to quote" data-quote-id="${p.id || p.sku || p.name || ''}" data-quote-name="${p.name || ''}" data-quote-sku="${primaryProductCode(p.sku)}" data-quote-image="${p.img || ''}" data-quote-url="${detailUrl}" onclick="event.stopPropagation();">+</button>
+                                                                                                                                                          </div>
+                                                                                                                                                        </div>
+                                                                                                                                                      `;
                     }).join('');
                 }
 
@@ -1029,7 +1037,7 @@
                         thumbImg.src = localSrc;
                         thumbImg.alt = item.isDimension ? 'Product Dimension Diagram' : `Product Thumbnail ${idx + 1}`;
                         if (!item.isDimension && (localSrc === '/assets/bg_default.png' || localSrc ===
-                                '/assets/logo_dark.png')) {
+                            '/assets/logo_dark.png')) {
                             thumbImg.style.filter = 'grayscale(100%)';
                         }
                         thumbImg.onerror = () => {
@@ -1158,7 +1166,7 @@
                     if (optionsGridLayout) optionsGridLayout.style.gridTemplateColumns = '1.25fr 0.75fr';
 
                     configurator.innerHTML =
-                        '<div class="reset-selection" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;"><h3 style="font-family: var(--font-serif); font-size: 28px; margin: 0;">Product Configuration</h3><a href="#" id="btn-clear-selection" class="btn sm" style="display: flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" height="15px" viewBox="0 -960 960 960" fill="currentColor"><path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>Reset Selection</a></div>';
+                        '<div class="reset-selection" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;"><h3 style="font-family: var(--font-serif); font-size: 28px; margin: 0;">Product Configuration</h3><a href="#" id="btn-clear-selection" class="btn sm" style="display: flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" zoomAndPan="magnify" viewBox="0 0 97.5 129.000003" height="15" preserveAspectRatio="xMidYMid meet" version="1.0"><defs><g/><clipPath id="19baf0d6ae"><path d="M 0.125 19.070312 L 96.527344 19.070312 L 96.527344 115.472656 L 0.125 115.472656 Z M 0.125 19.070312 " clip-rule="nonzero"/></clipPath><clipPath id="79dc47164a"><path d="M 48.328125 19.070312 C 21.707031 19.070312 0.125 40.648438 0.125 67.269531 C 0.125 93.890625 21.707031 115.472656 48.328125 115.472656 C 74.949219 115.472656 96.527344 93.890625 96.527344 67.269531 C 96.527344 40.648438 74.949219 19.070312 48.328125 19.070312 Z M 48.328125 19.070312 " clip-rule="nonzero"/></clipPath><clipPath id="19295492b8"><rect x="0" width="42" y="0" height="91"/></clipPath></defs><g clip-path="url(#19baf0d6ae)"><g clip-path="url(#79dc47164a)"><path stroke-linecap="butt" transform="matrix(0.744231, 0, 0, 0.744231, 0.126922, 19.070008)" fill="none" stroke-linejoin="miter" d="M 64.766476 0.000409245 C 28.99653 0.000409245 -0.00258246 28.994273 -0.00258246 64.764219 C -0.00258246 100.534164 28.99653 129.533277 64.766476 129.533277 C 100.536421 129.533277 129.530285 100.534164 129.530285 64.764219 C 129.530285 28.994273 100.536421 0.000409245 64.766476 0.000409245 Z M 64.766476 0.000409245 " stroke="#000000" stroke-width="24" stroke-opacity="1" stroke-miterlimit="4"/></g></g><g transform="matrix(1, 0, 0, 1, 27, 18)"><g clip-path="url(#19295492b8)"><g fill="#000000" fill-opacity="1"><g transform="translate(1.141728, 69.356989)"><g><path d="M 7.015625 0.375 C 6.015625 0.375 5.226562 0.0585938 4.65625 -0.5625 C 4.09375 -1.1875 3.8125 -2.019531 3.8125 -3.0625 C 3.8125 -3.8125 4.054688 -4.507812 4.546875 -5.15625 L 16.125 -18.8125 L 4.546875 -32.921875 C 4.003906 -33.617188 3.734375 -34.335938 3.734375 -35.078125 C 3.734375 -36.078125 4.054688 -36.882812 4.703125 -37.5 C 5.347656 -38.125 6.144531 -38.4375 7.09375 -38.4375 C 8.28125 -38.4375 9.175781 -38.015625 9.78125 -37.171875 L 20.234375 -24.265625 L 30.609375 -37.171875 C 31.203125 -38.015625 32.070312 -38.4375 33.21875 -38.4375 C 34.207031 -38.4375 35.023438 -38.125 35.671875 -37.5 C 36.328125 -36.882812 36.65625 -36.128906 36.65625 -35.234375 C 36.65625 -34.484375 36.40625 -33.785156 35.90625 -33.140625 L 24.109375 -19.25 L 35.75 -5.21875 C 36.300781 -4.625 36.578125 -3.90625 36.578125 -3.0625 C 36.578125 -2.113281 36.273438 -1.300781 35.671875 -0.625 C 35.078125 0.0390625 34.234375 0.375 33.140625 0.375 C 32.046875 0.375 31.175781 -0.0703125 30.53125 -0.96875 L 19.921875 -13.65625 L 9.921875 -1.125 C 9.179688 -0.125 8.210938 0.375 7.015625 0.375 Z M 7.015625 0.375 "/></g></g></g></g></g></svg>Reset Selection</a></div>';
 
                     const clearBtn = document.getElementById('btn-clear-selection');
                     if (clearBtn) {
@@ -1181,11 +1189,11 @@
                         group.className = 'config-group';
 
                         group.innerHTML = `
-                                                                                              <div class="config-group-title">
-                                                                                                <span>${optKey}</span>
-                                                                                              </div>
-                                                                                              <div class="config-options-flex" id="options-flex-${safeKey}" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
-                                                                                            `;
+                                                                                                                                                      <div class="config-group-title">
+                                                                                                                                                        <span>${optKey}</span>
+                                                                                                                                                      </div>
+                                                                                                                                                      <div class="config-options-flex" id="options-flex-${safeKey}" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+                                                                                                                                                    `;
                         configurator.appendChild(group);
 
                         const flex = group.querySelector(`#options-flex-${safeKey}`);
@@ -1250,7 +1258,7 @@
                     const features = product.product_features || {};
                     const rawIcons = product.technical_icons || product.product_icons || features["Technical Icons"] ||
                         features["Technical icons"] || features["technical_icons"] || features["Product Icons"] || features[
-                            "Product icons"] || features["product_icons"] || features["Icons"] || features["Icon"];
+                        "Product icons"] || features["product_icons"] || features["Icons"] || features["Icon"];
 
                     let iconUrls = [];
                     if (Array.isArray(rawIcons)) {
@@ -1270,11 +1278,11 @@
                     if (iconUrls.length > 0) {
                         if (iconsWrapper) iconsWrapper.style.display = 'block';
                         iconsRow.innerHTML = iconUrls.map((url, idx) => `
-                                                                                            <img src="${resolveImg(url)}" alt="Product Icon ${idx + 1}"
-                                                                                              style="height: 42px; width: auto; opacity: 0.85; transition: opacity 0.2s; max-width: 100px; object-fit: contain;"
-                                                                                              onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"
-                                                                                              onerror="this.style.display='none'">
-                                                                                          `).join('');
+                                                                                                                                                    <img src="${resolveImg(url)}" alt="Product Icon ${idx + 1}"
+                                                                                                                                                      style="height: 42px; width: auto; opacity: 0.85; transition: opacity 0.2s; max-width: 100px; object-fit: contain;"
+                                                                                                                                                      onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"
+                                                                                                                                                      onerror="this.style.display='none'">
+                                                                                                                                                  `).join('');
                     } else {
                         if (iconsWrapper) iconsWrapper.style.display = 'none';
                         iconsRow.innerHTML = '';
@@ -1550,9 +1558,9 @@
                                 modelDiv.style.borderBottom = '1px solid var(--line)';
                                 modelDiv.style.paddingBottom = '8px';
                                 modelDiv.innerHTML = `
-                              <strong style="color: var(--ink);">PRODUCT CODE:</strong>
-                              <span style="color: var(--accent); font-weight: 600;">${skuDisplay}</span>
-                            `;
+                                                                                      <strong style="color: var(--ink);">PRODUCT CODE:</strong>
+                                                                                      <span style="color: var(--accent); font-weight: 600;">${skuDisplay}</span>
+                                                                                    `;
                                 summaryListEl.appendChild(modelDiv);
                             }
 
@@ -1570,9 +1578,9 @@
                                     itemDiv.style.fontSize = '12px';
                                     itemDiv.style.marginBottom = '4px';
                                     itemDiv.innerHTML = `
-                                <span style="font-weight: 500; text-transform: capitalize; color: var(--muted);">${key}:</span>
-                                <span style="color: var(--ink); font-weight: 600;">${valObj.name}</span>
-                              `;
+                                                                                        <span style="font-weight: 500; text-transform: capitalize; color: var(--muted);">${key}:</span>
+                                                                                        <span style="color: var(--ink); font-weight: 600;">${valObj.name}</span>
+                                                                                      `;
                                     summaryListEl.appendChild(itemDiv);
                                 }
                             }
@@ -1664,7 +1672,7 @@
 
                 // Accordion Tab controllers
                 document.querySelectorAll('.tab-nav-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
+                    btn.addEventListener('click', function () {
                         document.querySelectorAll('.tab-nav-btn').forEach(b => b.classList.remove('active'));
                         document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
 
@@ -1676,7 +1684,7 @@
                 });
 
                 // Spec button click animation for both details and summary buttons
-                const handleSpecAdd = function() {
+                const handleSpecAdd = function () {
                     const originalText = this.textContent;
                     this.textContent = 'Added to Quote List!';
                     this.style.background = 'var(--rgba-hover)';
