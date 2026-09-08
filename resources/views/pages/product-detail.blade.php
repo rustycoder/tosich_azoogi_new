@@ -1142,14 +1142,6 @@
                         });
                     }
 
-                    // Pre-select inherently solitary option groups (options with only 1 choice)
-                    optionKeys.forEach(optKey => {
-                        const optVals = options[optKey] || [];
-                        if (optVals.length === 1 && !selectedOptions[optKey]) {
-                            selectedOptions[optKey] = String(optVals[0].id);
-                        }
-                    });
-
                     const features = product.product_features || {};
 
                     optionKeys.forEach(optKey => {
@@ -1540,6 +1532,15 @@
                 }
 
                 // Initialize
+                const initialOptions = product.options || {};
+                const initialOptionKeys = getOrderedOptionKeys(initialOptions);
+                initialOptionKeys.forEach(optKey => {
+                    const optVals = initialOptions[optKey] || [];
+                    if (optVals.length === 1 && !selectedOptions[optKey]) {
+                        selectedOptions[optKey] = String(optVals[0].id);
+                    }
+                });
+
                 renderGallery();
                 renderConfigurator();
                 renderProductIcons();
