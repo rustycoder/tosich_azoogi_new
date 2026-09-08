@@ -1915,6 +1915,10 @@ footer {
 
 @media (max-width: 1024px) {
     .util {
+        display: block;
+    }
+
+    .util .top-con {
         display: none;
     }
 
