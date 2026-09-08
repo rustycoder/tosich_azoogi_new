@@ -531,6 +531,60 @@
                         });
                     }
                 }
+                // Helper to check if product qualifies for Dimming Control options (NEON & Linear LED lights without Control Protocol)
+                function qualifiesForDimmingControl(prod, opts) {
+                    if (!prod) return false;
+                    const rawCategories = [];
+                    if (prod.category) rawCategories.push(String(prod.category));
+                    if (Array.isArray(prod.categories)) {
+                        prod.categories.forEach(c => rawCategories.push(String(c)));
+                    }
+                    if (Array.isArray(prod.category_path)) {
+                        prod.category_path.forEach(c => rawCategories.push(String(c)));
+                    }
+                    if (Array.isArray(prod.category_paths)) {
+                        prod.category_paths.flat().forEach(c => rawCategories.push(String(c)));
+                    }
+
+                    const catStr = rawCategories.join(' ').toLowerCase();
+                    const nameStr = String(prod.product_name || prod.name || '').toLowerCase();
+
+                    const isNeon = catStr.includes('neon') || nameStr.includes('neon');
+                    const isLinearOrStrip = catStr.includes('linear') || catStr.includes('strip') || catStr.includes('cob') ||
+                        catStr.includes('smd') || catStr.includes('lumoflex') || catStr.includes('flex') ||
+                        nameStr.includes('strip') || nameStr.includes('lumoflex') || nameStr.includes('cob') ||
+                        nameStr.includes('smd');
+
+                    const isExcluded = catStr.includes('profile') || catStr.includes('driver') || catStr.includes('accessories') ||
+                        catStr.includes('pool light') || catStr.includes('garden light') || catStr.includes('handrail') ||
+                        nameStr.includes('profile') || nameStr.includes('driver') || nameStr.includes('clip');
+
+                    if (!((isNeon || isLinearOrStrip) && !isExcluded)) return false;
+
+                    // Check if product already has "Control Protocol"
+                    if (opts) {
+                        for (const k in opts) {
+                            const lower = k.trim().toLowerCase();
+                            if (lower === 'control protocol' || lower === 'control_protocol' || lower === 'control') {
+                                if (Array.isArray(opts[k]) && opts[k].length > 0) return false;
+                            }
+                        }
+                    }
+
+                    return true;
+                }
+
+                if (qualifiesForDimmingControl(product, normalizedOptions)) {
+                    if (!normalizedOptions['Dimming Control']) {
+                        normalizedOptions['Dimming Control'] = [
+                            { id: 'dim-non', name: 'Non-Dimmable' },
+                            { id: 'dim-5in1', name: '5-in-1 Dimmable' },
+                            { id: 'dim-dali2', name: 'DALI-2' },
+                            { id: 'dim-casambi', name: 'CASAMBI' }
+                        ];
+                    }
+                }
+
                 product.options = normalizedOptions;
 
                 // Configuration state: starts unselected until the user picks options
@@ -1050,28 +1104,55 @@
                 // Helper to sort configurator option groups using Airtable Product Attributes order
                 function getOrderedOptionKeys(options) {
                     const rawKeys = Object.keys(options).filter(k => Array.isArray(options[k]) && options[k].length > 0);
-                    if (typeof AZOOGI_PRODUCTS !== 'undefined' && Array.isArray(AZOOGI_PRODUCTS.attribute_groups_order || AZOOGI_PRODUCTS.filterable_attributes)) {
-                        const masterOrder = AZOOGI_PRODUCTS.attribute_groups_order || AZOOGI_PRODUCTS.filterable_attributes;
-                        const orderMap = {};
-                        masterOrder.forEach((name, idx) => {
-                            orderMap[String(name).trim().toLowerCase()] = idx;
-                        });
-                        return rawKeys.slice().sort((a, b) => {
-                            const aIdx = orderMap.hasOwnProperty(a.trim().toLowerCase()) ? orderMap[a.trim().toLowerCase()] : 999999;
-                            const bIdx = orderMap.hasOwnProperty(b.trim().toLowerCase()) ? orderMap[b.trim().toLowerCase()] : 999999;
-                            if (aIdx !== bIdx) return aIdx - bIdx;
-                            return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
-                        });
-                    }
-                    return rawKeys;
+                    const masterOrder = (typeof AZOOGI_PRODUCTS !== 'undefined' && Array.isArray(AZOOGI_PRODUCTS.attribute_groups_order || AZOOGI_PRODUCTS.filterable_attributes))
+                        ? (AZOOGI_PRODUCTS.attribute_groups_order || AZOOGI_PRODUCTS.filterable_attributes)
+                        : [];
+                    const orderMap = {};
+                    masterOrder.forEach((name, idx) => {
+                        orderMap[String(name).trim().toLowerCase()] = idx;
+                    });
+
+                    return rawKeys.slice().sort((a, b) => {
+                        const aLower = a.trim().toLowerCase();
+                        const bLower = b.trim().toLowerCase();
+
+                        // Always place "Dimming Control" as the last option
+                        const aIsDimming = aLower === 'dimming control' || aLower === 'dimming';
+                        const bIsDimming = bLower === 'dimming control' || bLower === 'dimming';
+                        if (aIsDimming && !bIsDimming) return 1;
+                        if (!aIsDimming && bIsDimming) return -1;
+
+                        const aIdx = orderMap.hasOwnProperty(aLower) ? orderMap[aLower] : 999999;
+                        const bIdx = orderMap.hasOwnProperty(bLower) ? orderMap[bLower] : 999999;
+                        if (aIdx !== bIdx) return aIdx - bIdx;
+                        return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
+                    });
                 }
 
                 // Helper to sort configurator option values (buttons) using Airtable Product Attributes term order
                 function sortConfigOptionValues(groupKey, valList) {
                     if (!Array.isArray(valList)) return [];
+
+                    const targetLower = String(groupKey).trim().toLowerCase();
+                    if (targetLower === 'dimming control' || targetLower === 'dimming') {
+                        const dimmingRank = {
+                            'non-dimmable': 0,
+                            '5-in-1 dimmable': 1,
+                            'dali-2': 2,
+                            'casambi': 3
+                        };
+                        return valList.slice().sort((a, b) => {
+                            const aLower = String(a.name || '').trim().toLowerCase();
+                            const bLower = String(b.name || '').trim().toLowerCase();
+                            const aIdx = dimmingRank.hasOwnProperty(aLower) ? dimmingRank[aLower] : 99;
+                            const bIdx = dimmingRank.hasOwnProperty(bLower) ? dimmingRank[bLower] : 99;
+                            if (aIdx !== bIdx) return aIdx - bIdx;
+                            return (a.name || '').localeCompare(b.name || '');
+                        });
+                    }
+
                     let orderMap = null;
                     if (typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS.attribute_values_order) {
-                        const targetLower = String(groupKey).trim().toLowerCase();
                         for (const k in AZOOGI_PRODUCTS.attribute_values_order) {
                             if (k.trim().toLowerCase() === targetLower) {
                                 const list = AZOOGI_PRODUCTS.attribute_values_order[k];

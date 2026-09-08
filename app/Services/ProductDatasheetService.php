@@ -27,7 +27,7 @@ class ProductDatasheetService implements IProductDatasheetService
         'Optics' => ['Optics', 'Beam Angle', 'Beam'],
         'Color Temperature' => ['Color Temperature', 'Colour Temperature', 'CCT', 'Light Color'],
         'IP Rating' => ['IP Rating', 'IP'],
-        'Dimming' => ['Dimming', 'Dimmable', 'Dimming Type'],
+        'Dimming' => ['Dimming', 'Dimmable', 'Dimming Type', 'Dimming Control', 'Control Option'],
         'Mounting' => ['Mounting', 'Installation', 'Mount'],
         'Warranty' => ['Warranty'],
     ];

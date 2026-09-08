@@ -265,4 +265,37 @@ class ProductDatasheetTest extends TestCase
             ->assertOk()
             ->assertSeeInOrder(['>Datasheet</div>', 'Exports'], false);
     }
+
+    public function test_datasheet_maps_dimming_control_option_to_dimming_spec(): void
+    {
+        $product = Product::factory()->create([
+            'airtable_id' => 'recNeon01',
+            'product_name' => 'Mini Neon Side View',
+            'product_code' => 'SV1010-10W-3K-IP67',
+            'category' => 'Side View',
+            'status' => 'publish',
+            'product_features' => [
+                'Wattage' => [['value' => '10W']],
+                'Voltage' => [['value' => '24V']],
+            ],
+        ]);
+
+        $response = $this->postJson('/product-datasheet', [
+            'product_id' => 'recNeon01',
+            'project_name' => 'Harbour Penthouse',
+            'person_name' => 'Sarah Connor',
+            'product_code' => 'SV1010-10W-3K-IP67',
+            'selected_options' => [
+                'CCT' => '3000K',
+                'Dimming Control' => 'DALI-2',
+            ],
+        ]);
+
+        $response->assertOk();
+
+        $this->get($response->json('url'))
+            ->assertOk()
+            ->assertSee('<td>Dimming</td>', false)
+            ->assertSee('<td>DALI-2</td>', false);
+    }
 }
