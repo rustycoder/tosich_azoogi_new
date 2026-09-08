@@ -433,6 +433,10 @@ class AirtableDataExtractor:
             dimension_drawing = self.sanitize_field_value(fields.get("Product Dimension") or fields.get("Product dimension") or "")
             stocked_item = self.sanitize_field_value(fields.get("Stocked Item") or fields.get("Stock / Quantity") or "")
             datasheet = self.sanitize_field_value(fields.get("Datasheet") or "")
+            datasheet_file = self.sanitize_field_value(fields.get("Datasheet File") or "")
+            installation_guide_file = self.sanitize_field_value(fields.get("Installation Guide File") or "")
+            user_manual = self.sanitize_field_value(fields.get("User Manual") or "")
+            ies_file = self.sanitize_field_value(fields.get("IES File") or "")
             technical_icons = self.sanitize_field_value(fields.get("Technical Icons") or fields.get("Technical icons") or fields.get("Technical_Icons") or fields.get("Product Icons") or fields.get("Product icons") or "")
             meta_keywords = self.sanitize_field_value(fields.get("Meta Keywords") or fields.get("meta_keywords") or fields.get("Meta keywords") or fields.get("meta keywords") or "")
             supplier_name = self.sanitize_field_value(fields.get("Supplier Name") or "")
@@ -463,6 +467,10 @@ class AirtableDataExtractor:
                 "product_dimension": dimension_drawing,
                 "stocked_item": stocked_item,
                 "datasheet": datasheet,
+                "datasheet_file": datasheet_file,
+                "installation_guide_file": installation_guide_file,
+                "user_manual": user_manual,
+                "ies_file": ies_file,
                 "technical_icons": technical_icons,
                 "meta_keywords": meta_keywords,
                 "supplier_name": supplier_name,

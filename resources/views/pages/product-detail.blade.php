@@ -138,50 +138,12 @@
                         <!-- PRODUCT B2B ICONS ROW END -->
 
                         <!-- PRODUCT SPECIFICATION DOWNLOAD OPTION START -->
-                        <div class="specification-download-section"
-                            style="margin-top: 0; padding-top: 0; margin-bottom: 0;">
-                            <h3 style="font-family: var(--font-serif); font-size: 24px; margin-bottom: 20px;">Downloadable
+                        <div class="specification-download-section" id="specification-download-section"
+                            style="margin-top: 0; padding-top: 0; margin-bottom: 0; display: none;">
+                            <h3 id="downloadable-resources-title" style="font-family: var(--font-serif); font-size: 24px; margin-bottom: 20px;">Downloadable
                                 Resources
                             </h3>
-                            <div class="download-options" style="display: flex; gap: 16px; flex-wrap: wrap;">
-                                <a href="#" id="product-datasheet-link" class="btn --accent"
-                                    style="display:none; align-items:center; justify-content:center; gap:8px;"
-                                    target="_blank" rel="noopener noreferrer">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        width="18" height="18">
-                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                        <polyline points="7 10 12 15 17 10" />
-                                        <line x1="12" y1="15" x2="12" y2="3" />
-                                    </svg>
-                                    Datasheet
-                                </a>
-                                <!-- <a href="#" class="btn --accent"
-                                style="display:flex; align-items:center; justify-content:center; gap:8px;">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                  <polyline points="7 10 12 15 17 10" />
-                                  <line x1="12" y1="15" x2="12" y2="3" />
-                                </svg>
-                                Installation Guide
-                              </a>
-                              <a href="#" class="btn --accent"
-                                style="display:flex; align-items:center; justify-content:center; gap:8px;">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                  <polyline points="7 10 12 15 17 10" />
-                                  <line x1="12" y1="15" x2="12" y2="3" />
-                                </svg>
-                                User manual
-                              </a>
-                              <a href="#" class="btn --accent"
-                                style="display:flex; align-items:center; justify-content:center; gap:8px;">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                  <polyline points="7 10 12 15 17 10" />
-                                  <line x1="12" y1="15" x2="12" y2="3" />
-                                </svg>
-                                IES files
-                              </a> -->
+                            <div class="download-options" id="download-resources-list" style="display: flex; gap: 16px; flex-wrap: wrap;">
                             </div>
                         </div>
                         <!-- PRODUCT SPECIFICATION DOWNLOAD OPTION END -->
@@ -764,20 +726,6 @@
                 // Update Basic Info & Descriptions
                 if (productNameEl) productNameEl.textContent = pName;
 
-                const manufacturerDatasheet = document.getElementById('product-datasheet-link');
-                if (manufacturerDatasheet) {
-                    const sheets = Array.isArray(product.datasheet)
-                        ? product.datasheet
-                        : (product.datasheet ? [product.datasheet] : []);
-                    const sheetUrl = sheets.find((item) => typeof item === 'string' && /^https?:\/\//i.test(item));
-                    if (sheetUrl) {
-                        manufacturerDatasheet.href = sheetUrl;
-                        manufacturerDatasheet.style.display = 'flex';
-                    } else {
-                        manufacturerDatasheet.removeAttribute('href');
-                        manufacturerDatasheet.style.display = 'none';
-                    }
-                }
                 // if (productCodeEl) productCodeEl.textContent = sku ? `PRODUCT CODE: ${sku}` : `PRODUCT CODE: ${pName}`;
                 if (descEl) descEl.innerHTML = pLongDesc || pShortDesc ||
                     "Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.";
@@ -1333,6 +1281,90 @@
                     }
                 }
 
+                // Helper to extract a usable URL from an attachment field (string, array of strings/objects, or single object)
+                function extractFileUrl(fieldVal) {
+                    if (!fieldVal) return null;
+                    if (typeof fieldVal === 'string') {
+                        const trimmed = fieldVal.trim();
+                        if (/^(https?:\/\/|\/|assets\/)/i.test(trimmed)) return trimmed;
+                        return null;
+                    }
+                    if (Array.isArray(fieldVal)) {
+                        for (const item of fieldVal) {
+                            const url = extractFileUrl(item);
+                            if (url) return url;
+                        }
+                        return null;
+                    }
+                    if (typeof fieldVal === 'object' && fieldVal !== null) {
+                        if (fieldVal.url && typeof fieldVal.url === 'string') {
+                            return extractFileUrl(fieldVal.url);
+                        }
+                    }
+                    return null;
+                }
+
+                // Render Downloadable Resources section dynamically (Datasheet File, Installation Guide File, User Manual, IES File)
+                function renderDownloadableResources() {
+                    const sectionEl = document.getElementById('specification-download-section');
+                    const listEl = document.getElementById('download-resources-list');
+                    if (!sectionEl || !listEl) return;
+
+                    listEl.innerHTML = '';
+
+                    const features = product.product_features || {};
+
+                    // Resource definitions matching exact Airtable columns
+                    const resourceDefs = [
+                        {
+                            label: 'Datasheet',
+                            val: product.datasheet_file || features['Datasheet File'],
+                            iconSvg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`
+                        },
+                        {
+                            label: 'Installation Guide',
+                            val: product.installation_guide_file || features['Installation Guide File'],
+                            iconSvg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`
+                        },
+                        {
+                            label: 'User Manual',
+                            val: product.user_manual || features['User Manual'],
+                            iconSvg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`
+                        },
+                        {
+                            label: 'IES Files',
+                            val: product.ies_file || features['IES File'],
+                            iconSvg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`
+                        }
+                    ];
+
+                    let availableCount = 0;
+
+                    resourceDefs.forEach(res => {
+                        const fileUrl = extractFileUrl(res.val);
+                        if (fileUrl) {
+                            availableCount++;
+                            const btn = document.createElement('a');
+                            btn.href = resolveImg(fileUrl);
+                            btn.className = 'btn --accent';
+                            btn.target = '_blank';
+                            btn.rel = 'noopener noreferrer';
+                            btn.style.display = 'inline-flex';
+                            btn.style.alignItems = 'center';
+                            btn.style.justifyContent = 'center';
+                            btn.style.gap = '8px';
+                            btn.innerHTML = `${res.iconSvg}<span>${res.label}</span>`;
+                            listEl.appendChild(btn);
+                        }
+                    });
+
+                    if (availableCount > 0) {
+                        sectionEl.style.display = 'block';
+                    } else {
+                        sectionEl.style.display = 'none';
+                    }
+                }
+
                 // Matrix Availability Checker (Derived from SKU Mappings)
                 function updateOptionAvailability() {
                     const skuMatrix = getParsedSkuMatrix(product);
@@ -1625,6 +1657,7 @@
                 renderGallery();
                 renderConfigurator();
                 renderProductIcons();
+                renderDownloadableResources();
                 renderRecommendedAccessories();
                 updateOptionAvailability();
                 recalculate();

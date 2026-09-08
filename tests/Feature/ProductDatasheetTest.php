@@ -298,4 +298,27 @@ class ProductDatasheetTest extends TestCase
             ->assertSee('<td>Dimming</td>', false)
             ->assertSee('<td>DALI-2</td>', false);
     }
+
+    public function test_product_storefront_array_includes_downloadable_resource_files(): void
+    {
+        $product = Product::factory()->create([
+            'airtable_id' => 'recResourceTest',
+            'product_name' => 'Resource Strip',
+            'category' => 'Linear Lights',
+            'status' => 'publish',
+            'datasheet' => 'Yes',
+            'datasheet_file' => ['https://example.com/datasheet.pdf'],
+            'installation_guide_file' => ['https://example.com/guide.pdf'],
+            'user_manual' => ['https://example.com/manual.pdf'],
+            'ies_file' => ['https://example.com/ies.ies'],
+        ]);
+
+        $storefront = $product->toStorefrontArray();
+
+        $this->assertSame('Yes', $storefront['datasheet']);
+        $this->assertSame(['https://example.com/datasheet.pdf'], $storefront['datasheet_file']);
+        $this->assertSame(['https://example.com/guide.pdf'], $storefront['installation_guide_file']);
+        $this->assertSame(['https://example.com/manual.pdf'], $storefront['user_manual']);
+        $this->assertSame(['https://example.com/ies.ies'], $storefront['ies_file']);
+    }
 }
