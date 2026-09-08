@@ -124,7 +124,7 @@
 
                         <!-- DYNAMIC CONFIGURATOR WORKSPACE START -->
                         <div class="config-workspace" id="dynamic-configurator">
-                            <!-- Dynamically populated options with constraints -->
+                            <!-- Dynamically populated options -->
                         </div>
                         <!-- DYNAMIC CONFIGURATOR WORKSPACE END -->
 
@@ -472,9 +472,6 @@
                                             }
                                             if (!vData.options && node.options) {
                                                 vData.options = node.options;
-                                            }
-                                            if (!vData.constraints && node.constraints) {
-                                                vData.constraints = node.constraints;
                                             }
                                             addProduct(vData);
                                         }
@@ -1140,7 +1137,7 @@
                             e.preventDefault();
                             selectedOptions = {};
                             renderConfigurator();
-                            checkConstraints();
+                            updateOptionAvailability();
                             recalculate();
                         });
                     }
@@ -1206,7 +1203,7 @@
                                     btn.classList.add('active');
                                 }
 
-                                checkConstraints();
+                                updateOptionAvailability();
                                 recalculate();
                             });
 
@@ -1255,115 +1252,60 @@
                     }
                 }
 
-                // Constraints & Matrix Availability Checker
-                function checkConstraints() {
+                // Matrix Availability Checker (Derived from SKU Mappings)
+                function updateOptionAvailability() {
                     const skuMatrix = getParsedSkuMatrix(product);
-                    const hasSkuMatrix = skuMatrix.length > 0;
                     const options = product.options || {};
                     const optionKeys = getOrderedOptionKeys(options);
 
-                    // 1. Matrix-Driven Availability (derived from sku_mappings)
-                    if (hasSkuMatrix) {
-                        // Auto-clean any currently selected options that are no longer valid with the active selections
-                        optionKeys.forEach(optKey => {
-                            const currentSelectedId = selectedOptions[optKey];
-                            if (!currentSelectedId) return;
-
-                            const optVals = options[optKey] || [];
-                            const valObj = optVals.find(v => String(v.id) === String(currentSelectedId));
-                            if (!valObj) {
-                                delete selectedOptions[optKey];
-                                return;
-                            }
-
-                            const otherSelections = { ...selectedOptions };
-                            delete otherSelections[optKey];
-
-                            const isValid = isCombinationAvailable(optKey, valObj, otherSelections, skuMatrix, options);
-                            if (!isValid) {
-                                delete selectedOptions[optKey];
-                            }
-                        });
-
-                        // Update button disabled/enabled & active states
-                        optionKeys.forEach(optKey => {
-                            const optVals = options[optKey] || [];
-                            const safeKey = optKey.replace(/[^a-zA-Z0-9_-]/g, '-');
-                            const flex = document.getElementById(`options-flex-${safeKey}`);
-                            if (!flex) return;
-
-                            const otherSelections = { ...selectedOptions };
-                            delete otherSelections[optKey];
-
-                            const btns = flex.querySelectorAll('.config-btn');
-                            btns.forEach(btn => {
-                                const optId = String(btn.getAttribute('data-opt-id'));
-                                const valObj = optVals.find(v => String(v.id) === optId);
-
-                                const isAvailable = valObj
-                                    ? isCombinationAvailable(optKey, valObj, otherSelections, skuMatrix, options)
-                                    : true;
-
-                                if (!isAvailable) {
-                                    btn.disabled = true;
-                                    btn.classList.add('disabled');
-                                    btn.classList.remove('active');
-                                } else {
-                                    btn.disabled = false;
-                                    btn.classList.remove('disabled');
-                                    if (selectedOptions[optKey] && String(selectedOptions[optKey]) === optId) {
-                                        btn.classList.add('active');
-                                    } else {
-                                        btn.classList.remove('active');
-                                    }
-                                }
-                            });
-                        });
-
+                    if (skuMatrix.length === 0) {
                         return;
                     }
 
-                    // 2. Legacy Fallback: Negative constraints if sku_mappings is not present
-                    const prohibitedIds = new Set();
-                    const activeIds = Object.values(selectedOptions).map(String);
-                    activeIds.forEach(id => {
-                        if (product.constraints && product.constraints[id]) {
-                            const forbiddenList = Array.isArray(product.constraints[id]) ? product.constraints[id] : [
-                                product.constraints[id]
-                            ];
-                            forbiddenList.forEach(forbiddenId => {
-                                prohibitedIds.add(String(forbiddenId));
-                            });
+                    // Auto-clean any currently selected options that are no longer valid with the active selections
+                    optionKeys.forEach(optKey => {
+                        const currentSelectedId = selectedOptions[optKey];
+                        if (!currentSelectedId) return;
+
+                        const optVals = options[optKey] || [];
+                        const valObj = optVals.find(v => String(v.id) === String(currentSelectedId));
+                        if (!valObj) {
+                            delete selectedOptions[optKey];
+                            return;
                         }
-                        if (product.constraints) {
-                            for (const cKey in product.constraints) {
-                                const forbiddenList = product.constraints[cKey];
-                                if (Array.isArray(forbiddenList) && forbiddenList.map(String).includes(String(id))) {
-                                    prohibitedIds.add(String(cKey));
-                                }
-                            }
+
+                        const otherSelections = { ...selectedOptions };
+                        delete otherSelections[optKey];
+
+                        const isValid = isCombinationAvailable(optKey, valObj, otherSelections, skuMatrix, options);
+                        if (!isValid) {
+                            delete selectedOptions[optKey];
                         }
                     });
 
-                    for (const optKey in options) {
-                        if (!options.hasOwnProperty(optKey)) continue;
-
-                        const optVals = options[optKey];
+                    // Update button disabled/enabled & active states
+                    optionKeys.forEach(optKey => {
+                        const optVals = options[optKey] || [];
                         const safeKey = optKey.replace(/[^a-zA-Z0-9_-]/g, '-');
                         const flex = document.getElementById(`options-flex-${safeKey}`);
-                        if (!flex) continue;
+                        if (!flex) return;
+
+                        const otherSelections = { ...selectedOptions };
+                        delete otherSelections[optKey];
 
                         const btns = flex.querySelectorAll('.config-btn');
                         btns.forEach(btn => {
                             const optId = String(btn.getAttribute('data-opt-id'));
+                            const valObj = optVals.find(v => String(v.id) === optId);
 
-                            if (prohibitedIds.has(optId)) {
+                            const isAvailable = valObj
+                                ? isCombinationAvailable(optKey, valObj, otherSelections, skuMatrix, options)
+                                : true;
+
+                            if (!isAvailable) {
                                 btn.disabled = true;
                                 btn.classList.add('disabled');
                                 btn.classList.remove('active');
-                                if (selectedOptions[optKey] && String(selectedOptions[optKey]) === optId) {
-                                    delete selectedOptions[optKey];
-                                }
                             } else {
                                 btn.disabled = false;
                                 btn.classList.remove('disabled');
@@ -1374,7 +1316,7 @@
                                 }
                             }
                         });
-                    }
+                    });
                 }
 
                 // Recalculate parameters, SKU, lumens, drivers
@@ -1580,7 +1522,7 @@
                 renderConfigurator();
                 renderProductIcons();
                 renderRecommendedAccessories();
-                checkConstraints();
+                updateOptionAvailability();
                 recalculate();
 
                 // Accordion Tab controllers

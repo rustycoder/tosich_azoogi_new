@@ -33,7 +33,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'sku_mappings',
     'product_features',
     'options',
-    'constraints',
     'created_by',
     'updated_by',
     'deleted_by',
@@ -60,7 +59,6 @@ class Product extends Model
             'sku_mappings' => 'array',
             'product_features' => 'array',
             'options' => 'array',
-            'constraints' => 'array',
         ];
     }
 
@@ -109,7 +107,6 @@ class Product extends Model
             'product_type' => $this->product_type,
             'product_features' => $this->product_features,
             'options' => $this->options,
-            'constraints' => $this->constraints,
         ];
 
         foreach ($entry as $key => $value) {

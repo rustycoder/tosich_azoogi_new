@@ -158,7 +158,6 @@ final class ProductNormalizer
                 'product_type' => $this->sanitize($fields['Product type'] ?? ''),
                 'product_features' => $features,
                 'options' => $this->parseJsonField($fields['Options'] ?? $fields['options'] ?? [], []),
-                'constraints' => $this->parseJsonField($fields['Constraints'] ?? $fields['constraints'] ?? [], []),
             ];
 
             $product = [];
