@@ -21,11 +21,15 @@
     </header>
 
     <div class="title-block">
-        @if ($sheet['title'] !== '')
+        @if ($sheet['name'] !== '')
+            <h1>{{ $sheet['name'] }}</h1>
+        @elseif ($sheet['title'] !== '')
             <h1>{{ $sheet['title'] }}</h1>
         @endif
-        @if ($sheet['name'] !== '')
-            <h2>{{ $sheet['name'] }}</h2>
+        @if ($sheet['product_code'] !== '')
+            <h2>{{ $sheet['product_code'] }}</h2>
+        @elseif ($sheet['category'] !== '')
+            <h2>{{ $sheet['category'] }}</h2>
         @endif
     </div>
     <hr class="gradient-line">

@@ -1816,7 +1816,7 @@
                                 product_id: product.id,
                                 project_name: document.getElementById('datasheet-project-name')?.value || '',
                                 person_name: document.getElementById('datasheet-person-name')?.value || '',
-                                product_code: datasheetSku || product.product_code || '',
+                                product_code: product.product_code || datasheetSku || '',
                                 selected_options: selected,
                                 length: isLinear ? selectedLength : null,
                             }),

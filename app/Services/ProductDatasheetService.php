@@ -19,7 +19,6 @@ class ProductDatasheetService implements IProductDatasheetService
      */
     private const SPEC_FIELDS = [
         'Brand' => ['Brand', 'Supplier Name'],
-        'Model' => ['Model'],
         'Dimensions' => ['Dimension', 'Dimensions', 'Size', 'Strip Width'],
         'Light Source' => ['Light Source', 'LED Type', 'Chip'],
         'Wattage' => ['Wattage', 'Power', 'Power Consumption Rate'],
@@ -47,7 +46,7 @@ class ProductDatasheetService implements IProductDatasheetService
         }
 
         $selectedOptions = $this->stringMap($data['selected_options'] ?? []);
-        $productCode = trim((string) ($data['product_code'] ?? '')) ?: (string) ($product->product_code ?? '');
+        $productCode = trim((string) ($product->product_code ?? '')) ?: trim((string) ($data['product_code'] ?? ''));
         $length = isset($data['length']) && is_numeric($data['length']) ? (float) $data['length'] : null;
         $origin = $this->origin->capture();
 
@@ -91,8 +90,9 @@ class ProductDatasheetService implements IProductDatasheetService
         }
 
         return [
-            'title' => $export->product_code ?: $export->product_name,
+            'title' => (string) ($export->product_name ?: $export->product_code),
             'name' => (string) $export->product_name,
+            'product_code' => (string) ($export->product_code ?? ''),
             'category' => (string) ($configuration['category'] ?? ''),
             'description' => (string) ($configuration['description'] ?? ''),
             'specifications' => $specifications,
@@ -145,7 +145,6 @@ class ProductDatasheetService implements IProductDatasheetService
         foreach (self::SPEC_FIELDS as $label => $aliases) {
             $value = match ($label) {
                 'Brand' => $this->joinValues($this->featureValues($features, ...$aliases)) ?: 'Azoogi',
-                'Model' => $productCode !== '' ? $productCode : (string) $product->product_name,
                 default => $this->joinValues($this->featureValues($features, ...$aliases)),
             };
 
@@ -155,11 +154,6 @@ class ProductDatasheetService implements IProductDatasheetService
                     $usedOptionKeys[] = $optionKey;
                     break;
                 }
-            }
-
-            if ($label === 'Dimensions' && $length !== null && $length > 0) {
-                $cut = rtrim(rtrim(number_format($length, 1, '.', ''), '0'), '.').'m cut length';
-                $value = $value !== '' ? $value.' · '.$cut : $cut;
             }
 
             if ($value === '') {
@@ -172,8 +166,10 @@ class ProductDatasheetService implements IProductDatasheetService
             ];
         }
 
+        $excludedOptionKeys = ['model', 'product code', 'product_code', 'sku'];
+
         foreach ($selectedOptions as $optionKey => $optionValue) {
-            if (in_array($optionKey, $usedOptionKeys, true) || $optionValue === '') {
+            if (in_array($optionKey, $usedOptionKeys, true) || $optionValue === '' || in_array(strtolower(trim($optionKey)), $excludedOptionKeys, true)) {
                 continue;
             }
 

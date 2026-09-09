@@ -88,14 +88,16 @@ class ProductDatasheetTest extends TestCase
         $this->assertSame('recGarden', $export->airtable_id);
         $this->assertSame('White City', $export->project_name);
         $this->assertSame('Alex Chen', $export->person_name);
-        $this->assertSame('GL005-BLK', $export->product_code);
+        $this->assertSame('GL005', $export->product_code);
         $this->assertSame('203.0.113.10', $export->ip_address);
         $this->assertSame('AU', $export->country);
         $this->assertStringContainsString((string) $export->uuid, $response->json('url'));
 
         $this->get($response->json('url'))
             ->assertOk()
-            ->assertSee('GL005-BLK', false)
+            ->assertSee('<h1>Garden Light</h1>', false)
+            ->assertSee('<h2>GL005</h2>', false)
+            ->assertDontSee('PRODUCT CODE:', false)
             ->assertSee('White City', false)
             ->assertDontSee('Alex Chen', false)
             ->assertSee('Checked By: <span></span>', false)
