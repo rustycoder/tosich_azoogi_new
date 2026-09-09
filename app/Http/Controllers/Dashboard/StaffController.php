@@ -66,8 +66,14 @@ class StaffController extends Controller
         return back()->with('status', 'Staff member updated.');
     }
 
-    public function toggleStatus(User $staff): JsonResponse
+    public function toggleStatus(Request $request, User $staff): JsonResponse
     {
+        if ($staff->id === $request->user()?->id) {
+            return response()->json([
+                'error' => 'You cannot modify your own account status.',
+            ], 422);
+        }
+
         $staff = $this->staffMembers->toggleStatus($staff);
 
         return response()->json([

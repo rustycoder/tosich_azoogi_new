@@ -31,9 +31,9 @@ class UpdateProjectRequest extends FormRequest
             'cover_remote' => ['nullable', 'string', 'max:500'],
             'summary' => ['nullable', 'string'],
             'description' => ['nullable', 'string'],
-            'cover_file' => ['nullable', 'image', 'max:8192'],
+            'cover_file' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,avif', 'max:8192'],
             'gallery_files' => ['nullable', 'array'],
-            'gallery_files.*' => ['image', 'max:8192'],
+            'gallery_files.*' => ['image', 'mimes:jpg,jpeg,png,webp,avif', 'max:8192'],
             'remove_gallery' => ['nullable', 'array'],
             'remove_gallery.*' => ['string'],
         ];

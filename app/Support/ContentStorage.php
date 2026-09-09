@@ -13,7 +13,8 @@ class ContentStorage
         $this->deleteManaged($previous);
 
         $directory = 'pages/'.$slug.'/'.str_replace('.', '/', $key).'/'.$sortOrder;
-        $name = Str::uuid()->toString().'.'.$file->getClientOriginalExtension();
+        $extension = $file->guessExtension() ?: $file->extension() ?: 'bin';
+        $name = Str::uuid()->toString().'.'.$extension;
 
         $file->storeAs($directory, $name, 'public');
 
@@ -25,7 +26,8 @@ class ContentStorage
         $this->deleteManaged($previous);
 
         $directory = 'projects/'.$slug.'/'.$kind;
-        $name = Str::uuid()->toString().'.'.$file->getClientOriginalExtension();
+        $extension = $file->guessExtension() ?: $file->extension() ?: 'bin';
+        $name = Str::uuid()->toString().'.'.$extension;
 
         $file->storeAs($directory, $name, 'public');
 

@@ -22,7 +22,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'create'])->name('login');
-    Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+    Route::post('/login', [LoginController::class, 'store'])
+        ->middleware('throttle:6,1')
+        ->name('login.store');
 });
 
 Route::post('/logout', [LoginController::class, 'destroy'])
@@ -125,9 +127,15 @@ Route::get('/led-strip-calculator', LedCalculatorController::class)->name('led-s
 Route::get('/request-a-quote', [PageController::class, '__invoke'])->defaults('slug', 'request-a-quote')->name('request-a-quote');
 Route::view('/trade-login', 'pages.trade-login')->name('trade-login');
 
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.submit');
-Route::post('/request-a-quote', [QuoteRequestController::class, 'store'])->name('quote.submit');
-Route::post('/product-enquiry', [ProductEnquiryController::class, 'store'])->name('product-enquiry.submit');
+Route::post('/contact', [ContactController::class, 'store'])
+    ->middleware('throttle:10,1')
+    ->name('contact.submit');
+Route::post('/request-a-quote', [QuoteRequestController::class, 'store'])
+    ->middleware('throttle:10,1')
+    ->name('quote.submit');
+Route::post('/product-enquiry', [ProductEnquiryController::class, 'store'])
+    ->middleware('throttle:10,1')
+    ->name('product-enquiry.submit');
 Route::post('/product-datasheet', [ProductDatasheetController::class, 'store'])
     ->middleware('throttle:20,1')
     ->name('products.datasheet.store');
