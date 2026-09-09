@@ -37,7 +37,7 @@
                 <div class="mega-menu" id="dynamic-mega-menu"></div>
             </div>
             @foreach ($nav as $item)
-                <a href="{{ chrome_url($item['href'] ?? '') }}" {!! chrome_target_attrs($item['target'] ?? null) !!}>{{ $item['label'] }}</a>
+                <a href="{{ chrome_url($item['href'] ?? '') }}"{!! chrome_target_attrs($item['target'] ?? null) !!}>{{ $item['label'] }}</a>
             @endforeach
         </div>
         <div class="nav-actions">
