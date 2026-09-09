@@ -1658,6 +1658,14 @@
                 initialOptionKeys.forEach(optKey => {
                     const optVals = initialOptions[optKey] || [];
                     if (optVals.length === 1 && !selectedOptions[optKey]) {
+                        const valName = String(optVals[0].name || '').toLowerCase().trim();
+                        const keyName = String(optKey || '').toLowerCase().trim();
+
+                        // Skip auto-selecting Free Cut for Cut Interval
+                        if (keyName === 'cut interval' && valName === 'free cut') {
+                            return;
+                        }
+
                         selectedOptions[optKey] = String(optVals[0].id);
                     }
                 });
