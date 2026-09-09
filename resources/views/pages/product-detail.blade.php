@@ -739,7 +739,7 @@
                     "Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.";
 
                 // Update Document Title
-                document.title = `${pName} — Azoogi LED Lighting Solutions`;
+                document.title = `${pName.replace(/\r?\n/g, ' ')} — Azoogi LED Lighting Solutions`;
 
                 // Render Meta Keywords Badges
                 const metaBadgesEl = document.querySelector('.product-meta-badges');

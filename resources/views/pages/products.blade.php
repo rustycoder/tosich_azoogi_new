@@ -636,6 +636,8 @@
 
       .prod-card-title-text {
         flex: 1;
+        white-space: pre-line;
+        line-height: 1.3;
       }
 
       .prod-card-title .cat-label {
