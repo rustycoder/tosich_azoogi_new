@@ -51,6 +51,8 @@ class LedCalculatorTest extends TestCase
             'product_code' => 'COB001',
             'category' => 'COB',
             'status' => 'publish',
+            'categories' => ['COB'],
+            'category_path' => ['COB'],
             'product_features' => [
                 'IP Rating' => [['value' => 'IP20'], ['value' => 'IP65 (Nano-Coated)']],
                 'Voltage' => [['value' => '24V']],
@@ -66,6 +68,8 @@ class LedCalculatorTest extends TestCase
             'product_code' => 'SV1617',
             'category' => 'Side View',
             'status' => 'publish',
+            'categories' => ['Side View'],
+            'category_path' => ['Side View'],
             'product_features' => [
                 'IP Rating' => [['value' => 'IP67']],
                 'Voltage' => [['value' => '24V']],
@@ -80,6 +84,8 @@ class LedCalculatorTest extends TestCase
             'product_code' => 'ADR001',
             'category' => 'Non-Dimmable Driver',
             'status' => 'publish',
+            'categories' => ['Drivers', 'Non-Dimmable Driver'],
+            'category_path' => ['Drivers', 'Non-Dimmable Driver'],
             'product_features' => [
                 'IP Rating' => [['value' => 'IP67']],
                 'Voltage' => [['value' => '12V'], ['value' => '24V']],
@@ -92,6 +98,8 @@ class LedCalculatorTest extends TestCase
             'product_code' => 'DRAFT1',
             'category' => 'SMD',
             'status' => 'draft',
+            'categories' => ['SMD'],
+            'category_path' => ['SMD'],
             'product_features' => [
                 'IP Rating' => [['value' => 'IP20']],
             ],
@@ -124,5 +132,60 @@ class LedCalculatorTest extends TestCase
         $this->assertSame('non-dimmable', $driver['type']);
         $this->assertSame([60, 100], $driver['watts']);
         $this->assertFalse($lights->contains(fn (array $light): bool => $light['sku'] === 'DRAFT1'));
+    }
+
+    public function test_catalog_matches_live_category_names_and_colour_spelling(): void
+    {
+        Product::factory()->create([
+            'airtable_id' => 'recLiveCob',
+            'product_name' => 'Single Colour COB',
+            'product_code' => 'COB010',
+            'category' => 'Single Colour COB',
+            'status' => 'publish',
+            'categories' => ['COB Strips', 'Single Colour COB'],
+            'category_path' => ['COB Strips', 'Single Colour COB'],
+            'product_features' => [
+                'IP Rating' => [['value' => 'IP20'], ['value' => 'IP65 (Nano-Coated)']],
+                'Voltage' => [['value' => '24V']],
+                'Power' => [['value' => '10W/m']],
+                'Strip Width' => [['value' => '8mm (W)']],
+                'Colour Temperature' => [['value' => '2700K'], ['value' => '3000K']],
+            ],
+        ]);
+        Product::factory()->create([
+            'airtable_id' => 'recLiveNeon',
+            'product_name' => 'Lumoflex',
+            'product_code' => 'LMF13',
+            'category' => '360° Neon',
+            'status' => 'publish',
+            'categories' => ['360° Neon'],
+            'category_path' => ['Neon Flex', '360° Neon'],
+            'product_features' => [
+                'IP Rating' => [['value' => 'IP65']],
+                'Voltage' => [['value' => '24V']],
+                'Power' => [['value' => '9W/m']],
+                'Dimensions' => [['value' => '13mm (W) x 13mm (H)']],
+                'Colour Temperature' => [['value' => '2700K'], ['value' => 'RGB']],
+            ],
+        ]);
+
+        $catalog = app(ILedCalculatorService::class)->catalog();
+        $lights = collect($catalog['lights']);
+        $cob = $lights->firstWhere('sku', 'COB010');
+        $neon = $lights->firstWhere('sku', 'LMF13');
+
+        $this->assertNotNull($cob);
+        $this->assertSame('strip', $cob['family']);
+        $this->assertSame('cob', $cob['chip']);
+        $this->assertTrue($cob['has_single']);
+        $this->assertSame(['2700K', '3000K'], $cob['ccts']);
+        $this->assertContains('8mm', $cob['widths']);
+
+        $this->assertNotNull($neon);
+        $this->assertSame('neon', $neon['family']);
+        $this->assertSame('neon-360', $neon['neon_type']);
+        $this->assertTrue($neon['has_single']);
+        $this->assertTrue($neon['has_multi']);
+        $this->assertContains('13x13mm', $neon['widths']);
     }
 }

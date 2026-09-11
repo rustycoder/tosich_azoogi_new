@@ -7,16 +7,6 @@ use App\Services\Contracts\ILedCalculatorService;
 
 class LedCalculatorService implements ILedCalculatorService
 {
-    /**
-     * @var list<string>
-     */
-    private const STRIP_CATEGORIES = ['COB', 'SMD', 'Lumoflex', 'SMD Strip', 'RGBW Strip', 'LED Flex Sheet'];
-
-    /**
-     * @var list<string>
-     */
-    private const NEON_CATEGORIES = ['Top View', 'Side View', '3D', 'NEON'];
-
     public function __construct(private IProductRepository $products) {}
 
     public function catalog(): array
@@ -71,27 +61,51 @@ class LedCalculatorService implements ILedCalculatorService
      */
     private function kind(array $product): ?string
     {
-        $category = (string) ($product['category'] ?? '');
-        $name = (string) ($product['product_name'] ?? '');
-        $haystack = $category.' '.$name;
+        $haystack = $this->haystack($product);
 
         if (str_contains(mb_strtolower($haystack), 'driver')) {
             return 'driver';
         }
 
-        if (preg_match('/controller|remote|wifi|wall panel|rf\b/i', $haystack) === 1) {
+        if (preg_match('/controller|remote|wifi|wall panel|\brf\b/i', $haystack) === 1) {
             return 'controller';
         }
 
-        if (in_array($category, self::NEON_CATEGORIES, true) || preg_match('/\bneon\b/i', $name) === 1) {
+        if (str_contains(mb_strtolower($haystack), 'neon')) {
             return 'neon';
         }
 
-        if (in_array($category, self::STRIP_CATEGORIES, true) || preg_match('/strip|lumoflex|flex sheet/i', $haystack) === 1) {
+        if (preg_match('/\bcob\b|\bsmd\b|strip|lumoflex|flex panel|flex sheet/i', $haystack) === 1) {
             return 'strip';
         }
 
         return null;
+    }
+
+    /**
+     * @param  array<string, mixed>  $product
+     */
+    private function haystack(array $product): string
+    {
+        $parts = [
+            (string) ($product['category'] ?? ''),
+            (string) ($product['product_name'] ?? ''),
+            (string) ($product['product_code'] ?? ''),
+        ];
+
+        foreach (['categories', 'category_path'] as $key) {
+            if (! is_array($product[$key] ?? null)) {
+                continue;
+            }
+
+            foreach ($product[$key] as $item) {
+                if (is_string($item) && $item !== '') {
+                    $parts[] = $item;
+                }
+            }
+        }
+
+        return implode(' ', $parts);
     }
 
     /**
@@ -190,7 +204,7 @@ class LedCalculatorService implements ILedCalculatorService
             return 'neon';
         }
 
-        $haystack = mb_strtolower((string) ($product['category'] ?? '').' '.(string) ($product['product_name'] ?? '').' '.(string) ($product['product_code'] ?? ''));
+        $haystack = mb_strtolower($this->haystack($product));
 
         if (str_contains($haystack, 'csp')) {
             return 'csp';
@@ -208,7 +222,7 @@ class LedCalculatorService implements ILedCalculatorService
      */
     private function neonType(array $product): string
     {
-        $haystack = mb_strtolower((string) ($product['category'] ?? '').' '.(string) ($product['product_name'] ?? ''));
+        $haystack = mb_strtolower($this->haystack($product));
 
         if (str_contains($haystack, '360') || str_contains($haystack, 'dual bend') || str_contains($haystack, '3d')) {
             return 'neon-360';
@@ -253,7 +267,7 @@ class LedCalculatorService implements ILedCalculatorService
         $single = [];
         $multi = [];
 
-        foreach ($this->featureValues($features, 'Color Temperature', 'Light Color') as $raw) {
+        foreach ($this->featureValues($features, 'Color Temperature', 'Colour Temperature', 'Light Color', 'Light Colour', 'CCT', 'Color', 'Colour') as $raw) {
             $upper = strtoupper(str_replace(' ', '', $raw));
 
             if (str_contains($upper, 'RGB+CCT') || str_contains($upper, 'RGB+TW')) {
@@ -351,7 +365,7 @@ class LedCalculatorService implements ILedCalculatorService
     {
         $values = [];
 
-        foreach ($this->featureValues($features, 'Strip Width', 'Dimension') as $raw) {
+        foreach ($this->featureValues($features, 'Strip Width', 'Dimension', 'Dimensions') as $raw) {
             if (preg_match('/max\s|^\d[\d,]*\s*mm\s*\(L\)/i', $raw) === 1) {
                 continue;
             }
@@ -401,17 +415,26 @@ class LedCalculatorService implements ILedCalculatorService
     {
         $values = [];
 
-        foreach ($keys as $key) {
-            if (! array_key_exists($key, $features)) {
+        $wanted = array_map(fn (string $key): string => $this->normalizeFeatureKey($key), $keys);
+
+        foreach ($features as $name => $feature) {
+            if (! in_array($this->normalizeFeatureKey((string) $name), $wanted, true)) {
                 continue;
             }
 
-            foreach ($this->flattenFeature($features[$key]) as $value) {
+            foreach ($this->flattenFeature($feature) as $value) {
                 $values[] = $value;
             }
         }
 
         return $values;
+    }
+
+    private function normalizeFeatureKey(string $key): string
+    {
+        $normalized = str_replace('colour', 'color', strtolower(trim($key)));
+
+        return strtolower(preg_replace('/[^a-z0-9]+/i', '', $normalized) ?? $normalized);
     }
 
     /**
