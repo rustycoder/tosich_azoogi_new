@@ -21,11 +21,15 @@
     </header>
 
     <div class="title-block">
-        @if ($sheet['title'] !== '')
+        @if ($sheet['name'] !== '')
+            <h1>{{ $sheet['name'] }}</h1>
+        @elseif ($sheet['title'] !== '')
             <h1>{{ $sheet['title'] }}</h1>
         @endif
-        @if ($sheet['name'] !== '')
-            <h2>{{ $sheet['name'] }}</h2>
+        @if ($sheet['product_code'] !== '')
+            <h2>{{ $sheet['product_code'] }}</h2>
+        @elseif ($sheet['category'] !== '')
+            <h2>{{ $sheet['category'] }}</h2>
         @endif
     </div>
     <hr class="gradient-line">
@@ -82,8 +86,8 @@
                                 <div class="box" role="checkbox" aria-checked="false" aria-label="Minor variations"></div>
                             </div>
                         </section>
-                        <section class="row line">Checked By: <span>{{ $sheet['person_name'] }}</span></section>
-                        <section class="row line">Date: <span>{{ $sheet['reviewed_on'] }}</span></section>
+                        <section class="row line">Checked By: <span></span></section>
+                        <section class="row line">Date: <span></span></section>
                         <section class="row notes">
                             <ul>
                                 <li>This technical review indicates general conformity with the project design intent only.</li>

@@ -90,7 +90,7 @@ class ProductCatalog
             $categories[] = [
                 'title' => $name,
                 'body' => $body,
-                'image' => self::rangeImage($image),
+                'image' => self::rangeImage($image, $name),
                 'href' => url('/products').'?category='.urlencode($name),
                 'count' => $count,
                 '_priority' => $priorityOrder[$name] ?? 99,
@@ -106,10 +106,26 @@ class ProductCatalog
         }, $categories);
     }
 
-    private static function rangeImage(?string $image): string
+    public static function fallbackImage(string $name = ''): string
+    {
+        $categoryFallbackImages = [
+            'NEON' => '/assets/img/neon.webp',
+            'Profiles' => '/assets/img/prod-1.jpg',
+            'Linear Lights' => '/assets/img/prod-3.jpg',
+            'Strips and Flex' => '/assets/img/leds.webp',
+            'Outdoor & Architectural' => '/assets/img/GL001.webp',
+            'Drivers' => '/assets/img/drivers.webp',
+            'Accessories' => '/assets/img/prod-4.jpg',
+            'LED Lights' => '/assets/img/prod-5.jpg',
+        ];
+
+        return $categoryFallbackImages[$name] ?? '/assets/img/neon.webp';
+    }
+
+    private static function rangeImage(?string $image, string $name = ''): string
     {
         if ($image === null || $image === '') {
-            return '/assets/img/neon.webp';
+            return self::fallbackImage($name);
         }
 
         if (str_starts_with($image, 'http://') || str_starts_with($image, 'https://')) {

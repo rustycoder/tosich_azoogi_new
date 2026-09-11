@@ -88,17 +88,20 @@ class ProductDatasheetTest extends TestCase
         $this->assertSame('recGarden', $export->airtable_id);
         $this->assertSame('White City', $export->project_name);
         $this->assertSame('Alex Chen', $export->person_name);
-        $this->assertSame('GL005-BLK', $export->product_code);
+        $this->assertSame('GL005', $export->product_code);
         $this->assertSame('203.0.113.10', $export->ip_address);
         $this->assertSame('AU', $export->country);
         $this->assertStringContainsString((string) $export->uuid, $response->json('url'));
 
         $this->get($response->json('url'))
             ->assertOk()
-            ->assertSee('GL005-BLK', false)
-            ->assertSee('Garden Light', false)
+            ->assertSee('<h1>Garden Light</h1>', false)
+            ->assertSee('<h2>GL005</h2>', false)
+            ->assertDontSee('PRODUCT CODE:', false)
             ->assertSee('White City', false)
-            ->assertSee('Alex Chen', false)
+            ->assertDontSee('Alex Chen', false)
+            ->assertSee('Checked By: <span></span>', false)
+            ->assertSee('Date: <span></span>', false)
             ->assertSee('SPECIFICATIONS', false)
             ->assertSee('Lighting Technical Review', false)
             ->assertSee('Matched to Specifcation', false)
@@ -263,5 +266,61 @@ class ProductDatasheetTest extends TestCase
             ->get('/dashboard')
             ->assertOk()
             ->assertSeeInOrder(['>Datasheet</div>', 'Exports'], false);
+    }
+
+    public function test_datasheet_maps_dimming_control_option_to_dimming_spec(): void
+    {
+        $product = Product::factory()->create([
+            'airtable_id' => 'recNeon01',
+            'product_name' => 'Mini Neon Side View',
+            'product_code' => 'SV1010-10W-3K-IP67',
+            'category' => 'Side View',
+            'status' => 'publish',
+            'product_features' => [
+                'Wattage' => [['value' => '10W']],
+                'Voltage' => [['value' => '24V']],
+            ],
+        ]);
+
+        $response = $this->postJson('/product-datasheet', [
+            'product_id' => 'recNeon01',
+            'project_name' => 'Harbour Penthouse',
+            'person_name' => 'Sarah Connor',
+            'product_code' => 'SV1010-10W-3K-IP67',
+            'selected_options' => [
+                'CCT' => '3000K',
+                'Dimming Control' => 'DALI-2',
+            ],
+        ]);
+
+        $response->assertOk();
+
+        $this->get($response->json('url'))
+            ->assertOk()
+            ->assertSee('<td>Dimming</td>', false)
+            ->assertSee('<td>DALI-2</td>', false);
+    }
+
+    public function test_product_storefront_array_includes_downloadable_resource_files(): void
+    {
+        $product = Product::factory()->create([
+            'airtable_id' => 'recResourceTest',
+            'product_name' => 'Resource Strip',
+            'category' => 'Linear Lights',
+            'status' => 'publish',
+            'datasheet' => 'Yes',
+            'datasheet_file' => ['https://example.com/datasheet.pdf'],
+            'installation_guide_file' => ['https://example.com/guide.pdf'],
+            'user_manual' => ['https://example.com/manual.pdf'],
+            'ies_file' => ['https://example.com/ies.ies'],
+        ]);
+
+        $storefront = $product->toStorefrontArray();
+
+        $this->assertSame('Yes', $storefront['datasheet']);
+        $this->assertSame(['https://example.com/datasheet.pdf'], $storefront['datasheet_file']);
+        $this->assertSame(['https://example.com/guide.pdf'], $storefront['installation_guide_file']);
+        $this->assertSame(['https://example.com/manual.pdf'], $storefront['user_manual']);
+        $this->assertSame(['https://example.com/ies.ies'], $storefront['ies_file']);
     }
 }

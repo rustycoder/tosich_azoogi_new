@@ -276,7 +276,7 @@ class DashboardTest extends TestCase
         ]);
         $this->seed(PageSeeder::class);
         $page = Page::query()->where('slug', 'about')->firstOrFail();
-        $page->update(['title' => $page->title]);
+        $page->update(['title' => 'About Azoogi Updated']);
 
         $this->get('/dashboard/staff')
             ->assertOk()

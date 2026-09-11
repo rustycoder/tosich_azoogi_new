@@ -111,7 +111,7 @@ class PageTest extends TestCase
         $this->get('/')
             ->assertOk()
             ->assertSee('Explore the full Azoogi lighting catalogue.', false)
-            ->assertSee("background-image:url('{$remoteUrl}')", false)
+            ->assertSee('src="'.$remoteUrl.'"', false)
             ->assertDontSee('/https://v5.airtableusercontent.com', false);
     }
 

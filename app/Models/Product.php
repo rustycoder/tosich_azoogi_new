@@ -24,6 +24,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'product_description',
     'meta_keywords',
     'datasheet',
+    'datasheet_file',
+    'installation_guide_file',
+    'user_manual',
+    'ies_file',
     'product_images',
     'product_dimension',
     'technical_icons',
@@ -33,7 +37,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'sku_mappings',
     'product_features',
     'options',
-    'constraints',
     'created_by',
     'updated_by',
     'deleted_by',
@@ -54,13 +57,16 @@ class Product extends Model
             'product_dimension' => 'array',
             'technical_icons' => 'array',
             'datasheet' => 'array',
+            'datasheet_file' => 'array',
+            'installation_guide_file' => 'array',
+            'user_manual' => 'array',
+            'ies_file' => 'array',
             'categories' => 'array',
             'category_path' => 'array',
             'category_paths' => 'array',
             'sku_mappings' => 'array',
             'product_features' => 'array',
             'options' => 'array',
-            'constraints' => 'array',
         ];
     }
 
@@ -102,6 +108,10 @@ class Product extends Model
             'product_dimension' => $this->product_dimension,
             'stocked_item' => $this->stocked_item,
             'datasheet' => $this->datasheet,
+            'datasheet_file' => $this->datasheet_file,
+            'installation_guide_file' => $this->installation_guide_file,
+            'user_manual' => $this->user_manual,
+            'ies_file' => $this->ies_file,
             'technical_icons' => $this->technical_icons,
             'meta_keywords' => $this->meta_keywords,
             'supplier_name' => $this->supplier_name,
@@ -109,7 +119,6 @@ class Product extends Model
             'product_type' => $this->product_type,
             'product_features' => $this->product_features,
             'options' => $this->options,
-            'constraints' => $this->constraints,
         ];
 
         foreach ($entry as $key => $value) {

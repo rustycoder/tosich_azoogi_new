@@ -84,7 +84,6 @@
       head.className = 'mobile-nav-head';
       head.innerHTML = `
         <div class="mobile-nav-brand">
-          <span class="mobile-nav-kicker">Azoogi</span>
           <span class="mobile-nav-title">Menu</span>
         </div>
         <button type="button" class="mobile-nav-close" aria-label="Close menu">
