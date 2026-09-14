@@ -24,7 +24,7 @@
     <div class="wrap">
         <div class="foot">
             <div>
-                <a href="{{ url('/') }}" class="logo"><img src="{{ asset('assets/logo_dark.png') }}" width="150"
+                <a href="{{ url('/') }}" class="logo"><img src="{{ asset('assets/logo_white.png') }}" width="150"
                         alt="Azoogi"></a>
                 <p>{{ $description }}</p>
             </div>

@@ -124,23 +124,12 @@
 const topbar = document.getElementById('topbar');
   let lastScrolled = null;
 
-  function updateLogos() {
-    const isScrolled = window.scrollY > 40;
-    document.querySelectorAll('.logo img').forEach(img => {
-      if (img.closest('.topbar')) {
-        img.src = isScrolled ? '/assets/logo_dark.png' : '/assets/logo_white.png';
-      } else {
-        img.src = '/assets/logo_dark.png';
-      }
-    });
-  }
-
   const onScroll = () => {
     const isScrolled = window.scrollY > 40;
     if (isScrolled !== lastScrolled) {
       topbar.classList.toggle('solid', isScrolled);
       lastScrolled = isScrolled;
-      updateLogos();
+      if (typeof updateLogos === 'function') updateLogos();
     }
   };
   window.addEventListener('scroll', onScroll, { passive: true });

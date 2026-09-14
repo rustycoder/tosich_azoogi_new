@@ -35,6 +35,8 @@ class QuoteRequestTest extends TestCase
             ->assertSee(url('/request-a-quote'), false)
             ->assertSee(url('/led-strip-calculator'), false)
             ->assertSeeInOrder([
+                'Trade Login',
+                'id="theme-toggle"',
                 'class="nav-actions"',
                 'LED Calculator',
                 'id="search-trigger"',

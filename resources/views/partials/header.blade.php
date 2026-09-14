@@ -1,6 +1,6 @@
 @php
     $topbarClass = trim($__env->yieldContent('topbarClass', 'solid'));
-    $logoFile = trim($__env->yieldContent('logo', 'logo_dark.png'));
+    $logoFile = trim($__env->yieldContent('logo', 'logo_white.png'));
     $description = $headerMeta->get('header.description', 0, 'Australian-Owned B2B Trade Wholesaler - Custom Lighting & Smart Control Solutions');
     $phone = $headerMeta->get('header.phone', 0, '1300 641 261');
     $email = $headerMeta->get('header.email', 0, 'sales@azoogi.com');
@@ -22,10 +22,30 @@
     <div class="util">
         <div class="util-inner">
             <div class="util-rotate" data-words='@json($words)' aria-live="polite">{{ $description }}</div>
-            <div class="top-con" style="display:flex;gap:24px">
-                <a href="{{ tel_href($phone) }}">{{ $phone }}</a>
-                <a href="mailto:{{ $email }}">{{ $email }}</a>
-                <div style="display:flex; align-items:center;"><a href="{{ url('/trade-login') }}">Trade Login</a></div>
+            <div class="util-end">
+                <div class="top-con">
+                    <a href="{{ tel_href($phone) }}">{{ $phone }}</a>
+                    <a href="mailto:{{ $email }}">{{ $email }}</a>
+                    <a href="{{ url('/trade-login') }}">Trade Login</a>
+                </div>
+                <button type="button" class="theme-btn" id="theme-toggle" aria-label="Toggle theme">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
             </div>
         </div>
     </div>

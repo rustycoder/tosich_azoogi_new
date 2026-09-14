@@ -63,7 +63,7 @@ html, body {
 
 .login-card {
     width: 100%;
-    background: #fff;
+    background: var(--pure-bg);
     border: 1px solid var(--line);
     padding: 36px 32px 32px;
 }
@@ -157,7 +157,7 @@ html, body {
 <section class="login-screen">
     <div class="login-inner">
         <div class="brand" aria-label="Azoogi">
-            <img src="{{ asset('assets/logo_dark.png') }}" alt="Azoogi">
+            <img src="{{ asset('assets/logo_white.png') }}" alt="Azoogi">
         </div>
 
         <div class="login-card">

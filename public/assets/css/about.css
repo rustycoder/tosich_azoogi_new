@@ -1,9 +1,5 @@
 /* About Us — same Azoogi modules, sequenced as an index + deep-dive */
 
-.about-page .topbar.solid {
-  background: rgba(255, 255, 255, 0.96);
-}
-
 .about-main {
   background: var(--bg);
   color: var(--ink);
@@ -569,7 +565,7 @@
   width: min(520px, calc(100% - 36px));
   margin: 18vh auto 0;
   padding: 32px 28px;
-  background: #fff;
+  background: var(--bg-2);
   border: 1px solid var(--line);
   border-radius: 4px;
   box-shadow: 0 24px 56px rgba(0, 0, 0, 0.18);

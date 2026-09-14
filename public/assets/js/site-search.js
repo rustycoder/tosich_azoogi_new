@@ -10,7 +10,6 @@
   let closeBtn = null;
   let activeIndex = -1;
   let currentMatches = [];
-  let swappedLogo = '';
 
   function publishedProducts() {
     if (typeof AZOOGI_PRODUCTS === 'undefined' || !Array.isArray(AZOOGI_PRODUCTS.products)) {
@@ -111,46 +110,17 @@
     }
   }
 
-  function headerLogo() {
-    return document.querySelector('#topbar .logo img');
-  }
-
-  function useDarkHeaderLogo() {
-    const logo = headerLogo();
-    if (!logo) {
-      return;
+  function refreshLogos() {
+    if (typeof window.updateLogos === 'function') {
+      window.updateLogos();
     }
-
-    const src = logo.getAttribute('src') || '';
-    if (src.indexOf('logo_white') === -1) {
-      return;
-    }
-
-    swappedLogo = src;
-    logo.src = src.replace('logo_white.png', 'logo_dark.png');
-  }
-
-  function restoreHeaderLogo() {
-    const logo = headerLogo();
-    if (!logo || swappedLogo === '') {
-      swappedLogo = '';
-      return;
-    }
-
-    if (window.scrollY > 40) {
-      logo.src = swappedLogo.replace('logo_white.png', 'logo_dark.png');
-    } else {
-      logo.src = swappedLogo;
-    }
-
-    swappedLogo = '';
   }
 
   function openSearch() {
     closeNav();
     closeQuote();
-    useDarkHeaderLogo();
     document.body.classList.add('search-open');
+    refreshLogos();
     if (trigger) {
       trigger.setAttribute('aria-expanded', 'true');
     }
@@ -169,7 +139,7 @@
 
   function closeSearch() {
     document.body.classList.remove('search-open');
-    restoreHeaderLogo();
+    refreshLogos();
     if (trigger) {
       trigger.setAttribute('aria-expanded', 'false');
     }

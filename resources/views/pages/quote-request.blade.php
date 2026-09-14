@@ -9,7 +9,7 @@
 @section('chrome', 'full')
 
 @section('topbarClass', 'solid')
-@section('logo', 'logo_dark.png')
+@section('logo', 'logo_white.png')
 
 @section('content')
 <main class="quote-page">

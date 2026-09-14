@@ -20,19 +20,13 @@
 @section('chrome', 'full')
 
 @section('topbarClass', 'solid')
-@section('logo', 'logo_dark.png')
+@section('logo', 'logo_white.png')
 
 @push('styles')
   <link rel="stylesheet" href="{{ versioned_asset('assets/css/products.css') }}">
   @if ($showCatalog)
   @verbatim
     <style>
-      /* Product page — solid light header (matches site light mode) */
-      .topbar {
-        background: rgba(255, 255, 255, .96) !important;
-        border-bottom: 1px solid var(--line) !important;
-      }
-
       .header-bg {
         background-color: #333;
         height: 400px;
@@ -592,7 +586,7 @@
         position: relative;
         aspect-ratio: 1/1;
         overflow: hidden;
-        background-color: #ffffff;
+        background-color: var(--bg-2);
       }
 
       .prod-card .prod-card-img img {
@@ -612,7 +606,7 @@
         width: 100%;
         height: 100%;
         object-fit: contain;
-        background-color: #ffffff;
+        background-color: var(--bg-2);
         display: flex;
         align-items: center;
         justify-content: center;

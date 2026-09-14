@@ -13,7 +13,7 @@
 }
 
 body.search-open .topbar {
-  --nav-text: #111111;
+  --nav-text: var(--pure-text);
   background: var(--pure-bg);
   border-bottom-color: var(--line);
 }

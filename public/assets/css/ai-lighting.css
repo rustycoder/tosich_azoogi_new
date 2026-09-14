@@ -1,9 +1,5 @@
 /* AI Lighting — tighter, asymmetric, Azoogi-native */
 
-.ai-page .topbar.solid {
-  background: rgba(255, 255, 255, 0.96);
-}
-
 .ai-main {
   background: var(--bg);
   color: var(--ink);
@@ -154,7 +150,7 @@
   flex-direction: column;
   gap: 8px;
   padding: 16px 18px;
-  background: #fff;
+  background: var(--bg-2);
   border: 1px solid var(--line);
   border-radius: 4px;
 }
@@ -428,7 +424,7 @@
   align-items: center;
   gap: 18px;
   padding: 16px;
-  background: #fff;
+  background: var(--bg-2);
   border: 1px solid var(--line);
   border-radius: 4px;
 }
@@ -438,7 +434,7 @@
   width: 120px;
   height: 120px;
   display: block;
-  background: #fff;
+  background: var(--always-white);
 }
 
 .ai-app-qr p {
@@ -550,7 +546,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 0;
-  background: #fff;
+  background: var(--bg-2);
   border: 1px solid var(--line);
   border-radius: 4px;
   padding: 6px 20px;

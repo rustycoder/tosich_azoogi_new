@@ -177,7 +177,7 @@ html, body {
 
   <div class="coming-soon-inner">
     <a href="/" class="brand" aria-label="Azoogi home">
-      <img src="/assets/logo_dark.png" alt="Azoogi">
+      <img src="/assets/logo_white.png" alt="Azoogi">
     </a>
 
     <div class="kicker">Trade Portal</div>

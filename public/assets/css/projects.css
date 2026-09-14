@@ -1,10 +1,5 @@
 /* Projects listing + detail */
 
-.projects-page .topbar {
-  background: rgba(255, 255, 255, 0.96);
-  border-bottom: 1px solid var(--line);
-}
-
 .projects-hero {
   padding: 140px 0 0;
   text-align: center;
@@ -66,7 +61,7 @@
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 10;
-  background: #eee;
+  background: var(--card-bg);
 }
 
 .project-card-media img {
@@ -215,7 +210,7 @@
   overflow: hidden;
   border: 1px solid var(--line);
   max-height: 420px;
-  background: #eee;
+  background: var(--card-bg);
 }
 
 .project-gallery .image img {

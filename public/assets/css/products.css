@@ -1,10 +1,5 @@
 /* Products landing gallery + catalogue chrome */
 
-.products-page .topbar {
-  background: rgba(255, 255, 255, 0.96) !important;
-  border-bottom: 1px solid var(--line) !important;
-}
-
 .prod-gallery {
   padding: 12px 0 72px;
 }
@@ -44,7 +39,7 @@
 .prod-gallery-card {
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: var(--bg-2);
   border: 1px solid var(--line);
   color: var(--ink);
   text-decoration: none;

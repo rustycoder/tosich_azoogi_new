@@ -1,9 +1,5 @@
 /* Solutions — hero statement, control ecosystems, flip-card sector grid */
 
-.solutions-page .topbar.solid {
-  background: rgba(255, 255, 255, 0.96);
-}
-
 .solutions-main {
   padding: 0;
   background: var(--bg);

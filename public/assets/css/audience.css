@@ -1,9 +1,5 @@
 /* Audience pages — Why Azoogi sticky stack (inherits #cards from style_demo) */
 
-.audience-page .topbar.solid {
-  background: rgba(255, 255, 255, 0.96);
-}
-
 .audience-main {
   padding: 120px 0 0;
   background: var(--bg);

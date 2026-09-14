@@ -33,6 +33,8 @@ class HeaderSearchTest extends TestCase
             ->assertSee('aria-label="Clear search"', false)
             ->assertSee('placeholder="Search products..."', false)
             ->assertSeeInOrder([
+                'Trade Login',
+                'id="theme-toggle"',
                 '<nav class="nav">',
                 'class="nav-actions"',
                 'LED Calculator',

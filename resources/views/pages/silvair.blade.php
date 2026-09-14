@@ -9,7 +9,7 @@
 @section('chrome', 'full')
 
 @section('topbarClass', 'solid')
-@section('logo', 'logo_dark.png')
+@section('logo', 'logo_white.png')
 
 @push('styles')
 <link rel="stylesheet" href="{{ versioned_asset('assets/css/silvair.css') }}">

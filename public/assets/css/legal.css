@@ -1,9 +1,5 @@
 /* Legal / policy pages — v1.1 */
 
-.legal-page .topbar.solid {
-  background: rgba(255, 255, 255, 0.96);
-}
-
 .legal-main {
   padding: 140px 0 72px;
   background: var(--bg);

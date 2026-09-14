@@ -256,23 +256,6 @@
   }
   heroParallax();
   window.addEventListener('scroll', heroParallax, { passive: true });
-
-  function updateLogos() {
-    const isScrolled = window.scrollY > 40;
-    const logos = document.querySelectorAll('.logo img');
-    logos.forEach(img => {
-      if (img.closest('.topbar')) {
-        img.src = isScrolled ? '/assets/logo_dark.png' : '/assets/logo_white.png';
-      } else {
-        img.src = '/assets/logo_dark.png';
-      }
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    localStorage.removeItem('theme');
-    updateLogos();
-  });
 </script>
 @endverbatim
 @endpush

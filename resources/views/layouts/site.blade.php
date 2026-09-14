@@ -6,6 +6,16 @@
 <title>{{ trim($__env->yieldContent('title', 'Azoogi')) }}</title>
 <meta name="description" content="{{ trim($__env->yieldContent('description', 'Azoogi designs and supplies premium LED lighting for projects that demand more.')) }}">
 <link rel="icon" href="{{ asset('assets/favicon.png') }}">
+<script>
+(function () {
+  try {
+    var theme = localStorage.getItem('theme');
+    if (theme === 'light' || theme === 'dark') {
+      document.documentElement.setAttribute('data-theme', theme);
+    }
+  } catch (e) {}
+})();
+</script>
 @if (request()->routeIs('dashboard.pages.preview'))
 <base href="{{ rtrim(url('/'), '/') }}/">
 @endif
@@ -13,6 +23,7 @@
 <link rel="stylesheet" href="{{ versioned_asset('assets/css/quote.css') }}">
 <link rel="stylesheet" href="{{ versioned_asset('assets/css/site-search.css') }}">
 @stack('styles')
+<script defer src="{{ versioned_asset('assets/js/site-theme.js') }}"></script>
 @if (trim($__env->yieldContent('chrome', 'full')) !== 'none')
 <script>const AZOOGI_PRODUCTS = @json($productCatalog, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);</script>
 <script defer src="{{ asset('assets/js/mega_menu.js') }}?v={{ config('app.asset_version') }}"></script>

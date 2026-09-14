@@ -1,14 +1,5 @@
 /* LED Strip Calculator */
 
-.calc-page .topbar {
-  background: rgba(255, 255, 255, 0.96);
-  border-bottom: 1px solid var(--line);
-}
-
-.calc-page .topbar .cta {
-  color: #fff;
-}
-
 .calc-hero {
   position: relative;
   padding: 130px 28px 0;
@@ -65,7 +56,7 @@
   border: 1px solid var(--line);
   border-radius: 14px;
   overflow: hidden;
-  background: #fff;
+  background: var(--bg-2);
   min-height: 0;
   height: auto;
   max-height: none;
@@ -167,7 +158,7 @@
 .options button {
   appearance: none;
   border: 1px solid var(--line);
-  background: #fafafa;
+  background: var(--pure-bg);
   color: var(--ink);
   padding: 11px 12px;
   border-radius: 8px;
@@ -257,7 +248,7 @@
 .ls-results-container {
   border: 1px solid var(--line);
   border-radius: 14px;
-  background: #fff;
+  background: var(--bg-2);
   padding: clamp(20px, 3vw, 40px);
   box-shadow: 0 16px 40px -28px rgba(0, 0, 0, .12);
 }
@@ -282,7 +273,7 @@
   padding: 16px;
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: #fafafa;
+  background: var(--pure-bg);
   margin-bottom: 14px;
 }
 
@@ -290,7 +281,7 @@
   aspect-ratio: 16/9;
   border-radius: 8px;
   overflow: hidden;
-  background: #eee;
+  background: var(--card-bg);
   max-height: 140px;
 }
 

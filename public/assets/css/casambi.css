@@ -1,9 +1,5 @@
 /* Casambi — native Azoogi layout, partner lockup, spec table */
 
-.cb-page .topbar.solid {
-    background: rgba(255, 255, 255, 0.96);
-}
-
 .cb-main {
     padding: 120px 0 0;
     background: var(--bg);
@@ -120,7 +116,7 @@
     flex-direction: column;
     gap: 8px;
     padding: 24px;
-    background: #fff;
+    background: var(--bg-2);
     border: 1px solid var(--line);
     border-radius: 4px;
 }
@@ -287,7 +283,7 @@
     pointer-events: none;
     border-radius: 4px;
     overflow: hidden;
-    background: #fff;
+    background: var(--bg-2);
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
 }
 
@@ -299,7 +295,7 @@
     width: 100%;
     height: auto;
     display: block;
-    background: #f4f4f4;
+    background: var(--card-bg);
 }
 
 .cb-support {
@@ -313,7 +309,7 @@
 
 .cb-support li {
     padding: 24px;
-    background: #fff;
+    background: var(--bg-2);
     border: 1px solid var(--line);
     border-radius: 4px;
 }
