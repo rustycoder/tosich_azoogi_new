@@ -504,47 +504,21 @@
                         });
                     }
                 }
-                // Helper to check if product qualifies for Dimming Control options (NEON & Linear LED lights without Control Protocol)
+                // Helper to check if product qualifies for Dimming Control options based on Airtable "Dimming Control" checkbox
                 function qualifiesForDimmingControl(prod, opts) {
                     if (!prod) return false;
-                    const rawCategories = [];
-                    if (prod.category) rawCategories.push(String(prod.category));
-                    if (Array.isArray(prod.categories)) {
-                        prod.categories.forEach(c => rawCategories.push(String(c)));
-                    }
-                    if (Array.isArray(prod.category_path)) {
-                        prod.category_path.forEach(c => rawCategories.push(String(c)));
-                    }
-                    if (Array.isArray(prod.category_paths)) {
-                        prod.category_paths.flat().forEach(c => rawCategories.push(String(c)));
-                    }
 
-                    const catStr = rawCategories.join(' ').toLowerCase();
-                    const nameStr = String(prod.product_name || prod.name || '').toLowerCase();
+                    const val = prod.dimming_control !== undefined && prod.dimming_control !== null
+                        ? prod.dimming_control
+                        : (prod.product_features ? (prod.product_features['Dimming Control'] || prod.product_features['dimming_control']) : null);
 
-                    const isNeon = catStr.includes('neon') || nameStr.includes('neon');
-                    const isLinearOrStrip = catStr.includes('linear') || catStr.includes('strip') || catStr.includes('cob') ||
-                        catStr.includes('smd') || catStr.includes('lumoflex') || catStr.includes('flex') ||
-                        nameStr.includes('strip') || nameStr.includes('lumoflex') || nameStr.includes('cob') ||
-                        nameStr.includes('smd');
-
-                    const isExcluded = catStr.includes('profile') || catStr.includes('driver') || catStr.includes('accessories') ||
-                        catStr.includes('pool light') || catStr.includes('garden light') || catStr.includes('handrail') ||
-                        nameStr.includes('profile') || nameStr.includes('driver') || nameStr.includes('clip');
-
-                    if (!((isNeon || isLinearOrStrip) && !isExcluded)) return false;
-
-                    // Check if product already has "Control Protocol"
-                    if (opts) {
-                        for (const k in opts) {
-                            const lower = k.trim().toLowerCase();
-                            if (lower === 'control protocol' || lower === 'control_protocol' || lower === 'control') {
-                                if (Array.isArray(opts[k]) && opts[k].length > 0) return false;
-                            }
-                        }
+                    if (val === true || val === 1 || val === '1') return true;
+                    if (typeof val === 'string') {
+                        const lower = val.trim().toLowerCase();
+                        return lower === 'true' || lower === 'yes' || lower === '1' || lower === 'checked' || lower === 'dimmable';
                     }
 
-                    return true;
+                    return false;
                 }
 
                 if (qualifiesForDimmingControl(product, normalizedOptions)) {
@@ -556,6 +530,10 @@
                             { id: 'dim-casambi', name: 'CASAMBI' }
                         ];
                     }
+                } else {
+                    delete normalizedOptions['Dimming Control'];
+                    delete normalizedOptions['dimming control'];
+                    delete normalizedOptions['Dimming control'];
                 }
 
                 product.options = normalizedOptions;

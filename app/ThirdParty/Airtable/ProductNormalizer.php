@@ -162,6 +162,7 @@ final class ProductNormalizer
                 'product_type' => $this->sanitize($fields['Product type'] ?? ''),
                 'product_features' => $features,
                 'options' => $this->parseJsonField($fields['Options'] ?? $fields['options'] ?? [], []),
+                'dimming_control' => $this->booleanValue($fields['Dimming Control'] ?? $fields['Dimming control'] ?? $fields['dimming_control'] ?? $fields['Dimming_Control'] ?? false),
             ];
 
             $product = [];
@@ -740,5 +741,24 @@ final class ProductNormalizer
             fn (mixed $item): string => trim((string) $item),
             $value,
         )));
+    }
+
+    public function booleanValue(mixed $value): bool
+    {
+        if (is_bool($value)) {
+            return $value;
+        }
+
+        if (is_numeric($value)) {
+            return (int) $value === 1;
+        }
+
+        if (is_string($value)) {
+            $lower = mb_strtolower(trim($value));
+
+            return in_array($lower, ['1', 'true', 'yes', 'checked', 'on', 'dimmable'], true);
+        }
+
+        return false;
     }
 }

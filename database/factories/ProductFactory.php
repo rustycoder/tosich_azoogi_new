@@ -25,6 +25,7 @@ class ProductFactory extends Factory
             'categories' => [$category],
             'category_path' => [$category],
             'product_images' => ['/assets/img/neon.webp'],
+            'dimming_control' => false,
         ];
     }
 }

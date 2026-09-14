@@ -37,6 +37,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'sku_mappings',
     'product_features',
     'options',
+    'dimming_control',
     'created_by',
     'updated_by',
     'deleted_by',
@@ -53,6 +54,7 @@ class Product extends Model
     {
         return [
             'sort_order' => 'integer',
+            'dimming_control' => 'boolean',
             'product_images' => 'array',
             'product_dimension' => 'array',
             'technical_icons' => 'array',
@@ -119,6 +121,7 @@ class Product extends Model
             'product_type' => $this->product_type,
             'product_features' => $this->product_features,
             'options' => $this->options,
+            'dimming_control' => (bool) $this->dimming_control,
         ];
 
         foreach ($entry as $key => $value) {

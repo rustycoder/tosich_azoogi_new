@@ -687,4 +687,58 @@ class ProductSyncTest extends TestCase
 
         $this->assertStringStartsWith('text/event-stream', (string) $response->headers->get('Content-Type'));
     }
+
+    public function test_sync_normalizes_and_persists_dimming_control_checkbox(): void
+    {
+        config([
+            'airtable.api_key' => 'test-key',
+            'airtable.base_id' => 'appTest',
+        ]);
+
+        Http::fake(function (Request $request) {
+            $url = $request->url();
+
+            if (str_contains($url, 'Categories')) {
+                return Http::response(['records' => [
+                    ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
+                ]]);
+            }
+
+            if (str_contains($url, 'attributes') || str_contains($url, 'Attributes')) {
+                return Http::response(['records' => []]);
+            }
+
+            return Http::response(['records' => [
+                [
+                    'id' => 'recWithDimming',
+                    'fields' => [
+                        'Product Name' => 'Neon With Dimming',
+                        'Status' => 'publish',
+                        'Category' => 'NEON',
+                        'Dimming Control' => true,
+                    ],
+                ],
+                [
+                    'id' => 'recWithoutDimming',
+                    'fields' => [
+                        'Product Name' => 'Neon Without Dimming',
+                        'Status' => 'publish',
+                        'Category' => 'NEON',
+                        'Dimming Control' => false,
+                    ],
+                ],
+            ]]);
+        });
+
+        app(IProductSyncService::class)->sync('test');
+
+        $dimProduct = Product::query()->where('airtable_id', 'recWithDimming')->firstOrFail();
+        $nonDimProduct = Product::query()->where('airtable_id', 'recWithoutDimming')->firstOrFail();
+
+        $this->assertTrue($dimProduct->dimming_control);
+        $this->assertFalse($nonDimProduct->dimming_control);
+
+        $this->assertTrue($dimProduct->toStorefrontArray()['dimming_control']);
+        $this->assertFalse($nonDimProduct->toStorefrontArray()['dimming_control']);
+    }
 }
