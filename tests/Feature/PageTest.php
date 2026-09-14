@@ -145,6 +145,62 @@ class PageTest extends TestCase
             ->assertSee('href="'.url('/contact').'"', false);
     }
 
+    public function test_about_path_heading_matches_why_choose_and_sits_above_three_boxes(): void
+    {
+        $this->get('/about')
+            ->assertOk()
+            ->assertSee('class="about-split-copy about-path-head', false)
+            ->assertSee('Select Your <span>Path</span>', false)
+            ->assertSee('Why Choose <span>Azoogi</span>', false)
+            ->assertSee('For Architects &amp; Specifiers', false)
+            ->assertSee('For Builders &amp; Contractors', false)
+            ->assertSee('For Electrical Wholesalers', false)
+            ->assertSee('class="more">Learn more', false);
+
+        $css = file_get_contents(public_path('assets/css/about.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertMatchesRegularExpression(
+            '/\.about-path-head\s*\{[^}]*text-align:\s*left/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.about-split-copy h2 span\s*\{[^}]*color:\s*var\(--accent\)/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.about-path-list\s*\{[^}]*grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\)/s',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.about-path-head\s*\{[^}]*text-align:\s*center/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.about-path-row h4\s*\{[^}]*font-size:\s*var\(--fs-meta\)/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.about-path-row \.img\s*\{[^}]*aspect-ratio:\s*1\s*\/\s*1/s',
+            $css,
+        );
+    }
+
+    public function test_about_hero_image_is_anchored_to_the_bottom(): void
+    {
+        $css = file_get_contents(public_path('assets/css/about.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertMatchesRegularExpression(
+            '/\.about-hero-media img\s*\{[^}]*object-position:\s*bottom\s+center/s',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.about-hero-media img\s*\{[^}]*object-position:\s*top\s+center/s',
+            $css,
+        );
+    }
+
     public function test_header_and_footer_are_not_public_pages(): void
     {
         $this->get('/header')->assertNotFound();
@@ -169,6 +225,47 @@ class PageTest extends TestCase
         );
     }
 
+    public function test_audience_hero_does_not_force_a_tall_empty_band(): void
+    {
+        $css = file_get_contents(public_path('assets/css/audience.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.audience-hero\s*\{[^}]*min-height:\s*var\(--hero-min\)/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.audience-hero\s*\{[^}]*padding:\s*var\(--hero-pad-y-top\)\s+0\s+0\s*;/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.audience-hero \.wrap\s*\{[^}]*padding-bottom:\s*0/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.audience-hero \.h2:last-child\s*\{[^}]*margin-bottom:\s*0/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.audience-cards-wrap\.card-in\s*\{[^}]*padding-top:\s*0/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.audience-page #cards\s*\{[^}]*padding-top:\s*0/s',
+            $css,
+        );
+
+        $this->get('/electrician-builder')
+            ->assertOk()
+            ->assertSee('Electricians', false)
+            ->assertDontSee('class="audience-lead"', false);
+
+        $this->get('/wholesaler')
+            ->assertOk()
+            ->assertSee('Wholesaler', false)
+            ->assertDontSee('class="audience-lead"', false);
+    }
+
     public function test_wholesaler_page_does_not_include_the_last_off_spec_card(): void
     {
         $this->get('/wholesaler')
@@ -189,6 +286,18 @@ class PageTest extends TestCase
         $this->assertNotFalse($css);
         $this->assertMatchesRegularExpression(
             '/\.contact-info-panel \.info-label\s*\{[^}]*font-size:\s*var\(--fs-body\)/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.contact-title\s*\{[^}]*font-size:\s*var\(--fs-h2-section\)/s',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.contact-title\s*\{[^}]*font-size:\s*var\(--fs-h2\)\s*;/s',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.contact-title\s*\{[^}]*white-space:\s*nowrap/s',
             $css,
         );
     }

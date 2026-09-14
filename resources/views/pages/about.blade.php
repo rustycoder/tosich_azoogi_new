@@ -96,18 +96,19 @@
 
   <section class="about-band" {!! cms_section_attr('path') !!}>
     <div class="wrap about-path-section">
-      <div class="about-split-copy reveal">
-        <h2{!! cms_style($meta, 'path.heading') !!}>{!! nl2br_html($meta->get('path.heading'), true) !!}</h2>
+      <div class="about-split-copy about-path-head reveal">
+        <h2{!! cms_style($meta, 'path.heading') !!}>{!! accent_html($meta->get('path.heading'), 'Path') !!}</h2>
       </div>
       <div class="about-path-list">
         @foreach ($pathItems as $item)
           <a class="about-path-row reveal" href="{{ $item['href'] ?? '#' }}" @if (! $loop->first) style="transition-delay: {{ ($loop->index * 0.08) }}s" @endif>
-            <figure>
-              <img src="{{ media_url($item['image'] ?? '') }}" alt="" loading="lazy">
-            </figure>
-            <div>
-              <h3{!! cms_style($meta, 'path.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h3>
+            <div class="img">
+              <img src="{{ media_url($item['image'] ?? '') }}" alt="{{ $item['title'] ?? '' }}" loading="lazy">
+            </div>
+            <div class="body">
+              <h4{!! cms_style($meta, 'path.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h4>
               <p{!! cms_style($meta, 'path.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
+              <span class="more">Learn more &rarr;</span>
             </div>
           </a>
         @endforeach

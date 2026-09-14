@@ -34,7 +34,15 @@ class SolutionsPageTest extends TestCase
 
         $this->assertNotFalse($css);
         $this->assertMatchesRegularExpression(
-            '/\.solutions-hero\s*\{[^}]*padding:\s*140px\s+0\s+0\s*;/s',
+            '/\.solutions-hero\s*\{[^}]*min-height:\s*var\(--hero-min\)/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.solutions-hero\s*\{[^}]*align-items:\s*start/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.solutions-hero\s*\{[^}]*padding:\s*var\(--hero-pad-y-top\)\s+0\s+var\(--hero-pad-y-bottom\)\s*;/s',
             $css,
         );
         $this->assertMatchesRegularExpression(

@@ -85,7 +85,7 @@ class AboutDefinition implements PageDefinition
             ['key' => 'reach.body', 'sort_order' => 0, 'value' => 'For over two decades, our engineering footprint has extended far beyond Australia - delivering technical lighting packages for major developments and luxury resorts across Fiji, Vanuatu, Bali, the Maldives. With extensive export expertise, multi-currency processing, and deep experience navigating international compliance standards, we ensure seamless project delivery anywhere in the world.'],
             ['key' => 'reach.image', 'sort_order' => 0, 'value' => '/assets/img/sydney-night.jpg'],
             ['key' => 'path.kicker', 'sort_order' => 0, 'value' => 'Audiences'],
-            ['key' => 'path.heading', 'sort_order' => 0, 'value' => "Select Your\nPath"],
+            ['key' => 'path.heading', 'sort_order' => 0, 'value' => 'Select Your Path'],
         ];
 
         foreach ($why as $i => [$title, $body, $image]) {

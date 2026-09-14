@@ -49,8 +49,8 @@
   </section>
 
   <section class="dc-band dc-band--alt" {!! cms_section_attr('why') !!}>
-    <div class="wrap dc-split">
-      <div class="dc-split-copy reveal">
+    <div class="wrap">
+      <div class="dc-section-head reveal">
         <h2{!! cms_style($meta, 'why.heading') !!}>{!! nl2br_html($meta->get('why.heading'), true) !!}</h2>
         <p{!! cms_style($meta, 'why.body') !!}>{{ $meta->get('why.body') }}</p>
       </div>
@@ -66,77 +66,96 @@
     </div>
   </section>
 
-  <section class="dc-band dc-band--tight" {!! cms_section_attr('hardware') !!}>
-    <div class="wrap dc-feature">
+  <section class="dc-band dc-band--feature">
+    <div class="wrap dc-feature" {!! cms_section_attr('hardware') !!}>
       <div class="dc-feature-copy reveal">
-        <h2{!! cms_style($meta, 'hardware.heading') !!}>{!! nl2br_html($meta->get('hardware.heading'), true) !!}</h2>
+        <h2{!! cms_style($meta, 'hardware.heading') !!}>{!! accent_html($meta->get('hardware.heading'), 'Data Hall Conditions') !!}</h2>
         <ul class="dc-ticks">
           @foreach ($hardwareTicks as $tick)
             <li{!! cms_style($meta, 'hardware.tick', $loop->index) !!}>{!! labelled_tick($tick) !!}</li>
           @endforeach
         </ul>
       </div>
-      <div class="dc-feature-img reveal" style="transition-delay: 0.2s">
-        <figure>
-          <img src="{{ media_url($meta->get('hardware.image')) }}" alt="{{ $meta->get('hardware.heading') }}" loading="lazy">
-        </figure>
-      </div>
+      @if (filled($meta->get('hardware.image')))
+        <div class="dc-feature-img reveal" style="transition-delay: 0.2s">
+          <figure>
+            <img src="{{ media_url($meta->get('hardware.image')) }}" alt="{{ $meta->get('hardware.heading') }}" loading="lazy">
+          </figure>
+        </div>
+      @endif
     </div>
   </section>
 
-  <section class="dc-band dc-band--alt dc-band--tight" {!! cms_section_attr('control') !!}>
-    <div class="wrap dc-feature dc-feature--flip">
+  <section class="dc-band dc-band--alt dc-band--feature">
+    <div class="wrap dc-feature dc-feature--flip" {!! cms_section_attr('control') !!}>
       <div class="dc-feature-copy reveal">
-        <h2{!! cms_style($meta, 'control.heading') !!}>{!! nl2br_html($meta->get('control.heading'), true) !!}</h2>
+        <h2{!! cms_style($meta, 'control.heading') !!}>{!! accent_html($meta->get('control.heading'), 'Building Automation') !!}</h2>
         <ul class="dc-ticks">
           @foreach ($controlTicks as $tick)
             <li{!! cms_style($meta, 'control.tick', $loop->index) !!}>{!! labelled_tick($tick) !!}</li>
           @endforeach
         </ul>
       </div>
-      <div class="dc-feature-img reveal" style="transition-delay: 0.2s">
-        <figure>
-          <img src="{{ media_url($meta->get('control.image')) }}" alt="{{ $meta->get('control.heading') }}" loading="lazy">
-        </figure>
-      </div>
+      @if (filled($meta->get('control.image')))
+        <div class="dc-feature-img reveal" style="transition-delay: 0.2s">
+          <figure>
+            <img src="{{ media_url($meta->get('control.image')) }}" alt="{{ $meta->get('control.heading') }}" loading="lazy">
+          </figure>
+        </div>
+      @endif
     </div>
   </section>
 
-  <section class="dc-band">
-    <div class="wrap dc-grid-section">
-      <div class="dc-grid-col reveal" {!! cms_section_attr('emergency') !!}>
+  <section class="dc-band dc-band--feature">
+    <div class="wrap dc-feature" {!! cms_section_attr('emergency') !!}>
+      <div class="dc-feature-copy reveal">
         <h2{!! cms_style($meta, 'emergency.heading') !!}>{!! accent_html($meta->get('emergency.heading'), 'Emergency Lighting') !!}</h2>
-        @foreach ($emergencyItems as $item)
-          <div class="dc-grid-item">
-            <h3{!! cms_style($meta, 'emergency.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h3>
-            <p{!! cms_style($meta, 'emergency.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
-          </div>
-        @endforeach
+        <ul class="dc-ticks">
+          @foreach ($emergencyItems as $item)
+            <li{!! cms_style($meta, 'emergency.item.title', $loop->index) !!}>{!! labelled_tick(($item['title'] ?? '').': '.($item['body'] ?? '')) !!}</li>
+          @endforeach
+        </ul>
       </div>
-      
-      <div class="dc-grid-col reveal" style="transition-delay: 0.2s" {!! cms_section_attr('zones') !!}>
+      @if (filled($meta->get('hardware.image')))
+        <div class="dc-feature-img reveal" style="transition-delay: 0.2s">
+          <figure>
+            <img src="{{ media_url($meta->get('hardware.image')) }}" alt="{{ $meta->get('emergency.heading') }}" loading="lazy">
+          </figure>
+        </div>
+      @endif
+    </div>
+  </section>
+
+  <section class="dc-band dc-band--alt dc-band--feature">
+    <div class="wrap dc-feature dc-feature--flip" {!! cms_section_attr('zones') !!}>
+      <div class="dc-feature-copy reveal">
         <h2{!! cms_style($meta, 'zones.heading') !!}>{!! accent_html($meta->get('zones.heading'), 'Across All Zones') !!}</h2>
-        <ul class="dc-zone-list">
+        <ul class="dc-ticks">
           @foreach ($zones as $item)
             <li{!! cms_style($meta, 'zones.item.title', $loop->index) !!}>{!! labelled_tick(($item['title'] ?? '').': '.($item['body'] ?? '')) !!}</li>
           @endforeach
         </ul>
       </div>
+      @if (filled($meta->get('control.image')))
+        <div class="dc-feature-img reveal" style="transition-delay: 0.2s">
+          <figure>
+            <img src="{{ media_url($meta->get('control.image')) }}" alt="{{ $meta->get('zones.heading') }}" loading="lazy">
+          </figure>
+        </div>
+      @endif
     </div>
   </section>
 
-  <div class="wrap reveal" {!! cms_section_attr('cta') !!}>
-      <div class="dc-cta">
-        <div class="dc-cta-copy">
-          <h2{!! cms_style($meta, 'cta.heading') !!}>{!! accent_html($meta->get('cta.heading'), 'Data Centre Project?') !!}</h2>
-          <p{!! cms_style($meta, 'cta.body') !!}>{{ $meta->get('cta.body') }}</p>
-          <div class="dc-actions">
-            <a href="{{ $meta->get('cta.primary.href', 0, '/contact') }}" class="btn primary"{!! cms_style($meta, 'cta.primary.label') !!}>{{ $meta->get('cta.primary.label') }}</a>
-            <a href="{{ $meta->get('cta.secondary.href') }}" class="btn"{!! cms_style($meta, 'cta.secondary.label') !!}>{{ $meta->get('cta.secondary.label') }}</a>
-          </div>
-        </div>
+  <section class="dc-cta reveal" {!! cms_section_attr('cta') !!}>
+    <div class="wrap dc-cta-copy">
+      <h2{!! cms_style($meta, 'cta.heading') !!}>{!! accent_html($meta->get('cta.heading'), 'Data Centre Project?') !!}</h2>
+      <p{!! cms_style($meta, 'cta.body') !!}>{{ $meta->get('cta.body') }}</p>
+      <div class="dc-actions">
+        <a href="{{ $meta->get('cta.primary.href', 0, '/contact') }}" class="btn primary"{!! cms_style($meta, 'cta.primary.label') !!}>{{ $meta->get('cta.primary.label') }}</a>
+        <a href="{{ $meta->get('cta.secondary.href') }}" class="btn"{!! cms_style($meta, 'cta.secondary.label') !!}>{{ $meta->get('cta.secondary.label') }}</a>
       </div>
-  </div>
+    </div>
+  </section>
 
 </main>
 @endsection

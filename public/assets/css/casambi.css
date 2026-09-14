@@ -1,7 +1,7 @@
 /* Casambi — native Azoogi layout, partner lockup, spec table */
 
 .cb-main {
-    padding: 120px 0 0;
+    padding: 0;
     background: var(--bg);
     color: var(--ink);
     font-family: var(--font-sans);
@@ -19,7 +19,10 @@
 /* —— Hero —— */
 .cb-hero {
     text-align: center;
-    padding: 24px 0 0;
+    min-height: var(--hero-min);
+    display: grid;
+    align-items: start;
+    padding: var(--hero-pad-y-top) 0 var(--hero-pad-y-bottom);
 }
 
 .cb-lockup {
@@ -73,7 +76,7 @@
 
 /* —— Bands —— */
 .cb-band {
-    padding: clamp(9px, 1.5vw, 16px) 0;
+    padding: var(--section-y) 0;
 }
 
 .cb-band--alt {
@@ -346,7 +349,7 @@
 }
 
 .cb-cta {
-    padding: clamp(9px, 1.5vw, 16px) 0 24px;
+    padding: var(--section-y) 0 calc(var(--section-y) + 16px);
     border-radius: 4px;
     text-align: center;
 }
@@ -409,10 +412,6 @@
 
     .cb-title {
         max-width: none;
-    }
-
-    .cb-band {
-        padding: 8px 0;
     }
 
     .cb-cta .btn.primary {

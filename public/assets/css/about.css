@@ -18,7 +18,7 @@
 /* —— Hero (Data Centre) —— */
 .about-hero {
   position: relative;
-  min-height: 85vh;
+  min-height: var(--hero-min);
   display: grid;
   align-items: end;
   overflow: hidden;
@@ -35,7 +35,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center;
+  object-position: bottom center;
   display: block;
   filter: contrast(1.25) brightness(0.68) saturate(1.05);
   animation: aboutSlowZoom 22s ease-out forwards;
@@ -59,7 +59,7 @@
 .about-hero-copy {
   position: relative;
   z-index: 1;
-  padding: 120px max(28px, calc((100% - var(--site-max, 1400px)) / 2 + 28px)) 56px;
+  padding: var(--hero-pad-y-top) var(--hero-pad-x) var(--hero-pad-y-bottom);
   width: 100%;
 }
 
@@ -99,7 +99,7 @@
 
 /* —— Bands —— */
 .about-band {
-  padding: clamp(12px, 1.5vw, 18px) 0;
+  padding: var(--section-y) 0;
 }
 
 .about-band--alt {
@@ -462,84 +462,112 @@
   color: rgba(255, 255, 255, 0.82);
 }
 
-/* —— Paths (Data Centre zone list) —— */
+/* —— Paths —— */
 .about-path-section {
   display: grid;
-  grid-template-columns: 0.75fr 1.25fr;
-  gap: clamp(32px, 5vw, 64px);
-  align-items: start;
+  gap: clamp(22px, 3vw, 32px);
+}
+
+.about-path-head {
+  text-align: left;
 }
 
 .about-path-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
 }
 
 .about-path-row {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 20px;
-  align-items: start;
-  padding: 22px 28px 22px 0;
-  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  color: var(--ink);
   text-decoration: none;
-  color: inherit;
-  position: relative;
-  transition: padding-left 0.3s ease;
-}
-
-.about-path-row:last-child {
-  border-bottom: none;
-}
-
-.about-path-row::after {
-  content: "→";
-  position: absolute;
-  right: 0;
-  top: 28px;
-  color: var(--accent);
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.about-path-row:hover {
-  padding-left: 12px;
-}
-
-.about-path-row:hover::after {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.about-path-row figure {
-  margin: 0;
-  width: 120px;
-  height: 88px;
-  border-radius: 4px;
   overflow: hidden;
-  background: #111;
+  transition:
+    transform 0.45s ease,
+    border-color 0.45s ease,
+    box-shadow 0.45s ease;
 }
 
-.about-path-row img {
+.about-path-row:hover,
+.about-path-row:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 14px 32px -18px rgba(0, 0, 0, 0.16);
+}
+
+.about-path-row .img {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: var(--card-bg, #1a1a1a);
+}
+
+.about-path-row .img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
+  transition: transform 0.8s ease;
 }
 
-.about-path-row h3 {
+.about-path-row:hover .img img,
+.about-path-row:focus-visible .img img {
+  transform: scale(1.04);
+}
+
+.about-path-row .body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding: 16px 18px 18px;
+  background: var(--bg);
+}
+
+.about-path-row h4 {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--fs-meta);
+  letter-spacing: -0.01em;
   margin: 0 0 6px;
-  font-size: var(--fs-card-title-sm);
-  font-weight: 600;
   color: var(--ink);
 }
 
 .about-path-row p {
-  margin: 0;
-  font-size: var(--fs-body);
-  line-height: 1.55;
   color: var(--muted);
+  font-size: var(--fs-meta);
+  line-height: 1.45;
+  margin: 0 0 12px;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.about-path-row .more {
+  font-size: var(--fs-caption);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  transition: gap 0.3s ease;
+  margin-top: auto;
+}
+
+.about-path-row:hover .more,
+.about-path-row:focus-visible .more {
+  gap: 12px;
 }
 
 /* —— Modal —— */
@@ -596,16 +624,8 @@
   gap: 12px;
 }
 
-@media (min-width: 1500px) {
-  .about-hero {
-    min-height: 0;
-    height: 68vh;
-  }
-}
-
 @media (max-width: 1024px) {
-  .about-intro,
-  .about-path-section {
+  .about-intro {
     grid-template-columns: 1fr;
   }
 
@@ -650,28 +670,9 @@
   .about-why-steps.is-live .about-why-step {
     opacity: 1;
   }
-
-  .about-path-row {
-    grid-template-columns: 88px 1fr;
-    padding-right: 20px;
-  }
-
-  .about-path-row figure {
-    width: 88px;
-    height: 72px;
-  }
 }
 
 @media (max-width: 640px) {
-  .about-hero {
-    min-height: 72vh;
-    height: auto;
-  }
-
-  .about-hero-copy {
-    padding: 110px 18px 40px;
-  }
-
   .about-hero-copy h1 {
     max-width: none;
     font-size: var(--fs-h2);
@@ -690,7 +691,7 @@
     font-size: clamp(46px, 14vw, 64px);
   }
 
-  .about-path-row {
+  .about-path-list {
     grid-template-columns: 1fr;
   }
 

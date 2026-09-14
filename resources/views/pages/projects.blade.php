@@ -18,7 +18,7 @@
 @section('content')
 <section class="projects-hero" {!! cms_section_attr('hero') !!}>
   <div class="wrap" id="projectsIntro">
-    <h1 class="h2"{!! cms_style($meta, 'hero.title') !!}><span>{{ $meta->get('hero.title') }}</span></h1>
+    <h1 class="h2"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), 'Azoogi') !!}</h1>
     <p class="projects-hero-lead"{!! cms_style($meta, 'hero.body') !!}>
       {!! nl2br(linkify_emails($meta->get('hero.body')), false) !!}
     </p>
@@ -31,13 +31,13 @@
     <div class="projects-grid" id="projectsGrid">
       @foreach ($projects as $project)
         <a class="project-card" href="{{ route('project-detail', ['slug' => $project->slug]) }}">
-          <div class="project-card-media">
+          <span class="project-card-media">
             <img src="{{ $project->coverUrl() }}" alt="{{ $project->title }}" loading="lazy">
-          </div>
-          <div class="project-card-body">
-            <span class="project-tag">{{ $project->tag ?: $project->type ?: $meta->get('list.fallback_tag') }}</span>
+          </span>
+          <span class="project-card-cap">
+            <small class="project-tag">{{ $project->tag ?: $project->type ?: $meta->get('list.fallback_tag') }}</small>
             <h3>{{ $project->title }}</h3>
-          </div>
+          </span>
         </a>
       @endforeach
     </div>

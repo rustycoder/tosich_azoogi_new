@@ -2,7 +2,10 @@
 
 .calc-hero {
   position: relative;
-  padding: 130px 28px 0;
+  min-height: var(--hero-min);
+  display: grid;
+  align-items: start;
+  padding: var(--hero-pad-y-top) var(--hero-pad-x) var(--hero-pad-y-bottom);
   text-align: center;
   overflow: hidden;
   background: var(--bg);
@@ -42,7 +45,7 @@
 }
 
 .calc-selector {
-  padding: 12px 0 0;
+  padding: var(--section-y) 0 calc(var(--section-y) + 16px);
   scroll-margin-top: 100px;
 }
 
@@ -471,10 +474,6 @@
 }
 
 @media (max-width: 640px) {
-  .calc-hero {
-    padding: 120px 20px 0;
-  }
-
   .ls-toast {
     max-width: calc(100% - 32px);
   }

@@ -19,7 +19,7 @@
 /* —— Hero —— */
 .ai-hero {
   position: relative;
-  min-height: min(52vh, 480px);
+  min-height: var(--hero-min);
   display: grid;
   align-items: end;
   overflow: hidden;
@@ -51,7 +51,7 @@
 .ai-hero-copy {
   position: relative;
   z-index: 1;
-  padding: 120px max(28px, calc((100% - var(--site-max, 1400px)) / 2 + 28px)) 40px;
+  padding: var(--hero-pad-y-top) var(--hero-pad-x) var(--hero-pad-y-bottom);
   max-width: none;
   margin: 0 auto;
   width: 100%;
@@ -91,11 +91,7 @@
 
 /* —— Bands —— */
 .ai-band {
-  padding: clamp(9px, 1.25vw, 14px) 0;
-}
-
-.ai-band--tight {
-  padding-top: 4px;
+  padding: var(--section-y) 0;
 }
 
 .ai-band--soft {
@@ -307,7 +303,7 @@
 /* —— Insights (sticky stack — same engine as homepage / audience) —— */
 .ai-insights.card-in {
   text-align: left;
-  padding: clamp(14px, 2vw, 20px) 0;
+  padding: var(--section-y) 0;
   background: var(--bg);
 }
 
@@ -623,7 +619,7 @@
 .ai-cta-wrap {
   max-width: var(--site-max, 1400px);
   margin: 0 auto;
-  padding: clamp(36px, 5vw, 56px) 28px 56px;
+  padding: var(--section-y) 28px calc(var(--section-y) + 16px);
 }
 
 .ai-cta {
@@ -740,24 +736,12 @@
 }
 
 @media (max-width: 640px) {
-  .ai-band {
-    padding: 7px 0;
-  }
-
   .ai-caps {
     grid-template-columns: 1fr;
   }
 
   .ai-compare {
     grid-template-columns: 1fr;
-  }
-
-  .ai-hero {
-    min-height: min(58vh, 420px);
-  }
-
-  .ai-hero-copy {
-    padding: 110px 18px 32px;
   }
 
   .ai-hero-copy h1 {
@@ -771,7 +755,7 @@
   }
 
   .ai-cta-wrap {
-    padding: 28px 16px 48px;
+    padding: var(--section-y) 16px calc(var(--section-y) + 16px);
   }
 
   .ai-cta {

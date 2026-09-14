@@ -18,8 +18,8 @@
 /* —— Hero slideshow —— */
 .mx-hero {
     position: relative;
-    height: 100vh;
-    min-height: 100vh;
+    height: 80vh;
+    min-height: 80vh;
     display: grid;
     align-items: end;
     overflow: hidden;
@@ -68,8 +68,7 @@
 .mx-hero-copy {
     position: relative;
     z-index: 1;
-    padding: 120px max(28px, calc((100% - var(--site-max, 1400px)) / 2 + 28px))
-        14vh;
+    padding: var(--hero-pad-y-top) var(--hero-pad-x) var(--hero-pad-y-bottom);
     max-width: none;
     margin: 0 auto;
     width: 100%;
@@ -175,7 +174,7 @@
 
 /* —— Bands —— */
 .mx-band {
-    padding: clamp(9px, 1.5vw, 16px) 0;
+    padding: var(--section-y) 0;
 }
 
 .mx-band--alt {
@@ -458,7 +457,7 @@
 }
 
 .mx-cta {
-    padding: clamp(9px, 1.5vw, 16px) 0 24px;
+    padding: var(--section-y) 0 calc(var(--section-y) + 16px);
     border-radius: 4px;
     text-align: center;
 }
@@ -509,15 +508,6 @@
 }
 
 @media (max-width: 640px) {
-    .mx-hero {
-        height: 100vh;
-        min-height: 100vh;
-    }
-
-    .mx-hero-copy {
-        padding: 110px 18px 14vh;
-    }
-
     .mx-hero-controls {
         margin-top: 22px;
     }
@@ -530,10 +520,6 @@
     .mx-hero-copy h1 {
         max-width: none;
         font-size: var(--fs-h2);
-    }
-
-    .mx-band {
-        padding: 8px 0;
     }
 
     .mx-cta .btn.primary {

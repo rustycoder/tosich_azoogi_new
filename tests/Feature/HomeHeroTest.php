@@ -86,4 +86,38 @@ class HomeHeroTest extends TestCase
             $css,
         );
     }
+
+    public function test_home_section_headings_use_the_section_size(): void
+    {
+        $css = file_get_contents(public_path('assets/css/style_demo.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertMatchesRegularExpression(
+            '/\.h2\s*\{[^}]*font-size:\s*var\(--fs-h2-section\)/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.slide-title\s*\{[^}]*font-size:\s*var\(--fs-h2\)/s',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.h2\s*\{[^}]*font-size:\s*var\(--fs-h2\)\s*;/s',
+            $css,
+        );
+    }
+
+    public function test_home_stat_numbers_use_the_hero_size(): void
+    {
+        $css = file_get_contents(public_path('assets/css/style_demo.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertMatchesRegularExpression(
+            '/\.stat \.num\s*\{[^}]*font-size:\s*var\(--fs-h2\)/s',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.stat \.num\s*\{[^}]*font-size:\s*var\(--fs-h2-section\)/s',
+            $css,
+        );
+    }
 }

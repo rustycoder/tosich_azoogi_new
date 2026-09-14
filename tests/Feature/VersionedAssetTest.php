@@ -55,9 +55,14 @@ class VersionedAssetTest extends TestCase
             '/html,\s*body\s*\{[^}]*font-size:\s*var\(--fs-body\)/s',
             $css,
         );
-        $this->assertStringContainsString('proba-pro-regular.woff2', $css);
+        $this->assertStringNotContainsString('proba-pro-regular.woff2', $css);
+        $this->assertStringContainsString('--font-outline: var(--font-sans)', $css);
         $this->assertStringContainsString('google-sans-flex-latin.woff2', $css);
         $this->assertStringContainsString('-webkit-text-stroke', $css);
+        $this->assertStringContainsString('--fs-h2: clamp(36px, 4.5vw, 64px)', $css);
+        $this->assertStringContainsString('--fs-h2-section: clamp(24px, 3.2vw, 28px)', $css);
+        $this->assertStringContainsString('--fs-h3: clamp(22px, 2.4vw, 28px)', $css);
+        $this->assertDoesNotMatchRegularExpression('/--fs-h2-section:\s*clamp\([^)]+,\s*(?:3[2-9]|[4-9]\d)px\)/', $css);
     }
 
     public function test_public_stylesheets_do_not_use_legacy_serif_headings(): void
@@ -80,7 +85,7 @@ class VersionedAssetTest extends TestCase
         $this->seed(PageSeeder::class);
 
         $this->assertFileExists(public_path('assets/fonts/google-sans-flex-latin.woff2'));
-        $this->assertFileExists(public_path('assets/fonts/proba-pro-regular.woff2'));
+        $this->assertFileDoesNotExist(public_path('assets/fonts/proba-pro-regular.woff2'));
 
         $this->get('/')
             ->assertOk()
@@ -98,6 +103,8 @@ class VersionedAssetTest extends TestCase
             'silvair.css' => '.sv-title',
             'dali-centre.css' => '.dc-title',
             'led_calculator.css' => '.calc-hero-title',
+            'projects.css' => '.projects-hero .h2',
+            'audience.css' => '.audience-hero .h2',
         ];
 
         foreach ($files as $file => $selector) {
@@ -209,19 +216,15 @@ class VersionedAssetTest extends TestCase
         $css = File::get(public_path('assets/css/style_demo.css'));
 
         $this->assertMatchesRegularExpression(
-            '/\.foot\s*\{[^}]*display:\s*flex/s',
+            '/\.foot\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1\.4fr\)\s+repeat\(3,\s*minmax\(0,\s*1fr\)\)/s',
             $css,
         );
         $this->assertMatchesRegularExpression(
-            '/\.foot-links\s*\{[^}]*display:\s*flex/s',
-            $css,
-        );
-        $this->assertMatchesRegularExpression(
-            '/\.foot-links\s*\{[^}]*gap:\s*90px/s',
+            '/\.foot-links\s*\{[^}]*display:\s*contents/s',
             $css,
         );
         $this->assertDoesNotMatchRegularExpression(
-            '/\.foot\s*\{[^}]*grid-template-columns/s',
+            '/\.foot\s*\{[^}]*justify-content:\s*space-between/s',
             $css,
         );
     }

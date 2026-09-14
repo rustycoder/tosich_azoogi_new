@@ -16,14 +16,6 @@
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-@font-face {
-    font-family: "Proba Pro";
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url("../fonts/proba-pro-regular.woff2") format("woff2");
-}
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -43,7 +35,7 @@
     --site-max: 1400px;
 
     --font-sans: "Google Sans Flex", sans-serif;
-    --font-outline: "Proba Pro", var(--font-sans);
+    --font-outline: var(--font-sans);
     --fs-kicker: clamp(10px, 0.9vw, 13px);
     --fs-caption: clamp(7px, 0.8vw, 11px);
     --fs-card-title: clamp(11px, 1.85vw, 26px);
@@ -51,9 +43,15 @@
     --fs-meta: clamp(12px, 1vw, 14px);
     --fs-body: clamp(14px, 1.15vw, 17px);
     --fs-lead: clamp(15px, 1.2vw, 18px);
-    --fs-h2: clamp(36px, 4.5vw, 64px);
-    --fs-h2-section: clamp(28px, 3.2vw, 32px);
     --fs-h3: clamp(22px, 2.4vw, 28px);
+    --fs-h2-section: clamp(24px, 3.2vw, 28px);
+    --fs-h2: clamp(36px, 4.5vw, 64px);
+
+    --section-y: clamp(12px, 1.5vw, 18px);
+    --hero-min: min(52vh, 480px);
+    --hero-pad-y-top: 180px;
+    --hero-pad-y-bottom: 40px;
+    --hero-pad-x: max(28px, calc((100% - var(--site-max, 1400px)) / 2 + 28px));
 
     --pure-bg: #0b0b0b;
     --pure-text: #ffffff;
@@ -68,6 +66,15 @@
     --thumb-bg: rgba(255, 255, 255, 0.2);
     --track-bg: rgba(0, 0, 0, 0.2);
     --nav-text: #ffffff;
+}
+
+@media (max-width: 640px) {
+    :root {
+        --hero-min: min(58vh, 420px);
+        --hero-pad-y-top: 160px;
+        --hero-pad-y-bottom: 32px;
+        --hero-pad-x: 18px;
+    }
 }
 
 :root[data-theme="light"] {
@@ -904,6 +911,7 @@ body.nav-open .nav-overlay {
     position: relative;
     top: 0;
     height: 100vh;
+    min-height: 100vh;
     width: 100%;
     overflow: hidden;
     background: #000;
@@ -1137,7 +1145,7 @@ body.nav-open .nav-overlay {
 
 /* --- Page Layout & Breadcrumbs --- */
 .product-page-wrapper {
-    padding-top: 140px;
+    padding-top: var(--hero-pad-y-top);
     /* offset for fixed topbar */
     min-height: 100vh;
     background: var(--bg);
@@ -1189,7 +1197,7 @@ section {
 }
 
 .section-pad {
-    padding: var(--section-y, 24px) 0;
+    padding: var(--section-y) 0;
 }
 
 .kicker {
@@ -1204,7 +1212,7 @@ section {
 .h2 {
     font-family: var(--font-sans);
     font-weight: 400;
-    font-size: var(--fs-h2);
+    font-size: var(--fs-h2-section);
     line-height: 1.05;
     letter-spacing: -0.01em;
 }
@@ -1217,7 +1225,7 @@ section {
 }
 
 .intro {
-    padding: 24px 0;
+    padding: var(--section-y) 0;
     text-align: center;
     background: var(--bg);
 }
@@ -1248,7 +1256,7 @@ section {
 
 .card-in {
     text-align: center;
-    padding: 24px 0;
+    padding: var(--section-y) 0;
     background: var(--bg);
 }
 
@@ -1358,7 +1366,7 @@ section {
 
 /* ====== Product marquee (auto scroll R->L, pause on hover) ====== */
 .products {
-    padding: clamp(14px, 2vh, 24px) 0;
+    padding: var(--section-y) 0;
     background: var(--bg);
     overflow: hidden;
     /* max-width: var(--site-max); */
@@ -1744,7 +1752,7 @@ section {
 
 /* ====== Projects ====== */
 .projects {
-    padding: 24px 0;
+    padding: var(--section-y) 0;
     background: var(--bg);
 }
 
@@ -1897,7 +1905,7 @@ section {
 
 /* ====== Stats CTA ====== */
 .stats {
-    padding: 48px 0;
+    padding: var(--section-y) 0 calc(var(--section-y) + 16px);
     background: url("../vid2_fallback.jpg") center/cover no-repeat;
     position: relative;
     color: var(--always-white);
@@ -1962,23 +1970,18 @@ footer {
 }
 
 .foot {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 64px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+    gap: 48px;
+    align-items: start;
 }
 
 .foot-brand {
-    flex: 0 1 28rem;
-    max-width: 28rem;
     min-width: 0;
 }
 
 .foot-links {
-    display: flex;
-    flex: 0 0 auto;
-    gap: 90px;
-    margin-left: auto;
+    display: contents;
 }
 
 .foot h5 {
@@ -2441,15 +2444,15 @@ footer {
     .intro,
     .products,
     .projects {
-        padding: 20px 0;
+        padding: var(--section-y) 0;
     }
 
     .stats {
-        padding: 40px 0;
+        padding: var(--section-y) 0 calc(var(--section-y) + 16px);
     }
 
     .card-in {
-        padding: 20px 0;
+        padding: var(--section-y) 0;
     }
 
     footer {
@@ -2470,19 +2473,18 @@ footer {
     }
 
     .foot {
-        flex-wrap: wrap;
+        grid-template-columns: 1fr;
         gap: 40px;
     }
 
     .foot-brand {
-        flex-basis: 100%;
         max-width: none;
     }
 
     .foot-links {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         width: 100%;
-        justify-content: space-between;
-        margin-left: 0;
         gap: 40px;
     }
 
@@ -2502,13 +2504,11 @@ footer {
 
 @media (max-width: 640px) {
     .foot {
-        flex-direction: column;
         gap: 28px;
     }
 
     .foot-links {
-        flex-direction: column;
-        width: 100%;
+        grid-template-columns: 1fr;
         gap: 28px;
     }
 
@@ -2533,10 +2533,6 @@ footer {
 
     .form-actions .btn {
         width: 100%;
-    }
-
-    .contact-title {
-        white-space: normal;
     }
 }
 
@@ -3527,7 +3523,7 @@ a.mega-variant-card:after {
 
 /* ====== Contact page ====== */
 .contact-main {
-    padding: 140px 0 64px;
+    padding: var(--hero-pad-y-top) 0 calc(var(--section-y) + 16px);
     background: var(--bg);
 }
 
@@ -3605,15 +3601,10 @@ a.mega-variant-card:after {
 
 .contact-title {
     margin: 0 0 16px;
-    font-size: var(--fs-h2);
-    line-height: 1.15;
+    font-size: var(--fs-h2-section);
+    line-height: 1.2;
     color: #fff;
-}
-
-@media (min-width: 901px) {
-    .contact-title {
-        white-space: nowrap;
-    }
+    overflow: visible;
 }
 
 .contact-title span {
@@ -3865,7 +3856,7 @@ a.mega-variant-card:after {
 
 @media (max-width: 1024px) {
     .contact-main {
-        padding: 120px 0 48px;
+        padding: var(--hero-pad-y-top) 0 calc(var(--section-y) + 16px);
     }
 
     .contact-grid {
@@ -3917,10 +3908,6 @@ a.mega-variant-card:after {
 @media (max-width: 640px) {
     .contact-form-panel {
         padding: 22px 18px;
-    }
-
-    .contact-title {
-        font-size: var(--fs-h2);
     }
 
     .contact-info-panel {

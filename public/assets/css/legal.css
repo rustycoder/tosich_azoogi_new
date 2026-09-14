@@ -1,7 +1,7 @@
 /* Legal / policy pages — v1.1 */
 
 .legal-main {
-  padding: 140px 0 72px;
+  padding: 0 0 calc(var(--section-y) + 16px);
   background: var(--bg);
 }
 
@@ -11,7 +11,11 @@
 
 .legal-hero {
   max-width: none;
-  margin-bottom: 8px;
+  min-height: var(--hero-min);
+  display: grid;
+  align-items: end;
+  padding: var(--hero-pad-y-top) 0 var(--hero-pad-y-bottom);
+  margin-bottom: 0;
 }
 
 .legal-kicker {
@@ -261,18 +265,7 @@
   }
 }
 
-@media (max-width: 1024px) {
-  .legal-main {
-    padding: 120px 0 56px;
-  }
-
-}
-
 @media (max-width: 640px) {
-  .legal-main {
-    padding: 112px 0 48px;
-  }
-
   .legal-section,
   .legal-body {
     margin-bottom: 28px;
