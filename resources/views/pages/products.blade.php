@@ -1067,7 +1067,10 @@
 
         if (productsMap[itemKey]) {
           var existingItem = products.find(function (p) {
-            return (p.id && p.id === itemKey) || p.name === vName;
+            if (vData.id) {
+              return p.id === vData.id;
+            }
+            return !p.id && p.name === vName;
           });
           if (existingItem) {
             if (!existingItem.category_paths) {
@@ -1203,6 +1206,28 @@
         });
       }
 
+      function productMatchesCategory(p, selectedCat) {
+        var selLower = String(selectedCat || '').trim().toLowerCase();
+        if (!selLower) return true;
+
+        if (p.categories && p.categories.some(function (c) {
+          return String(c).trim().toLowerCase() === selLower;
+        })) return true;
+
+        function pathContains(path) {
+          return !!(path && path.some(function (cp) {
+            return String(cp).trim().toLowerCase() === selLower;
+          }));
+        }
+
+        if (pathContains(p.category_path)) return true;
+        if (p.category_paths && p.category_paths.some(pathContains)) return true;
+        if (p.sub && p.sub.trim().toLowerCase() === selLower) return true;
+        if (p.cat && p.cat.trim().toLowerCase() === selLower) return true;
+
+        return false;
+      }
+
       function toggleCategoryFilter(categoryName) {
         if (activeFilters.categories.length === 1 && activeFilters.categories[0] === categoryName) {
           activeFilters.categories = []; // Deselect if clicking active category
@@ -1278,14 +1303,7 @@
         if (activeFilters.categories && activeFilters.categories.length > 0) {
           targetProducts = products.filter(function (p) {
             return activeFilters.categories.some(function (selectedCat) {
-              var selLower = selectedCat.trim().toLowerCase();
-              if (p.modelName && p.modelName.trim().toLowerCase() === selLower) return true;
-              if (p.sub && p.sub.trim().toLowerCase() === selLower) return true;
-              if (p.cat && p.cat.trim().toLowerCase() === selLower) return true;
-              if (p.category_path && p.category_path.some(function (cp) {
-                return cp.trim().toLowerCase() === selLower;
-              })) return true;
-              return false;
+              return productMatchesCategory(p, selectedCat);
             });
           });
         }
@@ -1504,20 +1522,7 @@
 
           if (activeFilters.categories.length > 0) {
             var matchCat = activeFilters.categories.some(function (selectedCat) {
-              var selLower = selectedCat.trim().toLowerCase();
-              if (p.modelName && p.modelName.trim().toLowerCase() === selLower) return true;
-              if (p.sub && p.sub.trim().toLowerCase() === selLower) return true;
-              if (p.cat && p.cat.trim().toLowerCase() === selLower) return true;
-              if (p.categories && p.categories.some(function (c) {
-                return String(c).trim().toLowerCase() === selLower;
-              })) return true;
-              if (p.category_paths && p.category_paths.some(function (cpath) {
-                return cpath && cpath.some(function (cp) { return cp.trim().toLowerCase() === selLower; });
-              })) return true;
-              if (p.category_path && p.category_path.some(function (cp) {
-                return cp.trim().toLowerCase() === selLower;
-              })) return true;
-              return false;
+              return productMatchesCategory(p, selectedCat);
             });
             if (!matchCat) return false;
           }
