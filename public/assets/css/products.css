@@ -89,7 +89,7 @@
 .prod-gallery-card h4 {
   font-family: var(--font-sans);
   font-weight: 500;
-  font-size: var(--fs-card-title-sm);
+  font-size: var(--fs-meta);
   letter-spacing: -0.01em;
   margin: 0 0 6px;
   color: var(--ink);

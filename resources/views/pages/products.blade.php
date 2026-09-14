@@ -624,7 +624,7 @@
 
       .prod-card-title {
         padding: 12px 14px 14px;
-        font-size: var(--fs-card-title-sm);
+        font-size: var(--fs-meta);
         display: flex;
         align-items: flex-start;
         justify-content: space-between;

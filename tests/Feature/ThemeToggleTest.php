@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
+use Database\Seeders\AdminUserSeeder;
 use Database\Seeders\PageSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -118,5 +120,22 @@ class ThemeToggleTest extends TestCase
                 $path.' still paints cards white.',
             );
         }
+    }
+
+    public function test_dashboard_includes_the_shared_theme_toggle(): void
+    {
+        $this->seed(AdminUserSeeder::class);
+        $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
+        $jsMtime = filemtime(public_path('assets/js/site-theme.js'));
+
+        $this->actingAs($admin)
+            ->get('/dashboard')
+            ->assertOk()
+            ->assertSee("localStorage.getItem('theme')", false)
+            ->assertSee('id="theme-toggle"', false)
+            ->assertSee('aria-label="Toggle theme"', false)
+            ->assertSee('class="sun-icon"', false)
+            ->assertSee('class="moon-icon"', false)
+            ->assertSee('/assets/js/site-theme.js?v='.$jsMtime, false);
     }
 }

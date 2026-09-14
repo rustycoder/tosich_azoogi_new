@@ -131,4 +131,52 @@ class VersionedAssetTest extends TestCase
             );
         }
     }
+
+    public function test_dashboard_buttons_keep_readable_labels_in_both_themes(): void
+    {
+        $css = File::get(public_path('assets/css/dashboard.css'));
+
+        $this->assertMatchesRegularExpression(
+            '/:root\s*\{[^}]*--dash-bg:\s*#101410/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/:root\[data-theme="light"\]\s*\{[^}]*--dash-bg:\s*#f3f5f1/s',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/html:has\(\.dash\)\s*\{[^}]*--pure-bg:\s*#ffffff/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.dash \.btn(?:\s*,\s*\.dash a\.btn)?\s*\{[^}]*color:\s*var\(--dash-ink\)/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.dash \.btn\.primary(?:\s*,\s*\.dash a\.btn\.primary)?\s*\{[^}]*color:\s*#fff/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.dash \.btn\.primary:hover(?:\s*,\s*\.dash a\.btn\.primary:hover)?\s*\{[^}]*color:\s*#fff/s',
+            $css,
+        );
+    }
+
+    public function test_dashboard_scrollbars_match_the_product_filter_chrome(): void
+    {
+        $css = File::get(public_path('assets/css/dashboard.css'));
+
+        $this->assertMatchesRegularExpression(
+            '/\.dash ::-webkit-scrollbar\s*\{[^}]*width:\s*4px/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.dash ::-webkit-scrollbar-thumb\s*\{[^}]*background:\s*var\(--dash-line\)/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.dash(?:\s*,\s*\.dash \*)?\s*\{[^}]*scrollbar-width:\s*thin/s',
+            $css,
+        );
+    }
 }

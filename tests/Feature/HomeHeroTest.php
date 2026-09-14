@@ -70,6 +70,14 @@ class HomeHeroTest extends TestCase
             $css,
         );
         $this->assertMatchesRegularExpression(
+            '/\.marquee \.card h4\s*\{[^}]*font-size:\s*var\(--fs-meta\)/s',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.marquee \.card h4\s*\{[^}]*font-size:\s*var\(--fs-card-title/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
             '/\.marquee \.card h4\s*\{[^}]*white-space:\s*nowrap/s',
             $css,
         );

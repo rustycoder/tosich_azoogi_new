@@ -24,5 +24,6 @@ font-size: var(--fs-card-title-sm);     /* smaller card titles */
 - Image-card mosaics (home projects, related projects) keep their grid and **scale** cards and caption type. Do not stack those cards to one column.
 - Content columns (forms, project info, article body) may still stack on small screens.
 - Overlay captions stay small. Do not give them body or heading sizes.
+- Product card titles (home marquee, products gallery, catalogue cards) use `--fs-meta`. Do not use `--fs-card-title` or `--fs-card-title-sm` there — those are overlay titles only.
 - Form controls use `max(16px, var(--fs-body))` so iOS does not zoom on focus.
 - Allowed hardcoded sizes: logo wordmark, close/icon buttons, badge counts, DIM overlay, decorative `.about-why-ghost` numbers.
