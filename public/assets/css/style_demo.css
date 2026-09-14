@@ -1414,9 +1414,9 @@ section {
 }
 
 .marquee .card {
-    flex: 0 0 clamp(160px, 22vw, 260px);
-    width: clamp(160px, 22vw, 260px);
-    max-height: 360px;
+    flex: 0 0 clamp(220px, 28vw, 320px);
+    width: clamp(220px, 28vw, 320px);
+    min-height: 420px;
     display: flex;
     flex-direction: column;
     background: var(--bg-2);
@@ -1438,6 +1438,7 @@ section {
 
 .marquee .card .img {
     flex: 0 0 auto;
+    aspect-ratio: 1 / 1;
     position: relative;
     overflow: hidden;
     background: var(--card-bg, #1a1a1a);
@@ -1467,8 +1468,7 @@ section {
 .marquee .card .body {
     display: flex;
     flex-direction: column;
-    flex: 1;
-    min-height: 0;
+    flex: 1 0 auto;
     padding: 16px 18px 18px;
     background: var(--bg);
 }
@@ -1478,8 +1478,13 @@ section {
     font-weight: 500;
     font-size: var(--fs-card-title-sm);
     letter-spacing: -0.01em;
+    line-height: 1.25;
+    min-height: 1.25em;
     margin-bottom: 6px;
     color: var(--ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .marquee .card p {
@@ -1504,6 +1509,7 @@ section {
     align-items: center;
     gap: 6px;
     font-weight: 500;
+    flex-shrink: 0;
     transition: gap 0.3s ease;
     margin-top: auto;
 }

@@ -51,4 +51,31 @@ class HomeHeroTest extends TestCase
             ->assertOk()
             ->assertSee('<span>Qualified Mesh Lighting</span>', false);
     }
+
+    public function test_home_marquee_cards_reserve_space_for_titles_and_cta(): void
+    {
+        $css = file_get_contents(public_path('assets/css/style_demo.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.marquee \.card\s*\{[^}]*max-height:\s*360px/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.marquee \.card\s*\{[^}]*min-height:\s*420px/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.marquee \.card\s*\{[^}]*width:\s*clamp\(220px,\s*28vw,\s*320px\)/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.marquee \.card h4\s*\{[^}]*white-space:\s*nowrap/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.marquee \.card \.more\s*\{[^}]*flex-shrink:\s*0/s',
+            $css,
+        );
+    }
 }
