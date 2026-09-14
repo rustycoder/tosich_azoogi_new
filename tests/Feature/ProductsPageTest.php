@@ -111,7 +111,7 @@ class ProductsPageTest extends TestCase
 
     public function test_products_page_matches_categories_without_merging_same_named_items(): void
     {
-        $this->get('/products')
+        $this->get('/products?category=Profiles')
             ->assertOk()
             ->assertSee('function productMatchesCategory', false)
             ->assertDontSee('p.modelName && p.modelName.trim().toLowerCase() === selLower', false)
@@ -120,23 +120,18 @@ class ProductsPageTest extends TestCase
 
     public function test_sibling_profile_products_with_the_same_name_keep_separate_categories(): void
     {
-        ProductCategory::query()->create([
-            'airtable_id' => 'recProfiles',
-            'name' => 'Profiles',
-            'sort_order' => 1,
-        ]);
-        ProductCategory::query()->create([
-            'airtable_id' => 'recTrimless',
-            'name' => 'Trimless',
-            'parent_airtable_id' => 'recProfiles',
-            'sort_order' => 1,
-        ]);
-        ProductCategory::query()->create([
-            'airtable_id' => 'recSuspended',
-            'name' => 'Suspended',
-            'parent_airtable_id' => 'recProfiles',
-            'sort_order' => 2,
-        ]);
+        ProductCategory::query()->updateOrCreate(
+            ['airtable_id' => 'recProfiles'],
+            ['name' => 'Profiles', 'sort_order' => 1]
+        );
+        ProductCategory::query()->updateOrCreate(
+            ['airtable_id' => 'recTrimless'],
+            ['name' => 'Trimless', 'parent_airtable_id' => 'recProfiles', 'sort_order' => 1]
+        );
+        ProductCategory::query()->updateOrCreate(
+            ['airtable_id' => 'recSuspended'],
+            ['name' => 'Suspended', 'parent_airtable_id' => 'recProfiles', 'sort_order' => 2]
+        );
 
         Product::factory()->create([
             'airtable_id' => 'recTrimlessSku',
@@ -157,7 +152,7 @@ class ProductsPageTest extends TestCase
             'category_paths' => [['Profiles', 'Suspended']],
         ]);
 
-        $this->get('/products')
+        $this->get('/products?category=Profiles')
             ->assertOk()
             ->assertSee('recTrimlessSku', false)
             ->assertSee('recSuspendedSku', false)

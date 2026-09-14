@@ -2,6 +2,8 @@
 
 namespace App\ThirdParty\Airtable;
 
+use Illuminate\Support\Str;
+
 final class ProductNormalizer
 {
     /**
@@ -137,9 +139,13 @@ final class ProductNormalizer
                 [],
             ));
 
+            $rawSlug = trim((string) ($fields['URL Slug'] ?? ''));
+            $slug = $rawSlug !== '' ? Str::slug($rawSlug) : Str::slug($name);
+
             $entry = [
                 'id' => $record['id'],
                 'product_name' => $name,
+                'slug' => $slug !== '' ? $slug : 'product-'.$record['id'],
                 'order' => $this->orderValue($fields),
                 'category' => $resolvedCategories[0],
                 'categories' => $resolvedCategories,

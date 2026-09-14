@@ -794,4 +794,70 @@ class ProductSyncTest extends TestCase
             ->assertSee('<title>Custom SEO Title — Premium Neon 360</title>', false)
             ->assertSee('content="Custom SEO Meta Description for Neon 360 Light."', false);
     }
+
+    public function test_sync_normalizes_and_routes_product_url_slugs(): void
+    {
+        config([
+            'airtable.api_key' => 'test-key',
+            'airtable.base_id' => 'appTest',
+        ]);
+
+        Http::fake(function (Request $request) {
+            $url = $request->url();
+
+            if (str_contains($url, 'Categories')) {
+                return Http::response(['records' => [
+                    ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
+                ]]);
+            }
+
+            if (str_contains($url, 'attributes') || str_contains($url, 'Attributes')) {
+                return Http::response(['records' => []]);
+            }
+
+            return Http::response(['records' => [
+                [
+                    'id' => 'recCustomSlug',
+                    'fields' => [
+                        'Product Name' => 'Neon Flex Series 360',
+                        'Status' => 'publish',
+                        'Category' => 'NEON',
+                        'URL Slug' => 'custom-neon-360-series',
+                        'Meta Title' => 'Custom 360 Title',
+                        'Meta Descriptions' => 'Custom 360 Description',
+                    ],
+                ],
+                [
+                    'id' => 'recAutoSlug',
+                    'fields' => [
+                        'Product Name' => 'COB Strip Light 24V',
+                        'Status' => 'publish',
+                        'Category' => 'NEON',
+                    ],
+                ],
+            ]]);
+        });
+
+        app(IProductSyncService::class)->sync('test');
+
+        $customSlugProduct = Product::query()->where('airtable_id', 'recCustomSlug')->firstOrFail();
+        $autoSlugProduct = Product::query()->where('airtable_id', 'recAutoSlug')->firstOrFail();
+
+        $this->assertSame('custom-neon-360-series', $customSlugProduct->slug);
+        $this->assertSame('cob-strip-light-24v', $autoSlugProduct->slug);
+
+        $this->assertSame('/products/custom-neon-360-series', $customSlugProduct->publicPath());
+        $this->assertSame('/products/cob-strip-light-24v', $autoSlugProduct->publicPath());
+
+        // Test pretty URL routing
+        $this->get('/products/custom-neon-360-series')
+            ->assertOk()
+            ->assertSee('<title>Custom 360 Title</title>', false)
+            ->assertSee('content="Custom 360 Description"', false);
+
+        // Test fallback query param routing
+        $this->get('/product-detail?id=recCustomSlug')
+            ->assertOk()
+            ->assertSee('<title>Custom 360 Title</title>', false);
+    }
 }

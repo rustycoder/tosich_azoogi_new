@@ -158,8 +158,9 @@
     // const prodCodeHtml = prodCode ? `<div class="mega-variant-code">${prodCode}</div>` : '';
 
     const card = document.createElement('a');
+    const pSlug = (vdata && vdata.slug) ? vdata.slug : null;
     const pId = (vdata && vdata.id) ? vdata.id : (vdata && vdata.product_name ? vdata.product_name : vname);
-    card.href = `/product-detail?id=${encodeURIComponent(pId)}`;
+    card.href = pSlug ? `/products/${encodeURIComponent(pSlug)}` : `/products/${encodeURIComponent(pId)}`;
     card.className = 'mega-variant-card';
 
     const imgContainer = document.createElement('div');
