@@ -156,6 +156,8 @@ final class ProductNormalizer
                 'ies_file' => $this->sanitize($fields['IES File'] ?? ''),
                 'technical_icons' => $this->sanitize($fields['Technical Icons'] ?? $fields['Technical icons'] ?? $fields['Technical_Icons'] ?? $fields['Product Icons'] ?? $fields['Product icons'] ?? ''),
                 'meta_keywords' => $this->sanitize($fields['Meta Keywords'] ?? $fields['meta_keywords'] ?? $fields['Meta keywords'] ?? $fields['meta keywords'] ?? ''),
+                'meta_title' => $this->sanitize($fields['Meta Title'] ?? $fields['Meta title'] ?? $fields['meta_title'] ?? ''),
+                'meta_description' => $this->sanitize($fields['Meta Descriptions'] ?? $fields['Meta Description'] ?? $fields['meta_description'] ?? $fields['meta_descriptions'] ?? ''),
                 'supplier_name' => $this->sanitize($fields['Supplier Name'] ?? ''),
                 'status' => $this->sanitize($fields['Status'] ?? ''),
                 'product_type' => $this->sanitize($fields['Product type'] ?? ''),

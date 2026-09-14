@@ -1,12 +1,11 @@
 @extends('layouts.site')
 
 @section('title')
-    AZ-NF360 Neon Flex Series 360 — Azoogi LED Lighting Solutions
+    {{ !empty($product?->meta_title) ? $product->meta_title : (!empty($product?->product_name) ? $product->product_name . ' — Azoogi LED Lighting Solutions' : 'Products — Azoogi LED Lighting') }}
 @endsection
 
 @section('description')
-    Azoogi designs and supplies premium LED lighting — strips, neon, garden lights, drivers and architectural fittings for
-    projects that demand more.
+    {{ !empty($product?->meta_description) ? $product->meta_description : (!empty($product?->product_description) ? \Illuminate\Support\Str::limit(trim(preg_replace('/\s+/', ' ', strip_tags($product->product_description))), 160) : 'Azoogi designs and supplies premium LED lighting — strips, neon, garden lights, drivers and architectural fittings for projects that demand more.') }}
 @endsection
 
 @section('chrome', 'full')
@@ -717,8 +716,17 @@
                 if (descEl) descEl.innerHTML = pDesc ||
                     "Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.";
 
-                // Update Document Title
-                document.title = `${pName.replace(/\r?\n/g, ' ')} — Azoogi LED Lighting Solutions`;
+                // Update Document Title & Meta Description for SEO
+                const metaTitle = product.meta_title || `${pName.replace(/\r?\n/g, ' ')} — Azoogi LED Lighting Solutions`;
+                document.title = metaTitle;
+
+                const metaDesc = product.meta_description || (pDesc ? pDesc.replace(/<[^>]*>?/gm, '').replace(/\s+/g, ' ').trim().slice(0, 160) : '');
+                if (metaDesc) {
+                    const metaDescTag = document.querySelector('meta[name="description"]');
+                    if (metaDescTag) {
+                        metaDescTag.setAttribute('content', metaDesc);
+                    }
+                }
 
                 // Render Meta Keywords Badges
                 const metaBadgesEl = document.querySelector('.product-meta-badges');

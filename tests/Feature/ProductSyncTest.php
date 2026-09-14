@@ -741,4 +741,57 @@ class ProductSyncTest extends TestCase
         $this->assertTrue($dimProduct->toStorefrontArray()['dimming_control']);
         $this->assertFalse($nonDimProduct->toStorefrontArray()['dimming_control']);
     }
+
+    public function test_sync_normalizes_and_persists_meta_title_and_meta_descriptions(): void
+    {
+        config([
+            'airtable.api_key' => 'test-key',
+            'airtable.base_id' => 'appTest',
+        ]);
+
+        Http::fake(function (Request $request) {
+            $url = $request->url();
+
+            if (str_contains($url, 'Categories')) {
+                return Http::response(['records' => [
+                    ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
+                ]]);
+            }
+
+            if (str_contains($url, 'attributes') || str_contains($url, 'Attributes')) {
+                return Http::response(['records' => []]);
+            }
+
+            return Http::response(['records' => [
+                [
+                    'id' => 'recSeoProduct',
+                    'fields' => [
+                        'Product Name' => 'Neon 360 Light',
+                        'Status' => 'publish',
+                        'Category' => 'NEON',
+                        'Meta Title' => 'Custom SEO Title — Premium Neon 360',
+                        'Meta Descriptions' => 'Custom SEO Meta Description for Neon 360 Light.',
+                        'Product Description' => 'Long fallback description text.',
+                    ],
+                ],
+            ]]);
+        });
+
+        app(IProductSyncService::class)->sync('test');
+
+        $seoProduct = Product::query()->where('airtable_id', 'recSeoProduct')->firstOrFail();
+
+        $this->assertSame('Custom SEO Title — Premium Neon 360', $seoProduct->meta_title);
+        $this->assertSame('Custom SEO Meta Description for Neon 360 Light.', $seoProduct->meta_description);
+
+        $storefront = $seoProduct->toStorefrontArray();
+        $this->assertSame('Custom SEO Title — Premium Neon 360', $storefront['meta_title']);
+        $this->assertSame('Custom SEO Meta Description for Neon 360 Light.', $storefront['meta_description']);
+
+        // Check server-rendered product details page
+        $this->get('/product-detail?id=recSeoProduct')
+            ->assertOk()
+            ->assertSee('<title>Custom SEO Title — Premium Neon 360</title>', false)
+            ->assertSee('content="Custom SEO Meta Description for Neon 360 Light."', false);
+    }
 }
