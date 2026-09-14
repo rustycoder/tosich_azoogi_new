@@ -19,7 +19,7 @@
 
 @section('content')
     <!-- ========== BREADCRUMBS ========== -->
-    <div class="product-page-wrapper">
+    <div class="product-page-wrapper" data-product-slug="{{ $slug ?? '' }}">
         <div class="wrap">
             <!-- ==================== BREADCRUMBS START ==================== -->
             <div class="breadcrumbs" id="breadcrumbs">
@@ -398,6 +398,15 @@
                 const productCode = urlParams.get('product') || urlParams.get('name') || urlParams.get('variant') || urlParams
                     .get('file');
 
+                const pageWrapper = document.querySelector('.product-page-wrapper');
+                let pathSlug = pageWrapper ? (pageWrapper.getAttribute('data-product-slug') || null) : null;
+                if (!pathSlug) {
+                    const pathParts = window.location.pathname.split('/').filter(Boolean);
+                    if (pathParts.length >= 2 && pathParts[0] === 'products') {
+                        pathSlug = decodeURIComponent(pathParts[1]);
+                    }
+                }
+
                 let product = null;
 
                 // Load product details from AZOOGI_PRODUCTS (products array and tree variants)
@@ -455,13 +464,21 @@
                     }
                     if (AZOOGI_PRODUCTS.tree) collectFromTree(AZOOGI_PRODUCTS.tree);
 
-                    if (productId) {
+                    if (pathSlug) {
+                        const slugLower = String(pathSlug).toLowerCase().trim();
+                        product = allProducts.find(p =>
+                            (p.slug && p.slug.toLowerCase().trim() === slugLower) ||
+                            (p.id && p.id.toLowerCase().trim() === slugLower)
+                        );
+                    }
+                    if (!product && productId) {
                         const idLower = decodeURIComponent(productId).toLowerCase().trim();
-                        product = allProducts.find(p => p.id && p.id.toLowerCase() === idLower);
+                        product = allProducts.find(p => (p.id && p.id.toLowerCase() === idLower) || (p.slug && p.slug.toLowerCase() === idLower));
                     }
                     if (!product && productCode) {
                         const codeLower = decodeURIComponent(productCode).toLowerCase().trim();
                         product = allProducts.find(p =>
+                            (p.slug && p.slug.toLowerCase().trim() === codeLower) ||
                             (p.id && p.id.toLowerCase() === codeLower) ||
                             (p.sku && String(p.sku).toLowerCase().trim() === codeLower) ||
                             (p.product_name && p.product_name.toLowerCase().trim() === codeLower) ||
@@ -916,9 +933,9 @@
                     if (accessoriesSection) accessoriesSection.style.display = 'block';
 
                     accessoriesGrid.innerHTML = recommended.map(p => {
-                        const detailUrl = p.id ? ('/product-detail?id=' + encodeURIComponent(p.id)) : (p.filePath ? (
+                        const detailUrl = p.slug ? ('/products/' + encodeURIComponent(p.slug)) : (p.id ? ('/products/' + encodeURIComponent(p.id)) : (p.filePath ? (
                             '/product-detail?file=' + encodeURIComponent(p.filePath)) : (
-                            '/product-detail?product=' + encodeURIComponent(p.name)));
+                            '/product-detail?product=' + encodeURIComponent(p.name))));
                         const codeHtml = productCodeHtml(p.sku);
                         const isFallback = !p.img || p.img === '/assets/bg_default.png' || p.img ===
                             '/assets/logo_dark.png';

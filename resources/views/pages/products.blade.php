@@ -1607,7 +1607,7 @@
         var pagedItems = filtered.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
         grid.innerHTML = pagedItems.map(function (p) {
-          var detailUrl = p.id ? ('/product-detail?id=' + encodeURIComponent(p.id)) : (p.filePath ? ('/product-detail?file=' + encodeURIComponent(p.filePath)) : ('/product-detail?product=' + encodeURIComponent(p.name)));
+          var detailUrl = p.slug ? ('/products/' + encodeURIComponent(p.slug)) : (p.id ? ('/products/' + encodeURIComponent(p.id)) : (p.filePath ? ('/product-detail?file=' + encodeURIComponent(p.filePath)) : ('/product-detail?product=' + encodeURIComponent(p.name))));
 
           var isFallback = !p.img || p.img === '/assets/bg_default.png' || p.img === '/assets/logo_dark.png';
           var imgHtml = '<img src="' + (p.img || '/assets/bg_default.png') + '" alt="' + (p.name || 'Product') + '" class="prod-swatch' + (isFallback ? ' is-fallback' : '') + '" loading="lazy" onerror="this.onerror=null; this.src=\'/assets/bg_default.png\'; this.classList.add(\'is-fallback\');"' + (isFallback ? ' style="filter: grayscale(100%); opacity: 0.7;"' : '') + '>';

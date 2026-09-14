@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 #[Fillable([
     'airtable_id',
     'product_name',
+    'slug',
     'category',
     'status',
     'sort_order',
@@ -75,7 +76,11 @@ class Product extends Model
 
     public function publicPath(): string
     {
-        return '/product-detail?id='.rawurlencode($this->airtable_id);
+        if (! empty($this->slug)) {
+            return '/products/'.rawurlencode((string) $this->slug);
+        }
+
+        return '/product-detail?id='.rawurlencode((string) $this->airtable_id);
     }
 
     public function coverUrl(): string
@@ -98,6 +103,7 @@ class Product extends Model
         $entry = [
             'id' => $this->airtable_id,
             'product_name' => $this->product_name,
+            'slug' => $this->slug,
             'order' => $this->sort_order,
             'category' => $this->category,
             'categories' => $this->categories,

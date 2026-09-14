@@ -36,6 +36,7 @@ class ProductRepository implements IProductRepository
             $rows[$airtableId] = [
                 'airtable_id' => $airtableId,
                 'product_name' => (string) ($product['product_name'] ?? 'Unnamed Product'),
+                'slug' => $this->storedString($product['slug'] ?? null, 191),
                 'category' => $this->storedString($product['category'] ?? null),
                 'status' => $this->storedString($product['status'] ?? null, 32),
                 'sort_order' => $this->storedOrder($product),
@@ -74,6 +75,7 @@ class ProductRepository implements IProductRepository
         DB::transaction(function () use ($rows): void {
             $this->upsertByAirtableId(Product::class, array_values($rows), [
                 'product_name',
+                'slug',
                 'category',
                 'status',
                 'sort_order',

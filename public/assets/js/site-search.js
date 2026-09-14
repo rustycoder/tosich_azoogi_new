@@ -76,8 +76,12 @@
   }
 
   function productUrl(product) {
+    if (product.slug) {
+      return '/products/' + encodeURIComponent(product.slug);
+    }
+
     if (product.id) {
-      return '/product-detail?id=' + encodeURIComponent(product.id);
+      return '/products/' + encodeURIComponent(product.id);
     }
 
     const name = product.product_name || product.name || '';

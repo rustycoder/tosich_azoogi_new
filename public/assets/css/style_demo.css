@@ -2537,8 +2537,8 @@ footer {
 }
 
 :root {
-    /* Tall enough on large screens, capped so they don't balloon */
-    --card-height: min(72svh, 600px);
+    /* Hug the copy + image — tall enough for the sticky stack, not a empty slab */
+    --card-height: min(48svh, 400px);
     --card-margin: 0px;
     --card-top-offset: 1.25rem;
     --outline-width: 0px;
