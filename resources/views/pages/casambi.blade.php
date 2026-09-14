@@ -36,13 +36,11 @@
 
         <section class="cb-hero" {!! cms_section_attr('hero') !!}>
             <div class="wrap">
-                <div class="cb-lockup">
-                    <img class="cb-lockup-azoogi" src="{{ asset('assets/logo_dark.png') }}" alt="Azoogi">
-                    <span class="cb-lockup-x" aria-hidden="true">×</span>
-                    @if ($casambiLogo !== '')
+                @if ($casambiLogo !== '')
+                    <div class="cb-lockup">
                         <img class="cb-lockup-casambi" src="{{ $casambiLogo }}" alt="Casambi">
-                    @endif
-                </div>
+                    </div>
+                @endif
                 <h1 class="cb-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), 'Smart Ecosystems') !!}</h1>
                 <p class="cb-lead"{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
                 <p class="cb-intro" {!! cms_section_attr('intro') !!}{!! cms_style($meta, 'intro.body') !!}>{{ $meta->get('intro.body') }}</p>
@@ -154,15 +152,13 @@
             </section>
         @endif
 
-        <div class="cb-cta-wrap reveal" {!! cms_section_attr('cta') !!}>
-            <div class="wrap">
+        <div class="wrap reveal" {!! cms_section_attr('cta') !!}>
                 <div class="cb-cta">
                     <h2{!! cms_style($meta, 'cta.heading') !!}>{{ $meta->get('cta.heading') }}</h2>
                         <p{!! cms_style($meta, 'cta.body') !!}>{{ $meta->get('cta.body') }}</p>
                             <a class="btn primary"
                                 href="{{ chrome_url($meta->get('cta.href', 0, '/contact')) }}"{!! cms_style($meta, 'cta.label') !!}>{{ $meta->get('cta.label') }}</a>
                 </div>
-            </div>
         </div>
 
         <div class="cb-cursor-preview" data-product-preview="cb-product" hidden aria-hidden="true">

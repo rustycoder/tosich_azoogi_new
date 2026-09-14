@@ -209,7 +209,6 @@ class PageService implements IPageService
         }
 
         if ($page->slug === 'projects') {
-            $data['highlights'] = $this->projects->activeFeatured(4);
             $data['projects'] = $this->projects->activeOrdered();
         }
 

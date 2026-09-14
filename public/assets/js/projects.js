@@ -21,7 +21,6 @@
 
   function renderListing(data) {
     const introEl = document.getElementById('projectsIntro');
-    const highlightsEl = document.getElementById('highlightsGrid');
     const gridEl = document.getElementById('projectsGrid');
     const countEl = document.getElementById('projectsCount');
 
@@ -37,21 +36,6 @@
     }
 
     const projects = data.projects || [];
-    const featured = projects
-      .filter((p) => p.featured)
-      .sort((a, b) => (a.featuredOrder || 99) - (b.featuredOrder || 99));
-
-    if (highlightsEl) {
-      highlightsEl.innerHTML = featured.map((p) => `
-        <a class="highlight-card" href="/project-detail?slug=${encodeURIComponent(p.slug)}">
-          <img src="${escapeHtml(coverOf(p))}" alt="${escapeHtml(p.title)}" loading="lazy">
-          <div class="cap">
-            <small>${escapeHtml(p.tag || p.type || '')}${p.location ? ' — ' + escapeHtml(p.location) : ''}</small>
-            <h3>${escapeHtml(p.title)}</h3>
-          </div>
-        </a>
-      `).join('');
-    }
 
     if (countEl) {
       countEl.textContent = `Showing ${projects.length} project${projects.length === 1 ? '' : 's'}`;

@@ -363,7 +363,7 @@ class DashboardTest extends TestCase
         $this->seed([AdminUserSeeder::class, PageSeeder::class]);
         $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
         $page = Page::query()->where('slug', 'about')->firstOrFail();
-        $meta = PageMeta::query()->where('page_id', $page->id)->where('key', 'hero.kicker')->firstOrFail();
+        $meta = PageMeta::query()->where('page_id', $page->id)->where('key', 'hero.title')->firstOrFail();
 
         $this->actingAs($admin)
             ->put(route('dashboard.pages.update', $page), [
@@ -385,7 +385,7 @@ class DashboardTest extends TestCase
         $this->seed([AdminUserSeeder::class, PageSeeder::class]);
         $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
         $page = Page::query()->where('slug', 'about')->firstOrFail();
-        $meta = PageMeta::query()->where('page_id', $page->id)->where('key', 'hero.kicker')->firstOrFail();
+        $meta = PageMeta::query()->where('page_id', $page->id)->where('key', 'hero.title')->firstOrFail();
 
         $this->actingAs($admin)
             ->put(route('dashboard.pages.update', $page), [

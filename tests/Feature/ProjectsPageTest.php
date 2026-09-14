@@ -28,10 +28,23 @@ class ProjectsPageTest extends TestCase
         $this->get('/projects')
             ->assertOk()
             ->assertSee('Projects Powered by Azoogi', false)
-            ->assertSee('Recent', false)
-            ->assertSee('Highlights', false)
             ->assertSee('majorprojects@azoogi.com', false)
-            ->assertSee('Showing', false);
+            ->assertSee('Showing', false)
+            ->assertDontSee('projects-highlights', false)
+            ->assertDontSee('Recent Highlights', false);
+    }
+
+    public function test_projects_listing_does_not_render_featured_highlights(): void
+    {
+        Project::factory()->featured()->create([
+            'title' => 'Harbour Pavilion',
+        ]);
+
+        $this->get('/projects')
+            ->assertOk()
+            ->assertDontSee('class="projects-highlights"', false)
+            ->assertDontSee('id="highlightsGrid"', false)
+            ->assertSee('Harbour Pavilion', false);
     }
 
     public function test_project_detail_chrome_comes_from_cms(): void

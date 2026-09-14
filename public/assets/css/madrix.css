@@ -104,7 +104,7 @@
 }
 
 .mx-hero-copy h1 span {
-    color: #8cc63f;
+    font-family: var(--font-outline);
 }
 
 .mx-hero-copy p {
@@ -179,7 +179,7 @@
 
 /* —— Bands —— */
 .mx-band {
-    padding: clamp(36px, 6vw, 64px) 0;
+    padding: clamp(9px, 1.5vw, 16px) 0;
 }
 
 .mx-band--alt {
@@ -319,6 +319,7 @@
 
 .spec-table {
     width: 100%;
+    table-layout: fixed;
     border-collapse: collapse;
     margin-top: 4px;
 }
@@ -341,15 +342,28 @@
     border-bottom: 1px solid var(--line);
 }
 
+.spec-table th:first-child,
+.spec-table td:first-child {
+    width: 15%;
+}
+
 .spec-table td:first-child {
     font-weight: 500;
     color: var(--ink);
-    width: 26%;
+}
+
+.spec-table th:nth-child(2),
+.spec-table td:nth-child(2) {
+    width: 25%;
 }
 
 .spec-table td:nth-child(2) {
-    width: 24%;
     color: var(--ink);
+}
+
+.spec-table th:last-child,
+.spec-table td:last-child {
+    width: 60%;
 }
 
 .spec-table td:last-child {
@@ -447,12 +461,8 @@
     border: 0;
 }
 
-.mx-cta-wrap {
-    padding: 8px 0 80px;
-}
-
 .mx-cta {
-    padding: clamp(32px, 5vw, 48px);
+    padding: clamp(9px, 1.5vw, 16px) 0 24px;
     border-radius: 4px;
     text-align: center;
 }
@@ -527,19 +537,7 @@
     }
 
     .mx-band {
-        padding: 32px 0;
-    }
-
-    .mx-cta-wrap {
-        padding: 8px 0 56px;
-    }
-
-    .mx-cta-wrap .wrap {
-        padding-inline: 16px;
-    }
-
-    .mx-cta {
-        padding-inline: 16px;
+        padding: 8px 0;
     }
 
     .mx-cta .btn.primary {

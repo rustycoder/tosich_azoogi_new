@@ -11,8 +11,9 @@
 
 .audience-hero {
   text-align: center;
-  padding: 24px 0 8px;
+  padding: 24px 0 0;
 }
+
 
 .audience-hero .kicker {
   margin-bottom: 18px;
@@ -24,7 +25,7 @@
 }
 
 .audience-hero .h2 span {
-  color: var(--accent);
+  font-family: var(--font-outline);
 }
 
 .audience-lead {

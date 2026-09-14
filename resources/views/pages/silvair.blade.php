@@ -31,13 +31,11 @@
 
   <section class="sv-hero" {!! cms_section_attr('hero') !!}>
     <div class="wrap">
-      <div class="sv-lockup">
-        <img class="sv-lockup-azoogi" src="{{ asset('assets/logo_dark.png') }}" alt="Azoogi">
-        <span class="sv-lockup-x" aria-hidden="true">×</span>
-        @if ($silvairLogo !== '')
+      @if ($silvairLogo !== '')
+        <div class="sv-lockup">
           <img class="sv-lockup-silvair" src="{{ $silvairLogo }}" alt="Silvair">
-        @endif
-      </div>
+        </div>
+      @endif
       <h1 class="sv-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), 'Qualified Mesh Lighting') !!}</h1>
       <p class="sv-lead"{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
       <p class="sv-intro" {!! cms_section_attr('intro') !!}{!! cms_style($meta, 'intro.body') !!}>{{ $meta->get('intro.body') }}</p>
@@ -243,14 +241,12 @@
     </div>
   </section>
 
-  <div class="sv-cta-wrap reveal" {!! cms_section_attr('cta') !!}>
-    <div class="wrap">
+  <div class="wrap reveal" {!! cms_section_attr('cta') !!}>
       <div class="sv-cta">
         <h2{!! cms_style($meta, 'cta.heading') !!}>{{ $meta->get('cta.heading') }}</h2>
         <p{!! cms_style($meta, 'cta.body') !!}>{{ $meta->get('cta.body') }}</p>
         <a class="btn primary" href="{{ chrome_url($meta->get('cta.href', 0, '/contact')) }}"{!! cms_style($meta, 'cta.label') !!}>{{ $meta->get('cta.label') }}</a>
       </div>
-    </div>
   </div>
 
   <div class="sv-cursor-preview" data-product-preview="sv-product" hidden aria-hidden="true">

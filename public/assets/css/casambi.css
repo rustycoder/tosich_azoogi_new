@@ -23,7 +23,7 @@
 /* —— Hero —— */
 .cb-hero {
     text-align: center;
-    padding: 24px 0 8px;
+    padding: 24px 0 0;
 }
 
 .cb-lockup {
@@ -35,26 +35,10 @@
     margin: 0 auto 30px;
 }
 
-.cb-lockup-azoogi,
 .cb-lockup-casambi {
     display: block;
-    width: auto;
-    height: auto;
-}
-
-.cb-lockup-azoogi {
-    width: clamp(200px, 28vw, 320px);
-}
-
-.cb-lockup-casambi {
     width: clamp(220px, 32vw, 380px);
-}
-
-.cb-lockup-x {
-    color: var(--muted);
-    font-size: clamp(22px, 3vw, 36px);
-    font-weight: 400;
-    line-height: 1;
+    height: auto;
 }
 
 .cb-title {
@@ -69,7 +53,7 @@
 }
 
 .cb-title span {
-    color: var(--accent);
+    font-family: var(--font-outline);
 }
 
 .cb-lead {
@@ -93,7 +77,7 @@
 
 /* —— Bands —— */
 .cb-band {
-    padding: clamp(36px, 6vw, 64px) 0;
+    padding: clamp(9px, 1.5vw, 16px) 0;
 }
 
 .cb-band--alt {
@@ -223,6 +207,7 @@
 
 .spec-table {
     width: 100%;
+    table-layout: fixed;
     border-collapse: collapse;
     margin-top: 4px;
 }
@@ -245,15 +230,28 @@
     border-bottom: 1px solid var(--line);
 }
 
+.spec-table th:first-child,
+.spec-table td:first-child {
+    width: 15%;
+}
+
 .spec-table td:first-child {
     font-weight: 500;
     color: var(--ink);
-    width: 26%;
+}
+
+.spec-table th:nth-child(2),
+.spec-table td:nth-child(2) {
+    width: 25%;
 }
 
 .spec-table td:nth-child(2) {
-    width: 28%;
     color: var(--ink);
+}
+
+.spec-table th:last-child,
+.spec-table td:last-child {
+    width: 60%;
 }
 
 .spec-table td:last-child {
@@ -351,12 +349,8 @@
     border: 0;
 }
 
-.cb-cta-wrap {
-    padding: 8px 0 80px;
-}
-
 .cb-cta {
-    padding: clamp(32px, 5vw, 48px);
+    padding: clamp(9px, 1.5vw, 16px) 0 24px;
     border-radius: 4px;
     text-align: center;
 }
@@ -422,19 +416,7 @@
     }
 
     .cb-band {
-        padding: 32px 0;
-    }
-
-    .cb-cta-wrap {
-        padding: 8px 0 56px;
-    }
-
-    .cb-cta-wrap .wrap {
-        padding-inline: 16px;
-    }
-
-    .cb-cta {
-        padding-inline: 16px;
+        padding: 8px 0;
     }
 
     .cb-cta .btn.primary {

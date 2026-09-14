@@ -23,13 +23,15 @@
 <main class="solutions-main">
   <section class="solutions-hero" {!! cms_section_attr('hero') !!}>
     <div class="wrap">
-      <div class="solutions-hero-logo">
-        <img src="/assets/logo_dark.png" width="280" alt="Azoogi">
+      <h1 class="h2 solutions-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), 'Intelligent Controls') !!}</h1>
+      <div class="solutions-copy">
+        @if (trim($meta->get('hero.lead')) !== '')
+          <p class="solutions-lead"{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
+        @endif
+        @if (trim($meta->get('hero.sub')) !== '')
+          <p class="solutions-sub"{!! cms_style($meta, 'hero.sub') !!}>{{ $meta->get('hero.sub') }}</p>
+        @endif
       </div>
-      <h1 class="solutions-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), 'Intelligent Controls') !!}</h1>
-      <p class="solutions-lead"{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
-      <p class="solutions-claim"{!! cms_style($meta, 'hero.claim') !!}>{{ $meta->get('hero.claim') }}</p>
-      <p class="solutions-sub"{!! cms_style($meta, 'hero.sub') !!}>{{ $meta->get('hero.sub') }}</p>
     </div>
   </section>
 

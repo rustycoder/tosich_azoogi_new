@@ -37,8 +37,6 @@
   <section class="dc-hero" {!! cms_section_attr('hero') !!}>
     <div class="wrap dc-hero-grid">
       <div class="dc-hero-copy">
-        <img class="dc-hero-logo" src="{{ asset('assets/logo_dark.png') }}" alt="Azoogi">
-        <p class="dc-kicker"{!! cms_style($meta, 'hero.kicker') !!}>{{ $meta->get('hero.kicker') }}</p>
         <h1 class="dc-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), 'Smart DALI-2 Management') !!}</h1>
         <p class="dc-lead"{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
         <p class="dc-intro" {!! cms_section_attr('intro') !!}{!! cms_style($meta, 'intro.body') !!}>{{ $meta->get('intro.body') }}</p>
@@ -156,14 +154,12 @@
     </div>
   </section>
 
-  <div class="dc-cta-wrap reveal" {!! cms_section_attr('cta') !!}>
-    <div class="wrap">
+  <div class="wrap reveal" {!! cms_section_attr('cta') !!}>
       <div class="dc-cta">
         <h2{!! cms_style($meta, 'cta.heading') !!}>{{ $meta->get('cta.heading') }}</h2>
         <p{!! cms_style($meta, 'cta.body') !!}>{{ $meta->get('cta.body') }}</p>
         <a class="btn primary" href="{{ chrome_url($meta->get('cta.href', 0, '/contact')) }}"{!! cms_style($meta, 'cta.label') !!}>{{ $meta->get('cta.label') }}</a>
       </div>
-    </div>
   </div>
 
   <div class="dc-cursor-preview" data-product-preview="dc-product" hidden aria-hidden="true">

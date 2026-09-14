@@ -22,7 +22,7 @@ class DaliCentrePageTest extends TestCase
     {
         $this->get('/dali-centre')
             ->assertOk()
-            ->assertSee('/assets/logo_dark.png', false)
+            ->assertDontSee('dc-hero-logo', false)
             ->assertSee('AZOOGI DALI Centre', false)
             ->assertSee('Centralized Architectural Lighting &amp;', false)
             ->assertSee('Smart DALI-2 Management', false)
@@ -58,6 +58,26 @@ class DaliCentrePageTest extends TestCase
             ->assertSee('ZDA Series', false)
             ->assertSee('AZOOGI DALI Masters &amp; Keypads', false)
             ->assertSee('AZOOGI Sensors &amp; Input Modules', false);
+    }
+
+    public function test_hardware_table_keeps_the_first_column_narrower_than_the_second(): void
+    {
+        $css = file_get_contents(public_path('assets/css/dali-centre.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertStringContainsString('table-layout: fixed', $css);
+        $this->assertMatchesRegularExpression(
+            '/\.dc-page \.spec-table th:first-child,\s*\.dc-page \.spec-table td:first-child\s*\{[^}]*width:\s*15%/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.dc-page \.spec-table th:nth-child\(2\),\s*\.dc-page \.spec-table td:nth-child\(2\)\s*\{[^}]*width:\s*25%/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.dc-page \.spec-table th:last-child,\s*\.dc-page \.spec-table td:last-child\s*\{[^}]*width:\s*60%/s',
+            $css,
+        );
     }
 
     public function test_hero_places_the_video_on_the_right(): void

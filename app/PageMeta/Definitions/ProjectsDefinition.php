@@ -32,8 +32,6 @@ class ProjectsDefinition implements PageDefinition
         return [
             Field::text('hero.title', 'Hero title'),
             Field::textarea('hero.body', 'Hero intro'),
-            Field::text('highlights.heading', 'Highlights heading'),
-            Field::text('highlights.heading_accent', 'Highlights accent'),
             Field::text('list.showing', 'Count prefix'),
             Field::text('list.singular', 'Singular count'),
             Field::text('list.plural', 'Plural count'),
@@ -51,8 +49,6 @@ class ProjectsDefinition implements PageDefinition
         return [
             ['key' => 'hero.title', 'sort_order' => 0, 'value' => 'Projects Powered by Azoogi'],
             ['key' => 'hero.body', 'sort_order' => 0, 'value' => "From a new strip light in your kitchen to landmark Tier-1 developments — we deliver LED lighting solutions for projects of all sizes. Whether it’s a heritage restoration, boutique hospitality venue, residential upgrade, or a large-scale commercial build, our in-house engineering and assembly line ensure precision, speed, efficiency and quality — no matter the scale.\nFor a copy of our capability statement, contact us at majorprojects@azoogi.com."],
-            ['key' => 'highlights.heading', 'sort_order' => 0, 'value' => 'Recent Highlights'],
-            ['key' => 'highlights.heading_accent', 'sort_order' => 0, 'value' => 'Highlights'],
             ['key' => 'list.showing', 'sort_order' => 0, 'value' => 'Showing'],
             ['key' => 'list.singular', 'sort_order' => 0, 'value' => 'project'],
             ['key' => 'list.plural', 'sort_order' => 0, 'value' => 'projects'],

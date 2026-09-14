@@ -5,7 +5,7 @@
 }
 
 .solutions-main {
-  padding: 120px 0 0;
+  padding: 0;
   background: var(--bg);
   color: var(--ink);
   font-family: "Google Sans Flex", sans-serif;
@@ -14,68 +14,47 @@
 /* —— Hero —— */
 .solutions-hero {
   text-align: center;
-  padding: 24px 0 8px;
-}
-
-.solutions-hero-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto 30px;
-}
-
-.solutions-hero-logo img {
-  display: block;
-  width: clamp(180px, 28vw, 320px);
-  height: auto;
-  margin: 0 auto;
+  padding: 140px 0 0;
 }
 
 .solutions-title {
-  margin: 0 auto 20px;
-  max-width: 24ch;
-  font-family: "Google Sans Flex", sans-serif;
+  margin: 0 0 20px;
+  font-family: var(--font-sans);
   font-weight: 400;
-  font-size: var(--fs-h2-section);
-  line-height: 1.1;
-  letter-spacing: -.02em;
+  font-size: var(--fs-h2);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 
 .solutions-title span {
-  color: var(--accent);
+  white-space: nowrap;
 }
 
-.solutions-lead {
-  max-width: 720px;
+.solutions-copy {
+  max-width: 820px;
   margin: 0 auto;
   padding: 0;
+}
+
+.solutions-lead,
+.solutions-sub {
+  margin: 0;
+  padding: 0;
   color: var(--muted);
+  font-family: var(--font-sans);
   font-size: var(--fs-lead);
   font-weight: 400;
   line-height: 1.65;
 }
 
-.solutions-claim {
-  margin: 30px 0 10px;
-  padding: 0;
-  font-size: clamp(17px, 1.5vw, 21px);
-  font-weight: 600;
-  color: var(--ink);
-}
-
-.solutions-sub {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0;
-  color: var(--muted);
-  font-size: clamp(15px, 1.15vw, 17px);
-  line-height: 1.7;
+.solutions-lead + .solutions-sub {
+  margin-top: 8px;
 }
 
 /* —— Control ecosystems —— */
 .solutions-eco {
-  padding: clamp(48px, 6vw, 76px) 0 clamp(48px, 6vw, 76px);
+  padding: clamp(14px, 2vw, 24px) 0;
 }
 
 .solutions-eco-head {
@@ -265,7 +244,7 @@
 
 /* —— Capabilities by sector —— */
 .solutions-sectors {
-  padding: clamp(52px, 6vw, 80px) 0;
+  padding: clamp(13px, 1.5vw, 20px) 0;
   background: var(--card-bg);
 }
 
@@ -440,10 +419,6 @@
 }
 
 @media (max-width: 900px) {
-  .solutions-main {
-    padding: 110px 0 0;
-  }
-
   .solutions-eco-grid,
   .sol-sectors {
     grid-template-columns: repeat(2, minmax(0, 1fr));

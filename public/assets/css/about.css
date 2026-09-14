@@ -92,7 +92,7 @@
 }
 
 .about-hero-copy h1 span {
-  color: #8cc63f;
+  font-family: var(--font-outline);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -103,7 +103,7 @@
 
 /* —— Bands —— */
 .about-band {
-  padding: clamp(48px, 6vw, 72px) 0;
+  padding: clamp(12px, 1.5vw, 18px) 0;
 }
 
 .about-band--alt {
@@ -338,9 +338,9 @@
 .about-why-ghost {
   display: block;
   margin-bottom: 10px;
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: var(--font-outline);
   font-size: clamp(58px, 8vw, 124px);
-  font-weight: 500;
+  font-weight: 400;
   line-height: .82;
   letter-spacing: -.04em;
   color: var(--line);
@@ -350,7 +350,7 @@
 @supports (-webkit-text-stroke: 1px black) {
   .about-why-ghost {
     color: transparent;
-    -webkit-text-stroke: 1px var(--line);
+    -webkit-text-stroke: 1.5px var(--line);
   }
 
   .about-why-step.is-active .about-why-ghost {
@@ -426,8 +426,8 @@
 .about-reach-inner {
   position: relative;
   z-index: 1;
-  padding-top: clamp(48px, 6vw, 72px);
-  padding-bottom: clamp(48px, 6vw, 72px);
+  padding-top: clamp(24px, 3vw, 36px);
+  padding-bottom: clamp(24px, 3vw, 36px);
 }
 
 .about-reach-inner .kicker,

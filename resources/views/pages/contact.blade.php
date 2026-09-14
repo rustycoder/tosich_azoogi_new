@@ -52,7 +52,6 @@
       <div class="contact-grid-gap" aria-hidden="true"></div>
 
       <div class="contact-form-panel" {!! cms_section_attr('form') !!}>
-        <div class="kicker"{!! cms_style($meta, 'form.kicker') !!}>{{ $meta->get('form.kicker') }}</div>
         <h1 class="h2 contact-title"{!! cms_style($meta, 'form.title') !!}>{!! accent_html($meta->get('form.title'), 'hear') !!}</h1>
         <p class="contact-lead"{!! cms_style($meta, 'form.lead') !!}>{{ $meta->get('form.lead') }}</p>
 

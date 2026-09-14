@@ -9,9 +9,6 @@
 @if (request()->routeIs('dashboard.pages.preview'))
 <base href="{{ rtrim(url('/'), '/') }}/">
 @endif
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ versioned_asset('assets/css/style_demo.css') }}">
 <link rel="stylesheet" href="{{ versioned_asset('assets/css/quote.css') }}">
 @stack('styles')

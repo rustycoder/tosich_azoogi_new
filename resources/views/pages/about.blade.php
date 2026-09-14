@@ -27,7 +27,6 @@
       <img src="{{ media_url($meta->get('hero.image')) }}" alt="" loading="eager">
     </div>
     <div class="about-hero-copy">
-      <div class="kicker"{!! cms_style($meta, 'hero.kicker') !!}>{{ $meta->get('hero.kicker') }}</div>
       <h1{!! cms_style($meta, 'hero.title') !!}>{!! nl2br_html($meta->get('hero.title'), true) !!}</h1>
     </div>
   </section>
@@ -50,7 +49,6 @@
   <section class="about-band about-band--alt" id="why" {!! cms_section_attr('why') !!}>
     <div class="wrap">
       <div class="about-split-copy about-why-head reveal">
-        <div class="kicker"{!! cms_style($meta, 'why.kicker') !!}>{{ $meta->get('why.kicker') }}</div>
         <h2{!! cms_style($meta, 'why.heading') !!}>{!! accent_html($meta->get('why.heading'), 'Azoogi') !!}</h2>
       </div>
 
@@ -91,7 +89,6 @@
       <img src="{{ media_url($meta->get('reach.image')) }}" alt="" loading="lazy">
     </div>
     <div class="wrap about-reach-inner reveal">
-      <div class="kicker"{!! cms_style($meta, 'reach.kicker') !!}>{{ $meta->get('reach.kicker') }}</div>
       <h2{!! cms_style($meta, 'reach.heading') !!}>{!! accent_html($meta->get('reach.heading'), 'Reach') !!}</h2>
       <p{!! cms_style($meta, 'reach.body') !!}>{{ $meta->get('reach.body') }}</p>
     </div>
@@ -100,7 +97,6 @@
   <section class="about-band" {!! cms_section_attr('path') !!}>
     <div class="wrap about-path-section">
       <div class="about-split-copy reveal">
-        <div class="kicker"{!! cms_style($meta, 'path.kicker') !!}>{{ $meta->get('path.kicker') }}</div>
         <h2{!! cms_style($meta, 'path.heading') !!}>{!! nl2br_html($meta->get('path.heading'), true) !!}</h2>
       </div>
       <div class="about-path-list">

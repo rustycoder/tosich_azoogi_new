@@ -47,9 +47,13 @@ class VersionedAssetTest extends TestCase
     {
         $css = File::get(public_path('assets/css/style_demo.css'));
 
-        foreach (['--font-sans', '--fs-caption', '--fs-card-title', '--fs-h2', '--fs-h2-section', '--fs-lead'] as $token) {
+        foreach (['--font-sans', '--font-outline', '--fs-caption', '--fs-card-title', '--fs-h2', '--fs-h2-section', '--fs-lead'] as $token) {
             $this->assertStringContainsString($token, $css);
         }
+
+        $this->assertStringContainsString('proba-pro-regular.woff2', $css);
+        $this->assertStringContainsString('google-sans-flex-latin.woff2', $css);
+        $this->assertStringContainsString('-webkit-text-stroke', $css);
     }
 
     public function test_public_stylesheets_do_not_use_legacy_serif_headings(): void
@@ -67,13 +71,18 @@ class VersionedAssetTest extends TestCase
         }
     }
 
-    public function test_layout_loads_the_shared_sans_font(): void
+    public function test_layout_loads_local_fonts_instead_of_google_cdn(): void
     {
         $this->seed(PageSeeder::class);
 
+        $this->assertFileExists(public_path('assets/fonts/google-sans-flex-latin.woff2'));
+        $this->assertFileExists(public_path('assets/fonts/proba-pro-regular.woff2'));
+
         $this->get('/')
             ->assertOk()
-            ->assertSee('Google+Sans+Flex', false)
-            ->assertDontSee('Cormorant+Garamond', false);
+            ->assertDontSee('fonts.googleapis.com', false)
+            ->assertDontSee('Google+Sans+Flex', false)
+            ->assertDontSee('Cormorant+Garamond', false)
+            ->assertSee('assets/css/style_demo.css', false);
     }
 }

@@ -1,4 +1,28 @@
-@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap");
+@font-face {
+    font-family: "Google Sans Flex";
+    font-style: normal;
+    font-weight: 1 1000;
+    font-display: swap;
+    src: url("../fonts/google-sans-flex-latin-ext.woff2") format("woff2");
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+    font-family: "Google Sans Flex";
+    font-style: normal;
+    font-weight: 1 1000;
+    font-display: swap;
+    src: url("../fonts/google-sans-flex-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: "Proba Pro";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/proba-pro-regular.woff2") format("woff2");
+}
 
 * {
     box-sizing: border-box;
@@ -19,6 +43,7 @@
     --site-max: 1400px;
 
     --font-sans: "Google Sans Flex", sans-serif;
+    --font-outline: "Proba Pro", var(--font-sans);
     --fs-kicker: clamp(10px, 0.9vw, 13px);
     --fs-caption: clamp(7px, 0.8vw, 11px);
     --fs-card-title: clamp(11px, 1.85vw, 26px);
@@ -62,6 +87,71 @@ body {
 
 body {
     overflow-y: scroll;
+}
+
+.about-hero-copy h1 span,
+.ai-hero-copy h1 span,
+.dc-hero-copy h1 span,
+.mx-hero-copy h1 span,
+.solutions-title span,
+.cb-title span,
+.sv-title span,
+.dc-title span,
+.calc-hero-title span,
+.audience-hero .h2 span,
+.projects-hero .h2 span,
+.contact-title span,
+.about-why-ghost {
+    font-family: var(--font-outline);
+}
+
+.about-hero-copy h1 span,
+.ai-hero-copy h1 span,
+.dc-hero-copy h1 span,
+.mx-hero-copy h1 span,
+.solutions-title span,
+.cb-title span,
+.sv-title span,
+.dc-title span,
+.calc-hero-title span,
+.audience-hero .h2 span,
+.projects-hero .h2 span,
+.contact-title span {
+    color: var(--accent);
+}
+
+.about-hero-copy h1 span,
+.ai-hero-copy h1 span,
+.dc-hero-copy h1 span,
+.mx-hero-copy h1 span,
+.contact-title span {
+    color: #8cc63f;
+}
+
+@supports (-webkit-text-stroke: 1px black) {
+    .about-hero-copy h1 span,
+    .ai-hero-copy h1 span,
+    .dc-hero-copy h1 span,
+    .mx-hero-copy h1 span,
+    .solutions-title span,
+    .cb-title span,
+    .sv-title span,
+    .dc-title span,
+    .calc-hero-title span,
+    .audience-hero .h2 span,
+    .projects-hero .h2 span,
+    .contact-title span {
+        color: transparent;
+        -webkit-text-stroke: 1.35px var(--accent);
+    }
+
+    .about-hero-copy h1 span,
+    .ai-hero-copy h1 span,
+    .dc-hero-copy h1 span,
+    .mx-hero-copy h1 span,
+    .contact-title span {
+        -webkit-text-stroke-color: #8cc63f;
+    }
 }
 
 a {
@@ -814,22 +904,6 @@ body.nav-open .nav-overlay {
     color: var(--always-white);
 }
 
-.eyebrow {
-    font-size: 12px;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 24px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 1s 0.3s ease;
-}
-
-.slide.active .eyebrow {
-    opacity: 1;
-    transform: none;
-}
-
 .slide-title {
     font-family: "Google Sans Flex", sans-serif;
     font-weight: 400;
@@ -923,41 +997,10 @@ body.nav-open .nav-overlay {
     bottom: 6vh;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 24px;
     z-index: 3;
     color: var(--always-white);
-}
-
-.lines {
-    display: flex;
-    gap: 16px;
-    flex: 1;
-}
-
-.line {
-    position: relative;
-    flex: 1;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.18);
-    cursor: pointer;
-    overflow: hidden;
-}
-
-.line .fill {
-    position: absolute;
-    inset: 0;
-    background: var(--always-white);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.25s linear;
-}
-
-.line.active .fill {
-    transform: scaleX(var(--p, 0));
-}
-
-.line.done .fill {
-    transform: scaleX(1);
 }
 
 .pp {
@@ -1045,7 +1088,7 @@ section {
 .wrap {
     max-width: var(--site-max);
     margin: 0 auto;
-    padding: 0 28px;
+    padding: 10px 28px;
 }
 
 .wrap-sm {
@@ -1055,7 +1098,7 @@ section {
 }
 
 .section-pad {
-    padding: var(--section-y, 48px) 0;
+    padding: var(--section-y, 24px) 0;
 }
 
 .kicker {
@@ -1083,7 +1126,7 @@ section {
 }
 
 .intro {
-    padding: 48px 0;
+    padding: 24px 0;
     text-align: center;
     background: var(--bg);
 }
@@ -1114,7 +1157,7 @@ section {
 
 .card-in {
     text-align: center;
-    padding: 48px 0 8px;
+    padding: 24px 0;
     background: var(--bg);
 }
 
@@ -1224,7 +1267,7 @@ section {
 
 /* ====== Product marquee (auto scroll R->L, pause on hover) ====== */
 .products {
-    padding: clamp(28px, 4vh, 48px) 0;
+    padding: clamp(14px, 2vh, 24px) 0;
     background: var(--bg);
     overflow: hidden;
     /* max-width: var(--site-max); */
@@ -1604,7 +1647,7 @@ section {
 
 /* ====== Projects ====== */
 .projects {
-    padding: 48px 0;
+    padding: 24px 0;
     background: var(--bg);
 }
 
@@ -2282,13 +2325,16 @@ footer {
 
     .intro,
     .products,
-    .projects,
+    .projects {
+        padding: 20px 0;
+    }
+
     .stats {
         padding: 40px 0;
     }
 
     .card-in {
-        padding: 40px 0 8px;
+        padding: 20px 0;
     }
 
     footer {
@@ -3417,7 +3463,7 @@ a.mega-variant-card:after {
 }
 
 .contact-title span {
-    color: #8cc63f;
+    font-family: var(--font-outline);
 }
 
 .contact-lead {
@@ -3585,7 +3631,7 @@ a.mega-variant-card:after {
 }
 
 .contact-info-panel .info-label {
-    font-size: 12px;
+    font-size: 17px;
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;

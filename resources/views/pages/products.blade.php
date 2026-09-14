@@ -9,7 +9,9 @@
   Drivers and more.
 @endsection
 
-@section('bodyClass', 'products-page')
+@section('bodyClass')
+  products-page {{ $showCatalog ? 'is-catalog' : 'is-gallery' }}
+@endsection
 
 @section('bodyAttributes')
   style="padding-top: 120px;"
@@ -21,6 +23,8 @@
 @section('logo', 'logo_dark.png')
 
 @push('styles')
+  <link rel="stylesheet" href="{{ versioned_asset('assets/css/products.css') }}">
+  @if ($showCatalog)
   @verbatim
     <style>
       /* Product page — solid light header (matches site light mode) */
@@ -807,17 +811,23 @@
       }
     </style>
   @endverbatim
+  @endif
 @endpush
 
 @section('content')
   <div class="wrap">
-    <!-- Breadcrumb only — no h1 / subtitle -->
     <div class="breadcrumbs" id="breadcrumbs">
       <a href="/">Home</a>
-      <span>/</span>Products
+      <span>/</span>
+      @if ($showCatalog)
+        <a href="{{ route('products') }}">Products</a>
+        <span>/</span>{{ $selectedCategory }}
+      @else
+        Products
+      @endif
     </div>
 
-
+    @if ($showCatalog)
     <div class="prod-layout">
       <!-- ===== Sidebar ===== -->
       <div class="prod-filter-overlay" id="prodFilterOverlay"></div>
@@ -869,12 +879,38 @@
         <div class="pagination" id="paginationContainer"></div>
       </main>
     </div>
+    @else
+    <section class="prod-gallery">
+      <div class="prod-gallery-head">
+        <h1 class="h2">Our Range</h1>
+        <p class="prod-gallery-lead">Explore the full Azoogi lighting catalogue.</p>
+      </div>
+      <div class="prod-gallery-grid">
+        @forelse ($rangeItems as $item)
+          @php
+              $fallback = \App\Support\ProductCatalog::fallbackImage($item['title'] ?? '');
+              $imgUrl = media_url($item['image'] ?? '') ?: $fallback;
+          @endphp
+          <a class="prod-gallery-card" href="{{ $item['href'] ?? '#' }}">
+            <div class="img">
+              <img src="{{ $imgUrl }}" alt="{{ $item['title'] ?? '' }}" loading="lazy" onerror="this.onerror=null; this.src='{{ $fallback }}';">
+            </div>
+            <div class="body">
+              <h4>{{ $item['title'] ?? '' }}</h4>
+              <p>{{ $item['body'] ?? '' }}</p>
+              <span class="more">View Range &rarr;</span>
+            </div>
+          </a>
+        @empty
+          <div class="prod-gallery-empty">Catalogue coming soon.</div>
+        @endforelse
+      </div>
+    </section>
+    @endif
   </div>
-
-
-  <!-- ========== FOOTER ========== -->
 @endsection
 
+@if ($showCatalog)
 @push('scripts')
   @verbatim
     <script>
@@ -1290,7 +1326,7 @@
       function renderFilterAccordion() {
         // 0. Determine allowed filterable attributes from Airtable config
         var allowedFilterKeys = null;
-        if (typeof AZOOGI_PRODUCTS !== 'undefined' && Array.isArray(AZOOGI_PRODUCTS.filterable_attributes)) {
+        if (typeof AZOOGI_PRODUCTS !== 'undefined' && Array.isArray(AZOOGI_PRODUCTS.filterable_attributes) && AZOOGI_PRODUCTS.filterable_attributes.length > 0) {
           allowedFilterKeys = new Set(
             AZOOGI_PRODUCTS.filterable_attributes.map(function (k) {
               return String(k).trim().toLowerCase();
@@ -1823,3 +1859,4 @@
     </script>
   @endverbatim
 @endpush
+@endif

@@ -25,25 +25,6 @@
   </div>
 </section>
 
-<section class="projects-highlights" {!! cms_section_attr('highlights') !!}>
-  <div class="wrap">
-    <div class="section-head">
-      <h2{!! cms_style($meta, 'highlights.heading') !!}>{!! accent_html($meta->get('highlights.heading'), $meta->get('highlights.heading_accent')) !!}</h2>
-    </div>
-    <div class="highlights-grid" id="highlightsGrid">
-      @foreach ($highlights as $project)
-        <a class="highlight-card" href="{{ route('project-detail', ['slug' => $project->slug]) }}">
-          <img src="{{ $project->coverUrl() }}" alt="{{ $project->title }}" loading="lazy">
-          <div class="cap">
-            <small>{{ $project->tag ?: $project->type }}@if ($project->location) — {{ $project->location }}@endif</small>
-            <h3>{{ $project->title }}</h3>
-          </div>
-        </a>
-      @endforeach
-    </div>
-  </div>
-</section>
-
 <section class="projects-grid-section" {!! cms_section_attr('list') !!}>
   <div class="wrap">
     <div class="projects-count" id="projectsCount"{!! cms_style($meta, 'list.showing') !!}>{{ $meta->get('list.showing') }} {{ $projects->count() }} {{ $projects->count() === 1 ? $meta->get('list.singular') : $meta->get('list.plural') }}</div>

@@ -29,7 +29,6 @@
       <img src="{{ media_url($meta->get('hero.image')) }}" alt="" loading="eager">
     </div>
     <div class="ai-hero-copy">
-      <div class="kicker"{!! cms_style($meta, 'hero.kicker') !!}>{{ $meta->get('hero.kicker') }}</div>
       <h1{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), 'thinks') !!}</h1>
       <p{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
     </div>
@@ -38,7 +37,6 @@
   <section class="ai-band" {!! cms_section_attr('caps') !!}>
     <div class="wrap ai-split">
       <div class="ai-split-copy">
-        <div class="kicker"{!! cms_style($meta, 'caps.kicker') !!}>{{ $meta->get('caps.kicker') }}</div>
         <h2{!! cms_style($meta, 'caps.heading') !!}>{!! nl2br_html($meta->get('caps.heading'), true) !!}</h2>
         <p{!! cms_style($meta, 'caps.body') !!}>{{ $meta->get('caps.body') }}</p>
       </div>
@@ -56,7 +54,6 @@
   <section class="ai-band ai-band--tight" {!! cms_section_attr('spectrum') !!}>
     <div class="wrap ai-feature">
       <div class="ai-feature-copy">
-        <div class="kicker"{!! cms_style($meta, 'spectrum.kicker') !!}>{{ $meta->get('spectrum.kicker') }}</div>
         <h2{!! cms_style($meta, 'spectrum.heading') !!}>{!! accent_html($meta->get('spectrum.heading'), 'spectrum') !!}</h2>
         <p{!! cms_style($meta, 'spectrum.body') !!}>{{ $meta->get('spectrum.body') }}</p>
         <ul class="ai-ticks">
@@ -82,7 +79,6 @@
     <div class="wrap-sm">
       <div class="ai-row-head">
         <div>
-          <div class="kicker"{!! cms_style($meta, 'insights.kicker') !!}>{{ $meta->get('insights.kicker') }}</div>
           <h2{!! cms_style($meta, 'insights.heading') !!}>{!! accent_html($meta->get('insights.heading'), 'analysis') !!}</h2>
         </div>
         <p{!! cms_style($meta, 'insights.lead') !!}>{{ $meta->get('insights.lead') }}</p>
@@ -114,7 +110,6 @@
       <img src="{{ media_url($meta->get('cct.image')) }}" alt="" loading="lazy">
     </div>
     <div class="wrap ai-cct-inner">
-      <div class="kicker"{!! cms_style($meta, 'cct.kicker') !!}>{{ $meta->get('cct.kicker') }}</div>
       <h2{!! cms_style($meta, 'cct.heading') !!}>{!! accent_html($meta->get('cct.heading'), 'temperature') !!}</h2>
       <p{!! cms_style($meta, 'cct.body') !!}>{{ $meta->get('cct.body') }}</p>
     </div>
@@ -124,7 +119,6 @@
     <div class="wrap">
       <div class="ai-row-head">
         <div>
-          <div class="kicker"{!! cms_style($meta, 'space.kicker') !!}>{{ $meta->get('space.kicker') }}</div>
           <h2{!! cms_style($meta, 'space.heading') !!}>{!! accent_html($meta->get('space.heading'), 'management') !!}</h2>
         </div>
         <p{!! cms_style($meta, 'space.lead') !!}>{{ $meta->get('space.lead') }}</p>

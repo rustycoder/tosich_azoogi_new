@@ -32,7 +32,6 @@
       </video>
     </div>
     <div class="dc-hero-copy">
-      <div class="kicker"{!! cms_style($meta, 'hero.kicker') !!}>{{ $meta->get('hero.kicker') }}</div>
       <h1{!! cms_style($meta, 'hero.title') !!}>{!! nl2br_html($meta->get('hero.title'), true) !!}</h1>
       <p{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
     </div>
@@ -52,7 +51,6 @@
   <section class="dc-band dc-band--alt" {!! cms_section_attr('why') !!}>
     <div class="wrap dc-split">
       <div class="dc-split-copy reveal">
-        <div class="kicker"{!! cms_style($meta, 'why.kicker') !!}>{{ $meta->get('why.kicker') }}</div>
         <h2{!! cms_style($meta, 'why.heading') !!}>{!! nl2br_html($meta->get('why.heading'), true) !!}</h2>
         <p{!! cms_style($meta, 'why.body') !!}>{{ $meta->get('why.body') }}</p>
       </div>
@@ -71,7 +69,6 @@
   <section class="dc-band dc-band--tight" {!! cms_section_attr('hardware') !!}>
     <div class="wrap dc-feature">
       <div class="dc-feature-copy reveal">
-        <div class="kicker"{!! cms_style($meta, 'hardware.kicker') !!}>{{ $meta->get('hardware.kicker') }}</div>
         <h2{!! cms_style($meta, 'hardware.heading') !!}>{!! nl2br_html($meta->get('hardware.heading'), true) !!}</h2>
         <ul class="dc-ticks">
           @foreach ($hardwareTicks as $tick)
@@ -90,7 +87,6 @@
   <section class="dc-band dc-band--alt dc-band--tight" {!! cms_section_attr('control') !!}>
     <div class="wrap dc-feature dc-feature--flip">
       <div class="dc-feature-copy reveal">
-        <div class="kicker"{!! cms_style($meta, 'control.kicker') !!}>{{ $meta->get('control.kicker') }}</div>
         <h2{!! cms_style($meta, 'control.heading') !!}>{!! nl2br_html($meta->get('control.heading'), true) !!}</h2>
         <ul class="dc-ticks">
           @foreach ($controlTicks as $tick)
@@ -129,8 +125,7 @@
     </div>
   </section>
 
-  <div class="dc-cta-wrap reveal" {!! cms_section_attr('cta') !!}>
-    <div class="wrap">
+  <div class="wrap reveal" {!! cms_section_attr('cta') !!}>
       <div class="dc-cta">
         <div class="dc-cta-copy">
           <h2{!! cms_style($meta, 'cta.heading') !!}>{!! accent_html($meta->get('cta.heading'), 'Data Centre Project?') !!}</h2>
@@ -141,7 +136,6 @@
           </div>
         </div>
       </div>
-    </div>
   </div>
 
 </main>

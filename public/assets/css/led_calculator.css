@@ -11,7 +11,7 @@
 
 .calc-hero {
   position: relative;
-  padding: 130px 28px 36px;
+  padding: 130px 28px 0;
   text-align: center;
   overflow: hidden;
   background: var(--bg);
@@ -38,7 +38,7 @@
 }
 
 .calc-hero-title span {
-  color: var(--accent);
+  font-family: var(--font-outline);
 }
 
 .calc-hero-lead {
@@ -51,7 +51,7 @@
 }
 
 .calc-selector {
-  padding: 12px 0 56px;
+  padding: 12px 0 0;
   scroll-margin-top: 100px;
 }
 
@@ -481,7 +481,7 @@
 
 @media (max-width: 640px) {
   .calc-hero {
-    padding: 120px 20px 28px;
+    padding: 120px 20px 0;
   }
 
   .ls-toast {

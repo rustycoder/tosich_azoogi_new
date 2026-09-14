@@ -19,7 +19,6 @@
 <main class="legal-main">
     <div class="wrap legal-page-wrap" {!! cms_section_attr('legal') !!}>
     <div class="legal-hero">
-      <div class="kicker legal-kicker"{!! cms_style($meta, 'legal.kicker') !!}>{{ $meta->get('legal.kicker') }}</div>
       <h1 class="h2 legal-title"{!! cms_style($meta, 'legal.title') !!}>{{ $meta->get('legal.title') }}</h1>
       <p class="legal-intro"{!! cms_style($meta, 'legal.lead') !!}>{{ $meta->get('legal.lead') }}</p>
     </div>

@@ -17,11 +17,68 @@ class ProductsPageTest extends TestCase
         parent::setUp();
 
         $this->seed(PageSeeder::class);
+        $this->seedRangeCategories();
+    }
+
+    public function test_products_index_opens_as_a_parent_category_gallery(): void
+    {
+        $mtime = filemtime(public_path('assets/css/products.css'));
+
+        $this->get('/products')
+            ->assertOk()
+            ->assertSee('class="prod-gallery"', false)
+            ->assertSee('class="prod-gallery-card"', false)
+            ->assertSee('<h4>NEON</h4>', false)
+            ->assertSee('<h4>Profiles</h4>', false)
+            ->assertSee('/products?category=NEON', false)
+            ->assertSee('/products?category=Profiles', false)
+            ->assertSee('View Range', false)
+            ->assertSee('/assets/css/products.css?v='.$mtime, false)
+            ->assertDontSee('id="prodSidebar"', false)
+            ->assertDontSee('id="prodSearchInput"', false)
+            ->assertDontSee('id="productGrid"', false)
+            ->assertDontSee('id="prodFilterOpen"', false)
+            ->assertDontSee('products found', false)
+            ->assertDontSee('AZOOGI_PRODUCTS.filterable_attributes.length > 0', false);
+    }
+
+    public function test_products_gallery_uses_the_same_parent_categories_as_the_home_marquee(): void
+    {
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('<h4>NEON</h4>', false)
+            ->assertSee('<h4>Profiles</h4>', false)
+            ->assertSee('/products?category=NEON', false);
+
+        $this->get('/products')
+            ->assertOk()
+            ->assertSee('<h4>NEON</h4>', false)
+            ->assertSee('<h4>Profiles</h4>', false)
+            ->assertSee('/products?category=NEON', false);
+    }
+
+    public function test_category_query_opens_the_filtered_catalogue(): void
+    {
+        $this->get('/products?category=NEON')
+            ->assertOk()
+            ->assertSee('const AZOOGI_PRODUCTS', false)
+            ->assertDontSee('products_data.js', false)
+            ->assertDontSee('class="prod-gallery"', false)
+            ->assertSee('id="prodSidebar"', false)
+            ->assertSee('id="prodFilterOverlay"', false)
+            ->assertSee('id="prodFilterOpen"', false)
+            ->assertSee('id="prodSearchInput"', false)
+            ->assertSee('id="productGrid"', false)
+            ->assertSee('<span>/</span>NEON', false)
+            ->assertSee('max-width: 400px', false)
+            ->assertSee('margin-inline: auto', false)
+            ->assertSee('AZOOGI_PRODUCTS.filterable_attributes.length > 0', false)
+            ->assertSee("urlParams.get('category')", false);
     }
 
     public function test_products_page_renders_a_contained_mobile_filter_drawer(): void
     {
-        $this->get('/products')
+        $this->get('/products?category=NEON')
             ->assertOk()
             ->assertSee('const AZOOGI_PRODUCTS', false)
             ->assertDontSee('products_data.js', false)
@@ -29,7 +86,27 @@ class ProductsPageTest extends TestCase
             ->assertSee('id="prodFilterOverlay"', false)
             ->assertSee('id="prodFilterOpen"', false)
             ->assertSee('max-width: 400px', false)
-            ->assertSee('margin-inline: auto', false);
+            ->assertSee('margin-inline: auto', false)
+            ->assertSee('AZOOGI_PRODUCTS.filterable_attributes.length > 0', false);
+    }
+
+    private function seedRangeCategories(): void
+    {
+        ProductCategory::query()->create(['airtable_id' => 'recNeon', 'name' => 'NEON', 'sort_order' => 1]);
+        ProductCategory::query()->create(['airtable_id' => 'recProfiles', 'name' => 'Profiles', 'sort_order' => 2]);
+
+        Product::factory()->create([
+            'product_name' => 'Neon Flex',
+            'category' => 'NEON',
+            'categories' => ['NEON'],
+            'category_path' => ['NEON'],
+        ]);
+        Product::factory()->create([
+            'product_name' => 'Trimless Profile',
+            'category' => 'Profiles',
+            'categories' => ['Profiles'],
+            'category_path' => ['Profiles'],
+        ]);
     }
 
     public function test_products_page_matches_categories_without_merging_same_named_items(): void

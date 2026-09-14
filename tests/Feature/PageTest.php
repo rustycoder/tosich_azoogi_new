@@ -159,6 +159,22 @@ class PageTest extends TestCase
             ->assertDontSee('Off-Spec Solutions That Win the Job', false);
     }
 
+    public function test_contact_info_panel_labels_use_seventeen_pixel_type(): void
+    {
+        $this->get('/contact')
+            ->assertOk()
+            ->assertSee('class="contact-info-panel"', false)
+            ->assertSee('class="info-label"', false);
+
+        $css = file_get_contents(public_path('assets/css/style_demo.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertMatchesRegularExpression(
+            '/\.contact-info-panel \.info-label\s*\{[^}]*font-size:\s*17px/s',
+            $css,
+        );
+    }
+
     public function test_contact_form_validates_required_fields(): void
     {
         $this->from('/contact')

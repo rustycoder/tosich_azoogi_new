@@ -27,6 +27,9 @@ class ProductSeeder extends Seeder
             if (! ProductAttribute::query()->exists()) {
                 $products->persistLookups([], $attributes);
                 $this->command?->info('Seeded '.count($attributes).' product attribute(s) from products.json.');
+            } elseif (! ProductAttribute::query()->where('is_visible_on_filters', true)->exists()) {
+                $products->persistLookups([], $attributes);
+                $this->command?->info('Marked '.count($attributes).' product attribute(s) visible on filters.');
             }
 
             $this->backfillProductSortOrder($catalog);
@@ -192,6 +195,7 @@ class ProductSeeder extends Seeder
                                 'Term Name' => $value,
                                 'Icon' => $icon,
                                 'Order' => count($records) + 1,
+                                'Visible on the product filters' => true,
                             ],
                         ];
                     } elseif ($existing === '' && $icon !== '') {

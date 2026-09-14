@@ -6,3 +6,4 @@
 - Do not recreate `public/assets/img/products`, `public/assets/img/icons`, or `public/assets/img/attribute_icon`.
 - `media_url()` already leaves `http://` and `https://` paths unchanged for storefront and dashboard covers.
 - Schedule `products:sync` hourly (`Schedule::command('products:sync')->hourly()->withoutOverlapping()`), not every two hours.
+- `products.json` has no Airtable “Visible on the product filters” flag. JSON seed must mark derived attributes visible. An empty `filterable_attributes` array is a whitelist of nothing, so Tech Specification filters stay blank.

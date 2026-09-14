@@ -23,7 +23,7 @@ class SilvairPageTest extends TestCase
         $this->get('/silvair')
             ->assertOk()
             ->assertSee('/assets/img/silvair/logo.svg', false)
-            ->assertSee('/assets/logo_dark.png', false)
+            ->assertDontSee('sv-lockup-azoogi', false)
             ->assertSee('alt="Silvair"', false)
             ->assertSee('Enterprise Bluetooth®', false)
             ->assertSee('Qualified Mesh Lighting', false)
@@ -61,6 +61,26 @@ class SilvairPageTest extends TestCase
             ->assertSee('data-preview="/assets/img/silvair/emergency.jpg"', false)
             ->assertSee('Emergency &amp; DALI-2 Bridge', false)
             ->assertSee('Open API', false);
+    }
+
+    public function test_hardware_table_keeps_the_first_column_narrower_than_the_second(): void
+    {
+        $css = file_get_contents(public_path('assets/css/silvair.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertStringContainsString('table-layout: fixed', $css);
+        $this->assertMatchesRegularExpression(
+            '/\.sv-page \.spec-table th:first-child,\s*\.sv-page \.spec-table td:first-child\s*\{[^}]*width:\s*15%/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.sv-page \.spec-table th:nth-child\(2\),\s*\.sv-page \.spec-table td:nth-child\(2\)\s*\{[^}]*width:\s*25%/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.sv-page \.spec-table th:last-child,\s*\.sv-page \.spec-table td:last-child\s*\{[^}]*width:\s*60%/s',
+            $css,
+        );
     }
 
     public function test_page_includes_old_site_mix_sections(): void

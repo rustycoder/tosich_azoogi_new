@@ -82,7 +82,7 @@
 }
 
 .ai-hero-copy h1 span {
-  color: #8cc63f;
+  font-family: var(--font-outline);
 }
 
 .ai-hero-copy p {
@@ -95,11 +95,11 @@
 
 /* —— Bands —— */
 .ai-band {
-  padding: clamp(36px, 5vw, 56px) 0;
+  padding: clamp(9px, 1.25vw, 14px) 0;
 }
 
 .ai-band--tight {
-  padding-top: 8px;
+  padding-top: 4px;
 }
 
 .ai-band--soft {
@@ -311,7 +311,7 @@
 /* —— Insights (sticky stack — same engine as homepage / audience) —— */
 .ai-insights.card-in {
   text-align: left;
-  padding: clamp(28px, 4vw, 40px) 0 8px;
+  padding: clamp(14px, 2vw, 20px) 0;
   background: var(--bg);
 }
 
@@ -481,8 +481,8 @@
 .ai-cct-inner {
   position: relative;
   z-index: 1;
-  padding-top: clamp(40px, 6vw, 64px);
-  padding-bottom: clamp(40px, 6vw, 64px);
+  padding-top: clamp(20px, 3vw, 32px);
+  padding-bottom: clamp(20px, 3vw, 32px);
 }
 
 .ai-cct-inner .kicker,
@@ -627,7 +627,7 @@
 .ai-cta-wrap {
   max-width: var(--site-max, 1400px);
   margin: 0 auto;
-  padding: 8px 28px 56px;
+  padding: clamp(36px, 5vw, 56px) 28px 56px;
 }
 
 .ai-cta {
@@ -745,7 +745,7 @@
 
 @media (max-width: 640px) {
   .ai-band {
-    padding: 28px 0;
+    padding: 7px 0;
   }
 
   .ai-caps {
@@ -775,7 +775,7 @@
   }
 
   .ai-cta-wrap {
-    padding: 0 16px 48px;
+    padding: 28px 16px 48px;
   }
 
   .ai-cta {

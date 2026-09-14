@@ -23,7 +23,7 @@ class CasambiPageTest extends TestCase
         $this->get('/casambi')
             ->assertOk()
             ->assertSee('/assets/img/casambi/logo-dark.svg', false)
-            ->assertSee('/assets/logo_dark.png', false)
+            ->assertDontSee('cb-lockup-azoogi', false)
             ->assertSee('alt="Casambi"', false)
             ->assertDontSee('cb-hero-slides', false)
             ->assertSee('Advanced Wireless Lighting Control &amp;', false)
@@ -67,10 +67,33 @@ class CasambiPageTest extends TestCase
             ->assertSee('Casambi Gateway', false);
     }
 
+    public function test_hardware_table_keeps_the_first_column_narrower_than_the_second(): void
+    {
+        $css = file_get_contents(public_path('assets/css/casambi.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertMatchesRegularExpression(
+            '/\.spec-table th:first-child,\s*\.spec-table td:first-child\s*\{[^}]*width:\s*15%/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.spec-table th:nth-child\(2\),\s*\.spec-table td:nth-child\(2\)\s*\{[^}]*width:\s*25%/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.spec-table th:last-child,\s*\.spec-table td:last-child\s*\{[^}]*width:\s*60%/s',
+            $css,
+        );
+        $this->assertStringContainsString('table-layout: fixed', $css);
+    }
+
     public function test_solutions_casambi_button_links_to_the_page(): void
     {
         $this->get('/solutions')
             ->assertOk()
+            ->assertDontSee('solutions-hero-logo', false)
+            ->assertDontSee('solutions-kicker', false)
+            ->assertSee('End-to-End Lighting Solutions', false)
             ->assertSee('href="/casambi"', false);
     }
 
