@@ -19,7 +19,7 @@
 
 @section('content')
     <!-- ========== BREADCRUMBS ========== -->
-    <div class="product-page-wrapper">
+    <div class="product-page-wrapper" data-product-slug="{{ $slug ?? '' }}">
         <div class="wrap">
             <!-- ==================== BREADCRUMBS START ==================== -->
             <div class="breadcrumbs" id="breadcrumbs">
@@ -398,7 +398,8 @@
                 const productCode = urlParams.get('product') || urlParams.get('name') || urlParams.get('variant') || urlParams
                     .get('file');
 
-                let pathSlug = @json($slug ?? null);
+                const pageWrapper = document.querySelector('.product-page-wrapper');
+                let pathSlug = pageWrapper ? (pageWrapper.getAttribute('data-product-slug') || null) : null;
                 if (!pathSlug) {
                     const pathParts = window.location.pathname.split('/').filter(Boolean);
                     if (pathParts.length >= 2 && pathParts[0] === 'products') {
