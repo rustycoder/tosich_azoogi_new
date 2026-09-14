@@ -703,20 +703,18 @@
                     return "";
                 }
 
-                // Extract Product Name, SKU, Short & Long Descriptions
+                // Extract Product Name, SKU & Description
                 const pName = product.product_name || product.name || "Azoogi Lighting Product";
                 const features = product.product_features || {};
                 const sku = getMappedSku(product, selectedOptions);
-                const pShortDesc = product.product_short_description || product.short_description || features[
-                    "Product short description"] || "";
-                const pLongDesc = product.product_description || product.description || features["Product long description"] ||
-                    pShortDesc;
+                const pDesc = product.product_description || product.description || features["Product description"] ||
+                    features["Product long description"] || features["Description"] || "";
 
                 // Update Basic Info & Descriptions
                 if (productNameEl) productNameEl.textContent = pName;
 
                 // if (productCodeEl) productCodeEl.textContent = sku ? `PRODUCT CODE: ${sku}` : `PRODUCT CODE: ${pName}`;
-                if (descEl) descEl.innerHTML = pLongDesc || pShortDesc ||
+                if (descEl) descEl.innerHTML = pDesc ||
                     "Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.";
 
                 // Update Document Title

@@ -119,7 +119,7 @@ class ProductDatasheetService implements IProductDatasheetService
      */
     private function snapshot(Product $product, string $productCode, array $selectedOptions, ?float $length): array
     {
-        $description = trim((string) ($product->product_short_description ?: $product->product_description));
+        $description = trim((string) ($product->product_description ?? ''));
 
         return [
             'category' => (string) ($product->category ?? ''),

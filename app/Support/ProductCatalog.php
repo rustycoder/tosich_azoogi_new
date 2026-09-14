@@ -79,8 +79,8 @@ class ProductCatalog
                         $image = (string) $product['product_images'][0];
                     }
 
-                    if ($fallbackDesc === '' && ! empty($product['product_short_description'])) {
-                        $fallbackDesc = trim((string) $product['product_short_description']);
+                    if ($fallbackDesc === '' && ! empty($product['product_description'])) {
+                        $fallbackDesc = trim((string) $product['product_description']);
                     }
                 }
             }
