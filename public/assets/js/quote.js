@@ -280,6 +280,16 @@
     markAddedButtons(items);
   }
 
+  function isProductInQuote(items, product) {
+    const sku = primarySku(product.sku);
+    const name = String(product.name || '').trim();
+
+    return items.some((item) => {
+      const key = itemKey(item);
+      return (sku !== '' && key === sku) || (name !== '' && (key === name || item.name === name));
+    });
+  }
+
   function markAddedButtons(items) {
     const keys = new Set(items.map(itemKey));
     document.querySelectorAll('.add-quote-btn').forEach((button) => {
@@ -289,6 +299,26 @@
       button.classList.toggle('added', added);
       button.textContent = added ? '−' : '+';
       button.setAttribute('aria-label', added ? 'Remove from quote' : 'Add to quote');
+    });
+
+    const product = extractFromProductDetail();
+    const productAdded = isProductInQuote(items, product);
+    document.querySelectorAll('#add-to-spec-btn, #add-to-spec-btn-summary').forEach((button) => {
+      button.classList.toggle('is-added', productAdded);
+      const label = button.querySelector('[data-quote-label]');
+      if (label) {
+        label.textContent = productAdded ? 'Added to Quote List' : 'Add to Quote List';
+      }
+      const icon = button.querySelector('svg path');
+      if (icon) {
+        icon.setAttribute(
+          'd',
+          productAdded
+            ? 'M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z'
+            : 'M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z',
+        );
+      }
+      button.setAttribute('aria-label', productAdded ? 'Open quote list' : 'Add to quote list');
     });
   }
 
@@ -360,8 +390,13 @@
       const specBtn = event.target.closest('#add-to-spec-btn, #add-to-spec-btn-summary');
       if (specBtn) {
         event.preventDefault();
-        upsertItem(extractFromProductDetail());
-        openDrawer();
+        const item = extractFromProductDetail();
+        const exists = isProductInQuote(readItems(), item);
+        if (exists) {
+          openDrawer();
+        } else {
+          upsertItem(item);
+        }
         return;
       }
 

@@ -23,30 +23,32 @@
 <footer>
     <div class="wrap">
         <div class="foot">
-            <div>
+            <div class="foot-brand">
                 <a href="{{ url('/') }}" class="logo"><img src="{{ asset('assets/logo_white.png') }}" width="150"
                         alt="Azoogi"></a>
                 <p>{{ $description }}</p>
             </div>
-            <div>
-                <h5>{{ $productHeading }}</h5>
-                @foreach ($productLinks as $item)
-                    <a href="{{ chrome_url($item['href'] ?? '') }}"{!! chrome_target_attrs($item['target'] ?? null) !!}>{{ $item['label'] }}</a>
-                @endforeach
-            </div>
-            <div>
-                <h5>{{ $companyHeading }}</h5>
-                @foreach ($companyLinks as $item)
-                    <a href="{{ chrome_url($item['href'] ?? '') }}"{!! chrome_target_attrs($item['target'] ?? null) !!}>{{ $item['label'] }}</a>
-                @endforeach
-            </div>
-            <div>
-                <h5>{{ $contactHeading }}</h5>
-                <a href="{{ tel_href($phone) }}">{{ $phone }}</a>
-                <a href="mailto:{{ $email }}">{{ $email }}</a>
-                @foreach ($contactLinks as $item)
-                    <a href="{{ chrome_url($item['href'] ?? '') }}"{!! chrome_target_attrs($item['target'] ?? null) !!}>{{ $item['label'] }}</a>
-                @endforeach
+            <div class="foot-links">
+                <div>
+                    <h5>{{ $productHeading }}</h5>
+                    @foreach ($productLinks as $item)
+                        <a href="{{ chrome_url($item['href'] ?? '') }}"{!! chrome_target_attrs($item['target'] ?? null) !!}>{{ $item['label'] }}</a>
+                    @endforeach
+                </div>
+                <div>
+                    <h5>{{ $companyHeading }}</h5>
+                    @foreach ($companyLinks as $item)
+                        <a href="{{ chrome_url($item['href'] ?? '') }}"{!! chrome_target_attrs($item['target'] ?? null) !!}>{{ $item['label'] }}</a>
+                    @endforeach
+                </div>
+                <div>
+                    <h5>{{ $contactHeading }}</h5>
+                    <a href="{{ tel_href($phone) }}">{{ $phone }}</a>
+                    <a href="mailto:{{ $email }}">{{ $email }}</a>
+                    @foreach ($contactLinks as $item)
+                        <a href="{{ chrome_url($item['href'] ?? '') }}"{!! chrome_target_attrs($item['target'] ?? null) !!}>{{ $item['label'] }}</a>
+                    @endforeach
+                </div>
             </div>
         </div>
         <div class="copy">

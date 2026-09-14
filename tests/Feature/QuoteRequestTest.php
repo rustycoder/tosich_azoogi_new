@@ -64,7 +64,46 @@ class QuoteRequestTest extends TestCase
         $this->assertStringContainsString('pageSubmit.disabled = items.length === 0', $script);
         $this->assertStringContainsString("hasAttribute('data-clear-quote')", $script);
         $this->assertStringContainsString('writeItems([]);', $script);
+        $this->assertStringContainsString('Added to Quote List', $script);
+        $this->assertStringContainsString('isProductInQuote(readItems(), item)', $script);
+        $this->assertStringContainsString('openDrawer();', $script);
         $this->assertStringNotContainsString('row.append(img, copy);', $script);
+        $this->assertDoesNotMatchRegularExpression(
+            '/upsertItem\(extractFromProductDetail\(\)\);\s*openDrawer\(\)/s',
+            $script,
+        );
+    }
+
+    public function test_product_detail_quote_button_uses_theme_icons_and_keeps_its_label(): void
+    {
+        $this->get('/product-detail')
+            ->assertOk()
+            ->assertSee('id="add-to-spec-btn"', false)
+            ->assertSee('data-quote-label', false)
+            ->assertSee('fill="currentColor"', false)
+            ->assertDontSee('fill="#1f1f1f"', false)
+            ->assertDontSee('fill="#111111"', false)
+            ->assertDontSee('handleSpecAdd', false)
+            ->assertDontSee("this.textContent = 'Added to Quote List!'", false);
+
+        $css = file_get_contents(public_path('assets/css/product_detail.css'));
+        $this->assertNotFalse($css);
+        $this->assertMatchesRegularExpression(
+            '/\.gallery-actions \.btn svg\s*\{[^}]*fill:\s*currentColor/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/#add-to-spec-btn\.is-added:hover\s*\{[^}]*color:\s*var\(--always-white\)/s',
+            $css,
+        );
+        $this->assertStringNotContainsString('.gallery-actions a:hover svg', $css);
+
+        $siteCss = file_get_contents(public_path('assets/css/style_demo.css'));
+        $this->assertNotFalse($siteCss);
+        $this->assertMatchesRegularExpression(
+            '/\.btn\.primary:hover\s*\{[^}]*color:\s*var\(--pure-bg\)/s',
+            $siteCss,
+        );
     }
 
     public function test_quote_request_page_has_product_list_and_form(): void

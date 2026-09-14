@@ -151,6 +151,24 @@ class PageTest extends TestCase
         $this->get('/footer')->assertNotFound();
     }
 
+    public function test_footer_company_column_does_not_repeat_legal_links(): void
+    {
+        $html = $this->get('/')->assertOk()->getContent();
+
+        $this->assertDoesNotMatchRegularExpression(
+            '/<h5>Company<\/h5>.*?>Legal<\/a>.*?<h5>Contact<\/h5>/s',
+            $html,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/<h5>Company<\/h5>.*?>Privacy<\/a>.*?<h5>Contact<\/h5>/s',
+            $html,
+        );
+        $this->assertMatchesRegularExpression(
+            '/class="copy-links".*?>Privacy<\/a>.*?>Terms<\/a>.*?>Warranty<\/a>.*?>Modern Slavery Statement<\/a>/s',
+            $html,
+        );
+    }
+
     public function test_wholesaler_page_does_not_include_the_last_off_spec_card(): void
     {
         $this->get('/wholesaler')

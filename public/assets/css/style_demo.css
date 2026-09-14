@@ -1077,6 +1077,7 @@ body.nav-open .nav-overlay {
 
 .btn.primary:hover {
     background: var(--pure-text);
+    color: var(--pure-bg);
 }
 
 /* slider controls  */
@@ -1961,9 +1962,23 @@ footer {
 }
 
 .foot {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr;
-    gap: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 64px;
+}
+
+.foot-brand {
+    flex: 0 1 28rem;
+    max-width: 28rem;
+    min-width: 0;
+}
+
+.foot-links {
+    display: flex;
+    flex: 0 0 auto;
+    gap: 90px;
+    margin-left: auto;
 }
 
 .foot h5 {
@@ -2455,7 +2470,19 @@ footer {
     }
 
     .foot {
-        grid-template-columns: 1fr 1fr;
+        flex-wrap: wrap;
+        gap: 40px;
+    }
+
+    .foot-brand {
+        flex-basis: 100%;
+        max-width: none;
+    }
+
+    .foot-links {
+        width: 100%;
+        justify-content: space-between;
+        margin-left: 0;
         gap: 40px;
     }
 
@@ -2475,7 +2502,13 @@ footer {
 
 @media (max-width: 640px) {
     .foot {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        gap: 28px;
+    }
+
+    .foot-links {
+        flex-direction: column;
+        width: 100%;
         gap: 28px;
     }
 

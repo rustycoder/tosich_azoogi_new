@@ -115,6 +115,22 @@ class VersionedAssetTest extends TestCase
             '/\.product-title-group h1\s*\{[^}]*font-size:\s*var\(--fs-h2-section\)/s',
             $productCss,
         );
+        $this->assertMatchesRegularExpression(
+            '/\.reset-selection a\s*\{[^}]*font-size:\s*var\(--fs-kicker\)/s',
+            $productCss,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.prod-card-title\s*\{[^}]*font-size:\s*var\(--fs-meta\)/s',
+            $productCss,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.prod-card-title\s*\{[^}]*font-size:\s*var\(--fs-kicker\)/s',
+            $productCss,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.prod-card-title \.cat-label\s*\{[^}]*font-size:\s*var\(--fs-caption\)/s',
+            $productCss,
+        );
     }
 
     public function test_public_views_do_not_use_the_removed_serif_token(): void
@@ -176,6 +192,36 @@ class VersionedAssetTest extends TestCase
         );
         $this->assertMatchesRegularExpression(
             '/\.dash(?:\s*,\s*\.dash \*)?\s*\{[^}]*scrollbar-width:\s*thin/s',
+            $css,
+        );
+    }
+
+    public function test_footer_link_columns_sit_on_the_right(): void
+    {
+        $this->seed(PageSeeder::class);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('class="foot-brand"', false)
+            ->assertSee('class="foot-links"', false)
+            ->assertSeeInOrder(['foot-brand', 'foot-links']);
+
+        $css = File::get(public_path('assets/css/style_demo.css'));
+
+        $this->assertMatchesRegularExpression(
+            '/\.foot\s*\{[^}]*display:\s*flex/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.foot-links\s*\{[^}]*display:\s*flex/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.foot-links\s*\{[^}]*gap:\s*90px/s',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.foot\s*\{[^}]*grid-template-columns/s',
             $css,
         );
     }

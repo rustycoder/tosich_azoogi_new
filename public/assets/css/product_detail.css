@@ -280,8 +280,20 @@ a.meta-badge:hover {
   margin-top: 0 !IMPORTANT;
 }
 
-.gallery-actions a:hover svg {
-  fill: var(--pure-bg);
+.gallery-actions .btn svg {
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.gallery-actions #add-to-spec-btn.is-added {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.gallery-actions #add-to-spec-btn.is-added:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--always-white);
 }
 
 /* Configurator selection blocks */
@@ -915,7 +927,7 @@ a.meta-badge:hover {
 }
 
 .reset-selection a {
-  font-size: max(16px, var(--fs-body));
+  font-size: var(--fs-kicker);
   padding: 5px 10px !important;
   display: flex;
   align-items: center;
@@ -1057,7 +1069,7 @@ a.meta-badge:hover {
 
 .prod-card-title {
   padding: 12px 14px 14px;
-  font-size: var(--fs-kicker);
+  font-size: var(--fs-meta);
   display: flex;
   align-items: flex-start;
   justify-content: space-between;

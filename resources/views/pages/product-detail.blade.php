@@ -79,12 +79,15 @@
                     <div class="gallery-actions"
                         style="display: flex; gap: 16px; justify-content: flex-start; margin-top: 24px;">
 
-                        <a class="btn --outline" id="add-to-spec-btn"
-                            style="display:flex; align-items:center; justify-content:center; gap:8px;">
+                        <a href="#" class="btn --outline" id="add-to-spec-btn"
+                            style="display:flex; align-items:center; justify-content:center; gap:8px;"
+                            aria-label="Add to quote list">
                             <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px"
-                                fill="#1f1f1f">
+                                fill="currentColor" aria-hidden="true">
                                 <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
-                            </svg> Add to Quote List</a>
+                            </svg>
+                            <span data-quote-label>Add to Quote List</span>
+                        </a>
                     </div>
                     <!-- B2B ACTION BUTTONS END -->
 
@@ -181,8 +184,8 @@
                             </button>
                             <a href="#quote-section-anchor" class="btn --accent"
                                 style="display:flex; justify-content:center; gap:8px; width: 100%;">
-                                <svg viewBox="0 -960 960 960" fill="#111111" stroke="currentColor" stroke-width="2"
-                                    width="18" height="18">
+                                <svg viewBox="0 -960 960 960" fill="currentColor" width="18" height="18"
+                                    aria-hidden="true">
                                     <path
                                         d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z" />
                                 </svg>
@@ -1464,6 +1467,9 @@
                     if (specAddBtn) {
                         specAddBtn.dataset.quoteSku = skuDisplay || '';
                     }
+                    if (window.AzoogiQuote && typeof window.AzoogiQuote.refresh === 'function') {
+                        window.AzoogiQuote.refresh();
+                    }
 
                     // if (productCodeEl) productCodeEl.textContent = `PRODUCT CODE: ${skuDisplay}`;
 
@@ -1690,31 +1696,6 @@
                         if (panel) panel.classList.add('active');
                     });
                 });
-
-                // Spec button click animation for both details and summary buttons
-                const handleSpecAdd = function () {
-                    const originalText = this.textContent;
-                    this.textContent = 'Added to Quote List!';
-                    this.style.background = 'var(--rgba-hover)';
-                    this.style.borderColor = 'var(--accent)';
-                    this.style.color = 'var(--accent)';
-
-                    setTimeout(() => {
-                        this.textContent = originalText;
-                        this.style.background = 'none';
-                        this.style.borderColor = 'var(--border-light)';
-                        this.style.color = 'var(--ink)';
-                    }, 2000);
-                };
-
-                const specBtn = document.getElementById('add-to-spec-btn');
-                if (specBtn) {
-                    specBtn.addEventListener('click', handleSpecAdd);
-                }
-                const specSummaryBtn = document.getElementById('add-to-spec-btn-summary');
-                if (specSummaryBtn) {
-                    specSummaryBtn.addEventListener('click', handleSpecAdd);
-                }
 
                 // Hover Zoom effect on main image
                 if (galleryMainImg) {
