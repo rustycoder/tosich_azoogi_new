@@ -303,6 +303,10 @@ h3 {
     align-items: center;
 }
 
+.menu > a.mobile-cta {
+    display: none;
+}
+
 .menu a {
     position: relative;
     padding: 4px 15px;
@@ -1981,6 +1985,10 @@ footer {
     .nav>.cta {
         margin-left: auto;
         font-size: 11px;
+    }
+
+    .menu.mobile-drawer > a.mobile-cta {
+        display: flex;
     }
 
     .menu.mobile-drawer {

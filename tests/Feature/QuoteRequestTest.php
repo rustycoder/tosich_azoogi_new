@@ -37,11 +37,18 @@ class QuoteRequestTest extends TestCase
             ->assertSeeInOrder([
                 'class="nav-actions"',
                 'LED Calculator',
+                'id="search-trigger"',
                 'id="quote-trigger"',
             ], false)
             ->assertSee('LED Calculator', false)
             ->assertSee('assets/css/quote.css', false)
-            ->assertSee('assets/js/quote.js', false);
+            ->assertSee('assets/js/quote.js', false)
+            ->assertSee('assets/js/site_header.js', false);
+
+        $headerScript = file_get_contents(public_path('assets/js/site_header.js'));
+        $this->assertNotFalse($headerScript);
+        $this->assertStringContainsString("classList.add('mobile-cta')", $headerScript);
+        $this->assertStringContainsString('.nav-actions .cta', $headerScript);
     }
 
     public function test_quote_script_shows_sku_and_uses_a_delete_icon(): void

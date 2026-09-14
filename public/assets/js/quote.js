@@ -294,6 +294,7 @@
 
   function openDrawer() {
     document.body.classList.add('quote-open');
+    window.dispatchEvent(new CustomEvent('quote:open'));
     const trigger = document.getElementById('quote-trigger');
     const drawer = document.getElementById('quote-drawer');
     if (trigger) {

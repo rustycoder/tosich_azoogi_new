@@ -7,6 +7,7 @@
   flex-shrink: 0;
 }
 
+.search-trigger,
 .quote-trigger {
   position: relative;
   display: inline-flex;
@@ -22,10 +23,12 @@
   border-radius: 4px;
 }
 
+.search-trigger:hover,
 .quote-trigger:hover {
   background: var(--rgba-hover);
 }
 
+.search-trigger-icon,
 .quote-trigger-icon {
   display: block;
   width: 22px;
@@ -495,7 +498,7 @@ body.quote-open .quote-drawer {
   }
 
   .nav-actions .cta {
-    font-size: 11px;
+    display: none;
   }
 }
 

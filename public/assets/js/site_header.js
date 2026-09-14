@@ -131,6 +131,20 @@
     } else if (utilBox !== menu.lastElementChild) {
       menu.appendChild(utilBox);
     }
+
+    if (!menu.querySelector('.mobile-cta')) {
+      const cta = document.querySelector('.nav-actions .cta');
+      if (cta) {
+        const clone = cta.cloneNode(true);
+        clone.classList.add('mobile-cta');
+        const util = menu.querySelector('.mobile-util');
+        if (util) {
+          menu.insertBefore(clone, util);
+        } else {
+          menu.appendChild(clone);
+        }
+      }
+    }
   }
 
   function closeNav() {

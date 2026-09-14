@@ -11,12 +11,14 @@
 @endif
 <link rel="stylesheet" href="{{ versioned_asset('assets/css/style_demo.css') }}">
 <link rel="stylesheet" href="{{ versioned_asset('assets/css/quote.css') }}">
+<link rel="stylesheet" href="{{ versioned_asset('assets/css/site-search.css') }}">
 @stack('styles')
 @if (trim($__env->yieldContent('chrome', 'full')) !== 'none')
 <script>const AZOOGI_PRODUCTS = @json($productCatalog, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);</script>
 <script defer src="{{ asset('assets/js/mega_menu.js') }}?v={{ config('app.asset_version') }}"></script>
-<script defer src="{{ asset('assets/js/site_header.js') }}?v={{ config('app.asset_version') }}"></script>
+<script defer src="{{ versioned_asset('assets/js/site_header.js') }}"></script>
 <script defer src="{{ versioned_asset('assets/js/quote.js') }}"></script>
+<script defer src="{{ versioned_asset('assets/js/site-search.js') }}"></script>
 @endif
 @stack('head')
 @if (request()->routeIs('dashboard.pages.preview'))
