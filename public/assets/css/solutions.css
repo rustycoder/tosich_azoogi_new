@@ -4,7 +4,7 @@
   padding: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: var(--font-sans);
 }
 
 /* —— Hero —— */
@@ -61,9 +61,9 @@
 .solutions-eco-head h2 {
   margin: 0 auto 10px;
   max-width: 30ch;
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: var(--font-sans);
   font-weight: 500;
-  font-size: clamp(19px, 1.8vw, 25px);
+  font-size: var(--fs-h2-section);
   line-height: 1.25;
   letter-spacing: -.01em;
   color: var(--ink);
@@ -73,7 +73,7 @@
   margin: 0 auto;
   padding: 0;
   max-width: 60ch;
-  font-size: 14.5px;
+  font-size: var(--fs-body);
   font-style: italic;
   line-height: 1.6;
   color: var(--muted);
@@ -133,8 +133,8 @@
 }
 
 .sol-eco-name {
-  font-family: "Google Sans Flex", sans-serif;
-  font-size: clamp(19px, 1.7vw, 25px);
+  font-family: var(--font-sans);
+  font-size: var(--fs-h3);
   font-weight: 500;
   line-height: 1.15;
   letter-spacing: -.01em;
@@ -142,7 +142,7 @@
 }
 
 .sol-eco-sub {
-  font-size: 13.5px;
+  font-size: var(--fs-kicker);
   line-height: 1.5;
   color: var(--muted);
 }
@@ -153,7 +153,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 11px;
+  font-size: var(--fs-caption);
   font-weight: 600;
   letter-spacing: .13em;
   text-transform: uppercase;
@@ -214,8 +214,8 @@
 
 .solutions-cta-copy h3 {
   margin: 0 0 6px;
-  font-family: "Google Sans Flex", sans-serif;
-  font-size: 15px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-card-title-sm);
   font-weight: 600;
   letter-spacing: .06em;
   text-transform: uppercase;
@@ -226,8 +226,8 @@
 .solutions-cta-copy p {
   margin: 0;
   padding: 0;
-  font-family: "Google Sans Flex", sans-serif;
-  font-size: 15px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
   font-weight: 400;
   line-height: 1.55;
   color: var(--muted);
@@ -251,7 +251,7 @@
 
 .solutions-sector-head h2 {
   margin: 0 auto 10px;
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: var(--font-sans);
   font-weight: 400;
   font-size: var(--fs-h2-section);
   line-height: 1.1;
@@ -266,7 +266,7 @@
 .solutions-sector-hint {
   margin: 0;
   padding: 0;
-  font-size: 13.5px;
+  font-size: var(--fs-kicker);
   color: var(--muted);
 }
 
@@ -339,15 +339,15 @@
 }
 
 .sol-sector-num {
-  font-size: 12px;
+  font-size: var(--fs-kicker);
   font-weight: 600;
   letter-spacing: .14em;
   color: var(--accent);
 }
 
 .sol-sector-title {
-  font-family: "Google Sans Flex", sans-serif;
-  font-size: clamp(16px, 1.35vw, 19px);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
   font-weight: 500;
   line-height: 1.25;
   letter-spacing: -.01em;
@@ -355,7 +355,7 @@
 }
 
 .sol-sector-desc {
-  font-size: 13.5px;
+  font-size: var(--fs-kicker);
   line-height: 1.6;
   color: var(--muted);
 }
@@ -382,7 +382,7 @@
   align-items: center;
   gap: 10px;
   padding: 15px 30px;
-  font-size: 14px;
+  font-size: var(--fs-kicker);
   text-transform: none;
   letter-spacing: .01em;
   text-decoration: none;
@@ -455,11 +455,11 @@
   }
 
   .sol-sector-title {
-    font-size: clamp(12px, 3.2vw, 16px);
+    font-size: var(--fs-body);
   }
 
   .sol-sector-desc {
-    font-size: 12px;
+    font-size: var(--fs-kicker);
   }
 
   .solutions-sector-cta .btn {

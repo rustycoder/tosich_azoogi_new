@@ -74,7 +74,7 @@ html, body {
   }
 
   .coming-soon .h2 {
-    font-size: clamp(42px, 7vw, 72px);
+    font-size: var(--fs-h2);
     margin: 0 0 18px;
     opacity: 0;
     transform: translateY(24px);
@@ -84,7 +84,7 @@ html, body {
   .coming-soon .lead {
     margin: 0 auto 36px;
     max-width: 480px;
-    font-size: 16px;
+    font-size: var(--fs-lead);
     line-height: 1.65;
     opacity: 0;
     transform: translateY(24px);
@@ -103,7 +103,7 @@ html, body {
 
   .coming-soon .meta {
     margin-top: 56px;
-    font-size: 12px;
+    font-size: var(--fs-kicker);
     letter-spacing: .12em;
     text-transform: uppercase;
     color: var(--muted);
@@ -127,7 +127,7 @@ html, body {
     top: 28px;
     left: 28px;
     z-index: 2;
-    font-size: 12px;
+    font-size: var(--fs-kicker);
     letter-spacing: .18em;
     text-transform: uppercase;
     color: var(--muted);

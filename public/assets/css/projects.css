@@ -137,12 +137,12 @@
 .project-detail-hero .meta-bar .meta-location {
   margin: 0;
   color: var(--muted);
-  font-size: 14px;
+  font-size: var(--fs-body);
   line-height: 1.2;
 }
 
 .project-detail-hero h1 {
-  font-size: var(--fs-h2-section);
+  font-size: var(--fs-h2);
   font-weight: 450;
   margin: 16px 0 0;
   letter-spacing: -.01em;
@@ -178,18 +178,18 @@
 }
 
 .project-meta-row .meta-label {
-  font-size: clamp(16px, 1.4vw, 22px);
+  font-size: var(--fs-h3);
   font-weight: 500;
 }
 
 .project-meta-row .meta-value {
-  font-size: clamp(14px, 1.2vw, 17px);
+  font-size: var(--fs-body);
   font-weight: 400;
   color: var(--muted);
 }
 
 .project-description {
-  font-size: clamp(16px, 1.5vw, 22px);
+  font-size: var(--fs-h3);
   font-weight: 450;
   line-height: 1.5;
   color: var(--ink);
@@ -226,7 +226,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
+  font-size: var(--fs-kicker);
   letter-spacing: .16em;
   text-transform: uppercase;
   color: var(--muted);

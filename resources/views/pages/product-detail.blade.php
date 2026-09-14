@@ -141,7 +141,7 @@
                         <div class="specification-download-section" id="specification-download-section"
                             style="margin-top: 0; padding-top: 0; margin-bottom: 0; display: none;">
                             <h3 id="downloadable-resources-title"
-                                style="font-family: var(--font-serif); font-size: 24px; margin-bottom: 20px;">Downloadable
+                                style="font-family: var(--font-sans); font-size: var(--fs-h3); margin-bottom: 20px;">Downloadable
                                 Resources
                             </h3>
                             <div class="download-options" id="download-resources-list"
@@ -157,11 +157,11 @@
                     <div class="config-summary-card"
                         style="background: var(--card-bg); border: 1px solid var(--border-light); border-radius: 8px; padding: 24px; display: flex; flex-direction: column; gap: 10px; position: sticky; top: 100px;">
                         <h4
-                            style="font-family: var(--font-serif); font-size: 20px; margin: 0; color: var(--ink); border-bottom: 1px solid var(--line); padding-bottom: 12px;">
+                            style="font-family: var(--font-sans); font-size: var(--fs-h3); margin: 0; color: var(--ink); border-bottom: 1px solid var(--line); padding-bottom: 12px;">
                             Selected Configuration</h4>
 
                         <div id="selected-summary-list"
-                            style="display: flex; flex-direction: column; gap: 10px; font-size: 12px; color: var(--muted);">
+                            style="display: flex; flex-direction: column; gap: 10px; font-size: var(--fs-kicker); color: var(--muted);">
                             <!-- Dynamically populated list from Javascript selection updates -->
                         </div>
 
@@ -203,7 +203,7 @@
     <section class="accessories-section"
         style="margin-top: 25px; border-top: 1px solid var(--line); padding-top: 20px; padding-bottom: 40px;">
         <div class="wrap">
-            <h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px;">Recommended Products</h3>
+            <h3 style="font-family: var(--font-sans); font-size: var(--fs-h2-section); margin-bottom: 24px;">Recommended Products</h3>
             <div class="prod-grid" id="productGrid">
                 <div class="prod-card-img">
                     <img class="prod-swatch" src="/assets/img/drivers.webp" alt="DALI-2 Dimmable Driver" loading="lazy"
@@ -254,7 +254,7 @@
                         Request a B2B project quote or coordinate a specsheet request. Fill out your details, and an Azoogi
                         commercial specialist will follow up with pricing, lead times, and trade discount rates.
                     </p>
-                    <div style="font-size:13px; color:var(--muted); line-height: 2;">
+                    <div style="font-size:var(--fs-kicker); color:var(--muted); line-height: 2;">
                         <div><strong>Sales Support:</strong> 1300 641 261</div>
                         <div><strong>Email Response:</strong> sales@azoogi.com</div>
                         <div><strong>B2B Turnaround:</strong> Within 4 business hours</div>
@@ -1166,7 +1166,7 @@
                     if (optionsGridLayout) optionsGridLayout.style.gridTemplateColumns = '1.25fr 0.75fr';
 
                     configurator.innerHTML =
-                        '<div class="reset-selection" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;"><h3 style="font-family: var(--font-serif); font-size: 28px; margin: 0;">Product Configuration</h3><a href="#" id="btn-clear-selection" class="btn sm" style="display: flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" zoomAndPan="magnify" viewBox="0 0 97.5 129.000003" height="18" preserveAspectRatio="xMidYMid meet" version="1.0"><defs><g/><clipPath id="19baf0d6ae"><path d="M 0.125 19.070312 L 96.527344 19.070312 L 96.527344 115.472656 L 0.125 115.472656 Z M 0.125 19.070312 " clip-rule="nonzero"/></clipPath><clipPath id="79dc47164a"><path d="M 48.328125 19.070312 C 21.707031 19.070312 0.125 40.648438 0.125 67.269531 C 0.125 93.890625 21.707031 115.472656 48.328125 115.472656 C 74.949219 115.472656 96.527344 93.890625 96.527344 67.269531 C 96.527344 40.648438 74.949219 19.070312 48.328125 19.070312 Z M 48.328125 19.070312 " clip-rule="nonzero"/></clipPath><clipPath id="19295492b8"><rect x="0" width="42" y="0" height="91"/></clipPath></defs><g clip-path="url(#19baf0d6ae)"><g clip-path="url(#79dc47164a)"><path stroke-linecap="butt" transform="matrix(0.744231, 0, 0, 0.744231, 0.126922, 19.070008)" fill="none" stroke-linejoin="miter" d="M 64.766476 0.000409245 C 28.99653 0.000409245 -0.00258246 28.994273 -0.00258246 64.764219 C -0.00258246 100.534164 28.99653 129.533277 64.766476 129.533277 C 100.536421 129.533277 129.530285 100.534164 129.530285 64.764219 C 129.530285 28.994273 100.536421 0.000409245 64.766476 0.000409245 Z M 64.766476 0.000409245 " stroke="currentColor" stroke-width="24" stroke-opacity="1" stroke-miterlimit="4"/></g></g><g transform="matrix(1, 0, 0, 1, 27, 18)"><g clip-path="url(#19295492b8)"><g fill="currentColor" fill-opacity="1"><g transform="translate(1.141728, 69.356989)"><g><path d="M 7.015625 0.375 C 6.015625 0.375 5.226562 0.0585938 4.65625 -0.5625 C 4.09375 -1.1875 3.8125 -2.019531 3.8125 -3.0625 C 3.8125 -3.8125 4.054688 -4.507812 4.546875 -5.15625 L 16.125 -18.8125 L 4.546875 -32.921875 C 4.003906 -33.617188 3.734375 -34.335938 3.734375 -35.078125 C 3.734375 -36.078125 4.054688 -36.882812 4.703125 -37.5 C 5.347656 -38.125 6.144531 -38.4375 7.09375 -38.4375 C 8.28125 -38.4375 9.175781 -38.015625 9.78125 -37.171875 L 20.234375 -24.265625 L 30.609375 -37.171875 C 31.203125 -38.015625 32.070312 -38.4375 33.21875 -38.4375 C 34.207031 -38.4375 35.023438 -38.125 35.671875 -37.5 C 36.328125 -36.882812 36.65625 -36.128906 36.65625 -35.234375 C 36.65625 -34.484375 36.40625 -33.785156 35.90625 -33.140625 L 24.109375 -19.25 L 35.75 -5.21875 C 36.300781 -4.625 36.578125 -3.90625 36.578125 -3.0625 C 36.578125 -2.113281 36.273438 -1.300781 35.671875 -0.625 C 35.078125 0.0390625 34.234375 0.375 33.140625 0.375 C 32.046875 0.375 31.175781 -0.0703125 30.53125 -0.96875 L 19.921875 -13.65625 L 9.921875 -1.125 C 9.179688 -0.125 8.210938 0.375 7.015625 0.375 Z M 7.015625 0.375 "/></g></g></g></g></g></svg>Reset Selection</a></div>';
+                        '<div class="reset-selection" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;"><h3 style="font-family: var(--font-sans); font-size: var(--fs-h2-section); margin: 0;">Product Configuration</h3><a href="#" id="btn-clear-selection" class="btn sm" style="display: flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" zoomAndPan="magnify" viewBox="0 0 97.5 129.000003" height="18" preserveAspectRatio="xMidYMid meet" version="1.0"><defs><g/><clipPath id="19baf0d6ae"><path d="M 0.125 19.070312 L 96.527344 19.070312 L 96.527344 115.472656 L 0.125 115.472656 Z M 0.125 19.070312 " clip-rule="nonzero"/></clipPath><clipPath id="79dc47164a"><path d="M 48.328125 19.070312 C 21.707031 19.070312 0.125 40.648438 0.125 67.269531 C 0.125 93.890625 21.707031 115.472656 48.328125 115.472656 C 74.949219 115.472656 96.527344 93.890625 96.527344 67.269531 C 96.527344 40.648438 74.949219 19.070312 48.328125 19.070312 Z M 48.328125 19.070312 " clip-rule="nonzero"/></clipPath><clipPath id="19295492b8"><rect x="0" width="42" y="0" height="91"/></clipPath></defs><g clip-path="url(#19baf0d6ae)"><g clip-path="url(#79dc47164a)"><path stroke-linecap="butt" transform="matrix(0.744231, 0, 0, 0.744231, 0.126922, 19.070008)" fill="none" stroke-linejoin="miter" d="M 64.766476 0.000409245 C 28.99653 0.000409245 -0.00258246 28.994273 -0.00258246 64.764219 C -0.00258246 100.534164 28.99653 129.533277 64.766476 129.533277 C 100.536421 129.533277 129.530285 100.534164 129.530285 64.764219 C 129.530285 28.994273 100.536421 0.000409245 64.766476 0.000409245 Z M 64.766476 0.000409245 " stroke="currentColor" stroke-width="24" stroke-opacity="1" stroke-miterlimit="4"/></g></g><g transform="matrix(1, 0, 0, 1, 27, 18)"><g clip-path="url(#19295492b8)"><g fill="currentColor" fill-opacity="1"><g transform="translate(1.141728, 69.356989)"><g><path d="M 7.015625 0.375 C 6.015625 0.375 5.226562 0.0585938 4.65625 -0.5625 C 4.09375 -1.1875 3.8125 -2.019531 3.8125 -3.0625 C 3.8125 -3.8125 4.054688 -4.507812 4.546875 -5.15625 L 16.125 -18.8125 L 4.546875 -32.921875 C 4.003906 -33.617188 3.734375 -34.335938 3.734375 -35.078125 C 3.734375 -36.078125 4.054688 -36.882812 4.703125 -37.5 C 5.347656 -38.125 6.144531 -38.4375 7.09375 -38.4375 C 8.28125 -38.4375 9.175781 -38.015625 9.78125 -37.171875 L 20.234375 -24.265625 L 30.609375 -37.171875 C 31.203125 -38.015625 32.070312 -38.4375 33.21875 -38.4375 C 34.207031 -38.4375 35.023438 -38.125 35.671875 -37.5 C 36.328125 -36.882812 36.65625 -36.128906 36.65625 -35.234375 C 36.65625 -34.484375 36.40625 -33.785156 35.90625 -33.140625 L 24.109375 -19.25 L 35.75 -5.21875 C 36.300781 -4.625 36.578125 -3.90625 36.578125 -3.0625 C 36.578125 -2.113281 36.273438 -1.300781 35.671875 -0.625 C 35.078125 0.0390625 34.234375 0.375 33.140625 0.375 C 32.046875 0.375 31.175781 -0.0703125 30.53125 -0.96875 L 19.921875 -13.65625 L 9.921875 -1.125 C 9.179688 -0.125 8.210938 0.375 7.015625 0.375 Z M 7.015625 0.375 "/></g></g></g></g></g></svg>Reset Selection</a></div>';
 
                     const clearBtn = document.getElementById('btn-clear-selection');
                     if (clearBtn) {
@@ -1586,7 +1586,7 @@
                             }
                         } else {
                             summaryListEl.innerHTML =
-                                '<div style="color: var(--muted); font-size: 13px; font-style: italic; padding: 4px 0;">Please select configuration options to view product code and summary.</div>';
+                                '<div style="color: var(--muted); font-size: var(--fs-kicker); font-style: italic; padding: 4px 0;">Please select configuration options to view product code and summary.</div>';
                         }
                     }
 

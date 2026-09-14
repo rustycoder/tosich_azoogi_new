@@ -70,7 +70,7 @@
 }
 
 .audience-cards .card__body h2 {
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: var(--font-sans);
   font-weight: 400;
   font-size: var(--fs-h2-section);
   line-height: 1.15;

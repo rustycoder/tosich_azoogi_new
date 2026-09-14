@@ -159,7 +159,7 @@ class PageTest extends TestCase
             ->assertDontSee('Off-Spec Solutions That Win the Job', false);
     }
 
-    public function test_contact_info_panel_labels_use_seventeen_pixel_type(): void
+    public function test_contact_info_panel_labels_use_shared_body_type(): void
     {
         $this->get('/contact')
             ->assertOk()
@@ -170,7 +170,7 @@ class PageTest extends TestCase
 
         $this->assertNotFalse($css);
         $this->assertMatchesRegularExpression(
-            '/\.contact-info-panel \.info-label\s*\{[^}]*font-size:\s*17px/s',
+            '/\.contact-info-panel \.info-label\s*\{[^}]*font-size:\s*var\(--fs-body\)/s',
             $css,
         );
     }

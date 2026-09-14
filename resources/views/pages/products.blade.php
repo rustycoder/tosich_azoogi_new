@@ -46,7 +46,7 @@
       }
 
       .crumb {
-        font-size: 13px;
+        font-size: var(--fs-kicker);
         color: var(--muted);
       }
 
@@ -125,7 +125,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        font-size: 11px;
+        font-size: var(--fs-caption);
         font-weight: 600;
         letter-spacing: .12em;
         text-transform: uppercase;
@@ -139,7 +139,7 @@
       }
 
       .sb-toggle {
-        font-size: 15px;
+        font-size: var(--fs-body);
         font-weight: 300;
         line-height: 1;
         color: var(--accent);
@@ -191,7 +191,7 @@
         justify-content: space-between;
         padding: 5px 6px;
         cursor: pointer;
-        font-size: 11px;
+        font-size: var(--fs-caption);
         font-weight: 600;
         gap: 6px;
       }
@@ -211,7 +211,7 @@
 
       /* cleaner +/- toggle icon to match filter accordion */
       .cat-toggle {
-        font-size: 14px;
+        font-size: var(--fs-body);
         font-weight: 300;
         color: var(--muted);
         width: 16px;
@@ -244,14 +244,14 @@
       .cat-sub-link {
         display: block;
         padding: 4px 6px;
-        font-size: 10.5px;
+        font-size: var(--fs-caption);
         color: var(--muted);
         line-height: 1.3;
         text-decoration: none;
       }
 
       .cat-sub-link.level-0 {
-        font-size: 11px;
+        font-size: var(--fs-caption);
         font-weight: 600;
         color: var(--ink);
         padding: 5px 6px;
@@ -272,7 +272,7 @@
         justify-content: space-between;
         padding: 0 10px;
         cursor: pointer;
-        font-size: 10px;
+        font-size: var(--fs-caption);
         font-weight: 600;
       }
 
@@ -281,7 +281,7 @@
       }
 
       .filter-toggle {
-        font-size: 15px;
+        font-size: var(--fs-body);
         font-weight: 300;
         color: var(--muted);
         width: 16px;
@@ -309,7 +309,7 @@
         align-items: center;
         gap: 8px;
         padding: 3px 0;
-        font-size: 10px;
+        font-size: var(--fs-caption);
         color: var(--ink);
         cursor: pointer;
       }
@@ -321,7 +321,7 @@
       }
 
       .clear-filters {
-        font-size: 12px;
+        font-size: var(--fs-kicker);
         color: var(--accent) !important;
         cursor: pointer;
         display: inline-block;
@@ -346,7 +346,7 @@
       }
 
       .result-count {
-        font-size: 12px;
+        font-size: var(--fs-kicker);
         color: var(--muted);
       }
 
@@ -367,7 +367,7 @@
         border: 1px solid var(--border-light);
         background: var(--bg-2);
         color: var(--ink);
-        font-size: 13px;
+        font-size: var(--fs-kicker);
         width: 180px;
         min-width: 0;
         box-sizing: border-box;
@@ -377,7 +377,7 @@
         border: 1px solid var(--line);
         background: var(--bg);
         color: var(--ink);
-        font-size: 12px;
+        font-size: var(--fs-kicker);
         padding: 8px 12px;
         border-radius: 4px;
         cursor: pointer;
@@ -391,7 +391,7 @@
         background: none;
         color: var(--ink);
         padding: 8px 12px;
-        font-size: 13px;
+        font-size: var(--fs-kicker);
         cursor: pointer;
         border-radius: 4px;
         white-space: nowrap;
@@ -480,7 +480,7 @@
         }
 
         .prod-sidebar-head strong {
-          font-size: 14px;
+          font-size: var(--fs-body);
           letter-spacing: .08em;
           text-transform: uppercase;
         }
@@ -521,7 +521,7 @@
         gap: 6px;
         background: var(--card-bg);
         border: 1px solid var(--line);
-        font-size: 12px;
+        font-size: var(--fs-kicker);
         padding: 5px 10px;
         border-radius: 2px;
       }
@@ -624,7 +624,7 @@
 
       .prod-card-title {
         padding: 12px 14px 14px;
-        font-size: 13.5px;
+        font-size: var(--fs-card-title-sm);
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
@@ -640,7 +640,7 @@
 
       .prod-card-title .cat-label {
         display: block;
-        font-size: 10px;
+        font-size: var(--fs-caption);
         color: var(--accent);
         text-transform: uppercase;
         letter-spacing: .08em;
@@ -649,7 +649,7 @@
 
       .prod-card-title .prod-card-code {
         display: block;
-        font-size: 10px;
+        font-size: var(--fs-caption);
         color: var(--accent);
         text-transform: uppercase;
         letter-spacing: .08em;
@@ -692,7 +692,7 @@
       }
 
       .spec-item {
-        font-size: 11.5px;
+        font-size: var(--fs-caption);
         color: rgba(255, 255, 255, 0.85);
         line-height: 1.4;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -709,7 +709,7 @@
       .spec-item strong {
         color: #fff;
         font-weight: 500;
-        font-size: 11px;
+        font-size: var(--fs-caption);
         text-transform: uppercase;
         letter-spacing: .04em;
       }
@@ -726,7 +726,7 @@
       .ov-btn {
         flex: 1;
         text-align: center;
-        font-size: 11.5px;
+        font-size: var(--fs-caption);
         padding: 9px 6px;
         cursor: pointer;
         border-radius: 2px;
@@ -788,7 +788,7 @@
         align-items: center;
         justify-content: center;
         border: 1px solid var(--line);
-        font-size: 13px;
+        font-size: var(--fs-kicker);
         cursor: pointer;
         color: var(--muted);
       }
@@ -1423,7 +1423,7 @@
         if (filterAcc) {
           filterAcc.innerHTML = '';
           if (filters.length === 0) {
-            filterAcc.innerHTML = '<div style="padding:12px 0; font-size:12px; color:var(--muted);">No attributes available for this category.</div>';
+            filterAcc.innerHTML = '<div style="padding:12px 0; font-size:var(--fs-kicker); color:var(--muted);">No attributes available for this category.</div>';
             return;
           }
 
@@ -1510,7 +1510,7 @@
         }
 
         if (tagHtml !== '') {
-          tagHtml += '<span class="clear-filters" onclick="clearFilters()" style="margin-left:8px; font-size:12px; color:var(--muted); cursor:pointer; align-self:center;">Clear all filters</span>';
+          tagHtml += '<span class="clear-filters" onclick="clearFilters()" style="margin-left:8px; font-size:var(--fs-kicker); color:var(--muted); cursor:pointer; align-self:center;">Clear all filters</span>';
         }
 
         var activeTagsEl = document.getElementById('activeTags');

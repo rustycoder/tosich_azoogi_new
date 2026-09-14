@@ -4,12 +4,12 @@
     padding: 120px 0 0;
     background: var(--bg);
     color: var(--ink);
-    font-family: "Google Sans Flex", sans-serif;
+    font-family: var(--font-sans);
 }
 
 .sv-num {
     display: block;
-    font-size: 12px;
+    font-size: var(--fs-kicker);
     font-weight: 600;
     letter-spacing: 0.14em;
     color: var(--accent);
@@ -39,9 +39,9 @@
 .sv-title {
     margin: 0 auto 20px;
     max-width: 22ch;
-    font-family: "Google Sans Flex", sans-serif;
+    font-family: var(--font-sans);
     font-weight: 400;
-    font-size: var(--fs-h2-section);
+    font-size: var(--fs-h2);
     line-height: 1.1;
     letter-spacing: -0.02em;
     color: var(--ink);
@@ -66,7 +66,7 @@
     margin: 28px auto 0;
     padding: 0;
     color: var(--muted);
-    font-size: clamp(15px, 1.15vw, 17px);
+    font-size: var(--fs-lead);
     line-height: 1.7;
 }
 
@@ -84,9 +84,9 @@
 
 .sv-section-head h2 {
     margin: 0 0 12px;
-    font-family: "Google Sans Flex", sans-serif;
+    font-family: var(--font-sans);
     font-weight: 400;
-    font-size: clamp(26px, 3.2vw, 40px);
+    font-size: var(--fs-h2-section);
     line-height: 1.15;
     letter-spacing: -0.02em;
     color: var(--ink);
@@ -95,7 +95,7 @@
 .sv-section-head p {
     margin: 0;
     max-width: 70ch;
-    font-size: 16px;
+    font-size: var(--fs-body);
     line-height: 1.65;
     color: var(--muted);
 }
@@ -159,7 +159,7 @@
 .sv-support h3,
 .sv-app h3 {
     margin: 0;
-    font-size: 16px;
+    font-size: var(--fs-card-title-sm);
     font-weight: 600;
     line-height: 1.3;
     color: var(--ink);
@@ -172,7 +172,7 @@
 .sv-app p,
 .sv-stat span {
     margin: 0;
-    font-size: 14px;
+    font-size: var(--fs-body);
     line-height: 1.55;
     color: var(--muted);
 }
@@ -185,7 +185,7 @@
 }
 
 .sv-stat b {
-    font-size: clamp(20px, 3.2vw, 42px);
+    font-size: var(--fs-h2);
     font-weight: 400;
     letter-spacing: -0.03em;
     line-height: 1;
@@ -194,7 +194,7 @@
 
 .sv-stat span {
     max-width: 18ch;
-    font-size: clamp(11px, 1.1vw, 14px);
+    font-size: var(--fs-body);
 }
 
 .sv-app {
@@ -243,8 +243,8 @@
 
 .sv-lineup-heading {
     margin: 0 0 16px;
-    font-family: "Google Sans Flex", sans-serif;
-    font-size: clamp(22px, 2.4vw, 30px);
+    font-family: var(--font-sans);
+    font-size: var(--fs-h2-section);
     font-weight: 500;
     letter-spacing: -0.02em;
     color: var(--ink);
@@ -261,7 +261,7 @@
 .sv-feature-copy p {
     margin: 0;
     max-width: 46ch;
-    font-size: 16px;
+    font-size: var(--fs-body);
     line-height: 1.65;
     color: var(--muted);
 }
@@ -280,13 +280,13 @@
 }
 
 .sv-points b {
-    font-size: 14px;
+    font-size: var(--fs-body);
     font-weight: 600;
     color: var(--ink);
 }
 
 .sv-points span {
-    font-size: 14px;
+    font-size: var(--fs-body);
     line-height: 1.5;
     color: var(--muted);
 }
@@ -343,7 +343,7 @@
 .sv-page .spec-table th,
 .sv-page .spec-table td {
     padding: 10px 12px 10px 0;
-    font-size: 13px;
+    font-size: var(--fs-kicker);
     text-align: left;
     vertical-align: top;
 }
@@ -438,8 +438,8 @@
 
 .sv-cta h2 {
     margin: 0 0 12px;
-    font-family: "Google Sans Flex", sans-serif;
-    font-size: clamp(26px, 3.2vw, 36px);
+    font-family: var(--font-sans);
+    font-size: var(--fs-h2-section);
     font-weight: 400;
     letter-spacing: -0.02em;
     color: var(--ink);
@@ -448,7 +448,7 @@
 .sv-cta p {
     margin: 0 auto 24px;
     max-width: 640px;
-    font-size: 16px;
+    font-size: var(--fs-body);
     line-height: 1.6;
     color: var(--muted);
 }
@@ -551,7 +551,7 @@
 
     .sv-stat b {
         flex: 0 0 3.75rem;
-        font-size: 22px;
+        font-size: var(--fs-h3);
         text-align: right;
     }
 
@@ -586,7 +586,7 @@
 
     .sv-page .spec-table th,
     .sv-page .spec-table td {
-        font-size: 12px;
+        font-size: var(--fs-kicker);
         padding: 8px 10px 8px 0;
     }
 }

@@ -74,7 +74,7 @@ body.search-open .site-search {
   background: transparent;
   color: var(--ink);
   font-family: var(--font-sans);
-  font-size: 16px;
+  font-size: max(16px, var(--fs-body));
   font-weight: 400;
   line-height: 1.4;
   outline: none;
@@ -126,7 +126,7 @@ body.search-open .site-search {
 .site-search-empty {
   padding: 8px 0 4px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: var(--fs-kicker);
 }
 
 .site-search-item {
@@ -160,7 +160,7 @@ body.search-open .site-search {
 
 .site-search-item-name {
   display: block;
-  font-size: 14px;
+  font-size: var(--fs-body);
   font-weight: 500;
   line-height: 1.3;
   white-space: nowrap;
@@ -171,7 +171,7 @@ body.search-open .site-search {
 .site-search-item-meta {
   display: block;
   margin-top: 2px;
-  font-size: 12px;
+  font-size: var(--fs-kicker);
   color: var(--muted);
   white-space: nowrap;
   overflow: hidden;

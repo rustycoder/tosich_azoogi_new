@@ -53,7 +53,7 @@
     --fs-lead: clamp(15px, 1.2vw, 18px);
     --fs-h2: clamp(36px, 4.5vw, 64px);
     --fs-h2-section: clamp(28px, 3.2vw, 32px);
-    --fs-h3: clamp(22px, 2.4vw, 36px);
+    --fs-h3: clamp(22px, 2.4vw, 28px);
 
     --pure-bg: #0b0b0b;
     --pure-text: #ffffff;
@@ -102,6 +102,7 @@ body {
     background: var(--bg);
     color: var(--ink);
     font-family: var(--font-sans);
+    font-size: var(--fs-body);
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     /* visible required — overflow-x:hidden breaks position:sticky stacking cards */
@@ -225,7 +226,7 @@ h3 {
 }
 
 .util {
-    font-size: 12px;
+    font-size: var(--fs-kicker);
     color: #fff;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -310,7 +311,7 @@ h3 {
 }
 
 .logo {
-    font-family: "Google Sans Flex", sans-serif;
+    font-family: var(--font-sans);
     font-size: 32px;
     font-weight: 500;
     letter-spacing: 0.18em;
@@ -336,7 +337,7 @@ h3 {
 .menu {
     display: flex;
     gap: 24px;
-    font-size: 12px;
+    font-size: var(--fs-kicker);
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -455,7 +456,7 @@ h3 {
 }
 
 .scroll-indicator {
-    font-size: 11px;
+    font-size: var(--fs-caption);
     color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -497,8 +498,8 @@ h3 {
     background: none;
     border: none;
     color: var(--muted);
-    font-family: "Google Sans Flex", sans-serif;
-    font-size: 13px;
+    font-family: var(--font-sans);
+    font-size: var(--fs-kicker);
     padding: 12px 24px;
     cursor: pointer;
     transition: all 0.2s;
@@ -558,8 +559,8 @@ h3 {
 }
 
 .mega-panel-title {
-    font-family: "Google Sans Flex", sans-serif;
-    font-size: 13px;
+    font-family: var(--font-sans);
+    font-size: var(--fs-kicker);
     font-weight: 600;
     color: var(--accent);
     margin: 0;
@@ -568,7 +569,7 @@ h3 {
 }
 
 .mega-panel-header .view-all-btn {
-    font-size: 12px;
+    font-size: var(--fs-kicker);
     color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -611,8 +612,8 @@ h3 {
 }
 
 .subcategory-header h5 {
-    font-family: "Google Sans Flex", sans-serif;
-    font-size: 13px;
+    font-family: var(--font-sans);
+    font-size: var(--fs-kicker);
     font-weight: 500;
     color: var(--pure-text);
     margin: 0;
@@ -621,7 +622,7 @@ h3 {
 .subcategory-header .view-all-link {
     display: none;
     /* removed per user request */
-    font-size: 11px;
+    font-size: var(--fs-caption);
     color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -669,7 +670,7 @@ h3 {
     position: absolute;
     bottom: 6px;
     left: 8px;
-    font-size: 10px;
+    font-size: var(--fs-caption);
     color: var(--pure-text);
     font-weight: 500;
     letter-spacing: 0.05em;
@@ -687,7 +688,7 @@ h3 {
     border-radius: 4px;
     color: var(--pure-bg);
     text-transform: uppercase;
-    font-size: 10px;
+    font-size: var(--fs-caption);
     letter-spacing: 0.05em;
     padding: 12px;
     transition: all 0.2s;
@@ -718,7 +719,7 @@ h3 {
 
 .mega-footer a {
     color: var(--accent);
-    font-size: 12px;
+    font-size: var(--fs-kicker);
     letter-spacing: 0.1em;
 }
 
@@ -744,7 +745,7 @@ h3 {
 
 .cta {
     color: var(--nav-text);
-    font-size: 12px;
+    font-size: var(--fs-kicker);
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -771,7 +772,7 @@ h3 {
   padding: 8px 16px;
   border: 1px solid var(--nav-text);
   color: var(--nav-text);
-  font-size: 12px;
+  font-size: var(--fs-kicker);
   text-transform: uppercase;
   letter-spacing: .12em;
   transition: all .3s;
@@ -994,9 +995,9 @@ body.nav-open .nav-overlay {
 }
 
 .slide-title {
-    font-family: "Google Sans Flex", sans-serif;
+    font-family: var(--font-sans);
     font-weight: 400;
-    font-size: clamp(40px, 6.5vw, 96px);
+    font-size: var(--fs-h2);
     line-height: 1.02;
     max-width: 1100px;
     opacity: 0;
@@ -1052,7 +1053,7 @@ body.nav-open .nav-overlay {
 
 .btn {
     padding: 14px 28px;
-    font-size: 13px;
+    font-size: var(--fs-kicker);
     text-transform: uppercase;
     border: 1px solid var(--accent-2);
     color: var(--pure-text);
@@ -1119,14 +1120,14 @@ body.nav-open .nav-overlay {
 
 .counter {
     color: var(--always-white);
-    font-size: 12px;
+    font-size: var(--fs-kicker);
     letter-spacing: 0.2em;
     min-width: 60px;
     text-align: right;
 }
 
 .counter b {
-    font-size: 14px;
+    font-size: var(--fs-body);
 }
 
 .counter span {
@@ -1146,7 +1147,7 @@ body.nav-open .nav-overlay {
 }
 
 .breadcrumbs {
-    font-size: 11px;
+    font-size: var(--fs-caption);
     text-transform: uppercase;
     color: var(--muted);
     margin-top: 10px;
@@ -1231,7 +1232,7 @@ section {
 .audience a {
     padding: 14px 26px;
     border: 1px solid var(--line);
-    font-size: 13px;
+    font-size: var(--fs-kicker);
     text-transform: uppercase;
     letter-spacing: 0.14em;
     transition: all 0.35s;
@@ -1335,22 +1336,22 @@ section {
 }
 
 .value-grid .value .n {
-    font-family: "Google Sans Flex", sans-serif;
+    font-family: var(--font-sans);
     color: var(--accent);
-    font-size: 22px;
+    font-size: var(--fs-h3);
     margin-bottom: 30px;
 }
 
 .value-grid .value h3 {
-    font-family: "Google Sans Flex", sans-serif;
+    font-family: var(--font-sans);
     font-weight: 500;
-    font-size: 26px;
+    font-size: var(--fs-h3);
     margin-bottom: 14px;
 }
 
 .value-grid .value p {
     color: var(--muted);
-    font-size: 14.5px;
+    font-size: var(--fs-body);
     line-height: 1.7;
 }
 
@@ -1475,7 +1476,7 @@ section {
 .marquee .card h4 {
     font-family: var(--font-sans);
     font-weight: 500;
-    font-size: clamp(13px, 1.2vw, 17px);
+    font-size: var(--fs-card-title-sm);
     letter-spacing: -0.01em;
     margin-bottom: 6px;
     color: var(--ink);
@@ -1483,7 +1484,7 @@ section {
 
 .marquee .card p {
     color: var(--muted);
-    font-size: clamp(11px, 0.95vw, 13px);
+    font-size: var(--fs-kicker);
     line-height: 1.45;
     margin-bottom: 12px;
     flex: 1;
@@ -1495,7 +1496,7 @@ section {
 }
 
 .marquee .card .more {
-    font-size: 11px;
+    font-size: var(--fs-caption);
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--accent);
@@ -1548,8 +1549,8 @@ section {
 }
 
 .sidebar-header h3 {
-    font-family: "Google Sans Flex", sans-serif;
-    font-size: 22px;
+    font-family: var(--font-sans);
+    font-size: var(--fs-h3);
     margin: 0;
 }
 
@@ -1558,7 +1559,7 @@ section {
     background: none;
     border: none;
     color: var(--pure-text);
-    font-size: 24px;
+    font-size: var(--fs-h3);
     cursor: pointer;
     padding: 0;
 }
@@ -1575,7 +1576,7 @@ section {
 .category-list a {
     text-decoration: none;
     color: var(--muted);
-    font-size: 14px;
+    font-size: var(--fs-body);
     transition: color 0.3s;
 }
 
@@ -1612,7 +1613,7 @@ section {
     background: var(--bg-2);
     border: 1px solid var(--line);
     border-radius: 20px;
-    font-size: 13px;
+    font-size: var(--fs-kicker);
     color: var(--pure-text);
     white-space: nowrap;
     cursor: pointer;
@@ -1668,7 +1669,7 @@ section {
 }
 
 .compact-card h4 {
-    font-size: 14px;
+    font-size: var(--fs-card-title-sm);
     margin: 0 0 8px;
     color: var(--pure-text);
     font-weight: 600;
@@ -1679,7 +1680,7 @@ section {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    font-size: 11px;
+    font-size: var(--fs-caption);
     color: var(--muted);
     margin-bottom: auto;
 }
@@ -1695,7 +1696,7 @@ section {
 
 .btn-sm {
     padding: 8px 12px;
-    font-size: 11px;
+    font-size: var(--fs-kicker);
     border-radius: 4px;
     width: 100%;
     text-align: center;
@@ -1852,7 +1853,7 @@ section {
 }
 
 .pp-view-all {
-    font-size: 10px;
+    font-size: var(--fs-caption);
     text-align: center;
     line-height: 1.2;
     font-weight: 500;
@@ -1918,7 +1919,7 @@ section {
 
 .stat .num {
     font-family: var(--font-sans);
-    font-size: clamp(36px, 5vw, 72px);
+    font-size: var(--fs-h2);
     color: var(--accent);
     font-weight: 400;
     line-height: 1;
@@ -1926,7 +1927,7 @@ section {
 
 .stat .lbl {
     margin-top: 12px;
-    font-size: 12px;
+    font-size: var(--fs-kicker);
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: #ccc;
@@ -1960,7 +1961,7 @@ footer {
 }
 
 .foot h5 {
-    font-size: 12px;
+    font-size: var(--fs-kicker);
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--pure-text);
@@ -1970,7 +1971,7 @@ footer {
 .foot a {
     display: block;
     color: var(--muted);
-    font-size: 14px;
+    font-size: var(--fs-body);
     padding: 6px 0;
     transition: color 0.3s;
 }
@@ -1981,7 +1982,7 @@ footer {
 
 .foot p {
     color: var(--muted);
-    font-size: 14px;
+    font-size: var(--fs-body);
     margin-top: 18px;
     line-height: 1.7;
 }
@@ -2022,7 +2023,7 @@ footer {
     display: flex;
     justify-content: space-between;
     color: var(--muted);
-    font-size: 12px;
+    font-size: var(--fs-kicker);
 }
 
 .copy-links {
@@ -2069,7 +2070,7 @@ footer {
 
     .nav>.cta {
         margin-left: auto;
-        font-size: 11px;
+        font-size: var(--fs-caption);
     }
 
     .menu.mobile-drawer > a.mobile-cta {
@@ -2131,7 +2132,7 @@ footer {
     }
 
     .mobile-nav-kicker {
-        font-size: 11px;
+        font-size: var(--fs-caption);
         font-weight: 600;
         letter-spacing: 0.18em;
         text-transform: uppercase;
@@ -2139,7 +2140,7 @@ footer {
     }
 
     .mobile-nav-title {
-        font-size: 22px;
+        font-size: var(--fs-h3);
         font-weight: 500;
         letter-spacing: -0.02em;
         color: var(--ink);
@@ -2194,7 +2195,7 @@ footer {
         align-items: center;
         justify-content: space-between;
         padding: 16px 20px;
-        font-size: 15px;
+        font-size: var(--fs-body);
         font-weight: 500;
         letter-spacing: 0.06em;
         text-transform: uppercase;
@@ -2278,7 +2279,7 @@ footer {
         color: var(--ink) !important;
         text-transform: none !important;
         letter-spacing: 0 !important;
-        font-size: 14px !important;
+        font-size: var(--fs-body) !important;
         font-weight: 500;
         transition:
             background 0.2s ease,
@@ -2291,7 +2292,7 @@ footer {
     }
 
     .mobile-util-label {
-        font-size: 10px;
+        font-size: var(--fs-caption);
         font-weight: 600;
         letter-spacing: 0.14em;
         text-transform: uppercase;
@@ -2299,7 +2300,7 @@ footer {
     }
 
     .mobile-util-value {
-        font-size: 14px;
+        font-size: var(--fs-body);
         color: var(--ink);
         word-break: break-word;
     }
@@ -2377,7 +2378,7 @@ footer {
     }
 
     .menu.mobile-drawer[data-nav-style="c"] .mobile-nav-title {
-        font-size: 34px;
+        font-size: var(--fs-h2-section);
         font-weight: 400;
         letter-spacing: -0.03em;
     }
@@ -2391,7 +2392,7 @@ footer {
     .menu.mobile-drawer[data-nav-style="c"]>a,
     .menu.mobile-drawer[data-nav-style="c"] .has-dropdown>a {
         padding: 18px 22px;
-        font-size: 18px;
+        font-size: var(--fs-body);
         font-weight: 400;
         letter-spacing: -0.01em;
         text-transform: none;
@@ -2713,12 +2714,12 @@ aside p {
     }
 
     .card__content>div h2 {
-        font-size: clamp(22px, 5.5vw, 30px);
+        font-size: var(--fs-h3);
         line-height: 1.2;
     }
 
     .card__content>div p {
-        font-size: 14px;
+        font-size: var(--fs-body);
         line-height: 1.55;
     }
 }
@@ -2748,7 +2749,7 @@ aside p {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-size: 12px;
+    font-size: var(--fs-kicker);
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--accent);
@@ -2763,12 +2764,12 @@ aside p {
 }
 
 .cityscape h2 {
-    font-size: clamp(28px, 4vw, 52px);
+    font-size: var(--fs-h2-section);
     line-height: 1.05;
     margin: 14px 0 0;
     letter-spacing: -0.02em;
     font-weight: 400;
-    font-family: "Google Sans Flex", sans-serif;
+    font-family: var(--font-sans);
 }
 
 .cityscape h2 em {
@@ -2780,7 +2781,7 @@ aside p {
     color: var(--muted);
     max-width: 460px;
     margin: 0;
-    font-size: 15px;
+    font-size: var(--fs-lead);
     line-height: 1.65;
 }
 
@@ -2923,7 +2924,7 @@ aside p {
 }
 
 .tip .code {
-    font-size: 11px;
+    font-size: var(--fs-caption);
     letter-spacing: 0.18em;
     color: var(--accent);
     text-transform: uppercase;
@@ -2931,7 +2932,7 @@ aside p {
 }
 
 .tip .name {
-    font-size: 13px;
+    font-size: var(--fs-kicker);
     line-height: 1.35;
     margin: 4px 0 0;
     color: var(--pure-text);
@@ -2943,7 +2944,7 @@ aside p {
 }
 
 .tip .meta {
-    font-size: 11px;
+    font-size: var(--fs-caption);
     color: var(--muted);
     margin-top: 6px;
 }
@@ -2978,7 +2979,7 @@ aside p {
     gap: 18px;
     align-items: center;
     color: var(--always-white);
-    font-size: 13px;
+    font-size: var(--fs-kicker);
     flex-wrap: wrap;
     position: absolute;
     top: 20px;
@@ -3084,8 +3085,8 @@ aside p {
     background: none;
     border: none;
     color: var(--muted);
-    font-family: "Google Sans Flex", sans-serif;
-    font-size: 13px;
+    font-family: var(--font-sans);
+    font-size: var(--fs-kicker);
     padding: 12px 24px;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -3154,8 +3155,8 @@ aside p {
 }
 
 .mega-product-row-title {
-    font-family: "Google Sans Flex", sans-serif;
-    font-size: 12px;
+    font-family: var(--font-sans);
+    font-size: var(--fs-kicker);
     font-weight: 600;
     color: var(--pure-text);
     margin-bottom: 16px;
@@ -3261,8 +3262,8 @@ a.mega-variant-card:after {
 }
 
 .mega-variant-name {
-    font-family: "Google Sans Flex", sans-serif;
-    font-size: 11px;
+    font-family: var(--font-sans);
+    font-size: var(--fs-caption);
     font-weight: 400;
     color: #111111 !important;
     white-space: pre-line;
@@ -3274,8 +3275,8 @@ a.mega-variant-card:after {
 
 .mega-variant-code {
     display: block;
-    font-family: "Google Sans Flex", sans-serif;
-    font-size: 9px;
+    font-family: var(--font-sans);
+    font-size: var(--fs-caption);
     color: var(--accent) !important;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -3287,8 +3288,8 @@ a.mega-variant-card:after {
 }
 
 .mega-variant-specs {
-    font-family: "Google Sans Flex", sans-serif;
-    font-size: 10px;
+    font-family: var(--font-sans);
+    font-size: var(--fs-caption);
     color: var(--muted);
     white-space: nowrap;
     overflow: hidden;
@@ -3305,8 +3306,8 @@ a.mega-variant-card:after {
     background: transparent;
     border: 1px solid var(--accent);
     color: var(--accent);
-    font-family: "Google Sans Flex", sans-serif;
-    font-size: 12px;
+    font-family: var(--font-sans);
+    font-size: var(--fs-kicker);
     font-weight: 500;
     text-decoration: none;
     border-radius: 4px;
@@ -3393,7 +3394,7 @@ a.mega-variant-card:after {
 }
 
 .mega-accordion-title {
-    font-size: 12px;
+    font-size: var(--fs-kicker);
     font-weight: 600;
     color: var(--ink);
     letter-spacing: 0.02em;
@@ -3426,7 +3427,7 @@ a.mega-variant-card:after {
     border-bottom: 1px solid var(--border-light);
     padding: 5px 15px;
     font-weight: 400;
-    font-size: 11px;
+    font-size: var(--fs-caption);
 }
 
 .mega-accordion-group.open .mega-accordion-title {
@@ -3460,16 +3461,16 @@ a.mega-variant-card:after {
 }
 
 .mega-variant-product {
-    font-family: "Google Sans Flex", sans-serif;
-    font-size: 10px;
+    font-family: var(--font-sans);
+    font-size: var(--fs-caption);
     font-weight: 600;
     color: var(--accent);
     margin-top: 1px;
 }
 
 .mega-product-subfolder-title {
-    font-family: "Google Sans Flex", sans-serif;
-    font-size: 13px;
+    font-family: var(--font-sans);
+    font-size: var(--fs-kicker);
     font-weight: 600;
     color: var(--muted);
     text-transform: uppercase;
@@ -3565,7 +3566,7 @@ a.mega-variant-card:after {
 
 .contact-title {
     margin: 0 0 16px;
-    font-size: clamp(22px, 2.6vw, 36px);
+    font-size: var(--fs-h2);
     line-height: 1.15;
     color: #fff;
 }
@@ -3581,7 +3582,7 @@ a.mega-variant-card:after {
 }
 
 .contact-lead {
-    font-size: 17px;
+    font-size: var(--fs-lead);
     font-weight: 400;
     line-height: 1.55;
     color: rgba(255, 255, 255, 0.78);
@@ -3600,7 +3601,7 @@ a.mega-variant-card:after {
 }
 
 .contact-form label {
-    font-size: 12px;
+    font-size: var(--fs-kicker);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     font-weight: 500;
@@ -3615,7 +3616,7 @@ a.mega-variant-card:after {
     color: #fff;
     padding: 14px 16px;
     font: inherit;
-    font-size: 15px;
+    font-size: max(16px, var(--fs-body));
     font-weight: 400;
     border-radius: 4px;
     outline: none;
@@ -3673,7 +3674,7 @@ a.mega-variant-card:after {
 }
 
 .form-status {
-    font-size: 14px;
+    font-size: var(--fs-body);
     font-weight: 400;
     margin-top: 8px;
     padding-bottom: 0;
@@ -3713,7 +3714,7 @@ a.mega-variant-card:after {
     margin: 0 0 10px;
     padding: 0;
     color: rgba(255, 255, 255, 0.88);
-    font-size: 13px;
+    font-size: var(--fs-kicker);
     line-height: 1.65;
 }
 
@@ -3723,7 +3724,7 @@ a.mega-variant-card:after {
 
 .contact-international .green-title {
     color: #8cc63f;
-    font-size: 15px;
+    font-size: var(--fs-body);
     font-weight: 500;
 }
 
@@ -3745,7 +3746,7 @@ a.mega-variant-card:after {
 }
 
 .contact-info-panel .info-label {
-    font-size: 17px;
+    font-size: var(--fs-body);
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -3755,7 +3756,7 @@ a.mega-variant-card:after {
 }
 
 .contact-info-panel .info-block p {
-    font-size: 17px;
+    font-size: var(--fs-body);
     font-weight: 400;
     line-height: 1.55;
     color: #fff;
@@ -3789,7 +3790,7 @@ a.mega-variant-card:after {
 }
 
 .info-label {
-    font-size: 12px;
+    font-size: var(--fs-kicker);
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -3799,7 +3800,7 @@ a.mega-variant-card:after {
 }
 
 .info-block p {
-    font-size: 17px;
+    font-size: var(--fs-body);
     font-weight: 400;
     line-height: 1.55;
     color: var(--ink);
@@ -3880,7 +3881,7 @@ a.mega-variant-card:after {
     }
 
     .contact-title {
-        font-size: clamp(20px, 5.6vw, 28px);
+        font-size: var(--fs-h2);
     }
 
     .contact-info-panel {
@@ -3901,7 +3902,7 @@ a.mega-variant-card:after {
 
 .site-toast {
     font-family: var(--font-sans);
-    font-size: 14px;
+    font-size: var(--fs-body);
     font-weight: 500;
     line-height: 1.45;
     color: var(--pure-bg);

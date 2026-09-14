@@ -3,13 +3,13 @@
 .ai-main {
   background: var(--bg);
   color: var(--ink);
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: var(--font-sans);
 }
 
 
 .ai-num {
   display: block;
-  font-size: 12px;
+  font-size: var(--fs-kicker);
   font-weight: 600;
   letter-spacing: .14em;
   color: var(--accent);
@@ -69,7 +69,7 @@
 .ai-hero-copy h1 {
   margin: 0 0 12px;
   max-width: 14ch;
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: var(--font-sans);
   font-weight: 400;
   font-size: var(--fs-h2);
   line-height: 1.02;
@@ -84,7 +84,7 @@
 .ai-hero-copy p {
   margin: 0;
   max-width: 36ch;
-  font-size: 16px;
+  font-size: var(--fs-lead);
   line-height: 1.45;
   color: rgba(255, 255, 255, 0.78);
 }
@@ -116,9 +116,9 @@
 
 .ai-split-copy h2 {
   margin: 0 0 14px;
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: var(--font-sans);
   font-weight: 400;
-  font-size: clamp(26px, 3.2vw, 38px);
+  font-size: var(--fs-h2-section);
   line-height: 1.1;
   letter-spacing: -.02em;
   color: var(--ink);
@@ -131,7 +131,7 @@
 .ai-split-copy p {
   margin: 0;
   max-width: 38ch;
-  font-size: 15px;
+  font-size: var(--fs-body);
   line-height: 1.55;
   color: var(--muted);
 }
@@ -161,7 +161,7 @@
 
 .ai-caps h3 {
   margin: 0;
-  font-size: 15px;
+  font-size: var(--fs-card-title-sm);
   font-weight: 600;
   line-height: 1.3;
   color: var(--ink);
@@ -181,9 +181,9 @@
 
 .ai-feature-copy h2 {
   margin: 0 0 12px;
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: var(--font-sans);
   font-weight: 400;
-  font-size: clamp(26px, 3.2vw, 38px);
+  font-size: var(--fs-h2-section);
   line-height: 1.1;
   letter-spacing: -.02em;
   color: var(--ink);
@@ -195,7 +195,7 @@
 
 .ai-feature-copy > p {
   margin: 0 0 16px;
-  font-size: 15px;
+  font-size: var(--fs-body);
   line-height: 1.55;
   color: var(--muted);
   max-width: 40ch;
@@ -212,7 +212,7 @@
 .ai-ticks li {
   position: relative;
   padding-left: 18px;
-  font-size: 14px;
+  font-size: var(--fs-body);
   font-weight: 600;
   color: var(--ink);
 }
@@ -255,7 +255,7 @@
   bottom: 10px;
   margin: 0;
   padding: 5px 10px;
-  font-size: 12px;
+  font-size: var(--fs-caption);
   font-weight: 600;
   letter-spacing: .04em;
   text-transform: uppercase;
@@ -283,9 +283,9 @@
 
 .ai-row-head h2 {
   margin: 0;
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: var(--font-sans);
   font-weight: 400;
-  font-size: clamp(26px, 3.2vw, 38px);
+  font-size: var(--fs-h2-section);
   line-height: 1.1;
   letter-spacing: -.02em;
   color: var(--ink);
@@ -297,7 +297,7 @@
 
 .ai-row-head > p {
   margin: 0;
-  font-size: 15px;
+  font-size: var(--fs-body);
   line-height: 1.55;
   color: var(--muted);
   max-width: 42ch;
@@ -345,9 +345,9 @@
 }
 
 .ai-insights .card__content > div h2 {
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: var(--font-sans);
   font-weight: 400;
-  font-size: clamp(26px, 2.8vw, 40px);
+  font-size: var(--fs-h2-section);
   line-height: 1.15;
   margin: 0;
   color: var(--ink);
@@ -355,7 +355,7 @@
 
 .ai-insights .card__content > div p {
   margin: 0;
-  font-size: 15px;
+  font-size: var(--fs-body);
   line-height: 1.6;
   color: var(--muted);
 }
@@ -399,9 +399,9 @@
 
 .ai-app-copy h2 {
   margin: 0 0 12px;
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: var(--font-sans);
   font-weight: 400;
-  font-size: clamp(26px, 3.2vw, 38px);
+  font-size: var(--fs-h2-section);
   line-height: 1.1;
   letter-spacing: -.02em;
   color: var(--ink);
@@ -413,7 +413,7 @@
 
 .ai-app-copy > p {
   margin: 0 0 22px;
-  font-size: 15px;
+  font-size: var(--fs-body);
   line-height: 1.55;
   color: var(--muted);
   max-width: 36ch;
@@ -439,7 +439,7 @@
 
 .ai-app-qr p {
   margin: 0;
-  font-size: 14px;
+  font-size: var(--fs-body);
   line-height: 1.5;
   color: var(--muted);
 }
@@ -494,9 +494,9 @@
 
 .ai-cct-inner h2 {
   margin: 0 0 12px;
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: var(--font-sans);
   font-weight: 400;
-  font-size: clamp(26px, 3.2vw, 38px);
+  font-size: var(--fs-h2-section);
   line-height: 1.1;
   letter-spacing: -.02em;
   color: #fff;
@@ -508,7 +508,7 @@
 
 .ai-cct-inner p {
   margin: 0;
-  font-size: 15px;
+  font-size: var(--fs-body);
   line-height: 1.55;
   color: rgba(255, 255, 255, 0.82);
 }
@@ -581,7 +581,7 @@
 
 .ai-acc-btn h3 {
   margin: 0;
-  font-size: 16px;
+  font-size: var(--fs-card-title-sm);
   font-weight: 600;
 }
 
@@ -607,7 +607,7 @@
   display: none;
   padding: 0 0 16px 36px;
   color: var(--muted);
-  font-size: 14px;
+  font-size: var(--fs-body);
   line-height: 1.55;
 }
 
@@ -665,8 +665,8 @@
 
 .ai-cta-copy h3 {
   margin: 0 0 4px;
-  font-family: "Google Sans Flex", sans-serif;
-  font-size: 14px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-card-title-sm);
   font-weight: 600;
   letter-spacing: .06em;
   text-transform: uppercase;
@@ -676,7 +676,7 @@
 
 .ai-cta-copy p {
   margin: 0;
-  font-size: 14px;
+  font-size: var(--fs-body);
   line-height: 1.45;
   color: var(--muted);
 }

@@ -116,7 +116,7 @@ body.quote-open .quote-drawer {
 .quote-drawer-head h2 {
   margin: 0;
   font-family: var(--font-sans);
-  font-size: var(--fs-body);
+  font-size: var(--fs-h2-section);
   font-weight: 500;
   line-height: 1.2;
 }
@@ -189,7 +189,7 @@ body.quote-open .quote-drawer {
 .quote-item-sku {
   display: block;
   margin-top: 4px;
-  font-size: 12px;
+  font-size: var(--fs-kicker);
   color: var(--muted);
   letter-spacing: .04em;
 }
@@ -225,7 +225,7 @@ body.quote-open .quote-drawer {
 .quote-qty span {
   min-width: 22px;
   text-align: center;
-  font-size: 13px;
+  font-size: var(--fs-kicker);
 }
 
 .quote-item-remove {
@@ -299,7 +299,7 @@ body.quote-open .quote-drawer {
 .quote-page-intro h1 {
   margin: 0 0 10px;
   font-family: var(--font-sans);
-  font-size: var(--fs-h2-section);
+  font-size: var(--fs-h2);
   font-weight: 500;
   line-height: 1.15;
 }
@@ -368,7 +368,7 @@ body.quote-open .quote-drawer {
 .quote-page-item-sku {
   display: block;
   margin-top: 4px;
-  font-size: 13px;
+  font-size: var(--fs-kicker);
   color: var(--muted);
 }
 
@@ -415,7 +415,7 @@ body.quote-open .quote-drawer {
 }
 
 .quote-form label {
-  font-size: 12px;
+  font-size: var(--fs-kicker);
   letter-spacing: .08em;
   text-transform: uppercase;
   font-weight: 500;
@@ -438,7 +438,7 @@ body.quote-open .quote-drawer {
   gap: 10px;
   text-transform: none;
   letter-spacing: 0;
-  font-size: 15px;
+  font-size: var(--fs-kicker);
   font-weight: 400;
   color: var(--ink);
   cursor: pointer;
@@ -462,7 +462,7 @@ body.quote-open .quote-drawer {
   color: var(--ink);
   padding: 14px 16px;
   font: inherit;
-  font-size: 15px;
+  font-size: max(16px, var(--fs-body));
   border-radius: 4px;
   outline: none;
   transition: border-color .25s ease, box-shadow .25s ease;
@@ -486,7 +486,7 @@ body.quote-open .quote-drawer {
 }
 
 .quote-form-note {
-  font-size: 13px;
+  font-size: var(--fs-kicker);
   color: var(--muted);
   padding-bottom: 0;
 }
