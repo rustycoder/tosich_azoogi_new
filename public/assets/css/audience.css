@@ -58,6 +58,10 @@
   padding-bottom: calc(var(--section-y) + 16px);
 }
 
+.audience-page {
+  --card-height: min(72svh, 600px);
+}
+
 .audience-page #cards {
   padding-top: 0;
   margin-top: 0;
@@ -124,6 +128,7 @@
 
 .audience-cards .card__content > figure {
   grid-area: img;
+  display: block;
   margin: 0;
   overflow: hidden;
   min-height: 0;
@@ -149,6 +154,10 @@
 }
 
 @media (max-width: 720px) {
+  .audience-page {
+    --card-height: min(70svh, 520px);
+  }
+
   .audience-cards-wrap {
     padding-bottom: calc(var(--section-y) + 16px);
   }

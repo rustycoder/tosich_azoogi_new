@@ -126,7 +126,7 @@ class HomeHeroTest extends TestCase
             $css,
         );
         $this->assertMatchesRegularExpression(
-            '/\.card__content>div\s*\{[^}]*align-content:\s*center/s',
+            '/\.card__content>div\s*\{[^}]*align-content:\s*start/s',
             $css,
         );
         $this->assertDoesNotMatchRegularExpression(

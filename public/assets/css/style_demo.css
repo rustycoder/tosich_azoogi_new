@@ -2618,10 +2618,10 @@ footer {
 
 .card__content>div {
     grid-area: text;
-    width: auto;
-    max-width: 42ch;
+    width: 100%;
+    max-width: none;
     place-self: stretch;
-    align-content: center;
+    align-content: start;
     text-align: left;
     padding: clamp(24px, 3vw, 36px);
     box-sizing: border-box;

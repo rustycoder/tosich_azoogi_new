@@ -254,6 +254,14 @@ class PageTest extends TestCase
             '/\.audience-page #cards\s*\{[^}]*padding-top:\s*0/s',
             $css,
         );
+        $this->assertMatchesRegularExpression(
+            '/\.audience-page\s*\{[^}]*--card-height:\s*min\(72svh,\s*600px\)/s',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.audience-page\s*\{[^}]*--card-height:\s*min\(48svh,\s*400px\)/s',
+            $css,
+        );
 
         $this->get('/electrician-builder')
             ->assertOk()
