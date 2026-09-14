@@ -38,7 +38,7 @@ class DashboardTest extends TestCase
 
         $this->actingAs($admin)->get('/dashboard')->assertOk();
         $this->actingAs($admin)->get('/dashboard/staff')->assertOk();
-        $this->actingAs($admin)->get('/dashboard/content/pages')->assertOk()->assertSee('Home', false);
+        $this->actingAs($admin)->get('/dashboard/content/pages')->assertOk()->assertSee('Home', false)->assertSee('LED Calculator', false);
         $this->actingAs($admin)->get('/dashboard/content/pages/home')->assertOk();
         $this->actingAs($admin)->get('/dashboard/content/pages/home-owner')->assertOk();
         $this->actingAs($admin)->get('/dashboard/content/sections')->assertOk()->assertSee('Header', false)->assertSee('Footer', false)->assertSee('top of every public page', false)->assertSee('bottom of every public page', false);

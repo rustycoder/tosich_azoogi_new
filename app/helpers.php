@@ -103,18 +103,18 @@ if (! function_exists('accent_html')) {
     function accent_html(string $text, string $accent = ''): string
     {
         if ($accent === '') {
-            return e($text);
+            $html = e($text);
+        } else {
+            $position = strpos($text, $accent);
+
+            $html = $position === false
+                ? e($text)
+                : e(substr($text, 0, $position))
+                    .'<span>'.e($accent).'</span>'
+                    .e(substr($text, $position + strlen($accent)));
         }
 
-        $position = strpos($text, $accent);
-
-        if ($position === false) {
-            return e($text);
-        }
-
-        return e(substr($text, 0, $position))
-            .'<span>'.e($accent).'</span>'
-            .e(substr($text, $position + strlen($accent)));
+        return str_replace(["\r\n", "\n", "\r"], '<br>', $html);
     }
 }
 

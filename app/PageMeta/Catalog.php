@@ -14,6 +14,7 @@ use App\PageMeta\Definitions\FooterDefinition;
 use App\PageMeta\Definitions\HeaderDefinition;
 use App\PageMeta\Definitions\HomeDefinition;
 use App\PageMeta\Definitions\HomeOwnerDefinition;
+use App\PageMeta\Definitions\LedCalculatorDefinition;
 use App\PageMeta\Definitions\MadrixDefinition;
 use App\PageMeta\Definitions\ModernSlaveryDefinition;
 use App\PageMeta\Definitions\PrivacyDefinition;
@@ -43,6 +44,7 @@ final class Catalog
         'data-centre' => DataCentreDefinition::class,
         'contact' => ContactDefinition::class,
         'projects' => ProjectsDefinition::class,
+        'led-strip-calculator' => LedCalculatorDefinition::class,
         'request-a-quote' => QuoteRequestDefinition::class,
         'home-owner' => HomeOwnerDefinition::class,
         'architect-designer' => ArchitectDesignerDefinition::class,

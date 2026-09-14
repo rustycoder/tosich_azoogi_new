@@ -26,6 +26,7 @@ enum ContentResource: string
     case Footer = 'footer';
     case RequestAQuote = 'request-a-quote';
     case Projects = 'projects';
+    case LedCalculator = 'led-strip-calculator';
     case Products = 'products';
     case Datasheet = 'datasheet';
     case QuoteEnquiries = 'quote-enquiries';
@@ -57,6 +58,7 @@ enum ContentResource: string
             self::Footer => 'Footer',
             self::RequestAQuote => 'Request a Quote',
             self::Projects => 'Projects',
+            self::LedCalculator => 'LED Calculator',
             self::Products => 'Products',
             self::Datasheet => 'Datasheet',
             self::QuoteEnquiries => 'Quote Enquiries',

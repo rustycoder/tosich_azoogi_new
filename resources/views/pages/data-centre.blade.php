@@ -32,7 +32,7 @@
       </video>
     </div>
     <div class="dc-hero-copy">
-      <h1{!! cms_style($meta, 'hero.title') !!}>{!! nl2br_html($meta->get('hero.title'), true) !!}</h1>
+      <h1{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
       <p{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
     </div>
   </section>
@@ -51,7 +51,7 @@
   <section class="dc-band dc-band--alt" {!! cms_section_attr('why') !!}>
     <div class="wrap">
       <div class="dc-section-head reveal">
-        <h2{!! cms_style($meta, 'why.heading') !!}>{!! nl2br_html($meta->get('why.heading'), true) !!}</h2>
+        <h2{!! cms_style($meta, 'why.heading') !!}>{!! accent_html($meta->get('why.heading'), $meta->get('why.heading_accent')) !!}</h2>
         <p{!! cms_style($meta, 'why.body') !!}>{{ $meta->get('why.body') }}</p>
       </div>
       <ol class="dc-caps">
@@ -69,7 +69,7 @@
   <section class="dc-band dc-band--feature">
     <div class="wrap dc-feature" {!! cms_section_attr('hardware') !!}>
       <div class="dc-feature-copy reveal">
-        <h2{!! cms_style($meta, 'hardware.heading') !!}>{!! accent_html($meta->get('hardware.heading'), 'Data Hall Conditions') !!}</h2>
+        <h2{!! cms_style($meta, 'hardware.heading') !!}>{!! accent_html($meta->get('hardware.heading'), $meta->get('hardware.heading_accent')) !!}</h2>
         <ul class="dc-ticks">
           @foreach ($hardwareTicks as $tick)
             <li{!! cms_style($meta, 'hardware.tick', $loop->index) !!}>{!! labelled_tick($tick) !!}</li>
@@ -89,7 +89,7 @@
   <section class="dc-band dc-band--alt dc-band--feature">
     <div class="wrap dc-feature dc-feature--flip" {!! cms_section_attr('control') !!}>
       <div class="dc-feature-copy reveal">
-        <h2{!! cms_style($meta, 'control.heading') !!}>{!! accent_html($meta->get('control.heading'), 'Building Automation') !!}</h2>
+        <h2{!! cms_style($meta, 'control.heading') !!}>{!! accent_html($meta->get('control.heading'), $meta->get('control.heading_accent')) !!}</h2>
         <ul class="dc-ticks">
           @foreach ($controlTicks as $tick)
             <li{!! cms_style($meta, 'control.tick', $loop->index) !!}>{!! labelled_tick($tick) !!}</li>
@@ -109,7 +109,7 @@
   <section class="dc-band dc-band--feature">
     <div class="wrap dc-feature" {!! cms_section_attr('emergency') !!}>
       <div class="dc-feature-copy reveal">
-        <h2{!! cms_style($meta, 'emergency.heading') !!}>{!! accent_html($meta->get('emergency.heading'), 'Emergency Lighting') !!}</h2>
+        <h2{!! cms_style($meta, 'emergency.heading') !!}>{!! accent_html($meta->get('emergency.heading'), $meta->get('emergency.heading_accent')) !!}</h2>
         <ul class="dc-ticks">
           @foreach ($emergencyItems as $item)
             <li{!! cms_style($meta, 'emergency.item.title', $loop->index) !!}>{!! labelled_tick(($item['title'] ?? '').': '.($item['body'] ?? '')) !!}</li>
@@ -129,7 +129,7 @@
   <section class="dc-band dc-band--alt dc-band--feature">
     <div class="wrap dc-feature dc-feature--flip" {!! cms_section_attr('zones') !!}>
       <div class="dc-feature-copy reveal">
-        <h2{!! cms_style($meta, 'zones.heading') !!}>{!! accent_html($meta->get('zones.heading'), 'Across All Zones') !!}</h2>
+        <h2{!! cms_style($meta, 'zones.heading') !!}>{!! accent_html($meta->get('zones.heading'), $meta->get('zones.heading_accent')) !!}</h2>
         <ul class="dc-ticks">
           @foreach ($zones as $item)
             <li{!! cms_style($meta, 'zones.item.title', $loop->index) !!}>{!! labelled_tick(($item['title'] ?? '').': '.($item['body'] ?? '')) !!}</li>
@@ -148,7 +148,7 @@
 
   <section class="dc-cta reveal" {!! cms_section_attr('cta') !!}>
     <div class="wrap dc-cta-copy">
-      <h2{!! cms_style($meta, 'cta.heading') !!}>{!! accent_html($meta->get('cta.heading'), 'Data Centre Project?') !!}</h2>
+      <h2{!! cms_style($meta, 'cta.heading') !!}>{!! accent_html($meta->get('cta.heading'), $meta->get('cta.heading_accent')) !!}</h2>
       <p{!! cms_style($meta, 'cta.body') !!}>{{ $meta->get('cta.body') }}</p>
       <div class="dc-actions">
         <a href="{{ $meta->get('cta.primary.href', 0, '/contact') }}" class="btn primary"{!! cms_style($meta, 'cta.primary.label') !!}>{{ $meta->get('cta.primary.label') }}</a>

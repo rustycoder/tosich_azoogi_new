@@ -50,6 +50,32 @@ class HomeHeroTest extends TestCase
         $this->get('/silvair')
             ->assertOk()
             ->assertSee('<span>Qualified Mesh Lighting</span>', false);
+
+        $css = file_get_contents(public_path('assets/css/style_demo.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertMatchesRegularExpression(
+            '/-webkit-text-stroke:\s*1\.35px\s*var\(--accent\);\s*filter:\s*drop-shadow\(0 0 0\.1em/s',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/:root\s*\{[^}]*--outline-glow:/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/-webkit-text-stroke:\s*1\.35px\s*var\(--accent\)/',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/-webkit-text-stroke-color:\s*#8cc63f/',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/@keyframes\s+outline-led\s*\{/',
+            $css,
+        );
+        $this->assertStringContainsString('prefers-reduced-motion: reduce', $css);
+        $this->assertStringContainsString('animation: outline-led 3s linear infinite', $css);
     }
 
     public function test_home_marquee_cards_reserve_space_for_titles_and_cta(): void

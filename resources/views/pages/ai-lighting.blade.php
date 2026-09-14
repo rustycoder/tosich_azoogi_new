@@ -29,7 +29,7 @@
       <img src="{{ media_url($meta->get('hero.image')) }}" alt="" loading="eager">
     </div>
     <div class="ai-hero-copy">
-      <h1{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), 'thinks') !!}</h1>
+      <h1{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
       <p{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
     </div>
   </section>
@@ -37,7 +37,7 @@
   <section class="ai-band" {!! cms_section_attr('caps') !!}>
     <div class="wrap ai-split">
       <div class="ai-split-copy">
-        <h2{!! cms_style($meta, 'caps.heading') !!}>{!! nl2br_html($meta->get('caps.heading'), true) !!}</h2>
+        <h2{!! cms_style($meta, 'caps.heading') !!}>{!! accent_html($meta->get('caps.heading'), $meta->get('caps.heading_accent')) !!}</h2>
         <p{!! cms_style($meta, 'caps.body') !!}>{{ $meta->get('caps.body') }}</p>
       </div>
       <ol class="ai-caps">
@@ -54,7 +54,7 @@
   <section class="ai-band ai-band--tight" {!! cms_section_attr('spectrum') !!}>
     <div class="wrap ai-feature">
       <div class="ai-feature-copy">
-        <h2{!! cms_style($meta, 'spectrum.heading') !!}>{!! accent_html($meta->get('spectrum.heading'), 'spectrum') !!}</h2>
+        <h2{!! cms_style($meta, 'spectrum.heading') !!}>{!! accent_html($meta->get('spectrum.heading'), $meta->get('spectrum.heading_accent')) !!}</h2>
         <p{!! cms_style($meta, 'spectrum.body') !!}>{{ $meta->get('spectrum.body') }}</p>
         <ul class="ai-ticks">
           @foreach ($ticks as $tick)
@@ -79,7 +79,7 @@
     <div class="wrap-sm">
       <div class="ai-row-head">
         <div>
-          <h2{!! cms_style($meta, 'insights.heading') !!}>{!! accent_html($meta->get('insights.heading'), 'analysis') !!}</h2>
+          <h2{!! cms_style($meta, 'insights.heading') !!}>{!! accent_html($meta->get('insights.heading'), $meta->get('insights.heading_accent')) !!}</h2>
         </div>
         <p{!! cms_style($meta, 'insights.lead') !!}>{{ $meta->get('insights.lead') }}</p>
       </div>
@@ -110,7 +110,7 @@
       <img src="{{ media_url($meta->get('cct.image')) }}" alt="" loading="lazy">
     </div>
     <div class="wrap ai-cct-inner">
-      <h2{!! cms_style($meta, 'cct.heading') !!}>{!! accent_html($meta->get('cct.heading'), 'temperature') !!}</h2>
+      <h2{!! cms_style($meta, 'cct.heading') !!}>{!! accent_html($meta->get('cct.heading'), $meta->get('cct.heading_accent')) !!}</h2>
       <p{!! cms_style($meta, 'cct.body') !!}>{{ $meta->get('cct.body') }}</p>
     </div>
   </section>
@@ -119,7 +119,7 @@
     <div class="wrap">
       <div class="ai-row-head">
         <div>
-          <h2{!! cms_style($meta, 'space.heading') !!}>{!! accent_html($meta->get('space.heading'), 'management') !!}</h2>
+          <h2{!! cms_style($meta, 'space.heading') !!}>{!! accent_html($meta->get('space.heading'), $meta->get('space.heading_accent')) !!}</h2>
         </div>
         <p{!! cms_style($meta, 'space.lead') !!}>{{ $meta->get('space.lead') }}</p>
       </div>

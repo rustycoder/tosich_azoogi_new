@@ -23,7 +23,7 @@
 <main class="solutions-main">
   <section class="solutions-hero" {!! cms_section_attr('hero') !!}>
     <div class="wrap">
-      <h1 class="h2 solutions-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), 'Intelligent Controls') !!}</h1>
+      <h1 class="h2 solutions-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
       <div class="solutions-copy">
         @if (trim($meta->get('hero.lead')) !== '')
           <p class="solutions-lead"{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
@@ -76,7 +76,7 @@
   <section class="solutions-sectors" aria-labelledby="sectorTitle" {!! cms_section_attr('sector') !!}>
     <div class="wrap">
       <div class="solutions-sector-head">
-        <h2 id="sectorTitle"{!! cms_style($meta, 'sector.heading') !!}>{!! accent_html($meta->get('sector.heading'), 'Sector') !!}</h2>
+        <h2 id="sectorTitle"{!! cms_style($meta, 'sector.heading') !!}>{!! accent_html($meta->get('sector.heading'), $meta->get('sector.heading_accent')) !!}</h2>
         <p class="solutions-sector-hint"{!! cms_style($meta, 'sector.hint') !!}>{{ $meta->get('sector.hint') }}</p>
       </div>
 

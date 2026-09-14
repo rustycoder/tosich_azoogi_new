@@ -18,7 +18,7 @@
 @section('content')
 <section class="projects-hero" {!! cms_section_attr('hero') !!}>
   <div class="wrap" id="projectsIntro">
-    <h1 class="h2"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), 'Azoogi') !!}</h1>
+    <h1 class="h2"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
     <p class="projects-hero-lead"{!! cms_style($meta, 'hero.body') !!}>
       {!! nl2br(linkify_emails($meta->get('hero.body')), false) !!}
     </p>

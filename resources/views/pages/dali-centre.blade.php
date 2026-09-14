@@ -36,7 +36,7 @@
 
   <section class="dc-hero" {!! cms_section_attr('hero') !!}>
     <div class="wrap dc-hero-stack">
-      <h1 class="dc-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), 'Smart DALI-2 Management') !!}</h1>
+      <h1 class="dc-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
       <p class="dc-lead"{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
       @if ($videoId !== '')
         <div class="dc-hero-video" {!! cms_section_attr('video') !!}>

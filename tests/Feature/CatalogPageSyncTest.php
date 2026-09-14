@@ -32,5 +32,6 @@ class CatalogPageSyncTest extends TestCase
         $this->get('/products')->assertOk();
         $this->get('/projects')->assertOk();
         $this->get('/request-a-quote')->assertOk();
+        $this->get('/led-strip-calculator')->assertOk();
     }
 }

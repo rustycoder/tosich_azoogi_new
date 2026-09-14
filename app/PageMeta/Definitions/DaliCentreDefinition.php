@@ -32,6 +32,7 @@ class DaliCentreDefinition implements PageDefinition
         return [
             Field::text('hero.kicker', 'Hero kicker'),
             Field::textarea('hero.title', 'Hero title'),
+            Field::text('hero.title_accent', 'Title accent'),
             Field::textarea('hero.lead', 'Hero lead'),
             Field::textarea('intro.body', 'Intro'),
             Field::url('video.embed', 'YouTube URL'),
@@ -67,6 +68,7 @@ class DaliCentreDefinition implements PageDefinition
         $rows = [
             ['key' => 'hero.kicker', 'sort_order' => 0, 'value' => 'AZOOGI DALI Centre'],
             ['key' => 'hero.title', 'sort_order' => 0, 'value' => 'Centralized Architectural Lighting & Smart DALI-2 Management'],
+            ['key' => 'hero.title_accent', 'sort_order' => 0, 'value' => 'Smart DALI-2 Management'],
             ['key' => 'hero.lead', 'sort_order' => 0, 'value' => 'Scalable IP Gateways. Precision Local Control. Comprehensive Energy Analytics.'],
             ['key' => 'intro.body', 'sort_order' => 0, 'value' => 'A powerful centralized management platform designed for public buildings, commercial offices, and complex architectural spaces. Paired with our certified IP gateways, controllers, and sensor networks, AZOOGI DALI Centre offers total command over single-fixture or multi-floor lighting infrastructures.'],
             ['key' => 'video.embed', 'sort_order' => 0, 'value' => 'https://youtu.be/C0KcmW6NewI'],
