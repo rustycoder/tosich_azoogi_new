@@ -101,6 +101,11 @@
                 </a>
             @endif
             @if ($isAdmin)
+                <div class="dash-group">Notification</div>
+                <a href="{{ route('dashboard.email-templates.index') }}" class="{{ request()->routeIs('dashboard.email-templates.*') ? 'is-active' : '' }}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    Email
+                </a>
                 <div class="dash-group">Administration</div>
                 <a href="{{ route('dashboard.staff.index') }}" class="{{ request()->routeIs('dashboard.staff.*') ? 'is-active' : '' }}">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M4 19a5 5 0 0 1 10 0"/><circle cx="17" cy="9" r="2.4"/><path d="M16 19a4.2 4.2 0 0 1 4-3"/></svg>

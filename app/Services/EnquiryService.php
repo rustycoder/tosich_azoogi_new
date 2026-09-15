@@ -6,6 +6,7 @@ use App\Enums\EnquiryStatus;
 use App\Enums\EnquiryType;
 use App\Models\Enquiry;
 use App\Repositories\Contracts\IEnquiryRepository;
+use App\Services\Contracts\IEmailTemplateService;
 use App\Services\Contracts\IEnquiryService;
 use App\Services\Contracts\IVisitorOriginService;
 
@@ -14,6 +15,7 @@ class EnquiryService implements IEnquiryService
     public function __construct(
         private IEnquiryRepository $enquiries,
         private IVisitorOriginService $origin,
+        private IEmailTemplateService $emailTemplates,
     ) {}
 
     public function kanban(EnquiryType $type, ?EnquiryStatus $status = null): array
@@ -32,7 +34,7 @@ class EnquiryService implements IEnquiryService
     {
         $origin = $this->origin->capture();
 
-        return $this->enquiries->create([
+        $enquiry = $this->enquiries->create([
             'type' => $type,
             'status' => EnquiryStatus::Pending,
             'name' => $data['name'],
@@ -45,6 +47,10 @@ class EnquiryService implements IEnquiryService
             'country' => $origin['country'],
             'user_agent' => $origin['user_agent'],
         ]);
+
+        $this->emailTemplates->sendEnquiryNotification($enquiry);
+
+        return $enquiry;
     }
 
     public function updateStatus(Enquiry $enquiry, EnquiryStatus $status): Enquiry

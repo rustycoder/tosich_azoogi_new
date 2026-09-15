@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\ProductDatasheetExport;
 use App\Repositories\Contracts\IProductDatasheetRepository;
 use App\Repositories\Contracts\IProductRepository;
+use App\Services\Contracts\IEmailTemplateService;
 use App\Services\Contracts\IProductDatasheetService;
 use App\Services\Contracts\IVisitorOriginService;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -35,6 +36,7 @@ class ProductDatasheetService implements IProductDatasheetService
         private IProductRepository $products,
         private IProductDatasheetRepository $exports,
         private IVisitorOriginService $origin,
+        private IEmailTemplateService $emailTemplates,
     ) {}
 
     public function export(array $data): ProductDatasheetExport
@@ -50,7 +52,7 @@ class ProductDatasheetService implements IProductDatasheetService
         $length = isset($data['length']) && is_numeric($data['length']) ? (float) $data['length'] : null;
         $origin = $this->origin->capture();
 
-        return $this->exports->create([
+        $export = $this->exports->create([
             'uuid' => (string) Str::uuid(),
             'product_id' => $product->id,
             'airtable_id' => $product->airtable_id,
@@ -63,6 +65,10 @@ class ProductDatasheetService implements IProductDatasheetService
             'country' => $origin['country'],
             'user_agent' => $origin['user_agent'],
         ]);
+
+        $this->emailTemplates->sendDatasheetNotification($export);
+
+        return $export;
     }
 
     public function sheet(ProductDatasheetExport $export): array
