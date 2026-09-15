@@ -637,6 +637,12 @@ a.meta-badge:hover {
 .product-icons-row img {
   height: 54px !important;
   width: auto;
+  filter: invert(1);
+  transition: filter 0.3s ease, opacity 0.2s;
+}
+
+:root[data-theme="light"] .product-icons-row img {
+  filter: none;
 }
 
 .spec-table td:first-child {

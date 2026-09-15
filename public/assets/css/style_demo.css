@@ -3335,7 +3335,7 @@ a.mega-variant-card:after {
     font-family: var(--font-sans);
     font-size: var(--fs-caption);
     font-weight: 400;
-    color: #111111 !important;
+    color: var(--ink) !important;
     white-space: pre-line;
     line-height: 1.25;
     text-align: left;
