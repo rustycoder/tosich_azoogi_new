@@ -1,12 +1,8 @@
 @extends('layouts.site')
 
-@section('title')
-LED Strip Calculator — Azoogi
-@endsection
+@section('title', $page->title)
 
-@section('description')
-Build your perfect LED strip setup with Azoogi’s LED Strip Calculator. Choose location, chip, colour, voltage, power and more.
-@endsection
+@section('description', $page->meta_description)
 
 @section('bodyClass', 'calc-page')
 
@@ -21,16 +17,12 @@ Build your perfect LED strip setup with Azoogi’s LED Strip Calculator. Choose 
 
 @section('content')
 <!-- Hero -->
-<section class="calc-hero">
+<section class="calc-hero" {!! cms_section_attr('hero') !!}>
   <div class="calc-hero-glow" aria-hidden="true"></div>
   <div class="calc-hero-inner">
-    <h1 class="h2 calc-hero-title">LED Strip <span>Calculator</span></h1>
-    <p class="calc-hero-lead">
-      Azoogi’s versatile range of interior and exterior LED Strip Lights is perfect for both residential and commercial spaces.
-      With smart control options and custom configurations, creating the ideal lighting solution has never been easier.
-      Use our simple selector tools to build your perfect LED strip setup today.
-    </p>
-    <a href="#led-selector" class="btn primary">Begin LED Selector</a>
+    <h1 class="h2 calc-hero-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
+    <p class="calc-hero-lead"{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
+    <a href="#led-selector" class="btn primary"{!! cms_style($meta, 'hero.cta.label') !!}>{{ $meta->get('hero.cta.label') }}</a>
   </div>
 </section>
 

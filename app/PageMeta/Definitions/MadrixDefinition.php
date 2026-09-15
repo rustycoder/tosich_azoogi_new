@@ -34,6 +34,7 @@ class MadrixDefinition implements PageDefinition
             Field::text('slide.alt', 'Slide alt', true, 'slide'),
             Field::text('hero.kicker', 'Hero kicker'),
             Field::textarea('hero.title', 'Hero title'),
+            Field::text('hero.title_accent', 'Title accent'),
             Field::textarea('hero.lead', 'Hero lead'),
             Field::textarea('intro.body', 'Intro'),
             Field::text('why.heading', 'Why heading'),
@@ -69,6 +70,7 @@ class MadrixDefinition implements PageDefinition
         $rows = [
             ['key' => 'hero.kicker', 'sort_order' => 0, 'value' => 'Madrix'],
             ['key' => 'hero.title', 'sort_order' => 0, 'value' => 'Next-Generation Pixel Mapping & Advanced LED Control Solutions'],
+            ['key' => 'hero.title_accent', 'sort_order' => 0, 'value' => 'Advanced LED Control Solutions'],
             ['key' => 'hero.lead', 'sort_order' => 0, 'value' => 'Powerful German Engineering. Seamless Spatial Lighting Integration.'],
             ['key' => 'intro.body', 'sort_order' => 0, 'value' => 'As an official partner of MADRIX, we bring industry-leading pixel-mapping software and hardware interfaces directly to your projects. Whether you are designing dynamic architectural lighting, large-scale event stages, or custom immersive environments, MADRIX delivers rock-solid control over thousands of DMX/SPI universes with real-time audio reactivity.'],
             ['key' => 'why.heading', 'sort_order' => 0, 'value' => 'Why Choose MADRIX?'],

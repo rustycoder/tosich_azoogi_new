@@ -1,7 +1,7 @@
 /* Silvair — native Azoogi layout, partner lockup, spec table */
 
 .sv-main {
-    padding: 120px 0 0;
+    padding: 0;
     background: var(--bg);
     color: var(--ink);
     font-family: var(--font-sans);
@@ -18,7 +18,10 @@
 
 .sv-hero {
     text-align: center;
-    padding: 24px 0 0;
+    min-height: var(--hero-min);
+    display: grid;
+    align-items: start;
+    padding: var(--hero-pad-y-top) 0 var(--hero-pad-y-bottom);
 }
 
 .sv-lockup {
@@ -71,7 +74,7 @@
 }
 
 .sv-band {
-    padding: clamp(9px, 1.5vw, 16px) 0;
+    padding: var(--section-y) 0;
 }
 
 .sv-band--alt {
@@ -185,7 +188,7 @@
 }
 
 .sv-stat b {
-    font-size: var(--fs-h2);
+    font-size: var(--fs-h2-section);
     font-weight: 400;
     letter-spacing: -0.03em;
     line-height: 1;
@@ -431,7 +434,7 @@
 }
 
 .sv-cta {
-    padding: clamp(9px, 1.5vw, 16px) 0 24px;
+    padding: var(--section-y) 0 calc(var(--section-y) + 16px);
     border-radius: 4px;
     text-align: center;
 }
@@ -568,10 +571,6 @@
 
     .sv-title {
         max-width: none;
-    }
-
-    .sv-band {
-        padding: 8px 0;
     }
 
     .sv-cta .btn.primary {

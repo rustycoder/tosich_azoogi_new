@@ -275,7 +275,7 @@ body.quote-open .quote-drawer {
 /* Request page */
 
 .quote-page {
-  padding: 132px 0 72px;
+  padding: 0 0 calc(var(--section-y) + 16px);
   background: var(--bg);
 }
 
@@ -284,7 +284,11 @@ body.quote-open .quote-drawer {
 }
 
 .quote-page-intro {
-  margin-bottom: 32px;
+  min-height: var(--hero-min);
+  display: grid;
+  align-items: end;
+  padding: var(--hero-pad-y-top) 0 var(--hero-pad-y-bottom);
+  margin-bottom: 0;
   text-align: center;
 }
 

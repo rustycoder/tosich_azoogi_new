@@ -7,6 +7,7 @@ Map file globs to the rule files in this directory. Read every matching file bef
 | `public/assets/css/**/*.css` | [css-assets.md](css-assets.md), [typography.md](typography.md), [section-spacing.md](section-spacing.md) |
 | `public/assets/css/dashboard.css`, `resources/views/layouts/dashboard.blade.php`, `resources/views/dashboard/**/*.blade.php` | [dashboard.md](dashboard.md) |
 | `resources/views/**/*.blade.php` | [css-assets.md](css-assets.md) |
+| `resources/views/pages/**/*.blade.php`, `app/PageMeta/Definitions/**/*.php` | [outline-accents.md](outline-accents.md) |
 | `resources/views/pages/products.blade.php` | [products-filter.md](products-filter.md) |
 | `app/helpers.php` | [css-assets.md](css-assets.md) |
 | `app/Services/ProductSyncService.php`, `routes/console.php` | [product-sync.md](product-sync.md) |

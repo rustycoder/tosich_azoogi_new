@@ -185,7 +185,7 @@ class QuoteRequestTest extends TestCase
                 'meta' => [
                     $meta->id => [
                         'value' => $meta->value,
-                        'font_size' => '32px',
+                        'font_size' => '28px',
                         'text_align' => 'center',
                     ],
                 ],
@@ -194,6 +194,6 @@ class QuoteRequestTest extends TestCase
 
         $this->get('/request-a-quote')
             ->assertOk()
-            ->assertSee('style="font-size: 32px; text-align: center"', false);
+            ->assertSee('style="font-size: 28px; text-align: center"', false);
     }
 }

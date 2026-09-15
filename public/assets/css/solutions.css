@@ -10,7 +10,10 @@
 /* —— Hero —— */
 .solutions-hero {
   text-align: center;
-  padding: 140px 0 0;
+  min-height: var(--hero-min);
+  display: grid;
+  align-items: start;
+  padding: var(--hero-pad-y-top) 0 var(--hero-pad-y-bottom);
 }
 
 .solutions-title {
@@ -50,7 +53,7 @@
 
 /* —— Control ecosystems —— */
 .solutions-eco {
-  padding: clamp(14px, 2vw, 24px) 0;
+  padding: var(--section-y) 0;
 }
 
 .solutions-eco-head {
@@ -240,7 +243,7 @@
 
 /* —— Capabilities by sector —— */
 .solutions-sectors {
-  padding: clamp(13px, 1.5vw, 20px) 0;
+  padding: var(--section-y) 0 calc(var(--section-y) + 16px);
   background: var(--card-bg);
 }
 

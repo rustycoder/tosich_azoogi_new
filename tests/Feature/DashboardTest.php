@@ -38,7 +38,7 @@ class DashboardTest extends TestCase
 
         $this->actingAs($admin)->get('/dashboard')->assertOk();
         $this->actingAs($admin)->get('/dashboard/staff')->assertOk();
-        $this->actingAs($admin)->get('/dashboard/content/pages')->assertOk()->assertSee('Home', false);
+        $this->actingAs($admin)->get('/dashboard/content/pages')->assertOk()->assertSee('Home', false)->assertSee('LED Calculator', false);
         $this->actingAs($admin)->get('/dashboard/content/pages/home')->assertOk();
         $this->actingAs($admin)->get('/dashboard/content/pages/home-owner')->assertOk();
         $this->actingAs($admin)->get('/dashboard/content/sections')->assertOk()->assertSee('Header', false)->assertSee('Footer', false)->assertSee('top of every public page', false)->assertSee('bottom of every public page', false);
@@ -395,19 +395,19 @@ class DashboardTest extends TestCase
                 'meta' => [
                     $meta->id => [
                         'value' => $meta->value,
-                        'font_size' => '24px',
+                        'font_size' => '22px',
                         'text_align' => 'center',
                     ],
                 ],
             ])
             ->assertRedirect();
 
-        $this->assertSame('24px', $meta->fresh()->font_size);
+        $this->assertSame('22px', $meta->fresh()->font_size);
         $this->assertSame('center', $meta->fresh()->text_align);
 
         $this->get('/about')
             ->assertOk()
-            ->assertSee('style="font-size: 24px; text-align: center"', false);
+            ->assertSee('style="font-size: 22px; text-align: center"', false);
 
         $this->actingAs($admin)
             ->put(route('dashboard.pages.update', $page), [
@@ -463,19 +463,19 @@ class DashboardTest extends TestCase
                 'meta' => [
                     $meta->id => [
                         'value' => $meta->value,
-                        'font_size' => '32px',
+                        'font_size' => '28px',
                         'text_align' => 'left',
                     ],
                 ],
             ])
             ->assertRedirect();
 
-        $this->assertSame('32px', $meta->fresh()->font_size);
+        $this->assertSame('28px', $meta->fresh()->font_size);
         $this->assertSame('left', $meta->fresh()->text_align);
 
         $this->get('/'.$slug)
             ->assertOk()
-            ->assertSee('style="font-size: 32px; text-align: left"', false);
+            ->assertSee('style="font-size: 28px; text-align: left"', false);
     }
 
     public function test_staff_can_create_and_soft_delete_projects(): void

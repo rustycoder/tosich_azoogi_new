@@ -50,6 +50,32 @@ class HomeHeroTest extends TestCase
         $this->get('/silvair')
             ->assertOk()
             ->assertSee('<span>Qualified Mesh Lighting</span>', false);
+
+        $css = file_get_contents(public_path('assets/css/style_demo.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertMatchesRegularExpression(
+            '/-webkit-text-stroke:\s*1\.35px\s*var\(--accent\);\s*filter:\s*drop-shadow\(0 0 0\.1em/s',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/:root\s*\{[^}]*--outline-glow:/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/-webkit-text-stroke:\s*1\.35px\s*var\(--accent\)/',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/-webkit-text-stroke-color:\s*#8cc63f/',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/@keyframes\s+outline-led\s*\{/',
+            $css,
+        );
+        $this->assertStringContainsString('prefers-reduced-motion: reduce', $css);
+        $this->assertStringContainsString('animation: outline-led 3s linear infinite', $css);
     }
 
     public function test_home_marquee_cards_reserve_space_for_titles_and_cta(): void
@@ -83,6 +109,81 @@ class HomeHeroTest extends TestCase
         );
         $this->assertMatchesRegularExpression(
             '/\.marquee \.card \.more\s*\{[^}]*flex-shrink:\s*0/s',
+            $css,
+        );
+    }
+
+    public function test_home_section_headings_use_the_section_size(): void
+    {
+        $css = file_get_contents(public_path('assets/css/style_demo.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertMatchesRegularExpression(
+            '/\.h2\s*\{[^}]*font-size:\s*var\(--fs-h2-section\)/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.slide-title\s*\{[^}]*font-size:\s*var\(--fs-h2\)/s',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.h2\s*\{[^}]*font-size:\s*var\(--fs-h2\)\s*;/s',
+            $css,
+        );
+    }
+
+    public function test_stacked_value_cards_use_a_compact_height_and_padded_copy(): void
+    {
+        $css = file_get_contents(public_path('assets/css/style_demo.css'));
+        $aiCss = file_get_contents(public_path('assets/css/ai-lighting.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertNotFalse($aiCss);
+        $this->assertMatchesRegularExpression(
+            '/--card-height:\s*min\(48svh,\s*400px\)/',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/--card-height:\s*min\(72svh,\s*600px\)/',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.card__content>div\s*\{[^}]*place-self:\s*stretch/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.card__content>div\s*\{[^}]*align-content:\s*start/s',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.card__content>div\s*\{[^}]*width:\s*80%/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.ai-insights #cards\s*\{[^}]*--card-height:\s*min\(48svh,\s*400px\)/s',
+            $aiCss,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/--card-height:\s*min\(7[08]svh,\s*5[68]0px\)/',
+            $aiCss,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/--card-height:\s*min\(68svh,\s*640px\)/',
+            $aiCss,
+        );
+    }
+
+    public function test_home_stat_numbers_use_the_hero_size(): void
+    {
+        $css = file_get_contents(public_path('assets/css/style_demo.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertMatchesRegularExpression(
+            '/\.stat \.num\s*\{[^}]*font-size:\s*var\(--fs-h2\)/s',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.stat \.num\s*\{[^}]*font-size:\s*var\(--fs-h2-section\)/s',
             $css,
         );
     }

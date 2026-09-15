@@ -858,7 +858,7 @@ a.meta-badge:hover {
 
 /* --- Project Highlights Carousel --- */
 .related-projects-section {
-  padding: 30px 0 40px;
+  padding: var(--section-y) 0 calc(var(--section-y) + 16px);
   border-top: 1px solid var(--line);
 }
 

@@ -36,7 +36,7 @@
           <img class="sv-lockup-silvair" src="{{ $silvairLogo }}" alt="Silvair">
         </div>
       @endif
-      <h1 class="sv-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), 'Qualified Mesh Lighting') !!}</h1>
+      <h1 class="sv-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
       <p class="sv-lead"{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
       <p class="sv-intro" {!! cms_section_attr('intro') !!}{!! cms_style($meta, 'intro.body') !!}>{{ $meta->get('intro.body') }}</p>
     </div>

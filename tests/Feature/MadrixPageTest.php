@@ -25,7 +25,8 @@ class MadrixPageTest extends TestCase
             ->assertSee('MADRIX', false)
             ->assertSee('Next-Generation', false)
             ->assertSee('Pixel Mapping', false)
-            ->assertSee('Advanced LED Control Solutions', false)
+            ->assertSee('<span>Advanced LED Control Solutions</span>', false)
+            ->assertDontSee('<span>Pixel Mapping</span>', false)
             ->assertSee('Powerful German Engineering. Seamless Spatial Lighting Integration.', false)
             ->assertSee('As an official partner of MADRIX, we bring industry-leading pixel-mapping software', false)
             ->assertSee('Why Choose MADRIX?', false)
@@ -46,6 +47,21 @@ class MadrixPageTest extends TestCase
             ->assertSee('>Contact</a>', false)
             ->assertSee('>AI Lighting</a>', false)
             ->assertSee('LED Calculator', false);
+    }
+
+    public function test_hero_is_eighty_percent_viewport(): void
+    {
+        $css = file_get_contents(public_path('assets/css/madrix.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertMatchesRegularExpression(
+            '/\.mx-hero\s*\{[^}]*height:\s*80vh/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.mx-hero\s*\{[^}]*min-height:\s*80vh/s',
+            $css,
+        );
     }
 
     public function test_hardware_lineup_is_a_table(): void

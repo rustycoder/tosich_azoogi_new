@@ -43,7 +43,7 @@
       @endforeach
     </div>
     <div class="mx-hero-copy" {!! cms_section_attr('hero') !!}>
-      <h1{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), 'Pixel Mapping') !!}</h1>
+      <h1{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
       <p{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
       @if (count($slides) > 1)
         <div class="mx-hero-controls">

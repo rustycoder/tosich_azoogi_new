@@ -1,7 +1,7 @@
 /* Products landing gallery + catalogue chrome */
 
 .prod-gallery {
-  padding: 12px 0 72px;
+  padding: var(--section-y) 0 calc(var(--section-y) + 16px);
 }
 
 .prod-gallery-head {

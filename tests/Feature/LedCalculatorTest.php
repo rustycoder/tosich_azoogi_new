@@ -37,6 +37,8 @@ class LedCalculatorTest extends TestCase
         $this->get('/led-strip-calculator')
             ->assertOk()
             ->assertSee('LED Strip Calculator', false)
+            ->assertSee('<span>Calculator</span>', false)
+            ->assertSee('Begin LED Selector', false)
             ->assertSee('AZOOGI_LED_CALC', false)
             ->assertSee('COB001', false)
             ->assertSee('https://example.com/cob.jpg', false)

@@ -10,6 +10,7 @@ final class Typography
     public static function sizes(): array
     {
         return [
+            '10px' => '10px',
             '12px' => '12px',
             '14px' => '14px',
             '16px' => '16px',
@@ -18,7 +19,6 @@ final class Typography
             '22px' => '22px',
             '24px' => '24px',
             '28px' => '28px',
-            '32px' => '32px',
             '36px' => '36px',
             '42px' => '42px',
             '48px' => '48px',
