@@ -1556,16 +1556,15 @@
               if (!productSpec) return false;
 
               var matchesAny = selectedVals.some(function (selVal) {
+                var targetSel = String(selVal || '').trim().toLowerCase();
                 if (Array.isArray(productSpec)) {
                   return productSpec.some(function (psVal) {
                     var rawVal = (typeof psVal === 'object' && psVal !== null && psVal.value !== undefined) ? psVal.value : psVal;
-                    return String(rawVal).toLowerCase().indexOf(String(selVal).toLowerCase()) !== -1 ||
-                      String(selVal).toLowerCase().indexOf(String(rawVal).toLowerCase()) !== -1;
+                    return String(rawVal || '').trim().toLowerCase() === targetSel;
                   });
                 } else {
                   var rawVal = (typeof productSpec === 'object' && productSpec !== null && productSpec.value !== undefined) ? productSpec.value : productSpec;
-                  return String(rawVal).toLowerCase().indexOf(String(selVal).toLowerCase()) !== -1 ||
-                    String(selVal).toLowerCase().indexOf(String(rawVal).toLowerCase()) !== -1;
+                  return String(rawVal || '').trim().toLowerCase() === targetSel;
                 }
               });
 

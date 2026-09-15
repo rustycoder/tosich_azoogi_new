@@ -166,4 +166,12 @@ class ProductsPageTest extends TestCase
             ->assertDontSee('"categories":["Trimless","Suspended"]', false)
             ->assertDontSee('"categories":["Suspended","Trimless"]', false);
     }
+
+    public function test_products_page_uses_exact_matching_for_specification_filters(): void
+    {
+        $this->get('/products?category=NEON')
+            ->assertOk()
+            ->assertSee('String(rawVal || \'\').trim().toLowerCase() === targetSel', false)
+            ->assertDontSee('String(rawVal).toLowerCase().indexOf(String(selVal).toLowerCase()) !== -1', false);
+    }
 }
