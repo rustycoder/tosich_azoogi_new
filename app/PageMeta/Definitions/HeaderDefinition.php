@@ -62,7 +62,7 @@ class HeaderDefinition implements PageDefinition
             ['key' => 'header.email', 'sort_order' => 0, 'value' => 'sales@azoogi.com'],
         ];
 
-        foreach (['DESIGN', 'ENGINEER', 'CUSTOMISE', 'SUPPLY', 'CONTROL', 'COMMISSION'] as $order => $word) {
+        foreach (['Design', 'Engineer', 'Customise', 'Supply', 'Control', 'Commission'] as $order => $word) {
             $rows[] = ['key' => 'header.word.text', 'sort_order' => $order, 'value' => $word];
         }
 

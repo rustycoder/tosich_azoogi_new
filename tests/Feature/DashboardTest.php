@@ -955,7 +955,7 @@ class DashboardTest extends TestCase
             ->get(route('dashboard.sections.edit', $header))
             ->assertOk()
             ->assertSee('Rotating text', false)
-            ->assertSee('DESIGN', false)
+            ->assertSee('Design', false)
             ->assertSee('Add text', false)
             ->assertDontSee('Item 1', false);
 
@@ -986,8 +986,8 @@ class DashboardTest extends TestCase
             ->assertSee('"CRAFT"', false)
             ->assertSee('"INSTALL"', false)
             ->assertSee('"FINISH"', false)
-            ->assertDontSee('"DESIGN"', false)
-            ->assertDontSee('"COMMISSION"', false);
+            ->assertDontSee('"Design"', false)
+            ->assertDontSee('"Commission"', false);
     }
 
     public function test_admin_can_update_header_and_footer_copy(): void

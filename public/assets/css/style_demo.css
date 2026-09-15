@@ -320,8 +320,8 @@ h3 {
 }
 
 .util-rotate.is-words {
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+    letter-spacing: normal;
+    text-transform: none;
 }
 
 .util-rotate.is-in {
