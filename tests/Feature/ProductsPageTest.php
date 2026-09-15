@@ -23,6 +23,10 @@ class ProductsPageTest extends TestCase
     public function test_products_index_opens_as_a_parent_category_gallery(): void
     {
         $mtime = filemtime(public_path('assets/css/products.css'));
+        $css = file_get_contents(public_path('assets/css/products.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertStringNotContainsString('.prod-gallery-card .img', $css);
 
         $this->get('/products')
             ->assertOk()
@@ -34,6 +38,7 @@ class ProductsPageTest extends TestCase
             ->assertSee('/products?category=Profiles', false)
             ->assertSee('View Range', false)
             ->assertSee('/assets/css/products.css?v='.$mtime, false)
+            ->assertDontSee('class="img"', false)
             ->assertDontSee('id="prodSidebar"', false)
             ->assertDontSee('id="prodSearchInput"', false)
             ->assertDontSee('id="productGrid"', false)

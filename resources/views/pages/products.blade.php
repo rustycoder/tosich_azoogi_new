@@ -881,14 +881,7 @@
       </div>
       <div class="prod-gallery-grid">
         @forelse ($rangeItems as $item)
-          @php
-              $fallback = \App\Support\ProductCatalog::fallbackImage($item['title'] ?? '');
-              $imgUrl = media_url($item['image'] ?? '') ?: $fallback;
-          @endphp
           <a class="prod-gallery-card" href="{{ $item['href'] ?? '#' }}">
-            <div class="img">
-              <img src="{{ $imgUrl }}" alt="{{ $item['title'] ?? '' }}" loading="lazy" onerror="this.onerror=null; this.src='{{ $fallback }}';">
-            </div>
             <div class="body">
               <h4>{{ $item['title'] ?? '' }}</h4>
               <p>{{ $item['body'] ?? '' }}</p>

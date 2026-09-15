@@ -196,6 +196,14 @@ class ProjectsPageTest extends TestCase
             '/\.project-description\s*\{[^}]*width:\s*100%/s',
             $css,
         );
+        $this->assertMatchesRegularExpression(
+            '/\.project-gallery \.image\s*\{[^}]*aspect-ratio:\s*1\s*\/\s*1/s',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.project-gallery \.image img\s*\{[^}]*min-height:\s*220px/s',
+            $css,
+        );
     }
 
     public function test_projects_page_accepts_font_size_and_alignment(): void
