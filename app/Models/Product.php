@@ -77,7 +77,9 @@ class Product extends Model
     public function publicPath(): string
     {
         if (! empty($this->slug)) {
-            return '/products/'.rawurlencode((string) $this->slug);
+            $encoded = implode('/', array_map('rawurlencode', explode('/', (string) $this->slug)));
+
+            return '/products/'.ltrim($encoded, '/');
         }
 
         return '/product-detail?id='.rawurlencode((string) $this->airtable_id);

@@ -403,7 +403,7 @@
                 if (!pathSlug) {
                     const pathParts = window.location.pathname.split('/').filter(Boolean);
                     if (pathParts.length >= 2 && pathParts[0] === 'products') {
-                        pathSlug = decodeURIComponent(pathParts[1]);
+                        pathSlug = decodeURIComponent(pathParts.slice(1).join('/'));
                     }
                 }
 

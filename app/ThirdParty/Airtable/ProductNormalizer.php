@@ -140,7 +140,15 @@ final class ProductNormalizer
             ));
 
             $rawSlug = trim((string) ($fields['URL Slug'] ?? ''));
-            $slug = $rawSlug !== '' ? Str::slug($rawSlug) : Str::slug($name);
+            if ($rawSlug !== '') {
+                $segments = array_values(array_filter(array_map(
+                    fn (string $seg): string => Str::slug(trim($seg)),
+                    explode('/', $rawSlug)
+                )));
+                $slug = implode('/', $segments);
+            } else {
+                $slug = Str::slug($name);
+            }
 
             $entry = [
                 'id' => $record['id'],

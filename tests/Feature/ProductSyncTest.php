@@ -835,6 +835,15 @@ class ProductSyncTest extends TestCase
                         'Category' => 'NEON',
                     ],
                 ],
+                [
+                    'id' => 'recNestedSlug',
+                    'fields' => [
+                        'Product Name' => 'COB Strip Light',
+                        'Status' => 'publish',
+                        'Category' => 'NEON',
+                        'URL Slug' => 'led-strips/cob-strip-light',
+                    ],
+                ],
             ]]);
         });
 
@@ -842,18 +851,26 @@ class ProductSyncTest extends TestCase
 
         $customSlugProduct = Product::query()->where('airtable_id', 'recCustomSlug')->firstOrFail();
         $autoSlugProduct = Product::query()->where('airtable_id', 'recAutoSlug')->firstOrFail();
+        $nestedSlugProduct = Product::query()->where('airtable_id', 'recNestedSlug')->firstOrFail();
 
         $this->assertSame('custom-neon-360-series', $customSlugProduct->slug);
         $this->assertSame('cob-strip-light-24v', $autoSlugProduct->slug);
+        $this->assertSame('led-strips/cob-strip-light', $nestedSlugProduct->slug);
 
         $this->assertSame('/products/custom-neon-360-series', $customSlugProduct->publicPath());
         $this->assertSame('/products/cob-strip-light-24v', $autoSlugProduct->publicPath());
+        $this->assertSame('/products/led-strips/cob-strip-light', $nestedSlugProduct->publicPath());
 
         // Test pretty URL routing
         $this->get('/products/custom-neon-360-series')
             ->assertOk()
             ->assertSee('<title>Custom 360 Title</title>', false)
             ->assertSee('content="Custom 360 Description"', false);
+
+        // Test nested slash URL routing
+        $this->get('/products/led-strips/cob-strip-light')
+            ->assertOk()
+            ->assertSee('COB Strip Light', false);
 
         // Test fallback query param routing
         $this->get('/product-detail?id=recCustomSlug')
