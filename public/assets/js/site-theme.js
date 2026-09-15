@@ -23,7 +23,7 @@
       return;
     }
 
-    btn.setAttribute('aria-checked', theme === 'light' ? 'true' : 'false');
+    btn.setAttribute('aria-checked', theme === 'dark' ? 'true' : 'false');
   }
 
   function toggleTheme() {

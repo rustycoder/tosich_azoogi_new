@@ -26,6 +26,7 @@
     $flowItems = $meta->group('flow.item');
     $supportItems = $meta->group('support.item');
     $silvairLogo = media_url($meta->get('hero.logo'));
+    $silvairUsesStockLockup = $silvairLogo === '/assets/img/silvair/logo.svg';
 @endphp
 <main class="sv-main">
 
@@ -33,7 +34,16 @@
     <div class="wrap">
       @if ($silvairLogo !== '')
         <div class="sv-lockup">
-          <img class="sv-lockup-silvair" src="{{ $silvairLogo }}" alt="Silvair">
+          @if ($silvairUsesStockLockup)
+            @include('partials.themed-lockup', [
+              'path' => 'assets/img/silvair/logo.svg',
+              'class' => 'sv-lockup-silvair',
+              'label' => 'Silvair',
+              'fill' => '#111111',
+            ])
+          @else
+            <img class="sv-lockup-silvair" src="{{ $silvairLogo }}" alt="Silvair">
+          @endif
         </div>
       @endif
       <h1 class="sv-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>

@@ -853,11 +853,12 @@ a.cta:after {
     color: #222;
     display: grid;
     place-items: center;
+    transform: translateX(16px);
     transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
 }
 
 :root[data-theme="light"] .theme-switch-thumb {
-    transform: translateX(16px);
+    transform: none;
     background: #4a4a4a;
     color: #fff;
 }

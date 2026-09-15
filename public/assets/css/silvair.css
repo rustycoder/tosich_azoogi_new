@@ -37,6 +37,7 @@
     display: block;
     width: clamp(180px, 26vw, 300px);
     height: auto;
+    color: var(--ink);
 }
 
 .sv-title {

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" {!! trim($__env->yieldContent('htmlAttributes')) !!}>
+<html lang="en" data-theme="light" {!! trim($__env->yieldContent('htmlAttributes')) !!}>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -9,9 +9,8 @@
 <script>
 (function () {
   try {
-    var theme = localStorage.getItem('theme');
-    if (theme === 'light' || theme === 'dark') {
-      document.documentElement.setAttribute('data-theme', theme);
+    if (localStorage.getItem('theme') === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
     }
   } catch (e) {}
 })();

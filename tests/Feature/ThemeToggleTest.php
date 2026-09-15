@@ -41,7 +41,8 @@ class ThemeToggleTest extends TestCase
 
         $this->get($path)
             ->assertOk()
-            ->assertSee("localStorage.getItem('theme')", false)
+            ->assertSee('data-theme="light"', false)
+            ->assertSee("localStorage.getItem('theme') === 'dark'", false)
             ->assertSee('id="theme-toggle"', false)
             ->assertSee('aria-label="Toggle theme"', false)
             ->assertSee('class="theme-switch"', false)
@@ -70,6 +71,24 @@ class ThemeToggleTest extends TestCase
         $this->assertStringContainsString('/assets/logo_white.png', $script);
         $this->assertStringContainsString("getElementById('theme-toggle')", $script);
         $this->assertStringContainsString("setAttribute('aria-checked'", $script);
+        $this->assertStringContainsString("theme === 'dark' ? 'true' : 'false'", $script);
+        $this->assertStringNotContainsString('data-logo-light', $script);
+        $this->assertStringNotContainsString('dataset.logoDark', $script);
+    }
+
+    public function test_layouts_default_to_light_and_only_restore_saved_dark(): void
+    {
+        $site = file_get_contents(resource_path('views/layouts/site.blade.php'));
+        $dashboard = file_get_contents(resource_path('views/layouts/dashboard.blade.php'));
+
+        $this->assertNotFalse($site);
+        $this->assertNotFalse($dashboard);
+        $this->assertStringContainsString('data-theme="light"', $site);
+        $this->assertStringContainsString('data-theme="light"', $dashboard);
+        $this->assertStringContainsString("localStorage.getItem('theme') === 'dark'", $site);
+        $this->assertStringContainsString("localStorage.getItem('theme') === 'dark'", $dashboard);
+        $this->assertStringNotContainsString("theme === 'light' || theme === 'dark'", $site);
+        $this->assertStringNotContainsString("theme === 'light' || theme === 'dark'", $dashboard);
     }
 
     public function test_home_no_longer_clears_the_saved_theme(): void
@@ -93,7 +112,11 @@ class ThemeToggleTest extends TestCase
             $css,
         );
         $this->assertMatchesRegularExpression(
-            '/:root\[data-theme="light"\] \.theme-switch-thumb\s*\{[^}]*transform:\s*translateX\(16px\)/s',
+            '/\.theme-switch-thumb\s*\{[^}]*transform:\s*translateX\(16px\)/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/:root\[data-theme="light"\] \.theme-switch-thumb\s*\{[^}]*transform:\s*none/s',
             $css,
         );
         $this->assertDoesNotMatchRegularExpression(
@@ -156,7 +179,8 @@ class ThemeToggleTest extends TestCase
         $this->actingAs($admin)
             ->get('/dashboard')
             ->assertOk()
-            ->assertSee("localStorage.getItem('theme')", false)
+            ->assertSee('data-theme="light"', false)
+            ->assertSee("localStorage.getItem('theme') === 'dark'", false)
             ->assertSee('id="theme-toggle"', false)
             ->assertSee('aria-label="Toggle theme"', false)
             ->assertSee('class="theme-switch"', false)

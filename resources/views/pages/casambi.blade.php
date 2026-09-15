@@ -21,9 +21,10 @@
         $hardwareRows = $meta->group('hardware.row');
         $supportItems = $meta->group('support.item');
         $casambiLogo = media_url($meta->get('hero.logo'));
-        if ($casambiLogo === '/assets/img/casambi/logo.svg') {
-            $casambiLogo = '/assets/img/casambi/logo-dark.svg';
-        }
+        $casambiUsesStockLockup = in_array($casambiLogo, [
+            '/assets/img/casambi/logo.svg',
+            '/assets/img/casambi/logo-dark.svg',
+        ], true);
         $embed = trim($meta->get('video.embed'));
         $videoId = '';
         if (preg_match('/(?:v=|youtu\.be\/|embed\/)([A-Za-z0-9_-]{11})/', $embed, $matches) === 1) {
@@ -38,7 +39,16 @@
             <div class="wrap">
                 @if ($casambiLogo !== '')
                     <div class="cb-lockup">
-                        <img class="cb-lockup-casambi" src="{{ $casambiLogo }}" alt="Casambi">
+                        @if ($casambiUsesStockLockup)
+                            @include('partials.themed-lockup', [
+                                'path' => 'assets/img/casambi/logo-dark.svg',
+                                'class' => 'cb-lockup-casambi',
+                                'label' => 'Casambi',
+                                'fill' => '#111',
+                            ])
+                        @else
+                            <img class="cb-lockup-casambi" src="{{ $casambiLogo }}" alt="Casambi">
+                        @endif
                     </div>
                 @endif
                 <h1 class="cb-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
