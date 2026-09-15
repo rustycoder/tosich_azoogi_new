@@ -743,9 +743,12 @@
         --numcards: 2;
         --card-height: min(56svh, 400px);
     }
+}
 
+@media (max-width: 1024px) {
     .ai-insights .card__content {
-        max-height: var(--card-height);
+        height: auto;
+        max-height: none;
     }
 }
 

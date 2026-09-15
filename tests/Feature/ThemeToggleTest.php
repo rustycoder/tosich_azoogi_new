@@ -44,14 +44,18 @@ class ThemeToggleTest extends TestCase
             ->assertSee("localStorage.getItem('theme')", false)
             ->assertSee('id="theme-toggle"', false)
             ->assertSee('aria-label="Toggle theme"', false)
-            ->assertSee('class="theme-btn"', false)
+            ->assertSee('class="theme-switch"', false)
+            ->assertSee('role="switch"', false)
             ->assertSeeInOrder([
                 'Trade Login',
                 'id="theme-toggle"',
+                'class="sun-icon"',
+                'class="moon-icon"',
                 'class="nav-actions"',
             ], false)
-            ->assertSee('class="sun-icon"', false)
-            ->assertSee('class="moon-icon"', false)
+            ->assertDontSee('class="theme-switch-label"', false)
+            ->assertDontSee('>Dark</span>', false)
+            ->assertDontSee('>Light</span>', false)
             ->assertSee('/assets/js/site-theme.js?v='.$jsMtime, false);
     }
 
@@ -65,6 +69,7 @@ class ThemeToggleTest extends TestCase
         $this->assertStringContainsString('/assets/logo_dark.png', $script);
         $this->assertStringContainsString('/assets/logo_white.png', $script);
         $this->assertStringContainsString("getElementById('theme-toggle')", $script);
+        $this->assertStringContainsString("setAttribute('aria-checked'", $script);
     }
 
     public function test_home_no_longer_clears_the_saved_theme(): void
@@ -82,9 +87,29 @@ class ThemeToggleTest extends TestCase
         $this->assertNotFalse($css);
         $this->assertStringContainsString('--bg: #0b0b0b;', $css);
         $this->assertStringContainsString(':root[data-theme="light"]', $css);
-        $this->assertStringContainsString('.theme-btn', $css);
+        $this->assertStringContainsString('.theme-switch', $css);
         $this->assertMatchesRegularExpression(
-            '/\.theme-btn\s*\{[^}]*border:\s*0;/s',
+            '/\.theme-switch\s*\{[^}]*border:\s*0;/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/:root\[data-theme="light"\] \.theme-switch-thumb\s*\{[^}]*transform:\s*translateX\(16px\)/s',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.theme-switch-track\s*\{[^}]*background:\s*#fff/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.util-rotate\s*\{[^}]*text-align:\s*start/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.util-inner,\s*\.util-rotate\s*\{[^}]*text-align:\s*start/s',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.util-inner\s*\{[^}]*text-align:\s*center/s',
             $css,
         );
         $this->assertStringContainsString('background: rgba(11, 11, 11, 0.92);', $css);
@@ -134,8 +159,12 @@ class ThemeToggleTest extends TestCase
             ->assertSee("localStorage.getItem('theme')", false)
             ->assertSee('id="theme-toggle"', false)
             ->assertSee('aria-label="Toggle theme"', false)
+            ->assertSee('class="theme-switch"', false)
+            ->assertSee('role="switch"', false)
             ->assertSee('class="sun-icon"', false)
             ->assertSee('class="moon-icon"', false)
+            ->assertDontSee('>Dark</span>', false)
+            ->assertDontSee('>Light</span>', false)
             ->assertSee('/assets/js/site-theme.js?v='.$jsMtime, false);
     }
 }

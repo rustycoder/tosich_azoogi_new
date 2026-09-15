@@ -171,6 +171,26 @@ class HomeHeroTest extends TestCase
             '/--card-height:\s*min\(68svh,\s*640px\)/',
             $aiCss,
         );
+        $this->assertMatchesRegularExpression(
+            '/#cards\s*\{[^}]*grid-template-rows:\s*repeat\(var\(--numcards\),\s*auto\)/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.card__content\s*\{[^}]*max-height:\s*none/s',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.card__content>div\s*\{[^}]*overflow:\s*auto/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.ai-insights \.card__content\s*\{[^}]*max-height:\s*none/s',
+            $aiCss,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.card__content>figure>img\s*\{[^}]*position:\s*absolute/s',
+            $css,
+        );
     }
 
     public function test_home_stat_numbers_use_the_hero_size(): void

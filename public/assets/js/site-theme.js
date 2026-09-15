@@ -17,6 +17,15 @@
     });
   }
 
+  function syncToggle(theme) {
+    const btn = document.getElementById('theme-toggle');
+    if (!btn) {
+      return;
+    }
+
+    btn.setAttribute('aria-checked', theme === 'light' ? 'true' : 'false');
+  }
+
   function toggleTheme() {
     const newTheme = currentTheme() === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', newTheme);
@@ -25,6 +34,7 @@
     } catch {
       // Ignore quota / private-mode failures.
     }
+    syncToggle(newTheme);
     updateLogos(newTheme);
   }
 
@@ -37,6 +47,7 @@
         toggleTheme();
       });
     }
+    syncToggle(currentTheme());
     updateLogos();
   }
 

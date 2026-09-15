@@ -323,31 +323,8 @@ html:has(.dash) {
   height: 16px;
 }
 
-.dash-user-btn#theme-toggle {
-  position: relative;
-}
-
-.dash-user-btn#theme-toggle svg {
-  position: absolute;
-  inset: 8px;
-  width: 16px;
-  height: 16px;
-  transition: transform .5s ease, opacity .5s ease;
-}
-
-.dash-user-btn#theme-toggle .moon-icon {
-  opacity: 0;
-  transform: rotate(90deg) scale(0);
-}
-
-:root[data-theme="light"] .dash-user-btn#theme-toggle .sun-icon {
-  opacity: 0;
-  transform: rotate(-90deg) scale(0);
-}
-
-:root[data-theme="light"] .dash-user-btn#theme-toggle .moon-icon {
-  opacity: 1;
-  transform: rotate(0) scale(1);
+.dash-user .theme-switch {
+  justify-self: start;
 }
 
 .dash-user-btn:hover,

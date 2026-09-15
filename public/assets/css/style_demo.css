@@ -287,6 +287,7 @@ h3 {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-align: start;
 }
 
 .util-end {
@@ -817,49 +818,76 @@ a.cta:after {
     height: 0;
 }
 
-.theme-btn {
-    position: relative;
+.theme-switch {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
     padding: 0;
     border: 0;
     background: transparent;
-    color: #fff;
     cursor: pointer;
     flex-shrink: 0;
-    opacity: 0.8;
-    transition: opacity 0.3s;
+    line-height: 0;
 }
 
-.theme-btn:hover {
-    opacity: 1;
+.theme-switch-track {
+    position: relative;
+    width: 36px;
+    height: 20px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
 }
 
-.theme-btn svg {
+:root[data-theme="light"] .theme-switch-track {
+    background: rgba(255, 255, 255, 0.88);
+}
+
+.theme-switch-thumb {
     position: absolute;
+    top: 2px;
+    left: 2px;
     width: 16px;
     height: 16px;
-    transition:
-        transform 0.5s ease,
-        opacity 0.5s ease;
+    border-radius: 50%;
+    background: #c8c8c8;
+    color: #222;
+    display: grid;
+    place-items: center;
+    transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
 }
 
-.theme-btn .moon-icon {
+:root[data-theme="light"] .theme-switch-thumb {
+    transform: translateX(16px);
+    background: #4a4a4a;
+    color: #fff;
+}
+
+.theme-switch-thumb svg {
+    grid-area: 1 / 1;
+    width: 12px;
+    height: 12px;
+}
+
+.theme-switch .sun-icon {
     opacity: 0;
-    transform: rotate(90deg) scale(0);
 }
 
-:root[data-theme="light"] .theme-btn .sun-icon {
-    opacity: 0;
-    transform: rotate(-90deg) scale(0);
-}
-
-:root[data-theme="light"] .theme-btn .moon-icon {
+.theme-switch .moon-icon {
     opacity: 1;
-    transform: rotate(0) scale(1);
+}
+
+:root[data-theme="light"] .theme-switch .sun-icon {
+    opacity: 1;
+}
+
+:root[data-theme="light"] .theme-switch .moon-icon {
+    opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .theme-switch-thumb {
+        transition: none;
+    }
 }
 
 .burger {
@@ -2102,12 +2130,17 @@ footer {
         display: block;
     }
 
-    .util .top-con {
-        display: none !important;
+    .util-inner,
+    .util-rotate {
+        text-align: start;
     }
 
-    .util-inner {
-        text-align: center;
+    .util-end {
+        margin-left: auto;
+    }
+
+    .util .top-con {
+        display: none !important;
     }
 
     .burger {
@@ -2759,10 +2792,8 @@ aside p {
     .card__content {
         grid-template-areas: "img" "text";
         grid-template-columns: 1fr;
-        grid-template-rows: minmax(140px, 48%) 1fr;
+        grid-template-rows: minmax(140px, 200px) auto;
         min-height: 0;
-        height: 100%;
-        max-height: var(--card-height);
         outline: none;
     }
 
@@ -2780,7 +2811,7 @@ aside p {
         place-self: stretch;
         place-items: start;
         gap: 10px;
-        overflow: auto;
+        overflow: visible;
     }
 
     .card__content>div h2 {
@@ -2791,6 +2822,36 @@ aside p {
     .card__content>div p {
         font-size: var(--fs-body);
         line-height: 1.55;
+    }
+}
+
+/* Tablet and phone: hug copy. Desktop keeps the compact --card-height tracks. */
+@media (max-width: 1024px) {
+    #cards {
+        grid-template-rows: repeat(var(--numcards), auto);
+    }
+
+    .card__content {
+        height: auto;
+        max-height: none;
+    }
+
+    .card__content>div {
+        overflow: visible;
+    }
+
+    .card__content>figure {
+        position: relative;
+        min-height: 200px;
+        align-self: stretch;
+    }
+
+    .card__content>figure>img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 }
 

@@ -262,6 +262,10 @@ class PageTest extends TestCase
             '/\.audience-page\s*\{[^}]*--card-height:\s*min\(48svh,\s*400px\)/s',
             $css,
         );
+        $this->assertMatchesRegularExpression(
+            '/\.audience-cards \.card__content\s*\{[^}]*max-height:\s*none/s',
+            $css,
+        );
 
         $this->get('/electrician-builder')
             ->assertOk()

@@ -153,6 +153,13 @@
   margin-top: 20px;
 }
 
+@media (max-width: 1024px) {
+  .audience-cards .card__content {
+    height: auto;
+    max-height: none;
+  }
+}
+
 @media (max-width: 720px) {
   .audience-page {
     --card-height: min(70svh, 520px);
