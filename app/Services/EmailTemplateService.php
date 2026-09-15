@@ -224,7 +224,7 @@ class EmailTemplateService implements IEmailTemplateService
             'dashboard_url' => url('/dashboard/enquiries/'.$enquiry->type->menuSlug()),
             'site_url' => config('app.url'),
             'app_name' => config('app.name', 'Azoogi'),
-            'logo_url' => asset('assets/logo_white.png'),
+            'logo_url' => $this->emailLogoUrl(),
         ];
     }
 
@@ -254,7 +254,7 @@ class EmailTemplateService implements IEmailTemplateService
             'dashboard_url' => url('/dashboard/datasheets/exports'),
             'site_url' => config('app.url'),
             'app_name' => config('app.name', 'Azoogi'),
-            'logo_url' => asset('assets/logo_white.png'),
+            'logo_url' => $this->emailLogoUrl(),
         ];
     }
 
@@ -616,7 +616,18 @@ class EmailTemplateService implements IEmailTemplateService
             'dashboard_url' => url('/dashboard/enquiries'),
             'site_url' => config('app.url'),
             'app_name' => config('app.name', 'Azoogi'),
-            'logo_url' => asset('assets/logo_white.png'),
+            'logo_url' => $this->emailLogoUrl(),
         ];
+    }
+
+    private function emailLogoUrl(): string
+    {
+        $custom = trim((string) env('EMAIL_LOGO_URL', ''));
+
+        if ($custom !== '') {
+            return $custom;
+        }
+
+        return asset('assets/logo_white.png');
     }
 }
