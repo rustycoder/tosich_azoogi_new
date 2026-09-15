@@ -2,6 +2,10 @@
   const STORAGE_KEY = 'azoogi_quote_items';
   const FALLBACK_IMAGE = '/assets/bg_default.png';
 
+  function cleanStr(s) {
+    return String(s || '').replace(/\s+/g, ' ').trim().toLowerCase();
+  }
+
   function readItems() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -10,14 +14,30 @@
         return [];
       }
 
-      return items.map((item) => {
+      let mutated = false;
+      const result = items.map((item) => {
         const sku = primarySku(item.sku);
+        const resolvedImg = resolveItemImage(item);
+        let curImg = String(item.image || '').trim();
+        if ((!curImg || curImg === FALLBACK_IMAGE || curImg.includes('bg_default.png') || curImg.includes('logo_dark.png')) && resolvedImg && resolvedImg !== FALLBACK_IMAGE) {
+          curImg = resolvedImg;
+          mutated = true;
+        }
         return {
           ...item,
           sku,
           id: sku || item.id,
+          image: curImg || resolvedImg || FALLBACK_IMAGE,
         };
       });
+
+      if (mutated) {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(result));
+        } catch {}
+      }
+
+      return result;
     } catch {
       return [];
     }
@@ -49,6 +69,166 @@
     return items.reduce((sum, item) => sum + (Number(item.qty) || 1), 0);
   }
 
+  function extractProductImage(p) {
+    if (!p) return '';
+    const images = p.product_images || p.images || [];
+    let raw = '';
+    if (Array.isArray(images) && images.length > 0) {
+      raw = images[0];
+    } else if (p.cover) {
+      raw = p.cover;
+    } else if (p.img) {
+      raw = p.img;
+    } else if (p.image) {
+      raw = p.image;
+    } else if (Array.isArray(p.product_dimension) && p.product_dimension.length > 0) {
+      raw = p.product_dimension[0];
+    }
+
+    if (typeof raw === 'object' && raw !== null && raw.url) {
+      raw = raw.url;
+    }
+    if (typeof raw === 'string') {
+      const clean = raw.trim();
+      if (clean && clean !== FALLBACK_IMAGE && !clean.includes('bg_default.png') && !clean.includes('logo_dark.png')) {
+        return (clean.startsWith('http://') || clean.startsWith('https://') || clean.startsWith('/')) ? clean : ('/' + clean);
+      }
+    }
+    return '';
+  }
+
+  function searchTreeForVariant(nodes, target) {
+    if (!nodes || !Array.isArray(nodes) || !target) return null;
+    for (const node of nodes) {
+      if (!node) continue;
+      if (node.variants && typeof node.variants === 'object') {
+        for (const vName in node.variants) {
+          if (cleanStr(vName) === target || cleanStr(node.name) === target) {
+            const vData = node.variants[vName];
+            if (typeof vData === 'string') return vData;
+            if (typeof vData === 'object' && vData !== null && vData.id) return vData.id;
+          }
+        }
+      }
+      if (node.children && Array.isArray(node.children)) {
+        const res = searchTreeForVariant(node.children, target);
+        if (res) return res;
+      }
+    }
+    return null;
+  }
+
+  function findProductInCatalog(item) {
+    if (!item || typeof AZOOGI_PRODUCTS === 'undefined' || !AZOOGI_PRODUCTS.products) {
+      return null;
+    }
+
+    const list = Array.isArray(AZOOGI_PRODUCTS.products)
+      ? AZOOGI_PRODUCTS.products
+      : Object.values(AZOOGI_PRODUCTS.products);
+
+    const targetId = cleanStr(item.id);
+    const targetSku = cleanStr(primarySku(item.sku));
+    const targetName = cleanStr(item.name);
+
+    let urlSlug = '';
+    let urlId = '';
+    if (item.url) {
+      const u = String(item.url);
+      const mSlug = u.match(/\/products\/([^?#]+)/);
+      if (mSlug) {
+        urlSlug = cleanStr(decodeURIComponent(mSlug[1]));
+      }
+      const mId = u.match(/[?&]id=([^&#]+)/);
+      if (mId) {
+        urlId = cleanStr(decodeURIComponent(mId[1]));
+      }
+    }
+
+    // 1. Exact ID or Slug match
+    for (const p of list) {
+      if (!p) continue;
+      const pId = cleanStr(p.id || p.airtable_id);
+      const pSlug = cleanStr(p.slug);
+      if (targetId && (pId === targetId || pSlug === targetId)) return p;
+      if (urlId && pId === urlId) return p;
+      if (urlSlug && pSlug === urlSlug) return p;
+    }
+
+    // 2. SKU match (code, mapped SKUs)
+    if (targetSku) {
+      for (const p of list) {
+        if (!p) continue;
+        const pSku = cleanStr(primarySku(p.product_code || p.sku));
+        if (pSku && pSku === targetSku) return p;
+        if (p.sku_mappings && typeof p.sku_mappings === 'object') {
+          for (const k in p.sku_mappings) {
+            const mappedSku = cleanStr(primarySku(p.sku_mappings[k]));
+            if (mappedSku && mappedSku === targetSku) return p;
+          }
+        }
+      }
+    }
+
+    // 3. Exact Name match
+    if (targetName) {
+      for (const p of list) {
+        if (!p) continue;
+        const pName = cleanStr(p.product_name || p.name);
+        if (pName && pName === targetName) return p;
+      }
+    }
+
+    // 4. Tree variants match
+    if (AZOOGI_PRODUCTS.tree && Array.isArray(AZOOGI_PRODUCTS.tree)) {
+      const variantProdId = searchTreeForVariant(AZOOGI_PRODUCTS.tree, targetName || targetId);
+      if (variantProdId) {
+        const found = list.find((p) => cleanStr(p.id || p.airtable_id) === cleanStr(variantProdId));
+        if (found) return found;
+      }
+    }
+
+    // 5. Fuzzy / contains Name match
+    if (targetName && targetName.length > 3) {
+      for (const p of list) {
+        if (!p) continue;
+        const pName = cleanStr(p.product_name || p.name);
+        if (pName && (pName.includes(targetName) || targetName.includes(pName))) return p;
+      }
+    }
+
+    return null;
+  }
+
+  function resolveItemImage(item) {
+    if (!item) return FALLBACK_IMAGE;
+
+    let img = String(item.image || '').trim();
+    if (img && img !== FALLBACK_IMAGE && img !== '/assets/logo_dark.png' && !img.includes('bg_default.png')) {
+      if (img.startsWith('http://') || img.startsWith('https://') || img.startsWith('/')) {
+        return img;
+      }
+      return '/' + img;
+    }
+
+    if (typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS) {
+      const prod = findProductInCatalog(item);
+      if (prod) {
+        const foundImg = extractProductImage(prod);
+        if (foundImg) {
+          return foundImg;
+        }
+      }
+    }
+
+    return FALLBACK_IMAGE;
+  }
+
+  function backgroundUrl(url) {
+    const safe = String(url || FALLBACK_IMAGE).replace(/"/g, '');
+    return 'url("' + safe + '")';
+  }
+
   function upsertItem(next) {
     const name = String(next.name || '').trim();
     if (!name) {
@@ -56,11 +236,16 @@
     }
 
     const items = readItems();
+    let img = String(next.image || '').trim();
+    if (!img || img === FALLBACK_IMAGE || img.includes('bg_default.png') || img.includes('logo_dark.png')) {
+      img = resolveItemImage(next);
+    }
+
     const incoming = {
       id: primarySku(next.sku) || String(next.id || name),
       name,
       sku: primarySku(next.sku),
-      image: String(next.image || '').trim() || FALLBACK_IMAGE,
+      image: img || FALLBACK_IMAGE,
       url: String(next.url || '').trim(),
       qty: 1,
     };
@@ -69,7 +254,9 @@
 
     if (existing) {
       existing.qty = (Number(existing.qty) || 1) + 1;
-      existing.image = incoming.image || existing.image;
+      if (incoming.image && incoming.image !== FALLBACK_IMAGE && !incoming.image.includes('bg_default.png')) {
+        existing.image = incoming.image;
+      }
       existing.sku = incoming.sku || existing.sku;
       existing.url = incoming.url || existing.url;
     } else {
@@ -91,11 +278,6 @@
     writeItems(readItems().filter((item) => itemKey(item) !== key));
   }
 
-  function backgroundUrl(url) {
-    const safe = String(url || FALLBACK_IMAGE).replace(/"/g, '');
-    return 'url("' + safe + '")';
-  }
-
   function extractFromCard(button) {
     if (button.dataset.quoteName) {
       return {
@@ -107,12 +289,12 @@
       };
     }
 
-    const card = button.closest('.prod-card, [data-href]');
+    const card = button.closest('.prod-card, [data-href], .prod-grid');
     if (!card) {
       return null;
     }
 
-    const title = card.querySelector('.prod-card-title-text');
+    const title = card.querySelector('.prod-card-title-text, .prod-card-title, h3, h4');
     const cat = title ? title.querySelector('.cat-label') : null;
     const code = title ? title.querySelector('.prod-card-code') : null;
     let name = title ? title.textContent : '';
@@ -123,8 +305,8 @@
       name = name.replace(code.textContent, '');
     }
 
-    const swatch = card.querySelector('.prod-swatch');
-    const rawBg = swatch ? swatch.style.backgroundImage : '';
+    const swatch = card.querySelector('.prod-swatch, .prod-card-img img, img');
+    const rawBg = swatch ? (swatch.getAttribute('src') || swatch.src || swatch.style.backgroundImage || '') : '';
     const image = rawBg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
     const onclick = card.getAttribute('onclick') || '';
     const fromOnclick = onclick.match(/['"](\/[^'"]+)['"]/);
@@ -143,18 +325,38 @@
     const specBtn = document.getElementById('add-to-spec-btn');
     const codeEl = document.getElementById('product-code-label');
     const imgEl = document.getElementById('gallery-main-img');
-    const name = nameEl ? nameEl.textContent.trim() : '';
+    const name = (specBtn && specBtn.dataset.quoteName) || (nameEl ? nameEl.textContent.trim() : '');
     const sku = primarySku(
       (specBtn && specBtn.dataset.quoteSku) || (codeEl ? codeEl.textContent : ''),
     );
+    let image = (specBtn && specBtn.dataset.quoteImage) || (imgEl ? (imgEl.currentSrc || imgEl.src || imgEl.getAttribute('src') || '') : '');
+    if (image && image.includes(window.location.origin)) {
+      image = image.replace(window.location.origin, '');
+    }
 
     return {
-      id: sku || name,
+      id: (specBtn && specBtn.dataset.quoteId) || sku || name,
       name,
       sku,
-      image: imgEl ? (imgEl.getAttribute('src') || '') : '',
-      url: window.location.pathname + window.location.search,
+      image,
+      url: (specBtn && specBtn.dataset.quoteUrl) || (window.location.pathname + window.location.search),
     };
+  }
+
+  function resolveItemSku(item) {
+    let sku = primarySku(item && item.sku ? item.sku : '');
+    if (sku) {
+      return sku;
+    }
+
+    if (typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS) {
+      const found = findProductInCatalog(item);
+      if (found) {
+        return primarySku(found.product_code || found.sku || (found.product_features && (found.product_features['Product Code'] || found.product_features['Product code'])) || '');
+      }
+    }
+
+    return '';
   }
 
   function renderItemRow(item, variant) {
@@ -162,9 +364,24 @@
     row.className = variant === 'page' ? 'quote-page-item' : 'quote-item';
     row.dataset.quoteKey = itemKey(item);
 
+    const imgSrc = resolveItemImage(item);
     const img = document.createElement('div');
     img.className = variant === 'page' ? 'quote-page-item-img' : 'quote-item-img';
-    img.style.backgroundImage = backgroundUrl(item.image);
+    img.style.backgroundImage = backgroundUrl(imgSrc);
+
+    const imgEl = document.createElement('img');
+    imgEl.src = imgSrc;
+    imgEl.alt = item.name || 'Product Image';
+    imgEl.loading = 'lazy';
+    imgEl.onerror = function () {
+      this.onerror = null;
+      this.src = FALLBACK_IMAGE;
+      this.classList.add('is-fallback');
+    };
+    if (imgSrc === FALLBACK_IMAGE || imgSrc.includes('bg_default.png') || imgSrc.includes('logo_dark.png')) {
+      imgEl.classList.add('is-fallback');
+    }
+    img.appendChild(imgEl);
 
     const copy = document.createElement('div');
     copy.className = variant === 'page' ? 'quote-page-item-copy' : 'quote-item-copy';
@@ -176,13 +393,6 @@
       name.href = item.url;
     }
     copy.appendChild(name);
-
-    if (item.sku) {
-      const sku = document.createElement('span');
-      sku.className = variant === 'page' ? 'quote-page-item-sku' : 'quote-item-sku';
-      sku.textContent = 'SKU: ' + item.sku;
-      copy.appendChild(sku);
-    }
 
     const actions = document.createElement('div');
     actions.className = 'quote-item-actions';

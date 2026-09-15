@@ -172,6 +172,24 @@ body.quote-open .quote-drawer {
   border: 1px solid var(--line);
   border-radius: 4px;
   background: var(--card-bg) center / contain no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.quote-item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.quote-item-img img.is-fallback,
+.quote-page-item-img img.is-fallback {
+  filter: grayscale(100%);
+  opacity: 0.6;
 }
 
 .quote-item-copy {
@@ -361,6 +379,18 @@ body.quote-open .quote-drawer {
   border: 1px solid var(--line);
   border-radius: 4px;
   background: var(--card-bg) center / contain no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.quote-page-item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .quote-page-item-name {

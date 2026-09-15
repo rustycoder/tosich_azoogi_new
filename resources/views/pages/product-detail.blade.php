@@ -1015,6 +1015,7 @@
                     function setMainImage(item) {
                         const localSrc = resolveImg(item.url);
                         galleryMainImg.src = localSrc;
+                        galleryMainImg.setAttribute('src', localSrc);
                         galleryMainImg.style.display = 'block';
                         galleryMainImg.style.opacity = '1';
                         galleryMainImg.style.objectFit = 'contain';
@@ -1022,6 +1023,11 @@
                         galleryMainImg.style.padding = '0';
                         galleryMainImg.style.filter = (!item.isDimension && (localSrc === '/assets/bg_default.png' ||
                             localSrc === '/assets/logo_dark.png')) ? 'grayscale(100%)' : 'none';
+
+                        const specAddBtn = document.getElementById('add-to-spec-btn');
+                        if (specAddBtn && !item.isDimension && localSrc && !localSrc.includes('bg_default.png')) {
+                            specAddBtn.dataset.quoteImage = localSrc;
+                        }
                     }
 
                     setMainImage(galleryItems[0]);
@@ -1467,6 +1473,16 @@
                     const specAddBtn = document.getElementById('add-to-spec-btn');
                     if (specAddBtn) {
                         specAddBtn.dataset.quoteSku = skuDisplay || '';
+                        specAddBtn.dataset.quoteName = pName;
+                        specAddBtn.dataset.quoteId = product.id || pName;
+                        specAddBtn.dataset.quoteUrl = window.location.pathname;
+                        if (!specAddBtn.dataset.quoteImage) {
+                            if (galleryMainImg && galleryMainImg.src && !galleryMainImg.src.includes('bg_default.png')) {
+                                specAddBtn.dataset.quoteImage = galleryMainImg.src;
+                            } else if (product.product_images && product.product_images.length > 0) {
+                                specAddBtn.dataset.quoteImage = resolveImg(product.product_images[0]);
+                            }
+                        }
                     }
                     if (window.AzoogiQuote && typeof window.AzoogiQuote.refresh === 'function') {
                         window.AzoogiQuote.refresh();

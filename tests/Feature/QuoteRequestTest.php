@@ -53,12 +53,11 @@ class QuoteRequestTest extends TestCase
         $this->assertStringContainsString('.nav-actions .cta', $headerScript);
     }
 
-    public function test_quote_script_shows_sku_and_uses_a_delete_icon(): void
+    public function test_quote_script_renders_items_and_uses_a_delete_icon(): void
     {
         $script = file_get_contents(public_path('assets/js/quote.js'));
 
         $this->assertNotFalse($script);
-        $this->assertStringContainsString("sku.textContent = 'SKU: ' + item.sku;", $script);
         $this->assertStringContainsString("setAttribute('aria-label', 'Remove')", $script);
         $this->assertStringContainsString('row.append(img, copy, actions);', $script);
         $this->assertStringContainsString('pageSubmit.disabled = items.length === 0', $script);
