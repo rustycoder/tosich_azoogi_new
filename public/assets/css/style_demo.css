@@ -2592,12 +2592,9 @@ footer {
 }
 
 .card__content {
-    min-height: 0;
-    height: 100%;
-    max-height: var(--card-height);
+    min-height: 70svh;
     transform-origin: 50% 0%;
     will-change: transform;
-    border-radius: 4px;
 }
 
 /** PAGE STYLING **/
