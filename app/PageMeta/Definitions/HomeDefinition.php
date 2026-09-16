@@ -3,6 +3,7 @@
 namespace App\PageMeta\Definitions;
 
 use App\PageMeta\Field;
+use App\PageMeta\ImageSize;
 use App\PageMeta\PageDefinition;
 
 class HomeDefinition implements PageDefinition
@@ -41,16 +42,16 @@ class HomeDefinition implements PageDefinition
             Field::text('slide.cta.secondary.label', 'Secondary button', $slide, $group),
             Field::url('slide.cta.secondary.href', 'Secondary href', $slide, $group),
             Field::select('slide.media.type', 'Media type', ['image' => 'Image', 'video' => 'Video'], $slide, $group),
-            Field::image('slide.media.image', 'Slide image', $slide, $group),
+            Field::image('slide.media.image', 'Slide image', $slide, $group, ImageSize::Hero),
             Field::video('slide.media.video', 'Slide video', $slide, $group),
-            Field::image('slide.media.poster', 'Slide poster', $slide, $group),
+            Field::image('slide.media.poster', 'Slide poster', $slide, $group, ImageSize::Hero),
             Field::text('intro.kicker', 'Intro kicker'),
             Field::text('intro.heading', 'Intro heading'),
             Field::text('values.kicker', 'Values kicker'),
             Field::textarea('values.heading', 'Values heading'),
             Field::text('values.card.title', 'Value title', true, 'values.card'),
             Field::textarea('values.card.body', 'Value body', true, 'values.card'),
-            Field::image('values.card.image', 'Value image', true, 'values.card'),
+            Field::image('values.card.image', 'Value image', true, 'values.card', ImageSize::Card),
             Field::url('values.card.href', 'Value href', true, 'values.card'),
             Field::text('range.kicker', 'Range kicker'),
             Field::text('range.heading', 'Range heading'),

@@ -3,6 +3,7 @@
 namespace App\PageMeta\Definitions;
 
 use App\PageMeta\Field;
+use App\PageMeta\ImageSize;
 use App\PageMeta\PageDefinition;
 
 class DataCentreDefinition implements PageDefinition
@@ -35,7 +36,7 @@ class DataCentreDefinition implements PageDefinition
             Field::text('hero.title_accent', 'Title accent'),
             Field::textarea('hero.lead', 'Hero lead'),
             Field::video('hero.video', 'Hero video'),
-            Field::image('hero.poster', 'Hero poster'),
+            Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
             Field::textarea('intro.body', 'Intro'),
             Field::text('intro.cta.primary.label', 'Primary CTA'),
             Field::url('intro.cta.primary.href', 'Primary href'),
@@ -51,20 +52,20 @@ class DataCentreDefinition implements PageDefinition
             Field::textarea('hardware.heading', 'Hardware heading'),
             Field::text('hardware.heading_accent', 'Hardware accent'),
             Field::textarea('hardware.tick', 'Hardware tick', true, 'hardware.tick'),
-            Field::image('hardware.image', 'Hardware image'),
+            Field::image('hardware.image', 'Hardware image', hint: ImageSize::Photo),
             Field::text('control.kicker', 'Control kicker'),
             Field::textarea('control.heading', 'Control heading'),
             Field::text('control.heading_accent', 'Control accent'),
             Field::textarea('control.tick', 'Control tick', true, 'control.tick'),
-            Field::image('control.image', 'Control image'),
+            Field::image('control.image', 'Control image', hint: ImageSize::Photo),
             Field::text('emergency.heading', 'Emergency heading'),
             Field::text('emergency.heading_accent', 'Emergency accent'),
-            Field::image('emergency.image', 'Emergency image'),
+            Field::image('emergency.image', 'Emergency image', hint: ImageSize::Photo),
             Field::text('emergency.item.title', 'Emergency title', true, 'emergency.item'),
             Field::textarea('emergency.item.body', 'Emergency body', true, 'emergency.item'),
             Field::text('zones.heading', 'Zones heading'),
             Field::text('zones.heading_accent', 'Zones accent'),
-            Field::image('zones.image', 'Zones image'),
+            Field::image('zones.image', 'Zones image', hint: ImageSize::Photo),
             Field::text('zones.item.title', 'Zone title', true, 'zones.item'),
             Field::textarea('zones.item.body', 'Zone body', true, 'zones.item'),
             Field::textarea('cta.heading', 'CTA heading'),

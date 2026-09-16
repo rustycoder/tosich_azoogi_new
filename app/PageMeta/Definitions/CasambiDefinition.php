@@ -3,6 +3,7 @@
 namespace App\PageMeta\Definitions;
 
 use App\PageMeta\Field;
+use App\PageMeta\ImageSize;
 use App\PageMeta\PageDefinition;
 
 class CasambiDefinition implements PageDefinition
@@ -30,10 +31,10 @@ class CasambiDefinition implements PageDefinition
     public function fields(): array
     {
         return [
-            Field::image('slide.image', 'Slide image', true, 'slide'),
+            Field::image('slide.image', 'Slide image', true, 'slide', ImageSize::Banner),
             Field::text('slide.alt', 'Slide alt', true, 'slide'),
             Field::text('hero.kicker', 'Hero kicker'),
-            Field::image('hero.logo', 'Casambi logo'),
+            Field::image('hero.logo', 'Casambi logo', hint: ImageSize::Logo),
             Field::textarea('hero.title', 'Hero title'),
             Field::text('hero.title_accent', 'Title accent'),
             Field::textarea('hero.lead', 'Hero lead'),
@@ -45,7 +46,7 @@ class CasambiDefinition implements PageDefinition
             Field::text('software.heading', 'Software heading'),
             Field::text('software.title', 'Software title'),
             Field::textarea('software.body', 'Software body'),
-            Field::image('software.image', 'Software image'),
+            Field::image('software.image', 'Software image', hint: ImageSize::Software),
             Field::text('hardware.heading', 'Hardware heading'),
             Field::text('hardware.col.product', 'Product column'),
             Field::text('hardware.col.type', 'Type column'),
@@ -53,7 +54,7 @@ class CasambiDefinition implements PageDefinition
             Field::text('hardware.row.product', 'Product', true, 'hardware.row'),
             Field::text('hardware.row.type', 'Type', true, 'hardware.row'),
             Field::textarea('hardware.row.features', 'Key features', true, 'hardware.row'),
-            Field::image('hardware.row.image', 'Product image', true, 'hardware.row'),
+            Field::image('hardware.row.image', 'Product image', true, 'hardware.row', ImageSize::Product),
             Field::text('support.heading', 'Support heading'),
             Field::textarea('support.lead', 'Support lead'),
             Field::text('support.item.title', 'Support title', true, 'support.item'),

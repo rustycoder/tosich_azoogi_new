@@ -3,6 +3,7 @@
 namespace App\PageMeta\Definitions;
 
 use App\PageMeta\Field;
+use App\PageMeta\ImageSize;
 use App\PageMeta\PageDefinition;
 
 class AiLightingDefinition implements PageDefinition
@@ -34,7 +35,7 @@ class AiLightingDefinition implements PageDefinition
             Field::textarea('hero.title', 'Hero title'),
             Field::text('hero.title_accent', 'Title accent'),
             Field::textarea('hero.lead', 'Hero lead'),
-            Field::image('hero.image', 'Hero image'),
+            Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
             Field::text('caps.kicker', 'Caps kicker'),
             Field::textarea('caps.heading', 'Caps heading'),
             Field::text('caps.heading_accent', 'Caps accent'),
@@ -45,9 +46,9 @@ class AiLightingDefinition implements PageDefinition
             Field::text('spectrum.heading_accent', 'Spectrum accent'),
             Field::textarea('spectrum.body', 'Spectrum body'),
             Field::text('spectrum.tick', 'Spectrum tick', true, 'spectrum.tick'),
-            Field::image('spectrum.compare.traditional.image', 'Traditional image'),
+            Field::image('spectrum.compare.traditional.image', 'Traditional image', hint: ImageSize::Photo),
             Field::text('spectrum.compare.traditional.caption', 'Traditional caption'),
-            Field::image('spectrum.compare.ai.image', 'AI image'),
+            Field::image('spectrum.compare.ai.image', 'AI image', hint: ImageSize::Photo),
             Field::text('spectrum.compare.ai.caption', 'AI caption'),
             Field::text('insights.kicker', 'Insights kicker'),
             Field::textarea('insights.heading', 'Insights heading'),
@@ -55,19 +56,19 @@ class AiLightingDefinition implements PageDefinition
             Field::textarea('insights.lead', 'Insights lead'),
             Field::text('insights.item.title', 'Insight title', true, 'insights.item'),
             Field::textarea('insights.item.body', 'Insight body', true, 'insights.item'),
-            Field::image('insights.item.image', 'Insight image', true, 'insights.item'),
+            Field::image('insights.item.image', 'Insight image', true, 'insights.item', ImageSize::Card),
             Field::text('cct.kicker', 'CCT kicker'),
             Field::textarea('cct.heading', 'CCT heading'),
             Field::text('cct.heading_accent', 'CCT accent'),
             Field::textarea('cct.body', 'CCT body'),
-            Field::image('cct.image', 'CCT image'),
+            Field::image('cct.image', 'CCT image', hint: ImageSize::Banner),
             Field::text('space.kicker', 'Space kicker'),
             Field::textarea('space.heading', 'Space heading'),
             Field::text('space.heading_accent', 'Space accent'),
             Field::textarea('space.lead', 'Space lead'),
             Field::text('space.item.title', 'Space title', true, 'space.item'),
             Field::textarea('space.item.body', 'Space body', true, 'space.item'),
-            Field::image('space.item.image', 'Space image', true, 'space.item'),
+            Field::image('space.item.image', 'Space image', true, 'space.item', ImageSize::Panel),
             Field::text('cta.heading', 'CTA heading'),
             Field::textarea('cta.body', 'CTA body'),
             Field::text('cta.label', 'CTA label'),

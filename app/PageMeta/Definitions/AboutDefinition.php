@@ -3,6 +3,7 @@
 namespace App\PageMeta\Definitions;
 
 use App\PageMeta\Field;
+use App\PageMeta\ImageSize;
 use App\PageMeta\PageDefinition;
 
 class AboutDefinition implements PageDefinition
@@ -33,7 +34,7 @@ class AboutDefinition implements PageDefinition
             Field::text('hero.kicker', 'Hero kicker'),
             Field::textarea('hero.title', 'Hero title'),
             Field::text('hero.title_accent', 'Title accent'),
-            Field::image('hero.image', 'Hero image'),
+            Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
             Field::textarea('intro.body', 'Intro'),
             Field::text('intro.cta.label', 'Intro CTA'),
             Field::url('intro.cta.href', 'Intro CTA link'),
@@ -42,18 +43,18 @@ class AboutDefinition implements PageDefinition
             Field::text('why.heading_accent', 'Why accent'),
             Field::text('why.item.title', 'Why title', true, 'why.item'),
             Field::textarea('why.item.body', 'Why body', true, 'why.item'),
-            Field::image('why.item.image', 'Why image', true, 'why.item'),
+            Field::image('why.item.image', 'Why image', true, 'why.item', ImageSize::Panel),
             Field::text('reach.kicker', 'Reach kicker'),
             Field::text('reach.heading', 'Reach heading'),
             Field::text('reach.heading_accent', 'Reach accent'),
             Field::textarea('reach.body', 'Reach body'),
-            Field::image('reach.image', 'Reach image'),
+            Field::image('reach.image', 'Reach image', hint: ImageSize::Banner),
             Field::text('path.kicker', 'Path kicker'),
             Field::text('path.heading', 'Path heading'),
             Field::text('path.heading_accent', 'Path accent'),
             Field::text('path.item.title', 'Path title', true, 'path.item'),
             Field::textarea('path.item.body', 'Path body', true, 'path.item'),
-            Field::image('path.item.image', 'Path image', true, 'path.item'),
+            Field::image('path.item.image', 'Path image', true, 'path.item', ImageSize::Square),
             Field::url('path.item.href', 'Path href', true, 'path.item'),
         ];
     }

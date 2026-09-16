@@ -3,6 +3,7 @@
 namespace App\PageMeta\Definitions;
 
 use App\PageMeta\Field;
+use App\PageMeta\ImageSize;
 use App\PageMeta\PageDefinition;
 
 class DaliCentreDefinition implements PageDefinition
@@ -38,7 +39,7 @@ class DaliCentreDefinition implements PageDefinition
             Field::url('video.embed', 'YouTube URL'),
             Field::text('feature.heading', 'Diagram heading'),
             Field::textarea('feature.lead', 'Diagram lead'),
-            Field::image('feature.image', 'System diagram'),
+            Field::image('feature.image', 'System diagram', hint: ImageSize::Diagram),
             Field::text('feature.item.title', 'Diagram point title', true, 'feature.item'),
             Field::textarea('feature.item.body', 'Diagram point body', true, 'feature.item'),
             Field::text('why.heading', 'Why heading'),
@@ -51,7 +52,7 @@ class DaliCentreDefinition implements PageDefinition
             Field::text('hardware.row.product', 'Product', true, 'hardware.row'),
             Field::text('hardware.row.type', 'Type', true, 'hardware.row'),
             Field::textarea('hardware.row.features', 'Key features', true, 'hardware.row'),
-            Field::image('hardware.row.image', 'Product image', true, 'hardware.row'),
+            Field::image('hardware.row.image', 'Product image', true, 'hardware.row', ImageSize::Product),
             Field::text('support.heading', 'Support heading'),
             Field::textarea('support.lead', 'Support lead'),
             Field::text('support.item.title', 'Support title', true, 'support.item'),

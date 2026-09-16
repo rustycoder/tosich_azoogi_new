@@ -3,6 +3,7 @@
 namespace App\PageMeta\Definitions;
 
 use App\PageMeta\Field;
+use App\PageMeta\ImageSize;
 use App\PageMeta\PageDefinition;
 use Illuminate\Support\Facades\File;
 
@@ -31,7 +32,7 @@ abstract class AudiencePageDefinition implements PageDefinition
             Field::text('card.heading', 'Card heading', true, 'card'),
             Field::text('card.heading_accent', 'Card accent', true, 'card'),
             Field::textarea('card.body', 'Card body', true, 'card'),
-            Field::image('card.image', 'Card image', true, 'card'),
+            Field::image('card.image', 'Card image', true, 'card', ImageSize::Card),
             Field::text('card.cta.label', 'CTA label', true, 'card'),
             Field::url('card.cta.href', 'CTA href', true, 'card'),
         ];
