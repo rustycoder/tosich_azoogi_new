@@ -1255,7 +1255,7 @@ section {
 
 .audience a {
     padding: 14px 26px;
-    border-color: var(--accent);
+    border: 1px solid var(--accent);
     font-size: var(--fs-kicker);
     text-transform: uppercase;
     letter-spacing: 0.14em;
