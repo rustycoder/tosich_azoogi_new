@@ -361,21 +361,36 @@
     return CONTROLLERS.find((item) => item.id === state.controller) || null;
   }
 
+  function escapeHtml(value) {
+    return String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
   function productCard(label, product, extraName) {
     if (!product) {
       return '';
     }
     const name = extraName || product.name;
-    const sku = product.sku ? `SKU: ${product.sku}` : '';
-    return `
-      <div class="ls-product-card">
-        <div class="ls-card-image"><img src="${product.image}" alt="${name}"></div>
-        <div class="ls-card-info">
-          <div class="ls-card-label">${label}</div>
-          <div class="ls-card-name">${name}</div>
-          <div class="ls-card-sku">${sku}</div>
+    const sku = product.sku || '';
+    const url = product.url || '';
+    const img = product.image || '/assets/bg_default.png';
+    const skuHtml = sku ? `<span class="prod-card-code">${escapeHtml(sku)}</span>` : '';
+    const inner = `
+        <div class="prod-card-img">
+          <img src="${escapeHtml(img)}" alt="${escapeHtml(name)}" class="prod-swatch" loading="lazy" onerror="this.onerror=null; this.src='/assets/bg_default.png'; this.classList.add('is-fallback');">
         </div>
-      </div>`;
+        <div class="prod-card-title">
+          <div class="prod-card-title-text"><span class="cat-label">${escapeHtml(label)}</span>${escapeHtml(name)}${skuHtml}</div>
+        </div>`;
+
+    if (url) {
+      return `<a class="prod-card" href="${escapeHtml(url)}">${inner}</a>`;
+    }
+
+    return `<div class="prod-card">${inner}</div>`;
   }
 
   function buildResults() {
@@ -402,12 +417,14 @@
       : '';
 
     resultsGrid.innerHTML = `
-      <div class="ls-section ls-section-1">
-        ${productCard(light.family === 'neon' ? 'NEON LIGHT' : 'STRIP LIGHT', light, lightName)}
-      </div>
-      <div class="ls-section ls-section-2">
-        ${driver ? productCard('DRIVER', driver, driverName) : '<p class="step-hint">No matching driver in the catalogue.</p>'}
-        ${controller ? productCard('STRIP CONTROLLER', controller) : ''}
+      <div class="ls-results-products">
+        <div class="ls-section ls-section-1">
+          ${productCard(light.family === 'neon' ? 'NEON LIGHT' : 'STRIP LIGHT', light, lightName)}
+        </div>
+        <div class="ls-section ls-section-2">
+          ${driver ? productCard('DRIVER', driver, driverName) : '<p class="step-hint">No matching driver in the catalogue.</p>'}
+          ${controller ? productCard('STRIP CONTROLLER', controller) : ''}
+        </div>
       </div>
       <div class="ls-section ls-section-3">
         <div class="ls-specs-list">
@@ -423,7 +440,6 @@
         </div>
         <div class="ls-results-actions">
           <button type="button" class="btn-add-to-cart" id="btnAddEnquiry">Add to Enquiry Cart</button>
-          <a class="btn-edit" id="btnViewProduct" href="${light.url}">View Product</a>
           <button type="button" class="btn-edit" id="btnEdit">Make Edits</button>
         </div>
       </div>

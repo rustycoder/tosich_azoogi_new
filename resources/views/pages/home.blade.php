@@ -118,7 +118,7 @@
               $fallback = \App\Support\ProductCatalog::fallbackImage($item['title'] ?? '');
               $imgUrl = media_url($item['image'] ?? '') ?: $fallback;
           @endphp
-          <a class="card" href="{{ $item['href'] ?? '#' }}"><div class="img"><img src="{{ $imgUrl }}" alt="{{ $item['title'] ?? '' }}" loading="lazy" onerror="this.onerror=null; this.src='{{ $fallback }}';" /></div><div class="body"><h4>{{ $item['title'] ?? '' }}</h4><p>{{ $item['body'] ?? '' }}</p><span class="more">View Range &rarr;</span></div></a>
+          <a class="card" href="{{ $item['href'] ?? '#' }}"><div class="img"><img src="{{ $imgUrl }}" alt="{{ $item['title'] ?? '' }}" loading="lazy" onerror="this.onerror=null; this.src='{{ $fallback }}';" /></div><div class="body"><h4>{{ $item['title'] ?? '' }}</h4>@if (($item['body'] ?? '') !== '')<p>{{ $item['body'] }}</p>@endif<span class="more">View Range &rarr;</span></div></a>
         @endforeach
       @endforeach
     </div>

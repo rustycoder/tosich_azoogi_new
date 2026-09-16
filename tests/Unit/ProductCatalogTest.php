@@ -75,4 +75,51 @@ class ProductCatalogTest extends TestCase
         $this->assertIsArray($neon);
         $this->assertSame($remoteUrl, $neon['image']);
     }
+
+    public function test_range_cards_use_stored_category_description_and_featured_image(): void
+    {
+        $featuredUrl = 'https://v5.airtableusercontent.com/v3/full/category-hero.jpg';
+        $description = 'Seamless flexible linear lighting for interior and exterior architectural contours, including wet areas and long facade runs.';
+
+        ProductCategory::query()->create([
+            'airtable_id' => 'recNeon',
+            'name' => 'NEON',
+            'sort_order' => 1,
+            'description' => $description,
+            'featured_image' => $featuredUrl,
+            'icon' => 'https://dl.airtable.com/.attachments/neon-icon.svg',
+        ]);
+        Product::factory()->create([
+            'product_name' => 'Neon Flex',
+            'category' => 'NEON',
+            'status' => 'publish',
+            'categories' => ['NEON'],
+            'category_path' => ['NEON'],
+            'product_images' => ['https://v5.airtableusercontent.com/v3/full/product.jpg'],
+        ]);
+
+        $neon = collect(ProductCatalog::parentCategories())->firstWhere('title', 'NEON');
+
+        $this->assertIsArray($neon);
+        $this->assertSame($description, $neon['body']);
+        $this->assertSame($featuredUrl, $neon['image']);
+    }
+
+    public function test_range_cards_do_not_use_fallback_descriptions(): void
+    {
+        ProductCategory::query()->create(['airtable_id' => 'recNeon', 'name' => 'NEON', 'sort_order' => 1]);
+        Product::factory()->create([
+            'product_name' => 'Neon Flex',
+            'category' => 'NEON',
+            'status' => 'publish',
+            'categories' => ['NEON'],
+            'category_path' => ['NEON'],
+            'product_description' => 'A long product description that must not appear on the range card.',
+        ]);
+
+        $neon = collect(ProductCatalog::parentCategories())->firstWhere('title', 'NEON');
+
+        $this->assertIsArray($neon);
+        $this->assertSame('', $neon['body']);
+    }
 }

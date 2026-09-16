@@ -38,6 +38,12 @@ interface IProductRepository
     public function publishedByAirtableId(string $airtableId): ?Product;
 
     /**
+     * @param  list<string>  $ids
+     * @return Collection<int, Product>
+     */
+    public function publishedForQuoteIds(array $ids): Collection;
+
+    /**
      * @return Collection<int, Product>
      */
     public function metricIdentities(): Collection;

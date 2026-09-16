@@ -115,6 +115,42 @@ class PageTest extends TestCase
             ->assertDontSee('/https://v5.airtableusercontent.com', false);
     }
 
+    public function test_home_range_cards_show_the_full_stored_category_description(): void
+    {
+        $featuredUrl = 'https://v5.airtableusercontent.com/v3/full/category-hero.jpg';
+        $description = 'Seamless flexible linear lighting for interior and exterior architectural contours, including wet areas and long facade runs.';
+
+        ProductCategory::query()->create([
+            'airtable_id' => 'recNeon',
+            'name' => 'NEON',
+            'sort_order' => 1,
+            'description' => $description,
+            'featured_image' => $featuredUrl,
+        ]);
+        Product::factory()->create([
+            'product_name' => 'Neon Flex',
+            'category' => 'NEON',
+            'status' => 'publish',
+            'categories' => ['NEON'],
+            'category_path' => ['NEON'],
+            'product_images' => ['https://v5.airtableusercontent.com/v3/full/product.jpg'],
+        ]);
+
+        $css = file_get_contents(public_path('assets/css/style_demo.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.marquee \.card p\s*\{[^}]*line-clamp/s',
+            $css,
+        );
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee($description, false)
+            ->assertSee('src="'.$featuredUrl.'"', false)
+            ->assertDontSee('src="https://v5.airtableusercontent.com/v3/full/product.jpg"', false);
+    }
+
     public function test_legacy_audience_and_policies_urls_are_gone(): void
     {
         $this->get('/audience')->assertNotFound();

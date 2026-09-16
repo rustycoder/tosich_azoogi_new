@@ -27,6 +27,10 @@ class ProductsPageTest extends TestCase
 
         $this->assertNotFalse($css);
         $this->assertStringNotContainsString('.prod-gallery-card .img', $css);
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.prod-gallery-card p\s*\{[^}]*line-clamp/s',
+            $css,
+        );
 
         $this->get('/products')
             ->assertOk()
@@ -34,10 +38,13 @@ class ProductsPageTest extends TestCase
             ->assertSee('class="prod-gallery-card"', false)
             ->assertSee('<h4>NEON</h4>', false)
             ->assertSee('<h4>Profiles</h4>', false)
+            ->assertSee('Seamless flexible linear lighting for interior and exterior architectural contours, including wet areas and long facade runs.', false)
             ->assertSee('/products?category=NEON', false)
             ->assertSee('/products?category=Profiles', false)
             ->assertSee('View Range', false)
             ->assertSee('/assets/css/products.css?v='.$mtime, false)
+            ->assertDontSee('Trimless plaster-in, recessed, surfaced and corner aluminium extrusion channels.', false)
+            ->assertDontSee('products available', false)
             ->assertDontSee('class="img"', false)
             ->assertDontSee('id="prodSidebar"', false)
             ->assertDontSee('id="prodSearchInput"', false)
@@ -53,13 +60,19 @@ class ProductsPageTest extends TestCase
             ->assertOk()
             ->assertSee('<h4>NEON</h4>', false)
             ->assertSee('<h4>Profiles</h4>', false)
-            ->assertSee('/products?category=NEON', false);
+            ->assertSee('Seamless flexible linear lighting for interior and exterior architectural contours, including wet areas and long facade runs.', false)
+            ->assertSee('/products?category=NEON', false)
+            ->assertDontSee('Trimless plaster-in, recessed, surfaced and corner aluminium extrusion channels.', false)
+            ->assertDontSee('products available', false);
 
         $this->get('/products')
             ->assertOk()
             ->assertSee('<h4>NEON</h4>', false)
             ->assertSee('<h4>Profiles</h4>', false)
-            ->assertSee('/products?category=NEON', false);
+            ->assertSee('Seamless flexible linear lighting for interior and exterior architectural contours, including wet areas and long facade runs.', false)
+            ->assertSee('/products?category=NEON', false)
+            ->assertDontSee('Trimless plaster-in, recessed, surfaced and corner aluminium extrusion channels.', false)
+            ->assertDontSee('products available', false);
     }
 
     public function test_category_query_opens_the_filtered_catalogue(): void
@@ -97,7 +110,12 @@ class ProductsPageTest extends TestCase
 
     private function seedRangeCategories(): void
     {
-        ProductCategory::query()->create(['airtable_id' => 'recNeon', 'name' => 'NEON', 'sort_order' => 1]);
+        ProductCategory::query()->create([
+            'airtable_id' => 'recNeon',
+            'name' => 'NEON',
+            'sort_order' => 1,
+            'description' => 'Seamless flexible linear lighting for interior and exterior architectural contours, including wet areas and long facade runs.',
+        ]);
         ProductCategory::query()->create(['airtable_id' => 'recProfiles', 'name' => 'Profiles', 'sort_order' => 2]);
 
         Product::factory()->create([

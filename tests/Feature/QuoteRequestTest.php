@@ -45,6 +45,8 @@ class QuoteRequestTest extends TestCase
             ->assertSee('LED Calculator', false)
             ->assertSee('assets/css/quote.css', false)
             ->assertSee('assets/js/quote.js', false)
+            ->assertSee('window.AZOOGI_QUOTE', false)
+            ->assertSee('quote-products', false)
             ->assertSee('assets/js/site_header.js', false);
 
         $headerScript = file_get_contents(public_path('assets/js/site_header.js'));
@@ -64,13 +66,35 @@ class QuoteRequestTest extends TestCase
         $this->assertStringContainsString("hasAttribute('data-clear-quote')", $script);
         $this->assertStringContainsString('writeItems([]);', $script);
         $this->assertStringContainsString('Added to Quote List', $script);
-        $this->assertStringContainsString('isProductInQuote(readItems(), item)', $script);
+        $this->assertStringContainsString('isProductInQuote(displayItems(), item)', $script);
         $this->assertStringContainsString('openDrawer();', $script);
         $this->assertStringNotContainsString('row.append(img, copy);', $script);
         $this->assertDoesNotMatchRegularExpression(
             '/upsertItem\(extractFromProductDetail\(\)\);\s*openDrawer\(\)/s',
             $script,
         );
+    }
+
+    public function test_quote_list_stores_only_id_and_quantity_and_fetches_details_from_the_api(): void
+    {
+        $script = file_get_contents(public_path('assets/js/quote.js'));
+
+        $this->assertNotFalse($script);
+        $this->assertStringContainsString('function hydrateFromApi()', $script);
+        $this->assertStringContainsString("searchParams.append('ids[]', id)", $script);
+        $this->assertStringContainsString('persistStored(next)', $script);
+        $this->assertStringContainsString('merged.push({ id, qty })', $script);
+        $this->assertStringContainsString('window.AZOOGI_QUOTE && window.AZOOGI_QUOTE.productsUrl', $script);
+        $this->assertStringContainsString('if (requestKey === lastHydratedKey)', $script);
+        $this->assertStringContainsString('hydrateQueued = true', $script);
+        $this->assertStringContainsString('markAddedButtons(displayItems());', $script);
+        $this->assertDoesNotMatchRegularExpression(
+            '/refresh:\s*function\s*\(\)\s*\{\s*hydrateFromApi\(\)/',
+            $script,
+        );
+        $this->assertStringNotContainsString('function catalogImage(item)', $script);
+        $this->assertStringNotContainsString('function findProductInCatalog', $script);
+        $this->assertStringNotContainsString('AZOOGI_PRODUCTS', $script);
     }
 
     public function test_product_detail_quote_button_uses_theme_icons_and_keeps_its_label(): void

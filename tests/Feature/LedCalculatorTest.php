@@ -45,6 +45,24 @@ class LedCalculatorTest extends TestCase
             ->assertDontSee('COB019', false);
     }
 
+    public function test_result_cards_match_the_catalogue_and_open_the_product_page(): void
+    {
+        $js = file_get_contents(public_path('assets/js/led_calculator.js'));
+        $css = file_get_contents(public_path('assets/css/led_calculator.css'));
+
+        $this->assertNotFalse($js);
+        $this->assertNotFalse($css);
+        $this->assertStringContainsString('<a class="prod-card"', $js);
+        $this->assertStringNotContainsString('View Product', $js);
+        $this->assertStringNotContainsString('btnViewProduct', $js);
+        $this->assertStringNotContainsString('ls-product-card', $js);
+        $this->assertStringNotContainsString('data-href', $js);
+        $this->assertStringContainsString('ls-results-products', $js);
+        $this->assertStringContainsString('.ls-results-products', $css);
+        $this->assertStringContainsString('grid-template-columns: 1fr 1fr', $css);
+        $this->assertStringContainsString('height: 100%', $css);
+    }
+
     public function test_catalog_classifies_strips_neon_and_drivers(): void
     {
         Product::factory()->create([

@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 #[Fillable([
     'airtable_id',
     'name',
+    'description',
+    'featured_image',
+    'icon',
     'parent_airtable_id',
     'sort_order',
     'created_by',
