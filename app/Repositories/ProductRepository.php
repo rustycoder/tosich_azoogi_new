@@ -578,35 +578,6 @@ class ProductRepository implements IProductRepository
         return is_array($value) ? $value : [$value];
     }
 
-    private function storedAssetPath(mixed $value, ?int $maxLength = 500): ?string
-    {
-        if (is_string($value)) {
-            $path = trim($value);
-
-            if ($path === '') {
-                return null;
-            }
-
-            if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
-                return $maxLength === null ? $path : mb_substr($path, 0, $maxLength);
-            }
-
-            $path = ltrim($path, '/');
-
-            if (str_starts_with($path, 'assets/')) {
-                return $maxLength === null ? $path : mb_substr($path, 0, $maxLength);
-            }
-
-            return null;
-        }
-
-        if (! is_array($value)) {
-            return null;
-        }
-
-        foreach ($value as $item) {
-            $candidate = is_array($item) ? ($item['url'] ?? $item['icon'] ?? null) : $item;
-            $path = $this->storedAssetPath($candidate, $maxLength);
 
             if ($path !== null) {
                 return $path;
