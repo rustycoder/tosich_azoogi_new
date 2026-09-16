@@ -50,7 +50,7 @@
 
     --section-y: clamp(12px, 1.5vw, 18px);
     --hero-min: min(52vh, 480px);
-    --hero-max: min(52vh, 680px);
+    --hero-max: max(72vh, 680px);
     --hero-pad-y-top: 180px;
     --hero-pad-y-bottom: 40px;
     --hero-pad-x: max(28px, calc((100% - var(--site-max, 1400px)) / 2 + 28px));
