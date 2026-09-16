@@ -933,7 +933,7 @@ a.meta-badge:hover {
 }
 
 .reset-selection a {
-  font-size: var(--fs-kicker);
+  font-size: var(--fs-caption);
   padding: 5px 10px !important;
   display: flex;
   align-items: center;
