@@ -1240,7 +1240,7 @@ section {
 }
 
 .intro {
-    padding: var(--section-y) 0;
+    padding: 80px 0;
     text-align: center;
     background: var(--bg);
 }
@@ -1255,7 +1255,7 @@ section {
 
 .audience a {
     padding: 14px 26px;
-    border: 1px solid var(--line);
+    border-color: var(--accent);
     font-size: var(--fs-kicker);
     text-transform: uppercase;
     letter-spacing: 0.14em;
@@ -1267,6 +1267,8 @@ section {
     border-color: var(--accent);
     color: var(--accent);
     transform: translateY(-2px);
+    background-color: var(--accent);
+    color: var(--always-white);
 }
 
 .card-in {
