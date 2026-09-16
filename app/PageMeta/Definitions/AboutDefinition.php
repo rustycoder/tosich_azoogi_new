@@ -54,7 +54,6 @@ class AboutDefinition implements PageDefinition
             Field::text('path.heading_accent', 'Path accent'),
             Field::text('path.item.title', 'Path title', true, 'path.item'),
             Field::textarea('path.item.body', 'Path body', true, 'path.item'),
-            Field::image('path.item.image', 'Path image', true, 'path.item', ImageSize::Square),
             Field::url('path.item.href', 'Path href', true, 'path.item'),
         ];
     }
@@ -71,9 +70,9 @@ class AboutDefinition implements PageDefinition
         ];
 
         $paths = [
-            ['For Architects & Specifiers', 'Protect your design intent. Partner early with us - custom modifications, photometric testing, and spec-grade fixtures that match your vision.', '/assets/img/img-1.jpg', '/architect-designer'],
-            ['For Builders & Contractors', 'On time and on budget. We catch potential site issues before your installer ever opens a box.', '/assets/img/datacenter2.webp', '/electrician-builder'],
-            ['For Electrical Wholesalers', '100% channel protected. Guaranteed trade margins, fast quotes, and reliable local stock support.', '/assets/img/prod-4.jpg', '/wholesaler'],
+            ['For Architects & Specifiers', 'Protect your design intent. Partner early with us - custom modifications, photometric testing, and spec-grade fixtures that match your vision.', '/architect-designer'],
+            ['For Builders & Contractors', 'On time and on budget. We catch potential site issues before your installer ever opens a box.', '/electrician-builder'],
+            ['For Electrical Wholesalers', '100% channel protected. Guaranteed trade margins, fast quotes, and reliable local stock support.', '/wholesaler'],
         ];
 
         $rows = [
@@ -103,10 +102,9 @@ class AboutDefinition implements PageDefinition
             $rows[] = ['key' => 'why.item.image', 'sort_order' => $i, 'value' => $image];
         }
 
-        foreach ($paths as $i => [$title, $body, $image, $href]) {
+        foreach ($paths as $i => [$title, $body, $href]) {
             $rows[] = ['key' => 'path.item.title', 'sort_order' => $i, 'value' => $title];
             $rows[] = ['key' => 'path.item.body', 'sort_order' => $i, 'value' => $body];
-            $rows[] = ['key' => 'path.item.image', 'sort_order' => $i, 'value' => $image];
             $rows[] = ['key' => 'path.item.href', 'sort_order' => $i, 'value' => $href];
         }
 
