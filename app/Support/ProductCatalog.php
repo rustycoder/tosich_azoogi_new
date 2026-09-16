@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Models\ProductCategory;
 use App\Repositories\Contracts\IProductRepository;
 
 class ProductCatalog
@@ -21,6 +22,9 @@ class ProductCatalog
 
         $tree = $data['tree'];
         $products = $data['products'];
+        $storedByName = ProductCategory::query()
+            ->get(['name', 'description', 'featured_image'])
+            ->keyBy('name');
 
         // Preferred order for core lighting categories
         $priorityOrder = [
@@ -57,7 +61,10 @@ class ProductCatalog
             }
 
             $count = 0;
-            $image = null;
+            $stored = $storedByName->get($name);
+            $storedBody = trim((string) ($stored?->description ?? ''));
+            $storedImage = trim((string) ($stored?->featured_image ?? ''));
+            $image = $storedImage !== '' ? $storedImage : null;
             $fallbackDesc = '';
 
             foreach ($products as $product) {
@@ -85,7 +92,9 @@ class ProductCatalog
                 }
             }
 
-            $body = $descriptions[$name] ?? ($fallbackDesc !== '' ? $fallbackDesc : "{$count} products available");
+            $body = $storedBody !== ''
+                ? $storedBody
+                : ($descriptions[$name] ?? ($fallbackDesc !== '' ? $fallbackDesc : "{$count} products available"));
 
             $categories[] = [
                 'title' => $name,

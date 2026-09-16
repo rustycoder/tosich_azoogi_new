@@ -136,6 +136,17 @@ class ProductRepository implements IProductRepository
             $categoryRows[$airtableId] = [
                 'airtable_id' => $airtableId,
                 'name' => $name !== '' ? mb_substr($name, 0, 191) : 'Category',
+                'description' => $this->storedText(
+                    $fields['Descriptions'] ?? $fields['Description'] ?? $fields['Category Description'] ?? $fields['Category description'] ?? null,
+                ),
+                'featured_image' => $this->storedAssetPath(
+                    $fields['Featured Image'] ?? $fields['Featured image'] ?? $fields['featured_image'] ?? null,
+                    null,
+                ),
+                'icon' => $this->storedAssetPath(
+                    $fields['Icon'] ?? $fields['Category Icon'] ?? $fields['Category icon'] ?? null,
+                    null,
+                ),
                 'parent_airtable_id' => $parentId !== '' ? $parentId : null,
                 'sort_order' => isset($fields['Order']) && is_numeric($fields['Order']) ? (int) $fields['Order'] : null,
                 'created_by' => $userId,
@@ -187,6 +198,9 @@ class ProductRepository implements IProductRepository
         DB::transaction(function () use ($categoryRows, $attributeRows): void {
             $this->upsertByAirtableId(ProductCategory::class, array_values($categoryRows), [
                 'name',
+                'description',
+                'featured_image',
+                'icon',
                 'parent_airtable_id',
                 'sort_order',
                 'updated_by',
@@ -234,6 +248,18 @@ class ProductRepository implements IProductRepository
                 $fields = [
                     'Name' => $category->name,
                 ];
+
+                if ($category->description) {
+                    $fields['Descriptions'] = $category->description;
+                }
+
+                if ($category->featured_image) {
+                    $fields['Featured Image'] = $category->featured_image;
+                }
+
+                if ($category->icon) {
+                    $fields['Icon'] = $category->icon;
+                }
 
                 if ($category->parent_airtable_id) {
                     $fields['Parent'] = [$category->parent_airtable_id];
@@ -535,7 +561,9 @@ class ProductRepository implements IProductRepository
             return null;
         }
 
-        return (string) $value;
+        $text = trim((string) $value);
+
+        return $text === '' ? null : $text;
     }
 
     /**
@@ -550,7 +578,7 @@ class ProductRepository implements IProductRepository
         return is_array($value) ? $value : [$value];
     }
 
-    private function storedAssetPath(mixed $value): ?string
+    private function storedAssetPath(mixed $value, ?int $maxLength = 500): ?string
     {
         if (is_string($value)) {
             $path = trim($value);
@@ -560,13 +588,13 @@ class ProductRepository implements IProductRepository
             }
 
             if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
-                return mb_substr($path, 0, 500);
+                return $maxLength === null ? $path : mb_substr($path, 0, $maxLength);
             }
 
             $path = ltrim($path, '/');
 
             if (str_starts_with($path, 'assets/')) {
-                return mb_substr($path, 0, 500);
+                return $maxLength === null ? $path : mb_substr($path, 0, $maxLength);
             }
 
             return null;
@@ -578,7 +606,7 @@ class ProductRepository implements IProductRepository
 
         foreach ($value as $item) {
             $candidate = is_array($item) ? ($item['url'] ?? $item['icon'] ?? null) : $item;
-            $path = $this->storedAssetPath($candidate);
+            $path = $this->storedAssetPath($candidate, $maxLength);
 
             if ($path !== null) {
                 return $path;

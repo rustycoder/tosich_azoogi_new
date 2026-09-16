@@ -27,6 +27,10 @@ class ProductsPageTest extends TestCase
 
         $this->assertNotFalse($css);
         $this->assertStringNotContainsString('.prod-gallery-card .img', $css);
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.prod-gallery-card p\s*\{[^}]*line-clamp/s',
+            $css,
+        );
 
         $this->get('/products')
             ->assertOk()
@@ -34,6 +38,7 @@ class ProductsPageTest extends TestCase
             ->assertSee('class="prod-gallery-card"', false)
             ->assertSee('<h4>NEON</h4>', false)
             ->assertSee('<h4>Profiles</h4>', false)
+            ->assertSee('Seamless flexible linear lighting for interior and exterior architectural contours, including wet areas and long facade runs.', false)
             ->assertSee('/products?category=NEON', false)
             ->assertSee('/products?category=Profiles', false)
             ->assertSee('View Range', false)
@@ -53,12 +58,14 @@ class ProductsPageTest extends TestCase
             ->assertOk()
             ->assertSee('<h4>NEON</h4>', false)
             ->assertSee('<h4>Profiles</h4>', false)
+            ->assertSee('Seamless flexible linear lighting for interior and exterior architectural contours, including wet areas and long facade runs.', false)
             ->assertSee('/products?category=NEON', false);
 
         $this->get('/products')
             ->assertOk()
             ->assertSee('<h4>NEON</h4>', false)
             ->assertSee('<h4>Profiles</h4>', false)
+            ->assertSee('Seamless flexible linear lighting for interior and exterior architectural contours, including wet areas and long facade runs.', false)
             ->assertSee('/products?category=NEON', false);
     }
 
@@ -97,7 +104,12 @@ class ProductsPageTest extends TestCase
 
     private function seedRangeCategories(): void
     {
-        ProductCategory::query()->create(['airtable_id' => 'recNeon', 'name' => 'NEON', 'sort_order' => 1]);
+        ProductCategory::query()->create([
+            'airtable_id' => 'recNeon',
+            'name' => 'NEON',
+            'sort_order' => 1,
+            'description' => 'Seamless flexible linear lighting for interior and exterior architectural contours, including wet areas and long facade runs.',
+        ]);
         ProductCategory::query()->create(['airtable_id' => 'recProfiles', 'name' => 'Profiles', 'sort_order' => 2]);
 
         Product::factory()->create([

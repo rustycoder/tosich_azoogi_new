@@ -46,6 +46,9 @@ class ProductSyncTest extends TestCase
         $this->assertTrue(Schema::hasColumn('products', 'product_features'));
         $this->assertTrue(Schema::hasColumn('product_attributes', 'icon'));
         $this->assertTrue(Schema::hasColumn('product_attributes', 'is_visible_on_filters'));
+        $this->assertTrue(Schema::hasColumn('product_categories', 'description'));
+        $this->assertTrue(Schema::hasColumn('product_categories', 'featured_image'));
+        $this->assertTrue(Schema::hasColumn('product_categories', 'icon'));
         $this->assertStringContainsString("longText('product_images')", $migration);
         $this->assertStringNotContainsString('$table->json(', $migration);
     }
@@ -359,9 +362,26 @@ class ProductSyncTest extends TestCase
 
         DB::flushQueryLog();
         DB::enableQueryLog();
+        $featuredUrl = 'https://dl.airtable.com/.attachments/neon-hero.jpg';
+        $iconUrl = 'https://dl.airtable.com/.attachments/neon-icon.svg';
+        $description = 'Seamless flexible linear lighting for interior and exterior architectural contours, including wet areas and long facade runs.';
+
         app(IProductRepository::class)->persistLookups(
             [
-                ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
+                ['id' => 'recNeon', 'fields' => [
+                    'Name' => 'NEON',
+                    'Order' => 1,
+                    'Descriptions' => $description,
+                    'Featured Image' => [[
+                        'url' => $featuredUrl,
+                        'thumbnails' => [
+                            'small' => ['url' => 'https://dl.airtable.com/thumb-small.jpg'],
+                            'large' => ['url' => 'https://dl.airtable.com/thumb-large.jpg'],
+                            'full' => ['url' => 'https://dl.airtable.com/thumb-full.jpg'],
+                        ],
+                    ]],
+                    'Icon' => [['url' => $iconUrl]],
+                ]],
                 ['id' => 'recGarden', 'fields' => ['Name' => 'Garden', 'Order' => 2, 'Parent' => ['recNeon']]],
             ],
             [
@@ -377,6 +397,13 @@ class ProductSyncTest extends TestCase
         $this->assertDatabaseHas('product_categories', [
             'airtable_id' => 'recNeon',
             'name' => 'NEON',
+            'description' => $description,
+            'featured_image' => $featuredUrl,
+            'icon' => $iconUrl,
+        ]);
+        $this->assertDatabaseMissing('product_categories', [
+            'airtable_id' => 'recNeon',
+            'featured_image' => 'https://dl.airtable.com/thumb-small.jpg',
         ]);
         $this->assertDatabaseHas('product_categories', [
             'airtable_id' => 'recGarden',
