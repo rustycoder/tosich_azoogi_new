@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 #[Fillable([
     'airtable_id',
     'product_name',
+    'slug',
     'category',
     'status',
     'sort_order',
@@ -20,7 +21,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'product_type',
     'stocked_item',
     'supplier_name',
-    'product_short_description',
+    'meta_title',
+    'meta_description',
     'product_description',
     'meta_keywords',
     'datasheet',
@@ -37,6 +39,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'sku_mappings',
     'product_features',
     'options',
+    'dimming_control',
     'created_by',
     'updated_by',
     'deleted_by',
@@ -53,6 +56,7 @@ class Product extends Model
     {
         return [
             'sort_order' => 'integer',
+            'dimming_control' => 'boolean',
             'product_images' => 'array',
             'product_dimension' => 'array',
             'technical_icons' => 'array',
@@ -72,7 +76,13 @@ class Product extends Model
 
     public function publicPath(): string
     {
-        return '/product-detail?id='.rawurlencode($this->airtable_id);
+        if (! empty($this->slug)) {
+            $encoded = implode('/', array_map('rawurlencode', explode('/', (string) $this->slug)));
+
+            return '/products/'.ltrim($encoded, '/');
+        }
+
+        return '/product-detail?id='.rawurlencode((string) $this->airtable_id);
     }
 
     public function coverUrl(): string
@@ -88,6 +98,20 @@ class Product extends Model
     }
 
     /**
+     * @return array{id: string, sku: string, name: string, image: string, url: string}
+     */
+    public function quoteSummary(): array
+    {
+        return [
+            'id' => (string) $this->airtable_id,
+            'sku' => trim((string) ($this->product_code ?? '')),
+            'name' => (string) $this->product_name,
+            'image' => $this->coverUrl(),
+            'url' => $this->publicPath(),
+        ];
+    }
+
+    /**
      * @return array<string, mixed>
      */
     public function toStorefrontArray(): array
@@ -95,6 +119,7 @@ class Product extends Model
         $entry = [
             'id' => $this->airtable_id,
             'product_name' => $this->product_name,
+            'slug' => $this->slug,
             'order' => $this->sort_order,
             'category' => $this->category,
             'categories' => $this->categories,
@@ -102,7 +127,6 @@ class Product extends Model
             'category_paths' => $this->category_paths,
             'product_code' => $this->product_code,
             'sku_mappings' => $this->sku_mappings,
-            'product_short_description' => $this->product_short_description,
             'product_description' => $this->product_description,
             'product_images' => $this->product_images,
             'product_dimension' => $this->product_dimension,
@@ -114,11 +138,14 @@ class Product extends Model
             'ies_file' => $this->ies_file,
             'technical_icons' => $this->technical_icons,
             'meta_keywords' => $this->meta_keywords,
+            'meta_title' => $this->meta_title,
+            'meta_description' => $this->meta_description,
             'supplier_name' => $this->supplier_name,
             'status' => $this->status,
             'product_type' => $this->product_type,
             'product_features' => $this->product_features,
             'options' => $this->options,
+            'dimming_control' => (bool) $this->dimming_control,
         ];
 
         foreach ($entry as $key => $value) {

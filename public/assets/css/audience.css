@@ -1,18 +1,21 @@
 /* Audience pages — Why Azoogi sticky stack (inherits #cards from style_demo) */
 
-.audience-page .topbar.solid {
-  background: rgba(255, 255, 255, 0.96);
-}
-
 .audience-main {
-  padding: 120px 0 0;
+  padding: 0;
   background: var(--bg);
 }
 
 .audience-hero {
   text-align: center;
-  padding: 24px 0 8px;
+  display: grid;
+  align-items: start;
+  padding: var(--hero-pad-y-top) 0 0;
 }
+
+.audience-hero .wrap {
+  padding-bottom: 0;
+}
+
 
 .audience-hero .kicker {
   margin-bottom: 18px;
@@ -21,10 +24,15 @@
 .audience-hero .h2 {
   margin: 0 auto 20px;
   max-width: 920px;
+  font-size: var(--fs-h2);
+}
+
+.audience-hero .h2:last-child {
+  margin-bottom: 0;
 }
 
 .audience-hero .h2 span {
-  color: var(--accent);
+  font-family: var(--font-outline);
 }
 
 .audience-lead {
@@ -45,9 +53,18 @@
   margin-bottom: 0;
 }
 
-.audience-cards-wrap {
-  padding-top: 8px;
-  padding-bottom: 48px;
+.audience-cards-wrap.card-in {
+  padding-top: 0;
+  padding-bottom: calc(var(--section-y) + 16px);
+}
+
+.audience-page {
+  --card-height: min(72svh, 600px);
+}
+
+.audience-page #cards {
+  padding-top: 0;
+  margin-top: 0;
 }
 
 /* Content chrome only — sticky / scale come from style_demo #cards */
@@ -73,7 +90,7 @@
 }
 
 .audience-cards .card__body h2 {
-  font-family: "Google Sans Flex", sans-serif;
+  font-family: var(--font-sans);
   font-weight: 400;
   font-size: var(--fs-h2-section);
   line-height: 1.15;
@@ -111,6 +128,7 @@
 
 .audience-cards .card__content > figure {
   grid-area: img;
+  display: block;
   margin: 0;
   overflow: hidden;
   min-height: 0;
@@ -136,15 +154,19 @@
 }
 
 @media (max-width: 1024px) {
-  .audience-main {
-    padding: 110px 0 0;
+  .audience-cards .card__content {
+    height: auto;
+    max-height: none;
   }
 }
 
-/* Phones: sticky stack stays on; polish copy density only */
 @media (max-width: 720px) {
+  .audience-page {
+    --card-height: min(70svh, 520px);
+  }
+
   .audience-cards-wrap {
-    padding-bottom: 40px;
+    padding-bottom: calc(var(--section-y) + 16px);
   }
 
   .audience-cards .card__body {

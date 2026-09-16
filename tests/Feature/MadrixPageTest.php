@@ -22,10 +22,11 @@ class MadrixPageTest extends TestCase
     {
         $this->get('/madrix')
             ->assertOk()
-            ->assertSee('Madrix', false)
+            ->assertSee('MADRIX', false)
             ->assertSee('Next-Generation', false)
             ->assertSee('Pixel Mapping', false)
-            ->assertSee('Advanced LED Control Solutions', false)
+            ->assertSee('<span>Advanced LED Control Solutions</span>', false)
+            ->assertDontSee('<span>Pixel Mapping</span>', false)
             ->assertSee('Powerful German Engineering. Seamless Spatial Lighting Integration.', false)
             ->assertSee('As an official partner of MADRIX, we bring industry-leading pixel-mapping software', false)
             ->assertSee('Why Choose MADRIX?', false)
@@ -48,6 +49,21 @@ class MadrixPageTest extends TestCase
             ->assertSee('LED Calculator', false);
     }
 
+    public function test_hero_is_eighty_percent_viewport(): void
+    {
+        $css = file_get_contents(public_path('assets/css/madrix.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertMatchesRegularExpression(
+            '/\.mx-hero\s*\{[^}]*height:\s*80vh/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.mx-hero\s*\{[^}]*min-height:\s*80vh/s',
+            $css,
+        );
+    }
+
     public function test_hardware_lineup_is_a_table(): void
     {
         $this->get('/madrix')
@@ -62,6 +78,26 @@ class MadrixPageTest extends TestCase
             ->assertSee('data-preview="/assets/img/madrix/orion.png"', false)
             ->assertSee('MADRIX ORION', false)
             ->assertSee('Sensor Input Interface', false);
+    }
+
+    public function test_hardware_table_keeps_the_first_column_narrower_than_the_second(): void
+    {
+        $css = file_get_contents(public_path('assets/css/madrix.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertStringContainsString('table-layout: fixed', $css);
+        $this->assertMatchesRegularExpression(
+            '/\.spec-table th:first-child,\s*\.spec-table td:first-child\s*\{[^}]*width:\s*15%/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.spec-table th:nth-child\(2\),\s*\.spec-table td:nth-child\(2\)\s*\{[^}]*width:\s*25%/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.spec-table th:last-child,\s*\.spec-table td:last-child\s*\{[^}]*width:\s*60%/s',
+            $css,
+        );
     }
 
     public function test_page_embeds_the_reference_welcome_video(): void

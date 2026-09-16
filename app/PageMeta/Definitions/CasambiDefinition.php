@@ -3,6 +3,7 @@
 namespace App\PageMeta\Definitions;
 
 use App\PageMeta\Field;
+use App\PageMeta\ImageSize;
 use App\PageMeta\PageDefinition;
 
 class CasambiDefinition implements PageDefinition
@@ -30,11 +31,12 @@ class CasambiDefinition implements PageDefinition
     public function fields(): array
     {
         return [
-            Field::image('slide.image', 'Slide image', true, 'slide'),
+            Field::image('slide.image', 'Slide image', true, 'slide', ImageSize::Banner),
             Field::text('slide.alt', 'Slide alt', true, 'slide'),
             Field::text('hero.kicker', 'Hero kicker'),
-            Field::image('hero.logo', 'Casambi logo'),
+            Field::image('hero.logo', 'Casambi logo', hint: ImageSize::Logo),
             Field::textarea('hero.title', 'Hero title'),
+            Field::text('hero.title_accent', 'Title accent'),
             Field::textarea('hero.lead', 'Hero lead'),
             Field::textarea('intro.body', 'Intro'),
             Field::text('why.heading', 'Why heading'),
@@ -44,7 +46,7 @@ class CasambiDefinition implements PageDefinition
             Field::text('software.heading', 'Software heading'),
             Field::text('software.title', 'Software title'),
             Field::textarea('software.body', 'Software body'),
-            Field::image('software.image', 'Software image'),
+            Field::image('software.image', 'Software image', hint: ImageSize::Software),
             Field::text('hardware.heading', 'Hardware heading'),
             Field::text('hardware.col.product', 'Product column'),
             Field::text('hardware.col.type', 'Type column'),
@@ -52,7 +54,7 @@ class CasambiDefinition implements PageDefinition
             Field::text('hardware.row.product', 'Product', true, 'hardware.row'),
             Field::text('hardware.row.type', 'Type', true, 'hardware.row'),
             Field::textarea('hardware.row.features', 'Key features', true, 'hardware.row'),
-            Field::image('hardware.row.image', 'Product image', true, 'hardware.row'),
+            Field::image('hardware.row.image', 'Product image', true, 'hardware.row', ImageSize::Product),
             Field::text('support.heading', 'Support heading'),
             Field::textarea('support.lead', 'Support lead'),
             Field::text('support.item.title', 'Support title', true, 'support.item'),
@@ -71,6 +73,7 @@ class CasambiDefinition implements PageDefinition
             ['key' => 'hero.kicker', 'sort_order' => 0, 'value' => 'Azoogi X Casambi'],
             ['key' => 'hero.logo', 'sort_order' => 0, 'value' => '/assets/img/casambi/logo-dark.svg'],
             ['key' => 'hero.title', 'sort_order' => 0, 'value' => 'Advanced Wireless Lighting Control & Smart Ecosystems'],
+            ['key' => 'hero.title_accent', 'sort_order' => 0, 'value' => 'Smart Ecosystems'],
             ['key' => 'hero.lead', 'sort_order' => 0, 'value' => 'Scalable Bluetooth Mesh Technology. Standardized Luminaire Integration.'],
             ['key' => 'intro.body', 'sort_order' => 0, 'value' => 'As an official Casambi technology and distribution partner, we bring intelligent, ultra-reliable Bluetooth Low Energy (BLE) wireless lighting controls directly to your architectural, commercial, and industrial projects. Casambi creates a self-healing mesh network that eliminates single points of failure, requiring no complex control wiring or central servers.'],
             ['key' => 'why.heading', 'sort_order' => 0, 'value' => 'Why Choose Casambi?'],

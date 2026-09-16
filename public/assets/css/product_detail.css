@@ -27,7 +27,7 @@ h4 {
 }
 
 .breadcrumbs {
-  font-size: 11px;
+  font-size: var(--fs-caption);
   text-transform: uppercase;
   color: var(--muted);
   margin-bottom: 24px;
@@ -236,7 +236,7 @@ h4 {
 }
 
 .product-code {
-  font-size: 13px;
+  font-size: var(--fs-kicker);
   letter-spacing: 0.05em;
   color: var(--accent);
   margin-bottom: 12px;
@@ -253,8 +253,8 @@ h4 {
 .meta-badge {
   background: var(--rgba-hover);
   border: 1px solid var(--rgba-line);
-  color: #555;
-  font-size: 9px;
+  color: var(--muted);
+  font-size: var(--fs-caption);
   padding: 4px 10px;
   border-radius: 4px;
   letter-spacing: 0.03em;
@@ -271,7 +271,7 @@ a.meta-badge:hover {
 
 .product-desc {
   color: var(--ink);
-  font-size: 15px;
+  font-size: var(--fs-body);
   line-height: 1.6;
   padding-bottom: 20px;
 }
@@ -280,15 +280,27 @@ a.meta-badge:hover {
   margin-top: 0 !IMPORTANT;
 }
 
-.gallery-actions a:hover svg {
-  fill: var(--pure-bg);
+.gallery-actions .btn svg {
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.gallery-actions #add-to-spec-btn.is-added {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.gallery-actions #add-to-spec-btn.is-added:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--always-white);
 }
 
 /* Configurator selection blocks */
 
 .config-workspace h3,
 .accessories-section h3 {
-  font-size: 24px !important;
+  font-size: max(16px, var(--fs-h3)) !important;
 }
 
 .config-group {
@@ -301,7 +313,7 @@ a.meta-badge:hover {
 }
 
 .config-group-title {
-  font-size: 12px;
+  font-size: var(--fs-kicker);
   font-weight: 600;
   text-transform: capitalize;
   color: var(--ink);
@@ -340,7 +352,7 @@ a.meta-badge:hover {
   padding: 5px 10px;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: var(--fs-kicker);
   font-weight: 500;
   transition: all 0.2s ease;
   display: inline-flex;
@@ -399,7 +411,7 @@ a.meta-badge:hover {
 }
 
 .slider-val-box {
-  font-size: 16px;
+  font-size: var(--fs-body);
   font-weight: 600;
   color: var(--accent);
 }
@@ -473,7 +485,7 @@ a.meta-badge:hover {
 }
 
 .metric-label {
-  font-size: 10px;
+  font-size: var(--fs-caption);
   text-transform: uppercase;
   color: var(--muted);
   letter-spacing: 0.05em;
@@ -481,7 +493,7 @@ a.meta-badge:hover {
 }
 
 .metric-value {
-  font-size: 16px;
+  font-size: var(--fs-body);
   font-weight: 600;
   color: var(--ink);
 }
@@ -495,7 +507,7 @@ a.meta-badge:hover {
 }
 
 .driver-bar-label {
-  font-size: 11px;
+  font-size: var(--fs-caption);
   color: var(--muted);
   display: flex;
   justify-content: space-between;
@@ -518,7 +530,7 @@ a.meta-badge:hover {
 }
 
 .driver-warning {
-  font-size: 11px;
+  font-size: var(--fs-caption);
   color: #ff5e5e;
   margin-top: 10px;
   display: none;
@@ -535,7 +547,7 @@ a.meta-badge:hover {
   letter-spacing: 0.05em;
   text-align: center;
   border-radius: 4px;
-  font-size: 12px;
+  font-size: var(--fs-kicker);
 }
 
 #download-custom-datasheet:disabled {
@@ -562,7 +574,7 @@ a.meta-badge:hover {
   border: none;
   color: var(--muted);
   padding: 18px 0;
-  font-size: 14px;
+  font-size: var(--fs-body);
   font-weight: 500;
   cursor: pointer;
   position: relative;
@@ -602,7 +614,7 @@ a.meta-badge:hover {
 
 .tab-panel p {
   color: var(--muted);
-  font-size: 15px;
+  font-size: var(--fs-body);
   line-height: 1.7;
 }
 
@@ -619,12 +631,18 @@ a.meta-badge:hover {
 
 .spec-table td {
   padding: 6px 0;
-  font-size: 12px;
+  font-size: var(--fs-kicker);
 }
 
 .product-icons-row img {
   height: 54px !important;
   width: auto;
+  filter: invert(1);
+  transition: filter 0.3s ease, opacity 0.2s;
+}
+
+:root[data-theme="light"] .product-icons-row img {
+  filter: none;
 }
 
 .spec-table td:first-child {
@@ -673,13 +691,13 @@ a.meta-badge:hover {
 }
 
 .download-name {
-  font-size: 13px;
+  font-size: var(--fs-kicker);
   font-weight: 500;
   color: var(--ink);
 }
 
 .download-meta {
-  font-size: 11px;
+  font-size: var(--fs-caption);
   color: var(--muted);
   margin-top: 2px;
 }
@@ -695,7 +713,7 @@ a.meta-badge:hover {
 
 /* --- Quote Form / Spec Inquiry Section --- */
 .quote-section {
-  padding: 30px 0;
+  padding: 30px 0 0;
   border-top: 1px solid var(--line);
   background: linear-gradient(180deg, transparent 0%, rgba(var(--glow-rgb, 103, 208, 78), 0.01) 100%);
 }
@@ -714,14 +732,14 @@ a.meta-badge:hover {
 }
 
 .quote-intro h2 {
-  font-size: clamp(28px, 3vw, 36px);
+  font-size: var(--fs-h2-section);
   margin-bottom: 16px;
   line-weight: 1.2;
 }
 
 .quote-intro p {
   color: var(--muted);
-  font-size: 14px;
+  font-size: var(--fs-lead);
   line-weight: 1.6;
 }
 
@@ -756,7 +774,7 @@ a.meta-badge:hover {
 }
 
 .form-label {
-  font-size: 11px;
+  font-size: var(--fs-caption);
   font-weight: 600;
   text-transform: uppercase;
   color: var(--ink);
@@ -773,7 +791,6 @@ a.meta-badge:hover {
   padding: 12px;
   border-radius: 4px;
   font-family: inherit;
-  font-size: 14px;
   outline: none;
   transition: all 0.3s ease;
 }
@@ -806,7 +823,7 @@ a.meta-badge:hover {
   width: 100%;
   padding: 14px;
   font-weight: 600;
-  font-size: 14px;
+  font-size: var(--fs-body);
   letter-spacing: 0.05em;
   background: var(--accent);
   color: var(--pure-bg);
@@ -841,12 +858,12 @@ a.meta-badge:hover {
 
 .form-success-message p {
   color: var(--muted);
-  font-size: 14px;
+  font-size: var(--fs-body);
 }
 
 /* --- Project Highlights Carousel --- */
 .related-projects-section {
-  padding: 30px 0 40px;
+  padding: var(--section-y) 0 calc(var(--section-y) + 16px);
   border-top: 1px solid var(--line);
 }
 
@@ -915,7 +932,7 @@ a.meta-badge:hover {
 }
 
 .reset-selection a {
-  font-size: 10px;
+  font-size: var(--fs-caption);
   padding: 5px 10px !important;
   display: flex;
   align-items: center;
@@ -1057,7 +1074,7 @@ a.meta-badge:hover {
 
 .prod-card-title {
   padding: 12px 14px 14px;
-  font-size: 13.5px;
+  font-size: var(--fs-meta);
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -1073,7 +1090,7 @@ a.meta-badge:hover {
 
 .prod-card-title .cat-label {
   display: block;
-  font-size: 10px;
+  font-size: var(--fs-caption);
   color: var(--accent);
   text-transform: uppercase;
   letter-spacing: .08em;
@@ -1082,7 +1099,7 @@ a.meta-badge:hover {
 
 .prod-card-title .prod-card-code {
   display: block;
-  font-size: 10px;
+  font-size: var(--fs-caption);
   color: var(--accent);
   text-transform: uppercase;
   letter-spacing: .08em;
@@ -1103,7 +1120,7 @@ a.meta-badge:hover {
   cursor: pointer;
   transition: all .2s;
   flex-shrink: 0;
-  font-size: 16px;
+  font-size: var(--fs-body);
   font-weight: 300;
   padding: 0;
 }
@@ -1139,7 +1156,7 @@ a.meta-badge:hover {
 }
 
 .spec-item {
-  font-size: 11.5px;
+  font-size: var(--fs-caption);
   color: rgba(255, 255, 255, 0.85);
   line-height: 1.4;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -1156,7 +1173,7 @@ a.meta-badge:hover {
 .spec-item strong {
   color: #fff;
   font-weight: 500;
-  font-size: 11px;
+  font-size: var(--fs-caption);
   text-transform: uppercase;
   letter-spacing: .04em;
 }
@@ -1173,7 +1190,7 @@ a.meta-badge:hover {
 .ov-btn {
   flex: 1;
   text-align: center;
-  font-size: 11.5px;
+  font-size: var(--fs-caption);
   padding: 9px 6px;
   cursor: pointer;
   border-radius: 2px;
@@ -1241,7 +1258,7 @@ a.meta-badge:hover {
   margin: 0;
   font-family: var(--font-sans);
   font-weight: 400;
-  font-size: 24px;
+  font-size: var(--fs-h2-section);
   letter-spacing: -0.02em;
   line-height: 1.2;
 }
@@ -1278,7 +1295,7 @@ a.meta-badge:hover {
 
 .datasheet-dialog-lead {
   margin: 0 0 22px;
-  font-size: 15px;
+  font-size: var(--fs-lead);
   line-height: 1.55;
   color: var(--muted);
 }
@@ -1315,7 +1332,7 @@ a.meta-badge:hover {
 .datasheet-field-error {
   margin: 0;
   color: #c0392b;
-  font-size: 12px;
+  font-size: var(--fs-kicker);
 }
 
 @media (max-width: 640px) {

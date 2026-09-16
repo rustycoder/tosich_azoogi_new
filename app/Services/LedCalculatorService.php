@@ -191,7 +191,7 @@ class LedCalculatorService implements ILedCalculatorService
             'sku' => (string) ($product['product_code'] ?? ''),
             'category' => (string) ($product['category'] ?? ''),
             'image' => media_url($image !== '' ? $image : '/assets/img/neon.webp'),
-            'url' => '/product-detail?id='.rawurlencode($id),
+            'url' => ! empty($product['slug']) ? '/products/'.rawurlencode((string) $product['slug']) : '/products/'.rawurlencode($id),
         ];
     }
 

@@ -2,30 +2,19 @@
   const STORAGE_KEY = 'azoogi_quote_items';
   const FALLBACK_IMAGE = '/assets/bg_default.png';
 
-  function readItems() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      const items = raw ? JSON.parse(raw) : [];
-      if (!Array.isArray(items)) {
-        return [];
-      }
+  let detailsByKey = {};
+  let hydrateToken = 0;
+  let hydratePromise = null;
+  let hydrateQueued = false;
+  let lastHydratedKey = '';
 
-      return items.map((item) => {
-        const sku = primarySku(item.sku);
-        return {
-          ...item,
-          sku,
-          id: sku || item.id,
-        };
-      });
-    } catch {
-      return [];
-    }
+  function cleanStr(s) {
+    return String(s || '').replace(/\s+/g, ' ').trim().toLowerCase();
   }
 
-  function writeItems(items) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-    window.dispatchEvent(new CustomEvent('quote:changed'));
+  function productsUrl() {
+    const url = window.AZOOGI_QUOTE && window.AZOOGI_QUOTE.productsUrl;
+    return typeof url === 'string' ? url : '';
   }
 
   function normalizeSku(value) {
@@ -41,54 +30,218 @@
     return sku.split(',')[0].trim();
   }
 
+  function compactStored(entries) {
+    const merged = [];
+    const index = {};
+
+    entries.forEach((entry) => {
+      const id = String(entry && entry.id ? entry.id : '').trim();
+      if (!id) {
+        return;
+      }
+
+      const key = cleanStr(id);
+      const qty = Math.max(1, Number(entry.qty) || 1);
+      if (index[key] !== undefined) {
+        merged[index[key]].qty += qty;
+        return;
+      }
+
+      index[key] = merged.length;
+      merged.push({ id, qty });
+    });
+
+    return merged;
+  }
+
+  function persistStored(entries) {
+    const next = JSON.stringify(compactStored(entries));
+    try {
+      if (localStorage.getItem(STORAGE_KEY) === next) {
+        return;
+      }
+      localStorage.setItem(STORAGE_KEY, next);
+    } catch {}
+  }
+
+  function readStored() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const items = raw ? JSON.parse(raw) : [];
+      if (!Array.isArray(items)) {
+        return [];
+      }
+
+      return compactStored(items.map((item) => ({
+        id: String((item && (item.id || item.sku)) || '').trim(),
+        qty: Math.max(1, Number(item && item.qty) || 1),
+      })));
+    } catch {
+      return [];
+    }
+  }
+
+  function writeItems(entries) {
+    persistStored(entries);
+    window.dispatchEvent(new CustomEvent('quote:changed'));
+  }
+
+  function rememberDetails(product) {
+    if (!product) {
+      return;
+    }
+
+    const id = String(product.id || '').trim();
+    const sku = primarySku(product.sku);
+    const details = {
+      id: id || sku,
+      sku,
+      name: String(product.name || '').trim(),
+      image: String(product.image || '').trim() || FALLBACK_IMAGE,
+      url: String(product.url || '').trim(),
+    };
+
+    [details.id, details.sku].filter(Boolean).forEach((key) => {
+      detailsByKey[cleanStr(key)] = details;
+    });
+  }
+
+  function indexDetails(products) {
+    const next = {};
+    (Array.isArray(products) ? products : []).forEach((product) => {
+      if (!product || !product.id) {
+        return;
+      }
+
+      const details = {
+        id: String(product.id).trim(),
+        sku: primarySku(product.sku),
+        name: String(product.name || '').trim(),
+        image: String(product.image || '').trim() || FALLBACK_IMAGE,
+        url: String(product.url || '').trim(),
+      };
+
+      [details.id, details.sku].filter(Boolean).forEach((key) => {
+        next[cleanStr(key)] = details;
+      });
+    });
+    detailsByKey = next;
+  }
+
+  function matchDetails(value) {
+    const key = cleanStr(value);
+    return key ? (detailsByKey[key] || null) : null;
+  }
+
   function itemKey(item) {
-    return primarySku(item.sku) || String(item.id || item.name || '').trim();
+    const details = matchDetails(item && (item.id || item.sku));
+    if (details && details.id) {
+      return details.id;
+    }
+
+    return String((item && (item.id || item.sku)) || '').trim();
+  }
+
+  function displayItems() {
+    return readStored().map((entry) => {
+      const details = matchDetails(entry.id) || {};
+      return {
+        id: details.id || entry.id,
+        sku: details.sku || '',
+        name: details.name || entry.id,
+        image: details.image || FALLBACK_IMAGE,
+        url: details.url || '',
+        qty: entry.qty,
+      };
+    });
   }
 
   function countItems(items) {
     return items.reduce((sum, item) => sum + (Number(item.qty) || 1), 0);
   }
 
-  function upsertItem(next) {
-    const name = String(next.name || '').trim();
-    if (!name) {
-      return;
-    }
-
-    const items = readItems();
-    const incoming = {
-      id: primarySku(next.sku) || String(next.id || name),
-      name,
-      sku: primarySku(next.sku),
-      image: String(next.image || '').trim() || FALLBACK_IMAGE,
-      url: String(next.url || '').trim(),
-      qty: 1,
-    };
-    const key = itemKey(incoming);
-    const existing = items.find((item) => itemKey(item) === key);
-
-    if (existing) {
-      existing.qty = (Number(existing.qty) || 1) + 1;
-      existing.image = incoming.image || existing.image;
-      existing.sku = incoming.sku || existing.sku;
-      existing.url = incoming.url || existing.url;
-    } else {
-      items.push(incoming);
-    }
-
-    writeItems(items);
+  function isFallbackImage(img) {
+    const value = String(img || '').trim();
+    return value === '' || value === FALLBACK_IMAGE || value.includes('bg_default.png') || value.includes('logo_dark.png');
   }
 
-  function setQty(key, qty) {
-    const nextQty = Math.max(0, Number(qty) || 0);
-    const items = readItems()
-      .map((item) => (itemKey(item) === key ? { ...item, qty: nextQty } : item))
-      .filter((item) => (Number(item.qty) || 0) > 0);
-    writeItems(items);
+  function storedIdsKey(entries) {
+    return compactStored(entries).map((entry) => entry.id).join('\n');
   }
 
-  function removeItem(key) {
-    writeItems(readItems().filter((item) => itemKey(item) !== key));
+  function hydrateFromApi() {
+    if (hydratePromise) {
+      hydrateQueued = true;
+      return hydratePromise;
+    }
+
+    hydratePromise = (async () => {
+      const stored = readStored();
+      const ids = stored.map((entry) => entry.id).filter(Boolean);
+      const url = productsUrl();
+      const requestKey = storedIdsKey(stored);
+
+      if (!url || ids.length === 0) {
+        lastHydratedKey = '';
+        if (ids.length === 0) {
+          detailsByKey = {};
+        }
+        renderLists();
+        return;
+      }
+
+      if (requestKey === lastHydratedKey) {
+        renderLists();
+        return;
+      }
+
+      const token = ++hydrateToken;
+      const endpoint = new URL(url, window.location.origin);
+      ids.forEach((id) => endpoint.searchParams.append('ids[]', id));
+
+      try {
+        const response = await fetch(endpoint.toString(), {
+          headers: { Accept: 'application/json' },
+          credentials: 'same-origin',
+        });
+
+        if (!response.ok || token !== hydrateToken) {
+          renderLists();
+          return;
+        }
+
+        const data = await response.json();
+        if (token !== hydrateToken) {
+          return;
+        }
+
+        indexDetails(data.products || []);
+
+        const next = compactStored(stored.map((entry) => {
+          const details = matchDetails(entry.id);
+          return {
+            id: details ? details.id : entry.id,
+            qty: entry.qty,
+          };
+        }));
+
+        persistStored(next);
+        lastHydratedKey = storedIdsKey(next);
+        renderLists();
+      } catch {
+        if (token === hydrateToken) {
+          renderLists();
+        }
+      }
+    })().finally(() => {
+      hydratePromise = null;
+      if (hydrateQueued) {
+        hydrateQueued = false;
+        hydrateFromApi();
+      }
+    });
+
+    return hydratePromise;
   }
 
   function backgroundUrl(url) {
@@ -96,8 +249,41 @@
     return 'url("' + safe + '")';
   }
 
+  function upsertItem(next) {
+    const id = String((next && (next.id || next.sku)) || '').trim();
+    if (!id) {
+      return;
+    }
+
+    rememberDetails({ ...next, id });
+    const stored = readStored();
+    const key = itemKey({ id, sku: next.sku });
+    const existing = stored.find((entry) => itemKey(entry) === key);
+
+    if (existing) {
+      existing.qty = (Number(existing.qty) || 1) + 1;
+    } else {
+      stored.push({ id, qty: 1 });
+    }
+
+    writeItems(stored);
+    hydrateFromApi();
+  }
+
+  function setQty(key, qty) {
+    const nextQty = Math.max(0, Number(qty) || 0);
+    const items = readStored()
+      .map((item) => (itemKey(item) === key ? { ...item, qty: nextQty } : item))
+      .filter((item) => (Number(item.qty) || 0) > 0);
+    writeItems(items);
+  }
+
+  function removeItem(key) {
+    writeItems(readStored().filter((item) => itemKey(item) !== key));
+  }
+
   function extractFromCard(button) {
-    if (button.dataset.quoteName) {
+    if (button.dataset.quoteName || button.dataset.quoteId || button.dataset.quoteSku) {
       return {
         id: button.dataset.quoteId || button.dataset.quoteSku || button.dataset.quoteName,
         name: button.dataset.quoteName,
@@ -107,12 +293,12 @@
       };
     }
 
-    const card = button.closest('.prod-card, [data-href]');
+    const card = button.closest('.prod-card, [data-href], .prod-grid');
     if (!card) {
       return null;
     }
 
-    const title = card.querySelector('.prod-card-title-text');
+    const title = card.querySelector('.prod-card-title-text, .prod-card-title, h3, h4');
     const cat = title ? title.querySelector('.cat-label') : null;
     const code = title ? title.querySelector('.prod-card-code') : null;
     let name = title ? title.textContent : '';
@@ -123,8 +309,8 @@
       name = name.replace(code.textContent, '');
     }
 
-    const swatch = card.querySelector('.prod-swatch');
-    const rawBg = swatch ? swatch.style.backgroundImage : '';
+    const swatch = card.querySelector('.prod-swatch, .prod-card-img img, img');
+    const rawBg = swatch ? (swatch.getAttribute('src') || swatch.src || swatch.style.backgroundImage || '') : '';
     const image = rawBg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
     const onclick = card.getAttribute('onclick') || '';
     const fromOnclick = onclick.match(/['"](\/[^'"]+)['"]/);
@@ -143,17 +329,21 @@
     const specBtn = document.getElementById('add-to-spec-btn');
     const codeEl = document.getElementById('product-code-label');
     const imgEl = document.getElementById('gallery-main-img');
-    const name = nameEl ? nameEl.textContent.trim() : '';
+    const name = (specBtn && specBtn.dataset.quoteName) || (nameEl ? nameEl.textContent.trim() : '');
     const sku = primarySku(
       (specBtn && specBtn.dataset.quoteSku) || (codeEl ? codeEl.textContent : ''),
     );
+    let image = (specBtn && specBtn.dataset.quoteImage) || (imgEl ? (imgEl.currentSrc || imgEl.src || imgEl.getAttribute('src') || '') : '');
+    if (image && image.includes(window.location.origin)) {
+      image = image.replace(window.location.origin, '');
+    }
 
     return {
-      id: sku || name,
+      id: (specBtn && specBtn.dataset.quoteId) || sku || name,
       name,
       sku,
-      image: imgEl ? (imgEl.getAttribute('src') || '') : '',
-      url: window.location.pathname + window.location.search,
+      image,
+      url: (specBtn && specBtn.dataset.quoteUrl) || (window.location.pathname + window.location.search),
     };
   }
 
@@ -162,9 +352,24 @@
     row.className = variant === 'page' ? 'quote-page-item' : 'quote-item';
     row.dataset.quoteKey = itemKey(item);
 
+    const imgSrc = item.image || FALLBACK_IMAGE;
     const img = document.createElement('div');
     img.className = variant === 'page' ? 'quote-page-item-img' : 'quote-item-img';
-    img.style.backgroundImage = backgroundUrl(item.image);
+    img.style.backgroundImage = backgroundUrl(imgSrc);
+
+    const imgEl = document.createElement('img');
+    imgEl.src = imgSrc;
+    imgEl.alt = item.name || 'Product Image';
+    imgEl.loading = 'lazy';
+    imgEl.onerror = function () {
+      this.onerror = null;
+      this.src = FALLBACK_IMAGE;
+      this.classList.add('is-fallback');
+    };
+    if (isFallbackImage(imgSrc)) {
+      imgEl.classList.add('is-fallback');
+    }
+    img.appendChild(imgEl);
 
     const copy = document.createElement('div');
     copy.className = variant === 'page' ? 'quote-page-item-copy' : 'quote-item-copy';
@@ -176,13 +381,6 @@
       name.href = item.url;
     }
     copy.appendChild(name);
-
-    if (item.sku) {
-      const sku = document.createElement('span');
-      sku.className = variant === 'page' ? 'quote-page-item-sku' : 'quote-item-sku';
-      sku.textContent = 'SKU: ' + item.sku;
-      copy.appendChild(sku);
-    }
 
     const actions = document.createElement('div');
     actions.className = 'quote-item-actions';
@@ -196,14 +394,14 @@
     minus.setAttribute('aria-label', 'Decrease quantity');
     minus.textContent = '−';
 
-    const qty = document.createElement('span');
-    qty.textContent = String(item.qty || 1);
-
     const plus = document.createElement('button');
     plus.type = 'button';
     plus.dataset.quoteQty = '1';
     plus.setAttribute('aria-label', 'Increase quantity');
     plus.textContent = '+';
+
+    const qty = document.createElement('span');
+    qty.textContent = String(item.qty || 1);
 
     stepper.append(minus, qty, plus);
 
@@ -220,7 +418,7 @@
   }
 
   function renderLists() {
-    const items = readItems();
+    const items = displayItems();
     const count = countItems(items);
     const countEls = document.querySelectorAll('[data-quote-count]');
     const drawers = document.querySelectorAll('[data-quote-list="drawer"]');
@@ -280,6 +478,15 @@
     markAddedButtons(items);
   }
 
+  function isProductInQuote(items, product) {
+    const key = itemKey(product);
+    if (key === '') {
+      return false;
+    }
+
+    return items.some((item) => itemKey(item) === key);
+  }
+
   function markAddedButtons(items) {
     const keys = new Set(items.map(itemKey));
     document.querySelectorAll('.add-quote-btn').forEach((button) => {
@@ -290,10 +497,31 @@
       button.textContent = added ? '−' : '+';
       button.setAttribute('aria-label', added ? 'Remove from quote' : 'Add to quote');
     });
+
+    const product = extractFromProductDetail();
+    const productAdded = isProductInQuote(items, product);
+    document.querySelectorAll('#add-to-spec-btn, #add-to-spec-btn-summary').forEach((button) => {
+      button.classList.toggle('is-added', productAdded);
+      const label = button.querySelector('[data-quote-label]');
+      if (label) {
+        label.textContent = productAdded ? 'Added to Quote List' : 'Add to Quote List';
+      }
+      const icon = button.querySelector('svg path');
+      if (icon) {
+        icon.setAttribute(
+          'd',
+          productAdded
+            ? 'M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z'
+            : 'M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z',
+        );
+      }
+      button.setAttribute('aria-label', productAdded ? 'Open quote list' : 'Add to quote list');
+    });
   }
 
   function openDrawer() {
     document.body.classList.add('quote-open');
+    window.dispatchEvent(new CustomEvent('quote:open'));
     const trigger = document.getElementById('quote-trigger');
     const drawer = document.getElementById('quote-drawer');
     if (trigger) {
@@ -349,7 +577,7 @@
         }
         const qtyBtn = event.target.closest('[data-quote-qty]');
         if (qtyBtn) {
-          const item = readItems().find((entry) => itemKey(entry) === key);
+          const item = readStored().find((entry) => itemKey(entry) === key);
           const current = item ? (Number(item.qty) || 1) : 1;
           setQty(key, current + Number(qtyBtn.dataset.quoteQty));
           return;
@@ -359,8 +587,13 @@
       const specBtn = event.target.closest('#add-to-spec-btn, #add-to-spec-btn-summary');
       if (specBtn) {
         event.preventDefault();
-        upsertItem(extractFromProductDetail());
-        openDrawer();
+        const item = extractFromProductDetail();
+        const exists = isProductInQuote(displayItems(), item);
+        if (exists) {
+          openDrawer();
+        } else {
+          upsertItem(item);
+        }
         return;
       }
 
@@ -371,7 +604,7 @@
           return;
         }
         const key = itemKey(item);
-        const exists = readItems().some((entry) => itemKey(entry) === key);
+        const exists = displayItems().some((entry) => itemKey(entry) === key);
         if (exists) {
           removeItem(key);
         } else {
@@ -389,14 +622,14 @@
     const form = document.getElementById('quote-request-form');
     if (form) {
       form.addEventListener('submit', (event) => {
-        if (readItems().length === 0) {
+        if (displayItems().length === 0) {
           event.preventDefault();
           return;
         }
 
         const products = form.querySelector('#your-products');
         if (products && !String(products.value || '').trim()) {
-          products.value = readItems().map((item) => {
+          products.value = displayItems().map((item) => {
             const qty = Number(item.qty) || 1;
             const sku = item.sku ? ` (${item.sku})` : '';
             return `${qty}x ${item.name}${sku}`;
@@ -412,23 +645,24 @@
     window.addEventListener('quote:changed', renderLists);
     window.addEventListener('storage', (event) => {
       if (event.key === STORAGE_KEY) {
-        renderLists();
+        hydrateFromApi();
       }
     });
 
     renderLists();
+    hydrateFromApi();
   }
 
   window.AzoogiQuote = {
     add: upsertItem,
     open: openDrawer,
     close: closeDrawer,
-    items: readItems,
+    items: displayItems,
     clear: function () {
       writeItems([]);
     },
     refresh: function () {
-      markAddedButtons(readItems());
+      markAddedButtons(displayItems());
     },
   };
 

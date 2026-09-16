@@ -38,7 +38,7 @@ class DashboardTest extends TestCase
 
         $this->actingAs($admin)->get('/dashboard')->assertOk();
         $this->actingAs($admin)->get('/dashboard/staff')->assertOk();
-        $this->actingAs($admin)->get('/dashboard/content/pages')->assertOk()->assertSee('Home', false);
+        $this->actingAs($admin)->get('/dashboard/content/pages')->assertOk()->assertSee('Home', false)->assertSee('LED Calculator', false);
         $this->actingAs($admin)->get('/dashboard/content/pages/home')->assertOk();
         $this->actingAs($admin)->get('/dashboard/content/pages/home-owner')->assertOk();
         $this->actingAs($admin)->get('/dashboard/content/sections')->assertOk()->assertSee('Header', false)->assertSee('Footer', false)->assertSee('top of every public page', false)->assertSee('bottom of every public page', false);
@@ -363,7 +363,7 @@ class DashboardTest extends TestCase
         $this->seed([AdminUserSeeder::class, PageSeeder::class]);
         $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
         $page = Page::query()->where('slug', 'about')->firstOrFail();
-        $meta = PageMeta::query()->where('page_id', $page->id)->where('key', 'hero.kicker')->firstOrFail();
+        $meta = PageMeta::query()->where('page_id', $page->id)->where('key', 'hero.title')->firstOrFail();
 
         $this->actingAs($admin)
             ->put(route('dashboard.pages.update', $page), [
@@ -385,7 +385,7 @@ class DashboardTest extends TestCase
         $this->seed([AdminUserSeeder::class, PageSeeder::class]);
         $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
         $page = Page::query()->where('slug', 'about')->firstOrFail();
-        $meta = PageMeta::query()->where('page_id', $page->id)->where('key', 'hero.kicker')->firstOrFail();
+        $meta = PageMeta::query()->where('page_id', $page->id)->where('key', 'hero.title')->firstOrFail();
 
         $this->actingAs($admin)
             ->put(route('dashboard.pages.update', $page), [
@@ -395,19 +395,19 @@ class DashboardTest extends TestCase
                 'meta' => [
                     $meta->id => [
                         'value' => $meta->value,
-                        'font_size' => '24px',
+                        'font_size' => '22px',
                         'text_align' => 'center',
                     ],
                 ],
             ])
             ->assertRedirect();
 
-        $this->assertSame('24px', $meta->fresh()->font_size);
+        $this->assertSame('22px', $meta->fresh()->font_size);
         $this->assertSame('center', $meta->fresh()->text_align);
 
         $this->get('/about')
             ->assertOk()
-            ->assertSee('style="font-size: 24px; text-align: center"', false);
+            ->assertSee('style="font-size: 22px; text-align: center"', false);
 
         $this->actingAs($admin)
             ->put(route('dashboard.pages.update', $page), [
@@ -463,19 +463,19 @@ class DashboardTest extends TestCase
                 'meta' => [
                     $meta->id => [
                         'value' => $meta->value,
-                        'font_size' => '32px',
+                        'font_size' => '28px',
                         'text_align' => 'left',
                     ],
                 ],
             ])
             ->assertRedirect();
 
-        $this->assertSame('32px', $meta->fresh()->font_size);
+        $this->assertSame('28px', $meta->fresh()->font_size);
         $this->assertSame('left', $meta->fresh()->text_align);
 
         $this->get('/'.$slug)
             ->assertOk()
-            ->assertSee('style="font-size: 32px; text-align: left"', false);
+            ->assertSee('style="font-size: 28px; text-align: left"', false);
     }
 
     public function test_staff_can_create_and_soft_delete_projects(): void
@@ -596,11 +596,32 @@ class DashboardTest extends TestCase
             ->assertSee('Who We Are', false)
             ->assertDontSee('&lt;h3&gt;', false);
 
-        $this->actingAs($admin)
-            ->get('/dashboard/content/pages/privacy')
-            ->assertOk()
-            ->assertSee('data-ckeditor', false)
-            ->assertSee('ckeditor', false);
+        foreach (['privacy', 'terms', 'warranty-returns', 'modern-slavery'] as $slug) {
+            $this->actingAs($admin)
+                ->get('/dashboard/content/pages/'.$slug)
+                ->assertOk()
+                ->assertSee('data-ckeditor', false)
+                ->assertSee('ckeditor', false)
+                ->assertSee('dashCkeditor', false)
+                ->assertSee('ckeditor-contents.css', false);
+        }
+
+        $js = file_get_contents(public_path('assets/js/dashboard-visual.js'));
+        $css = file_get_contents(public_path('assets/css/dashboard.css'));
+
+        $this->assertNotFalse($js);
+        $this->assertNotFalse($css);
+        $this->assertStringContainsString("startupMode: 'wysiwyg'", $js);
+        $this->assertStringContainsString('contentsCss', $js);
+        $this->assertStringContainsString('padding: 14px 16px', file_get_contents(public_path('assets/css/ckeditor-contents.css')));
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.dash-drawer \.cke_contents\s*\{[^}]*max-height:\s*min\(240px/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.dash-drawer\.is-wide \.cke_contents\s*\{[^}]*min-height:\s*420px/s',
+            $css,
+        );
     }
 
     public function test_audience_pages_have_dedicated_editors(): void
@@ -955,7 +976,7 @@ class DashboardTest extends TestCase
             ->get(route('dashboard.sections.edit', $header))
             ->assertOk()
             ->assertSee('Rotating text', false)
-            ->assertSee('DESIGN', false)
+            ->assertSee('Design', false)
             ->assertSee('Add text', false)
             ->assertDontSee('Item 1', false);
 
@@ -986,8 +1007,8 @@ class DashboardTest extends TestCase
             ->assertSee('"CRAFT"', false)
             ->assertSee('"INSTALL"', false)
             ->assertSee('"FINISH"', false)
-            ->assertDontSee('"DESIGN"', false)
-            ->assertDontSee('"COMMISSION"', false);
+            ->assertDontSee('"Design"', false)
+            ->assertDontSee('"Commission"', false);
     }
 
     public function test_admin_can_update_header_and_footer_copy(): void

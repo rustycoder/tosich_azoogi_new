@@ -3,6 +3,7 @@
 namespace App\PageMeta\Definitions;
 
 use App\PageMeta\Field;
+use App\PageMeta\ImageSize;
 use App\PageMeta\PageDefinition;
 
 class MadrixDefinition implements PageDefinition
@@ -30,10 +31,11 @@ class MadrixDefinition implements PageDefinition
     public function fields(): array
     {
         return [
-            Field::image('slide.image', 'Slide image', true, 'slide'),
+            Field::image('slide.image', 'Slide image', true, 'slide', ImageSize::Hero),
             Field::text('slide.alt', 'Slide alt', true, 'slide'),
             Field::text('hero.kicker', 'Hero kicker'),
             Field::textarea('hero.title', 'Hero title'),
+            Field::text('hero.title_accent', 'Title accent'),
             Field::textarea('hero.lead', 'Hero lead'),
             Field::textarea('intro.body', 'Intro'),
             Field::text('why.heading', 'Why heading'),
@@ -43,7 +45,7 @@ class MadrixDefinition implements PageDefinition
             Field::text('software.heading', 'Software heading'),
             Field::text('software.title', 'Software title'),
             Field::textarea('software.body', 'Software body'),
-            Field::image('software.image', 'Software image'),
+            Field::image('software.image', 'Software image', hint: ImageSize::Software),
             Field::text('hardware.heading', 'Hardware heading'),
             Field::text('hardware.col.product', 'Product column'),
             Field::text('hardware.col.type', 'Type column'),
@@ -51,7 +53,7 @@ class MadrixDefinition implements PageDefinition
             Field::text('hardware.row.product', 'Product', true, 'hardware.row'),
             Field::text('hardware.row.type', 'Type', true, 'hardware.row'),
             Field::textarea('hardware.row.features', 'Key features', true, 'hardware.row'),
-            Field::image('hardware.row.image', 'Product image', true, 'hardware.row'),
+            Field::image('hardware.row.image', 'Product image', true, 'hardware.row', ImageSize::Product),
             Field::text('support.heading', 'Support heading'),
             Field::textarea('support.lead', 'Support lead'),
             Field::text('support.item.title', 'Support title', true, 'support.item'),
@@ -69,6 +71,7 @@ class MadrixDefinition implements PageDefinition
         $rows = [
             ['key' => 'hero.kicker', 'sort_order' => 0, 'value' => 'Madrix'],
             ['key' => 'hero.title', 'sort_order' => 0, 'value' => 'Next-Generation Pixel Mapping & Advanced LED Control Solutions'],
+            ['key' => 'hero.title_accent', 'sort_order' => 0, 'value' => 'Advanced LED Control Solutions'],
             ['key' => 'hero.lead', 'sort_order' => 0, 'value' => 'Powerful German Engineering. Seamless Spatial Lighting Integration.'],
             ['key' => 'intro.body', 'sort_order' => 0, 'value' => 'As an official partner of MADRIX, we bring industry-leading pixel-mapping software and hardware interfaces directly to your projects. Whether you are designing dynamic architectural lighting, large-scale event stages, or custom immersive environments, MADRIX delivers rock-solid control over thousands of DMX/SPI universes with real-time audio reactivity.'],
             ['key' => 'why.heading', 'sort_order' => 0, 'value' => 'Why Choose MADRIX?'],

@@ -3,6 +3,7 @@
 namespace App\PageMeta\Definitions;
 
 use App\PageMeta\Field;
+use App\PageMeta\ImageSize;
 use App\PageMeta\PageDefinition;
 
 class SilvairDefinition implements PageDefinition
@@ -31,8 +32,9 @@ class SilvairDefinition implements PageDefinition
     {
         return [
             Field::text('hero.kicker', 'Hero kicker'),
-            Field::image('hero.logo', 'Silvair logo'),
+            Field::image('hero.logo', 'Silvair logo', hint: ImageSize::Logo),
             Field::textarea('hero.title', 'Hero title'),
+            Field::text('hero.title_accent', 'Title accent'),
             Field::textarea('hero.lead', 'Hero lead'),
             Field::textarea('intro.body', 'Intro'),
             Field::text('why.heading', 'Why heading'),
@@ -48,11 +50,11 @@ class SilvairDefinition implements PageDefinition
             Field::text('software.heading', 'Software heading'),
             Field::text('software.title', 'Software title'),
             Field::textarea('software.body', 'Software body'),
-            Field::image('software.image', 'Software image'),
+            Field::image('software.image', 'Software image', hint: ImageSize::Software),
             Field::text('standard.heading', 'Standard heading'),
             Field::text('standard.title', 'Standard title'),
             Field::textarea('standard.body', 'Standard body'),
-            Field::image('standard.image', 'Standard image'),
+            Field::image('standard.image', 'Standard image', hint: ImageSize::Photo),
             Field::text('standard.item.title', 'Standard point title', true, 'standard.item'),
             Field::textarea('standard.item.body', 'Standard point body', true, 'standard.item'),
             Field::text('hardware.heading', 'Hardware heading'),
@@ -62,12 +64,12 @@ class SilvairDefinition implements PageDefinition
             Field::text('hardware.row.product', 'Product', true, 'hardware.row'),
             Field::text('hardware.row.type', 'Type', true, 'hardware.row'),
             Field::textarea('hardware.row.features', 'Key features', true, 'hardware.row'),
-            Field::image('hardware.row.image', 'Product image', true, 'hardware.row'),
+            Field::image('hardware.row.image', 'Product image', true, 'hardware.row', ImageSize::Product),
             Field::text('apps.heading', 'Applications heading'),
             Field::textarea('apps.lead', 'Applications lead'),
             Field::text('apps.item.title', 'Application title', true, 'apps.item'),
             Field::textarea('apps.item.body', 'Application body', true, 'apps.item'),
-            Field::image('apps.item.image', 'Application image', true, 'apps.item'),
+            Field::image('apps.item.image', 'Application image', true, 'apps.item', ImageSize::Photo),
             Field::text('flow.heading', 'How it works heading'),
             Field::textarea('flow.lead', 'How it works lead'),
             Field::text('flow.item.title', 'Step title', true, 'flow.item'),
@@ -89,6 +91,7 @@ class SilvairDefinition implements PageDefinition
             ['key' => 'hero.kicker', 'sort_order' => 0, 'value' => 'Azoogi X Silvair'],
             ['key' => 'hero.logo', 'sort_order' => 0, 'value' => '/assets/img/silvair/logo.svg'],
             ['key' => 'hero.title', 'sort_order' => 0, 'value' => 'Enterprise Bluetooth® Qualified Mesh Lighting'],
+            ['key' => 'hero.title_accent', 'sort_order' => 0, 'value' => 'Qualified Mesh Lighting'],
             ['key' => 'hero.lead', 'sort_order' => 0, 'value' => 'Qualified Mesh Standard. Rapid Mobile Commissioning. Intelligent Energy Analytics.'],
             ['key' => 'intro.body', 'sort_order' => 0, 'value' => 'As an official integration partner for Silvair, we deliver robust, interoperable Bluetooth® Mesh lighting control solutions for commercial real estate, industrial facilities, and educational institutions. Silvair’s software-driven architecture enables wireless fixture-level control, automated energy code compliance, and advanced building data analytics without complex control wiring or central servers.'],
             ['key' => 'why.heading', 'sort_order' => 0, 'value' => 'Why Choose Silvair Wireless Controls?'],

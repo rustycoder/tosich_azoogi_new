@@ -1,11 +1,7 @@
 /* Legal / policy pages — v1.1 */
 
-.legal-page .topbar.solid {
-  background: rgba(255, 255, 255, 0.96);
-}
-
 .legal-main {
-  padding: 140px 0 72px;
+  padding: 0 0 calc(var(--section-y) + 16px);
   background: var(--bg);
 }
 
@@ -15,7 +11,11 @@
 
 .legal-hero {
   max-width: none;
-  margin-bottom: 8px;
+  min-height: var(--hero-min);
+  display: grid;
+  align-items: end;
+  padding: var(--hero-pad-y-top) 0 var(--hero-pad-y-bottom);
+  margin-bottom: 0;
 }
 
 .legal-kicker {
@@ -60,7 +60,7 @@
 }
 
 .legal-nav a {
-  font-size: 13px;
+  font-size: var(--fs-kicker);
   font-weight: 500;
   letter-spacing: .06em;
   text-transform: uppercase;
@@ -132,8 +132,8 @@
 }
 
 .legal-block-title {
-  font-family: "Google Sans Flex", sans-serif;
-  font-size: clamp(26px, 3.5vw, 36px);
+  font-family: var(--font-sans);
+  font-size: var(--fs-h2-section);
   font-weight: 400;
   margin: 0 0 16px;
   line-height: 1.15;
@@ -142,7 +142,7 @@
 
 .legal-block-lead {
   color: var(--muted);
-  font-size: clamp(15px, 1.15vw, 17px);
+  font-size: var(--fs-lead);
   line-height: 1.65;
   margin: 0 0 28px;
   padding: 0;
@@ -155,8 +155,8 @@
 
 .legal-section h3,
 .legal-body h3 {
-  font-family: "Google Sans Flex", sans-serif;
-  font-size: clamp(16px, 1.6vw, 19px);
+  font-family: var(--font-sans);
+  font-size: var(--fs-card-title-sm);
   font-weight: 500;
   margin: 0 0 12px;
   line-height: 1.3;
@@ -165,8 +165,8 @@
 
 .legal-section h2,
 .legal-body h2 {
-  font-family: "Google Sans Flex", sans-serif;
-  font-size: clamp(18px, 2vw, 22px);
+  font-family: var(--font-sans);
+  font-size: var(--fs-h2-section);
   font-weight: 500;
   margin: 0 0 14px;
   line-height: 1.3;
@@ -178,7 +178,7 @@
 .legal-body p,
 .legal-body li {
   color: var(--muted);
-  font-size: 15px;
+  font-size: var(--fs-body);
   line-height: 1.7;
   margin: 0 0 12px;
   padding: 0;
@@ -216,7 +216,7 @@
 .legal-contact p {
   margin: 0 0 6px;
   color: var(--muted);
-  font-size: 15px;
+  font-size: var(--fs-body);
   line-height: 1.65;
   padding: 0;
 }
@@ -265,18 +265,7 @@
   }
 }
 
-@media (max-width: 1024px) {
-  .legal-main {
-    padding: 120px 0 56px;
-  }
-
-}
-
 @media (max-width: 640px) {
-  .legal-main {
-    padding: 112px 0 48px;
-  }
-
   .legal-section,
   .legal-body {
     margin-bottom: 28px;

@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Models\ProductCategory;
 use App\Repositories\Contracts\IProductRepository;
 
 class ProductCatalog
@@ -21,6 +22,9 @@ class ProductCatalog
 
         $tree = $data['tree'];
         $products = $data['products'];
+        $storedByName = ProductCategory::query()
+            ->get(['name', 'description', 'featured_image'])
+            ->keyBy('name');
 
         // Preferred order for core lighting categories
         $priorityOrder = [
@@ -31,17 +35,6 @@ class ProductCatalog
             'Outdoor & Architectural' => 5,
             'Drivers' => 6,
             'Accessories' => 7,
-        ];
-
-        // Refined architectural descriptions
-        $descriptions = [
-            'NEON' => 'Seamless flexible linear lighting for interior and exterior architectural contours.',
-            'Profiles' => 'Trimless plaster-in, recessed, surfaced and corner aluminium extrusion channels.',
-            'Linear Lights' => 'Architectural linear fixtures and integrated illuminated systems.',
-            'Strips and Flex' => 'High-output dotless COB, SMD strips and flexible LED sheets.',
-            'Outdoor & Architectural' => 'High-grade IP67/IP68 landscape, garden, and pathway luminaires.',
-            'Drivers' => 'Intelligent 5-in-1 dimming, DALI-2, and switchable power supplies.',
-            'Accessories' => 'Precision diffusers, aluminium mounting tracks, and end caps.',
         ];
 
         $categories = [];
@@ -57,8 +50,10 @@ class ProductCatalog
             }
 
             $count = 0;
-            $image = null;
-            $fallbackDesc = '';
+            $stored = $storedByName->get($name);
+            $storedBody = trim((string) ($stored?->description ?? ''));
+            $storedImage = trim((string) ($stored?->featured_image ?? ''));
+            $image = $storedImage !== '' ? $storedImage : null;
 
             foreach ($products as $product) {
                 if (! is_array($product)) {
@@ -78,18 +73,12 @@ class ProductCatalog
                     if ($image === null && ! empty($product['product_images'][0])) {
                         $image = (string) $product['product_images'][0];
                     }
-
-                    if ($fallbackDesc === '' && ! empty($product['product_short_description'])) {
-                        $fallbackDesc = trim((string) $product['product_short_description']);
-                    }
                 }
             }
 
-            $body = $descriptions[$name] ?? ($fallbackDesc !== '' ? $fallbackDesc : "{$count} products available");
-
             $categories[] = [
                 'title' => $name,
-                'body' => $body,
+                'body' => $storedBody,
                 'image' => self::rangeImage($image, $name),
                 'href' => url('/products').'?category='.urlencode($name),
                 'count' => $count,

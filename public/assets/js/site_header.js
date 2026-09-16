@@ -7,7 +7,7 @@
   let el = null;
   let isHome = false;
   let intro = 'Australian-Owned B2B Trade Wholesaler - Custom Lighting & Smart Control Solutions';
-  let words = ['DESIGN', 'ENGINEER', 'CUSTOMISE', 'SUPPLY', 'CONTROL', 'COMMISSION'];
+  let words = ['Design', 'Engineer', 'Customise', 'Supply', 'Control', 'Commission'];
 
   function swap(nextText, asWords) {
     if (!el || !isHome) return;
@@ -130,6 +130,20 @@
       }
     } else if (utilBox !== menu.lastElementChild) {
       menu.appendChild(utilBox);
+    }
+
+    if (!menu.querySelector('.mobile-cta')) {
+      const cta = document.querySelector('.nav-actions .cta');
+      if (cta) {
+        const clone = cta.cloneNode(true);
+        clone.classList.add('mobile-cta');
+        const util = menu.querySelector('.mobile-util');
+        if (util) {
+          menu.insertBefore(clone, util);
+        } else {
+          menu.appendChild(clone);
+        }
+      }
     }
   }
 

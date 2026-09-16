@@ -56,7 +56,7 @@ class ProductDatasheetTest extends TestCase
             'product_code' => 'GL005',
             'category' => 'Garden Light',
             'status' => 'publish',
-            'product_short_description' => 'Transform outdoor spaces.',
+            'product_description' => 'Transform outdoor spaces.',
             'product_images' => ['https://example.com/garden.jpg'],
             'product_dimension' => ['https://example.com/garden-dim.jpg'],
             'product_features' => [

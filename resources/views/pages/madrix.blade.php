@@ -43,8 +43,7 @@
       @endforeach
     </div>
     <div class="mx-hero-copy" {!! cms_section_attr('hero') !!}>
-      <div class="kicker"{!! cms_style($meta, 'hero.kicker') !!}>{{ $meta->get('hero.kicker') }}</div>
-      <h1{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), 'Pixel Mapping') !!}</h1>
+      <h1{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
       <p{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
       @if (count($slides) > 1)
         <div class="mx-hero-controls">
@@ -181,14 +180,12 @@
     </section>
   @endif
 
-  <div class="mx-cta-wrap reveal" {!! cms_section_attr('cta') !!}>
-    <div class="wrap">
+  <div class="wrap reveal" {!! cms_section_attr('cta') !!}>
       <div class="mx-cta">
         <h2{!! cms_style($meta, 'cta.heading') !!}>{{ $meta->get('cta.heading') }}</h2>
         <p{!! cms_style($meta, 'cta.body') !!}>{{ $meta->get('cta.body') }}</p>
         <a class="btn primary" href="{{ chrome_url($meta->get('cta.href', 0, '/contact')) }}"{!! cms_style($meta, 'cta.label') !!}>{{ $meta->get('cta.label') }}</a>
       </div>
-    </div>
   </div>
 
   <div class="mx-cursor-preview" data-product-preview="mx-product" hidden aria-hidden="true">
@@ -206,23 +203,12 @@
   const topbar = document.getElementById('topbar');
   let lastScrolled = null;
 
-  function updateLogos() {
-    const isScrolled = window.scrollY > 40;
-    document.querySelectorAll('.logo img').forEach(function (img) {
-      if (img.closest('.topbar')) {
-        img.src = isScrolled ? '/assets/logo_dark.png' : '/assets/logo_white.png';
-      } else {
-        img.src = '/assets/logo_dark.png';
-      }
-    });
-  }
-
   const onScroll = function () {
     const isScrolled = window.scrollY > 40;
     if (isScrolled !== lastScrolled) {
       topbar?.classList.toggle('solid', isScrolled);
       lastScrolled = isScrolled;
-      updateLogos();
+      if (typeof updateLogos === 'function') updateLogos();
     }
   };
   window.addEventListener('scroll', onScroll, { passive: true });

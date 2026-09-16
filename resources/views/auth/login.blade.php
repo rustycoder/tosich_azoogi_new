@@ -63,7 +63,7 @@ html, body {
 
 .login-card {
     width: 100%;
-    background: #fff;
+    background: var(--pure-bg);
     border: 1px solid var(--line);
     padding: 36px 32px 32px;
 }
@@ -73,7 +73,7 @@ html, body {
 }
 
 .login-card .h2 {
-    font-size: clamp(28px, 4vw, 36px);
+    font-size: var(--fs-h2-section);
     margin: 0 0 28px;
 }
 
@@ -88,7 +88,7 @@ html, body {
 }
 
 .login-form label {
-    font-size: 12px;
+    font-size: var(--fs-kicker);
     letter-spacing: .08em;
     text-transform: uppercase;
     font-weight: 500;
@@ -103,7 +103,7 @@ html, body {
     color: var(--ink);
     padding: 14px 16px;
     font: inherit;
-    font-size: 15px;
+    font-size: max(16px, var(--fs-body));
     border-radius: 4px;
     outline: none;
     transition: border-color .25s ease, box-shadow .25s ease;
@@ -118,7 +118,7 @@ html, body {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 14px;
+    font-size: var(--fs-body);
     color: var(--muted);
     text-transform: none;
     letter-spacing: 0;
@@ -135,7 +135,7 @@ html, body {
 }
 
 .login-error {
-    font-size: 13px;
+    font-size: var(--fs-kicker);
     color: #c0392b;
     margin: 0;
 }
@@ -157,7 +157,7 @@ html, body {
 <section class="login-screen">
     <div class="login-inner">
         <div class="brand" aria-label="Azoogi">
-            <img src="{{ asset('assets/logo_dark.png') }}" alt="Azoogi">
+            <img src="{{ asset('assets/logo_white.png') }}" alt="Azoogi">
         </div>
 
         <div class="login-card">

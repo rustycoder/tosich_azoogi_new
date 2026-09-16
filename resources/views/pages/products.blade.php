@@ -9,7 +9,9 @@
   Drivers and more.
 @endsection
 
-@section('bodyClass', 'products-page')
+@section('bodyClass')
+  products-page {{ $showCatalog ? 'is-catalog' : 'is-gallery' }}
+@endsection
 
 @section('bodyAttributes')
   style="padding-top: 120px;"
@@ -18,17 +20,13 @@
 @section('chrome', 'full')
 
 @section('topbarClass', 'solid')
-@section('logo', 'logo_dark.png')
+@section('logo', 'logo_white.png')
 
 @push('styles')
+  <link rel="stylesheet" href="{{ versioned_asset('assets/css/products.css') }}">
+  @if ($showCatalog)
   @verbatim
     <style>
-      /* Product page — solid light header (matches site light mode) */
-      .topbar {
-        background: rgba(255, 255, 255, .96) !important;
-        border-bottom: 1px solid var(--line) !important;
-      }
-
       .header-bg {
         background-color: #333;
         height: 400px;
@@ -48,7 +46,7 @@
       }
 
       .crumb {
-        font-size: 13px;
+        font-size: var(--fs-kicker);
         color: var(--muted);
       }
 
@@ -127,7 +125,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        font-size: 11px;
+        font-size: var(--fs-caption);
         font-weight: 600;
         letter-spacing: .12em;
         text-transform: uppercase;
@@ -141,7 +139,7 @@
       }
 
       .sb-toggle {
-        font-size: 15px;
+        font-size: var(--fs-body);
         font-weight: 300;
         line-height: 1;
         color: var(--accent);
@@ -193,7 +191,7 @@
         justify-content: space-between;
         padding: 5px 6px;
         cursor: pointer;
-        font-size: 11px;
+        font-size: var(--fs-caption);
         font-weight: 600;
         gap: 6px;
       }
@@ -213,7 +211,7 @@
 
       /* cleaner +/- toggle icon to match filter accordion */
       .cat-toggle {
-        font-size: 14px;
+        font-size: var(--fs-body);
         font-weight: 300;
         color: var(--muted);
         width: 16px;
@@ -246,14 +244,14 @@
       .cat-sub-link {
         display: block;
         padding: 4px 6px;
-        font-size: 10.5px;
+        font-size: var(--fs-caption);
         color: var(--muted);
         line-height: 1.3;
         text-decoration: none;
       }
 
       .cat-sub-link.level-0 {
-        font-size: 11px;
+        font-size: var(--fs-caption);
         font-weight: 600;
         color: var(--ink);
         padding: 5px 6px;
@@ -274,7 +272,7 @@
         justify-content: space-between;
         padding: 0 10px;
         cursor: pointer;
-        font-size: 10px;
+        font-size: var(--fs-caption);
         font-weight: 600;
       }
 
@@ -283,7 +281,7 @@
       }
 
       .filter-toggle {
-        font-size: 15px;
+        font-size: var(--fs-body);
         font-weight: 300;
         color: var(--muted);
         width: 16px;
@@ -311,7 +309,7 @@
         align-items: center;
         gap: 8px;
         padding: 3px 0;
-        font-size: 10px;
+        font-size: var(--fs-caption);
         color: var(--ink);
         cursor: pointer;
       }
@@ -323,7 +321,7 @@
       }
 
       .clear-filters {
-        font-size: 12px;
+        font-size: var(--fs-kicker);
         color: var(--accent) !important;
         cursor: pointer;
         display: inline-block;
@@ -348,7 +346,7 @@
       }
 
       .result-count {
-        font-size: 12px;
+        font-size: var(--fs-kicker);
         color: var(--muted);
       }
 
@@ -369,7 +367,7 @@
         border: 1px solid var(--border-light);
         background: var(--bg-2);
         color: var(--ink);
-        font-size: 13px;
+        font-size: var(--fs-kicker);
         width: 180px;
         min-width: 0;
         box-sizing: border-box;
@@ -379,7 +377,7 @@
         border: 1px solid var(--line);
         background: var(--bg);
         color: var(--ink);
-        font-size: 12px;
+        font-size: var(--fs-kicker);
         padding: 8px 12px;
         border-radius: 4px;
         cursor: pointer;
@@ -393,7 +391,7 @@
         background: none;
         color: var(--ink);
         padding: 8px 12px;
-        font-size: 13px;
+        font-size: var(--fs-kicker);
         cursor: pointer;
         border-radius: 4px;
         white-space: nowrap;
@@ -482,7 +480,7 @@
         }
 
         .prod-sidebar-head strong {
-          font-size: 14px;
+          font-size: var(--fs-body);
           letter-spacing: .08em;
           text-transform: uppercase;
         }
@@ -523,7 +521,7 @@
         gap: 6px;
         background: var(--card-bg);
         border: 1px solid var(--line);
-        font-size: 12px;
+        font-size: var(--fs-kicker);
         padding: 5px 10px;
         border-radius: 2px;
       }
@@ -588,7 +586,7 @@
         position: relative;
         aspect-ratio: 1/1;
         overflow: hidden;
-        background-color: #ffffff;
+        background-color: var(--bg-2);
       }
 
       .prod-card .prod-card-img img {
@@ -608,7 +606,7 @@
         width: 100%;
         height: 100%;
         object-fit: contain;
-        background-color: #ffffff;
+        background-color: var(--bg-2);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -626,7 +624,7 @@
 
       .prod-card-title {
         padding: 12px 14px 14px;
-        font-size: 13.5px;
+        font-size: var(--fs-meta);
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
@@ -642,7 +640,7 @@
 
       .prod-card-title .cat-label {
         display: block;
-        font-size: 10px;
+        font-size: var(--fs-caption);
         color: var(--accent);
         text-transform: uppercase;
         letter-spacing: .08em;
@@ -651,7 +649,7 @@
 
       .prod-card-title .prod-card-code {
         display: block;
-        font-size: 10px;
+        font-size: var(--fs-caption);
         color: var(--accent);
         text-transform: uppercase;
         letter-spacing: .08em;
@@ -694,7 +692,7 @@
       }
 
       .spec-item {
-        font-size: 11.5px;
+        font-size: var(--fs-caption);
         color: rgba(255, 255, 255, 0.85);
         line-height: 1.4;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -711,7 +709,7 @@
       .spec-item strong {
         color: #fff;
         font-weight: 500;
-        font-size: 11px;
+        font-size: var(--fs-caption);
         text-transform: uppercase;
         letter-spacing: .04em;
       }
@@ -728,7 +726,7 @@
       .ov-btn {
         flex: 1;
         text-align: center;
-        font-size: 11.5px;
+        font-size: var(--fs-caption);
         padding: 9px 6px;
         cursor: pointer;
         border-radius: 2px;
@@ -790,7 +788,7 @@
         align-items: center;
         justify-content: center;
         border: 1px solid var(--line);
-        font-size: 13px;
+        font-size: var(--fs-kicker);
         cursor: pointer;
         color: var(--muted);
       }
@@ -807,17 +805,23 @@
       }
     </style>
   @endverbatim
+  @endif
 @endpush
 
 @section('content')
   <div class="wrap">
-    <!-- Breadcrumb only — no h1 / subtitle -->
     <div class="breadcrumbs" id="breadcrumbs">
       <a href="/">Home</a>
-      <span>/</span>Products
+      <span>/</span>
+      @if ($showCatalog)
+        <a href="{{ route('products') }}">Products</a>
+        <span>/</span>{{ $selectedCategory }}
+      @else
+        Products
+      @endif
     </div>
 
-
+    @if ($showCatalog)
     <div class="prod-layout">
       <!-- ===== Sidebar ===== -->
       <div class="prod-filter-overlay" id="prodFilterOverlay"></div>
@@ -869,12 +873,33 @@
         <div class="pagination" id="paginationContainer"></div>
       </main>
     </div>
+    @else
+    <section class="prod-gallery">
+      <div class="prod-gallery-head">
+        <h1 class="h2">Our Range</h1>
+        <p class="prod-gallery-lead">Explore the full Azoogi lighting catalogue.</p>
+      </div>
+      <div class="prod-gallery-grid">
+        @forelse ($rangeItems as $item)
+          <a class="prod-gallery-card" href="{{ $item['href'] ?? '#' }}">
+            <div class="body">
+              <h4>{{ $item['title'] ?? '' }}</h4>
+              @if (($item['body'] ?? '') !== '')
+                <p>{{ $item['body'] }}</p>
+              @endif
+              <span class="more">View Range &rarr;</span>
+            </div>
+          </a>
+        @empty
+          <div class="prod-gallery-empty">Catalogue coming soon.</div>
+        @endforelse
+      </div>
+    </section>
+    @endif
   </div>
-
-
-  <!-- ========== FOOTER ========== -->
 @endsection
 
+@if ($showCatalog)
 @push('scripts')
   @verbatim
     <script>
@@ -1290,7 +1315,7 @@
       function renderFilterAccordion() {
         // 0. Determine allowed filterable attributes from Airtable config
         var allowedFilterKeys = null;
-        if (typeof AZOOGI_PRODUCTS !== 'undefined' && Array.isArray(AZOOGI_PRODUCTS.filterable_attributes)) {
+        if (typeof AZOOGI_PRODUCTS !== 'undefined' && Array.isArray(AZOOGI_PRODUCTS.filterable_attributes) && AZOOGI_PRODUCTS.filterable_attributes.length > 0) {
           allowedFilterKeys = new Set(
             AZOOGI_PRODUCTS.filterable_attributes.map(function (k) {
               return String(k).trim().toLowerCase();
@@ -1393,7 +1418,7 @@
         if (filterAcc) {
           filterAcc.innerHTML = '';
           if (filters.length === 0) {
-            filterAcc.innerHTML = '<div style="padding:12px 0; font-size:12px; color:var(--muted);">No attributes available for this category.</div>';
+            filterAcc.innerHTML = '<div style="padding:12px 0; font-size:var(--fs-kicker); color:var(--muted);">No attributes available for this category.</div>';
             return;
           }
 
@@ -1480,7 +1505,7 @@
         }
 
         if (tagHtml !== '') {
-          tagHtml += '<span class="clear-filters" onclick="clearFilters()" style="margin-left:8px; font-size:12px; color:var(--muted); cursor:pointer; align-self:center;">Clear all filters</span>';
+          tagHtml += '<span class="clear-filters" onclick="clearFilters()" style="margin-left:8px; font-size:var(--fs-kicker); color:var(--muted); cursor:pointer; align-self:center;">Clear all filters</span>';
         }
 
         var activeTagsEl = document.getElementById('activeTags');
@@ -1533,16 +1558,15 @@
               if (!productSpec) return false;
 
               var matchesAny = selectedVals.some(function (selVal) {
+                var targetSel = String(selVal || '').trim().toLowerCase();
                 if (Array.isArray(productSpec)) {
                   return productSpec.some(function (psVal) {
                     var rawVal = (typeof psVal === 'object' && psVal !== null && psVal.value !== undefined) ? psVal.value : psVal;
-                    return String(rawVal).toLowerCase().indexOf(String(selVal).toLowerCase()) !== -1 ||
-                      String(selVal).toLowerCase().indexOf(String(rawVal).toLowerCase()) !== -1;
+                    return String(rawVal || '').trim().toLowerCase() === targetSel;
                   });
                 } else {
                   var rawVal = (typeof productSpec === 'object' && productSpec !== null && productSpec.value !== undefined) ? productSpec.value : productSpec;
-                  return String(rawVal).toLowerCase().indexOf(String(selVal).toLowerCase()) !== -1 ||
-                    String(selVal).toLowerCase().indexOf(String(rawVal).toLowerCase()) !== -1;
+                  return String(rawVal || '').trim().toLowerCase() === targetSel;
                 }
               });
 
@@ -1577,7 +1601,7 @@
         var pagedItems = filtered.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
         grid.innerHTML = pagedItems.map(function (p) {
-          var detailUrl = p.id ? ('/product-detail?id=' + encodeURIComponent(p.id)) : (p.filePath ? ('/product-detail?file=' + encodeURIComponent(p.filePath)) : ('/product-detail?product=' + encodeURIComponent(p.name)));
+          var detailUrl = p.slug ? ('/products/' + encodeURIComponent(p.slug)) : (p.id ? ('/products/' + encodeURIComponent(p.id)) : (p.filePath ? ('/product-detail?file=' + encodeURIComponent(p.filePath)) : ('/product-detail?product=' + encodeURIComponent(p.name))));
 
           var isFallback = !p.img || p.img === '/assets/bg_default.png' || p.img === '/assets/logo_dark.png';
           var imgHtml = '<img src="' + (p.img || '/assets/bg_default.png') + '" alt="' + (p.name || 'Product') + '" class="prod-swatch' + (isFallback ? ' is-fallback' : '') + '" loading="lazy" onerror="this.onerror=null; this.src=\'/assets/bg_default.png\'; this.classList.add(\'is-fallback\');"' + (isFallback ? ' style="filter: grayscale(100%); opacity: 0.7;"' : '') + '>';
@@ -1823,3 +1847,4 @@
     </script>
   @endverbatim
 @endpush
+@endif

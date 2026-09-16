@@ -22,7 +22,7 @@ class DaliCentrePageTest extends TestCase
     {
         $this->get('/dali-centre')
             ->assertOk()
-            ->assertSee('/assets/logo_dark.png', false)
+            ->assertDontSee('dc-hero-logo', false)
             ->assertSee('AZOOGI DALI Centre', false)
             ->assertSee('Centralized Architectural Lighting &amp;', false)
             ->assertSee('Smart DALI-2 Management', false)
@@ -60,13 +60,67 @@ class DaliCentrePageTest extends TestCase
             ->assertSee('AZOOGI Sensors &amp; Input Modules', false);
     }
 
-    public function test_hero_places_the_video_on_the_right(): void
+    public function test_hardware_table_keeps_the_first_column_narrower_than_the_second(): void
     {
-        $this->get('/dali-centre')
-            ->assertOk()
-            ->assertSee('class="wrap dc-hero-grid"', false)
-            ->assertSee('class="dc-hero-video"', false)
-            ->assertSee('youtube-nocookie.com/embed/C0KcmW6NewI', false);
+        $css = file_get_contents(public_path('assets/css/dali-centre.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertStringContainsString('table-layout: fixed', $css);
+        $this->assertMatchesRegularExpression(
+            '/\.dc-page \.spec-table th:first-child,\s*\.dc-page \.spec-table td:first-child\s*\{[^}]*width:\s*15%/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.dc-page \.spec-table th:nth-child\(2\),\s*\.dc-page \.spec-table td:nth-child\(2\)\s*\{[^}]*width:\s*25%/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.dc-page \.spec-table th:last-child,\s*\.dc-page \.spec-table td:last-child\s*\{[^}]*width:\s*60%/s',
+            $css,
+        );
+    }
+
+    public function test_hero_stacks_title_lead_video_then_description(): void
+    {
+        $html = $this->get('/dali-centre')->assertOk()->getContent();
+
+        $title = strpos($html, 'class="dc-title"');
+        $lead = strpos($html, 'class="dc-lead"');
+        $video = strpos($html, 'class="dc-hero-video"');
+        $intro = strpos($html, 'class="dc-intro"');
+
+        $this->assertNotFalse($title);
+        $this->assertNotFalse($lead);
+        $this->assertNotFalse($video);
+        $this->assertNotFalse($intro);
+        $this->assertLessThan($lead, $title);
+        $this->assertLessThan($video, $lead);
+        $this->assertLessThan($intro, $video);
+        $this->assertStringContainsString('class="wrap dc-hero-stack"', $html);
+        $this->assertStringContainsString('youtube-nocookie.com/embed/C0KcmW6NewI', $html);
+    }
+
+    public function test_hero_is_center_aligned(): void
+    {
+        $css = file_get_contents(public_path('assets/css/dali-centre.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertMatchesRegularExpression(
+            '/\.dc-hero\s*\{[^}]*text-align:\s*center/s',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.dc-hero-stack\s*\{[^}]*grid-template-columns/s',
+            $css,
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.dc-hero-grid\s*\{/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.dc-hero-video\s*\{[^}]*max-width:\s*560px/s',
+            $css,
+        );
     }
 
     public function test_page_shows_the_client_dali_system_diagram(): void

@@ -26,7 +26,11 @@
             @endif
         @endif
         <input type="hidden" name="meta[{{ $row->id }}][value]" value="{{ $row->value }}">
-        <input type="file" name="meta[{{ $row->id }}][file]">
+        <input type="file" name="meta[{{ $row->id }}][file]" @if ($field->type === FieldType::Image) accept="image/*" @else accept="video/*" @endif>
+        @include('dashboard.partials.upload-progress')
+        @if ($field->type === FieldType::Image && $field->hint !== '')
+            <small>{{ $field->hint }}</small>
+        @endif
     @else
         <input type="text" name="meta[{{ $row->id }}][value]"
             value="{{ old('meta.' . $row->id . '.value', $row->value) }}">

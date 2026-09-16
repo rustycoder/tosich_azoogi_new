@@ -9,13 +9,12 @@
 @section('chrome', 'full')
 
 @section('topbarClass', 'solid')
-@section('logo', 'logo_dark.png')
+@section('logo', 'logo_white.png')
 
 @section('content')
 <main class="quote-page">
   <div class="wrap quote-page-wrap">
     <div class="quote-page-intro" {!! cms_section_attr('intro') !!}>
-      <div class="quote-page-kicker"{!! cms_style($meta, 'intro.kicker') !!}>{{ $meta->get('intro.kicker') }}</div>
       <h1{!! cms_style($meta, 'intro.title') !!}>{{ $meta->get('intro.title') }}</h1>
       <p{!! cms_style($meta, 'intro.body') !!}>{{ $meta->get('intro.body') }}</p>
     </div>

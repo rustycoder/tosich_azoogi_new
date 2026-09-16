@@ -7,6 +7,7 @@
   flex-shrink: 0;
 }
 
+.search-trigger,
 .quote-trigger {
   position: relative;
   display: inline-flex;
@@ -22,10 +23,12 @@
   border-radius: 4px;
 }
 
+.search-trigger:hover,
 .quote-trigger:hover {
   background: var(--rgba-hover);
 }
 
+.search-trigger-icon,
 .quote-trigger-icon {
   display: block;
   width: 22px;
@@ -113,7 +116,7 @@ body.quote-open .quote-drawer {
 .quote-drawer-head h2 {
   margin: 0;
   font-family: var(--font-sans);
-  font-size: var(--fs-body);
+  font-size: var(--fs-h2-section);
   font-weight: 500;
   line-height: 1.2;
 }
@@ -169,6 +172,24 @@ body.quote-open .quote-drawer {
   border: 1px solid var(--line);
   border-radius: 4px;
   background: var(--card-bg) center / contain no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.quote-item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.quote-item-img img.is-fallback,
+.quote-page-item-img img.is-fallback {
+  filter: grayscale(100%);
+  opacity: 0.6;
 }
 
 .quote-item-copy {
@@ -186,7 +207,7 @@ body.quote-open .quote-drawer {
 .quote-item-sku {
   display: block;
   margin-top: 4px;
-  font-size: 12px;
+  font-size: var(--fs-kicker);
   color: var(--muted);
   letter-spacing: .04em;
 }
@@ -222,7 +243,7 @@ body.quote-open .quote-drawer {
 .quote-qty span {
   min-width: 22px;
   text-align: center;
-  font-size: 13px;
+  font-size: var(--fs-kicker);
 }
 
 .quote-item-remove {
@@ -272,7 +293,7 @@ body.quote-open .quote-drawer {
 /* Request page */
 
 .quote-page {
-  padding: 132px 0 72px;
+  padding: 0 0 calc(var(--section-y) + 16px);
   background: var(--bg);
 }
 
@@ -281,7 +302,11 @@ body.quote-open .quote-drawer {
 }
 
 .quote-page-intro {
-  margin-bottom: 32px;
+  min-height: var(--hero-min);
+  display: grid;
+  align-items: end;
+  padding: var(--hero-pad-y-top) 0 var(--hero-pad-y-bottom);
+  margin-bottom: 0;
   text-align: center;
 }
 
@@ -296,7 +321,7 @@ body.quote-open .quote-drawer {
 .quote-page-intro h1 {
   margin: 0 0 10px;
   font-family: var(--font-sans);
-  font-size: var(--fs-h2-section);
+  font-size: var(--fs-h2);
   font-weight: 500;
   line-height: 1.15;
 }
@@ -354,6 +379,18 @@ body.quote-open .quote-drawer {
   border: 1px solid var(--line);
   border-radius: 4px;
   background: var(--card-bg) center / contain no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.quote-page-item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .quote-page-item-name {
@@ -365,7 +402,7 @@ body.quote-open .quote-drawer {
 .quote-page-item-sku {
   display: block;
   margin-top: 4px;
-  font-size: 13px;
+  font-size: var(--fs-kicker);
   color: var(--muted);
 }
 
@@ -412,7 +449,7 @@ body.quote-open .quote-drawer {
 }
 
 .quote-form label {
-  font-size: 12px;
+  font-size: var(--fs-kicker);
   letter-spacing: .08em;
   text-transform: uppercase;
   font-weight: 500;
@@ -435,7 +472,7 @@ body.quote-open .quote-drawer {
   gap: 10px;
   text-transform: none;
   letter-spacing: 0;
-  font-size: 15px;
+  font-size: var(--fs-kicker);
   font-weight: 400;
   color: var(--ink);
   cursor: pointer;
@@ -459,7 +496,7 @@ body.quote-open .quote-drawer {
   color: var(--ink);
   padding: 14px 16px;
   font: inherit;
-  font-size: 15px;
+  font-size: max(16px, var(--fs-body));
   border-radius: 4px;
   outline: none;
   transition: border-color .25s ease, box-shadow .25s ease;
@@ -483,7 +520,7 @@ body.quote-open .quote-drawer {
 }
 
 .quote-form-note {
-  font-size: 13px;
+  font-size: var(--fs-kicker);
   color: var(--muted);
   padding-bottom: 0;
 }
@@ -495,7 +532,7 @@ body.quote-open .quote-drawer {
   }
 
   .nav-actions .cta {
-    font-size: 11px;
+    display: none;
   }
 }
 

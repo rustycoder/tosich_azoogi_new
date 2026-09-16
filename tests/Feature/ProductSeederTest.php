@@ -47,7 +47,21 @@ class ProductSeederTest extends TestCase
 
         $this->assertIsArray($garden);
         $this->assertNotEmpty($garden['product_features']['Finish'] ?? []);
+        $this->assertTrue(ProductAttribute::query()->where('is_visible_on_filters', true)->exists());
+        $this->assertContains('Finish', app(IProductRepository::class)->compiled()['filterable_attributes']);
         $this->assertDatabaseCount('product_syncs', 0);
+    }
+
+    public function test_seeder_backfills_filter_visibility_when_none_are_visible(): void
+    {
+        $this->seed(ProductSeeder::class);
+
+        ProductAttribute::query()->update(['is_visible_on_filters' => false]);
+
+        $this->seed(ProductSeeder::class);
+
+        $this->assertTrue(ProductAttribute::query()->where('is_visible_on_filters', true)->exists());
+        $this->assertContains('Finish', app(IProductRepository::class)->compiled()['filterable_attributes']);
     }
 
     public function test_seeder_skips_json_when_products_already_exist(): void

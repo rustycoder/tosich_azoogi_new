@@ -9,7 +9,7 @@
 @section('chrome', 'full')
 
 @section('topbarClass', 'solid')
-@section('logo', 'logo_dark.png')
+@section('logo', 'logo_white.png')
 
 @push('styles')
 <link rel="stylesheet" href="{{ versioned_asset('assets/css/casambi.css') }}">
@@ -21,9 +21,10 @@
         $hardwareRows = $meta->group('hardware.row');
         $supportItems = $meta->group('support.item');
         $casambiLogo = media_url($meta->get('hero.logo'));
-        if ($casambiLogo === '/assets/img/casambi/logo.svg') {
-            $casambiLogo = '/assets/img/casambi/logo-dark.svg';
-        }
+        $casambiUsesStockLockup = in_array($casambiLogo, [
+            '/assets/img/casambi/logo.svg',
+            '/assets/img/casambi/logo-dark.svg',
+        ], true);
         $embed = trim($meta->get('video.embed'));
         $videoId = '';
         if (preg_match('/(?:v=|youtu\.be\/|embed\/)([A-Za-z0-9_-]{11})/', $embed, $matches) === 1) {
@@ -36,14 +37,21 @@
 
         <section class="cb-hero" {!! cms_section_attr('hero') !!}>
             <div class="wrap">
-                <div class="cb-lockup">
-                    <img class="cb-lockup-azoogi" src="{{ asset('assets/logo_dark.png') }}" alt="Azoogi">
-                    <span class="cb-lockup-x" aria-hidden="true">×</span>
-                    @if ($casambiLogo !== '')
-                        <img class="cb-lockup-casambi" src="{{ $casambiLogo }}" alt="Casambi">
-                    @endif
-                </div>
-                <h1 class="cb-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), 'Smart Ecosystems') !!}</h1>
+                @if ($casambiLogo !== '')
+                    <div class="cb-lockup">
+                        @if ($casambiUsesStockLockup)
+                            @include('partials.themed-lockup', [
+                                'path' => 'assets/img/casambi/logo-dark.svg',
+                                'class' => 'cb-lockup-casambi',
+                                'label' => 'Casambi',
+                                'fill' => '#111',
+                            ])
+                        @else
+                            <img class="cb-lockup-casambi" src="{{ $casambiLogo }}" alt="Casambi">
+                        @endif
+                    </div>
+                @endif
+                <h1 class="cb-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
                 <p class="cb-lead"{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
                 <p class="cb-intro" {!! cms_section_attr('intro') !!}{!! cms_style($meta, 'intro.body') !!}>{{ $meta->get('intro.body') }}</p>
             </div>
@@ -154,15 +162,13 @@
             </section>
         @endif
 
-        <div class="cb-cta-wrap reveal" {!! cms_section_attr('cta') !!}>
-            <div class="wrap">
+        <div class="wrap reveal" {!! cms_section_attr('cta') !!}>
                 <div class="cb-cta">
                     <h2{!! cms_style($meta, 'cta.heading') !!}>{{ $meta->get('cta.heading') }}</h2>
                         <p{!! cms_style($meta, 'cta.body') !!}>{{ $meta->get('cta.body') }}</p>
                             <a class="btn primary"
                                 href="{{ chrome_url($meta->get('cta.href', 0, '/contact')) }}"{!! cms_style($meta, 'cta.label') !!}>{{ $meta->get('cta.label') }}</a>
                 </div>
-            </div>
         </div>
 
         <div class="cb-cursor-preview" data-product-preview="cb-product" hidden aria-hidden="true">

@@ -1,18 +1,17 @@
 @extends('layouts.site')
 
 @section('title')
-    AZ-NF360 Neon Flex Series 360 — Azoogi LED Lighting Solutions
+    {{ !empty($product?->meta_title) ? $product->meta_title : (!empty($product?->product_name) ? $product->product_name . ' — Azoogi LED Lighting Solutions' : 'Products — Azoogi LED Lighting') }}
 @endsection
 
 @section('description')
-    Azoogi designs and supplies premium LED lighting — strips, neon, garden lights, drivers and architectural fittings for
-    projects that demand more.
+    {{ !empty($product?->meta_description) ? $product->meta_description : (!empty($product?->product_description) ? \Illuminate\Support\Str::limit(trim(preg_replace('/\s+/', ' ', strip_tags($product->product_description))), 160) : 'Azoogi designs and supplies premium LED lighting — strips, neon, garden lights, drivers and architectural fittings for projects that demand more.') }}
 @endsection
 
 @section('chrome', 'full')
 
 @section('topbarClass', 'solid')
-@section('logo', 'logo_dark.png')
+@section('logo', 'logo_white.png')
 
 @push('styles')
     <link rel="stylesheet" href="{{ versioned_asset('assets/css/product_detail.css') }}">
@@ -20,7 +19,7 @@
 
 @section('content')
     <!-- ========== BREADCRUMBS ========== -->
-    <div class="product-page-wrapper">
+    <div class="product-page-wrapper" data-product-slug="{{ $slug ?? '' }}">
         <div class="wrap">
             <!-- ==================== BREADCRUMBS START ==================== -->
             <div class="breadcrumbs" id="breadcrumbs">
@@ -79,12 +78,15 @@
                     <div class="gallery-actions"
                         style="display: flex; gap: 16px; justify-content: flex-start; margin-top: 24px;">
 
-                        <a class="btn --outline" id="add-to-spec-btn"
-                            style="display:flex; align-items:center; justify-content:center; gap:8px;">
+                        <a href="#" class="btn --outline" id="add-to-spec-btn"
+                            style="display:flex; align-items:center; justify-content:center; gap:8px;"
+                            aria-label="Add to quote list">
                             <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px"
-                                fill="#1f1f1f">
+                                fill="currentColor" aria-hidden="true">
                                 <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
-                            </svg> Add to Quote List</a>
+                            </svg>
+                            <span data-quote-label>Add to Quote List</span>
+                        </a>
                     </div>
                     <!-- B2B ACTION BUTTONS END -->
 
@@ -141,7 +143,7 @@
                         <div class="specification-download-section" id="specification-download-section"
                             style="margin-top: 0; padding-top: 0; margin-bottom: 0; display: none;">
                             <h3 id="downloadable-resources-title"
-                                style="font-family: var(--font-serif); font-size: 24px; margin-bottom: 20px;">Downloadable
+                                style="font-family: var(--font-sans); font-size: var(--fs-h3); margin-bottom: 20px;">Downloadable
                                 Resources
                             </h3>
                             <div class="download-options" id="download-resources-list"
@@ -157,11 +159,11 @@
                     <div class="config-summary-card"
                         style="background: var(--card-bg); border: 1px solid var(--border-light); border-radius: 8px; padding: 24px; display: flex; flex-direction: column; gap: 10px; position: sticky; top: 100px;">
                         <h4
-                            style="font-family: var(--font-serif); font-size: 20px; margin: 0; color: var(--ink); border-bottom: 1px solid var(--line); padding-bottom: 12px;">
+                            style="font-family: var(--font-sans); font-size: var(--fs-h3); margin: 0; color: var(--ink); border-bottom: 1px solid var(--line); padding-bottom: 12px;">
                             Selected Configuration</h4>
 
                         <div id="selected-summary-list"
-                            style="display: flex; flex-direction: column; gap: 10px; font-size: 12px; color: var(--muted);">
+                            style="display: flex; flex-direction: column; gap: 10px; font-size: var(--fs-kicker); color: var(--muted);">
                             <!-- Dynamically populated list from Javascript selection updates -->
                         </div>
 
@@ -181,8 +183,8 @@
                             </button>
                             <a href="#quote-section-anchor" class="btn --accent"
                                 style="display:flex; justify-content:center; gap:8px; width: 100%;">
-                                <svg viewBox="0 -960 960 960" fill="#111111" stroke="currentColor" stroke-width="2"
-                                    width="18" height="18">
+                                <svg viewBox="0 -960 960 960" fill="currentColor" width="18" height="18"
+                                    aria-hidden="true">
                                     <path
                                         d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z" />
                                 </svg>
@@ -203,7 +205,7 @@
     <section class="accessories-section"
         style="margin-top: 25px; border-top: 1px solid var(--line); padding-top: 20px; padding-bottom: 40px;">
         <div class="wrap">
-            <h3 style="font-family: var(--font-serif); font-size: 28px; margin-bottom: 24px;">Recommended Products</h3>
+            <h3 style="font-family: var(--font-sans); font-size: var(--fs-h2-section); margin-bottom: 24px;">Recommended Products</h3>
             <div class="prod-grid" id="productGrid">
                 <div class="prod-card-img">
                     <img class="prod-swatch" src="/assets/img/drivers.webp" alt="DALI-2 Dimmable Driver" loading="lazy"
@@ -254,7 +256,7 @@
                         Request a B2B project quote or coordinate a specsheet request. Fill out your details, and an Azoogi
                         commercial specialist will follow up with pricing, lead times, and trade discount rates.
                     </p>
-                    <div style="font-size:13px; color:var(--muted); line-height: 2;">
+                    <div style="font-size:var(--fs-kicker); color:var(--muted); line-height: 2;">
                         <div><strong>Sales Support:</strong> 1300 641 261</div>
                         <div><strong>Email Response:</strong> sales@azoogi.com</div>
                         <div><strong>B2B Turnaround:</strong> Within 4 business hours</div>
@@ -384,9 +386,9 @@
                 ();
 
             document.addEventListener("DOMContentLoaded", () => {
-                document.querySelectorAll('.logo img').forEach((img) => {
-                    img.src = '/assets/logo_dark.png';
-                });
+                if (typeof updateLogos === 'function') {
+                    updateLogos();
+                }
                 initDynamicProductPage();
             });
 
@@ -395,6 +397,15 @@
                 const productId = urlParams.get('id');
                 const productCode = urlParams.get('product') || urlParams.get('name') || urlParams.get('variant') || urlParams
                     .get('file');
+
+                const pageWrapper = document.querySelector('.product-page-wrapper');
+                let pathSlug = pageWrapper ? (pageWrapper.getAttribute('data-product-slug') || null) : null;
+                if (!pathSlug) {
+                    const pathParts = window.location.pathname.split('/').filter(Boolean);
+                    if (pathParts.length >= 2 && pathParts[0] === 'products') {
+                        pathSlug = decodeURIComponent(pathParts.slice(1).join('/'));
+                    }
+                }
 
                 let product = null;
 
@@ -453,13 +464,21 @@
                     }
                     if (AZOOGI_PRODUCTS.tree) collectFromTree(AZOOGI_PRODUCTS.tree);
 
-                    if (productId) {
+                    if (pathSlug) {
+                        const slugLower = String(pathSlug).toLowerCase().trim();
+                        product = allProducts.find(p =>
+                            (p.slug && p.slug.toLowerCase().trim() === slugLower) ||
+                            (p.id && p.id.toLowerCase().trim() === slugLower)
+                        );
+                    }
+                    if (!product && productId) {
                         const idLower = decodeURIComponent(productId).toLowerCase().trim();
-                        product = allProducts.find(p => p.id && p.id.toLowerCase() === idLower);
+                        product = allProducts.find(p => (p.id && p.id.toLowerCase() === idLower) || (p.slug && p.slug.toLowerCase() === idLower));
                     }
                     if (!product && productCode) {
                         const codeLower = decodeURIComponent(productCode).toLowerCase().trim();
                         product = allProducts.find(p =>
+                            (p.slug && p.slug.toLowerCase().trim() === codeLower) ||
                             (p.id && p.id.toLowerCase() === codeLower) ||
                             (p.sku && String(p.sku).toLowerCase().trim() === codeLower) ||
                             (p.product_name && p.product_name.toLowerCase().trim() === codeLower) ||
@@ -501,47 +520,21 @@
                         });
                     }
                 }
-                // Helper to check if product qualifies for Dimming Control options (NEON & Linear LED lights without Control Protocol)
+                // Helper to check if product qualifies for Dimming Control options based on Airtable "Dimming Control" checkbox
                 function qualifiesForDimmingControl(prod, opts) {
                     if (!prod) return false;
-                    const rawCategories = [];
-                    if (prod.category) rawCategories.push(String(prod.category));
-                    if (Array.isArray(prod.categories)) {
-                        prod.categories.forEach(c => rawCategories.push(String(c)));
-                    }
-                    if (Array.isArray(prod.category_path)) {
-                        prod.category_path.forEach(c => rawCategories.push(String(c)));
-                    }
-                    if (Array.isArray(prod.category_paths)) {
-                        prod.category_paths.flat().forEach(c => rawCategories.push(String(c)));
-                    }
 
-                    const catStr = rawCategories.join(' ').toLowerCase();
-                    const nameStr = String(prod.product_name || prod.name || '').toLowerCase();
+                    const val = prod.dimming_control !== undefined && prod.dimming_control !== null
+                        ? prod.dimming_control
+                        : (prod.product_features ? (prod.product_features['Dimming Control'] || prod.product_features['dimming_control']) : null);
 
-                    const isNeon = catStr.includes('neon') || nameStr.includes('neon');
-                    const isLinearOrStrip = catStr.includes('linear') || catStr.includes('strip') || catStr.includes('cob') ||
-                        catStr.includes('smd') || catStr.includes('lumoflex') || catStr.includes('flex') ||
-                        nameStr.includes('strip') || nameStr.includes('lumoflex') || nameStr.includes('cob') ||
-                        nameStr.includes('smd');
-
-                    const isExcluded = catStr.includes('profile') || catStr.includes('driver') || catStr.includes('accessories') ||
-                        catStr.includes('pool light') || catStr.includes('garden light') || catStr.includes('handrail') ||
-                        nameStr.includes('profile') || nameStr.includes('driver') || nameStr.includes('clip');
-
-                    if (!((isNeon || isLinearOrStrip) && !isExcluded)) return false;
-
-                    // Check if product already has "Control Protocol"
-                    if (opts) {
-                        for (const k in opts) {
-                            const lower = k.trim().toLowerCase();
-                            if (lower === 'control protocol' || lower === 'control_protocol' || lower === 'control') {
-                                if (Array.isArray(opts[k]) && opts[k].length > 0) return false;
-                            }
-                        }
+                    if (val === true || val === 1 || val === '1') return true;
+                    if (typeof val === 'string') {
+                        const lower = val.trim().toLowerCase();
+                        return lower === 'true' || lower === 'yes' || lower === '1' || lower === 'checked' || lower === 'dimmable';
                     }
 
-                    return true;
+                    return false;
                 }
 
                 if (qualifiesForDimmingControl(product, normalizedOptions)) {
@@ -553,6 +546,10 @@
                             { id: 'dim-casambi', name: 'CASAMBI' }
                         ];
                     }
+                } else {
+                    delete normalizedOptions['Dimming Control'];
+                    delete normalizedOptions['dimming control'];
+                    delete normalizedOptions['Dimming control'];
                 }
 
                 product.options = normalizedOptions;
@@ -722,24 +719,31 @@
                     return "";
                 }
 
-                // Extract Product Name, SKU, Short & Long Descriptions
+                // Extract Product Name, SKU & Description
                 const pName = product.product_name || product.name || "Azoogi Lighting Product";
                 const features = product.product_features || {};
                 const sku = getMappedSku(product, selectedOptions);
-                const pShortDesc = product.product_short_description || product.short_description || features[
-                    "Product short description"] || "";
-                const pLongDesc = product.product_description || product.description || features["Product long description"] ||
-                    pShortDesc;
+                const pDesc = product.product_description || product.description || features["Product description"] ||
+                    features["Product long description"] || features["Description"] || "";
 
                 // Update Basic Info & Descriptions
                 if (productNameEl) productNameEl.textContent = pName;
 
                 // if (productCodeEl) productCodeEl.textContent = sku ? `PRODUCT CODE: ${sku}` : `PRODUCT CODE: ${pName}`;
-                if (descEl) descEl.innerHTML = pLongDesc || pShortDesc ||
+                if (descEl) descEl.innerHTML = pDesc ||
                     "Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.";
 
-                // Update Document Title
-                document.title = `${pName.replace(/\r?\n/g, ' ')} — Azoogi LED Lighting Solutions`;
+                // Update Document Title & Meta Description for SEO
+                const metaTitle = product.meta_title || `${pName.replace(/\r?\n/g, ' ')} — Azoogi LED Lighting Solutions`;
+                document.title = metaTitle;
+
+                const metaDesc = product.meta_description || (pDesc ? pDesc.replace(/<[^>]*>?/gm, '').replace(/\s+/g, ' ').trim().slice(0, 160) : '');
+                if (metaDesc) {
+                    const metaDescTag = document.querySelector('meta[name="description"]');
+                    if (metaDescTag) {
+                        metaDescTag.setAttribute('content', metaDesc);
+                    }
+                }
 
                 // Render Meta Keywords Badges
                 const metaBadgesEl = document.querySelector('.product-meta-badges');
@@ -929,9 +933,9 @@
                     if (accessoriesSection) accessoriesSection.style.display = 'block';
 
                     accessoriesGrid.innerHTML = recommended.map(p => {
-                        const detailUrl = p.id ? ('/product-detail?id=' + encodeURIComponent(p.id)) : (p.filePath ? (
+                        const detailUrl = p.slug ? ('/products/' + encodeURIComponent(p.slug)) : (p.id ? ('/products/' + encodeURIComponent(p.id)) : (p.filePath ? (
                             '/product-detail?file=' + encodeURIComponent(p.filePath)) : (
-                            '/product-detail?product=' + encodeURIComponent(p.name)));
+                            '/product-detail?product=' + encodeURIComponent(p.name))));
                         const codeHtml = productCodeHtml(p.sku);
                         const isFallback = !p.img || p.img === '/assets/bg_default.png' || p.img ===
                             '/assets/logo_dark.png';
@@ -1011,6 +1015,7 @@
                     function setMainImage(item) {
                         const localSrc = resolveImg(item.url);
                         galleryMainImg.src = localSrc;
+                        galleryMainImg.setAttribute('src', localSrc);
                         galleryMainImg.style.display = 'block';
                         galleryMainImg.style.opacity = '1';
                         galleryMainImg.style.objectFit = 'contain';
@@ -1018,6 +1023,11 @@
                         galleryMainImg.style.padding = '0';
                         galleryMainImg.style.filter = (!item.isDimension && (localSrc === '/assets/bg_default.png' ||
                             localSrc === '/assets/logo_dark.png')) ? 'grayscale(100%)' : 'none';
+
+                        const specAddBtn = document.getElementById('add-to-spec-btn');
+                        if (specAddBtn && !item.isDimension && localSrc && !localSrc.includes('bg_default.png')) {
+                            specAddBtn.dataset.quoteImage = localSrc;
+                        }
                     }
 
                     setMainImage(galleryItems[0]);
@@ -1166,7 +1176,7 @@
                     if (optionsGridLayout) optionsGridLayout.style.gridTemplateColumns = '1.25fr 0.75fr';
 
                     configurator.innerHTML =
-                        '<div class="reset-selection" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;"><h3 style="font-family: var(--font-serif); font-size: 28px; margin: 0;">Product Configuration</h3><a href="#" id="btn-clear-selection" class="btn sm" style="display: flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" zoomAndPan="magnify" viewBox="0 0 97.5 129.000003" height="18" preserveAspectRatio="xMidYMid meet" version="1.0"><defs><g/><clipPath id="19baf0d6ae"><path d="M 0.125 19.070312 L 96.527344 19.070312 L 96.527344 115.472656 L 0.125 115.472656 Z M 0.125 19.070312 " clip-rule="nonzero"/></clipPath><clipPath id="79dc47164a"><path d="M 48.328125 19.070312 C 21.707031 19.070312 0.125 40.648438 0.125 67.269531 C 0.125 93.890625 21.707031 115.472656 48.328125 115.472656 C 74.949219 115.472656 96.527344 93.890625 96.527344 67.269531 C 96.527344 40.648438 74.949219 19.070312 48.328125 19.070312 Z M 48.328125 19.070312 " clip-rule="nonzero"/></clipPath><clipPath id="19295492b8"><rect x="0" width="42" y="0" height="91"/></clipPath></defs><g clip-path="url(#19baf0d6ae)"><g clip-path="url(#79dc47164a)"><path stroke-linecap="butt" transform="matrix(0.744231, 0, 0, 0.744231, 0.126922, 19.070008)" fill="none" stroke-linejoin="miter" d="M 64.766476 0.000409245 C 28.99653 0.000409245 -0.00258246 28.994273 -0.00258246 64.764219 C -0.00258246 100.534164 28.99653 129.533277 64.766476 129.533277 C 100.536421 129.533277 129.530285 100.534164 129.530285 64.764219 C 129.530285 28.994273 100.536421 0.000409245 64.766476 0.000409245 Z M 64.766476 0.000409245 " stroke="currentColor" stroke-width="24" stroke-opacity="1" stroke-miterlimit="4"/></g></g><g transform="matrix(1, 0, 0, 1, 27, 18)"><g clip-path="url(#19295492b8)"><g fill="currentColor" fill-opacity="1"><g transform="translate(1.141728, 69.356989)"><g><path d="M 7.015625 0.375 C 6.015625 0.375 5.226562 0.0585938 4.65625 -0.5625 C 4.09375 -1.1875 3.8125 -2.019531 3.8125 -3.0625 C 3.8125 -3.8125 4.054688 -4.507812 4.546875 -5.15625 L 16.125 -18.8125 L 4.546875 -32.921875 C 4.003906 -33.617188 3.734375 -34.335938 3.734375 -35.078125 C 3.734375 -36.078125 4.054688 -36.882812 4.703125 -37.5 C 5.347656 -38.125 6.144531 -38.4375 7.09375 -38.4375 C 8.28125 -38.4375 9.175781 -38.015625 9.78125 -37.171875 L 20.234375 -24.265625 L 30.609375 -37.171875 C 31.203125 -38.015625 32.070312 -38.4375 33.21875 -38.4375 C 34.207031 -38.4375 35.023438 -38.125 35.671875 -37.5 C 36.328125 -36.882812 36.65625 -36.128906 36.65625 -35.234375 C 36.65625 -34.484375 36.40625 -33.785156 35.90625 -33.140625 L 24.109375 -19.25 L 35.75 -5.21875 C 36.300781 -4.625 36.578125 -3.90625 36.578125 -3.0625 C 36.578125 -2.113281 36.273438 -1.300781 35.671875 -0.625 C 35.078125 0.0390625 34.234375 0.375 33.140625 0.375 C 32.046875 0.375 31.175781 -0.0703125 30.53125 -0.96875 L 19.921875 -13.65625 L 9.921875 -1.125 C 9.179688 -0.125 8.210938 0.375 7.015625 0.375 Z M 7.015625 0.375 "/></g></g></g></g></g></svg>Reset Selection</a></div>';
+                        '<div class="reset-selection" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;"><h3 style="font-family: var(--font-sans); font-size: var(--fs-h2-section); margin: 0;">Product Configuration</h3><a href="#" id="btn-clear-selection" class="btn sm" style="display: flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" zoomAndPan="magnify" viewBox="0 0 97.5 129.000003" height="18" preserveAspectRatio="xMidYMid meet" version="1.0"><defs><g/><clipPath id="19baf0d6ae"><path d="M 0.125 19.070312 L 96.527344 19.070312 L 96.527344 115.472656 L 0.125 115.472656 Z M 0.125 19.070312 " clip-rule="nonzero"/></clipPath><clipPath id="79dc47164a"><path d="M 48.328125 19.070312 C 21.707031 19.070312 0.125 40.648438 0.125 67.269531 C 0.125 93.890625 21.707031 115.472656 48.328125 115.472656 C 74.949219 115.472656 96.527344 93.890625 96.527344 67.269531 C 96.527344 40.648438 74.949219 19.070312 48.328125 19.070312 Z M 48.328125 19.070312 " clip-rule="nonzero"/></clipPath><clipPath id="19295492b8"><rect x="0" width="42" y="0" height="91"/></clipPath></defs><g clip-path="url(#19baf0d6ae)"><g clip-path="url(#79dc47164a)"><path stroke-linecap="butt" transform="matrix(0.744231, 0, 0, 0.744231, 0.126922, 19.070008)" fill="none" stroke-linejoin="miter" d="M 64.766476 0.000409245 C 28.99653 0.000409245 -0.00258246 28.994273 -0.00258246 64.764219 C -0.00258246 100.534164 28.99653 129.533277 64.766476 129.533277 C 100.536421 129.533277 129.530285 100.534164 129.530285 64.764219 C 129.530285 28.994273 100.536421 0.000409245 64.766476 0.000409245 Z M 64.766476 0.000409245 " stroke="currentColor" stroke-width="24" stroke-opacity="1" stroke-miterlimit="4"/></g></g><g transform="matrix(1, 0, 0, 1, 27, 18)"><g clip-path="url(#19295492b8)"><g fill="currentColor" fill-opacity="1"><g transform="translate(1.141728, 69.356989)"><g><path d="M 7.015625 0.375 C 6.015625 0.375 5.226562 0.0585938 4.65625 -0.5625 C 4.09375 -1.1875 3.8125 -2.019531 3.8125 -3.0625 C 3.8125 -3.8125 4.054688 -4.507812 4.546875 -5.15625 L 16.125 -18.8125 L 4.546875 -32.921875 C 4.003906 -33.617188 3.734375 -34.335938 3.734375 -35.078125 C 3.734375 -36.078125 4.054688 -36.882812 4.703125 -37.5 C 5.347656 -38.125 6.144531 -38.4375 7.09375 -38.4375 C 8.28125 -38.4375 9.175781 -38.015625 9.78125 -37.171875 L 20.234375 -24.265625 L 30.609375 -37.171875 C 31.203125 -38.015625 32.070312 -38.4375 33.21875 -38.4375 C 34.207031 -38.4375 35.023438 -38.125 35.671875 -37.5 C 36.328125 -36.882812 36.65625 -36.128906 36.65625 -35.234375 C 36.65625 -34.484375 36.40625 -33.785156 35.90625 -33.140625 L 24.109375 -19.25 L 35.75 -5.21875 C 36.300781 -4.625 36.578125 -3.90625 36.578125 -3.0625 C 36.578125 -2.113281 36.273438 -1.300781 35.671875 -0.625 C 35.078125 0.0390625 34.234375 0.375 33.140625 0.375 C 32.046875 0.375 31.175781 -0.0703125 30.53125 -0.96875 L 19.921875 -13.65625 L 9.921875 -1.125 C 9.179688 -0.125 8.210938 0.375 7.015625 0.375 Z M 7.015625 0.375 "/></g></g></g></g></g></svg>Reset Selection</a></div>';
 
                     const clearBtn = document.getElementById('btn-clear-selection');
                     if (clearBtn) {
@@ -1463,6 +1473,19 @@
                     const specAddBtn = document.getElementById('add-to-spec-btn');
                     if (specAddBtn) {
                         specAddBtn.dataset.quoteSku = skuDisplay || '';
+                        specAddBtn.dataset.quoteName = pName;
+                        specAddBtn.dataset.quoteId = product.id || pName;
+                        specAddBtn.dataset.quoteUrl = window.location.pathname;
+                        if (!specAddBtn.dataset.quoteImage) {
+                            if (galleryMainImg && galleryMainImg.src && !galleryMainImg.src.includes('bg_default.png')) {
+                                specAddBtn.dataset.quoteImage = galleryMainImg.src;
+                            } else if (product.product_images && product.product_images.length > 0) {
+                                specAddBtn.dataset.quoteImage = resolveImg(product.product_images[0]);
+                            }
+                        }
+                    }
+                    if (window.AzoogiQuote && typeof window.AzoogiQuote.refresh === 'function') {
+                        window.AzoogiQuote.refresh();
                     }
 
                     // if (productCodeEl) productCodeEl.textContent = `PRODUCT CODE: ${skuDisplay}`;
@@ -1586,7 +1609,7 @@
                             }
                         } else {
                             summaryListEl.innerHTML =
-                                '<div style="color: var(--muted); font-size: 13px; font-style: italic; padding: 4px 0;">Please select configuration options to view product code and summary.</div>';
+                                '<div style="color: var(--muted); font-size: var(--fs-kicker); font-style: italic; padding: 4px 0;">Please select configuration options to view product code and summary.</div>';
                         }
                     }
 
@@ -1690,31 +1713,6 @@
                         if (panel) panel.classList.add('active');
                     });
                 });
-
-                // Spec button click animation for both details and summary buttons
-                const handleSpecAdd = function () {
-                    const originalText = this.textContent;
-                    this.textContent = 'Added to Quote List!';
-                    this.style.background = 'var(--rgba-hover)';
-                    this.style.borderColor = 'var(--accent)';
-                    this.style.color = 'var(--accent)';
-
-                    setTimeout(() => {
-                        this.textContent = originalText;
-                        this.style.background = 'none';
-                        this.style.borderColor = 'var(--border-light)';
-                        this.style.color = 'var(--ink)';
-                    }, 2000);
-                };
-
-                const specBtn = document.getElementById('add-to-spec-btn');
-                if (specBtn) {
-                    specBtn.addEventListener('click', handleSpecAdd);
-                }
-                const specSummaryBtn = document.getElementById('add-to-spec-btn-summary');
-                if (specSummaryBtn) {
-                    specSummaryBtn.addEventListener('click', handleSpecAdd);
-                }
 
                 // Hover Zoom effect on main image
                 if (galleryMainImg) {

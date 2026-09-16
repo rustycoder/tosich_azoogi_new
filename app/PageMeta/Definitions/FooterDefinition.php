@@ -75,7 +75,6 @@ class FooterDefinition implements PageDefinition
             ['Projects', '/projects'],
             ['AI Lighting', '/ai-lighting'],
             ['Contact', '/contact'],
-            ['Privacy', '/privacy'],
         ] as $order => $item) {
             $rows[] = ['key' => 'footer.company.link.label', 'sort_order' => $order, 'value' => $item[0]];
             $rows[] = ['key' => 'footer.company.link.href', 'sort_order' => $order, 'value' => $item[1]];

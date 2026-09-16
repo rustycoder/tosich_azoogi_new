@@ -26,7 +26,6 @@ class ProjectService implements IProjectService
     public function publicListing(): array
     {
         return [
-            'highlights' => $this->projects->activeFeatured(4),
             'projects' => $this->projects->activeOrdered(),
         ];
     }

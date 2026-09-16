@@ -27,8 +27,7 @@
       <img src="{{ media_url($meta->get('hero.image')) }}" alt="" loading="eager">
     </div>
     <div class="about-hero-copy">
-      <div class="kicker"{!! cms_style($meta, 'hero.kicker') !!}>{{ $meta->get('hero.kicker') }}</div>
-      <h1{!! cms_style($meta, 'hero.title') !!}>{!! nl2br_html($meta->get('hero.title'), true) !!}</h1>
+      <h1{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
     </div>
   </section>
 
@@ -50,8 +49,7 @@
   <section class="about-band about-band--alt" id="why" {!! cms_section_attr('why') !!}>
     <div class="wrap">
       <div class="about-split-copy about-why-head reveal">
-        <div class="kicker"{!! cms_style($meta, 'why.kicker') !!}>{{ $meta->get('why.kicker') }}</div>
-        <h2{!! cms_style($meta, 'why.heading') !!}>{!! accent_html($meta->get('why.heading'), 'Azoogi') !!}</h2>
+        <h2{!! cms_style($meta, 'why.heading') !!}>{!! accent_html($meta->get('why.heading'), $meta->get('why.heading_accent')) !!}</h2>
       </div>
 
       <div class="about-why">
@@ -91,27 +89,23 @@
       <img src="{{ media_url($meta->get('reach.image')) }}" alt="" loading="lazy">
     </div>
     <div class="wrap about-reach-inner reveal">
-      <div class="kicker"{!! cms_style($meta, 'reach.kicker') !!}>{{ $meta->get('reach.kicker') }}</div>
-      <h2{!! cms_style($meta, 'reach.heading') !!}>{!! accent_html($meta->get('reach.heading'), 'Reach') !!}</h2>
+      <h2{!! cms_style($meta, 'reach.heading') !!}>{!! accent_html($meta->get('reach.heading'), $meta->get('reach.heading_accent')) !!}</h2>
       <p{!! cms_style($meta, 'reach.body') !!}>{{ $meta->get('reach.body') }}</p>
     </div>
   </section>
 
   <section class="about-band" {!! cms_section_attr('path') !!}>
     <div class="wrap about-path-section">
-      <div class="about-split-copy reveal">
-        <div class="kicker"{!! cms_style($meta, 'path.kicker') !!}>{{ $meta->get('path.kicker') }}</div>
-        <h2{!! cms_style($meta, 'path.heading') !!}>{!! nl2br_html($meta->get('path.heading'), true) !!}</h2>
+      <div class="about-split-copy about-path-head reveal">
+        <h2{!! cms_style($meta, 'path.heading') !!}>{!! accent_html($meta->get('path.heading'), $meta->get('path.heading_accent')) !!}</h2>
       </div>
       <div class="about-path-list">
         @foreach ($pathItems as $item)
           <a class="about-path-row reveal" href="{{ $item['href'] ?? '#' }}" @if (! $loop->first) style="transition-delay: {{ ($loop->index * 0.08) }}s" @endif>
-            <figure>
-              <img src="{{ media_url($item['image'] ?? '') }}" alt="" loading="lazy">
-            </figure>
-            <div>
-              <h3{!! cms_style($meta, 'path.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h3>
+            <div class="body">
+              <h4{!! cms_style($meta, 'path.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h4>
               <p{!! cms_style($meta, 'path.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
+              <span class="more">Learn more &rarr;</span>
             </div>
           </a>
         @endforeach
@@ -128,23 +122,12 @@
 const topbar = document.getElementById('topbar');
   let lastScrolled = null;
 
-  function updateLogos() {
-    const isScrolled = window.scrollY > 40;
-    document.querySelectorAll('.logo img').forEach(img => {
-      if (img.closest('.topbar')) {
-        img.src = isScrolled ? '/assets/logo_dark.png' : '/assets/logo_white.png';
-      } else {
-        img.src = '/assets/logo_dark.png';
-      }
-    });
-  }
-
   const onScroll = () => {
     const isScrolled = window.scrollY > 40;
     if (isScrolled !== lastScrolled) {
       topbar.classList.toggle('solid', isScrolled);
       lastScrolled = isScrolled;
-      updateLogos();
+      if (typeof updateLogos === 'function') updateLogos();
     }
   };
   window.addEventListener('scroll', onScroll, { passive: true });

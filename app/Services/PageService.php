@@ -10,6 +10,7 @@ use App\PageMeta\SectionItems;
 use App\PageMeta\Typography;
 use App\Repositories\Contracts\IPageRepository;
 use App\Repositories\Contracts\IProjectRepository;
+use App\Services\Contracts\ILedCalculatorService;
 use App\Services\Contracts\IPageService;
 use App\Support\ContentStorage;
 use App\Support\PageMetaBag;
@@ -22,6 +23,7 @@ class PageService implements IPageService
     public function __construct(
         private IPageRepository $pages,
         private IProjectRepository $projects,
+        private ILedCalculatorService $calculator,
         private ContentStorage $storage,
     ) {}
 
@@ -209,8 +211,11 @@ class PageService implements IPageService
         }
 
         if ($page->slug === 'projects') {
-            $data['highlights'] = $this->projects->activeFeatured(4);
             $data['projects'] = $this->projects->activeOrdered();
+        }
+
+        if ($page->slug === 'led-strip-calculator') {
+            $data['calculatorCatalog'] = $this->calculator->catalog();
         }
 
         return [
@@ -233,6 +238,7 @@ class PageService implements IPageService
             'data-centre' => 'pages.data-centre',
             'contact' => 'pages.contact',
             'projects' => 'pages.projects',
+            'led-strip-calculator' => 'pages.led-strip-calculator',
             'request-a-quote' => 'pages.quote-request',
             'home-owner', 'architect-designer', 'electrician-builder', 'wholesaler' => 'pages.audience',
             'privacy', 'terms', 'warranty-returns', 'modern-slavery' => 'pages.legal',

@@ -2,6 +2,8 @@
 
 namespace App\ThirdParty\Airtable;
 
+use Illuminate\Support\Str;
+
 final class ProductNormalizer
 {
     /**
@@ -137,16 +139,27 @@ final class ProductNormalizer
                 [],
             ));
 
+            $rawSlug = trim((string) ($fields['URL Slug'] ?? ''));
+            if ($rawSlug !== '') {
+                $segments = array_values(array_filter(array_map(
+                    fn (string $seg): string => Str::slug(trim($seg)),
+                    explode('/', $rawSlug)
+                )));
+                $slug = implode('/', $segments);
+            } else {
+                $slug = Str::slug($name);
+            }
+
             $entry = [
                 'id' => $record['id'],
                 'product_name' => $name,
+                'slug' => $slug !== '' ? $slug : 'product-'.$record['id'],
                 'order' => $this->orderValue($fields),
                 'category' => $resolvedCategories[0],
                 'categories' => $resolvedCategories,
                 'product_code' => $this->sanitize($fields['Product Code'] ?? $fields['Product code'] ?? $fields['product_code'] ?? ''),
                 'sku_mappings' => $skuMappings,
-                'product_short_description' => (string) ($fields['Product short description'] ?? $fields['Short description'] ?? $fields['short_description'] ?? $fields['Short Description'] ?? ''),
-                'product_description' => (string) ($fields['Product long description'] ?? $fields['Product description'] ?? $fields['Long description'] ?? $fields['Description'] ?? $fields['description'] ?? ''),
+                'product_description' => (string) ($fields['Product description'] ?? $fields['Product Description'] ?? $fields['Product long description'] ?? $fields['Long description'] ?? $fields['Description'] ?? $fields['description'] ?? ''),
                 'product_images' => $this->imageUrls($fields),
                 'product_dimension' => $this->sanitize($fields['Product Dimension'] ?? $fields['Product dimension'] ?? ''),
                 'stocked_item' => $this->sanitize($fields['Stocked Item'] ?? $fields['Stock / Quantity'] ?? ''),
@@ -157,11 +170,14 @@ final class ProductNormalizer
                 'ies_file' => $this->sanitize($fields['IES File'] ?? ''),
                 'technical_icons' => $this->sanitize($fields['Technical Icons'] ?? $fields['Technical icons'] ?? $fields['Technical_Icons'] ?? $fields['Product Icons'] ?? $fields['Product icons'] ?? ''),
                 'meta_keywords' => $this->sanitize($fields['Meta Keywords'] ?? $fields['meta_keywords'] ?? $fields['Meta keywords'] ?? $fields['meta keywords'] ?? ''),
+                'meta_title' => $this->sanitize($fields['Meta Title'] ?? $fields['Meta title'] ?? $fields['meta_title'] ?? ''),
+                'meta_description' => $this->sanitize($fields['Meta Descriptions'] ?? $fields['Meta Description'] ?? $fields['meta_description'] ?? $fields['meta_descriptions'] ?? ''),
                 'supplier_name' => $this->sanitize($fields['Supplier Name'] ?? ''),
                 'status' => $this->sanitize($fields['Status'] ?? ''),
                 'product_type' => $this->sanitize($fields['Product type'] ?? ''),
                 'product_features' => $features,
                 'options' => $this->parseJsonField($fields['Options'] ?? $fields['options'] ?? [], []),
+                'dimming_control' => $this->booleanValue($fields['Dimming Control'] ?? $fields['Dimming control'] ?? $fields['dimming_control'] ?? $fields['Dimming_Control'] ?? false),
             ];
 
             $product = [];
@@ -740,5 +756,24 @@ final class ProductNormalizer
             fn (mixed $item): string => trim((string) $item),
             $value,
         )));
+    }
+
+    public function booleanValue(mixed $value): bool
+    {
+        if (is_bool($value)) {
+            return $value;
+        }
+
+        if (is_numeric($value)) {
+            return (int) $value === 1;
+        }
+
+        if (is_string($value)) {
+            $lower = mb_strtolower(trim($value));
+
+            return in_array($lower, ['1', 'true', 'yes', 'checked', 'on', 'dimmable'], true);
+        }
+
+        return false;
     }
 }

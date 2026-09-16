@@ -46,6 +46,9 @@ class ProductSyncTest extends TestCase
         $this->assertTrue(Schema::hasColumn('products', 'product_features'));
         $this->assertTrue(Schema::hasColumn('product_attributes', 'icon'));
         $this->assertTrue(Schema::hasColumn('product_attributes', 'is_visible_on_filters'));
+        $this->assertTrue(Schema::hasColumn('product_categories', 'description'));
+        $this->assertTrue(Schema::hasColumn('product_categories', 'featured_image'));
+        $this->assertTrue(Schema::hasColumn('product_categories', 'icon'));
         $this->assertStringContainsString("longText('product_images')", $migration);
         $this->assertStringNotContainsString('$table->json(', $migration);
     }
@@ -359,9 +362,26 @@ class ProductSyncTest extends TestCase
 
         DB::flushQueryLog();
         DB::enableQueryLog();
+        $featuredUrl = 'https://dl.airtable.com/.attachments/neon-hero.jpg';
+        $iconUrl = 'https://dl.airtable.com/.attachments/neon-icon.svg';
+        $description = 'Seamless flexible linear lighting for interior and exterior architectural contours, including wet areas and long facade runs.';
+
         app(IProductRepository::class)->persistLookups(
             [
-                ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
+                ['id' => 'recNeon', 'fields' => [
+                    'Name' => 'NEON',
+                    'Order' => 1,
+                    'Descriptions' => $description,
+                    'Featured Image' => [[
+                        'url' => $featuredUrl,
+                        'thumbnails' => [
+                            'small' => ['url' => 'https://dl.airtable.com/thumb-small.jpg'],
+                            'large' => ['url' => 'https://dl.airtable.com/thumb-large.jpg'],
+                            'full' => ['url' => 'https://dl.airtable.com/thumb-full.jpg'],
+                        ],
+                    ]],
+                    'Icon' => [['url' => $iconUrl]],
+                ]],
                 ['id' => 'recGarden', 'fields' => ['Name' => 'Garden', 'Order' => 2, 'Parent' => ['recNeon']]],
             ],
             [
@@ -377,6 +397,13 @@ class ProductSyncTest extends TestCase
         $this->assertDatabaseHas('product_categories', [
             'airtable_id' => 'recNeon',
             'name' => 'NEON',
+            'description' => $description,
+            'featured_image' => $featuredUrl,
+            'icon' => $iconUrl,
+        ]);
+        $this->assertDatabaseMissing('product_categories', [
+            'airtable_id' => 'recNeon',
+            'featured_image' => 'https://dl.airtable.com/thumb-small.jpg',
         ]);
         $this->assertDatabaseHas('product_categories', [
             'airtable_id' => 'recGarden',
@@ -686,5 +713,195 @@ class ProductSyncTest extends TestCase
             ->post(route('dashboard.products.sync.stream'));
 
         $this->assertStringStartsWith('text/event-stream', (string) $response->headers->get('Content-Type'));
+    }
+
+    public function test_sync_normalizes_and_persists_dimming_control_checkbox(): void
+    {
+        config([
+            'airtable.api_key' => 'test-key',
+            'airtable.base_id' => 'appTest',
+        ]);
+
+        Http::fake(function (Request $request) {
+            $url = $request->url();
+
+            if (str_contains($url, 'Categories')) {
+                return Http::response(['records' => [
+                    ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
+                ]]);
+            }
+
+            if (str_contains($url, 'attributes') || str_contains($url, 'Attributes')) {
+                return Http::response(['records' => []]);
+            }
+
+            return Http::response(['records' => [
+                [
+                    'id' => 'recWithDimming',
+                    'fields' => [
+                        'Product Name' => 'Neon With Dimming',
+                        'Status' => 'publish',
+                        'Category' => 'NEON',
+                        'Dimming Control' => true,
+                    ],
+                ],
+                [
+                    'id' => 'recWithoutDimming',
+                    'fields' => [
+                        'Product Name' => 'Neon Without Dimming',
+                        'Status' => 'publish',
+                        'Category' => 'NEON',
+                        'Dimming Control' => false,
+                    ],
+                ],
+            ]]);
+        });
+
+        app(IProductSyncService::class)->sync('test');
+
+        $dimProduct = Product::query()->where('airtable_id', 'recWithDimming')->firstOrFail();
+        $nonDimProduct = Product::query()->where('airtable_id', 'recWithoutDimming')->firstOrFail();
+
+        $this->assertTrue($dimProduct->dimming_control);
+        $this->assertFalse($nonDimProduct->dimming_control);
+
+        $this->assertTrue($dimProduct->toStorefrontArray()['dimming_control']);
+        $this->assertFalse($nonDimProduct->toStorefrontArray()['dimming_control']);
+    }
+
+    public function test_sync_normalizes_and_persists_meta_title_and_meta_descriptions(): void
+    {
+        config([
+            'airtable.api_key' => 'test-key',
+            'airtable.base_id' => 'appTest',
+        ]);
+
+        Http::fake(function (Request $request) {
+            $url = $request->url();
+
+            if (str_contains($url, 'Categories')) {
+                return Http::response(['records' => [
+                    ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
+                ]]);
+            }
+
+            if (str_contains($url, 'attributes') || str_contains($url, 'Attributes')) {
+                return Http::response(['records' => []]);
+            }
+
+            return Http::response(['records' => [
+                [
+                    'id' => 'recSeoProduct',
+                    'fields' => [
+                        'Product Name' => 'Neon 360 Light',
+                        'Status' => 'publish',
+                        'Category' => 'NEON',
+                        'Meta Title' => 'Custom SEO Title — Premium Neon 360',
+                        'Meta Descriptions' => 'Custom SEO Meta Description for Neon 360 Light.',
+                        'Product Description' => 'Long fallback description text.',
+                    ],
+                ],
+            ]]);
+        });
+
+        app(IProductSyncService::class)->sync('test');
+
+        $seoProduct = Product::query()->where('airtable_id', 'recSeoProduct')->firstOrFail();
+
+        $this->assertSame('Custom SEO Title — Premium Neon 360', $seoProduct->meta_title);
+        $this->assertSame('Custom SEO Meta Description for Neon 360 Light.', $seoProduct->meta_description);
+
+        $storefront = $seoProduct->toStorefrontArray();
+        $this->assertSame('Custom SEO Title — Premium Neon 360', $storefront['meta_title']);
+        $this->assertSame('Custom SEO Meta Description for Neon 360 Light.', $storefront['meta_description']);
+
+        // Check server-rendered product details page
+        $this->get('/product-detail?id=recSeoProduct')
+            ->assertOk()
+            ->assertSee('<title>Custom SEO Title — Premium Neon 360</title>', false)
+            ->assertSee('content="Custom SEO Meta Description for Neon 360 Light."', false);
+    }
+
+    public function test_sync_normalizes_and_routes_product_url_slugs(): void
+    {
+        config([
+            'airtable.api_key' => 'test-key',
+            'airtable.base_id' => 'appTest',
+        ]);
+
+        Http::fake(function (Request $request) {
+            $url = $request->url();
+
+            if (str_contains($url, 'Categories')) {
+                return Http::response(['records' => [
+                    ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
+                ]]);
+            }
+
+            if (str_contains($url, 'attributes') || str_contains($url, 'Attributes')) {
+                return Http::response(['records' => []]);
+            }
+
+            return Http::response(['records' => [
+                [
+                    'id' => 'recCustomSlug',
+                    'fields' => [
+                        'Product Name' => 'Neon Flex Series 360',
+                        'Status' => 'publish',
+                        'Category' => 'NEON',
+                        'URL Slug' => 'custom-neon-360-series',
+                        'Meta Title' => 'Custom 360 Title',
+                        'Meta Descriptions' => 'Custom 360 Description',
+                    ],
+                ],
+                [
+                    'id' => 'recAutoSlug',
+                    'fields' => [
+                        'Product Name' => 'COB Strip Light 24V',
+                        'Status' => 'publish',
+                        'Category' => 'NEON',
+                    ],
+                ],
+                [
+                    'id' => 'recNestedSlug',
+                    'fields' => [
+                        'Product Name' => 'COB Strip Light',
+                        'Status' => 'publish',
+                        'Category' => 'NEON',
+                        'URL Slug' => 'led-strips/cob-strip-light',
+                    ],
+                ],
+            ]]);
+        });
+
+        app(IProductSyncService::class)->sync('test');
+
+        $customSlugProduct = Product::query()->where('airtable_id', 'recCustomSlug')->firstOrFail();
+        $autoSlugProduct = Product::query()->where('airtable_id', 'recAutoSlug')->firstOrFail();
+        $nestedSlugProduct = Product::query()->where('airtable_id', 'recNestedSlug')->firstOrFail();
+
+        $this->assertSame('custom-neon-360-series', $customSlugProduct->slug);
+        $this->assertSame('cob-strip-light-24v', $autoSlugProduct->slug);
+        $this->assertSame('led-strips/cob-strip-light', $nestedSlugProduct->slug);
+
+        $this->assertSame('/products/custom-neon-360-series', $customSlugProduct->publicPath());
+        $this->assertSame('/products/cob-strip-light-24v', $autoSlugProduct->publicPath());
+        $this->assertSame('/products/led-strips/cob-strip-light', $nestedSlugProduct->publicPath());
+
+        // Test pretty URL routing
+        $this->get('/products/custom-neon-360-series')
+            ->assertOk()
+            ->assertSee('<title>Custom 360 Title</title>', false)
+            ->assertSee('content="Custom 360 Description"', false);
+
+        // Test nested slash URL routing
+        $this->get('/products/led-strips/cob-strip-light')
+            ->assertOk()
+            ->assertSee('COB Strip Light', false);
+
+        // Test fallback query param routing
+        $this->get('/product-detail?id=recCustomSlug')
+            ->assertOk()
+            ->assertSee('<title>Custom 360 Title</title>', false);
     }
 }

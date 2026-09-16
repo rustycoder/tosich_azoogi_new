@@ -42,12 +42,12 @@
             <textarea id="description" name="description" rows="5">{{ old('description', $project->description ?? '') }}</textarea>
         </div>
 
-        <div class="dash-field">
+        <div class="dash-field is-wide">
             <label for="cover_remote">Cover remote URL</label>
             <input id="cover_remote" name="cover_remote" value="{{ old('cover_remote', $project->cover_remote ?? '') }}">
         </div>
 
-        <div class="dash-field">
+        <div class="dash-field is-wide">
             <label for="cover_file">Cover image</label>
             <div class="dash-media">
                 @if ($project?->cover)
@@ -55,6 +55,8 @@
                 @endif
                 <input id="cover_file" type="file" name="cover_file" accept="image/*">
             </div>
+            @include('dashboard.partials.upload-progress')
+            <small>{{ \App\PageMeta\ImageSize::Cover }}</small>
             @error('cover_file')<p class="login-error">{{ $message }}</p>@enderror
         </div>
     </div>
@@ -78,6 +80,8 @@
     <div class="dash-field">
         <label for="gallery_files">Add images</label>
         <input id="gallery_files" type="file" name="gallery_files[]" accept="image/*" multiple>
+        @include('dashboard.partials.upload-progress')
+        <small>{{ \App\PageMeta\ImageSize::Gallery }}</small>
         @error('gallery_files')<p class="login-error">{{ $message }}</p>@enderror
         @error('gallery_files.*')<p class="login-error">{{ $message }}</p>@enderror
     </div>

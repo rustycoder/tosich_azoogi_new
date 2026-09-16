@@ -9,7 +9,7 @@
 @section('chrome', 'full')
 
 @section('topbarClass', 'solid')
-@section('logo', 'logo_dark.png')
+@section('logo', 'logo_white.png')
 
 @section('content')
 <main class="contact-main">
@@ -52,8 +52,7 @@
       <div class="contact-grid-gap" aria-hidden="true"></div>
 
       <div class="contact-form-panel" {!! cms_section_attr('form') !!}>
-        <div class="kicker"{!! cms_style($meta, 'form.kicker') !!}>{{ $meta->get('form.kicker') }}</div>
-        <h1 class="h2 contact-title"{!! cms_style($meta, 'form.title') !!}>{!! accent_html($meta->get('form.title'), 'hear') !!}</h1>
+        <h1 class="h2 contact-title"{!! cms_style($meta, 'form.title') !!}>{!! accent_html($meta->get('form.title'), $meta->get('form.title_accent')) !!}</h1>
         <p class="contact-lead"{!! cms_style($meta, 'form.lead') !!}>{{ $meta->get('form.lead') }}</p>
 
         <form class="contact-form" id="contactForm" action="{{ route('contact.submit') }}" method="post" novalidate>

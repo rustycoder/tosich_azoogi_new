@@ -9,7 +9,7 @@
 @section('chrome', 'full')
 
 @section('topbarClass', 'solid')
-@section('logo', 'logo_dark.png')
+@section('logo', 'logo_white.png')
 
 @push('styles')
 <link rel="stylesheet" href="{{ versioned_asset('assets/css/audience.css') }}">
@@ -19,9 +19,6 @@
 <main class="audience-main" id="audienceRoot">
   <section class="audience-hero" {!! cms_section_attr('hero') !!}>
     <div class="wrap">
-      @if ($meta->get('hero.eyebrow'))
-        <div class="kicker"{!! cms_style($meta, 'hero.eyebrow') !!}>{{ $meta->get('hero.eyebrow') }}</div>
-      @endif
       <h1 class="h2"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
       @if ($leads)
         <div class="audience-lead">

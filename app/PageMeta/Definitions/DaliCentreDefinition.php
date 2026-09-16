@@ -3,6 +3,7 @@
 namespace App\PageMeta\Definitions;
 
 use App\PageMeta\Field;
+use App\PageMeta\ImageSize;
 use App\PageMeta\PageDefinition;
 
 class DaliCentreDefinition implements PageDefinition
@@ -32,12 +33,13 @@ class DaliCentreDefinition implements PageDefinition
         return [
             Field::text('hero.kicker', 'Hero kicker'),
             Field::textarea('hero.title', 'Hero title'),
+            Field::text('hero.title_accent', 'Title accent'),
             Field::textarea('hero.lead', 'Hero lead'),
             Field::textarea('intro.body', 'Intro'),
             Field::url('video.embed', 'YouTube URL'),
             Field::text('feature.heading', 'Diagram heading'),
             Field::textarea('feature.lead', 'Diagram lead'),
-            Field::image('feature.image', 'System diagram'),
+            Field::image('feature.image', 'System diagram', hint: ImageSize::Diagram),
             Field::text('feature.item.title', 'Diagram point title', true, 'feature.item'),
             Field::textarea('feature.item.body', 'Diagram point body', true, 'feature.item'),
             Field::text('why.heading', 'Why heading'),
@@ -50,7 +52,7 @@ class DaliCentreDefinition implements PageDefinition
             Field::text('hardware.row.product', 'Product', true, 'hardware.row'),
             Field::text('hardware.row.type', 'Type', true, 'hardware.row'),
             Field::textarea('hardware.row.features', 'Key features', true, 'hardware.row'),
-            Field::image('hardware.row.image', 'Product image', true, 'hardware.row'),
+            Field::image('hardware.row.image', 'Product image', true, 'hardware.row', ImageSize::Product),
             Field::text('support.heading', 'Support heading'),
             Field::textarea('support.lead', 'Support lead'),
             Field::text('support.item.title', 'Support title', true, 'support.item'),
@@ -67,6 +69,7 @@ class DaliCentreDefinition implements PageDefinition
         $rows = [
             ['key' => 'hero.kicker', 'sort_order' => 0, 'value' => 'AZOOGI DALI Centre'],
             ['key' => 'hero.title', 'sort_order' => 0, 'value' => 'Centralized Architectural Lighting & Smart DALI-2 Management'],
+            ['key' => 'hero.title_accent', 'sort_order' => 0, 'value' => 'Smart DALI-2 Management'],
             ['key' => 'hero.lead', 'sort_order' => 0, 'value' => 'Scalable IP Gateways. Precision Local Control. Comprehensive Energy Analytics.'],
             ['key' => 'intro.body', 'sort_order' => 0, 'value' => 'A powerful centralized management platform designed for public buildings, commercial offices, and complex architectural spaces. Paired with our certified IP gateways, controllers, and sensor networks, AZOOGI DALI Centre offers total command over single-fixture or multi-floor lighting infrastructures.'],
             ['key' => 'video.embed', 'sort_order' => 0, 'value' => 'https://youtu.be/C0KcmW6NewI'],

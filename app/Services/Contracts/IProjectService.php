@@ -15,7 +15,7 @@ interface IProjectService
     public function dashboardList(string $search = ''): LengthAwarePaginator;
 
     /**
-     * @return array{highlights: Collection<int, Project>, projects: Collection<int, Project>}
+     * @return array{projects: Collection<int, Project>}
      */
     public function publicListing(): array;
 

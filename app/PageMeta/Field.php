@@ -14,6 +14,7 @@ final class Field
         public bool $repeatable = false,
         public ?string $group = null,
         public array $options = [],
+        public string $hint = '',
     ) {}
 
     public static function text(string $key, string $label, bool $repeatable = false, ?string $group = null): self
@@ -36,9 +37,9 @@ final class Field
         return new self($key, $label, FieldType::Url, $repeatable, $group);
     }
 
-    public static function image(string $key, string $label, bool $repeatable = false, ?string $group = null): self
+    public static function image(string $key, string $label, bool $repeatable = false, ?string $group = null, string $hint = ''): self
     {
-        return new self($key, $label, FieldType::Image, $repeatable, $group);
+        return new self($key, $label, FieldType::Image, $repeatable, $group, hint: $hint);
     }
 
     public static function video(string $key, string $label, bool $repeatable = false, ?string $group = null): self

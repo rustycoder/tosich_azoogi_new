@@ -36,6 +36,7 @@ class ProductRepository implements IProductRepository
             $rows[$airtableId] = [
                 'airtable_id' => $airtableId,
                 'product_name' => (string) ($product['product_name'] ?? 'Unnamed Product'),
+                'slug' => $this->storedString($product['slug'] ?? null, 191),
                 'category' => $this->storedString($product['category'] ?? null),
                 'status' => $this->storedString($product['status'] ?? null, 32),
                 'sort_order' => $this->storedOrder($product),
@@ -44,10 +45,15 @@ class ProductRepository implements IProductRepository
                 'product_type' => $this->storedString($product['product_type'] ?? null),
                 'stocked_item' => $this->storedString($product['stocked_item'] ?? null),
                 'supplier_name' => $this->storedString($product['supplier_name'] ?? null),
-                'product_short_description' => $this->storedText($product['product_short_description'] ?? null),
+                'meta_title' => $this->storedString($product['meta_title'] ?? null, 255),
+                'meta_description' => $this->storedText($product['meta_description'] ?? null),
                 'product_description' => $this->storedText($product['product_description'] ?? null),
                 'meta_keywords' => $this->storedText($product['meta_keywords'] ?? null),
                 'datasheet' => $this->storedJson($product['datasheet'] ?? null),
+                'datasheet_file' => $this->storedJson($product['datasheet_file'] ?? null),
+                'installation_guide_file' => $this->storedJson($product['installation_guide_file'] ?? null),
+                'user_manual' => $this->storedJson($product['user_manual'] ?? null),
+                'ies_file' => $this->storedJson($product['ies_file'] ?? null),
                 'product_images' => $this->storedJson($images),
                 'product_dimension' => $this->storedJson($product['product_dimension'] ?? null),
                 'technical_icons' => $this->storedJson($product['technical_icons'] ?? null),
@@ -57,6 +63,7 @@ class ProductRepository implements IProductRepository
                 'sku_mappings' => $this->storedJson($product['sku_mappings'] ?? null),
                 'product_features' => $this->storedJson($product['product_features'] ?? null),
                 'options' => $this->storedJson($product['options'] ?? null),
+                'dimming_control' => (bool) ($product['dimming_control'] ?? false),
                 'constraints' => $this->storedJson($product['constraints'] ?? null),
                 'created_by' => $userId,
                 'updated_by' => $userId,
@@ -68,6 +75,7 @@ class ProductRepository implements IProductRepository
         DB::transaction(function () use ($rows): void {
             $this->upsertByAirtableId(Product::class, array_values($rows), [
                 'product_name',
+                'slug',
                 'category',
                 'status',
                 'sort_order',
@@ -76,10 +84,15 @@ class ProductRepository implements IProductRepository
                 'product_type',
                 'stocked_item',
                 'supplier_name',
-                'product_short_description',
+                'meta_title',
+                'meta_description',
                 'product_description',
                 'meta_keywords',
                 'datasheet',
+                'datasheet_file',
+                'installation_guide_file',
+                'user_manual',
+                'ies_file',
                 'product_images',
                 'product_dimension',
                 'technical_icons',
@@ -89,6 +102,7 @@ class ProductRepository implements IProductRepository
                 'sku_mappings',
                 'product_features',
                 'options',
+                'dimming_control',
                 'constraints',
                 'updated_by',
                 'deleted_by',
@@ -122,6 +136,17 @@ class ProductRepository implements IProductRepository
             $categoryRows[$airtableId] = [
                 'airtable_id' => $airtableId,
                 'name' => $name !== '' ? mb_substr($name, 0, 191) : 'Category',
+                'description' => $this->storedText(
+                    $fields['Descriptions'] ?? $fields['Description'] ?? $fields['Category Description'] ?? $fields['Category description'] ?? null,
+                ),
+                'featured_image' => $this->storedAssetPath(
+                    $fields['Featured Image'] ?? $fields['Featured image'] ?? $fields['featured_image'] ?? null,
+                    null,
+                ),
+                'icon' => $this->storedAssetPath(
+                    $fields['Icon'] ?? $fields['Category Icon'] ?? $fields['Category icon'] ?? null,
+                    null,
+                ),
                 'parent_airtable_id' => $parentId !== '' ? $parentId : null,
                 'sort_order' => isset($fields['Order']) && is_numeric($fields['Order']) ? (int) $fields['Order'] : null,
                 'created_by' => $userId,
@@ -173,6 +198,9 @@ class ProductRepository implements IProductRepository
         DB::transaction(function () use ($categoryRows, $attributeRows): void {
             $this->upsertByAirtableId(ProductCategory::class, array_values($categoryRows), [
                 'name',
+                'description',
+                'featured_image',
+                'icon',
                 'parent_airtable_id',
                 'sort_order',
                 'updated_by',
@@ -220,6 +248,18 @@ class ProductRepository implements IProductRepository
                 $fields = [
                     'Name' => $category->name,
                 ];
+
+                if ($category->description) {
+                    $fields['Descriptions'] = $category->description;
+                }
+
+                if ($category->featured_image) {
+                    $fields['Featured Image'] = $category->featured_image;
+                }
+
+                if ($category->icon) {
+                    $fields['Icon'] = $category->icon;
+                }
 
                 if ($category->parent_airtable_id) {
                     $fields['Parent'] = [$category->parent_airtable_id];
@@ -299,17 +339,66 @@ class ProductRepository implements IProductRepository
     {
         $product = Product::query()->where('airtable_id', $airtableId)->first();
 
-        if ($product === null) {
-            return null;
-        }
-
-        $status = strtolower(trim((string) ($product->status ?? 'publish')));
-
-        if ($status !== '' && $status !== 'publish') {
+        if ($product === null || ! $this->isPublished($product)) {
             return null;
         }
 
         return $product;
+    }
+
+    /**
+     * @param  list<string>  $ids
+     * @return Collection<int, Product>
+     */
+    public function publishedForQuoteIds(array $ids): Collection
+    {
+        $wanted = collect($ids)
+            ->map(fn (mixed $id): string => trim((string) $id))
+            ->filter()
+            ->unique()
+            ->values();
+
+        if ($wanted->isEmpty()) {
+            return collect();
+        }
+
+        $products = Product::query()
+            ->where(function ($query) use ($wanted): void {
+                $query->whereIn('airtable_id', $wanted->all())
+                    ->orWhereIn('product_code', $wanted->all())
+                    ->orWhereIn('slug', $wanted->all());
+            })
+            ->get()
+            ->filter(fn (Product $product): bool => $this->isPublished($product));
+
+        $matchedKeys = $products
+            ->flatMap(fn (Product $product): array => $this->quoteLookupKeys($product))
+            ->map(fn (string $key): string => mb_strtolower($key));
+
+        $unmatched = $wanted->reject(
+            fn (string $id): bool => $matchedKeys->contains(mb_strtolower($id)),
+        );
+
+        if ($unmatched->isNotEmpty()) {
+            $mapped = Product::query()
+                ->whereNotNull('sku_mappings')
+                ->get()
+                ->filter(function (Product $product) use ($unmatched): bool {
+                    if (! $this->isPublished($product)) {
+                        return false;
+                    }
+
+                    $keys = array_map('mb_strtolower', $this->quoteLookupKeys($product));
+
+                    return $unmatched->contains(
+                        fn (string $id): bool => in_array(mb_strtolower($id), $keys, true),
+                    );
+                });
+
+            $products = $products->concat($mapped)->unique('id');
+        }
+
+        return $products->values();
     }
 
     /**
@@ -472,7 +561,9 @@ class ProductRepository implements IProductRepository
             return null;
         }
 
-        return (string) $value;
+        $text = trim((string) $value);
+
+        return $text === '' ? null : $text;
     }
 
     /**
@@ -487,7 +578,7 @@ class ProductRepository implements IProductRepository
         return is_array($value) ? $value : [$value];
     }
 
-    private function storedAssetPath(mixed $value): ?string
+    private function storedAssetPath(mixed $value, ?int $maxLength = 500): ?string
     {
         if (is_string($value)) {
             $path = trim($value);
@@ -497,13 +588,13 @@ class ProductRepository implements IProductRepository
             }
 
             if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
-                return mb_substr($path, 0, 500);
+                return $maxLength === null ? $path : mb_substr($path, 0, $maxLength);
             }
 
             $path = ltrim($path, '/');
 
             if (str_starts_with($path, 'assets/')) {
-                return mb_substr($path, 0, 500);
+                return $maxLength === null ? $path : mb_substr($path, 0, $maxLength);
             }
 
             return null;
@@ -515,7 +606,7 @@ class ProductRepository implements IProductRepository
 
         foreach ($value as $item) {
             $candidate = is_array($item) ? ($item['url'] ?? $item['icon'] ?? null) : $item;
-            $path = $this->storedAssetPath($candidate);
+            $path = $this->storedAssetPath($candidate, $maxLength);
 
             if ($path !== null) {
                 return $path;
@@ -523,5 +614,40 @@ class ProductRepository implements IProductRepository
         }
 
         return null;
+    }
+
+    private function isPublished(Product $product): bool
+    {
+        $status = strtolower(trim((string) ($product->status ?? 'publish')));
+
+        return $status === '' || $status === 'publish';
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function quoteLookupKeys(Product $product): array
+    {
+        $keys = [
+            trim((string) $product->airtable_id),
+            trim((string) $product->product_code),
+            trim((string) $product->slug),
+        ];
+
+        $mappings = $product->sku_mappings;
+
+        if (is_array($mappings)) {
+            foreach ($mappings as $key => $value) {
+                if (is_string($key)) {
+                    $keys[] = trim($key);
+                }
+
+                if (is_string($value)) {
+                    $keys[] = trim($value);
+                }
+            }
+        }
+
+        return array_values(array_filter($keys, fn (string $key): bool => $key !== ''));
     }
 }

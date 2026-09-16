@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\EmailTemplateController;
 use App\Http\Controllers\Dashboard\EnquiryController;
 use App\Http\Controllers\Dashboard\PageContentController;
 use App\Http\Controllers\Dashboard\ProductController;
@@ -13,11 +14,12 @@ use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\Dashboard\StaffController;
 use App\Http\Controllers\ProductEnquiryController;
 use App\Http\Controllers\QuoteRequestController;
-use App\Http\Controllers\Site\LedCalculatorController;
 use App\Http\Controllers\Site\PageController;
+use App\Http\Controllers\Site\ProductController as SiteProductController;
 use App\Http\Controllers\Site\ProductDatasheetController;
 use App\Http\Controllers\Site\ProductDetailController;
 use App\Http\Controllers\Site\ProjectController as SiteProjectController;
+use App\Http\Controllers\Site\QuoteProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -41,6 +43,14 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         Route::get('staff/{staff}/edit', [StaffController::class, 'edit'])->name('staff.edit');
         Route::put('staff/{staff}', [StaffController::class, 'update'])->name('staff.update');
         Route::patch('staff/{staff}/status', [StaffController::class, 'toggleStatus'])->name('staff.toggle-status');
+
+        Route::get('email-templates', [EmailTemplateController::class, 'index'])->name('email-templates.index');
+        Route::get('email-templates/{emailTemplate}/edit', [EmailTemplateController::class, 'edit'])->name('email-templates.edit');
+        Route::put('email-templates/{emailTemplate}', [EmailTemplateController::class, 'update'])->name('email-templates.update');
+        Route::post('email-templates/{emailTemplate}/preview', [EmailTemplateController::class, 'preview'])->name('email-templates.preview');
+        Route::post('email-templates/{emailTemplate}/test', [EmailTemplateController::class, 'test'])->name('email-templates.test');
+        Route::post('email-templates/{emailTemplate}/reset', [EmailTemplateController::class, 'reset'])->name('email-templates.reset');
+        Route::patch('email-templates/{emailTemplate}/toggle-status', [EmailTemplateController::class, 'toggleStatus'])->name('email-templates.toggle-status');
     });
 
     Route::middleware('can.manage:enquiries')->group(function () {
@@ -119,13 +129,17 @@ Route::get('/wholesaler', [PageController::class, '__invoke'])->defaults('slug',
 Route::get('/projects', [SiteProjectController::class, 'index'])->name('projects');
 Route::get('/project-detail', [SiteProjectController::class, 'show'])->name('project-detail');
 
-Route::view('/products', 'pages.products')->name('products');
+Route::get('/products', [SiteProductController::class, 'index'])->name('products');
+Route::get('/products/{slug}', ProductDetailController::class)->where('slug', '.+')->name('products.show');
 Route::get('/product-detail', ProductDetailController::class)->name('product-detail');
-Route::get('/led-strip-calculator', LedCalculatorController::class)->name('led-strip-calculator');
+Route::get('/led-strip-calculator', [PageController::class, '__invoke'])->defaults('slug', 'led-strip-calculator')->name('led-strip-calculator');
 Route::get('/request-a-quote', [PageController::class, '__invoke'])->defaults('slug', 'request-a-quote')->name('request-a-quote');
 Route::view('/trade-login', 'pages.trade-login')->name('trade-login');
 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.submit');
+Route::get('/quote-products', QuoteProductController::class)
+    ->middleware('throttle:60,1')
+    ->name('quote.products');
 Route::post('/request-a-quote', [QuoteRequestController::class, 'store'])->name('quote.submit');
 Route::post('/product-enquiry', [ProductEnquiryController::class, 'store'])->name('product-enquiry.submit');
 Route::post('/product-datasheet', [ProductDatasheetController::class, 'store'])

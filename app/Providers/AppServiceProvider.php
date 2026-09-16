@@ -21,6 +21,7 @@ use App\Repositories\ProductRepository;
 use App\Repositories\ProjectRepository;
 use App\Repositories\UserRepository;
 use App\Services\Contracts\IDashboardMetricsService;
+use App\Services\Contracts\IEmailTemplateService;
 use App\Services\Contracts\IEnquiryService;
 use App\Services\Contracts\ILedCalculatorService;
 use App\Services\Contracts\IPageService;
@@ -32,6 +33,7 @@ use App\Services\Contracts\IProjectService;
 use App\Services\Contracts\IStaffService;
 use App\Services\Contracts\IVisitorOriginService;
 use App\Services\DashboardMetricsService;
+use App\Services\EmailTemplateService;
 use App\Services\EnquiryService;
 use App\Services\LedCalculatorService;
 use App\Services\PageService;
@@ -74,6 +76,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IProductDatasheetService::class, ProductDatasheetService::class);
         $this->app->bind(IVisitorOriginService::class, VisitorOriginService::class);
         $this->app->bind(IPageVisitService::class, PageVisitService::class);
+        $this->app->bind(IEmailTemplateService::class, EmailTemplateService::class);
     }
 
     public function boot(): void

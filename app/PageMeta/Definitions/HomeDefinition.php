@@ -3,6 +3,7 @@
 namespace App\PageMeta\Definitions;
 
 use App\PageMeta\Field;
+use App\PageMeta\ImageSize;
 use App\PageMeta\PageDefinition;
 
 class HomeDefinition implements PageDefinition
@@ -41,16 +42,15 @@ class HomeDefinition implements PageDefinition
             Field::text('slide.cta.secondary.label', 'Secondary button', $slide, $group),
             Field::url('slide.cta.secondary.href', 'Secondary href', $slide, $group),
             Field::select('slide.media.type', 'Media type', ['image' => 'Image', 'video' => 'Video'], $slide, $group),
-            Field::image('slide.media.image', 'Slide image', $slide, $group),
+            Field::image('slide.media.image', 'Slide image', $slide, $group, ImageSize::Hero),
             Field::video('slide.media.video', 'Slide video', $slide, $group),
-            Field::image('slide.media.poster', 'Slide poster', $slide, $group),
             Field::text('intro.kicker', 'Intro kicker'),
             Field::text('intro.heading', 'Intro heading'),
             Field::text('values.kicker', 'Values kicker'),
             Field::textarea('values.heading', 'Values heading'),
             Field::text('values.card.title', 'Value title', true, 'values.card'),
             Field::textarea('values.card.body', 'Value body', true, 'values.card'),
-            Field::image('values.card.image', 'Value image', true, 'values.card'),
+            Field::image('values.card.image', 'Value image', true, 'values.card', ImageSize::Card),
             Field::url('values.card.href', 'Value href', true, 'values.card'),
             Field::text('range.kicker', 'Range kicker'),
             Field::text('range.heading', 'Range heading'),
@@ -70,11 +70,11 @@ class HomeDefinition implements PageDefinition
     public function seed(): array
     {
         $rows = [
-            ...$this->slide(0, 'Made just for you', "Custom fittings\nwithout compromise.", 'Off-spec alternatives, custom fittings, matched specs and budgets — without ever compromising on quality.', 'Start a Project', '/contact', 'Our Services', '#products', 'video', '', '/assets/herovid 1.webm', '/assets/fallback.webp'),
-            ...$this->slide(1, 'For those who demand more from their lighting', "Award-winning\nLED lighting solutions.", 'Premium components, strict quality assurance, and up to a 5-year warranty — engineered to perform and last.', 'Explore Products', '/products', 'View Projects', '/projects', 'video', '', '/assets/herovid 2.webm', '/assets/vid2_fallback.jpg'),
-            ...$this->slide(2, 'Support that lasts', "From first idea\nto final install — and beyond.", "We don't just supply lighting. We partner with you with advice, guidance, and service that keeps your project shining.", 'Talk to a Specialist', '/contact', 'Recent Work', '/projects', 'image', '/assets/hero01.jpg', '', ''),
-            ...$this->slide(3, 'Design without limits', "Architectural lighting,\nshaped to your vision.", 'From sleek LED strips to statement architectural fittings — solutions for every style and every space, indoors or out.', 'Browse Range', '/products', 'Our Story', '#about', 'image', 'https://images.unsplash.com/photo-1567016526105-22da7c13161a?w=2400&q=80', '', ''),
-            ...$this->slide(4, 'Made just for you', "Custom fittings\nwithout compromise.", 'Off-spec alternatives, custom fittings, matched specs and budgets — without ever compromising on quality.', 'Start a Project', '/contact', 'Our Services', '#products', 'image', 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=2400&q=80', '', ''),
+            ...$this->slide(0, 'Made just for you', "Custom fittings\nwithout compromise.", 'Off-spec alternatives, custom fittings, matched specs and budgets — without ever compromising on quality.', 'Start a Project', '/contact', 'Our Services', '#products', 'video', '/assets/fallback.webp', '/assets/herovid 1.webm'),
+            ...$this->slide(1, 'For those who demand more from their lighting', "Award-winning\nLED lighting solutions.", 'Premium components, strict quality assurance, and up to a 5-year warranty — engineered to perform and last.', 'Explore Products', '/products', 'View Projects', '/projects', 'video', '/assets/vid2_fallback.jpg', '/assets/herovid 2.webm'),
+            ...$this->slide(2, 'Support that lasts', "From first idea\nto final install — and beyond.", "We don't just supply lighting. We partner with you with advice, guidance, and service that keeps your project shining.", 'Talk to a Specialist', '/contact', 'Recent Work', '/projects', 'image', '/assets/hero01.jpg', ''),
+            ...$this->slide(3, 'Design without limits', "Architectural lighting,\nshaped to your vision.", 'From sleek LED strips to statement architectural fittings — solutions for every style and every space, indoors or out.', 'Browse Range', '/products', 'Our Story', '#about', 'image', 'https://images.unsplash.com/photo-1567016526105-22da7c13161a?w=2400&q=80', ''),
+            ...$this->slide(4, 'Made just for you', "Custom fittings\nwithout compromise.", 'Off-spec alternatives, custom fittings, matched specs and budgets — without ever compromising on quality.', 'Start a Project', '/contact', 'Our Services', '#products', 'image', 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=2400&q=80', ''),
             ['key' => 'intro.kicker', 'sort_order' => 0, 'value' => 'Lighting solutions from start to finish'],
             ['key' => 'intro.heading', 'sort_order' => 0, 'value' => "I'm looking for lighting as a…"],
             ['key' => 'values.kicker', 'sort_order' => 0, 'value' => 'Why Azoogi'],
@@ -105,7 +105,7 @@ class HomeDefinition implements PageDefinition
     /**
      * @return list<array{key: string, sort_order: int, value: string}>
      */
-    private function slide(int $i, string $eyebrow, string $title, string $subtitle, string $pLabel, string $pHref, string $sLabel, string $sHref, string $type, string $image, string $video, string $poster): array
+    private function slide(int $i, string $eyebrow, string $title, string $subtitle, string $pLabel, string $pHref, string $sLabel, string $sHref, string $type, string $image, string $video): array
     {
         return [
             ['key' => 'slide.eyebrow', 'sort_order' => $i, 'value' => $eyebrow],
@@ -118,7 +118,6 @@ class HomeDefinition implements PageDefinition
             ['key' => 'slide.media.type', 'sort_order' => $i, 'value' => $type],
             ['key' => 'slide.media.image', 'sort_order' => $i, 'value' => $image],
             ['key' => 'slide.media.video', 'sort_order' => $i, 'value' => $video],
-            ['key' => 'slide.media.poster', 'sort_order' => $i, 'value' => $poster],
         ];
     }
 
