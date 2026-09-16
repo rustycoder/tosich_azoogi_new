@@ -41,7 +41,7 @@
     --fs-card-title: clamp(11px, 1.85vw, 26px);
     --fs-card-title-sm: clamp(13px, 1.6vw, 22px);
     --fs-meta: clamp(12px, 1vw, 14px);
-    --fs-body: clamp(14px, 1.15vw, 16px);
+    --fs-body: clamp(14px, 1.15vw, 14px);
     --fs-lead: clamp(15px, 1.2vw, 18px);
     --fs-h3: clamp(22px, 2.4vw, 28px);
     --fs-h2-section: clamp(24px, 3.2vw, 36px);
