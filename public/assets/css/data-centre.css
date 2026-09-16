@@ -121,7 +121,7 @@
 
 /* —— Bands —— */
 .dc-band {
-  padding: var(--section-y) 0;
+  padding: var(--fs-h2-section) 0;
 }
 
 /* .dc-band--tight {
