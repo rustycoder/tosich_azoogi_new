@@ -88,6 +88,15 @@
 @endsection
 
 @push('scripts')
+<script>
+    window.dashCkeditor = {
+        contentsCss: [
+            @json(versioned_asset('assets/css/style_demo.css')),
+            @json(versioned_asset('assets/css/legal.css')),
+            @json(versioned_asset('assets/css/ckeditor-contents.css')),
+        ],
+    };
+</script>
 <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 <script src="{{ versioned_asset('assets/js/dashboard-visual.js') }}"></script>
 @endpush

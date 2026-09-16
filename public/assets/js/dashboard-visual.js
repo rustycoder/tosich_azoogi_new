@@ -5,23 +5,43 @@
     }
 
     const backdrop = document.getElementById('dash-drawer-backdrop');
+    const contentsCss = Array.isArray(window.dashCkeditor?.contentsCss)
+        ? window.dashCkeditor.contentsCss
+        : [];
 
-    const editorConfig = {
-        height: 220,
-        allowedContent: true,
-        versionCheck: false,
-        removePlugins: 'elementspath,link,sourcearea',
-        toolbar: [
-            { name: 'styles', items: ['Format'] },
-            { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'] },
-            { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'] },
-        ],
+    const editorConfig = (drawer) => {
+        const wide = drawer.classList.contains('is-wide');
+
+        return {
+            startupMode: 'wysiwyg',
+            height: wide ? 520 : 280,
+            allowedContent: true,
+            versionCheck: false,
+            contentsCss,
+            removePlugins: 'elementspath,sourcearea',
+            toolbar: [
+                { name: 'styles', items: ['Format'] },
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'] },
+                { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'] },
+                { name: 'links', items: ['Link', 'Unlink'] },
+            ],
+            on: {
+                instanceReady(event) {
+                    const html = event.editor.document.getDocumentElement().$;
+                    const theme = document.documentElement.getAttribute('data-theme') || 'light';
+                    html.setAttribute('data-theme', theme);
+                    event.editor.resetDirty();
+                },
+            },
+        };
     };
 
     const mountEditors = (drawer) => {
         if (typeof CKEDITOR === 'undefined') {
             return;
         }
+
+        const config = editorConfig(drawer);
 
         drawer.querySelectorAll('textarea[data-ckeditor]').forEach((textarea) => {
             if (!textarea.id) {
@@ -31,11 +51,11 @@
             const existing = CKEDITOR.instances[textarea.id];
 
             if (existing) {
-                existing.resize('100%', editorConfig.height);
+                existing.resize('100%', config.height);
                 return;
             }
 
-            const editor = CKEDITOR.replace(textarea, editorConfig);
+            const editor = CKEDITOR.replace(textarea, config);
 
             textarea.closest('form')?.addEventListener('submit', () => {
                 editor.updateElement();

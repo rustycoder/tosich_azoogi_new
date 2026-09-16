@@ -2487,8 +2487,13 @@ code {
 }
 
 .dash-drawer .cke_contents {
-  min-height: 160px !important;
-  max-height: min(240px, 32vh) !important;
+  min-height: 220px !important;
+  max-height: min(48vh, 420px) !important;
+}
+
+.dash-drawer.is-wide .cke_contents {
+  min-height: 420px !important;
+  max-height: min(70vh, 720px) !important;
 }
 
 .email-template-layout {

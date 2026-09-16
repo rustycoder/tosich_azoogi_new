@@ -596,11 +596,32 @@ class DashboardTest extends TestCase
             ->assertSee('Who We Are', false)
             ->assertDontSee('&lt;h3&gt;', false);
 
-        $this->actingAs($admin)
-            ->get('/dashboard/content/pages/privacy')
-            ->assertOk()
-            ->assertSee('data-ckeditor', false)
-            ->assertSee('ckeditor', false);
+        foreach (['privacy', 'terms', 'warranty-returns', 'modern-slavery'] as $slug) {
+            $this->actingAs($admin)
+                ->get('/dashboard/content/pages/'.$slug)
+                ->assertOk()
+                ->assertSee('data-ckeditor', false)
+                ->assertSee('ckeditor', false)
+                ->assertSee('dashCkeditor', false)
+                ->assertSee('ckeditor-contents.css', false);
+        }
+
+        $js = file_get_contents(public_path('assets/js/dashboard-visual.js'));
+        $css = file_get_contents(public_path('assets/css/dashboard.css'));
+
+        $this->assertNotFalse($js);
+        $this->assertNotFalse($css);
+        $this->assertStringContainsString("startupMode: 'wysiwyg'", $js);
+        $this->assertStringContainsString('contentsCss', $js);
+        $this->assertStringContainsString('padding: 14px 16px', file_get_contents(public_path('assets/css/ckeditor-contents.css')));
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.dash-drawer \.cke_contents\s*\{[^}]*max-height:\s*min\(240px/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.dash-drawer\.is-wide \.cke_contents\s*\{[^}]*min-height:\s*420px/s',
+            $css,
+        );
     }
 
     public function test_audience_pages_have_dedicated_editors(): void
