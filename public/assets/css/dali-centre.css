@@ -227,12 +227,10 @@
 
 .dc-feature-img {
     margin: 0;
-    padding: clamp(0px, 2vw, 20px);
+    padding: 0px;
     border-radius: 4px;
     overflow: hidden;
     background: var(--bg-2);
-    /* border: 1px solid var(--line); */
-    height: 670px;
 }
 
 .dc-feature-img img {
