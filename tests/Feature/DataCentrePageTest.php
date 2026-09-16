@@ -2,6 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Models\Page;
+use App\Models\PageMeta;
+use App\Models\User;
+use Database\Seeders\AdminUserSeeder;
 use Database\Seeders\PageSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -170,5 +174,86 @@ class DataCentrePageTest extends TestCase
             '/\.dc-feature-img img\s*\{[^}]*object-position:\s*center/s',
             $css,
         );
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.dc-feature-img\s*\{[^}]*height:\s*100%/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.dc-band--feature\s*\{[^}]*isolation:\s*isolate/s',
+            $css,
+        );
+    }
+
+    public function test_each_feature_section_renders_its_own_image(): void
+    {
+        $page = Page::query()->where('slug', 'data-centre')->firstOrFail();
+
+        PageMeta::query()->where('page_id', $page->id)->where('key', 'hardware.image')->update(['value' => '/assets/img/datacenter1.webp']);
+        PageMeta::query()->where('page_id', $page->id)->where('key', 'control.image')->update(['value' => '/assets/img/datacenter2.webp']);
+        PageMeta::query()->where('page_id', $page->id)->where('key', 'emergency.image')->update(['value' => '/assets/img/silvair/emergency.jpg']);
+        PageMeta::query()->where('page_id', $page->id)->where('key', 'zones.image')->update(['value' => '/assets/img/datacenter.webp']);
+
+        $html = $this->get('/data-centre')->assertOk()->getContent();
+
+        $hardware = strpos($html, 'Data Hall Conditions');
+        $control = strpos($html, 'Building Automation');
+        $emergency = strpos($html, 'Fail-Safe');
+        $zones = strpos($html, 'Across All Zones');
+        $cta = strpos($html, 'class="dc-cta reveal"');
+
+        $this->assertNotFalse($hardware);
+        $this->assertNotFalse($control);
+        $this->assertNotFalse($emergency);
+        $this->assertNotFalse($zones);
+        $this->assertNotFalse($cta);
+
+        $hardwareBlock = substr($html, $hardware, $control - $hardware);
+        $controlBlock = substr($html, $control, $emergency - $control);
+        $emergencyBlock = substr($html, $emergency, $zones - $emergency);
+        $zonesBlock = substr($html, $zones, $cta - $zones);
+
+        $this->assertStringContainsString('datacenter1.webp', $hardwareBlock);
+        $this->assertStringContainsString('datacenter2.webp', $controlBlock);
+        $this->assertStringContainsString('silvair/emergency.jpg', $emergencyBlock);
+        $this->assertStringContainsString('datacenter.webp', $zonesBlock);
+        $this->assertStringNotContainsString('silvair/emergency.jpg', $hardwareBlock);
+        $this->assertStringNotContainsString('datacenter1.webp', $emergencyBlock);
+        $this->assertStringNotContainsString('datacenter2.webp', $zonesBlock);
+    }
+
+    public function test_page_editor_preview_keeps_feature_images_in_separate_sections(): void
+    {
+        $this->seed(AdminUserSeeder::class);
+        $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
+
+        $html = $this->actingAs($admin)
+            ->get('/dashboard/content/pages/data-centre/preview')
+            ->assertOk()
+            ->assertSee('data-cms-section="hardware"', false)
+            ->assertSee('data-cms-section="control"', false)
+            ->assertSee('data-cms-section="emergency"', false)
+            ->assertSee('data-cms-section="zones"', false)
+            ->getContent();
+
+        $this->assertSame(4, substr_count($html, 'class="dc-feature-img reveal"'));
+        $this->assertSame(4, preg_match_all('/<section class="dc-band[^\"]*dc-band--feature/', $html));
+    }
+
+    public function test_cms_editor_shows_revealed_content_and_staggers_edit_buttons(): void
+    {
+        $css = file_get_contents(public_path('assets/css/cms-editor.css'));
+        $js = file_get_contents(public_path('assets/js/cms-editor.js'));
+
+        $this->assertNotFalse($css);
+        $this->assertNotFalse($js);
+        $this->assertMatchesRegularExpression(
+            '/\.cms-editing \.reveal\s*\{[^}]*opacity:\s*1/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.cms-editing \.reveal\s*\{[^}]*transform:\s*none/s',
+            $css,
+        );
+        $this->assertStringContainsString('usedTops', $js);
     }
 }

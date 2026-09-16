@@ -133,6 +133,9 @@
 }
 
 .dc-band--feature {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
   padding: calc(var(--section-y) + 16px) 0;
 }
 
@@ -276,11 +279,18 @@
   align-items: center;
 }
 
+.dc-feature-copy,
+.dc-feature-img {
+  min-width: 0;
+  max-width: 100%;
+}
+
 .dc-feature-img {
   display: flex;
   align-items: center;
   align-self: center;
-  height: 100%;
+  position: relative;
+  z-index: 0;
 }
 
 .dc-feature--flip .dc-feature-copy {
