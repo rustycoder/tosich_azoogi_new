@@ -20,7 +20,9 @@
 <section class="hero" id="hero" {!! cms_section_attr('slide') !!}>
   @foreach ($slides as $slide)
     @php
-        $isVideo = ($slide['media.type'] ?? '') === 'video';
+        $video = trim((string) ($slide['media.video'] ?? ''));
+        $image = media_url($slide['media.image'] ?? '');
+        $isVideo = $video !== '';
         $classes = 'slide';
         if ($loop->first) {
             $classes .= ' active';
@@ -28,12 +30,11 @@
         if ($isVideo) {
             $classes .= ' has-video';
         }
-        $image = media_url($slide['media.image'] ?? '');
     @endphp
-    <div class="{{ $classes }}" @if (! $isVideo && $image) style="background-image:url('{{ $image }}')" @endif>
+    <div class="{{ $classes }}" @if (! $isVideo && $image !== '') style="background-image:url('{{ $image }}')" @endif>
       @if ($isVideo)
-        <video class="bg-video" @if ($loop->first) autoplay @endif muted loop playsinline preload="auto" poster="{{ media_url($slide['media.poster'] ?? '') }}">
-          <source src="{{ media_url($slide['media.video'] ?? '') }}" type="video/webm">
+        <video class="bg-video" @if ($loop->first) autoplay @endif muted loop playsinline preload="auto" @if ($image !== '') poster="{{ $image }}" @endif>
+          <source src="{{ media_url($video) }}" type="video/webm">
         </video>
       @endif
       <div class="slide-inner">

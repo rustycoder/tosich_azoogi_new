@@ -2,6 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Models\Page;
+use App\Models\PageMeta;
+use App\Models\User;
+use Database\Seeders\AdminUserSeeder;
 use Database\Seeders\PageSeeder;
 use Database\Seeders\ProjectSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -30,6 +34,46 @@ class HomeHeroTest extends TestCase
             ->assertDontSee('class="line"', false)
             ->assertSee('class="slider-ctrl"', false)
             ->assertSee('id="pp"', false);
+    }
+
+    public function test_home_hero_uses_slide_image_as_video_poster_and_image_fallback(): void
+    {
+        $html = $this->get('/')->assertOk()->getContent();
+
+        $this->assertStringContainsString('poster="/assets/fallback.webp"', $html);
+        $this->assertStringContainsString('poster="/assets/vid2_fallback.jpg"', $html);
+        $this->assertStringContainsString("background-image:url('/assets/hero01.jpg')", $html);
+        $this->assertStringNotContainsString('Slide poster', $html);
+        $this->assertEquals(2, substr_count($html, '<video class="bg-video"'));
+    }
+
+    public function test_home_hero_shows_slide_image_when_video_is_empty(): void
+    {
+        $page = Page::query()->where('slug', 'home')->firstOrFail();
+
+        PageMeta::query()
+            ->where('page_id', $page->id)
+            ->where('key', 'slide.media.video')
+            ->where('sort_order', 0)
+            ->update(['value' => '']);
+
+        $html = $this->get('/')->assertOk()->getContent();
+
+        $this->assertStringContainsString("background-image:url('/assets/fallback.webp')", $html);
+        $this->assertEquals(1, substr_count($html, '<video class="bg-video"'));
+    }
+
+    public function test_home_page_editor_omits_slide_poster(): void
+    {
+        $this->seed(AdminUserSeeder::class);
+        $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
+
+        $this->actingAs($admin)
+            ->get('/dashboard/content/pages/home')
+            ->assertOk()
+            ->assertDontSee('Slide poster', false)
+            ->assertSee('Slide image', false)
+            ->assertSee('Slide video', false);
     }
 
     public function test_public_pages_omit_hero_eyebrow_labels(): void
