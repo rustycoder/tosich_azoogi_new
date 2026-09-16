@@ -2,50 +2,19 @@
   const STORAGE_KEY = 'azoogi_quote_items';
   const FALLBACK_IMAGE = '/assets/bg_default.png';
 
+  let detailsByKey = {};
+  let hydrateToken = 0;
+  let hydratePromise = null;
+  let hydrateQueued = false;
+  let lastHydratedKey = '';
+
   function cleanStr(s) {
     return String(s || '').replace(/\s+/g, ' ').trim().toLowerCase();
   }
 
-  function readItems() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      const items = raw ? JSON.parse(raw) : [];
-      if (!Array.isArray(items)) {
-        return [];
-      }
-
-      let mutated = false;
-      const result = items.map((item) => {
-        const sku = primarySku(item.sku);
-        const resolvedImg = resolveItemImage(item);
-        let curImg = String(item.image || '').trim();
-        if ((!curImg || curImg === FALLBACK_IMAGE || curImg.includes('bg_default.png') || curImg.includes('logo_dark.png')) && resolvedImg && resolvedImg !== FALLBACK_IMAGE) {
-          curImg = resolvedImg;
-          mutated = true;
-        }
-        return {
-          ...item,
-          sku,
-          id: sku || item.id,
-          image: curImg || resolvedImg || FALLBACK_IMAGE,
-        };
-      });
-
-      if (mutated) {
-        try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(result));
-        } catch {}
-      }
-
-      return result;
-    } catch {
-      return [];
-    }
-  }
-
-  function writeItems(items) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-    window.dispatchEvent(new CustomEvent('quote:changed'));
+  function productsUrl() {
+    const url = window.AZOOGI_QUOTE && window.AZOOGI_QUOTE.productsUrl;
+    return typeof url === 'string' ? url : '';
   }
 
   function normalizeSku(value) {
@@ -61,167 +30,218 @@
     return sku.split(',')[0].trim();
   }
 
+  function compactStored(entries) {
+    const merged = [];
+    const index = {};
+
+    entries.forEach((entry) => {
+      const id = String(entry && entry.id ? entry.id : '').trim();
+      if (!id) {
+        return;
+      }
+
+      const key = cleanStr(id);
+      const qty = Math.max(1, Number(entry.qty) || 1);
+      if (index[key] !== undefined) {
+        merged[index[key]].qty += qty;
+        return;
+      }
+
+      index[key] = merged.length;
+      merged.push({ id, qty });
+    });
+
+    return merged;
+  }
+
+  function persistStored(entries) {
+    const next = JSON.stringify(compactStored(entries));
+    try {
+      if (localStorage.getItem(STORAGE_KEY) === next) {
+        return;
+      }
+      localStorage.setItem(STORAGE_KEY, next);
+    } catch {}
+  }
+
+  function readStored() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const items = raw ? JSON.parse(raw) : [];
+      if (!Array.isArray(items)) {
+        return [];
+      }
+
+      return compactStored(items.map((item) => ({
+        id: String((item && (item.id || item.sku)) || '').trim(),
+        qty: Math.max(1, Number(item && item.qty) || 1),
+      })));
+    } catch {
+      return [];
+    }
+  }
+
+  function writeItems(entries) {
+    persistStored(entries);
+    window.dispatchEvent(new CustomEvent('quote:changed'));
+  }
+
+  function rememberDetails(product) {
+    if (!product) {
+      return;
+    }
+
+    const id = String(product.id || '').trim();
+    const sku = primarySku(product.sku);
+    const details = {
+      id: id || sku,
+      sku,
+      name: String(product.name || '').trim(),
+      image: String(product.image || '').trim() || FALLBACK_IMAGE,
+      url: String(product.url || '').trim(),
+    };
+
+    [details.id, details.sku].filter(Boolean).forEach((key) => {
+      detailsByKey[cleanStr(key)] = details;
+    });
+  }
+
+  function indexDetails(products) {
+    const next = {};
+    (Array.isArray(products) ? products : []).forEach((product) => {
+      if (!product || !product.id) {
+        return;
+      }
+
+      const details = {
+        id: String(product.id).trim(),
+        sku: primarySku(product.sku),
+        name: String(product.name || '').trim(),
+        image: String(product.image || '').trim() || FALLBACK_IMAGE,
+        url: String(product.url || '').trim(),
+      };
+
+      [details.id, details.sku].filter(Boolean).forEach((key) => {
+        next[cleanStr(key)] = details;
+      });
+    });
+    detailsByKey = next;
+  }
+
+  function matchDetails(value) {
+    const key = cleanStr(value);
+    return key ? (detailsByKey[key] || null) : null;
+  }
+
   function itemKey(item) {
-    return primarySku(item.sku) || String(item.id || item.name || '').trim();
+    const details = matchDetails(item && (item.id || item.sku));
+    if (details && details.id) {
+      return details.id;
+    }
+
+    return String((item && (item.id || item.sku)) || '').trim();
+  }
+
+  function displayItems() {
+    return readStored().map((entry) => {
+      const details = matchDetails(entry.id) || {};
+      return {
+        id: details.id || entry.id,
+        sku: details.sku || '',
+        name: details.name || entry.id,
+        image: details.image || FALLBACK_IMAGE,
+        url: details.url || '',
+        qty: entry.qty,
+      };
+    });
   }
 
   function countItems(items) {
     return items.reduce((sum, item) => sum + (Number(item.qty) || 1), 0);
   }
 
-  function extractProductImage(p) {
-    if (!p) return '';
-    const images = p.product_images || p.images || [];
-    let raw = '';
-    if (Array.isArray(images) && images.length > 0) {
-      raw = images[0];
-    } else if (p.cover) {
-      raw = p.cover;
-    } else if (p.img) {
-      raw = p.img;
-    } else if (p.image) {
-      raw = p.image;
-    } else if (Array.isArray(p.product_dimension) && p.product_dimension.length > 0) {
-      raw = p.product_dimension[0];
-    }
-
-    if (typeof raw === 'object' && raw !== null && raw.url) {
-      raw = raw.url;
-    }
-    if (typeof raw === 'string') {
-      const clean = raw.trim();
-      if (clean && clean !== FALLBACK_IMAGE && !clean.includes('bg_default.png') && !clean.includes('logo_dark.png')) {
-        return (clean.startsWith('http://') || clean.startsWith('https://') || clean.startsWith('/')) ? clean : ('/' + clean);
-      }
-    }
-    return '';
+  function isFallbackImage(img) {
+    const value = String(img || '').trim();
+    return value === '' || value === FALLBACK_IMAGE || value.includes('bg_default.png') || value.includes('logo_dark.png');
   }
 
-  function searchTreeForVariant(nodes, target) {
-    if (!nodes || !Array.isArray(nodes) || !target) return null;
-    for (const node of nodes) {
-      if (!node) continue;
-      if (node.variants && typeof node.variants === 'object') {
-        for (const vName in node.variants) {
-          if (cleanStr(vName) === target || cleanStr(node.name) === target) {
-            const vData = node.variants[vName];
-            if (typeof vData === 'string') return vData;
-            if (typeof vData === 'object' && vData !== null && vData.id) return vData.id;
-          }
-        }
-      }
-      if (node.children && Array.isArray(node.children)) {
-        const res = searchTreeForVariant(node.children, target);
-        if (res) return res;
-      }
-    }
-    return null;
+  function storedIdsKey(entries) {
+    return compactStored(entries).map((entry) => entry.id).join('\n');
   }
 
-  function findProductInCatalog(item) {
-    if (!item || typeof AZOOGI_PRODUCTS === 'undefined' || !AZOOGI_PRODUCTS.products) {
-      return null;
+  function hydrateFromApi() {
+    if (hydratePromise) {
+      hydrateQueued = true;
+      return hydratePromise;
     }
 
-    const list = Array.isArray(AZOOGI_PRODUCTS.products)
-      ? AZOOGI_PRODUCTS.products
-      : Object.values(AZOOGI_PRODUCTS.products);
+    hydratePromise = (async () => {
+      const stored = readStored();
+      const ids = stored.map((entry) => entry.id).filter(Boolean);
+      const url = productsUrl();
+      const requestKey = storedIdsKey(stored);
 
-    const targetId = cleanStr(item.id);
-    const targetSku = cleanStr(primarySku(item.sku));
-    const targetName = cleanStr(item.name);
-
-    let urlSlug = '';
-    let urlId = '';
-    if (item.url) {
-      const u = String(item.url);
-      const mSlug = u.match(/\/products\/([^?#]+)/);
-      if (mSlug) {
-        urlSlug = cleanStr(decodeURIComponent(mSlug[1]));
+      if (!url || ids.length === 0) {
+        lastHydratedKey = '';
+        if (ids.length === 0) {
+          detailsByKey = {};
+        }
+        renderLists();
+        return;
       }
-      const mId = u.match(/[?&]id=([^&#]+)/);
-      if (mId) {
-        urlId = cleanStr(decodeURIComponent(mId[1]));
+
+      if (requestKey === lastHydratedKey) {
+        renderLists();
+        return;
       }
-    }
 
-    // 1. Exact ID or Slug match
-    for (const p of list) {
-      if (!p) continue;
-      const pId = cleanStr(p.id || p.airtable_id);
-      const pSlug = cleanStr(p.slug);
-      if (targetId && (pId === targetId || pSlug === targetId)) return p;
-      if (urlId && pId === urlId) return p;
-      if (urlSlug && pSlug === urlSlug) return p;
-    }
+      const token = ++hydrateToken;
+      const endpoint = new URL(url, window.location.origin);
+      ids.forEach((id) => endpoint.searchParams.append('ids[]', id));
 
-    // 2. SKU match (code, mapped SKUs)
-    if (targetSku) {
-      for (const p of list) {
-        if (!p) continue;
-        const pSku = cleanStr(primarySku(p.product_code || p.sku));
-        if (pSku && pSku === targetSku) return p;
-        if (p.sku_mappings && typeof p.sku_mappings === 'object') {
-          for (const k in p.sku_mappings) {
-            const mappedSku = cleanStr(primarySku(p.sku_mappings[k]));
-            if (mappedSku && mappedSku === targetSku) return p;
-          }
+      try {
+        const response = await fetch(endpoint.toString(), {
+          headers: { Accept: 'application/json' },
+          credentials: 'same-origin',
+        });
+
+        if (!response.ok || token !== hydrateToken) {
+          renderLists();
+          return;
+        }
+
+        const data = await response.json();
+        if (token !== hydrateToken) {
+          return;
+        }
+
+        indexDetails(data.products || []);
+
+        const next = compactStored(stored.map((entry) => {
+          const details = matchDetails(entry.id);
+          return {
+            id: details ? details.id : entry.id,
+            qty: entry.qty,
+          };
+        }));
+
+        persistStored(next);
+        lastHydratedKey = storedIdsKey(next);
+        renderLists();
+      } catch {
+        if (token === hydrateToken) {
+          renderLists();
         }
       }
-    }
-
-    // 3. Exact Name match
-    if (targetName) {
-      for (const p of list) {
-        if (!p) continue;
-        const pName = cleanStr(p.product_name || p.name);
-        if (pName && pName === targetName) return p;
+    })().finally(() => {
+      hydratePromise = null;
+      if (hydrateQueued) {
+        hydrateQueued = false;
+        hydrateFromApi();
       }
-    }
+    });
 
-    // 4. Tree variants match
-    if (AZOOGI_PRODUCTS.tree && Array.isArray(AZOOGI_PRODUCTS.tree)) {
-      const variantProdId = searchTreeForVariant(AZOOGI_PRODUCTS.tree, targetName || targetId);
-      if (variantProdId) {
-        const found = list.find((p) => cleanStr(p.id || p.airtable_id) === cleanStr(variantProdId));
-        if (found) return found;
-      }
-    }
-
-    // 5. Fuzzy / contains Name match
-    if (targetName && targetName.length > 3) {
-      for (const p of list) {
-        if (!p) continue;
-        const pName = cleanStr(p.product_name || p.name);
-        if (pName && (pName.includes(targetName) || targetName.includes(pName))) return p;
-      }
-    }
-
-    return null;
-  }
-
-  function resolveItemImage(item) {
-    if (!item) return FALLBACK_IMAGE;
-
-    let img = String(item.image || '').trim();
-    if (img && img !== FALLBACK_IMAGE && img !== '/assets/logo_dark.png' && !img.includes('bg_default.png')) {
-      if (img.startsWith('http://') || img.startsWith('https://') || img.startsWith('/')) {
-        return img;
-      }
-      return '/' + img;
-    }
-
-    if (typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS) {
-      const prod = findProductInCatalog(item);
-      if (prod) {
-        const foundImg = extractProductImage(prod);
-        if (foundImg) {
-          return foundImg;
-        }
-      }
-    }
-
-    return FALLBACK_IMAGE;
+    return hydratePromise;
   }
 
   function backgroundUrl(url) {
@@ -230,56 +250,40 @@
   }
 
   function upsertItem(next) {
-    const name = String(next.name || '').trim();
-    if (!name) {
+    const id = String((next && (next.id || next.sku)) || '').trim();
+    if (!id) {
       return;
     }
 
-    const items = readItems();
-    let img = String(next.image || '').trim();
-    if (!img || img === FALLBACK_IMAGE || img.includes('bg_default.png') || img.includes('logo_dark.png')) {
-      img = resolveItemImage(next);
-    }
-
-    const incoming = {
-      id: primarySku(next.sku) || String(next.id || name),
-      name,
-      sku: primarySku(next.sku),
-      image: img || FALLBACK_IMAGE,
-      url: String(next.url || '').trim(),
-      qty: 1,
-    };
-    const key = itemKey(incoming);
-    const existing = items.find((item) => itemKey(item) === key);
+    rememberDetails({ ...next, id });
+    const stored = readStored();
+    const key = itemKey({ id, sku: next.sku });
+    const existing = stored.find((entry) => itemKey(entry) === key);
 
     if (existing) {
       existing.qty = (Number(existing.qty) || 1) + 1;
-      if (incoming.image && incoming.image !== FALLBACK_IMAGE && !incoming.image.includes('bg_default.png')) {
-        existing.image = incoming.image;
-      }
-      existing.sku = incoming.sku || existing.sku;
-      existing.url = incoming.url || existing.url;
     } else {
-      items.push(incoming);
+      stored.push({ id, qty: 1 });
     }
 
-    writeItems(items);
+    writeItems(stored);
+    hydrateFromApi();
   }
 
   function setQty(key, qty) {
     const nextQty = Math.max(0, Number(qty) || 0);
-    const items = readItems()
+    const items = readStored()
       .map((item) => (itemKey(item) === key ? { ...item, qty: nextQty } : item))
       .filter((item) => (Number(item.qty) || 0) > 0);
     writeItems(items);
   }
 
   function removeItem(key) {
-    writeItems(readItems().filter((item) => itemKey(item) !== key));
+    writeItems(readStored().filter((item) => itemKey(item) !== key));
   }
 
   function extractFromCard(button) {
-    if (button.dataset.quoteName) {
+    if (button.dataset.quoteName || button.dataset.quoteId || button.dataset.quoteSku) {
       return {
         id: button.dataset.quoteId || button.dataset.quoteSku || button.dataset.quoteName,
         name: button.dataset.quoteName,
@@ -343,28 +347,12 @@
     };
   }
 
-  function resolveItemSku(item) {
-    let sku = primarySku(item && item.sku ? item.sku : '');
-    if (sku) {
-      return sku;
-    }
-
-    if (typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS) {
-      const found = findProductInCatalog(item);
-      if (found) {
-        return primarySku(found.product_code || found.sku || (found.product_features && (found.product_features['Product Code'] || found.product_features['Product code'])) || '');
-      }
-    }
-
-    return '';
-  }
-
   function renderItemRow(item, variant) {
     const row = document.createElement('div');
     row.className = variant === 'page' ? 'quote-page-item' : 'quote-item';
     row.dataset.quoteKey = itemKey(item);
 
-    const imgSrc = resolveItemImage(item);
+    const imgSrc = item.image || FALLBACK_IMAGE;
     const img = document.createElement('div');
     img.className = variant === 'page' ? 'quote-page-item-img' : 'quote-item-img';
     img.style.backgroundImage = backgroundUrl(imgSrc);
@@ -378,7 +366,7 @@
       this.src = FALLBACK_IMAGE;
       this.classList.add('is-fallback');
     };
-    if (imgSrc === FALLBACK_IMAGE || imgSrc.includes('bg_default.png') || imgSrc.includes('logo_dark.png')) {
+    if (isFallbackImage(imgSrc)) {
       imgEl.classList.add('is-fallback');
     }
     img.appendChild(imgEl);
@@ -406,14 +394,14 @@
     minus.setAttribute('aria-label', 'Decrease quantity');
     minus.textContent = '−';
 
-    const qty = document.createElement('span');
-    qty.textContent = String(item.qty || 1);
-
     const plus = document.createElement('button');
     plus.type = 'button';
     plus.dataset.quoteQty = '1';
     plus.setAttribute('aria-label', 'Increase quantity');
     plus.textContent = '+';
+
+    const qty = document.createElement('span');
+    qty.textContent = String(item.qty || 1);
 
     stepper.append(minus, qty, plus);
 
@@ -430,7 +418,7 @@
   }
 
   function renderLists() {
-    const items = readItems();
+    const items = displayItems();
     const count = countItems(items);
     const countEls = document.querySelectorAll('[data-quote-count]');
     const drawers = document.querySelectorAll('[data-quote-list="drawer"]');
@@ -491,13 +479,12 @@
   }
 
   function isProductInQuote(items, product) {
-    const sku = primarySku(product.sku);
-    const name = String(product.name || '').trim();
+    const key = itemKey(product);
+    if (key === '') {
+      return false;
+    }
 
-    return items.some((item) => {
-      const key = itemKey(item);
-      return (sku !== '' && key === sku) || (name !== '' && (key === name || item.name === name));
-    });
+    return items.some((item) => itemKey(item) === key);
   }
 
   function markAddedButtons(items) {
@@ -590,7 +577,7 @@
         }
         const qtyBtn = event.target.closest('[data-quote-qty]');
         if (qtyBtn) {
-          const item = readItems().find((entry) => itemKey(entry) === key);
+          const item = readStored().find((entry) => itemKey(entry) === key);
           const current = item ? (Number(item.qty) || 1) : 1;
           setQty(key, current + Number(qtyBtn.dataset.quoteQty));
           return;
@@ -601,7 +588,7 @@
       if (specBtn) {
         event.preventDefault();
         const item = extractFromProductDetail();
-        const exists = isProductInQuote(readItems(), item);
+        const exists = isProductInQuote(displayItems(), item);
         if (exists) {
           openDrawer();
         } else {
@@ -617,7 +604,7 @@
           return;
         }
         const key = itemKey(item);
-        const exists = readItems().some((entry) => itemKey(entry) === key);
+        const exists = displayItems().some((entry) => itemKey(entry) === key);
         if (exists) {
           removeItem(key);
         } else {
@@ -635,14 +622,14 @@
     const form = document.getElementById('quote-request-form');
     if (form) {
       form.addEventListener('submit', (event) => {
-        if (readItems().length === 0) {
+        if (displayItems().length === 0) {
           event.preventDefault();
           return;
         }
 
         const products = form.querySelector('#your-products');
         if (products && !String(products.value || '').trim()) {
-          products.value = readItems().map((item) => {
+          products.value = displayItems().map((item) => {
             const qty = Number(item.qty) || 1;
             const sku = item.sku ? ` (${item.sku})` : '';
             return `${qty}x ${item.name}${sku}`;
@@ -658,23 +645,24 @@
     window.addEventListener('quote:changed', renderLists);
     window.addEventListener('storage', (event) => {
       if (event.key === STORAGE_KEY) {
-        renderLists();
+        hydrateFromApi();
       }
     });
 
     renderLists();
+    hydrateFromApi();
   }
 
   window.AzoogiQuote = {
     add: upsertItem,
     open: openDrawer,
     close: closeDrawer,
-    items: readItems,
+    items: displayItems,
     clear: function () {
       writeItems([]);
     },
     refresh: function () {
-      markAddedButtons(readItems());
+      markAddedButtons(displayItems());
     },
   };
 

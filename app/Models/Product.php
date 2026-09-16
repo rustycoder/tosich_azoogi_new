@@ -98,6 +98,20 @@ class Product extends Model
     }
 
     /**
+     * @return array{id: string, sku: string, name: string, image: string, url: string}
+     */
+    public function quoteSummary(): array
+    {
+        return [
+            'id' => (string) $this->airtable_id,
+            'sku' => trim((string) ($this->product_code ?? '')),
+            'name' => (string) $this->product_name,
+            'image' => $this->coverUrl(),
+            'url' => $this->publicPath(),
+        ];
+    }
+
+    /**
      * @return array<string, mixed>
      */
     public function toStorefrontArray(): array

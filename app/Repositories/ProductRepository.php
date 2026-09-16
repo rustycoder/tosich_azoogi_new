@@ -313,17 +313,66 @@ class ProductRepository implements IProductRepository
     {
         $product = Product::query()->where('airtable_id', $airtableId)->first();
 
-        if ($product === null) {
-            return null;
-        }
-
-        $status = strtolower(trim((string) ($product->status ?? 'publish')));
-
-        if ($status !== '' && $status !== 'publish') {
+        if ($product === null || ! $this->isPublished($product)) {
             return null;
         }
 
         return $product;
+    }
+
+    /**
+     * @param  list<string>  $ids
+     * @return Collection<int, Product>
+     */
+    public function publishedForQuoteIds(array $ids): Collection
+    {
+        $wanted = collect($ids)
+            ->map(fn (mixed $id): string => trim((string) $id))
+            ->filter()
+            ->unique()
+            ->values();
+
+        if ($wanted->isEmpty()) {
+            return collect();
+        }
+
+        $products = Product::query()
+            ->where(function ($query) use ($wanted): void {
+                $query->whereIn('airtable_id', $wanted->all())
+                    ->orWhereIn('product_code', $wanted->all())
+                    ->orWhereIn('slug', $wanted->all());
+            })
+            ->get()
+            ->filter(fn (Product $product): bool => $this->isPublished($product));
+
+        $matchedKeys = $products
+            ->flatMap(fn (Product $product): array => $this->quoteLookupKeys($product))
+            ->map(fn (string $key): string => mb_strtolower($key));
+
+        $unmatched = $wanted->reject(
+            fn (string $id): bool => $matchedKeys->contains(mb_strtolower($id)),
+        );
+
+        if ($unmatched->isNotEmpty()) {
+            $mapped = Product::query()
+                ->whereNotNull('sku_mappings')
+                ->get()
+                ->filter(function (Product $product) use ($unmatched): bool {
+                    if (! $this->isPublished($product)) {
+                        return false;
+                    }
+
+                    $keys = array_map('mb_strtolower', $this->quoteLookupKeys($product));
+
+                    return $unmatched->contains(
+                        fn (string $id): bool => in_array(mb_strtolower($id), $keys, true),
+                    );
+                });
+
+            $products = $products->concat($mapped)->unique('id');
+        }
+
+        return $products->values();
     }
 
     /**
@@ -537,5 +586,40 @@ class ProductRepository implements IProductRepository
         }
 
         return null;
+    }
+
+    private function isPublished(Product $product): bool
+    {
+        $status = strtolower(trim((string) ($product->status ?? 'publish')));
+
+        return $status === '' || $status === 'publish';
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function quoteLookupKeys(Product $product): array
+    {
+        $keys = [
+            trim((string) $product->airtable_id),
+            trim((string) $product->product_code),
+            trim((string) $product->slug),
+        ];
+
+        $mappings = $product->sku_mappings;
+
+        if (is_array($mappings)) {
+            foreach ($mappings as $key => $value) {
+                if (is_string($key)) {
+                    $keys[] = trim($key);
+                }
+
+                if (is_string($value)) {
+                    $keys[] = trim($value);
+                }
+            }
+        }
+
+        return array_values(array_filter($keys, fn (string $key): bool => $key !== ''));
     }
 }

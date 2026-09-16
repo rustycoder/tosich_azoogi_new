@@ -19,6 +19,7 @@ use App\Http\Controllers\Site\ProductController as SiteProductController;
 use App\Http\Controllers\Site\ProductDatasheetController;
 use App\Http\Controllers\Site\ProductDetailController;
 use App\Http\Controllers\Site\ProjectController as SiteProjectController;
+use App\Http\Controllers\Site\QuoteProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -136,6 +137,9 @@ Route::get('/request-a-quote', [PageController::class, '__invoke'])->defaults('s
 Route::view('/trade-login', 'pages.trade-login')->name('trade-login');
 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.submit');
+Route::get('/quote-products', QuoteProductController::class)
+    ->middleware('throttle:60,1')
+    ->name('quote.products');
 Route::post('/request-a-quote', [QuoteRequestController::class, 'store'])->name('quote.submit');
 Route::post('/product-enquiry', [ProductEnquiryController::class, 'store'])->name('product-enquiry.submit');
 Route::post('/product-datasheet', [ProductDatasheetController::class, 'store'])
