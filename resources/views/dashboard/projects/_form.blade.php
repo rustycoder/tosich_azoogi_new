@@ -55,6 +55,7 @@
                 @endif
                 <input id="cover_file" type="file" name="cover_file" accept="image/*">
             </div>
+            @include('dashboard.partials.upload-progress')
             <small>{{ \App\PageMeta\ImageSize::Cover }}</small>
             @error('cover_file')<p class="login-error">{{ $message }}</p>@enderror
         </div>
@@ -79,6 +80,7 @@
     <div class="dash-field">
         <label for="gallery_files">Add images</label>
         <input id="gallery_files" type="file" name="gallery_files[]" accept="image/*" multiple>
+        @include('dashboard.partials.upload-progress')
         <small>{{ \App\PageMeta\ImageSize::Gallery }}</small>
         @error('gallery_files')<p class="login-error">{{ $message }}</p>@enderror
         @error('gallery_files.*')<p class="login-error">{{ $message }}</p>@enderror

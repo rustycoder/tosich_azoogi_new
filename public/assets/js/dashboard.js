@@ -840,5 +840,135 @@
             });
         });
     });
+
+    const setUploadProgress = (wrap, percent) => {
+        const value = Math.max(0, Math.min(100, Math.round(percent)));
+        const fill = wrap.querySelector('.dash-upload-fill');
+        const label = wrap.querySelector('.dash-upload-pct');
+        const bar = wrap.querySelector('[role="progressbar"]');
+
+        wrap.hidden = false;
+
+        if (fill) {
+            fill.style.width = `${value}%`;
+        }
+
+        if (label) {
+            label.textContent = `${value}%`;
+        }
+
+        bar?.setAttribute('aria-valuenow', String(value));
+    };
+
+    const uploadWrapFor = (input) => input.closest('.dash-field')?.querySelector('.dash-upload');
+
+    const submitButtonsFor = (form) => [
+        ...form.querySelectorAll('[type="submit"]'),
+        ...(form.id ? [...document.querySelectorAll(`button[type="submit"][form="${form.id}"]`)] : []),
+    ];
+
+    const syncEditors = () => {
+        if (typeof CKEDITOR === 'undefined') {
+            return;
+        }
+
+        Object.keys(CKEDITOR.instances).forEach((id) => {
+            CKEDITOR.instances[id].updateElement();
+        });
+    };
+
+    document.querySelectorAll('form.dash-form').forEach((form) => {
+        const fileInputs = [...form.querySelectorAll('input[type="file"]')];
+
+        if (fileInputs.length === 0) {
+            return;
+        }
+
+        fileInputs.forEach((input) => {
+            input.addEventListener('change', () => {
+                const wrap = uploadWrapFor(input);
+
+                if (!wrap) {
+                    return;
+                }
+
+                if (!input.files?.length) {
+                    wrap.hidden = true;
+                    setUploadProgress(wrap, 0);
+                    return;
+                }
+
+                setUploadProgress(wrap, 0);
+            });
+        });
+
+        form.addEventListener('submit', (event) => {
+            const active = fileInputs.filter((input) => input.files && input.files.length > 0);
+
+            if (active.length === 0) {
+                return;
+            }
+
+            event.preventDefault();
+            syncEditors();
+
+            const wraps = active.map(uploadWrapFor).filter(Boolean);
+            const buttons = submitButtonsFor(form);
+
+            wraps.forEach((wrap) => setUploadProgress(wrap, 0));
+            buttons.forEach((button) => {
+                button.disabled = true;
+            });
+
+            const xhr = new XMLHttpRequest();
+            xhr.open((form.getAttribute('method') || 'POST').toUpperCase(), form.action);
+
+            xhr.upload.addEventListener('progress', (progress) => {
+                if (!progress.lengthComputable) {
+                    return;
+                }
+
+                const percent = (progress.loaded / progress.total) * 100;
+                wraps.forEach((wrap) => setUploadProgress(wrap, percent));
+            });
+
+            xhr.addEventListener('load', () => {
+                wraps.forEach((wrap) => setUploadProgress(wrap, 100));
+
+                if (xhr.status >= 200 && xhr.status < 400) {
+                    window.location.href = xhr.responseURL || window.location.href;
+                    return;
+                }
+
+                wraps.forEach((wrap) => {
+                    const label = wrap.querySelector('.dash-upload-pct');
+
+                    if (label) {
+                        label.textContent = 'Failed';
+                    }
+                });
+                buttons.forEach((button) => {
+                    button.disabled = false;
+                });
+                toast('Could not upload. Try again.', 'error');
+            });
+
+            xhr.addEventListener('error', () => {
+                wraps.forEach((wrap) => {
+                    const label = wrap.querySelector('.dash-upload-pct');
+
+                    if (label) {
+                        label.textContent = 'Failed';
+                    }
+                });
+                buttons.forEach((button) => {
+                    button.disabled = false;
+                });
+                toast('Could not upload. Try again.', 'error');
+            });
+
+            xhr.send(new FormData(form));
+        });
+    });
 })();
 

@@ -810,23 +810,87 @@ html:has(.dash) {
 
 .dash-repeat {
   display: grid;
-  gap: 16px;
-  padding: 18px 0 2px;
-  border-top: 1px solid var(--dash-line);
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--dash-line);
+  border-radius: 8px;
+  background: var(--dash-fill);
+  min-width: 0;
 }
 
-.dash-repeat:first-child {
-  border-top: 0;
-  padding-top: 0;
+.dash-repeat + .dash-repeat {
+  margin-top: 8px;
 }
 
 .dash-repeat-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin: 0;
+  padding: 12px 14px;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--dash-green-dark);
+  cursor: pointer;
+  list-style: none;
+}
+
+.dash-repeat-title::-webkit-details-marker,
+.dash-repeat-title::marker {
+  display: none;
+  content: "";
+}
+
+.dash-repeat-title::after {
+  content: "";
+  width: 0.45em;
+  height: 0.45em;
+  margin-left: auto;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform .15s ease;
+}
+
+.dash-repeat[open] > .dash-repeat-title::after {
+  transform: rotate(-135deg);
+}
+
+.dash-repeat-body {
+  display: grid;
+  gap: 16px;
+  padding: 0 14px 16px;
+}
+
+.dash-upload {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.dash-upload-track {
+  height: 8px;
+  background: var(--dash-track);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.dash-upload-fill {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--dash-green);
+  border-radius: 999px;
+  transition: width .15s ease;
+}
+
+.dash-upload-pct {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
 }
 
 .dash-stack {
