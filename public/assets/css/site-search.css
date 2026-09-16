@@ -56,8 +56,6 @@ body.search-open .site-search {
   display: flex;
   align-items: center;
   gap: 12px;
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 10px;
 }
 
 .site-search-icon {
@@ -179,6 +177,7 @@ body.search-open .site-search {
 }
 
 @media (max-width: 1024px) {
+
   .site-search-form,
   .site-search-results {
     padding-left: 16px;
