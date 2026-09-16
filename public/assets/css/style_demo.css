@@ -41,10 +41,10 @@
     --fs-card-title: clamp(11px, 1.85vw, 26px);
     --fs-card-title-sm: clamp(13px, 1.6vw, 22px);
     --fs-meta: clamp(12px, 1vw, 14px);
-    --fs-body: clamp(14px, 1.15vw, 17px);
+    --fs-body: clamp(14px, 1.15vw, 16px);
     --fs-lead: clamp(15px, 1.2vw, 18px);
     --fs-h3: clamp(22px, 2.4vw, 28px);
-    --fs-h2-section: clamp(24px, 3.2vw, 28px);
+    --fs-h2-section: clamp(24px, 3.2vw, 36px);
     --fs-h2: clamp(36px, 4.5vw, 64px);
 
     --section-y: clamp(12px, 1.5vw, 18px);
@@ -152,6 +152,7 @@ body {
 }
 
 @supports (-webkit-text-stroke: 1px black) {
+
     .about-hero-copy h1 span,
     .ai-hero-copy h1 span,
     .dc-hero-copy h1 span,
@@ -337,7 +338,7 @@ h3 {
     align-items: center;
 }
 
-.menu > a.mobile-cta {
+.menu>a.mobile-cta {
     display: none;
 }
 
@@ -2116,7 +2117,7 @@ footer {
         font-size: var(--fs-caption);
     }
 
-    .menu.mobile-drawer > a.mobile-cta {
+    .menu.mobile-drawer>a.mobile-cta {
         display: flex;
     }
 
