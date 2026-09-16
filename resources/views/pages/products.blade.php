@@ -884,7 +884,9 @@
           <a class="prod-gallery-card" href="{{ $item['href'] ?? '#' }}">
             <div class="body">
               <h4>{{ $item['title'] ?? '' }}</h4>
-              <p>{{ $item['body'] ?? '' }}</p>
+              @if (($item['body'] ?? '') !== '')
+                <p>{{ $item['body'] }}</p>
+              @endif
               <span class="more">View Range &rarr;</span>
             </div>
           </a>

@@ -104,4 +104,22 @@ class ProductCatalogTest extends TestCase
         $this->assertSame($description, $neon['body']);
         $this->assertSame($featuredUrl, $neon['image']);
     }
+
+    public function test_range_cards_do_not_use_fallback_descriptions(): void
+    {
+        ProductCategory::query()->create(['airtable_id' => 'recNeon', 'name' => 'NEON', 'sort_order' => 1]);
+        Product::factory()->create([
+            'product_name' => 'Neon Flex',
+            'category' => 'NEON',
+            'status' => 'publish',
+            'categories' => ['NEON'],
+            'category_path' => ['NEON'],
+            'product_description' => 'A long product description that must not appear on the range card.',
+        ]);
+
+        $neon = collect(ProductCatalog::parentCategories())->firstWhere('title', 'NEON');
+
+        $this->assertIsArray($neon);
+        $this->assertSame('', $neon['body']);
+    }
 }

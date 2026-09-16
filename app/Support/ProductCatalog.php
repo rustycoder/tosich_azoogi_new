@@ -37,17 +37,6 @@ class ProductCatalog
             'Accessories' => 7,
         ];
 
-        // Refined architectural descriptions
-        $descriptions = [
-            'NEON' => 'Seamless flexible linear lighting for interior and exterior architectural contours.',
-            'Profiles' => 'Trimless plaster-in, recessed, surfaced and corner aluminium extrusion channels.',
-            'Linear Lights' => 'Architectural linear fixtures and integrated illuminated systems.',
-            'Strips and Flex' => 'High-output dotless COB, SMD strips and flexible LED sheets.',
-            'Outdoor & Architectural' => 'High-grade IP67/IP68 landscape, garden, and pathway luminaires.',
-            'Drivers' => 'Intelligent 5-in-1 dimming, DALI-2, and switchable power supplies.',
-            'Accessories' => 'Precision diffusers, aluminium mounting tracks, and end caps.',
-        ];
-
         $categories = [];
 
         foreach ($tree as $node) {
@@ -65,7 +54,6 @@ class ProductCatalog
             $storedBody = trim((string) ($stored?->description ?? ''));
             $storedImage = trim((string) ($stored?->featured_image ?? ''));
             $image = $storedImage !== '' ? $storedImage : null;
-            $fallbackDesc = '';
 
             foreach ($products as $product) {
                 if (! is_array($product)) {
@@ -85,20 +73,12 @@ class ProductCatalog
                     if ($image === null && ! empty($product['product_images'][0])) {
                         $image = (string) $product['product_images'][0];
                     }
-
-                    if ($fallbackDesc === '' && ! empty($product['product_description'])) {
-                        $fallbackDesc = trim((string) $product['product_description']);
-                    }
                 }
             }
 
-            $body = $storedBody !== ''
-                ? $storedBody
-                : ($descriptions[$name] ?? ($fallbackDesc !== '' ? $fallbackDesc : "{$count} products available"));
-
             $categories[] = [
                 'title' => $name,
-                'body' => $body,
+                'body' => $storedBody,
                 'image' => self::rangeImage($image, $name),
                 'href' => url('/products').'?category='.urlencode($name),
                 'count' => $count,

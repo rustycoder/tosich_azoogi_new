@@ -43,6 +43,8 @@ class ProductsPageTest extends TestCase
             ->assertSee('/products?category=Profiles', false)
             ->assertSee('View Range', false)
             ->assertSee('/assets/css/products.css?v='.$mtime, false)
+            ->assertDontSee('Trimless plaster-in, recessed, surfaced and corner aluminium extrusion channels.', false)
+            ->assertDontSee('products available', false)
             ->assertDontSee('class="img"', false)
             ->assertDontSee('id="prodSidebar"', false)
             ->assertDontSee('id="prodSearchInput"', false)
@@ -59,14 +61,18 @@ class ProductsPageTest extends TestCase
             ->assertSee('<h4>NEON</h4>', false)
             ->assertSee('<h4>Profiles</h4>', false)
             ->assertSee('Seamless flexible linear lighting for interior and exterior architectural contours, including wet areas and long facade runs.', false)
-            ->assertSee('/products?category=NEON', false);
+            ->assertSee('/products?category=NEON', false)
+            ->assertDontSee('Trimless plaster-in, recessed, surfaced and corner aluminium extrusion channels.', false)
+            ->assertDontSee('products available', false);
 
         $this->get('/products')
             ->assertOk()
             ->assertSee('<h4>NEON</h4>', false)
             ->assertSee('<h4>Profiles</h4>', false)
             ->assertSee('Seamless flexible linear lighting for interior and exterior architectural contours, including wet areas and long facade runs.', false)
-            ->assertSee('/products?category=NEON', false);
+            ->assertSee('/products?category=NEON', false)
+            ->assertDontSee('Trimless plaster-in, recessed, surfaced and corner aluminium extrusion channels.', false)
+            ->assertDontSee('products available', false);
     }
 
     public function test_category_query_opens_the_filtered_catalogue(): void
