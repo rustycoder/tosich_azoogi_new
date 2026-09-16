@@ -155,7 +155,9 @@ class PageTest extends TestCase
             ->assertSee('For Architects &amp; Specifiers', false)
             ->assertSee('For Builders &amp; Contractors', false)
             ->assertSee('For Electrical Wholesalers', false)
-            ->assertSee('class="more">Learn more', false);
+            ->assertSee('class="more">Learn more', false)
+            ->assertSee('class="about-path-row', false)
+            ->assertDontSee('<div class="img">', false);
 
         $css = file_get_contents(public_path('assets/css/about.css'));
 
@@ -180,8 +182,8 @@ class PageTest extends TestCase
             '/\.about-path-row h4\s*\{[^}]*font-size:\s*var\(--fs-meta\)/s',
             $css,
         );
-        $this->assertMatchesRegularExpression(
-            '/\.about-path-row \.img\s*\{[^}]*aspect-ratio:\s*1\s*\/\s*1/s',
+        $this->assertDoesNotMatchRegularExpression(
+            '/\.about-path-row \.img\s*\{/s',
             $css,
         );
     }

@@ -54,7 +54,11 @@ class PageEditorImageSizeTest extends TestCase
             ->assertSee('<small>'.ImageSize::Hero.'</small>', false)
             ->assertSee('<small>'.ImageSize::Panel.'</small>', false)
             ->assertSee('<small>'.ImageSize::Banner.'</small>', false)
-            ->assertSee('<small>'.ImageSize::Square.'</small>', false);
+            ->assertSee('Path title', false)
+            ->assertSee('Path body', false)
+            ->assertSee('Path href', false)
+            ->assertDontSee('Path image', false)
+            ->assertDontSee('<small>'.ImageSize::Square.'</small>', false);
 
         $this->actingAs($admin)
             ->get('/dashboard/content/pages/casambi')
