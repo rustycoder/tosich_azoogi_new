@@ -2468,7 +2468,7 @@ footer {
     }
 
     .stats {
-        padding: var(--section-y) 0 calc(var(--section-y) + 16px);
+        padding: 50px 0px;
     }
 
     .card-in {
