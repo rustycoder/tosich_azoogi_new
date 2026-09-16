@@ -2464,7 +2464,7 @@ footer {
     .intro,
     .products,
     .projects {
-        padding: var(--section-y) 0;
+        padding: 50px 0px;
     }
 
     .stats {
