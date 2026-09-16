@@ -1,11 +1,11 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Email Templates')
+@section('title', 'Email Notifications')
 
 @section('content')
 <div class="dash-head">
     <div class="dash-head-title">
-        <h1>Email Notifications & Templates</h1>
+        <h1>Email Notifications</h1>
     </div>
     <p class="dash-lead">Configure dynamic notification recipients, subject lines, and branded HTML templates for website inquiries and datasheet downloads.</p>
 </div>
@@ -27,10 +27,6 @@
                 <p class="dash-list-sub" style="margin-top:4px;color:var(--muted);">
                     {{ $template->description }}
                 </p>
-                <div style="margin-top:8px;font-size:13px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
-                    <span><strong>Recipients:</strong> <code style="background:var(--rgba-hover);padding:2px 6px;border-radius:4px;font-size:12px;">{{ $template->recipient_emails }}</code></span>
-                    <span><strong>Subject:</strong> <span style="color:var(--ink);opacity:0.85;">{{ $template->subject }}</span></span>
-                </div>
             </div>
             <div class="dash-list-card-meta">
                 <div class="dash-updated">

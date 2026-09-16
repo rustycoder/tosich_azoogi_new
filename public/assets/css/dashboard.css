@@ -115,6 +115,13 @@ html:has(.dash) {
   color: #fff;
 }
 
+.dash .btn.danger,
+.dash a.btn.danger {
+  background: #c5221f;
+  border-color: #c5221f;
+  color: #fff;
+}
+
 .dash .btn:hover,
 .dash a.btn:hover {
   background: var(--dash-hover);
@@ -126,6 +133,13 @@ html:has(.dash) {
 .dash a.btn.primary:hover {
   background: var(--dash-green-dark);
   border-color: var(--dash-green-dark);
+  color: #fff;
+}
+
+.dash .btn.danger:hover,
+.dash a.btn.danger:hover {
+  background: #a50e0e;
+  border-color: #a50e0e;
   color: #fff;
 }
 
@@ -323,8 +337,25 @@ html:has(.dash) {
   height: 16px;
 }
 
-.dash-user .theme-switch {
-  justify-self: start;
+.dash-user-btn .sun-icon,
+.dash-user-btn .moon-icon {
+  grid-area: 1 / 1;
+}
+
+.dash-user-btn .sun-icon {
+  opacity: 0;
+}
+
+.dash-user-btn .moon-icon {
+  opacity: 1;
+}
+
+:root[data-theme="light"] .dash-user-btn .sun-icon {
+  opacity: 1;
+}
+
+:root[data-theme="light"] .dash-user-btn .moon-icon {
+  opacity: 0;
 }
 
 .dash-user-btn:hover,
@@ -376,6 +407,10 @@ html:has(.dash) {
   flex-shrink: 0;
   align-items: center;
   gap: 10px;
+}
+
+.dash-head-actions form {
+  margin: 0;
 }
 
 .dash-head-actions .btn {
@@ -2392,6 +2427,42 @@ code {
   max-height: min(240px, 32vh) !important;
 }
 
+.email-template-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.email-test-row {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.dash-form .email-test-row input {
+  width: auto;
+  flex: 1;
+  min-width: 0;
+}
+
+.email-test-row .btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.token-chip:hover {
+  background: var(--accent) !important;
+  color: #0b0b0b !important;
+  border-color: var(--accent) !important;
+}
+
+@media (max-width: 1024px) {
+  .email-template-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
 .dash-kanban {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2736,6 +2807,30 @@ code {
 
 .dash-enquiry-delete:hover {
   background: #fde8e6;
+}
+
+.dash-confirm-dialog {
+  width: min(420px, calc(100vw - 32px));
+  max-height: none;
+}
+
+.dash-confirm-dialog .dash-enquiry-dialog-body {
+  overflow: visible;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--dash-muted);
+}
+
+.dash-confirm-dialog .dash-enquiry-dialog-body p {
+  margin: 0;
+}
+
+.dash-confirm-dialog .dash-enquiry-dialog-foot {
+  justify-content: flex-end;
+}
+
+.dash-confirm-dialog .dash-enquiry-dialog-foot .btn {
+  min-width: 88px;
 }
 
 @media (max-width: 560px) {

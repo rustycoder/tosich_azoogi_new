@@ -20,7 +20,7 @@ font-size: var(--fs-caption);           /* clamp 7–11px — overlay tags, micr
 - Host `Google Sans Flex` from `public/assets/fonts`. Do not load fonts from Google Fonts or another CDN. Do not add a second public typeface for outline accents.
 - Type tokens use `clamp()` so they scale with the viewport. `--fs-h2` may reach 64px and is for page heroes and home stat numbers (`.stat .num`). `.h2` and every other content token use `--fs-h2-section` or smaller (max 28px).
 - Public pages use `--font-sans` for body and headings. Write `var(--font-sans)`, not the family name.
-- Hero accent words and About numbering use `--font-outline` (`var(--font-sans)`) with `-webkit-text-stroke` (transparent fill). Stroke uses `var(--accent)` only — do not use `#8cc63f` or another lime. A slight `outline-led` blink and one tight `drop-shadow` (about `0.1em`, mid-opacity accent) are allowed. Do not stack a large glow. Respect `prefers-reduced-motion`.
+- Hero accent words and About numbering use `--font-outline` (`var(--font-sans)`) with `-webkit-text-stroke` (transparent fill). Stroke uses `var(--accent)` only — do not use `#8cc63f` or another lime. One tight `drop-shadow` (about `0.1em`, mid-opacity accent) is allowed. Do not blink, flash, or animate outline accents. Do not stack a large glow.
 - Do not use Cormorant, Inter, `--font-serif`, or another display face on the site.
 - Image-card mosaics (home projects, related projects) keep their grid and **scale** cards and caption type. Do not stack those cards to one column.
 - Content columns (forms, project info, article body) may still stack on small screens.

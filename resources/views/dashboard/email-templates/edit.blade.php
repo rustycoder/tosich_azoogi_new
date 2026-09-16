@@ -4,17 +4,19 @@
 
 @section('content')
 <div class="dash-head">
+    <div class="dash-crumb">
+        <a href="{{ route('dashboard.email-templates.index') }}">Email Notifications</a>
+        <span>/</span>
+        <span>{{ $template->name }}</span>
+    </div>
     <div class="dash-head-title">
-        <div>
-            <a href="{{ route('dashboard.email-templates.index') }}" style="color:var(--muted);text-decoration:none;font-size:13px;display:inline-block;margin-bottom:6px;">&larr; Back to Email Templates</a>
-            <h1>{{ $template->name }}</h1>
-        </div>
-        <div class="dash-head-actions" style="display:flex;gap:10px;align-items:center;">
-            <form method="post" action="{{ route('dashboard.email-templates.reset', $template) }}" onsubmit="return confirm('Are you sure you want to reset this template to default? Custom modifications will be replaced.');">
+        <h1>{{ $template->name }}</h1>
+        <div class="dash-head-actions">
+            <form id="email-template-reset-form" method="post" action="{{ route('dashboard.email-templates.reset', $template) }}">
                 @csrf
-                <button type="submit" class="btn" style="color:#d93025;border-color:rgba(217,48,37,0.3);">Reset to default</button>
+                <button type="button" class="btn danger" data-reset-open>Reset</button>
             </form>
-            <button class="btn primary" type="submit" form="email-template-form">Save changes</button>
+            <button class="btn primary" type="submit" form="email-template-form">Save</button>
         </div>
     </div>
     <p class="dash-lead">{{ $template->description }}</p>
@@ -26,7 +28,7 @@
     </div>
 @endif
 
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;" class="email-template-layout">
+<div class="email-template-layout">
     <!-- Left Column: Settings & HTML Editor -->
     <div style="display:flex;flex-direction:column;gap:20px;">
         <form id="email-template-form" class="dash-form" method="post" action="{{ route('dashboard.email-templates.update', $template) }}">
@@ -81,9 +83,14 @@
         <div class="dash-card">
             <h2>Send Test Delivery</h2>
             <p style="font-size:13px;color:var(--muted);margin-top:-4px;margin-bottom:12px;">Dispatch a real rendered sample email via configured SMTP to verify client formatting and inbox delivery.</p>
-            <div style="display:flex;gap:10px;">
-                <input type="email" id="test_email" value="{{ auth()->user()->email }}" placeholder="Enter destination email address" style="flex-grow:1;">
-                <button type="button" class="btn primary" id="btn-send-test" style="white-space:nowrap;">Send Test</button>
+            <div class="dash-form">
+                <div class="dash-field" style="margin-bottom:0;">
+                    <label for="test_email">Destination email</label>
+                    <div class="email-test-row">
+                        <input type="email" id="test_email" value="{{ auth()->user()->email }}" placeholder="Enter destination email address">
+                        <button type="button" class="btn primary" id="btn-send-test">Send Test</button>
+                    </div>
+                </div>
             </div>
             <div id="test-result" style="display:none;margin-top:12px;padding:10px 14px;border-radius:6px;font-size:13px;"></div>
         </div>
@@ -106,19 +113,26 @@
     </div>
 </div>
 
-<style>
-@media (max-width: 1024px) {
-    .email-template-layout {
-        grid-template-columns: 1fr !important;
-    }
-}
-.token-chip:hover {
-    background: var(--accent) !important;
-    color: #0b0b0b !important;
-    border-color: var(--accent) !important;
-}
-</style>
+<dialog class="dash-enquiry-dialog dash-confirm-dialog" data-reset-dialog aria-labelledby="dash-reset-dialog-title">
+    <div class="dash-enquiry-dialog-panel">
+        <header class="dash-enquiry-dialog-head">
+            <div class="dash-enquiry-dialog-heading">
+                <h2 id="dash-reset-dialog-title">Reset this template?</h2>
+            </div>
+            <button type="button" class="dash-drawer-close" data-reset-dialog-close aria-label="Close">×</button>
+        </header>
+        <div class="dash-enquiry-dialog-body">
+            <p>Custom modifications will be replaced with the default template.</p>
+        </div>
+        <footer class="dash-enquiry-dialog-foot">
+            <button type="button" class="btn" data-reset-dialog-close>Cancel</button>
+            <button type="submit" class="btn danger" form="email-template-reset-form">Reset</button>
+        </footer>
+    </div>
+</dialog>
+@endsection
 
+@push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     var previewFrame = document.getElementById('preview-frame');
@@ -130,12 +144,38 @@ document.addEventListener('DOMContentLoaded', function () {
     var testEmailInput = document.getElementById('test_email');
     var testResult = document.getElementById('test-result');
     var tokenChips = document.querySelectorAll('.token-chip');
+    var resetDialog = document.querySelector('[data-reset-dialog]');
+    var resetOpen = document.querySelector('[data-reset-open]');
+    var debounceTimer = null;
 
-    // Initial load
+    function closeResetDialog() {
+        if (resetDialog && resetDialog.open) {
+            resetDialog.close();
+        }
+    }
+
+    if (resetOpen && resetDialog) {
+        resetOpen.addEventListener('click', function () {
+            resetDialog.showModal();
+        });
+
+        resetDialog.addEventListener('click', function (event) {
+            if (event.target === resetDialog) {
+                closeResetDialog();
+            }
+        });
+
+        resetDialog.querySelectorAll('[data-reset-dialog-close]').forEach(function (button) {
+            button.addEventListener('click', closeResetDialog);
+        });
+    }
+
     updatePreviewFrame(@json($preview['body_html']));
 
     function updatePreviewFrame(html) {
-        if (!previewFrame) return;
+        if (!previewFrame) {
+            return;
+        }
         var doc = previewFrame.contentDocument || previewFrame.contentWindow.document;
         doc.open();
         doc.write(html);
@@ -152,8 +192,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 'Accept': 'application/json'
             },
             body: JSON.stringify({
-                body_html: bodyHtmlInput.value,
-                subject: subjectInput.value
+                body_html: bodyHtmlInput ? bodyHtmlInput.value : '',
+                subject: subjectInput ? subjectInput.value : ''
             })
         })
         .then(function (r) { return r.json(); })
@@ -170,30 +210,29 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    function schedulePreviewRefresh() {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(refreshPreviewAjax, 600);
+    }
+
     if (btnRefresh) {
         btnRefresh.addEventListener('click', refreshPreviewAjax);
     }
 
-    // Debounced live typing update
-    var debounceTimer = null;
     if (bodyHtmlInput) {
-        bodyHtmlInput.addEventListener('input', function () {
-            clearTimeout(debounceTimer);
-            debounceTimer = setTimeout(refreshPreviewAjax, 600);
-        });
-    }
-    if (subjectInput) {
-        subjectInput.addEventListener('input', function () {
-            clearTimeout(debounceTimer);
-            debounceTimer = setTimeout(refreshPreviewAjax, 600);
-        });
+        bodyHtmlInput.addEventListener('input', schedulePreviewRefresh);
     }
 
-    // Token insertion click
+    if (subjectInput) {
+        subjectInput.addEventListener('input', schedulePreviewRefresh);
+    }
+
     tokenChips.forEach(function (chip) {
         chip.addEventListener('click', function () {
             var token = this.getAttribute('data-token');
-            if (!bodyHtmlInput) return;
+            if (!bodyHtmlInput) {
+                return;
+            }
 
             var start = bodyHtmlInput.selectionStart;
             var end = bodyHtmlInput.selectionEnd;
@@ -207,7 +246,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Test send email
     if (btnSendTest) {
         btnSendTest.addEventListener('click', function () {
             var email = testEmailInput.value.trim();
@@ -250,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     testResult.textContent = data.message || 'Failed to send test email.';
                 }
             })
-            .catch(function (err) {
+            .catch(function () {
                 btnSendTest.disabled = false;
                 btnSendTest.textContent = 'Send Test';
                 testResult.style.display = 'block';
@@ -263,4 +301,5 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 </script>
-@endsection
+@endpush
+

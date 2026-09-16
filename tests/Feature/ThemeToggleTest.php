@@ -183,12 +183,28 @@ class ThemeToggleTest extends TestCase
             ->assertSee("localStorage.getItem('theme') === 'dark'", false)
             ->assertSee('id="theme-toggle"', false)
             ->assertSee('aria-label="Toggle theme"', false)
-            ->assertSee('class="theme-switch"', false)
+            ->assertSee('class="dash-user-btn"', false)
             ->assertSee('role="switch"', false)
             ->assertSee('class="sun-icon"', false)
             ->assertSee('class="moon-icon"', false)
+            ->assertSeeInOrder([
+                'aria-label="Settings"',
+                'id="theme-toggle"',
+                'aria-label="Log out"',
+            ], false)
+            ->assertDontSee('class="theme-switch"', false)
+            ->assertDontSee('class="theme-switch-track"', false)
             ->assertDontSee('>Dark</span>', false)
             ->assertDontSee('>Light</span>', false)
             ->assertSee('/assets/js/site-theme.js?v='.$jsMtime, false);
+
+        $css = file_get_contents(public_path('assets/css/dashboard.css'));
+
+        $this->assertNotFalse($css);
+        $this->assertMatchesRegularExpression(
+            '/\.dash-user-btn \.sun-icon,\s*\.dash-user-btn \.moon-icon\s*\{[^}]*grid-area:\s*1 \/ 1/s',
+            $css,
+        );
+        $this->assertStringNotContainsString('.dash-topbar .theme-switch', $css);
     }
 }

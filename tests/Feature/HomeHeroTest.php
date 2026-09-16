@@ -70,12 +70,22 @@ class HomeHeroTest extends TestCase
             '/-webkit-text-stroke-color:\s*#8cc63f/',
             $css,
         );
-        $this->assertMatchesRegularExpression(
+        $this->assertDoesNotMatchRegularExpression(
             '/@keyframes\s+outline-led\s*\{/',
             $css,
         );
-        $this->assertStringContainsString('prefers-reduced-motion: reduce', $css);
-        $this->assertStringContainsString('animation: outline-led 3s linear infinite', $css);
+        $this->assertDoesNotMatchRegularExpression(
+            '/animation:\s*outline-led/',
+            $css,
+        );
+
+        $aboutCss = file_get_contents(public_path('assets/css/about.css'));
+
+        $this->assertNotFalse($aboutCss);
+        $this->assertDoesNotMatchRegularExpression(
+            '/animation:\s*outline-led/',
+            $aboutCss,
+        );
     }
 
     public function test_home_marquee_cards_reserve_space_for_titles_and_cta(): void

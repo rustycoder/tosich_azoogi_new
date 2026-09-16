@@ -37,7 +37,11 @@ class EmailTemplateTest extends TestCase
         $response = $this->actingAs($this->admin)->get(route('dashboard.email-templates.index'));
 
         $response->assertOk()
-            ->assertSee('Email Notifications & Templates', false)
+            ->assertSee('Email Notifications', false)
+            ->assertDontSee('Email Notifications & Templates', false)
+            ->assertDontSee('<strong>Recipients:</strong>', false)
+            ->assertDontSee('<strong>Subject:</strong>', false)
+            ->assertDontSee('New Product Enquiry from {{name}} - {{project}}', false)
             ->assertSee('Contact Enquiry Notification')
             ->assertSee('Product Enquiry Notification')
             ->assertSee('Quote Request Notification')
@@ -60,6 +64,28 @@ class EmailTemplateTest extends TestCase
         $response = $this->actingAs($this->admin)->get(route('dashboard.email-templates.edit', $template));
 
         $response->assertOk()
+            ->assertSee('class="dash-crumb"', false)
+            ->assertSeeInOrder([
+                'class="dash-crumb"',
+                'Email Notifications',
+                $template->name,
+            ], false)
+            ->assertDontSee('Back to Email Notifications', false)
+            ->assertSee('>Save</button>', false)
+            ->assertDontSee('Save changes', false)
+            ->assertSee('class="btn danger"', false)
+            ->assertSee('data-reset-dialog', false)
+            ->assertSee('data-reset-open', false)
+            ->assertSee('Reset this template?', false)
+            ->assertSee('Custom modifications will be replaced with the default template.', false)
+            ->assertDontSee('Reset to default', false)
+            ->assertDontSee('return confirm(', false)
+            ->assertDontSee('data-ckeditor', false)
+            ->assertDontSee('cdn.ckeditor.com', false)
+            ->assertDontSee('data-editor-mode', false)
+            ->assertSee('for="test_email"', false)
+            ->assertSee('class="email-test-row"', false)
+            ->assertDontSee('style="flex-grow:1;"', false)
             ->assertSee('+ {{name}}', false)
             ->assertSee('+ {{email}}', false)
             ->assertSee('+ {{company}}', false)

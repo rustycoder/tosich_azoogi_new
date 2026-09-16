@@ -352,13 +352,6 @@
   .about-why-step.is-active .about-why-ghost {
     -webkit-text-stroke-color: var(--accent);
     filter: drop-shadow(0 0 0.1em color-mix(in srgb, var(--accent) 42%, transparent));
-    animation: outline-led 3s linear infinite;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .about-why-step.is-active .about-why-ghost {
-    animation: none;
   }
 }
 
