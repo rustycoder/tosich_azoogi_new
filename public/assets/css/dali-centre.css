@@ -227,7 +227,7 @@
 
 .dc-feature-img {
     margin: 0;
-    padding: clamp(65px, 2vw, 20px);
+    padding: clamp(0px, 2vw, 20px);
     border-radius: 4px;
     overflow: hidden;
     background: var(--bg-2);
@@ -387,6 +387,7 @@
 }
 
 @media (max-width: 900px) {
+
     .dc-diagram,
     .dc-caps,
     .dc-support {
