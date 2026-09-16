@@ -791,7 +791,6 @@ a.meta-badge:hover {
   padding: 12px;
   border-radius: 4px;
   font-family: inherit;
-  font-size: max(16px, var(--fs-body));
   outline: none;
   transition: all 0.3s ease;
 }
