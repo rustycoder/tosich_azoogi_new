@@ -25,6 +25,7 @@
 :root {
     --bg: #0b0b0b;
     --bg-2: #111;
+    --intro-bg: #000;
     --ink: #f3f3f3;
     --muted: #9a9a9a;
     --line: rgba(255, 255, 255, 0.12);
@@ -80,6 +81,7 @@
 :root[data-theme="light"] {
     --bg: #ffffff;
     --bg-2: #ffffff;
+    --intro-bg: #f7f7f7;
     --ink: #111111;
     --muted: #555555;
     --line: rgba(0, 0, 0, 0.12);
@@ -1242,7 +1244,7 @@ section {
 .intro {
     padding: 80px 0;
     text-align: center;
-    background: var(--bg);
+    background: var(--intro-bg);
 }
 
 .audience {
