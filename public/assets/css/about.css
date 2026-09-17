@@ -470,7 +470,7 @@
 /* —— Paths —— */
 .about-path-section {
   display: grid;
-  gap: clamp(22px, 3vw, 32px);
+  gap: clamp(18px, 3vw, 18px);
 }
 
 .about-path-head {
@@ -512,6 +512,10 @@
   min-height: 0;
   padding: 16px 18px 18px;
   background: var(--bg);
+}
+
+.about-path-row .body h3 {
+  padding-bottom: 5px;
 }
 
 .about-path-row h4 {
