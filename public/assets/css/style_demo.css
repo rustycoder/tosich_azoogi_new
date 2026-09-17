@@ -29,8 +29,8 @@
     --ink: #f3f3f3;
     --muted: #9a9a9a;
     --line: rgba(255, 255, 255, 0.12);
-    --accent: #67d04e;
-    --accent-2: #3aa028;
+    --accent: #3aa028;
+    --accent-2: #67d04e;
 
     /* Shared shell — header, wraps, and media banners */
     --site-max: 1400px;
@@ -2559,9 +2559,9 @@ footer {
 
 :root {
     /* Hug the copy + image — tall enough for the sticky stack, not a empty slab */
-    --card-height: min(70svh);
+    --card-height: min(70svh, );
     --card-margin: 0px;
-    --card-top-offset: 1.5rem;
+    /* --card-top-offset: 1.5rem; */
     --outline-width: 0px;
 }
 
@@ -3606,7 +3606,7 @@ a.mega-variant-card:after {
     background-color: #1a1a1a;
     background-image: url("../imgcontact.jpeg");
     background-size: cover;
-    background-position: center;
+    background-position: bottom;
     background-repeat: no-repeat;
     pointer-events: none;
 }
@@ -3615,7 +3615,7 @@ a.mega-variant-card:after {
 .contact-grid-gap {
     position: relative;
     z-index: 2;
-    background: var(--bg);
+    background: rgba(10, 12, 10, 0.8);
     min-width: clamp(48px, 6vw, 88px);
 }
 
@@ -3626,11 +3626,7 @@ a.mega-variant-card:after {
     border-radius: 0;
     overflow: hidden;
     color: #fff;
-    /* Dim only — image lives on .contact-grid::before once */
-    background: linear-gradient(160deg,
-            rgba(10, 12, 10, 0.84) 0%,
-            rgba(10, 12, 10, 0.58) 45%,
-            rgba(10, 12, 10, 0.8) 100%);
+    background: rgba(10, 12, 10, 0.8);
 }
 
 .contact-form-panel {
@@ -3729,20 +3725,8 @@ a.mega-variant-card:after {
     font-weight: 400;
 }
 
-.contact-form-panel .btn.primary {
-    background: #8cc63f;
-    border-color: #8cc63f;
-    color: #111;
-}
-
-.contact-form-panel .btn.primary:hover {
-    background: #fff;
-    border-color: #fff;
-    color: #111;
-}
-
 .contact-page .form-status.is-success {
-    color: #8cc63f;
+    color: var(--accent);
 }
 
 .contact-page .form-status.is-error {
@@ -3807,13 +3791,13 @@ a.mega-variant-card:after {
 }
 
 .contact-international .green-title {
-    color: #8cc63f;
+    color: var(--accent);
     font-size: var(--fs-body);
     font-weight: 500;
 }
 
 .contact-international a {
-    color: #8cc63f;
+    color: var(--accent)
 }
 
 .contact-international a:hover {
@@ -3834,7 +3818,7 @@ a.mega-variant-card:after {
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #8cc63f;
+    /* color: #8cc63f; */
     margin-bottom: 10px;
     line-height: 1.3;
 }

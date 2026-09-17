@@ -149,7 +149,7 @@
 .project-detail-hero {
   position: relative;
   height: 50vh;
-  min-height: 50vh;
+  min-height: 75vh;
   display: grid;
   align-items: end;
   overflow: hidden;
@@ -187,7 +187,7 @@
   width: 100%;
 }
 
-.project-detail-hero-copy > * {
+.project-detail-hero-copy>* {
   max-width: var(--site-max, 1400px);
 }
 
@@ -244,7 +244,7 @@
   font-weight: 450;
   line-height: 1.15;
   letter-spacing: -0.01em;
-  margin: 0 0 16px;
+  margin: 15px 0 15px;
 }
 
 .project-description {
