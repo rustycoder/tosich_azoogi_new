@@ -3725,20 +3725,8 @@ a.mega-variant-card:after {
     font-weight: 400;
 }
 
-.contact-form-panel .btn.primary {
-    background: #8cc63f;
-    border-color: #8cc63f;
-    color: #111;
-}
-
-.contact-form-panel .btn.primary:hover {
-    background: #fff;
-    border-color: #fff;
-    color: #111;
-}
-
 .contact-page .form-status.is-success {
-    color: #8cc63f;
+    color: var(--accent);
 }
 
 .contact-page .form-status.is-error {
@@ -3803,13 +3791,13 @@ a.mega-variant-card:after {
 }
 
 .contact-international .green-title {
-    color: #8cc63f;
+    color: var(--accent);
     font-size: var(--fs-body);
     font-weight: 500;
 }
 
 .contact-international a {
-    color: #8cc63f;
+    color: var(--accent)
 }
 
 .contact-international a:hover {
@@ -3830,7 +3818,7 @@ a.mega-variant-card:after {
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #8cc63f;
+    /* color: #8cc63f; */
     margin-bottom: 10px;
     line-height: 1.3;
 }
