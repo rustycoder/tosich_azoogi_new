@@ -3606,7 +3606,7 @@ a.mega-variant-card:after {
     background-color: #1a1a1a;
     background-image: url("../imgcontact.jpeg");
     background-size: cover;
-    background-position: center;
+    background-position: bottom;
     background-repeat: no-repeat;
     pointer-events: none;
 }
@@ -3615,7 +3615,8 @@ a.mega-variant-card:after {
 .contact-grid-gap {
     position: relative;
     z-index: 2;
-    background: var(--bg);
+    /* background: var(--bg); */
+    background: rgba(10, 12, 10, 0.8);
     min-width: clamp(48px, 6vw, 88px);
 }
 
@@ -3627,10 +3628,11 @@ a.mega-variant-card:after {
     overflow: hidden;
     color: #fff;
     /* Dim only — image lives on .contact-grid::before once */
-    background: linear-gradient(160deg,
+    /* background: linear-gradient(160deg,
             rgba(10, 12, 10, 0.84) 0%,
             rgba(10, 12, 10, 0.58) 45%,
-            rgba(10, 12, 10, 0.8) 100%);
+            rgba(10, 12, 10, 0.8) 100%); */
+    background: rgba(10, 12, 10, 0.8);
 }
 
 .contact-form-panel {
