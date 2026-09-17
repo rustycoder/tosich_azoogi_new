@@ -112,7 +112,7 @@
             <a class="about-path-row reveal" href="{{ $item['href'] ?? '#' }}" @if (!$loop->first)
             style="transition-delay: {{ ($loop->index * 0.08) }}s" @endif>
               <div class="body">
-                <h4{!! cms_style($meta, 'path.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h4>
+                <h3{!! cms_style($meta, 'path.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h3>
                   <p{!! cms_style($meta, 'path.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
                     <span class="more">Learn more &rarr;</span>
               </div>

@@ -457,7 +457,7 @@
 }
 
 .about-reach-inner h2 span {
-  color: #8cc63f;
+  color: var(--accent)
 }
 
 .about-reach-inner p {
