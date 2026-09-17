@@ -86,8 +86,8 @@
     --ink: #111111;
     --muted: #555555;
     --line: rgba(0, 0, 0, 0.12);
-    --accent: #3aa028;
-    --accent-2: #2d7a1e;
+    --accent: #acc63f;
+    --accent-2: #3aa028;
 
     --pure-bg: #ffffff;
     --pure-text: #111111;
@@ -3615,7 +3615,6 @@ a.mega-variant-card:after {
 .contact-grid-gap {
     position: relative;
     z-index: 2;
-    /* background: var(--bg); */
     background: rgba(10, 12, 10, 0.8);
     min-width: clamp(48px, 6vw, 88px);
 }
@@ -3627,11 +3626,6 @@ a.mega-variant-card:after {
     border-radius: 0;
     overflow: hidden;
     color: #fff;
-    /* Dim only — image lives on .contact-grid::before once */
-    /* background: linear-gradient(160deg,
-            rgba(10, 12, 10, 0.84) 0%,
-            rgba(10, 12, 10, 0.58) 45%,
-            rgba(10, 12, 10, 0.8) 100%); */
     background: rgba(10, 12, 10, 0.8);
 }
 
