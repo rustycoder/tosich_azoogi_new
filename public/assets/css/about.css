@@ -301,7 +301,7 @@
   position: relative;
   /* Must exceed .about-why-sticky's height, or the pinned visual gets pushed
      off-centre on the first and last steps. */
-  min-height: 80svh;
+  min-height: 70svh;
   margin: 0;
   padding: 24px 0 24px clamp(24px, 3vw, 42px);
   display: flex;
