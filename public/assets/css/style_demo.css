@@ -29,8 +29,8 @@
     --ink: #f3f3f3;
     --muted: #9a9a9a;
     --line: rgba(255, 255, 255, 0.12);
-    --accent: #67d04e;
-    --accent-2: #3aa028;
+    --accent: #3aa028;
+    --accent-2: #67d04e;
 
     /* Shared shell — header, wraps, and media banners */
     --site-max: 1400px;
