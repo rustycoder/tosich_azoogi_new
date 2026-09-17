@@ -24,6 +24,7 @@
     const sync = () => {
         const floor = headerBottom() + 8;
         const seen = new Set();
+        const usedTops = [];
 
         sections.forEach((section) => {
             const key = section.getAttribute('data-cms-section');
@@ -54,7 +55,12 @@
                 layer.append(button);
             }
 
-            const top = Math.max(rect.top, floor) + 8;
+            let top = Math.max(rect.top, floor) + 8;
+            while (usedTops.some((used) => Math.abs(used - top) < 36)) {
+                top += 40;
+            }
+            usedTops.push(top);
+
             const left = Math.min(rect.right - 78, window.innerWidth - 90);
             button.style.transform = `translate(${Math.max(12, left)}px, ${top}px)`;
         });

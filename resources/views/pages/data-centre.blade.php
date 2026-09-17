@@ -116,10 +116,10 @@
           @endforeach
         </ul>
       </div>
-      @if (filled($meta->get('hardware.image')))
+      @if (filled($meta->get('emergency.image')))
         <div class="dc-feature-img reveal" style="transition-delay: 0.2s">
           <figure>
-            <img src="{{ media_url($meta->get('hardware.image')) }}" alt="{{ $meta->get('emergency.heading') }}" loading="lazy">
+            <img src="{{ media_url($meta->get('emergency.image')) }}" alt="{{ $meta->get('emergency.heading') }}" loading="lazy">
           </figure>
         </div>
       @endif
@@ -136,10 +136,10 @@
           @endforeach
         </ul>
       </div>
-      @if (filled($meta->get('control.image')))
+      @if (filled($meta->get('zones.image')))
         <div class="dc-feature-img reveal" style="transition-delay: 0.2s">
           <figure>
-            <img src="{{ media_url($meta->get('control.image')) }}" alt="{{ $meta->get('zones.heading') }}" loading="lazy">
+            <img src="{{ media_url($meta->get('zones.image')) }}" alt="{{ $meta->get('zones.heading') }}" loading="lazy">
           </figure>
         </div>
       @endif
