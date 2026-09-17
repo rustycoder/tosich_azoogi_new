@@ -49,12 +49,12 @@
 
     <section class="about-band about-band--alt" id="why" {!! cms_section_attr('why') !!}>
       <div class="wrap">
-        <div class="about-split-copy about-why-head reveal">
-          <h2{!! cms_style($meta, 'why.heading') !!}>{!! accent_html($meta->get('why.heading'), "") !!}</h2>
-        </div>
-
         <div class="about-why">
           <div class="about-why-sticky">
+            <div class="about-split-copy about-why-head reveal">
+              <h2{!! cms_style($meta, 'why.heading') !!}>
+                {!! accent_html($meta->get('why.heading'), $meta->get('why.heading_accent')) !!}</h2>
+            </div>
             <div class="about-why-visual" id="aboutWhyVisual">
               @foreach ($whyItems as $item)
                 <img class="{{ $loop->first ? 'is-active' : '' }}" src="{{ media_url($item['image'] ?? '') }}" alt=""
