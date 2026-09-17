@@ -149,7 +149,7 @@
 .project-detail-hero {
   position: relative;
   height: 50vh;
-  min-height: 50vh;
+  min-height: 75vh;
   display: grid;
   align-items: end;
   overflow: hidden;
@@ -187,7 +187,7 @@
   width: 100%;
 }
 
-.project-detail-hero-copy > * {
+.project-detail-hero-copy>* {
   max-width: var(--site-max, 1400px);
 }
 
