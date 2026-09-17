@@ -235,7 +235,7 @@
 
 .about-why-count b {
   font-weight: 600;
-  color: #8cc63f;
+  color: var(--accent);
 }
 
 .about-why-track {
@@ -248,7 +248,7 @@
   display: block;
   height: 100%;
   width: 16.6667%;
-  background: #8cc63f;
+  background: var(--accent);
   transition: width .45s ease;
 }
 
@@ -301,7 +301,7 @@
   position: relative;
   /* Must exceed .about-why-sticky's height, or the pinned visual gets pushed
      off-centre on the first and last steps. */
-  min-height: 70svh;
+  min-height: 84svh;
   margin: 0;
   padding: 24px 0 24px clamp(24px, 3vw, 42px);
   display: flex;
@@ -322,8 +322,8 @@
   content: "";
   position: absolute;
   left: 0;
-  top: 14%;
-  bottom: 14%;
+  top: 12%;
+  bottom: 12%;
   width: 2px;
   background: var(--accent);
   transform: scaleY(0);
