@@ -303,8 +303,6 @@ body.quote-open .quote-drawer {
 
 .quote-page-intro {
   min-height: var(--hero-min);
-  display: grid;
-  align-items: end;
   padding: var(--hero-pad-y-top) 0 var(--hero-pad-y-bottom);
   margin-bottom: 0;
   text-align: center;
@@ -322,7 +320,7 @@ body.quote-open .quote-drawer {
   margin: 0 0 10px;
   font-family: var(--font-sans);
   font-size: var(--fs-h2);
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.15;
 }
 

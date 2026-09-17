@@ -2561,7 +2561,7 @@ footer {
     /* Hug the copy + image — tall enough for the sticky stack, not a empty slab */
     --card-height: min(70svh, );
     --card-margin: 0px;
-    --card-top-offset: 1.5rem;
+    /* --card-top-offset: 1.5rem; */
     --outline-width: 0px;
 }
 

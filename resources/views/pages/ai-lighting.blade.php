@@ -12,183 +12,195 @@
 @section('logo', 'logo_white.png')
 
 @push('styles')
-<link rel="stylesheet" href="{{ versioned_asset('assets/css/ai-lighting.css') }}">
+  <link rel="stylesheet" href="{{ versioned_asset('assets/css/ai-lighting.css') }}">
 @endpush
 
 @section('content')
-@php
+  @php
     $caps = $meta->list('caps.item.title');
     $ticks = $meta->list('spectrum.tick');
     $insights = $meta->group('insights.item');
     $spaceItems = $meta->group('space.item');
-@endphp
-<main class="ai-main">
+  @endphp
+  <main class="ai-main">
 
-  <section class="ai-hero" {!! cms_section_attr('hero') !!}>
-    <div class="ai-hero-media" aria-hidden="true">
-      <img src="{{ media_url($meta->get('hero.image')) }}" alt="" loading="eager">
-    </div>
-    <div class="ai-hero-copy">
-      <h1{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
-      <p{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
-    </div>
-  </section>
-
-  <section class="ai-band" {!! cms_section_attr('caps') !!}>
-    <div class="wrap ai-split">
-      <div class="ai-split-copy">
-        <h2{!! cms_style($meta, 'caps.heading') !!}>{!! accent_html($meta->get('caps.heading'), $meta->get('caps.heading_accent')) !!}</h2>
-        <p{!! cms_style($meta, 'caps.body') !!}>{{ $meta->get('caps.body') }}</p>
+    <section class="ai-hero" {!! cms_section_attr('hero') !!}>
+      <div class="ai-hero-media" aria-hidden="true">
+        <img src="{{ media_url($meta->get('hero.image')) }}" alt="" loading="eager">
       </div>
-      <ol class="ai-caps">
-        @foreach ($caps as $title)
-          <li>
-            <span class="ai-num">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-            <h3{!! cms_style($meta, 'caps.item.title', $loop->index) !!}>{{ $title }}</h3>
-          </li>
-        @endforeach
-      </ol>
-    </div>
-  </section>
-
-  <section class="ai-band ai-band--tight" {!! cms_section_attr('spectrum') !!}>
-    <div class="wrap ai-feature">
-      <div class="ai-feature-copy">
-        <h2{!! cms_style($meta, 'spectrum.heading') !!}>{!! accent_html($meta->get('spectrum.heading'), $meta->get('spectrum.heading_accent')) !!}</h2>
-        <p{!! cms_style($meta, 'spectrum.body') !!}>{{ $meta->get('spectrum.body') }}</p>
-        <ul class="ai-ticks">
-          @foreach ($ticks as $tick)
-            <li{!! cms_style($meta, 'spectrum.tick', $loop->index) !!}>{{ $tick }}</li>
-          @endforeach
-        </ul>
+      <div class="ai-hero-copy">
+        <h1{!! cms_style($meta, 'hero.title') !!}>
+          {!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
+          <p{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
       </div>
-      <div class="ai-compare">
-        <figure>
-          <img src="{{ media_url($meta->get('spectrum.compare.traditional.image')) }}" alt="{{ $meta->get('spectrum.compare.traditional.caption') }}" loading="lazy">
-          <figcaption{!! cms_style($meta, 'spectrum.compare.traditional.caption') !!}>{{ $meta->get('spectrum.compare.traditional.caption') }}</figcaption>
-        </figure>
-        <figure class="is-accent">
-          <img src="{{ media_url($meta->get('spectrum.compare.ai.image')) }}" alt="{{ $meta->get('spectrum.compare.ai.caption') }}" loading="lazy">
-          <figcaption{!! cms_style($meta, 'spectrum.compare.ai.caption') !!}>{{ $meta->get('spectrum.compare.ai.caption') }}</figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="ai-insights card-in" {!! cms_section_attr('insights') !!}>
-    <div class="wrap-sm">
-      <div class="ai-row-head">
-        <div>
-          <h2{!! cms_style($meta, 'insights.heading') !!}>{!! accent_html($meta->get('insights.heading'), $meta->get('insights.heading_accent')) !!}</h2>
+    <section class="ai-band" {!! cms_section_attr('caps') !!}>
+      <div class="wrap ai-split">
+        <div class="ai-split-copy">
+          <h2{!! cms_style($meta, 'caps.heading') !!}>
+            {!! accent_html($meta->get('caps.heading'), $meta->get('caps.heading_accent')) !!}</h2>
+            <p{!! cms_style($meta, 'caps.body') !!}>{{ $meta->get('caps.body') }}</p>
         </div>
-        <p{!! cms_style($meta, 'insights.lead') !!}>{{ $meta->get('insights.lead') }}</p>
-      </div>
-
-      <div class="container max-width-adaptive-md">
-        <ul id="cards" style="--numcards: {{ count($insights) }}">
-          @foreach ($insights as $item)
-            <li class="card-main" id="card_{{ $loop->iteration }}" style="--index: {{ $loop->iteration }}">
-              <div class="card__content">
-                <div>
-                  <span class="ai-num">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-                  <h2{!! cms_style($meta, 'insights.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h2>
-                  <p{!! cms_style($meta, 'insights.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
-                </div>
-                <figure>
-                  <img src="{{ media_url($item['image'] ?? '') }}" alt="{{ $item['title'] ?? '' }}">
-                </figure>
-              </div>
+        <ol class="ai-caps">
+          @foreach ($caps as $title)
+            <li>
+              <span class="ai-num">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+              <h3{!! cms_style($meta, 'caps.item.title', $loop->index) !!}>{{ $title }}</h3>
             </li>
           @endforeach
-        </ul>
+        </ol>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="ai-cct" {!! cms_section_attr('cct') !!}>
-    <div class="ai-cct-media" aria-hidden="true">
-      <img src="{{ media_url($meta->get('cct.image')) }}" alt="" loading="lazy">
-    </div>
-    <div class="wrap ai-cct-inner">
-      <h2{!! cms_style($meta, 'cct.heading') !!}>{!! accent_html($meta->get('cct.heading'), $meta->get('cct.heading_accent')) !!}</h2>
-      <p{!! cms_style($meta, 'cct.body') !!}>{{ $meta->get('cct.body') }}</p>
-    </div>
-  </section>
-
-  <section class="ai-band" {!! cms_section_attr('space') !!}>
-    <div class="wrap">
-      <div class="ai-row-head">
-        <div>
-          <h2{!! cms_style($meta, 'space.heading') !!}>{!! accent_html($meta->get('space.heading'), $meta->get('space.heading_accent')) !!}</h2>
+    <section class="ai-band ai-band--tight" {!! cms_section_attr('spectrum') !!}>
+      <div class="wrap ai-feature">
+        <div class="ai-feature-copy">
+          <h2{!! cms_style($meta, 'spectrum.heading') !!}>
+            {!! accent_html($meta->get('spectrum.heading'), $meta->get('spectrum.heading_accent')) !!}</h2>
+            <p{!! cms_style($meta, 'spectrum.body') !!}>{{ $meta->get('spectrum.body') }}</p>
+              <ul class="ai-ticks">
+                @foreach ($ticks as $tick)
+                  <li{!! cms_style($meta, 'spectrum.tick', $loop->index) !!}>{{ $tick }}</li>
+                @endforeach
+              </ul>
         </div>
-        <p{!! cms_style($meta, 'space.lead') !!}>{{ $meta->get('space.lead') }}</p>
+        <div class="ai-compare">
+          <figure>
+            <img src="{{ media_url($meta->get('spectrum.compare.traditional.image')) }}"
+              alt="{{ $meta->get('spectrum.compare.traditional.caption') }}" loading="lazy">
+            <figcaption{!! cms_style($meta, 'spectrum.compare.traditional.caption') !!}>
+              {{ $meta->get('spectrum.compare.traditional.caption') }}</figcaption>
+          </figure>
+          <figure class="is-accent">
+            <img src="{{ media_url($meta->get('spectrum.compare.ai.image')) }}"
+              alt="{{ $meta->get('spectrum.compare.ai.caption') }}" loading="lazy">
+            <figcaption{!! cms_style($meta, 'spectrum.compare.ai.caption') !!}>
+              {{ $meta->get('spectrum.compare.ai.caption') }}</figcaption>
+          </figure>
+        </div>
       </div>
+    </section>
 
-      <div class="ai-space">
-        <div class="ai-space-visual" id="aiSpaceVisual">
-          @foreach ($spaceItems as $item)
-            <img class="{{ $loop->first ? 'is-active' : '' }}" src="{{ media_url($item['image'] ?? '') }}" alt="{{ $item['title'] ?? '' }}" data-panel="{{ $loop->index }}">
-          @endforeach
+    <section class="ai-insights card-in" {!! cms_section_attr('insights') !!}>
+      <div class="wrap-sm">
+        <div class="ai-row-head">
+          <div>
+            <h2{!! cms_style($meta, 'insights.heading') !!}>
+              {!! accent_html($meta->get('insights.heading'), $meta->get('insights.heading_accent')) !!}</h2>
+          </div>
+          <p{!! cms_style($meta, 'insights.lead') !!}>{{ $meta->get('insights.lead') }}</p>
         </div>
 
-        <div class="ai-accordion" id="aiAccordion">
-          @foreach ($spaceItems as $item)
-            <div class="ai-acc-item {{ $loop->first ? 'is-open' : '' }}">
-              <button type="button" class="ai-acc-btn" aria-expanded="{{ $loop->first ? 'true' : 'false' }}">
-                <span class="ai-num">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-                <h3{!! cms_style($meta, 'space.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h3>
-                <span class="chev" aria-hidden="true"></span>
-              </button>
-              <div class="ai-acc-panel">
-                <p{!! cms_style($meta, 'space.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
+        <div class="container max-width-adaptive-md" style="padding-bottom:40px">
+          <ul id="cards" style="--numcards: {{ count($insights) }}">
+            @foreach ($insights as $item)
+              <li class="card-main" id="card_{{ $loop->iteration }}" style="--index: {{ $loop->iteration }}">
+                <div class="card__content">
+                  <div>
+                    <span class="ai-num">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+                    <h2{!! cms_style($meta, 'insights.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h2>
+                      <p{!! cms_style($meta, 'insights.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
+                  </div>
+                  <figure>
+                    <img src="{{ media_url($item['image'] ?? '') }}" alt="{{ $item['title'] ?? '' }}">
+                  </figure>
+                </div>
+              </li>
+            @endforeach
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="ai-cct" {!! cms_section_attr('cct') !!}>
+      <div class="ai-cct-media" aria-hidden="true">
+        <img src="{{ media_url($meta->get('cct.image')) }}" alt="" loading="lazy">
+      </div>
+      <div class="wrap ai-cct-inner">
+        <h2{!! cms_style($meta, 'cct.heading') !!}>
+          {!! accent_html($meta->get('cct.heading'), $meta->get('cct.heading_accent')) !!}</h2>
+          <p{!! cms_style($meta, 'cct.body') !!}>{{ $meta->get('cct.body') }}</p>
+      </div>
+    </section>
+
+    <section class="ai-band" {!! cms_section_attr('space') !!}>
+      <div class="wrap">
+        <div class="ai-row-head">
+          <div>
+            <h2{!! cms_style($meta, 'space.heading') !!}>
+              {!! accent_html($meta->get('space.heading'), $meta->get('space.heading_accent')) !!}</h2>
+          </div>
+          <p{!! cms_style($meta, 'space.lead') !!}>{{ $meta->get('space.lead') }}</p>
+        </div>
+
+        <div class="ai-space">
+          <div class="ai-space-visual" id="aiSpaceVisual">
+            @foreach ($spaceItems as $item)
+              <img class="{{ $loop->first ? 'is-active' : '' }}" src="{{ media_url($item['image'] ?? '') }}"
+                alt="{{ $item['title'] ?? '' }}" data-panel="{{ $loop->index }}">
+            @endforeach
+          </div>
+
+          <div class="ai-accordion" id="aiAccordion">
+            @foreach ($spaceItems as $item)
+              <div class="ai-acc-item {{ $loop->first ? 'is-open' : '' }}">
+                <button type="button" class="ai-acc-btn" aria-expanded="{{ $loop->first ? 'true' : 'false' }}">
+                  <span class="ai-num">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+                  <h3{!! cms_style($meta, 'space.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h3>
+                    <span class="chev" aria-hidden="true"></span>
+                </button>
+                <div class="ai-acc-panel">
+                  <p{!! cms_style($meta, 'space.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
+                </div>
               </div>
-            </div>
-          @endforeach
+            @endforeach
+          </div>
         </div>
       </div>
+    </section>
+
+    <div class="ai-cta-wrap" {!! cms_section_attr('cta') !!}>
+      <a class="ai-cta" href="{{ $meta->get('cta.href', 0, '/contact') }}">
+        <span class="ai-cta-check" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </span>
+        <span class="ai-cta-copy">
+          <h3{!! cms_style($meta, 'cta.heading') !!}>{{ $meta->get('cta.heading') }}</h3>
+            <p{!! cms_style($meta, 'cta.body') !!}>{{ $meta->get('cta.body') }}</p>
+        </span>
+        <span class="btn primary" {!! cms_style($meta, 'cta.label') !!}>{{ $meta->get('cta.label') }}</span>
+      </a>
     </div>
-  </section>
 
-  <div class="ai-cta-wrap" {!! cms_section_attr('cta') !!}>
-    <a class="ai-cta" href="{{ $meta->get('cta.href', 0, '/contact') }}">
-      <span class="ai-cta-check" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </span>
-      <span class="ai-cta-copy">
-        <h3{!! cms_style($meta, 'cta.heading') !!}>{{ $meta->get('cta.heading') }}</h3>
-        <p{!! cms_style($meta, 'cta.body') !!}>{{ $meta->get('cta.body') }}</p>
-      </span>
-      <span class="btn primary"{!! cms_style($meta, 'cta.label') !!}>{{ $meta->get('cta.label') }}</span>
-    </a>
-  </div>
-
-</main>
+  </main>
 @endsection
 
 @push('scripts')
-@verbatim
-<script>
-document.getElementById('topbar')?.classList.add('solid');
+  @verbatim
+    <script>
+      document.getElementById('topbar')?.classList.add('solid');
 
-  (function () {
-    var items = document.querySelectorAll('#aiAccordion .ai-acc-item');
-    var visuals = document.querySelectorAll('#aiSpaceVisual img');
-    items.forEach(function (item, index) {
-      var btn = item.querySelector('.ai-acc-btn');
-      btn.addEventListener('click', function () {
-        items.forEach(function (el, i) {
-          var open = i === index;
-          el.classList.toggle('is-open', open);
-          el.querySelector('.ai-acc-btn').setAttribute('aria-expanded', open ? 'true' : 'false');
+      (function () {
+        var items = document.querySelectorAll('#aiAccordion .ai-acc-item');
+        var visuals = document.querySelectorAll('#aiSpaceVisual img');
+        items.forEach(function (item, index) {
+          var btn = item.querySelector('.ai-acc-btn');
+          btn.addEventListener('click', function () {
+            items.forEach(function (el, i) {
+              var open = i === index;
+              el.classList.toggle('is-open', open);
+              el.querySelector('.ai-acc-btn').setAttribute('aria-expanded', open ? 'true' : 'false');
+            });
+            visuals.forEach(function (img) {
+              img.classList.toggle('is-active', Number(img.getAttribute('data-panel')) === index);
+            });
+          });
         });
-        visuals.forEach(function (img) {
-          img.classList.toggle('is-active', Number(img.getAttribute('data-panel')) === index);
-        });
-      });
-    });
-  })();
-</script>
-@endverbatim
+      })();
+    </script>
+  @endverbatim
 @endpush
