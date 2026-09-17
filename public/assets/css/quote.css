@@ -343,7 +343,7 @@ body.quote-open .quote-drawer {
 .quote-page-form {
   border: 1px solid var(--line);
   border-radius: 4px;
-  background: var(--pure-bg);
+  background: var(--intro-bg);
 }
 
 .quote-page-list {
@@ -494,7 +494,7 @@ body.quote-open .quote-drawer {
   color: var(--ink);
   padding: 14px 16px;
   font: inherit;
-  font-size: max(16px, var(--fs-body));
+  font-size: max(14px, var(--fs-body));
   border-radius: 4px;
   outline: none;
   transition: border-color .25s ease, box-shadow .25s ease;
