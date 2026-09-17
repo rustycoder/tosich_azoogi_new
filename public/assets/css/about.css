@@ -179,7 +179,7 @@
      pinned before the first step reaches the middle and stays pinned until
      after the last one leaves it. The offset also clears the fixed header. */
   top: 16svh;
-  height: 68svh;
+  height: 80svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
