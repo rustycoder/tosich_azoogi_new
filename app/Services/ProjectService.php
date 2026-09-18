@@ -71,7 +71,7 @@ class ProjectService implements IProjectService
         array $data,
         ?UploadedFile $cover = null,
         array $galleryFiles = [],
-        array $removeGallery = [],
+        ?array $keepGallery = null,
     ): void {
         $galleryFiles = $this->uploadedFiles($galleryFiles);
         unset($data['featured'], $data['featured_order'], $data['status']);
@@ -87,30 +87,34 @@ class ProjectService implements IProjectService
         }
 
         $gallery = is_array($project->gallery) ? $project->gallery : [];
-        $removeLookup = $this->galleryRemoveLookup($removeGallery);
 
-        if ($removeLookup !== []) {
-            foreach ($removeLookup as $path) {
-                $this->storage->deleteManaged($path);
+        if ($keepGallery !== null) {
+            $keepLookup = [];
+            foreach ($keepGallery as $index) {
+                $keepLookup[(int) $index] = true;
             }
 
-            $gallery = array_values(array_filter(
-                $gallery,
-                function (mixed $path) use ($removeLookup): bool {
-                    if (! is_string($path) || $path === '') {
-                        return false;
-                    }
+            $kept = [];
+            foreach ($gallery as $index => $path) {
+                if (isset($keepLookup[$index])) {
+                    $kept[] = $path;
 
-                    return ! isset($removeLookup[$this->normalizedGalleryPath($path)]);
-                },
-            ));
+                    continue;
+                }
+
+                if (is_string($path) && $path !== '') {
+                    $this->storage->deleteManaged($this->normalizedGalleryPath($path));
+                }
+            }
+
+            $gallery = $kept;
         }
 
         foreach ($galleryFiles as $file) {
             $gallery[] = $this->storage->storeProjectUpload($project->slug, 'gallery', $file);
         }
 
-        $project->gallery = $gallery;
+        $project->gallery = array_values($gallery);
         $this->projects->save($project);
     }
 
@@ -157,31 +161,6 @@ class ProjectService implements IProjectService
             $files,
             fn (mixed $file): bool => $file instanceof UploadedFile,
         ));
-    }
-
-    /**
-     * @param  list<mixed>  $paths
-     * @return array<string, string>
-     */
-    private function galleryRemoveLookup(array $paths): array
-    {
-        $lookup = [];
-
-        foreach ($paths as $path) {
-            if (! is_string($path)) {
-                continue;
-            }
-
-            $normalized = $this->normalizedGalleryPath($path);
-
-            if ($normalized === '') {
-                continue;
-            }
-
-            $lookup[$normalized] = $normalized;
-        }
-
-        return $lookup;
     }
 
     private function normalizedGalleryPath(string $path): string

@@ -52,14 +52,16 @@ class ProjectController extends Controller
 
     public function update(UpdateProjectRequest $request, Project $project): RedirectResponse
     {
-        $data = $request->safe()->except(['cover_file', 'gallery_files', 'remove_gallery']);
+        $data = $request->safe()->except(['cover_file', 'gallery_files', 'gallery_sync', 'keep_gallery']);
 
         $this->projects->update(
             $project,
             $data,
             $request->file('cover_file'),
             $request->file('gallery_files', []) ?? [],
-            $request->validated('remove_gallery') ?? [],
+            $request->boolean('gallery_sync')
+                ? array_map(intval(...), $request->validated('keep_gallery') ?? [])
+                : null,
         );
 
         return back()->with('status', 'Project updated.');

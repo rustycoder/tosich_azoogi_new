@@ -886,24 +886,7 @@
             }
 
             event.preventDefault();
-
-            const item = trigger.closest('[data-gallery-item]');
-            const path = trigger.getAttribute('data-remove-gallery') ?? '';
-            const checkbox = item?.querySelector('input[name="remove_gallery[]"]');
-
-            if (checkbox instanceof HTMLInputElement) {
-                checkbox.checked = true;
-                checkbox.hidden = true;
-                form.append(checkbox);
-            } else if (path !== '') {
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'remove_gallery[]';
-                input.value = path;
-                form.append(input);
-            }
-
-            item?.remove();
+            trigger.closest('[data-gallery-item]')?.remove();
         });
 
         const fileInputs = [...form.querySelectorAll('input[type="file"]')];

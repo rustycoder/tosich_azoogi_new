@@ -64,16 +64,15 @@
 
 <div class="dash-card">
     <h2>Gallery</h2>
+    <input type="hidden" name="gallery_sync" value="1">
     @if (! empty($project?->gallery))
         <div class="dash-gallery">
-            @foreach ($project->gallery as $image)
+            @foreach ($project->gallery as $index => $image)
                 @if (is_string($image) && $image !== '')
                     <div class="dash-gallery-item" data-gallery-item>
                         <img src="{{ media_url($image) }}" alt="">
-                        <label class="dash-gallery-remove" data-remove-gallery="{{ $image }}">
-                            <input type="checkbox" name="remove_gallery[]" value="{{ $image }}">
-                            Remove
-                        </label>
+                        <input type="hidden" name="keep_gallery[]" value="{{ $index }}">
+                        <button type="button" class="dash-gallery-remove" data-remove-gallery>Remove</button>
                     </div>
                 @endif
             @endforeach

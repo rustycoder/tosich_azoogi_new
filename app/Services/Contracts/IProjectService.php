@@ -30,14 +30,14 @@ interface IProjectService
     /**
      * @param  array<string, mixed>  $data
      * @param  list<UploadedFile>  $galleryFiles
-     * @param  list<string>  $removeGallery
+     * @param  list<int>|null  $keepGallery
      */
     public function update(
         Project $project,
         array $data,
         ?UploadedFile $cover = null,
         array $galleryFiles = [],
-        array $removeGallery = [],
+        ?array $keepGallery = null,
     ): void;
 
     public function delete(Project $project): void;

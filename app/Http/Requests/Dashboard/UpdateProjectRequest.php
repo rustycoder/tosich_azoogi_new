@@ -33,9 +33,10 @@ class UpdateProjectRequest extends FormRequest
             'description' => ['nullable', 'string'],
             'cover_file' => ['nullable', 'image', 'max:8192'],
             'gallery_files' => ['nullable', 'array'],
-            'gallery_files.*' => ['image', 'max:8192'],
-            'remove_gallery' => ['nullable', 'array'],
-            'remove_gallery.*' => ['nullable', 'string'],
+            'gallery_files.*' => ['nullable', 'image', 'max:8192'],
+            'gallery_sync' => ['sometimes', 'boolean'],
+            'keep_gallery' => ['nullable', 'array'],
+            'keep_gallery.*' => ['integer', 'min:0'],
         ];
     }
 }

@@ -12,24 +12,24 @@ class ProjectGalleryRemoveTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_edit_form_marks_gallery_images_for_removal(): void
+    public function test_edit_form_keeps_gallery_images_by_index(): void
     {
         $admin = User::factory()->admin()->create();
-        $image = 'assets/img/projects/keep-me.jpg';
         $project = Project::factory()->create([
-            'gallery' => [$image],
+            'gallery' => ['assets/img/projects/keep-me.jpg'],
         ]);
 
         $this->actingAs($admin)
             ->get(route('dashboard.projects.edit', $project))
             ->assertOk()
+            ->assertSee('name="gallery_sync"', false)
             ->assertSee('data-gallery-item', false)
-            ->assertSee('data-remove-gallery="'.$image.'"', false)
-            ->assertSee('name="remove_gallery[]"', false)
-            ->assertSee('value="'.$image.'"', false);
+            ->assertSee('data-remove-gallery', false)
+            ->assertSee('name="keep_gallery[]"', false)
+            ->assertSee('value="0"', false);
     }
 
-    public function test_updating_a_project_removes_selected_gallery_images(): void
+    public function test_updating_a_project_drops_gallery_images_not_kept(): void
     {
         $admin = User::factory()->admin()->create();
         $keep = 'assets/img/projects/keep.jpg';
@@ -45,31 +45,54 @@ class ProjectGalleryRemoveTest extends TestCase
             ->put(route('dashboard.projects.update', $project), [
                 'title' => 'Gallery Project',
                 'slug' => 'gallery-project',
-                'remove_gallery' => [$remove],
+                'gallery_sync' => '1',
+                'keep_gallery' => ['0'],
             ])
             ->assertRedirect(route('dashboard.projects.edit', $project));
 
         $this->assertSame([$keep], $project->fresh()->gallery);
     }
 
-    public function test_gallery_remove_matches_paths_with_or_without_a_leading_slash(): void
+    public function test_updating_a_project_can_clear_the_gallery(): void
     {
         $admin = User::factory()->admin()->create();
         $project = Project::factory()->create([
-            'title' => 'Slash Gallery',
-            'slug' => 'slash-gallery',
-            'gallery' => ['/assets/img/projects/drop.jpg', 'assets/img/projects/keep.jpg'],
+            'title' => 'Empty Gallery',
+            'slug' => 'empty-gallery',
+            'gallery' => ['assets/img/projects/drop.jpg'],
         ]);
 
         $this->actingAs($admin)
             ->put(route('dashboard.projects.update', $project), [
-                'title' => 'Slash Gallery',
-                'slug' => 'slash-gallery',
-                'remove_gallery' => ['assets/img/projects/drop.jpg'],
+                'title' => 'Empty Gallery',
+                'slug' => 'empty-gallery',
+                'gallery_sync' => '1',
             ])
             ->assertRedirect();
 
-        $this->assertSame(['assets/img/projects/keep.jpg'], $project->fresh()->gallery);
+        $this->assertSame([], $project->fresh()->gallery);
+    }
+
+    public function test_saving_without_removing_keeps_the_gallery(): void
+    {
+        $admin = User::factory()->admin()->create();
+        $gallery = ['assets/img/projects/one.jpg', 'assets/img/projects/two.jpg'];
+        $project = Project::factory()->create([
+            'title' => 'Kept Gallery',
+            'slug' => 'kept-gallery',
+            'gallery' => $gallery,
+        ]);
+
+        $this->actingAs($admin)
+            ->put(route('dashboard.projects.update', $project), [
+                'title' => 'Kept Gallery',
+                'slug' => 'kept-gallery',
+                'gallery_sync' => '1',
+                'keep_gallery' => ['0', '1'],
+            ])
+            ->assertRedirect();
+
+        $this->assertSame($gallery, $project->fresh()->gallery);
     }
 
     public function test_removing_a_managed_gallery_image_deletes_the_stored_file(): void
@@ -92,7 +115,8 @@ class ProjectGalleryRemoveTest extends TestCase
             ->put(route('dashboard.projects.update', $project), [
                 'title' => 'Managed Gallery',
                 'slug' => 'managed-gallery',
-                'remove_gallery' => ['storage/projects/managed-gallery/gallery/drop.jpg'],
+                'gallery_sync' => '1',
+                'keep_gallery' => [0],
             ])
             ->assertRedirect();
 
@@ -112,20 +136,19 @@ class ProjectGalleryRemoveTest extends TestCase
             'gallery' => [$remove, $keep],
         ]);
 
-        $html = $this->actingAs($admin)
+        $this->actingAs($admin)
             ->get(route('dashboard.projects.edit', $project))
             ->assertOk()
-            ->getContent();
-
-        $this->assertStringContainsString('data-remove-gallery="'.e($remove).'"', $html);
-        $this->assertStringContainsString('value="'.e($remove).'"', $html);
+            ->assertSee('name="keep_gallery[]"', false)
+            ->assertDontSee('name="remove_gallery[]"', false);
 
         $this->actingAs($admin)
             ->from(route('dashboard.projects.edit', $project))
             ->put(route('dashboard.projects.update', $project), [
                 'title' => 'Remote Gallery',
                 'slug' => 'remote-gallery',
-                'remove_gallery' => [rawurldecode($remove)],
+                'gallery_sync' => '1',
+                'keep_gallery' => [1],
             ])
             ->assertRedirect(route('dashboard.projects.edit', $project));
 
