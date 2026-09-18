@@ -86,15 +86,23 @@ class ProjectService implements IProjectService
             );
         }
 
-        $gallery = $project->gallery ?? [];
+        $gallery = is_array($project->gallery) ? $project->gallery : [];
+        $removeLookup = $this->galleryRemoveLookup($removeGallery);
 
-        if ($removeGallery !== []) {
-            foreach ($removeGallery as $path) {
+        if ($removeLookup !== []) {
+            foreach ($removeLookup as $path) {
                 $this->storage->deleteManaged($path);
             }
+
             $gallery = array_values(array_filter(
                 $gallery,
-                fn (string $path): bool => ! in_array($path, $removeGallery, true),
+                function (mixed $path) use ($removeLookup): bool {
+                    if (! is_string($path) || $path === '') {
+                        return false;
+                    }
+
+                    return ! isset($removeLookup[$this->normalizedGalleryPath($path)]);
+                },
             ));
         }
 
@@ -149,5 +157,46 @@ class ProjectService implements IProjectService
             $files,
             fn (mixed $file): bool => $file instanceof UploadedFile,
         ));
+    }
+
+    /**
+     * @param  list<mixed>  $paths
+     * @return array<string, string>
+     */
+    private function galleryRemoveLookup(array $paths): array
+    {
+        $lookup = [];
+
+        foreach ($paths as $path) {
+            if (! is_string($path)) {
+                continue;
+            }
+
+            $normalized = $this->normalizedGalleryPath($path);
+
+            if ($normalized === '') {
+                continue;
+            }
+
+            $lookup[$normalized] = $normalized;
+        }
+
+        return $lookup;
+    }
+
+    private function normalizedGalleryPath(string $path): string
+    {
+        $path = trim(rawurldecode($path));
+        $path = str_replace('\\', '/', $path);
+
+        if ($path === '') {
+            return '';
+        }
+
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            return $path;
+        }
+
+        return '/'.ltrim($path, '/');
     }
 }

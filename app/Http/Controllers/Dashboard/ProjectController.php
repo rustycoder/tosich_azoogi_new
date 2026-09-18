@@ -59,7 +59,7 @@ class ProjectController extends Controller
             $data,
             $request->file('cover_file'),
             $request->file('gallery_files', []) ?? [],
-            $request->input('remove_gallery', []) ?? [],
+            $request->validated('remove_gallery') ?? [],
         );
 
         return back()->with('status', 'Project updated.');

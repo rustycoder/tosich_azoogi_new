@@ -67,13 +67,15 @@
     @if (! empty($project?->gallery))
         <div class="dash-gallery">
             @foreach ($project->gallery as $image)
-                <label class="dash-gallery-item">
-                    <img src="{{ media_url($image) }}" alt="">
-                    <span>
-                        <input type="checkbox" name="remove_gallery[]" value="{{ $image }}">
-                        Remove
-                    </span>
-                </label>
+                @if (is_string($image) && $image !== '')
+                    <div class="dash-gallery-item" data-gallery-item>
+                        <img src="{{ media_url($image) }}" alt="">
+                        <label class="dash-gallery-remove" data-remove-gallery="{{ $image }}">
+                            <input type="checkbox" name="remove_gallery[]" value="{{ $image }}">
+                            Remove
+                        </label>
+                    </div>
+                @endif
             @endforeach
         </div>
     @endif
