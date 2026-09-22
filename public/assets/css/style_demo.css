@@ -3996,3 +3996,77 @@ a.mega-variant-card:after {
         transform: none;
     }
 }
+
+/* ===========================================================
+   404 & ERROR PAGES
+=========================================================== */
+.error-main {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(120px, 16vh, 180px) 0 clamp(60px, 10vh, 100px);
+}
+
+.error-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.error-card {
+    max-width: 640px;
+    text-align: center;
+    padding: clamp(32px, 5vw, 48px) clamp(20px, 4vw, 36px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.error-code {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: clamp(64px, 10vw, 110px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--accent);
+    margin-bottom: 12px;
+}
+
+.error-title {
+    font-family: var(--font-sans);
+    font-size: var(--fs-h2-section);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0 0 16px;
+}
+
+.error-lead {
+    font-family: var(--font-sans);
+    font-size: var(--fs-lead);
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0 0 32px;
+    max-width: 48ch;
+}
+
+.error-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+@media (max-width: 480px) {
+    .error-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .error-actions .btn {
+        width: 100%;
+    }
+}
