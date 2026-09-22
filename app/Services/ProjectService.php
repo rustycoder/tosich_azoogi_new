@@ -71,7 +71,7 @@ class ProjectService implements IProjectService
         array $data,
         ?UploadedFile $cover = null,
         array $galleryFiles = [],
-        array $removeGallery = [],
+        ?array $keepGallery = null,
     ): void {
         $galleryFiles = $this->uploadedFiles($galleryFiles);
         unset($data['featured'], $data['featured_order'], $data['status']);
@@ -86,23 +86,35 @@ class ProjectService implements IProjectService
             );
         }
 
-        $gallery = $project->gallery ?? [];
+        $gallery = is_array($project->gallery) ? $project->gallery : [];
 
-        if ($removeGallery !== []) {
-            foreach ($removeGallery as $path) {
-                $this->storage->deleteManaged($path);
+        if ($keepGallery !== null) {
+            $keepLookup = [];
+            foreach ($keepGallery as $index) {
+                $keepLookup[(int) $index] = true;
             }
-            $gallery = array_values(array_filter(
-                $gallery,
-                fn (string $path): bool => ! in_array($path, $removeGallery, true),
-            ));
+
+            $kept = [];
+            foreach ($gallery as $index => $path) {
+                if (isset($keepLookup[$index])) {
+                    $kept[] = $path;
+
+                    continue;
+                }
+
+                if (is_string($path) && $path !== '') {
+                    $this->storage->deleteManaged($this->normalizedGalleryPath($path));
+                }
+            }
+
+            $gallery = $kept;
         }
 
         foreach ($galleryFiles as $file) {
             $gallery[] = $this->storage->storeProjectUpload($project->slug, 'gallery', $file);
         }
 
-        $project->gallery = $gallery;
+        $project->gallery = array_values($gallery);
         $this->projects->save($project);
     }
 
@@ -149,5 +161,21 @@ class ProjectService implements IProjectService
             $files,
             fn (mixed $file): bool => $file instanceof UploadedFile,
         ));
+    }
+
+    private function normalizedGalleryPath(string $path): string
+    {
+        $path = trim(rawurldecode($path));
+        $path = str_replace('\\', '/', $path);
+
+        if ($path === '') {
+            return '';
+        }
+
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            return $path;
+        }
+
+        return '/'.ltrim($path, '/');
     }
 }

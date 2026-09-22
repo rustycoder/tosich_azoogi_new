@@ -878,6 +878,17 @@
     };
 
     document.querySelectorAll('form.dash-form').forEach((form) => {
+        form.addEventListener('click', (event) => {
+            const trigger = event.target.closest('[data-remove-gallery]');
+
+            if (!trigger || !form.contains(trigger)) {
+                return;
+            }
+
+            event.preventDefault();
+            trigger.closest('[data-gallery-item]')?.remove();
+        });
+
         const fileInputs = [...form.querySelectorAll('input[type="file"]')];
 
         if (fileInputs.length === 0) {

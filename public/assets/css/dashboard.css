@@ -1097,14 +1097,27 @@ html:has(.dash) {
   border-radius: 8px;
 }
 
-.dash-gallery-item span {
+.dash-form .dash-gallery-remove {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--dash-line);
+  border-radius: 8px;
+  background: var(--dash-card);
+  color: var(--dash-ink);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.35;
+  cursor: pointer;
 }
 
-.dash-gallery-item input {
-  width: auto;
+.dash-form .dash-gallery-remove:hover {
+  border-color: #c4453c;
+  color: #c4453c;
 }
 
 .dash-list {
