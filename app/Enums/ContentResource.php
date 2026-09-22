@@ -33,6 +33,10 @@ enum ContentResource: string
     case ProductEnquiries = 'product-enquiries';
     case ContactEnquiry = 'contact-enquiry';
     case NotFound = '404';
+    case Forbidden = '403';
+    case PageExpired = '419';
+    case ServerError = '500';
+    case ServiceUnavailable = '503';
 
     public function label(): string
     {
@@ -66,6 +70,10 @@ enum ContentResource: string
             self::ProductEnquiries => 'Product Enquiries',
             self::ContactEnquiry => 'Contact Enquiries',
             self::NotFound => '404 Page',
+            self::Forbidden => '403 Page',
+            self::PageExpired => '419 Page',
+            self::ServerError => '500 Page',
+            self::ServiceUnavailable => '503 Page',
         };
     }
 
