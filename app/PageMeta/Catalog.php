@@ -17,6 +17,7 @@ use App\PageMeta\Definitions\HomeOwnerDefinition;
 use App\PageMeta\Definitions\LedCalculatorDefinition;
 use App\PageMeta\Definitions\MadrixDefinition;
 use App\PageMeta\Definitions\ModernSlaveryDefinition;
+use App\PageMeta\Definitions\NotFoundDefinition;
 use App\PageMeta\Definitions\PrivacyDefinition;
 use App\PageMeta\Definitions\ProjectsDefinition;
 use App\PageMeta\Definitions\QuoteRequestDefinition;
@@ -54,6 +55,7 @@ final class Catalog
         'terms' => TermsDefinition::class,
         'warranty-returns' => WarrantyReturnsDefinition::class,
         'modern-slavery' => ModernSlaveryDefinition::class,
+        '404' => NotFoundDefinition::class,
         'header' => HeaderDefinition::class,
         'footer' => FooterDefinition::class,
     ];

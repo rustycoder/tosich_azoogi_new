@@ -32,6 +32,7 @@ enum ContentResource: string
     case QuoteEnquiries = 'quote-enquiries';
     case ProductEnquiries = 'product-enquiries';
     case ContactEnquiry = 'contact-enquiry';
+    case NotFound = '404';
 
     public function label(): string
     {
@@ -64,6 +65,7 @@ enum ContentResource: string
             self::QuoteEnquiries => 'Quote Enquiries',
             self::ProductEnquiries => 'Product Enquiries',
             self::ContactEnquiry => 'Contact Enquiries',
+            self::NotFound => '404 Page',
         };
     }
 

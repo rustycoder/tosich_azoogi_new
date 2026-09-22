@@ -4025,14 +4025,23 @@ a.mega-variant-card:after {
 
 .error-code {
     display: inline-block;
-    font-family: var(--font-sans);
-    font-size: clamp(64px, 10vw, 110px);
+    font-family: var(--font-outline);
+    font-size: clamp(72px, 12vw, 130px);
     font-weight: 700;
     line-height: 1;
-    letter-spacing: -0.04em;
+    letter-spacing: 0.02em;
     color: var(--accent);
-    margin-bottom: 12px;
+    margin-bottom: 16px;
 }
+
+@supports (-webkit-text-stroke: 1px black) {
+    .error-code {
+        color: transparent;
+        -webkit-text-stroke: 1.5px var(--accent);
+        filter: drop-shadow(0 0 0.12em color-mix(in srgb, var(--accent) 42%, transparent));
+    }
+}
+
 
 .error-title {
     font-family: var(--font-sans);

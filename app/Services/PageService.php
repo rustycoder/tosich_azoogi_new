@@ -240,6 +240,7 @@ class PageService implements IPageService
             'projects' => 'pages.projects',
             'led-strip-calculator' => 'pages.led-strip-calculator',
             'request-a-quote' => 'pages.quote-request',
+            '404' => 'errors.404',
             'home-owner', 'architect-designer', 'electrician-builder', 'wholesaler' => 'pages.audience',
             'privacy', 'terms', 'warranty-returns', 'modern-slavery' => 'pages.legal',
             default => throw new NotFoundHttpException,
