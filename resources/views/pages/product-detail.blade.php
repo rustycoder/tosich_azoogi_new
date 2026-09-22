@@ -306,6 +306,8 @@
                                 placeholder="Provide extra requirements, dimming requests, or custom connector feeds...">{{ old('quote-message') }}</textarea>
                         </div>
 
+                        <x-turnstile action="product_enquiry" />
+
                         @if ($errors->any())
                             <p class="form-status is-error">{{ $errors->first() }}</p>
                         @endif
@@ -341,6 +343,8 @@
                         maxlength="191" placeholder="e.g. Alex Chen" autocomplete="name">
                     <p class="datasheet-field-error" data-error-for="person_name" hidden></p>
                 </div>
+                <x-turnstile action="datasheet" id="datasheet-turnstile-container" />
+                <p class="datasheet-field-error" data-error-for="cf-turnstile-response" hidden></p>
                 <p class="datasheet-field-error" data-error-for="form" hidden></p>
                 <div class="datasheet-dialog-actions">
                     <button type="button" class="btn" id="datasheet-export-cancel">Cancel</button>
@@ -1817,6 +1821,7 @@
                                 product_code: product.product_code || datasheetSku || '',
                                 selected_options: selected,
                                 length: isLinear ? selectedLength : null,
+                                'cf-turnstile-response': datasheetForm.querySelector('input[name="cf-turnstile-response"]')?.value || (window.turnstile ? window.turnstile.getResponse() : ''),
                             }),
                         });
 
@@ -1830,18 +1835,30 @@
                             if (!Object.keys(errors).length) {
                                 setDatasheetError('form', 'Enter the project name and client name.');
                             }
+                            if (window.turnstile) {
+                                try { window.turnstile.reset(); } catch (e) {}
+                            }
                             return;
                         }
 
                         if (!response.ok || !payload.url) {
                             setDatasheetError('form', 'The datasheet could not be generated. Try again.');
+                            if (window.turnstile) {
+                                try { window.turnstile.reset(); } catch (e) {}
+                            }
                             return;
                         }
 
                         datasheetDialog?.close();
+                        if (window.turnstile) {
+                            try { window.turnstile.reset(); } catch (e) {}
+                        }
                         window.open(payload.url, '_blank', 'noopener');
                     } catch (error) {
                         setDatasheetError('form', 'The datasheet could not be generated. Try again.');
+                        if (window.turnstile) {
+                            try { window.turnstile.reset(); } catch (e) {}
+                        }
                     } finally {
                         if (datasheetSubmit) {
                             datasheetSubmit.disabled = false;

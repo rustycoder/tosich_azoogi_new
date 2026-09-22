@@ -31,6 +31,9 @@
 <script defer src="{{ versioned_asset('assets/js/quote.js') }}"></script>
 <script defer src="{{ versioned_asset('assets/js/site-search.js') }}"></script>
 @endif
+@if (config('services.turnstile.site_key'))
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+@endif
 @stack('head')
 @if (request()->routeIs('dashboard.pages.preview'))
 <link rel="stylesheet" href="{{ versioned_asset('assets/css/cms-editor.css') }}">

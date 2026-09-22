@@ -73,6 +73,7 @@
             <label for="your-message">Message*</label>
             <textarea id="your-message" name="your-message" rows="6" maxlength="2000" required placeholder="We’re here to help genuine customers and potential partners. Please, no unsolicited sales pitches.">{{ old('your-message') }}</textarea>
           </div>
+          <x-turnstile action="contact" />
           <div class="form-actions">
             <button type="submit" class="btn primary">Send Message</button>
           </div>
