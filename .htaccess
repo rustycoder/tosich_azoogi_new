@@ -11,3 +11,15 @@
     # Direct all requests to /public folder
 
 </IfModule>
+
+<IfModule mod_mime.c>
+    AddType video/webm .webm
+    AddType video/mp4 .mp4 .m4v
+    AddType video/ogg .ogv .ogg
+    AddType image/webp .webp
+    AddType image/svg+xml .svg .svgz
+</IfModule>
+
+<IfModule mod_deflate.c>
+    SetEnvIfNoCase Request_URI \.(?:mp4|webm|ogv|m4v)$ no-gzip dont-vary
+</IfModule>
