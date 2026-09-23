@@ -34,7 +34,7 @@
     <div class="{{ $classes }}" @if (! $isVideo && $image !== '') style="background-image:url('{{ $image }}')" @endif>
       @if ($isVideo)
         <video class="bg-video" @if ($loop->first) autoplay @endif muted loop playsinline preload="auto" @if ($image !== '') poster="{{ $image }}" @endif>
-          <source src="{{ media_url($video) }}" type="video/webm">
+          <source src="{{ media_url($video) }}" type="{{ video_mime_type($video) }}">
         </video>
       @endif
       <div class="slide-inner">

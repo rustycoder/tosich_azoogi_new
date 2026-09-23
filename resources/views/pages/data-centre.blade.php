@@ -27,9 +27,13 @@
 
   <section class="dc-hero" {!! cms_section_attr('hero') !!}>
     <div class="dc-hero-media" aria-hidden="true">
-      <video class="dc-hero-video" autoplay muted loop playsinline preload="auto" poster="{{ media_url($meta->get('hero.poster')) }}">
-        <source src="{{ media_url($meta->get('hero.video')) }}" type="video/webm">
-      </video>
+      @if (filled($meta->get('hero.video')))
+        <video class="dc-hero-video" autoplay muted loop playsinline preload="auto" poster="{{ media_url($meta->get('hero.poster')) }}">
+          <source src="{{ media_url($meta->get('hero.video')) }}" type="{{ video_mime_type($meta->get('hero.video')) }}">
+        </video>
+      @elseif (filled($meta->get('hero.poster')))
+        <img src="{{ media_url($meta->get('hero.poster')) }}" alt="{{ $meta->get('hero.title') }}">
+      @endif
     </div>
     <div class="dc-hero-copy">
       <h1{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
@@ -181,6 +185,18 @@ const topbar = document.getElementById('topbar');
     es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: .12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  const dcVideo = document.querySelector('.dc-hero-video');
+  if (dcVideo) {
+    const playVideo = () => {
+      dcVideo.muted = true;
+      dcVideo.play().catch(() => {});
+    };
+    playVideo();
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) playVideo();
+    });
+  }
 </script>
 @endverbatim
 @endpush
