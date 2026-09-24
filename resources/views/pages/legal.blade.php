@@ -19,7 +19,7 @@
 <main class="legal-main">
     <div class="wrap legal-page-wrap" {!! cms_section_attr('legal') !!}>
     <div class="legal-hero">
-      <h1 class="h2 legal-title"{!! cms_style($meta, 'legal.title') !!}>{{ $meta->get('legal.title') }}</h1>
+      <h1 class="h2 legal-title"{!! cms_style($meta, 'legal.title') !!}>{!! accent_html($meta->get('legal.title')) !!}</h1>
       <p class="legal-intro"{!! cms_style($meta, 'legal.lead') !!}>{{ $meta->get('legal.lead') }}</p>
     </div>
 
@@ -33,7 +33,7 @@
 
       <div class="legal-wrap">
         <article class="legal-block" id="{{ $page->slug }}">
-          <h2 class="legal-block-title"{!! cms_style($meta, 'legal.title') !!}>{{ $meta->get('legal.title') }}</h2>
+          <h2 class="legal-block-title"{!! cms_style($meta, 'legal.title') !!}>{!! accent_html($meta->get('legal.title')) !!}</h2>
           <p class="legal-block-lead"{!! cms_style($meta, 'legal.lead') !!}>{{ $meta->get('legal.lead') }}</p>
           <div class="legal-body"{!! cms_style($meta, 'legal.html') !!}>
             {!! $meta->get('legal.html') !!}

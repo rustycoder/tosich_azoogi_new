@@ -54,7 +54,7 @@
           </span>
         @endif
       </div>
-      <h1>{{ $project->title }}</h1>
+      <h1>{!! accent_html($project->title) !!}</h1>
     </div>
   </section>
 

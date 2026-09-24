@@ -282,6 +282,10 @@
   color: var(--always-white);
 }
 
+.project-detail-hero h1 span {
+  font-family: var(--font-outline);
+}
+
 .project-info {
   padding: var(--section-y) 0;
 }

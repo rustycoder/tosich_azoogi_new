@@ -139,9 +139,15 @@ body {
 .audience-hero .h2 span,
 .projects-hero-copy h1 span,
 .projects-hero .h2 span,
+.project-detail-hero h1 span,
+.project-detail-hero-copy h1 span,
 .prod-hero-copy h1 span,
 .contact-hero-copy h1 span,
 .contact-title span,
+.slide-title span,
+.legal-title span,
+.legal-block-title span,
+.quote-page-intro h1 span,
 .about-why-ghost {
     font-family: var(--font-outline);
 }
@@ -162,9 +168,15 @@ body {
 .audience-hero .h2 span,
 .projects-hero-copy h1 span,
 .projects-hero .h2 span,
+.project-detail-hero h1 span,
+.project-detail-hero-copy h1 span,
 .prod-hero-copy h1 span,
 .contact-hero-copy h1 span,
-.contact-title span {
+.contact-title span,
+.slide-title span,
+.legal-title span,
+.legal-block-title span,
+.quote-page-intro h1 span {
     color: var(--accent);
 }
 
@@ -186,9 +198,15 @@ body {
     .audience-hero .h2 span,
     .projects-hero-copy h1 span,
     .projects-hero .h2 span,
+    .project-detail-hero h1 span,
+    .project-detail-hero-copy h1 span,
     .prod-hero-copy h1 span,
     .contact-hero-copy h1 span,
-    .contact-title span {
+    .contact-title span,
+    .slide-title span,
+    .legal-title span,
+    .legal-block-title span,
+    .quote-page-intro h1 span {
         color: transparent;
         -webkit-text-stroke: 1.35px var(--accent);
         filter: drop-shadow(0 0 0.1em color-mix(in srgb, var(--accent) 42%, transparent));

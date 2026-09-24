@@ -38,7 +38,7 @@
         </video>
       @endif
       <div class="slide-inner">
-        <h1 class="slide-title"{!! cms_style($meta, 'slide.title', $loop->index) !!}>{!! nl2br_html($slide['title'] ?? '') !!}</h1>
+        <h1 class="slide-title"{!! cms_style($meta, 'slide.title', $loop->index) !!}>{!! accent_html($slide['title'] ?? '') !!}</h1>
         <p class="slide-sub"{!! cms_style($meta, 'slide.subtitle', $loop->index) !!}>{{ $slide['subtitle'] ?? '' }}</p>
         <div class="slide-actions">
           <a class="btn primary" href="{{ $slide['cta.primary.href'] ?? '#' }}"{!! cms_style($meta, 'slide.cta.primary.label', $loop->index) !!}>{{ $slide['cta.primary.label'] ?? '' }}</a>
