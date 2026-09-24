@@ -775,7 +775,7 @@
         @if ($showCatalog)
           Explore our comprehensive range of commercial, architectural and smart LED lighting solutions.
         @else
-          {{ $meta->get('hero.lead', 0, 'Explore the full Azoogi lighting catalogue. COB Strips, SMD Strips, Neon, Outdoor Lights, Aluminium Profiles, LED Drivers and more.') }}
+          {!! accent_html($meta->get('hero.lead', 0, 'Explore the full Azoogi lighting catalogue. COB Strips, SMD Strips, Neon, Outdoor Lights, Aluminium Profiles, LED Drivers and more.')) !!}
         @endif
       </p>
     </div>

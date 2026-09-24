@@ -97,4 +97,31 @@ class OutlineAccentTest extends TestCase
             ->assertDontSee('Title accent', false)
             ->assertSee('{Calculator}', false);
     }
+
+    public function test_hero_paragraph_text_in_curly_braces_renders_as_accent_spans(): void
+    {
+        $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
+        $page = Page::query()->where('slug', 'contact')->firstOrFail();
+        $leadMeta = PageMeta::query()
+            ->where('page_id', $page->id)
+            ->where('key', 'hero.lead')
+            ->firstOrFail();
+
+        $this->actingAs($admin)
+            ->put(route('dashboard.pages.update', $page), [
+                'title' => $page->title,
+                'meta_description' => $page->meta_description,
+                'status' => Status::Active->value,
+                'meta' => [
+                    $leadMeta->id => [
+                        'value' => 'Have questions about our {custom lighting} solutions? We are here to help.',
+                    ],
+                ],
+            ])
+            ->assertRedirect();
+
+        $this->get('/contact')
+            ->assertOk()
+            ->assertSee('<p class="contact-hero-lead">Have questions about our <span>custom lighting</span> solutions? We are here to help.</p>', false);
+    }
 }

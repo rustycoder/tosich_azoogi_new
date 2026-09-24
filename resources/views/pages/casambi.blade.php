@@ -55,8 +55,8 @@
                     </div>
                 @endif
                 <h1 class="cb-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title')) !!}</h1>
-                <p class="cb-lead"{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
-                <p class="cb-intro" {!! cms_section_attr('intro') !!}{!! cms_style($meta, 'intro.body') !!}>{{ $meta->get('intro.body') }}</p>
+                <p class="cb-lead"{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($meta->get('hero.lead')) !!}</p>
+                <p class="cb-intro" {!! cms_section_attr('intro') !!}{!! cms_style($meta, 'intro.body') !!}>{!! accent_html($meta->get('intro.body')) !!}</p>
             </div>
         </section>
 

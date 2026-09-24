@@ -16,7 +16,7 @@
   <div class="wrap quote-page-wrap">
     <div class="quote-page-intro" {!! cms_section_attr('intro') !!}>
       <h1{!! cms_style($meta, 'intro.title') !!}>{!! accent_html($meta->get('intro.title')) !!}</h1>
-      <p{!! cms_style($meta, 'intro.body') !!}>{{ $meta->get('intro.body') }}</p>
+      <p{!! cms_style($meta, 'intro.body') !!}>{!! accent_html($meta->get('intro.body')) !!}</p>
     </div>
 
     <div class="quote-page-grid">

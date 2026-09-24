@@ -44,7 +44,7 @@
     </div>
     <div class="mx-hero-copy" {!! cms_section_attr('hero') !!}>
       <h1{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title')) !!}</h1>
-      <p{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
+      <p{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($meta->get('hero.lead')) !!}</p>
       @if (count($slides) > 1)
         <div class="mx-hero-controls">
           <button type="button" class="mx-hero-nav mx-hero-nav--prev" aria-label="Previous image">

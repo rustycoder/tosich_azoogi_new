@@ -22,7 +22,7 @@
       <h1{!! cms_style($meta, 'hero.title') !!}>
         {!! accent_html($meta->get('hero.title', 0, 'Get in {Touch}')) !!}</h1>
       @if ($meta->get('hero.lead'))
-        <p class="contact-hero-lead"{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
+        <p class="contact-hero-lead"{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($meta->get('hero.lead')) !!}</p>
       @endif
     </div>
   </section>

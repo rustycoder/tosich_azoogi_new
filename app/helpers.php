@@ -147,9 +147,10 @@ if (! function_exists('nl2br_html')) {
 if (! function_exists('linkify_emails')) {
     function linkify_emails(string $text): string
     {
-        $escaped = e($text);
+        $isHtml = str_contains($text, '<span') || str_contains($text, '<br');
+        $escaped = $isHtml ? $text : e($text);
         $linked = preg_replace(
-            '/([a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,})/',
+            '/([a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,})(?![^<]*>|[^<>]*<\/a>)/',
             '<a href="mailto:$1">$1</a>',
             $escaped,
         );

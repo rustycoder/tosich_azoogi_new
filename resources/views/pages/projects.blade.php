@@ -24,7 +24,7 @@
     <div class="projects-hero-copy">
       <h1{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title')) !!}</h1>
       <p class="projects-hero-lead"{!! cms_style($meta, 'hero.body') !!}>
-        {!! nl2br(linkify_emails($meta->get('hero.body')), false) !!}
+        {!! linkify_emails(accent_html($meta->get('hero.body'))) !!}
       </p>
     </div>
   </section>

@@ -213,6 +213,45 @@ body {
     }
 }
 
+/* Hero paragraph & subtitle text in {} - solid accent color */
+.slide-sub span,
+.about-hero-copy p span,
+.about-intro p span,
+.ai-hero-copy p span,
+.dc-hero-copy p span,
+.dc-lead span,
+.dc-intro span,
+.mx-hero-copy p span,
+.solutions-hero-copy p span,
+.solutions-copy p span,
+.solutions-lead span,
+.solutions-sub span,
+.cb-hero-copy p span,
+.cb-lead span,
+.cb-intro span,
+.sv-hero-copy p span,
+.sv-lead span,
+.sv-intro span,
+.projects-hero-copy p span,
+.projects-hero-lead span,
+.prod-hero-copy p span,
+.prod-hero-lead span,
+.contact-hero-copy p span,
+.contact-hero-lead span,
+.calc-hero-copy p span,
+.calc-hero-lead span,
+.audience-hero p span,
+.audience-lead p span,
+.legal-hero p span,
+.legal-intro span,
+.quote-page-intro p span {
+    font-family: inherit;
+    font-weight: 500;
+    color: var(--accent) !important;
+    -webkit-text-stroke: 0 !important;
+    filter: none !important;
+}
+
 a {
     color: inherit;
     text-decoration: none;

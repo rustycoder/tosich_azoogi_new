@@ -31,7 +31,7 @@
       <div class="ai-hero-copy">
         <h1{!! cms_style($meta, 'hero.title') !!}>
           {!! accent_html($meta->get('hero.title')) !!}</h1>
-          <p{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
+        <p{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($meta->get('hero.lead')) !!}</p>
       </div>
     </section>
 

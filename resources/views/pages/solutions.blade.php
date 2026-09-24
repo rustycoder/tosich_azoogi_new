@@ -29,10 +29,10 @@
       <h1 class="h2 solutions-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title')) !!}</h1>
       <div class="solutions-copy">
         @if (trim($meta->get('hero.lead')) !== '')
-          <p class="solutions-lead"{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
+          <p class="solutions-lead"{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($meta->get('hero.lead')) !!}</p>
         @endif
         @if (trim($meta->get('hero.sub')) !== '')
-          <p class="solutions-sub"{!! cms_style($meta, 'hero.sub') !!}>{{ $meta->get('hero.sub') }}</p>
+          <p class="solutions-sub"{!! cms_style($meta, 'hero.sub') !!}>{!! accent_html($meta->get('hero.sub')) !!}</p>
         @endif
       </div>
     </div>

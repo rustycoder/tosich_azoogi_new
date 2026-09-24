@@ -25,7 +25,7 @@
       <h1 class="h2 calc-hero-title"{!! cms_style($meta, 'hero.title') !!}>
         {!! accent_html($meta->get('hero.title', 0, 'LED Strip {Calculator}')) !!}</h1>
       @if ($meta->get('hero.lead'))
-        <p class="calc-hero-lead"{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
+        <p class="calc-hero-lead"{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($meta->get('hero.lead')) !!}</p>
       @endif
       @if ($meta->get('hero.cta.label'))
         <div class="calc-hero-actions">

@@ -23,7 +23,7 @@
       @if ($leads)
         <div class="audience-lead">
           @foreach ($leads as $index => $paragraph)
-            <p{!! cms_style($meta, 'hero.lead', $index) !!}>{!! linkify_emails($paragraph) !!}</p>
+            <p{!! cms_style($meta, 'hero.lead', $index) !!}>{!! linkify_emails(accent_html($paragraph)) !!}</p>
           @endforeach
         </div>
       @endif
