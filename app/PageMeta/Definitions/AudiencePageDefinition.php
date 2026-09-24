@@ -56,13 +56,25 @@ abstract class AudiencePageDefinition implements PageDefinition
             'wholesaler' => '/assets/img/img-2.jpg',
         ];
 
+        $defaultLeads = [
+            'home-owner' => ['Explore high-quality LED lighting solutions tailored for Australian homes — combining style, energy efficiency, and lasting performance.'],
+            'architect-designer' => ['Specification-grade LED lighting crafted to enhance contemporary interiors and bring your architectural vision to life.'],
+            'electrician-builder' => ['Engineered for straightforward installation, rapid turnarounds, and reliable performance on every residential and commercial build.'],
+            'wholesaler' => ['Stock with confidence. Fast quotes, protected trade margins, and dependable nationwide supply for leading electrical distributors.'],
+        ];
+
         $rows = [
             ['key' => 'hero.image', 'sort_order' => 0, 'value' => $heroImages[$this->slug()] ?? '/assets/img/img-0.jpg'],
             ['key' => 'hero.eyebrow', 'sort_order' => 0, 'value' => (string) ($audience['eyebrow'] ?? '')],
             ['key' => 'hero.title', 'sort_order' => 0, 'value' => $titleValue],
         ];
 
-        foreach ($audience['lead'] ?? [] as $i => $paragraph) {
+        $leadParagraphs = $audience['lead'] ?? [];
+        if (empty($leadParagraphs) && isset($defaultLeads[$this->slug()])) {
+            $leadParagraphs = $defaultLeads[$this->slug()];
+        }
+
+        foreach ($leadParagraphs as $i => $paragraph) {
             $rows[] = ['key' => 'hero.lead', 'sort_order' => $i, 'value' => (string) $paragraph];
         }
 

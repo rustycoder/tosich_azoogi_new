@@ -69,8 +69,19 @@ class OutlineAccentTest extends TestCase
                 ->assertSee('class="audience-hero"', false)
                 ->assertSee('class="audience-hero-media"', false)
                 ->assertSee('class="audience-hero-copy"', false)
-                ->assertSee('class="h2 audience-hero-title"', false);
+                ->assertSee('class="h2 audience-hero-title"', false)
+                ->assertSee('class="audience-hero-lead"', false);
         }
+    }
+
+    public function test_about_page_renders_hero_title_and_lead(): void
+    {
+        $this->get('/about')
+            ->assertOk()
+            ->assertSee('class="about-hero"', false)
+            ->assertSee('class="about-hero-copy"', false)
+            ->assertSee('class="about-hero-lead"', false)
+            ->assertSee('We design, assemble, and optimize architectural', false);
     }
 
     public function test_outline_accent_is_editable_from_the_page_editor(): void

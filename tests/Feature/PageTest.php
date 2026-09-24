@@ -300,12 +300,12 @@ class PageTest extends TestCase
         $this->get('/electrician-builder')
             ->assertOk()
             ->assertSee('Electricians', false)
-            ->assertDontSee('class="audience-hero-lead"', false);
+            ->assertSee('class="audience-hero-lead"', false);
 
         $this->get('/wholesaler')
             ->assertOk()
             ->assertSee('Wholesaler', false)
-            ->assertDontSee('class="audience-hero-lead"', false);
+            ->assertSee('class="audience-hero-lead"', false);
     }
 
     public function test_wholesaler_page_does_not_include_the_last_off_spec_card(): void

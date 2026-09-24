@@ -29,6 +29,12 @@
       <div class="about-hero-copy">
         <h1{!! cms_style($meta, 'hero.title') !!}>
           {!! accent_html($meta->get('hero.title')) !!}</h1>
+        @php
+          $aboutLead = $meta->get('hero.lead', 0, 'We design, assemble, and optimize architectural, commercial, and industrial lighting for projects of every scale — from bespoke residential projects to Tier 1 developments.');
+        @endphp
+        @if ($aboutLead !== '')
+          <p class="about-hero-lead"{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($aboutLead) !!}</p>
+        @endif
       </div>
     </section>
 
