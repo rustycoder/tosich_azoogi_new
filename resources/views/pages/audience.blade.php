@@ -8,6 +8,8 @@
 
 @section('chrome', 'full')
 
+@section('topbarClass', '')
+
 @push('styles')
 <link rel="stylesheet" href="{{ versioned_asset('assets/css/audience.css') }}">
 @endpush
@@ -71,3 +73,28 @@
   </section>
 </main>
 @endsection
+
+@push('scripts')
+  @verbatim
+    <script>
+      const topbar = document.getElementById('topbar');
+      let lastScrolled = null;
+
+      const onScroll = () => {
+        const isScrolled = window.scrollY > 40;
+        if (isScrolled !== lastScrolled) {
+          topbar?.classList.toggle('solid', isScrolled);
+          lastScrolled = isScrolled;
+          if (typeof updateLogos === 'function') updateLogos();
+        }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      const io = new IntersectionObserver((es) => {
+        es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: .12 });
+      document.querySelectorAll('.reveal, .audience-hero').forEach(el => io.observe(el));
+    </script>
+  @endverbatim
+@endpush
