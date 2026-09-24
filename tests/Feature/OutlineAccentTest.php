@@ -41,6 +41,9 @@ class OutlineAccentTest extends TestCase
             'ai-lighting' => ['/ai-lighting', ['<span>for retail</span>', '<span>Four hard advantages.</span>', '<span>spectrum</span>', '<span>analysis</span>', '<span>temperature</span>', '<span>management</span>']],
             'data-centre' => ['/data-centre', ['<span>Lighting &amp; Design Services</span>', '<span>White &amp; Grey Spaces</span>', '<span>Data Hall Conditions</span>', '<span>Building Automation</span>', '<span>Emergency Lighting</span>', '<span>Across All Zones</span>', '<span>Data Centre Project?</span>']],
             'home-owner' => ['/home-owner', ['<span>Home Owner</span>']],
+            'architect-designer' => ['/architect-designer', ['<span>Designers</span>']],
+            'electrician-builder' => ['/electrician-builder', ['<span>Electricians and Builders</span>']],
+            'wholesaler' => ['/wholesaler', ['<span>Wholesaler</span>']],
             'calculator' => ['/led-strip-calculator', ['<span>Calculator</span>']],
         ];
     }
@@ -55,6 +58,18 @@ class OutlineAccentTest extends TestCase
 
         foreach ($spans as $span) {
             $response->assertSee($span, false);
+        }
+    }
+
+    public function test_audience_pages_render_hero_banner(): void
+    {
+        foreach (['/home-owner', '/architect-designer', '/electrician-builder', '/wholesaler'] as $uri) {
+            $this->get($uri)
+                ->assertOk()
+                ->assertSee('class="audience-hero"', false)
+                ->assertSee('class="audience-hero-media"', false)
+                ->assertSee('class="audience-hero-copy"', false)
+                ->assertSee('class="h2 audience-hero-title"', false);
         }
     }
 

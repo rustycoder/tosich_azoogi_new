@@ -8,20 +8,31 @@
 
 @section('chrome', 'full')
 
-@section('topbarClass', 'solid')
-@section('logo', 'logo_white.png')
-
 @push('styles')
 <link rel="stylesheet" href="{{ versioned_asset('assets/css/audience.css') }}">
 @endpush
 
+@php
+    $defaultHeroImages = [
+        'home-owner' => '/assets/img/img-0.jpg',
+        'architect-designer' => '/assets/hero02.jpg',
+        'electrician-builder' => '/assets/img/img-1.jpg',
+        'wholesaler' => '/assets/img/img-2.jpg',
+    ];
+    $heroImage = $meta->get('hero.image', 0, $defaultHeroImages[$page->slug] ?? '/assets/img/img-0.jpg');
+@endphp
+
 @section('content')
 <main class="audience-main" id="audienceRoot">
   <section class="audience-hero" {!! cms_section_attr('hero') !!}>
-    <div class="wrap">
-      <h1 class="h2"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title')) !!}</h1>
+    <div class="audience-hero-media" aria-hidden="true">
+      <img src="{{ media_url($heroImage) }}" alt="" loading="eager" decoding="async">
+    </div>
+    <div class="audience-hero-copy">
+      <h1 class="h2 audience-hero-title"{!! cms_style($meta, 'hero.title') !!}>
+        {!! accent_html($meta->get('hero.title')) !!}</h1>
       @if ($leads)
-        <div class="audience-lead">
+        <div class="audience-hero-lead">
           @foreach ($leads as $index => $paragraph)
             <p{!! cms_style($meta, 'hero.lead', $index) !!}>{!! linkify_emails(accent_html($paragraph)) !!}</p>
           @endforeach

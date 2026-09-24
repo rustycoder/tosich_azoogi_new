@@ -142,7 +142,7 @@ class SectionSpacingTest extends TestCase
             'casambi' => ['assets/css/casambi.css', '.cb-hero', false, true],
             'silvair' => ['assets/css/silvair.css', '.sv-hero', false, true],
             'dali centre' => ['assets/css/dali-centre.css', '.dc-hero', false, true],
-            'audience' => ['assets/css/audience.css', '.audience-hero', true, false],
+            'audience' => ['assets/css/audience.css', '.audience-hero', false, true],
             'calculator' => ['assets/css/led_calculator.css', '.calc-hero', false, true],
             'contact' => ['assets/css/style_demo.css', '.contact-hero', false, true],
         ];

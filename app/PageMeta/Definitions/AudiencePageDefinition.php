@@ -25,6 +25,7 @@ abstract class AudiencePageDefinition implements PageDefinition
     public function fields(): array
     {
         return [
+            Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
             Field::text('hero.eyebrow', 'Eyebrow', typographic: false),
             Field::text('hero.title', 'Title', typographic: false),
             Field::textarea('hero.lead', 'Lead paragraph', true, 'hero.lead', typographic: false),
@@ -48,7 +49,15 @@ abstract class AudiencePageDefinition implements PageDefinition
             ? str_replace($titleAccent, '{'.$titleAccent.'}', $title)
             : $title;
 
+        $heroImages = [
+            'home-owner' => '/assets/img/img-0.jpg',
+            'architect-designer' => '/assets/hero02.jpg',
+            'electrician-builder' => '/assets/img/img-1.jpg',
+            'wholesaler' => '/assets/img/img-2.jpg',
+        ];
+
         $rows = [
+            ['key' => 'hero.image', 'sort_order' => 0, 'value' => $heroImages[$this->slug()] ?? '/assets/img/img-0.jpg'],
             ['key' => 'hero.eyebrow', 'sort_order' => 0, 'value' => (string) ($audience['eyebrow'] ?? '')],
             ['key' => 'hero.title', 'sort_order' => 0, 'value' => $titleValue],
         ];

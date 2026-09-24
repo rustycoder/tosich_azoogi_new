@@ -263,29 +263,21 @@ class PageTest extends TestCase
         );
     }
 
-    public function test_audience_hero_does_not_force_a_tall_empty_band(): void
+    public function test_audience_hero_uses_standard_hero_banner(): void
     {
         $css = file_get_contents(public_path('assets/css/audience.css'));
 
         $this->assertNotFalse($css);
-        $this->assertDoesNotMatchRegularExpression(
+        $this->assertMatchesRegularExpression(
             '/\.audience-hero\s*\{[^}]*min-height:\s*var\(--hero-min\)/s',
             $css,
         );
         $this->assertMatchesRegularExpression(
-            '/\.audience-hero\s*\{[^}]*padding:\s*var\(--hero-pad-y-top\)\s+0\s+0\s*;/s',
+            '/\.audience-hero-media\s*\{[^}]*position:\s*absolute/s',
             $css,
         );
         $this->assertMatchesRegularExpression(
-            '/\.audience-hero \.wrap\s*\{[^}]*padding-bottom:\s*0/s',
-            $css,
-        );
-        $this->assertMatchesRegularExpression(
-            '/\.audience-hero \.h2:last-child\s*\{[^}]*margin-bottom:\s*0/s',
-            $css,
-        );
-        $this->assertMatchesRegularExpression(
-            '/\.audience-cards-wrap\.card-in\s*\{[^}]*padding-top:\s*0/s',
+            '/\.audience-hero-copy\s*\{[^}]*padding:\s*var\(--hero-pad-y-top\)/s',
             $css,
         );
         $this->assertMatchesRegularExpression(
@@ -308,12 +300,12 @@ class PageTest extends TestCase
         $this->get('/electrician-builder')
             ->assertOk()
             ->assertSee('Electricians', false)
-            ->assertDontSee('class="audience-lead"', false);
+            ->assertDontSee('class="audience-hero-lead"', false);
 
         $this->get('/wholesaler')
             ->assertOk()
             ->assertSee('Wholesaler', false)
-            ->assertDontSee('class="audience-lead"', false);
+            ->assertDontSee('class="audience-hero-lead"', false);
     }
 
     public function test_wholesaler_page_does_not_include_the_last_off_spec_card(): void
