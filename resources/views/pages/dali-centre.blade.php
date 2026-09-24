@@ -39,9 +39,17 @@
       <img src="{{ media_url($meta->get('hero.image')) }}" alt="" loading="eager">
     </div>
     <div class="dc-hero-copy">
-      <h1 class="dc-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title')) !!}</h1>
-      <p class="dc-lead"{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($meta->get('hero.lead')) !!}</p>
-      <p class="dc-intro" {!! cms_section_attr('intro') !!}{!! cms_style($meta, 'intro.body') !!}>{!! accent_html($meta->get('intro.body')) !!}</p>
+      <h1 class="dc-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title', 0, 'Azoogi DALI Centre: {Smart DALI-2 Management}')) !!}</h1>
+      @php
+        $dcLead = $meta->get('hero.lead', 0, 'Centralised DALI-2 lighting management and emergency testing built for Australian compliance and building efficiency.');
+        $dcIntro = $meta->get('intro.body', 0, 'Complete control, real-time diagnostic reporting, and scheduled testing across commercial installations.');
+      @endphp
+      @if (trim($dcLead) !== '')
+        <p class="dc-lead"{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($dcLead) !!}</p>
+      @endif
+      @if (trim($dcIntro) !== '')
+        <p class="dc-intro" {!! cms_section_attr('intro') !!}{!! cms_style($meta, 'intro.body') !!}>{!! accent_html($dcIntro) !!}</p>
+      @endif
     </div>
   </section>
 

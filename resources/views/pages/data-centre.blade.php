@@ -38,8 +38,13 @@
       @endif
     </div>
     <div class="dc-hero-copy">
-      <h1{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title')) !!}</h1>
-      <p{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($meta->get('hero.lead')) !!}</p>
+      <h1{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title', 0, 'Data Centre {Lighting & Design Services}')) !!}</h1>
+      @php
+        $dcLead = $meta->get('hero.lead', 0, 'Engineered LED lighting systems designed specifically for mission-critical white and grey spaces, high thermal loads, and Tier 1 reliability.');
+      @endphp
+      @if (trim($dcLead) !== '')
+        <p{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($dcLead) !!}</p>
+      @endif
     </div>
   </section>
 

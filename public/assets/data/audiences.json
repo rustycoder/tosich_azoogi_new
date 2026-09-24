@@ -6,7 +6,10 @@
       "eyebrow": "",
       "title": "For a Home Owner",
       "titleAccent": "Home Owner",
-      "lead": [],
+      "lead": [
+        "Explore high-quality LED lighting solutions tailored for Australian homes — combining style, energy efficiency, and lasting performance.",
+        "From warm ambient living spaces to precision outdoor illumination, we provide fixtures that bring beauty and comfort to every room."
+      ],
       "cards": [
         {
           "heading": "Who We Are",
@@ -97,7 +100,10 @@
       "eyebrow": "",
       "title": "For Electricians and Builders",
       "titleAccent": "Electricians and Builders",
-      "lead": [],
+      "lead": [
+        "At Azoogi, we know that the right lighting solution doesn’t just look great – it makes your job faster, simpler, and more profitable. Engineered for straightforward installation and dependable performance on every build.",
+        "From high-end residential projects to large-scale commercial fit-outs, get expert engineering advice and rapid nationwide trade supply."
+      ],
       "cards": [
         {
           "heading": "Install With Ease, Build With Confidence",
@@ -147,7 +153,10 @@
       "eyebrow": "",
       "title": "For a Wholesaler",
       "titleAccent": "Wholesaler",
-      "lead": [],
+      "lead": [
+        "Stock with confidence. Fast quotes, protected trade margins, and dependable nationwide supply for leading electrical distributors.",
+        "From high-turnover LED strips to commercial-grade drivers and architectural downlights, partner with an Australian supplier built to support your trade counter."
+      ],
       "cards": [
         {
           "heading": "Stock With Confidence, Sell With Ease",

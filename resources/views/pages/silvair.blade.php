@@ -49,9 +49,17 @@
           @endif
         </div>
       @endif
-      <h1 class="sv-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title')) !!}</h1>
-      <p class="sv-lead"{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($meta->get('hero.lead')) !!}</p>
-      <p class="sv-intro" {!! cms_section_attr('intro') !!}{!! cms_style($meta, 'intro.body') !!}>{!! accent_html($meta->get('intro.body')) !!}</p>
+      <h1 class="sv-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title', 0, 'Silvair Bluetooth {Qualified Mesh Lighting}')) !!}</h1>
+      @php
+        $svLead = $meta->get('hero.lead', 0, 'Commercial-grade Bluetooth mesh lighting control platform engineered for large-scale enterprise and industrial environments.');
+        $svIntro = $meta->get('intro.body', 0, 'Silvair delivers wire-free reliability, predictive maintenance, and energy analytics compliant with global open standards.');
+      @endphp
+      @if (trim($svLead) !== '')
+        <p class="sv-lead"{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($svLead) !!}</p>
+      @endif
+      @if (trim($svIntro) !== '')
+        <p class="sv-intro" {!! cms_section_attr('intro') !!}{!! cms_style($meta, 'intro.body') !!}>{!! accent_html($svIntro) !!}</p>
+      @endif
     </div>
   </section>
 

@@ -21,8 +21,11 @@
     <div class="contact-hero-copy">
       <h1{!! cms_style($meta, 'hero.title') !!}>
         {!! accent_html($meta->get('hero.title', 0, 'Get in {Touch}')) !!}</h1>
-      @if ($meta->get('hero.lead'))
-        <p class="contact-hero-lead"{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($meta->get('hero.lead')) !!}</p>
+      @php
+        $contactLead = $meta->get('hero.lead', 0, 'Have a project in mind, need custom LED engineering, or looking for trade support? We’re here to help.');
+      @endphp
+      @if ($contactLead !== '')
+        <p class="contact-hero-lead"{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($contactLead) !!}</p>
       @endif
     </div>
   </section>

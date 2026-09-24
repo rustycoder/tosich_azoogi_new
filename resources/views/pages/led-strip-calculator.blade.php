@@ -24,8 +24,11 @@
     <div class="calc-hero-copy">
       <h1 class="h2 calc-hero-title"{!! cms_style($meta, 'hero.title') !!}>
         {!! accent_html($meta->get('hero.title', 0, 'LED Strip {Calculator}')) !!}</h1>
-      @if ($meta->get('hero.lead'))
-        <p class="calc-hero-lead"{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($meta->get('hero.lead')) !!}</p>
+      @php
+        $calcLead = $meta->get('hero.lead', 0, 'Azoogi’s versatile range of interior and exterior LED Strip Lights is perfect for both residential and commercial spaces. With smart control options and custom configurations, creating the ideal lighting solution has never been easier. Use our simple selector tools to build your perfect LED strip setup today.');
+      @endphp
+      @if ($calcLead !== '')
+        <p class="calc-hero-lead"{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($calcLead) !!}</p>
       @endif
       @if ($meta->get('hero.cta.label'))
         <div class="calc-hero-actions">

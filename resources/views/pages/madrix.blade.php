@@ -43,8 +43,13 @@
       @endforeach
     </div>
     <div class="mx-hero-copy" {!! cms_section_attr('hero') !!}>
-      <h1{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title')) !!}</h1>
-      <p{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($meta->get('hero.lead')) !!}</p>
+      <h1{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title', 0, 'MADRIX {Advanced LED Control Solutions}')) !!}</h1>
+      @php
+        $mxLead = $meta->get('hero.lead', 0, 'Professional pixel mapping and 2D/3D lighting control software and hardware for creative architectural installations.');
+      @endphp
+      @if (trim($mxLead) !== '')
+        <p{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($mxLead) !!}</p>
+      @endif
       @if (count($slides) > 1)
         <div class="mx-hero-controls">
           <button type="button" class="mx-hero-nav mx-hero-nav--prev" aria-label="Previous image">

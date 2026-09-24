@@ -22,9 +22,9 @@
       <img src="{{ media_url($meta->get('hero.image')) }}" alt="" loading="eager">
     </div>
     <div class="projects-hero-copy">
-      <h1{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title')) !!}</h1>
+      <h1{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title', 0, 'Projects Powered by {Azoogi}')) !!}</h1>
       <p class="projects-hero-lead"{!! cms_style($meta, 'hero.body') !!}>
-        {!! linkify_emails(accent_html($meta->get('hero.body'))) !!}
+        {!! linkify_emails(accent_html($meta->get('hero.body', 0, 'From a new strip light in your kitchen to landmark Tier-1 developments — we deliver LED lighting solutions for projects of all sizes. Whether it’s a heritage restoration, boutique hospitality venue, residential upgrade, or a large-scale commercial build, our in-house engineering and assembly line ensure precision, speed, efficiency and quality.'))) !!}
       </p>
     </div>
   </section>

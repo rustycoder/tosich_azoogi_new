@@ -54,9 +54,17 @@
                         @endif
                     </div>
                 @endif
-                <h1 class="cb-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title')) !!}</h1>
-                <p class="cb-lead"{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($meta->get('hero.lead')) !!}</p>
-                <p class="cb-intro" {!! cms_section_attr('intro') !!}{!! cms_style($meta, 'intro.body') !!}>{!! accent_html($meta->get('intro.body')) !!}</p>
+                <h1 class="cb-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title', 0, 'Casambi Wireless {Smart Ecosystems}')) !!}</h1>
+                @php
+                  $cbLead = $meta->get('hero.lead', 0, 'Specification-grade Bluetooth Low Energy mesh lighting controls for seamless commercial and high-end residential integration.');
+                  $cbIntro = $meta->get('intro.body', 0, 'Casambi provides a robust, scalable wireless solution without the complexity of traditional control wiring.');
+                @endphp
+                @if (trim($cbLead) !== '')
+                  <p class="cb-lead"{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($cbLead) !!}</p>
+                @endif
+                @if (trim($cbIntro) !== '')
+                  <p class="cb-intro" {!! cms_section_attr('intro') !!}{!! cms_style($meta, 'intro.body') !!}>{!! accent_html($cbIntro) !!}</p>
+                @endif
             </div>
         </section>
 

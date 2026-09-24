@@ -30,8 +30,13 @@
       </div>
       <div class="ai-hero-copy">
         <h1{!! cms_style($meta, 'hero.title') !!}>
-          {!! accent_html($meta->get('hero.title')) !!}</h1>
-        <p{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($meta->get('hero.lead')) !!}</p>
+          {!! accent_html($meta->get('hero.title', 0, 'Engineered {for retail} and high-spec environments')) !!}</h1>
+        @php
+          $aiLead = $meta->get('hero.lead', 0, 'Adaptive spectrum tuning and precision optical design crafted for modern retail, gallery, and premium architectural spaces.');
+        @endphp
+        @if (trim($aiLead) !== '')
+          <p{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($aiLead) !!}</p>
+        @endif
       </div>
     </section>
 

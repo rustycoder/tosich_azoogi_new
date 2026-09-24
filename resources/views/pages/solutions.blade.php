@@ -26,13 +26,17 @@
       <img src="{{ media_url($meta->get('hero.image')) }}" alt="" loading="eager">
     </div>
     <div class="solutions-hero-copy">
-      <h1 class="h2 solutions-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title')) !!}</h1>
+      <h1 class="h2 solutions-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title', 0, 'Smart Lighting &amp; {Intelligent Controls}')) !!}</h1>
       <div class="solutions-copy">
-        @if (trim($meta->get('hero.lead')) !== '')
-          <p class="solutions-lead"{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($meta->get('hero.lead')) !!}</p>
+        @php
+          $solutionsLead = $meta->get('hero.lead', 0, 'Smart control architectures and precision LED hardware designed for seamless integration across modern residential, commercial, and industrial spaces.');
+          $solutionsSub = $meta->get('hero.sub', 0, 'Explore cutting-edge ecosystems from Casambi, Silvair, and DALI-2 alongside bespoke sector engineering.');
+        @endphp
+        @if (trim($solutionsLead) !== '')
+          <p class="solutions-lead"{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($solutionsLead) !!}</p>
         @endif
-        @if (trim($meta->get('hero.sub')) !== '')
-          <p class="solutions-sub"{!! cms_style($meta, 'hero.sub') !!}>{!! accent_html($meta->get('hero.sub')) !!}</p>
+        @if (trim($solutionsSub) !== '')
+          <p class="solutions-sub"{!! cms_style($meta, 'hero.sub') !!}>{!! accent_html($solutionsSub) !!}</p>
         @endif
       </div>
     </div>
