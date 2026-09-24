@@ -93,7 +93,7 @@
 
 /* —— Bands —— */
 .ai-band {
-    padding: var(--section-y) 0;
+    padding: 50px 0 0 0 ;
 }
 
 .ai-band--soft {
@@ -268,11 +268,11 @@
 
 /* —— Row heads —— */
 .ai-row-head {
-    display: grid;
     grid-template-columns: 1.1fr 0.9fr;
     gap: clamp(20px, 3vw, 40px);
     align-items: end;
     margin-bottom: 28px;
+    text-align: center;
 }
 
 .ai-row-head .kicker {
@@ -305,7 +305,7 @@
 /* —— Insights (sticky stack — same engine as homepage / audience) —— */
 .ai-insights.card-in {
     text-align: left;
-    padding: var(--section-y) 0;
+    padding: 80px 0 50px 0;
     background: var(--bg);
 }
 
@@ -314,7 +314,7 @@
 }
 
 .ai-insights .wrap-sm {
-    max-width: 1320px;
+    max-width: 1200px;
 }
 
 .ai-insights #cards {
@@ -326,11 +326,12 @@
 .ai-insights .card__content {
     background: var(--bg-2);
     max-height: var(--card-height);
+    min-height: 40svh;
 }
 
 @media (min-width: 1400px) {
     .ai-insights .wrap-sm {
-        max-width: 1440px;
+        max-width: 1200px;
     }
 }
 
@@ -472,7 +473,7 @@
     inset: 0;
     background: linear-gradient(100deg,
             rgba(0, 0, 0, 0.78) 0%,
-            rgba(0, 0, 0, 0.4) 55%,
+            rgba(0, 0, 0, 0.4) 85%,
             rgba(0, 0, 0, 0.25) 100%);
 }
 
@@ -502,10 +503,11 @@
     line-height: 1.1;
     letter-spacing: -0.02em;
     color: #fff;
+    text-align: center;
 }
 
 .ai-cct-inner h2 span {
-    color: #8cc63f;
+    color: var(--accent);
 }
 
 .ai-cct-inner p {
@@ -513,6 +515,7 @@
     font-size: var(--fs-body);
     line-height: 1.55;
     color: rgba(255, 255, 255, 0.82);
+    text-align: center;
 }
 
 /* —— Space —— */
@@ -717,8 +720,8 @@
 
     .ai-cct::after {
         background: linear-gradient(180deg,
-                rgba(0, 0, 0, 0.55) 0%,
-                rgba(0, 0, 0, 0.78) 100%);
+                rgba(0, 0, 0, 0.85) 0%,
+                rgba(0, 0, 0, 0.85) 100%);
     }
 
     .ai-cta {

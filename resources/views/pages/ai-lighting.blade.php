@@ -85,15 +85,16 @@
     <section class="ai-insights card-in" {!! cms_section_attr('insights') !!}>
       <div class="wrap-sm">
         <div class="ai-row-head">
-          <div>
+          <div style="text-align:center;">
             <h2{!! cms_style($meta, 'insights.heading') !!}>
               {!! accent_html($meta->get('insights.heading'), $meta->get('insights.heading_accent')) !!}</h2>
+              <p{!! cms_style($meta, 'insights.lead') !!}>{{ $meta->get('insights.lead') }}</p>
           </div>
-          <p{!! cms_style($meta, 'insights.lead') !!}>{{ $meta->get('insights.lead') }}</p>
+          
         </div>
 
         <div class="container max-width-adaptive-md" style="padding-bottom:40px">
-          <ul id="cards" style="--numcards: {{ count($insights) }}">
+          <ul id="cards" class="ai-cards" style="--numcards: {{ count($insights) }}">
             @foreach ($insights as $item)
               <li class="card-main" id="card_{{ $loop->iteration }}" style="--index: {{ $loop->iteration }}">
                 <div class="card__content">
@@ -130,8 +131,9 @@
           <div>
             <h2{!! cms_style($meta, 'space.heading') !!}>
               {!! accent_html($meta->get('space.heading'), $meta->get('space.heading_accent')) !!}</h2>
+              <p{!! cms_style($meta, 'space.lead') !!}>{{ $meta->get('space.lead') }}</p>
           </div>
-          <p{!! cms_style($meta, 'space.lead') !!}>{{ $meta->get('space.lead') }}</p>
+          
         </div>
 
         <div class="ai-space">
