@@ -442,57 +442,33 @@ class DashboardTest extends TestCase
     }
 
     #[DataProvider('newPageTypographyProvider')]
-    public function test_new_pages_accept_font_size_and_alignment(string $slug): void
+    public function test_new_pages_do_not_expose_font_size_and_alignment_in_cms(string $slug): void
     {
         $this->seed([AdminUserSeeder::class, PageSeeder::class]);
         $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
         $page = Page::query()->where('slug', $slug)->firstOrFail();
-        $meta = PageMeta::query()->where('page_id', $page->id)->where('key', 'why.heading')->firstOrFail();
 
         $this->actingAs($admin)
             ->get(route('dashboard.pages.edit', $page))
             ->assertOk()
-            ->assertSee('Font size', false)
-            ->assertSee('Alignment', false);
-
-        $this->actingAs($admin)
-            ->put(route('dashboard.pages.update', $page), [
-                'title' => $page->title,
-                'meta_description' => $page->meta_description,
-                'status' => Status::Active->value,
-                'meta' => [
-                    $meta->id => [
-                        'value' => $meta->value,
-                        'font_size' => '28px',
-                        'text_align' => 'left',
-                    ],
-                ],
-            ])
-            ->assertRedirect();
-
-        $this->assertSame('28px', $meta->fresh()->font_size);
-        $this->assertSame('left', $meta->fresh()->text_align);
-
-        $this->get('/'.$slug)
-            ->assertOk()
-            ->assertSee('style="font-size: 28px; text-align: left"', false);
+            ->assertDontSee('<label>Font size</label>', false)
+            ->assertDontSee('<label>Alignment</label>', false);
     }
 
-    public function test_hero_title_and_intro_fields_do_not_expose_typography_options_in_dashboard(): void
+    public function test_dashboard_page_editor_does_not_expose_typography_options(): void
     {
         $this->seed([AdminUserSeeder::class, PageSeeder::class]);
         $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
 
         foreach (['about', 'products', 'projects', 'contact', 'led-strip-calculator', 'dali-centre', 'data-centre', 'ai-lighting', 'madrix', 'solutions', 'casambi', 'silvair'] as $slug) {
             $page = Page::query()->where('slug', $slug)->firstOrFail();
-            $heroMeta = PageMeta::query()->where('page_id', $page->id)->whereIn('key', ['hero.title', 'slide.title', 'hero.lead', 'hero.body', 'intro.body'])->get();
 
-            $response = $this->actingAs($admin)->get(route('dashboard.pages.edit', $page))->assertOk();
-
-            foreach ($heroMeta as $meta) {
-                $response->assertDontSee('name="meta['.$meta->id.'][font_size]"', false);
-                $response->assertDontSee('name="meta['.$meta->id.'][text_align]"', false);
-            }
+            $this->actingAs($admin)
+                ->get(route('dashboard.pages.edit', $page))
+                ->assertOk()
+                ->assertDontSee('<label>Font size</label>', false)
+                ->assertDontSee('<label>Alignment</label>', false)
+                ->assertDontSee('dash-type-row', false);
         }
     }
 

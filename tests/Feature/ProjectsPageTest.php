@@ -216,8 +216,8 @@ class ProjectsPageTest extends TestCase
         $this->actingAs($admin)
             ->get(route('dashboard.pages.edit', $page))
             ->assertOk()
-            ->assertSee('Font size', false)
-            ->assertSee('Alignment', false);
+            ->assertDontSee('<label>Font size</label>', false)
+            ->assertDontSee('<label>Alignment</label>', false);
 
         $this->actingAs($admin)
             ->put(route('dashboard.pages.update', $page), [

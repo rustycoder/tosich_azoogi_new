@@ -15,20 +15,20 @@ final class Field
         public ?string $group = null,
         public array $options = [],
         public string $hint = '',
-        public bool $typographic = true,
+        public bool $typographic = false,
     ) {}
 
-    public static function text(string $key, string $label, bool $repeatable = false, ?string $group = null, bool $typographic = true): self
+    public static function text(string $key, string $label, bool $repeatable = false, ?string $group = null, bool $typographic = false): self
     {
         return new self($key, $label, FieldType::Text, $repeatable, $group, typographic: $typographic);
     }
 
-    public static function textarea(string $key, string $label, bool $repeatable = false, ?string $group = null, bool $typographic = true): self
+    public static function textarea(string $key, string $label, bool $repeatable = false, ?string $group = null, bool $typographic = false): self
     {
         return new self($key, $label, FieldType::Textarea, $repeatable, $group, typographic: $typographic);
     }
 
-    public static function html(string $key, string $label, bool $repeatable = false, ?string $group = null, bool $typographic = true): self
+    public static function html(string $key, string $label, bool $repeatable = false, ?string $group = null, bool $typographic = false): self
     {
         return new self($key, $label, FieldType::Html, $repeatable, $group, typographic: $typographic);
     }
