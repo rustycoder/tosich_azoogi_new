@@ -36,7 +36,7 @@ class OutlineAccentTest extends TestCase
             'dali-centre' => ['/dali-centre', ['<span>Smart DALI-2 Management</span>']],
             'projects' => ['/projects', ['<span>Azoogi</span>']],
             'products' => ['/products', ['<span>Range</span>']],
-            'contact' => ['/contact', ['<span>hear</span>']],
+            'contact' => ['/contact', ['<span>Touch</span>', '<span>hear</span>']],
             'about' => ['/about', ['<span>Zero Compromise.</span>', '<span>Azoogi</span>', '<span>Reach</span>', '<span>Path</span>']],
             'ai-lighting' => ['/ai-lighting', ['<span>for retail</span>', '<span>Four hard advantages.</span>', '<span>spectrum</span>', '<span>analysis</span>', '<span>temperature</span>', '<span>management</span>']],
             'data-centre' => ['/data-centre', ['<span>Lighting &amp; Design Services</span>', '<span>White &amp; Grey Spaces</span>', '<span>Data Hall Conditions</span>', '<span>Building Automation</span>', '<span>Emergency Lighting</span>', '<span>Across All Zones</span>', '<span>Data Centre Project?</span>']],

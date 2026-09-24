@@ -8,11 +8,25 @@
 
 @section('chrome', 'full')
 
-@section('topbarClass', 'solid')
+@section('topbarClass', '')
 @section('logo', 'logo_white.png')
 
 @section('content')
 <main class="contact-main">
+
+  <section class="contact-hero" {!! cms_section_attr('hero') !!}>
+    <div class="contact-hero-media" aria-hidden="true">
+      <img src="{{ media_url($meta->get('hero.image', 0, '/assets/imgcontact.jpeg')) }}" alt="" loading="eager" decoding="async">
+    </div>
+    <div class="contact-hero-copy">
+      <h1{!! cms_style($meta, 'hero.title') !!}>
+        {!! accent_html($meta->get('hero.title', 0, 'Get in {Touch}')) !!}</h1>
+      @if ($meta->get('hero.lead'))
+        <p class="contact-hero-lead"{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
+      @endif
+    </div>
+  </section>
+
   <div class="wrap contact-wrap">
     <div class="contact-grid">
 
@@ -52,7 +66,7 @@
       <div class="contact-grid-gap" aria-hidden="true"></div>
 
       <div class="contact-form-panel" {!! cms_section_attr('form') !!}>
-        <h1 class="h2 contact-title"{!! cms_style($meta, 'form.title') !!}>{!! accent_html($meta->get('form.title')) !!}</h1>
+        <h2 class="h2 contact-title"{!! cms_style($meta, 'form.title') !!}>{!! accent_html($meta->get('form.title')) !!}</h2>
         <p class="contact-lead"{!! cms_style($meta, 'form.lead') !!}>{{ $meta->get('form.lead') }}</p>
 
         <form class="contact-form" id="contactForm" action="{{ route('contact.submit') }}" method="post" novalidate>
@@ -89,7 +103,31 @@
 @endsection
 
 @push('scripts')
+@verbatim
 <script>
-  document.getElementById('topbar').classList.add('solid');
+  const topbar = document.getElementById('topbar');
+  let lastScrolled = null;
+
+  const onScroll = () => {
+    const isScrolled = window.scrollY > 40;
+    if (isScrolled !== lastScrolled) {
+      topbar?.classList.toggle('solid', isScrolled);
+      lastScrolled = isScrolled;
+      if (typeof updateLogos === 'function') updateLogos();
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal, .contact-hero').forEach(el => io.observe(el));
 </script>
+@endverbatim
 @endpush

@@ -3,6 +3,7 @@
 namespace App\PageMeta\Definitions;
 
 use App\PageMeta\Field;
+use App\PageMeta\ImageSize;
 use App\PageMeta\PageDefinition;
 
 class ContactDefinition implements PageDefinition
@@ -30,6 +31,9 @@ class ContactDefinition implements PageDefinition
     public function fields(): array
     {
         return [
+            Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
+            Field::text('hero.title', 'Hero title'),
+            Field::textarea('hero.lead', 'Hero intro'),
             Field::text('hours.label', 'Hours label'),
             Field::textarea('hours.value', 'Hours'),
             Field::text('address.label', 'Address label'),
@@ -54,6 +58,9 @@ class ContactDefinition implements PageDefinition
     public function seed(): array
     {
         return [
+            ['key' => 'hero.image', 'sort_order' => 0, 'value' => '/assets/imgcontact.jpeg'],
+            ['key' => 'hero.title', 'sort_order' => 0, 'value' => 'Get in {Touch}'],
+            ['key' => 'hero.lead', 'sort_order' => 0, 'value' => 'Have a project in mind, need custom LED engineering, or looking for trade support? We’re here to help.'],
             ['key' => 'hours.label', 'sort_order' => 0, 'value' => 'Office Hours'],
             ['key' => 'hours.value', 'sort_order' => 0, 'value' => "08:00AM – 04:00PM\nMonday To Friday"],
             ['key' => 'address.label', 'sort_order' => 0, 'value' => 'Address'],
