@@ -385,7 +385,7 @@ class DashboardTest extends TestCase
         $this->seed([AdminUserSeeder::class, PageSeeder::class]);
         $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
         $page = Page::query()->where('slug', 'about')->firstOrFail();
-        $meta = PageMeta::query()->where('page_id', $page->id)->where('key', 'hero.title')->firstOrFail();
+        $meta = PageMeta::query()->where('page_id', $page->id)->where('key', 'why.heading')->firstOrFail();
 
         $this->actingAs($admin)
             ->put(route('dashboard.pages.update', $page), [
@@ -447,7 +447,7 @@ class DashboardTest extends TestCase
         $this->seed([AdminUserSeeder::class, PageSeeder::class]);
         $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
         $page = Page::query()->where('slug', $slug)->firstOrFail();
-        $meta = PageMeta::query()->where('page_id', $page->id)->where('key', 'hero.title')->firstOrFail();
+        $meta = PageMeta::query()->where('page_id', $page->id)->where('key', 'why.heading')->firstOrFail();
 
         $this->actingAs($admin)
             ->get(route('dashboard.pages.edit', $page))
@@ -476,6 +476,24 @@ class DashboardTest extends TestCase
         $this->get('/'.$slug)
             ->assertOk()
             ->assertSee('style="font-size: 28px; text-align: left"', false);
+    }
+
+    public function test_hero_title_and_intro_fields_do_not_expose_typography_options_in_dashboard(): void
+    {
+        $this->seed([AdminUserSeeder::class, PageSeeder::class]);
+        $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
+
+        foreach (['about', 'products', 'projects', 'contact', 'led-strip-calculator', 'dali-centre', 'data-centre', 'ai-lighting', 'madrix', 'solutions', 'casambi', 'silvair'] as $slug) {
+            $page = Page::query()->where('slug', $slug)->firstOrFail();
+            $heroMeta = PageMeta::query()->where('page_id', $page->id)->whereIn('key', ['hero.title', 'slide.title', 'hero.lead', 'hero.body', 'intro.body'])->get();
+
+            $response = $this->actingAs($admin)->get(route('dashboard.pages.edit', $page))->assertOk();
+
+            foreach ($heroMeta as $meta) {
+                $response->assertDontSee('name="meta['.$meta->id.'][font_size]"', false);
+                $response->assertDontSee('name="meta['.$meta->id.'][text_align]"', false);
+            }
+        }
     }
 
     public function test_staff_can_create_and_soft_delete_projects(): void

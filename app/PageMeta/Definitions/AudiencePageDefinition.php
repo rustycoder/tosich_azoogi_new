@@ -25,9 +25,9 @@ abstract class AudiencePageDefinition implements PageDefinition
     public function fields(): array
     {
         return [
-            Field::text('hero.eyebrow', 'Eyebrow'),
-            Field::text('hero.title', 'Title'),
-            Field::textarea('hero.lead', 'Lead paragraph', true, 'hero.lead'),
+            Field::text('hero.eyebrow', 'Eyebrow', typographic: false),
+            Field::text('hero.title', 'Title', typographic: false),
+            Field::textarea('hero.lead', 'Lead paragraph', true, 'hero.lead', typographic: false),
             Field::text('card.heading', 'Card heading', true, 'card'),
             Field::textarea('card.body', 'Card body', true, 'card'),
             Field::image('card.image', 'Card image', true, 'card', ImageSize::Card),

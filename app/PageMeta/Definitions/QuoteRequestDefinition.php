@@ -30,9 +30,9 @@ class QuoteRequestDefinition implements PageDefinition
     public function fields(): array
     {
         return [
-            Field::text('intro.kicker', 'Kicker'),
-            Field::text('intro.title', 'Title'),
-            Field::textarea('intro.body', 'Intro'),
+            Field::text('intro.kicker', 'Kicker', typographic: false),
+            Field::text('intro.title', 'Title', typographic: false),
+            Field::textarea('intro.body', 'Intro', typographic: false),
             Field::text('drawer.trigger_label', 'Header button label'),
             Field::text('drawer.title', 'Drawer title'),
             Field::text('drawer.close', 'Drawer close'),

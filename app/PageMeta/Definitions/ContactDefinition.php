@@ -32,8 +32,8 @@ class ContactDefinition implements PageDefinition
     {
         return [
             Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
-            Field::text('hero.title', 'Hero title'),
-            Field::textarea('hero.lead', 'Hero intro'),
+            Field::text('hero.title', 'Hero title', typographic: false),
+            Field::textarea('hero.lead', 'Hero intro', typographic: false),
             Field::text('hours.label', 'Hours label'),
             Field::textarea('hours.value', 'Hours'),
             Field::text('address.label', 'Address label'),

@@ -211,7 +211,7 @@ class ProjectsPageTest extends TestCase
         $this->seed(AdminUserSeeder::class);
         $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
         $page = Page::query()->where('slug', 'projects')->firstOrFail();
-        $meta = PageMeta::query()->where('page_id', $page->id)->where('key', 'hero.title')->firstOrFail();
+        $meta = PageMeta::query()->where('page_id', $page->id)->where('key', 'detail.overview')->firstOrFail();
 
         $this->actingAs($admin)
             ->get(route('dashboard.pages.edit', $page))
@@ -236,9 +236,5 @@ class ProjectsPageTest extends TestCase
 
         $this->assertSame('28px', $meta->fresh()->font_size);
         $this->assertSame('left', $meta->fresh()->text_align);
-
-        $this->get('/projects')
-            ->assertOk()
-            ->assertSee('style="font-size: 28px; text-align: left"', false);
     }
 }

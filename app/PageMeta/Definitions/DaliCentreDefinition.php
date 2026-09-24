@@ -34,7 +34,7 @@ class DaliCentreDefinition implements PageDefinition
             Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
             Field::textarea('hero.title', 'Hero title', typographic: false),
             Field::textarea('hero.lead', 'Hero lead', typographic: false),
-            Field::textarea('intro.body', 'Intro'),
+            Field::textarea('intro.body', 'Intro', typographic: false),
             Field::url('video.embed', 'YouTube URL'),
             Field::text('feature.heading', 'Diagram heading'),
             Field::textarea('feature.lead', 'Diagram lead'),

@@ -198,7 +198,7 @@ class QuoteRequestTest extends TestCase
         $this->seed(AdminUserSeeder::class);
         $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
         $page = Page::query()->where('slug', 'request-a-quote')->firstOrFail();
-        $meta = PageMeta::query()->where('page_id', $page->id)->where('key', 'intro.title')->firstOrFail();
+        $meta = PageMeta::query()->where('page_id', $page->id)->where('key', 'form.title')->firstOrFail();
 
         $this->actingAs($admin)
             ->put(route('dashboard.pages.update', $page), [

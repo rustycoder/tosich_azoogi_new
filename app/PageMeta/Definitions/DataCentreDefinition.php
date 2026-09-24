@@ -36,7 +36,7 @@ class DataCentreDefinition implements PageDefinition
             Field::textarea('hero.lead', 'Hero lead', typographic: false),
             Field::video('hero.video', 'Hero video'),
             Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
-            Field::textarea('intro.body', 'Intro'),
+            Field::textarea('intro.body', 'Intro', typographic: false),
             Field::text('intro.cta.primary.label', 'Primary CTA'),
             Field::url('intro.cta.primary.href', 'Primary href'),
             Field::text('intro.cta.secondary.label', 'Secondary CTA'),

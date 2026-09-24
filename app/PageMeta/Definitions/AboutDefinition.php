@@ -33,7 +33,7 @@ class AboutDefinition implements PageDefinition
         return [
             Field::textarea('hero.title', 'Hero title', typographic: false),
             Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
-            Field::textarea('intro.body', 'Intro'),
+            Field::textarea('intro.body', 'Intro', typographic: false),
             Field::text('intro.cta.label', 'Intro CTA'),
             Field::url('intro.cta.href', 'Intro CTA link'),
             Field::text('why.kicker', 'Why kicker'),

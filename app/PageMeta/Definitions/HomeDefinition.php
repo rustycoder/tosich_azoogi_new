@@ -34,9 +34,9 @@ class HomeDefinition implements PageDefinition
         $group = 'slide';
 
         return [
-            Field::text('slide.eyebrow', 'Slide eyebrow', $slide, $group),
-            Field::textarea('slide.title', 'Slide title', $slide, $group),
-            Field::textarea('slide.subtitle', 'Slide subtitle', $slide, $group),
+            Field::text('slide.eyebrow', 'Slide eyebrow', $slide, $group, typographic: false),
+            Field::textarea('slide.title', 'Slide title', $slide, $group, typographic: false),
+            Field::textarea('slide.subtitle', 'Slide subtitle', $slide, $group, typographic: false),
             Field::text('slide.cta.primary.label', 'Primary button', $slide, $group),
             Field::url('slide.cta.primary.href', 'Primary href', $slide, $group),
             Field::text('slide.cta.secondary.label', 'Secondary button', $slide, $group),
@@ -44,8 +44,8 @@ class HomeDefinition implements PageDefinition
             Field::select('slide.media.type', 'Media type', ['image' => 'Image', 'video' => 'Video'], $slide, $group),
             Field::image('slide.media.image', 'Slide image', $slide, $group, ImageSize::Hero),
             Field::video('slide.media.video', 'Slide video', $slide, $group),
-            Field::text('intro.kicker', 'Intro kicker'),
-            Field::text('intro.heading', 'Intro heading'),
+            Field::text('intro.kicker', 'Intro kicker', typographic: false),
+            Field::text('intro.heading', 'Intro heading', typographic: false),
             Field::text('values.kicker', 'Values kicker'),
             Field::textarea('values.heading', 'Values heading'),
             Field::text('values.card.title', 'Value title', true, 'values.card'),

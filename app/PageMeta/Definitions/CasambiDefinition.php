@@ -37,7 +37,7 @@ class CasambiDefinition implements PageDefinition
             Field::image('hero.logo', 'Casambi logo', hint: ImageSize::Logo),
             Field::textarea('hero.title', 'Hero title', typographic: false),
             Field::textarea('hero.lead', 'Hero lead', typographic: false),
-            Field::textarea('intro.body', 'Intro'),
+            Field::textarea('intro.body', 'Intro', typographic: false),
             Field::text('why.heading', 'Why heading'),
             Field::text('why.item.title', 'Why title', true, 'why.item'),
             Field::textarea('why.item.body', 'Why body', true, 'why.item'),
