@@ -8,7 +8,7 @@
 
 @section('chrome', 'full')
 
-@section('topbarClass', 'solid')
+@section('topbarClass', '')
 @section('logo', 'logo_white.png')
 
 @push('styles')
@@ -35,22 +35,31 @@
 <main class="dc-main">
 
   <section class="dc-hero" {!! cms_section_attr('hero') !!}>
-    <div class="wrap dc-hero-stack">
-      <h1 class="dc-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
+    <div class="dc-hero-media" aria-hidden="true">
+      <img src="{{ media_url($meta->get('hero.image')) }}" alt="" loading="eager">
+    </div>
+    <div class="dc-hero-copy">
+      <h1 class="dc-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title')) !!}</h1>
       <p class="dc-lead"{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
-      @if ($videoId !== '')
-        <div class="dc-hero-video" {!! cms_section_attr('video') !!}>
+      <p class="dc-intro" {!! cms_section_attr('intro') !!}{!! cms_style($meta, 'intro.body') !!}>{{ $meta->get('intro.body') }}</p>
+    </div>
+  </section>
+
+  @if ($videoId !== '')
+    <section class="dc-band dc-video-band" {!! cms_section_attr('video') !!}>
+      <div class="wrap">
+        <div class="dc-video reveal">
           <iframe
             src="https://www.youtube-nocookie.com/embed/{{ $videoId }}?rel=0&modestbranding=1"
             title="AZOOGI DALI Centre"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen
+            loading="lazy"
           ></iframe>
         </div>
-      @endif
-      <p class="dc-intro" {!! cms_section_attr('intro') !!}{!! cms_style($meta, 'intro.body') !!}>{{ $meta->get('intro.body') }}</p>
-    </div>
-  </section>
+      </div>
+    </section>
+  @endif
 
   <section class="dc-band dc-band--alt" {!! cms_section_attr('why') !!}>
     <div class="wrap">
@@ -171,7 +180,19 @@
 <script src="{{ versioned_asset('assets/js/product-preview.js') }}"></script>
 @verbatim
 <script>
-document.getElementById('topbar')?.classList.add('solid');
+const topbar = document.getElementById('topbar');
+let lastScrolled = null;
+
+const onScroll = () => {
+  const isScrolled = window.scrollY > 40;
+  if (isScrolled !== lastScrolled) {
+    topbar?.classList.toggle('solid', isScrolled);
+    lastScrolled = isScrolled;
+    if (typeof updateLogos === 'function') updateLogos();
+  }
+};
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 
 (function () {
   const io = new IntersectionObserver(function (entries) {

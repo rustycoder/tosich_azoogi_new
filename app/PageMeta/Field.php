@@ -15,21 +15,22 @@ final class Field
         public ?string $group = null,
         public array $options = [],
         public string $hint = '',
+        public bool $typographic = true,
     ) {}
 
-    public static function text(string $key, string $label, bool $repeatable = false, ?string $group = null): self
+    public static function text(string $key, string $label, bool $repeatable = false, ?string $group = null, bool $typographic = true): self
     {
-        return new self($key, $label, FieldType::Text, $repeatable, $group);
+        return new self($key, $label, FieldType::Text, $repeatable, $group, typographic: $typographic);
     }
 
-    public static function textarea(string $key, string $label, bool $repeatable = false, ?string $group = null): self
+    public static function textarea(string $key, string $label, bool $repeatable = false, ?string $group = null, bool $typographic = true): self
     {
-        return new self($key, $label, FieldType::Textarea, $repeatable, $group);
+        return new self($key, $label, FieldType::Textarea, $repeatable, $group, typographic: $typographic);
     }
 
-    public static function html(string $key, string $label, bool $repeatable = false, ?string $group = null): self
+    public static function html(string $key, string $label, bool $repeatable = false, ?string $group = null, bool $typographic = true): self
     {
-        return new self($key, $label, FieldType::Html, $repeatable, $group);
+        return new self($key, $label, FieldType::Html, $repeatable, $group, typographic: $typographic);
     }
 
     public static function url(string $key, string $label, bool $repeatable = false, ?string $group = null): self
@@ -57,6 +58,6 @@ final class Field
 
     public function isTypographic(): bool
     {
-        return in_array($this->type, [FieldType::Text, FieldType::Textarea, FieldType::Html], true);
+        return $this->typographic && in_array($this->type, [FieldType::Text, FieldType::Textarea, FieldType::Html], true);
     }
 }

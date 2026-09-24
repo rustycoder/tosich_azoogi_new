@@ -120,21 +120,12 @@ if (! function_exists('video_mime_type')) {
 }
 
 if (! function_exists('accent_html')) {
-    function accent_html(string $text, string $accent = ''): string
+    function accent_html(string $text): string
     {
-        if ($accent === '') {
-            $html = e($text);
-        } else {
-            $position = strpos($text, $accent);
+        $escaped = e($text);
+        $html = preg_replace('/\{([^}]+)\}/', '<span>$1</span>', $escaped);
 
-            $html = $position === false
-                ? e($text)
-                : e(substr($text, 0, $position))
-                    .'<span>'.e($accent).'</span>'
-                    .e(substr($text, $position + strlen($accent)));
-        }
-
-        return str_replace(["\r\n", "\n", "\r"], '<br>', $html);
+        return str_replace(["\r\n", "\n", "\r"], '<br>', $html ?? $escaped);
     }
 }
 

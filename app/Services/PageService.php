@@ -14,6 +14,7 @@ use App\Services\Contracts\ILedCalculatorService;
 use App\Services\Contracts\IPageService;
 use App\Support\ContentStorage;
 use App\Support\PageMetaBag;
+use App\Support\ProductCatalog;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -214,6 +215,12 @@ class PageService implements IPageService
             $data['projects'] = $this->projects->activeOrdered();
         }
 
+        if ($page->slug === 'products') {
+            $data['rangeItems'] = ProductCatalog::parentCategories();
+            $data['selectedCategory'] = '';
+            $data['showCatalog'] = false;
+        }
+
         if ($page->slug === 'led-strip-calculator') {
             $data['calculatorCatalog'] = $this->calculator->catalog();
         }
@@ -237,6 +244,7 @@ class PageService implements IPageService
             'ai-lighting' => 'pages.ai-lighting',
             'data-centre' => 'pages.data-centre',
             'contact' => 'pages.contact',
+            'products' => 'pages.products',
             'projects' => 'pages.projects',
             'led-strip-calculator' => 'pages.led-strip-calculator',
             'request-a-quote' => 'pages.quote-request',

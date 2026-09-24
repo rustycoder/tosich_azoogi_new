@@ -1,25 +1,16 @@
 @extends('layouts.site')
 
-@section('title')
-  Products — Azoogi LED Lighting
-@endsection
+@section('title', $page->title)
 
-@section('description')
-  Browse the full Azoogi LED lighting catalogue. COB Strips, SMD Strips, Neon, Outdoor Lights, Aluminium Profiles, LED
-  Drivers and more.
-@endsection
+@section('description', $page->meta_description)
 
 @section('bodyClass')
   products-page {{ $showCatalog ? 'is-catalog' : 'is-gallery' }}
 @endsection
 
-@section('bodyAttributes')
-  style="padding-top: 120px;"
-@endsection
-
 @section('chrome', 'full')
 
-@section('topbarClass', 'solid')
+@section('topbarClass', '')
 @section('logo', 'logo_white.png')
 
 @push('styles')
@@ -27,38 +18,6 @@
   @if ($showCatalog)
     @verbatim
       <style>
-        .header-bg {
-          background-color: #333;
-          height: 400px;
-          background: url("/assets/hero02.jpg") no-repeat top left;
-          background-size: cover;
-          position: relative;
-        }
-
-
-        /* ===========================================================
-                                                                       BREADCRUMB STRIP
-                                                                    =========================================================== */
-        .page-head {
-          padding: 12px 0 16px;
-          border-bottom: 1px solid var(--line);
-          margin-bottom: 0;
-        }
-
-        .crumb {
-          font-size: var(--fs-kicker);
-          color: var(--muted);
-        }
-
-        .crumb a:hover {
-          color: var(--accent);
-        }
-
-        .crumb span {
-          margin: 0 6px;
-          opacity: .5;
-        }
-
         /* ===========================================================
                                                                        TWO-COLUMN LAYOUT: narrow sidebar | product grid
                                                                     =========================================================== */
@@ -771,16 +730,6 @@
           padding: 0 4px;
         }
 
-        @media (max-width: 1024px) {
-          body.products-page {
-            padding-top: 72px !important;
-          }
-
-          .breadcrumbs {
-            margin: 8px 0 12px;
-          }
-        }
-
         .pg-btn {
           width: 36px;
           height: 36px;
@@ -809,18 +758,30 @@
 @endpush
 
 @section('content')
-  <div class="wrap">
-    <div class="breadcrumbs" id="breadcrumbs">
-      <a href="/">Home</a>
-      <span>/</span>
-      @if ($showCatalog)
-        <a href="{{ route('products') }}">Products</a>
-        <span>/</span>{{ $selectedCategory }}
-      @else
-        Products
-      @endif
+<main class="prod-main">
+  <section class="prod-hero" {!! cms_section_attr('hero') !!}>
+    <div class="prod-hero-media" aria-hidden="true">
+      <img src="{{ media_url($meta->get('hero.image', 0, '/assets/hero02.jpg')) }}" alt="{{ $page->title }}" loading="eager">
     </div>
+    <div class="prod-hero-copy">
+      <h1{!! cms_style($meta, 'hero.title') !!}>
+        @if ($showCatalog && filled($selectedCategory))
+          {!! accent_html($selectedCategory) !!}
+        @else
+          {!! accent_html($meta->get('hero.title', 0, 'Our {Range}')) !!}
+        @endif
+      </h1>
+      <p class="prod-hero-lead"{!! cms_style($meta, 'hero.lead') !!}>
+        @if ($showCatalog)
+          Explore our comprehensive range of commercial, architectural and smart LED lighting solutions.
+        @else
+          {{ $meta->get('hero.lead', 0, 'Explore the full Azoogi lighting catalogue. COB Strips, SMD Strips, Neon, Outdoor Lights, Aluminium Profiles, LED Drivers and more.') }}
+        @endif
+      </p>
+    </div>
+  </section>
 
+  <div class="wrap">
     @if ($showCatalog)
       <div class="prod-layout">
         <!-- ===== Sidebar ===== -->
@@ -875,10 +836,6 @@
       </div>
     @else
       <section class="prod-gallery">
-        <div class="prod-gallery-head">
-          <h1 class="h2">Our Range</h1>
-          <p class="prod-gallery-lead">Explore the full Azoogi lighting catalogue.</p>
-        </div>
         <div class="prod-gallery-grid">
           @forelse ($rangeItems as $item)
             <a class="prod-gallery-card" href="{{ $item['href'] ?? '#' }}">
@@ -897,7 +854,38 @@
       </section>
     @endif
   </div>
+</main>
 @endsection
+
+@push('scripts')
+  @verbatim
+    <script>
+      const topbar = document.getElementById('topbar');
+      let lastScrolled = null;
+
+      const onScroll = () => {
+        const isScrolled = window.scrollY > 40;
+        if (isScrolled !== lastScrolled) {
+          topbar?.classList.toggle('solid', isScrolled);
+          lastScrolled = isScrolled;
+          if (typeof updateLogos === 'function') updateLogos();
+        }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal, .prod-hero').forEach(el => io.observe(el));
+    </script>
+  @endverbatim
+@endpush
 
 @if ($showCatalog)
   @push('scripts')
@@ -905,9 +893,6 @@
       <script>
         /* ===== PRODUCTS PAGE INTERACTION & CATALOG ===== */
         (function () {
-          // Force topbar solid immediately
-          var tb = document.getElementById('topbar');
-          if (tb) tb.classList.add('solid');
 
           // Mobile sidebar filter drawer
           var sidebar = document.getElementById('prodSidebar');

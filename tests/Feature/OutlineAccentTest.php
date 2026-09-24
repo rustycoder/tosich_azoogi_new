@@ -35,6 +35,7 @@ class OutlineAccentTest extends TestCase
             'solutions' => ['/solutions', ['<span>Intelligent Controls</span>', '<span>Sector</span>']],
             'dali-centre' => ['/dali-centre', ['<span>Smart DALI-2 Management</span>']],
             'projects' => ['/projects', ['<span>Azoogi</span>']],
+            'products' => ['/products', ['<span>Range</span>']],
             'contact' => ['/contact', ['<span>hear</span>']],
             'about' => ['/about', ['<span>Zero Compromise.</span>', '<span>Azoogi</span>', '<span>Reach</span>', '<span>Path</span>']],
             'ai-lighting' => ['/ai-lighting', ['<span>for retail</span>', '<span>Four hard advantages.</span>', '<span>spectrum</span>', '<span>analysis</span>', '<span>temperature</span>', '<span>management</span>']],
@@ -61,16 +62,16 @@ class OutlineAccentTest extends TestCase
     {
         $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
         $page = Page::query()->where('slug', 'madrix')->firstOrFail();
-        $accent = PageMeta::query()
+        $titleMeta = PageMeta::query()
             ->where('page_id', $page->id)
-            ->where('key', 'hero.title_accent')
+            ->where('key', 'hero.title')
             ->firstOrFail();
 
         $this->actingAs($admin)
             ->get(route('dashboard.pages.edit', $page))
             ->assertOk()
-            ->assertSee('Title accent', false)
-            ->assertSee('Advanced LED Control Solutions', false);
+            ->assertDontSee('Title accent', false)
+            ->assertSee('{Advanced LED Control Solutions}', false);
 
         $this->actingAs($admin)
             ->put(route('dashboard.pages.update', $page), [
@@ -78,8 +79,8 @@ class OutlineAccentTest extends TestCase
                 'meta_description' => $page->meta_description,
                 'status' => Status::Active->value,
                 'meta' => [
-                    $accent->id => [
-                        'value' => 'Pixel Mapping',
+                    $titleMeta->id => [
+                        'value' => "MADRIX\n{Pixel Mapping}",
                     ],
                 ],
             ])
@@ -93,7 +94,7 @@ class OutlineAccentTest extends TestCase
         $this->actingAs($admin)
             ->get(route('dashboard.pages.edit', 'led-strip-calculator'))
             ->assertOk()
-            ->assertSee('Title accent', false)
-            ->assertSee('Calculator', false);
+            ->assertDontSee('Title accent', false)
+            ->assertSee('{Calculator}', false);
     }
 }

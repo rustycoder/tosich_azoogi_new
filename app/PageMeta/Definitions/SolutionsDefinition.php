@@ -3,6 +3,7 @@
 namespace App\PageMeta\Definitions;
 
 use App\PageMeta\Field;
+use App\PageMeta\ImageSize;
 use App\PageMeta\PageDefinition;
 
 class SolutionsDefinition implements PageDefinition
@@ -30,11 +31,11 @@ class SolutionsDefinition implements PageDefinition
     public function fields(): array
     {
         return [
-            Field::textarea('hero.title', 'Hero title'),
-            Field::text('hero.title_accent', 'Title accent'),
-            Field::textarea('hero.lead', 'Hero lead'),
-            Field::text('hero.claim', 'Hero claim'),
-            Field::textarea('hero.sub', 'Hero sub'),
+            Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
+            Field::textarea('hero.title', 'Hero title', typographic: false),
+            Field::textarea('hero.lead', 'Hero lead', typographic: false),
+            Field::text('hero.claim', 'Hero claim', typographic: false),
+            Field::textarea('hero.sub', 'Hero sub', typographic: false),
             Field::text('eco.heading', 'Ecosystems heading'),
             Field::textarea('eco.lead', 'Ecosystems lead'),
             Field::text('eco.item.name', 'Platform name', true, 'eco.item'),
@@ -45,7 +46,6 @@ class SolutionsDefinition implements PageDefinition
             Field::text('eco.cta.label', 'Eco CTA label'),
             Field::url('eco.cta.href', 'Eco CTA href'),
             Field::text('sector.heading', 'Sectors heading'),
-            Field::text('sector.heading_accent', 'Sectors accent'),
             Field::text('sector.hint', 'Sectors hint'),
             Field::text('sector.item.title', 'Sector title', true, 'sector.item'),
             Field::textarea('sector.item.body', 'Sector body', true, 'sector.item'),
@@ -75,8 +75,8 @@ class SolutionsDefinition implements PageDefinition
         ];
 
         $rows = [
-            ['key' => 'hero.title', 'sort_order' => 0, 'value' => 'End-to-End Lighting Solutions & Intelligent Controls'],
-            ['key' => 'hero.title_accent', 'sort_order' => 0, 'value' => 'Intelligent Controls'],
+            ['key' => 'hero.image', 'sort_order' => 0, 'value' => '/assets/img/img-1.jpg'],
+            ['key' => 'hero.title', 'sort_order' => 0, 'value' => 'End-to-End Lighting Solutions & {Intelligent Controls}'],
             ['key' => 'hero.lead', 'sort_order' => 0, 'value' => 'From initial plans through to final commissioning, we provide complete, custom packages - staying at the absolute forefront of modern lighting technology and smart control automation.'],
             ['key' => 'hero.claim', 'sort_order' => 0, 'value' => 'Azoogi does it all.'],
             ['key' => 'hero.sub', 'sort_order' => 0, 'value' => 'We design, engineer, customize, supply, control, and commission tailored lighting environments. By pairing custom hardware with seamless intelligent controls, we give you a single, trusted technology partner from concept through to final handover.'],
@@ -86,8 +86,7 @@ class SolutionsDefinition implements PageDefinition
             ['key' => 'eco.cta.body', 'sort_order' => 0, 'value' => 'We design, engineer, and custom-manufacture bespoke LED solutions for any project requirement.'],
             ['key' => 'eco.cta.label', 'sort_order' => 0, 'value' => 'Contact Us'],
             ['key' => 'eco.cta.href', 'sort_order' => 0, 'value' => '/contact'],
-            ['key' => 'sector.heading', 'sort_order' => 0, 'value' => 'Our Lighting Capabilities by Sector'],
-            ['key' => 'sector.heading_accent', 'sort_order' => 0, 'value' => 'Sector'],
+            ['key' => 'sector.heading', 'sort_order' => 0, 'value' => 'Our Lighting Capabilities by {Sector}'],
             ['key' => 'sector.hint', 'sort_order' => 0, 'value' => 'Hover or tap a sector to read the detail.'],
             ['key' => 'sector.cta.label', 'sort_order' => 0, 'value' => 'Explore Data Center Lighting Solutions'],
             ['key' => 'sector.cta.href', 'sort_order' => 0, 'value' => '/data-centre'],

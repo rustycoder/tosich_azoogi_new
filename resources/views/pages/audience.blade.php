@@ -19,7 +19,7 @@
 <main class="audience-main" id="audienceRoot">
   <section class="audience-hero" {!! cms_section_attr('hero') !!}>
     <div class="wrap">
-      <h1 class="h2"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
+      <h1 class="h2"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title')) !!}</h1>
       @if ($leads)
         <div class="audience-lead">
           @foreach ($leads as $index => $paragraph)
@@ -37,7 +37,7 @@
           <li class="card-main" id="card_{{ $loop->iteration }}" style="--index: {{ $loop->iteration }}">
             <div class="card__content">
               <div class="card__body">
-                <h2{!! cms_style($meta, 'card.heading', $loop->index) !!}>{!! accent_html($card['heading'] ?? '', $card['heading_accent'] ?? '') !!}</h2>
+                <h2{!! cms_style($meta, 'card.heading', $loop->index) !!}>{!! accent_html($card['heading'] ?? '') !!}</h2>
                 <div class="card__copy"{!! cms_style($meta, 'card.body', $loop->index) !!}>
                   @foreach (preg_split("/\n\n+/", $card['body'] ?? '') as $paragraph)
                     @if (trim($paragraph) !== '')

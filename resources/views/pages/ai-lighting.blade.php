@@ -8,7 +8,7 @@
 
 @section('chrome', 'full')
 
-@section('topbarClass', 'solid')
+@section('topbarClass', '')
 @section('logo', 'logo_white.png')
 
 @push('styles')
@@ -30,7 +30,7 @@
       </div>
       <div class="ai-hero-copy">
         <h1{!! cms_style($meta, 'hero.title') !!}>
-          {!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
+          {!! accent_html($meta->get('hero.title')) !!}</h1>
           <p{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
       </div>
     </section>
@@ -39,7 +39,7 @@
       <div class="wrap ai-split">
         <div class="ai-split-copy">
           <h2{!! cms_style($meta, 'caps.heading') !!}>
-            {!! accent_html($meta->get('caps.heading'), $meta->get('caps.heading_accent')) !!}</h2>
+            {!! accent_html($meta->get('caps.heading')) !!}</h2>
             <p{!! cms_style($meta, 'caps.body') !!}>{{ $meta->get('caps.body') }}</p>
         </div>
         <ol class="ai-caps">
@@ -57,7 +57,7 @@
       <div class="wrap ai-feature">
         <div class="ai-feature-copy">
           <h2{!! cms_style($meta, 'spectrum.heading') !!}>
-            {!! accent_html($meta->get('spectrum.heading'), $meta->get('spectrum.heading_accent')) !!}</h2>
+            {!! accent_html($meta->get('spectrum.heading')) !!}</h2>
             <p{!! cms_style($meta, 'spectrum.body') !!}>{{ $meta->get('spectrum.body') }}</p>
               <ul class="ai-ticks">
                 @foreach ($ticks as $tick)
@@ -87,7 +87,7 @@
         <div class="ai-row-head">
           <div>
             <h2{!! cms_style($meta, 'insights.heading') !!}>
-              {!! accent_html($meta->get('insights.heading'), $meta->get('insights.heading_accent')) !!}</h2>
+              {!! accent_html($meta->get('insights.heading')) !!}</h2>
           </div>
           <p{!! cms_style($meta, 'insights.lead') !!}>{{ $meta->get('insights.lead') }}</p>
         </div>
@@ -119,7 +119,7 @@
       </div>
       <div class="wrap ai-cct-inner">
         <h2{!! cms_style($meta, 'cct.heading') !!}>
-          {!! accent_html($meta->get('cct.heading'), $meta->get('cct.heading_accent')) !!}</h2>
+          {!! accent_html($meta->get('cct.heading')) !!}</h2>
           <p{!! cms_style($meta, 'cct.body') !!}>{{ $meta->get('cct.body') }}</p>
       </div>
     </section>
@@ -129,7 +129,7 @@
         <div class="ai-row-head">
           <div>
             <h2{!! cms_style($meta, 'space.heading') !!}>
-              {!! accent_html($meta->get('space.heading'), $meta->get('space.heading_accent')) !!}</h2>
+              {!! accent_html($meta->get('space.heading')) !!}</h2>
           </div>
           <p{!! cms_style($meta, 'space.lead') !!}>{{ $meta->get('space.lead') }}</p>
         </div>
@@ -182,7 +182,19 @@
 @push('scripts')
   @verbatim
     <script>
-      document.getElementById('topbar')?.classList.add('solid');
+      const topbar = document.getElementById('topbar');
+      let lastScrolled = null;
+
+      const onScroll = () => {
+        const isScrolled = window.scrollY > 40;
+        if (isScrolled !== lastScrolled) {
+          topbar?.classList.toggle('solid', isScrolled);
+          lastScrolled = isScrolled;
+          if (typeof updateLogos === 'function') updateLogos();
+        }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
 
       (function () {
         var items = document.querySelectorAll('#aiAccordion .ai-acc-item');

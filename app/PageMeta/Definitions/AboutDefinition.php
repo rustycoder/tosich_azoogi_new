@@ -31,27 +31,22 @@ class AboutDefinition implements PageDefinition
     public function fields(): array
     {
         return [
-            Field::text('hero.kicker', 'Hero kicker'),
-            Field::textarea('hero.title', 'Hero title'),
-            Field::text('hero.title_accent', 'Title accent'),
+            Field::textarea('hero.title', 'Hero title', typographic: false),
             Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
             Field::textarea('intro.body', 'Intro'),
             Field::text('intro.cta.label', 'Intro CTA'),
             Field::url('intro.cta.href', 'Intro CTA link'),
             Field::text('why.kicker', 'Why kicker'),
             Field::text('why.heading', 'Why heading'),
-            Field::text('why.heading_accent', 'Why accent'),
             Field::text('why.item.title', 'Why title', true, 'why.item'),
             Field::textarea('why.item.body', 'Why body', true, 'why.item'),
             Field::image('why.item.image', 'Why image', true, 'why.item', ImageSize::Panel),
             Field::text('reach.kicker', 'Reach kicker'),
             Field::text('reach.heading', 'Reach heading'),
-            Field::text('reach.heading_accent', 'Reach accent'),
             Field::textarea('reach.body', 'Reach body'),
             Field::image('reach.image', 'Reach image', hint: ImageSize::Banner),
             Field::text('path.kicker', 'Path kicker'),
             Field::text('path.heading', 'Path heading'),
-            Field::text('path.heading_accent', 'Path accent'),
             Field::text('path.item.title', 'Path title', true, 'path.item'),
             Field::textarea('path.item.body', 'Path body', true, 'path.item'),
             Field::url('path.item.href', 'Path href', true, 'path.item'),
@@ -76,24 +71,19 @@ class AboutDefinition implements PageDefinition
         ];
 
         $rows = [
-            ['key' => 'hero.kicker', 'sort_order' => 0, 'value' => 'About Us'],
-            ['key' => 'hero.title', 'sort_order' => 0, 'value' => "Engineered Lighting.\nInfinite Scale.\nZero Compromise."],
-            ['key' => 'hero.title_accent', 'sort_order' => 0, 'value' => 'Zero Compromise.'],
+            ['key' => 'hero.title', 'sort_order' => 0, 'value' => "Engineered Lighting.\nInfinite Scale.\n{Zero Compromise.}"],
             ['key' => 'hero.image', 'sort_order' => 0, 'value' => '/assets/img/ai-lighting/hero.jpg'],
             ['key' => 'intro.body', 'sort_order' => 0, 'value' => 'We design, assemble, and optimize architectural, commercial, and industrial lighting for projects of every scale - from bespoke residential projects to Tier 1 developments.'],
             ['key' => 'intro.cta.label', 'sort_order' => 0, 'value' => 'Request Capability Statement'],
             ['key' => 'intro.cta.href', 'sort_order' => 0, 'value' => '/contact'],
             ['key' => 'why.kicker', 'sort_order' => 0, 'value' => 'Why Azoogi'],
-            ['key' => 'why.heading', 'sort_order' => 0, 'value' => 'Why Choose Azoogi'],
-            ['key' => 'why.heading_accent', 'sort_order' => 0, 'value' => 'Azoogi'],
+            ['key' => 'why.heading', 'sort_order' => 0, 'value' => 'Why Choose {Azoogi}'],
             ['key' => 'reach.kicker', 'sort_order' => 0, 'value' => 'Worldwide'],
-            ['key' => 'reach.heading', 'sort_order' => 0, 'value' => 'International Project Reach'],
-            ['key' => 'reach.heading_accent', 'sort_order' => 0, 'value' => 'Reach'],
+            ['key' => 'reach.heading', 'sort_order' => 0, 'value' => 'International Project {Reach}'],
             ['key' => 'reach.body', 'sort_order' => 0, 'value' => 'For over two decades, our engineering footprint has extended far beyond Australia - delivering technical lighting packages for major developments and luxury resorts across Fiji, Vanuatu, Bali, the Maldives. With extensive export expertise, multi-currency processing, and deep experience navigating international compliance standards, we ensure seamless project delivery anywhere in the world.'],
             ['key' => 'reach.image', 'sort_order' => 0, 'value' => '/assets/img/sydney-night.jpg'],
             ['key' => 'path.kicker', 'sort_order' => 0, 'value' => 'Audiences'],
-            ['key' => 'path.heading', 'sort_order' => 0, 'value' => 'Select Your Path'],
-            ['key' => 'path.heading_accent', 'sort_order' => 0, 'value' => 'Path'],
+            ['key' => 'path.heading', 'sort_order' => 0, 'value' => 'Select Your {Path}'],
         ];
 
         foreach ($why as $i => [$title, $body, $image]) {

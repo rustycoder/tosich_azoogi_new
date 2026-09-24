@@ -31,11 +31,10 @@ class SilvairDefinition implements PageDefinition
     public function fields(): array
     {
         return [
-            Field::text('hero.kicker', 'Hero kicker'),
+            Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
             Field::image('hero.logo', 'Silvair logo', hint: ImageSize::Logo),
-            Field::textarea('hero.title', 'Hero title'),
-            Field::text('hero.title_accent', 'Title accent'),
-            Field::textarea('hero.lead', 'Hero lead'),
+            Field::textarea('hero.title', 'Hero title', typographic: false),
+            Field::textarea('hero.lead', 'Hero lead', typographic: false),
             Field::textarea('intro.body', 'Intro'),
             Field::text('why.heading', 'Why heading'),
             Field::text('why.item.title', 'Why title', true, 'why.item'),
@@ -88,10 +87,9 @@ class SilvairDefinition implements PageDefinition
     public function seed(): array
     {
         $rows = [
-            ['key' => 'hero.kicker', 'sort_order' => 0, 'value' => 'Azoogi X Silvair'],
+            ['key' => 'hero.image', 'sort_order' => 0, 'value' => '/assets/img/silvair/nlc.jpg'],
             ['key' => 'hero.logo', 'sort_order' => 0, 'value' => '/assets/img/silvair/logo.svg'],
-            ['key' => 'hero.title', 'sort_order' => 0, 'value' => 'Enterprise Bluetooth® Qualified Mesh Lighting'],
-            ['key' => 'hero.title_accent', 'sort_order' => 0, 'value' => 'Qualified Mesh Lighting'],
+            ['key' => 'hero.title', 'sort_order' => 0, 'value' => 'Enterprise Bluetooth® {Qualified Mesh Lighting}'],
             ['key' => 'hero.lead', 'sort_order' => 0, 'value' => 'Qualified Mesh Standard. Rapid Mobile Commissioning. Intelligent Energy Analytics.'],
             ['key' => 'intro.body', 'sort_order' => 0, 'value' => 'As an official integration partner for Silvair, we deliver robust, interoperable Bluetooth® Mesh lighting control solutions for commercial real estate, industrial facilities, and educational institutions. Silvair’s software-driven architecture enables wireless fixture-level control, automated energy code compliance, and advanced building data analytics without complex control wiring or central servers.'],
             ['key' => 'why.heading', 'sort_order' => 0, 'value' => 'Why Choose Silvair Wireless Controls?'],

@@ -21,6 +21,7 @@ use App\PageMeta\Definitions\ModernSlaveryDefinition;
 use App\PageMeta\Definitions\NotFoundDefinition;
 use App\PageMeta\Definitions\PageExpiredDefinition;
 use App\PageMeta\Definitions\PrivacyDefinition;
+use App\PageMeta\Definitions\ProductsDefinition;
 use App\PageMeta\Definitions\ProjectsDefinition;
 use App\PageMeta\Definitions\QuoteRequestDefinition;
 use App\PageMeta\Definitions\ServerErrorDefinition;
@@ -48,6 +49,7 @@ final class Catalog
         'ai-lighting' => AiLightingDefinition::class,
         'data-centre' => DataCentreDefinition::class,
         'contact' => ContactDefinition::class,
+        'products' => ProductsDefinition::class,
         'projects' => ProjectsDefinition::class,
         'led-strip-calculator' => LedCalculatorDefinition::class,
         'request-a-quote' => QuoteRequestDefinition::class,

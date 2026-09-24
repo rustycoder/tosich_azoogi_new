@@ -8,7 +8,7 @@
 
 @section('chrome', 'full')
 
-@section('topbarClass', 'solid')
+@section('topbarClass', '')
 @section('logo', 'logo_white.png')
 
 @push('styles')
@@ -31,7 +31,10 @@
 <main class="sv-main">
 
   <section class="sv-hero" {!! cms_section_attr('hero') !!}>
-    <div class="wrap">
+    <div class="sv-hero-media" aria-hidden="true">
+      <img src="{{ media_url($meta->get('hero.image')) }}" alt="" loading="eager">
+    </div>
+    <div class="sv-hero-copy">
       @if ($silvairLogo !== '')
         <div class="sv-lockup">
           @if ($silvairUsesStockLockup)
@@ -46,7 +49,7 @@
           @endif
         </div>
       @endif
-      <h1 class="sv-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
+      <h1 class="sv-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title')) !!}</h1>
       <p class="sv-lead"{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
       <p class="sv-intro" {!! cms_section_attr('intro') !!}{!! cms_style($meta, 'intro.body') !!}>{{ $meta->get('intro.body') }}</p>
     </div>
@@ -270,7 +273,19 @@
 <script src="{{ versioned_asset('assets/js/product-preview.js') }}"></script>
 @verbatim
 <script>
-document.getElementById('topbar')?.classList.add('solid');
+const topbar = document.getElementById('topbar');
+let lastScrolled = null;
+
+const onScroll = () => {
+  const isScrolled = window.scrollY > 40;
+  if (isScrolled !== lastScrolled) {
+    topbar?.classList.toggle('solid', isScrolled);
+    lastScrolled = isScrolled;
+    if (typeof updateLogos === 'function') updateLogos();
+  }
+};
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 
 (function () {
   const io = new IntersectionObserver(function (entries) {

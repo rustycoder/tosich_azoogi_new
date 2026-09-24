@@ -28,7 +28,7 @@
       </div>
       <div class="about-hero-copy">
         <h1{!! cms_style($meta, 'hero.title') !!}>
-          {!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
+          {!! accent_html($meta->get('hero.title')) !!}</h1>
       </div>
     </section>
 
@@ -53,7 +53,7 @@
           <div class="about-why-sticky">
             <div class="about-split-copy about-why-head reveal">
               <h2{!! cms_style($meta, 'why.heading') !!}>
-                {!! accent_html($meta->get('why.heading'), $meta->get('why.heading_accent')) !!}</h2>
+                {!! accent_html($meta->get('why.heading')) !!}</h2>
             </div>
             <div class="about-why-visual" id="aboutWhyVisual">
               @foreach ($whyItems as $item)
@@ -96,7 +96,7 @@
       </div>
       <div class="wrap about-reach-inner reveal">
         <h2{!! cms_style($meta, 'reach.heading') !!}>
-          {!! accent_html($meta->get('reach.heading'), $meta->get('reach.heading_accent')) !!}</h2>
+          {!! accent_html($meta->get('reach.heading')) !!}</h2>
           <p{!! cms_style($meta, 'reach.body') !!}>{{ $meta->get('reach.body') }}</p>
       </div>
     </section>
@@ -105,7 +105,7 @@
       <div class="wrap about-path-section">
         <div class="about-split-copy about-path-head reveal">
           <h2{!! cms_style($meta, 'path.heading') !!}>
-            {!! accent_html($meta->get('path.heading'), $meta->get('path.heading_accent')) !!}</h2>
+            {!! accent_html($meta->get('path.heading')) !!}</h2>
         </div>
         <div class="about-path-list">
           @foreach ($pathItems as $item)

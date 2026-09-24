@@ -233,10 +233,6 @@
       }
     });
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeNav();
-    });
-
     window.addEventListener('resize', () => {
       if (!window.matchMedia(MOBILE_MQ).matches) closeNav();
     });

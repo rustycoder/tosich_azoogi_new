@@ -28,7 +28,7 @@ class SolutionsPageTest extends TestCase
             ->assertDontSee('solutions-hero-logo', false);
     }
 
-    public function test_solutions_hero_aligns_with_the_projects_hero(): void
+    public function test_solutions_hero_aligns_with_the_about_hero(): void
     {
         $css = file_get_contents(public_path('assets/css/solutions.css'));
 
@@ -38,11 +38,11 @@ class SolutionsPageTest extends TestCase
             $css,
         );
         $this->assertMatchesRegularExpression(
-            '/\.solutions-hero\s*\{[^}]*align-items:\s*start/s',
+            '/\.solutions-hero\s*\{[^}]*align-items:\s*end/s',
             $css,
         );
         $this->assertMatchesRegularExpression(
-            '/\.solutions-hero\s*\{[^}]*padding:\s*var\(--hero-pad-y-top\)\s+0\s+var\(--hero-pad-y-bottom\)\s*;/s',
+            '/\.solutions-hero-copy\s*\{[^}]*padding:\s*var\(--hero-pad-y-top\)\s+var\(--hero-pad-x\)\s+var\(--hero-pad-y-bottom\)\s*;/s',
             $css,
         );
         $this->assertMatchesRegularExpression(
@@ -50,7 +50,7 @@ class SolutionsPageTest extends TestCase
             $css,
         );
         $this->assertMatchesRegularExpression(
-            '/\.solutions-title\s*\{[^}]*margin:\s*0\s+0\s+20px\s*;/s',
+            '/\.solutions-title\s*\{[^}]*margin:\s*0\s+0\s+16px\s*;/s',
             $css,
         );
         $this->assertMatchesRegularExpression(

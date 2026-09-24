@@ -16,39 +16,88 @@
     margin-bottom: 8px;
 }
 
+/* —— Hero —— */
 .sv-hero {
-    text-align: center;
+    position: relative;
     min-height: var(--hero-min);
     display: grid;
-    align-items: start;
-    padding: var(--hero-pad-y-top) 0 var(--hero-pad-y-bottom);
+    align-items: end;
+    overflow: hidden;
+    background: #111;
+    width: 100%;
+}
+
+.sv-hero-media {
+    position: absolute;
+    inset: 0;
+}
+
+.sv-hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    filter: contrast(1.25) brightness(0.68) saturate(1.05);
+    animation: svSlowZoom 22s ease-out forwards;
+}
+
+.sv-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(105deg, rgba(0, 0, 0, .78) 0%, rgba(0, 0, 0, .48) 46%, rgba(0, 0, 0, .32) 100%),
+        rgba(0, 0, 0, 0.28);
+    pointer-events: none;
+}
+
+@keyframes svSlowZoom {
+    0% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+.sv-hero-copy {
+    position: relative;
+    z-index: 1;
+    padding: var(--hero-pad-y-top) var(--hero-pad-x) var(--hero-pad-y-bottom);
+    width: 100%;
+}
+
+.sv-hero-copy > * {
+    max-width: var(--site-max, 1400px);
 }
 
 .sv-lockup {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
     gap: clamp(16px, 2.4vw, 28px);
-    margin: 0 auto 30px;
+    margin: 0 0 20px;
 }
 
 .sv-lockup-silvair {
     display: block;
     width: clamp(180px, 26vw, 300px);
     height: auto;
-    color: var(--ink);
+    color: #fff;
 }
 
 .sv-title {
-    margin: 0 auto 20px;
-    max-width: 22ch;
+    margin: 0 0 16px;
+    max-width: 24ch;
     font-family: var(--font-sans);
     font-weight: 400;
     font-size: var(--fs-h2);
     line-height: 1.1;
     letter-spacing: -0.02em;
-    color: var(--ink);
+    color: #fff;
 }
 
 .sv-title span {
@@ -57,9 +106,9 @@
 
 .sv-lead {
     max-width: 720px;
-    margin: 0 auto;
+    margin: 0 0 16px;
     padding: 0;
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.82);
     font-size: var(--fs-lead);
     font-weight: 400;
     line-height: 1.65;
@@ -67,9 +116,9 @@
 
 .sv-intro {
     max-width: 900px;
-    margin: 28px auto 0;
+    margin: 16px 0 0;
     padding: 0;
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.72);
     font-size: var(--fs-lead);
     line-height: 1.7;
 }

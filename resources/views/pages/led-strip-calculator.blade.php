@@ -21,7 +21,7 @@
     <div class="calc-hero-glow" aria-hidden="true"></div>
     <div class="calc-hero-inner">
       <h1 class="h2 calc-hero-title" {!! cms_style($meta, 'hero.title') !!}>
-        {!! accent_html($meta->get('hero.title'), $meta->get('hero.title_accent')) !!}</h1>
+        {!! accent_html($meta->get('hero.title')) !!}</h1>
       <p class="calc-hero-lead" {!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
       <!-- <a href="#led-selector" class="btn primary"{!! cms_style($meta, 'hero.cta.label') !!}>{{ $meta->get('hero.cta.label') }}</a> -->
     </div>

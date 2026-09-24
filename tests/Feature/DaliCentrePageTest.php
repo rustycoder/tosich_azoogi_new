@@ -80,33 +80,39 @@ class DaliCentrePageTest extends TestCase
         );
     }
 
-    public function test_hero_stacks_title_lead_video_then_description(): void
+    public function test_hero_and_video_render_in_order(): void
     {
         $html = $this->get('/dali-centre')->assertOk()->getContent();
 
+        $hero = strpos($html, 'class="dc-hero"');
         $title = strpos($html, 'class="dc-title"');
         $lead = strpos($html, 'class="dc-lead"');
-        $video = strpos($html, 'class="dc-hero-video"');
         $intro = strpos($html, 'class="dc-intro"');
+        $video = strpos($html, 'class="dc-video');
 
+        $this->assertNotFalse($hero);
         $this->assertNotFalse($title);
         $this->assertNotFalse($lead);
-        $this->assertNotFalse($video);
         $this->assertNotFalse($intro);
+        $this->assertNotFalse($video);
         $this->assertLessThan($lead, $title);
-        $this->assertLessThan($video, $lead);
-        $this->assertLessThan($intro, $video);
-        $this->assertStringContainsString('class="wrap dc-hero-stack"', $html);
+        $this->assertLessThan($intro, $lead);
+        $this->assertLessThan($video, $intro);
+        $this->assertStringContainsString('class="dc-hero-copy"', $html);
         $this->assertStringContainsString('youtube-nocookie.com/embed/C0KcmW6NewI', $html);
     }
 
-    public function test_hero_is_center_aligned(): void
+    public function test_hero_aligns_with_about_hero(): void
     {
         $css = file_get_contents(public_path('assets/css/dali-centre.css'));
 
         $this->assertNotFalse($css);
         $this->assertMatchesRegularExpression(
-            '/\.dc-hero\s*\{[^}]*text-align:\s*center/s',
+            '/\.dc-hero\s*\{[^}]*align-items:\s*end/s',
+            $css,
+        );
+        $this->assertMatchesRegularExpression(
+            '/\.dc-hero-copy\s*\{[^}]*padding:\s*var\(--hero-pad-y-top\)\s+var\(--hero-pad-x\)\s+var\(--hero-pad-y-bottom\)\s*;/s',
             $css,
         );
         $this->assertDoesNotMatchRegularExpression(
@@ -115,10 +121,6 @@ class DaliCentrePageTest extends TestCase
         );
         $this->assertDoesNotMatchRegularExpression(
             '/\.dc-hero-grid\s*\{/s',
-            $css,
-        );
-        $this->assertMatchesRegularExpression(
-            '/\.dc-hero-video\s*\{[^}]*max-width:\s*560px/s',
             $css,
         );
     }

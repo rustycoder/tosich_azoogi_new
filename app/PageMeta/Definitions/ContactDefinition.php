@@ -47,7 +47,6 @@ class ContactDefinition implements PageDefinition
             Field::text('intl.phone', 'International phone'),
             Field::text('form.kicker', 'Form kicker'),
             Field::text('form.title', 'Form title'),
-            Field::text('form.title_accent', 'Title accent'),
             Field::textarea('form.lead', 'Form lead'),
         ];
     }
@@ -71,8 +70,7 @@ class ContactDefinition implements PageDefinition
             ['key' => 'intl.email', 'sort_order' => 0, 'value' => 'exports@azoogi.com'],
             ['key' => 'intl.phone', 'sort_order' => 0, 'value' => '+61 2 7912 3524'],
             ['key' => 'form.kicker', 'sort_order' => 0, 'value' => 'Contact'],
-            ['key' => 'form.title', 'sort_order' => 0, 'value' => 'We’d love to hear from you!'],
-            ['key' => 'form.title_accent', 'sort_order' => 0, 'value' => 'hear'],
+            ['key' => 'form.title', 'sort_order' => 0, 'value' => 'We’d love to {hear} from you!'],
             ['key' => 'form.lead', 'sort_order' => 0, 'value' => 'Use the form below.'],
         ];
     }

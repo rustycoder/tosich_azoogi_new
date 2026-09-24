@@ -1,5 +1,5 @@
 @php
-    $topbarClass = trim($__env->yieldContent('topbarClass', 'solid'));
+    $topbarClass = trim($__env->yieldContent('topbarClass', ''));
     $logoFile = trim($__env->yieldContent('logo', 'logo_white.png'));
     $description = $headerMeta->get('header.description', 0, 'Australian-Owned B2B Trade Wholesaler - Custom Lighting & Smart Control Solutions');
     $phone = $headerMeta->get('header.phone', 0, '1300 641 261');

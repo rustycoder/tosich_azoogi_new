@@ -27,10 +27,8 @@ abstract class AudiencePageDefinition implements PageDefinition
         return [
             Field::text('hero.eyebrow', 'Eyebrow'),
             Field::text('hero.title', 'Title'),
-            Field::text('hero.title_accent', 'Title accent'),
             Field::textarea('hero.lead', 'Lead paragraph', true, 'hero.lead'),
             Field::text('card.heading', 'Card heading', true, 'card'),
-            Field::text('card.heading_accent', 'Card accent', true, 'card'),
             Field::textarea('card.body', 'Card body', true, 'card'),
             Field::image('card.image', 'Card image', true, 'card', ImageSize::Card),
             Field::text('card.cta.label', 'CTA label', true, 'card'),
@@ -44,10 +42,15 @@ abstract class AudiencePageDefinition implements PageDefinition
     public function seed(): array
     {
         $audience = $this->payload();
+        $title = (string) ($audience['title'] ?? '');
+        $titleAccent = (string) ($audience['titleAccent'] ?? '');
+        $titleValue = ($titleAccent !== '' && str_contains($title, $titleAccent))
+            ? str_replace($titleAccent, '{'.$titleAccent.'}', $title)
+            : $title;
+
         $rows = [
             ['key' => 'hero.eyebrow', 'sort_order' => 0, 'value' => (string) ($audience['eyebrow'] ?? '')],
-            ['key' => 'hero.title', 'sort_order' => 0, 'value' => (string) ($audience['title'] ?? '')],
-            ['key' => 'hero.title_accent', 'sort_order' => 0, 'value' => (string) ($audience['titleAccent'] ?? '')],
+            ['key' => 'hero.title', 'sort_order' => 0, 'value' => $titleValue],
         ];
 
         foreach ($audience['lead'] ?? [] as $i => $paragraph) {
@@ -55,8 +58,13 @@ abstract class AudiencePageDefinition implements PageDefinition
         }
 
         foreach ($audience['cards'] ?? [] as $i => $card) {
-            $rows[] = ['key' => 'card.heading', 'sort_order' => $i, 'value' => (string) ($card['heading'] ?? '')];
-            $rows[] = ['key' => 'card.heading_accent', 'sort_order' => $i, 'value' => (string) ($card['headingAccent'] ?? '')];
+            $heading = (string) ($card['heading'] ?? '');
+            $headingAccent = (string) ($card['headingAccent'] ?? '');
+            $headingValue = ($headingAccent !== '' && str_contains($heading, $headingAccent))
+                ? str_replace($headingAccent, '{'.$headingAccent.'}', $heading)
+                : $heading;
+
+            $rows[] = ['key' => 'card.heading', 'sort_order' => $i, 'value' => $headingValue];
             $rows[] = ['key' => 'card.body', 'sort_order' => $i, 'value' => implode("\n\n", $card['body'] ?? [])];
             $rows[] = ['key' => 'card.image', 'sort_order' => $i, 'value' => (string) ($card['image'] ?? '')];
             $rows[] = ['key' => 'card.cta.label', 'sort_order' => $i, 'value' => (string) ($card['cta']['label'] ?? '')];

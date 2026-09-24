@@ -31,13 +31,12 @@ class CasambiDefinition implements PageDefinition
     public function fields(): array
     {
         return [
+            Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
             Field::image('slide.image', 'Slide image', true, 'slide', ImageSize::Banner),
             Field::text('slide.alt', 'Slide alt', true, 'slide'),
-            Field::text('hero.kicker', 'Hero kicker'),
             Field::image('hero.logo', 'Casambi logo', hint: ImageSize::Logo),
-            Field::textarea('hero.title', 'Hero title'),
-            Field::text('hero.title_accent', 'Title accent'),
-            Field::textarea('hero.lead', 'Hero lead'),
+            Field::textarea('hero.title', 'Hero title', typographic: false),
+            Field::textarea('hero.lead', 'Hero lead', typographic: false),
             Field::textarea('intro.body', 'Intro'),
             Field::text('why.heading', 'Why heading'),
             Field::text('why.item.title', 'Why title', true, 'why.item'),
@@ -70,10 +69,9 @@ class CasambiDefinition implements PageDefinition
     public function seed(): array
     {
         $rows = [
-            ['key' => 'hero.kicker', 'sort_order' => 0, 'value' => 'Azoogi X Casambi'],
+            ['key' => 'hero.image', 'sort_order' => 0, 'value' => '/assets/img/casambi/banner.png'],
             ['key' => 'hero.logo', 'sort_order' => 0, 'value' => '/assets/img/casambi/logo-dark.svg'],
-            ['key' => 'hero.title', 'sort_order' => 0, 'value' => 'Advanced Wireless Lighting Control & Smart Ecosystems'],
-            ['key' => 'hero.title_accent', 'sort_order' => 0, 'value' => 'Smart Ecosystems'],
+            ['key' => 'hero.title', 'sort_order' => 0, 'value' => 'Advanced Wireless Lighting Control & {Smart Ecosystems}'],
             ['key' => 'hero.lead', 'sort_order' => 0, 'value' => 'Scalable Bluetooth Mesh Technology. Standardized Luminaire Integration.'],
             ['key' => 'intro.body', 'sort_order' => 0, 'value' => 'As an official Casambi technology and distribution partner, we bring intelligent, ultra-reliable Bluetooth Low Energy (BLE) wireless lighting controls directly to your architectural, commercial, and industrial projects. Casambi creates a self-healing mesh network that eliminates single points of failure, requiring no complex control wiring or central servers.'],
             ['key' => 'why.heading', 'sort_order' => 0, 'value' => 'Why Choose Casambi?'],

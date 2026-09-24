@@ -16,18 +16,67 @@
     margin-bottom: 8px;
 }
 
+/* —— Hero —— */
 .dc-hero {
+    position: relative;
     min-height: var(--hero-min);
     display: grid;
-    align-items: start;
-    padding: var(--hero-pad-y-top) 0 var(--hero-pad-y-bottom);
-    text-align: center;
+    align-items: end;
+    overflow: hidden;
+    background: #111;
+    width: 100%;
+}
+
+.dc-hero-media {
+    position: absolute;
+    inset: 0;
+}
+
+.dc-hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    filter: contrast(1.25) brightness(0.68) saturate(1.05);
+    animation: dcSlowZoom 22s ease-out forwards;
+}
+
+.dc-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(105deg, rgba(0, 0, 0, .78) 0%, rgba(0, 0, 0, .48) 46%, rgba(0, 0, 0, .32) 100%),
+        rgba(0, 0, 0, 0.28);
+    pointer-events: none;
+}
+
+@keyframes dcSlowZoom {
+    0% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+.dc-hero-copy {
+    position: relative;
+    z-index: 1;
+    padding: var(--hero-pad-y-top) var(--hero-pad-x) var(--hero-pad-y-bottom);
+    width: 100%;
+}
+
+.dc-hero-copy > * {
+    max-width: var(--site-max, 1400px);
 }
 
 .dc-hero-stack {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .dc-kicker {
@@ -40,14 +89,14 @@
 }
 
 .dc-title {
-    margin: 0 auto 16px;
+    margin: 0 0 16px;
     max-width: 24ch;
     font-family: var(--font-sans);
     font-weight: 400;
     font-size: var(--fs-h2);
     line-height: 1.1;
     letter-spacing: -0.02em;
-    color: var(--ink);
+    color: #fff;
 }
 
 .dc-title span {
@@ -55,34 +104,34 @@
 }
 
 .dc-lead {
-    margin: 0 auto;
-    max-width: 46ch;
-    color: var(--muted);
+    margin: 0 0 16px;
+    max-width: 720px;
+    color: rgba(255, 255, 255, 0.82);
     font-size: var(--fs-lead);
     font-weight: 400;
     line-height: 1.65;
 }
 
+.dc-intro {
+    margin: 16px 0 0;
+    max-width: 900px;
+    padding: 0;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: var(--fs-body);
+    line-height: 1.7;
+}
+
+.dc-video,
 .dc-hero-video {
     position: relative;
     width: 100%;
-    max-width: 560px;
-    margin: 22px auto 0;
     aspect-ratio: 16 / 9;
     background: #111;
     border-radius: 4px;
     overflow: hidden;
 }
 
-.dc-intro {
-    margin: 24px auto 0;
-    max-width: 62ch;
-    padding: 0;
-    color: var(--muted);
-    font-size: var(--fs-body);
-    line-height: 1.7;
-}
-
+.dc-video iframe,
 .dc-hero-video iframe {
     position: absolute;
     inset: 0;
