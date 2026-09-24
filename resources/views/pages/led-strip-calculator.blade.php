@@ -8,7 +8,7 @@
 
 @section('chrome', 'full')
 
-@section('topbarClass', 'solid')
+@section('topbarClass', '')
 @section('logo', 'logo_white.png')
 
 @push('styles')
@@ -18,12 +18,20 @@
 @section('content')
   <!-- Hero -->
   <section class="calc-hero" {!! cms_section_attr('hero') !!}>
-    <div class="calc-hero-glow" aria-hidden="true"></div>
-    <div class="calc-hero-inner">
-      <h1 class="h2 calc-hero-title" {!! cms_style($meta, 'hero.title') !!}>
-        {!! accent_html($meta->get('hero.title')) !!}</h1>
-      <p class="calc-hero-lead" {!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
-      <!-- <a href="#led-selector" class="btn primary"{!! cms_style($meta, 'hero.cta.label') !!}>{{ $meta->get('hero.cta.label') }}</a> -->
+    <div class="calc-hero-media" aria-hidden="true">
+      <img src="{{ media_url($meta->get('hero.image', 0, '/assets/hero01.jpg')) }}" alt="" loading="eager" decoding="async">
+    </div>
+    <div class="calc-hero-copy">
+      <h1 class="h2 calc-hero-title"{!! cms_style($meta, 'hero.title') !!}>
+        {!! accent_html($meta->get('hero.title', 0, 'LED Strip {Calculator}')) !!}</h1>
+      @if ($meta->get('hero.lead'))
+        <p class="calc-hero-lead"{!! cms_style($meta, 'hero.lead') !!}>{{ $meta->get('hero.lead') }}</p>
+      @endif
+      @if ($meta->get('hero.cta.label'))
+        <div class="calc-hero-actions">
+          <a href="#led-selector" class="btn primary"{!! cms_style($meta, 'hero.cta.label') !!}>{{ $meta->get('hero.cta.label') }}</a>
+        </div>
+      @endif
     </div>
   </section>
 
@@ -131,4 +139,31 @@
 @push('scripts')
   <script>window.AZOOGI_LED_CALC = @json($calculatorCatalog, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);</script>
   <script src="{{ versioned_asset('assets/js/led_calculator.js') }}"></script>
+@verbatim
+<script>
+  const topbar = document.getElementById('topbar');
+  let lastScrolled = null;
+
+  const onScroll = () => {
+    const isScrolled = window.scrollY > 40;
+    if (isScrolled !== lastScrolled) {
+      topbar?.classList.toggle('solid', isScrolled);
+      lastScrolled = isScrolled;
+      if (typeof updateLogos === 'function') updateLogos();
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal, .calc-hero').forEach(el => io.observe(el));
+</script>
+@endverbatim
 @endpush
