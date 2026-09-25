@@ -160,6 +160,7 @@
           line-height: 1.3;
           word-break: break-word;
           cursor: pointer;
+          color: var(--ink);
         }
 
         .cat-label-text.active,
