@@ -3430,7 +3430,8 @@ code {
   background: rgba(59, 130, 246, .08);
 }
 
-.dash-doc-callout.alert {
+.dash-doc-callout.alert,
+.dash-doc-callout.warning {
   border-left-color: #f59e0b;
   background: rgba(245, 158, 11, .08);
 }
@@ -3438,6 +3439,15 @@ code {
 .dash-doc-callout.tip {
   border-left-color: var(--dash-green);
   background: var(--dash-mark-bg);
+}
+
+.dash-doc-callout p {
+  margin: 6px 0 0;
+  line-height: 1.55;
+}
+
+.dash-doc-callout p:first-child {
+  margin-top: 0;
 }
 
 .dash-doc-callout ul {

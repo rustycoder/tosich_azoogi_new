@@ -262,19 +262,37 @@
 
                 <div class="dash-doc-callout info">
                     <strong>Live Character & Word Count Guidance:</strong> CMS input fields and SEO meta forms feature real-time character and word count meters.
-                    <ul style="margin: 6px 0 0 16px; padding: 0;">
+                    <ul>
                         <li><strong>Recommendation Badges</strong> (e.g. <em>(50–60 chars recommended)</em> or <em>(15–30 words recommended)</em>) indicate ideal text density for search engines and typography grids.</li>
                         <li><strong>Dynamic Status Indicators</strong> update as you type: turning <span style="color: var(--dash-green-dark); font-weight: 600;">green (Optimal)</span> within range, showing remaining counts when under, or alerting <span style="color: #c4453c; font-weight: 600;">(+X over limit)</span> when exceeding maximum lengths.</li>
                     </ul>
                 </div>
 
-                <div class="dash-doc-callout warning">
-                    <strong>Accent & Outlined Text Formatting (Curly Braces <code>{}</code> Syntax):</strong>
-                    <p style="margin: 6px 0 0;">Wrap any words inside curly braces <code>{...}</code> in CMS text fields to apply dynamic visual highlights:</p>
-                    <ul style="margin: 6px 0 0 16px; padding: 0;">
-                        <li><strong>Hero Titles (<code>hero.title</code> / Slide Titles)</strong>: Words inside <code>{...}</code> are automatically styled with the signature <strong>outlined stroke font</strong> effect (e.g., <code>Get in {Touch}</code> or <code>Engineered Lighting {Infinite Scale}</code>).</li>
-                        <li><strong>All Other Text Fields (Section Headings, Paragraphs, Leads, Cards, Subtitles)</strong>: Words inside <code>{...}</code> are rendered in the vibrant <strong>brand accent color</strong> (e.g. <code>Why Choose {Azoogi}</code> or <code>Capabilities by {Sector}</code>).</li>
-                    </ul>
+                <h3>Accent & Outlined Text Formatting (Curly Braces <code>{}</code> Syntax)</h3>
+                <p>Wrap any word or phrase in curly braces <code>{...}</code> in CMS text fields to apply dynamic visual styling automatically:</p>
+
+                <div class="dash-doc-grid-cards">
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap" style="color: var(--dash-green-dark);">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
+                        </div>
+                        <h4>Hero Titles (Outlined Typography)</h4>
+                        <p>Words inside <code>{...}</code> in hero titles (<code>hero.title</code> / slide titles) are rendered in the signature <strong>outlined stroke font</strong>.</p>
+                        <div style="margin-top: 10px; font-size: 13px; background: var(--dash-fill); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--dash-border);">
+                            <code>Get in {Touch}</code> &rarr; <strong>Get in</strong> <span style="font-family: serif; -webkit-text-stroke: 1px currentColor; color: transparent; font-weight: 700; letter-spacing: .02em;">Touch</span>
+                        </div>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap" style="color: var(--dash-green-dark);">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+                        </div>
+                        <h4>All Other Text Fields (Brand Accent Color)</h4>
+                        <p>Words inside <code>{...}</code> in section titles, paragraphs, cards, subtitles, and leads are highlighted in the vibrant <strong>brand accent color</strong>.</p>
+                        <div style="margin-top: 10px; font-size: 13px; background: var(--dash-fill); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--dash-border);">
+                            <code>Why Choose {Azoogi}</code> &rarr; <strong>Why Choose</strong> <span style="color: var(--dash-green-dark); font-weight: 700;">Azoogi</span>
+                        </div>
+                    </div>
                 </div>
 
                 <h3>Managing Featured Projects</h3>
