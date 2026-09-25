@@ -773,15 +773,17 @@
       @endif
     </div>
     <div class="prod-hero-copy">
-      <h1{!! cms_style($meta, 'hero.title') !!}>
-        @if ($showCatalog && filled($selectedCategory))
-          {!! accent_html($selectedCategory) !!}
+      <h1{!! cms_style($meta, 'hero.title') !!} id="prodHeroTitle">
+        @if ($showCatalog && filled($selectedParentCategory['title'] ?? $selectedCategory))
+          {!! accent_html($selectedParentCategory['title'] ?? $selectedCategory) !!}
         @else
           {!! accent_html($meta->get('hero.title', 0, 'Our {Range}')) !!}
         @endif
       </h1>
-      <p class="prod-hero-lead"{!! cms_style($meta, 'hero.lead') !!}>
-        @if ($showCatalog)
+      <p class="prod-hero-lead"{!! cms_style($meta, 'hero.lead') !!} id="prodHeroLead">
+        @if ($showCatalog && filled($selectedParentCategory['body'] ?? null))
+          {!! accent_html($selectedParentCategory['body']) !!}
+        @elseif ($showCatalog)
           Explore our comprehensive range of commercial, architectural and smart LED lighting solutions.
         @else
           {!! accent_html($meta->get('hero.lead', 0, 'Explore the full Azoogi lighting catalogue. COB Strips, SMD Strips, Neon, Outdoor Lights, Aluminium Profiles, LED Drivers and more.')) !!}
@@ -898,6 +900,11 @@
 
 @if ($showCatalog)
   @push('scripts')
+    <script>
+      const PARENT_CATEGORIES = @json(collect($rangeItems)->mapWithKeys(fn($item) => [$item['title'] => ['title' => $item['title'], 'description' => $item['body'] ?? '']]));
+      const DEFAULT_HERO_TITLE = @json($meta->get('hero.title', 0, 'Our {Range}'));
+      const DEFAULT_CATALOG_LEAD = "Explore our comprehensive range of commercial, architectural and smart LED lighting solutions.";
+    </script>
     @verbatim
       <script>
         /* ===== PRODUCTS PAGE INTERACTION & CATALOG ===== */
@@ -1247,6 +1254,68 @@
           return false;
         }
 
+        function formatAccent(text) {
+          if (!text) return '';
+          return String(text).replace(/\{([^}]+)\}/g, '<span class="accent">$1</span>');
+        }
+
+        function treeHasCategory(children, catName) {
+          if (!children || !Array.isArray(children)) return false;
+          var lower = String(catName).trim().toLowerCase();
+          for (var i = 0; i < children.length; i++) {
+            var c = children[i];
+            if (!c) continue;
+            if (c.type === 'category' && c.name && c.name.trim().toLowerCase() === lower) {
+              return true;
+            }
+            if (c.children && treeHasCategory(c.children, catName)) {
+              return true;
+            }
+          }
+          return false;
+        }
+
+        function findRootParentCategory(catName) {
+          if (!catName) return null;
+          var lower = String(catName).trim().toLowerCase();
+          if (typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS.tree) {
+            for (var i = 0; i < AZOOGI_PRODUCTS.tree.length; i++) {
+              var root = AZOOGI_PRODUCTS.tree[i];
+              if (!root || root.type !== 'category') continue;
+              if (root.name && root.name.trim().toLowerCase() === lower) {
+                return root.name;
+              }
+              if (treeHasCategory(root.children, catName)) {
+                return root.name;
+              }
+            }
+          }
+          return catName;
+        }
+
+        function updateHeroBanner() {
+          var heroTitleEl = document.getElementById('prodHeroTitle');
+          var heroLeadEl = document.getElementById('prodHeroLead');
+          if (!heroTitleEl || !heroLeadEl) return;
+
+          var selectedCat = activeFilters.categories.length > 0 ? activeFilters.categories[0] : null;
+
+          if (selectedCat) {
+            var parentName = findRootParentCategory(selectedCat) || selectedCat;
+            var parentData = (typeof PARENT_CATEGORIES !== 'undefined' && PARENT_CATEGORIES[parentName]) ? PARENT_CATEGORIES[parentName] : null;
+            var titleText = parentName;
+            var leadText = (parentData && parentData.description) ? parentData.description : (typeof DEFAULT_CATALOG_LEAD !== 'undefined' ? DEFAULT_CATALOG_LEAD : '');
+
+            heroTitleEl.innerHTML = formatAccent(titleText);
+            heroLeadEl.innerHTML = formatAccent(leadText);
+          } else {
+            var defaultTitle = typeof DEFAULT_HERO_TITLE !== 'undefined' ? DEFAULT_HERO_TITLE : 'Our {Range}';
+            var defaultLead = typeof DEFAULT_CATALOG_LEAD !== 'undefined' ? DEFAULT_CATALOG_LEAD : '';
+            heroTitleEl.innerHTML = formatAccent(defaultTitle);
+            heroLeadEl.innerHTML = formatAccent(defaultLead);
+          }
+        }
+
         function toggleCategoryFilter(categoryName) {
           if (activeFilters.categories.length === 1 && activeFilters.categories[0] === categoryName) {
             activeFilters.categories = []; // Deselect if clicking active category
@@ -1255,6 +1324,7 @@
           }
           updateActiveCategoryClasses();
           renderFilterAccordion();
+          updateHeroBanner();
           updateActiveTags();
         }
 
@@ -1460,6 +1530,7 @@
             activeFilters.categories = activeFilters.categories.filter(function (x) { return x !== val; });
             updateActiveCategoryClasses();
             renderFilterAccordion();
+            updateHeroBanner();
           } else if (type === 'spec') {
             activeFilters.specs[group] = activeFilters.specs[group].filter(function (x) { return x !== val; });
             if (activeFilters.specs[group].length === 0) delete activeFilters.specs[group];
@@ -1478,6 +1549,7 @@
           activeFilters.specs = {};
           updateActiveCategoryClasses();
           renderFilterAccordion();
+          updateHeroBanner();
           updateActiveTags();
         }
 
@@ -1827,6 +1899,8 @@
               }
             });
           }
+
+          updateHeroBanner();
 
           // 6. Initial render
           renderFilterAccordion();

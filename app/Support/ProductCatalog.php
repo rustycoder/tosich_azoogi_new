@@ -111,6 +111,77 @@ class ProductCatalog
         return $categoryFallbackImages[$name] ?? '/assets/img/neon.webp';
     }
 
+    /**
+     * Find the root parent category name for a given category name from compiled tree or database.
+     */
+    public static function findRootParentCategory(string $categoryName): ?string
+    {
+        $categoryName = trim($categoryName);
+        if ($categoryName === '') {
+            return null;
+        }
+
+        $data = app(IProductRepository::class)->compiled();
+        $tree = $data['tree'] ?? [];
+
+        foreach ($tree as $node) {
+            if (! is_array($node) || ($node['type'] ?? '') !== 'category') {
+                continue;
+            }
+
+            $rootName = (string) ($node['name'] ?? '');
+            if (strcasecmp($rootName, $categoryName) === 0) {
+                return $rootName;
+            }
+
+            if (self::categoryTreeContains($node['children'] ?? [], $categoryName)) {
+                return $rootName;
+            }
+        }
+
+        // Fallback: check ProductCategory database hierarchy
+        $category = ProductCategory::query()->where('name', $categoryName)->first();
+        if ($category) {
+            $current = $category;
+            while ($current->parent_airtable_id) {
+                $parent = ProductCategory::query()->where('airtable_id', $current->parent_airtable_id)->first();
+                if (! $parent) {
+                    break;
+                }
+                $current = $parent;
+            }
+
+            return $current->name;
+        }
+
+        return $categoryName;
+    }
+
+    /**
+     * @param  array<int|string, mixed>  $children
+     */
+    private static function categoryTreeContains(array $children, string $categoryName): bool
+    {
+        foreach ($children as $child) {
+            if (! is_array($child)) {
+                continue;
+            }
+
+            $childName = (string) ($child['name'] ?? '');
+            if (($child['type'] ?? '') === 'category' && strcasecmp($childName, $categoryName) === 0) {
+                return true;
+            }
+
+            if (! empty($child['children']) && is_array($child['children'])) {
+                if (self::categoryTreeContains($child['children'], $categoryName)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     private static function rangeImage(?string $image, string $name = ''): string
     {
         if ($image === null || $image === '') {
