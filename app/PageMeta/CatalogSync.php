@@ -54,6 +54,19 @@ final class CatalogSync
                 );
             }
 
+            foreach ($definition->fields() as $field) {
+                if ($field->group === null) {
+                    PageMeta::query()->firstOrCreate(
+                        [
+                            'page_id' => $page->id,
+                            'key' => $field->key,
+                            'sort_order' => 0,
+                        ],
+                        ['value' => ''],
+                    );
+                }
+            }
+
             if ($allowed !== []) {
                 PageMeta::query()
                     ->where('page_id', $page->id)
