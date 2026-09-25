@@ -9,7 +9,7 @@
 /* —— Products Hero —— */
 .prod-hero {
   position: relative;
-  min-height: var(--hero-min);
+  min-height: var(--hero-max);
   display: grid;
   align-items: end;
   overflow: hidden;

@@ -269,7 +269,7 @@ class PageTest extends TestCase
 
         $this->assertNotFalse($css);
         $this->assertMatchesRegularExpression(
-            '/\.audience-hero\s*\{[^}]*min-height:\s*var\(--hero-min\)/s',
+            '/\.audience-hero\s*\{[^}]*min-height:\s*var\(--hero-max\)/s',
             $css,
         );
         $this->assertMatchesRegularExpression(

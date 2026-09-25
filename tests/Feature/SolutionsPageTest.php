@@ -34,7 +34,7 @@ class SolutionsPageTest extends TestCase
 
         $this->assertNotFalse($css);
         $this->assertMatchesRegularExpression(
-            '/\.solutions-hero\s*\{[^}]*min-height:\s*var\(--hero-min\)/s',
+            '/\.solutions-hero\s*\{[^}]*min-height:\s*var\(--hero-max\)/s',
             $css,
         );
         $this->assertMatchesRegularExpression(

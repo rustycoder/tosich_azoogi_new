@@ -157,15 +157,15 @@ class SectionSpacingTest extends TestCase
 
         if ($expectsMinHeight) {
             $this->assertMatchesRegularExpression(
-                '/'.preg_quote($selector, '/').'\s*\{[^}]*min-height:\s*var\(--hero-min\)/s',
+                '/'.preg_quote($selector, '/').'\s*\{[^}]*min-height:\s*var\(--hero-max\)/s',
                 $css,
-                $selector.' in '.$path.' should use --hero-min.',
+                $selector.' in '.$path.' should use --hero-max.',
             );
         } else {
             $this->assertDoesNotMatchRegularExpression(
-                '/'.preg_quote($selector, '/').'\s*\{[^}]*min-height:\s*var\(--hero-min\)/s',
+                '/'.preg_quote($selector, '/').'\s*\{[^}]*min-height:\s*var\(--hero-max\)/s',
                 $css,
-                $selector.' in '.$path.' should size to copy, not --hero-min.',
+                $selector.' in '.$path.' should size to copy, not --hero-max.',
             );
         }
 

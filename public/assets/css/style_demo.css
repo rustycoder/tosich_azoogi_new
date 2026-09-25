@@ -74,6 +74,7 @@
 @media (max-width: 640px) {
     :root {
         --hero-min: min(58vh, 420px);
+        --hero-max: min(65vh, 480px);
         --hero-pad-y-top: 160px;
         --hero-pad-y-bottom: 32px;
         --hero-pad-x: 18px;
@@ -3663,7 +3664,7 @@ a.mega-variant-card:after {
 /* ====== Contact page ====== */
 .contact-hero {
     position: relative;
-    min-height: var(--hero-min);
+    min-height: var(--hero-max);
     display: grid;
     align-items: end;
     overflow: hidden;

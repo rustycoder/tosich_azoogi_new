@@ -19,7 +19,7 @@
 .mx-hero {
     position: relative;
     height: 80vh;
-    min-height: 80vh;
+    min-height: var(--hero-max);
     display: grid;
     align-items: end;
     overflow: hidden;
