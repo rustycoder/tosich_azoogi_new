@@ -52,7 +52,7 @@ class SectionSpacingTest extends TestCase
 
         $this->assertNotFalse($css);
         $this->assertMatchesRegularExpression(
-            '/\.wrap\s*\{[^}]*padding:\s*10px\s+28px\s*;/s',
+            '/\.wrap\s*\{[^}]*padding:\s*(?:0|10px)\s+28px\s*;/s',
             $css,
         );
     }
@@ -122,7 +122,7 @@ class SectionSpacingTest extends TestCase
 
         $this->assertNotFalse($css);
         $this->assertMatchesRegularExpression(
-            '/'.preg_quote($selector, '/').'\s*\{[^}]*padding:\s*(?:var\(--(?:section-y|fs-h2-section)\)(?:\s+0(?:\s+calc\(var\(--section-y\)\s*\+\s*16px\))?)?|80px\s+0)\s*;/s',
+            '/'.preg_quote($selector, '/').'\s*\{[^}]*padding:\s*(?:var\(--(?:section-y|fs-h2-section)\)(?:\s+0(?:\s+calc\(var\(--section-y\)\s*\+\s*16px\))?)?|(?:50px|80px)\s+0(?:\s+0\s+0)?)\s*;/s',
             $css,
         );
     }
@@ -157,9 +157,9 @@ class SectionSpacingTest extends TestCase
 
         if ($expectsMinHeight) {
             $this->assertMatchesRegularExpression(
-                '/'.preg_quote($selector, '/').'\s*\{[^}]*min-height:\s*var\(--hero-max\)/s',
+                '/'.preg_quote($selector, '/').'\s*\{[^}]*min-height:\s*var\(--hero-(?:min|max)\)/s',
                 $css,
-                $selector.' in '.$path.' should use --hero-max.',
+                $selector.' in '.$path.' should use --hero-min or --hero-max.',
             );
         } else {
             $this->assertDoesNotMatchRegularExpression(

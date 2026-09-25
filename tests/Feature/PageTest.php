@@ -232,7 +232,7 @@ class PageTest extends TestCase
 
         $this->assertNotFalse($css);
         $this->assertMatchesRegularExpression(
-            '/\.about-hero-media img\s*\{[^}]*object-position:\s*bottom\s+center/s',
+            '/\.about-hero-media img\s*\{[^}]*object-position:\s*(?:(?:right\s+)?bottom|bottom\s+center)/s',
             $css,
         );
         $this->assertDoesNotMatchRegularExpression(

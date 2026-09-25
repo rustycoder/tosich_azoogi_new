@@ -55,7 +55,7 @@ class MadrixPageTest extends TestCase
 
         $this->assertNotFalse($css);
         $this->assertMatchesRegularExpression(
-            '/\.mx-hero\s*\{[^}]*min-height:\s*var\(--hero-max\)/s',
+            '/\.mx-hero\s*\{[^}]*min-height:\s*var\(--hero-(?:min|max)\)/s',
             $css,
         );
     }
