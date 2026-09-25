@@ -10,7 +10,7 @@
 /* —— Hero —— */
 .solutions-hero {
   position: relative;
-  min-height: var(--hero-max);
+  min-height: var(--hero-min);
   display: grid;
   align-items: end;
   overflow: hidden;
@@ -120,7 +120,6 @@
 
 .solutions-eco-head h2 {
   margin: 0 auto 10px;
-  max-width: 30ch;
   font-family: var(--font-sans);
   font-weight: 500;
   font-size: var(--fs-h2-section);
@@ -132,7 +131,6 @@
 .solutions-eco-head p {
   margin: 0 auto;
   padding: 0;
-  max-width: 60ch;
   font-size: var(--fs-body);
   font-style: italic;
   line-height: 1.6;
