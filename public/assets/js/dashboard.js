@@ -1081,16 +1081,21 @@
             const parts = file.type.split('/');
             if (parts[1]) return parts[1].replace('+xml', '').toUpperCase();
         }
-        const nameParts = file.name.split('.');
-        return nameParts.length > 1 ? nameParts.pop().toUpperCase() : 'IMAGE';
+    const formatDuration = (seconds) => {
+        if (!seconds || isNaN(seconds)) return '';
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
     };
 
-    const initImageDropzones = (container = document) => {
-        // Auto-measure any existing preview cards on page
+    const initMediaDropzones = (container = document) => {
+        // Auto-measure any existing preview cards on page (Images & Videos)
         container.querySelectorAll('.dash-preview-card:not([data-measured])').forEach((card) => {
             card.setAttribute('data-measured', 'true');
-            const img = card.querySelector('.dash-preview-thumb');
+            const img = card.querySelector('img.dash-preview-thumb');
+            const video = card.querySelector('video.dash-preview-thumb');
             const badges = card.querySelector('.dash-preview-badges');
+
             if (img && badges && !badges.querySelector('.is-dimensions')) {
                 const measureImg = new Image();
                 measureImg.onload = () => {
@@ -1113,9 +1118,41 @@
                 };
                 measureImg.src = img.src;
             }
+
+            if (video && badges) {
+                const applyVideoMeta = () => {
+                    const w = video.videoWidth;
+                    const h = video.videoHeight;
+                    if (w && h && !badges.querySelector('.is-dimensions')) {
+                        const dimBadge = document.createElement('span');
+                        dimBadge.className = 'dash-preview-badge is-dimensions';
+                        dimBadge.textContent = `${w} × ${h} px`;
+                        badges.appendChild(dimBadge);
+
+                        const ratio = formatAspectRatio(w, h);
+                        if (ratio && !badges.querySelector('.is-ratio')) {
+                            const ratioBadge = document.createElement('span');
+                            ratioBadge.className = 'dash-preview-badge is-ratio';
+                            ratioBadge.textContent = ratio;
+                            badges.appendChild(ratioBadge);
+                        }
+                    }
+                    if (video.duration && !badges.querySelector('.is-duration')) {
+                        const durBadge = document.createElement('span');
+                        durBadge.className = 'dash-preview-badge is-duration';
+                        durBadge.textContent = formatDuration(video.duration);
+                        badges.appendChild(durBadge);
+                    }
+                };
+                if (video.readyState >= 1) {
+                    applyVideoMeta();
+                } else {
+                    video.addEventListener('loadedmetadata', applyVideoMeta, { once: true });
+                }
+            }
         });
 
-        container.querySelectorAll('[data-image-dropzone]').forEach((zone) => {
+        container.querySelectorAll('[data-image-dropzone], [data-media-dropzone], [data-video-dropzone]').forEach((zone) => {
             if (zone.dataset.dropzoneInitialized) return;
             zone.dataset.dropzoneInitialized = 'true';
 
@@ -1167,19 +1204,30 @@
                 }
 
                 files.forEach((file, index) => {
+                    const isVideo = file.type.startsWith('video/') || /\.(mp4|webm|mov|ogg)$/i.test(file.name);
                     const card = document.createElement('div');
                     card.className = 'dash-preview-card';
 
                     const thumbWrap = document.createElement('div');
                     thumbWrap.className = 'dash-preview-thumb-wrap';
 
-                    const img = document.createElement('img');
-                    img.className = 'dash-preview-thumb';
-                    img.alt = file.name;
-
                     const objectUrl = URL.createObjectURL(file);
-                    img.src = objectUrl;
-                    thumbWrap.appendChild(img);
+                    let mediaEl;
+
+                    if (isVideo) {
+                        mediaEl = document.createElement('video');
+                        mediaEl.className = 'dash-preview-thumb';
+                        mediaEl.muted = true;
+                        mediaEl.playsInline = true;
+                        mediaEl.preload = 'metadata';
+                        mediaEl.src = objectUrl;
+                    } else {
+                        mediaEl = document.createElement('img');
+                        mediaEl.className = 'dash-preview-thumb';
+                        mediaEl.alt = file.name;
+                        mediaEl.src = objectUrl;
+                    }
+                    thumbWrap.appendChild(mediaEl);
 
                     const info = document.createElement('div');
                     info.className = 'dash-preview-info';
@@ -1213,14 +1261,53 @@
                     badges.appendChild(dimBadge);
                     badges.appendChild(ratioBadge);
 
+                    if (isVideo) {
+                        const durBadge = document.createElement('span');
+                        durBadge.className = 'dash-preview-badge is-duration';
+                        durBadge.style.display = 'none';
+                        badges.appendChild(durBadge);
+
+                        mediaEl.addEventListener('loadedmetadata', () => {
+                            const w = mediaEl.videoWidth;
+                            const h = mediaEl.videoHeight;
+                            if (w && h) {
+                                dimBadge.textContent = `${w} × ${h} px`;
+                                const ratio = formatAspectRatio(w, h);
+                                if (ratio) {
+                                    ratioBadge.textContent = ratio;
+                                    ratioBadge.style.display = 'inline-flex';
+                                }
+                            } else {
+                                dimBadge.textContent = 'Video file';
+                            }
+                            if (mediaEl.duration) {
+                                durBadge.textContent = formatDuration(mediaEl.duration);
+                                durBadge.style.display = 'inline-flex';
+                            }
+                        });
+                    } else {
+                        const measureImg = new Image();
+                        measureImg.onload = () => {
+                            const w = measureImg.naturalWidth;
+                            const h = measureImg.naturalHeight;
+                            dimBadge.textContent = `${w} × ${h} px`;
+                            const ratio = formatAspectRatio(w, h);
+                            if (ratio) {
+                                ratioBadge.textContent = ratio;
+                                ratioBadge.style.display = 'inline-flex';
+                            }
+                        };
+                        measureImg.src = objectUrl;
+                    }
+
                     info.appendChild(filename);
                     info.appendChild(badges);
 
                     const removeBtn = document.createElement('button');
                     removeBtn.type = 'button';
                     removeBtn.className = 'dash-preview-remove';
-                    removeBtn.title = 'Remove image';
-                    removeBtn.setAttribute('aria-label', 'Remove image');
+                    removeBtn.title = 'Remove file';
+                    removeBtn.setAttribute('aria-label', 'Remove file');
                     removeBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>`;
 
                     removeBtn.addEventListener('click', (e) => {
@@ -1246,19 +1333,6 @@
                     card.appendChild(info);
                     card.appendChild(removeBtn);
                     previews.appendChild(card);
-
-                    const measureImg = new Image();
-                    measureImg.onload = () => {
-                        const w = measureImg.naturalWidth;
-                        const h = measureImg.naturalHeight;
-                        dimBadge.textContent = `${w} × ${h} px`;
-                        const ratio = formatAspectRatio(w, h);
-                        if (ratio) {
-                            ratioBadge.textContent = ratio;
-                            ratioBadge.style.display = 'inline-flex';
-                        }
-                    };
-                    measureImg.src = objectUrl;
                 });
             };
 
@@ -1266,19 +1340,22 @@
         });
     };
 
+    const initImageDropzones = initMediaDropzones;
     window.initLiveCounters = initLiveCounters;
-    window.initImageDropzones = initImageDropzones;
+    window.initImageDropzones = initMediaDropzones;
+    window.initMediaDropzones = initMediaDropzones;
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             initLiveCounters();
-            initImageDropzones();
+            initMediaDropzones();
         });
     } else {
         initLiveCounters();
-        initImageDropzones();
+        initMediaDropzones();
     }
 })();
+
 
 
 
