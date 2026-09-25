@@ -43,7 +43,8 @@
     opacity: 1;
 }
 
-.mx-hero-slide img {
+.mx-hero-slide img,
+.mx-hero-slide video {
     width: 100%;
     height: 100%;
     object-fit: cover;

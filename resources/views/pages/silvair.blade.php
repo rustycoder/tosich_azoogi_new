@@ -32,7 +32,15 @@
 
   <section class="sv-hero" {!! cms_section_attr('hero') !!}>
     <div class="sv-hero-media" aria-hidden="true">
-      <img src="{{ media_url($meta->get('hero.image')) }}" alt="" loading="eager">
+      @if (filled($meta->get('hero.video')))
+        <video class="sv-hero-video" autoplay muted loop playsinline preload="auto" poster="{{ media_url($meta->get('hero.poster', 0, $meta->get('hero.image')) ?: '') }}">
+          <source src="{{ media_url($meta->get('hero.video')) }}" type="{{ video_mime_type($meta->get('hero.video')) }}">
+        </video>
+      @elseif (filled($meta->get('hero.image')))
+        <img src="{{ media_url($meta->get('hero.image')) }}" alt="" loading="eager">
+      @elseif (filled($meta->get('hero.poster')))
+        <img src="{{ media_url($meta->get('hero.poster')) }}" alt="" loading="eager">
+      @endif
     </div>
     <div class="sv-hero-copy">
       @if ($silvairLogo !== '')

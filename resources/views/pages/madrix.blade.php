@@ -34,10 +34,21 @@
   <section class="mx-hero" {!! cms_section_attr('slide') !!}>
     <div class="mx-hero-slides" data-mx-slider>
       @foreach ($slides as $slide)
-        @php $image = media_url($slide['image'] ?? ''); @endphp
-        @if ($image !== '')
+        @php
+          $videoPath = $slide['video'] ?? '';
+          $imagePath = $slide['image'] ?? '';
+          $videoUrl = filled($videoPath) ? media_url($videoPath) : '';
+          $imageUrl = filled($imagePath) ? media_url($imagePath) : '';
+        @endphp
+        @if ($videoUrl !== '')
           <div class="mx-hero-slide{{ $loop->first ? ' is-active' : '' }}">
-            <img src="{{ $image }}" alt="{{ $slide['alt'] ?? '' }}" @if ($loop->first) fetchpriority="high" @else loading="lazy" @endif>
+            <video class="mx-hero-video" autoplay muted loop playsinline preload="auto" poster="{{ $imageUrl }}">
+              <source src="{{ $videoUrl }}" type="{{ video_mime_type($videoPath) }}">
+            </video>
+          </div>
+        @elseif ($imageUrl !== '')
+          <div class="mx-hero-slide{{ $loop->first ? ' is-active' : '' }}">
+            <img src="{{ $imageUrl }}" alt="{{ $slide['alt'] ?? '' }}" @if ($loop->first) fetchpriority="high" @else loading="lazy" @endif>
           </div>
         @endif
       @endforeach

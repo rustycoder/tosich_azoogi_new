@@ -32,6 +32,8 @@ class CasambiDefinition implements PageDefinition
     {
         return [
             Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
+            Field::video('hero.video', 'Hero video'),
+            Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
             Field::image('slide.image', 'Slide image', true, 'slide', ImageSize::Banner),
             Field::text('slide.alt', 'Slide alt', true, 'slide'),
             Field::image('hero.logo', 'Casambi logo', hint: ImageSize::Logo),

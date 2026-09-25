@@ -34,6 +34,8 @@ class AiLightingDefinition implements PageDefinition
             Field::textarea('hero.title', 'Hero title', typographic: false),
             Field::textarea('hero.lead', 'Hero lead', typographic: false),
             Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
+            Field::video('hero.video', 'Hero video'),
+            Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
             Field::text('caps.kicker', 'Caps kicker'),
             Field::textarea('caps.heading', 'Caps heading'),
             Field::textarea('caps.body', 'Caps body'),

@@ -19,7 +19,15 @@
 <main class="projects-main">
   <section class="projects-hero" {!! cms_section_attr('hero') !!}>
     <div class="projects-hero-media" aria-hidden="true">
-      <img src="{{ media_url($meta->get('hero.image')) }}" alt="" loading="eager">
+      @if (filled($meta->get('hero.video')))
+        <video class="projects-hero-video" autoplay muted loop playsinline preload="auto" poster="{{ media_url($meta->get('hero.poster', 0, $meta->get('hero.image')) ?: '') }}">
+          <source src="{{ media_url($meta->get('hero.video')) }}" type="{{ video_mime_type($meta->get('hero.video')) }}">
+        </video>
+      @elseif (filled($meta->get('hero.image')))
+        <img src="{{ media_url($meta->get('hero.image')) }}" alt="" loading="eager">
+      @elseif (filled($meta->get('hero.poster')))
+        <img src="{{ media_url($meta->get('hero.poster')) }}" alt="" loading="eager">
+      @endif
     </div>
     <div class="projects-hero-copy">
       <h1{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title', 0, 'Projects Powered by {Azoogi}')) !!}</h1>

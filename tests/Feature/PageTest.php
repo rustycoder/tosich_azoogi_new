@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\Page;
+use App\Models\PageMeta;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Database\Seeders\PageSeeder;
@@ -401,5 +403,42 @@ class PageTest extends TestCase
             ->assertSee('<h4>NEON</h4>', false)
             ->assertSee('<h4>Profiles</h4>', false)
             ->assertSee('/products?category=NEON', false);
+    }
+
+    public function test_hero_banner_renders_video_when_configured(): void
+    {
+        $pages = [
+            'about' => '/about',
+            'casambi' => '/casambi',
+            'silvair' => '/silvair',
+            'solutions' => '/solutions',
+            'dali-centre' => '/dali-centre',
+            'data-centre' => '/data-centre',
+            'contact' => '/contact',
+            'ai-lighting' => '/ai-lighting',
+            'led-strip-calculator' => '/led-strip-calculator',
+            'products' => '/products',
+            'projects' => '/projects',
+            'architect-designer' => '/architect-designer',
+        ];
+
+        foreach ($pages as $slug => $uri) {
+            $page = Page::query()->where('slug', $slug)->firstOrFail();
+
+            PageMeta::query()->updateOrCreate(
+                ['page_id' => $page->id, 'key' => 'hero.video', 'sort_order' => 0],
+                ['value' => 'assets/video/sample.mp4']
+            );
+            PageMeta::query()->updateOrCreate(
+                ['page_id' => $page->id, 'key' => 'hero.poster', 'sort_order' => 0],
+                ['value' => 'assets/img/sample-poster.jpg']
+            );
+
+            $this->get($uri)
+                ->assertOk()
+                ->assertSee('assets/video/sample.mp4', false)
+                ->assertSee('assets/img/sample-poster.jpg', false)
+                ->assertSee('<video', false);
+        }
     }
 }

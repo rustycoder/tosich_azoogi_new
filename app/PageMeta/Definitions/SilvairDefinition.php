@@ -32,6 +32,8 @@ class SilvairDefinition implements PageDefinition
     {
         return [
             Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
+            Field::video('hero.video', 'Hero video'),
+            Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
             Field::image('hero.logo', 'Silvair logo', hint: ImageSize::Logo),
             Field::textarea('hero.title', 'Hero title', typographic: false),
             Field::textarea('hero.lead', 'Hero lead', typographic: false),

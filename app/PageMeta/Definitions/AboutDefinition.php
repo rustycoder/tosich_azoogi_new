@@ -34,6 +34,8 @@ class AboutDefinition implements PageDefinition
             Field::textarea('hero.title', 'Hero title', typographic: false),
             Field::textarea('hero.lead', 'Hero intro', typographic: false),
             Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
+            Field::video('hero.video', 'Hero video'),
+            Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
             Field::textarea('intro.body', 'Intro', typographic: false),
             Field::text('intro.cta.label', 'Intro CTA'),
             Field::url('intro.cta.href', 'Intro CTA link'),

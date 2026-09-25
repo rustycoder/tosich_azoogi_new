@@ -32,6 +32,7 @@ class MadrixDefinition implements PageDefinition
     {
         return [
             Field::image('slide.image', 'Slide image', true, 'slide', ImageSize::Hero),
+            Field::video('slide.video', 'Slide video', true, 'slide'),
             Field::text('slide.alt', 'Slide alt', true, 'slide'),
             Field::textarea('hero.title', 'Hero title', typographic: false),
             Field::textarea('hero.lead', 'Hero lead', typographic: false),

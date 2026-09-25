@@ -26,6 +26,8 @@ abstract class AudiencePageDefinition implements PageDefinition
     {
         return [
             Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
+            Field::video('hero.video', 'Hero video'),
+            Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
             Field::text('hero.eyebrow', 'Eyebrow', typographic: false),
             Field::text('hero.title', 'Title', typographic: false),
             Field::textarea('hero.lead', 'Lead paragraph', true, 'hero.lead', typographic: false),

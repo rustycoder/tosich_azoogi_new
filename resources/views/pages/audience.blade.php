@@ -35,7 +35,15 @@
 <main class="audience-main" id="audienceRoot">
   <section class="audience-hero" {!! cms_section_attr('hero') !!}>
     <div class="audience-hero-media" aria-hidden="true">
-      <img src="{{ media_url($heroImage) }}" alt="" loading="eager" decoding="async">
+      @if (filled($meta->get('hero.video')))
+        <video class="audience-hero-video" autoplay muted loop playsinline preload="auto" poster="{{ media_url($meta->get('hero.poster', 0, $heroImage) ?: '') }}">
+          <source src="{{ media_url($meta->get('hero.video')) }}" type="{{ video_mime_type($meta->get('hero.video')) }}">
+        </video>
+      @elseif (filled($heroImage))
+        <img src="{{ media_url($heroImage) }}" alt="" loading="eager" decoding="async">
+      @elseif (filled($meta->get('hero.poster')))
+        <img src="{{ media_url($meta->get('hero.poster')) }}" alt="" loading="eager" decoding="async">
+      @endif
     </div>
     <div class="audience-hero-copy">
       <h1 class="h2 audience-hero-title"{!! cms_style($meta, 'hero.title') !!}>

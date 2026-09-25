@@ -3677,7 +3677,8 @@ a.mega-variant-card:after {
     inset: 0;
 }
 
-.contact-hero-media img {
+.contact-hero-media img,
+.contact-hero-video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -3688,7 +3689,8 @@ a.mega-variant-card:after {
     transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.contact-hero.in .contact-hero-media img {
+.contact-hero.in .contact-hero-media img,
+.contact-hero.in .contact-hero-video {
     transform: scale(1);
 }
 
