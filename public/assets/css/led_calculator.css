@@ -2,7 +2,7 @@
 
 .calc-hero {
   position: relative;
-  min-height: var(--hero-max);
+  min-height: var(--hero-min);
   display: grid;
   align-items: end;
   overflow: hidden;
@@ -85,7 +85,7 @@
 }
 
 .calc-selector {
-  padding: var(--section-y) 0 calc(var(--section-y) + 16px);
+  padding: 50px 0;
   scroll-margin-top: 100px;
 }
 
@@ -284,7 +284,7 @@
 
 /* Results */
 .calc-results {
-  padding: 12px 0 56px;
+  padding: 50px 0;
   scroll-margin-top: 100px;
 }
 

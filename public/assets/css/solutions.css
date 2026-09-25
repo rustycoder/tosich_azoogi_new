@@ -110,7 +110,7 @@
 
 /* —— Control ecosystems —— */
 .solutions-eco {
-  padding: var(--section-y) 0;
+  padding: 50px 0;
 }
 
 .solutions-eco-head {
@@ -298,7 +298,7 @@
 
 /* —— Capabilities by sector —— */
 .solutions-sectors {
-  padding: var(--section-y) 0 calc(var(--section-y) + 16px);
+  padding: 50px 0;
   background: var(--card-bg);
 }
 
