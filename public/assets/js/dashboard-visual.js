@@ -87,6 +87,9 @@
             if (window.initLiveCounters) {
                 window.initLiveCounters(drawer);
             }
+            if (window.initImageDropzones) {
+                window.initImageDropzones(drawer);
+            }
         }, 50);
     };
 

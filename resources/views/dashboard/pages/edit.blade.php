@@ -50,17 +50,50 @@
                 @error('meta_description')<p class="login-error">{{ $message }}</p>@enderror
             </div>
             <div class="dash-field">
-                <label for="og_image_file">Social Share Image (OG Image) <small>(1200×630px recommended)</small></label>
-                @if (!empty($page->og_image))
-                    <div style="margin-bottom: 8px; display: flex; align-items: center; gap: 12px;">
-                        <img src="{{ media_url($page->og_image) }}" alt="OG Preview" style="width: 80px; height: 45px; object-fit: cover; border-radius: 4px; border: 1px solid var(--dash-line);">
-                        <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer; text-transform: none; letter-spacing: 0;">
-                            <input type="checkbox" name="remove_og_image" value="1">
-                            Remove current image
-                        </label>
+                <label for="og_image_file">Social Share Image (OG Image) <small class="dash-field-rec">(1200×630px recommended)</small></label>
+                <div class="dash-dropzone" data-image-dropzone>
+                    @if (!empty($page->og_image))
+                        @php
+                            $ogInfo = media_file_info($page->og_image);
+                        @endphp
+                        <div class="dash-dropzone-previews">
+                            <div class="dash-preview-card">
+                                <div class="dash-preview-thumb-wrap" style="width: 100px; height: 56px;">
+                                    <img class="dash-preview-thumb" src="{{ media_url($page->og_image) }}" alt="OG Preview">
+                                </div>
+                                <div class="dash-preview-info">
+                                    <div class="dash-preview-filename" title="{{ basename($page->og_image) }}">{{ basename($page->og_image) }}</div>
+                                    <div class="dash-preview-badges">
+                                        <span class="dash-preview-badge is-format">{{ $ogInfo['format'] ?? 'IMAGE' }}</span>
+                                        @if (!empty($ogInfo['size']))
+                                            <span class="dash-preview-badge">{{ $ogInfo['size'] }}</span>
+                                        @endif
+                                        @if (!empty($ogInfo['dimensions']))
+                                            <span class="dash-preview-badge is-dimensions">{{ $ogInfo['dimensions'] }}</span>
+                                        @endif
+                                        @if (!empty($ogInfo['aspect_ratio']))
+                                            <span class="dash-preview-badge is-ratio">{{ $ogInfo['aspect_ratio'] }}</span>
+                                        @endif
+                                        <span class="dash-preview-badge">Current file</span>
+                                    </div>
+                                    <label style="font-size: 11.5px; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; color: #c4453c; margin-top: 2px;">
+                                        <input type="checkbox" name="remove_og_image" value="1">
+                                        Remove on save
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                    <div class="dash-dropzone-box">
+                        <input id="og_image_file" class="dash-dropzone-input" name="og_image_file" type="file" accept="image/png,image/jpeg,image/webp">
+                        <div class="dash-dropzone-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        </div>
+                        <div class="dash-dropzone-text"><strong>Choose an OG image</strong> or drag and drop</div>
+                        <span class="dash-dropzone-sub">WEBP, JPG, PNG (1200×630px optimal)</span>
                     </div>
-                @endif
-                <input id="og_image_file" name="og_image_file" type="file" accept="image/png,image/jpeg,image/webp">
+                    <div class="dash-dropzone-previews" hidden></div>
+                </div>
                 @error('og_image_file')<p class="login-error">{{ $message }}</p>@enderror
             </div>
         </div>

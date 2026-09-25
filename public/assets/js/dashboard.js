@@ -1046,12 +1046,239 @@
         });
     };
 
+    // Image Dropzone & Live Previews with Metadata Badges
+    const formatBytes = (bytes, decimals = 1) => {
+        if (!bytes || bytes === 0) return '0 B';
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ['B', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    };
+
+    const formatAspectRatio = (width, height) => {
+        if (!width || !height) return '';
+        const ratio = width / height;
+        if (Math.abs(ratio - 16 / 9) < 0.03) return '16:9';
+        if (Math.abs(ratio - 4 / 3) < 0.03) return '4:3';
+        if (Math.abs(ratio - 3 / 2) < 0.03) return '3:2';
+        if (Math.abs(ratio - 1 / 1) < 0.02) return '1:1';
+        if (Math.abs(ratio - 21 / 9) < 0.03) return '21:9';
+        if (Math.abs(ratio - 9 / 16) < 0.03) return '9:16';
+
+        const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
+        const d = gcd(width, height);
+        const rW = width / d;
+        const rH = height / d;
+        if (rW <= 20 && rH <= 20) {
+            return `${rW}:${rH}`;
+        }
+        return `${ratio.toFixed(2)}:1`;
+    };
+
+    const getFileFormatBadge = (file) => {
+        if (file.type) {
+            const parts = file.type.split('/');
+            if (parts[1]) return parts[1].replace('+xml', '').toUpperCase();
+        }
+        const nameParts = file.name.split('.');
+        return nameParts.length > 1 ? nameParts.pop().toUpperCase() : 'IMAGE';
+    };
+
+    const initImageDropzones = (container = document) => {
+        // Auto-measure any existing preview cards on page
+        container.querySelectorAll('.dash-preview-card:not([data-measured])').forEach((card) => {
+            card.setAttribute('data-measured', 'true');
+            const img = card.querySelector('.dash-preview-thumb');
+            const badges = card.querySelector('.dash-preview-badges');
+            if (img && badges && !badges.querySelector('.is-dimensions')) {
+                const measureImg = new Image();
+                measureImg.onload = () => {
+                    const w = measureImg.naturalWidth;
+                    const h = measureImg.naturalHeight;
+                    if (w && h) {
+                        const dimBadge = document.createElement('span');
+                        dimBadge.className = 'dash-preview-badge is-dimensions';
+                        dimBadge.textContent = `${w} × ${h} px`;
+                        badges.appendChild(dimBadge);
+
+                        const ratio = formatAspectRatio(w, h);
+                        if (ratio && !badges.querySelector('.is-ratio')) {
+                            const ratioBadge = document.createElement('span');
+                            ratioBadge.className = 'dash-preview-badge is-ratio';
+                            ratioBadge.textContent = ratio;
+                            badges.appendChild(ratioBadge);
+                        }
+                    }
+                };
+                measureImg.src = img.src;
+            }
+        });
+
+        container.querySelectorAll('[data-image-dropzone]').forEach((zone) => {
+            if (zone.dataset.dropzoneInitialized) return;
+            zone.dataset.dropzoneInitialized = 'true';
+
+            const input = zone.querySelector('input[type="file"]');
+            const prompt = zone.querySelector('.dash-dropzone-box');
+            const previews = zone.querySelector('.dash-dropzone-previews');
+            const isMultiple = input && input.hasAttribute('multiple');
+
+            if (!input || !previews) return;
+
+            ['dragenter', 'dragover'].forEach((eventName) => {
+                zone.addEventListener(eventName, (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    zone.classList.add('is-dragover');
+                });
+            });
+
+            ['dragleave', 'drop'].forEach((eventName) => {
+                zone.addEventListener(eventName, (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    zone.classList.remove('is-dragover');
+                });
+            });
+
+            zone.addEventListener('drop', (e) => {
+                const dt = e.dataTransfer;
+                if (dt && dt.files && dt.files.length) {
+                    input.files = dt.files;
+                    renderPreviews();
+                    input.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            });
+
+            const renderPreviews = () => {
+                previews.innerHTML = '';
+                const files = Array.from(input.files || []);
+
+                if (files.length === 0) {
+                    previews.hidden = true;
+                    if (prompt) prompt.style.display = '';
+                    return;
+                }
+
+                previews.hidden = false;
+                if (!isMultiple && prompt) {
+                    prompt.style.display = 'none';
+                }
+
+                files.forEach((file, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'dash-preview-card';
+
+                    const thumbWrap = document.createElement('div');
+                    thumbWrap.className = 'dash-preview-thumb-wrap';
+
+                    const img = document.createElement('img');
+                    img.className = 'dash-preview-thumb';
+                    img.alt = file.name;
+
+                    const objectUrl = URL.createObjectURL(file);
+                    img.src = objectUrl;
+                    thumbWrap.appendChild(img);
+
+                    const info = document.createElement('div');
+                    info.className = 'dash-preview-info';
+
+                    const filename = document.createElement('div');
+                    filename.className = 'dash-preview-filename';
+                    filename.textContent = file.name;
+                    filename.title = file.name;
+
+                    const badges = document.createElement('div');
+                    badges.className = 'dash-preview-badges';
+
+                    const formatBadge = document.createElement('span');
+                    formatBadge.className = 'dash-preview-badge is-format';
+                    formatBadge.textContent = getFileFormatBadge(file);
+
+                    const sizeBadge = document.createElement('span');
+                    sizeBadge.className = 'dash-preview-badge';
+                    sizeBadge.textContent = formatBytes(file.size);
+
+                    const dimBadge = document.createElement('span');
+                    dimBadge.className = 'dash-preview-badge is-dimensions';
+                    dimBadge.textContent = 'Measuring...';
+
+                    const ratioBadge = document.createElement('span');
+                    ratioBadge.className = 'dash-preview-badge is-ratio';
+                    ratioBadge.style.display = 'none';
+
+                    badges.appendChild(formatBadge);
+                    badges.appendChild(sizeBadge);
+                    badges.appendChild(dimBadge);
+                    badges.appendChild(ratioBadge);
+
+                    info.appendChild(filename);
+                    info.appendChild(badges);
+
+                    const removeBtn = document.createElement('button');
+                    removeBtn.type = 'button';
+                    removeBtn.className = 'dash-preview-remove';
+                    removeBtn.title = 'Remove image';
+                    removeBtn.setAttribute('aria-label', 'Remove image');
+                    removeBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>`;
+
+                    removeBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        URL.revokeObjectURL(objectUrl);
+
+                        if (isMultiple) {
+                            const dt = new DataTransfer();
+                            Array.from(input.files).forEach((f, i) => {
+                                if (i !== index) dt.items.add(f);
+                            });
+                            input.files = dt.files;
+                            renderPreviews();
+                        } else {
+                            input.value = '';
+                            renderPreviews();
+                        }
+                        input.dispatchEvent(new Event('change', { bubbles: true }));
+                    });
+
+                    card.appendChild(thumbWrap);
+                    card.appendChild(info);
+                    card.appendChild(removeBtn);
+                    previews.appendChild(card);
+
+                    const measureImg = new Image();
+                    measureImg.onload = () => {
+                        const w = measureImg.naturalWidth;
+                        const h = measureImg.naturalHeight;
+                        dimBadge.textContent = `${w} × ${h} px`;
+                        const ratio = formatAspectRatio(w, h);
+                        if (ratio) {
+                            ratioBadge.textContent = ratio;
+                            ratioBadge.style.display = 'inline-flex';
+                        }
+                    };
+                    measureImg.src = objectUrl;
+                });
+            };
+
+            input.addEventListener('change', renderPreviews);
+        });
+    };
+
     window.initLiveCounters = initLiveCounters;
+    window.initImageDropzones = initImageDropzones;
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => initLiveCounters());
+        document.addEventListener('DOMContentLoaded', () => {
+            initLiveCounters();
+            initImageDropzones();
+        });
     } else {
         initLiveCounters();
+        initImageDropzones();
     }
 })();
+
+
 

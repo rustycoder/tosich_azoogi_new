@@ -119,6 +119,72 @@ if (! function_exists('video_mime_type')) {
     }
 }
 
+if (! function_exists('media_file_info')) {
+    /**
+     * @return array{name: string, format: string, size: string, dimensions: string, aspect_ratio: string}|null
+     */
+    function media_file_info(?string $path): ?array
+    {
+        if ($path === null || $path === '') {
+            return null;
+        }
+
+        $cleanPath = ltrim(parse_url($path, PHP_URL_PATH) ?? $path, '/');
+        $fullPath = public_path($cleanPath);
+
+        $name = basename($cleanPath);
+        $ext = strtoupper(pathinfo($cleanPath, PATHINFO_EXTENSION) ?: 'IMAGE');
+        $formattedSize = '';
+        $dimensions = '';
+        $aspectRatio = '';
+
+        if (file_exists($fullPath) && ! is_dir($fullPath)) {
+            $bytes = filesize($fullPath);
+            if ($bytes !== false) {
+                if ($bytes >= 1048576) {
+                    $formattedSize = number_format($bytes / 1048576, 1).' MB';
+                } elseif ($bytes >= 1024) {
+                    $formattedSize = number_format($bytes / 1024, 1).' KB';
+                } else {
+                    $formattedSize = $bytes.' B';
+                }
+            }
+
+            $imgSize = @getimagesize($fullPath);
+            if ($imgSize && isset($imgSize[0], $imgSize[1])) {
+                $w = $imgSize[0];
+                $h = $imgSize[1];
+                $dimensions = "{$w} × {$h} px";
+
+                $ratio = $h > 0 ? $w / $h : 0;
+                if (abs($ratio - 16 / 9) < 0.03) {
+                    $aspectRatio = '16:9';
+                } elseif (abs($ratio - 4 / 3) < 0.03) {
+                    $aspectRatio = '4:3';
+                } elseif (abs($ratio - 3 / 2) < 0.03) {
+                    $aspectRatio = '3:2';
+                } elseif (abs($ratio - 1 / 1) < 0.02) {
+                    $aspectRatio = '1:1';
+                } elseif (abs($ratio - 21 / 9) < 0.03) {
+                    $aspectRatio = '21:9';
+                } elseif (abs($ratio - 9 / 16) < 0.03) {
+                    $aspectRatio = '9:16';
+                } elseif ($ratio > 0) {
+                    $aspectRatio = number_format($ratio, 2).':1';
+                }
+            }
+        }
+
+        return [
+            'name' => $name,
+            'format' => $ext,
+            'size' => $formattedSize,
+            'dimensions' => $dimensions,
+            'aspect_ratio' => $aspectRatio,
+        ];
+    }
+}
+
 if (! function_exists('accent_html')) {
     function accent_html(string $text): string
     {
