@@ -9,7 +9,7 @@
 /* —— Projects Hero —— */
 .projects-hero {
   position: relative;
-  min-height: var(--hero-max);
+  min-height: var(--hero-min);
   display: grid;
   align-items: end;
   overflow: hidden;
@@ -95,7 +95,7 @@
 }
 
 .projects-grid-section {
-  padding: var(--section-y) 0 calc(var(--section-y) + 16px);
+  padding: 50px 0;
 }
 
 .projects-count {

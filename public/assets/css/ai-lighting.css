@@ -18,7 +18,7 @@
 /* —— Hero —— */
 .ai-hero {
     position: relative;
-    min-height: var(--hero-max);
+    min-height: var(--hero-min);
     display: grid;
     align-items: end;
     overflow: hidden;
@@ -71,7 +71,6 @@
 
 .ai-hero-copy h1 {
     margin: 0 0 12px;
-    max-width: 14ch;
     font-family: var(--font-sans);
     font-weight: 400;
     font-size: var(--fs-h2);
@@ -86,7 +85,7 @@
 
 .ai-hero-copy p {
     margin: 0;
-    max-width: 36ch;
+    max-width: 70ch;
     font-size: var(--fs-lead);
     line-height: 1.45;
     color: rgba(255, 255, 255, 0.78);
@@ -94,7 +93,7 @@
 
 /* —— Bands —— */
 .ai-band {
-    padding: var(--section-y) 0;
+    padding: 50px 0 0 0;
 }
 
 .ai-band--soft {

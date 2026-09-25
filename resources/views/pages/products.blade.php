@@ -197,7 +197,7 @@
           max-height: 2000px;
           margin-left: 6px;
           padding-left: 8px;
-          border-left: 1px solid rgba(255, 255, 255, 0.1);
+          border-left: 1px solid var(--line);
         }
 
         .sub-list li a,
@@ -301,7 +301,7 @@
           gap: 14px;
           margin-bottom: 10px;
           flex-wrap: wrap;
-          border-bottom: 1px solid #CCC;
+          border-bottom: 1px solid var(--line);
           padding-bottom: 10px;
         }
 

@@ -19,7 +19,7 @@
 /* —— Hero —— */
 .cb-hero {
     position: relative;
-    min-height: var(--hero-max);
+    min-height: var(--hero-min);
     display: grid;
     align-items: end;
     overflow: hidden;
@@ -85,7 +85,7 @@
 
 .cb-lockup-casambi {
     display: block;
-    width: clamp(180px, 26vw, 320px);
+    width: clamp(120px, 26vw, 150px);
     height: auto;
     color: #fff;
 }

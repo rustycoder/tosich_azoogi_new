@@ -18,7 +18,7 @@
 /* —— Hero (Data Centre) —— */
 .about-hero {
   position: relative;
-  min-height: var(--hero-max);
+  min-height: var(--hero-min);
   display: grid;
   align-items: end;
   overflow: hidden;
@@ -35,7 +35,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: bottom center;
+  object-position: right bottom;
   display: block;
   filter: contrast(1.25) brightness(0.68) saturate(1.05);
   animation: aboutSlowZoom 22s ease-out forwards;
@@ -93,7 +93,7 @@
 
 .about-hero-copy h1 {
   margin: 0 0 16px;
-  max-width: 16ch;
+  max-width: 30ch;
   font-family: var(--font-sans);
   font-weight: 400;
   font-size: var(--fs-h2);
@@ -124,7 +124,7 @@
 
 /* —— Bands —— */
 .about-band {
-  padding: var(--section-y) 0;
+  padding: 50px 0;
 }
 
 .about-band--alt {

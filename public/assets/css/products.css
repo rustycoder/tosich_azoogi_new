@@ -9,7 +9,7 @@
 /* —— Products Hero —— */
 .prod-hero {
   position: relative;
-  min-height: var(--hero-max);
+  min-height: var(--hero-min);
   display: grid;
   align-items: end;
   overflow: hidden;
@@ -85,7 +85,7 @@
 }
 
 .prod-gallery {
-  padding: var(--section-y) 0 calc(var(--section-y) + 16px);
+  padding: 50px 
 }
 
 .prod-gallery-head {
