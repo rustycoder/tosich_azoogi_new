@@ -31,11 +31,10 @@ class DataCentreDefinition implements PageDefinition
     public function fields(): array
     {
         return [
-            Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
-            Field::textarea('hero.title', 'Hero title', typographic: false),
-            Field::textarea('hero.lead', 'Hero lead', typographic: false),
             Field::video('hero.video', 'Hero video'),
             Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
+            Field::textarea('hero.title', 'Hero title', typographic: false),
+            Field::textarea('hero.lead', 'Hero lead', typographic: false),
             Field::textarea('intro.body', 'Intro', typographic: false),
             Field::text('intro.cta.primary.label', 'Primary CTA'),
             Field::url('intro.cta.primary.href', 'Primary href'),
@@ -74,7 +73,6 @@ class DataCentreDefinition implements PageDefinition
     public function seed(): array
     {
         $rows = [
-            ['key' => 'hero.image', 'sort_order' => 0, 'value' => '/assets/img/datacenter1.webp'],
             ['key' => 'hero.title', 'sort_order' => 0, 'value' => "Mission-Critical Data Centre\n{Lighting & Design Services}"],
             ['key' => 'hero.lead', 'sort_order' => 0, 'value' => 'Engineered for ANZ Standards. Built for Maximum Uptime, Low PUE, and Rapid Deployment.'],
             ['key' => 'hero.video', 'sort_order' => 0, 'value' => '/assets/img/Data_Centre_DRAFT_optimized.webm'],

@@ -33,7 +33,6 @@ class AboutDefinition implements PageDefinition
         return [
             Field::textarea('hero.title', 'Hero title', typographic: false),
             Field::textarea('hero.lead', 'Hero intro', typographic: false),
-            Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
             Field::video('hero.video', 'Hero video'),
             Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
             Field::textarea('intro.body', 'Intro', typographic: false),
@@ -76,7 +75,7 @@ class AboutDefinition implements PageDefinition
         $rows = [
             ['key' => 'hero.title', 'sort_order' => 0, 'value' => "Engineered Lighting.\nInfinite Scale.\n{Zero Compromise.}"],
             ['key' => 'hero.lead', 'sort_order' => 0, 'value' => 'We design, assemble, and optimize architectural, commercial, and industrial lighting for projects of every scale — from bespoke residential projects to Tier 1 developments.'],
-            ['key' => 'hero.image', 'sort_order' => 0, 'value' => '/assets/img/ai-lighting/hero.jpg'],
+            ['key' => 'hero.poster', 'sort_order' => 0, 'value' => '/assets/img/ai-lighting/hero.jpg'],
             ['key' => 'intro.body', 'sort_order' => 0, 'value' => 'We design, assemble, and optimize architectural, commercial, and industrial lighting for projects of every scale - from bespoke residential projects to Tier 1 developments.'],
             ['key' => 'intro.cta.label', 'sort_order' => 0, 'value' => 'Request Capability Statement'],
             ['key' => 'intro.cta.href', 'sort_order' => 0, 'value' => '/contact'],

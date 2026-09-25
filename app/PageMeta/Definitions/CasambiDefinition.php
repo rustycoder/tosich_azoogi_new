@@ -31,7 +31,6 @@ class CasambiDefinition implements PageDefinition
     public function fields(): array
     {
         return [
-            Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
             Field::video('hero.video', 'Hero video'),
             Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
             Field::image('slide.image', 'Slide image', true, 'slide', ImageSize::Banner),
@@ -71,7 +70,7 @@ class CasambiDefinition implements PageDefinition
     public function seed(): array
     {
         $rows = [
-            ['key' => 'hero.image', 'sort_order' => 0, 'value' => '/assets/img/casambi/banner.png'],
+            ['key' => 'hero.poster', 'sort_order' => 0, 'value' => '/assets/img/casambi/banner.png'],
             ['key' => 'hero.logo', 'sort_order' => 0, 'value' => '/assets/img/casambi/logo-dark.svg'],
             ['key' => 'hero.title', 'sort_order' => 0, 'value' => 'Advanced Wireless Lighting Control & {Smart Ecosystems}'],
             ['key' => 'hero.lead', 'sort_order' => 0, 'value' => 'Scalable Bluetooth Mesh Technology. Standardized Luminaire Integration.'],

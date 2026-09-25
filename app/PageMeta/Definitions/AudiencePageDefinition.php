@@ -25,7 +25,6 @@ abstract class AudiencePageDefinition implements PageDefinition
     public function fields(): array
     {
         return [
-            Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
             Field::video('hero.video', 'Hero video'),
             Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
             Field::text('hero.eyebrow', 'Eyebrow', typographic: false),
@@ -66,7 +65,7 @@ abstract class AudiencePageDefinition implements PageDefinition
         ];
 
         $rows = [
-            ['key' => 'hero.image', 'sort_order' => 0, 'value' => $heroImages[$this->slug()] ?? '/assets/img/img-0.jpg'],
+            ['key' => 'hero.poster', 'sort_order' => 0, 'value' => $heroImages[$this->slug()] ?? '/assets/img/img-0.jpg'],
             ['key' => 'hero.eyebrow', 'sort_order' => 0, 'value' => (string) ($audience['eyebrow'] ?? '')],
             ['key' => 'hero.title', 'sort_order' => 0, 'value' => $titleValue],
         ];

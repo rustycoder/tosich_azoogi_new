@@ -28,13 +28,11 @@
   <section class="dc-hero" {!! cms_section_attr('hero') !!}>
     <div class="dc-hero-media" aria-hidden="true">
       @if (filled($meta->get('hero.video')))
-        <video class="dc-hero-video" autoplay muted loop playsinline preload="auto" poster="{{ media_url($meta->get('hero.poster')) }}">
+        <video class="dc-hero-video" autoplay muted loop playsinline preload="auto" poster="{{ media_url($meta->get('hero.poster', 0, '/assets/img/datacenter.webp')) }}">
           <source src="{{ media_url($meta->get('hero.video')) }}" type="{{ video_mime_type($meta->get('hero.video')) }}">
         </video>
-      @elseif (filled($meta->get('hero.image')))
-        <img src="{{ media_url($meta->get('hero.image')) }}" alt="{{ $meta->get('hero.title') }}">
       @elseif (filled($meta->get('hero.poster')))
-        <img src="{{ media_url($meta->get('hero.poster')) }}" alt="{{ $meta->get('hero.title') }}">
+        <img src="{{ media_url($meta->get('hero.poster', 0, '/assets/img/datacenter.webp')) }}" alt="{{ $meta->get('hero.title') }}">
       @endif
     </div>
     <div class="dc-hero-copy">

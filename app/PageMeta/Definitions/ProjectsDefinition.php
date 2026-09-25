@@ -31,7 +31,6 @@ class ProjectsDefinition implements PageDefinition
     public function fields(): array
     {
         return [
-            Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
             Field::video('hero.video', 'Hero video'),
             Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
             Field::text('hero.title', 'Hero title', typographic: false),
@@ -51,7 +50,7 @@ class ProjectsDefinition implements PageDefinition
     public function seed(): array
     {
         return [
-            ['key' => 'hero.image', 'sort_order' => 0, 'value' => '/assets/img/img-1.jpg'],
+            ['key' => 'hero.poster', 'sort_order' => 0, 'value' => '/assets/img/img-1.jpg'],
             ['key' => 'hero.title', 'sort_order' => 0, 'value' => 'Projects Powered by {Azoogi}'],
             ['key' => 'hero.body', 'sort_order' => 0, 'value' => "From a new strip light in your kitchen to landmark Tier-1 developments — we deliver LED lighting solutions for projects of all sizes. Whether it’s a heritage restoration, boutique hospitality venue, residential upgrade, or a large-scale commercial build, our in-house engineering and assembly line ensure precision, speed, efficiency and quality — no matter the scale.\nFor a copy of our capability statement, contact us at majorprojects@azoogi.com."],
             ['key' => 'list.showing', 'sort_order' => 0, 'value' => 'Showing'],

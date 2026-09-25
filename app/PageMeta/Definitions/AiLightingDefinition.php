@@ -33,7 +33,6 @@ class AiLightingDefinition implements PageDefinition
         return [
             Field::textarea('hero.title', 'Hero title', typographic: false),
             Field::textarea('hero.lead', 'Hero lead', typographic: false),
-            Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
             Field::video('hero.video', 'Hero video'),
             Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
             Field::text('caps.kicker', 'Caps kicker'),
@@ -76,7 +75,7 @@ class AiLightingDefinition implements PageDefinition
         $rows = [
             ['key' => 'hero.title', 'sort_order' => 0, 'value' => 'Lighting that thinks {for retail}.'],
             ['key' => 'hero.lead', 'sort_order' => 0, 'value' => 'Adaptive spectrum. Live store insight. Energy that follows the floor.'],
-            ['key' => 'hero.image', 'sort_order' => 0, 'value' => '/assets/img/ai-lighting/hero.jpg'],
+            ['key' => 'hero.poster', 'sort_order' => 0, 'value' => '/assets/img/ai-lighting/hero.jpg'],
             ['key' => 'caps.kicker', 'sort_order' => 0, 'value' => 'Beyond illumination'],
             ['key' => 'caps.heading', 'sort_order' => 0, 'value' => "One intelligent platform.\n{Four hard advantages.}"],
             ['key' => 'caps.body', 'sort_order' => 0, 'value' => 'AI-assisted colour recognition, adaptive control, occupancy sensing, and store data — built to sell product, protect stock, and cut waste.'],

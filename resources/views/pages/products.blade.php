@@ -762,13 +762,11 @@
   <section class="prod-hero" {!! cms_section_attr('hero') !!}>
     <div class="prod-hero-media" aria-hidden="true">
       @if (filled($meta->get('hero.video')))
-        <video class="prod-hero-video" autoplay muted loop playsinline preload="auto" poster="{{ media_url($meta->get('hero.poster', 0, $meta->get('hero.image', 0, '/assets/hero02.jpg')) ?: '') }}">
+        <video class="prod-hero-video" autoplay muted loop playsinline preload="auto" poster="{{ media_url($meta->get('hero.poster', 0, '/assets/hero02.jpg')) }}">
           <source src="{{ media_url($meta->get('hero.video')) }}" type="{{ video_mime_type($meta->get('hero.video')) }}">
         </video>
-      @elseif (filled($meta->get('hero.image')))
-        <img src="{{ media_url($meta->get('hero.image', 0, '/assets/hero02.jpg')) }}" alt="{{ $page->title }}" loading="eager">
       @elseif (filled($meta->get('hero.poster')))
-        <img src="{{ media_url($meta->get('hero.poster')) }}" alt="{{ $page->title }}" loading="eager">
+        <img src="{{ media_url($meta->get('hero.poster', 0, '/assets/hero02.jpg')) }}" alt="{{ $page->title }}" loading="eager">
       @else
         <img src="{{ media_url('/assets/hero02.jpg') }}" alt="{{ $page->title }}" loading="eager">
       @endif

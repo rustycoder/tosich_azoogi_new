@@ -31,7 +31,6 @@ class ContactDefinition implements PageDefinition
     public function fields(): array
     {
         return [
-            Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
             Field::video('hero.video', 'Hero video'),
             Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
             Field::text('hero.title', 'Hero title', typographic: false),
@@ -60,7 +59,7 @@ class ContactDefinition implements PageDefinition
     public function seed(): array
     {
         return [
-            ['key' => 'hero.image', 'sort_order' => 0, 'value' => '/assets/imgcontact.jpeg'],
+            ['key' => 'hero.poster', 'sort_order' => 0, 'value' => '/assets/imgcontact.jpeg'],
             ['key' => 'hero.title', 'sort_order' => 0, 'value' => 'Get in {Touch}'],
             ['key' => 'hero.lead', 'sort_order' => 0, 'value' => 'Have a project in mind, need custom LED engineering, or looking for trade support? We’re here to help.'],
             ['key' => 'hours.label', 'sort_order' => 0, 'value' => 'Office Hours'],

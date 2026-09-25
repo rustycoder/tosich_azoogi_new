@@ -31,7 +31,6 @@ class SilvairDefinition implements PageDefinition
     public function fields(): array
     {
         return [
-            Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
             Field::video('hero.video', 'Hero video'),
             Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
             Field::image('hero.logo', 'Silvair logo', hint: ImageSize::Logo),
@@ -89,7 +88,7 @@ class SilvairDefinition implements PageDefinition
     public function seed(): array
     {
         $rows = [
-            ['key' => 'hero.image', 'sort_order' => 0, 'value' => '/assets/img/silvair/nlc.jpg'],
+            ['key' => 'hero.poster', 'sort_order' => 0, 'value' => '/assets/img/silvair/nlc.jpg'],
             ['key' => 'hero.logo', 'sort_order' => 0, 'value' => '/assets/img/silvair/logo.svg'],
             ['key' => 'hero.title', 'sort_order' => 0, 'value' => 'Enterprise Bluetooth® {Qualified Mesh Lighting}'],
             ['key' => 'hero.lead', 'sort_order' => 0, 'value' => 'Qualified Mesh Standard. Rapid Mobile Commissioning. Intelligent Energy Analytics.'],

@@ -31,7 +31,6 @@ class SolutionsDefinition implements PageDefinition
     public function fields(): array
     {
         return [
-            Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
             Field::video('hero.video', 'Hero video'),
             Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
             Field::textarea('hero.title', 'Hero title', typographic: false),
@@ -77,7 +76,7 @@ class SolutionsDefinition implements PageDefinition
         ];
 
         $rows = [
-            ['key' => 'hero.image', 'sort_order' => 0, 'value' => '/assets/img/img-1.jpg'],
+            ['key' => 'hero.poster', 'sort_order' => 0, 'value' => '/assets/img/img-1.jpg'],
             ['key' => 'hero.title', 'sort_order' => 0, 'value' => 'End-to-End Lighting Solutions & {Intelligent Controls}'],
             ['key' => 'hero.lead', 'sort_order' => 0, 'value' => 'From initial plans through to final commissioning, we provide complete, custom packages - staying at the absolute forefront of modern lighting technology and smart control automation.'],
             ['key' => 'hero.claim', 'sort_order' => 0, 'value' => 'Azoogi does it all.'],

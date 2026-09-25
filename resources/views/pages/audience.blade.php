@@ -27,7 +27,7 @@
         'electrician-builder' => ['Engineered for straightforward installation, rapid turnarounds, and reliable performance on every residential and commercial build.'],
         'wholesaler' => ['Stock with confidence. Fast quotes, protected trade margins, and dependable nationwide supply for leading electrical distributors.'],
     ];
-    $heroImage = $meta->get('hero.image', 0, $defaultHeroImages[$page->slug] ?? '/assets/img/img-0.jpg');
+    $heroPoster = $meta->get('hero.poster', 0, $defaultHeroImages[$page->slug] ?? '/assets/img/img-0.jpg');
     $audienceLeads = ! empty($leads) ? $leads : ($defaultLeads[$page->slug] ?? []);
 @endphp
 
@@ -36,13 +36,11 @@
   <section class="audience-hero" {!! cms_section_attr('hero') !!}>
     <div class="audience-hero-media" aria-hidden="true">
       @if (filled($meta->get('hero.video')))
-        <video class="audience-hero-video" autoplay muted loop playsinline preload="auto" poster="{{ media_url($meta->get('hero.poster', 0, $heroImage) ?: '') }}">
+        <video class="audience-hero-video" autoplay muted loop playsinline preload="auto" poster="{{ media_url($heroPoster) }}">
           <source src="{{ media_url($meta->get('hero.video')) }}" type="{{ video_mime_type($meta->get('hero.video')) }}">
         </video>
-      @elseif (filled($heroImage))
-        <img src="{{ media_url($heroImage) }}" alt="" loading="eager" decoding="async">
-      @elseif (filled($meta->get('hero.poster')))
-        <img src="{{ media_url($meta->get('hero.poster')) }}" alt="" loading="eager" decoding="async">
+      @elseif (filled($heroPoster))
+        <img src="{{ media_url($heroPoster) }}" alt="" loading="eager" decoding="async">
       @endif
     </div>
     <div class="audience-hero-copy">

@@ -38,13 +38,11 @@
         <section class="cb-hero" {!! cms_section_attr('hero') !!}>
             <div class="cb-hero-media" aria-hidden="true">
                 @if (filled($meta->get('hero.video')))
-                    <video class="cb-hero-video" autoplay muted loop playsinline preload="auto" poster="{{ media_url($meta->get('hero.poster', 0, $meta->get('hero.image')) ?: '') }}">
+                    <video class="cb-hero-video" autoplay muted loop playsinline preload="auto" poster="{{ media_url($meta->get('hero.poster', 0, '/assets/img/casambi/banner.png')) }}">
                         <source src="{{ media_url($meta->get('hero.video')) }}" type="{{ video_mime_type($meta->get('hero.video')) }}">
                     </video>
-                @elseif (filled($meta->get('hero.image')))
-                    <img src="{{ media_url($meta->get('hero.image')) }}" alt="" loading="eager" decoding="async">
                 @elseif (filled($meta->get('hero.poster')))
-                    <img src="{{ media_url($meta->get('hero.poster')) }}" alt="" loading="eager" decoding="async">
+                    <img src="{{ media_url($meta->get('hero.poster', 0, '/assets/img/casambi/banner.png')) }}" alt="" loading="eager" decoding="async">
                 @endif
             </div>
             <div class="cb-hero-copy">

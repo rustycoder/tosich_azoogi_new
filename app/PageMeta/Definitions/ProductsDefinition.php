@@ -31,7 +31,6 @@ class ProductsDefinition implements PageDefinition
     public function fields(): array
     {
         return [
-            Field::image('hero.image', 'Hero image', hint: ImageSize::Hero),
             Field::video('hero.video', 'Hero video'),
             Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
             Field::text('hero.title', 'Hero title', typographic: false),
@@ -42,7 +41,7 @@ class ProductsDefinition implements PageDefinition
     public function seed(): array
     {
         return [
-            ['key' => 'hero.image', 'sort_order' => 0, 'value' => '/assets/hero02.jpg'],
+            ['key' => 'hero.poster', 'sort_order' => 0, 'value' => '/assets/hero02.jpg'],
             ['key' => 'hero.title', 'sort_order' => 0, 'value' => 'Our {Range}'],
             ['key' => 'hero.lead', 'sort_order' => 0, 'value' => 'Explore the full Azoogi lighting catalogue. COB Strips, SMD Strips, Neon, Outdoor Lights, Aluminium Profiles, LED Drivers and more.'],
         ];

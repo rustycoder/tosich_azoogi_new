@@ -17,13 +17,11 @@
   <section class="contact-hero" {!! cms_section_attr('hero') !!}>
     <div class="contact-hero-media" aria-hidden="true">
       @if (filled($meta->get('hero.video')))
-        <video class="contact-hero-video" autoplay muted loop playsinline preload="auto" poster="{{ media_url($meta->get('hero.poster', 0, $meta->get('hero.image', 0, '/assets/imgcontact.jpeg')) ?: '') }}">
+        <video class="contact-hero-video" autoplay muted loop playsinline preload="auto" poster="{{ media_url($meta->get('hero.poster', 0, '/assets/imgcontact.jpeg')) }}">
           <source src="{{ media_url($meta->get('hero.video')) }}" type="{{ video_mime_type($meta->get('hero.video')) }}">
         </video>
-      @elseif (filled($meta->get('hero.image')))
-        <img src="{{ media_url($meta->get('hero.image', 0, '/assets/imgcontact.jpeg')) }}" alt="" loading="eager" decoding="async">
       @elseif (filled($meta->get('hero.poster')))
-        <img src="{{ media_url($meta->get('hero.poster')) }}" alt="" loading="eager" decoding="async">
+        <img src="{{ media_url($meta->get('hero.poster', 0, '/assets/imgcontact.jpeg')) }}" alt="" loading="eager" decoding="async">
       @else
         <img src="{{ media_url('/assets/imgcontact.jpeg') }}" alt="" loading="eager" decoding="async">
       @endif
