@@ -27,7 +27,7 @@ class ProjectsPageTest extends TestCase
     {
         $this->get('/projects')
             ->assertOk()
-            ->assertSee('Projects Powered by <span>Azoogi</span>', false)
+            ->assertSee('Projects Powered by <span class="accent">Azoogi</span>', false)
             ->assertSee('majorprojects@azoogi.com', false)
             ->assertSee('Showing', false)
             ->assertDontSee('projects-highlights', false)

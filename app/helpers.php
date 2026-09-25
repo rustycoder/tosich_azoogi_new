@@ -189,7 +189,7 @@ if (! function_exists('accent_html')) {
     function accent_html(string $text): string
     {
         $escaped = e($text);
-        $html = preg_replace('/\{([^}]+)\}/', '<span>$1</span>', $escaped);
+        $html = preg_replace('/\{([^}]+)\}/', '<span class="accent">$1</span>', $escaped);
 
         return str_replace(["\r\n", "\n", "\r"], '<br>', $html ?? $escaped);
     }
@@ -203,11 +203,11 @@ if (! function_exists('nl2br_html')) {
 
         if ($spanLast && count($lines) > 1) {
             $last = array_pop($lines);
-            $lines[] = '<span>'.$last.'</span>';
+            $lines[] = '<span class="accent">'.$last.'</span>';
         }
 
         $result = implode('<br>', $lines);
-        $html = preg_replace('/\{([^}]+)\}/', '<span>$1</span>', $result);
+        $html = preg_replace('/\{([^}]+)\}/', '<span class="accent">$1</span>', $result);
 
         return $html ?? $result;
     }

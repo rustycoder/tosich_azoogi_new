@@ -23,7 +23,7 @@ class SolutionsPageTest extends TestCase
             ->assertOk()
             ->assertSee('class="h2 solutions-title"', false)
             ->assertSee('End-to-End Lighting Solutions', false)
-            ->assertSee('<span>Intelligent Controls</span>', false)
+            ->assertSee('<span class="accent">Intelligent Controls</span>', false)
             ->assertDontSee('solutions-kicker', false)
             ->assertDontSee('solutions-hero-logo', false);
     }

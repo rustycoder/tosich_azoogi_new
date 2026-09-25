@@ -93,7 +93,7 @@ class HomeHeroTest extends TestCase
 
         $this->get('/silvair')
             ->assertOk()
-            ->assertSee('<span>Qualified Mesh Lighting</span>', false);
+            ->assertSee('<span class="accent">Qualified Mesh Lighting</span>', false);
 
         $css = file_get_contents(public_path('assets/css/style_demo.css'));
 

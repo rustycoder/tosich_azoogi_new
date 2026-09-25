@@ -29,22 +29,22 @@ class OutlineAccentTest extends TestCase
     public static function seededAccentProvider(): array
     {
         return [
-            'madrix' => ['/madrix', ['<span>Advanced LED Control Solutions</span>']],
-            'casambi' => ['/casambi', ['<span>Smart Ecosystems</span>']],
-            'silvair' => ['/silvair', ['<span>Qualified Mesh Lighting</span>']],
-            'solutions' => ['/solutions', ['<span>Intelligent Controls</span>', '<span>Sector</span>']],
-            'dali-centre' => ['/dali-centre', ['<span>Smart DALI-2 Management</span>']],
-            'projects' => ['/projects', ['<span>Azoogi</span>']],
-            'products' => ['/products', ['<span>Range</span>']],
-            'contact' => ['/contact', ['<span>Touch</span>', '<span>hear</span>']],
-            'about' => ['/about', ['<span>Zero Compromise.</span>', '<span>Azoogi</span>', '<span>Reach</span>', '<span>Path</span>']],
-            'ai-lighting' => ['/ai-lighting', ['<span>for retail</span>', '<span>Four hard advantages.</span>', '<span>spectrum</span>', '<span>analysis</span>', '<span>temperature</span>', '<span>management</span>']],
-            'data-centre' => ['/data-centre', ['<span>Lighting &amp; Design Services</span>', '<span>White &amp; Grey Spaces</span>', '<span>Data Hall Conditions</span>', '<span>Building Automation</span>', '<span>Emergency Lighting</span>', '<span>Across All Zones</span>', '<span>Data Centre Project?</span>']],
-            'home-owner' => ['/home-owner', ['<span>Home Owner</span>']],
-            'architect-designer' => ['/architect-designer', ['<span>Designers</span>']],
-            'electrician-builder' => ['/electrician-builder', ['<span>Electricians and Builders</span>']],
-            'wholesaler' => ['/wholesaler', ['<span>Wholesaler</span>']],
-            'calculator' => ['/led-strip-calculator', ['<span>Calculator</span>']],
+            'madrix' => ['/madrix', ['<span class="accent">Advanced LED Control Solutions</span>']],
+            'casambi' => ['/casambi', ['<span class="accent">Smart Ecosystems</span>']],
+            'silvair' => ['/silvair', ['<span class="accent">Qualified Mesh Lighting</span>']],
+            'solutions' => ['/solutions', ['<span class="accent">Intelligent Controls</span>', '<span class="accent">Sector</span>']],
+            'dali-centre' => ['/dali-centre', ['<span class="accent">Smart DALI-2 Management</span>']],
+            'projects' => ['/projects', ['<span class="accent">Azoogi</span>']],
+            'products' => ['/products', ['<span class="accent">Range</span>']],
+            'contact' => ['/contact', ['<span class="accent">Touch</span>', '<span class="accent">hear</span>']],
+            'about' => ['/about', ['<span class="accent">Zero Compromise.</span>', '<span class="accent">Azoogi</span>', '<span class="accent">Reach</span>', '<span class="accent">Path</span>']],
+            'ai-lighting' => ['/ai-lighting', ['<span class="accent">for retail</span>', '<span class="accent">Four hard advantages.</span>', '<span class="accent">spectrum</span>', '<span class="accent">analysis</span>', '<span class="accent">temperature</span>', '<span class="accent">management</span>']],
+            'data-centre' => ['/data-centre', ['<span class="accent">Lighting &amp; Design Services</span>', '<span class="accent">White &amp; Grey Spaces</span>', '<span class="accent">Data Hall Conditions</span>', '<span class="accent">Building Automation</span>', '<span class="accent">Emergency Lighting</span>', '<span class="accent">Across All Zones</span>', '<span class="accent">Data Centre Project?</span>']],
+            'home-owner' => ['/home-owner', ['<span class="accent">Home Owner</span>']],
+            'architect-designer' => ['/architect-designer', ['<span class="accent">Designers</span>']],
+            'electrician-builder' => ['/electrician-builder', ['<span class="accent">Electricians and Builders</span>']],
+            'wholesaler' => ['/wholesaler', ['<span class="accent">Wholesaler</span>']],
+            'calculator' => ['/led-strip-calculator', ['<span class="accent">Calculator</span>']],
         ];
     }
 
@@ -114,8 +114,8 @@ class OutlineAccentTest extends TestCase
 
         $this->get('/madrix')
             ->assertOk()
-            ->assertSee('<span>Pixel Mapping</span>', false)
-            ->assertDontSee('<span>Advanced LED Control Solutions</span>', false);
+            ->assertSee('<span class="accent">Pixel Mapping</span>', false)
+            ->assertDontSee('<span class="accent">Advanced LED Control Solutions</span>', false);
 
         $this->actingAs($admin)
             ->get(route('dashboard.pages.edit', 'led-strip-calculator'))
@@ -148,6 +148,6 @@ class OutlineAccentTest extends TestCase
 
         $this->get('/contact')
             ->assertOk()
-            ->assertSee('<p class="contact-hero-lead">Have questions about our <span>custom lighting</span> solutions? We are here to help.</p>', false);
+            ->assertSee('<p class="contact-hero-lead">Have questions about our <span class="accent">custom lighting</span> solutions? We are here to help.</p>', false);
     }
 }
