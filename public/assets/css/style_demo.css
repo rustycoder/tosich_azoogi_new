@@ -221,10 +221,31 @@ body {
     }
 }
 
-/* Solid accent color for CMS content fields inside {} (headings, subtitles, leads, cards, and section text) */
+/* Solid accent color for all CMS content fields inside {} (headings, paragraphs, subtitles, leads, cards, and section text) */
+h2 span,
+h3 span,
+h4 span,
+h5 span,
+h6 span,
+p span,
+figcaption span,
+blockquote span,
+dt span,
+dd span,
 .slide-sub span,
 .lead span,
 .kicker span,
+.about-why span,
+.about-why-head h2 span,
+.about-why-step h3 span,
+.about-why-step p span,
+.about-reach span,
+.about-reach-inner h2 span,
+.about-reach-inner p span,
+.about-path-section span,
+.about-path-head h2 span,
+.about-path-row h3 span,
+.about-path-row p span,
 .head h2 span,
 .head h3 span,
 .head h4 span,
@@ -300,15 +321,41 @@ span.accent,
     filter: none !important;
 }
 
-/* Ensure buttons and action spans always inherit normal button color */
+/* Explicit protections to ensure UI action controls and category filter text keep their normal styling */
 .btn span,
 button span,
+.btn-primary span,
 .add-quote-btn span,
 #add-to-spec-btn span,
-[data-quote-label] {
+[data-quote-label],
+.products-sidebar span,
+.cat-label-text,
+.cat-toggle,
+.cat-sub-link {
     color: inherit;
     font-family: inherit;
     font-weight: inherit;
+    -webkit-text-stroke: 0;
+    filter: none;
+}
+
+.cat-label-text {
+    color: var(--ink) !important;
+}
+
+.cat-label-text.active,
+.cat-label-text:hover,
+.cat-row:hover .cat-label-text {
+    color: var(--accent) !important;
+}
+
+.cat-sub-link {
+    color: var(--muted) !important;
+}
+
+.cat-sub-link.active,
+.cat-sub-link:hover {
+    color: var(--accent) !important;
 }
 
 a {
