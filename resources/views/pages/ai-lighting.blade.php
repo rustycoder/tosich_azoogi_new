@@ -31,12 +31,12 @@
       <div class="ai-hero-copy">
         <h1{!! cms_style($meta, 'hero.title') !!}>
           {!! accent_html($meta->get('hero.title', 0, 'Engineered {for retail} and high-spec environments')) !!}</h1>
-        @php
-          $aiLead = $meta->get('hero.lead', 0, 'Adaptive spectrum tuning and precision optical design crafted for modern retail, gallery, and premium architectural spaces.');
-        @endphp
-        @if (trim($aiLead) !== '')
-          <p{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($aiLead) !!}</p>
-        @endif
+          @php
+            $aiLead = $meta->get('hero.lead', 0, 'Adaptive spectrum tuning and precision optical design crafted for modern retail, gallery, and premium architectural spaces.');
+          @endphp
+          @if (trim($aiLead) !== '')
+            <p{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($aiLead) !!}</p>
+          @endif
       </div>
     </section>
 
@@ -90,15 +90,16 @@
     <section class="ai-insights card-in" {!! cms_section_attr('insights') !!}>
       <div class="wrap-sm">
         <div class="ai-row-head">
-          <div>
+          <div style="text-align:center;">
             <h2{!! cms_style($meta, 'insights.heading') !!}>
-              {!! accent_html($meta->get('insights.heading')) !!}</h2>
+              {!! accent_html($meta->get('insights.heading'), $meta->get('insights.heading_accent')) !!}</h2>
+              <p{!! cms_style($meta, 'insights.lead') !!}>{{ $meta->get('insights.lead') }}</p>
           </div>
-          <p{!! cms_style($meta, 'insights.lead') !!}>{{ $meta->get('insights.lead') }}</p>
+
         </div>
 
         <div class="container max-width-adaptive-md" style="padding-bottom:40px">
-          <ul id="cards" style="--numcards: {{ count($insights) }}">
+          <ul id="cards" class="ai-cards" style="--numcards: {{ count($insights) }}">
             @foreach ($insights as $item)
               <li class="card-main" id="card_{{ $loop->iteration }}" style="--index: {{ $loop->iteration }}">
                 <div class="card__content">
@@ -134,9 +135,10 @@
         <div class="ai-row-head">
           <div>
             <h2{!! cms_style($meta, 'space.heading') !!}>
-              {!! accent_html($meta->get('space.heading')) !!}</h2>
+              {!! accent_html($meta->get('space.heading'), $meta->get('space.heading_accent')) !!}</h2>
+              <p{!! cms_style($meta, 'space.lead') !!}>{{ $meta->get('space.lead') }}</p>
           </div>
-          <p{!! cms_style($meta, 'space.lead') !!}>{{ $meta->get('space.lead') }}</p>
+
         </div>
 
         <div class="ai-space">
