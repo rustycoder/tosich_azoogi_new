@@ -260,6 +260,14 @@
                     </div>
                 </div>
 
+                <div class="dash-doc-callout info">
+                    <strong>Live Character & Word Count Guidance:</strong> CMS input fields and SEO meta forms feature real-time character and word count meters.
+                    <ul style="margin: 6px 0 0 16px; padding: 0;">
+                        <li><strong>Recommendation Badges</strong> (e.g. <em>(50–60 chars recommended)</em> or <em>(15–30 words recommended)</em>) indicate ideal text density for search engines and typography grids.</li>
+                        <li><strong>Dynamic Status Indicators</strong> update as you type: turning <span style="color: var(--dash-green-dark); font-weight: 600;">green (Optimal)</span> within range, showing remaining counts when under, or alerting <span style="color: #c4453c; font-weight: 600;">(+X over limit)</span> when exceeding maximum lengths.</li>
+                    </ul>
+                </div>
+
                 <h3>Managing Featured Projects</h3>
                 <p>Located in <a href="{{ route('dashboard.projects.index') }}"><strong>Content &rarr; Projects</strong></a>:</p>
                 <ul class="dash-doc-list">

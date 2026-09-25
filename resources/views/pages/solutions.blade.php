@@ -36,13 +36,9 @@
       <div class="solutions-copy">
         @php
           $solutionsLead = $meta->get('hero.lead', 0, 'Smart control architectures and precision LED hardware designed for seamless integration across modern residential, commercial, and industrial spaces.');
-          $solutionsSub = $meta->get('hero.sub', 0, 'Explore cutting-edge ecosystems from Casambi, Silvair, and DALI-2 alongside bespoke sector engineering.');
         @endphp
         @if (trim($solutionsLead) !== '')
           <p class="solutions-lead"{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($solutionsLead) !!}</p>
-        @endif
-        @if (trim($solutionsSub) !== '')
-          <p class="solutions-sub"{!! cms_style($meta, 'hero.sub') !!}>{!! accent_html($solutionsSub) !!}</p>
         @endif
       </div>
     </div>

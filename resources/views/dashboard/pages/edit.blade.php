@@ -40,13 +40,13 @@
         </div>
         <div class="dash-drawer-body">
             <div class="dash-field">
-                <label for="title">SEO title <small>(50–60 chars recommended)</small></label>
-                <input id="title" name="title" value="{{ old('title', $page->title) }}" required>
+                <label for="title">SEO title <small class="dash-field-rec">(50–60 chars recommended)</small></label>
+                <input id="title" name="title" value="{{ old('title', $page->title) }}" data-counter="chars" data-min="50" data-max="60" required>
                 @error('title')<p class="login-error">{{ $message }}</p>@enderror
             </div>
             <div class="dash-field">
-                <label for="meta_description">Meta description <small>(140–160 chars recommended)</small></label>
-                <textarea id="meta_description" name="meta_description" rows="4">{{ old('meta_description', $page->meta_description) }}</textarea>
+                <label for="meta_description">Meta description <small class="dash-field-rec">(140–160 chars recommended)</small></label>
+                <textarea id="meta_description" name="meta_description" rows="4" data-counter="chars" data-min="140" data-max="160">{{ old('meta_description', $page->meta_description) }}</textarea>
                 @error('meta_description')<p class="login-error">{{ $message }}</p>@enderror
             </div>
             <div class="dash-field">

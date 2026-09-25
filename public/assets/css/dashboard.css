@@ -3582,3 +3582,49 @@ code {
   }
 }
 
+.dash-field-rec {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--dash-muted);
+  opacity: 0.85;
+}
+
+.dash-field-counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--dash-muted);
+  margin-top: -2px;
+  transition: color .15s ease;
+}
+
+.dash-field-counter .dash-counter-count {
+  font-variant-numeric: tabular-nums;
+}
+
+.dash-field-counter .dash-counter-status {
+  font-size: 11px;
+}
+
+.dash-field-counter.is-optimal {
+  color: var(--dash-green-dark);
+}
+
+.dash-field-counter.is-optimal .dash-counter-status {
+  font-weight: 600;
+}
+
+.dash-field-counter.is-under {
+  color: var(--dash-muted);
+}
+
+.dash-field-counter.is-overflow {
+  color: #c4453c;
+  font-weight: 600;
+}
+

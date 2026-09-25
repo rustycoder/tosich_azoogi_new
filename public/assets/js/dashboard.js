@@ -981,5 +981,77 @@
             xhr.send(new FormData(form));
         });
     });
+
+    // Live Word & Character Counters
+    const initLiveCounters = (container = document) => {
+        container.querySelectorAll('[data-counter]').forEach((el) => {
+            if (el.dataset.counterInitialized) {
+                return;
+            }
+            el.dataset.counterInitialized = 'true';
+
+            const type = el.dataset.counter || 'chars';
+            const min = parseInt(el.dataset.min || '0', 10);
+            const max = parseInt(el.dataset.max || '0', 10);
+
+            const counter = document.createElement('div');
+            counter.className = 'dash-field-counter';
+            el.insertAdjacentElement('afterend', counter);
+
+            const updateCount = (text) => {
+                text = text || '';
+                const charCount = text.length;
+                const trimmed = text.trim();
+                const wordCount = trimmed ? trimmed.split(/\s+/).length : 0;
+
+                const current = type === 'words' ? wordCount : charCount;
+                const unit = type === 'words' ? 'words' : 'chars';
+
+                let statusClass = '';
+                let statusText = '';
+
+                if (current === 0) {
+                    statusText = min > 0 ? `0 / ${max} ${unit} (${min}–${max} recommended)` : `0 / ${max} ${unit}`;
+                } else if (min > 0 && current < min) {
+                    statusClass = 'is-under';
+                    statusText = `${current} / ${max} ${unit} • ${min - current} more for optimal`;
+                } else if (current >= min && (max === 0 || current <= max)) {
+                    statusClass = 'is-optimal';
+                    statusText = `${current} / ${max} ${unit} • Optimal`;
+                } else if (max > 0 && current > max) {
+                    statusClass = 'is-overflow';
+                    statusText = `${current} / ${max} ${unit} • +${current - max} over limit`;
+                } else {
+                    statusText = `${current} ${unit}`;
+                }
+
+                counter.className = `dash-field-counter ${statusClass}`.trim();
+                const leftLabel = type === 'words' ? `${wordCount} words (${charCount} chars)` : `${charCount} chars`;
+                counter.innerHTML = `<span class="dash-counter-count">${leftLabel}</span><span class="dash-counter-status">${statusText}</span>`;
+            };
+
+            el.addEventListener('input', () => updateCount(el.value));
+            el.addEventListener('change', () => updateCount(el.value));
+            updateCount(el.value);
+
+            if (window.CKEDITOR && el.id && window.CKEDITOR.instances[el.id]) {
+                const editor = window.CKEDITOR.instances[el.id];
+                editor.on('change', () => {
+                    const html = editor.getData();
+                    const tmp = document.createElement('div');
+                    tmp.innerHTML = html;
+                    updateCount(tmp.textContent || tmp.innerText || '');
+                });
+            }
+        });
+    };
+
+    window.initLiveCounters = initLiveCounters;
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => initLiveCounters());
+    } else {
+        initLiveCounters();
+    }
 })();
 

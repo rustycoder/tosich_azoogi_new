@@ -2,8 +2,8 @@
     <h2>Details</h2>
     <div class="dash-form-grid">
         <div class="dash-field">
-            <label for="title">Title</label>
-            <input id="title" name="title" value="{{ old('title', $project->title ?? '') }}" required>
+            <label for="title">Title <small class="dash-field-rec">(30–60 chars recommended)</small></label>
+            <input id="title" name="title" value="{{ old('title', $project->title ?? '') }}" data-counter="chars" data-min="30" data-max="60" required>
             @error('title')<p class="login-error">{{ $message }}</p>@enderror
         </div>
 
@@ -33,13 +33,13 @@
         </div>
 
         <div class="dash-field is-wide">
-            <label for="summary">Summary</label>
-            <textarea id="summary" name="summary" rows="3">{{ old('summary', $project->summary ?? '') }}</textarea>
+            <label for="summary">Summary <small class="dash-field-rec">(15–30 words recommended)</small></label>
+            <textarea id="summary" name="summary" rows="3" data-counter="words" data-min="15" data-max="30">{{ old('summary', $project->summary ?? '') }}</textarea>
         </div>
 
         <div class="dash-field is-wide">
-            <label for="description">Description</label>
-            <textarea id="description" name="description" rows="5">{{ old('description', $project->description ?? '') }}</textarea>
+            <label for="description">Description <small class="dash-field-rec">(80–250 words recommended)</small></label>
+            <textarea id="description" name="description" rows="5" data-counter="words" data-min="80" data-max="250">{{ old('description', $project->description ?? '') }}</textarea>
         </div>
 
         <div class="dash-field is-wide">

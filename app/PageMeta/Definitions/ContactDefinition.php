@@ -34,7 +34,7 @@ class ContactDefinition implements PageDefinition
             Field::video('hero.video', 'Hero video'),
             Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
             Field::text('hero.title', 'Hero title', typographic: false),
-            Field::textarea('hero.lead', 'Hero intro', typographic: false),
+            Field::textarea('hero.lead', 'Hero intro', typographic: false)->recommendedWords(10, 30),
             Field::text('hours.label', 'Hours label'),
             Field::textarea('hours.value', 'Hours'),
             Field::text('address.label', 'Address label'),
@@ -47,12 +47,12 @@ class ContactDefinition implements PageDefinition
             Field::text('acn.label', 'ACN label'),
             Field::text('acn.value', 'ACN'),
             Field::text('intl.heading', 'International heading'),
-            Field::textarea('intl.body', 'International body'),
+            Field::textarea('intl.body', 'International body')->recommendedWords(25, 60),
             Field::text('intl.email', 'International email'),
             Field::text('intl.phone', 'International phone'),
             Field::text('form.kicker', 'Form kicker'),
             Field::text('form.title', 'Form title'),
-            Field::textarea('form.lead', 'Form lead'),
+            Field::textarea('form.lead', 'Form lead')->recommendedWords(3, 15),
         ];
     }
 
