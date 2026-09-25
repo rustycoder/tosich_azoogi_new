@@ -268,6 +268,15 @@
                     </ul>
                 </div>
 
+                <div class="dash-doc-callout warning">
+                    <strong>Accent & Outlined Text Formatting (Curly Braces <code>{}</code> Syntax):</strong>
+                    <p style="margin: 6px 0 0;">Wrap any words inside curly braces <code>{...}</code> in CMS text fields to apply dynamic visual highlights:</p>
+                    <ul style="margin: 6px 0 0 16px; padding: 0;">
+                        <li><strong>Hero Titles (<code>hero.title</code> / Slide Titles)</strong>: Words inside <code>{...}</code> are automatically styled with the signature <strong>outlined stroke font</strong> effect (e.g., <code>Get in {Touch}</code> or <code>Engineered Lighting {Infinite Scale}</code>).</li>
+                        <li><strong>All Other Text Fields (Section Headings, Paragraphs, Leads, Cards, Subtitles)</strong>: Words inside <code>{...}</code> are rendered in the vibrant <strong>brand accent color</strong> (e.g. <code>Why Choose {Azoogi}</code> or <code>Capabilities by {Sector}</code>).</li>
+                    </ul>
+                </div>
+
                 <h3>Managing Featured Projects</h3>
                 <p>Located in <a href="{{ route('dashboard.projects.index') }}"><strong>Content &rarr; Projects</strong></a>:</p>
                 <ul class="dash-doc-list">
