@@ -67,12 +67,12 @@
                 <div class="card__copy"{!! cms_style($meta, 'card.body', $loop->index) !!}>
                   @foreach (preg_split("/\n\n+/", $card['body'] ?? '') as $paragraph)
                     @if (trim($paragraph) !== '')
-                      <p>{!! linkify_emails($paragraph) !!}</p>
+                      <p>{!! linkify_emails(accent_html($paragraph)) !!}</p>
                     @endif
                   @endforeach
                 </div>
                 @if (! empty($card['cta.label']))
-                  <div class="card__cta"><a href="{{ $card['cta.href'] ?? '#' }}" class="btn"{!! cms_style($meta, 'card.cta.label', $loop->index) !!}>{{ $card['cta.label'] }}</a></div>
+                  <div class="card__cta"><a href="{{ $card['cta.href'] ?? '#' }}" class="btn"{!! cms_style($meta, 'card.cta.label', $loop->index) !!}>{!! accent_html($card['cta.label']) !!}</a></div>
                 @endif
               </div>
               <figure>

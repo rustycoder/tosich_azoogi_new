@@ -60,9 +60,9 @@
 
   <section class="project-info{{ $gallery === [] ? ' project-info--last' : '' }}" {!! cms_section_attr('detail') !!}>
     <div class="wrap">
-      <h2{!! cms_style($meta, 'detail.overview') !!}>{{ $meta->get('detail.overview') }}</h2>
+      <h2{!! cms_style($meta, 'detail.overview') !!}>{!! accent_html($meta->get('detail.overview')) !!}</h2>
       <div class="project-description">
-        <p>{{ $project->description ?: $project->summary }}</p>
+        <p>{!! accent_html($project->description ?: $project->summary) !!}</p>
       </div>
     </div>
   </section>

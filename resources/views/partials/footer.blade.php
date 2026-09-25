@@ -26,33 +26,33 @@
             <div class="foot-brand">
                 <a href="{{ url('/') }}" class="logo"><img src="{{ asset('assets/logo_white.png') }}" width="150"
                         alt="Azoogi"></a>
-                <p>{{ $description }}</p>
+                <p>{!! accent_html($description) !!}</p>
             </div>
             <div class="foot-links">
                 <div>
-                    <h5>{{ $productHeading }}</h5>
+                    <h5>{!! accent_html($productHeading) !!}</h5>
                     @foreach ($productLinks as $item)
-                        <a href="{{ chrome_url($item['href'] ?? '') }}"{!! chrome_target_attrs($item['target'] ?? null) !!}>{{ $item['label'] }}</a>
+                        <a href="{{ chrome_url($item['href'] ?? '') }}"{!! chrome_target_attrs($item['target'] ?? null) !!}>{!! accent_html($item['label']) !!}</a>
                     @endforeach
                 </div>
                 <div>
-                    <h5>{{ $companyHeading }}</h5>
+                    <h5>{!! accent_html($companyHeading) !!}</h5>
                     @foreach ($companyLinks as $item)
-                        <a href="{{ chrome_url($item['href'] ?? '') }}"{!! chrome_target_attrs($item['target'] ?? null) !!}>{{ $item['label'] }}</a>
+                        <a href="{{ chrome_url($item['href'] ?? '') }}"{!! chrome_target_attrs($item['target'] ?? null) !!}>{!! accent_html($item['label']) !!}</a>
                     @endforeach
                 </div>
                 <div>
-                    <h5>{{ $contactHeading }}</h5>
+                    <h5>{!! accent_html($contactHeading) !!}</h5>
                     <a href="{{ tel_href($phone) }}">{{ $phone }}</a>
                     <a href="mailto:{{ $email }}">{{ $email }}</a>
                     @foreach ($contactLinks as $item)
-                        <a href="{{ chrome_url($item['href'] ?? '') }}"{!! chrome_target_attrs($item['target'] ?? null) !!}>{{ $item['label'] }}</a>
+                        <a href="{{ chrome_url($item['href'] ?? '') }}"{!! chrome_target_attrs($item['target'] ?? null) !!}>{!! accent_html($item['label']) !!}</a>
                     @endforeach
                 </div>
             </div>
         </div>
         <div class="copy">
-            <div>&copy; {{ date('Y') }} {{ $message }}</div>
+            <div>&copy; {{ date('Y') }} {!! accent_html($message) !!}</div>
             <div class="copy-links">
                 <a href="{{ url('/privacy') }}">Privacy</a><span class="sep">&middot;</span>
                 <a href="{{ url('/terms') }}">Terms</a><span class="sep">&middot;</span>

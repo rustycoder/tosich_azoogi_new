@@ -59,7 +59,7 @@
 <!-- ========== INTRO ========== -->
 <section class="intro" {!! cms_section_attr('intro') !!}>
   <div class="wrap v-head">
-    <h2 class="h2 reveal"{!! cms_style($meta, 'intro.heading') !!}>{{ $meta->get('intro.heading') }}</h2>
+    <h2 class="h2 reveal"{!! cms_style($meta, 'intro.heading') !!}>{!! accent_html($meta->get('intro.heading')) !!}</h2>
     <div class="audience reveal">
       <a href="{{ url('/architect-designer') }}">Architect / Designer</a>
       <a href="{{ url('/electrician-builder') }}">Electrician / Builder</a>
@@ -75,7 +75,7 @@
 <section class="card-in" id="about" {!! cms_section_attr('values') !!}>
   <div class="wrap-sm">
     <div class="head">
-      <h2 class="h2 reveal"{!! cms_style($meta, 'values.heading') !!}>{{ $meta->get('values.heading') }}</h2>
+      <h2 class="h2 reveal"{!! cms_style($meta, 'values.heading') !!}>{!! accent_html($meta->get('values.heading')) !!}</h2>
     </div>
   
     <div class="container max-width-adaptive-md">
@@ -84,8 +84,8 @@
           <li class="card-main" id="card_{{ $loop->iteration }}">
             <div class="card__content">
               <div>
-                <h2{!! cms_style($meta, 'values.card.title', $loop->index) !!}>{{ $card['title'] ?? '' }}</h2>
-                <p{!! cms_style($meta, 'values.card.body', $loop->index) !!}>{{ $card['body'] ?? '' }}</p>
+                <h2{!! cms_style($meta, 'values.card.title', $loop->index) !!}>{!! accent_html($card['title'] ?? '') !!}</h2>
+                <p{!! cms_style($meta, 'values.card.body', $loop->index) !!}>{!! accent_html($card['body'] ?? '') !!}</p>
                 <p><a href="{{ $card['href'] ?? '#top' }}" class="btn --accent">Read more</a></p>
               </div>
               <figure>
@@ -105,9 +105,9 @@
   <div class="wrap">
     <div class="head">
       <div>
-        <h2 class="h2 reveal"{!! cms_style($meta, 'range.heading') !!}>{{ $meta->get('range.heading') }}</h2>
+        <h2 class="h2 reveal"{!! cms_style($meta, 'range.heading') !!}>{!! accent_html($meta->get('range.heading')) !!}</h2>
       </div>
-      <a href="{{ $meta->get('range.cta.href', 0, '/products') }}" class="btn --accent reveal"{!! cms_style($meta, 'range.cta.label') !!}>{{ $meta->get('range.cta.label') }}</a>
+      <a href="{{ $meta->get('range.cta.href', 0, '/products') }}" class="btn --accent reveal"{!! cms_style($meta, 'range.cta.label') !!}>{!! accent_html($meta->get('range.cta.label')) !!}</a>
     </div>
   </div>
   <div class="marquee">
@@ -118,7 +118,7 @@
               $fallback = \App\Support\ProductCatalog::fallbackImage($item['title'] ?? '');
               $imgUrl = media_url($item['image'] ?? '') ?: $fallback;
           @endphp
-          <a class="card" href="{{ $item['href'] ?? '#' }}"><div class="img"><img src="{{ $imgUrl }}" alt="{{ $item['title'] ?? '' }}" loading="lazy" onerror="this.onerror=null; this.src='{{ $fallback }}';" /></div><div class="body"><h4>{{ $item['title'] ?? '' }}</h4>@if (($item['body'] ?? '') !== '')<p>{{ $item['body'] }}</p>@endif<span class="more">View Range &rarr;</span></div></a>
+          <a class="card" href="{{ $item['href'] ?? '#' }}"><div class="img"><img src="{{ $imgUrl }}" alt="{{ $item['title'] ?? '' }}" loading="lazy" onerror="this.onerror=null; this.src='{{ $fallback }}';" /></div><div class="body"><h4>{!! accent_html($item['title'] ?? '') !!}</h4>@if (($item['body'] ?? '') !== '')<p>{!! accent_html($item['body']) !!}</p>@endif<span class="more">View Range &rarr;</span></div></a>
         @endforeach
       @endforeach
     </div>
@@ -130,14 +130,14 @@
   <div class="wrap">
     <div class="head" style="display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap">
       <div>
-        <h2 class="h2 reveal"{!! cms_style($meta, 'projects.heading') !!}>{{ $meta->get('projects.heading') }}</h2>
+        <h2 class="h2 reveal"{!! cms_style($meta, 'projects.heading') !!}>{!! accent_html($meta->get('projects.heading')) !!}</h2>
       </div>
-      <a href="{{ $meta->get('projects.cta.href', 0, '/projects') }}" class="btn reveal"{!! cms_style($meta, 'projects.cta.label') !!}>{{ $meta->get('projects.cta.label') }}</a>
+      <a href="{{ $meta->get('projects.cta.href', 0, '/projects') }}" class="btn reveal"{!! cms_style($meta, 'projects.cta.label') !!}>{!! accent_html($meta->get('projects.cta.label')) !!}</a>
     </div>
 
     <div class="grid">
       @foreach ($featuredProjects as $project)
-        <div class="proj reveal"><a href="{{ route('project-detail', ['slug' => $project->slug]) }}"><img src="{{ $project->coverUrl() }}" alt="{{ $project->title }}"/><div class="cap"><small>{{ $project->tag }}@if ($project->location) &mdash; {{ $project->location }}@endif</small><h3>{{ $project->title }}</h3></div></a></div>
+        <div class="proj reveal"><a href="{{ route('project-detail', ['slug' => $project->slug]) }}"><img src="{{ $project->coverUrl() }}" alt="{{ $project->title }}"/><div class="cap"><small>{{ $project->tag }}@if ($project->location) &mdash; {{ $project->location }}@endif</small><h3>{!! accent_html($project->title) !!}</h3></div></a></div>
       @endforeach
     </div>
   </div>
@@ -146,10 +146,10 @@
 <!-- ========== STATS ========== -->
 <section class="stats" {!! cms_section_attr('stats') !!}>
   <div class="wrap">
-    <h2 class="h2 reveal"{!! cms_style($meta, 'stats.heading', 0, 'text-align:center; max-width:900px; margin:0 auto') !!}>{!! nl2br_html($meta->get('stats.heading')) !!}</h2>
+    <h2 class="h2 reveal"{!! cms_style($meta, 'stats.heading', 0, 'text-align:center; max-width:900px; margin:0 auto') !!}>{!! accent_html($meta->get('stats.heading')) !!}</h2>
     <div class="stats-grid">
       @foreach ($stats as $stat)
-        <div class="stat reveal"><div class="num" data-c="{{ (int) ($stat['value'] ?? 0) }}"{!! cms_style($meta, 'stats.item.value', $loop->index) !!}>0</div><div class="lbl"{!! cms_style($meta, 'stats.item.label', $loop->index) !!}>{{ $stat['label'] ?? '' }}</div></div>
+        <div class="stat reveal"><div class="num" data-c="{{ (int) ($stat['value'] ?? 0) }}"{!! cms_style($meta, 'stats.item.value', $loop->index) !!}>0</div><div class="lbl"{!! cms_style($meta, 'stats.item.label', $loop->index) !!}>{!! accent_html($stat['label'] ?? '') !!}</div></div>
       @endforeach
     </div>
   </div>

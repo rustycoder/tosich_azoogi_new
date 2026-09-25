@@ -51,13 +51,13 @@
         <div class="ai-split-copy">
           <h2{!! cms_style($meta, 'caps.heading') !!}>
             {!! accent_html($meta->get('caps.heading')) !!}</h2>
-            <p{!! cms_style($meta, 'caps.body') !!}>{{ $meta->get('caps.body') }}</p>
+            <p{!! cms_style($meta, 'caps.body') !!}>{!! accent_html($meta->get('caps.body')) !!}</p>
         </div>
         <ol class="ai-caps">
           @foreach ($caps as $title)
             <li>
               <span class="ai-num">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-              <h3{!! cms_style($meta, 'caps.item.title', $loop->index) !!}>{{ $title }}</h3>
+              <h3{!! cms_style($meta, 'caps.item.title', $loop->index) !!}>{!! accent_html($title) !!}</h3>
             </li>
           @endforeach
         </ol>
@@ -69,10 +69,10 @@
         <div class="ai-feature-copy">
           <h2{!! cms_style($meta, 'spectrum.heading') !!}>
             {!! accent_html($meta->get('spectrum.heading')) !!}</h2>
-            <p{!! cms_style($meta, 'spectrum.body') !!}>{{ $meta->get('spectrum.body') }}</p>
+            <p{!! cms_style($meta, 'spectrum.body') !!}>{!! accent_html($meta->get('spectrum.body')) !!}</p>
               <ul class="ai-ticks">
                 @foreach ($ticks as $tick)
-                  <li{!! cms_style($meta, 'spectrum.tick', $loop->index) !!}>{{ $tick }}</li>
+                  <li{!! cms_style($meta, 'spectrum.tick', $loop->index) !!}>{!! accent_html($tick) !!}</li>
                 @endforeach
               </ul>
         </div>
@@ -81,13 +81,13 @@
             <img src="{{ media_url($meta->get('spectrum.compare.traditional.image')) }}"
               alt="{{ $meta->get('spectrum.compare.traditional.caption') }}" loading="lazy">
             <figcaption{!! cms_style($meta, 'spectrum.compare.traditional.caption') !!}>
-              {{ $meta->get('spectrum.compare.traditional.caption') }}</figcaption>
+              {!! accent_html($meta->get('spectrum.compare.traditional.caption')) !!}</figcaption>
           </figure>
           <figure class="is-accent">
             <img src="{{ media_url($meta->get('spectrum.compare.ai.image')) }}"
               alt="{{ $meta->get('spectrum.compare.ai.caption') }}" loading="lazy">
             <figcaption{!! cms_style($meta, 'spectrum.compare.ai.caption') !!}>
-              {{ $meta->get('spectrum.compare.ai.caption') }}</figcaption>
+              {!! accent_html($meta->get('spectrum.compare.ai.caption')) !!}</figcaption>
           </figure>
         </div>
       </div>
@@ -99,7 +99,7 @@
           <div style="text-align:center;">
             <h2{!! cms_style($meta, 'insights.heading') !!}>
               {!! accent_html($meta->get('insights.heading'), $meta->get('insights.heading_accent')) !!}</h2>
-              <p{!! cms_style($meta, 'insights.lead') !!}>{{ $meta->get('insights.lead') }}</p>
+              <p{!! cms_style($meta, 'insights.lead') !!}>{!! accent_html($meta->get('insights.lead')) !!}</p>
           </div>
 
         </div>
@@ -111,8 +111,8 @@
                 <div class="card__content">
                   <div>
                     <span class="ai-num">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-                    <h2{!! cms_style($meta, 'insights.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h2>
-                      <p{!! cms_style($meta, 'insights.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
+                    <h2{!! cms_style($meta, 'insights.item.title', $loop->index) !!}>{!! accent_html($item['title'] ?? '') !!}</h2>
+                      <p{!! cms_style($meta, 'insights.item.body', $loop->index) !!}>{!! accent_html($item['body'] ?? '') !!}</p>
                   </div>
                   <figure>
                     <img src="{{ media_url($item['image'] ?? '') }}" alt="{{ $item['title'] ?? '' }}">
@@ -132,7 +132,7 @@
       <div class="wrap ai-cct-inner">
         <h2{!! cms_style($meta, 'cct.heading') !!}>
           {!! accent_html($meta->get('cct.heading')) !!}</h2>
-          <p{!! cms_style($meta, 'cct.body') !!}>{{ $meta->get('cct.body') }}</p>
+          <p{!! cms_style($meta, 'cct.body') !!}>{!! accent_html($meta->get('cct.body')) !!}</p>
       </div>
     </section>
 
@@ -142,7 +142,7 @@
           <div>
             <h2{!! cms_style($meta, 'space.heading') !!}>
               {!! accent_html($meta->get('space.heading'), $meta->get('space.heading_accent')) !!}</h2>
-              <p{!! cms_style($meta, 'space.lead') !!}>{{ $meta->get('space.lead') }}</p>
+              <p{!! cms_style($meta, 'space.lead') !!}>{!! accent_html($meta->get('space.lead')) !!}</p>
           </div>
 
         </div>
@@ -160,11 +160,11 @@
               <div class="ai-acc-item {{ $loop->first ? 'is-open' : '' }}">
                 <button type="button" class="ai-acc-btn" aria-expanded="{{ $loop->first ? 'true' : 'false' }}">
                   <span class="ai-num">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-                  <h3{!! cms_style($meta, 'space.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h3>
+                  <h3{!! cms_style($meta, 'space.item.title', $loop->index) !!}>{!! accent_html($item['title'] ?? '') !!}</h3>
                     <span class="chev" aria-hidden="true"></span>
                 </button>
                 <div class="ai-acc-panel">
-                  <p{!! cms_style($meta, 'space.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
+                  <p{!! cms_style($meta, 'space.item.body', $loop->index) !!}>{!! accent_html($item['body'] ?? '') !!}</p>
                 </div>
               </div>
             @endforeach
@@ -182,10 +182,10 @@
           </svg>
         </span>
         <span class="ai-cta-copy">
-          <h3{!! cms_style($meta, 'cta.heading') !!}>{{ $meta->get('cta.heading') }}</h3>
-            <p{!! cms_style($meta, 'cta.body') !!}>{{ $meta->get('cta.body') }}</p>
+          <h3{!! cms_style($meta, 'cta.heading') !!}>{!! accent_html($meta->get('cta.heading')) !!}</h3>
+            <p{!! cms_style($meta, 'cta.body') !!}>{!! accent_html($meta->get('cta.body')) !!}</p>
         </span>
-        <span class="btn primary" {!! cms_style($meta, 'cta.label') !!}>{{ $meta->get('cta.label') }}</span>
+        <span class="btn primary" {!! cms_style($meta, 'cta.label') !!}>{!! accent_html($meta->get('cta.label')) !!}</span>
       </a>
     </div>
 

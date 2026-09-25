@@ -47,16 +47,16 @@
   <section class="solutions-eco" aria-labelledby="ecoTitle" {!! cms_section_attr('eco') !!}>
     <div class="wrap">
       <div class="solutions-eco-head">
-        <h2 id="ecoTitle"{!! cms_style($meta, 'eco.heading') !!}>{{ $meta->get('eco.heading') }}</h2>
-        <p{!! cms_style($meta, 'eco.lead') !!}>{{ $meta->get('eco.lead') }}</p>
+        <h2 id="ecoTitle"{!! cms_style($meta, 'eco.heading') !!}>{!! accent_html($meta->get('eco.heading')) !!}</h2>
+        <p{!! cms_style($meta, 'eco.lead') !!}>{!! accent_html($meta->get('eco.lead')) !!}</p>
       </div>
 
       <ul class="solutions-eco-grid">
         @foreach ($ecosystems as $item)
           <li>
             <a class="sol-eco" href="{{ $item['href'] ?? '#' }}">
-              <span class="sol-eco-name"{!! cms_style($meta, 'eco.item.name', $loop->index) !!}>{{ $item['name'] ?? '' }}</span>
-              <span class="sol-eco-sub"{!! cms_style($meta, 'eco.item.sub', $loop->index) !!}>{{ $item['sub'] ?? '' }}</span>
+              <span class="sol-eco-name"{!! cms_style($meta, 'eco.item.name', $loop->index) !!}>{!! accent_html($item['name'] ?? '') !!}</span>
+              <span class="sol-eco-sub"{!! cms_style($meta, 'eco.item.sub', $loop->index) !!}>{!! accent_html($item['sub'] ?? '') !!}</span>
               <span class="sol-eco-go">View platform
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -74,10 +74,10 @@
           </svg>
         </span>
         <span class="solutions-cta-copy">
-          <h3{!! cms_style($meta, 'eco.cta.heading') !!}>{{ $meta->get('eco.cta.heading') }}</h3>
-          <p{!! cms_style($meta, 'eco.cta.body') !!}>{{ $meta->get('eco.cta.body') }}</p>
+          <h3{!! cms_style($meta, 'eco.cta.heading') !!}>{!! accent_html($meta->get('eco.cta.heading')) !!}</h3>
+          <p{!! cms_style($meta, 'eco.cta.body') !!}>{!! accent_html($meta->get('eco.cta.body')) !!}</p>
         </span>
-        <span class="btn primary"{!! cms_style($meta, 'eco.cta.label') !!}>{{ $meta->get('eco.cta.label') }}</span>
+        <span class="btn primary"{!! cms_style($meta, 'eco.cta.label') !!}>{!! accent_html($meta->get('eco.cta.label')) !!}</span>
       </a>
     </div>
   </section>
@@ -86,7 +86,7 @@
     <div class="wrap">
       <div class="solutions-sector-head">
         <h2 id="sectorTitle"{!! cms_style($meta, 'sector.heading') !!}>{!! accent_html($meta->get('sector.heading')) !!}</h2>
-        <p class="solutions-sector-hint"{!! cms_style($meta, 'sector.hint') !!}>{{ $meta->get('sector.hint') }}</p>
+        <p class="solutions-sector-hint"{!! cms_style($meta, 'sector.hint') !!}>{!! accent_html($meta->get('sector.hint')) !!}</p>
       </div>
 
       <ul class="sol-sectors">
@@ -95,10 +95,10 @@
             <button type="button" class="sol-sector-inner" aria-expanded="false">
               <span class="sol-sector-face sol-sector-front">
                 <span class="sol-sector-num">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-                <span class="sol-sector-title"{!! cms_style($meta, 'sector.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</span>
+                <span class="sol-sector-title"{!! cms_style($meta, 'sector.item.title', $loop->index) !!}>{!! accent_html($item['title'] ?? '') !!}</span>
               </span>
               <span class="sol-sector-face sol-sector-back">
-                <span class="sol-sector-desc"{!! cms_style($meta, 'sector.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</span>
+                <span class="sol-sector-desc"{!! cms_style($meta, 'sector.item.body', $loop->index) !!}>{!! accent_html($item['body'] ?? '') !!}</span>
               </span>
             </button>
           </li>
@@ -106,7 +106,7 @@
       </ul>
 
       <div class="solutions-sector-cta">
-        <a class="btn" href="{{ $meta->get('sector.cta.href', 0, '/data-centre') }}"{!! cms_style($meta, 'sector.cta.label') !!}>{{ $meta->get('sector.cta.label') }}
+        <a class="btn" href="{{ $meta->get('sector.cta.href', 0, '/data-centre') }}"{!! cms_style($meta, 'sector.cta.label') !!}>{!! accent_html($meta->get('sector.cta.label')) !!}
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>

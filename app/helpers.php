@@ -206,7 +206,10 @@ if (! function_exists('nl2br_html')) {
             $lines[] = '<span>'.$last.'</span>';
         }
 
-        return implode('<br>', $lines);
+        $result = implode('<br>', $lines);
+        $html = preg_replace('/\{([^}]+)\}/', '<span>$1</span>', $result);
+
+        return $html ?? $result;
     }
 }
 
@@ -231,10 +234,13 @@ if (! function_exists('labelled_tick')) {
         $colon = strpos($text, ':');
 
         if ($colon === false) {
-            return e($text);
+            return accent_html($text);
         }
 
-        return '<strong>'.e(substr($text, 0, $colon + 1)).'</strong>'.e(substr($text, $colon + 1));
+        $label = substr($text, 0, $colon + 1);
+        $rest = substr($text, $colon + 1);
+
+        return '<strong>'.accent_html($label).'</strong>'.accent_html($rest);
     }
 }
 
