@@ -3,8 +3,42 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{{ trim($__env->yieldContent('title', 'Azoogi')) }}</title>
+<title>{{ trim($__env->yieldContent('title', 'Azoogi — Architectural LED Lighting Solutions')) }}</title>
 <meta name="description" content="{{ trim($__env->yieldContent('description', 'Azoogi designs and supplies premium LED lighting for projects that demand more.')) }}">
+<link rel="canonical" href="{{ trim($__env->yieldContent('canonical', url()->current())) }}">
+<meta name="robots" content="{{ trim($__env->yieldContent('robots', request()->routeIs('dashboard.pages.preview') || request()->routeIs('trade-login') ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1')) }}">
+
+<!-- Open Graph / Social Sharing -->
+<meta property="og:type" content="{{ trim($__env->yieldContent('ogType', 'website')) }}">
+<meta property="og:site_name" content="Azoogi">
+<meta property="og:url" content="{{ trim($__env->yieldContent('canonical', url()->current())) }}">
+<meta property="og:title" content="{{ trim($__env->yieldContent('ogTitle', $__env->yieldContent('title', 'Azoogi — Architectural LED Lighting Solutions'))) }}">
+<meta property="og:description" content="{{ trim($__env->yieldContent('ogDescription', $__env->yieldContent('description', 'Azoogi designs and supplies premium LED lighting for projects that demand more.'))) }}">
+<meta property="og:image" content="{{ trim($__env->yieldContent('ogImage', !empty($page?->og_image) ? media_url($page->og_image) : asset('assets/logo_dark.png'))) }}">
+<meta property="og:locale" content="en_AU">
+
+<!-- Twitter / X Card -->
+<meta name="twitter:card" content="{{ trim($__env->yieldContent('twitterCard', 'summary_large_image')) }}">
+<meta name="twitter:title" content="{{ trim($__env->yieldContent('ogTitle', $__env->yieldContent('title', 'Azoogi — Architectural LED Lighting Solutions'))) }}">
+<meta name="twitter:description" content="{{ trim($__env->yieldContent('ogDescription', $__env->yieldContent('description', 'Azoogi designs and supplies premium LED lighting for projects that demand more.'))) }}">
+<meta name="twitter:image" content="{{ trim($__env->yieldContent('ogImage', !empty($page?->og_image) ? media_url($page->og_image) : asset('assets/logo_dark.png'))) }}">
+
+<!-- Structured Data (JSON-LD) -->
+@if (trim($__env->yieldContent('schema')) !== '')
+@yield('schema')
+@else
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@@type": "Organization",
+  "name": "Azoogi",
+  "url": "{{ url('/') }}",
+  "logo": "{{ asset('assets/logo_dark.png') }}",
+  "description": "Azoogi designs and supplies premium architectural LED lighting and smart control systems."
+}
+</script>
+@endif
+
 <link rel="icon" href="{{ asset('assets/favicon.png') }}">
 <script>
 (function () {

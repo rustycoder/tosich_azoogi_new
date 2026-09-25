@@ -63,6 +63,7 @@ ffmpeg -i input_video.mp4 \
 | Placement | Recommended Dimensions | Max Target File Size | Format |
 | :--- | :--- | :--- | :--- |
 | **Hero Banners & Posters** | `1920 x 1080 px` | `< 200 KB` | `.webp` |
+| **Social Share (OG Images)** | `1200 x 630 px` | `< 150 KB` | `.webp` / `.jpg` |
 | **Project / Feature Photos** | `1200 x 800 px` | `< 120 KB` | `.webp` |
 | **Product Thumbnails / Cards** | `600 x 600 px` | `< 60 KB` | `.webp` / `.jpg` |
 | **Logos & Badges** | Vector or `400 x 120 px` | `< 30 KB` | `.svg` / `.png` |

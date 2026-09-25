@@ -25,6 +25,9 @@ class UpdatePageContentRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'meta_description' => ['nullable', 'string', 'max:500'],
+            'og_image' => ['nullable', 'string', 'max:255'],
+            'og_image_file' => ['nullable', 'file', 'max:5120', 'mimes:jpg,jpeg,png,webp'],
+            'remove_og_image' => ['nullable', 'boolean'],
             'status' => ['required', Rule::enum(Status::class)],
             'meta' => ['nullable', 'array'],
             'meta.*.value' => ['nullable', 'string'],

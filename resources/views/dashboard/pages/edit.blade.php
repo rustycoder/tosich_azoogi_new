@@ -29,25 +29,39 @@
 <div class="dash-drawer-backdrop" id="dash-drawer-backdrop" hidden></div>
 
 <aside class="dash-drawer" id="dash-drawer-meta" hidden>
-    <form class="dash-form" method="post" action="{{ route('dashboard.pages.update', $page) }}">
+    <form class="dash-form" method="post" action="{{ route('dashboard.pages.update', $page) }}" enctype="multipart/form-data">
         @csrf
         @method('put')
         <input type="hidden" name="editor_section" value="meta">
         <input type="hidden" name="status" value="{{ $page->status->value }}">
         <div class="dash-drawer-head">
-            <h2>Page Meta</h2>
+            <h2>Page Meta & SEO</h2>
             <button type="button" class="dash-drawer-close" data-close-drawer aria-label="Close">&times;</button>
         </div>
         <div class="dash-drawer-body">
             <div class="dash-field">
-                <label for="title">SEO title</label>
+                <label for="title">SEO title <small>(50–60 chars recommended)</small></label>
                 <input id="title" name="title" value="{{ old('title', $page->title) }}" required>
                 @error('title')<p class="login-error">{{ $message }}</p>@enderror
             </div>
             <div class="dash-field">
-                <label for="meta_description">Meta description</label>
+                <label for="meta_description">Meta description <small>(140–160 chars recommended)</small></label>
                 <textarea id="meta_description" name="meta_description" rows="4">{{ old('meta_description', $page->meta_description) }}</textarea>
                 @error('meta_description')<p class="login-error">{{ $message }}</p>@enderror
+            </div>
+            <div class="dash-field">
+                <label for="og_image_file">Social Share Image (OG Image) <small>(1200×630px recommended)</small></label>
+                @if (!empty($page->og_image))
+                    <div style="margin-bottom: 8px; display: flex; align-items: center; gap: 12px;">
+                        <img src="{{ media_url($page->og_image) }}" alt="OG Preview" style="width: 80px; height: 45px; object-fit: cover; border-radius: 4px; border: 1px solid var(--dash-line);">
+                        <label style="font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer; text-transform: none; letter-spacing: 0;">
+                            <input type="checkbox" name="remove_og_image" value="1">
+                            Remove current image
+                        </label>
+                    </div>
+                @endif
+                <input id="og_image_file" name="og_image_file" type="file" accept="image/png,image/jpeg,image/webp">
+                @error('og_image_file')<p class="login-error">{{ $message }}</p>@enderror
             </div>
         </div>
         <div class="dash-drawer-foot">
