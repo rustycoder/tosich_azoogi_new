@@ -221,7 +221,7 @@ body {
     }
 }
 
-/* All other text fields across CMS (H2, H3, H4, paragraphs, leads, lists, labels, buttons, cards, etc.) inside {} get solid accent color */
+/* All other text fields across CMS (H2, H3, H4, paragraphs, leads, lists, labels, cards, etc.) inside {} get solid accent color */
 h2 span,
 h3 span,
 h4 span,
@@ -236,7 +236,6 @@ dd span,
 label span,
 figcaption span,
 blockquote span,
-button span,
 .btn span,
 .lead span,
 .kicker span,
@@ -841,13 +840,14 @@ h3 {
     position: relative;
 }
 
-.cta span.count {
+.cta span.count,
+.quote-trigger .count {
     position: absolute;
     top: -6px;
     right: -6px;
     border-radius: 50%;
-    background: var(--accent);
-    color: var(--pure-bg);
+    background: var(--accent) !important;
+    color: var(--pure-bg) !important;
     font-size: 10px;
     width: 18px;
     height: 18px;
@@ -902,7 +902,7 @@ a.cta:after {
     height: 16px;
     border-radius: 50%;
     background: #c8c8c8;
-    color: #222;
+    color: #222 !important;
     display: grid;
     place-items: center;
     transform: translateX(16px);
@@ -912,13 +912,15 @@ a.cta:after {
 :root[data-theme="light"] .theme-switch-thumb {
     transform: none;
     background: #4a4a4a;
-    color: #fff;
+    color: #fff !important;
 }
 
 .theme-switch-thumb svg {
     grid-area: 1 / 1;
     width: 12px;
     height: 12px;
+    stroke: currentColor !important;
+    fill: none !important;
 }
 
 .theme-switch .sun-icon {
