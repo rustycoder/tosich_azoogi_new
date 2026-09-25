@@ -38,11 +38,6 @@
       @if ($calcLead !== '')
         <p class="calc-hero-lead"{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($calcLead) !!}</p>
       @endif
-      @if ($meta->get('hero.cta.label'))
-        <div class="calc-hero-actions">
-          <a href="#led-selector" class="btn primary"{!! cms_style($meta, 'hero.cta.label') !!}>{!! accent_html($meta->get('hero.cta.label')) !!}</a>
-        </div>
-      @endif
     </div>
   </section>
 
