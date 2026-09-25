@@ -15,8 +15,8 @@
             @if ($field->type === FieldType::Html) id="ckeditor-{{ $row->id }}"
                 class="is-html"
                 data-ckeditor @endif
+            data-counter="{{ $field->counterType ?? 'chars' }}"
             @if ($field->hasRecommendation())
-                data-counter="{{ $field->counterType }}"
                 data-min="{{ $field->minCount }}"
                 data-max="{{ $field->maxCount }}"
             @endif>{{ old('meta.' . $row->id . '.value', $row->value) }}</textarea>
@@ -116,8 +116,8 @@
     @else
         <input type="text" name="meta[{{ $row->id }}][value]"
             value="{{ old('meta.' . $row->id . '.value', $row->value) }}"
+            data-counter="{{ $field->counterType ?? 'chars' }}"
             @if ($field->hasRecommendation())
-                data-counter="{{ $field->counterType }}"
                 data-min="{{ $field->minCount }}"
                 data-max="{{ $field->maxCount }}"
             @endif>

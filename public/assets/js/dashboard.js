@@ -993,6 +993,7 @@
             const type = el.dataset.counter || 'chars';
             const min = parseInt(el.dataset.min || '0', 10);
             const max = parseInt(el.dataset.max || '0', 10);
+            const hasRec = min > 0 || max > 0;
 
             const counter = document.createElement('div');
             counter.className = 'dash-field-counter';
@@ -1010,23 +1011,27 @@
                 let statusClass = '';
                 let statusText = '';
 
-                if (current === 0) {
-                    statusText = min > 0 ? `0 / ${max} ${unit} (${min}–${max} recommended)` : `0 / ${max} ${unit}`;
-                } else if (min > 0 && current < min) {
-                    statusClass = 'is-under';
-                    statusText = `${current} / ${max} ${unit} • ${min - current} more for optimal`;
-                } else if (current >= min && (max === 0 || current <= max)) {
-                    statusClass = 'is-optimal';
-                    statusText = `${current} / ${max} ${unit} • Optimal`;
-                } else if (max > 0 && current > max) {
-                    statusClass = 'is-overflow';
-                    statusText = `${current} / ${max} ${unit} • +${current - max} over limit`;
+                if (hasRec) {
+                    if (current === 0) {
+                        statusText = min > 0 ? `0 / ${max} ${unit} (${min}–${max} recommended)` : `0 / ${max} ${unit}`;
+                    } else if (min > 0 && current < min) {
+                        statusClass = 'is-under';
+                        statusText = `${current} / ${max} ${unit} • ${min - current} more for optimal`;
+                    } else if (current >= min && (max === 0 || current <= max)) {
+                        statusClass = 'is-optimal';
+                        statusText = `${current} / ${max} ${unit} • Optimal`;
+                    } else if (max > 0 && current > max) {
+                        statusClass = 'is-overflow';
+                        statusText = `${current} / ${max} ${unit} • +${current - max} over limit`;
+                    } else {
+                        statusText = `${current} ${unit}`;
+                    }
                 } else {
-                    statusText = `${current} ${unit}`;
+                    statusText = `${wordCount} ${wordCount === 1 ? 'word' : 'words'}`;
                 }
 
                 counter.className = `dash-field-counter ${statusClass}`.trim();
-                const leftLabel = type === 'words' ? `${wordCount} words (${charCount} chars)` : `${charCount} chars`;
+                const leftLabel = `${charCount} ${charCount === 1 ? 'char' : 'chars'}`;
                 counter.innerHTML = `<span class="dash-counter-count">${leftLabel}</span><span class="dash-counter-status">${statusText}</span>`;
             };
 
@@ -1046,7 +1051,7 @@
         });
     };
 
-    // Image Dropzone & Live Previews with Metadata Badges
+    // Image & Video Dropzone with Live Previews & Metadata Badges
     const formatBytes = (bytes, decimals = 1) => {
         if (!bytes || bytes === 0) return '0 B';
         const k = 1024;
@@ -1081,6 +1086,9 @@
             const parts = file.type.split('/');
             if (parts[1]) return parts[1].replace('+xml', '').toUpperCase();
         }
+        const nameParts = file.name.split('.');
+        return nameParts.length > 1 ? nameParts.pop().toUpperCase() : 'FILE';
+    };
     const formatDuration = (seconds) => {
         if (!seconds || isNaN(seconds)) return '';
         const mins = Math.floor(seconds / 60);
