@@ -4286,6 +4286,32 @@ code {
   opacity: .7;
 }
 
+.dash-seo-url {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: var(--dash-muted);
+  text-decoration: none;
+  transition: color .15s ease;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 1px;
+  overflow-wrap: anywhere;
+}
+
+.dash-seo-url:hover {
+  color: var(--dash-green);
+}
+
+.dash-seo-url .dash-ext-icon {
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+  opacity: .7;
+}
+
 /* Status Switch Toggle */
 .dash-td-status {
   white-space: nowrap;

@@ -65,8 +65,8 @@
     <table class="dash-table dash-pages-table" id="pagesTable">
         <thead>
             <tr>
-                <th scope="col" style="min-width: 240px; width: 28%;">Page Name & Path</th>
-                <th scope="col" style="min-width: 320px; width: 44%;">SEO & Social Meta</th>
+                <th scope="col" style="min-width: 220px; width: 24%;">Page Name</th>
+                <th scope="col" style="min-width: 340px; width: 48%;">SEO & Social Meta</th>
                 <th scope="col" style="width: 130px;">Status</th>
                 <th scope="col" style="min-width: 170px; width: 18%;">Last updated</th>
             </tr>
@@ -113,12 +113,6 @@
                                 'label' => $navLabel,
                                 'view' => $page->publicPath(),
                             ])
-                            <a href="{{ $page->publicPath() }}" target="_blank" rel="noopener noreferrer" class="dash-page-path" title="Open live URL {{ $page->publicPath() }}">
-                                <span>{{ $page->publicPath() }}</span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="dash-ext-icon" aria-hidden="true">
-                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/>
-                                </svg>
-                            </a>
                             <div class="dash-page-cat-line">
                                 <span class="dash-cat-badge {{ $cat->badgeClass() }}">
                                     {{ $cat->shortLabel() }}
@@ -154,6 +148,12 @@
                                 @else
                                     <p class="dash-seo-desc is-empty">No meta description configured</p>
                                 @endif
+                                <a href="{{ url($page->publicPath()) }}" target="_blank" rel="noopener noreferrer" class="dash-seo-url" title="Open live URL {{ url($page->publicPath()) }}">
+                                    <span>{{ url($page->publicPath()) }}</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="dash-ext-icon" aria-hidden="true">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/>
+                                    </svg>
+                                </a>
                             </div>
                         </div>
                     </td>
