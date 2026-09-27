@@ -47,7 +47,7 @@
             type="search"
             name="q"
             value="{{ $search }}"
-            placeholder="Search pages by name, slug, or SEO title..."
+            placeholder="Search pages by name, slug, SEO title, or description..."
             maxlength="80"
             autocomplete="off"
         >
@@ -65,11 +65,10 @@
     <table class="dash-table dash-pages-table" id="pagesTable">
         <thead>
             <tr>
-                <th scope="col" style="min-width: 220px;">Page Name & Path</th>
-                <th scope="col" style="width: 160px;">Category</th>
-                <th scope="col" style="min-width: 240px;">SEO Title</th>
-                <th scope="col" style="width: 120px;">Status</th>
-                <th scope="col" style="width: 200px;">Last Updated</th>
+                <th scope="col" style="min-width: 240px; width: 28%;">Page Name & Path</th>
+                <th scope="col" style="min-width: 320px; width: 44%;">SEO & Social Meta</th>
+                <th scope="col" style="width: 130px;">Status</th>
+                <th scope="col" style="min-width: 170px; width: 18%;">Last Updated</th>
             </tr>
         </thead>
         <tbody>
@@ -81,14 +80,19 @@
                 @endphp
                 <tr class="dash-page-row" 
                     data-cat="{{ $cat->value }}" 
-                    data-title="{{ mb_strtolower($navLabel . ' ' . $page->title . ' ' . $page->slug . ' ' . $cat->label()) }}">
+                    data-title="{{ mb_strtolower($navLabel . ' ' . $page->title . ' ' . $page->meta_description . ' ' . $page->slug . ' ' . $cat->label()) }}">
                     <td class="dash-td-page">
                         <div class="dash-page-primary">
-                            @include('dashboard.partials.title-link', [
-                                'href' => route('dashboard.pages.edit', $page),
-                                'label' => $navLabel,
-                                'view' => $page->publicPath(),
-                            ])
+                            <div class="dash-page-header-line">
+                                @include('dashboard.partials.title-link', [
+                                    'href' => route('dashboard.pages.edit', $page),
+                                    'label' => $navLabel,
+                                    'view' => $page->publicPath(),
+                                ])
+                                <span class="dash-cat-badge {{ $cat->badgeClass() }}">
+                                    {{ $cat->shortLabel() }}
+                                </span>
+                            </div>
                             <a href="{{ $page->publicPath() }}" target="_blank" rel="noopener noreferrer" class="dash-page-path" title="Open live URL {{ $page->publicPath() }}">
                                 <span>{{ $page->publicPath() }}</span>
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="dash-ext-icon" aria-hidden="true">
@@ -97,30 +101,56 @@
                             </a>
                         </div>
                     </td>
-                    <td>
-                        <span class="dash-cat-badge {{ $cat->badgeClass() }}">
-                            {{ $cat->shortLabel() }}
-                        </span>
-                    </td>
                     <td class="dash-td-seo">
-                        <span class="dash-seo-title" title="{{ $page->title }}">{{ $page->title }}</span>
+                        <div class="dash-seo-card">
+                            @if (!empty($page->og_image))
+                                <div class="dash-seo-og-thumb" title="OG Social Share Image: {{ basename($page->og_image) }}">
+                                    <img src="{{ media_url($page->og_image) }}" alt="{{ $navLabel }} Social Share" loading="lazy">
+                                </div>
+                            @else
+                                <div class="dash-seo-og-thumb is-empty" title="No social share (OG) image uploaded">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                                        <polyline points="21 15 16 10 5 21"/>
+                                    </svg>
+                                    <span>No OG</span>
+                                </div>
+                            @endif
+                            <div class="dash-seo-info">
+                                <div class="dash-seo-title-row">
+                                    <strong class="dash-seo-title" title="{{ $page->title }}">{{ $page->title }}</strong>
+                                </div>
+                                @if (filled($page->meta_description))
+                                    <p class="dash-seo-desc" title="{{ $page->meta_description }}">{{ $page->meta_description }}</p>
+                                @else
+                                    <p class="dash-seo-desc is-empty">No meta description configured</p>
+                                @endif
+                            </div>
+                        </div>
                     </td>
-                    <td>
-                        @include('dashboard.partials.toggle', [
-                            'url' => route('dashboard.pages.toggle-status', $page),
-                            'on' => $page->isActive(),
-                            'label' => $page->status->label(),
-                            'onClass' => 'is-active',
-                            'offClass' => 'is-inactive',
-                        ])
+                    <td class="dash-td-status">
+                        <label class="dash-switch-label" title="Toggle active status">
+                            <input 
+                                type="checkbox" 
+                                class="dash-switch-input" 
+                                {{ $page->isActive() ? 'checked' : '' }} 
+                                data-dash-toggle-switch="{{ route('dashboard.pages.toggle-status', $page) }}"
+                                aria-label="Toggle {{ $navLabel }} status"
+                            >
+                            <span class="dash-switch-slider" aria-hidden="true"></span>
+                            <span class="dash-switch-status {{ $page->isActive() ? 'is-active' : 'is-inactive' }}">
+                                {{ $page->status->label() }}
+                            </span>
+                        </label>
                     </td>
-                    <td>
+                    <td class="dash-td-updated">
                         @include('dashboard.partials.updated', ['record' => $page])
                     </td>
                 </tr>
             @empty
                 <tr id="serverEmptyRow">
-                    <td colspan="5">
+                    <td colspan="4">
                         <div class="dash-empty">
                             {{ $search === '' ? 'No pages found in this category.' : 'No pages match "' . $search . '".' }}
                         </div>
@@ -128,7 +158,7 @@
                 </tr>
             @endforelse
             <tr id="clientEmptyRow" style="display: none;">
-                <td colspan="5">
+                <td colspan="4">
                     <div class="dash-empty">No pages match your filter or search query.</div>
                 </td>
             </tr>
@@ -175,7 +205,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tabs.forEach(tab => {
         tab.addEventListener('click', (e) => {
-            // When user clicks with ctrl/cmd or middle click, allow default link
             if (e.metaKey || e.ctrlKey || e.shiftKey) return;
             e.preventDefault();
 
@@ -187,7 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 searchCatInput.value = currentCat === 'all' ? '' : currentCat;
             }
 
-            // Sync URL without reload
             const url = new URL(window.location);
             if (currentCat === 'all') {
                 url.searchParams.delete('category');

@@ -116,6 +116,47 @@
         });
     });
 
+    document.querySelectorAll('input[data-dash-toggle-switch]').forEach((checkbox) => {
+        checkbox.addEventListener('change', async () => {
+            if (checkbox.disabled) {
+                return;
+            }
+
+            checkbox.disabled = true;
+            const container = checkbox.closest('.dash-switch-label');
+            const statusLabel = container?.querySelector('.dash-switch-status');
+
+            try {
+                const response = await fetch(checkbox.dataset.dashToggleSwitch, {
+                    method: 'PATCH',
+                    headers: {
+                        Accept: 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': csrf,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('toggle-failed');
+                }
+
+                const data = await response.json();
+                checkbox.checked = data.on;
+                if (statusLabel) {
+                    statusLabel.textContent = data.label;
+                    statusLabel.classList.toggle('is-active', data.on);
+                    statusLabel.classList.toggle('is-inactive', !data.on);
+                }
+                toast(data.message);
+            } catch {
+                checkbox.checked = !checkbox.checked;
+                toast('Could not update status. Try again.', 'error');
+            } finally {
+                checkbox.disabled = false;
+            }
+        });
+    });
+
     const sortBody = document.querySelector('[data-dash-sort]');
 
     if (sortBody) {
