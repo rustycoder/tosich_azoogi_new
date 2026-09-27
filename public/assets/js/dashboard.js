@@ -904,17 +904,25 @@
         });
 
         form.addEventListener('input', (event) => {
-            const input = event.target.closest('[data-gallery-alt-edit] input');
-            if (!input || !form.contains(input)) {
+            const galleryInput = event.target.closest('[data-gallery-alt-edit] input');
+            if (galleryInput && form.contains(galleryInput)) {
+                const card = galleryInput.closest('[data-gallery-item]');
+                const valDisplay = card?.querySelector('[data-gallery-alt-val]');
+                if (valDisplay) {
+                    const text = galleryInput.value.trim();
+                    const defaultAlt = valDisplay.dataset.defaultAlt || 'photo';
+                    valDisplay.textContent = text !== '' ? text : `Auto (${defaultAlt})`;
+                }
                 return;
             }
 
-            const card = input.closest('[data-gallery-item]');
-            const valDisplay = card?.querySelector('[data-gallery-alt-val]');
-            if (valDisplay) {
-                const text = input.value.trim();
-                const defaultAlt = valDisplay.dataset.defaultAlt || 'photo';
-                valDisplay.textContent = text !== '' ? text : `Auto (${defaultAlt})`;
+            if (event.target.id === 'cover_alt' && form.contains(event.target)) {
+                const valDisplay = form.querySelector('[data-cover-alt-val]');
+                if (valDisplay) {
+                    const text = event.target.value.trim();
+                    const defaultAlt = valDisplay.dataset.defaultAlt || 'Project';
+                    valDisplay.textContent = text !== '' ? text : `Auto (${defaultAlt})`;
+                }
             }
         });
 

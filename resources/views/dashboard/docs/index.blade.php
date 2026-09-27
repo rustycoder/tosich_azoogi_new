@@ -65,6 +65,9 @@
                                     @case('images')
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                                         @break
+                                    @case('alt-text')
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7V4h16v3M9 20h6M12 4v16"/><path d="M2 19h20M2 5h20" stroke-dasharray="2 2"/><circle cx="18" cy="15" r="3"/><path d="m20.5 17.5-1.5-1.5"/></svg>
+                                        @break
                                     @case('seo')
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                                         @break
@@ -349,6 +352,10 @@
                     </div>
                 </div>
 
+                <div class="dash-doc-callout info">
+                    <strong>Cover & Gallery Alt Text:</strong> You can edit cover and gallery alt text directly in the Project form with live card previews. Read the <a href="{{ route('dashboard.docs.index', ['topic' => 'alt-text']) }}" class="dash-doc-inline-link"><strong>Image Alt Text & Accessibility Guide &rarr;</strong></a> for writing tips and SEO benefits.
+                </div>
+
                 <div class="dash-doc-callout tip">
                     <strong>Auto-Sitemap Invalidation:</strong> Whenever a project is created, updated, or deleted, the public XML sitemap (<code>/sitemap.xml</code>) and AI feeds (<code>/llms.txt</code>) are automatically invalidated and refreshed.
                 </div>
@@ -498,12 +505,130 @@
                     </table>
                 </div>
 
-                <div class="dash-doc-callout tip">
-                    <strong>Recommended Free Optimization Tools:</strong>
+                <div class="dash-doc-callout info">
+                    <strong>Setting Alt Text & Accessibility:</strong> For instructions on configuring custom alt text, live preview badges, and search ranking benefits, read our dedicated <a href="{{ route('dashboard.docs.index', ['topic' => 'alt-text']) }}" class="dash-doc-inline-link"><strong>Image Alt Text & Accessibility Guide &rarr;</strong></a>
+                </div>
+            </article>
+        @endif
+
+        {{-- 8b. IMAGE ALT TEXT & ACCESSIBILITY --}}
+        @if ($activeTopic === 'alt-text')
+            <article class="dash-card dash-doc-section" data-doc-block>
+                <div class="dash-doc-header">
+                    <h2>Image Alt Text & Accessibility (WCAG 2.1 & SEO)</h2>
+                    <span class="dash-pill-active">Accessibility & SEO Standard</span>
+                </div>
+                <p>Alternative text (alt text) is a concise textual description embedded in image HTML tags (<code>&lt;img alt="..."&gt;</code>). It serves as the primary bridge between visual imagery and non-visual user agents&mdash;including search engine crawlers, assistive screen readers, and AI recommendation engines.</p>
+
+                <h3>Why Alt Text is Crucial for the Website</h3>
+                <div class="dash-doc-grid-cards">
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        </div>
+                        <h4>1. Search Engine Optimization (SEO) & Google Images</h4>
+                        <p>Search bots (Googlebot, Bingbot) cannot directly "see" photographic lighting installations. Alt text provides explicit keyword context that indexes project installations in Google Image search and rich result carousels.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+                        </div>
+                        <h4>2. Web Accessibility (WCAG 2.1 AA Compliance)</h4>
+                        <p>Visually impaired architects, lighting designers, and clients using screen readers (VoiceOver, NVDA, JAWS) rely on alt text read aloud to understand diagrams, installation photos, and lighting fixtures.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l1.912 5.813a2 2 0 0 0 1.275 1.275L21 12l-5.813 1.912a2 2 0 0 0-1.275 1.275L12 21l-1.912-5.813a2 2 0 0 0-1.275-1.275L3 12l5.813-1.912a2 2 0 0 0 1.275-1.275L12 3z"/></svg>
+                        </div>
+                        <h4>3. Generative AI Search (LLMs & GEO)</h4>
+                        <p>Modern AI search engines (ChatGPT, Perplexity, Google Gemini, Claude) crawl image alt attributes to synthesize answers about Azoogi's architectural lighting projects, citing them in AI-generated responses.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        </div>
+                        <h4>4. Graceful Degradation on Slow Networks</h4>
+                        <p>If a visitor is on a low-bandwidth cellular network and high-resolution photography fails to download immediately, the browser renders the alt text in place of the image, keeping page context intact.</p>
+                    </div>
+                </div>
+
+                <h3>How to Set Alt Text in the Backend CMS</h3>
+                <div class="dash-doc-steps">
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">1</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Project Cover Image Alt Text</h4>
+                            <p>In the Project Editor (<a href="{{ route('dashboard.projects.index') }}"><strong>Content &rarr; Projects</strong></a>), locate the <strong>Cover image alt text</strong> field directly below the cover upload dropzone. The preview card above updates in real time to show the active alt text badge.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">2</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Project Gallery Photo Alt Text</h4>
+                            <p>Every photo in the Gallery grid displays an image preview card with metadata badges (format, file size, dimensions, and aspect ratio). Click the <strong>Edit Alt</strong> pencil icon (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 13px; height: 13px; vertical-align: -2px; display: inline-block;"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>) to reveal the inline custom alt text field. Type your description, and the preview label reflects your input instantly.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">3</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Automatic Intelligent Fallbacks</h4>
+                            <p>If you leave the alt text blank, the Azoogi platform automatically generates a clean, descriptive fallback (e.g. <code>[Project Title]</code> for covers and <code>[Project Title] photo [Index]</code> for gallery photos) to guarantee 100% WCAG 2.1 compliance with zero empty alt tags across the public website.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">4</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Page Feature Diagrams & Schematics</h4>
+                            <p>Structured page sections (such as system architecture diagrams, software integration workflows, and Casambi mesh diagrams) include dedicated alt fields (e.g. <code>feature.image_alt</code>) ensuring technical schematics remain accessible.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Best Practice Writing Guidelines</h3>
+                <div class="dash-table-wrap">
+                    <table class="dash-doc-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Poor Alt Text (Avoid)</th>
+                                <th>Optimized Alt Text (Recommended)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Project Cover Photo</strong></td>
+                                <td><code>IMG_8492.jpg</code> or <code>Photo</code></td>
+                                <td><code>Crown Sydney Grand Atrium illuminated by custom curved RGBW linear profiles</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gallery Installation Shot</strong></td>
+                                <td><code>Image of boardroom lights</code></td>
+                                <td><code>Recessed micro-downlights and acoustic lighting suspended above executive boardroom table</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Exterior Facade Lighting</strong></td>
+                                <td><code>Azoogi project 2</code></td>
+                                <td><code>IP67 exterior wall-washers highlighting heritage sandstone facade in warm 2700K</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Technical Control Diagram</strong></td>
+                                <td><code>Diagram</code></td>
+                                <td><code>Casambi wireless BLE mesh network topology diagram linking sensors, switches, and drivers</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="dash-doc-callout info">
+                    <strong>Golden Rules for Writing Alt Text:</strong>
                     <ul>
-                        <li><a href="https://squoosh.app/" target="_blank" rel="noopener noreferrer">Squoosh.app</a> &mdash; Best for converting photos to high-efficiency WebP.</li>
-                        <li><a href="https://tinypng.com/" target="_blank" rel="noopener noreferrer">TinyPNG</a> &mdash; Fast bulk compression.</li>
-                        <li><a href="https://handbrake.fr/" target="_blank" rel="noopener noreferrer">HandBrake</a> &mdash; Free desktop app for video web optimization.</li>
+                        <li><strong>Be Specific & Descriptive:</strong> State the architectural setting, fixture type, and lighting effect.</li>
+                        <li><strong>Skip Redundant Prefixes:</strong> Do NOT start with <em>"Image of..."</em> or <em>"Picture of..."</em>&mdash;screen readers already announce that the element is an image.</li>
+                        <li><strong>Keep it Under 125 Characters:</strong> Most popular screen readers pause or truncate excessively verbose strings.</li>
+                        <li><strong>Include Natural Keywords:</strong> Mention relevant architectural lighting terminology naturally without keyword stuffing.</li>
                     </ul>
                 </div>
             </article>
@@ -525,7 +650,7 @@
                     <li><strong>Social Share Images (OG Images)</strong>: Upload high-res <code>1200×630px</code> WebP/JPG images per page. These automatically appear when links are shared on LinkedIn, WhatsApp, Slack, iMessage, and X/Twitter.</li>
                     <li><strong>Canonical URLs</strong>: Automatically generated for each page to prevent duplicate content indexing.</li>
                     <li><strong>Structured Data (Schema.org)</strong>: Automated <code>Organization</code> and <code>Product</code> JSON-LD schemas power Google rich snippets and search knowledge graphs.</li>
-                    <li><strong>Image Alt Text</strong>: Always include descriptive alt text for product and project imagery for screen readers and Google Image search ranking.</li>
+                    <li><strong>Image Alt Text</strong>: Always include descriptive alt text for product and project imagery for screen readers and Google Image search ranking. See our <a href="{{ route('dashboard.docs.index', ['topic' => 'alt-text']) }}" class="dash-doc-inline-link"><strong>Image Alt Text & Accessibility Guide &rarr;</strong></a></li>
                 </ul>
 
                 <div class="dash-doc-callout info">

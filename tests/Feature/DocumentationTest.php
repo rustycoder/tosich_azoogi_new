@@ -32,6 +32,7 @@ class DocumentationTest extends TestCase
             'products',
             'videos',
             'images',
+            'alt-text',
             'seo',
             'sitemap',
             'geo',
@@ -44,6 +45,8 @@ class DocumentationTest extends TestCase
             'media',
             'content',
             'maintenance',
+            'alt',
+            'accessibility',
         ];
 
         foreach ($topics as $topic) {
@@ -52,5 +55,10 @@ class DocumentationTest extends TestCase
             $response->assertSee('Documentation & Guides', false);
             $response->assertSee('dash-doc-menu', false);
         }
+
+        $altResponse = $this->actingAs($user)->get('/dashboard/docs/alt-text');
+        $altResponse->assertOk();
+        $altResponse->assertSee('Image Alt Text & Accessibility (WCAG 2.1 & SEO)', false);
+        $altResponse->assertSee('Search Engine Optimization (SEO) & Google Images', false);
     }
 }

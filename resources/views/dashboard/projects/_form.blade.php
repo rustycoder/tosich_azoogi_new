@@ -45,9 +45,11 @@
         <div class="dash-field is-wide">
             <label for="cover_file">Cover image</label>
             <div class="dash-dropzone" data-image-dropzone>
-                @if ($project?->cover)
+                @if (!empty($project?->cover))
                     @php
                         $coverInfo = media_file_info($project->cover);
+                        $coverAltVal = $project->cover_alt ?? '';
+                        $coverFallbackAlt = $project->title ?? 'Project';
                     @endphp
                     <div class="dash-dropzone-previews">
                         <div class="dash-preview-card">
@@ -56,6 +58,10 @@
                             </div>
                             <div class="dash-preview-info">
                                 <div class="dash-preview-filename" title="{{ basename($project->cover) }}">{{ basename($project->cover) }}</div>
+                                <div class="dash-preview-alt-text" title="Alt text for screen readers and search engines">
+                                    <span class="dash-preview-alt-label">Alt:</span>
+                                    <span class="dash-preview-alt-val" data-cover-alt-val data-default-alt="{{ $coverFallbackAlt }}">{{ $coverAltVal !== '' ? $coverAltVal : 'Auto (' . $coverFallbackAlt . ')' }}</span>
+                                </div>
                                 <div class="dash-preview-badges">
                                     <span class="dash-preview-badge is-format">{{ $coverInfo['format'] ?? 'IMAGE' }}</span>
                                     @if (!empty($coverInfo['size']))

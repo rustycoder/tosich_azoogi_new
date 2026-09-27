@@ -57,6 +57,11 @@ class DocumentationController extends Controller
                     'title' => 'Image Dimensions & WebP',
                     'keywords' => 'webp image dimensions resolutions 1920x1080 1200x800 squoosh compression tinypng logos banner sizes images',
                 ],
+                'alt-text' => [
+                    'label' => 'Image Alt Text',
+                    'title' => 'Image Alt Text & Accessibility',
+                    'keywords' => 'alt text alternative text accessibility wcag 2.1 screen readers seo google images rankings cover_alt gallery_alts meta descriptions images media',
+                ],
             ],
             'SEO & Discovery' => [
                 'seo' => [
@@ -116,6 +121,8 @@ class DocumentationController extends Controller
             'media' => 'videos',
             'content' => 'pages',
             'maintenance' => 'deployment',
+            'alt' => 'alt-text',
+            'accessibility' => 'alt-text',
         ];
 
         if (isset($aliases[$topic])) {
