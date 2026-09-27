@@ -4067,23 +4067,35 @@ code {
 .dash-page-cat-line {
   display: flex;
   align-items: center;
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
 .dash-page-primary .dash-row-link {
   margin: 0;
-}
-
-.dash-page-link {
-  color: var(--dash-ink);
-  text-decoration: none;
+  font-size: 13px;
   font-weight: 600;
-  font-size: 14px;
-  transition: color .15s ease;
+  color: var(--dash-ink);
+  line-height: 1.35;
+  letter-spacing: 0;
+  gap: 6px;
+  align-items: center;
 }
 
-.dash-page-link:hover {
-  color: var(--dash-green);
+.dash-page-primary .dash-row-link-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dash-ink);
+  line-height: 1.35;
+}
+
+.dash-page-primary .dash-row-link-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.dash-page-primary .dash-row-link-icon svg {
+  width: 14px;
+  height: 14px;
 }
 
 .dash-page-path {

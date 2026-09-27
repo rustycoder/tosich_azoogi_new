@@ -68,7 +68,7 @@
                 <th scope="col" style="min-width: 240px; width: 28%;">Page Name & Path</th>
                 <th scope="col" style="min-width: 320px; width: 44%;">SEO & Social Meta</th>
                 <th scope="col" style="width: 130px;">Status</th>
-                <th scope="col" style="min-width: 170px; width: 18%;">Last Updated</th>
+                <th scope="col" style="min-width: 170px; width: 18%;">Last updated</th>
             </tr>
         </thead>
             @php
@@ -173,7 +173,15 @@
                         </label>
                     </td>
                     <td class="dash-td-updated">
-                        @include('dashboard.partials.updated', ['record' => $page])
+                        <div class="dash-updated">
+                            <span class="dash-updated-value">
+                                <strong data-updater-name>{{ $page->updater?->name ?? 'Admin User' }}</strong>
+                                @if ($page->updated_at)
+                                    <span class="dash-updated-sep" aria-hidden="true">·</span>
+                                    <time data-updated-at datetime="{{ $page->updated_at->toIso8601String() }}">{{ $page->updated_at->timezone(config('app.timezone'))->format('j M Y, g:i A') }}</time>
+                                @endif
+                            </span>
+                        </div>
                     </td>
                 </tr>
             @empty
