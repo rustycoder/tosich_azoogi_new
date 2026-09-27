@@ -7,6 +7,7 @@ use App\Http\Requests\Dashboard\UpdatePageContentRequest;
 use App\Models\Page;
 use App\PageMeta\Catalog;
 use App\Services\Contracts\IPageService;
+use App\Support\SitemapBuilder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -65,6 +66,8 @@ class PageContentController extends Controller
             $section = null;
         }
 
+        SitemapBuilder::clearCache();
+
         return redirect()
             ->route('dashboard.pages.edit', array_filter([
                 'page' => $page,
@@ -78,6 +81,7 @@ class PageContentController extends Controller
         abort_if(Catalog::isSection($page->slug), 404);
 
         $page = $this->pages->toggleStatus($page);
+        SitemapBuilder::clearCache();
 
         return response()->json([
             'on' => $page->isActive(),

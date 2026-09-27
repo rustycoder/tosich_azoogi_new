@@ -8,6 +8,7 @@ use App\Models\ProductAttribute;
 use App\Models\ProductCategory;
 use App\Models\ProductSync;
 use App\Repositories\Contracts\IProductRepository;
+use App\Support\SitemapBuilder;
 use App\ThirdParty\Airtable\ProductNormalizer;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
@@ -454,6 +455,10 @@ class ProductRepository implements IProductRepository
             'error' => $error,
         ]);
         $sync->save();
+
+        if ($ok) {
+            SitemapBuilder::clearCache();
+        }
     }
 
     public function failStaleRunningSyncs(): void

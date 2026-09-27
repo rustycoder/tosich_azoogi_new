@@ -7,6 +7,7 @@ use App\Http\Requests\Dashboard\UpdatePageContentRequest;
 use App\Models\Page;
 use App\PageMeta\Catalog;
 use App\Services\Contracts\IPageService;
+use App\Support\SitemapBuilder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View as PageView;
@@ -49,6 +50,8 @@ class SectionController extends Controller
             $request->file('meta', []) ?? [],
             $request->validated('items') ?? [],
         );
+
+        SitemapBuilder::clearCache();
 
         return redirect()
             ->route('dashboard.sections.edit', $page)

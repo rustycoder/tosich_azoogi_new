@@ -8,6 +8,7 @@ use App\Http\Requests\Dashboard\StoreProjectRequest;
 use App\Http\Requests\Dashboard\UpdateProjectRequest;
 use App\Models\Project;
 use App\Services\Contracts\IProjectService;
+use App\Support\SitemapBuilder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -42,6 +43,8 @@ class ProjectController extends Controller
             $request->file('gallery_files', []) ?? [],
         );
 
+        SitemapBuilder::clearCache();
+
         return redirect()->route('dashboard.projects.edit', $project)->with('status', 'Project created.');
     }
 
@@ -64,12 +67,15 @@ class ProjectController extends Controller
                 : null,
         );
 
+        SitemapBuilder::clearCache();
+
         return back()->with('status', 'Project updated.');
     }
 
     public function destroy(Project $project): RedirectResponse
     {
         $this->projects->delete($project);
+        SitemapBuilder::clearCache();
 
         return redirect()->route('dashboard.projects.index')->with('status', 'Project deleted.');
     }
@@ -77,6 +83,7 @@ class ProjectController extends Controller
     public function toggleStatus(Project $project): JsonResponse
     {
         $project = $this->projects->toggleStatus($project);
+        SitemapBuilder::clearCache();
 
         return response()->json([
             'on' => $project->isActive(),
@@ -88,6 +95,7 @@ class ProjectController extends Controller
     public function toggleFeatured(Project $project): JsonResponse
     {
         $project = $this->projects->toggleFeatured($project);
+        SitemapBuilder::clearCache();
 
         return response()->json([
             'on' => $project->featured,
@@ -99,6 +107,7 @@ class ProjectController extends Controller
     public function reorder(ReorderProjectsRequest $request): JsonResponse
     {
         $this->projects->reorder($request->validated('order'));
+        SitemapBuilder::clearCache();
 
         return response()->json([
             'message' => 'Featured order updated.',

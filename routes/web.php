@@ -21,6 +21,7 @@ use App\Http\Controllers\Site\ProductDatasheetController;
 use App\Http\Controllers\Site\ProductDetailController;
 use App\Http\Controllers\Site\ProjectController as SiteProjectController;
 use App\Http\Controllers\Site\QuoteProductController;
+use App\Http\Controllers\Site\SitemapController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -148,3 +149,5 @@ Route::post('/product-datasheet', [ProductDatasheetController::class, 'store'])
     ->middleware('throttle:20,1')
     ->name('products.datasheet.store');
 Route::get('/product-datasheet/{export}', [ProductDatasheetController::class, 'show'])->name('products.datasheet.show');
+
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
