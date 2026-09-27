@@ -24,7 +24,6 @@ class ProjectSeeder extends Seeder
                 'featured' => (bool) ($item['featured'] ?? false),
                 'featured_order' => (int) ($item['featuredOrder'] ?? 0),
                 'cover' => $item['cover'] ?? null,
-                'cover_remote' => $item['coverRemote'] ?? null,
                 'summary' => $item['summary'] ?? null,
                 'description' => $item['description'] ?? null,
                 'gallery' => $item['gallery'] ?? [],
@@ -39,7 +38,6 @@ class ProjectSeeder extends Seeder
             if (! $project->wasRecentlyCreated && $this->shouldRestoreMedia($project, $item)) {
                 $project->forceFill([
                     'cover' => $attributes['cover'],
-                    'cover_remote' => $attributes['cover_remote'],
                     'gallery' => $attributes['gallery'],
                 ])->save();
             }
@@ -59,8 +57,19 @@ class ProjectSeeder extends Seeder
 
         $cover = (string) ($project->cover ?? '');
 
+        $hasRemoteGallery = false;
+        if (is_array($project->gallery)) {
+            foreach ($project->gallery as $img) {
+                if (is_string($img) && (str_starts_with($img, 'http://') || str_starts_with($img, 'https://'))) {
+                    $hasRemoteGallery = true;
+                    break;
+                }
+            }
+        }
+
         return $cover === ''
             || str_starts_with($cover, 'http://')
-            || str_starts_with($cover, 'https://');
+            || str_starts_with($cover, 'https://')
+            || $hasRemoteGallery;
     }
 }

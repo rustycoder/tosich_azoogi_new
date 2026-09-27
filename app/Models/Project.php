@@ -21,7 +21,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'featured',
     'featured_order',
     'cover',
-    'cover_remote',
     'cover_alt',
     'summary',
     'description',
@@ -63,9 +62,7 @@ class Project extends Model
 
     public function coverUrl(): string
     {
-        $path = $this->cover ?: $this->cover_remote;
-
-        return media_url($path);
+        return media_url($this->cover);
     }
 
     public function coverAlt(): string

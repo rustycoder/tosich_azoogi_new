@@ -23,7 +23,7 @@ class ProjectFactory extends Factory
             'featured' => false,
             'featured_order' => 0,
             'cover' => '/assets/img/img-0.jpg',
-            'cover_remote' => null,
+            'cover_alt' => null,
             'summary' => fake()->sentence(),
             'description' => fake()->paragraph(),
             'gallery' => [],

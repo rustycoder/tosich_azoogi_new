@@ -17,10 +17,10 @@
 
 @section('content')
 @php
-    $cover = $project->cover ?: $project->cover_remote;
+    $cover = $project->cover;
     $gallery = array_values(array_filter(
         $project->gallery ?: [],
-        fn ($image) => $image !== $cover && $image !== $project->cover_remote,
+        fn ($image) => $image !== $cover,
     ));
     $gallery = array_slice($gallery, 0, 6);
 @endphp

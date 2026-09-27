@@ -30,7 +30,7 @@ class ProjectEditorImageSizeTest extends TestCase
             ->assertSee('<small>'.ImageSize::Gallery.'</small>', false);
     }
 
-    public function test_cover_image_upload_sits_below_the_remote_url(): void
+    public function test_cover_alt_sits_below_the_cover_file_upload(): void
     {
         $admin = User::factory()->admin()->create();
 
@@ -40,7 +40,7 @@ class ProjectEditorImageSizeTest extends TestCase
             ->getContent();
 
         $this->assertMatchesRegularExpression(
-            '/<div class="dash-field is-wide">\s*<label for="cover_remote"[\s\S]*?<div class="dash-field is-wide">\s*<label for="cover_file"/',
+            '/<div class="dash-field is-wide">\s*<label for="cover_file"[\s\S]*?<div class="dash-field is-wide">\s*<label for="cover_alt"/',
             $html,
         );
     }

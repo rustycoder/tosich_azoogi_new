@@ -43,11 +43,6 @@
         </div>
 
         <div class="dash-field is-wide">
-            <label for="cover_remote">Cover remote URL</label>
-            <input id="cover_remote" name="cover_remote" value="{{ old('cover_remote', $project->cover_remote ?? '') }}">
-        </div>
-
-        <div class="dash-field is-wide">
             <label for="cover_file">Cover image</label>
             <div class="dash-dropzone" data-image-dropzone>
                 @if ($project?->cover)
