@@ -65,10 +65,9 @@
     <table class="dash-table dash-pages-table" id="pagesTable">
         <thead>
             <tr>
-                <th scope="col" style="min-width: 220px; width: 24%;">Page Name</th>
-                <th scope="col" style="min-width: 340px; width: 48%;">SEO & Social Meta</th>
+                <th scope="col" style="min-width: 260px; width: 34%;">Page Name</th>
+                <th scope="col" style="min-width: 360px; width: 52%;">SEO & Social Meta</th>
                 <th scope="col" style="width: 130px;">Status</th>
-                <th scope="col" style="min-width: 170px; width: 18%;">Last updated</th>
             </tr>
         </thead>
             @php
@@ -108,14 +107,22 @@
                     data-title="{{ mb_strtolower($navLabel . ' ' . $page->title . ' ' . $page->meta_description . ' ' . $page->slug . ' ' . $cat->label()) }}">
                     <td class="dash-td-page">
                         <div class="dash-page-primary">
-                            @include('dashboard.partials.title-link', [
-                                'href' => route('dashboard.pages.edit', $page),
-                                'label' => $navLabel,
-                                'view' => $page->publicPath(),
-                            ])
-                            <div class="dash-page-cat-line">
+                            <div class="dash-page-head-line">
+                                @include('dashboard.partials.title-link', [
+                                    'href' => route('dashboard.pages.edit', $page),
+                                    'label' => $navLabel,
+                                ])
                                 <span class="dash-cat-badge {{ $cat->badgeClass() }}">
                                     {{ $cat->shortLabel() }}
+                                </span>
+                            </div>
+                            <div class="dash-updated">
+                                <span class="dash-updated-value">
+                                    <strong data-updater-name>{{ $page->updater?->name ?? 'Admin User' }}</strong>
+                                    @if ($page->updated_at)
+                                        <span class="dash-updated-sep" aria-hidden="true">·</span>
+                                        <time data-updated-at datetime="{{ $page->updated_at->toIso8601String() }}">{{ $page->updated_at->timezone(config('app.timezone'))->format('j M Y, g:i A') }}</time>
+                                    @endif
                                 </span>
                             </div>
                         </div>
@@ -143,17 +150,17 @@
                                 <div class="dash-seo-title-row">
                                     <strong class="dash-seo-title" title="{{ $page->title }}">{{ $page->title }}</strong>
                                 </div>
-                                @if (filled($page->meta_description))
-                                    <p class="dash-seo-desc" title="{{ $page->meta_description }}">{{ $page->meta_description }}</p>
-                                @else
-                                    <p class="dash-seo-desc is-empty">No meta description configured</p>
-                                @endif
                                 <a href="{{ url($page->publicPath()) }}" target="_blank" rel="noopener noreferrer" class="dash-seo-url" title="Open live URL {{ url($page->publicPath()) }}">
                                     <span>{{ url($page->publicPath()) }}</span>
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="dash-ext-icon" aria-hidden="true">
                                         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/>
                                     </svg>
                                 </a>
+                                @if (filled($page->meta_description))
+                                    <p class="dash-seo-desc" title="{{ $page->meta_description }}">{{ $page->meta_description }}</p>
+                                @else
+                                    <p class="dash-seo-desc is-empty">No meta description configured</p>
+                                @endif
                             </div>
                         </div>
                     </td>
@@ -172,21 +179,10 @@
                             </span>
                         </label>
                     </td>
-                    <td class="dash-td-updated">
-                        <div class="dash-updated">
-                            <span class="dash-updated-value">
-                                <strong data-updater-name>{{ $page->updater?->name ?? 'Admin User' }}</strong>
-                                @if ($page->updated_at)
-                                    <span class="dash-updated-sep" aria-hidden="true">·</span>
-                                    <time data-updated-at datetime="{{ $page->updated_at->toIso8601String() }}">{{ $page->updated_at->timezone(config('app.timezone'))->format('j M Y, g:i A') }}</time>
-                                @endif
-                            </span>
-                        </div>
-                    </td>
                 </tr>
             @empty
                 <tr id="serverEmptyRow">
-                    <td colspan="4">
+                    <td colspan="3">
                         <div class="dash-empty">
                             {{ $search === '' ? 'No pages found in this category.' : 'No pages match "' . $search . '".' }}
                         </div>
@@ -194,7 +190,7 @@
                 </tr>
             @endforelse
             <tr id="clientEmptyRow" style="display: none;">
-                <td colspan="4">
+                <td colspan="3">
                     <div class="dash-empty">No pages match your filter or search query.</div>
                 </td>
             </tr>

@@ -323,12 +323,11 @@ class DashboardTest extends TestCase
             ->assertDontSee('Slug', false)
             ->assertDontSee('dash-pill is-slug', false)
             ->assertSee('Status', false)
-            ->assertSee('Last updated', false)
             ->assertSee('Pat Admin', false)
             ->assertSee('dash-updated', false)
             ->assertSee('dash-row-link-icon', false)
             ->assertSee('aria-label="Edit"', false)
-            ->assertSee('aria-label="Preview"', false)
+            ->assertDontSee('aria-label="Preview"', false)
             ->assertDontSee('aria-label="View"', false);
 
         $this->assertNotNull($staff->fresh()->updated_by);

@@ -4061,13 +4061,14 @@ code {
 .dash-page-primary {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 }
 
-.dash-page-cat-line {
+.dash-page-head-line {
   display: flex;
   align-items: center;
-  margin-top: 3px;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .dash-page-primary .dash-row-link {
@@ -4098,20 +4099,35 @@ code {
   height: 14px;
 }
 
-.dash-page-path {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 12px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  color: var(--dash-muted);
-  text-decoration: none;
-  transition: color .15s ease;
-  width: fit-content;
+.dash-page-primary .dash-updated {
+  gap: 0;
 }
 
-.dash-page-path:hover {
-  color: var(--dash-green);
+.dash-page-primary .dash-updated-value {
+  min-height: auto;
+  gap: 5px;
+  font-size: 12px;
+}
+
+.dash-page-primary .dash-updated-value strong {
+  font-size: 12px;
+  font-weight: 550;
+  color: var(--dash-ink);
+  line-height: 1.35;
+}
+
+.dash-page-primary .dash-updated-value time {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--dash-muted);
+  line-height: 1.35;
+}
+
+.dash-page-primary .dash-updated-sep {
+  font-size: 12px;
+  color: var(--dash-muted);
+  opacity: .6;
+  line-height: 1.35;
 }
 
 .dash-ext-icon {
