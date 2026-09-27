@@ -480,6 +480,95 @@
                     <li><strong>Image Alt Text</strong>: Always include descriptive alt text for product and project imagery for screen readers and Google Image search ranking.</li>
                 </ul>
 
+                <h3>XML Sitemap & Search Engine Crawling</h3>
+                <p>The platform automatically compiles and serves a standards-compliant XML sitemap at <a href="{{ url('/sitemap.xml') }}" target="_blank" class="dash-doc-inline-link"><strong>/sitemap.xml</strong></a> for search engines (Googlebot, Bingbot, Yandex).</p>
+
+                <div class="dash-doc-specs-grid">
+                    <div class="dash-doc-spec-item">
+                        <span class="spec-label">Sitemap URL</span>
+                        <span class="spec-value"><code>{{ url('/sitemap.xml') }}</code></span>
+                    </div>
+                    <div class="dash-doc-spec-item">
+                        <span class="spec-label">Standard</span>
+                        <span class="spec-value"><strong>sitemaps.org 0.9</strong> Schema</span>
+                    </div>
+                    <div class="dash-doc-spec-item">
+                        <span class="spec-label">Caching Policy</span>
+                        <span class="spec-value"><strong>24 Hours (Sub-5ms response)</strong></span>
+                    </div>
+                    <div class="dash-doc-spec-item">
+                        <span class="spec-label">Content Type</span>
+                        <span class="spec-value"><code>application/xml; charset=utf-8</code></span>
+                    </div>
+                </div>
+
+                <div class="dash-table-wrap" style="margin-top: 14px;">
+                    <table class="dash-doc-table">
+                        <thead>
+                            <tr>
+                                <th>Section / URL Type</th>
+                                <th>Included URLs</th>
+                                <th>Priority</th>
+                                <th>Changefreq</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Homepage</strong></td>
+                                <td><code>/</code></td>
+                                <td><span class="dash-pill-active">1.0</span></td>
+                                <td>daily</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Catalog & Solutions</strong></td>
+                                <td><code>/products</code>, <code>/solutions</code></td>
+                                <td><span class="dash-pill-active">0.9</span></td>
+                                <td>weekly</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tech Pages, Categories & Products</strong></td>
+                                <td><code>/casambi</code>, <code>/silvair</code>, <code>/madrix</code>, <code>/dali-centre</code>, <code>/ai-lighting</code>, <code>/data-centre</code>, <code>/products?category=...</code>, <code>/products/{slug}</code></td>
+                                <td><span class="dash-pill-active">0.8</span></td>
+                                <td>weekly</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Projects & Audience Pages</strong></td>
+                                <td><code>/projects</code>, <code>/project-detail?slug=...</code>, <code>/architect-designer</code>, <code>/electrician-builder</code>, <code>/home-owner</code>, <code>/wholesaler</code>, <code>/about</code>, <code>/contact</code></td>
+                                <td><span class="dash-pill-active">0.7</span></td>
+                                <td>monthly</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Legal & Policies</strong></td>
+                                <td><code>/privacy</code>, <code>/terms</code>, <code>/warranty-returns</code>, <code>/modern-slavery</code></td>
+                                <td><span class="dash-pill-active">0.3</span></td>
+                                <td>yearly</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="dash-doc-callout tip">
+                    <strong>Automated Real-Time Cache Invalidation:</strong> The sitemap cache is automatically purged and refreshed whenever:
+                    <ul>
+                        <li>A page or section is updated or toggled in <strong>Content &rarr; Pages / Sections</strong>.</li>
+                        <li>An Airtable product catalog sync finishes successfully in <strong>Products</strong>.</li>
+                        <li>A showcase project is created, edited, reordered, or deleted in <strong>Projects</strong>.</li>
+                    </ul>
+                </div>
+
+                <h4>Sitemap CLI Commands</h4>
+                <p>You can pre-warm or manually clear the XML sitemap cache via Artisan terminal commands:</p>
+                <div class="dash-doc-code-block" style="margin-bottom: 12px;">
+                    <pre><code># Pre-warm & regenerate sitemap cache
+php artisan sitemap:generate</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="php artisan sitemap:generate">Copy Command</button>
+                </div>
+                <div class="dash-doc-code-block">
+                    <pre><code># Clear sitemap cache immediately
+php artisan sitemap:generate --clear</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="php artisan sitemap:generate --clear">Copy Command</button>
+                </div>
+
                 <h3>CSS & JavaScript Asset Versioning</h3>
                 <p>When deploying updates to front-end styles, bump the asset cache version using the project utility script:</p>
                 <div class="dash-doc-code-block">

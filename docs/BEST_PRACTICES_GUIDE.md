@@ -133,3 +133,32 @@ The CMS features dynamic text accenting powered by curly braces `{}`:
   - Text enclosed in `{...}` is rendered in the **solid brand accent color** (`color: var(--accent);`).
   - *Example*: `Why Choose {Azoogi}` or `Our Lighting Capabilities by {Sector}`.
 
+---
+
+## 5. XML Sitemap & Search Engine Indexing
+
+The website automatically compiles and serves a dynamic XML sitemap at `/sitemap.xml` conforming to the `sitemaps.org 0.9` schema.
+
+### 5.1 URL Types & Weighting
+* **1.0 (Daily)**: Homepage (`/`)
+* **0.9 (Weekly)**: Catalog (`/products`), Solutions (`/solutions`)
+* **0.8 (Weekly)**: Tech & Protocol pages (`/casambi`, `/silvair`, `/madrix`, `/dali-centre`, `/ai-lighting`, `/data-centre`), Category views (`/products?category=...`), Individual Products (`/products/{slug}`)
+* **0.7 (Monthly)**: Showcase Projects (`/projects`, `/project-detail?slug=...`), Audience landing pages (`/architect-designer`, `/electrician-builder`, `/home-owner`, `/wholesaler`), Contact (`/contact`), About (`/about`)
+* **0.3 (Yearly)**: Legal and compliance pages (`/privacy`, `/terms`, `/warranty-returns`, `/modern-slavery`)
+
+### 5.2 Real-Time Cache Invalidation
+The sitemap is cached for 24 hours to ensure `< 5ms` response times for search crawlers. The cache is automatically purged and refreshed upon:
+* Page/section content updates in **Content → Pages / Sections**
+* Airtable product catalog synchronization in **Products**
+* Project updates or reordering in **Projects**
+
+### 5.3 CLI Commands
+```bash
+# Pre-warm and regenerate the sitemap cache
+php artisan sitemap:generate
+
+# Clear the sitemap cache
+php artisan sitemap:generate --clear
+```
+
+
