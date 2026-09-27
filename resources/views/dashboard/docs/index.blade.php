@@ -219,9 +219,17 @@
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
                         </div>
                         <h4>Hero Slide Titles (Outlined Typography)</h4>
-                        <p>Words inside <code>{...}</code> in hero titles (<code>hero.title</code> / slide titles) are rendered in the signature <strong>outlined stroke font</strong>.</p>
-                        <div style="margin-top: 10px; font-size: 13px; background: var(--dash-fill); padding: 10px 14px; border-radius: 6px; border: 1px solid var(--dash-border);">
-                            <code>Get in {Touch}</code> &rarr; <span style="font-size: 15px;"><strong>Get in</strong> <span style="font-family: serif; -webkit-text-stroke: 1px currentColor; color: transparent; font-weight: 700; letter-spacing: .02em;">Touch</span></span>
+                        <p>Words inside <code>{...}</code> in hero slide titles (<code>hero.title</code>) are rendered in the signature <strong>outlined stroke font</strong> on the website.</p>
+                        
+                        <div style="margin-top: 12px; background: #0b0b0b; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 14px 18px;">
+                            <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #888888; margin-bottom: 6px;">Live Hero Banner Output:</div>
+                            <div style="font-size: 24px; font-weight: 800; line-height: 1.15; color: #ffffff; letter-spacing: -0.01em;">
+                                Get in <span style="color: transparent; -webkit-text-stroke: 1.35px #67d04e; filter: drop-shadow(0 0 0.12em rgba(103, 208, 78, 0.45)); letter-spacing: 0.02em;">Touch</span>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 10px; font-size: 13px; background: var(--dash-fill); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--dash-border);">
+                            <code>Get in {Touch}</code> &rarr; <strong>Get in</strong> <span style="color: transparent; -webkit-text-stroke: 1.35px var(--dash-green-dark, #27771e); font-weight: 800;">Touch</span>
                         </div>
                     </div>
 
@@ -231,8 +239,16 @@
                         </div>
                         <h4>Section Titles, Paragraphs & Cards (Brand Accent Color)</h4>
                         <p>Words inside <code>{...}</code> in section titles, paragraphs, subtitles, and cards are highlighted in the vibrant <strong>brand accent color</strong>.</p>
-                        <div style="margin-top: 10px; font-size: 13px; background: var(--dash-fill); padding: 10px 14px; border-radius: 6px; border: 1px solid var(--dash-border);">
-                            <code>Why Choose {Azoogi}</code> &rarr; <span style="font-size: 15px;"><strong>Why Choose</strong> <span style="color: var(--dash-green-dark); font-weight: 700;">Azoogi</span></span>
+                        
+                        <div style="margin-top: 12px; background: #0b0b0b; border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 14px 18px;">
+                            <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #888888; margin-bottom: 6px;">Live Section Heading Output:</div>
+                            <div style="font-size: 22px; font-weight: 700; line-height: 1.15; color: #ffffff;">
+                                Why Choose <span style="color: #67d04e; font-weight: 700;">Azoogi</span>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 10px; font-size: 13px; background: var(--dash-fill); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--dash-border);">
+                            <code>Why Choose {Azoogi}</code> &rarr; <strong>Why Choose</strong> <span style="color: var(--dash-green-dark, #27771e); font-weight: 700;">Azoogi</span>
                         </div>
                     </div>
                 </div>
