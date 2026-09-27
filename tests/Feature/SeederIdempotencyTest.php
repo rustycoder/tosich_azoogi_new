@@ -37,8 +37,8 @@ class SeederIdempotencyTest extends TestCase
         $meta = PageMeta::query()->count();
         $projects = Project::query()->count();
 
-        $row = PageMeta::query()->where('key', 'intro.kicker')->firstOrFail();
-        $row->update(['value' => 'Edited kicker']);
+        $row = PageMeta::query()->where('key', 'intro.heading')->firstOrFail();
+        $row->update(['value' => 'Edited heading']);
 
         $project = Project::query()->where('slug', 'zushi-restaurant')->firstOrFail();
         $project->update(['title' => 'Edited Zushi']);
@@ -48,7 +48,7 @@ class SeederIdempotencyTest extends TestCase
         $this->assertSame($pages, Page::query()->count());
         $this->assertSame($meta, PageMeta::query()->count());
         $this->assertSame($projects, Project::query()->count());
-        $this->assertSame('Edited kicker', $row->fresh()->value);
+        $this->assertSame('Edited heading', $row->fresh()->value);
         $this->assertSame('Edited Zushi', $project->fresh()->title);
         $this->assertTrue(Page::query()->where('slug', 'home-owner')->exists());
         $this->assertTrue(Page::query()->where('slug', 'architect-designer')->exists());
