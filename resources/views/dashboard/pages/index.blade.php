@@ -65,12 +65,11 @@
     <table class="dash-table dash-pages-table" id="pagesTable">
         <thead>
             <tr>
-                <th scope="col" style="min-width: 200px;">Page Name & Path</th>
-                <th scope="col" style="width: 150px;">Category</th>
-                <th scope="col" style="min-width: 220px;">SEO Title</th>
-                <th scope="col" style="width: 110px;">Status</th>
-                <th scope="col" style="width: 170px;">Last Updated</th>
-                <th scope="col" class="dash-th-actions" style="width: 140px; text-align: right;">Actions</th>
+                <th scope="col" style="min-width: 220px;">Page Name & Path</th>
+                <th scope="col" style="width: 160px;">Category</th>
+                <th scope="col" style="min-width: 240px;">SEO Title</th>
+                <th scope="col" style="width: 120px;">Status</th>
+                <th scope="col" style="width: 200px;">Last Updated</th>
             </tr>
         </thead>
         <tbody>
@@ -118,27 +117,10 @@
                     <td>
                         @include('dashboard.partials.updated', ['record' => $page])
                     </td>
-                    <td class="dash-td-actions" style="text-align: right;">
-                        <div class="dash-row-actions">
-                            <a href="{{ route('dashboard.pages.edit', $page) }}" class="btn secondary dash-btn-sm" title="Edit in Visual Editor">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="dash-btn-svg" aria-hidden="true">
-                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                                </svg>
-                                <span>Edit</span>
-                            </a>
-                            <a href="{{ $page->publicPath() }}" target="_blank" rel="noopener noreferrer" class="btn secondary dash-btn-sm dash-btn-icon" title="View live page">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="dash-btn-svg" aria-hidden="true">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                                    <circle cx="12" cy="12" r="3"/>
-                                </svg>
-                                <span class="visually-hidden">View</span>
-                            </a>
-                        </div>
-                    </td>
                 </tr>
             @empty
                 <tr id="serverEmptyRow">
-                    <td colspan="6">
+                    <td colspan="5">
                         <div class="dash-empty">
                             {{ $search === '' ? 'No pages found in this category.' : 'No pages match "' . $search . '".' }}
                         </div>
@@ -146,7 +128,7 @@
                 </tr>
             @endforelse
             <tr id="clientEmptyRow" style="display: none;">
-                <td colspan="6">
+                <td colspan="5">
                     <div class="dash-empty">No pages match your filter or search query.</div>
                 </td>
             </tr>
