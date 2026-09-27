@@ -46,14 +46,14 @@
 
     <section class="about-band" {!! cms_section_attr('intro') !!}>
       <div class="wrap about-intro reveal">
-        <p{!! cms_style($meta, 'intro.body') !!}>{{ $meta->get('intro.body') }}</p>
+        <p{!! cms_style($meta, 'intro.body') !!}>{!! accent_html($meta->get('intro.body')) !!}</p>
           @php
             $ctaLabel = $meta->get('intro.cta.label');
             $ctaHref = $meta->get('intro.cta.href', 0, '/contact');
           @endphp
           @if ($ctaLabel !== '')
             <div class="about-intro-action">
-              <a href="{{ chrome_url($ctaHref) }}" class="btn primary" {!! cms_style($meta, 'intro.cta.label') !!}>{{ $ctaLabel }}</a>
+              <a href="{{ chrome_url($ctaHref) }}" class="btn primary" {!! cms_style($meta, 'intro.cta.label') !!}>{!! accent_html($ctaLabel) !!}</a>
             </div>
           @endif
       </div>
@@ -93,8 +93,8 @@
               <li class="about-why-step">
                 <span class="about-why-ghost"
                   aria-hidden="true">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-                <h3{!! cms_style($meta, 'why.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h3>
-                  <p{!! cms_style($meta, 'why.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
+                <h3{!! cms_style($meta, 'why.item.title', $loop->index) !!}>{!! accent_html($item['title'] ?? '') !!}</h3>
+                  <p{!! cms_style($meta, 'why.item.body', $loop->index) !!}>{!! accent_html($item['body'] ?? '') !!}</p>
               </li>
             @endforeach
           </ol>
@@ -109,7 +109,7 @@
       <div class="wrap about-reach-inner reveal">
         <h2{!! cms_style($meta, 'reach.heading') !!}>
           {!! accent_html($meta->get('reach.heading')) !!}</h2>
-          <p{!! cms_style($meta, 'reach.body') !!}>{{ $meta->get('reach.body') }}</p>
+          <p{!! cms_style($meta, 'reach.body') !!}>{!! accent_html($meta->get('reach.body')) !!}</p>
       </div>
     </section>
 
@@ -124,8 +124,8 @@
             <a class="about-path-row reveal" href="{{ $item['href'] ?? '#' }}" @if (!$loop->first)
             style="transition-delay: {{ ($loop->index * 0.08) }}s" @endif>
               <div class="body">
-                <h3{!! cms_style($meta, 'path.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h3>
-                  <p{!! cms_style($meta, 'path.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
+                <h3{!! cms_style($meta, 'path.item.title', $loop->index) !!}>{!! accent_html($item['title'] ?? '') !!}</h3>
+                  <p{!! cms_style($meta, 'path.item.body', $loop->index) !!}>{!! accent_html($item['body'] ?? '') !!}</p>
                     <span class="more">Learn more &rarr;</span>
               </div>
             </a>

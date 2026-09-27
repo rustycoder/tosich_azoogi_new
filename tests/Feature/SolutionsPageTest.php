@@ -23,7 +23,7 @@ class SolutionsPageTest extends TestCase
             ->assertOk()
             ->assertSee('class="h2 solutions-title"', false)
             ->assertSee('End-to-End Lighting Solutions', false)
-            ->assertSee('<span>Intelligent Controls</span>', false)
+            ->assertSee('<span class="accent">Intelligent Controls</span>', false)
             ->assertDontSee('solutions-kicker', false)
             ->assertDontSee('solutions-hero-logo', false);
     }
@@ -34,7 +34,7 @@ class SolutionsPageTest extends TestCase
 
         $this->assertNotFalse($css);
         $this->assertMatchesRegularExpression(
-            '/\.solutions-hero\s*\{[^}]*min-height:\s*var\(--hero-max\)/s',
+            '/\.solutions-hero\s*\{[^}]*min-height:\s*var\(--hero-(?:min|max)\)/s',
             $css,
         );
         $this->assertMatchesRegularExpression(

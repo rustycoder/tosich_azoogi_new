@@ -8,6 +8,27 @@
     {{ !empty($product?->meta_description) ? $product->meta_description : (!empty($product?->product_description) ? \Illuminate\Support\Str::limit(trim(preg_replace('/\s+/', ' ', strip_tags($product->product_description))), 160) : 'Azoogi designs and supplies premium LED lighting — strips, neon, garden lights, drivers and architectural fittings for projects that demand more.') }}
 @endsection
 
+@section('ogType', 'product')
+@section('ogImage', $product?->primary_image_url ?? asset('assets/logo_dark.png'))
+
+@section('schema')
+@php
+$productSchema = [
+    '@context' => 'https://schema.org',
+    '@type' => 'Product',
+    'name' => $product?->product_name ?? 'Azoogi Lighting Product',
+    'image' => $product?->primary_image_url ?? asset('assets/logo_dark.png'),
+    'description' => !empty($product?->meta_description) ? $product->meta_description : (!empty($product?->product_description) ? \Illuminate\Support\Str::limit(trim(preg_replace('/\s+/', ' ', strip_tags($product->product_description))), 250) : 'Azoogi architectural lighting fixture.'),
+    'brand' => [
+        '@type' => 'Brand',
+        'name' => 'Azoogi',
+    ],
+    'category' => $product?->category ?? 'Architectural Lighting',
+];
+@endphp
+<script type="application/ld+json">{!! json_encode($productSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+@endsection
+
 @section('chrome', 'full')
 
 @section('topbarClass', 'solid')

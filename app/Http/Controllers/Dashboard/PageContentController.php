@@ -51,9 +51,12 @@ class PageContentController extends Controller
 
         $this->pages->updateContent(
             $page,
-            $request->safe()->only(['title', 'meta_description', 'status']),
+            $request->safe()->only(['title', 'meta_description', 'og_image', 'status']),
             $request->validated('meta') ?? [],
             $request->file('meta', []) ?? [],
+            $request->validated('items') ?? [],
+            $request->file('og_image_file'),
+            $request->boolean('remove_og_image'),
         );
 
         $section = $request->input('editor_section');

@@ -46,7 +46,7 @@
             </span>
             <span class="project-card-cap">
               <small class="project-tag">{{ $project->tag ?: $project->type ?: $meta->get('list.fallback_tag') }}</small>
-              <h3>{{ $project->title }}</h3>
+              <h3>{!! accent_html($project->title) !!}</h3>
             </span>
           </a>
         @endforeach

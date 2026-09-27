@@ -16,6 +16,9 @@ final class Field
         public array $options = [],
         public string $hint = '',
         public bool $typographic = false,
+        public ?int $minCount = null,
+        public ?int $maxCount = null,
+        public ?string $counterType = null,
     ) {}
 
     public static function text(string $key, string $label, bool $repeatable = false, ?string $group = null, bool $typographic = false): self
@@ -54,6 +57,40 @@ final class Field
     public static function select(string $key, string $label, array $options, bool $repeatable = false, ?string $group = null): self
     {
         return new self($key, $label, FieldType::Select, $repeatable, $group, $options);
+    }
+
+    public function recommendedChars(int $min, int $max): self
+    {
+        $this->minCount = $min;
+        $this->maxCount = $max;
+        $this->counterType = 'chars';
+
+        return $this;
+    }
+
+    public function recommendedWords(int $min, int $max): self
+    {
+        $this->minCount = $min;
+        $this->maxCount = $max;
+        $this->counterType = 'words';
+
+        return $this;
+    }
+
+    public function hasRecommendation(): bool
+    {
+        return $this->minCount !== null && $this->maxCount !== null && $this->counterType !== null;
+    }
+
+    public function recommendationLabel(): string
+    {
+        if (! $this->hasRecommendation()) {
+            return '';
+        }
+
+        $unit = $this->counterType === 'words' ? 'words' : 'chars';
+
+        return "({$this->minCount}–{$this->maxCount} {$unit} recommended)";
     }
 
     public function isTypographic(): bool

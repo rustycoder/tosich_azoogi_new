@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\DocumentationController;
 use App\Http\Controllers\Dashboard\EmailTemplateController;
 use App\Http\Controllers\Dashboard\EnquiryController;
 use App\Http\Controllers\Dashboard\PageContentController;
@@ -33,6 +34,7 @@ Route::post('/logout', [LoginController::class, 'destroy'])
 
 Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', DashboardController::class)->name('home');
+    Route::get('docs/{topic?}', [DocumentationController::class, 'index'])->name('docs.index');
     Route::get('settings', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('settings', [ProfileController::class, 'update'])->name('profile.update');
 

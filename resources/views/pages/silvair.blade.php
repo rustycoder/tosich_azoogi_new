@@ -72,14 +72,14 @@
   <section class="sv-band sv-band--alt" {!! cms_section_attr('why') !!}>
     <div class="wrap">
       <div class="sv-section-head reveal">
-        <h2{!! cms_style($meta, 'why.heading') !!}>{{ $meta->get('why.heading') }}</h2>
+        <h2{!! cms_style($meta, 'why.heading') !!}>{!! accent_html($meta->get('why.heading')) !!}</h2>
       </div>
       <ol class="sv-caps">
         @foreach ($whyItems as $item)
           <li class="reveal" style="transition-delay: {{ $loop->iteration * 0.08 }}s">
             <span class="sv-num">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-            <h3{!! cms_style($meta, 'why.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h3>
-            <p{!! cms_style($meta, 'why.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
+            <h3{!! cms_style($meta, 'why.item.title', $loop->index) !!}>{!! accent_html($item['title'] ?? '') !!}</h3>
+            <p{!! cms_style($meta, 'why.item.body', $loop->index) !!}>{!! accent_html($item['body'] ?? '') !!}</p>
           </li>
         @endforeach
       </ol>
@@ -92,8 +92,8 @@
         <div class="sv-stats">
           @foreach ($statsItems as $item)
             <div class="sv-stat reveal" style="transition-delay: {{ $loop->iteration * 0.08 }}s">
-              <b{!! cms_style($meta, 'stats.item.value', $loop->index) !!}>{{ $item['value'] ?? '' }}</b>
-              <span{!! cms_style($meta, 'stats.item.label', $loop->index) !!}>{{ $item['label'] ?? '' }}</span>
+              <b{!! cms_style($meta, 'stats.item.value', $loop->index) !!}>{!! accent_html($item['value'] ?? '') !!}</b>
+              <span{!! cms_style($meta, 'stats.item.label', $loop->index) !!}>{!! accent_html($item['label'] ?? '') !!}</span>
             </div>
           @endforeach
         </div>
@@ -104,17 +104,17 @@
   <section class="sv-band sv-band--alt" {!! cms_section_attr('pillar') !!}>
     <div class="wrap">
       <div class="sv-section-head reveal">
-        <h2{!! cms_style($meta, 'pillar.heading') !!}>{{ $meta->get('pillar.heading') }}</h2>
+        <h2{!! cms_style($meta, 'pillar.heading') !!}>{!! accent_html($meta->get('pillar.heading')) !!}</h2>
         @if (trim($meta->get('pillar.lead')) !== '')
-          <p{!! cms_style($meta, 'pillar.lead') !!}>{{ $meta->get('pillar.lead') }}</p>
+          <p{!! cms_style($meta, 'pillar.lead') !!}>{!! accent_html($meta->get('pillar.lead')) !!}</p>
         @endif
       </div>
       <ul class="sv-pillars">
         @foreach ($pillarItems as $item)
           <li class="reveal" style="transition-delay: {{ $loop->iteration * 0.06 }}s">
             <span class="sv-num">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-            <h3{!! cms_style($meta, 'pillar.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h3>
-            <p{!! cms_style($meta, 'pillar.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
+            <h3{!! cms_style($meta, 'pillar.item.title', $loop->index) !!}>{!! accent_html($item['title'] ?? '') !!}</h3>
+            <p{!! cms_style($meta, 'pillar.item.body', $loop->index) !!}>{!! accent_html($item['body'] ?? '') !!}</p>
           </li>
         @endforeach
       </ul>
@@ -124,14 +124,14 @@
   <section class="sv-band" {!! cms_section_attr('lineup') !!}>
     <div class="wrap">
       <div class="sv-section-head reveal">
-        <h2{!! cms_style($meta, 'lineup.heading') !!}>{{ $meta->get('lineup.heading') }}</h2>
+        <h2{!! cms_style($meta, 'lineup.heading') !!}>{!! accent_html($meta->get('lineup.heading')) !!}</h2>
       </div>
 
       <div class="sv-feature reveal" {!! cms_section_attr('software') !!}>
         <div class="sv-feature-copy">
-          <h3 class="sv-lineup-heading"{!! cms_style($meta, 'software.heading') !!}>{{ $meta->get('software.heading') }}</h3>
-          <div class="kicker"{!! cms_style($meta, 'software.title') !!}>{{ $meta->get('software.title') }}</div>
-          <p{!! cms_style($meta, 'software.body') !!}>{{ $meta->get('software.body') }}</p>
+          <h3 class="sv-lineup-heading"{!! cms_style($meta, 'software.heading') !!}>{!! accent_html($meta->get('software.heading')) !!}</h3>
+          <div class="kicker"{!! cms_style($meta, 'software.title') !!}>{!! accent_html($meta->get('software.title')) !!}</div>
+          <p{!! cms_style($meta, 'software.body') !!}>{!! accent_html($meta->get('software.body')) !!}</p>
         </div>
         @php $softwareImage = media_url($meta->get('software.image')); @endphp
         @if ($softwareImage !== '')
@@ -153,15 +153,15 @@
           </div>
         @endif
         <div class="sv-feature-copy">
-          <h3 class="sv-lineup-heading"{!! cms_style($meta, 'standard.heading') !!}>{{ $meta->get('standard.heading') }}</h3>
-          <div class="kicker"{!! cms_style($meta, 'standard.title') !!}>{{ $meta->get('standard.title') }}</div>
-          <p{!! cms_style($meta, 'standard.body') !!}>{{ $meta->get('standard.body') }}</p>
+          <h3 class="sv-lineup-heading"{!! cms_style($meta, 'standard.heading') !!}>{!! accent_html($meta->get('standard.heading')) !!}</h3>
+          <div class="kicker"{!! cms_style($meta, 'standard.title') !!}>{!! accent_html($meta->get('standard.title')) !!}</div>
+          <p{!! cms_style($meta, 'standard.body') !!}>{!! accent_html($meta->get('standard.body')) !!}</p>
           @if (count($standardItems) > 0)
             <ul class="sv-points">
               @foreach ($standardItems as $item)
                 <li>
-                  <b{!! cms_style($meta, 'standard.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</b>
-                  <span{!! cms_style($meta, 'standard.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</span>
+                  <b{!! cms_style($meta, 'standard.item.title', $loop->index) !!}>{!! accent_html($item['title'] ?? '') !!}</b>
+                  <span{!! cms_style($meta, 'standard.item.body', $loop->index) !!}>{!! accent_html($item['body'] ?? '') !!}</span>
                 </li>
               @endforeach
             </ul>
@@ -170,14 +170,14 @@
       </div>
 
       <div class="sv-hardware reveal" {!! cms_section_attr('hardware') !!}>
-        <h3 class="sv-lineup-heading"{!! cms_style($meta, 'hardware.heading') !!}>{{ $meta->get('hardware.heading') }}</h3>
+        <h3 class="sv-lineup-heading"{!! cms_style($meta, 'hardware.heading') !!}>{!! accent_html($meta->get('hardware.heading')) !!}</h3>
         <div class="sv-table-wrap">
           <table class="spec-table">
             <thead>
               <tr>
-                <th{!! cms_style($meta, 'hardware.col.product') !!}>{{ $meta->get('hardware.col.product') }}</th>
-                <th{!! cms_style($meta, 'hardware.col.type') !!}>{{ $meta->get('hardware.col.type') }}</th>
-                <th{!! cms_style($meta, 'hardware.col.features') !!}>{{ $meta->get('hardware.col.features') }}</th>
+                <th{!! cms_style($meta, 'hardware.col.product') !!}>{!! accent_html($meta->get('hardware.col.product')) !!}</th>
+                <th{!! cms_style($meta, 'hardware.col.type') !!}>{!! accent_html($meta->get('hardware.col.type')) !!}</th>
+                <th{!! cms_style($meta, 'hardware.col.features') !!}>{!! accent_html($meta->get('hardware.col.features')) !!}</th>
               </tr>
             </thead>
             <tbody>
@@ -186,13 +186,13 @@
                 <tr>
                   <td>
                     @if ($preview !== '')
-                      <span class="sv-product" data-preview="{{ $preview }}" tabindex="0"{!! cms_style($meta, 'hardware.row.product', $loop->index) !!}>{{ $row['product'] ?? '' }}</span>
+                      <span class="sv-product" data-preview="{{ $preview }}" tabindex="0"{!! cms_style($meta, 'hardware.row.product', $loop->index) !!}>{!! accent_html($row['product'] ?? '') !!}</span>
                     @else
-                      <span{!! cms_style($meta, 'hardware.row.product', $loop->index) !!}>{{ $row['product'] ?? '' }}</span>
+                      <span{!! cms_style($meta, 'hardware.row.product', $loop->index) !!}>{!! accent_html($row['product'] ?? '') !!}</span>
                     @endif
                   </td>
-                  <td{!! cms_style($meta, 'hardware.row.type', $loop->index) !!}>{{ $row['type'] ?? '' }}</td>
-                  <td{!! cms_style($meta, 'hardware.row.features', $loop->index) !!}>{{ $row['features'] ?? '' }}</td>
+                  <td{!! cms_style($meta, 'hardware.row.type', $loop->index) !!}>{!! accent_html($row['type'] ?? '') !!}</td>
+                  <td{!! cms_style($meta, 'hardware.row.features', $loop->index) !!}>{!! accent_html($row['features'] ?? '') !!}</td>
                 </tr>
               @endforeach
             </tbody>
@@ -205,9 +205,9 @@
   <section class="sv-band sv-band--alt" {!! cms_section_attr('apps') !!}>
     <div class="wrap">
       <div class="sv-section-head reveal">
-        <h2{!! cms_style($meta, 'apps.heading') !!}>{{ $meta->get('apps.heading') }}</h2>
+        <h2{!! cms_style($meta, 'apps.heading') !!}>{!! accent_html($meta->get('apps.heading')) !!}</h2>
         @if (trim($meta->get('apps.lead')) !== '')
-          <p{!! cms_style($meta, 'apps.lead') !!}>{{ $meta->get('apps.lead') }}</p>
+          <p{!! cms_style($meta, 'apps.lead') !!}>{!! accent_html($meta->get('apps.lead')) !!}</p>
         @endif
       </div>
       <div class="sv-apps">
@@ -220,8 +220,8 @@
               </figure>
             @endif
             <div class="sv-app-copy">
-              <h3{!! cms_style($meta, 'apps.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h3>
-              <p{!! cms_style($meta, 'apps.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
+              <h3{!! cms_style($meta, 'apps.item.title', $loop->index) !!}>{!! accent_html($item['title'] ?? '') !!}</h3>
+              <p{!! cms_style($meta, 'apps.item.body', $loop->index) !!}>{!! accent_html($item['body'] ?? '') !!}</p>
             </div>
           </article>
         @endforeach
@@ -232,17 +232,17 @@
   <section class="sv-band" {!! cms_section_attr('flow') !!}>
     <div class="wrap">
       <div class="sv-section-head reveal">
-        <h2{!! cms_style($meta, 'flow.heading') !!}>{{ $meta->get('flow.heading') }}</h2>
+        <h2{!! cms_style($meta, 'flow.heading') !!}>{!! accent_html($meta->get('flow.heading')) !!}</h2>
         @if (trim($meta->get('flow.lead')) !== '')
-          <p{!! cms_style($meta, 'flow.lead') !!}>{{ $meta->get('flow.lead') }}</p>
+          <p{!! cms_style($meta, 'flow.lead') !!}>{!! accent_html($meta->get('flow.lead')) !!}</p>
         @endif
       </div>
       <ol class="sv-flow">
         @foreach ($flowItems as $item)
           <li class="reveal" style="transition-delay: {{ $loop->iteration * 0.08 }}s">
             <span class="sv-num">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-            <h3{!! cms_style($meta, 'flow.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h3>
-            <p{!! cms_style($meta, 'flow.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
+            <h3{!! cms_style($meta, 'flow.item.title', $loop->index) !!}>{!! accent_html($item['title'] ?? '') !!}</h3>
+            <p{!! cms_style($meta, 'flow.item.body', $loop->index) !!}>{!! accent_html($item['body'] ?? '') !!}</p>
           </li>
         @endforeach
       </ol>
@@ -252,16 +252,16 @@
   <section class="sv-band sv-band--alt" {!! cms_section_attr('support') !!}>
     <div class="wrap">
       <div class="sv-section-head reveal">
-        <h2{!! cms_style($meta, 'support.heading') !!}>{{ $meta->get('support.heading') }}</h2>
+        <h2{!! cms_style($meta, 'support.heading') !!}>{!! accent_html($meta->get('support.heading')) !!}</h2>
         @if (trim($meta->get('support.lead')) !== '')
-          <p{!! cms_style($meta, 'support.lead') !!}>{{ $meta->get('support.lead') }}</p>
+          <p{!! cms_style($meta, 'support.lead') !!}>{!! accent_html($meta->get('support.lead')) !!}</p>
         @endif
       </div>
       <ul class="sv-support">
         @foreach ($supportItems as $item)
           <li class="reveal" style="transition-delay: {{ $loop->iteration * 0.08 }}s">
-            <h3{!! cms_style($meta, 'support.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h3>
-            <p{!! cms_style($meta, 'support.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
+            <h3{!! cms_style($meta, 'support.item.title', $loop->index) !!}>{!! accent_html($item['title'] ?? '') !!}</h3>
+            <p{!! cms_style($meta, 'support.item.body', $loop->index) !!}>{!! accent_html($item['body'] ?? '') !!}</p>
           </li>
         @endforeach
       </ul>
@@ -270,9 +270,9 @@
 
   <div class="wrap reveal" {!! cms_section_attr('cta') !!}>
       <div class="sv-cta">
-        <h2{!! cms_style($meta, 'cta.heading') !!}>{{ $meta->get('cta.heading') }}</h2>
-        <p{!! cms_style($meta, 'cta.body') !!}>{{ $meta->get('cta.body') }}</p>
-        <a class="btn primary" href="{{ chrome_url($meta->get('cta.href', 0, '/contact')) }}"{!! cms_style($meta, 'cta.label') !!}>{{ $meta->get('cta.label') }}</a>
+        <h2{!! cms_style($meta, 'cta.heading') !!}>{!! accent_html($meta->get('cta.heading')) !!}</h2>
+        <p{!! cms_style($meta, 'cta.body') !!}>{!! accent_html($meta->get('cta.body')) !!}</p>
+        <a class="btn primary" href="{{ chrome_url($meta->get('cta.href', 0, '/contact')) }}"{!! cms_style($meta, 'cta.label') !!}>{!! accent_html($meta->get('cta.label')) !!}</a>
       </div>
   </div>
 

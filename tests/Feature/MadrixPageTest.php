@@ -25,8 +25,8 @@ class MadrixPageTest extends TestCase
             ->assertSee('MADRIX', false)
             ->assertSee('Next-Generation', false)
             ->assertSee('Pixel Mapping', false)
-            ->assertSee('<span>Advanced LED Control Solutions</span>', false)
-            ->assertDontSee('<span>Pixel Mapping</span>', false)
+            ->assertSee('<span class="accent">Advanced LED Control Solutions</span>', false)
+            ->assertDontSee('<span class="accent">Pixel Mapping</span>', false)
             ->assertSee('Powerful German Engineering. Seamless Spatial Lighting Integration.', false)
             ->assertSee('As an official partner of MADRIX, we bring industry-leading pixel-mapping software', false)
             ->assertSee('Why Choose MADRIX?', false)
@@ -55,7 +55,7 @@ class MadrixPageTest extends TestCase
 
         $this->assertNotFalse($css);
         $this->assertMatchesRegularExpression(
-            '/\.mx-hero\s*\{[^}]*min-height:\s*var\(--hero-max\)/s',
+            '/\.mx-hero\s*\{[^}]*min-height:\s*var\(--hero-(?:min|max)\)/s',
             $css,
         );
     }

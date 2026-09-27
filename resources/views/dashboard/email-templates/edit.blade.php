@@ -45,8 +45,8 @@
                 </div>
 
                 <div class="dash-field">
-                    <label for="subject">Email Subject</label>
-                    <input id="subject" name="subject" value="{{ old('subject', $template->subject) }}" required>
+                    <label for="subject">Email Subject <small class="dash-field-rec">(30–60 chars recommended)</small></label>
+                    <input id="subject" name="subject" value="{{ old('subject', $template->subject) }}" data-counter="chars" data-min="30" data-max="60" required>
                     <small style="color:var(--muted);font-size:12px;margin-top:4px;display:block;">You can use dynamic tokens such as <code>@{{name}}</code> or <code>@{{project}}</code> in the subject.</small>
                     @error('subject')<p class="login-error">{{ $message }}</p>@enderror
                 </div>

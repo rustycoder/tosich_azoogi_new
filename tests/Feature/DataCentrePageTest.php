@@ -79,8 +79,8 @@ class DataCentrePageTest extends TestCase
             '/class="dc-band dc-band--feature">\s*<div class="wrap dc-feature"[\s\S]*?Data Hall Conditions[\s\S]*?class="dc-band dc-band--alt dc-band--feature">\s*<div class="wrap dc-feature dc-feature--flip"[\s\S]*?Building Automation/',
             $html,
         );
-        $this->assertStringContainsString('<span>Data Hall Conditions</span>', $html);
-        $this->assertStringContainsString('<span>Building Automation</span>', $html);
+        $this->assertStringContainsString('<span class="accent">Data Hall Conditions</span>', $html);
+        $this->assertStringContainsString('<span class="accent">Building Automation</span>', $html);
         $this->assertStringContainsString('datacenter1.webp', $html);
         $this->assertStringContainsString('datacenter2.webp', $html);
 

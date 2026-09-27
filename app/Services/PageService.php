@@ -90,8 +90,21 @@ class PageService implements IPageService
         ];
     }
 
-    public function updateContent(Page $page, array $attributes, array $metaValues, array $uploaded, array $items = []): void
+    public function updateContent(Page $page, array $attributes, array $metaValues, array $uploaded, array $items = [], ?UploadedFile $ogImageFile = null, bool $removeOgImage = false): void
     {
+        if ($removeOgImage) {
+            $this->storage->deleteManaged($page->og_image);
+            $attributes['og_image'] = null;
+        } elseif ($ogImageFile instanceof UploadedFile) {
+            $attributes['og_image'] = $this->storage->storePageUpload(
+                $page->slug,
+                'og_image',
+                0,
+                $ogImageFile,
+                $page->og_image,
+            );
+        }
+
         $page->fill($attributes);
         $this->pages->save($page);
 

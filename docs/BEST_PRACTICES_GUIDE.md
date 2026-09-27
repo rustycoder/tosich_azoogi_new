@@ -63,6 +63,7 @@ ffmpeg -i input_video.mp4 \
 | Placement | Recommended Dimensions | Max Target File Size | Format |
 | :--- | :--- | :--- | :--- |
 | **Hero Banners & Posters** | `1920 x 1080 px` | `< 200 KB` | `.webp` |
+| **Social Share (OG Images)** | `1200 x 630 px` | `< 150 KB` | `.webp` / `.jpg` |
 | **Project / Feature Photos** | `1200 x 800 px` | `< 120 KB` | `.webp` |
 | **Product Thumbnails / Cards** | `600 x 600 px` | `< 60 KB` | `.webp` / `.jpg` |
 | **Logos & Badges** | Vector or `400 x 120 px` | `< 30 KB` | `.svg` / `.png` |
@@ -118,3 +119,17 @@ Or set specific version:
 ```bash
 python update_version.py 2.12
 ```
+
+---
+
+## 4. Typography & Highlight Formatting (`{...}` Syntax)
+
+The CMS features dynamic text accenting powered by curly braces `{}`:
+
+* **Hero Titles (`hero.title` / Slide Titles)**:
+  - Text enclosed in `{...}` is rendered with the signature **outlined stroke font** (`font-family: var(--font-outline); -webkit-text-stroke: 1.35px var(--accent);`).
+  - *Example*: `Engineered Lighting.\nInfinite Scale.\n{Zero Compromise.}`
+* **All Other Text Fields (Section Headings, Paragraphs, Leads, Cards, Subtitles)**:
+  - Text enclosed in `{...}` is rendered in the **solid brand accent color** (`color: var(--accent);`).
+  - *Example*: `Why Choose {Azoogi}` or `Our Lighting Capabilities by {Sector}`.
+

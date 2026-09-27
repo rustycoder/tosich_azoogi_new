@@ -48,11 +48,11 @@
 
   <section class="dc-band" {!! cms_section_attr('intro') !!}>
     <div class="wrap dc-intro reveal">
-      <p{!! cms_style($meta, 'intro.body') !!}>{{ $meta->get('intro.body') }}</p>
+      <p{!! cms_style($meta, 'intro.body') !!}>{!! accent_html($meta->get('intro.body')) !!}</p>
       
       <div class="dc-actions">
-        <a href="{{ $meta->get('intro.cta.primary.href', 0, '/contact') }}" class="btn primary"{!! cms_style($meta, 'intro.cta.primary.label') !!}>{{ $meta->get('intro.cta.primary.label') }}</a>
-        <a href="{{ $meta->get('intro.cta.secondary.href', 0, '/contact') }}" class="btn"{!! cms_style($meta, 'intro.cta.secondary.label') !!}>{{ $meta->get('intro.cta.secondary.label') }}</a>
+        <a href="{{ $meta->get('intro.cta.primary.href', 0, '/contact') }}" class="btn primary"{!! cms_style($meta, 'intro.cta.primary.label') !!}>{!! accent_html($meta->get('intro.cta.primary.label')) !!}</a>
+        <a href="{{ $meta->get('intro.cta.secondary.href', 0, '/contact') }}" class="btn"{!! cms_style($meta, 'intro.cta.secondary.label') !!}>{!! accent_html($meta->get('intro.cta.secondary.label')) !!}</a>
       </div>
     </div>
   </section>
@@ -61,14 +61,14 @@
     <div class="wrap">
       <div class="dc-section-head reveal">
         <h2{!! cms_style($meta, 'why.heading') !!}>{!! accent_html($meta->get('why.heading')) !!}</h2>
-        <p{!! cms_style($meta, 'why.body') !!}>{{ $meta->get('why.body') }}</p>
+        <p{!! cms_style($meta, 'why.body') !!}>{!! accent_html($meta->get('why.body')) !!}</p>
       </div>
       <ol class="dc-caps">
         @foreach ($whyItems as $item)
           <li class="reveal" style="transition-delay: {{ $loop->iteration * 0.1 }}s">
             <span class="dc-num">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-            <h3{!! cms_style($meta, 'why.item.title', $loop->index) !!}>{{ $item['title'] ?? '' }}</h3>
-            <p{!! cms_style($meta, 'why.item.body', $loop->index) !!}>{{ $item['body'] ?? '' }}</p>
+            <h3{!! cms_style($meta, 'why.item.title', $loop->index) !!}>{!! accent_html($item['title'] ?? '') !!}</h3>
+            <p{!! cms_style($meta, 'why.item.body', $loop->index) !!}>{!! accent_html($item['body'] ?? '') !!}</p>
           </li>
         @endforeach
       </ol>
@@ -158,10 +158,10 @@
   <section class="dc-cta reveal" {!! cms_section_attr('cta') !!}>
     <div class="wrap dc-cta-copy">
       <h2{!! cms_style($meta, 'cta.heading') !!}>{!! accent_html($meta->get('cta.heading')) !!}</h2>
-      <p{!! cms_style($meta, 'cta.body') !!}>{{ $meta->get('cta.body') }}</p>
+      <p{!! cms_style($meta, 'cta.body') !!}>{!! accent_html($meta->get('cta.body')) !!}</p>
       <div class="dc-actions">
-        <a href="{{ $meta->get('cta.primary.href', 0, '/contact') }}" class="btn primary"{!! cms_style($meta, 'cta.primary.label') !!}>{{ $meta->get('cta.primary.label') }}</a>
-        <a href="{{ $meta->get('cta.secondary.href') }}" class="btn"{!! cms_style($meta, 'cta.secondary.label') !!}>{{ $meta->get('cta.secondary.label') }}</a>
+        <a href="{{ $meta->get('cta.primary.href', 0, '/contact') }}" class="btn primary"{!! cms_style($meta, 'cta.primary.label') !!}>{!! accent_html($meta->get('cta.primary.label')) !!}</a>
+        <a href="{{ $meta->get('cta.secondary.href') }}" class="btn"{!! cms_style($meta, 'cta.secondary.label') !!}>{!! accent_html($meta->get('cta.secondary.label')) !!}</a>
       </div>
     </div>
   </section>

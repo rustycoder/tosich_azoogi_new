@@ -31,26 +31,26 @@ class AboutDefinition implements PageDefinition
     public function fields(): array
     {
         return [
-            Field::textarea('hero.title', 'Hero title', typographic: false),
-            Field::textarea('hero.lead', 'Hero intro', typographic: false),
+            Field::textarea('hero.title', 'Hero title', typographic: false)->recommendedWords(3, 8),
+            Field::textarea('hero.lead', 'Hero intro', typographic: false)->recommendedWords(15, 35),
             Field::video('hero.video', 'Hero video'),
             Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
-            Field::textarea('intro.body', 'Intro', typographic: false),
+            Field::textarea('intro.body', 'Intro', typographic: false)->recommendedWords(15, 40),
             Field::text('intro.cta.label', 'Intro CTA'),
             Field::url('intro.cta.href', 'Intro CTA link'),
             Field::text('why.kicker', 'Why kicker'),
             Field::text('why.heading', 'Why heading'),
-            Field::text('why.item.title', 'Why title', true, 'why.item'),
-            Field::textarea('why.item.body', 'Why body', true, 'why.item'),
+            Field::text('why.item.title', 'Why title', true, 'why.item')->recommendedWords(2, 6),
+            Field::textarea('why.item.body', 'Why body', true, 'why.item')->recommendedWords(15, 45),
             Field::image('why.item.image', 'Why image', true, 'why.item', ImageSize::Panel),
             Field::text('reach.kicker', 'Reach kicker'),
             Field::text('reach.heading', 'Reach heading'),
-            Field::textarea('reach.body', 'Reach body'),
+            Field::textarea('reach.body', 'Reach body')->recommendedWords(25, 60),
             Field::image('reach.image', 'Reach image', hint: ImageSize::Banner),
             Field::text('path.kicker', 'Path kicker'),
             Field::text('path.heading', 'Path heading'),
             Field::text('path.item.title', 'Path title', true, 'path.item'),
-            Field::textarea('path.item.body', 'Path body', true, 'path.item'),
+            Field::textarea('path.item.body', 'Path body', true, 'path.item')->recommendedWords(10, 30),
             Field::url('path.item.href', 'Path href', true, 'path.item'),
         ];
     }

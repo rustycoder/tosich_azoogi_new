@@ -43,33 +43,33 @@
 
       <aside class="contact-info-panel">
         <div class="info-block" {!! cms_section_attr('hours') !!}>
-          <div class="info-label"{!! cms_style($meta, 'hours.label') !!}>{{ $meta->get('hours.label') }}</div>
-          <p{!! cms_style($meta, 'hours.value') !!}>{!! nl2br_html($meta->get('hours.value')) !!}</p>
+          <div class="info-label"{!! cms_style($meta, 'hours.label') !!}>{!! accent_html($meta->get('hours.label')) !!}</div>
+          <p{!! cms_style($meta, 'hours.value') !!}>{!! accent_html($meta->get('hours.value')) !!}</p>
         </div>
         <div class="info-block" {!! cms_section_attr('address') !!}>
-          <div class="info-label"{!! cms_style($meta, 'address.label') !!}>{{ $meta->get('address.label') }}</div>
+          <div class="info-label"{!! cms_style($meta, 'address.label') !!}>{!! accent_html($meta->get('address.label')) !!}</div>
           <p>
             <a href="{{ $meta->get('address.maps_url') }}" target="_blank" rel="noopener noreferrer"{!! cms_style($meta, 'address.value') !!}>
-              {!! nl2br_html($meta->get('address.value')) !!}
+              {!! accent_html($meta->get('address.value')) !!}
             </a>
           </p>
         </div>
         <div class="info-block" {!! cms_section_attr('phone') !!}>
-          <div class="info-label"{!! cms_style($meta, 'phone.label') !!}>{{ $meta->get('phone.label') }}</div>
-          <p{!! cms_style($meta, 'phone.value') !!}><a href="tel:{{ preg_replace('/\s+/', '', $meta->get('phone.value')) }}">{{ $meta->get('phone.value') }}</a></p>
+          <div class="info-label"{!! cms_style($meta, 'phone.label') !!}>{!! accent_html($meta->get('phone.label')) !!}</div>
+          <p{!! cms_style($meta, 'phone.value') !!}><a href="tel:{{ preg_replace('/\s+/', '', $meta->get('phone.value')) }}">{!! accent_html($meta->get('phone.value')) !!}</a></p>
         </div>
         <div class="info-block" {!! cms_section_attr('abn') !!}>
-          <div class="info-label"{!! cms_style($meta, 'abn.label') !!}>{{ $meta->get('abn.label') }}</div>
-          <p{!! cms_style($meta, 'abn.value') !!}>{{ $meta->get('abn.value') }}</p>
+          <div class="info-label"{!! cms_style($meta, 'abn.label') !!}>{!! accent_html($meta->get('abn.label')) !!}</div>
+          <p{!! cms_style($meta, 'abn.value') !!}>{!! accent_html($meta->get('abn.value')) !!}</p>
         </div>
         <div class="info-block" {!! cms_section_attr('acn') !!}>
-          <div class="info-label"{!! cms_style($meta, 'acn.label') !!}>{{ $meta->get('acn.label') }}</div>
-          <p{!! cms_style($meta, 'acn.value') !!}>{{ $meta->get('acn.value') }}</p>
+          <div class="info-label"{!! cms_style($meta, 'acn.label') !!}>{!! accent_html($meta->get('acn.label')) !!}</div>
+          <p{!! cms_style($meta, 'acn.value') !!}>{!! accent_html($meta->get('acn.value')) !!}</p>
         </div>
 
         <div class="contact-international" {!! cms_section_attr('intl') !!}>
-          <p><strong class="green-title"{!! cms_style($meta, 'intl.heading') !!}>{{ $meta->get('intl.heading') }}</strong></p>
-          <p{!! cms_style($meta, 'intl.body') !!}>{{ $meta->get('intl.body') }}</p>
+          <p><strong class="green-title"{!! cms_style($meta, 'intl.heading') !!}>{!! accent_html($meta->get('intl.heading')) !!}</strong></p>
+          <p{!! cms_style($meta, 'intl.body') !!}>{!! accent_html($meta->get('intl.body')) !!}</p>
           <p>For international project inquiries, connect with our export team at <a href="mailto:{{ $meta->get('intl.email') }}">{{ $meta->get('intl.email') }}</a> or call <a href="tel:{{ preg_replace('/\s+/', '', $meta->get('intl.phone')) }}">{{ $meta->get('intl.phone') }}</a> (or <a href="tel:{{ preg_replace('/\s+/', '', $meta->get('phone.value')) }}">{{ $meta->get('phone.value') }}</a> within Australia).</p>
         </div>
       </aside>
@@ -78,7 +78,7 @@
 
       <div class="contact-form-panel" {!! cms_section_attr('form') !!}>
         <h2 class="h2 contact-title"{!! cms_style($meta, 'form.title') !!}>{!! accent_html($meta->get('form.title')) !!}</h2>
-        <p class="contact-lead"{!! cms_style($meta, 'form.lead') !!}>{{ $meta->get('form.lead') }}</p>
+        <p class="contact-lead"{!! cms_style($meta, 'form.lead') !!}>{!! accent_html($meta->get('form.lead')) !!}</p>
 
         <form class="contact-form" id="contactForm" action="{{ route('contact.submit') }}" method="post" novalidate>
           @csrf

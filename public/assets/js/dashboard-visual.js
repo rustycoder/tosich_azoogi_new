@@ -82,7 +82,15 @@
         if (backdrop) {
             backdrop.hidden = false;
         }
-        window.setTimeout(() => mountEditors(drawer), 50);
+        window.setTimeout(() => {
+            mountEditors(drawer);
+            if (window.initLiveCounters) {
+                window.initLiveCounters(drawer);
+            }
+            if (window.initImageDropzones) {
+                window.initImageDropzones(drawer);
+            }
+        }, 50);
     };
 
     document.querySelectorAll('[data-open-section]').forEach((button) => {

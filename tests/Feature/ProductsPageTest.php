@@ -194,4 +194,43 @@ class ProductsPageTest extends TestCase
             ->assertSee('String(rawVal || \'\').trim().toLowerCase() === targetSel', false)
             ->assertDontSee('String(rawVal).toLowerCase().indexOf(String(selVal).toLowerCase()) !== -1', false);
     }
+
+    public function test_product_hero_banner_displays_parent_category_title_and_description_when_category_selected(): void
+    {
+        $this->get('/products?category=NEON')
+            ->assertOk()
+            ->assertSee('id="prodHeroTitle"', false)
+            ->assertSee('id="prodHeroLead"', false)
+            ->assertSee('NEON', false)
+            ->assertSee('Seamless flexible linear lighting for interior and exterior architectural contours, including wet areas and long facade runs.', false)
+            ->assertSee('PARENT_CATEGORIES', false)
+            ->assertSee('updateHeroBanner', false)
+            ->assertSee('findRootParentCategory', false);
+    }
+
+    public function test_product_hero_banner_displays_parent_category_details_when_subcategory_selected(): void
+    {
+        ProductCategory::query()->updateOrCreate(
+            ['airtable_id' => 'recProfiles'],
+            [
+                'name' => 'Profiles',
+                'sort_order' => 1,
+                'description' => 'Architectural aluminium channels and profiles.',
+            ]
+        );
+        ProductCategory::query()->updateOrCreate(
+            ['airtable_id' => 'recTrimless'],
+            [
+                'name' => 'Trimless',
+                'parent_airtable_id' => 'recProfiles',
+                'sort_order' => 1,
+                'description' => 'Trimless plaster-in profile descriptions.',
+            ]
+        );
+
+        $this->get('/products?category=Trimless')
+            ->assertOk()
+            ->assertSee('Profiles', false)
+            ->assertSee('Architectural aluminium channels and profiles.', false);
+    }
 }

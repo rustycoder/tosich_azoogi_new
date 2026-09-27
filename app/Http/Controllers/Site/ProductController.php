@@ -18,11 +18,23 @@ class ProductController extends Controller
     {
         $selectedCategory = trim((string) $request->query('category', ''));
         $presented = $this->pages->publicPage('products');
+        $rangeItems = ProductCatalog::parentCategories();
+
+        $selectedParentCategory = null;
+        if ($selectedCategory !== '') {
+            $parentCategoryMap = collect($rangeItems)->keyBy('title')->all();
+            $rootParentName = ProductCatalog::findRootParentCategory($selectedCategory) ?? $selectedCategory;
+            $selectedParentCategory = $parentCategoryMap[$rootParentName] ?? [
+                'title' => $rootParentName,
+                'body' => '',
+            ];
+        }
 
         return view($presented['view'], [
             ...$presented['data'],
-            'rangeItems' => ProductCatalog::parentCategories(),
+            'rangeItems' => $rangeItems,
             'selectedCategory' => $selectedCategory,
+            'selectedParentCategory' => $selectedParentCategory,
             'showCatalog' => $selectedCategory !== '',
         ]);
     }

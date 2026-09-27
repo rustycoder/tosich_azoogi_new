@@ -1,2 +1,6 @@
 User-agent: *
-Disallow:
+Disallow: /dashboard/
+Disallow: /trade-login
+Disallow: /quote-products
+
+Sitemap: https://azoogi.com/sitemap.xml
