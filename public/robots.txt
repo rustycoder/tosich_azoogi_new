@@ -1,6 +1,25 @@
+# Standard Search Engine Crawlers
 User-agent: *
 Disallow: /dashboard/
 Disallow: /trade-login
 Disallow: /quote-products
+Disallow: /product-datasheet/
 
+# Verified AI & Generative Search Crawlers (ChatGPT, Perplexity, Claude, Gemini, Copilot)
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: PerplexityBot
+User-agent: ClaudeBot
+User-agent: Anthropic-ai
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Bingbot
+Disallow: /dashboard/
+Disallow: /trade-login
+Disallow: /quote-products
+Disallow: /product-datasheet/
+
+# Sitemaps & LLM Context Feeds
 Sitemap: https://azoogi.com/sitemap.xml
+

@@ -26,18 +26,59 @@
 <!-- Structured Data (JSON-LD) -->
 @if (trim($__env->yieldContent('schema')) !== '')
 @yield('schema')
-@else
+@endif
 <script type="application/ld+json">
 {
   "@@context": "https://schema.org",
-  "@@type": "Organization",
-  "name": "Azoogi",
-  "url": "{{ url('/') }}",
-  "logo": "{{ asset('assets/logo_dark.png') }}",
-  "description": "Azoogi designs and supplies premium architectural LED lighting and smart control systems."
+  "@@graph": [
+    {
+      "@@type": "Organization",
+      "@@id": "{{ url('/') }}#organization",
+      "name": "Azoogi",
+      "legalName": "Azoogi LED Lighting",
+      "url": "{{ url('/') }}",
+      "logo": {
+        "@@type": "ImageObject",
+        "url": "{{ asset('assets/logo_dark.png') }}"
+      },
+      "description": "Australian manufacturer and specialist in commercial architectural LED linear lighting, custom aluminium profiles, and smart wireless control systems.",
+      "areaServed": "AU",
+      "knowsAbout": [
+        "Architectural LED Lighting",
+        "COB LED Strips",
+        "Aluminium Extrusion Profiles",
+        "Casambi Bluetooth Low Energy Mesh",
+        "Silvair Bluetooth Mesh",
+        "DALI-2 Lighting Control",
+        "Madrix Pixel Mapping"
+      ],
+      "contactPoint": {
+        "@@type": "ContactPoint",
+        "contactType": "sales and technical support",
+        "email": "info@azoogi.com",
+        "areaServed": "AU"
+      }
+    },
+    {
+      "@@type": "WebSite",
+      "@@id": "{{ url('/') }}#website",
+      "url": "{{ url('/') }}",
+      "name": "Azoogi",
+      "publisher": {
+        "@@id": "{{ url('/') }}#organization"
+      },
+      "potentialAction": {
+        "@@type": "SearchAction",
+        "target": {
+          "@@type": "EntryPoint",
+          "urlTemplate": "{{ url('/products') }}?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
 }
 </script>
-@endif
 
 <link rel="icon" href="{{ asset('assets/favicon.png') }}">
 <script>

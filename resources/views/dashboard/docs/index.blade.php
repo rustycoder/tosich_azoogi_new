@@ -569,6 +569,41 @@ php artisan sitemap:generate --clear</code></pre>
                     <button type="button" class="dash-doc-copy-btn" data-copy-text="php artisan sitemap:generate --clear">Copy Command</button>
                 </div>
 
+                <h3>Generative Engine Optimization (GEO) & AI Search Feeds</h3>
+                <p>To maximize brand citations, product discovery, and authoritative source inclusion in AI search engines (<strong>ChatGPT Search, Perplexity AI, Claude, Google Gemini / AI Overviews, Microsoft Copilot</strong>), the platform serves token-optimized, machine-readable Markdown feeds.</p>
+
+                <div class="dash-doc-specs-grid">
+                    <div class="dash-doc-spec-item">
+                        <span class="spec-label">LLM Summary Feed</span>
+                        <span class="spec-value"><a href="{{ url('/llms.txt') }}" target="_blank" class="dash-doc-inline-link"><code>{{ url('/llms.txt') }}</code></a></span>
+                    </div>
+                    <div class="dash-doc-spec-item">
+                        <span class="spec-label">Full Technical Feed</span>
+                        <span class="spec-value"><a href="{{ url('/llms-full.txt') }}" target="_blank" class="dash-doc-inline-link"><code>{{ url('/llms-full.txt') }}</code></a></span>
+                    </div>
+                    <div class="dash-doc-spec-item">
+                        <span class="spec-label">AI Crawlers Allowed</span>
+                        <span class="spec-value"><strong>GPTBot, PerplexityBot, ClaudeBot, Google-Extended, Bingbot</strong></span>
+                    </div>
+                    <div class="dash-doc-spec-item">
+                        <span class="spec-label">Knowledge Graph</span>
+                        <span class="spec-value"><strong>Schema.org Multi-Entity Graph</strong></span>
+                    </div>
+                </div>
+
+                <div class="dash-doc-callout tip" style="margin-top: 14px;">
+                    <strong>Unified GEO & Sitemap Command:</strong> Pre-warm or refresh all search engine and AI feeds simultaneously:
+                </div>
+
+                <div class="dash-doc-code-block">
+                    <pre><code># Pre-warm /llms.txt, /llms-full.txt and /sitemap.xml
+php artisan geo:generate
+
+# Clear all GEO & sitemap caches
+php artisan geo:generate --clear</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="php artisan geo:generate">Copy Command</button>
+                </div>
+
                 <h3>CSS & JavaScript Asset Versioning</h3>
                 <p>When deploying updates to front-end styles, bump the asset cache version using the project utility script:</p>
                 <div class="dash-doc-code-block">

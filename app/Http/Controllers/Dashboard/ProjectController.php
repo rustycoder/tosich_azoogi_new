@@ -8,6 +8,7 @@ use App\Http\Requests\Dashboard\StoreProjectRequest;
 use App\Http\Requests\Dashboard\UpdateProjectRequest;
 use App\Models\Project;
 use App\Services\Contracts\IProjectService;
+use App\Support\LlmsTxtBuilder;
 use App\Support\SitemapBuilder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -44,6 +45,7 @@ class ProjectController extends Controller
         );
 
         SitemapBuilder::clearCache();
+        LlmsTxtBuilder::clearCache();
 
         return redirect()->route('dashboard.projects.edit', $project)->with('status', 'Project created.');
     }
@@ -68,6 +70,7 @@ class ProjectController extends Controller
         );
 
         SitemapBuilder::clearCache();
+        LlmsTxtBuilder::clearCache();
 
         return back()->with('status', 'Project updated.');
     }
@@ -76,6 +79,7 @@ class ProjectController extends Controller
     {
         $this->projects->delete($project);
         SitemapBuilder::clearCache();
+        LlmsTxtBuilder::clearCache();
 
         return redirect()->route('dashboard.projects.index')->with('status', 'Project deleted.');
     }
@@ -84,6 +88,7 @@ class ProjectController extends Controller
     {
         $project = $this->projects->toggleStatus($project);
         SitemapBuilder::clearCache();
+        LlmsTxtBuilder::clearCache();
 
         return response()->json([
             'on' => $project->isActive(),
@@ -96,6 +101,7 @@ class ProjectController extends Controller
     {
         $project = $this->projects->toggleFeatured($project);
         SitemapBuilder::clearCache();
+        LlmsTxtBuilder::clearCache();
 
         return response()->json([
             'on' => $project->featured,
@@ -108,6 +114,7 @@ class ProjectController extends Controller
     {
         $this->projects->reorder($request->validated('order'));
         SitemapBuilder::clearCache();
+        LlmsTxtBuilder::clearCache();
 
         return response()->json([
             'message' => 'Featured order updated.',

@@ -7,6 +7,7 @@ use App\Http\Requests\Dashboard\UpdatePageContentRequest;
 use App\Models\Page;
 use App\PageMeta\Catalog;
 use App\Services\Contracts\IPageService;
+use App\Support\LlmsTxtBuilder;
 use App\Support\SitemapBuilder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -52,6 +53,7 @@ class SectionController extends Controller
         );
 
         SitemapBuilder::clearCache();
+        LlmsTxtBuilder::clearCache();
 
         return redirect()
             ->route('dashboard.sections.edit', $page)

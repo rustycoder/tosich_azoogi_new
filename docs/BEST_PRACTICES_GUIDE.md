@@ -161,4 +161,33 @@ php artisan sitemap:generate
 php artisan sitemap:generate --clear
 ```
 
+---
+
+## 6. Generative Engine Optimization (GEO) & AI Search Standards
+
+Generative Engine Optimization optimizes the Azoogi platform for AI search systems (**ChatGPT Search, Perplexity AI, Claude, Google Gemini / AI Overviews, Microsoft Copilot, Apple Intelligence**).
+
+### 6.1 Machine-Readable Markdown Endpoints (`/llms.txt`)
+* **Curated Overview**: [`/llms.txt`](https://azoogi.com/llms.txt) — Token-efficient summary of core architectural linear ranges, wireless control protocols (Casambi, Silvair, DALI, Madrix), calculators, and trade services.
+* **Full Technical Index**: [`/llms-full.txt`](https://azoogi.com/llms-full.txt) — Complete SKU-level technical specifications, product features, and case studies formatted for LLM context windows.
+
+### 6.2 AI Crawler Permissions (`robots.txt`)
+The following verified AI bots are explicitly welcomed to index public catalog, technology protocols, and `/llms.txt`:
+* `GPTBot`, `OAI-SearchBot`, `ChatGPT-User` (OpenAI / ChatGPT)
+* `PerplexityBot` (Perplexity AI)
+* `ClaudeBot`, `Anthropic-ai` (Anthropic / Claude)
+* `Google-Extended` (Google AI / Gemini)
+* `Applebot-Extended` (Apple Intelligence)
+* `Bingbot` (Microsoft Copilot)
+
+### 6.3 Unified GEO & Sitemap Command
+```bash
+# Pre-warm /llms.txt, /llms-full.txt, and /sitemap.xml
+php artisan geo:generate
+
+# Purge all GEO and sitemap caches
+php artisan geo:generate --clear
+```
+
+
 

@@ -7,6 +7,7 @@ use App\Http\Requests\Dashboard\UpdatePageContentRequest;
 use App\Models\Page;
 use App\PageMeta\Catalog;
 use App\Services\Contracts\IPageService;
+use App\Support\LlmsTxtBuilder;
 use App\Support\SitemapBuilder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -67,6 +68,7 @@ class PageContentController extends Controller
         }
 
         SitemapBuilder::clearCache();
+        LlmsTxtBuilder::clearCache();
 
         return redirect()
             ->route('dashboard.pages.edit', array_filter([
@@ -82,6 +84,7 @@ class PageContentController extends Controller
 
         $page = $this->pages->toggleStatus($page);
         SitemapBuilder::clearCache();
+        LlmsTxtBuilder::clearCache();
 
         return response()->json([
             'on' => $page->isActive(),

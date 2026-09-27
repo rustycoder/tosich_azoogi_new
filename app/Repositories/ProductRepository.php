@@ -8,6 +8,7 @@ use App\Models\ProductAttribute;
 use App\Models\ProductCategory;
 use App\Models\ProductSync;
 use App\Repositories\Contracts\IProductRepository;
+use App\Support\LlmsTxtBuilder;
 use App\Support\SitemapBuilder;
 use App\ThirdParty\Airtable\ProductNormalizer;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -458,6 +459,7 @@ class ProductRepository implements IProductRepository
 
         if ($ok) {
             SitemapBuilder::clearCache();
+            LlmsTxtBuilder::clearCache();
         }
     }
 

@@ -15,6 +15,7 @@ use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\Dashboard\StaffController;
 use App\Http\Controllers\ProductEnquiryController;
 use App\Http\Controllers\QuoteRequestController;
+use App\Http\Controllers\Site\LlmsTxtController;
 use App\Http\Controllers\Site\PageController;
 use App\Http\Controllers\Site\ProductController as SiteProductController;
 use App\Http\Controllers\Site\ProductDatasheetController;
@@ -151,3 +152,5 @@ Route::post('/product-datasheet', [ProductDatasheetController::class, 'store'])
 Route::get('/product-datasheet/{export}', [ProductDatasheetController::class, 'show'])->name('products.datasheet.show');
 
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+Route::get('/llms.txt', [LlmsTxtController::class, 'index'])->name('llms.txt');
+Route::get('/llms-full.txt', [LlmsTxtController::class, 'full'])->name('llms-full.txt');
