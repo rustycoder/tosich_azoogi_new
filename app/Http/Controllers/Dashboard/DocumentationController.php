@@ -23,7 +23,7 @@ class DocumentationController extends Controller
                 'deployment' => [
                     'label' => 'Server & Setup',
                     'title' => 'Server Setup & Deployment',
-                    'keywords' => 'server setup storage:link asset versioning update_version.py turnstile captcha cache:clear production deploy maintenance deployment',
+                    'keywords' => 'server setup environment env database db mysql sqlite postgres airtable config email smtp mailer storage:link asset versioning update_version.py turnstile captcha cache:clear production deploy maintenance deployment',
                 ],
             ],
             'Content & Media' => [

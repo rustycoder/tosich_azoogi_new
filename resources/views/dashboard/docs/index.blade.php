@@ -786,33 +786,131 @@ php artisan geo:generate --clear</code></pre>
         @if ($activeTopic === 'deployment')
             <article class="dash-card dash-doc-section" data-doc-block>
                 <div class="dash-doc-header">
-                    <h2>Server Setup, Asset Versioning & Deployment</h2>
+                    <h2>Server Setup, Environment & Deployment</h2>
                     <span class="dash-pill-active">Engineering & Ops</span>
                 </div>
+                <p>Comprehensive environment configuration standards, external API integrations, database connectivity, and deployment protocols for staging and production hosting.</p>
 
-                <h3>Public Storage Symlink</h3>
-                <p>If uploaded media or product attachments show broken links on a new environment, verify the public storage symlink:</p>
-                <div class="dash-doc-code-block" style="margin-bottom: 14px;">
+                <h3>1. Database Configuration (<code>DB_*</code>)</h3>
+                <p>The platform supports <strong>SQLite</strong> (recommended for lightweight local development) as well as <strong>MySQL / MariaDB</strong> and <strong>PostgreSQL</strong> for high-concurrency production deployments.</p>
+
+                <div class="dash-doc-grid-cards" style="margin-bottom: 12px;">
+                    <div class="dash-doc-feature-card">
+                        <h4>MySQL / MariaDB (Production)</h4>
+                        <div class="dash-doc-code-block" style="margin-top: 8px;">
+                            <pre><code>DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=azoogi_production
+DB_USERNAME=azoogi_dbuser
+DB_PASSWORD=your_secure_db_password</code></pre>
+                        </div>
+                    </div>
+                    <div class="dash-doc-feature-card">
+                        <h4>SQLite (Local Dev / Staging)</h4>
+                        <div class="dash-doc-code-block" style="margin-top: 8px;">
+                            <pre><code>DB_CONNECTION=sqlite
+# Database file location:
+# database/database.sqlite</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <p>Run migrations on newly deployed instances:</p>
+                <div class="dash-doc-code-block" style="margin-bottom: 16px;">
+                    <pre><code># Run all database schema migrations
+php artisan migrate --force</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="php artisan migrate --force">Copy Command</button>
+                </div>
+
+                <h3>2. Airtable API Configuration (<code>AIRTABLE_*</code>)</h3>
+                <p>Product catalog data, categories, and technical specification attributes synchronize with Airtable through personal access tokens (PAT).</p>
+
+                <div class="dash-doc-code-block" style="margin-bottom: 12px;">
+                    <pre><code># Airtable Credentials
+AIRTABLE_API_KEY=pat_your_personal_access_token_here
+AIRTABLE_BASE_ID=app_your_airtable_base_id_here
+
+# Table Names (Matches Airtable Table Names Exactly)
+AIRTABLE_PRODUCTS_TABLE="Products"
+AIRTABLE_CATEGORIES_TABLE="Categories"
+AIRTABLE_ATTRIBUTES_TABLE="Product attributes"</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text='AIRTABLE_API_KEY=your_token
+AIRTABLE_BASE_ID=your_base_id
+AIRTABLE_PRODUCTS_TABLE="Products"
+AIRTABLE_CATEGORIES_TABLE="Categories"
+AIRTABLE_ATTRIBUTES_TABLE="Product attributes"'>Copy Template</button>
+                </div>
+
+                <div class="dash-doc-callout info">
+                    <strong>Airtable Token Permissions:</strong> Ensure your Airtable Personal Access Token has the <code>data.records:read</code> and <code>schema.bases:read</code> scopes assigned for the target Base.
+                </div>
+
+                <p>You can run manual product synchronization via the CLI or use the Dashboard UI under <a href="{{ route('dashboard.products.index') }}" class="dash-doc-inline-link"><strong>Products</strong></a>:</p>
+                <div class="dash-doc-code-block" style="margin-bottom: 16px;">
+                    <pre><code># Trigger CLI product catalog sync
+php artisan products:sync</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="php artisan products:sync">Copy Command</button>
+                </div>
+
+                <h3>3. Email & Transactional Notification Setup (<code>MAIL_*</code>)</h3>
+                <p>Automated customer quote receipts, enquiry dispatch, and staff notification emails can be delivered via SMTP, Amazon SES, Resend, or Postmark.</p>
+
+                <div class="dash-doc-grid-cards" style="margin-bottom: 12px;">
+                    <div class="dash-doc-feature-card">
+                        <h4>Standard SMTP Configuration</h4>
+                        <div class="dash-doc-code-block" style="margin-top: 8px;">
+                            <pre><code>MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailgun.org
+MAIL_PORT=587
+MAIL_ENCRYPTION=tls
+MAIL_USERNAME=your_smtp_username
+MAIL_PASSWORD=your_smtp_password
+MAIL_FROM_ADDRESS="sales@azoogi.com"
+MAIL_FROM_NAME="Azoogi"</code></pre>
+                        </div>
+                    </div>
+                    <div class="dash-doc-feature-card">
+                        <h4>Amazon SES / API Providers</h4>
+                        <div class="dash-doc-code-block" style="margin-top: 8px;">
+                            <pre><code>MAIL_MAILER=ses
+AWS_ACCESS_KEY_ID=your_aws_key
+AWS_SECRET_ACCESS_KEY=your_aws_secret
+AWS_DEFAULT_REGION=ap-southeast-2
+MAIL_FROM_ADDRESS="sales@azoogi.com"
+MAIL_FROM_NAME="Azoogi"</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dash-doc-callout tip">
+                    <strong>Testing Email Delivery:</strong> Navigate to <a href="{{ route('dashboard.email-templates.index') }}" class="dash-doc-inline-link"><strong>Notifications &rarr; Email</strong></a> and click <em>Send Test Email</em> to verify outgoing deliverability.
+                </div>
+
+                <h3>4. Cloudflare Turnstile CAPTCHA (<code>TURNSTILE_*</code>)</h3>
+                <p>Spam protection for public quote requests and contact forms uses Cloudflare Turnstile:</p>
+                <div class="dash-doc-code-block" style="margin-bottom: 16px;">
+                    <pre><code>TURNSTILE_SITE_KEY=your_turnstile_site_key
+TURNSTILE_SECRET_KEY=your_turnstile_secret_key
+TURNSTILE_ENABLED=true</code></pre>
+                </div>
+
+                <h3>5. Public Storage Symlink</h3>
+                <p>If uploaded media, hero videos, or product attachments show broken links on a new environment, verify the public storage symlink:</p>
+                <div class="dash-doc-code-block" style="margin-bottom: 16px;">
                     <pre><code>php artisan storage:link</code></pre>
                     <button type="button" class="dash-doc-copy-btn" data-copy-text="php artisan storage:link">Copy Command</button>
                 </div>
 
-                <h3>CSS & JavaScript Asset Versioning</h3>
+                <h3>6. CSS & JavaScript Asset Versioning</h3>
                 <p>When deploying updates to front-end styles or scripts, bump the asset cache version using the project utility script:</p>
-                <div class="dash-doc-code-block" style="margin-bottom: 14px;">
+                <div class="dash-doc-code-block" style="margin-bottom: 16px;">
                     <pre><code>python update_version.py bump</code></pre>
                     <button type="button" class="dash-doc-copy-btn" data-copy-text="python update_version.py bump">Copy Command</button>
                 </div>
 
-                <h3>Cloudflare Turnstile CAPTCHA</h3>
-                <p>Ensure environment keys are configured in <code>.env</code> for spam protection on public quote and contact forms:</p>
-                <div class="dash-doc-code-block" style="margin-bottom: 14px;">
-                    <pre><code>TURNSTILE_SITE_KEY=your_turnstile_site_key
-TURNSTILE_SECRET_KEY=your_turnstile_secret_key</code></pre>
-                </div>
-
-                <h3>Production Deployment Cache Checklist</h3>
-                <p>After pushing code updates to production servers, optimize Laravel configuration and routing caches:</p>
+                <h3>7. Production Deployment Cache Checklist</h3>
+                <p>After pushing code updates to production servers, optimize Laravel configuration, routing, and search caches:</p>
                 <div class="dash-doc-code-block">
                     <pre><code>php artisan config:cache
 php artisan route:cache
