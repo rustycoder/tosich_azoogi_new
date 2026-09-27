@@ -42,7 +42,7 @@
         @foreach ($projects as $project)
           <a class="project-card" href="{{ route('project-detail', ['slug' => $project->slug]) }}">
             <span class="project-card-media">
-              <img src="{{ $project->coverUrl() }}" alt="{{ $project->title }}" loading="lazy">
+              <img src="{{ $project->coverUrl() }}" alt="{{ $project->coverAlt() }}" loading="lazy">
             </span>
             <span class="project-card-cap">
               <small class="project-tag">{{ $project->tag ?: $project->type ?: $meta->get('list.fallback_tag') }}</small>

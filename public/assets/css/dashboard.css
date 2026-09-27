@@ -1073,12 +1073,13 @@ html:has(.dash) {
 
 .dash-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
 }
 
 .dash-form .dash-gallery-item {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 8px;
   margin: 0;
   text-transform: none;
@@ -1086,6 +1087,12 @@ html:has(.dash) {
   font-size: 13px;
   font-weight: 500;
   color: var(--dash-ink);
+}
+
+.dash-form .dash-gallery-item input[type="text"] {
+  padding: 6px 8px;
+  font-size: 12px;
+  border-radius: 6px;
 }
 
 .dash-gallery-item img {

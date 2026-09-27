@@ -92,6 +92,13 @@
             <small>{{ \App\PageMeta\ImageSize::Cover }}</small>
             @error('cover_file')<p class="login-error">{{ $message }}</p>@enderror
         </div>
+
+        <div class="dash-field is-wide">
+            <label for="cover_alt">Cover image alt text</label>
+            <input id="cover_alt" name="cover_alt" value="{{ old('cover_alt', $project->cover_alt ?? '') }}" placeholder="e.g. {{ $project->title ?? 'Project' }} architectural lighting installation">
+            <small>Descriptive alt text for accessibility and search engines. Defaults to project title if left blank.</small>
+            @error('cover_alt')<p class="login-error">{{ $message }}</p>@enderror
+        </div>
     </div>
 </div>
 
@@ -102,9 +109,13 @@
         <div class="dash-gallery">
             @foreach ($project->gallery as $index => $image)
                 @if (is_string($image) && $image !== '')
+                    @php
+                        $altVal = $project->gallery_alts[$index] ?? ($project->gallery_alts[$image] ?? '');
+                    @endphp
                     <div class="dash-gallery-item" data-gallery-item>
                         <img src="{{ media_url($image) }}" alt="">
                         <input type="hidden" name="keep_gallery[]" value="{{ $index }}">
+                        <input type="text" name="gallery_alts[{{ $index }}]" value="{{ old("gallery_alts.{$index}", $altVal) }}" placeholder="Custom alt text..." title="Alt text for this gallery image">
                         <button type="button" class="dash-gallery-remove" data-remove-gallery>Remove</button>
                     </div>
                 @endif

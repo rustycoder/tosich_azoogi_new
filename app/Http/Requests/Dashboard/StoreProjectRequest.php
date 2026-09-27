@@ -24,11 +24,14 @@ class StoreProjectRequest extends FormRequest
             'type' => ['nullable', 'string', 'max:255'],
             'completed' => ['nullable', 'string', 'max:100'],
             'cover_remote' => ['nullable', 'string', 'max:500'],
+            'cover_alt' => ['nullable', 'string', 'max:255'],
             'summary' => ['nullable', 'string'],
             'description' => ['nullable', 'string'],
             'cover_file' => ['nullable', 'image', 'max:8192'],
             'gallery_files' => ['nullable', 'array'],
             'gallery_files.*' => ['image', 'max:8192'],
+            'gallery_alts' => ['nullable', 'array'],
+            'gallery_alts.*' => ['nullable', 'string', 'max:255'],
         ];
     }
 }

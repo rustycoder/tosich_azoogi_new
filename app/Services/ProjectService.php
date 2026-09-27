@@ -53,10 +53,13 @@ class ProjectService implements IProjectService
 
         if ($galleryFiles !== []) {
             $gallery = [];
+            $galleryAlts = [];
             foreach ($galleryFiles as $file) {
                 $gallery[] = $this->storage->storeProjectUpload($project->slug, 'gallery', $file);
+                $galleryAlts[] = '';
             }
             $project->gallery = $gallery;
+            $project->gallery_alts = $galleryAlts;
         }
 
         if ($cover || $galleryFiles !== []) {
@@ -87,6 +90,8 @@ class ProjectService implements IProjectService
         }
 
         $gallery = is_array($project->gallery) ? $project->gallery : [];
+        $existingAlts = is_array($project->gallery_alts) ? $project->gallery_alts : [];
+        $inputAlts = isset($data['gallery_alts']) && is_array($data['gallery_alts']) ? $data['gallery_alts'] : [];
 
         if ($keepGallery !== null) {
             $keepLookup = [];
@@ -95,9 +100,12 @@ class ProjectService implements IProjectService
             }
 
             $kept = [];
+            $keptAlts = [];
             foreach ($gallery as $index => $path) {
                 if (isset($keepLookup[$index])) {
                     $kept[] = $path;
+                    $altVal = $inputAlts[$index] ?? ($existingAlts[$index] ?? ($existingAlts[$path] ?? ''));
+                    $keptAlts[] = is_string($altVal) ? $altVal : '';
 
                     continue;
                 }
@@ -108,13 +116,18 @@ class ProjectService implements IProjectService
             }
 
             $gallery = $kept;
+            $galleryAlts = $keptAlts;
+        } else {
+            $galleryAlts = array_values($inputAlts ?: $existingAlts);
         }
 
         foreach ($galleryFiles as $file) {
             $gallery[] = $this->storage->storeProjectUpload($project->slug, 'gallery', $file);
+            $galleryAlts[] = '';
         }
 
         $project->gallery = array_values($gallery);
+        $project->gallery_alts = array_values($galleryAlts);
         $this->projects->save($project);
     }
 
