@@ -25,8 +25,16 @@
         </div>
 
         <nav class="dash-doc-menu" id="doc-menu">
-            @foreach ($topics as $key => $title)
-                <a href="{{ route('dashboard.docs.index', ['topic' => $key]) }}" class="dash-doc-menu-item {{ $activeTopic === $key ? 'is-active' : '' }}" data-topic="{{ $key }}">
+            @foreach ($topics as $key => $topicData)
+                @php
+                    $title = is_array($topicData) ? $topicData['title'] : $topicData;
+                    $keywords = is_array($topicData) ? ($topicData['keywords'] ?? '') : '';
+                @endphp
+                <a href="{{ route('dashboard.docs.index', ['topic' => $key]) }}" 
+                   class="dash-doc-menu-item {{ $activeTopic === $key ? 'is-active' : '' }}" 
+                   data-topic="{{ $key }}"
+                   data-title="{{ strtolower($title) }}"
+                   data-keywords="{{ strtolower($keywords) }}">
                     @switch($key)
                         @case('overview')
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1z"/></svg>
@@ -80,6 +88,9 @@
                     <span>{{ $title }}</span>
                 </a>
             @endforeach
+            <div id="doc-menu-no-results" class="dash-doc-no-results" style="display: none;">
+                No matching topics found
+            </div>
         </nav>
     </aside>
 
@@ -811,14 +822,68 @@ php artisan geo:generate</code></pre>
 document.addEventListener('DOMContentLoaded', () => {
     // Quick Search filter
     const searchInput = document.getElementById('doc-search');
+    const menuItems = document.querySelectorAll('.dash-doc-menu-item');
+    const noResults = document.getElementById('doc-menu-no-results');
+    const contentBlocks = document.querySelectorAll('[data-doc-block]');
+
     if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase().trim();
-            const blocks = document.querySelectorAll('[data-doc-block]');
-            blocks.forEach(block => {
-                const text = block.textContent.toLowerCase();
-                block.style.display = term === '' || text.includes(term) ? '' : 'none';
+        const performSearch = () => {
+            const query = searchInput.value.toLowerCase().trim();
+            const terms = query.split(/\s+/).filter(Boolean);
+            let visibleCount = 0;
+
+            // 1. Filter sidebar navigation topics
+            menuItems.forEach(item => {
+                if (terms.length === 0) {
+                    item.style.display = '';
+                    visibleCount++;
+                    return;
+                }
+
+                const title = item.getAttribute('data-title') || '';
+                const keywords = item.getAttribute('data-keywords') || '';
+                const topic = item.getAttribute('data-topic') || '';
+                const itemText = (title + ' ' + keywords + ' ' + topic).toLowerCase();
+
+                const isMatch = terms.every(term => itemText.includes(term));
+                if (isMatch) {
+                    item.style.display = '';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
             });
+
+            if (noResults) {
+                noResults.style.display = (terms.length > 0 && visibleCount === 0) ? 'block' : 'none';
+            }
+
+            // 2. Filter sub-sections and cards inside the currently active document
+            contentBlocks.forEach(block => {
+                if (terms.length === 0) {
+                    block.style.display = '';
+                    return;
+                }
+                const blockText = block.textContent.toLowerCase();
+                const matchesBlock = terms.some(term => blockText.includes(term));
+                block.style.display = matchesBlock || visibleCount > 0 ? '' : 'none';
+            });
+        };
+
+        searchInput.addEventListener('input', performSearch);
+
+        // Press Enter to open the first matching topic in sidebar
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const firstVisible = Array.from(menuItems).find(item => item.style.display !== 'none');
+                if (firstVisible) {
+                    window.location.href = firstVisible.getAttribute('href');
+                }
+            } else if (e.key === 'Escape') {
+                searchInput.value = '';
+                performSearch();
+            }
         });
     }
 
