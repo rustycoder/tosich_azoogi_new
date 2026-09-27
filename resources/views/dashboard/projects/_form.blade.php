@@ -105,13 +105,47 @@
             @foreach ($project->gallery as $index => $image)
                 @if (is_string($image) && $image !== '')
                     @php
+                        $imageInfo = media_file_info($image);
                         $altVal = $project->gallery_alts[$index] ?? ($project->gallery_alts[$image] ?? '');
+                        $fallbackAlt = ($project->title ?? 'Project') . ' photo ' . ($index + 1);
                     @endphp
-                    <div class="dash-gallery-item" data-gallery-item>
-                        <img src="{{ media_url($image) }}" alt="">
+                    <div class="dash-preview-card is-gallery-card" data-gallery-item>
                         <input type="hidden" name="keep_gallery[]" value="{{ $index }}">
-                        <input type="text" name="gallery_alts[{{ $index }}]" value="{{ old("gallery_alts.{$index}", $altVal) }}" placeholder="Custom alt text..." title="Alt text for this gallery image">
-                        <button type="button" class="dash-gallery-remove" data-remove-gallery>Remove</button>
+                        <div class="dash-preview-card-header">
+                            <div class="dash-preview-thumb-wrap">
+                                <img class="dash-preview-thumb" src="{{ media_url($image) }}" alt="{{ basename($image) }}">
+                            </div>
+                            <div class="dash-preview-info">
+                                <div class="dash-preview-filename" title="{{ basename($image) }}">{{ basename($image) }}</div>
+                                <div class="dash-preview-alt-text" title="Alt text for screen readers and search engines">
+                                    <span class="dash-preview-alt-label">Alt:</span>
+                                    <span class="dash-preview-alt-val" data-gallery-alt-val data-default-alt="{{ $fallbackAlt }}">{{ $altVal !== '' ? $altVal : 'Auto (' . $fallbackAlt . ')' }}</span>
+                                </div>
+                                <div class="dash-preview-badges">
+                                    <span class="dash-preview-badge is-format">{{ $imageInfo['format'] ?? 'IMAGE' }}</span>
+                                    @if (!empty($imageInfo['size']))
+                                        <span class="dash-preview-badge">{{ $imageInfo['size'] }}</span>
+                                    @endif
+                                    @if (!empty($imageInfo['dimensions']))
+                                        <span class="dash-preview-badge is-dimensions">{{ $imageInfo['dimensions'] }}</span>
+                                    @endif
+                                    @if (!empty($imageInfo['aspect_ratio']))
+                                        <span class="dash-preview-badge is-ratio">{{ $imageInfo['aspect_ratio'] }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="dash-preview-actions">
+                                <button type="button" class="dash-preview-action" data-toggle-alt-edit title="Edit alt text">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                                </button>
+                                <button type="button" class="dash-preview-remove" data-remove-gallery title="Remove image">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="dash-preview-alt-edit" data-gallery-alt-edit hidden>
+                            <input type="text" name="gallery_alts[{{ $index }}]" value="{{ old("gallery_alts.{$index}", $altVal) }}" placeholder="Enter custom alt text..." data-gallery-alt-input>
+                        </div>
                     </div>
                 @endif
             @endforeach

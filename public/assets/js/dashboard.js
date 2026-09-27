@@ -879,14 +879,43 @@
 
     document.querySelectorAll('form.dash-form').forEach((form) => {
         form.addEventListener('click', (event) => {
-            const trigger = event.target.closest('[data-remove-gallery]');
-
-            if (!trigger || !form.contains(trigger)) {
+            const removeTrigger = event.target.closest('[data-remove-gallery]');
+            if (removeTrigger && form.contains(removeTrigger)) {
+                event.preventDefault();
+                removeTrigger.closest('[data-gallery-item]')?.remove();
                 return;
             }
 
-            event.preventDefault();
-            trigger.closest('[data-gallery-item]')?.remove();
+            const editTrigger = event.target.closest('[data-toggle-alt-edit]');
+            if (editTrigger && form.contains(editTrigger)) {
+                event.preventDefault();
+                const card = editTrigger.closest('[data-gallery-item]');
+                const editRow = card?.querySelector('[data-gallery-alt-edit]');
+                const input = editRow?.querySelector('input');
+                if (editRow) {
+                    const isHidden = editRow.hidden;
+                    editRow.hidden = !isHidden;
+                    editTrigger.classList.toggle('is-active', !editRow.hidden);
+                    if (!editRow.hidden && input) {
+                        input.focus();
+                    }
+                }
+            }
+        });
+
+        form.addEventListener('input', (event) => {
+            const input = event.target.closest('[data-gallery-alt-edit] input');
+            if (!input || !form.contains(input)) {
+                return;
+            }
+
+            const card = input.closest('[data-gallery-item]');
+            const valDisplay = card?.querySelector('[data-gallery-alt-val]');
+            if (valDisplay) {
+                const text = input.value.trim();
+                const defaultAlt = valDisplay.dataset.defaultAlt || 'photo';
+                valDisplay.textContent = text !== '' ? text : `Auto (${defaultAlt})`;
+            }
         });
 
         const fileInputs = [...form.querySelectorAll('input[type="file"]')];
