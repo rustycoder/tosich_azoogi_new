@@ -4061,14 +4061,13 @@ code {
 .dash-page-primary {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
 }
 
-.dash-page-head-line {
+.dash-page-cat-line {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
+  margin-top: 2px;
 }
 
 .dash-page-primary .dash-row-link {

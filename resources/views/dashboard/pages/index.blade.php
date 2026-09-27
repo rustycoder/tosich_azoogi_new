@@ -107,15 +107,10 @@
                     data-title="{{ mb_strtolower($navLabel . ' ' . $page->title . ' ' . $page->meta_description . ' ' . $page->slug . ' ' . $cat->label()) }}">
                     <td class="dash-td-page">
                         <div class="dash-page-primary">
-                            <div class="dash-page-head-line">
-                                @include('dashboard.partials.title-link', [
-                                    'href' => route('dashboard.pages.edit', $page),
-                                    'label' => $navLabel,
-                                ])
-                                <span class="dash-cat-badge {{ $cat->badgeClass() }}">
-                                    {{ $cat->shortLabel() }}
-                                </span>
-                            </div>
+                            @include('dashboard.partials.title-link', [
+                                'href' => route('dashboard.pages.edit', $page),
+                                'label' => $navLabel,
+                            ])
                             <div class="dash-updated">
                                 <span class="dash-updated-value">
                                     <strong data-updater-name>{{ $page->updater?->name ?? 'Admin User' }}</strong>
@@ -123,6 +118,11 @@
                                         <span class="dash-updated-sep" aria-hidden="true">·</span>
                                         <time data-updated-at datetime="{{ $page->updated_at->toIso8601String() }}">{{ $page->updated_at->timezone(config('app.timezone'))->format('j M Y, g:i A') }}</time>
                                     @endif
+                                </span>
+                            </div>
+                            <div class="dash-page-cat-line">
+                                <span class="dash-cat-badge {{ $cat->badgeClass() }}">
+                                    {{ $cat->shortLabel() }}
                                 </span>
                             </div>
                         </div>
