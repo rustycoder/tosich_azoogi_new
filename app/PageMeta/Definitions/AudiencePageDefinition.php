@@ -73,9 +73,8 @@ abstract class AudiencePageDefinition implements PageDefinition
             $leadParagraphs = $defaultLeads[$this->slug()];
         }
 
-        foreach ($leadParagraphs as $i => $paragraph) {
-            $rows[] = ['key' => 'hero.lead', 'sort_order' => $i, 'value' => (string) $paragraph];
-        }
+        $lead = is_array($leadParagraphs) ? implode(' ', $leadParagraphs) : (string) $leadParagraphs;
+        $rows[] = ['key' => 'hero.lead', 'sort_order' => 0, 'value' => $lead];
 
         foreach ($audience['cards'] ?? [] as $i => $card) {
             $heading = (string) ($card['heading'] ?? '');

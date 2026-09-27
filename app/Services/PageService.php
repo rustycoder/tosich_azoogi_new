@@ -220,7 +220,6 @@ class PageService implements IPageService
         ];
 
         if (in_array($page->slug, AudiencePageDefinition::SLUGS, true)) {
-            $data['leads'] = $meta->list('hero.lead');
             $data['cards'] = $meta->group('card');
         }
 

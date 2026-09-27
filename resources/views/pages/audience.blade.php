@@ -2,7 +2,7 @@
 
 @section('title', $page->title)
 
-@section('description', $leads[0] ?? $page->meta_description)
+@section('description', $meta->get('hero.lead', 0, $page->meta_description))
 
 @section('bodyClass', 'audience-page')
 
@@ -28,7 +28,7 @@
         'wholesaler' => 'Stock with confidence. Fast quotes, protected trade margins, and dependable nationwide supply for leading electrical distributors.',
     ];
     $heroPoster = $meta->get('hero.poster', 0, $defaultHeroImages[$page->slug] ?? '/assets/img/img-0.jpg');
-    $leadText = ! empty($leads) ? (is_array($leads) ? implode(' ', $leads) : (string) $leads) : ($defaultLeads[$page->slug] ?? '');
+    $leadText = $meta->get('hero.lead', 0, $defaultLeads[$page->slug] ?? '');
 @endphp
 
 @section('content')
