@@ -25,13 +25,24 @@ class DocumentationTest extends TestCase
 
         $topics = [
             'overview',
-            'media',
-            'content',
+            'pages',
+            'formatting',
+            'counters',
+            'projects',
             'products',
+            'videos',
+            'images',
+            'seo',
+            'sitemap',
+            'geo',
             'enquiries',
             'datasheets',
             'emails',
             'staff',
+            'deployment',
+            // Test backward-compatible aliases as well
+            'media',
+            'content',
             'maintenance',
         ];
 

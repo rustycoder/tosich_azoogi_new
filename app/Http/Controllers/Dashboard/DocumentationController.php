@@ -15,15 +15,32 @@ class DocumentationController extends Controller
     {
         $validTopics = [
             'overview' => 'Overview & Quick Start',
-            'media' => 'Media & Asset Guidelines',
-            'content' => 'Content & Page Editor',
-            'products' => 'Products & Airtable Sync',
+            'pages' => 'Pages & Visual Editor',
+            'formatting' => 'Accent & Outlined Text ({})',
+            'counters' => 'Character & Word Counters',
+            'projects' => 'Project Showcase & Case Studies',
+            'products' => 'Product Catalog & Airtable',
+            'videos' => 'Video Guidelines & Encoding',
+            'images' => 'Image Dimensions & WebP',
+            'seo' => 'SEO & Social Share (OG)',
+            'sitemap' => 'XML Sitemap (/sitemap.xml)',
+            'geo' => 'Generative Engine Optimization (/llms.txt)',
             'enquiries' => 'Enquiries & Quote Workflow',
             'datasheets' => 'Datasheet Exports',
             'emails' => 'Email Templates & Alerts',
             'staff' => 'Staff & Role Permissions',
-            'maintenance' => 'SEO, Cache & Deployment',
+            'deployment' => 'Server Setup & Deployment',
         ];
+
+        $aliases = [
+            'media' => 'videos',
+            'content' => 'pages',
+            'maintenance' => 'deployment',
+        ];
+
+        if (isset($aliases[$topic])) {
+            $topic = $aliases[$topic];
+        }
 
         if (! array_key_exists($topic, $validTopics)) {
             $topic = 'overview';
