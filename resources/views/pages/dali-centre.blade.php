@@ -111,7 +111,7 @@
           @endif
         </div>
         <figure class="dc-feature-img">
-          <img src="{{ $featureImage }}" alt="AZOOGI DALI system architecture — gateways, sensors, switches and loads on one DALI bus" loading="lazy">
+          <img src="{{ $featureImage }}" alt="{{ $meta->get('feature.image_alt', 0, 'AZOOGI DALI system architecture — gateways, sensors, switches and loads on one DALI bus') }}" loading="lazy">
         </figure>
       </div>
     </section>

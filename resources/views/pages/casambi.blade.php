@@ -103,7 +103,7 @@
                     @if ($softwareImage !== '')
                         <div class="cb-feature-img">
                             <figure>
-                                <img src="{{ $softwareImage }}" alt="{{ $meta->get('software.title') }}" loading="lazy">
+                                <img src="{{ $softwareImage }}" alt="{{ $meta->get('software.image_alt', 0, $meta->get('software.title', 0, 'Casambi App interface')) }}" loading="lazy">
                             </figure>
                         </div>
                     @endif

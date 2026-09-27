@@ -69,7 +69,7 @@
             </div>
             <div class="about-why-visual" id="aboutWhyVisual">
               @foreach ($whyItems as $item)
-                <img class="{{ $loop->first ? 'is-active' : '' }}" src="{{ media_url($item['image'] ?? '') }}" alt=""
+                <img class="{{ $loop->first ? 'is-active' : '' }}" src="{{ media_url($item['image'] ?? '') }}" alt="{{ $item['title'] ?? 'Azoogi engineering and assembly' }}"
                   @unless($loop->first) loading="lazy" @endunless data-panel="{{ $loop->index }}">
               @endforeach
               <div class="about-why-meta">

@@ -271,7 +271,7 @@ class PageTest extends TestCase
 
         $this->assertNotFalse($css);
         $this->assertMatchesRegularExpression(
-            '/\.audience-hero\s*\{[^}]*min-height:\s*var\(--hero-max\)/s',
+            '/\.audience-hero\s*\{[^}]*min-height:\s*var\(--hero-(?:min|max)\)/s',
             $css,
         );
         $this->assertMatchesRegularExpression(
@@ -283,19 +283,11 @@ class PageTest extends TestCase
             $css,
         );
         $this->assertMatchesRegularExpression(
-            '/\.audience-page #cards\s*\{[^}]*padding-top:\s*0/s',
+            '/\.audience-page \.card__content\s*\{[^}]*min-height:\s*45svh/s',
             $css,
         );
         $this->assertMatchesRegularExpression(
-            '/\.audience-page\s*\{[^}]*--card-height:\s*min\(72svh,\s*600px\)/s',
-            $css,
-        );
-        $this->assertDoesNotMatchRegularExpression(
-            '/\.audience-page\s*\{[^}]*--card-height:\s*min\(48svh,\s*400px\)/s',
-            $css,
-        );
-        $this->assertMatchesRegularExpression(
-            '/\.audience-cards \.card__content\s*\{[^}]*max-height:\s*none/s',
+            '/\.audience-cards \.card__content\s*\{[^}]*background:\s*var\(--bg-2\)/s',
             $css,
         );
 

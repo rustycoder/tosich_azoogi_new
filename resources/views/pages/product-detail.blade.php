@@ -119,7 +119,7 @@ $productSchema = [
 
                     <!-- MAIN IMAGE COVER START -->
                     <div class="gallery-main-wrapper">
-                        <img class="gallery-main-image" src="" id="gallery-main-img" alt="Product Image"
+                        <img class="gallery-main-image" src="" id="gallery-main-img" alt="{{ $product?->product_name ?? 'Azoogi Lighting Product' }}"
                             style="display:none;">
                     </div>
                     <!-- MAIN IMAGE COVER END -->
@@ -1041,6 +1041,7 @@ $productSchema = [
                         const localSrc = resolveImg(item.url);
                         galleryMainImg.src = localSrc;
                         galleryMainImg.setAttribute('src', localSrc);
+                        galleryMainImg.alt = item.isDimension ? ((prod.product_name || 'Product') + ' — dimensions') : (prod.product_name || 'Product Image');
                         galleryMainImg.style.display = 'block';
                         galleryMainImg.style.opacity = '1';
                         galleryMainImg.style.objectFit = 'contain';

@@ -133,7 +133,7 @@
         @if ($softwareImage !== '')
           <div class="sv-feature-img sv-feature-img--contain">
             <figure>
-              <img src="{{ $softwareImage }}" alt="{{ $meta->get('software.title') }}" loading="lazy">
+              <img src="{{ $softwareImage }}" alt="{{ $meta->get('software.image_alt', 0, $meta->get('software.title', 0, 'Silvair commissioning software interface')) }}" loading="lazy">
             </figure>
           </div>
         @endif
@@ -144,7 +144,7 @@
         @if ($standardImage !== '')
           <div class="sv-feature-img">
             <figure>
-              <img src="{{ $standardImage }}" alt="{{ $meta->get('standard.title') }}" loading="lazy">
+              <img src="{{ $standardImage }}" alt="{{ $meta->get('standard.image_alt', 0, $meta->get('standard.title', 0, 'Silvair Bluetooth Networked Lighting Control standard architecture')) }}" loading="lazy">
             </figure>
           </div>
         @endif

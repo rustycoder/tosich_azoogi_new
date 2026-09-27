@@ -73,7 +73,7 @@
         <div class="project-gallery">
           @foreach ($gallery as $image)
             <div class="image">
-              <img src="{{ media_url($image) }}" alt="{{ $project->title }}" loading="lazy">
+              <img src="{{ media_url($image) }}" alt="{{ $project->title }} — gallery image {{ $loop->iteration }}" loading="lazy">
             </div>
           @endforeach
         </div>
