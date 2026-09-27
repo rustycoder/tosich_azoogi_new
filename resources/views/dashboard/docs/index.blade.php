@@ -86,6 +86,9 @@
                                     @case('staff')
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><path d="M4 19a5 5 0 0 1 10 0"/><circle cx="17" cy="9" r="2.4"/><path d="M16 19a4.2 4.2 0 0 1 4-3"/></svg>
                                         @break
+                                    @case('mcp')
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                                        @break
                                     @case('deployment')
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
                                         @break
@@ -934,6 +937,192 @@ php artisan view:cache
 php artisan geo:generate</code></pre>
                     <button type="button" class="dash-doc-copy-btn" data-copy-text="php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan geo:generate">Copy Command</button>
                 </div>
+            </article>
+        @endif
+
+        {{-- 17. MODEL CONTEXT PROTOCOL (MCP) & AI ASSISTANT --}}
+        @if ($activeTopic === 'mcp')
+            <article class="dash-card dash-doc-section" data-doc-block>
+                <div class="dash-doc-header">
+                    <h2>Model Context Protocol (MCP) & AI Integration</h2>
+                    <span class="dash-pill-active">AI Engine</span>
+                </div>
+                <p>Azoogi features a <strong>native PHP implementation of the Model Context Protocol (MCP)</strong> conforming to the <code>2024-11-05</code> specification. MCP allows external Large Language Models (such as Anthropic Claude Desktop, Cursor AI, or IDE assistants) to securely inspect front-end views, read route definitions, explore assets, and execute validated database updates using natural language prompts.</p>
+
+                <div class="dash-doc-callout info">
+                    <strong>Zero Node.js Overhead:</strong> The MCP server runs 100% natively in PHP through the standard input/output stream (<code>stdio</code>) via an Artisan console command without external runtime dependencies.
+                </div>
+
+                <h3>1. Quick Start & Artisan Server</h3>
+                <p>The MCP server runs as a background process or interactive stdio listener via Artisan:</p>
+                <div class="dash-doc-code-block" style="margin-bottom: 16px;">
+                    <pre><code># Start the MCP server exposing all tool suites (Frontend, Backend, and Public Chat)
+php artisan mcp:serve --mode=all
+
+# Expose only read-only frontend exploration tools
+php artisan mcp:serve --mode=frontend
+
+# Expose only backend mutations and CMS updating tools
+php artisan mcp:serve --mode=backend
+
+# Expose catalog search and quote builder tools
+php artisan mcp:serve --mode=public_chat</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="php artisan mcp:serve --mode=all">Copy Command</button>
+                </div>
+
+                <h3>2. Connecting MCP to Claude Desktop</h3>
+                <p>To connect Claude Desktop to your local Azoogi backend, open your Claude configuration file:</p>
+                <ul>
+                    <li><strong>macOS:</strong> <code>~/Library/Application Support/Claude/claude_desktop_config.json</code></li>
+                    <li><strong>Windows:</strong> <code>%APPDATA%\Claude\claude_desktop_config.json</code></li>
+                </ul>
+                <div class="dash-doc-code-block" style="margin-bottom: 16px;">
+                    <pre><code>{
+  "mcpServers": {
+    "azoogi-backend": {
+      "command": "php",
+      "args": [
+        "{{ base_path('artisan') }}",
+        "mcp:serve",
+        "--mode=all"
+      ]
+    }
+  }
+}</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text='{
+  "mcpServers": {
+    "azoogi-backend": {
+      "command": "php",
+      "args": [
+        "{{ str_replace('\\', '/', base_path('artisan')) }}",
+        "mcp:serve",
+        "--mode=all"
+      ]
+    }
+  }
+}'>Copy JSON Config</button>
+                </div>
+
+                <h3>3. Connecting MCP to Cursor IDE</h3>
+                <p>To connect Cursor to the Azoogi MCP server, create or edit <code>.cursor/mcp.json</code> in your project root:</p>
+                <div class="dash-doc-code-block" style="margin-bottom: 16px;">
+                    <pre><code>{
+  "mcpServers": {
+    "azoogi-app": {
+      "command": "php",
+      "args": ["artisan", "mcp:serve", "--mode=all"]
+    }
+  }
+}</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text='{
+  "mcpServers": {
+    "azoogi-app": {
+      "command": "php",
+      "args": ["artisan", "mcp:serve", "--mode=all"]
+    }
+  }
+}'>Copy JSON Config</button>
+                </div>
+
+                <h3>4. Example Natural Language Use Cases</h3>
+                <div class="dash-doc-steps">
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">A</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Update Solution Page Hero Banner Copy</h4>
+                            <p>Prompt in Claude or Cursor:</p>
+                            <p><em>&ldquo;Update the solution page hero banner title to 'Innovative Commercial Lighting Solutions' and the lead text to 'High-efficiency luminaires and smart controls built for modern architecture'.&rdquo;</em></p>
+                            <p><strong>Action Taken:</strong> The AI invokes <code>backend_update_page_content</code>, matches the <code>solutions</code> slug, and writes to MySQL <code>page_meta</code> inside an atomic database transaction.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">B</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Visitor Product Search & Quote Creation</h4>
+                            <p>Prompt on website chat or AI assistant:</p>
+                            <p><em>&ldquo;Search for our outdoor garden spike lights, add 6 units of the 50W model to my quote, and submit a quote request for info@archstudio.com.au.&rdquo;</em></p>
+                            <p><strong>Action Taken:</strong> The AI queries <code>public_search_products</code>, updates session cart via <code>public_manage_quote_list</code>, and registers the lead via <code>public_submit_quote_enquiry</code>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>5. Available MCP Tool Reference</h3>
+                <div class="dash-doc-table-wrap">
+                    <table class="dash-doc-table">
+                        <thead>
+                            <tr>
+                                <th>Tool Identifier</th>
+                                <th>Category</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>frontend_list_blade_views</code></td>
+                                <td><span class="dash-pill-active" style="font-size: 11px;">Frontend</span></td>
+                                <td>Recursively scans <code>resources/views</code> for templates, layouts, and components.</td>
+                            </tr>
+                            <tr>
+                                <td><code>frontend_read_blade_view</code></td>
+                                <td><span class="dash-pill-active" style="font-size: 11px;">Frontend</span></td>
+                                <td>Safely reads Blade file contents with directory traversal protection.</td>
+                            </tr>
+                            <tr>
+                                <td><code>frontend_list_routes</code></td>
+                                <td><span class="dash-pill-active" style="font-size: 11px;">Frontend</span></td>
+                                <td>Lists registered application routes with HTTP methods, URIs, and middleware.</td>
+                            </tr>
+                            <tr>
+                                <td><code>frontend_search_assets</code></td>
+                                <td><span class="dash-pill-active" style="font-size: 11px;">Frontend</span></td>
+                                <td>Grep search across Blade views, CSS stylesheets, and JavaScript files.</td>
+                            </tr>
+                            <tr>
+                                <td><code>backend_update_page_content</code></td>
+                                <td><span class="dash-pill-active" style="font-size: 11px; background: rgba(58, 160, 40, 0.2); color: #67d04e;">Backend</span></td>
+                                <td>Updates page metadata, hero titles, subtitles, banner texts, or custom section values.</td>
+                            </tr>
+                            <tr>
+                                <td><code>backend_inspect_schema</code></td>
+                                <td><span class="dash-pill-active" style="font-size: 11px; background: rgba(58, 160, 40, 0.2); color: #67d04e;">Backend</span></td>
+                                <td>Inspects MySQL database table columns, types, and primary keys for models.</td>
+                            </tr>
+                            <tr>
+                                <td><code>backend_query_records</code></td>
+                                <td><span class="dash-pill-active" style="font-size: 11px; background: rgba(58, 160, 40, 0.2); color: #67d04e;">Backend</span></td>
+                                <td>Queries records from allowlisted Eloquent models with safe filtering and pagination.</td>
+                            </tr>
+                            <tr>
+                                <td><code>backend_mutate_model</code></td>
+                                <td><span class="dash-pill-active" style="font-size: 11px; background: rgba(58, 160, 40, 0.2); color: #67d04e;">Backend</span></td>
+                                <td>Safely executes validated create, update, or delete operations on allowlisted models.</td>
+                            </tr>
+                            <tr>
+                                <td><code>public_search_products</code></td>
+                                <td><span class="dash-pill-active" style="font-size: 11px; background: rgba(56, 189, 248, 0.2); color: #38bdf8;">Chat / Quotes</span></td>
+                                <td>Searches active product catalog by application, category, or keyword.</td>
+                            </tr>
+                            <tr>
+                                <td><code>public_manage_quote_list</code></td>
+                                <td><span class="dash-pill-active" style="font-size: 11px; background: rgba(56, 189, 248, 0.2); color: #38bdf8;">Chat / Quotes</span></td>
+                                <td>Adds, removes, or inspects items in visitor quote cart.</td>
+                            </tr>
+                            <tr>
+                                <td><code>public_submit_quote_enquiry</code></td>
+                                <td><span class="dash-pill-active" style="font-size: 11px; background: rgba(56, 189, 248, 0.2); color: #38bdf8;">Chat / Quotes</span></td>
+                                <td>Creates quote enquiry records in MySQL with customer details and selected items.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>6. Security Controls & Guardrails</h3>
+                <ul>
+                    <li><strong>Strict Model Allowlisting:</strong> Only models explicitly registered in <code>MutationGuard</code> (Page, PageMeta, Product, Category, Project, Enquiry) can be manipulated. Sensitive models like <code>User</code> are strictly locked down.</li>
+                    <li><strong>Forbidden Column Protection:</strong> Columns such as <code>id</code>, <code>password</code>, <code>is_admin</code>, <code>remember_token</code>, and <code>api_token</code> cannot be modified through MCP mutations.</li>
+                    <li><strong>Atomic DB Transactions:</strong> All mutations are executed within <code>DB::transaction()</code> blocks to guarantee that failures or invalid attributes immediately rollback changes.</li>
+                    <li><strong>Dry-Run Previews:</strong> Destructive or complex updates support <code>"dry_run": true</code>, returning an exact before-and-after attribute diff before committing changes to MySQL.</li>
+                </ul>
             </article>
         @endif
 

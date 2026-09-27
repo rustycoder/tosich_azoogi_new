@@ -40,6 +40,7 @@ class DocumentationTest extends TestCase
             'emails',
             'staff',
             'deployment',
+            'mcp',
             // Test backward-compatible aliases as well
             'media',
             'content',

@@ -75,6 +75,13 @@ class DocumentationController extends Controller
                     'keywords' => 'generative engine optimization llms.txt llms-full.txt ai search chatgpt perplexity claude gemini copilot robots.txt geo:generate knowledge graph citations geo',
                 ],
             ],
+            'AI & Automation' => [
+                'mcp' => [
+                    'label' => 'MCP Protocol & AI',
+                    'title' => 'Model Context Protocol (MCP) & AI Integration',
+                    'keywords' => 'mcp model context protocol ai claude cursor stdio json-rpc tools frontend exploration backend mutations page updates quotes chatbot automation',
+                ],
+            ],
             'Operations & Admin' => [
                 'products' => [
                     'label' => 'Products & Airtable',
