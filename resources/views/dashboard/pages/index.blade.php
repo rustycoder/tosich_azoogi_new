@@ -71,44 +71,72 @@
                 <th scope="col" style="min-width: 170px; width: 18%;">Last Updated</th>
             </tr>
         </thead>
-        <tbody>
+            @php
+                $defaultHeroImages = [
+                    'home-owner' => '/assets/img/img-0.jpg',
+                    'architect-designer' => '/assets/hero02.jpg',
+                    'electrician-builder' => '/assets/img/img-1.jpg',
+                    'wholesaler' => '/assets/img/img-2.jpg',
+                    'products' => '/assets/hero02.jpg',
+                    'led-strip-calculator' => '/assets/hero01.jpg',
+                    'solutions' => '/assets/img/img-1.jpg',
+                    'contact' => '/assets/imgcontact.jpeg',
+                    'ai-lighting' => '/assets/img/ai-lighting/hero.jpg',
+                    'dali-centre' => '/assets/img/dali-system/video.jpg',
+                    'casambi' => '/assets/img/casambi/banner.png',
+                    'silvair' => '/assets/img/silvair/nlc.jpg',
+                    'madrix' => '/assets/img/madrix/banner.png',
+                    'projects' => '/assets/img/img-1.jpg',
+                ];
+            @endphp
             @forelse ($pages as $page)
                 @php
                     $def = \App\PageMeta\Catalog::for($page->slug);
                     $cat = \App\PageMeta\Catalog::categoryForSlug($page->slug);
                     $navLabel = $def->navLabel();
+                    $metaBag = \App\Support\PageMetaBag::for($page);
+                    $ogPreview = $page->og_image
+                        ?: $metaBag->get('hero.poster')
+                        ?: $metaBag->get('hero.image')
+                        ?: $metaBag->get('slide.media.image', 0)
+                        ?: $metaBag->get('card.image', 0)
+                        ?: ($defaultHeroImages[$page->slug] ?? null);
+                    $isCustomOg = filled($page->og_image);
                 @endphp
                 <tr class="dash-page-row" 
                     data-cat="{{ $cat->value }}" 
                     data-title="{{ mb_strtolower($navLabel . ' ' . $page->title . ' ' . $page->meta_description . ' ' . $page->slug . ' ' . $cat->label()) }}">
                     <td class="dash-td-page">
                         <div class="dash-page-primary">
-                            <div class="dash-page-header-line">
-                                @include('dashboard.partials.title-link', [
-                                    'href' => route('dashboard.pages.edit', $page),
-                                    'label' => $navLabel,
-                                    'view' => $page->publicPath(),
-                                ])
-                                <span class="dash-cat-badge {{ $cat->badgeClass() }}">
-                                    {{ $cat->shortLabel() }}
-                                </span>
-                            </div>
+                            @include('dashboard.partials.title-link', [
+                                'href' => route('dashboard.pages.edit', $page),
+                                'label' => $navLabel,
+                                'view' => $page->publicPath(),
+                            ])
                             <a href="{{ $page->publicPath() }}" target="_blank" rel="noopener noreferrer" class="dash-page-path" title="Open live URL {{ $page->publicPath() }}">
                                 <span>{{ $page->publicPath() }}</span>
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="dash-ext-icon" aria-hidden="true">
                                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/>
                                 </svg>
                             </a>
+                            <div class="dash-page-cat-line">
+                                <span class="dash-cat-badge {{ $cat->badgeClass() }}">
+                                    {{ $cat->shortLabel() }}
+                                </span>
+                            </div>
                         </div>
                     </td>
                     <td class="dash-td-seo">
                         <div class="dash-seo-card">
-                            @if (!empty($page->og_image))
-                                <div class="dash-seo-og-thumb" title="OG Social Share Image: {{ basename($page->og_image) }}">
-                                    <img src="{{ media_url($page->og_image) }}" alt="{{ $navLabel }} Social Share" loading="lazy">
+                            @if (!empty($ogPreview))
+                                <div class="dash-seo-og-thumb" title="{{ $isCustomOg ? 'Custom OG Social Share Image: ' . basename($page->og_image) : 'Using Hero Banner Image as Social Share fallback' }}">
+                                    <img src="{{ media_url($ogPreview) }}" alt="{{ $navLabel }} Share Image" loading="lazy">
+                                    @if (!$isCustomOg)
+                                        <span class="dash-og-fallback-badge">Banner</span>
+                                    @endif
                                 </div>
                             @else
-                                <div class="dash-seo-og-thumb is-empty" title="No social share (OG) image uploaded">
+                                <div class="dash-seo-og-thumb is-empty" title="No social share (OG) image configured">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
                                         <rect x="3" y="3" width="18" height="18" rx="2"/>
                                         <circle cx="8.5" cy="8.5" r="1.5"/>

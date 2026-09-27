@@ -4061,14 +4061,13 @@ code {
 .dash-page-primary {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
 }
 
-.dash-page-header-line {
+.dash-page-cat-line {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
+  margin-top: 2px;
 }
 
 .dash-page-primary .dash-row-link {
@@ -4178,6 +4177,7 @@ code {
 }
 
 .dash-seo-og-thumb {
+  position: relative;
   width: 72px;
   height: 42px;
   flex-shrink: 0;
@@ -4194,6 +4194,22 @@ code {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.dash-og-fallback-badge {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  background: rgba(0, 0, 0, .72);
+  color: rgba(255, 255, 255, .9);
+  font-size: 8.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  padding: 1px 4px;
+  border-radius: 3px;
+  line-height: 1.1;
+  pointer-events: none;
 }
 
 .dash-seo-og-thumb.is-empty {
