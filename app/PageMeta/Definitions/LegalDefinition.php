@@ -19,8 +19,8 @@ abstract class LegalDefinition implements PageDefinition
     {
         return [
             Field::text('legal.kicker', 'Kicker'),
-            Field::text('legal.title', 'Title', typographic: false),
-            Field::textarea('legal.lead', 'Lead', typographic: false),
+            Field::text('legal.title', 'Hero title', typographic: false),
+            Field::textarea('legal.lead', 'Hero lead', typographic: false),
             Field::html('legal.html', 'Body'),
         ];
     }

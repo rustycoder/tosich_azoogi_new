@@ -34,7 +34,7 @@ class ProjectsDefinition implements PageDefinition
             Field::video('hero.video', 'Hero video'),
             Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
             Field::text('hero.title', 'Hero title', typographic: false),
-            Field::textarea('hero.body', 'Hero intro', typographic: false),
+            Field::textarea('hero.body', 'Hero lead', typographic: false),
             Field::text('list.showing', 'Count prefix'),
             Field::text('list.singular', 'Singular count'),
             Field::text('list.plural', 'Plural count'),

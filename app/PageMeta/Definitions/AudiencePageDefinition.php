@@ -27,9 +27,8 @@ abstract class AudiencePageDefinition implements PageDefinition
         return [
             Field::video('hero.video', 'Hero video'),
             Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
-            Field::text('hero.eyebrow', 'Eyebrow', typographic: false),
-            Field::text('hero.title', 'Title', typographic: false)->recommendedWords(3, 8),
-            Field::textarea('hero.lead', 'Lead paragraph', true, 'hero.lead', typographic: false)->recommendedWords(15, 35),
+            Field::text('hero.title', 'Hero title', typographic: false)->recommendedWords(3, 8),
+            Field::textarea('hero.lead', 'Hero lead', typographic: false)->recommendedWords(20, 60),
             Field::text('card.heading', 'Card heading', true, 'card')->recommendedWords(3, 8),
             Field::textarea('card.body', 'Card body', true, 'card')->recommendedWords(20, 60),
             Field::image('card.image', 'Card image', true, 'card', ImageSize::Card),
@@ -59,14 +58,13 @@ abstract class AudiencePageDefinition implements PageDefinition
 
         $defaultLeads = [
             'home-owner' => ['Explore high-quality LED lighting solutions tailored for Australian homes — combining style, energy efficiency, and lasting performance.'],
-            'architect-designer' => ['Specification-grade LED lighting crafted to enhance contemporary interiors and bring your architectural vision to life.'],
-            'electrician-builder' => ['Engineered for straightforward installation, rapid turnarounds, and reliable performance on every residential and commercial build.'],
+            'architect-designer' => ['At Azoogi, we understand that lighting is more than illumination… it’s the art of shaping atmosphere, evoking emotion, and bringing your vision to life. That’s why Australia’s leading interior and lighting designers choose Azoogi for products that balance style, performance, and reliability.'],
+            'electrician-builder' => ['At Azoogi, we know that the right lighting solution doesn’t just look great – it makes your job faster, simpler, and more profitable. Engineered for straightforward installation and dependable performance on every build.'],
             'wholesaler' => ['Stock with confidence. Fast quotes, protected trade margins, and dependable nationwide supply for leading electrical distributors.'],
         ];
 
         $rows = [
             ['key' => 'hero.poster', 'sort_order' => 0, 'value' => $heroImages[$this->slug()] ?? '/assets/img/img-0.jpg'],
-            ['key' => 'hero.eyebrow', 'sort_order' => 0, 'value' => (string) ($audience['eyebrow'] ?? '')],
             ['key' => 'hero.title', 'sort_order' => 0, 'value' => $titleValue],
         ];
 

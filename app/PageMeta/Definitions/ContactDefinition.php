@@ -34,7 +34,7 @@ class ContactDefinition implements PageDefinition
             Field::video('hero.video', 'Hero video'),
             Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
             Field::text('hero.title', 'Hero title', typographic: false),
-            Field::textarea('hero.lead', 'Hero intro', typographic: false)->recommendedWords(10, 30),
+            Field::textarea('hero.lead', 'Hero lead', typographic: false)->recommendedWords(10, 30),
             Field::text('hours.label', 'Hours label'),
             Field::textarea('hours.value', 'Hours'),
             Field::text('address.label', 'Address label'),

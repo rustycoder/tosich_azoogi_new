@@ -32,7 +32,7 @@ class AboutDefinition implements PageDefinition
     {
         return [
             Field::textarea('hero.title', 'Hero title', typographic: false)->recommendedWords(3, 8),
-            Field::textarea('hero.lead', 'Hero intro', typographic: false)->recommendedWords(15, 35),
+            Field::textarea('hero.lead', 'Hero lead', typographic: false)->recommendedWords(15, 35),
             Field::video('hero.video', 'Hero video'),
             Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
             Field::textarea('intro.body', 'Intro', typographic: false)->recommendedWords(15, 40),
