@@ -3420,7 +3420,7 @@ code {
 
 .dash-doc-specs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 12px;
   margin: 16px 0;
 }
@@ -3432,7 +3432,10 @@ code {
   padding: 12px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .spec-label {
@@ -3441,11 +3444,23 @@ code {
   letter-spacing: .04em;
   color: var(--dash-muted);
   font-weight: 600;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .spec-value {
   font-size: 13px;
+  line-height: 1.45;
   color: var(--dash-ink);
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.spec-value code {
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-all;
 }
 
 .dash-doc-callout {
