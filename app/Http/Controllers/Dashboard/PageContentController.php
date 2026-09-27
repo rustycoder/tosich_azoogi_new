@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Enums\PageCategory;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\UpdatePageContentRequest;
 use App\Models\Page;
@@ -24,10 +25,29 @@ class PageContentController extends Controller
         abort_unless($slugs !== [], 403);
 
         $search = dash_search_query($request->query('q'));
+        $category = $request->query('category');
+        if (! in_array($category, array_column(PageCategory::cases(), 'value'), true)) {
+            $category = null;
+        }
+
+        $allManagedPages = $this->pages->dashboardList($slugs, '');
+        $categoryCounts = [
+            'all' => $allManagedPages->count(),
+        ];
+        foreach (PageCategory::cases() as $cat) {
+            $categoryCounts[$cat->value] = $allManagedPages->filter(
+                fn (Page $page): bool => Catalog::categoryForSlug($page->slug) === $cat
+            )->count();
+        }
+
+        $pages = $this->pages->dashboardList($slugs, $search, $category);
 
         return view('dashboard.pages.index', [
-            'pages' => $this->pages->dashboardList($slugs, $search),
+            'pages' => $pages,
             'search' => $search,
+            'activeCategory' => $category,
+            'categoryCounts' => $categoryCounts,
+            'categories' => PageCategory::cases(),
         ]);
     }
 

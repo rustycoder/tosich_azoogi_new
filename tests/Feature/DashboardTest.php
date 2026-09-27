@@ -74,7 +74,7 @@ class DashboardTest extends TestCase
             ->assertSee('>Details</h2>', false)
             ->assertSee('>Gallery</h2>', false);
         $this->actingAs($admin)->get('/dashboard/settings')->assertOk()->assertSee('dash-card', false);
-        $this->actingAs($admin)->get('/dashboard/content/pages')->assertOk()->assertSee('dash-list', false)->assertSee('name="q"', false);
+        $this->actingAs($admin)->get('/dashboard/content/pages')->assertOk()->assertSee('dash-table', false)->assertSee('name="q"', false);
         $this->actingAs($admin)->get('/dashboard/content/sections')->assertOk()->assertSee('dash-list', false)->assertSee('name="q"', false);
     }
 
@@ -156,6 +156,27 @@ class DashboardTest extends TestCase
             ->assertOk()
             ->assertSee('Neon Flex', false)
             ->assertDontSee('Garden Light', false);
+    }
+
+    public function test_pages_index_can_filter_by_category(): void
+    {
+        $this->seed([AdminUserSeeder::class, PageSeeder::class]);
+        $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
+
+        $this->actingAs($admin)
+            ->get('/dashboard/content/pages?category=technology')
+            ->assertOk()
+            ->assertSee('Casambi', false)
+            ->assertSee('DALI Centre', false)
+            ->assertDontSee('>Home</strong>', false)
+            ->assertDontSee('>Wholesaler</strong>', false);
+
+        $this->actingAs($admin)
+            ->get('/dashboard/content/pages?category=audience')
+            ->assertOk()
+            ->assertSee('Home Owner', false)
+            ->assertSee('Wholesaler', false)
+            ->assertDontSee('>Casambi</strong>', false);
     }
 
     public function test_products_index_is_ordered_by_sku(): void
