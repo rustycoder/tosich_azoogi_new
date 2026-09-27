@@ -4111,7 +4111,7 @@ code {
 .dash-page-primary .dash-updated-value strong {
   font-size: 12px;
   font-weight: 550;
-  color: var(--dash-ink);
+  color: var(--dash-muted);
   line-height: 1.35;
 }
 

@@ -113,7 +113,7 @@
                             ])
                             <div class="dash-updated">
                                 <span class="dash-updated-value">
-                                    <strong data-updater-name>{{ $page->updater?->name ?? 'Admin User' }}</strong>
+                                    <strong data-updater-name>{{ $page->updater?->name ?? 'Admin' }}</strong>
                                     @if ($page->updated_at)
                                         <span class="dash-updated-sep" aria-hidden="true">·</span>
                                         <time data-updated-at datetime="{{ $page->updated_at->toIso8601String() }}">{{ $page->updated_at->timezone(config('app.timezone'))->format('j M Y, g:i A') }}</time>
