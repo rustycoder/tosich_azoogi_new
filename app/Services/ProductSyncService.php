@@ -101,11 +101,11 @@ class ProductSyncService implements IProductSyncService
             $emit(32, 'Products fetched', 'Retrieved '.count($records).' raw product records.');
 
             $emit(35, 'Compiling catalog...', 'Compiling and normalizing catalog data...');
-            $this->log($run, 'Compiling published products.');
+            $this->log($run, 'Compiling products.');
             $compiled = $this->normalizer->compileProducts($records, $categories, $attributes);
             $totalProducts = count($compiled);
-            $this->log($run, 'Compiled '.$totalProducts.' published product'.($totalProducts === 1 ? '' : 's').'.');
-            $emit(38, 'Catalog compiled', "Compiled {$totalProducts} published products for processing.", 0, $totalProducts);
+            $this->log($run, 'Compiled '.$totalProducts.' product'.($totalProducts === 1 ? '' : 's').'.');
+            $emit(38, 'Catalog compiled', "Compiled {$totalProducts} products for processing.", 0, $totalProducts);
 
             $this->log($run, 'Keeping Airtable image URLs (not localizing).');
 

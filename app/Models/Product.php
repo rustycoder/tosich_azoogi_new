@@ -85,16 +85,112 @@ class Product extends Model
         return '/product-detail?id='.rawurlencode((string) $this->airtable_id);
     }
 
-    public function coverUrl(): string
+    public function coverUrl(?int $index = null): string
     {
+        if ($index !== null && is_array($this->product_images) && isset($this->product_images[$index])) {
+            $val = $this->product_images[$index];
+            $url = is_string($val) ? $val : (is_array($val) ? ($val['url'] ?? '') : '');
+            if ($url !== '') {
+                return media_url((string) $url);
+            }
+        }
+
         $path = $this->cover;
 
         if (($path === null || $path === '') && is_array($this->product_images) && $this->product_images !== []) {
             $first = $this->product_images[0];
-            $path = is_string($first) ? $first : '';
+            $path = is_string($first) ? $first : (is_array($first) ? ($first['url'] ?? '') : '');
         }
 
         return media_url((string) $path);
+    }
+
+    public function dimensionUrl(): ?string
+    {
+        $url = $this->firstAssetUrl($this->product_dimension);
+
+        return $url !== null ? media_url($url) : null;
+    }
+
+    public function datasheetUrl(): ?string
+    {
+        $url = $this->firstAssetUrl($this->datasheet_file)
+            ?? $this->firstAssetUrl($this->datasheet);
+
+        return $url !== null ? media_url($url) : null;
+    }
+
+    public function manualUrl(): ?string
+    {
+        $url = $this->firstAssetUrl($this->user_manual);
+
+        return $url !== null ? media_url($url) : null;
+    }
+
+    public function guideUrl(): ?string
+    {
+        $url = $this->firstAssetUrl($this->installation_guide_file);
+
+        return $url !== null ? media_url($url) : null;
+    }
+
+    public function iesUrl(): ?string
+    {
+        $url = $this->firstAssetUrl($this->ies_file);
+
+        return $url !== null ? media_url($url) : null;
+    }
+
+    public function firstAssetUrl(mixed $value): ?string
+    {
+        if ($value === null || $value === '' || $value === []) {
+            return null;
+        }
+
+        if (is_string($value)) {
+            $trimmed = trim($value);
+
+            return $trimmed !== '' ? $trimmed : null;
+        }
+
+        if (is_array($value)) {
+            if (isset($value['url']) && is_string($value['url']) && trim($value['url']) !== '') {
+                return trim($value['url']);
+            }
+
+            foreach ($value as $item) {
+                $found = $this->firstAssetUrl($item);
+                if ($found !== null) {
+                    return $found;
+                }
+            }
+        }
+
+        if (is_object($value)) {
+            return $this->firstAssetUrl((array) $value);
+        }
+
+        return null;
+    }
+
+    public function isPublished(): bool
+    {
+        $status = strtolower(trim((string) ($this->status ?? 'publish')));
+
+        return $status === '' || $status === 'publish';
+    }
+
+    public function isVisibleOnStorefront(bool $allowPreviewForAuth = true): bool
+    {
+        if (! app()->isProduction()) {
+            return true;
+        }
+
+        if ($allowPreviewForAuth && auth()->check()) {
+            return true;
+        }
+
+        return $this->isPublished();
     }
 
     /**

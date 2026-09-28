@@ -99,10 +99,6 @@ final class ProductNormalizer
             $fields = $record['fields'];
             $status = $this->statusValue($fields['Status'] ?? $fields['status'] ?? '');
 
-            if ($status !== '' && $status !== 'publish') {
-                continue;
-            }
-
             $name = (string) ($fields['Product_Name'] ?? $fields['Product Name'] ?? $fields['Name'] ?? $fields['Title'] ?? 'Unnamed Product');
             $resolvedCategories = $this->resolveCategories($fields['Category'] ?? $fields['Product Category'] ?? $fields['Categories'] ?? 'General', $catIndex);
             $features = [];
@@ -173,7 +169,7 @@ final class ProductNormalizer
                 'meta_title' => $this->sanitize($fields['Meta Title'] ?? $fields['Meta title'] ?? $fields['meta_title'] ?? ''),
                 'meta_description' => $this->sanitize($fields['Meta Descriptions'] ?? $fields['Meta Description'] ?? $fields['meta_description'] ?? $fields['meta_descriptions'] ?? ''),
                 'supplier_name' => $this->sanitize($fields['Supplier Name'] ?? ''),
-                'status' => $this->sanitize($fields['Status'] ?? ''),
+                'status' => $status !== '' ? $status : $this->sanitize($fields['Status'] ?? ''),
                 'product_type' => $this->sanitize($fields['Product type'] ?? ''),
                 'product_features' => $features,
                 'options' => $this->parseJsonField($fields['Options'] ?? $fields['options'] ?? [], []),
@@ -183,6 +179,14 @@ final class ProductNormalizer
             $product = [];
 
             foreach ($entry as $key => $value) {
+                if ($key === 'status') {
+                    if ($value !== null && $value !== '') {
+                        $product[$key] = $value;
+                    }
+
+                    continue;
+                }
+
                 if ($value !== null && $value !== '' && $value !== 'No' && $value !== 'draft' && $value !== 'simple' && $value !== [''] && $value !== []) {
                     $product[$key] = $value;
                 }
