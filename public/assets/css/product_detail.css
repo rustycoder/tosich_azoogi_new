@@ -79,8 +79,21 @@ h4 {
 
   .gallery-thumbs {
     flex-direction: row !important;
-    display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)) !important;
+    display: flex !important;
+    max-height: none !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding-bottom: 8px !important;
+    padding-right: 0 !important;
+    gap: 10px !important;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+  }
+
+  .thumb-card {
+    width: 60px !important;
+    height: 60px !important;
+    flex-shrink: 0 !important;
   }
 }
 
@@ -170,10 +183,36 @@ h4 {
 .gallery-thumbs {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+  max-height: 480px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+  scroll-behavior: smooth;
+}
+
+.gallery-thumbs::-webkit-scrollbar {
+  width: 4px;
+}
+
+.gallery-thumbs::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.gallery-thumbs::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 4px;
+}
+
+.gallery-thumbs::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
 }
 
 .thumb-card {
+  flex-shrink: 0;
+  width: 100%;
   aspect-ratio: 1/1;
   border-radius: 6px;
   background: var(--card-bg);

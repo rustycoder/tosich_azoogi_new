@@ -1092,6 +1092,7 @@ $productSchema = [
                             galleryThumbs.querySelectorAll('.thumb-card').forEach(t => t.classList.remove(
                                 'active'));
                             thumb.classList.add('active');
+                            thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
                             setMainImage(item);
                         });
 
