@@ -51,6 +51,10 @@ class LedCalculatorService implements ILedCalculatorService
      */
     private function isPublished(array $product): bool
     {
+        if (! app()->isProduction()) {
+            return true;
+        }
+
         $status = strtolower(trim((string) ($product['status'] ?? 'publish')));
 
         return $status === '' || $status === 'publish';

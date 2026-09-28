@@ -231,10 +231,20 @@ class ProductRepository implements IProductRepository
 
     public function compiled(): array
     {
-        $products = Product::query()
+        $productsQuery = Product::query()
             ->orderByRaw('sort_order is null')
             ->orderBy('sort_order')
-            ->orderBy('product_name')
+            ->orderBy('product_name');
+
+        if (app()->isProduction()) {
+            $productsQuery->where(function ($query): void {
+                $query->whereNull('status')
+                    ->orWhere('status', '')
+                    ->orWhereRaw('LOWER(status) = ?', ['publish']);
+            });
+        }
+
+        $products = $productsQuery
             ->get()
             ->map(fn (Product $product): array => $product->toStorefrontArray())
             ->all();
@@ -618,6 +628,10 @@ class ProductRepository implements IProductRepository
 
     private function isPublished(Product $product): bool
     {
+        if (! app()->isProduction()) {
+            return true;
+        }
+
         $status = strtolower(trim((string) ($product->status ?? 'publish')));
 
         return $status === '' || $status === 'publish';
