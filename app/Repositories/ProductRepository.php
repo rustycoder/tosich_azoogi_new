@@ -466,16 +466,22 @@ class ProductRepository implements IProductRepository
         $sync->save();
     }
 
-    public function failStaleRunningSyncs(): void
+    public function failStaleRunningSyncs(bool $forceAll = false): void
     {
-        ProductSync::query()
-            ->where('status', ProductSyncStatus::Running)
-            ->where('started_at', '<', now()->subMinutes(25))
-            ->get()
-            ->each(function (ProductSync $sync): void {
-                $this->appendSyncLog($sync, 'Marked failed after 25 minutes without finishing.');
-                $this->finishSync($sync, false, (int) $sync->products_count, 'Sync timed out.');
+        $query = ProductSync::query()->where('status', ProductSyncStatus::Running);
+
+        if (! $forceAll) {
+            $query->where(function ($q): void {
+                $q->where('started_at', '<', now()->subMinutes(3))
+                    ->orWhere('updated_at', '<', now()->subMinutes(2));
             });
+        }
+
+        $query->get()->each(function (ProductSync $sync) use ($forceAll): void {
+            $reason = $forceAll ? 'Manually force-reset running sync.' : 'Marked failed after 3 minutes without finishing.';
+            $this->appendSyncLog($sync, $reason);
+            $this->finishSync($sync, false, (int) $sync->products_count, $reason);
+        });
     }
 
     /**

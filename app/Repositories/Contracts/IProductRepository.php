@@ -58,5 +58,5 @@ interface IProductRepository
 
     public function finishSync(ProductSync $sync, bool $ok, int $productCount, ?string $error = null): void;
 
-    public function failStaleRunningSyncs(): void;
+    public function failStaleRunningSyncs(bool $forceAll = false): void;
 }
