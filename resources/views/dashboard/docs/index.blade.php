@@ -784,6 +784,10 @@ php artisan sitemap:generate --clear</code></pre>
                     </div>
                 </div>
 
+                <div class="dash-doc-callout info" style="margin-top: 14px;">
+                    <strong>Custom Feed Editor:</strong> You can view, customize, and edit the live Markdown files served to LLMs directly from <a href="{{ route('dashboard.llms.index') }}" class="dash-doc-inline-link"><strong>AI & LLM Feeds &rarr;</strong></a> in the dashboard.
+                </div>
+
                 <div class="dash-doc-callout tip" style="margin-top: 14px;">
                     <strong>Unified GEO & Sitemap Command:</strong> Pre-warm or refresh all search engine and AI feeds simultaneously:
                 </div>

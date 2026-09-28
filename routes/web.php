@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DocumentationController;
 use App\Http\Controllers\Dashboard\EmailTemplateController;
 use App\Http\Controllers\Dashboard\EnquiryController;
+use App\Http\Controllers\Dashboard\LlmFeedController;
 use App\Http\Controllers\Dashboard\PageContentController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\ProductDatasheetExportController;
@@ -110,6 +111,13 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::put('content/sections/{page:slug}', [SectionController::class, 'update'])
         ->middleware('can.manage')
         ->name('sections.update');
+
+    Route::middleware('can.manage:pages')->group(function () {
+        Route::get('content/llms', [LlmFeedController::class, 'index'])->name('llms.index');
+        Route::put('content/llms', [LlmFeedController::class, 'update'])->name('llms.update');
+        Route::post('content/llms/reset', [LlmFeedController::class, 'reset'])->name('llms.reset');
+        Route::post('content/llms/generate', [LlmFeedController::class, 'generate'])->name('llms.generate');
+    });
 });
 
 Route::get('/', [PageController::class, '__invoke'])->name('home');

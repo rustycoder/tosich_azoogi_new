@@ -92,6 +92,12 @@
                         Sections
                     </a>
                 @endif
+                @if ($canManagePages || $isAdmin)
+                    <a href="{{ route('dashboard.llms.index') }}" class="{{ request()->routeIs('dashboard.llms.*') ? 'is-active' : '' }}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3l1.912 5.813a2 2 0 0 0 1.275 1.275L21 12l-5.813 1.912a2 2 0 0 0-1.275 1.275L12 21l-1.912-5.813a2 2 0 0 0-1.275-1.275L3 12l5.813-1.912a2 2 0 0 0 1.275-1.275L12 3z"/></svg>
+                        AI & LLM Feeds
+                    </a>
+                @endif
             @endif
             @if ($canManageDatasheets)
                 <div class="dash-group">Datasheet</div>
