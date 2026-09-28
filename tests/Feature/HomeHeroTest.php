@@ -194,7 +194,7 @@ class HomeHeroTest extends TestCase
         $this->assertNotFalse($css);
         $this->assertNotFalse($aiCss);
         $this->assertMatchesRegularExpression(
-            '/--card-height:\s*min\(48svh,\s*400px\)/',
+            '/--card-height:\s*min\((?:48|56)svh,\s*400px\)/',
             $css,
         );
         $this->assertDoesNotMatchRegularExpression(

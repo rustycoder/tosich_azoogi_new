@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Turnstile;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreProductDatasheetRequest extends FormRequest
 {
@@ -12,7 +14,7 @@ class StoreProductDatasheetRequest extends FormRequest
     }
 
     /**
-     * @return array<string, list<string>>
+     * @return array<string, mixed>
      */
     public function rules(): array
     {
@@ -24,6 +26,9 @@ class StoreProductDatasheetRequest extends FormRequest
             'selected_options' => ['nullable', 'array', 'max:40'],
             'selected_options.*' => ['nullable', 'string', 'max:191'],
             'length' => ['nullable', 'numeric', 'min:0', 'max:1000'],
+            'cf-turnstile-response' => [
+                Rule::when((bool) config('services.turnstile.enabled'), ['required', 'string', new Turnstile]),
+            ],
         ];
     }
 
@@ -35,6 +40,7 @@ class StoreProductDatasheetRequest extends FormRequest
         return [
             'project_name.required' => 'Enter the project name.',
             'person_name.required' => 'Enter the client name.',
+            'cf-turnstile-response.required' => 'Please complete the security check before generating the datasheet.',
         ];
     }
 }

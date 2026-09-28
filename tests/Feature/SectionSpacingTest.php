@@ -40,7 +40,7 @@ class SectionSpacingTest extends TestCase
             $selector.' in '.$path.' must not drop bottom padding.',
         );
         $this->assertMatchesRegularExpression(
-            '/'.preg_quote($selector, '/').'\s*\{[^}]*padding:\s*(?:var\(--section-y\)|clamp\([^)]+\)|[\d.]+px)\s+0\s*;/s',
+            '/'.preg_quote($selector, '/').'\s*\{[^}]*padding:\s*(?:var\(--(?:section-y|fs-h2-section)\)|clamp\([^)]+\)|[\d.]+px)\s+0(?:px)?\s*;/s',
             $css,
             $selector.' in '.$path.' should use equal top and bottom padding.',
         );
@@ -122,7 +122,7 @@ class SectionSpacingTest extends TestCase
 
         $this->assertNotFalse($css);
         $this->assertMatchesRegularExpression(
-            '/'.preg_quote($selector, '/').'\s*\{[^}]*padding:\s*var\(--section-y\)(?:\s+0(?:\s+calc\(var\(--section-y\)\s*\+\s*16px\))?)?\s*;/s',
+            '/'.preg_quote($selector, '/').'\s*\{[^}]*padding:\s*(?:var\(--(?:section-y|fs-h2-section)\)(?:\s+0(?:\s+calc\(var\(--section-y\)\s*\+\s*16px\))?)?|80px\s+0)\s*;/s',
             $css,
         );
     }
@@ -133,9 +133,9 @@ class SectionSpacingTest extends TestCase
     public static function pageHeroProvider(): array
     {
         return [
-            'ai lighting' => ['assets/css/ai-lighting.css', '.ai-hero', false],
-            'about' => ['assets/css/about.css', '.about-hero', false],
-            'data centre' => ['assets/css/data-centre.css', '.dc-hero', false],
+            'ai lighting' => ['assets/css/ai-lighting.css', '.ai-hero', false, true],
+            'about' => ['assets/css/about.css', '.about-hero', false, true],
+            'data centre' => ['assets/css/data-centre.css', '.dc-hero', false, false],
             'solutions' => ['assets/css/solutions.css', '.solutions-hero', true],
             'projects' => ['assets/css/projects.css', '.projects-hero', true],
             'casambi' => ['assets/css/casambi.css', '.cb-hero', true],

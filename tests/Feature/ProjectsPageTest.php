@@ -149,7 +149,7 @@ class ProjectsPageTest extends TestCase
             $css,
         );
         $this->assertMatchesRegularExpression(
-            '/\.project-detail-hero\s*\{[^}]*min-height:\s*50vh/s',
+            '/\.project-detail-hero\s*\{[^}]*min-height:\s*75vh/s',
             $css,
         );
         $this->assertMatchesRegularExpression(

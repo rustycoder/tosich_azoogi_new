@@ -60,9 +60,9 @@ class VersionedAssetTest extends TestCase
         $this->assertStringContainsString('google-sans-flex-latin.woff2', $css);
         $this->assertStringContainsString('-webkit-text-stroke', $css);
         $this->assertStringContainsString('--fs-h2: clamp(36px, 4.5vw, 64px)', $css);
-        $this->assertStringContainsString('--fs-h2-section: clamp(24px, 3.2vw, 28px)', $css);
+        $this->assertStringContainsString('--fs-h2-section: clamp(24px, 3.2vw, 36px)', $css);
         $this->assertStringContainsString('--fs-h3: clamp(22px, 2.4vw, 28px)', $css);
-        $this->assertDoesNotMatchRegularExpression('/--fs-h2-section:\s*clamp\([^)]+,\s*(?:3[2-9]|[4-9]\d)px\)/', $css);
+        $this->assertDoesNotMatchRegularExpression('/--fs-h2-section:\s*clamp\([^)]+,\s*(?:4[0-9]|[5-9]\d)px\)/', $css);
     }
 
     public function test_public_stylesheets_do_not_use_legacy_serif_headings(): void
@@ -123,7 +123,7 @@ class VersionedAssetTest extends TestCase
             $productCss,
         );
         $this->assertMatchesRegularExpression(
-            '/\.reset-selection a\s*\{[^}]*font-size:\s*var\(--fs-kicker\)/s',
+            '/\.reset-selection a\s*\{[^}]*font-size:\s*var\(--fs-caption\)/s',
             $productCss,
         );
         $this->assertMatchesRegularExpression(

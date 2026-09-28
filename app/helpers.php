@@ -99,6 +99,26 @@ if (! function_exists('media_url')) {
     }
 }
 
+if (! function_exists('video_mime_type')) {
+    function video_mime_type(?string $path): string
+    {
+        if ($path === null || $path === '') {
+            return 'video/mp4';
+        }
+
+        $parsedPath = parse_url($path, PHP_URL_PATH);
+        $ext = strtolower(pathinfo(is_string($parsedPath) ? $parsedPath : $path, PATHINFO_EXTENSION));
+
+        return match ($ext) {
+            'webm' => 'video/webm',
+            'ogg', 'ogv' => 'video/ogg',
+            'mov', 'qt' => 'video/quicktime',
+            'm4v' => 'video/x-m4v',
+            default => 'video/mp4',
+        };
+    }
+}
+
 if (! function_exists('accent_html')) {
     function accent_html(string $text, string $accent = ''): string
     {

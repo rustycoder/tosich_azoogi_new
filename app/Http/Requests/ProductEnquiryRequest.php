@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Turnstile;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProductEnquiryRequest extends FormRequest
 {
@@ -12,7 +14,7 @@ class ProductEnquiryRequest extends FormRequest
     }
 
     /**
-     * @return array<string, list<string>>
+     * @return array<string, mixed>
      */
     public function rules(): array
     {
@@ -23,6 +25,9 @@ class ProductEnquiryRequest extends FormRequest
             'quote-project' => ['required', 'string', 'max:191'],
             'quote-spec' => ['required', 'string', 'max:8000'],
             'quote-message' => ['nullable', 'string', 'max:2000'],
+            'cf-turnstile-response' => [
+                Rule::when((bool) config('services.turnstile.enabled'), ['required', 'string', new Turnstile]),
+            ],
         ];
     }
 
@@ -33,6 +38,7 @@ class ProductEnquiryRequest extends FormRequest
     {
         return [
             'quote-spec.required' => 'Configure the product before sending this enquiry.',
+            'cf-turnstile-response.required' => 'Please complete the security check before sending this enquiry.',
         ];
     }
 }

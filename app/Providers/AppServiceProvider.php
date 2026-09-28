@@ -31,6 +31,7 @@ use App\Services\Contracts\IProductSyncService;
 use App\Services\Contracts\IProfileService;
 use App\Services\Contracts\IProjectService;
 use App\Services\Contracts\IStaffService;
+use App\Services\Contracts\ITurnstileService;
 use App\Services\Contracts\IVisitorOriginService;
 use App\Services\DashboardMetricsService;
 use App\Services\EmailTemplateService;
@@ -43,6 +44,7 @@ use App\Services\ProductSyncService;
 use App\Services\ProfileService;
 use App\Services\ProjectService;
 use App\Services\StaffService;
+use App\Services\TurnstileService;
 use App\Services\VisitorOriginService;
 use App\Support\PageMetaBag;
 use App\ThirdParty\Airtable\AirtableClient;
@@ -77,6 +79,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IVisitorOriginService::class, VisitorOriginService::class);
         $this->app->bind(IPageVisitService::class, PageVisitService::class);
         $this->app->bind(IEmailTemplateService::class, EmailTemplateService::class);
+        $this->app->bind(ITurnstileService::class, TurnstileService::class);
     }
 
     public function boot(): void

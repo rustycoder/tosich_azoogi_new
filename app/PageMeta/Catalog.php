@@ -11,15 +11,20 @@ use App\PageMeta\Definitions\DaliCentreDefinition;
 use App\PageMeta\Definitions\DataCentreDefinition;
 use App\PageMeta\Definitions\ElectricianBuilderDefinition;
 use App\PageMeta\Definitions\FooterDefinition;
+use App\PageMeta\Definitions\ForbiddenDefinition;
 use App\PageMeta\Definitions\HeaderDefinition;
 use App\PageMeta\Definitions\HomeDefinition;
 use App\PageMeta\Definitions\HomeOwnerDefinition;
 use App\PageMeta\Definitions\LedCalculatorDefinition;
 use App\PageMeta\Definitions\MadrixDefinition;
 use App\PageMeta\Definitions\ModernSlaveryDefinition;
+use App\PageMeta\Definitions\NotFoundDefinition;
+use App\PageMeta\Definitions\PageExpiredDefinition;
 use App\PageMeta\Definitions\PrivacyDefinition;
 use App\PageMeta\Definitions\ProjectsDefinition;
 use App\PageMeta\Definitions\QuoteRequestDefinition;
+use App\PageMeta\Definitions\ServerErrorDefinition;
+use App\PageMeta\Definitions\ServiceUnavailableDefinition;
 use App\PageMeta\Definitions\SilvairDefinition;
 use App\PageMeta\Definitions\SolutionsDefinition;
 use App\PageMeta\Definitions\TermsDefinition;
@@ -54,6 +59,11 @@ final class Catalog
         'terms' => TermsDefinition::class,
         'warranty-returns' => WarrantyReturnsDefinition::class,
         'modern-slavery' => ModernSlaveryDefinition::class,
+        '404' => NotFoundDefinition::class,
+        '403' => ForbiddenDefinition::class,
+        '419' => PageExpiredDefinition::class,
+        '500' => ServerErrorDefinition::class,
+        '503' => ServiceUnavailableDefinition::class,
         'header' => HeaderDefinition::class,
         'footer' => FooterDefinition::class,
     ];

@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Turnstile;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class QuoteRequest extends FormRequest
 {
@@ -12,7 +14,7 @@ class QuoteRequest extends FormRequest
     }
 
     /**
-     * @return array<string, list<string>>
+     * @return array<string, mixed>
      */
     public function rules(): array
     {
@@ -25,6 +27,9 @@ class QuoteRequest extends FormRequest
             'radio-choice' => ['required', 'string', 'max:400'],
             'contact-choice' => ['required', 'string', 'max:400'],
             'suburb-retailer' => ['nullable', 'string', 'max:191'],
+            'cf-turnstile-response' => [
+                Rule::when((bool) config('services.turnstile.enabled'), ['required', 'string', new Turnstile]),
+            ],
         ];
     }
 
@@ -37,6 +42,7 @@ class QuoteRequest extends FormRequest
             'your-products.required' => 'Add at least one product to your quote before submitting.',
             'radio-choice.required' => 'Please choose which option describes you best.',
             'contact-choice.required' => 'Please choose a preferred contact method.',
+            'cf-turnstile-response.required' => 'Please complete the security check before submitting.',
         ];
     }
 }

@@ -60,6 +60,8 @@
     </div>
   </div>
 
+  <x-turnstile action="quote" />
+
   <div class="form-actions">
     <button type="submit" class="btn primary" disabled aria-disabled="true"{!! cms_style($meta, 'form.submit') !!}>{{ $meta->get('form.submit') }}</button>
   </div>

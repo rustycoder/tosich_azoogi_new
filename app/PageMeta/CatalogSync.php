@@ -10,7 +10,24 @@ final class CatalogSync
 {
     public static function pages(): void
     {
-        foreach (Catalog::all() as $definition) {
+        self::sync(Catalog::all());
+    }
+
+    /**
+     * @param  list<string>  $slugs
+     */
+    public static function slugs(array $slugs): void
+    {
+        $definitions = array_map(fn (string $slug) => Catalog::for($slug), $slugs);
+        self::sync($definitions);
+    }
+
+    /**
+     * @param  list<PageDefinition>  $definitions
+     */
+    public static function sync(array $definitions): void
+    {
+        foreach ($definitions as $definition) {
             $page = Page::query()->firstOrCreate(
                 ['slug' => $definition->slug()],
                 [
