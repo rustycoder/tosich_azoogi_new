@@ -496,6 +496,16 @@ h3 {
     flex-direction: column;
 }
 
+.mega-menu a {
+    color: var(--ink);
+    padding: 0;
+}
+
+.mega-menu a:after {
+    display: none !important;
+    height: 0 !important;
+}
+
 @media (min-width: 1025px) {
     .has-dropdown:hover .mega-menu {
         opacity: 1;
@@ -660,16 +670,20 @@ h3 {
     letter-spacing: 0.05em;
 }
 
-.mega-panel-header .view-all-btn {
+.mega-panel-header .view-all-btn,
+.mega-menu .view-all-btn {
     font-size: var(--fs-kicker);
-    color: var(--accent);
+    color: var(--accent) !important;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    padding: 0 !important;
     transition: opacity 0.2s;
 }
 
-.mega-panel-header .view-all-btn:hover {
+.mega-panel-header .view-all-btn:hover,
+.mega-menu .view-all-btn:hover {
     text-decoration: underline;
+    opacity: 0.8;
 }
 
 .mega-panel {
@@ -3484,31 +3498,38 @@ a.mega-variant-card:after {
 }
 
 /* View All Buttons & Cards in Mega Menu */
-.view-all-range-btn {
+.view-all-range-btn,
+.mega-menu .view-all-range-btn,
+.menu .mega-menu .view-all-range-btn {
     display: block;
     width: 100%;
-    padding: 8px !important;
+    padding: 10px 16px !important;
     margin-top: 24px;
     text-align: center;
-    background: transparent;
-    border: 1px solid var(--accent);
-    color: var(--accent);
+    background: transparent !important;
+    border: 1px solid var(--accent) !important;
+    color: var(--accent) !important;
     font-family: var(--font-sans);
     font-size: var(--fs-kicker);
-    font-weight: 500;
+    font-weight: 600;
     text-decoration: none;
     border-radius: 6px;
     transition: all 0.2s ease;
     box-sizing: border-box;
 }
 
-.view-all-range-btn:hover {
-    background: var(--accent);
-    color: var(--pure-bg);
+.view-all-range-btn:hover,
+.mega-menu .view-all-range-btn:hover,
+.menu .mega-menu .view-all-range-btn:hover {
+    background: var(--accent) !important;
+    color: var(--pure-bg) !important;
     transform: translateY(-2px);
 }
 
-.view-all-range-btn:after {
+.view-all-range-btn:after,
+.mega-menu .view-all-range-btn:after,
+.menu .mega-menu .view-all-range-btn:after {
+    display: none !important;
     height: 0 !important;
 }
 

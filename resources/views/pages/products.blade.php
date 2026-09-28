@@ -989,28 +989,18 @@
 
         function getLocalImg(imgUrl, filePath) {
           if (typeof window.getLocalImagePath === 'function') {
-            var pathFromWin = window.getLocalImagePath(imgUrl, filePath);
-            if (pathFromWin && !pathFromWin.startsWith('/') && !pathFromWin.startsWith('http')) {
-              return '/' + pathFromWin;
-            }
-            return pathFromWin;
+            return window.getLocalImagePath(imgUrl, filePath);
           }
-          if (!imgUrl || typeof imgUrl !== 'string' || !imgUrl.trim()) return '/assets/bg_default.png';
+          if (!imgUrl) return '/assets/bg_default.png';
+          if (typeof imgUrl === 'object') {
+            imgUrl = imgUrl.url || (imgUrl.thumbnails && imgUrl.thumbnails.full && imgUrl.thumbnails.full.url) || '/assets/bg_default.png';
+          }
+          if (typeof imgUrl !== 'string' || !imgUrl.trim()) return '/assets/bg_default.png';
           var clean = imgUrl.trim();
-          if (!clean.startsWith('http')) {
-            return clean.startsWith('/') ? clean : '/' + clean;
+          if (clean.startsWith('http://') || clean.startsWith('https://')) {
+            return clean;
           }
-          var filename = clean.split('/').pop().split('?')[0];
-          if (!filename) return '/assets/bg_default.png';
-          if (filePath) {
-            var cleanFilePath = decodeURIComponent(filePath);
-            var lastSlash = cleanFilePath.lastIndexOf('/');
-            if (lastSlash !== -1) {
-              var res = cleanFilePath.substring(0, lastSlash) + '/' + filename;
-              return res.startsWith('/') ? res : '/' + res;
-            }
-          }
-          return clean;
+          return clean.startsWith('/') ? clean : '/' + clean;
         }
 
         function extractSpecsFromFeatures(features) {

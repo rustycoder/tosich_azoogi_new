@@ -8,13 +8,15 @@
     container = document.getElementById('dynamic-mega-menu');
     if (!container) return;
 
-    // Index products by ID for fast lookup
+    // Index products by ID, slug, and name for fast lookup
     productsById = {};
     if (typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS.products && Array.isArray(AZOOGI_PRODUCTS.products)) {
       AZOOGI_PRODUCTS.products.forEach(p => {
-        if (p && p.id) {
-          productsById[p.id] = p;
-        }
+        if (!p || typeof p !== 'object') return;
+        if (p.id) productsById[p.id] = p;
+        if (p.slug) productsById[p.slug] = p;
+        if (p.product_name) productsById[p.product_name] = p;
+        if (p.name) productsById[p.name] = p;
       });
     }
 
@@ -145,15 +147,44 @@
     return String(sku).split(',')[0].trim();
   }
 
+  function resolveProductImage(vdata) {
+    const fallback = '/assets/bg_default.png';
+    if (!vdata) return fallback;
+
+    let img = null;
+    if (typeof vdata === 'string') {
+      img = vdata;
+    } else if (typeof vdata === 'object') {
+      if (vdata.cover) {
+        img = vdata.cover;
+      } else if (Array.isArray(vdata.product_images) && vdata.product_images.length > 0) {
+        img = vdata.product_images[0];
+      } else if (vdata.product_images && typeof vdata.product_images === 'string') {
+        img = vdata.product_images;
+      } else if (vdata.image) {
+        img = vdata.image;
+      }
+    }
+
+    if (!img) return fallback;
+
+    if (typeof img === 'object') {
+      img = img.url || (img.thumbnails && img.thumbnails.full && img.thumbnails.full.url) || fallback;
+    }
+
+    if (typeof img !== 'string' || !img.trim()) return fallback;
+    const clean = img.trim();
+
+    if (clean.startsWith('http://') || clean.startsWith('https://')) {
+      return clean;
+    }
+
+    return clean.startsWith('/') ? clean : '/' + clean;
+  }
+
   function createProductCard(cardData) {
     const { vname, vdata } = cardData;
-    const rawImgSrc = (vdata && vdata.product_images && vdata.product_images.length > 0)
-      ? vdata.product_images[0]
-      : '/assets/bg_default.png';
-
-    const imgSrc = getLocalImagePath(rawImgSrc, vdata ? vdata.file_path : '');
-    // const prodCode = primaryProductCode(extractProductCode(vdata));
-    // const prodCodeHtml = prodCode ? `<div class="mega-variant-code">${prodCode}</div>` : '';
+    const imgSrc = resolveProductImage(vdata);
 
     const card = document.createElement('a');
     const pSlug = (vdata && vdata.slug) ? vdata.slug : null;
@@ -288,23 +319,7 @@
   }
 
   function getLocalImagePath(imgUrl, filePath) {
-    const fallback = '/assets/bg_default.png';
-    if (!imgUrl || typeof imgUrl !== 'string') return fallback;
-    if (!imgUrl.startsWith('http')) {
-      return imgUrl.startsWith('/') ? imgUrl : '/' + imgUrl;
-    }
-    const filename = imgUrl.split('/').pop().split('?')[0];
-    if (!filename) return fallback;
-    if (filePath) {
-      const cleanFilePath = decodeURIComponent(filePath);
-      const lastSlash = cleanFilePath.lastIndexOf('/');
-      if (lastSlash !== -1) {
-        const folderPath = cleanFilePath.substring(0, lastSlash);
-        const local = `${folderPath}/${filename}`;
-        return local.startsWith('/') ? local : '/' + local;
-      }
-    }
-    return imgUrl;
+    return resolveProductImage(imgUrl);
   }
   window.getLocalImagePath = getLocalImagePath;
 
