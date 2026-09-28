@@ -40,7 +40,7 @@ $productSchema = [
 
 @section('content')
     <!-- ========== BREADCRUMBS ========== -->
-    <div class="product-page-wrapper" data-product-slug="{{ $slug ?? '' }}">
+    <div class="product-page-wrapper" data-product-slug="{{ $slug ?? '' }}" @if($product) data-server-product='@json($product->toStorefrontArray())' @endif>
         <div class="wrap">
             <!-- ==================== BREADCRUMBS START ==================== -->
             <div class="breadcrumbs" id="breadcrumbs">
@@ -421,28 +421,35 @@ $productSchema = [
                 const urlParams = new URLSearchParams(window.location.search);
                 const productId = urlParams.get('id');
                 const productCode = urlParams.get('product') || urlParams.get('name') || urlParams.get('variant') || urlParams
-                    .get('file');
+                    .get('file') || urlParams.get('code') || urlParams.get('sku');
 
                 const pageWrapper = document.querySelector('.product-page-wrapper');
                 let pathSlug = pageWrapper ? (pageWrapper.getAttribute('data-product-slug') || null) : null;
-                if (!pathSlug) {
-                    const pathParts = window.location.pathname.split('/').filter(Boolean);
-                    if (pathParts.length >= 2 && pathParts[0] === 'products') {
-                        pathSlug = decodeURIComponent(pathParts.slice(1).join('/'));
-                    }
-                }
+                const serverProductRaw = pageWrapper ? pageWrapper.getAttribute('data-server-product') : null;
 
                 let product = null;
 
-                // Load product details from AZOOGI_PRODUCTS (products array and tree variants)
-                if (typeof AZOOGI_PRODUCTS !== 'undefined') {
+                if (serverProductRaw) {
+                    try {
+                        product = JSON.parse(serverProductRaw);
+                    } catch (e) {}
+                }
+
+                // Load product details from AZOOGI_PRODUCTS (products array and tree variants) if not yet resolved
+                if (!product && typeof AZOOGI_PRODUCTS !== 'undefined') {
+                    if (!pathSlug) {
+                        const pathParts = window.location.pathname.split('/').filter(Boolean);
+                        if (pathParts.length >= 2 && pathParts[0] === 'products') {
+                            pathSlug = decodeURIComponent(pathParts.slice(1).join('/'));
+                        }
+                    }
+
                     const allProducts = [];
                     const seenKeys = new Set();
 
                     const addProduct = (p) => {
                         if (!p) return;
-                        if (p.status && String(p.status).toLowerCase().trim() !== 'publish') return;
-                        const key = p.id || p.sku || p.product_name || p.name;
+                        const key = p.id || p.sku || p.product_code || p.product_name || p.name;
                         if (key && !seenKeys.has(key)) {
                             seenKeys.add(key);
                             allProducts.push(p);
@@ -493,6 +500,8 @@ $productSchema = [
                         const slugLower = String(pathSlug).toLowerCase().trim();
                         product = allProducts.find(p =>
                             (p.slug && p.slug.toLowerCase().trim() === slugLower) ||
+                            (p.product_code && String(p.product_code).toLowerCase().trim() === slugLower) ||
+                            (p.sku && String(p.sku).toLowerCase().trim() === slugLower) ||
                             (p.id && p.id.toLowerCase().trim() === slugLower)
                         );
                     }
@@ -505,6 +514,7 @@ $productSchema = [
                         product = allProducts.find(p =>
                             (p.slug && p.slug.toLowerCase().trim() === codeLower) ||
                             (p.id && p.id.toLowerCase() === codeLower) ||
+                            (p.product_code && String(p.product_code).toLowerCase().trim() === codeLower) ||
                             (p.sku && String(p.sku).toLowerCase().trim() === codeLower) ||
                             (p.product_name && p.product_name.toLowerCase().trim() === codeLower) ||
                             (p.variantName && p.variantName.toLowerCase().trim() === codeLower) ||
@@ -512,9 +522,6 @@ $productSchema = [
                             (p.file_path && p.file_path.toLowerCase().trim() === codeLower) ||
                             (p.product_name && p.product_name.toLowerCase().includes(codeLower))
                         );
-                    }
-                    if (!product && allProducts.length > 0) {
-                        product = allProducts[0];
                     }
                 }
 
