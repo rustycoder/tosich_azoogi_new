@@ -258,11 +258,20 @@ final class ProductNormalizer
         foreach ($fields as $key => $value) {
             $lower = mb_strtolower((string) $key);
 
-            if (str_contains($lower, 'dimension') || (! in_array($lower, $keys, true) && ! str_contains($lower, 'image') && ! str_contains($lower, 'attachment') && ! str_contains($lower, 'gallery') && ! str_contains($lower, 'photo'))) {
+            if (
+                str_contains($lower, 'dimension')
+                || str_contains($lower, 'url')
+                || str_contains($lower, 'link')
+                || (! in_array($lower, $keys, true) && ! str_contains($lower, 'image') && ! str_contains($lower, 'attachment') && ! str_contains($lower, 'gallery') && ! str_contains($lower, 'photo'))
+            ) {
                 continue;
             }
 
             foreach ($this->urlList($value) as $url) {
+                if (str_contains($url, '/products') && (str_contains($url, '?image') || str_contains($url, 'azoogi.com') || str_contains($url, 'tosichcapital.com'))) {
+                    continue;
+                }
+
                 $images[] = $url;
             }
         }

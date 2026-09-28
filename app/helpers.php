@@ -85,6 +85,14 @@ if (! function_exists('media_url')) {
         }
 
         if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            $host = strtolower((string) parse_url($path, PHP_URL_HOST));
+            $urlPath = (string) parse_url($path, PHP_URL_PATH);
+            $query = parse_url($path, PHP_URL_QUERY);
+
+            if (str_starts_with($urlPath, '/products') && in_array($host, ['azoogi.com', 'www.azoogi.com', 'demo.tosichcapital.com'], true)) {
+                return $urlPath.($query !== null ? '?'.$query : '');
+            }
+
             return $path;
         }
 
