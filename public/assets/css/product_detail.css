@@ -1392,3 +1392,131 @@ a.meta-badge:hover {
     padding-bottom: 24px;
   }
 }
+
+/* --- Configured Spec Summary Single-Card in Enquiry Form --- */
+.configured-spec-card {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+  align-items: start;
+  background: transparent;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 14px;
+  box-shadow: none;
+  transition: border-color 0.3s ease;
+  margin-top: 6px;
+}
+
+.configured-spec-card:hover {
+  border-color: var(--line);
+}
+
+.spec-card-media {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  aspect-ratio: 1/1;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.spec-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 4px;
+  transition: transform 0.2s ease;
+}
+
+.spec-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.spec-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.spec-card-title {
+  margin: 0;
+  font-size: var(--fs-body);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.spec-card-sku {
+  display: inline-block;
+  font-family: var(--font-mono, monospace);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  color: var(--accent);
+  background: none;
+  border: none;
+  padding: 0;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.spec-card-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.spec-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  line-height: 1.2;
+}
+
+.spec-pill strong {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.spec-card-linear {
+  background: var(--rgba-hover);
+  border-left: 2px solid var(--accent);
+  padding: 6px 10px;
+  border-radius: 0 4px 4px 0;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+.spec-card-linear strong {
+  color: var(--ink);
+}
+
+@media (max-width: 600px) {
+  .configured-spec-card {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .spec-card-media {
+    width: 80px;
+    height: 80px;
+  }
+}

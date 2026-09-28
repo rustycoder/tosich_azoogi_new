@@ -316,9 +316,30 @@ $productSchema = [
 
                         <div class="form-group">
                             <label class="form-label" for="quote-spec">Configured Specification *</label>
+
+                            <!-- Single-Card Configured Spec Summary -->
+                            <div class="configured-spec-card" id="configured-spec-card">
+                                <div class="spec-card-media">
+                                    <img id="spec-card-img" src="{{ $product?->coverUrl() ?? asset('assets/bg_default.png') }}"
+                                        alt="{{ $product?->product_name ?? 'Configured Product' }}">
+                                </div>
+                                <div class="spec-card-content">
+                                    <div class="spec-card-header">
+                                        <h4 class="spec-card-title" id="spec-card-title">{{ $product?->product_name ?? 'Product' }}</h4>
+                                        <span class="spec-card-sku" id="spec-card-sku">{{ $product?->product_code ?? 'SKU' }}</span>
+                                    </div>
+                                    <div class="spec-card-pills" id="spec-card-pills">
+                                        <!-- Dynamically injected spec badges -->
+                                    </div>
+                                    <div class="spec-card-linear" id="spec-card-linear" style="display: none;">
+                                        <!-- Custom cut / load info for linear lights -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hidden Textarea for Form Submission & Email Processing -->
                             <textarea class="form-textarea" id="quote-spec" name="quote-spec" required readonly wrap="off"
-                                rows="10"
-                                style="opacity: 0.8; background: var(--rgba-hover); cursor: not-allowed;">{{ old('quote-spec') }}</textarea>
+                                style="display: none;">{{ old('quote-spec') }}</textarea>
                         </div>
 
                         <div class="form-group">
@@ -1675,6 +1696,55 @@ $productSchema = [
                     const specField = document.getElementById('quote-spec');
                     if (specField) {
                         specField.value = specLines.map((line) => String(line).replace(/[ \t]+$/g, '')).join('\n');
+                    }
+
+                    // Update Configured Spec Summary Single-Card UI
+                    const specTitleEl = document.getElementById('spec-card-title');
+                    if (specTitleEl) {
+                        specTitleEl.textContent = pName;
+                    }
+
+                    const specSkuEl = document.getElementById('spec-card-sku');
+                    if (specSkuEl) {
+                        specSkuEl.textContent = skuDisplay || product.product_code || 'Standard Model';
+                    }
+
+                    const specImgEl = document.getElementById('spec-card-img');
+                    if (specImgEl) {
+                        const activeSrc = (galleryMainImg && galleryMainImg.src && !galleryMainImg.src.includes('bg_default.png'))
+                            ? galleryMainImg.src
+                            : resolveImg((product.product_images && product.product_images[0]) || product.cover || '');
+                        specImgEl.src = activeSrc;
+                        specImgEl.onerror = () => {
+                            specImgEl.src = '/assets/bg_default.png';
+                        };
+                    }
+
+                    const specPillsEl = document.getElementById('spec-card-pills');
+                    if (specPillsEl) {
+                        if (selectedOptionsSummary.length > 0) {
+                            specPillsEl.innerHTML = selectedOptionsSummary.map((s) => {
+                                const colonIdx = s.indexOf(':');
+                                if (colonIdx === -1) {
+                                    return `<span class="spec-pill">${s}</span>`;
+                                }
+                                const k = s.substring(0, colonIdx).trim();
+                                const v = s.substring(colonIdx + 1).trim();
+                                return `<span class="spec-pill"><strong>${k}:</strong> ${v}</span>`;
+                            }).join('');
+                        } else {
+                            specPillsEl.innerHTML = '<span class="spec-pill" style="color: var(--muted); font-style: italic;">Standard specification</span>';
+                        }
+                    }
+
+                    const specLinearEl = document.getElementById('spec-card-linear');
+                    if (specLinearEl) {
+                        if (isLinear) {
+                            specLinearEl.style.display = 'block';
+                            specLinearEl.innerHTML = `<strong>Custom Cut:</strong> ${selectedLength.toFixed(1)}m &bull; <strong>Total Load:</strong> ${totalPower.toFixed(1)}W &bull; <strong>Driver:</strong> ${driverRecommendation}`;
+                        } else {
+                            specLinearEl.style.display = 'none';
+                        }
                     }
 
                     const datasheetBtn = document.getElementById('download-custom-datasheet');
