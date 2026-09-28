@@ -997,6 +997,12 @@
           }
           if (typeof imgUrl !== 'string' || !imgUrl.trim()) return '/assets/bg_default.png';
           var clean = imgUrl.trim();
+          if (clean.includes('/products') && (clean.includes('azoogi.com') || clean.includes('tosichcapital.com'))) {
+            try {
+              var parsed = new URL(clean);
+              clean = parsed.pathname + parsed.search;
+            } catch (e) {}
+          }
           if (clean.startsWith('http://') || clean.startsWith('https://')) {
             return clean;
           }

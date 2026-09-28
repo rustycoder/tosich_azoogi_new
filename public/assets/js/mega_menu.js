@@ -173,7 +173,14 @@
     }
 
     if (typeof img !== 'string' || !img.trim()) return fallback;
-    const clean = img.trim();
+    var clean = img.trim();
+
+    if (clean.includes('/products') && (clean.includes('azoogi.com') || clean.includes('tosichcapital.com'))) {
+      try {
+        var parsed = new URL(clean);
+        clean = parsed.pathname + parsed.search;
+      } catch (e) {}
+    }
 
     if (clean.startsWith('http://') || clean.startsWith('https://')) {
       return clean;
