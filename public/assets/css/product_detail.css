@@ -184,13 +184,14 @@ h4 {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-height: 480px;
+  max-height: 355px;
   overflow-y: auto;
   overflow-x: hidden;
   padding-right: 4px;
   scrollbar-width: thin;
   scrollbar-color: var(--line) transparent;
   scroll-behavior: smooth;
+  padding-top:5px
 }
 
 .gallery-thumbs::-webkit-scrollbar {
