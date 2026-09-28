@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Enums\PageVisitKind;
 use App\Enums\Status;
 use App\Models\Page;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
@@ -71,6 +72,11 @@ class PageVisitTest extends TestCase
     public function test_product_detail_with_id_records_a_product_visit(): void
     {
         Http::fake();
+
+        Product::factory()->create([
+            'airtable_id' => 'recGardenLight01',
+            'status' => 'publish',
+        ]);
 
         $this->withHeaders([
             'CF-IPCountry' => 'AU',

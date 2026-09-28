@@ -915,7 +915,6 @@ $productSchema = [
                         Object.values(AZOOGI_PRODUCTS.products);
 
                     rawList.forEach(pRow => {
-                        if (pRow.status && String(pRow.status).toLowerCase().trim() !== 'publish') return;
                         const pId = pRow.id || '';
                         const pName = pRow.product_name || pRow.name || '';
                         if (pId === product.id || pName === product.product_name || pName === product.name) return;

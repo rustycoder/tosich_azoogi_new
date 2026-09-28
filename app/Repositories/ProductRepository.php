@@ -641,13 +641,7 @@ class ProductRepository implements IProductRepository
 
     private function isPublished(Product $product): bool
     {
-        if (! app()->isProduction()) {
-            return true;
-        }
-
-        $status = strtolower(trim((string) ($product->status ?? 'publish')));
-
-        return $status === '' || $status === 'publish';
+        return $product->isPublished();
     }
 
     /**
