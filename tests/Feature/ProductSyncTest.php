@@ -106,7 +106,7 @@ class ProductSyncTest extends TestCase
         $this->assertNotContains('NEON', $titles);
     }
 
-    public function test_sync_stores_published_products_and_skips_drafts(): void
+    public function test_sync_stores_products_with_their_status(): void
     {
         config([
             'airtable.api_key' => 'test-key',
@@ -153,11 +153,14 @@ class ProductSyncTest extends TestCase
             'airtable_id' => 'recPublish',
             'product_name' => 'Garden Light',
             'category' => 'NEON',
+            'status' => 'publish',
             'sort_order' => 1,
         ]);
         $this->assertFalse(Schema::hasColumn('products', 'payload'));
-        $this->assertDatabaseMissing('products', [
+        $this->assertDatabaseHas('products', [
             'airtable_id' => 'recDraft',
+            'product_name' => 'Hidden Draft',
+            'status' => 'draft',
         ]);
         $this->assertDatabaseHas('product_categories', [
             'airtable_id' => 'recNeon',
@@ -166,8 +169,7 @@ class ProductSyncTest extends TestCase
 
         $this->get('/products')
             ->assertOk()
-            ->assertSee('Garden Light', false)
-            ->assertDontSee('Hidden Draft', false);
+            ->assertSee('Garden Light', false);
 
         $sync = ProductSync::query()->latest('id')->first();
         $this->assertNotNull($sync);
@@ -658,7 +660,7 @@ class ProductSyncTest extends TestCase
         $this->assertSame(ProductSyncStatus::Ok, $sync->status);
         $this->assertDatabaseHas('product_syncs', [
             'status' => ProductSyncStatus::Failed->value,
-            'error' => 'Sync timed out.',
+            'error' => 'Marked failed after 3 minutes without finishing.',
         ]);
     }
 
@@ -903,5 +905,34 @@ class ProductSyncTest extends TestCase
         $this->get('/product-detail?id=recCustomSlug')
             ->assertOk()
             ->assertSee('<title>Custom 360 Title</title>', false);
+    }
+
+    public function test_force_option_resets_any_running_sync_and_executes(): void
+    {
+        ProductSync::query()->create([
+            'status' => ProductSyncStatus::Running,
+            'products_count' => 0,
+            'started_at' => now(), // Just started 1 second ago
+            'triggered_by' => 'web',
+            'log' => 'Active sync in progress.',
+        ]);
+
+        config([
+            'airtable.api_key' => 'test-key',
+            'airtable.base_id' => 'appTest',
+        ]);
+
+        Http::fake([
+            '*' => Http::response(['records' => []]),
+        ]);
+
+        $this->artisan('products:sync', ['--force' => true])
+            ->assertSuccessful()
+            ->expectsOutputToContain('Synced 0 product(s).');
+
+        $this->assertDatabaseHas('product_syncs', [
+            'status' => ProductSyncStatus::Failed->value,
+            'error' => 'Manually force-reset running sync.',
+        ]);
     }
 }

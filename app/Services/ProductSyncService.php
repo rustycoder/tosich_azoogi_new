@@ -24,8 +24,15 @@ class ProductSyncService implements IProductSyncService
     /**
      * @param  (callable(array<string, mixed> $event): void)|null  $onProgress
      */
-    public function sync(string $triggeredBy = 'schedule', ?callable $onProgress = null): ProductSync
+    public function sync(string $triggeredBy = 'schedule', ?callable $onProgress = null, bool $force = false): ProductSync
     {
+        @set_time_limit(300);
+        @ignore_user_abort(true);
+
+        if ($force) {
+            $this->products->failStaleRunningSyncs(true);
+        }
+
         if ($this->products->isSyncRunning()) {
             throw new RuntimeException('A product sync is already running.');
         }
