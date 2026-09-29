@@ -222,4 +222,40 @@ class ProductDetailTest extends TestCase
         $this->assertEquals('https://example.com/repo-neon.jpg', $found['image'] ?? null);
         $this->assertNotEmpty($found['product_images'] ?? []);
     }
+
+    public function test_multiline_and_special_character_url_resolves_product_detail_when_product_exists(): void
+    {
+        $rawName = "Pendant Adjustable Downlight\nØ110mm x 151mm (H)";
+        $cleanSlug = 'pendant-adjustable-downlight-o110mm-x-151mm-h';
+
+        $product = Product::query()->create([
+            'airtable_id' => 'recPendantTest',
+            'product_name' => $rawName,
+            'slug' => $cleanSlug,
+            'category' => 'Downlights',
+            'status' => 'Published',
+            'product_code' => 'AZ-PENDANT-01',
+        ]);
+
+        $encodedUri = '/products/'.rawurlencode($rawName);
+
+        $response = $this->get($encodedUri);
+
+        $response->assertOk();
+        $response->assertSee('Pendant Adjustable Downlight', false);
+    }
+
+    public function test_multiline_and_special_character_url_renders_custom_404_error_page_when_not_found(): void
+    {
+        $rawName = "Pendant Adjustable Downlight\nØ110mm x 151mm (H)";
+        $encodedUri = '/products/'.rawurlencode($rawName);
+
+        $response = $this->get($encodedUri);
+
+        $response->assertNotFound();
+        $response->assertSee('Page Not Found');
+        $response->assertSee('404');
+        $response->assertSee('Browse Products');
+        $response->assertSee('Back to Home');
+    }
 }

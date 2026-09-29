@@ -142,7 +142,7 @@ Route::get('/projects', [SiteProjectController::class, 'index'])->name('projects
 Route::get('/project-detail', [SiteProjectController::class, 'show'])->name('project-detail');
 
 Route::get('/products', [SiteProductController::class, 'index'])->name('products');
-Route::get('/products/{slug}', ProductDetailController::class)->where('slug', '.+')->name('products.show');
+Route::get('/products/{slug}', ProductDetailController::class)->where('slug', '(?s).+')->name('products.show');
 Route::get('/product-detail', ProductDetailController::class)->name('product-detail');
 Route::get('/led-strip-calculator', [PageController::class, '__invoke'])->defaults('slug', 'led-strip-calculator')->name('led-strip-calculator');
 Route::get('/request-a-quote', [PageController::class, '__invoke'])->defaults('slug', 'request-a-quote')->name('request-a-quote');

@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Services\Contracts\IPageVisitService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class ProductDetailController extends Controller
@@ -27,10 +28,15 @@ class ProductDetailController extends Controller
         $product = null;
         if (is_string($identifier) && trim($identifier) !== '') {
             $trimmed = trim(preg_replace('/\.json$/i', '', trim($identifier)));
+            $normalizedWhitespace = preg_replace('/\s+/', ' ', $trimmed);
+            $slugified = Str::slug($trimmed);
+
             $product = Product::query()->where('slug', $trimmed)->first()
                 ?? Product::query()->whereRaw('LOWER(product_code) = ?', [strtolower($trimmed)])->first()
                 ?? Product::query()->where('airtable_id', $trimmed)->first()
-                ?? Product::query()->whereRaw('LOWER(product_name) = ?', [strtolower($trimmed)])->first();
+                ?? Product::query()->whereRaw('LOWER(product_name) = ?', [strtolower($trimmed)])->first()
+                ?? ($slugified !== '' ? Product::query()->where('slug', $slugified)->first() : null)
+                ?? ($normalizedWhitespace !== $trimmed ? Product::query()->whereRaw('LOWER(product_name) = ?', [strtolower($normalizedWhitespace)])->first() : null);
         } else {
             $product = Product::query()->where('status', 'Published')->first()
                 ?? Product::query()->first();
