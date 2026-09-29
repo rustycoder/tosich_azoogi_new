@@ -107,7 +107,7 @@
 <script defer src="{{ versioned_asset('assets/js/site-search.js') }}"></script>
 @endif
 @if (config('services.turnstile.site_key'))
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback&render=explicit" async defer></script>
 @endif
 @stack('head')
 @if (request()->routeIs('dashboard.pages.preview'))

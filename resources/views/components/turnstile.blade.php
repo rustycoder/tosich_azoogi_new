@@ -1,16 +1,16 @@
 @props([
     'action' => null,
-    'theme' => 'auto',
+    'theme' => null,
     'siteKey' => config('services.turnstile.site_key'),
     'id' => null,
 ])
 
 @if ($siteKey)
-  <div class="turnstile-wrapper" style="margin: 12px 0 18px;">
+  <div class="turnstile-wrapper">
     <div
       class="cf-turnstile"
       data-sitekey="{{ $siteKey }}"
-      data-theme="{{ $theme }}"
+      @if($theme) data-theme="{{ $theme }}" @endif
       @if($action) data-action="{{ $action }}" @endif
       @if($id) id="{{ $id }}" @endif
     ></div>

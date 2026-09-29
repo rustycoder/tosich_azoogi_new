@@ -3920,6 +3920,16 @@ a.mega-variant-card:after {
     color: #ff8a80;
 }
 
+.turnstile-wrapper {
+    padding: 12px 0;
+    margin: 8px 0 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 65px;
+    box-sizing: border-box;
+}
+
 .form-actions {
     margin-top: 8px;
 }
