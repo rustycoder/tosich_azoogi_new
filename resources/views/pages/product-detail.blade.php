@@ -40,7 +40,7 @@ $productSchema = [
 
 @section('content')
     <!-- ========== BREADCRUMBS ========== -->
-    <div class="product-page-wrapper" data-product-slug="{{ $slug ?? '' }}" @if($product) data-server-product='@json($product->toStorefrontArray())' @endif>
+    <div class="product-page-wrapper">
         <div class="wrap">
             <!-- ==================== BREADCRUMBS START ==================== -->
             <div class="breadcrumbs" id="breadcrumbs">
@@ -395,8 +395,7 @@ $productSchema = [
 @endsection
 
 @push('scripts')
-    @verbatim
-        <script>
+    <script>
             /* ===== Header solid ===== */
             document.getElementById('topbar')?.classList.add('solid');
 
@@ -428,38 +427,30 @@ $productSchema = [
             })
                 ();
 
+            const CURRENT_PRODUCT = @json($product?->toStorefrontArray() ?? null);
+            const RECOMMENDED_ACCESSORIES = @json($recommendedProducts ?? []);
+
             document.addEventListener("DOMContentLoaded", () => {
                 if (typeof updateLogos === 'function') {
                     updateLogos();
                 }
-                initDynamicProductPage();
+                initDynamicProductPage(CURRENT_PRODUCT);
             });
 
-            function initDynamicProductPage() {
+            function initDynamicProductPage(initialProduct) {
                 const urlParams = new URLSearchParams(window.location.search);
                 const productId = urlParams.get('id');
                 const productCode = urlParams.get('product') || urlParams.get('name') || urlParams.get('variant') || urlParams
                     .get('file') || urlParams.get('code') || urlParams.get('sku');
 
-                const pageWrapper = document.querySelector('.product-page-wrapper');
-                let pathSlug = pageWrapper ? (pageWrapper.getAttribute('data-product-slug') || null) : null;
-                const serverProductRaw = pageWrapper ? pageWrapper.getAttribute('data-server-product') : null;
+                let product = initialProduct || (typeof CURRENT_PRODUCT !== 'undefined' ? CURRENT_PRODUCT : null);
 
-                let product = null;
-
-                if (serverProductRaw) {
-                    try {
-                        product = JSON.parse(serverProductRaw);
-                    } catch (e) {}
-                }
-
-                // Load product details from AZOOGI_PRODUCTS (products array and tree variants) if not yet resolved
+                // Fallback: Load product details from AZOOGI_PRODUCTS (if available) if not yet resolved
                 if (!product && typeof AZOOGI_PRODUCTS !== 'undefined') {
-                    if (!pathSlug) {
-                        const pathParts = window.location.pathname.split('/').filter(Boolean);
-                        if (pathParts.length >= 2 && pathParts[0] === 'products') {
-                            pathSlug = decodeURIComponent(pathParts.slice(1).join('/'));
-                        }
+                    let pathSlug = null;
+                    const pathParts = window.location.pathname.split('/').filter(Boolean);
+                    if (pathParts.length >= 2 && (pathParts[0] === 'products' || pathParts[0] === 'product')) {
+                        pathSlug = decodeURIComponent(pathParts.slice(1).join('/'));
                     }
 
                     const allProducts = [];
@@ -923,60 +914,66 @@ $productSchema = [
                 // Render Recommended Compatible Accessories from the same category
                 function renderRecommendedAccessories() {
                     const accessoriesGrid = document.getElementById('productGrid');
-                    if (!accessoriesGrid || typeof AZOOGI_PRODUCTS === 'undefined' || !AZOOGI_PRODUCTS.products) return;
-
-                    const currentCatPath = product.category_path || [product.category || ''];
-                    const topCat = currentCatPath[0] || '';
-                    const subCat = currentCatPath.length > 1 ? currentCatPath[currentCatPath.length - 1] : topCat;
-
-                    const sameSubCatProducts = [];
-                    const sameTopCatProducts = [];
-                    const otherProducts = [];
-
-                    const rawList = Array.isArray(AZOOGI_PRODUCTS.products) ?
-                        AZOOGI_PRODUCTS.products :
-                        Object.values(AZOOGI_PRODUCTS.products);
-
-                    rawList.forEach(pRow => {
-                        const pId = pRow.id || '';
-                        const pName = pRow.product_name || pRow.name || '';
-                        if (pId === product.id || pName === product.product_name || pName === product.name) return;
-
-                        const variants = pRow.variants || {};
-                        const vKeys = Object.keys(variants);
-                        const firstVar = vKeys.length > 0 ? variants[vKeys[0]] : pRow;
-
-                        const catPath = pRow.category_path || [pRow.category || ''];
-                        const pTopCat = catPath[0] || '';
-                        const pSubCat = catPath.length > 1 ? catPath[catPath.length - 1] : pTopCat;
-
-                        const images = firstVar.product_images || pRow.product_images || [];
-                        const rawImg = images.length > 0 ? images[0] : '/assets/bg_default.png';
-                        const localImg = resolveImg(rawImg, firstVar.file_path);
-                        const sku = extractProductCode(firstVar) || extractProductCode(pRow) || '';
-
-                        const item = {
-                            id: pId,
-                            name: pName,
-                            sub: pSubCat,
-                            cat: pTopCat,
-                            filePath: firstVar.file_path || '',
-                            img: localImg,
-                            sku: sku,
-                            specs: firstVar.product_features || pRow.product_features || {}
-                        };
-
-                        if (subCat && (pSubCat === subCat || catPath.includes(subCat))) {
-                            sameSubCatProducts.push(item);
-                        } else if (topCat && (pTopCat === topCat || catPath.includes(topCat))) {
-                            sameTopCatProducts.push(item);
-                        } else {
-                            otherProducts.push(item);
-                        }
-                    });
-
-                    const recommended = [...sameSubCatProducts, ...sameTopCatProducts, ...otherProducts].slice(0, 4);
+                    if (!accessoriesGrid) return;
                     const accessoriesSection = document.querySelector('.accessories-section');
+
+                    let recommended = typeof RECOMMENDED_ACCESSORIES !== 'undefined' && Array.isArray(RECOMMENDED_ACCESSORIES) && RECOMMENDED_ACCESSORIES.length > 0
+                        ? RECOMMENDED_ACCESSORIES
+                        : [];
+
+                    if (recommended.length === 0 && typeof AZOOGI_PRODUCTS !== 'undefined' && AZOOGI_PRODUCTS.products) {
+                        const currentCatPath = product.category_path || [product.category || ''];
+                        const topCat = currentCatPath[0] || '';
+                        const subCat = currentCatPath.length > 1 ? currentCatPath[currentCatPath.length - 1] : topCat;
+
+                        const sameSubCatProducts = [];
+                        const sameTopCatProducts = [];
+                        const otherProducts = [];
+
+                        const rawList = Array.isArray(AZOOGI_PRODUCTS.products) ?
+                            AZOOGI_PRODUCTS.products :
+                            Object.values(AZOOGI_PRODUCTS.products);
+
+                        rawList.forEach(pRow => {
+                            const pId = pRow.id || '';
+                            const pName = pRow.product_name || pRow.name || '';
+                            if (pId === product.id || pName === product.product_name || pName === product.name) return;
+
+                            const variants = pRow.variants || {};
+                            const vKeys = Object.keys(variants);
+                            const firstVar = vKeys.length > 0 ? variants[vKeys[0]] : pRow;
+
+                            const catPath = pRow.category_path || [pRow.category || ''];
+                            const pTopCat = catPath[0] || '';
+                            const pSubCat = catPath.length > 1 ? catPath[catPath.length - 1] : pTopCat;
+
+                            const images = firstVar.product_images || pRow.product_images || [];
+                            const rawImg = images.length > 0 ? images[0] : '/assets/bg_default.png';
+                            const localImg = resolveImg(rawImg, firstVar.file_path);
+                            const sku = extractProductCode(firstVar) || extractProductCode(pRow) || '';
+
+                            const item = {
+                                id: pId,
+                                name: pName,
+                                sub: pSubCat,
+                                cat: pTopCat,
+                                filePath: firstVar.file_path || '',
+                                img: localImg,
+                                sku: sku,
+                                specs: firstVar.product_features || pRow.product_features || {}
+                            };
+
+                            if (subCat && (pSubCat === subCat || catPath.includes(subCat))) {
+                                sameSubCatProducts.push(item);
+                            } else if (topCat && (pTopCat === topCat || catPath.includes(topCat))) {
+                                sameTopCatProducts.push(item);
+                            } else {
+                                otherProducts.push(item);
+                            }
+                        });
+
+                        recommended = [...sameSubCatProducts, ...sameTopCatProducts, ...otherProducts].slice(0, 4);
+                    }
 
                     if (recommended.length === 0) {
                         if (accessoriesSection) accessoriesSection.style.display = 'none';
@@ -987,9 +984,9 @@ $productSchema = [
                     if (accessoriesSection) accessoriesSection.style.display = 'block';
 
                     accessoriesGrid.innerHTML = recommended.map(p => {
-                        const detailUrl = p.slug ? ('/products/' + encodeURIComponent(p.slug)) : (p.id ? ('/products/' + encodeURIComponent(p.id)) : (p.filePath ? (
+                        const detailUrl = p.url || (p.slug ? ('/products/' + encodeURIComponent(p.slug)) : (p.id ? ('/products/' + encodeURIComponent(p.id)) : (p.filePath ? (
                             '/product-detail?file=' + encodeURIComponent(p.filePath)) : (
-                            '/product-detail?product=' + encodeURIComponent(p.name))));
+                            '/product-detail?product=' + encodeURIComponent(p.name)))));
                         const codeHtml = productCodeHtml(p.sku);
                         const isFallback = !p.img || p.img === '/assets/bg_default.png' || p.img ===
                             '/assets/logo_dark.png';
@@ -1969,5 +1966,4 @@ $productSchema = [
 
             // Inquiry form posts to the server; success is shown after redirect.
         </script>
-    @endverbatim
 @endpush

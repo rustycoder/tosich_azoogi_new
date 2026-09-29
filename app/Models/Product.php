@@ -236,7 +236,6 @@ class Product extends Model
             'meta_keywords' => $this->meta_keywords,
             'meta_title' => $this->meta_title,
             'meta_description' => $this->meta_description,
-            'supplier_name' => $this->supplier_name,
             'status' => $this->status,
             'product_type' => $this->product_type,
             'product_features' => $this->product_features,

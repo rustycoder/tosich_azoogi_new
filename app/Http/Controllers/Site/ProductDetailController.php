@@ -18,15 +18,22 @@ class ProductDetailController extends Controller
         $identifier = $slug
             ?? $request->query('id')
             ?? $request->query('product')
+            ?? $request->query('name')
             ?? $request->query('code')
-            ?? $request->query('sku');
+            ?? $request->query('sku')
+            ?? $request->query('file')
+            ?? $request->query('variant');
 
         $product = null;
         if (is_string($identifier) && trim($identifier) !== '') {
-            $trimmed = trim($identifier);
+            $trimmed = trim(preg_replace('/\.json$/i', '', trim($identifier)));
             $product = Product::query()->where('slug', $trimmed)->first()
                 ?? Product::query()->whereRaw('LOWER(product_code) = ?', [strtolower($trimmed)])->first()
-                ?? Product::query()->where('airtable_id', $trimmed)->first();
+                ?? Product::query()->where('airtable_id', $trimmed)->first()
+                ?? Product::query()->whereRaw('LOWER(product_name) = ?', [strtolower($trimmed)])->first();
+        } else {
+            $product = Product::query()->where('status', 'Published')->first()
+                ?? Product::query()->first();
         }
 
         if (is_string($identifier) && trim($identifier) !== '' && $product === null) {
@@ -47,9 +54,32 @@ class ProductDetailController extends Controller
         $recordedId = $product?->airtable_id ?? (is_string($identifier) ? $identifier : null);
         $this->visits->recordProduct($recordedId, $request);
 
+        $recommendedProducts = [];
+        if ($product !== null) {
+            $category = $product->category;
+            $recommendedProducts = Product::query()
+                ->where('status', 'Published')
+                ->where('id', '!=', $product->id)
+                ->when($category, fn ($q) => $q->where('category', $category))
+                ->limit(4)
+                ->get()
+                ->map(fn (Product $p) => [
+                    'id' => $p->airtable_id ?? (string) $p->id,
+                    'name' => $p->product_name,
+                    'slug' => $p->slug,
+                    'sku' => $p->product_code,
+                    'category' => $p->category,
+                    'sub' => $p->category,
+                    'img' => $p->coverUrl(),
+                    'url' => $p->slug ? route('products.show', $p->slug) : url('/product-detail?id='.$p->airtable_id),
+                ])
+                ->all();
+        }
+
         return view('pages.product-detail', [
             'product' => $product,
             'slug' => $product?->slug ?? $slug,
+            'recommendedProducts' => $recommendedProducts,
         ]);
     }
 

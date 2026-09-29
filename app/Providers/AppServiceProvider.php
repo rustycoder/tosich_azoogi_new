@@ -116,7 +116,7 @@ class AppServiceProvider extends ServiceProvider
                 'headerMeta' => isset($pages['header']) ? PageMetaBag::for($pages['header']) : PageMetaBag::empty(),
                 'footerMeta' => isset($pages['footer']) ? PageMetaBag::for($pages['footer']) : PageMetaBag::empty(),
                 'quoteMeta' => isset($pages['request-a-quote']) ? PageMetaBag::for($pages['request-a-quote']) : PageMetaBag::empty(),
-                'productCatalog' => $this->app->make(IProductRepository::class)->compiled(),
+                'navigationCatalog' => $this->app->make(IProductRepository::class)->navigationCatalog(),
             ]);
         });
     }

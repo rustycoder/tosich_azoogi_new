@@ -31,6 +31,11 @@ interface IProductRepository
     public function compiled(): array;
 
     /**
+     * @return array{categories: list<mixed>, products: list<mixed>, tree: list<mixed>}
+     */
+    public function navigationCatalog(): array;
+
+    /**
      * @return LengthAwarePaginator<int, Product>
      */
     public function dashboardList(string $search = ''): LengthAwarePaginator;

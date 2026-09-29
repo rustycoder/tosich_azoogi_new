@@ -330,6 +330,77 @@ class ProductRepository implements IProductRepository
         return $this->normalizer->fromStored($products, $categories, $filterableAttributes, $attributeValuesOrder, $attributeGroupsOrder);
     }
 
+    public function navigationCatalog(): array
+    {
+        $productsQuery = Product::query()
+            ->orderByRaw('sort_order is null')
+            ->orderBy('sort_order')
+            ->orderBy('product_name');
+
+        if (app()->isProduction()) {
+            $productsQuery->where(function ($query): void {
+                $query->whereNull('status')
+                    ->orWhere('status', '')
+                    ->orWhereRaw('LOWER(status) = ?', ['publish']);
+            });
+        }
+
+        $lightweightProducts = $productsQuery
+            ->get()
+            ->map(fn (Product $p): array => [
+                'id' => $p->airtable_id ?? (string) $p->id,
+                'name' => $p->product_name,
+                'product_name' => $p->product_name,
+                'slug' => $p->slug,
+                'product_code' => $p->product_code,
+                'category' => $p->category,
+                'categories' => $p->categories,
+                'category_path' => $p->category_path,
+                'category_paths' => $p->category_paths,
+                'product_images' => array_slice($p->product_images ?? [], 0, 1),
+            ])
+            ->all();
+
+        $categories = ProductCategory::query()
+            ->orderByRaw('sort_order is null')
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->get()
+            ->map(function (ProductCategory $category): array {
+                $fields = [
+                    'Name' => $category->name,
+                ];
+
+                if ($category->description) {
+                    $fields['Descriptions'] = $category->description;
+                }
+
+                if ($category->featured_image) {
+                    $fields['Featured Image'] = $category->featured_image;
+                }
+
+                if ($category->icon) {
+                    $fields['Icon'] = $category->icon;
+                }
+
+                if ($category->parent_airtable_id) {
+                    $fields['Parent'] = [$category->parent_airtable_id];
+                }
+
+                if ($category->sort_order !== null) {
+                    $fields['Order'] = $category->sort_order;
+                }
+
+                return [
+                    'id' => $category->airtable_id,
+                    'fields' => $fields,
+                ];
+            })
+            ->all();
+
+        return $this->normalizer->fromStored($lightweightProducts, $categories, [], [], []);
+    }
+
     public function dashboardList(string $search = ''): LengthAwarePaginator
     {
         return Product::query()

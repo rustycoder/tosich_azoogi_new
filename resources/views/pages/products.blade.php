@@ -901,6 +901,7 @@
 @if ($showCatalog)
   @push('scripts')
     <script>
+      const AZOOGI_PRODUCTS = @json($productCatalog ?? [], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
       const PARENT_CATEGORIES = @json(collect($rangeItems)->mapWithKeys(fn($item) => [$item['title'] => ['title' => $item['title'], 'description' => $item['body'] ?? '']]));
       const DEFAULT_HERO_TITLE = @json($meta->get('hero.title', 0, 'Our {Range}'));
       const DEFAULT_CATALOG_LEAD = "Explore our comprehensive range of commercial, architectural and smart LED lighting solutions.";
