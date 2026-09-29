@@ -42,8 +42,18 @@ class ListBladeViewsTool implements McpToolInterface
         $baseDir = resource_path('views');
         $targetDir = $baseDir;
 
-        if (! empty($arguments['subdirectory'])) {
-            $cleanSubdir = trim(str_replace(['..', "\0"], '', (string) $arguments['subdirectory']), '/\\');
+        $rawSubdir = $arguments['subdirectory'] ?? null;
+
+        // Auto-unwrap if user pasted a JSON string into a text input box
+        if (is_string($rawSubdir) && str_starts_with(trim($rawSubdir), '{')) {
+            $decoded = json_decode($rawSubdir, true);
+            if (is_array($decoded) && isset($decoded['subdirectory'])) {
+                $rawSubdir = $decoded['subdirectory'];
+            }
+        }
+
+        if (! empty($rawSubdir)) {
+            $cleanSubdir = trim(str_replace(['..', "\0"], '', (string) $rawSubdir), '/\\');
             $targetDir = $baseDir.DIRECTORY_SEPARATOR.$cleanSubdir;
         }
 

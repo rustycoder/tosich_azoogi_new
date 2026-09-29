@@ -37,7 +37,17 @@ class ReadBladeViewTool implements McpToolInterface
 
     public function execute(array $arguments): array
     {
-        $view = trim((string) ($arguments['view'] ?? ''));
+        $rawView = $arguments['view'] ?? '';
+
+        // Auto-unwrap if user pasted a JSON string into text input box
+        if (is_string($rawView) && str_starts_with(trim($rawView), '{')) {
+            $decoded = json_decode($rawView, true);
+            if (is_array($decoded) && isset($decoded['view'])) {
+                $rawView = $decoded['view'];
+            }
+        }
+
+        $view = trim((string) $rawView);
         $baseDir = realpath(resource_path('views'));
 
         if (! $baseDir) {
