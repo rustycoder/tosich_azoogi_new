@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Product;
+use App\Repositories\Contracts\IProductRepository;
 use Database\Seeders\PageSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -168,5 +169,57 @@ class ProductDetailTest extends TestCase
         $response->assertOk();
         $response->assertSee('const RECOMMENDED_ACCESSORIES = [', false);
         $response->assertSee('Architectural Spotlight Accessory', false);
+    }
+
+    public function test_navigation_dropdown_catalog_contains_product_cover_images(): void
+    {
+        $product = Product::query()->create([
+            'airtable_id' => 'recDropdownTest',
+            'product_name' => 'Dropdown Strip Light',
+            'slug' => 'dropdown-strip-light',
+            'category' => 'LED Strip',
+            'status' => 'Published',
+            'product_code' => 'AZ-DROP-01',
+            'cover' => 'https://example.com/dropdown-cover.jpg',
+            'product_images' => [
+                'https://example.com/dropdown-cover.jpg',
+                'https://example.com/dropdown-extra.jpg',
+            ],
+        ]);
+
+        $response = $this->get('/products/'.$product->slug);
+
+        $response->assertOk();
+
+        $content = $response->getContent();
+        $this->assertNotFalse($content);
+
+        // Ensure navigation catalog in the global layout provides the image for mega menu dropdown
+        $this->assertStringContainsString('AZOOGI_PRODUCTS', $content);
+        $this->assertStringContainsString('dropdown-cover.jpg', $content);
+    }
+
+    public function test_navigation_catalog_repository_provides_resolved_images(): void
+    {
+        Product::query()->create([
+            'airtable_id' => 'recRepoDropdownTest',
+            'product_name' => 'Repo Neon Fitting',
+            'slug' => 'repo-neon-fitting',
+            'category' => 'Neon',
+            'status' => 'Published',
+            'product_code' => 'AZ-REPO-01',
+            'product_images' => ['https://example.com/repo-neon.jpg'],
+        ]);
+
+        $catalog = app(IProductRepository::class)->navigationCatalog();
+
+        $this->assertArrayHasKey('products', $catalog);
+        $this->assertArrayHasKey('tree', $catalog);
+
+        $found = collect($catalog['products'])->firstWhere('slug', 'repo-neon-fitting');
+        $this->assertNotNull($found);
+        $this->assertEquals('https://example.com/repo-neon.jpg', $found['cover'] ?? null);
+        $this->assertEquals('https://example.com/repo-neon.jpg', $found['image'] ?? null);
+        $this->assertNotEmpty($found['product_images'] ?? []);
     }
 }

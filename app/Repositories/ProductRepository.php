@@ -357,7 +357,9 @@ class ProductRepository implements IProductRepository
                 'categories' => $p->categories,
                 'category_path' => $p->category_path,
                 'category_paths' => $p->category_paths,
-                'product_images' => array_slice($p->product_images ?? [], 0, 1),
+                'cover' => $p->coverUrl(),
+                'image' => $p->coverUrl(),
+                'product_images' => $p->coverUrl() !== '' ? [$p->coverUrl()] : [],
             ])
             ->all();
 
