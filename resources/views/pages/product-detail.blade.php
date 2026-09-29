@@ -326,7 +326,7 @@ $productSchema = [
                                 <div class="spec-card-content">
                                     <div class="spec-card-header">
                                         <h4 class="spec-card-title" id="spec-card-title">{{ $product?->product_name ?? 'Product' }}</h4>
-                                        <span class="spec-card-sku" id="spec-card-sku">{{ $product?->product_code ?? 'SKU' }}</span>
+                                        <span class="spec-card-sku" id="spec-card-sku" style="display: none;"></span>
                                     </div>
                                     <div class="spec-card-pills" id="spec-card-pills">
                                         <!-- Dynamically injected spec badges -->
@@ -1677,7 +1677,7 @@ $productSchema = [
                         pNameLower.includes('nnr');
                     const specLines = [
                         `Product: ${pName} (${product.category || 'General'})`,
-                        `Variant Model: ${skuDisplay}`,
+                        ...(skuDisplay ? [`Variant Model: ${skuDisplay}`] : []),
                         'Selected Options:',
                         ...selectedOptionsSummary.map((s) => `  - ${s}`),
                     ];
@@ -1703,7 +1703,13 @@ $productSchema = [
 
                     const specSkuEl = document.getElementById('spec-card-sku');
                     if (specSkuEl) {
-                        specSkuEl.textContent = skuDisplay || product.product_code || 'Standard Model';
+                        if (skuDisplay) {
+                            specSkuEl.textContent = skuDisplay;
+                            specSkuEl.style.display = 'inline-block';
+                        } else {
+                            specSkuEl.textContent = '';
+                            specSkuEl.style.display = 'none';
+                        }
                     }
 
                     const specImgEl = document.getElementById('spec-card-img');
