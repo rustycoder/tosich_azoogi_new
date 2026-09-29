@@ -1452,6 +1452,9 @@ a.meta-badge:hover {
   flex-direction: column;
   align-items: flex-start;
   gap: 2px;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 8px;
+  margin-bottom: 2px;
 }
 
 .spec-card-title {
@@ -1478,41 +1481,49 @@ a.meta-badge:hover {
 
 .spec-card-pills {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
 }
 
-.spec-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  background: var(--bg-2);
-  border: 1px solid var(--line);
-  color: var(--ink);
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 4px;
-  line-height: 1.2;
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 12px;
+  line-height: 1.4;
+  gap: 12px;
 }
 
-.spec-pill strong {
+.spec-row:last-child {
+  border-bottom: none;
+}
+
+.spec-row-label {
+  text-align: left;
   color: var(--muted);
   font-weight: 500;
+  flex-shrink: 0;
+}
+
+.spec-row-value {
+  text-align: right;
+  color: var(--ink);
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.spec-row-empty {
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+  padding: 4px 0;
 }
 
 .spec-card-linear {
-  background: var(--rgba-hover);
-  border-left: 2px solid var(--accent);
-  padding: 6px 10px;
-  border-radius: 0 4px 4px 0;
-  font-size: 11px;
-  color: var(--muted);
-  line-height: 1.4;
-  margin-top: 4px;
-}
-
-.spec-card-linear strong {
-  color: var(--ink);
+  display: none;
 }
 
 #gvvP2{

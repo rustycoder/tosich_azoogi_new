@@ -331,9 +331,6 @@ $productSchema = [
                                     <div class="spec-card-pills" id="spec-card-pills">
                                         <!-- Dynamically injected spec badges -->
                                     </div>
-                                    <div class="spec-card-linear" id="spec-card-linear" style="display: none;">
-                                        <!-- Custom cut / load info for linear lights -->
-                                    </div>
                                 </div>
                             </div>
 
@@ -1722,29 +1719,22 @@ $productSchema = [
 
                     const specPillsEl = document.getElementById('spec-card-pills');
                     if (specPillsEl) {
+                        let rowsHtml = '';
                         if (selectedOptionsSummary.length > 0) {
-                            specPillsEl.innerHTML = selectedOptionsSummary.map((s) => {
+                            rowsHtml = selectedOptionsSummary.map((s) => {
                                 const colonIdx = s.indexOf(':');
                                 if (colonIdx === -1) {
-                                    return `<span class="spec-pill">${s}</span>`;
+                                    return `<div class="spec-row"><span class="spec-row-label">${s}</span><span class="spec-row-value"></span></div>`;
                                 }
-                                const k = s.substring(0, colonIdx).trim();
+                                const k = s.substring(0, colonIdx).trim().replace(/:$/, '');
                                 const v = s.substring(colonIdx + 1).trim();
-                                return `<span class="spec-pill"><strong>${k}:</strong> ${v}</span>`;
+                                return `<div class="spec-row"><span class="spec-row-label">${k}</span><span class="spec-row-value">${v}</span></div>`;
                             }).join('');
                         } else {
-                            specPillsEl.innerHTML = '<span class="spec-pill" style="color: var(--muted); font-style: italic;">Standard specification</span>';
+                            rowsHtml = '<div class="spec-row-empty">Standard specification</div>';
                         }
-                    }
 
-                    const specLinearEl = document.getElementById('spec-card-linear');
-                    if (specLinearEl) {
-                        if (isLinear) {
-                            specLinearEl.style.display = 'block';
-                            specLinearEl.innerHTML = `<strong>Custom Cut:</strong> ${selectedLength.toFixed(1)}m &bull; <strong>Total Load:</strong> ${totalPower.toFixed(1)}W &bull; <strong>Driver:</strong> ${driverRecommendation}`;
-                        } else {
-                            specLinearEl.style.display = 'none';
-                        }
+                        specPillsEl.innerHTML = rowsHtml;
                     }
 
                     const datasheetBtn = document.getElementById('download-custom-datasheet');
