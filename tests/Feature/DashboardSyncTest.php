@@ -163,4 +163,41 @@ class DashboardSyncTest extends TestCase
         $this->assertEquals(1, $audit['image_standards']['non_svg_tech_icons']['count']);
         $this->assertEquals('PNG', $audit['image_standards']['non_svg_tech_icons']['samples'][0]['format']);
     }
+
+    public function test_catalog_audit_evaluates_seo_and_copywriting_character_limits(): void
+    {
+        // 1. Product with out-of-limit SEO (Title > 60 chars, Meta Desc < 70 chars, Desc < 80 chars)
+        Product::factory()->create([
+            'product_name' => 'Custom Pendant',
+            'product_code' => 'AZ-PEND-01',
+            'slug' => 'custom-pendant',
+            'meta_title' => 'This is an excessively long meta title that goes far beyond sixty characters in length',
+            'meta_description' => 'Short desc',
+            'product_description' => 'Tiny desc',
+        ]);
+
+        // 2. Product with optimal SEO limits
+        Product::factory()->create([
+            'product_name' => 'Optimal Track Light',
+            'product_code' => 'AZ-TRK-01',
+            'slug' => 'optimal-track-light',
+            'meta_title' => 'Optimal Track Light | Azoogi Lighting AU',
+            'meta_description' => 'A premium architectural track light offering versatile beam angles and high CRI 90 illumination for commercial spaces.',
+            'product_description' => 'The Optimal Track Light is designed for commercial and architectural interiors, delivering high efficiency, flexible aiming, and low glare performance.',
+        ]);
+
+        /** @var ICatalogAuditService $service */
+        $service = app(ICatalogAuditService::class);
+        $audit = $service->audit();
+
+        $this->assertArrayHasKey('standards', $audit['seo']);
+        $this->assertEquals(1, $audit['seo']['standards']['meta_title']['too_long_count']);
+        $this->assertEquals(1, $audit['seo']['standards']['meta_title']['optimal_count']);
+
+        $this->assertEquals(1, $audit['seo']['standards']['meta_description']['too_short_count']);
+        $this->assertEquals(1, $audit['seo']['standards']['meta_description']['optimal_count']);
+
+        $this->assertEquals(1, $audit['seo']['standards']['product_description']['too_short_count']);
+        $this->assertEquals(1, $audit['seo']['standards']['product_description']['optimal_count']);
+    }
 }

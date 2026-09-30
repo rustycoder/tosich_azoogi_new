@@ -190,6 +190,9 @@ class CatalogAuditService implements ICatalogAuditService
         // 6. Image Standards & Diagnostics (WebP Images & SVG Icons)
         $imageDiagnostics = $this->auditImageStandards();
 
+        // 7. SEO & Copywriting Character Count Standards
+        $seoStandards = $this->auditSeoAndCopyStandards();
+
         // Health Score Calculation (0-100%)
         $healthScore = 100;
         if ($totalProducts > 0) {
@@ -203,7 +206,9 @@ class CatalogAuditService implements ICatalogAuditService
             $imageFormatPenalty = ($imageDiagnostics['non_webp_covers']['count'] / $totalProducts) * 10;
             $iconFormatPenalty = ($imageDiagnostics['non_svg_tech_icons']['count'] / $totalProducts) * 5;
 
-            $totalPenalty = $coverPenalty + $skuPenalty + $slugPenalty + $categoryPenalty + $descPenalty + $metaPenalty + $datasheetPenalty + $imageFormatPenalty + $iconFormatPenalty;
+            $seoLengthPenalty = (($seoStandards['meta_title']['too_long_count'] + $seoStandards['meta_title']['too_short_count'] + $seoStandards['meta_description']['too_short_count'] + $seoStandards['meta_description']['too_long_count']) / $totalProducts) * 5;
+
+            $totalPenalty = $coverPenalty + $skuPenalty + $slugPenalty + $categoryPenalty + $descPenalty + $metaPenalty + $datasheetPenalty + $imageFormatPenalty + $iconFormatPenalty + $seoLengthPenalty;
             $healthScore = max(0, min(100, (int) round(100 - $totalPenalty)));
         }
 
@@ -310,6 +315,7 @@ class CatalogAuditService implements ICatalogAuditService
                     'count' => $missingMetaDescriptionCount,
                     'severity' => $missingMetaDescriptionCount > 0 ? 'medium' : 'ok',
                 ],
+                'standards' => $seoStandards,
             ],
             'integrity' => [
                 'duplicate_slugs' => [
@@ -674,5 +680,143 @@ class CatalogAuditService implements ICatalogAuditService
         }
 
         return null;
+    }
+
+    /**
+     * Audit character count standards for product copy, meta title, and meta description.
+     *
+     * @return array<string, mixed>
+     */
+    private function auditSeoAndCopyStandards(): array
+    {
+        $products = Product::query()
+            ->select(['id', 'product_name', 'product_code', 'slug', 'meta_title', 'meta_description', 'product_description'])
+            ->get();
+
+        $metaTitleOptimal = 0;
+        $metaTitleTooShort = [];
+        $metaTitleTooLong = [];
+
+        $metaDescOptimal = 0;
+        $metaDescTooShort = [];
+        $metaDescTooLong = [];
+
+        $descOptimal = 0;
+        $descTooShort = [];
+        $descTooLong = [];
+
+        foreach ($products as $product) {
+            // Meta Title: Target 30 - 60 chars
+            $title = trim((string) $product->meta_title);
+            if ($title !== '') {
+                $len = mb_strlen($title);
+                if ($len < 30) {
+                    $metaTitleTooShort[] = [
+                        'id' => $product->id,
+                        'name' => $product->product_name,
+                        'code' => $product->product_code,
+                        'length' => $len,
+                        'value' => $title,
+                    ];
+                } elseif ($len > 60) {
+                    $metaTitleTooLong[] = [
+                        'id' => $product->id,
+                        'name' => $product->product_name,
+                        'code' => $product->product_code,
+                        'length' => $len,
+                        'value' => $title,
+                    ];
+                } else {
+                    $metaTitleOptimal++;
+                }
+            }
+
+            // Meta Description: Target 70 - 160 chars
+            $metaDesc = trim((string) $product->meta_description);
+            if ($metaDesc !== '') {
+                $len = mb_strlen($metaDesc);
+                if ($len < 70) {
+                    $metaDescTooShort[] = [
+                        'id' => $product->id,
+                        'name' => $product->product_name,
+                        'code' => $product->product_code,
+                        'length' => $len,
+                        'value' => $metaDesc,
+                    ];
+                } elseif ($len > 160) {
+                    $metaDescTooLong[] = [
+                        'id' => $product->id,
+                        'name' => $product->product_name,
+                        'code' => $product->product_code,
+                        'length' => $len,
+                        'value' => $metaDesc,
+                    ];
+                } else {
+                    $metaDescOptimal++;
+                }
+            }
+
+            // Product Description: Target 80 - 1500 chars (plain text length)
+            $rawDesc = trim((string) $product->product_description);
+            $plainDesc = trim(strip_tags($rawDesc));
+            if ($plainDesc !== '') {
+                $len = mb_strlen($plainDesc);
+                if ($len < 80) {
+                    $descTooShort[] = [
+                        'id' => $product->id,
+                        'name' => $product->product_name,
+                        'code' => $product->product_code,
+                        'length' => $len,
+                        'value' => mb_strimwidth($plainDesc, 0, 100, '...'),
+                    ];
+                } elseif ($len > 1500) {
+                    $descTooLong[] = [
+                        'id' => $product->id,
+                        'name' => $product->product_name,
+                        'code' => $product->product_code,
+                        'length' => $len,
+                        'value' => mb_strimwidth($plainDesc, 0, 100, '...'),
+                    ];
+                } else {
+                    $descOptimal++;
+                }
+            }
+        }
+
+        return [
+            'meta_title' => [
+                'label' => 'Meta Title Length (Target: 30–60 chars)',
+                'min' => 30,
+                'max' => 60,
+                'optimal_count' => $metaTitleOptimal,
+                'too_short_count' => count($metaTitleTooShort),
+                'too_short_samples' => array_slice($metaTitleTooShort, 0, 10),
+                'too_long_count' => count($metaTitleTooLong),
+                'too_long_samples' => array_slice($metaTitleTooLong, 0, 10),
+                'severity' => (count($metaTitleTooShort) + count($metaTitleTooLong)) > 0 ? 'medium' : 'ok',
+            ],
+            'meta_description' => [
+                'label' => 'Meta Description Length (Target: 70–160 chars)',
+                'min' => 70,
+                'max' => 160,
+                'optimal_count' => $metaDescOptimal,
+                'too_short_count' => count($metaDescTooShort),
+                'too_short_samples' => array_slice($metaDescTooShort, 0, 10),
+                'too_long_count' => count($metaDescTooLong),
+                'too_long_samples' => array_slice($metaDescTooLong, 0, 10),
+                'severity' => (count($metaDescTooShort) + count($metaDescTooLong)) > 0 ? 'medium' : 'ok',
+            ],
+            'product_description' => [
+                'label' => 'Product Description Length (Target: 80–1,500 chars)',
+                'min' => 80,
+                'max' => 1500,
+                'optimal_count' => $descOptimal,
+                'too_short_count' => count($descTooShort),
+                'too_short_samples' => array_slice($descTooShort, 0, 10),
+                'too_long_count' => count($descTooLong),
+                'too_long_samples' => array_slice($descTooLong, 0, 10),
+                'severity' => (count($descTooShort) + count($descTooLong)) > 0 ? 'medium' : 'ok',
+            ],
+        ];
     }
 }

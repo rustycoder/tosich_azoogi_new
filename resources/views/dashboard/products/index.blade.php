@@ -355,8 +355,12 @@
                     <!-- Product Description -->
                     <td>
                         @if (filled($product->product_description))
-                            <div class="dash-text-snippet" title="{{ strip_tags($product->product_description) }}">
+                            @php
+                                $descLen = mb_strlen(strip_tags($product->product_description));
+                            @endphp
+                            <div class="dash-text-snippet" title="{{ strip_tags($product->product_description) }} ({{ $descLen }} chars)">
                                 {{ \Illuminate\Support\Str::limit(strip_tags($product->product_description), 120) }}
+                                <span style="display: block; font-size: 10px; color: var(--dash-muted); margin-top: 2px;">{{ $descLen }} chars</span>
                             </div>
                         @endif
                     </td>
@@ -364,8 +368,14 @@
                     <!-- Meta Title -->
                     <td>
                         @if (filled($product->meta_title))
-                            <div class="dash-text-snippet" title="{{ $product->meta_title }}">
+                            @php
+                                $titleLen = mb_strlen($product->meta_title);
+                            @endphp
+                            <div class="dash-text-snippet" title="{{ $product->meta_title }} ({{ $titleLen }} chars)">
                                 {{ $product->meta_title }}
+                                <span style="display: block; font-size: 10px; margin-top: 2px; color: {{ $titleLen > 60 ? '#f43f5e' : ($titleLen < 30 ? '#f59e0b' : 'var(--dash-muted)') }}; font-weight: {{ $titleLen > 60 || $titleLen < 30 ? '600' : 'normal' }};">
+                                    {{ $titleLen }} chars {{ $titleLen > 60 ? '(&gt;60 max)' : ($titleLen < 30 ? '(&lt;30 min)' : '') }}
+                                </span>
                             </div>
                         @endif
                     </td>
@@ -373,8 +383,14 @@
                     <!-- Meta Description -->
                     <td>
                         @if (filled($product->meta_description))
-                            <div class="dash-text-snippet" title="{{ $product->meta_description }}">
+                            @php
+                                $metaDescLen = mb_strlen($product->meta_description);
+                            @endphp
+                            <div class="dash-text-snippet" title="{{ $product->meta_description }} ({{ $metaDescLen }} chars)">
                                 {{ $product->meta_description }}
+                                <span style="display: block; font-size: 10px; margin-top: 2px; color: {{ $metaDescLen > 160 ? '#f43f5e' : ($metaDescLen < 70 ? '#f59e0b' : 'var(--dash-muted)') }}; font-weight: {{ $metaDescLen > 160 || $metaDescLen < 70 ? '600' : 'normal' }};">
+                                    {{ $metaDescLen }} chars {{ $metaDescLen > 160 ? '(&gt;160 max)' : ($metaDescLen < 70 ? '(&lt;70 min)' : '') }}
+                                </span>
                             </div>
                         @endif
                     </td>

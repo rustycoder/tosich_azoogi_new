@@ -522,38 +522,203 @@
                     @endif
                 </div>
 
-                <!-- Missing Product Description -->
+                <!-- Product Descriptions -->
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-size: 13px; color: var(--dash-ink);">Product Descriptions</span>
                     @if ($audit['seo']['missing_description']['count'] === 0)
-                        <span class="dash-pill is-active" style="font-size: 10.5px;">100% Populated</span>
+                        <span class="dash-pill is-active" style="font-size: 10.5px;">100% Present</span>
                     @else
                         <span class="dash-tag" style="font-size: 10.5px;">{{ $audit['seo']['missing_description']['count'] }} Missing</span>
                     @endif
                 </div>
 
-                <!-- Missing Meta Title -->
+                <!-- Meta Titles -->
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-size: 13px; color: var(--dash-ink);">Meta Titles</span>
-                    @if ($audit['seo']['missing_meta_title']['count'] === 0)
-                        <span class="dash-pill is-active" style="font-size: 10.5px;">100% Configured</span>
-                    @else
+                    <span style="font-size: 13px; color: var(--dash-ink);">Meta Titles (30–60 Chars)</span>
+                    @if ($audit['seo']['missing_meta_title']['count'] === 0 && ($audit['seo']['standards']['meta_title']['too_long_count'] ?? 0) === 0 && ($audit['seo']['standards']['meta_title']['too_short_count'] ?? 0) === 0)
+                        <span class="dash-pill is-active" style="font-size: 10.5px;">100% Optimal</span>
+                    @elseif ($audit['seo']['missing_meta_title']['count'] > 0)
                         <span class="dash-tag" style="font-size: 10.5px;">{{ $audit['seo']['missing_meta_title']['count'] }} Missing</span>
+                    @else
+                        <span class="dash-pill is-pending" style="font-size: 10.5px;">{{ $audit['seo']['standards']['meta_title']['too_long_count'] + $audit['seo']['standards']['meta_title']['too_short_count'] }} Limit Violations</span>
                     @endif
                 </div>
 
-                <!-- Missing Meta Description -->
+                <!-- Meta Descriptions -->
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-size: 13px; color: var(--dash-ink);">Meta Descriptions</span>
-                    @if ($audit['seo']['missing_meta_description']['count'] === 0)
-                        <span class="dash-pill is-active" style="font-size: 10.5px;">100% Configured</span>
-                    @else
+                    <span style="font-size: 13px; color: var(--dash-ink);">Meta Descriptions (70–160 Chars)</span>
+                    @if ($audit['seo']['missing_meta_description']['count'] === 0 && ($audit['seo']['standards']['meta_description']['too_long_count'] ?? 0) === 0 && ($audit['seo']['standards']['meta_description']['too_short_count'] ?? 0) === 0)
+                        <span class="dash-pill is-active" style="font-size: 10.5px;">100% Optimal</span>
+                    @elseif ($audit['seo']['missing_meta_description']['count'] > 0)
                         <span class="dash-tag" style="font-size: 10.5px;">{{ $audit['seo']['missing_meta_description']['count'] }} Missing</span>
+                    @else
+                        <span class="dash-pill is-pending" style="font-size: 10.5px;">{{ $audit['seo']['standards']['meta_description']['too_long_count'] + $audit['seo']['standards']['meta_description']['too_short_count'] }} Limit Violations</span>
                     @endif
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Section: SEO & Copywriting Character Count Standards -->
+    @if (isset($audit['seo']['standards']))
+        <div class="dash-card" style="margin-bottom: 28px; border-top: 4px solid #38bdf8;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--dash-line); padding-bottom: 14px; margin-bottom: 18px;">
+                <div>
+                    <h3 style="font-size: 16px; font-weight: 700; margin: 0; color: var(--dash-ink); display: flex; align-items: center; gap: 8px;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; color: #38bdf8;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        Copywriting &amp; SEO Character Count Standards
+                    </h3>
+                    <p style="margin: 4px 0 0; font-size: 12px; color: var(--dash-muted);">
+                        Recommended limits for search engine snippet rendering and conversion: <strong>Meta Title (30–60 chars)</strong>, <strong>Meta Description (70–160 chars)</strong>, <strong>Product Description (80–1,500 chars)</strong>.
+                    </p>
+                </div>
+                @php
+                    $seoViolations = ($audit['seo']['standards']['meta_title']['too_short_count'] ?? 0)
+                        + ($audit['seo']['standards']['meta_title']['too_long_count'] ?? 0)
+                        + ($audit['seo']['standards']['meta_description']['too_short_count'] ?? 0)
+                        + ($audit['seo']['standards']['meta_description']['too_long_count'] ?? 0)
+                        + ($audit['seo']['standards']['product_description']['too_short_count'] ?? 0)
+                        + ($audit['seo']['standards']['product_description']['too_long_count'] ?? 0);
+                @endphp
+                <span class="dash-pill {{ $seoViolations === 0 ? 'is-active' : 'is-pending' }}">
+                    {{ $seoViolations === 0 ? '100% Within Recommended Limits' : $seoViolations . ' Length Warnings' }}
+                </span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 16px;">
+                <!-- 1. Meta Title Standards -->
+                <div style="background: var(--dash-fill); border: 1px solid var(--dash-line); border-radius: 8px; padding: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--dash-line); padding-bottom: 8px;">
+                        <strong style="font-size: 13px; color: var(--dash-ink); display: flex; align-items: center; gap: 6px;">
+                            <span class="dash-tag is-primary" style="font-size: 10px;">TITLE</span>
+                            Meta Title Length
+                        </strong>
+                        <span style="font-size: 11px; color: var(--dash-muted);">Target: 30–60 chars</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 12.5px; color: var(--dash-ink);">Optimal Length (30–60 chars)</span>
+                            <span class="dash-pill is-active" style="font-size: 10.5px;">{{ $audit['seo']['standards']['meta_title']['optimal_count'] }} Products</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 12.5px; color: var(--dash-ink);">Too Short (&lt; 30 chars)</span>
+                            @if ($audit['seo']['standards']['meta_title']['too_short_count'] === 0)
+                                <span class="dash-pill is-active" style="font-size: 10.5px;">0</span>
+                            @else
+                                <span class="dash-pill is-pending" style="font-size: 10.5px;">{{ $audit['seo']['standards']['meta_title']['too_short_count'] }} Short</span>
+                            @endif
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 12.5px; color: var(--dash-ink);">Exceeds Limit (&gt; 60 chars)</span>
+                            @if ($audit['seo']['standards']['meta_title']['too_long_count'] === 0)
+                                <span class="dash-pill is-active" style="font-size: 10.5px;">0</span>
+                            @else
+                                <span class="dash-pill is-cancelled" style="font-size: 10.5px;">{{ $audit['seo']['standards']['meta_title']['too_long_count'] }} Over Limit</span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Meta Description Standards -->
+                <div style="background: var(--dash-fill); border: 1px solid var(--dash-line); border-radius: 8px; padding: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--dash-line); padding-bottom: 8px;">
+                        <strong style="font-size: 13px; color: var(--dash-ink); display: flex; align-items: center; gap: 6px;">
+                            <span class="dash-tag is-primary" style="font-size: 10px;">DESC</span>
+                            Meta Description Length
+                        </strong>
+                        <span style="font-size: 11px; color: var(--dash-muted);">Target: 70–160 chars</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 12.5px; color: var(--dash-ink);">Optimal Length (70–160 chars)</span>
+                            <span class="dash-pill is-active" style="font-size: 10.5px;">{{ $audit['seo']['standards']['meta_description']['optimal_count'] }} Products</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 12.5px; color: var(--dash-ink);">Too Short (&lt; 70 chars)</span>
+                            @if ($audit['seo']['standards']['meta_description']['too_short_count'] === 0)
+                                <span class="dash-pill is-active" style="font-size: 10.5px;">0</span>
+                            @else
+                                <span class="dash-pill is-pending" style="font-size: 10.5px;">{{ $audit['seo']['standards']['meta_description']['too_short_count'] }} Short</span>
+                            @endif
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 12.5px; color: var(--dash-ink);">Exceeds Limit (&gt; 160 chars)</span>
+                            @if ($audit['seo']['standards']['meta_description']['too_long_count'] === 0)
+                                <span class="dash-pill is-active" style="font-size: 10.5px;">0</span>
+                            @else
+                                <span class="dash-pill is-cancelled" style="font-size: 10.5px;">{{ $audit['seo']['standards']['meta_description']['too_long_count'] }} Over Limit</span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Product Description Standards -->
+                <div style="background: var(--dash-fill); border: 1px solid var(--dash-line); border-radius: 8px; padding: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--dash-line); padding-bottom: 8px;">
+                        <strong style="font-size: 13px; color: var(--dash-ink); display: flex; align-items: center; gap: 6px;">
+                            <span class="dash-tag" style="font-size: 10px;">COPY</span>
+                            Product Description Length
+                        </strong>
+                        <span style="font-size: 11px; color: var(--dash-muted);">Target: 80–1,500 chars</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 12.5px; color: var(--dash-ink);">Optimal Length (80–1,500 chars)</span>
+                            <span class="dash-pill is-active" style="font-size: 10.5px;">{{ $audit['seo']['standards']['product_description']['optimal_count'] }} Products</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 12.5px; color: var(--dash-ink);">Thin Content (&lt; 80 chars)</span>
+                            @if ($audit['seo']['standards']['product_description']['too_short_count'] === 0)
+                                <span class="dash-pill is-active" style="font-size: 10.5px;">0</span>
+                            @else
+                                <span class="dash-pill is-pending" style="font-size: 10.5px;">{{ $audit['seo']['standards']['product_description']['too_short_count'] }} Thin</span>
+                            @endif
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 12.5px; color: var(--dash-ink);">Very Long (&gt; 1,500 chars)</span>
+                            @if ($audit['seo']['standards']['product_description']['too_long_count'] === 0)
+                                <span class="dash-pill is-active" style="font-size: 10.5px;">0</span>
+                            @else
+                                <span class="dash-tag" style="font-size: 10.5px;">{{ $audit['seo']['standards']['product_description']['too_long_count'] }} Long</span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @if (!empty($audit['seo']['standards']['meta_title']['too_long_samples']) || !empty($audit['seo']['standards']['meta_title']['too_short_samples']) || !empty($audit['seo']['standards']['meta_description']['too_short_samples']) || !empty($audit['seo']['standards']['meta_description']['too_long_samples']))
+                <div style="background: var(--dash-mix); border: 1px dashed var(--dash-line); border-radius: 6px; padding: 14px; font-size: 12px;">
+                    <strong style="color: var(--dash-ink); display: block; margin-bottom: 8px;">Out-of-Limit SEO Samples to Review in Airtable:</strong>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        @foreach ($audit['seo']['standards']['meta_title']['too_long_samples'] as $sample)
+                            <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--dash-fill); padding: 6px 10px; border-radius: 4px; border: 1px solid var(--dash-line);">
+                                <div>
+                                    <span class="dash-tag is-cancelled" style="font-size: 9.5px; margin-right: 6px;">Title: {{ $sample['length'] }} Chars (&gt;60)</span>
+                                    <strong style="color: var(--dash-ink);">{{ $sample['code'] ?: $sample['name'] }}</strong>
+                                    <span style="color: var(--dash-muted); margin-left: 6px; font-size: 11.5px;">&ldquo;{{ $sample['value'] }}&rdquo;</span>
+                                </div>
+                                <a href="{{ route('dashboard.products.index', ['search' => $sample['code'] ?: $sample['name']]) }}" class="dash-asset-chip" style="font-size: 10.5px; white-space: nowrap;">
+                                    View &rarr;
+                                </a>
+                            </div>
+                        @endforeach
+                        @foreach ($audit['seo']['standards']['meta_description']['too_short_samples'] as $sample)
+                            <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--dash-fill); padding: 6px 10px; border-radius: 4px; border: 1px solid var(--dash-line);">
+                                <div>
+                                    <span class="dash-tag is-pending" style="font-size: 9.5px; margin-right: 6px;">Meta Desc: {{ $sample['length'] }} Chars (&lt;70)</span>
+                                    <strong style="color: var(--dash-ink);">{{ $sample['code'] ?: $sample['name'] }}</strong>
+                                    <span style="color: var(--dash-muted); margin-left: 6px; font-size: 11.5px;">&ldquo;{{ $sample['value'] }}&rdquo;</span>
+                                </div>
+                                <a href="{{ route('dashboard.products.index', ['search' => $sample['code'] ?: $sample['name']]) }}" class="dash-asset-chip" style="font-size: 10.5px; white-space: nowrap;">
+                                    View &rarr;
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+        </div>
+    @endif
 
     <!-- Data Integrity & Relational Anomalies -->
     <div class="dash-card" style="margin-bottom: 28px;">
