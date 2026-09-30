@@ -87,6 +87,10 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>
                         Product Attributes
                     </a>
+                    <a href="{{ route('dashboard.sync.index') }}" class="{{ request()->routeIs('dashboard.sync.*') ? 'is-active' : '' }}">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+                        Airtable Sync
+                    </a>
                 @endif
                 @if ($canManagePages)
                     <a href="{{ route('dashboard.pages.index') }}" class="{{ request()->routeIs('dashboard.pages.*') ? 'is-active' : '' }}">

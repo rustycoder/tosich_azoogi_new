@@ -16,6 +16,7 @@ use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\ProjectController;
 use App\Http\Controllers\Dashboard\SectionController;
 use App\Http\Controllers\Dashboard\StaffController;
+use App\Http\Controllers\Dashboard\SyncController;
 use App\Http\Controllers\ProductEnquiryController;
 use App\Http\Controllers\QuoteRequestController;
 use App\Http\Controllers\Site\LlmsTxtController;
@@ -73,6 +74,8 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         Route::match(['get', 'post'], 'content/products/sync/stream', [ProductController::class, 'syncStream'])->name('products.sync.stream');
         Route::get('content/categories', [CategoryController::class, 'index'])->name('categories.index');
         Route::get('content/product-attributes', [ProductAttributeController::class, 'index'])->name('product-attributes.index');
+        Route::get('sync', [SyncController::class, 'index'])->name('sync.index');
+        Route::post('sync', [SyncController::class, 'sync'])->name('sync.trigger');
     });
 
     Route::middleware('can.manage:datasheet')->group(function () {
