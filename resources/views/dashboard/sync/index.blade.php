@@ -6,10 +6,24 @@
 <div class="dash-sync-page">
     <div class="dash-head">
         <div>
-            <h1>Airtable Sync</h1>
-            <p class="dash-lead">Trigger on-demand synchronization with Airtable and audit catalog health, missing assets, and data integrity.</p>
+            <h1>Airtable Sync &amp; Catalog Audit</h1>
+            <p class="dash-lead">
+                Trigger on-demand synchronization with Airtable and review catalog completeness, WebP images, and SVG icons.
+                @if ($audit && isset($audit['audited_at']))
+                    <span style="display: block; margin-top: 4px; font-size: 11.5px; color: var(--dash-muted);">
+                        Last Audited: <strong style="color: var(--dash-ink);">{{ \Carbon\Carbon::parse($audit['audited_at'])->diffForHumans() }}</strong> ({{ $audit['audited_at_human'] }})
+                    </span>
+                @endif
+            </p>
         </div>
-        <div class="dash-head-actions">
+        <div class="dash-head-actions" style="display: flex; gap: 10px; align-items: center;">
+            <form method="post" action="{{ route('dashboard.sync.audit') }}">
+                @csrf
+                <button class="btn secondary" type="submit" title="Audit catalog without fetching from Airtable">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px; margin-right: 6px; display: inline-block; vertical-align: -2px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <span>Run Catalog Audit</span>
+                </button>
+            </form>
             <form id="dash-product-sync-form" method="post" action="{{ route('dashboard.sync.trigger') }}" data-stream-url="{{ route('dashboard.products.sync.stream') }}">
                 @csrf
                 <button id="dash-product-sync-btn" class="btn primary" type="submit">
@@ -66,7 +80,8 @@
         </div>
     </div>
 
-    <!-- Executive Catalog Health Metrics (4 KPI Cards) -->
+    @if ($audit)
+        <!-- Executive Catalog Health Metrics (4 KPI Cards) -->
     <div class="dash-home-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-bottom: 24px;">
         <!-- Health Score Card -->
         <div class="dash-card" style="display: flex; flex-direction: column; justify-content: space-between; border-left: 4px solid {{ $audit['summary']['health_score'] >= 90 ? '#67d04e' : ($audit['summary']['health_score'] >= 75 ? '#fbbf24' : '#fb7185') }};">
@@ -593,5 +608,27 @@
             </div>
         </div>
     </div>
+    @else
+        <!-- Empty state when audit has not yet been executed -->
+        <div class="dash-card" style="text-align: center; padding: 56px 24px; margin-bottom: 28px;">
+            <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--dash-mark-bg); color: var(--dash-green); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 28px; height: 28px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3 style="font-size: 18px; font-weight: 700; margin: 0 0 8px; color: var(--dash-ink);">No Catalog Audit Report Available</h3>
+            <p style="font-size: 13px; color: var(--dash-muted); max-width: 520px; margin: 0 auto 24px; line-height: 1.5;">
+                Audits analyze WebP image standards, SVG icon formats, required PDFs, and relational integrity. Audits run automatically when an Airtable sync completes or on demand using the button below.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 12px;">
+                <form method="post" action="{{ route('dashboard.sync.audit') }}">
+                    @csrf
+                    <button class="btn primary" type="submit" style="padding: 10px 20px;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px; margin-right: 6px; display: inline-block; vertical-align: -2px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        <span>Run Catalog Audit Now</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    @endif
 </div>
 @endsection
+

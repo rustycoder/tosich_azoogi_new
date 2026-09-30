@@ -17,4 +17,9 @@ interface ICatalogAuditService
      * @return array<string, mixed>|null
      */
     public function getLatestAudit(): ?array;
+
+    /**
+     * Clear any cached/stored audit report.
+     */
+    public function clearStoredAudit(): void;
 }

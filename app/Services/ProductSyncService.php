@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Jobs\SyncProductsJob;
 use App\Models\ProductSync;
 use App\Repositories\Contracts\IProductRepository;
+use App\Services\Contracts\ICatalogAuditService;
 use App\Services\Contracts\IProductSyncService;
 use App\ThirdParty\Airtable\Contracts\IAirtableClient;
 use App\ThirdParty\Airtable\ProductNormalizer;
@@ -19,6 +20,7 @@ class ProductSyncService implements IProductSyncService
         private IAirtableClient $airtable,
         private IProductRepository $products,
         private ProductNormalizer $normalizer,
+        private ICatalogAuditService $auditService,
     ) {}
 
     /**
@@ -134,6 +136,17 @@ class ProductSyncService implements IProductSyncService
 
             $this->products->appendSyncLog($run, 'Sync finished.');
             $this->products->finishSync($run, true, count($keepIds));
+
+            $emit(98, 'Auditing catalog quality & media...', 'Executing automated post-sync catalog and asset audit...');
+            $this->log($run, 'Executing post-sync catalog quality, WebP images, and SVG icons audit.');
+            try {
+                $this->auditService->audit();
+                $this->log($run, 'Post-sync catalog and asset audit completed successfully.');
+            } catch (Throwable $auditException) {
+                Log::warning('Post-sync catalog audit failed.', [
+                    'exception' => $auditException->getMessage(),
+                ]);
+            }
 
             $totalTime = (int) round(microtime(true) - $startTime);
             $emit(

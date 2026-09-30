@@ -7,10 +7,15 @@ use App\Models\ProductAttribute;
 use App\Models\ProductCategory;
 use App\Models\ProductSync;
 use App\Services\Contracts\ICatalogAuditService;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class CatalogAuditService implements ICatalogAuditService
 {
+    public const string CACHE_KEY = 'catalog_audit_latest_report';
+
+    public static ?array $memoryReport = null;
+
     /**
      * Run a comprehensive audit of the product, category, and attribute catalog.
      *
@@ -204,7 +209,7 @@ class CatalogAuditService implements ICatalogAuditService
 
         $latestSync = ProductSync::query()->latest('id')->first();
 
-        return [
+        $report = [
             'summary' => [
                 'total_products' => $totalProducts,
                 'published_products' => $publishedProducts,
@@ -333,7 +338,75 @@ class CatalogAuditService implements ICatalogAuditService
                 ],
             ],
             'latest_sync' => $latestSync,
+            'audited_at' => now()->toIso8601String(),
+            'audited_at_human' => now()->format('d M Y, g:i A'),
         ];
+
+        self::$memoryReport = $report;
+        Cache::forever(self::CACHE_KEY, $report);
+
+        try {
+            $storageDir = storage_path('framework/cache');
+            if (! is_dir($storageDir)) {
+                @mkdir($storageDir, 0755, true);
+            }
+            $encoded = json_encode($report, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+            if ($encoded) {
+                @file_put_contents($storageDir.'/catalog_audit.json', $encoded);
+            }
+        } catch (\Throwable) {
+            // Silently ignore file write issues if storage permissions are restricted
+        }
+
+        return $report;
+    }
+
+    /**
+     * Get the latest stored audit report without recalculating against the database.
+     *
+     * @return array<string, mixed>|null
+     */
+    public function getLatestAudit(): ?array
+    {
+        if (self::$memoryReport !== null) {
+            return self::$memoryReport;
+        }
+
+        $cached = Cache::get(self::CACHE_KEY);
+        if ($cached !== null) {
+            self::$memoryReport = $cached;
+
+            return $cached;
+        }
+
+        $filePath = storage_path('framework/cache/catalog_audit.json');
+        if (file_exists($filePath)) {
+            $contents = @file_get_contents($filePath);
+            if ($contents) {
+                $decoded = json_decode($contents, true);
+                if (is_array($decoded)) {
+                    self::$memoryReport = $decoded;
+
+                    return $decoded;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Clear any cached/stored audit report.
+     */
+    public function clearStoredAudit(): void
+    {
+        self::$memoryReport = null;
+        Cache::forget(self::CACHE_KEY);
+
+        $filePath = storage_path('framework/cache/catalog_audit.json');
+        if (file_exists($filePath)) {
+            @unlink($filePath);
+        }
     }
 
     /**

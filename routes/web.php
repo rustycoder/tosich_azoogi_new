@@ -76,6 +76,7 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         Route::get('content/product-attributes', [ProductAttributeController::class, 'index'])->name('product-attributes.index');
         Route::get('sync', [SyncController::class, 'index'])->name('sync.index');
         Route::post('sync', [SyncController::class, 'sync'])->name('sync.trigger');
+        Route::post('sync/audit', [SyncController::class, 'runAudit'])->name('sync.audit');
     });
 
     Route::middleware('can.manage:datasheet')->group(function () {

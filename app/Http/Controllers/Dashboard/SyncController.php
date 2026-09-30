@@ -18,13 +18,22 @@ class SyncController extends Controller
 
     public function index(Request $request): View
     {
-        $audit = $this->auditService->audit();
+        $audit = $this->auditService->getLatestAudit();
         $latestSync = $this->syncService->latestSync();
 
         return view('dashboard.sync.index', [
             'audit' => $audit,
             'latestSync' => $latestSync,
         ]);
+    }
+
+    public function runAudit(Request $request): RedirectResponse
+    {
+        $this->auditService->audit();
+
+        return redirect()
+            ->route('dashboard.sync.index')
+            ->with('status', 'Catalog quality, WebP images, and SVG icons audit completed successfully.');
     }
 
     public function sync(Request $request): RedirectResponse
@@ -35,7 +44,7 @@ class SyncController extends Controller
 
             return redirect()
                 ->route('dashboard.sync.index')
-                ->with('status', 'Product catalog synchronized successfully with Airtable.');
+                ->with('status', 'Product catalog synchronized and audited successfully.');
         } catch (\Throwable $e) {
             return redirect()
                 ->route('dashboard.sync.index')

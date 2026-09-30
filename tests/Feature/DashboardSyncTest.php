@@ -14,12 +14,19 @@ class DashboardSyncTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        app(ICatalogAuditService::class)->clearStoredAudit();
+    }
+
     public function test_guests_cannot_access_sync_dashboard(): void
     {
         $this->get('/dashboard/sync')->assertRedirect('/login');
     }
 
-    public function test_admin_can_view_airtable_sync_dashboard(): void
+    public function test_admin_can_view_sync_dashboard_and_trigger_manual_audit(): void
     {
         $admin = User::factory()->admin()->create();
 
@@ -45,14 +52,25 @@ class DashboardSyncTest extends TestCase
             'datasheet_file' => 'https://example.com/datasheet.pdf',
         ]);
 
+        // 1. Initial view before any audit is run shows the empty state with the Run Audit action button
         $response = $this->actingAs($admin)->get('/dashboard/sync');
-
         $response->assertOk()
-            ->assertSee('Airtable Sync', false)
+            ->assertSee('Airtable Sync &amp; Catalog Audit', false)
+            ->assertSee('Run Catalog Audit', false)
+            ->assertSee('No Catalog Audit Report Available', false);
+
+        // 2. Triggering the on-demand audit action calculates and caches the report
+        $auditPost = $this->actingAs($admin)->post('/dashboard/sync/audit');
+        $auditPost->assertRedirect('/dashboard/sync');
+
+        $this->assertNotNull(app(ICatalogAuditService::class)->getLatestAudit());
+
+        // 3. Visiting/reloading /dashboard/sync now displays the stored audit metrics
+        $responseAfterAudit = $this->actingAs($admin)->get('/dashboard/sync');
+        $responseAfterAudit->assertOk()
             ->assertSee('Catalog Health Score', false)
             ->assertSee('Total Products', false)
-            ->assertSee('Categories', false)
-            ->assertSee('Product Attributes', false)
+            ->assertSee('Asset Format Standards', false)
             ->assertSee('Media &amp; Schematics', false)
             ->assertSee('Technical Documents', false)
             ->assertSee('Core ID &amp; Inventory', false)
