@@ -478,6 +478,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             activeTrigger = el;
             popoverImg.src = src;
+            popover.classList.toggle('is-tech-icon', el.classList.contains('dash-tech-icon'));
             popover.classList.add('is-visible');
 
             const rect = el.getBoundingClientRect();
@@ -501,7 +502,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         el.addEventListener('mouseleave', () => {
             activeTrigger = null;
-            popover.classList.remove('is-visible');
+            popover.classList.remove('is-visible', 'is-tech-icon');
         });
     });
 
