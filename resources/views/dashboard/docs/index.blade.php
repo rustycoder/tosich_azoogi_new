@@ -447,22 +447,22 @@
                 <div class="dash-doc-callout tip" style="margin-top: 14px;">
                     <strong>Category Rules:</strong>
                     <ul style="margin: 8px 0 0 18px; padding: 0;">
-                        <li><strong>Unique numbers:</strong> Every category has its own number, and a subcategory's number is always higher than its parent's and lower than the next parent's block.</li>
+                        <li><strong>Unique numbers:</strong> Every category has its own three-digit number. A subcategory's number is always higher than its parent's and lower than the next parent's block.</li>
                         <li><strong>Adding a subcategory:</strong> Give it the next free number inside its parent's block. For example, a new Neon type would be <code>214</code>.</li>
                         <li><strong>Adding a top-level category:</strong> Give it a new empty block, such as <code>1000</code>.</li>
-                        <li><strong>Moving a category:</strong> You can change its number, but its products won't follow automatically. Each product's Order also needs its first three digits updated (see Section 2).</li>
+                        <li><strong>Moving a category:</strong> You can change its number, but its products won't follow automatically. Each product's Order must also have its first three digits updated (see Section 2).</li>
                     </ul>
                 </div>
 
                 <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
 
                 <h3>2. Product Order Formula</h3>
-                <p>Every product's order number is calculated from its category number plus its position inside that category:</p>
+                <p>Every product's number combines its category number with its position in that category:</p>
 
                 <div style="margin: 16px 0; background: var(--dash-fill); border: 1px solid var(--dash-border); border-radius: 8px; padding: 16px 20px;">
                     <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dash-muted); margin-bottom: 6px;">Order Generation Formula:</div>
                     <div style="font-size: 18px; font-weight: 700; color: var(--dash-green-dark, #27771e); font-family: monospace;">
-                        Product Order = Category Order × 100 + position (01–99)
+                        Product Order = Category Order × 1000 + position (001–999)
                     </div>
                 </div>
 
@@ -470,7 +470,7 @@
                     <table class="dash-doc-table">
                         <thead>
                             <tr>
-                                <th>Product Example</th>
+                                <th>Product</th>
                                 <th>Category (Order)</th>
                                 <th>Position</th>
                                 <th>Calculated Product Order</th>
@@ -481,88 +481,96 @@
                                 <td><strong>First Mini Neon product</strong></td>
                                 <td>Mini Neon (<code>201</code>)</td>
                                 <td><code>1</code></td>
-                                <td><code style="font-weight: 700; color: var(--dash-green-dark, #27771e);">20101</code></td>
+                                <td><code style="font-weight: 700; color: var(--dash-green-dark, #27771e);">201001</code></td>
                             </tr>
                             <tr>
                                 <td><strong>Fourth Mini Neon product</strong></td>
                                 <td>Mini Neon (<code>201</code>)</td>
                                 <td><code>4</code></td>
-                                <td><code style="font-weight: 700; color: var(--dash-green-dark, #27771e);">20104</code></td>
+                                <td><code style="font-weight: 700; color: var(--dash-green-dark, #27771e);">201004</code></td>
                             </tr>
                             <tr>
                                 <td><strong>First Trimless profile</strong></td>
                                 <td>Trimless Profiles (<code>401</code>)</td>
                                 <td><code>1</code></td>
-                                <td><code style="font-weight: 700; color: var(--dash-green-dark, #27771e);">40101</code></td>
+                                <td><code style="font-weight: 700; color: var(--dash-green-dark, #27771e);">401001</code></td>
                             </tr>
                             <tr>
                                 <td><strong>41st Recessed downlight</strong></td>
                                 <td>Recessed (<code>901</code>)</td>
                                 <td><code>41</code></td>
-                                <td><code style="font-weight: 700; color: var(--dash-green-dark, #27771e);">90141</code></td>
+                                <td><code style="font-weight: 700; color: var(--dash-green-dark, #27771e);">901041</code></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <p style="margin-top: 12px;">This structure allows you to <strong>read any product number directly</strong>. For example, <code>90141</code> is category <strong>901</strong> (Recessed), product <strong>41</strong>.</p>
+                <p style="margin-top: 12px;">To read any product number, the <strong>first three digits are the category</strong> and the <strong>last three are the position</strong>. For example, <code>901041</code> is category <strong>901</strong> (Recessed), product <strong>041</strong>.</p>
 
                 <div class="dash-doc-callout tip" style="margin-top: 14px;">
                     <strong>Product Rules:</strong>
                     <ul style="margin: 8px 0 0 18px; padding: 0;">
                         <li><strong>Unique numbers:</strong> No two products share an <code>Order</code> value.</li>
-                        <li><strong>Category first:</strong> Sorting the whole table by <code>Order</code> lists products by category, cleanly following the category order above.</li>
-                        <li><strong>Multi-category products:</strong> A product in more than one category is numbered under the <em>first category</em> in its Categories field. For example, PR126 is listed under Suspended Profiles (<code>411</code>), so its Order is <code>411xx</code>.</li>
-                        <li><strong>Capacity:</strong> Each category holds up to 99 products (01–99). The largest currently is Neon Accessories with 46.</li>
+                        <li><strong>Category first:</strong> Sorting the whole table by <code>Order</code> lists products by category, following the category order above.</li>
+                        <li><strong>Multi-category products:</strong> A product in more than one category is numbered under the <em>first category</em> in its Categories field. For example, PR126 is listed under Suspended Profiles (<code>411</code>), so its Order is <code>411xxx</code>.</li>
+                        <li><strong>Capacity:</strong> Each category holds up to 999 products (001–999). The largest now is Neon Accessories with 46.</li>
                     </ul>
                 </div>
 
                 <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
 
-                <h3>3. How the Baseline Numbers Were Set</h3>
+                <h3>3. How the Current Numbers Were Set</h3>
                 <ul class="dash-doc-list">
                     <li><strong>Categories</strong> were placed in the sequence of the Categories table.</li>
                     <li><strong>Within each category</strong>, products that already had an order kept their relative sequence.</li>
-                    <li><strong>Products with no order</strong> were placed at the end of their category, sorted alphabetically by name.</li>
+                    <li><strong>Products with no order</strong> were placed at the end of their category, alphabetically by name.</li>
+                    <li><strong>All numbers were converted</strong> from the earlier ×100 format to ×1000 (e.g. <code>20101</code> became <code>201001</code>). Categories and positions stayed the same.</li>
                 </ul>
 
                 <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
 
-                <h3>4. Day-to-Day Maintenance SOP</h3>
+                <h3>4. Day-to-Day Maintenance</h3>
                 <div class="dash-doc-steps">
                     <div class="dash-doc-step">
                         <div class="dash-doc-step-num">1</div>
                         <div class="dash-doc-step-content">
-                            <h4>Adding a New Product</h4>
-                            <p>Find the highest number in its category and add 1. For example, if the last Mini Neon is <code>20104</code>, the new one is <code>20105</code>.</p>
+                            <h4>New Product</h4>
+                            <p>Find the highest number in its category and add 1. If the last Mini Neon is <code>201004</code>, the new one is <code>201005</code>.</p>
                         </div>
                     </div>
                     <div class="dash-doc-step">
                         <div class="dash-doc-step-num">2</div>
                         <div class="dash-doc-step-content">
                             <h4>Reordering Within a Category</h4>
-                            <p>Swap or renumber only that category's products, and keep the same first three digits intact.</p>
+                            <p>Renumber only that category's products, and keep the same first three digits.</p>
                         </div>
                     </div>
                     <div class="dash-doc-step">
                         <div class="dash-doc-step-num">3</div>
                         <div class="dash-doc-step-content">
                             <h4>Inserting in the Middle</h4>
-                            <p>Positions are consecutive, so there is no gap. Renumber the products after the insert point in that category (can be executed in bulk).</p>
+                            <p>Positions are consecutive, so there's no gap. Renumber the products after the insert point in that category (can be done in bulk).</p>
                         </div>
                     </div>
                     <div class="dash-doc-step">
                         <div class="dash-doc-step-num">4</div>
                         <div class="dash-doc-step-content">
                             <h4>Changing a Product's Category</h4>
-                            <p>Renumber it into the new category's range matching the destination category's 3-digit prefix.</p>
+                            <p>Give it the next free number in the new category's range.</p>
                         </div>
                     </div>
                     <div class="dash-doc-step">
                         <div class="dash-doc-step-num">5</div>
                         <div class="dash-doc-step-content">
-                            <h4>Checking & Auditing the Table</h4>
-                            <p>Sort by <code>Order</code> in Airtable. A product appearing in the wrong group, or a number that doesn't match the product's category, means that product needs renumbering.</p>
+                            <h4>New Subcategory</h4>
+                            <p>Its products start at <code>[category number]001</code>, for example <code>214001</code>.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">6</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Checking the Table</h4>
+                            <p>Sort by <code>Order</code> in Airtable. If a product appears in the wrong group, or its first three digits don't match its category, it needs renumbering.</p>
                         </div>
                     </div>
                 </div>

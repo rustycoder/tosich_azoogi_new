@@ -68,8 +68,9 @@ class DocumentationTest extends TestCase
         $productResponse->assertOk();
         $productResponse->assertSee('Product Catalog & Airtable Guide', false);
         $productResponse->assertSee('Category Order & Number Blocks', false);
-        $productResponse->assertSee('Product Order = Category Order × 100 + position (01–99)', false);
-        $productResponse->assertSee('90141', false);
+        $productResponse->assertSee('Product Order = Category Order × 1000 + position (001–999)', false);
+        $productResponse->assertSee('901041', false);
+        $productResponse->assertSee('201001', false);
         $productResponse->assertSee('Landscape Lighting', false);
     }
 }

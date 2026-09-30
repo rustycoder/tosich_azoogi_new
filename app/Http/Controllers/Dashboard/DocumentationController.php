@@ -84,7 +84,7 @@ class DocumentationController extends Controller
                 'products' => [
                     'label' => 'Products & Airtable',
                     'title' => 'Product Catalog & Airtable',
-                    'keywords' => 'airtable sync product catalog specs variants live stream background job sku lighting fixtures products order ordering hierarchy category block number formula maintenance sequence 20101 90141 catalog',
+                    'keywords' => 'airtable sync product catalog specs variants live stream background job sku lighting fixtures products order ordering hierarchy category block number formula maintenance sequence 201001 901041 20101 90141 catalog',
                 ],
                 'enquiries' => [
                     'label' => 'Enquiries & Quotes',
