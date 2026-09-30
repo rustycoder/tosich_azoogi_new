@@ -4932,6 +4932,14 @@ a.dash-product-title:hover {
   font-weight: 600;
 }
 
+.dash-tag.is-cancelled,
+.dash-tag.is-danger {
+  background: var(--dash-pill-cancelled-bg);
+  color: var(--dash-pill-cancelled-ink);
+  border-color: rgba(244, 63, 94, .35);
+  font-weight: 600;
+}
+
 /* Downloadable Asset Chips */
 .dash-asset-chips {
   display: flex;
