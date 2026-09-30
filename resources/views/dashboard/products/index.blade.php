@@ -106,40 +106,40 @@
             <!-- Column Header Tier 2 -->
             <tr>
                 <!-- Group 1: Primary ID & Visuals (6 cols) -->
-                <th scope="col" style="width: 70px; text-align: center;">Order</th>
-                <th scope="col" style="width: 80px; text-align: center;">Product Image</th>
-                <th scope="col" style="min-width: 130px;">Product Code</th>
-                <th scope="col" style="min-width: 220px;">Product Name</th>
-                <th scope="col" style="width: 100px;">Status</th>
-                <th scope="col" style="min-width: 160px;">Category</th>
+                <th scope="col" class="dash-col-th is-primary" style="width: 70px; text-align: center;">Order</th>
+                <th scope="col" class="dash-col-th is-primary" style="width: 80px; text-align: center;">Product Image</th>
+                <th scope="col" class="dash-col-th is-primary" style="min-width: 130px;">Product Code</th>
+                <th scope="col" class="dash-col-th is-primary" style="min-width: 220px;">Product Name</th>
+                <th scope="col" class="dash-col-th is-primary" style="width: 100px;">Status</th>
+                <th scope="col" class="dash-col-th is-primary" style="min-width: 160px;">Category</th>
 
                 <!-- Group 2: Media & Schematics (3 cols) -->
-                <th scope="col" style="min-width: 220px;">Product Gallery</th>
-                <th scope="col" style="width: 80px; text-align: center;">Product Dimension</th>
-                <th scope="col" style="min-width: 220px;">Technical Icons</th>
+                <th scope="col" class="dash-col-th is-media" style="min-width: 220px;">Product Gallery</th>
+                <th scope="col" class="dash-col-th is-media" style="width: 80px; text-align: center;">Product Dimension</th>
+                <th scope="col" class="dash-col-th is-media" style="min-width: 220px;">Technical Icons</th>
 
                 <!-- Group 3: Supplier & Inventory (4 cols) -->
-                <th scope="col" style="min-width: 140px;">Supplier Name</th>
-                <th scope="col" style="min-width: 130px;">Supplier Code</th>
-                <th scope="col" style="min-width: 130px;">Type &amp; Stock</th>
-                <th scope="col" style="width: 80px; text-align: center;">Dimming</th>
+                <th scope="col" class="dash-col-th is-supplier" style="min-width: 140px;">Supplier Name</th>
+                <th scope="col" class="dash-col-th is-supplier" style="min-width: 130px;">Supplier Code</th>
+                <th scope="col" class="dash-col-th is-supplier" style="min-width: 130px;">Type &amp; Stock</th>
+                <th scope="col" class="dash-col-th is-supplier" style="width: 80px; text-align: center;">Dimming</th>
 
                 <!-- Group 4: Technical Documents (5 cols) -->
-                <th scope="col" style="width: 85px; text-align: center;">Datasheet</th>
-                <th scope="col" style="min-width: 120px;">Datasheet File</th>
-                <th scope="col" style="min-width: 140px;">Installation Guide</th>
-                <th scope="col" style="min-width: 120px;">User Manual</th>
-                <th scope="col" style="min-width: 100px;">IES File</th>
+                <th scope="col" class="dash-col-th is-docs" style="width: 85px; text-align: center;">Datasheet</th>
+                <th scope="col" class="dash-col-th is-docs" style="min-width: 120px;">Datasheet File</th>
+                <th scope="col" class="dash-col-th is-docs" style="min-width: 140px;">Installation Guide</th>
+                <th scope="col" class="dash-col-th is-docs" style="min-width: 120px;">User Manual</th>
+                <th scope="col" class="dash-col-th is-docs" style="min-width: 100px;">IES File</th>
 
                 <!-- Group 5: Copy & SEO (5 cols) -->
-                <th scope="col" style="min-width: 160px;">URL Slug</th>
-                <th scope="col" style="min-width: 220px;">Product Description</th>
-                <th scope="col" style="min-width: 180px;">Meta Title</th>
-                <th scope="col" style="min-width: 200px;">Meta Description</th>
-                <th scope="col" style="min-width: 160px;">Meta Keywords</th>
+                <th scope="col" class="dash-col-th is-seo" style="min-width: 160px;">URL Slug</th>
+                <th scope="col" class="dash-col-th is-seo" style="min-width: 220px;">Product Description</th>
+                <th scope="col" class="dash-col-th is-seo" style="min-width: 180px;">Meta Title</th>
+                <th scope="col" class="dash-col-th is-seo" style="min-width: 200px;">Meta Description</th>
+                <th scope="col" class="dash-col-th is-seo" style="min-width: 160px;">Meta Keywords</th>
 
                 <!-- Group 6: Audit (1 col) -->
-                <th scope="col" style="min-width: 140px;">Updated</th>
+                <th scope="col" class="dash-col-th is-audit" style="min-width: 140px;">Updated</th>
             </tr>
         </thead>
         <tbody>
