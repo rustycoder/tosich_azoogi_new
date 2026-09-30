@@ -174,6 +174,166 @@
         </section>
     @endif
 
+    <!-- Section: Image & Icon Format Standards (WebP & SVG Only) -->
+    <div class="dash-card" style="margin-bottom: 28px; border-top: 4px solid var(--dash-green);">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--dash-line); padding-bottom: 14px; margin-bottom: 18px;">
+            <div>
+                <h3 style="font-size: 16px; font-weight: 700; margin: 0; color: var(--dash-ink); display: flex; align-items: center; gap: 8px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; color: var(--dash-green);"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    Asset Format Standards: WebP Images &amp; SVG Icons
+                </h3>
+                <p style="margin: 4px 0 0; font-size: 12px; color: var(--dash-muted);">
+                    Strict requirements: All catalog images must be <strong>.webp</strong> format, and all technical/attribute icons must be <strong>.svg</strong> format.
+                </p>
+            </div>
+            @php
+                $formatIssuesCount = $audit['image_standards']['non_webp_covers']['count']
+                    + $audit['image_standards']['non_webp_gallery']['count']
+                    + $audit['image_standards']['non_webp_dimensions']['count']
+                    + $audit['image_standards']['non_webp_categories']['count']
+                    + $audit['image_standards']['non_svg_tech_icons']['count']
+                    + $audit['image_standards']['non_svg_category_icons']['count']
+                    + $audit['image_standards']['non_svg_attribute_icons']['count'];
+            @endphp
+            <span class="dash-pill {{ $formatIssuesCount === 0 ? 'is-active' : 'is-cancelled' }}">
+                {{ $formatIssuesCount === 0 ? '100% Format Compliant' : $formatIssuesCount . ' Format Violations' }}
+            </span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 16px;">
+            <!-- 1. WebP Image Standard Compliance -->
+            <div style="background: var(--dash-fill); border: 1px solid var(--dash-line); border-radius: 8px; padding: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--dash-line); padding-bottom: 8px;">
+                    <strong style="font-size: 13px; color: var(--dash-ink); display: flex; align-items: center; gap: 6px;">
+                        <span class="dash-tag is-primary" style="font-size: 10px; text-transform: uppercase;">WebP</span>
+                        Image Formats
+                    </strong>
+                    <span style="font-size: 11px; color: var(--dash-muted);">Expected: .webp</span>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12.5px; color: var(--dash-ink);">Product Covers</span>
+                        @if ($audit['image_standards']['non_webp_covers']['count'] === 0)
+                            <span class="dash-pill is-active" style="font-size: 10.5px;">All WebP</span>
+                        @else
+                            <span class="dash-pill is-cancelled" style="font-size: 10.5px;">{{ $audit['image_standards']['non_webp_covers']['count'] }} Non-WebP</span>
+                        @endif
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12.5px; color: var(--dash-ink);">Gallery Photos</span>
+                        @if ($audit['image_standards']['non_webp_gallery']['count'] === 0)
+                            <span class="dash-pill is-active" style="font-size: 10.5px;">All WebP</span>
+                        @else
+                            <span class="dash-pill is-pending" style="font-size: 10.5px;">{{ $audit['image_standards']['non_webp_gallery']['count'] }} Non-WebP</span>
+                        @endif
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12.5px; color: var(--dash-ink);">Dimension Diagrams</span>
+                        @if ($audit['image_standards']['non_webp_dimensions']['count'] === 0)
+                            <span class="dash-pill is-active" style="font-size: 10.5px;">WebP/SVG</span>
+                        @else
+                            <span class="dash-tag" style="font-size: 10.5px;">{{ $audit['image_standards']['non_webp_dimensions']['count'] }} Other</span>
+                        @endif
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12.5px; color: var(--dash-ink);">Category Banners</span>
+                        @if ($audit['image_standards']['non_webp_categories']['count'] === 0)
+                            <span class="dash-pill is-active" style="font-size: 10.5px;">All WebP</span>
+                        @else
+                            <span class="dash-pill is-pending" style="font-size: 10.5px;">{{ $audit['image_standards']['non_webp_categories']['count'] }} Non-WebP</span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. SVG Icon Standard Compliance -->
+            <div style="background: var(--dash-fill); border: 1px solid var(--dash-line); border-radius: 8px; padding: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--dash-line); padding-bottom: 8px;">
+                    <strong style="font-size: 13px; color: var(--dash-ink); display: flex; align-items: center; gap: 6px;">
+                        <span class="dash-tag is-primary" style="font-size: 10px; text-transform: uppercase;">SVG</span>
+                        Icon Formats
+                    </strong>
+                    <span style="font-size: 11px; color: var(--dash-muted);">Expected: .svg only</span>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12.5px; color: var(--dash-ink);">Technical Icons</span>
+                        @if ($audit['image_standards']['non_svg_tech_icons']['count'] === 0)
+                            <span class="dash-pill is-active" style="font-size: 10.5px;">100% SVG</span>
+                        @else
+                            <span class="dash-pill is-cancelled" style="font-size: 10.5px;">{{ $audit['image_standards']['non_svg_tech_icons']['count'] }} Non-SVG</span>
+                        @endif
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12.5px; color: var(--dash-ink);">Category Icons</span>
+                        @if ($audit['image_standards']['non_svg_category_icons']['count'] === 0)
+                            <span class="dash-pill is-active" style="font-size: 10.5px;">100% SVG</span>
+                        @else
+                            <span class="dash-pill is-pending" style="font-size: 10.5px;">{{ $audit['image_standards']['non_svg_category_icons']['count'] }} Non-SVG</span>
+                        @endif
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12.5px; color: var(--dash-ink);">Attribute Term Icons</span>
+                        @if ($audit['image_standards']['non_svg_attribute_icons']['count'] === 0)
+                            <span class="dash-pill is-active" style="font-size: 10.5px;">100% SVG</span>
+                        @else
+                            <span class="dash-pill is-pending" style="font-size: 10.5px;">{{ $audit['image_standards']['non_svg_attribute_icons']['count'] }} Non-SVG</span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Dimension & Aspect Ratio Checks -->
+            <div style="background: var(--dash-fill); border: 1px solid var(--dash-line); border-radius: 8px; padding: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--dash-line); padding-bottom: 8px;">
+                    <strong style="font-size: 13px; color: var(--dash-ink); display: flex; align-items: center; gap: 6px;">
+                        <span class="dash-tag" style="font-size: 10px; text-transform: uppercase;">1:1</span>
+                        Aspect Ratio &amp; Res
+                    </strong>
+                    <span style="font-size: 11px; color: var(--dash-muted);">Standard: Square &ge; 600px</span>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12.5px; color: var(--dash-ink);">Square Covers (1:1 Ratio)</span>
+                        @if ($audit['image_standards']['non_square_covers']['count'] === 0)
+                            <span class="dash-pill is-active" style="font-size: 10.5px;">Optimal</span>
+                        @else
+                            <span class="dash-tag" style="font-size: 10.5px;">{{ $audit['image_standards']['non_square_covers']['count'] }} Non-Square</span>
+                        @endif
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 12.5px; color: var(--dash-ink);">High Resolution (&ge; 600px)</span>
+                        @if ($audit['image_standards']['low_res_covers']['count'] === 0)
+                            <span class="dash-pill is-active" style="font-size: 10.5px;">Optimal</span>
+                        @else
+                            <span class="dash-tag" style="font-size: 10.5px;">{{ $audit['image_standards']['low_res_covers']['count'] }} Low Res</span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if (!empty($audit['image_standards']['non_webp_covers']['samples']) || !empty($audit['image_standards']['non_svg_tech_icons']['samples']))
+            <div style="background: var(--dash-mix); border: 1px dashed var(--dash-line); border-radius: 6px; padding: 12px; font-size: 12px;">
+                <strong style="color: var(--dash-ink); display: block; margin-bottom: 6px;">Sample Non-Compliant Items to Replace:</strong>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    @foreach ($audit['image_standards']['non_webp_covers']['samples'] as $sample)
+                        <a href="{{ route('dashboard.products.index', ['search' => $sample['code'] ?: $sample['name']]) }}" class="dash-asset-chip" style="font-size: 11px;" title="{{ $sample['url'] }}">
+                            <span class="dash-tag is-primary" style="font-size: 9.5px; margin-right: 4px;">{{ $sample['format'] }}</span>
+                            {{ $sample['code'] ?: $sample['name'] }}
+                        </a>
+                    @endforeach
+                    @foreach ($audit['image_standards']['non_svg_tech_icons']['samples'] as $sample)
+                        <a href="{{ route('dashboard.products.index', ['search' => $sample['code'] ?: $sample['name']]) }}" class="dash-asset-chip" style="font-size: 11px;" title="{{ $sample['url'] }}">
+                            <span class="dash-tag" style="font-size: 9.5px; margin-right: 4px;">ICON: {{ $sample['format'] }}</span>
+                            {{ $sample['code'] ?: $sample['name'] }}
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        @endif
+    </div>
+
     <!-- Audit Section: Domain Completeness Breakdown -->
     <h2 style="font-size: 18px; font-weight: 700; margin: 32px 0 16px; color: var(--dash-ink); display: flex; align-items: center; gap: 8px;">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; color: var(--dash-green);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>

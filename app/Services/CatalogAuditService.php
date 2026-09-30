@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Services\CatalogAuditService;
-
 namespace App\Services;
 
 use App\Models\Product;
@@ -184,18 +182,23 @@ class CatalogAuditService implements ICatalogAuditService
             ->pluck('parent_airtable_id', 'name')
             ->toArray();
 
+        // 6. Image Standards & Diagnostics (WebP Images & SVG Icons)
+        $imageDiagnostics = $this->auditImageStandards();
+
         // Health Score Calculation (0-100%)
         $healthScore = 100;
         if ($totalProducts > 0) {
-            $coverPenalty = ($missingCoverCount / $totalProducts) * 20;
-            $skuPenalty = ($missingSkuCount / $totalProducts) * 20;
+            $coverPenalty = ($missingCoverCount / $totalProducts) * 15;
+            $skuPenalty = ($missingSkuCount / $totalProducts) * 15;
             $slugPenalty = ($missingSlugCount / $totalProducts) * 15;
-            $categoryPenalty = ($missingCategoryCount / $totalProducts) * 15;
+            $categoryPenalty = ($missingCategoryCount / $totalProducts) * 10;
             $descPenalty = ($missingDescriptionCount / $totalProducts) * 10;
             $metaPenalty = ($missingMetaDescriptionCount / $totalProducts) * 10;
             $datasheetPenalty = ($missingDatasheetFileCount / max(1, $totalProducts)) * 10;
+            $imageFormatPenalty = ($imageDiagnostics['non_webp_covers']['count'] / $totalProducts) * 10;
+            $iconFormatPenalty = ($imageDiagnostics['non_svg_tech_icons']['count'] / $totalProducts) * 5;
 
-            $totalPenalty = $coverPenalty + $skuPenalty + $slugPenalty + $categoryPenalty + $descPenalty + $metaPenalty + $datasheetPenalty;
+            $totalPenalty = $coverPenalty + $skuPenalty + $slugPenalty + $categoryPenalty + $descPenalty + $metaPenalty + $datasheetPenalty + $imageFormatPenalty + $iconFormatPenalty;
             $healthScore = max(0, min(100, (int) round(100 - $totalPenalty)));
         }
 
@@ -237,6 +240,7 @@ class CatalogAuditService implements ICatalogAuditService
                     'severity' => $missingTechIconsCount > 0 ? 'low' : 'ok',
                 ],
             ],
+            'image_standards' => $imageDiagnostics,
             'documents' => [
                 'missing_datasheet_file' => [
                     'label' => 'Missing Datasheet PDF (Required)',
@@ -330,5 +334,272 @@ class CatalogAuditService implements ICatalogAuditService
             ],
             'latest_sync' => $latestSync,
         ];
+    }
+
+    /**
+     * Audit image format standards (WebP for images, SVG for icons), dimensions, and aspect ratio.
+     *
+     * @return array<string, mixed>
+     */
+    private function auditImageStandards(): array
+    {
+        $nonWebpCovers = [];
+        $nonWebpGallery = [];
+        $nonWebpDimensions = [];
+        $nonSvgTechIcons = [];
+        $nonSquareCovers = [];
+        $lowResCovers = [];
+
+        $products = Product::query()
+            ->select(['id', 'product_name', 'product_code', 'slug', 'cover', 'product_images', 'product_dimension', 'technical_icons'])
+            ->get();
+
+        foreach ($products as $product) {
+            $coverUrl = $product->coverUrl();
+            if (filled($coverUrl)) {
+                $ext = $this->extractExtension($coverUrl);
+                if ($ext && $ext !== 'webp') {
+                    $nonWebpCovers[] = [
+                        'id' => $product->id,
+                        'name' => $product->product_name,
+                        'code' => $product->product_code,
+                        'url' => $coverUrl,
+                        'format' => strtoupper($ext),
+                    ];
+                }
+
+                // Check local dimension & aspect ratio
+                $dimensions = $this->getImageDimensions($coverUrl);
+                if ($dimensions) {
+                    if (! $dimensions['is_square']) {
+                        $nonSquareCovers[] = [
+                            'id' => $product->id,
+                            'name' => $product->product_name,
+                            'code' => $product->product_code,
+                            'url' => $coverUrl,
+                            'dimensions' => "{$dimensions['width']}×{$dimensions['height']}",
+                            'ratio' => $dimensions['ratio'],
+                        ];
+                    }
+                    if ($dimensions['width'] < 600 || $dimensions['height'] < 600) {
+                        $lowResCovers[] = [
+                            'id' => $product->id,
+                            'name' => $product->product_name,
+                            'code' => $product->product_code,
+                            'url' => $coverUrl,
+                            'dimensions' => "{$dimensions['width']}×{$dimensions['height']}",
+                        ];
+                    }
+                }
+            }
+
+            // Check Gallery Images
+            $gallery = $product->galleryImageUrls();
+            foreach ($gallery as $gUrl) {
+                $ext = $this->extractExtension($gUrl);
+                if ($ext && $ext !== 'webp') {
+                    $nonWebpGallery[] = [
+                        'id' => $product->id,
+                        'name' => $product->product_name,
+                        'code' => $product->product_code,
+                        'url' => $gUrl,
+                        'format' => strtoupper($ext),
+                    ];
+                    break;
+                }
+            }
+
+            // Check Dimension Diagrams (WebP or SVG)
+            $dimUrl = $product->dimensionUrl();
+            if (filled($dimUrl)) {
+                $ext = $this->extractExtension($dimUrl);
+                if ($ext && ! in_array($ext, ['webp', 'svg'])) {
+                    $nonWebpDimensions[] = [
+                        'id' => $product->id,
+                        'name' => $product->product_name,
+                        'code' => $product->product_code,
+                        'url' => $dimUrl,
+                        'format' => strtoupper($ext),
+                    ];
+                }
+            }
+
+            // Check Technical Icons (Must be SVG only)
+            $techIcons = $product->technicalIconUrls();
+            foreach ($techIcons as $tUrl) {
+                $ext = $this->extractExtension($tUrl);
+                if ($ext && $ext !== 'svg') {
+                    $nonSvgTechIcons[] = [
+                        'id' => $product->id,
+                        'name' => $product->product_name,
+                        'code' => $product->product_code,
+                        'url' => $tUrl,
+                        'format' => strtoupper($ext),
+                    ];
+                    break;
+                }
+            }
+        }
+
+        // Category Featured Images & Icons
+        $nonWebpCategories = [];
+        $nonSvgCategoryIcons = [];
+        $categories = ProductCategory::query()->select(['id', 'name', 'featured_image', 'icon'])->get();
+        foreach ($categories as $cat) {
+            $fImg = $cat->featuredImageUrl();
+            if ($fImg) {
+                $ext = $this->extractExtension($fImg);
+                if ($ext && $ext !== 'webp') {
+                    $nonWebpCategories[] = [
+                        'id' => $cat->id,
+                        'name' => $cat->name,
+                        'url' => $fImg,
+                        'format' => strtoupper($ext),
+                    ];
+                }
+            }
+            $icon = $cat->iconUrl();
+            if ($icon) {
+                $ext = $this->extractExtension($icon);
+                if ($ext && $ext !== 'svg') {
+                    $nonSvgCategoryIcons[] = [
+                        'id' => $cat->id,
+                        'name' => $cat->name,
+                        'url' => $icon,
+                        'format' => strtoupper($ext),
+                    ];
+                }
+            }
+        }
+
+        // Product Attribute Icons
+        $nonSvgAttributeIcons = [];
+        $attributes = ProductAttribute::query()->whereNotNull('icon')->where('icon', '!=', '')->select(['id', 'name', 'value', 'icon'])->get();
+        foreach ($attributes as $attr) {
+            $icon = $attr->iconUrl();
+            if ($icon) {
+                $ext = $this->extractExtension($icon);
+                if ($ext && $ext !== 'svg') {
+                    $nonSvgAttributeIcons[] = [
+                        'id' => $attr->id,
+                        'group' => $attr->name,
+                        'value' => $attr->value,
+                        'url' => $icon,
+                        'format' => strtoupper($ext),
+                    ];
+                }
+            }
+        }
+
+        return [
+            'non_webp_covers' => [
+                'label' => 'Non-WebP Product Covers (Expected: WebP)',
+                'count' => count($nonWebpCovers),
+                'samples' => array_slice($nonWebpCovers, 0, 10),
+                'severity' => count($nonWebpCovers) > 0 ? 'high' : 'ok',
+            ],
+            'non_webp_gallery' => [
+                'label' => 'Non-WebP Gallery Images (Expected: WebP)',
+                'count' => count($nonWebpGallery),
+                'samples' => array_slice($nonWebpGallery, 0, 10),
+                'severity' => count($nonWebpGallery) > 0 ? 'medium' : 'ok',
+            ],
+            'non_webp_dimensions' => [
+                'label' => 'Non-WebP/SVG Dimension Diagrams (Expected: WebP or SVG)',
+                'count' => count($nonWebpDimensions),
+                'samples' => array_slice($nonWebpDimensions, 0, 10),
+                'severity' => count($nonWebpDimensions) > 0 ? 'medium' : 'ok',
+            ],
+            'non_webp_categories' => [
+                'label' => 'Non-WebP Category Banners (Expected: WebP)',
+                'count' => count($nonWebpCategories),
+                'samples' => array_slice($nonWebpCategories, 0, 10),
+                'severity' => count($nonWebpCategories) > 0 ? 'medium' : 'ok',
+            ],
+            'non_svg_tech_icons' => [
+                'label' => 'Non-SVG Technical Icons (Expected: SVG only)',
+                'count' => count($nonSvgTechIcons),
+                'samples' => array_slice($nonSvgTechIcons, 0, 10),
+                'severity' => count($nonSvgTechIcons) > 0 ? 'high' : 'ok',
+            ],
+            'non_svg_category_icons' => [
+                'label' => 'Non-SVG Category Icons (Expected: SVG only)',
+                'count' => count($nonSvgCategoryIcons),
+                'samples' => array_slice($nonSvgCategoryIcons, 0, 10),
+                'severity' => count($nonSvgCategoryIcons) > 0 ? 'medium' : 'ok',
+            ],
+            'non_svg_attribute_icons' => [
+                'label' => 'Non-SVG Attribute Icons (Expected: SVG only)',
+                'count' => count($nonSvgAttributeIcons),
+                'samples' => array_slice($nonSvgAttributeIcons, 0, 10),
+                'severity' => count($nonSvgAttributeIcons) > 0 ? 'medium' : 'ok',
+            ],
+            'non_square_covers' => [
+                'label' => 'Non-Square Product Covers (Target: 1:1)',
+                'count' => count($nonSquareCovers),
+                'samples' => array_slice($nonSquareCovers, 0, 10),
+                'severity' => count($nonSquareCovers) > 0 ? 'medium' : 'ok',
+            ],
+            'low_res_covers' => [
+                'label' => 'Low Resolution Product Covers (< 600px)',
+                'count' => count($lowResCovers),
+                'samples' => array_slice($lowResCovers, 0, 10),
+                'severity' => count($lowResCovers) > 0 ? 'medium' : 'ok',
+            ],
+        ];
+    }
+
+    /**
+     * Extract extension from URL/path ignoring query params.
+     */
+    private function extractExtension(?string $url): ?string
+    {
+        if (empty($url)) {
+            return null;
+        }
+
+        $cleanPath = parse_url($url, PHP_URL_PATH) ?? $url;
+        $ext = strtolower(pathinfo($cleanPath, PATHINFO_EXTENSION));
+
+        return $ext !== '' ? $ext : null;
+    }
+
+    /**
+     * Get image dimensions and aspect ratio for local assets.
+     *
+     * @return array{width: int, height: int, ratio: float, is_square: bool}|null
+     */
+    private function getImageDimensions(?string $url): ?array
+    {
+        if (empty($url)) {
+            return null;
+        }
+
+        $cleanPath = parse_url($url, PHP_URL_PATH) ?? $url;
+        $localFile = null;
+
+        if (str_starts_with($cleanPath, '/assets/') || str_starts_with($cleanPath, 'assets/')) {
+            $localFile = public_path(ltrim($cleanPath, '/'));
+        } elseif (str_starts_with($cleanPath, '/storage/') || str_starts_with($cleanPath, 'storage/')) {
+            $localFile = public_path(ltrim($cleanPath, '/'));
+        }
+
+        if ($localFile && file_exists($localFile) && is_file($localFile)) {
+            $info = @getimagesize($localFile);
+            if ($info && isset($info[0], $info[1]) && $info[1] > 0) {
+                $width = (int) $info[0];
+                $height = (int) $info[1];
+                $ratio = round($width / $height, 2);
+
+                return [
+                    'width' => $width,
+                    'height' => $height,
+                    'ratio' => $ratio,
+                    'is_square' => ($width / $height) >= 0.95 && ($width / $height) <= 1.05,
+                ];
+            }
+        }
+
+        return null;
     }
 }
