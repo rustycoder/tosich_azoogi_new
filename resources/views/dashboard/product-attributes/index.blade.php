@@ -101,8 +101,6 @@
                     <td style="text-align: center;">
                         @if ($attr->sort_order !== null)
                             <span class="dash-code-badge" style="font-size: 11px; font-weight: 600;">#{{ $attr->sort_order }}</span>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 
@@ -114,7 +112,7 @@
                     <!-- Attribute Value (Term) (Sticky Left) -->
                     <td class="dash-sticky-col">
                         <div style="display: flex; flex-direction: column; gap: 3px;">
-                            <strong style="color: var(--dash-ink); font-size: 13.5px;">{{ $attr->value ?: '—' }}</strong>
+                            <strong style="color: var(--dash-ink); font-size: 13.5px;">{{ $attr->value }}</strong>
                             <span class="dash-airtable-id">{{ $attr->airtable_id }}</span>
                         </div>
                     </td>
@@ -125,8 +123,6 @@
                             <div class="dash-tech-icon" data-popover-img="{{ $icon }}" style="width: 32px; height: 32px; display: inline-flex;" title="Attribute icon">
                                 <img src="{{ $icon }}" alt="Icon" loading="lazy">
                             </div>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 

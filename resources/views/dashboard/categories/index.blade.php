@@ -94,8 +94,6 @@
                     <td style="text-align: center;">
                         @if ($category->sort_order !== null)
                             <span class="dash-code-badge" style="font-size: 11px; font-weight: 600;">#{{ $category->sort_order }}</span>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 
@@ -125,8 +123,6 @@
                             <div class="dash-preview-thumb" data-popover-img="{{ $img }}" style="width: 40px; height: 40px;" title="Featured category image">
                                 <img src="{{ $img }}" alt="{{ $category->name }}" loading="lazy">
                             </div>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 
@@ -136,8 +132,6 @@
                             <div class="dash-tech-icon" data-popover-img="{{ $icon }}" style="width: 32px; height: 32px; display: inline-flex;" title="Category icon">
                                 <img src="{{ $icon }}" alt="Icon" loading="lazy">
                             </div>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 
@@ -147,8 +141,6 @@
                             <p style="margin: 0; font-size: 12px; color: var(--dash-muted); max-width: 300px; white-space: normal; line-height: 1.4;" title="{{ $category->description }}">
                                 {{ \Illuminate\Support\Str::limit($category->description, 100) }}
                             </p>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 

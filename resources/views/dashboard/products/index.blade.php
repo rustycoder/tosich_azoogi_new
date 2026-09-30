@@ -162,8 +162,6 @@
                     <td style="text-align: center;">
                         @if ($product->sort_order !== null)
                             <span class="dash-code-badge" style="font-size: 11px; font-weight: 600;">#{{ $product->sort_order }}</span>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 
@@ -184,8 +182,6 @@
                     <td>
                         @if (filled($product->product_code))
                             <span class="dash-code-badge" style="font-weight: 600;">{{ $product->product_code }}</span>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 
@@ -235,8 +231,6 @@
                                     </div>
                                 @endforeach
                             </div>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 
@@ -246,8 +240,6 @@
                             <div class="dash-dimension-thumb" data-popover-img="{{ $dimension }}" title="Hover to view dimension schematic">
                                 <img src="{{ $dimension }}" alt="Dimension Diagram" loading="lazy">
                             </div>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 
@@ -261,8 +253,6 @@
                                     </div>
                                 @endforeach
                             </div>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 
@@ -271,8 +261,6 @@
                     <td>
                         @if (filled($product->supplier_name))
                             <span class="dash-tag" style="font-size: 11px;">{{ $product->supplier_name }}</span>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 
@@ -280,8 +268,6 @@
                     <td>
                         @if (filled($product->supplier_code))
                             <span class="dash-code-badge">{{ $product->supplier_code }}</span>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 
@@ -315,8 +301,6 @@
                             <span style="color: var(--dash-muted); font-size: 11px;">No</span>
                         @elseif (filled($datasheetStatus))
                             <span class="dash-pill" style="font-size: 10.5px;">{{ $datasheetStatus }}</span>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 
@@ -327,8 +311,6 @@
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                                 PDF
                             </a>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 
@@ -339,8 +321,6 @@
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                                 Guide
                             </a>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 
@@ -351,8 +331,6 @@
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                                 Manual
                             </a>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 
@@ -363,8 +341,6 @@
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                                 IES
                             </a>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 
@@ -373,8 +349,6 @@
                     <td>
                         @if (filled($product->slug))
                             <span class="dash-code-badge" title="Slug: {{ $product->slug }}">{{ $product->slug }}</span>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 
@@ -384,8 +358,6 @@
                             <div class="dash-text-snippet" title="{{ strip_tags($product->product_description) }}">
                                 {{ \Illuminate\Support\Str::limit(strip_tags($product->product_description), 120) }}
                             </div>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 
@@ -395,8 +367,6 @@
                             <div class="dash-text-snippet" title="{{ $product->meta_title }}">
                                 {{ $product->meta_title }}
                             </div>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 
@@ -406,8 +376,6 @@
                             <div class="dash-text-snippet" title="{{ $product->meta_description }}">
                                 {{ $product->meta_description }}
                             </div>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 
@@ -421,8 +389,6 @@
                                     @endif
                                 @endforeach
                             </div>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
                     </td>
 
