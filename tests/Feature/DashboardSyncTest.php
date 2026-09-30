@@ -68,8 +68,8 @@ class DashboardSyncTest extends TestCase
         // 3. Visiting/reloading /dashboard/sync now displays the stored audit metrics
         $responseAfterAudit = $this->actingAs($admin)->get('/dashboard/sync');
         $responseAfterAudit->assertOk()
-            ->assertSee('Catalog Health Score', false)
-            ->assertSee('Total Products', false)
+            ->assertSee('Health Score', false)
+            ->assertSee('Products', false)
             ->assertSee('Asset Format Standards', false)
             ->assertSee('Media &amp; Schematics', false)
             ->assertSee('Technical Documents', false)

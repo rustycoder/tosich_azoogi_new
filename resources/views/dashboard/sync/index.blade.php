@@ -87,7 +87,7 @@
         <div class="dash-card" style="display: flex; flex-direction: column; justify-content: space-between; border-left: 4px solid {{ $audit['summary']['health_score'] >= 90 ? '#67d04e' : ($audit['summary']['health_score'] >= 75 ? '#fbbf24' : '#fb7185') }};">
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                 <div>
-                    <span style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--dash-muted);">Catalog Health Score</span>
+                    <span style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--dash-muted);">Health Score</span>
                     <div style="font-size: 32px; font-weight: 800; color: {{ $audit['summary']['health_score'] >= 90 ? '#67d04e' : ($audit['summary']['health_score'] >= 75 ? '#fbbf24' : '#fb7185') }}; margin-top: 4px;">
                         {{ $audit['summary']['health_score'] }}%
                     </div>
@@ -105,13 +105,13 @@
         <div class="dash-card" style="display: flex; flex-direction: column; justify-content: space-between; border-left: 4px solid #38bdf8;">
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                 <div>
-                    <span style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--dash-muted);">Total Products</span>
+                    <span style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--dash-muted);">Products</span>
                     <div style="font-size: 32px; font-weight: 800; color: var(--dash-ink); margin-top: 4px;">
                         {{ number_format($audit['summary']['total_products']) }}
                     </div>
                 </div>
                 <a href="{{ route('dashboard.products.index') }}" class="dash-asset-chip" style="font-size: 11px; padding: 4px 8px;">
-                    View Grid &rarr;
+                    View All
                 </a>
             </div>
             <div style="display: flex; gap: 8px; margin-top: 10px; font-size: 12px; color: var(--dash-muted);">
@@ -133,7 +133,7 @@
                     </div>
                 </div>
                 <a href="{{ route('dashboard.categories.index') }}" class="dash-asset-chip" style="font-size: 11px; padding: 4px 8px;">
-                    View All &rarr;
+                    View All
                 </a>
             </div>
             <p style="margin: 10px 0 0; font-size: 12px; color: var(--dash-muted);">
@@ -145,13 +145,13 @@
         <div class="dash-card" style="display: flex; flex-direction: column; justify-content: space-between; border-left: 4px solid #fbbf24;">
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                 <div>
-                    <span style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--dash-muted);">Product Attributes</span>
+                    <span style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--dash-muted);">Attributes</span>
                     <div style="font-size: 32px; font-weight: 800; color: var(--dash-ink); margin-top: 4px;">
                         {{ number_format($audit['summary']['total_attributes']) }}
                     </div>
                 </div>
                 <a href="{{ route('dashboard.product-attributes.index') }}" class="dash-asset-chip" style="font-size: 11px; padding: 4px 8px;">
-                    View Terms &rarr;
+                    View All
                 </a>
             </div>
             <p style="margin: 10px 0 0; font-size: 12px; color: var(--dash-muted);">
@@ -227,7 +227,7 @@
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 10px;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-size: 12.5px; color: var(--dash-ink);">Product Covers</span>
+                        <span style="font-size: 12.5px; color: var(--dash-ink);">Product Image</span>
                         @if ($audit['image_standards']['non_webp_covers']['count'] === 0)
                             <span class="dash-pill is-active" style="font-size: 10.5px;">All WebP</span>
                         @else
@@ -235,7 +235,7 @@
                         @endif
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-size: 12.5px; color: var(--dash-ink);">Gallery Photos</span>
+                        <span style="font-size: 12.5px; color: var(--dash-ink);">Product Gallery</span>
                         @if ($audit['image_standards']['non_webp_gallery']['count'] === 0)
                             <span class="dash-pill is-active" style="font-size: 10.5px;">All WebP</span>
                         @else
@@ -243,7 +243,7 @@
                         @endif
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-size: 12.5px; color: var(--dash-ink);">Dimension Diagrams</span>
+                        <span style="font-size: 12.5px; color: var(--dash-ink);">Product Dimension</span>
                         @if ($audit['image_standards']['non_webp_dimensions']['count'] === 0)
                             <span class="dash-pill is-active" style="font-size: 10.5px;">All WebP</span>
                         @else
@@ -379,26 +379,21 @@
                     + $audit['seo']['missing_meta_description']['count'];
             @endphp
             <span class="dash-pill {{ $completenessIssuesCount === 0 ? 'is-active' : 'is-cancelled' }}">
-                {{ $completenessIssuesCount === 0 ? '100% Attributes Complete' : $completenessIssuesCount . ' Missing Attributes' }}
+                {{ $completenessIssuesCount === 0 ? '100% Attributes Complete' : $completenessIssuesCount . ' Missing' }}
             </span>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 16px;">
             <!-- 1. Media & Schematics Audit -->
             <div style="background: var(--dash-fill); border: 1px solid var(--dash-line); border-radius: 8px; padding: 16px;">
-                <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--dash-line); padding-bottom: 10px; margin-bottom: 12px;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span class="dash-group-badge is-media" style="font-size: 11px;">Media &amp; Schematics</span>
-                    </div>
-                    <span class="dash-tag {{ $audit['media']['missing_cover']['count'] === 0 ? 'is-primary' : 'is-cancelled' }}" style="font-size: 10.5px;">
-                        {{ $audit['media']['missing_cover']['count'] === 0 ? 'Covers OK' : $audit['media']['missing_cover']['count'] . ' Missing Cover' }}
-                    </span>
+                <div style="margin-bottom: 12px; border-bottom: 1px solid var(--dash-line); padding-bottom: 8px;">
+                    <strong style="font-size: 13px; color: var(--dash-ink);">Media &amp; Schematics</strong>
                 </div>
                 
                 <div style="display: flex; flex-direction: column; gap: 10px;">
                     <!-- Missing Cover Image -->
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-size: 12.5px; color: var(--dash-ink);">Primary Cover Images</span>
+                        <span style="font-size: 12.5px; color: var(--dash-ink);">Product Image</span>
                         @if ($audit['media']['missing_cover']['count'] === 0)
                             <span class="dash-pill is-active" style="font-size: 10.5px;">100% Present</span>
                         @else
@@ -408,7 +403,7 @@
 
                     <!-- Missing Gallery Images -->
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-size: 12.5px; color: var(--dash-ink);">Product Gallery Photos</span>
+                        <span style="font-size: 12.5px; color: var(--dash-ink);">Product Gallery</span>
                         @if ($audit['media']['missing_gallery']['count'] === 0)
                             <span class="dash-pill is-active" style="font-size: 10.5px;">100% Present</span>
                         @else
@@ -418,7 +413,7 @@
 
                     <!-- Missing Dimensions -->
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-size: 12.5px; color: var(--dash-ink);">Dimension Diagrams</span>
+                        <span style="font-size: 12.5px; color: var(--dash-ink);">Product Dimension</span>
                         @if ($audit['media']['missing_dimensions']['count'] === 0)
                             <span class="dash-pill is-active" style="font-size: 10.5px;">100% Present</span>
                         @else
@@ -440,13 +435,8 @@
 
             <!-- 2. Technical Documents Audit -->
             <div style="background: var(--dash-fill); border: 1px solid var(--dash-line); border-radius: 8px; padding: 16px;">
-                <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--dash-line); padding-bottom: 10px; margin-bottom: 12px;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span class="dash-group-badge is-docs" style="font-size: 11px;">Technical Documents</span>
-                    </div>
-                    <span class="dash-tag {{ $audit['documents']['missing_datasheet_file']['count'] === 0 ? 'is-primary' : 'is-cancelled' }}" style="font-size: 10.5px;">
-                        {{ $audit['documents']['missing_datasheet_file']['count'] === 0 ? 'Datasheets OK' : $audit['documents']['missing_datasheet_file']['count'] . ' Missing PDF' }}
-                    </span>
+                <div style="margin-bottom: 12px; border-bottom: 1px solid var(--dash-line); padding-bottom: 8px;">
+                    <strong style="font-size: 13px; color: var(--dash-ink);">Technical Documents</strong>
                 </div>
 
                 <div style="display: flex; flex-direction: column; gap: 10px;">
@@ -494,13 +484,8 @@
 
             <!-- 3. Core ID & Specifications Audit -->
             <div style="background: var(--dash-fill); border: 1px solid var(--dash-line); border-radius: 8px; padding: 16px;">
-                <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--dash-line); padding-bottom: 10px; margin-bottom: 12px;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span class="dash-group-badge is-primary" style="font-size: 11px;">Core ID &amp; Inventory</span>
-                    </div>
-                    <span class="dash-tag {{ $audit['core']['missing_sku']['count'] === 0 ? 'is-primary' : 'is-cancelled' }}" style="font-size: 10.5px;">
-                        {{ $audit['core']['missing_sku']['count'] === 0 ? 'SKUs OK' : $audit['core']['missing_sku']['count'] . ' Missing SKU' }}
-                    </span>
+                <div style="margin-bottom: 12px; border-bottom: 1px solid var(--dash-line); padding-bottom: 8px;">
+                    <strong style="font-size: 13px; color: var(--dash-ink);">Core ID &amp; Inventory</strong>
                 </div>
 
                 <div style="display: flex; flex-direction: column; gap: 10px;">
@@ -538,13 +523,8 @@
 
             <!-- 4. Copy & SEO Metadata Audit -->
             <div style="background: var(--dash-fill); border: 1px solid var(--dash-line); border-radius: 8px; padding: 16px;">
-                <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--dash-line); padding-bottom: 10px; margin-bottom: 12px;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span class="dash-group-badge is-seo" style="font-size: 11px;">Copy &amp; SEO Meta</span>
-                    </div>
-                    <span class="dash-tag {{ $audit['seo']['missing_slug']['count'] === 0 ? 'is-primary' : 'is-cancelled' }}" style="font-size: 10.5px;">
-                        {{ $audit['seo']['missing_slug']['count'] === 0 ? 'Slugs OK' : $audit['seo']['missing_slug']['count'] . ' Missing Slug' }}
-                    </span>
+                <div style="margin-bottom: 12px; border-bottom: 1px solid var(--dash-line); padding-bottom: 8px;">
+                    <strong style="font-size: 13px; color: var(--dash-ink);">Copy &amp; SEO Meta</strong>
                 </div>
 
                 <div style="display: flex; flex-direction: column; gap: 10px;">
@@ -576,7 +556,7 @@
                         @elseif ($audit['seo']['missing_meta_title']['count'] > 0)
                             <span class="dash-pill is-cancelled" style="font-size: 10.5px;">{{ $audit['seo']['missing_meta_title']['count'] }} Missing</span>
                         @else
-                            <span class="dash-pill is-cancelled" style="font-size: 10.5px;">{{ $audit['seo']['standards']['meta_title']['too_long_count'] + $audit['seo']['standards']['meta_title']['too_short_count'] }} Limit Warnings</span>
+                            <span class="dash-pill is-cancelled" style="font-size: 10.5px;">{{ $audit['seo']['standards']['meta_title']['too_long_count'] + $audit['seo']['standards']['meta_title']['too_short_count'] }} Warnings</span>
                         @endif
                     </div>
 
@@ -606,7 +586,7 @@
                         Copywriting &amp; SEO Character Count Standards
                     </h3>
                     <p style="margin: 4px 0 0; font-size: 12px; color: var(--dash-muted);">
-                        Recommended limits for search engine snippet rendering and conversion: <strong>Meta Title (30–60 chars)</strong>, <strong>Meta Description (70–160 chars)</strong>, <strong>Product Description (80–1,500 chars)</strong>.
+                        Recommended limits for search engine snippet rendering and conversion: <br><strong>Meta Title (30–60 chars)</strong>, <strong>Meta Description (70–160 chars)</strong>, <strong>Product Description (80–1,500 chars)</strong>.
                     </p>
                 </div>
                 @php
@@ -618,7 +598,7 @@
                         + ($audit['seo']['standards']['product_description']['too_long_count'] ?? 0);
                 @endphp
                 <span class="dash-pill {{ $seoViolations === 0 ? 'is-active' : 'is-cancelled' }}">
-                    {{ $seoViolations === 0 ? '100% Within Recommended Limits' : $seoViolations . ' Length Warnings' }}
+                    {{ $seoViolations === 0 ? '100% Within Recommended Limits' : $seoViolations . ' Warnings' }}
                 </span>
             </div>
 
@@ -628,7 +608,7 @@
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--dash-line); padding-bottom: 8px;">
                         <strong style="font-size: 13px; color: var(--dash-ink); display: flex; align-items: center; gap: 6px;">
                             <span class="dash-tag is-primary" style="font-size: 10px;">TITLE</span>
-                            Meta Title Length
+                            Meta Title
                         </strong>
                         <span style="font-size: 11px; color: var(--dash-muted);">Target: 30–60 chars</span>
                     </div>
@@ -661,7 +641,7 @@
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--dash-line); padding-bottom: 8px;">
                         <strong style="font-size: 13px; color: var(--dash-ink); display: flex; align-items: center; gap: 6px;">
                             <span class="dash-tag is-primary" style="font-size: 10px;">DESC</span>
-                            Meta Description Length
+                            Meta Description
                         </strong>
                         <span style="font-size: 11px; color: var(--dash-muted);">Target: 70–160 chars</span>
                     </div>
@@ -693,8 +673,8 @@
                 <div style="background: var(--dash-fill); border: 1px solid var(--dash-line); border-radius: 8px; padding: 16px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid var(--dash-line); padding-bottom: 8px;">
                         <strong style="font-size: 13px; color: var(--dash-ink); display: flex; align-items: center; gap: 6px;">
-                            <span class="dash-tag" style="font-size: 10px;">COPY</span>
-                            Product Description Length
+                            <span class="dash-tag" style="font-size: 10px;">DESC</span>
+                            Product Description
                         </strong>
                         <span style="font-size: 11px; color: var(--dash-muted);">Target: 80–1,500 chars</span>
                     </div>
