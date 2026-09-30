@@ -366,16 +366,212 @@
         @if ($activeTopic === 'products')
             <article class="dash-card dash-doc-section" data-doc-block>
                 <div class="dash-doc-header">
-                    <h2>Product Catalog & Airtable Sync</h2>
-                    <span class="dash-pill-active">Automated Pipeline</span>
+                    <h2>Product Catalog & Airtable Guide</h2>
+                    <span class="dash-pill-active">Airtable Architecture & SOP</span>
                 </div>
-                <p>Product specifications, variants, category hierarchies, images, and datasheets are managed in Airtable and synced seamlessly to the website database.</p>
+                <p>Product specifications, variants, category hierarchies, images, and datasheets are managed in Airtable and synced to the website database. Ordering across the catalog is strictly governed by a mathematical hierarchy between the <strong>Categories</strong> and <strong>Products</strong> tables.</p>
 
                 <div class="dash-doc-callout info">
-                    <strong>How Synchronization Works:</strong> When you trigger a sync from <a href="{{ route('dashboard.products.index') }}"><strong>Products</strong></a>, the backend connects securely to Airtable, fetches all active product records, updates technical specifications, downloads new media assets to local storage, and rebuilds the product cache.
+                    <strong>Two Cooperating Order Fields:</strong> The <strong>Categories</strong> table sets the display order of categories, and the <strong>Products</strong> table sets the order of products within them. Following this system guarantees clean category grouping and deterministic product sorting site-wide.
                 </div>
 
-                <h3>Sync Modes</h3>
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>1. Category Order & Number Blocks</h3>
+                <p>Each top-level category owns a block of numbers in <strong>steps of 100</strong>. Its subcategories use the numbers directly after it:</p>
+
+                <div class="dash-table-wrap">
+                    <table class="dash-doc-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 100px;">Block</th>
+                                <th style="width: 240px;">Parent Category</th>
+                                <th>Subcategories & Ranges</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>100</code></td>
+                                <td><strong>Landscape Lighting</strong></td>
+                                <td><code>101</code> Garden Light, <code>102</code> Pool Light, <code>103</code> Handrail</td>
+                            </tr>
+                            <tr>
+                                <td><code>200</code></td>
+                                <td><strong>Neon Flex</strong></td>
+                                <td><code>201</code> Mini Neon, <code>202</code> Standard Neon, <code>203</code> 3D Neon … <code>213</code> Long Run Neon</td>
+                            </tr>
+                            <tr>
+                                <td><code>300</code></td>
+                                <td><strong>COB Strips / SMD Strips</strong></td>
+                                <td><code>301</code> COB Strips, <code>302–304</code> COB types, <code>305</code> SMD Strips, <code>306–307</code> SMD types, <code>308</code> Flex Panel Sheets</td>
+                            </tr>
+                            <tr>
+                                <td><code>400</code></td>
+                                <td><strong>Profiles</strong></td>
+                                <td><code>401</code> Trimless … <code>414</code> Wall Washer <em>(the 403 and 407 parents hold the Surfaced and Recessed sub-groups)</em></td>
+                            </tr>
+                            <tr>
+                                <td><code>500</code></td>
+                                <td><strong>Drivers</strong></td>
+                                <td><code>501–504</code> Driver types</td>
+                            </tr>
+                            <tr>
+                                <td><code>600</code></td>
+                                <td><strong>Accessories</strong></td>
+                                <td><code>601</code> Neon, <code>602</code> LED Strip, <code>603</code> Remotes (<code>604</code> RF Remotes, <code>605</code> Wall Panels), <code>606</code> Downlight Accessories</td>
+                            </tr>
+                            <tr>
+                                <td><code>700</code></td>
+                                <td><strong>Controllers</strong></td>
+                                <td><code>701</code> DALI, <code>702</code> Tuya, <code>703</code> Casambi Controllers (empty), <code>704</code> Waterproof, <code>705</code> MADRIX Pixel</td>
+                            </tr>
+                            <tr>
+                                <td><code>750</code></td>
+                                <td><strong>Smart Controls</strong></td>
+                                <td><code>751</code> Casambi Controls, <code>752</code> Smart Switches</td>
+                            </tr>
+                            <tr>
+                                <td><code>800</code></td>
+                                <td><strong>48V Track Systems</strong></td>
+                                <td><code>801</code> Azoogi TR11, <code>802</code> Luminaires, <code>803</code> Tracks, <code>804</code> Track Accessories, <code>805</code> Audio, <code>806</code> Ventilation</td>
+                            </tr>
+                            <tr>
+                                <td><code>900</code></td>
+                                <td><strong>Downlights</strong></td>
+                                <td><code>901</code> Recessed, <code>902</code> Surface Mounted, <code>903</code> Pendant, <code>904</code> Wall Lights</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="dash-doc-callout tip" style="margin-top: 14px;">
+                    <strong>Category Rules:</strong>
+                    <ul style="margin: 8px 0 0 18px; padding: 0;">
+                        <li><strong>Unique numbers:</strong> Every category has its own number, and a subcategory's number is always higher than its parent's and lower than the next parent's block.</li>
+                        <li><strong>Adding a subcategory:</strong> Give it the next free number inside its parent's block. For example, a new Neon type would be <code>214</code>.</li>
+                        <li><strong>Adding a top-level category:</strong> Give it a new empty block, such as <code>1000</code>.</li>
+                        <li><strong>Moving a category:</strong> You can change its number, but its products won't follow automatically. Each product's Order also needs its first three digits updated (see Section 2).</li>
+                    </ul>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>2. Product Order Formula</h3>
+                <p>Every product's order number is calculated from its category number plus its position inside that category:</p>
+
+                <div style="margin: 16px 0; background: var(--dash-fill); border: 1px solid var(--dash-border); border-radius: 8px; padding: 16px 20px;">
+                    <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dash-muted); margin-bottom: 6px;">Order Generation Formula:</div>
+                    <div style="font-size: 18px; font-weight: 700; color: var(--dash-green-dark, #27771e); font-family: monospace;">
+                        Product Order = Category Order × 100 + position (01–99)
+                    </div>
+                </div>
+
+                <div class="dash-table-wrap">
+                    <table class="dash-doc-table">
+                        <thead>
+                            <tr>
+                                <th>Product Example</th>
+                                <th>Category (Order)</th>
+                                <th>Position</th>
+                                <th>Calculated Product Order</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>First Mini Neon product</strong></td>
+                                <td>Mini Neon (<code>201</code>)</td>
+                                <td><code>1</code></td>
+                                <td><code style="font-weight: 700; color: var(--dash-green-dark, #27771e);">20101</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fourth Mini Neon product</strong></td>
+                                <td>Mini Neon (<code>201</code>)</td>
+                                <td><code>4</code></td>
+                                <td><code style="font-weight: 700; color: var(--dash-green-dark, #27771e);">20104</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>First Trimless profile</strong></td>
+                                <td>Trimless Profiles (<code>401</code>)</td>
+                                <td><code>1</code></td>
+                                <td><code style="font-weight: 700; color: var(--dash-green-dark, #27771e);">40101</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>41st Recessed downlight</strong></td>
+                                <td>Recessed (<code>901</code>)</td>
+                                <td><code>41</code></td>
+                                <td><code style="font-weight: 700; color: var(--dash-green-dark, #27771e);">90141</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p style="margin-top: 12px;">This structure allows you to <strong>read any product number directly</strong>. For example, <code>90141</code> is category <strong>901</strong> (Recessed), product <strong>41</strong>.</p>
+
+                <div class="dash-doc-callout tip" style="margin-top: 14px;">
+                    <strong>Product Rules:</strong>
+                    <ul style="margin: 8px 0 0 18px; padding: 0;">
+                        <li><strong>Unique numbers:</strong> No two products share an <code>Order</code> value.</li>
+                        <li><strong>Category first:</strong> Sorting the whole table by <code>Order</code> lists products by category, cleanly following the category order above.</li>
+                        <li><strong>Multi-category products:</strong> A product in more than one category is numbered under the <em>first category</em> in its Categories field. For example, PR126 is listed under Suspended Profiles (<code>411</code>), so its Order is <code>411xx</code>.</li>
+                        <li><strong>Capacity:</strong> Each category holds up to 99 products (01–99). The largest currently is Neon Accessories with 46.</li>
+                    </ul>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>3. How the Baseline Numbers Were Set</h3>
+                <ul class="dash-doc-list">
+                    <li><strong>Categories</strong> were placed in the sequence of the Categories table.</li>
+                    <li><strong>Within each category</strong>, products that already had an order kept their relative sequence.</li>
+                    <li><strong>Products with no order</strong> were placed at the end of their category, sorted alphabetically by name.</li>
+                </ul>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>4. Day-to-Day Maintenance SOP</h3>
+                <div class="dash-doc-steps">
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">1</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Adding a New Product</h4>
+                            <p>Find the highest number in its category and add 1. For example, if the last Mini Neon is <code>20104</code>, the new one is <code>20105</code>.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">2</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Reordering Within a Category</h4>
+                            <p>Swap or renumber only that category's products, and keep the same first three digits intact.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">3</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Inserting in the Middle</h4>
+                            <p>Positions are consecutive, so there is no gap. Renumber the products after the insert point in that category (can be executed in bulk).</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">4</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Changing a Product's Category</h4>
+                            <p>Renumber it into the new category's range matching the destination category's 3-digit prefix.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">5</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Checking & Auditing the Table</h4>
+                            <p>Sort by <code>Order</code> in Airtable. A product appearing in the wrong group, or a number that doesn't match the product's category, means that product needs renumbering.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>5. Synchronization Pipeline & Execution</h3>
+                <p>When you trigger a sync from <a href="{{ route('dashboard.products.index') }}"><strong>Products</strong></a> or via CLI, the backend connects securely to Airtable, fetches all active product records, updates technical specifications, downloads new media assets to local storage, and rebuilds the product cache.</p>
+
                 <div class="dash-doc-grid-cards">
                     <div class="dash-doc-feature-card">
                         <h4>Live Stream Sync</h4>
@@ -387,10 +583,11 @@
                     </div>
                 </div>
 
-                <h3>Troubleshooting Sync Issues</h3>
+                <h3 style="margin-top: 20px;">Troubleshooting Sync Issues</h3>
                 <ul class="dash-doc-list">
-                    <li><strong>Missing Product Images</strong>: Ensure the image field in Airtable contains valid attachments and that <code>php artisan storage:link</code> has been generated on the server.</li>
-                    <li><strong>Duplicate Slugs</strong>: Ensure product codes and names in Airtable are unique to avoid URL routing collisions.</li>
+                    <li><strong>Missing Product Images:</strong> Ensure the image field in Airtable contains valid attachments and that <code>php artisan storage:link</code> has been generated on the server.</li>
+                    <li><strong>Duplicate Slugs:</strong> Ensure product codes and names in Airtable are unique to avoid URL routing collisions.</li>
+                    <li><strong>Out-of-Order Products:</strong> If products appear in the wrong order, verify the 5-digit <code>Order</code> value in Airtable and re-run sync.</li>
                 </ul>
             </article>
         @endif

@@ -47,6 +47,9 @@ class DocumentationTest extends TestCase
             'maintenance',
             'alt',
             'accessibility',
+            'ordering',
+            'airtable',
+            'catalog',
         ];
 
         foreach ($topics as $topic) {
@@ -60,5 +63,13 @@ class DocumentationTest extends TestCase
         $altResponse->assertOk();
         $altResponse->assertSee('Image Alt Text & Accessibility (WCAG 2.1 & SEO)', false);
         $altResponse->assertSee('Search Engine Optimization (SEO) & Google Images', false);
+
+        $productResponse = $this->actingAs($user)->get('/dashboard/docs/products');
+        $productResponse->assertOk();
+        $productResponse->assertSee('Product Catalog & Airtable Guide', false);
+        $productResponse->assertSee('Category Order & Number Blocks', false);
+        $productResponse->assertSee('Product Order = Category Order × 100 + position (01–99)', false);
+        $productResponse->assertSee('90141', false);
+        $productResponse->assertSee('Landscape Lighting', false);
     }
 }

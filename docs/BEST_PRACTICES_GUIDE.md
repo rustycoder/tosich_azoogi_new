@@ -189,5 +189,70 @@ php artisan geo:generate
 php artisan geo:generate --clear
 ```
 
+---
+
+## 7. Azoogi Airtable Ordering Guide & Catalog Hierarchy
+
+Ordering across the lighting catalog is driven by two cooperating `Order` fields:
+* The **Categories table** sets the order of categories.
+* The **Products table** sets the order of products within those categories.
+
+### 7.1 Category Order & Block Ranges
+
+Each top-level category owns a block of numbers in **steps of 100**. Its subcategories use the numbers directly after it:
+
+| Block | Parent Category | Subcategories |
+| :--- | :--- | :--- |
+| **100** | Landscape Lighting | `101` Garden Light, `102` Pool Light, `103` Handrail |
+| **200** | Neon Flex | `201` Mini Neon, `202` Standard Neon, `203` 3D Neon … `213` Long Run Neon |
+| **300** | COB Strips / SMD Strips | `301` COB Strips, `302–304` COB types, `305` SMD Strips, `306–307` SMD types, `308` Flex Panel Sheets |
+| **400** | Profiles | `401` Trimless … `414` Wall Washer *(the 403 and 407 parents hold the Surfaced and Recessed sub-groups)* |
+| **500** | Drivers | `501–504` Driver types |
+| **600** | Accessories | `601` Neon, `602` LED Strip, `603` Remotes (`604` RF Remotes, `605` Wall Panels), `606` Downlight Accessories |
+| **700** | Controllers | `701` DALI, `702` Tuya, `703` Casambi Controllers (empty), `704` Waterproof, `705` MADRIX Pixel |
+| **750** | Smart Controls | `751` Casambi Controls, `752` Smart Switches |
+| **800** | 48V Track Systems | `801` Azoogi TR11, `802` Luminaires, `803` Tracks, `804` Track Accessories, `805` Audio, `806` Ventilation |
+| **900** | Downlights | `901` Recessed, `902` Surface Mounted, `903` Pendant, `904` Wall Lights |
+
+#### Category Rules:
+1. **Unique numbers**: Every category has its own number. A subcategory's number is always higher than its parent's and lower than the next parent's block.
+2. **Adding a subcategory**: Give it the next free number inside its parent's block (e.g., a new Neon type is `214`).
+3. **Adding a top-level category**: Assign a new empty block (e.g., `1000`).
+4. **Moving a category**: Changing a category number requires updating the first three digits of all products in that category.
+
+### 7.2 Product Order Formula & Structure
+
+Every product's number is calculated from its category number plus its position inside that category:
+
+$$\text{Product Order} = \text{Category Order} \times 100 + \text{position } (01–99)$$
+
+| Product | Category (Order) | Position | Product Order |
+| :--- | :--- | :--- | :--- |
+| First Mini Neon product | Mini Neon (`201`) | 1 | `20101` |
+| Fourth Mini Neon product | Mini Neon (`201`) | 4 | `20104` |
+| First Trimless profile | Trimless Profiles (`401`) | 1 | `40101` |
+| 41st Recessed downlight | Recessed (`901`) | 41 | `90141` |
+
+> **Direct Reading Example:** `90141` = Category `901` (Recessed), Product position `41`.
+
+#### Product Rules:
+* **Unique numbers**: No two products share an `Order` value.
+* **Category first**: Sorting the entire table by `Order` automatically sorts products by category, matching the category hierarchy above.
+* **Multi-category products**: A product associated with multiple categories is numbered under the *first category* listed in its Airtable `Categories` field (e.g., PR126 listed under Suspended Profiles (`411`) uses `411xx`).
+* **Capacity**: Each category holds up to 99 products (`01`–`99`).
+
+### 7.3 Baseline Numbering Logic
+1. Categories follow the sequence of the Categories table.
+2. Within each category, products that already had an order retained their relative sequence.
+3. Products without an order were placed at the end of their respective category, sorted alphabetically by name.
+
+### 7.4 Day-to-Day Maintenance SOP
+* **Adding a new product**: Find the highest number in its category and add 1 (e.g., if last Mini Neon is `20104`, the next is `20105`).
+* **Reordering within a category**: Swap or renumber only that category's products, preserving the 3-digit category prefix.
+* **Inserting in the middle**: Positions are consecutive with no gaps. Renumber subsequent products in that category.
+* **Changing a category**: Renumber the product into the destination category's 3-digit prefix range.
+* **Auditing the table**: Sort by `Order`. Any fixture out of sequence or mismatched with its parent category prefix indicates a renumbering requirement.
+
+
 
 
