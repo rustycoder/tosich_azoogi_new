@@ -272,15 +272,12 @@ $productSchema = [
             <div class="quote-grid">
 
                 <div class="quote-intro">
-                    <h2>Let's light up your project.</h2>
-                    <p style="margin-bottom: 20px;">
-                        Request a B2B project quote or coordinate a specsheet request. Fill out your details, and an Azoogi
-                        commercial specialist will follow up with pricing, lead times, and trade discount rates.
+                    <h2>Request a Quote</h2>
+                    <p>
+                        Send us your specification and our team will respond with pricing, lead times and a spec sheet, usually within 4 business hours.
                     </p>
-                    <div style="font-size:var(--fs-kicker); color:var(--muted); line-height: 2;">
-                        <div><strong>Sales Support:</strong> 1300 641 261</div>
-                        <div><strong>Email Response:</strong> sales@azoogi.com</div>
-                        <div><strong>B2B Turnaround:</strong> Within 4 business hours</div>
+                    <div style="font-size:var(--fs-caption); color:var(--semi-muted);">
+                        <span>Azoogi supplies through our wholsale and retail partners. Let us know your preferred electrical wholesaler or lighting retailer, or we'll recommend one near you.</p>
                     </div>
                 </div>
 
@@ -291,31 +288,31 @@ $productSchema = [
                             <div class="form-group">
                                 <label class="form-label" for="quote-name">Your Name *</label>
                                 <input class="form-input" id="quote-name" name="quote-name" type="text" required
-                                    maxlength="191" placeholder="e.g. John Doe" value="{{ old('quote-name') }}">
+                                    maxlength="191" placeholder="" value="{{ old('quote-name') }}">
                             </div>
                             <div class="form-group">
-                                <label class="form-label" for="quote-email">Email Address *</label>
+                                <label class="form-label" for="quote-email">Email *</label>
                                 <input class="form-input" id="quote-email" name="quote-email" type="email" required
-                                    maxlength="191" placeholder="e.g. name@company.com.au" value="{{ old('quote-email') }}">
+                                    maxlength="191" placeholder="" value="{{ old('quote-email') }}">
                             </div>
                         </div>
 
                         <div class="form-row-2">
                             <div class="form-group">
-                                <label class="form-label" for="quote-company">Company / Trade Name *</label>
+                                <label class="form-label" for="quote-company">Company *</label>
                                 <input class="form-input" id="quote-company" name="quote-company" type="text" required
-                                    maxlength="191" placeholder="e.g. Summit Electrical" value="{{ old('quote-company') }}">
+                                    maxlength="191" placeholder="Summit Electrical" value="{{ old('quote-company') }}">
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="quote-project">Project Name *</label>
                                 <input class="form-input" id="quote-project" name="quote-project" type="text" required
-                                    maxlength="191" placeholder="e.g. Sydney Office fitout"
+                                    maxlength="191" placeholder="Sydney Office fitout"
                                     value="{{ old('quote-project') }}">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label" for="quote-spec">Configured Specification *</label>
+                            <label class="form-label" for="quote-spec">Your Specification *</label>
 
                             <!-- Single-Card Configured Spec Summary -->
                             <div class="configured-spec-card" id="configured-spec-card">
@@ -342,7 +339,7 @@ $productSchema = [
                         <div class="form-group">
                             <label class="form-label" for="quote-message">Additional Project Details</label>
                             <textarea class="form-textarea" id="quote-message" name="quote-message"
-                                placeholder="Dimming requirements, quantities, delivery dates or other notes.">{{ old('quote-message') }}</textarea>
+                                placeholder="Dimming, controls, connection requirements, your preferred wholesaler or retailer, or anything else we should know.">{{ old('quote-message') }}</textarea>
                         </div>
 
                         <x-turnstile action="product_enquiry" />
@@ -351,7 +348,7 @@ $productSchema = [
                             <p class="form-status is-error">{{ $errors->first() }}</p>
                         @endif
 
-                        <button class="btn" style="margin-top: 8px;" type="submit">Submit Spec Inquiry</button>
+                        <button class="btn" style="margin-top: 8px;" type="submit">Request Quote</button>
                     </form>
                 </div>
 

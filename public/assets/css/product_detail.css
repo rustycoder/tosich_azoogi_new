@@ -784,7 +784,7 @@ a.meta-badge:hover {
 
 .quote-intro p {
   color: var(--muted);
-  font-size: var(--fs-lead);
+  font-size: var(--fs-body);
   line-weight: 1.6;
 }
 
@@ -801,11 +801,11 @@ a.meta-badge:hover {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .quote-form-card .form-textarea{
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 @media (max-width: 600px) {
@@ -816,7 +816,7 @@ a.meta-badge:hover {
 }
 
 .form-group {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -1412,7 +1412,7 @@ a.meta-badge:hover {
   box-shadow: none;
   transition: border-color 0.3s ease;
   margin-top: 6px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .configured-spec-card:hover {
