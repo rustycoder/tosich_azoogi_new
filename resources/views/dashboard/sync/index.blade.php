@@ -5,33 +5,33 @@
 @section('content')
 <div class="dash-sync-page">
     <div class="dash-head">
-        <div>
+        <div class="dash-head-title">
             <h1>Airtable Sync &amp; Catalog Audit</h1>
-            <p class="dash-lead">
-                Trigger on-demand synchronization with Airtable and review catalog completeness, WebP images, and SVG icons.
-                @if ($audit && isset($audit['audited_at']))
-                    <span style="display: block; margin-top: 4px; font-size: 11.5px; color: var(--dash-muted);">
-                        Last Audited: <strong style="color: var(--dash-ink);">{{ \Carbon\Carbon::parse($audit['audited_at'])->diffForHumans() }}</strong> ({{ $audit['audited_at_human'] }})
-                    </span>
-                @endif
-            </p>
+            <div class="dash-head-actions">
+                <form method="post" action="{{ route('dashboard.sync.audit') }}">
+                    @csrf
+                    <button class="btn secondary" type="submit" title="Audit catalog without fetching from Airtable">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px; margin-right: 6px; display: inline-block; vertical-align: -2px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        <span>Run Audit</span>
+                    </button>
+                </form>
+                <form id="dash-product-sync-form" method="post" action="{{ route('dashboard.sync.trigger') }}" data-stream-url="{{ route('dashboard.products.sync.stream') }}">
+                    @csrf
+                    <button id="dash-product-sync-btn" class="btn primary" type="submit">
+                        <svg class="dash-sync-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px; margin-right: 6px; display: inline-block; vertical-align: -2px;"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+                        <span>Sync Airtable</span>
+                    </button>
+                </form>
+            </div>
         </div>
-        <div class="dash-head-actions" style="display: flex; gap: 10px; align-items: center;">
-            <form method="post" action="{{ route('dashboard.sync.audit') }}">
-                @csrf
-                <button class="btn secondary" type="submit" title="Audit catalog without fetching from Airtable">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px; margin-right: 6px; display: inline-block; vertical-align: -2px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    <span>Run Catalog Audit</span>
-                </button>
-            </form>
-            <form id="dash-product-sync-form" method="post" action="{{ route('dashboard.sync.trigger') }}" data-stream-url="{{ route('dashboard.products.sync.stream') }}">
-                @csrf
-                <button id="dash-product-sync-btn" class="btn primary" type="submit">
-                    <svg class="dash-sync-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px; margin-right: 6px; display: inline-block; vertical-align: -2px;"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
-                    <span>Sync Airtable Now</span>
-                </button>
-            </form>
-        </div>
+        <p class="dash-lead">
+            Trigger on-demand synchronization with Airtable and review catalog completeness, WebP images, and SVG icons.
+            @if ($audit && isset($audit['audited_at']))
+                <span style="display: block; margin-top: 4px; font-size: 11.5px; color: var(--dash-muted);">
+                    Last Audited: <strong style="color: var(--dash-ink);">{{ \Carbon\Carbon::parse($audit['audited_at'])->diffForHumans() }}</strong> ({{ $audit['audited_at_human'] }})
+                </span>
+            @endif
+        </p>
     </div>
 
     <!-- Live Sync Streaming Progress Panel -->
@@ -568,7 +568,7 @@
                         @elseif ($audit['seo']['missing_meta_description']['count'] > 0)
                             <span class="dash-pill is-cancelled" style="font-size: 10.5px;">{{ $audit['seo']['missing_meta_description']['count'] }} Missing</span>
                         @else
-                            <span class="dash-pill is-cancelled" style="font-size: 10.5px;">{{ $audit['seo']['standards']['meta_description']['too_long_count'] + $audit['seo']['standards']['meta_description']['too_short_count'] }} Limit Warnings</span>
+                            <span class="dash-pill is-cancelled" style="font-size: 10.5px;">{{ $audit['seo']['standards']['meta_description']['too_long_count'] + $audit['seo']['standards']['meta_description']['too_short_count'] }} Warnings</span>
                         @endif
                     </div>
                 </div>
@@ -809,7 +809,7 @@
                     @csrf
                     <button class="btn primary" type="submit" style="padding: 10px 20px;">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px; margin-right: 6px; display: inline-block; vertical-align: -2px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        <span>Run Catalog Audit Now</span>
+                        <span>Run Audit</span>
                     </button>
                 </form>
             </div>

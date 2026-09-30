@@ -56,7 +56,7 @@ class DashboardSyncTest extends TestCase
         $response = $this->actingAs($admin)->get('/dashboard/sync');
         $response->assertOk()
             ->assertSee('Airtable Sync &amp; Catalog Audit', false)
-            ->assertSee('Run Catalog Audit', false)
+            ->assertSee('Run Audit', false)
             ->assertSee('No Catalog Audit Report Available', false);
 
         // 2. Triggering the on-demand audit action calculates and caches the report
