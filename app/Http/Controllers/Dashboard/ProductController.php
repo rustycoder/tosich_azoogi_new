@@ -50,19 +50,24 @@ class ProductController extends Controller
 
     public function syncStream(Request $request): StreamedResponse
     {
-        set_time_limit(300);
+        @set_time_limit(300);
+        if (function_exists('apache_setenv')) {
+            @apache_setenv('no-gzip', '1');
+        }
+        @ini_set('zlib.output_compression', '0');
+        @ini_set('implicit_flush', '1');
 
         return response()->stream(function (): void {
             while (ob_get_level() > 0) {
-                ob_end_flush();
+                @ob_end_flush();
             }
 
             $sendEvent = function (array $data): void {
                 echo 'data: '.json_encode($data)."\n\n";
                 if (ob_get_level() > 0) {
-                    ob_flush();
+                    @ob_flush();
                 }
-                flush();
+                @flush();
             };
 
             try {
@@ -81,7 +86,7 @@ class ProductController extends Controller
             }
         }, 200, [
             'Content-Type' => 'text/event-stream',
-            'Cache-Control' => 'no-cache, no-transform',
+            'Cache-Control' => 'no-cache, no-transform, no-store',
             'Connection' => 'keep-alive',
             'X-Accel-Buffering' => 'no',
         ]);

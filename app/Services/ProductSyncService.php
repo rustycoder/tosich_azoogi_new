@@ -105,9 +105,23 @@ class ProductSyncService implements IProductSyncService
 
             $emit(28, 'Fetching products...', 'Connecting to Airtable products table...');
             $this->log($run, 'Fetching products from Airtable ['.$productsTable.'].');
-            $records = $this->airtable->fetchRecords($productsTable);
+            $records = [];
+            $pageIndex = 0;
+            foreach ($this->airtable->eachPage($productsTable) as $page) {
+                $pageIndex++;
+                foreach ($page as $record) {
+                    $records[] = $record;
+                }
+                $emit(
+                    min(34, 28 + ($pageIndex * 2)),
+                    "Fetching products (page {$pageIndex})...",
+                    "Retrieved page {$pageIndex} from Airtable (".count($records).' product records loaded so far)...',
+                    count($records),
+                    0
+                );
+            }
             $this->log($run, 'Fetched '.count($records).' product record'.(count($records) === 1 ? '' : 's').'.');
-            $emit(32, 'Products fetched', 'Retrieved '.count($records).' raw product records.');
+            $emit(35, 'Products fetched', 'Retrieved all '.count($records).' raw product records from Airtable.', count($records), count($records));
 
             $emit(35, 'Compiling catalog...', 'Compiling and normalizing catalog data...');
             $this->log($run, 'Compiling products.');
