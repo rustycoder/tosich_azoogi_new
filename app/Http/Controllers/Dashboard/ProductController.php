@@ -16,10 +16,25 @@ class ProductController extends Controller
     public function index(Request $request): View
     {
         $search = dash_search_query($request->query('q'));
+        $category = $request->query('category');
+        $activeCategory = filled($category) && $category !== 'all' ? (string) $category : null;
+
+        $status = $request->query('status');
+        $activeStatus = filled($status) && $status !== 'all' ? (string) $status : null;
+
+        $rawPerPage = (int) $request->query('per_page', 50);
+        $perPage = in_array($rawPerPage, [15, 25, 50, 100, 150, 200], true) ? $rawPerPage : 50;
+
+        $categories = $this->products->hierarchicalCategories();
 
         return view('dashboard.products.index', [
-            'products' => $this->products->dashboardList($search),
+            'products' => $this->products->dashboardList($search, $activeCategory, $perPage, $activeStatus),
             'search' => $search,
+            'categories' => $categories,
+            'activeCategory' => $activeCategory,
+            'activeStatus' => $activeStatus,
+            'perPage' => $perPage,
+            'perPageOptions' => [50, 100, 150, 200],
             'latestSync' => $this->products->latestSync(),
         ]);
     }

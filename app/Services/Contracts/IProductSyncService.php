@@ -18,7 +18,12 @@ interface IProductSyncService
     /**
      * @return LengthAwarePaginator<int, Product>
      */
-    public function dashboardList(string $search = ''): LengthAwarePaginator;
+    public function dashboardList(string $search = '', ?string $category = null, int $perPage = 50, ?string $status = null): LengthAwarePaginator;
+
+    /**
+     * @return list<array{name: string, label: string, depth: int, airtable_id: string}>
+     */
+    public function hierarchicalCategories(): array;
 
     public function latestSync(): ?ProductSync;
 }

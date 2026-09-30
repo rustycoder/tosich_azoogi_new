@@ -36,7 +36,7 @@ class DashboardTest extends TestCase
         $this->seed([AdminUserSeeder::class, PageSeeder::class]);
         $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
 
-        $this->actingAs($admin)->get('/dashboard')->assertOk();
+        $this->actingAs($admin)->get('/dashboard')->assertOk()->assertSee('Sync Airtable', false);
         $this->actingAs($admin)->get('/dashboard/staff')->assertOk();
         $this->actingAs($admin)->get('/dashboard/content/pages')->assertOk()->assertSee('Home', false)->assertSee('LED Calculator', false);
         $this->actingAs($admin)->get('/dashboard/content/pages/home')->assertOk();
@@ -44,7 +44,7 @@ class DashboardTest extends TestCase
         $this->actingAs($admin)->get('/dashboard/content/sections')->assertOk()->assertSee('Header', false)->assertSee('Footer', false)->assertSee('top of every public page', false)->assertSee('bottom of every public page', false);
         $this->actingAs($admin)->get('/dashboard/content/sections/header')->assertOk()->assertSee('dash-card', false)->assertDontSee('dash-visual-frame', false);
         $this->actingAs($admin)->get('/dashboard/content/projects')->assertOk();
-        $this->actingAs($admin)->get('/dashboard/content/products')->assertOk()->assertSee('Sync', false);
+        $this->actingAs($admin)->get('/dashboard/content/products')->assertOk();
     }
 
     public function test_staff_project_and_profile_screens_use_full_width_cards(): void
@@ -59,7 +59,7 @@ class DashboardTest extends TestCase
         $this->actingAs($admin)->get('/dashboard/staff/create')->assertOk()->assertSee('dash-card', false);
         $this->actingAs($admin)->get(route('dashboard.staff.edit', $staff))->assertOk()->assertSee('dash-card', false);
         $this->actingAs($admin)->get('/dashboard/content/projects')->assertOk()->assertSee('dash-list-card', false)->assertSee('dash-list-card-main', false)->assertSee('dash-list-thumb', false)->assertSee('name="q"', false);
-        $this->actingAs($admin)->get('/dashboard/content/products')->assertOk()->assertSee('name="q"', false)->assertSee('Sync', false)->assertSee('dash-list-card-main', false)->assertSee('dash-list-thumb', false);
+        $this->actingAs($admin)->get('/dashboard/content/products')->assertOk()->assertSee('name="q"', false)->assertSee('dash-airtable-table', false)->assertSee('dash-preview-thumb', false);
         $this->actingAs($admin)
             ->get('/dashboard/content/projects/create')
             ->assertOk()
@@ -114,11 +114,13 @@ class DashboardTest extends TestCase
             'product_name' => 'Garden Light',
             'product_code' => 'GL-100',
             'category' => 'Profiles',
+            'categories' => ['Profiles'],
         ]);
         Product::factory()->create([
             'product_name' => 'Neon Flex',
             'product_code' => 'NF-200',
             'category' => 'Garden',
+            'categories' => ['Garden'],
         ]);
 
         $this->actingAs($admin)
@@ -185,14 +187,17 @@ class DashboardTest extends TestCase
         Product::factory()->create([
             'product_name' => 'Zebra Light',
             'product_code' => 'ZZ-9',
+            'sort_order' => 1,
         ]);
         Product::factory()->create([
             'product_name' => 'Apple Light',
             'product_code' => 'AA-1',
+            'sort_order' => 1,
         ]);
         Product::factory()->create([
             'product_name' => 'No Sku Light',
             'product_code' => null,
+            'sort_order' => 1,
         ]);
 
         $html = $this->actingAs($admin)
@@ -222,6 +227,7 @@ class DashboardTest extends TestCase
             Product::factory()->create([
                 'product_name' => 'Catalog Item '.$label,
                 'product_code' => 'SKU-'.$label,
+                'sort_order' => $index,
             ]);
             Project::factory()->create([
                 'title' => 'Catalog Project '.$label,
@@ -233,7 +239,7 @@ class DashboardTest extends TestCase
         }
 
         $this->actingAs($admin)
-            ->get('/dashboard/content/products')
+            ->get('/dashboard/content/products?per_page=15')
             ->assertOk()
             ->assertSee('Catalog Item 01', false)
             ->assertSee('Catalog Item 15', false)
@@ -241,7 +247,7 @@ class DashboardTest extends TestCase
             ->assertSee('dash-pagination', false);
 
         $this->actingAs($admin)
-            ->get('/dashboard/content/products?page=2')
+            ->get('/dashboard/content/products?per_page=15&page=2')
             ->assertOk()
             ->assertSee('Catalog Item 16', false)
             ->assertDontSee('Catalog Item 01', false);

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 #[Fillable([
     'airtable_id',
@@ -21,6 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'product_type',
     'stocked_item',
     'supplier_name',
+    'supplier_code',
     'meta_title',
     'meta_description',
     'product_description',
@@ -112,12 +114,58 @@ class Product extends Model
         return $url !== null ? media_url($url) : null;
     }
 
+    public function datasheetFileUrl(): ?string
+    {
+        $url = $this->firstAssetUrl($this->datasheet_file);
+
+        return $url !== null ? media_url($url) : null;
+    }
+
     public function datasheetUrl(): ?string
     {
         $url = $this->firstAssetUrl($this->datasheet_file)
             ?? $this->firstAssetUrl($this->datasheet);
 
         return $url !== null ? media_url($url) : null;
+    }
+
+    public function datasheetStatus(): ?string
+    {
+        $val = $this->datasheet;
+        if ($val === null || $val === '' || $val === []) {
+            return null;
+        }
+
+        if (is_bool($val)) {
+            return $val ? 'Yes' : 'No';
+        }
+
+        if (is_array($val)) {
+            if (isset($val['url'])) {
+                return 'Yes';
+            }
+            if (isset($val[0]) && is_string($val[0])) {
+                $val = $val[0];
+            }
+        }
+
+        if (is_string($val)) {
+            $trimmed = trim($val, " \t\n\r\0\x0B\"'");
+            if (strcasecmp($trimmed, 'yes') === 0 || $trimmed === '1' || strcasecmp($trimmed, 'true') === 0) {
+                return 'Yes';
+            }
+            if (strcasecmp($trimmed, 'no') === 0 || $trimmed === '0' || strcasecmp($trimmed, 'false') === 0) {
+                return 'No';
+            }
+            if ($trimmed !== '' && ! str_starts_with($trimmed, 'http') && ! str_starts_with($trimmed, '/')) {
+                return $trimmed;
+            }
+            if (str_starts_with($trimmed, 'http') || str_starts_with($trimmed, '/')) {
+                return 'Yes';
+            }
+        }
+
+        return null;
     }
 
     public function manualUrl(): ?string
@@ -171,6 +219,79 @@ class Product extends Model
         }
 
         return null;
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function galleryImageUrls(bool $excludeCover = true): array
+    {
+        $urls = [];
+        if (! is_array($this->product_images) || $this->product_images === []) {
+            return $urls;
+        }
+
+        $coverUrl = $excludeCover ? $this->coverUrl() : null;
+        $hasCustomCover = filled($this->cover);
+        $coverMatched = false;
+
+        foreach ($this->product_images as $index => $item) {
+            $url = is_string($item) ? $item : (is_array($item) ? ($item['url'] ?? '') : '');
+            if (! is_string($url) || trim($url) === '') {
+                continue;
+            }
+
+            $mediaUrl = media_url(trim($url));
+
+            if ($excludeCover) {
+                if (! $coverMatched && $mediaUrl === $coverUrl) {
+                    $coverMatched = true;
+
+                    continue;
+                }
+
+                if (! $hasCustomCover && $index === 0) {
+                    continue;
+                }
+            }
+
+            $urls[] = $mediaUrl;
+        }
+
+        return $urls;
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function technicalIconUrls(): array
+    {
+        $urls = [];
+        if (is_array($this->technical_icons)) {
+            foreach ($this->technical_icons as $item) {
+                $url = is_string($item) ? $item : (is_array($item) ? ($item['url'] ?? '') : '');
+                if (is_string($url) && trim($url) !== '') {
+                    $urls[] = media_url(trim($url));
+                }
+            }
+        } elseif (is_string($this->technical_icons) && trim($this->technical_icons) !== '') {
+            $urls[] = media_url(trim($this->technical_icons));
+        }
+
+        return $urls;
+    }
+
+    public function shortDescription(): string
+    {
+        if (isset($this->attributes['product_short_description']) && filled($this->attributes['product_short_description'])) {
+            return (string) $this->attributes['product_short_description'];
+        }
+
+        if (filled($this->product_description)) {
+            return Str::limit(trim(strip_tags((string) $this->product_description)), 120);
+        }
+
+        return '';
     }
 
     public function isPublished(): bool

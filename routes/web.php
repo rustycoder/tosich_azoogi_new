@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DocumentationController;
 use App\Http\Controllers\Dashboard\EmailTemplateController;
 use App\Http\Controllers\Dashboard\EnquiryController;
 use App\Http\Controllers\Dashboard\LlmFeedController;
 use App\Http\Controllers\Dashboard\PageContentController;
+use App\Http\Controllers\Dashboard\ProductAttributeController;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\ProductDatasheetExportController;
 use App\Http\Controllers\Dashboard\ProfileController;
@@ -69,6 +71,8 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         Route::get('content/products', [ProductController::class, 'index'])->name('products.index');
         Route::post('content/products/sync', [ProductController::class, 'sync'])->name('products.sync');
         Route::match(['get', 'post'], 'content/products/sync/stream', [ProductController::class, 'syncStream'])->name('products.sync.stream');
+        Route::get('content/categories', [CategoryController::class, 'index'])->name('categories.index');
+        Route::get('content/product-attributes', [ProductAttributeController::class, 'index'])->name('product-attributes.index');
     });
 
     Route::middleware('can.manage:datasheet')->group(function () {

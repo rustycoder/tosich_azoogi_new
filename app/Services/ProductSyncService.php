@@ -168,9 +168,17 @@ class ProductSyncService implements IProductSyncService
         SyncProductsJob::dispatch($triggeredBy);
     }
 
-    public function dashboardList(string $search = ''): LengthAwarePaginator
+    public function dashboardList(string $search = '', ?string $category = null, int $perPage = 50, ?string $status = null): LengthAwarePaginator
     {
-        return $this->products->dashboardList($search);
+        return $this->products->dashboardList($search, $category, $perPage, $status);
+    }
+
+    /**
+     * @return list<array{name: string, label: string, depth: int, airtable_id: string}>
+     */
+    public function hierarchicalCategories(): array
+    {
+        return $this->products->hierarchicalCategories();
     }
 
     public function latestSync(): ?ProductSync

@@ -7,6 +7,7 @@ use App\Enums\EnquiryType;
 use App\Http\Controllers\Controller;
 use App\Services\Contracts\IDashboardMetricsService;
 use App\Services\Contracts\IEnquiryService;
+use App\Services\Contracts\IProductSyncService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -15,6 +16,7 @@ class DashboardController extends Controller
     public function __construct(
         private IEnquiryService $enquiries,
         private IDashboardMetricsService $metrics,
+        private IProductSyncService $productSync,
     ) {}
 
     public function __invoke(Request $request): View
@@ -42,6 +44,7 @@ class DashboardController extends Controller
             'visitedPageMetrics' => $user ? $this->metrics->visitedPages($user) : null,
             'visitedCountryMetrics' => $user ? $this->metrics->visitedCountries($user) : null,
             'topProductMetrics' => $user ? $this->metrics->topProducts($user) : null,
+            'latestSync' => $this->productSync->latestSync(),
         ]);
     }
 }
