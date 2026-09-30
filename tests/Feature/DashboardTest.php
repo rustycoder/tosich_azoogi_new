@@ -36,7 +36,7 @@ class DashboardTest extends TestCase
         $this->seed([AdminUserSeeder::class, PageSeeder::class]);
         $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
 
-        $this->actingAs($admin)->get('/dashboard')->assertOk()->assertSee('Sync Airtable', false);
+        $this->actingAs($admin)->get('/dashboard')->assertOk()->assertSee('Airtable Sync', false);
         $this->actingAs($admin)->get('/dashboard/staff')->assertOk();
         $this->actingAs($admin)->get('/dashboard/content/pages')->assertOk()->assertSee('Home', false)->assertSee('LED Calculator', false);
         $this->actingAs($admin)->get('/dashboard/content/pages/home')->assertOk();

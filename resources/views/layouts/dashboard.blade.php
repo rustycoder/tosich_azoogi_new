@@ -45,6 +45,12 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1z"/></svg>
                 Dashboard
             </a>
+            @if ($canManageProducts || $isAdmin)
+                <a href="{{ route('dashboard.sync.index') }}" class="{{ request()->routeIs('dashboard.sync.*') ? 'is-active' : '' }}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+                    Airtable Sync
+                </a>
+            @endif
             @if ($canManageQuoteEnquiries || $canManageProductEnquiries || $canManageContactEnquiries)
                 <div class="dash-group">Enquiries</div>
                 @if ($canManageQuoteEnquiries)
@@ -86,10 +92,6 @@
                     <a href="{{ route('dashboard.product-attributes.index') }}" class="{{ request()->routeIs('dashboard.product-attributes.*') ? 'is-active' : '' }}">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>
                         Product Attributes
-                    </a>
-                    <a href="{{ route('dashboard.sync.index') }}" class="{{ request()->routeIs('dashboard.sync.*') ? 'is-active' : '' }}">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
-                        Airtable Sync
                     </a>
                 @endif
                 @if ($canManagePages)
