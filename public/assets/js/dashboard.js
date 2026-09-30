@@ -784,6 +784,11 @@
                                 etaText.textContent = '0s';
                                 closeBtn.style.display = 'inline-block';
                                 toast('Product sync completed successfully!');
+                                if (window.location.pathname.includes('/dashboard/sync')) {
+                                    setTimeout(() => {
+                                        window.location.reload();
+                                    }, 1600);
+                                }
                             } else if (data.status === 'failed') {
                                 clearInterval(elapsedInterval);
                                 statusText.textContent = 'Failed';

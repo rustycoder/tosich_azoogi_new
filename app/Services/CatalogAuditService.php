@@ -409,11 +409,11 @@ class CatalogAuditService implements ICatalogAuditService
                 }
             }
 
-            // Check Dimension Diagrams (WebP or SVG)
+            // Check Dimension Diagrams (Must be WebP only)
             $dimUrl = $product->dimensionUrl();
             if (filled($dimUrl)) {
                 $ext = $this->extractExtension($dimUrl);
-                if ($ext && ! in_array($ext, ['webp', 'svg'])) {
+                if ($ext && $ext !== 'webp') {
                     $nonWebpDimensions[] = [
                         'id' => $product->id,
                         'name' => $product->product_name,
@@ -505,7 +505,7 @@ class CatalogAuditService implements ICatalogAuditService
                 'severity' => count($nonWebpGallery) > 0 ? 'medium' : 'ok',
             ],
             'non_webp_dimensions' => [
-                'label' => 'Non-WebP/SVG Dimension Diagrams (Expected: WebP or SVG)',
+                'label' => 'Non-WebP Dimension Diagrams (Expected: WebP)',
                 'count' => count($nonWebpDimensions),
                 'samples' => array_slice($nonWebpDimensions, 0, 10),
                 'severity' => count($nonWebpDimensions) > 0 ? 'medium' : 'ok',

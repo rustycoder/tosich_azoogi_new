@@ -111,23 +111,25 @@ class DashboardSyncTest extends TestCase
 
     public function test_catalog_audit_flags_non_webp_images_and_non_svg_icons(): void
     {
-        // 1. Product with non-webp cover (.jpg) and non-svg technical icon (.png)
+        // 1. Product with non-webp cover (.jpg), non-webp dimension (.png), and non-svg technical icon (.png)
         Product::factory()->create([
             'product_name' => 'Legacy Format Light',
             'product_code' => 'AZ-LEGACY-01',
             'slug' => 'legacy-format-light',
             'cover' => 'https://example.com/images/lamp.jpg',
             'product_images' => ['https://example.com/images/lamp_gallery.png'],
+            'product_dimension' => ['https://example.com/images/lamp_dim.png'],
             'technical_icons' => ['https://example.com/icons/dimmable.png'],
         ]);
 
-        // 2. Product with compliant webp images and svg icons
+        // 2. Product with compliant webp images, webp dimensions, and svg icons
         Product::factory()->create([
             'product_name' => 'Modern Compliant Light',
             'product_code' => 'AZ-MODERN-01',
             'slug' => 'modern-compliant-light',
             'cover' => 'https://example.com/images/lamp.webp',
             'product_images' => ['https://example.com/images/lamp_gallery.webp'],
+            'product_dimension' => ['https://example.com/images/lamp_dim.webp'],
             'technical_icons' => ['https://example.com/icons/dimmable.svg'],
         ]);
 
@@ -138,6 +140,8 @@ class DashboardSyncTest extends TestCase
         $this->assertEquals(1, $audit['image_standards']['non_webp_covers']['count']);
         $this->assertEquals('JPG', $audit['image_standards']['non_webp_covers']['samples'][0]['format']);
         $this->assertEquals(1, $audit['image_standards']['non_webp_gallery']['count']);
+        $this->assertEquals(1, $audit['image_standards']['non_webp_dimensions']['count']);
+        $this->assertEquals('PNG', $audit['image_standards']['non_webp_dimensions']['samples'][0]['format']);
         $this->assertEquals(1, $audit['image_standards']['non_svg_tech_icons']['count']);
         $this->assertEquals('PNG', $audit['image_standards']['non_svg_tech_icons']['samples'][0]['format']);
     }

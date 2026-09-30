@@ -230,9 +230,9 @@
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span style="font-size: 12.5px; color: var(--dash-ink);">Dimension Diagrams</span>
                         @if ($audit['image_standards']['non_webp_dimensions']['count'] === 0)
-                            <span class="dash-pill is-active" style="font-size: 10.5px;">WebP/SVG</span>
+                            <span class="dash-pill is-active" style="font-size: 10.5px;">All WebP</span>
                         @else
-                            <span class="dash-tag" style="font-size: 10.5px;">{{ $audit['image_standards']['non_webp_dimensions']['count'] }} Other</span>
+                            <span class="dash-pill is-pending" style="font-size: 10.5px;">{{ $audit['image_standards']['non_webp_dimensions']['count'] }} Non-WebP</span>
                         @endif
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center;">
