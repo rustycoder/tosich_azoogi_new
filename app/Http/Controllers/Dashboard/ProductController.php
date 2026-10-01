@@ -73,7 +73,7 @@ class ProductController extends Controller
             try {
                 $this->products->sync((string) auth()->id(), function (array $event) use ($sendEvent): void {
                     $sendEvent($event);
-                });
+                }, force: true);
             } catch (\Throwable $e) {
                 $sendEvent([
                     'status' => 'failed',
