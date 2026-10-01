@@ -784,7 +784,7 @@ a.meta-badge:hover {
 
 .quote-intro p {
   color: var(--muted);
-  font-size: var(--fs-body);
+  font-size: var(--fs-lead);
   line-weight: 1.6;
 }
 

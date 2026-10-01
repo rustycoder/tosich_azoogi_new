@@ -279,7 +279,7 @@
                         Send us your specification and our team will respond with pricing, lead times and a spec sheet,
                         usually within 4 business hours.
                     </p>
-                    <div style="font-size:var(--fs-caption); color:var(--semi-muted);">
+                    <div style="font-size:var(--fs-body); color:var(--semi-muted);">
                         <span>Azoogi supplies through our wholsale and retail partners. Let us know your preferred
                             electrical wholesaler or lighting retailer, or we'll recommend one near you.</p>
                     </div>
@@ -318,7 +318,7 @@
                             <div class="form-group">
                                 <label class="form-label" for="quote-phone">Phone (Optional)</label>
                                 <input class="form-input" id="quote-phone" name="quote-phone" type="tel" maxlength="50"
-                                    placeholder="+61 400 000 000" value="{{ old('quote-phone') }}">
+                                    placeholder="" value="{{ old('quote-phone') }}">
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="quote-location">Project Location</label>
