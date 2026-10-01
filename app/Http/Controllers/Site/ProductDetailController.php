@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+use App\Models\Page;
 use App\Models\Product;
 use App\Services\Contracts\IPageVisitService;
+use App\Support\PageMetaBag;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -82,10 +84,16 @@ class ProductDetailController extends Controller
                 ->all();
         }
 
+        $productsPage = Page::query()->where('slug', 'products')->with('meta')->first();
+        $productsMeta = $productsPage ? PageMetaBag::for($productsPage) : null;
+        $quoteImage = $productsMeta?->get('quote.image') ?: '/assets/supportthatlasts.jpeg';
+
         return view('pages.product-detail', [
             'product' => $product,
             'slug' => $product?->slug ?? $slug,
             'recommendedProducts' => $recommendedProducts,
+            'quoteImage' => $quoteImage,
+            'meta' => $productsMeta,
         ]);
     }
 

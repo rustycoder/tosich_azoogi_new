@@ -280,9 +280,15 @@
                         usually within 4 business hours.
                     </p>
                     <div style="font-size:var(--fs-body); color:var(--semi-muted);">
-                        <span>Azoogi supplies through our wholsale and retail partners. Let us know your preferred
+                        <p>Azoogi supplies through our wholesale and retail partners. Let us know your preferred
                             electrical wholesaler or lighting retailer, or we'll recommend one near you.</p>
                     </div>
+
+                    @if (!empty($quoteImage))
+                        <div class="quote-intro-image">
+                            <img src="{{ asset($quoteImage) }}" alt="Request a Quote — Azoogi" loading="lazy">
+                        </div>
+                    @endif
                 </div>
 
                 <div class="quote-form-card">
