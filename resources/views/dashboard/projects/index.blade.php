@@ -94,7 +94,6 @@
                 <th scope="col" style="min-width: 220px;">Summary</th>
                 <th scope="col" style="min-width: 220px;">Description</th>
                 <th scope="col" style="min-width: 140px;">Updated</th>
-                <th scope="col" style="width: 80px; text-align: center;">Actions</th>
             </tr>
         </thead>
         <tbody @if ($projects->isNotEmpty() && $search === '' && $activeStatus === null && $activeFeatured === null && ! $projects->hasPages()) data-dash-sort="{{ route('dashboard.projects.reorder') }}" @endif>
@@ -132,9 +131,11 @@
 
                     <!-- 3. Title (Sticky Column) -->
                     <td class="dash-sticky-col">
-                        <a href="{{ route('dashboard.projects.edit', $project) }}" class="dash-product-title">
-                            <strong>{{ $project->title }}</strong>
-                        </a>
+                        @include('dashboard.partials.title-link', [
+                            'label' => $project->title,
+                            'href' => route('dashboard.projects.edit', $project),
+                            'view' => route('project-detail', ['slug' => $project->slug]),
+                        ])
                     </td>
 
                     <!-- 4. Status Toggle -->
@@ -262,19 +263,10 @@
                             </span>
                         </div>
                     </td>
-
-                    <!-- 15. Actions -->
-                    <td style="text-align: center;">
-                        <div style="display: inline-flex; align-items: center; gap: 6px;">
-                            <a href="{{ route('dashboard.projects.edit', $project) }}" class="btn is-sm" style="padding: 4px 8px; font-size: 11px;" title="Edit Project">
-                                Edit
-                            </a>
-                        </div>
-                    </td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="15">
+                    <td colspan="14">
                         <div class="dash-card dash-empty">
                             {{ $search === '' ? 'No projects yet.' : 'No projects match "' . $search . '".' }}
                         </div>

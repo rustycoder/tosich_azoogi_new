@@ -4700,6 +4700,20 @@ code {
   gap: 3px;
 }
 
+.dash-airtable-table .dash-row-link {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+  align-items: center;
+  gap: 8px;
+}
+
+.dash-airtable-table .dash-row-link-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+}
+
 .dash-product-title,
 a.dash-product-title {
   color: var(--dash-ink);
