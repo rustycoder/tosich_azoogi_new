@@ -272,32 +272,40 @@
                             $featureCount = count($features);
                         @endphp
                         @if ($featureCount > 0)
-                            <div class="dash-tag-list" style="display: flex; flex-direction: column; gap: 4px; align-items: flex-start;">
-                                @foreach (array_slice($features, 0, 3, true) as $fKey => $fVal)
-                                    @php
-                                        $valStr = '';
-                                        if (is_array($fVal)) {
-                                            $vals = [];
-                                            foreach ($fVal as $item) {
-                                                if (is_array($item) && isset($item['value'])) {
-                                                    $vals[] = $item['value'];
-                                                } elseif (is_string($item)) {
-                                                    $vals[] = $item;
-                                                }
-                                            }
-                                            $valStr = implode(', ', $vals);
-                                        } elseif (is_scalar($fVal)) {
-                                            $valStr = (string) $fVal;
-                                        }
-                                    @endphp
-                                    <span class="dash-tag" style="font-size: 11px; max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{{ $fKey }}: {{ $valStr }}">
-                                        <strong style="color: var(--dash-ink);">{{ $fKey }}:</strong> {{ $valStr }}
+                            <button type="button" class="dash-specs-cell-btn" data-specs-trigger="{{ $product->id }}" data-specs-tab="attributes" title="Click to inspect all {{ $featureCount }} attributes &amp; features">
+                                <div class="dash-specs-cell-header">
+                                    <span class="dash-tag is-specs-tag">{{ $featureCount }} {{ \Illuminate\Support\Str::plural('Spec', $featureCount) }}</span>
+                                    <span class="dash-specs-expand-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg>
                                     </span>
-                                @endforeach
-                                @if ($featureCount > 3)
-                                    <span style="font-size: 10px; color: var(--dash-muted); font-weight: 600;">+{{ $featureCount - 3 }} more</span>
-                                @endif
-                            </div>
+                                </div>
+                                <div class="dash-tag-list" style="display: flex; flex-direction: column; gap: 3px; margin-top: 4px;">
+                                    @foreach (array_slice($features, 0, 2, true) as $fKey => $fVal)
+                                        @php
+                                            $valStr = '';
+                                            if (is_array($fVal)) {
+                                                $vals = [];
+                                                foreach ($fVal as $item) {
+                                                    if (is_array($item) && isset($item['value'])) {
+                                                        $vals[] = $item['value'];
+                                                    } elseif (is_string($item)) {
+                                                        $vals[] = $item;
+                                                    }
+                                                }
+                                                $valStr = implode(', ', $vals);
+                                            } elseif (is_scalar($fVal)) {
+                                                $valStr = (string) $fVal;
+                                            }
+                                        @endphp
+                                        <span class="dash-tag" style="font-size: 10.5px; max-width: 210px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{{ $fKey }}: {{ $valStr }}">
+                                            <strong style="color: var(--dash-ink);">{{ $fKey }}:</strong> {{ $valStr }}
+                                        </span>
+                                    @endforeach
+                                    @if ($featureCount > 2)
+                                        <span style="font-size: 10px; color: var(--dash-muted); font-weight: 600;">+{{ $featureCount - 2 }} more...</span>
+                                    @endif
+                                </div>
+                            </button>
                         @else
                             <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
@@ -310,29 +318,37 @@
                             $optionCount = count($options);
                         @endphp
                         @if ($optionCount > 0)
-                            <div class="dash-tag-list" style="display: flex; flex-direction: column; gap: 4px; align-items: flex-start;">
-                                @foreach (array_slice($options, 0, 3, true) as $optGroup => $optItems)
-                                    @php
-                                        $choices = [];
-                                        if (is_array($optItems)) {
-                                            foreach ($optItems as $item) {
-                                                if (is_array($item) && isset($item['name'])) {
-                                                    $choices[] = $item['name'];
-                                                } elseif (is_string($item)) {
-                                                    $choices[] = $item;
+                            <button type="button" class="dash-specs-cell-btn" data-specs-trigger="{{ $product->id }}" data-specs-tab="options" title="Click to inspect configurator option tree ({{ $optionCount }} groups)">
+                                <div class="dash-specs-cell-header">
+                                    <span class="dash-tag is-specs-tag">{{ $optionCount }} {{ \Illuminate\Support\Str::plural('Group', $optionCount) }}</span>
+                                    <span class="dash-specs-expand-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg>
+                                    </span>
+                                </div>
+                                <div class="dash-tag-list" style="display: flex; flex-direction: column; gap: 3px; margin-top: 4px;">
+                                    @foreach (array_slice($options, 0, 2, true) as $optGroup => $optItems)
+                                        @php
+                                            $choices = [];
+                                            if (is_array($optItems)) {
+                                                foreach ($optItems as $item) {
+                                                    if (is_array($item) && isset($item['name'])) {
+                                                        $choices[] = $item['name'];
+                                                    } elseif (is_string($item)) {
+                                                        $choices[] = $item;
+                                                    }
                                                 }
                                             }
-                                        }
-                                        $choiceStr = implode(', ', $choices);
-                                    @endphp
-                                    <span class="dash-tag" style="font-size: 11px; max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{{ $optGroup }}: {{ $choiceStr }}">
-                                        <strong style="color: var(--dash-ink);">{{ $optGroup }}:</strong> {{ $choiceStr ?: (count($choices).' choices') }}
-                                    </span>
-                                @endforeach
-                                @if ($optionCount > 3)
-                                    <span style="font-size: 10px; color: var(--dash-muted); font-weight: 600;">+{{ $optionCount - 3 }} more</span>
-                                @endif
-                            </div>
+                                            $choiceStr = implode(', ', $choices);
+                                        @endphp
+                                        <span class="dash-tag" style="font-size: 10.5px; max-width: 190px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{{ $optGroup }}: {{ $choiceStr }}">
+                                            <strong style="color: var(--dash-ink);">{{ $optGroup }}:</strong> {{ $choiceStr ?: (count($choices).' choices') }}
+                                        </span>
+                                    @endforeach
+                                    @if ($optionCount > 2)
+                                        <span style="font-size: 10px; color: var(--dash-muted); font-weight: 600;">+{{ $optionCount - 2 }} more...</span>
+                                    @endif
+                                </div>
+                            </button>
                         @else
                             <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
@@ -345,24 +361,42 @@
                             $mappingCount = count($mappings);
                         @endphp
                         @if ($mappingCount > 0)
-                            <div style="display: flex; flex-direction: column; gap: 4px; align-items: flex-start;">
-                                <span class="dash-pill is-active" style="font-size: 10.5px; font-weight: 700;">
-                                    {{ $mappingCount }} {{ \Illuminate\Support\Str::plural('Variant', $mappingCount) }}
-                                </span>
-                                <div class="dash-tag-list" style="gap: 3px; max-width: 180px;">
-                                    @foreach (array_slice(array_values($mappings), 0, 3) as $skuCode)
+                            <button type="button" class="dash-specs-cell-btn" data-specs-trigger="{{ $product->id }}" data-specs-tab="sku" title="Click to inspect {{ $mappingCount }} variant SKU mappings">
+                                <div class="dash-specs-cell-header">
+                                    <span class="dash-pill is-active" style="font-size: 10.5px; font-weight: 700;">
+                                        {{ $mappingCount }} {{ \Illuminate\Support\Str::plural('Variant', $mappingCount) }}
+                                    </span>
+                                    <span class="dash-specs-expand-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg>
+                                    </span>
+                                </div>
+                                <div class="dash-tag-list" style="gap: 3px; max-width: 180px; margin-top: 4px;">
+                                    @foreach (array_slice(array_values($mappings), 0, 2) as $skuCode)
                                         @if (filled($skuCode))
                                             <span class="dash-code-badge" style="font-size: 10.5px;">{{ $skuCode }}</span>
                                         @endif
                                     @endforeach
-                                    @if ($mappingCount > 3)
-                                        <span style="font-size: 10px; color: var(--dash-muted); font-weight: 600;">+{{ $mappingCount - 3 }}</span>
+                                    @if ($mappingCount > 2)
+                                        <span style="font-size: 10px; color: var(--dash-muted); font-weight: 600;">+{{ $mappingCount - 2 }}</span>
                                     @endif
                                 </div>
-                            </div>
+                            </button>
                         @else
                             <span style="color: var(--dash-muted); font-size: 11px;">—</span>
                         @endif
+
+                        <!-- Product Specs JSON Payload for Modal Inspector -->
+                        <script type="application/json" id="product-specs-data-{{ $product->id }}">
+                        {!! json_encode([
+                            'id' => $product->id,
+                            'product_name' => $product->product_name,
+                            'cover_url' => $cover,
+                            'category' => $product->category,
+                            'product_features' => $product->product_features ?? [],
+                            'options' => $product->options ?? [],
+                            'sku_mappings' => $product->sku_mappings ?? [],
+                        ], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) !!}
+                        </script>
                     </td>
 
                     <!-- Dimming Control -->
@@ -553,56 +587,392 @@
     <img id="dash-global-img-popover-src" src="" alt="Enlarged Preview">
 </div>
 
+<!-- Specifications & Configurator Inspector Modal -->
+<div id="dash-specs-modal" class="dash-specs-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="dash-specs-backdrop" data-specs-close></div>
+    <div class="dash-specs-dialog">
+        <!-- Modal Header -->
+        <div class="dash-specs-header">
+            <div class="dash-specs-header-main">
+                <div id="dash-specs-modal-img-wrap" class="dash-specs-modal-img-wrap">
+                    <img id="dash-specs-modal-img" src="" alt="Product Cover">
+                </div>
+                <div class="dash-specs-title-wrap">
+                    <h3 id="dash-specs-modal-title" class="dash-specs-title">Product Name</h3>
+                    <div class="dash-specs-subtitle">
+                        <span id="dash-specs-modal-category" class="dash-tag is-primary" style="font-size: 11px;">Category</span>
+                    </div>
+                </div>
+            </div>
+            <div class="dash-specs-actions">
+                <button type="button" class="dash-specs-close-btn" data-specs-close aria-label="Close inspector modal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Segmented Nav Tabs -->
+        <div class="dash-specs-nav-wrap">
+            <div class="dash-specs-tabs-segmented">
+                <button type="button" class="dash-specs-tab-btn is-active" data-specs-tab-target="attributes">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    <span>Attributes</span>
+                    <span id="dash-specs-count-attributes" class="dash-specs-tab-pill">0</span>
+                </button>
+                <button type="button" class="dash-specs-tab-btn" data-specs-tab-target="options">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    <span>Options</span>
+                    <span id="dash-specs-count-options" class="dash-specs-tab-pill">0</span>
+                </button>
+                <button type="button" class="dash-specs-tab-btn" data-specs-tab-target="sku">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    <span>SKU Mappings</span>
+                    <span id="dash-specs-count-sku" class="dash-specs-tab-pill">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Modal Body / Panels -->
+        <div class="dash-specs-body">
+            <!-- Panel 1: Attributes -->
+            <div id="dash-specs-panel-attributes" class="dash-specs-panel is-active">
+                <div id="dash-specs-attributes-content" class="dash-specs-content-wrap"></div>
+            </div>
+
+            <!-- Panel 2: Options -->
+            <div id="dash-specs-panel-options" class="dash-specs-panel">
+                <div id="dash-specs-options-content" class="dash-specs-groups-grid" style="padding: 0;"></div>
+            </div>
+
+            <!-- Panel 3: SKU Mappings -->
+            <div id="dash-specs-panel-sku" class="dash-specs-panel">
+                <div id="dash-specs-sku-content" class="dash-specs-content-wrap"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Image Popover Logic ---
     const popover = document.getElementById('dash-global-img-popover');
     const popoverImg = document.getElementById('dash-global-img-popover-src');
-    if (!popover || !popoverImg) return;
 
-    let activeTrigger = null;
+    if (popover && popoverImg) {
+        let activeTrigger = null;
 
-    document.querySelectorAll('[data-popover-img]').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            const src = el.getAttribute('data-popover-img');
-            if (!src) return;
+        document.querySelectorAll('[data-popover-img]').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                const src = el.getAttribute('data-popover-img');
+                if (!src) return;
 
-            activeTrigger = el;
-            popoverImg.src = src;
-            popover.classList.toggle('is-tech-icon', el.classList.contains('dash-tech-icon'));
-            popover.classList.add('is-visible');
+                activeTrigger = el;
+                popoverImg.src = src;
+                popover.classList.toggle('is-tech-icon', el.classList.contains('dash-tech-icon'));
+                popover.classList.add('is-visible');
 
-            const rect = el.getBoundingClientRect();
-            let top = rect.top + (rect.height / 2);
-            let left = rect.right + 12;
+                const rect = el.getBoundingClientRect();
+                let top = rect.top + (rect.height / 2);
+                let left = rect.right + 12;
 
-            // Keep within viewport boundaries
-            if (left + 280 > window.innerWidth) {
-                left = rect.left - 272;
-            }
-            if (top + 130 > window.innerHeight) {
-                top = window.innerHeight - 140;
-            }
-            if (top - 130 < 10) {
-                top = 140;
-            }
+                if (left + 280 > window.innerWidth) {
+                    left = rect.left - 272;
+                }
+                if (top + 130 > window.innerHeight) {
+                    top = window.innerHeight - 140;
+                }
+                if (top - 130 < 10) {
+                    top = 140;
+                }
 
-            popover.style.top = top + 'px';
-            popover.style.left = left + 'px';
+                popover.style.top = top + 'px';
+                popover.style.left = left + 'px';
+            });
+
+            el.addEventListener('mouseleave', () => {
+                activeTrigger = null;
+                popover.classList.remove('is-visible', 'is-tech-icon');
+            });
         });
 
-        el.addEventListener('mouseleave', () => {
-            activeTrigger = null;
-            popover.classList.remove('is-visible', 'is-tech-icon');
+        window.addEventListener('scroll', () => {
+            if (activeTrigger) {
+                popover.classList.remove('is-visible');
+                activeTrigger = null;
+            }
+        }, { passive: true });
+    }
+
+    // --- Specifications & Configurator Inspector Modal Logic ---
+    const specsModal = document.getElementById('dash-specs-modal');
+    if (!specsModal) return;
+
+    let currentSpecs = null;
+
+    function openSpecsModal(productId, targetTab = 'attributes') {
+        const scriptEl = document.getElementById(`product-specs-data-${productId}`);
+        if (!scriptEl) return;
+
+        try {
+            currentSpecs = JSON.parse(scriptEl.textContent);
+        } catch (e) {
+            console.error('Failed to parse product specs JSON', e);
+            return;
+        }
+
+        // Header info
+        document.getElementById('dash-specs-modal-title').textContent = currentSpecs.product_name || 'Product Specifications';
+        document.getElementById('dash-specs-modal-category').textContent = currentSpecs.category || 'Uncategorized';
+
+        const imgWrap = document.getElementById('dash-specs-modal-img-wrap');
+        if (currentSpecs.cover_url) {
+            imgWrap.innerHTML = `<img id="dash-specs-modal-img" src="${escapeHtml(currentSpecs.cover_url)}" alt="${escapeHtml(currentSpecs.product_name || 'Product Cover')}">`;
+            imgWrap.classList.remove('is-empty');
+        } else {
+            imgWrap.classList.add('is-empty');
+            imgWrap.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>';
+        }
+
+        // Render Tabs Content
+        renderAttributesPanel(currentSpecs.product_features || {});
+        renderOptionsPanel(currentSpecs.options || {});
+        renderSkuMatrixPanel(currentSpecs.sku_mappings || {}, currentSpecs.options || {});
+
+        // Switch to chosen tab
+        switchTab(targetTab);
+
+        // Show modal
+        specsModal.classList.add('is-open');
+        specsModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeSpecsModal() {
+        specsModal.classList.remove('is-open');
+        specsModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    function switchTab(tabId) {
+        document.querySelectorAll('.dash-specs-tab-btn').forEach(btn => {
+            btn.classList.toggle('is-active', btn.getAttribute('data-specs-tab-target') === tabId);
+        });
+        document.querySelectorAll('.dash-specs-panel').forEach(panel => {
+            panel.classList.toggle('is-active', panel.id === `dash-specs-panel-${tabId}`);
+        });
+    }
+
+    // Tab buttons click
+    document.querySelectorAll('.dash-specs-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const target = btn.getAttribute('data-specs-tab-target');
+            switchTab(target);
         });
     });
 
-    window.addEventListener('scroll', () => {
-        if (activeTrigger) {
-            popover.classList.remove('is-visible');
-            activeTrigger = null;
+    // Triggers click from table cells
+    document.querySelectorAll('[data-specs-trigger]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const productId = btn.getAttribute('data-specs-trigger');
+            const initialTab = btn.getAttribute('data-specs-tab') || 'attributes';
+            openSpecsModal(productId, initialTab);
+        });
+    });
+
+    // Close button / backdrop
+    document.querySelectorAll('[data-specs-close]').forEach(el => {
+        el.addEventListener('click', closeSpecsModal);
+    });
+
+    // Escape key
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && specsModal.classList.contains('is-open')) {
+            closeSpecsModal();
         }
-    }, { passive: true });
+    });
+
+    // --- Render Panel Helpers ---
+
+    function renderAttributesPanel(features) {
+        const container = document.getElementById('dash-specs-attributes-content');
+        const countBadge = document.getElementById('dash-specs-count-attributes');
+        const keys = Object.keys(features);
+        countBadge.textContent = keys.length;
+
+        if (keys.length === 0) {
+            container.innerHTML = '<div style="padding: 24px; text-align: center; color: var(--dash-muted);">No product attributes configured yet.</div>';
+            return;
+        }
+
+        let html = `
+            <table class="dash-specs-table" id="dash-specs-attr-table">
+                <thead>
+                    <tr>
+                        <th style="width: 220px;">Attribute</th>
+                        <th>Value(s)</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        keys.forEach(key => {
+            const valData = features[key];
+            let items = [];
+
+            if (Array.isArray(valData)) {
+                valData.forEach(item => {
+                    if (typeof item === 'object' && item !== null) {
+                        items.push({ value: item.value || '', icon: item.icon || '' });
+                    } else if (typeof item === 'string' || typeof item === 'number') {
+                        items.push({ value: String(item), icon: '' });
+                    }
+                });
+            } else if (typeof valData === 'object' && valData !== null) {
+                items.push({ value: valData.value || '', icon: valData.icon || '' });
+            } else if (valData !== null && valData !== undefined) {
+                items.push({ value: String(valData), icon: '' });
+            }
+
+            const valueTagsHtml = items.length > 0 
+                ? items.map(item => {
+                    const iconHtml = item.icon ? `<img src="${escapeHtml(item.icon)}" alt="" loading="lazy" style="width: 15px; height: 15px; object-fit: contain; flex-shrink: 0; vertical-align: middle;">` : '';
+                    return `<span class="dash-tag" style="display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; color: var(--dash-ink);">${iconHtml}<span>${escapeHtml(item.value)}</span></span>`;
+                }).join(' ')
+                : '<span style="color: var(--dash-muted);">—</span>';
+
+            html += `
+                <tr>
+                    <td>
+                        <strong style="color: var(--dash-ink); font-size: 12.5px;">${escapeHtml(key)}</strong>
+                    </td>
+                    <td>
+                        <div class="dash-tag-list" style="gap: 6px; flex-wrap: wrap;">${valueTagsHtml}</div>
+                    </td>
+                </tr>
+            `;
+        });
+
+        html += `</tbody></table>`;
+        container.innerHTML = html;
+    }
+
+    function renderOptionsPanel(options) {
+        const container = document.getElementById('dash-specs-options-content');
+        const countBadge = document.getElementById('dash-specs-count-options');
+        const groupKeys = Object.keys(options);
+        countBadge.textContent = groupKeys.length;
+
+        if (groupKeys.length === 0) {
+            container.innerHTML = '<div class="dash-specs-content-wrap" style="padding: 24px; text-align: center; color: var(--dash-muted);">No configurator dropdown options defined for this product.</div>';
+            return;
+        }
+
+        let html = '';
+        groupKeys.forEach(groupName => {
+            const items = Array.isArray(options[groupName]) ? options[groupName] : [];
+            html += `
+                <div class="dash-specs-group-card">
+                    <div class="dash-specs-group-title">
+                        <span>${escapeHtml(groupName)}</span>
+                        <span class="dash-tag is-specs-tag" style="font-size: 10px;">${items.length} ${items.length === 1 ? 'choice' : 'choices'}</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 5px;">
+            `;
+
+            items.forEach(choice => {
+                const name = typeof choice === 'object' && choice.name ? choice.name : (typeof choice === 'string' ? choice : 'Option');
+                const id = typeof choice === 'object' && choice.id ? choice.id : '';
+                html += `
+                    <div class="dash-specs-choice-item">
+                        <span style="font-weight: 600; color: var(--dash-ink);">${escapeHtml(name)}</span>
+                        ${id ? `<span class="dash-code-badge" style="font-size: 10px; font-weight: 700;">ID: ${escapeHtml(id)}</span>` : ''}
+                    </div>
+                `;
+            });
+
+            html += `</div></div>`;
+        });
+
+        container.innerHTML = html;
+    }
+
+    function renderSkuMatrixPanel(mappings, options) {
+        const container = document.getElementById('dash-specs-sku-content');
+        const countBadge = document.getElementById('dash-specs-count-sku');
+
+        // Build ID -> Choice Name lookup
+        const idLookup = {};
+        if (typeof options === 'object' && options !== null) {
+            Object.values(options).forEach(groupList => {
+                if (Array.isArray(groupList)) {
+                    groupList.forEach(item => {
+                        if (item && item.id && item.name) {
+                            idLookup[String(item.id)] = item.name;
+                        }
+                    });
+                }
+            });
+        }
+
+        const keys = Object.keys(mappings);
+        countBadge.textContent = keys.length;
+
+        if (keys.length === 0) {
+            container.innerHTML = '<div style="padding: 24px; text-align: center; color: var(--dash-muted);">No SKU variant mappings configured.</div>';
+            return;
+        }
+
+        let html = `
+            <table class="dash-specs-table" id="dash-specs-sku-table">
+                <thead>
+                    <tr>
+                        <th style="width: 50px; text-align: center;">#</th>
+                        <th style="width: 180px;">Option IDs</th>
+                        <th>Resolved Choices</th>
+                        <th style="width: 180px;">Mapped SKU Code</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        keys.forEach((comboKey, idx) => {
+            const skuCode = mappings[comboKey];
+            const ids = comboKey.split(',').map(s => s.trim()).filter(Boolean);
+            const resolvedLabels = ids.map(id => idLookup[id] ? `<span class="dash-tag" style="font-size: 11px;">${escapeHtml(idLookup[id])}</span>` : `<span class="dash-tag" style="font-size: 11px; opacity: 0.7;">#${escapeHtml(id)}</span>`).join(' ');
+
+            html += `
+                <tr>
+                    <td style="text-align: center; color: var(--dash-muted); font-size: 11px;">${idx + 1}</td>
+                    <td>
+                        <span class="dash-code-badge" style="font-size: 11px; font-weight: 600;">${escapeHtml(comboKey)}</span>
+                    </td>
+                    <td>
+                        <div class="dash-tag-list" style="gap: 4px; flex-wrap: wrap;">${resolvedLabels}</div>
+                    </td>
+                    <td>
+                        <span class="dash-code-badge" style="font-weight: 700; font-size: 12px; color: var(--dash-ink);">
+                            ${escapeHtml(skuCode)}
+                        </span>
+                    </td>
+                </tr>
+            `;
+        });
+
+        html += `</tbody></table>`;
+        container.innerHTML = html;
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
 });
 </script>
 @endpush
