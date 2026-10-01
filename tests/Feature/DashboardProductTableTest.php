@@ -97,6 +97,8 @@ class DashboardProductTableTest extends TestCase
         $response->assertSee('Product Name');
         $response->assertSee('Supplier Name');
         $response->assertSee('Supplier Code');
+        $response->assertSee('Type');
+        $response->assertSee('Stock');
         $response->assertSee('Datasheet File');
         $response->assertSee('Installation Guide');
         $response->assertSee('User Manual');
