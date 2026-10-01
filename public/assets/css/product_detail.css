@@ -794,7 +794,6 @@ a.meta-badge:hover {
   overflow: hidden;
   border: 1px solid var(--border-light);
   background: var(--card-bg);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
 }
 
 .quote-intro-image img {
@@ -1576,6 +1575,14 @@ a.meta-badge:hover {
   padding: 0 20px!important;
 }
 
+@media (max-width: 900px) {
+  .quote-intro-image {
+    display: none;
+  }
+
+}
+
+
 @media (max-width: 600px) {
   .configured-spec-card {
     grid-template-columns: 100px 1fr;
@@ -1583,3 +1590,4 @@ a.meta-badge:hover {
   }
 
 }
+
