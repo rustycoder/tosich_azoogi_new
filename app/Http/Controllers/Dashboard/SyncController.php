@@ -40,7 +40,10 @@ class SyncController extends Controller
     {
         try {
             $user = $request->user();
-            $this->syncService->sync(triggeredBy: $user ? 'user:'.$user->name : 'dashboard');
+            $this->syncService->sync(
+                triggeredBy: $user ? 'user:'.$user->name : 'dashboard',
+                force: true,
+            );
 
             return redirect()
                 ->route('dashboard.sync.index')
