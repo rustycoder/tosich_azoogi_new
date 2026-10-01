@@ -280,8 +280,12 @@
                         usually within 4 business hours.
                     </p>
                     <div style="font-size:var(--fs-body); color:var(--semi-muted);">
-                        <span>Azoogi supplies through our wholsale and retail partners. Let us know your preferred
+                        <p>Azoogi supplies through our wholesale and retail partners. Let us know your preferred
                             electrical wholesaler or lighting retailer, or we'll recommend one near you.</p>
+                    </div>
+
+                    <div class="quote-intro-image">
+                        <img src="{{ asset('assets/supportthatlasts.jpeg') }}" alt="Azoogi Lighting Support" loading="lazy">
                     </div>
                 </div>
 
