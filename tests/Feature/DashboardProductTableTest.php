@@ -33,7 +33,6 @@ class DashboardProductTableTest extends TestCase
             'categories' => ['Linear Profile', 'Surface Mounted'],
             'status' => 'publish',
             'stocked_item' => 'In Stock',
-            'product_type' => 'Linear',
             'supplier_name' => 'Azoogi Tech',
             'supplier_code' => 'SUP-9988',
             'slug' => 'linear-led-luminaire-pro',
@@ -97,7 +96,6 @@ class DashboardProductTableTest extends TestCase
         $response->assertSee('Product Name');
         $response->assertSee('Supplier Name');
         $response->assertSee('Supplier Code');
-        $response->assertSee('Type');
         $response->assertSee('Stock');
         $response->assertSee('Datasheet File');
         $response->assertSee('Installation Guide');

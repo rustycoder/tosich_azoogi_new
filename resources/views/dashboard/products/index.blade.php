@@ -93,7 +93,7 @@
                 <th scope="colgroup" colspan="4" class="dash-group-th is-specs" style="text-align: center;">
                     <span class="dash-group-badge is-specs">3. Specifications &amp; Configurator</span>
                 </th>
-                <th scope="colgroup" colspan="4" class="dash-group-th is-supplier" style="text-align: center;">
+                <th scope="colgroup" colspan="3" class="dash-group-th is-supplier" style="text-align: center;">
                     <span class="dash-group-badge is-supplier">4. Supplier &amp; Inventory</span>
                 </th>
                 <th scope="colgroup" colspan="5" class="dash-group-th is-docs" style="text-align: center;">
@@ -127,10 +127,9 @@
                 <th scope="col" class="dash-col-th is-specs" style="min-width: 160px;">SKU Mapping</th>
                 <th scope="col" class="dash-col-th is-specs" style="width: 80px; text-align: center;">Dimming</th>
 
-                <!-- Group 4: Supplier & Inventory (4 cols) -->
+                <!-- Group 4: Supplier & Inventory (3 cols) -->
                 <th scope="col" class="dash-col-th is-supplier" style="min-width: 140px;">Supplier Name</th>
                 <th scope="col" class="dash-col-th is-supplier" style="min-width: 130px;">Supplier Code</th>
-                <th scope="col" class="dash-col-th is-supplier" style="min-width: 110px;">Type</th>
                 <th scope="col" class="dash-col-th is-supplier" style="min-width: 110px;">Stock</th>
 
                 <!-- Group 5: Technical Documents (5 cols) -->
@@ -424,13 +423,6 @@
                         @endif
                     </td>
 
-                    <!-- Product Type -->
-                    <td>
-                        @if (filled($product->product_type))
-                            <span style="font-size: 12px; font-weight: 600;">{{ $product->product_type }}</span>
-                        @endif
-                    </td>
-
                     <!-- Stock Status -->
                     <td>
                         @if (filled($product->stocked_item))
@@ -570,7 +562,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="28">
+                    <td colspan="27">
                         <div class="dash-card dash-empty">
                             {{ $search === '' ? 'No products yet. Run Sync to pull from Airtable.' : 'No products match "' . $search . '".' }}
                         </div>

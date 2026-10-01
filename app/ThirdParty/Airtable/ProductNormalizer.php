@@ -171,7 +171,6 @@ final class ProductNormalizer
                 'supplier_name' => $this->sanitize($fields['Supplier Name'] ?? $fields['Supplier name'] ?? $fields['Supplier_Name'] ?? $fields['supplier_name'] ?? ''),
                 'supplier_code' => $this->sanitize($fields['Supplier Code'] ?? $fields['Supplier code'] ?? $fields['Supplier_Code'] ?? $fields['supplier_code'] ?? $fields['Supplier Part Number'] ?? $fields['Supplier part number'] ?? $fields['Supplier SKU'] ?? $fields['Supplier sku'] ?? $fields['Supplier Item Code'] ?? $fields['Supplier item code'] ?? ''),
                 'status' => $status !== '' ? $status : $this->sanitize($fields['Status'] ?? ''),
-                'product_type' => $this->sanitize($fields['Product type'] ?? ''),
                 'product_features' => $features,
                 'options' => $this->parseJsonField($fields['Options'] ?? $fields['options'] ?? [], []),
                 'dimming_control' => $this->booleanValue($fields['Dimming Control'] ?? $fields['Dimming control'] ?? $fields['dimming_control'] ?? $fields['Dimming_Control'] ?? false),
