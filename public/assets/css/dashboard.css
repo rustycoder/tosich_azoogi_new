@@ -1479,13 +1479,14 @@ button.dash-row-link-icon {
 }
 
 .dash-list-card-meta > .dash-updated:last-child .dash-updated-value {
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
 }
 
 .dash-list-card-meta > .dash-updated:last-child .dash-updated-sep {
-  display: none;
+  display: inline;
 }
 
 .dash-updated-value strong,
@@ -4492,6 +4493,7 @@ code {
 
 .dash-group-th.is-primary { border-top: 3px solid #67d04e; }
 .dash-group-th.is-media   { border-top: 3px solid #38bdf8; }
+.dash-group-th.is-specs   { border-top: 3px solid #0d9488; }
 .dash-group-th.is-supplier{ border-top: 3px solid #fbbf24; }
 .dash-group-th.is-docs    { border-top: 3px solid #c084fc; }
 .dash-group-th.is-seo     { border-top: 3px solid #fb7185; }
@@ -4532,7 +4534,17 @@ code {
   color: #38bdf8;
 }
 
-/* 3. Supplier & Inventory (Warm Amber) */
+/* 3. Specifications & Configurator (Deep Teal) */
+.dash-group-badge.is-specs {
+  color: #14b8a6;
+  border-color: rgba(20, 184, 166, .35);
+  background: rgba(20, 184, 166, .12);
+}
+.dash-col-th.is-specs {
+  color: #14b8a6;
+}
+
+/* 4. Supplier & Inventory (Warm Amber) */
 .dash-group-badge.is-supplier {
   color: #fbbf24;
   border-color: rgba(251, 191, 36, .3);
@@ -4575,6 +4587,7 @@ code {
 /* Light Mode Overrides for High Contrast */
 :root[data-theme="light"] .dash-group-th.is-primary { border-top-color: #1b7318; }
 :root[data-theme="light"] .dash-group-th.is-media   { border-top-color: #0284c7; }
+:root[data-theme="light"] .dash-group-th.is-specs   { border-top-color: #0f766e; }
 :root[data-theme="light"] .dash-group-th.is-supplier{ border-top-color: #b45309; }
 :root[data-theme="light"] .dash-group-th.is-docs    { border-top-color: #7e22ce; }
 :root[data-theme="light"] .dash-group-th.is-seo     { border-top-color: #be123c; }
@@ -4596,6 +4609,15 @@ code {
 }
 :root[data-theme="light"] .dash-col-th.is-media {
   color: #0369a1;
+}
+
+:root[data-theme="light"] .dash-group-badge.is-specs {
+  color: #0f766e;
+  border-color: rgba(15, 118, 110, .25);
+  background: rgba(15, 118, 110, .08);
+}
+:root[data-theme="light"] .dash-col-th.is-specs {
+  color: #0f766e;
 }
 
 :root[data-theme="light"] .dash-group-badge.is-supplier {
@@ -5115,6 +5137,230 @@ a.dash-product-title:hover {
   .dash-per-page-wrap {
     margin-left: 0;
   }
+}
+
+/* Section Card Live Previews */
+.dash-section-card {
+  flex-direction: column !important;
+  gap: 16px;
+  align-items: stretch !important;
+}
+
+.dash-list-card-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+}
+
+.dash-section-preview-wrap {
+  position: relative;
+  width: 100%;
+  margin-top: 4px;
+  border-radius: 10px;
+  background: var(--dash-fill);
+  border: 1px solid var(--dash-line);
+  padding: 16px 18px;
+  overflow: hidden;
+}
+
+.dash-section-preview-badge {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--dash-muted);
+  background: var(--dash-card);
+  border: 1px solid var(--dash-line);
+  padding: 2px 8px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.dash-preview-frame {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dash-preview-topbar-util {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--dash-line);
+  font-size: 11.5px;
+  color: var(--dash-muted);
+}
+
+.dash-preview-topbar-rotate {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--dash-ink);
+  font-weight: 500;
+  max-width: 65%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dash-preview-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #67d04e;
+  flex-shrink: 0;
+}
+
+.dash-preview-topbar-contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: auto;
+}
+
+.dash-preview-topbar-contact span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dash-preview-topbar-contact svg {
+  width: 12px;
+  height: 12px;
+  stroke: var(--dash-muted);
+}
+
+.dash-preview-trade-pill {
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--dash-card);
+  border: 1px solid var(--dash-line);
+  font-size: 10.5px;
+  color: var(--dash-ink);
+}
+
+.dash-preview-topbar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 4px 0;
+}
+
+.dash-preview-brand strong {
+  font-size: 14px;
+  letter-spacing: .08em;
+  color: var(--dash-ink);
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+}
+
+.dash-preview-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.dash-preview-link {
+  font-size: 12px;
+  color: var(--dash-ink);
+  font-weight: 500;
+}
+
+.dash-preview-link.is-active {
+  color: #67d04e;
+  font-weight: 600;
+}
+
+.dash-preview-cta-btn {
+  display: inline-flex;
+  padding: 4px 10px;
+  border-radius: 5px;
+  background: rgba(103, 208, 78, .15);
+  border: 1px solid rgba(103, 208, 78, .3);
+  color: #67d04e;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.dash-preview-words-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding-top: 8px;
+  border-top: 1px dashed var(--dash-line);
+}
+
+.dash-preview-words-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--dash-muted);
+}
+
+.dash-preview-foot-columns {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.2fr;
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .dash-preview-foot-columns {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.dash-preview-foot-bio {
+  margin: 6px 0 0;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--dash-muted);
+}
+
+.dash-preview-foot-h {
+  margin: 0 0 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--dash-ink);
+}
+
+.dash-preview-foot-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 11.5px;
+  color: var(--dash-muted);
+}
+
+.dash-preview-foot-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--dash-line);
+  font-size: 11px;
+  color: var(--dash-muted);
+}
+
+.dash-preview-foot-legal {
+  display: inline-flex;
+  gap: 6px;
 }
 
 

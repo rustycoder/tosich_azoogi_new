@@ -90,17 +90,20 @@
                 <th scope="colgroup" colspan="3" class="dash-group-th is-media" style="text-align: center;">
                     <span class="dash-group-badge is-media">2. Media &amp; Schematics</span>
                 </th>
-                <th scope="colgroup" colspan="4" class="dash-group-th is-supplier" style="text-align: center;">
-                    <span class="dash-group-badge is-supplier">3. Supplier &amp; Inventory</span>
+                <th scope="colgroup" colspan="4" class="dash-group-th is-specs" style="text-align: center;">
+                    <span class="dash-group-badge is-specs">3. Specifications &amp; Configurator</span>
+                </th>
+                <th scope="colgroup" colspan="3" class="dash-group-th is-supplier" style="text-align: center;">
+                    <span class="dash-group-badge is-supplier">4. Supplier &amp; Inventory</span>
                 </th>
                 <th scope="colgroup" colspan="5" class="dash-group-th is-docs" style="text-align: center;">
-                    <span class="dash-group-badge is-docs">4. Technical Documents</span>
+                    <span class="dash-group-badge is-docs">5. Technical Documents</span>
                 </th>
                 <th scope="colgroup" colspan="5" class="dash-group-th is-seo" style="text-align: center;">
-                    <span class="dash-group-badge is-seo">5. Copy &amp; SEO</span>
+                    <span class="dash-group-badge is-seo">6. Copy &amp; SEO</span>
                 </th>
                 <th scope="colgroup" colspan="1" class="dash-group-th is-audit" style="text-align: center;">
-                    <span class="dash-group-badge is-audit">6. Audit</span>
+                    <span class="dash-group-badge is-audit">7. Audit</span>
                 </th>
             </tr>
             <!-- Column Header Tier 2 -->
@@ -118,27 +121,32 @@
                 <th scope="col" class="dash-col-th is-media" style="width: 80px; text-align: center;">Product Dimension</th>
                 <th scope="col" class="dash-col-th is-media" style="min-width: 220px;">Technical Icons</th>
 
-                <!-- Group 3: Supplier & Inventory (4 cols) -->
+                <!-- Group 3: Specifications & Configurator (4 cols) -->
+                <th scope="col" class="dash-col-th is-specs" style="min-width: 200px;">Attributes</th>
+                <th scope="col" class="dash-col-th is-specs" style="min-width: 180px;">Options</th>
+                <th scope="col" class="dash-col-th is-specs" style="min-width: 160px;">SKU Mapping</th>
+                <th scope="col" class="dash-col-th is-specs" style="width: 80px; text-align: center;">Dimming</th>
+
+                <!-- Group 4: Supplier & Inventory (3 cols) -->
                 <th scope="col" class="dash-col-th is-supplier" style="min-width: 140px;">Supplier Name</th>
                 <th scope="col" class="dash-col-th is-supplier" style="min-width: 130px;">Supplier Code</th>
                 <th scope="col" class="dash-col-th is-supplier" style="min-width: 130px;">Type &amp; Stock</th>
-                <th scope="col" class="dash-col-th is-supplier" style="width: 80px; text-align: center;">Dimming</th>
 
-                <!-- Group 4: Technical Documents (5 cols) -->
+                <!-- Group 5: Technical Documents (5 cols) -->
                 <th scope="col" class="dash-col-th is-docs" style="width: 85px; text-align: center;">Datasheet</th>
                 <th scope="col" class="dash-col-th is-docs" style="min-width: 120px;">Datasheet File</th>
                 <th scope="col" class="dash-col-th is-docs" style="min-width: 140px;">Installation Guide</th>
                 <th scope="col" class="dash-col-th is-docs" style="min-width: 120px;">User Manual</th>
                 <th scope="col" class="dash-col-th is-docs" style="min-width: 100px;">IES File</th>
 
-                <!-- Group 5: Copy & SEO (5 cols) -->
+                <!-- Group 6: Copy & SEO (5 cols) -->
                 <th scope="col" class="dash-col-th is-seo" style="min-width: 160px;">URL Slug</th>
                 <th scope="col" class="dash-col-th is-seo" style="min-width: 220px;">Product Description</th>
                 <th scope="col" class="dash-col-th is-seo" style="min-width: 180px;">Meta Title</th>
                 <th scope="col" class="dash-col-th is-seo" style="min-width: 200px;">Meta Description</th>
                 <th scope="col" class="dash-col-th is-seo" style="min-width: 160px;">Meta Keywords</th>
 
-                <!-- Group 6: Audit (1 col) -->
+                <!-- Group 7: Audit (1 col) -->
                 <th scope="col" class="dash-col-th is-audit" style="min-width: 140px;">Updated</th>
             </tr>
         </thead>
@@ -256,7 +264,117 @@
                         @endif
                     </td>
 
-                    <!-- 3. Supplier & Inventory -->
+                    <!-- 3. Specifications & Configurator -->
+                    <!-- Attributes -->
+                    <td>
+                        @php
+                            $features = is_array($product->product_features) ? $product->product_features : [];
+                            $featureCount = count($features);
+                        @endphp
+                        @if ($featureCount > 0)
+                            <div class="dash-tag-list" style="display: flex; flex-direction: column; gap: 4px; align-items: flex-start;">
+                                @foreach (array_slice($features, 0, 3, true) as $fKey => $fVal)
+                                    @php
+                                        $valStr = '';
+                                        if (is_array($fVal)) {
+                                            $vals = [];
+                                            foreach ($fVal as $item) {
+                                                if (is_array($item) && isset($item['value'])) {
+                                                    $vals[] = $item['value'];
+                                                } elseif (is_string($item)) {
+                                                    $vals[] = $item;
+                                                }
+                                            }
+                                            $valStr = implode(', ', $vals);
+                                        } elseif (is_scalar($fVal)) {
+                                            $valStr = (string) $fVal;
+                                        }
+                                    @endphp
+                                    <span class="dash-tag" style="font-size: 11px; max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{{ $fKey }}: {{ $valStr }}">
+                                        <strong style="color: var(--dash-ink);">{{ $fKey }}:</strong> {{ $valStr }}
+                                    </span>
+                                @endforeach
+                                @if ($featureCount > 3)
+                                    <span style="font-size: 10px; color: var(--dash-muted); font-weight: 600;">+{{ $featureCount - 3 }} more</span>
+                                @endif
+                            </div>
+                        @else
+                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
+                        @endif
+                    </td>
+
+                    <!-- Options -->
+                    <td>
+                        @php
+                            $options = is_array($product->options) ? $product->options : [];
+                            $optionCount = count($options);
+                        @endphp
+                        @if ($optionCount > 0)
+                            <div class="dash-tag-list" style="display: flex; flex-direction: column; gap: 4px; align-items: flex-start;">
+                                @foreach (array_slice($options, 0, 3, true) as $optGroup => $optItems)
+                                    @php
+                                        $choices = [];
+                                        if (is_array($optItems)) {
+                                            foreach ($optItems as $item) {
+                                                if (is_array($item) && isset($item['name'])) {
+                                                    $choices[] = $item['name'];
+                                                } elseif (is_string($item)) {
+                                                    $choices[] = $item;
+                                                }
+                                            }
+                                        }
+                                        $choiceStr = implode(', ', $choices);
+                                    @endphp
+                                    <span class="dash-tag" style="font-size: 11px; max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="{{ $optGroup }}: {{ $choiceStr }}">
+                                        <strong style="color: var(--dash-ink);">{{ $optGroup }}:</strong> {{ $choiceStr ?: (count($choices).' choices') }}
+                                    </span>
+                                @endforeach
+                                @if ($optionCount > 3)
+                                    <span style="font-size: 10px; color: var(--dash-muted); font-weight: 600;">+{{ $optionCount - 3 }} more</span>
+                                @endif
+                            </div>
+                        @else
+                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
+                        @endif
+                    </td>
+
+                    <!-- SKU Mapping -->
+                    <td>
+                        @php
+                            $mappings = is_array($product->sku_mappings) ? $product->sku_mappings : [];
+                            $mappingCount = count($mappings);
+                        @endphp
+                        @if ($mappingCount > 0)
+                            <div style="display: flex; flex-direction: column; gap: 4px; align-items: flex-start;">
+                                <span class="dash-pill is-active" style="font-size: 10.5px; font-weight: 700;">
+                                    {{ $mappingCount }} {{ \Illuminate\Support\Str::plural('Variant', $mappingCount) }}
+                                </span>
+                                <div class="dash-tag-list" style="gap: 3px; max-width: 180px;">
+                                    @foreach (array_slice(array_values($mappings), 0, 3) as $skuCode)
+                                        @if (filled($skuCode))
+                                            <span class="dash-code-badge" style="font-size: 10.5px;">{{ $skuCode }}</span>
+                                        @endif
+                                    @endforeach
+                                    @if ($mappingCount > 3)
+                                        <span style="font-size: 10px; color: var(--dash-muted); font-weight: 600;">+{{ $mappingCount - 3 }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                        @else
+                            <span style="color: var(--dash-muted); font-size: 11px;">—</span>
+                        @endif
+                    </td>
+
+                    <!-- Dimming Control -->
+                    <td style="text-align: center;">
+                        @if ($product->dimming_control)
+                            <span class="dash-pill is-active" style="font-size: 10.5px;">Yes</span>
+                        @else
+                            <span style="color: var(--dash-muted); font-size: 11px;">No</span>
+                        @endif
+                    </td>
+
+                    <!-- 4. Supplier & Inventory -->
                     <!-- Supplier Name -->
                     <td>
                         @if (filled($product->supplier_name))
@@ -283,16 +401,7 @@
                         </div>
                     </td>
 
-                    <!-- Dimming Control -->
-                    <td style="text-align: center;">
-                        @if ($product->dimming_control)
-                            <span class="dash-pill is-active" style="font-size: 10.5px;">Yes</span>
-                        @else
-                            <span style="color: var(--dash-muted); font-size: 11px;">No</span>
-                        @endif
-                    </td>
-
-                    <!-- 4. Technical Documents -->
+                    <!-- 5. Technical Documents -->
                     <!-- Datasheet (Status Yes/No) -->
                     <td style="text-align: center;">
                         @if ($datasheetStatus === 'Yes')
@@ -344,7 +453,7 @@
                         @endif
                     </td>
 
-                    <!-- 5. Copy & SEO -->
+                    <!-- 6. Copy & SEO -->
                     <!-- URL Slug -->
                     <td>
                         @if (filled($product->slug))
@@ -408,7 +517,7 @@
                         @endif
                     </td>
 
-                    <!-- 6. Audit -->
+                    <!-- 7. Audit -->
                     <!-- Updated -->
                     <td>
                         <div class="dash-updated" style="gap: 2px;">
@@ -424,7 +533,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="18">
+                    <td colspan="27">
                         <div class="dash-card dash-empty">
                             {{ $search === '' ? 'No products yet. Run Sync to pull from Airtable.' : 'No products match "' . $search . '".' }}
                         </div>

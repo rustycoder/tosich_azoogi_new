@@ -79,7 +79,6 @@
                 <th scope="col" style="width: 80px; text-align: center;">Image</th>
                 <th scope="col" style="width: 70px; text-align: center;">Icon</th>
                 <th scope="col" style="min-width: 240px;">Description</th>
-                <th scope="col" style="width: 130px; text-align: center;">Products</th>
                 <th scope="col" style="min-width: 150px;">Updated</th>
             </tr>
         </thead>
@@ -144,13 +143,6 @@
                         @endif
                     </td>
 
-                    <!-- Products Count -->
-                    <td style="text-align: center;">
-                        <span class="dash-pill {{ ($category->products_count ?? 0) > 0 ? 'is-active' : 'is-inactive' }}">
-                            {{ $category->products_count ?? 0 }} {{ ($category->products_count ?? 0) === 1 ? 'product' : 'products' }}
-                        </span>
-                    </td>
-
                     <!-- Updated -->
                     <td>
                         <div class="dash-updated" style="gap: 2px;">
@@ -166,7 +158,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="8">
+                    <td colspan="7">
                         <div class="dash-card dash-empty">
                             {{ $search === '' ? 'No categories synced yet.' : 'No categories match "' . $search . '".' }}
                         </div>

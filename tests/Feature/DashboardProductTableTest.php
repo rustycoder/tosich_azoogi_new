@@ -60,6 +60,17 @@ class DashboardProductTableTest extends TestCase
             'ies_file' => 'https://example.com/light.ies',
             'dimming_control' => true,
             'sort_order' => 5,
+            'product_features' => [
+                'Power' => [['value' => '7W', 'icon' => '']],
+                'Colour Temperature' => [['value' => '3000K', 'icon' => 'https://example.com/3000k.svg']],
+            ],
+            'options' => [
+                'Power' => [['name' => '7W', 'id' => '101']],
+                'Colour' => [['name' => 'White', 'id' => '201']],
+            ],
+            'sku_mappings' => [
+                '101,201' => 'LIN-7W-WHT',
+            ],
         ]);
 
         $response = $this->actingAs($admin)->get(route('dashboard.products.index'));
@@ -68,10 +79,20 @@ class DashboardProductTableTest extends TestCase
         $response->assertSee('dash-airtable-table', false);
         $response->assertSee('1. Primary ID &amp; Visuals', false);
         $response->assertSee('2. Media &amp; Schematics', false);
-        $response->assertSee('3. Supplier &amp; Inventory', false);
-        $response->assertSee('4. Technical Documents', false);
-        $response->assertSee('5. Copy &amp; SEO', false);
-        $response->assertSee('6. Audit', false);
+        $response->assertSee('3. Specifications &amp; Configurator', false);
+        $response->assertSee('4. Supplier &amp; Inventory', false);
+        $response->assertSee('5. Technical Documents', false);
+        $response->assertSee('6. Copy &amp; SEO', false);
+        $response->assertSee('7. Audit', false);
+        $response->assertSee('Attributes');
+        $response->assertSee('Options');
+        $response->assertSee('SKU Mapping');
+        $response->assertSee('Dimming');
+        $response->assertSee('Power:');
+        $response->assertSee('7W');
+        $response->assertSee('3000K');
+        $response->assertSee('LIN-7W-WHT');
+        $response->assertSee('1 Variant');
         $response->assertSee('Product Code');
         $response->assertSee('Product Name');
         $response->assertSee('Supplier Name');
@@ -280,7 +301,6 @@ class DashboardProductTableTest extends TestCase
         $response->assertSee('https://example.com/cat_featured.jpg');
         $response->assertSee('https://example.com/cat_icon.svg');
         $response->assertSee('Root Category');
-        $response->assertSee('1 product');
 
         $html = $response->getContent();
         $this->assertTrue(strpos($html, 'Commercial Lighting') < strpos($html, 'High Bay'));
