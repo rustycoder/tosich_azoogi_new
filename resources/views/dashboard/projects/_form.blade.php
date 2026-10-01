@@ -8,13 +8,14 @@
         </div>
 
         <div class="dash-field">
-            <label for="slug">Slug</label>
-            <input id="slug" name="slug" value="{{ old('slug', $project->slug ?? '') }}">
+            <label for="slug">Slug <small class="dash-field-rec">(20–50 chars recommended)</small></label>
+            <input id="slug" name="slug" value="{{ old('slug', $project->slug ?? '') }}" data-counter="chars" data-min="20" data-max="50" placeholder="e.g. eve-hotel-sydney">
+            @error('slug')<p class="login-error">{{ $message }}</p>@enderror
         </div>
 
         <div class="dash-field">
-            <label for="tag">Tag</label>
-            <input id="tag" name="tag" value="{{ old('tag', $project->tag ?? '') }}">
+            <label for="tag">Tags <small class="dash-field-rec">(comma-separated for multiple)</small></label>
+            <input id="tag" name="tag" value="{{ old('tag', $project->tag ?? '') }}" placeholder="e.g. Hospitality, Commercial, Architectural">
         </div>
 
         <div class="dash-field">

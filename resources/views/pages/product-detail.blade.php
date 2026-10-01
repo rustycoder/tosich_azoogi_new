@@ -247,26 +247,26 @@
 
     <!-- ========== RELATED PROJECTS GALLERY ========== -->
     <!-- <section class="related-projects-section">
-                                                  <div class="wrap">
-                                                    <h3>Featured Project Applications</h3>
-                                                    <div class="projects-small-grid">
-                                                      <div class="proj-small-card">
-                                                        <img src="/assets/img/img-1.jpg" alt="Zushi Restaurant">
-                                                        <div class="proj-small-overlay">
-                                                          <small>Hospitality · Sydney</small>
-                                                          <h4>Zushi Restaurant Custom Facade Outlines</h4>
+                                                      <div class="wrap">
+                                                        <h3>Featured Project Applications</h3>
+                                                        <div class="projects-small-grid">
+                                                          <div class="proj-small-card">
+                                                            <img src="/assets/img/img-1.jpg" alt="Zushi Restaurant">
+                                                            <div class="proj-small-overlay">
+                                                              <small>Hospitality · Sydney</small>
+                                                              <h4>Zushi Restaurant Custom Facade Outlines</h4>
+                                                            </div>
+                                                          </div>
+                                                          <div class="proj-small-card">
+                                                            <img src="/assets/img/eve.jpg" alt="The Eve Hotel">
+                                                            <div class="proj-small-overlay">
+                                                              <small>Commercial · Redfern</small>
+                                                              <h4>The Eve Hotel Curved Lounge Cove Illumination</h4>
+                                                            </div>
+                                                          </div>
                                                         </div>
                                                       </div>
-                                                      <div class="proj-small-card">
-                                                        <img src="/assets/img/eve.jpg" alt="The Eve Hotel">
-                                                        <div class="proj-small-overlay">
-                                                          <small>Commercial · Redfern</small>
-                                                          <h4>The Eve Hotel Curved Lounge Cove Illumination</h4>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </section> -->
+                                                    </section> -->
 
     <!-- ========== B2B INQUIRY FORM SECTION ========== -->
     <section class="quote-section" id="quote-section-anchor">
@@ -280,7 +280,7 @@
                         usually within 4 business hours.
                     </p>
                     <div style="font-size:var(--fs-body); color:var(--semi-muted);">
-                        <p>Azoogi supplies through our wholesale and retail partners. Let us know your preferred
+                        <span>Azoogi supplies through our wholsale and retail partners. Let us know your preferred
                             electrical wholesaler or lighting retailer, or we'll recommend one near you.</p>
                     </div>
 
@@ -380,7 +380,8 @@
                                 <div class="spec-card-content">
                                     <div class="spec-card-header">
                                         <h4 class="spec-card-title" id="spec-card-title">
-                                            {{ $product?->product_name ?? 'Product' }}</h4>
+                                            {{ $product?->product_name ?? 'Product' }}
+                                        </h4>
                                         <span class="spec-card-sku" id="spec-card-sku" style="display: none;"></span>
                                     </div>
                                     <div class="spec-card-pills" id="spec-card-pills">
@@ -902,22 +903,22 @@
             categorySegments = Array.from(new Set(categorySegments));
 
             let breadcrumbHTML = `
-                                                                                                                                                              <a href="/">Home</a>
-                                                                                                                                                              <span>/</span>
-                                                                                                                                                              <a href="/products">Products</a>
-                                                                                                                                                            `;
+                                                                                                                                                                  <a href="/">Home</a>
+                                                                                                                                                                  <span>/</span>
+                                                                                                                                                                  <a href="/products">Products</a>
+                                                                                                                                                                `;
 
             categorySegments.forEach(seg => {
                 breadcrumbHTML += `
-                                                                                                                                                                  <span>/</span>
-                                                                                                                                                                  <a href="/products?category=${encodeURIComponent(seg)}">${seg}</a>
-                                                                                                                                                                `;
+                                                                                                                                                                      <span>/</span>
+                                                                                                                                                                      <a href="/products?category=${encodeURIComponent(seg)}">${seg}</a>
+                                                                                                                                                                    `;
             });
 
             breadcrumbHTML += `
-                                                                                                                                                              <span>/</span>
-                                                                                                                                                              <span style="color: var(--ink);">${pName}</span>
-                                                                                                                                                            `;
+                                                                                                                                                                  <span>/</span>
+                                                                                                                                                                  <span style="color: var(--ink);">${pName}</span>
+                                                                                                                                                                `;
 
             breadcrumbsEl.innerHTML = breadcrumbHTML;
 
@@ -1047,16 +1048,16 @@
                         '/assets/logo_dark.png';
                     const fallbackStyle = isFallback ? ' filter: grayscale(100%); opacity: 0.7;' : '';
                     return `
-                                                                                                                                                                    <div class="prod-card" onclick="window.location.href='${detailUrl}'">
-                                                                                                                                                                      <div class="prod-card-img">
-                                                                                                                                                                        <img class="prod-swatch${isFallback ? ' is-fallback' : ''}" src="${p.img || '/assets/bg_default.png'}" alt="${p.name || 'Recommended Product'}" loading="lazy" onerror="this.onerror=null; this.src='/assets/bg_default.png'; this.classList.add('is-fallback');" style="${fallbackStyle}">
-                                                                                                                                                                      </div>
-                                                                                                                                                                      <div class="prod-card-title">
-                                                                                                                                                                        <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}</div>
-                                                                                                                                                                        <button class="add-quote-btn" aria-label="Add to quote" data-quote-id="${p.id || p.sku || p.name || ''}" data-quote-name="${p.name || ''}" data-quote-sku="${primaryProductCode(p.sku)}" data-quote-image="${p.img || ''}" data-quote-url="${detailUrl}" onclick="event.stopPropagation();">+</button>
-                                                                                                                                                                      </div>
-                                                                                                                                                                    </div>
-                                                                                                                                                                  `;
+                                                                                                                                                                        <div class="prod-card" onclick="window.location.href='${detailUrl}'">
+                                                                                                                                                                          <div class="prod-card-img">
+                                                                                                                                                                            <img class="prod-swatch${isFallback ? ' is-fallback' : ''}" src="${p.img || '/assets/bg_default.png'}" alt="${p.name || 'Recommended Product'}" loading="lazy" onerror="this.onerror=null; this.src='/assets/bg_default.png'; this.classList.add('is-fallback');" style="${fallbackStyle}">
+                                                                                                                                                                          </div>
+                                                                                                                                                                          <div class="prod-card-title">
+                                                                                                                                                                            <div class="prod-card-title-text"><span class="cat-label">${p.sub}</span>${p.name}</div>
+                                                                                                                                                                            <button class="add-quote-btn" aria-label="Add to quote" data-quote-id="${p.id || p.sku || p.name || ''}" data-quote-name="${p.name || ''}" data-quote-sku="${primaryProductCode(p.sku)}" data-quote-image="${p.img || ''}" data-quote-url="${detailUrl}" onclick="event.stopPropagation();">+</button>
+                                                                                                                                                                          </div>
+                                                                                                                                                                        </div>
+                                                                                                                                                                      `;
                 }).join('');
             }
 
@@ -1307,11 +1308,11 @@
                     group.className = 'config-group';
 
                     group.innerHTML = `
-                                                                                                                                                                  <div class="config-group-title">
-                                                                                                                                                                    <span>${optKey}</span>
-                                                                                                                                                                  </div>
-                                                                                                                                                                  <div class="config-options-flex" id="options-flex-${safeKey}" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
-                                                                                                                                                                `;
+                                                                                                                                                                      <div class="config-group-title">
+                                                                                                                                                                        <span>${optKey}</span>
+                                                                                                                                                                      </div>
+                                                                                                                                                                      <div class="config-options-flex" id="options-flex-${safeKey}" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+                                                                                                                                                                    `;
                     configurator.appendChild(group);
 
                     const flex = group.querySelector(`#options-flex-${safeKey}`);
@@ -1396,11 +1397,11 @@
                 if (iconUrls.length > 0) {
                     if (iconsWrapper) iconsWrapper.style.display = 'block';
                     iconsRow.innerHTML = iconUrls.map((url, idx) => `
-                                                                                                                                                                <img src="${resolveImg(url)}" alt="Product Icon ${idx + 1}"
-                                                                                                                                                                  style="height: 42px; width: auto; opacity: 0.85; transition: opacity 0.2s; max-width: 100px; object-fit: contain;"
-                                                                                                                                                                  onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"
-                                                                                                                                                                  onerror="this.style.display='none'">
-                                                                                                                                                              `).join('');
+                                                                                                                                                                    <img src="${resolveImg(url)}" alt="Product Icon ${idx + 1}"
+                                                                                                                                                                      style="height: 42px; width: auto; opacity: 0.85; transition: opacity 0.2s; max-width: 100px; object-fit: contain;"
+                                                                                                                                                                      onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"
+                                                                                                                                                                      onerror="this.style.display='none'">
+                                                                                                                                                                  `).join('');
                 } else {
                     if (iconsWrapper) iconsWrapper.style.display = 'none';
                     iconsRow.innerHTML = '';
@@ -1689,9 +1690,9 @@
                             modelDiv.style.borderBottom = '1px solid var(--line)';
                             modelDiv.style.paddingBottom = '8px';
                             modelDiv.innerHTML = `
-                                                                                                  <strong style="color: var(--ink);">PRODUCT CODE:</strong>
-                                                                                                  <span style="color: var(--accent); font-weight: 600;">${skuDisplay}</span>
-                                                                                                `;
+                                                                                                      <strong style="color: var(--ink);">PRODUCT CODE:</strong>
+                                                                                                      <span style="color: var(--accent); font-weight: 600;">${skuDisplay}</span>
+                                                                                                    `;
                             summaryListEl.appendChild(modelDiv);
                         }
 
@@ -1709,9 +1710,9 @@
                                 itemDiv.style.fontSize = '12px';
                                 itemDiv.style.marginBottom = '4px';
                                 itemDiv.innerHTML = `
-                                                                                                    <span style="font-weight: 500; text-transform: capitalize; color: var(--muted);">${key}:</span>
-                                                                                                    <span style="color: var(--ink); font-weight: 600;">${valObj.name}</span>
-                                                                                                  `;
+                                                                                                        <span style="font-weight: 500; text-transform: capitalize; color: var(--muted);">${key}:</span>
+                                                                                                        <span style="color: var(--ink); font-weight: 600;">${valObj.name}</span>
+                                                                                                      `;
                                 summaryListEl.appendChild(itemDiv);
                             }
                         }

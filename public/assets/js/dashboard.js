@@ -205,6 +205,12 @@
 
                 const data = await response.json();
                 startOrder = order;
+                sortBody.querySelectorAll('[data-id]').forEach((row, idx) => {
+                    const badge = row.querySelector('.dash-order-badge');
+                    if (badge) {
+                        badge.textContent = '#' + (idx + 1);
+                    }
+                });
                 toast(data.message || 'Featured order updated.');
             } catch {
                 toast('Could not update order. Try again.', 'error');

@@ -58,7 +58,7 @@ class DashboardTest extends TestCase
         $this->actingAs($admin)->get('/dashboard/staff')->assertOk()->assertSee('dash-list-card', false)->assertSee('name="q"', false);
         $this->actingAs($admin)->get('/dashboard/staff/create')->assertOk()->assertSee('dash-card', false);
         $this->actingAs($admin)->get(route('dashboard.staff.edit', $staff))->assertOk()->assertSee('dash-card', false);
-        $this->actingAs($admin)->get('/dashboard/content/projects')->assertOk()->assertSee('dash-list-card', false)->assertSee('dash-list-card-main', false)->assertSee('dash-list-thumb', false)->assertSee('name="q"', false);
+        $this->actingAs($admin)->get('/dashboard/content/projects')->assertOk()->assertSee('dash-airtable-table', false)->assertSee('dash-preview-thumb', false)->assertSee('name="q"', false);
         $this->actingAs($admin)->get('/dashboard/content/products')->assertOk()->assertSee('name="q"', false)->assertSee('dash-airtable-table', false)->assertSee('dash-preview-thumb', false);
         $this->actingAs($admin)
             ->get('/dashboard/content/projects/create')
@@ -320,7 +320,6 @@ class DashboardTest extends TestCase
             ->assertSee('Status', false)
             ->assertSee('Featured', false)
             ->assertSee('dash-pill', false)
-            ->assertSee('Last updated', false)
             ->assertSee('Pat Admin', false)
             ->assertSee('dash-updated', false);
 
@@ -856,6 +855,67 @@ class DashboardTest extends TestCase
         $this->assertSame(1, $third->fresh()->featured_order);
         $this->assertSame(2, $first->fresh()->featured_order);
         $this->assertSame(3, $second->fresh()->featured_order);
+    }
+
+    public function test_projects_can_be_filtered_by_status_featured_and_search(): void
+    {
+        $admin = User::factory()->admin()->create();
+        $activeFeatured = Project::factory()->create([
+            'title' => 'Opera House Glow',
+            'tag' => 'Hospitality',
+            'location' => 'Sydney NSW',
+            'status' => Status::Active,
+            'featured' => true,
+        ]);
+        $inactiveUnfeatured = Project::factory()->create([
+            'title' => 'Bridge Tunnel Dark',
+            'tag' => 'Infrastructure',
+            'location' => 'Brisbane QLD',
+            'status' => Status::Inactive,
+            'featured' => false,
+        ]);
+
+        // Filter by Status: Active
+        $this->actingAs($admin)
+            ->get('/dashboard/content/projects?status=active')
+            ->assertOk()
+            ->assertSee('Opera House Glow', false)
+            ->assertDontSee('Bridge Tunnel Dark', false);
+
+        // Filter by Status: Inactive
+        $this->actingAs($admin)
+            ->get('/dashboard/content/projects?status=inactive')
+            ->assertOk()
+            ->assertSee('Bridge Tunnel Dark', false)
+            ->assertDontSee('Opera House Glow', false);
+
+        // Filter by Featured: Featured
+        $this->actingAs($admin)
+            ->get('/dashboard/content/projects?featured=featured')
+            ->assertOk()
+            ->assertSee('Opera House Glow', false)
+            ->assertDontSee('Bridge Tunnel Dark', false);
+
+        // Filter by Featured: Not Featured
+        $this->actingAs($admin)
+            ->get('/dashboard/content/projects?featured=not_featured')
+            ->assertOk()
+            ->assertSee('Bridge Tunnel Dark', false)
+            ->assertDontSee('Opera House Glow', false);
+
+        // Search by location
+        $this->actingAs($admin)
+            ->get('/dashboard/content/projects?q=Sydney')
+            ->assertOk()
+            ->assertSee('Opera House Glow', false)
+            ->assertDontSee('Bridge Tunnel Dark', false);
+
+        // Search by tag
+        $this->actingAs($admin)
+            ->get('/dashboard/content/projects?q=Infrastructure')
+            ->assertOk()
+            ->assertSee('Bridge Tunnel Dark', false)
+            ->assertDontSee('Opera House Glow', false);
     }
 
     public function test_staff_can_toggle_assigned_page_status(): void

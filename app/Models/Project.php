@@ -110,4 +110,19 @@ class Project extends Model
     {
         return '/project-detail?slug='.$this->slug;
     }
+
+    /**
+     * @return list<string>
+     */
+    public function tags(): array
+    {
+        if (blank($this->tag)) {
+            return [];
+        }
+
+        return array_values(array_filter(
+            array_map('trim', explode(',', (string) $this->tag)),
+            fn (string $t): bool => $t !== '',
+        ));
+    }
 }

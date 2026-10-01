@@ -18,9 +18,13 @@ class ProjectService implements IProjectService
         private ContentStorage $storage,
     ) {}
 
-    public function dashboardList(string $search = ''): LengthAwarePaginator
-    {
-        return $this->projects->dashboardList($search);
+    public function dashboardList(
+        string $search = '',
+        ?string $status = null,
+        ?string $featured = null,
+        int $perPage = 15
+    ): LengthAwarePaginator {
+        return $this->projects->dashboardList($search, $status, $featured, $perPage);
     }
 
     public function publicListing(): array

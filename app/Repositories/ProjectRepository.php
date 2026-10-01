@@ -15,16 +15,36 @@ class ProjectRepository implements IProjectRepository
         return Project::query()->with('updater:id,name')->orderBy('featured_order')->orderBy('title')->get();
     }
 
-    public function dashboardList(string $search = ''): LengthAwarePaginator
-    {
+    public function dashboardList(
+        string $search = '',
+        ?string $status = null,
+        ?string $featured = null,
+        int $perPage = 15
+    ): LengthAwarePaginator {
         return Project::query()
             ->with('updater:id,name')
             ->when($search !== '', function ($query) use ($search): void {
-                $query->where('title', 'like', '%'.$search.'%');
+                $query->where(function ($q) use ($search): void {
+                    $q->where('title', 'like', '%'.$search.'%')
+                        ->orWhere('tag', 'like', '%'.$search.'%')
+                        ->orWhere('location', 'like', '%'.$search.'%')
+                        ->orWhere('type', 'like', '%'.$search.'%')
+                        ->orWhere('summary', 'like', '%'.$search.'%');
+                });
+            })
+            ->when($status !== null, function ($query) use ($status): void {
+                $query->where('status', $status);
+            })
+            ->when($featured !== null, function ($query) use ($featured): void {
+                if ($featured === 'featured' || $featured === '1') {
+                    $query->where('featured', true);
+                } elseif ($featured === 'not_featured' || $featured === '0') {
+                    $query->where('featured', false);
+                }
             })
             ->orderBy('featured_order')
             ->orderBy('title')
-            ->paginate(15)
+            ->paginate($perPage)
             ->withQueryString();
     }
 
