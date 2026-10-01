@@ -788,28 +788,6 @@ a.meta-badge:hover {
   line-weight: 1.6;
 }
 
-.quote-intro-image {
-  margin-top: 24px;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid var(--border-light);
-  background: var(--card-bg);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
-  aspect-ratio: 16 / 10;
-}
-
-.quote-intro-image img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  transition: transform 0.8s ease;
-}
-
-.quote-intro-image:hover img {
-  transform: scale(1.04);
-}
-
 .quote-form-card {
   background: var(--card-bg);
   border: 1px solid var(--border-light);
