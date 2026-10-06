@@ -83,7 +83,7 @@ class MockLlmDriver implements IChatLlmDriver
             }
 
             return [
-                'content' => 'I have processed your request. Here are the relevant product details and options below.',
+                'content' => 'Here are the relevant product details and options matching your request below.',
                 'tool_calls' => [],
                 'tokens_used' => 30,
             ];
@@ -203,15 +203,17 @@ class MockLlmDriver implements IChatLlmDriver
             $category = 'Pool Light';
         } elseif (str_contains($text, 'profile') || str_contains($text, 'extrusion') || str_contains($text, 'linear')) {
             $category = 'Profile';
+        } elseif (str_contains($text, 'driver') || str_contains($text, 'power')) {
+            $category = 'Driver';
         }
 
         $ipRating = '';
-        if (preg_match('/\b(IP[2456][0-8])\b/i', $text, $ipMatch)) {
+        if (preg_match('/\b(IP[2456][0-9])\b/i', $text, $ipMatch)) {
             $ipRating = strtoupper($ipMatch[1]);
         }
 
         $dimming = '';
-        if (preg_match('/\b(DALI|Casambi|Triac|0-10V|MADRIX|Silvair|Phase)\b/i', $text, $dimMatch)) {
+        if (preg_match('/\b(DALI(?:-2)?|Casambi|Triac|0-10V|1-10V|MADRIX|Silvair|Phase)\b/i', $text, $dimMatch)) {
             $dimming = $dimMatch[1];
         }
 

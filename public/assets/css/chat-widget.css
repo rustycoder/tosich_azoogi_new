@@ -465,16 +465,6 @@
     font-weight: 600;
 }
 
-.azoogi-chat-products-carousel .prod-card-code {
-    display: block;
-    font-size: var(--fs-caption, 11px);
-    color: var(--accent, #67d04e);
-    text-transform: uppercase;
-    letter-spacing: .08em;
-    margin-top: 4px;
-    font-weight: 400;
-}
-
 .azoogi-chat-products-carousel .add-quote-btn {
     background: var(--accent, #67d04e);
     border: 1px solid var(--line, rgba(255, 255, 255, 0.12));

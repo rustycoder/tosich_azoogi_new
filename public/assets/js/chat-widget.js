@@ -181,7 +181,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const isFallback = !p.image_url || p.image_url.includes('placeholder') || p.image_url.includes('default');
             const imgHtml = `<img src="${p.image_url || '/assets/quote.webp'}" alt="${escapeHtml(p.name)}" class="prod-swatch${isFallback ? ' is-fallback' : ''}" loading="lazy" onerror="this.onerror=null; this.src='/assets/quote.webp';">`;
             const catLabel = p.category ? `<span class="cat-label">${escapeHtml(p.category)}</span>` : '';
-            const codeLabel = p.code ? `<span class="prod-card-code">${escapeHtml(p.code)}</span>` : '';
             const detailUrl = p.url || `/products/${encodeURIComponent(p.slug || p.id)}`;
 
             return `
@@ -193,7 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="prod-card-title-text">
                             ${catLabel}
                             <span class="prod-card-name">${escapeHtml(p.name)}</span>
-                            ${codeLabel}
                         </div>
                         <button class="add-quote-btn js-add-quote" type="button" aria-label="Add to quote" data-id="${p.id}" data-name="${escapeHtml(p.name)}" data-sku="${escapeHtml(p.code || '')}" data-image="${escapeHtml(p.image_url || '')}" data-url="${escapeHtml(detailUrl)}" onclick="event.stopPropagation();">+</button>
                     </div>
