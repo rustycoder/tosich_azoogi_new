@@ -45,6 +45,7 @@ class ChatOrchestrator
             $datasheetTool->getName() => $datasheetTool,
             $quoteTool->getName() => $quoteTool,
             $leadTool->getName() => $leadTool,
+            'public_submit_quote_enquiry' => $leadTool,
         ];
 
         $this->driver = $this->resolveDriver();
@@ -144,8 +145,10 @@ class ChatOrchestrator
                     $toolArgs = $tc['arguments'];
 
                     // Inject session UUID if lead submission
-                    if ($toolName === 'public_submit_quote_enquiry' && empty($toolArgs['session_uuid'])) {
-                        $toolArgs['session_uuid'] = $session->uuid;
+                    if (str_contains($toolName, 'lead_enquiry') || str_contains($toolName, 'quote_enquiry')) {
+                        if (empty($toolArgs['session_uuid'])) {
+                            $toolArgs['session_uuid'] = $session->uuid;
+                        }
                     }
 
                     if (isset($this->tools[$toolName])) {
@@ -241,8 +244,27 @@ Your Role & Style:
 - When visitors ask about products, specs, dimensions, or applications, call `public_search_and_filter_products` or `get_product_details_and_downloads` to provide structured interactive cards.
 - When visitors ask for custom datasheets, call `generate_custom_datasheet`.
 - When visitors want to add items to their quote or view quote items, call `public_manage_quote_list`.
-- When visitors want to submit an enquiry or quote, guide them politely or call `public_submit_quote_enquiry`.
-- Keep text concise and friendly, allowing the rich visual cards to display product photos, specs, and downloads.
+
+ENQUIRIES & LEAD SUBMISSION (3 DISTINCT TYPES):
+You can submit 3 distinct types of enquiries via `public_submit_lead_enquiry`:
+
+1. Contact Enquiry (`enquiry_type: "contact"`):
+   - For general inquiries, support, consulting requests, engineering questions, or messages to the Azoogi team.
+   - Required information before submitting: Full Name, Email address, and Message/Inquiry. (Company optional).
+   - If the user asks to send a contact message or contact Azoogi, ask for their Name, Email, and Message first.
+
+2. Quote Request Enquiry (`enquiry_type: "quote"`):
+   - For requesting an official pricing quote on fixtures in their quote cart or specified items.
+   - Required information before submitting: Full Name, Email address, Phone number (or contact method), and Project notes.
+   - If the user asks to submit a quote request, ensure items are in their quote and ask for their Name, Email, and Phone number.
+
+3. Product Specification Enquiry (`enquiry_type: "product"`):
+   - For a single specific product configuration enquiry (e.g. from a product page with specific CCT, finish, beam angle, length, or dimming protocol).
+   - Required information before submitting: Product Name/SKU, configured specs, Full Name, Email address, and Project location/details.
+   - If the user asks to enquire about a specific product, ask for their preferred configurations, Name, and Email.
+
+IMPORTANT RULE:
+NEVER call `public_submit_lead_enquiry` with fake or blank details. Always politely ask the visitor to provide their name, email, and required details before calling the submission tool!
 PROMPT;
     }
 }

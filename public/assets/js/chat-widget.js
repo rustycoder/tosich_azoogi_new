@@ -273,14 +273,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Lead Confirmation Card Template
     const renderLeadConfirmationCard = (lead) => {
+        const typeTitles = {
+            'contact': 'Contact Message Sent!',
+            'product': 'Product Enquiry Submitted!',
+            'quote': 'Quote Request Submitted!'
+        };
+        const title = typeTitles[lead.enquiry_type] || `Enquiry #${lead.enquiry_id} Submitted!`;
+        const sub = lead.enquiry_type === 'contact'
+            ? `Thank you ${escapeHtml(lead.name || '')}! Our engineering team will reply to ${escapeHtml(lead.email || '')}.`
+            : `Ref #${lead.enquiry_id} &bull; Confirmation sent to ${escapeHtml(lead.email || '')}`;
+
         return `
             <div class="azoogi-chat-download-card" style="border-color: #10b981;">
                 <div class="azoogi-chat-download-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                 </div>
                 <div class="azoogi-chat-download-meta">
-                    <div class="azoogi-chat-download-title">Quote Inquiry #${lead.enquiry_id} Submitted!</div>
-                    <div class="azoogi-chat-download-sub">Confirmation sent to ${lead.email}</div>
+                    <div class="azoogi-chat-download-title">${title}</div>
+                    <div class="azoogi-chat-download-sub">${sub}</div>
                 </div>
             </div>
         `;

@@ -89,9 +89,16 @@ class MockLlmDriver implements IChatLlmDriver
             // Case E: Lead Enquiry Submission
             if (isset($toolResult['enquiry_id']) || isset($toolResult['lead_id'])) {
                 $ref = $toolResult['enquiry_id'] ?? rand(1000, 9999);
+                $enquiryType = $toolResult['enquiry_type'] ?? 'contact';
+
+                $customMessage = match ($enquiryType) {
+                    'quote' => "Thank you! Your quote request has been submitted to our Sydney sales engineering team (Ref #{$ref}). A lighting specialist will review your project requirements and be in touch shortly.",
+                    'product' => "Thank you! Your product specification enquiry has been submitted (Ref #{$ref}). Our engineering team will review your specifications and contact you shortly.",
+                    default => "Thank you! Your contact message has been sent to our Sydney sales engineering team (Ref #{$ref}). We will review your inquiry and reply shortly.",
+                };
 
                 return [
-                    'content' => "Thank you! Your quote enquiry has been submitted to our Sydney sales engineering team (Ref #{$ref}). A lighting specialist will review your project requirements and be in touch shortly.",
+                    'content' => $toolResult['message'] ?? $customMessage,
                     'tool_calls' => [],
                     'tokens_used' => 40,
                 ];
@@ -164,22 +171,71 @@ class MockLlmDriver implements IChatLlmDriver
             ];
         }
 
-        // Intent: Submit Enquiry / Quote
-        if (str_contains($text, 'submit') || str_contains($text, 'enquiry') || str_contains($text, 'send contact') || str_contains($text, 'contact sales') || str_contains($text, 'get a quote')) {
-            return [
-                'content' => null,
-                'tool_calls' => [
-                    [
-                        'id' => uniqid('mock_call_'),
-                        'name' => 'public_submit_quote_enquiry',
-                        'arguments' => [
-                            'name' => 'Website Visitor',
-                            'email' => 'visitor@example.com',
-                            'notes' => 'Inquiry submitted via website AI assistant.',
+        // Intent: Contact Message / Consultation
+        if (preg_match('/\b(contact|message|reach out|talk to|speak with|get in touch|consultation)\b/i', $text) && ! str_contains($text, 'quote')) {
+            preg_match('/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/', $text, $emailMatches);
+            $foundEmail = $emailMatches[0] ?? null;
+
+            preg_match('/(?:my name is|name[:\s]+|i am)\s+([A-Za-z\s]+?)(?:,|\.|\sand\b|\semail\b|$)/i', $text, $nameMatches);
+            $foundName = isset($nameMatches[1]) ? trim($nameMatches[1]) : null;
+
+            if ($foundEmail && $foundName) {
+                return [
+                    'content' => null,
+                    'tool_calls' => [
+                        [
+                            'id' => uniqid('mock_call_'),
+                            'name' => 'public_submit_lead_enquiry',
+                            'arguments' => [
+                                'enquiry_type' => 'contact',
+                                'name' => $foundName,
+                                'email' => $foundEmail,
+                                'message' => $text,
+                            ],
                         ],
                     ],
-                ],
-                'tokens_used' => 40,
+                    'tokens_used' => 40,
+                ];
+            }
+
+            return [
+                'content' => "I would be happy to forward your message to our Sydney sales and engineering team. To send your contact enquiry, please provide:\n\n1. **Your Full Name**\n2. **Your Email Address**\n3. **Your Message or Question**\n\nOnce provided, I will send your enquiry directly to our team.",
+                'tool_calls' => [],
+                'tokens_used' => 45,
+            ];
+        }
+
+        // Intent: Submit Quote Request
+        if (str_contains($text, 'submit quote') || str_contains($text, 'send quote') || str_contains($text, 'request a quote') || (str_contains($text, 'submit') && str_contains($text, 'quote'))) {
+            preg_match('/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/', $text, $emailMatches);
+            $foundEmail = $emailMatches[0] ?? null;
+
+            preg_match('/(?:my name is|name[:\s]+|i am)\s+([A-Za-z\s]+?)(?:,|\.|\sand\b|\semail\b|$)/i', $text, $nameMatches);
+            $foundName = isset($nameMatches[1]) ? trim($nameMatches[1]) : null;
+
+            if ($foundEmail && $foundName) {
+                return [
+                    'content' => null,
+                    'tool_calls' => [
+                        [
+                            'id' => uniqid('mock_call_'),
+                            'name' => 'public_submit_lead_enquiry',
+                            'arguments' => [
+                                'enquiry_type' => 'quote',
+                                'name' => $foundName,
+                                'email' => $foundEmail,
+                                'message' => $text,
+                            ],
+                        ],
+                    ],
+                    'tokens_used' => 40,
+                ];
+            }
+
+            return [
+                'content' => "To submit your project quote request to our engineering team, could you please provide:\n\n1. **Your Full Name**\n2. **Your Email Address**\n3. **Your Contact Phone Number** (optional)\n4. **Project Details or Notes**\n\nI will package your active quote list and submit it immediately.",
+                'tool_calls' => [],
+                'tokens_used' => 45,
             ];
         }
 
