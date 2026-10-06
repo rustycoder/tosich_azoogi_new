@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\ChatController as ApiChatController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Dashboard\ChatSessionController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\DocumentationController;
 use App\Http\Controllers\Dashboard\EmailTemplateController;
@@ -62,6 +64,11 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
             ->name('enquiries.index');
         Route::patch('enquiries/{enquiry}/status', [EnquiryController::class, 'updateStatus'])->name('enquiries.status');
         Route::delete('enquiries/{enquiry}', [EnquiryController::class, 'destroy'])->name('enquiries.destroy');
+
+        Route::get('chat-sessions', [ChatSessionController::class, 'index'])->name('chat-sessions.index');
+        Route::get('chat-sessions/{chatSession}', [ChatSessionController::class, 'show'])->name('chat-sessions.show');
+        Route::post('chat-sessions/{chatSession}/convert-enquiry', [ChatSessionController::class, 'convertToEnquiry'])->name('chat-sessions.convert-enquiry');
+        Route::delete('chat-sessions/{chatSession}', [ChatSessionController::class, 'destroy'])->name('chat-sessions.destroy');
     });
 
     Route::middleware('can.manage:products')->group(function () {
@@ -154,3 +161,15 @@ Route::get('/product-datasheet/{export}', [ProductDatasheetController::class, 's
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 Route::get('/llms.txt', [LlmsTxtController::class, 'index'])->name('llms.txt');
 Route::get('/llms-full.txt', [LlmsTxtController::class, 'full'])->name('llms-full.txt');
+
+Route::prefix('api/chat')->name('api.chat.')->group(function () {
+    Route::post('message', [ApiChatController::class, 'message'])
+        ->middleware('throttle:60,1')
+        ->name('message');
+    Route::get('session/{uuid}', [ApiChatController::class, 'session'])
+        ->name('session');
+    Route::post('quote/add', [ApiChatController::class, 'addQuote'])
+        ->name('quote.add');
+    Route::post('clear', [ApiChatController::class, 'clear'])
+        ->name('clear');
+});

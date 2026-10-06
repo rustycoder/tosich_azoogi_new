@@ -92,10 +92,11 @@
 </script>
 @if (request()->routeIs('dashboard.pages.preview'))
 <base href="{{ rtrim(url('/'), '/') }}/">
-@endif
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" href="{{ versioned_asset('assets/css/style_demo.css') }}">
 <link rel="stylesheet" href="{{ versioned_asset('assets/css/quote.css') }}">
 <link rel="stylesheet" href="{{ versioned_asset('assets/css/site-search.css') }}">
+<link rel="stylesheet" href="{{ versioned_asset('assets/css/chat-widget.css') }}">
 @stack('styles')
 <script defer src="{{ versioned_asset('assets/js/site-theme.js') }}"></script>
 @if (trim($__env->yieldContent('chrome', 'full')) !== 'none')
@@ -124,10 +125,12 @@
 
 @if (trim($__env->yieldContent('chrome', 'full')) !== 'none')
     @include('partials.footer')
+    @include('components.chat-widget')
 @endif
 
 <div id="site-toasts" class="site-toasts" aria-live="polite" @if (session('status')) data-flash="{{ session('status') }}" @endif @if (session('clear_quote')) data-clear-quote @endif></div>
 
+<script defer src="{{ versioned_asset('assets/js/chat-widget.js') }}"></script>
 @stack('scripts')
 @if (request()->routeIs('dashboard.pages.preview'))
 <script src="{{ asset('assets/js/cms-editor.js') }}?v={{ config('app.asset_version') }}"></script>
