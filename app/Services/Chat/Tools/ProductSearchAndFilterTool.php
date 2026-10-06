@@ -7,6 +7,7 @@ namespace App\Services\Chat\Tools;
 use App\Models\Product;
 use App\Services\Chat\Contracts\IChatTool;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
 class ProductSearchAndFilterTool implements IChatTool
 {
@@ -31,7 +32,7 @@ class ProductSearchAndFilterTool implements IChatTool
                 ],
                 'category' => [
                     'type' => 'string',
-                    'description' => 'Optional category filter (e.g., "Downlights", "LED Strips", "Garden Light", "Pool Light").',
+                    'description' => 'Optional category filter (e.g., "Downlight", "LED Strip", "Garden Light", "Pool Light", "Neon", "Driver").',
                 ],
                 'ip_rating' => [
                     'type' => 'string',
@@ -62,39 +63,85 @@ class ProductSearchAndFilterTool implements IChatTool
         $dimming = trim((string) ($arguments['dimming'] ?? ''));
         $limit = min(8, max(1, (int) ($arguments['limit'] ?? 4)));
 
-        // Extract IP rating from query if not explicitly passed
-        if (empty($ipRating) && preg_match('/\b(IP[2456][0-8])\b/i', $rawQuery, $ipMatch)) {
+        // Extract IP rating from query if not provided
+        if (empty($ipRating) && preg_match('/\b(IP[2456][0-9])\b/i', $rawQuery, $ipMatch)) {
             $ipRating = strtoupper($ipMatch[1]);
         }
 
-        // Extract dimming protocol from query if not explicitly passed
-        if (empty($dimming) && preg_match('/\b(DALI|Casambi|Triac|0-10V|MADRIX|Silvair|Phase)\b/i', $rawQuery, $dimMatch)) {
+        // Extract dimming protocol from query
+        if (empty($dimming) && preg_match('/\b(DALI(?:-2)?|Casambi|Triac|0-10V|1-10V|MADRIX|Silvair|Phase)\b/i', $rawQuery, $dimMatch)) {
             $dimming = $dimMatch[1];
         }
 
-        // Extract dimension from query if not explicitly passed
-        if (empty($dimension) && preg_match('/\b(?:Ø|\b)?\d+(?:\.\d+)?\s*(?:mm|m|cm)?\b/i', $rawQuery, $dimenMatch)) {
-            $dimension = trim($dimenMatch[0]);
+        // Extract dimension keywords from query
+        if (empty($dimension) && preg_match_all('/\b(?:Ø)?\d+(?:\.\d+)?\s*(?:mm|m|cm)?\b/i', $rawQuery, $dimenMatches)) {
+            $dimension = implode(' ', $dimenMatches[0]);
         }
 
-        // Tokenize and clean query
-        $keywords = $this->extractKeywords($rawQuery);
+        // Check if query implies outdoor
+        $isOutdoor = (bool) (preg_match('/\b(outdoor|exterior|garden|pool|waterproof|weatherproof|submersible|inground)\b/i', $rawQuery) || in_array($ipRating, ['IP65', 'IP66', 'IP67', 'IP68', 'IP69'], true));
 
-        // 1. Try structured search with high precision
-        $products = $this->queryProducts($keywords, $category, $ipRating, $dimension, $dimming, $limit, 'and');
+        // Tokenize and stem query keywords
+        $keywords = $this->extractAndStemKeywords($rawQuery);
 
-        // 2. Fallback: Relaxed OR search if no products found
-        if ($products->isEmpty() && (! empty($keywords) || ! empty($category) || ! empty($ipRating) || ! empty($dimming))) {
-            $products = $this->queryProducts($keywords, $category, $ipRating, $dimension, $dimming, $limit, 'or');
+        // Auto-detect category from keywords
+        if (empty($category)) {
+            if (in_array('downlight', $keywords, true)) {
+                $category = 'Downlight';
+            } elseif (in_array('strip', $keywords, true) || in_array('tape', $keywords, true)) {
+                $category = 'Strip';
+            } elseif (in_array('neon', $keywords, true)) {
+                $category = 'Neon';
+            } elseif (in_array('garden', $keywords, true) || in_array('spike', $keywords, true)) {
+                $category = 'Garden Light';
+            } elseif (in_array('pool', $keywords, true)) {
+                $category = 'Pool Light';
+            } elseif (in_array('driver', $keywords, true) || in_array('power', $keywords, true)) {
+                $category = 'Driver';
+            } elseif (in_array('profile', $keywords, true) || in_array('extrusion', $keywords, true)) {
+                $category = 'Profile';
+            }
         }
 
-        // 3. Fallback: Default to top published products if still empty
-        if ($products->isEmpty()) {
-            $products = $this->basePublishedQuery()
-                ->orderBy('sort_order', 'asc')
-                ->limit($limit)
-                ->get();
+        // 1. First priority: High precision search with scoring
+        $scored = $this->searchAndScoreProducts($keywords, $category, $ipRating, $dimension, $dimming, $isOutdoor);
+
+        // 2. If no products scored, perform broad fallback
+        if ($scored->isEmpty()) {
+            if ($isOutdoor) {
+                $scored = Product::query()
+                    ->where(fn ($q) => $this->applyPublishedScope($q))
+                    ->where(function ($q) {
+                        $q->where('product_name', 'like', '%Garden%')
+                            ->orWhere('product_name', 'like', '%Pool%')
+                            ->orWhere('category', 'like', '%Garden%')
+                            ->orWhere('category', 'like', '%Pool%')
+                            ->orWhere('product_description', 'like', '%IP6%')
+                            ->orWhere('product_description', 'like', '%outdoor%');
+                    })
+                    ->orderBy('sort_order', 'asc')
+                    ->limit($limit)
+                    ->get();
+            } elseif (! empty($category)) {
+                $scored = Product::query()
+                    ->where(fn ($q) => $this->applyPublishedScope($q))
+                    ->where(function ($q) use ($category) {
+                        $q->where('category', 'like', "%{$category}%")
+                            ->orWhere('product_name', 'like', "%{$category}%");
+                    })
+                    ->orderBy('sort_order', 'asc')
+                    ->limit($limit)
+                    ->get();
+            } else {
+                $scored = Product::query()
+                    ->where(fn ($q) => $this->applyPublishedScope($q))
+                    ->orderBy('sort_order', 'asc')
+                    ->limit($limit)
+                    ->get();
+            }
         }
+
+        $products = $scored->take($limit);
 
         $productCards = $products->map(function (Product $p) {
             $coverUrl = $p->coverUrl();
@@ -107,6 +154,12 @@ class ProductSearchAndFilterTool implements IChatTool
             if (! empty($p->category)) {
                 $badges[] = $p->category;
             }
+
+            // Check if IP rating found in description or name
+            if (preg_match('/(IP6[5-9]|IP54|IP68)/i', $p->product_name.' '.$p->product_description, $ipB)) {
+                $badges[] = strtoupper($ipB[1]);
+            }
+
             if ($p->dimming_control) {
                 $badges[] = 'Smart Dimming';
             }
@@ -125,7 +178,7 @@ class ProductSearchAndFilterTool implements IChatTool
                 'image_url' => $coverUrl ?: asset('assets/quote.webp'),
                 'url' => $p->publicPath() ?: route('products.show', $p->slug ?: $p->id),
                 'datasheet_url' => $p->datasheetUrl(),
-                'badges' => $badges,
+                'badges' => array_values(array_unique($badges)),
             ];
         })->values()->toArray();
 
@@ -133,6 +186,9 @@ class ProductSearchAndFilterTool implements IChatTool
             'result' => [
                 'matched_count' => count($productCards),
                 'query_used' => $rawQuery,
+                'detected_category' => $category,
+                'detected_ip_rating' => $ipRating,
+                'is_outdoor' => $isOutdoor,
                 'products' => $productCards,
             ],
             'cards' => [
@@ -144,88 +200,189 @@ class ProductSearchAndFilterTool implements IChatTool
 
     /**
      * @param  list<string>  $keywords
+     * @return Collection<int, Product>
      */
-    protected function queryProducts(
+    protected function searchAndScoreProducts(
         array $keywords,
         string $category,
         string $ipRating,
         string $dimension,
         string $dimming,
-        int $limit,
-        string $mode = 'and'
-    ) {
-        $builder = $this->basePublishedQuery();
+        bool $isOutdoor
+    ): Collection {
+        $builder = Product::query()->where(fn ($q) => $this->applyPublishedScope($q));
 
-        if (! empty($category)) {
-            $builder->where(function ($q) use ($category) {
+        // Get candidate products that match at least one attribute
+        $builder->where(function ($q) use ($keywords, $category, $ipRating, $dimming, $isOutdoor) {
+            $hasCondition = false;
+
+            if (! empty($category)) {
                 $q->where('category', 'like', "%{$category}%")
-                    ->orWhere('category_path', 'like', "%{$category}%")
-                    ->orWhere('categories', 'like', "%{$category}%");
-            });
-        }
-
-        if (! empty($ipRating)) {
-            $builder->where(function ($q) use ($ipRating) {
-                $q->where('product_description', 'like', "%{$ipRating}%")
-                    ->orWhere('product_name', 'like', "%{$ipRating}%")
-                    ->orWhere('product_features', 'like', "%{$ipRating}%")
-                    ->orWhere('options', 'like', "%{$ipRating}%");
-            });
-        }
-
-        if (! empty($dimming)) {
-            $builder->where(function ($q) use ($dimming) {
-                $q->where('product_description', 'like', "%{$dimming}%")
-                    ->orWhere('product_name', 'like', "%{$dimming}%")
-                    ->orWhere('product_features', 'like', "%{$dimming}%")
-                    ->orWhere('dimming_control', true);
-            });
-        }
-
-        if (! empty($dimension)) {
-            $cleanDim = preg_replace('/[^\d.]/', '', $dimension);
-            if (! empty($cleanDim)) {
-                $builder->where(function ($q) use ($cleanDim) {
-                    $q->where('product_dimension', 'like', "%{$cleanDim}%")
-                        ->orWhere('product_description', 'like', "%{$cleanDim}%")
-                        ->orWhere('product_name', 'like', "%{$cleanDim}%");
-                });
+                    ->orWhere('product_name', 'like', "%{$category}%");
+                $hasCondition = true;
             }
-        }
 
-        if (! empty($keywords)) {
-            $builder->where(function ($q) use ($keywords, $mode) {
-                foreach ($keywords as $index => $kw) {
-                    $method = ($mode === 'and' && $index > 0) ? 'where' : 'orWhere';
-                    $q->{$method}(function ($sub) use ($kw) {
-                        $sub->where('product_name', 'like', "%{$kw}%")
-                            ->orWhere('category', 'like', "%{$kw}%")
-                            ->orWhere('product_code', 'like', "%{$kw}%")
-                            ->orWhere('product_description', 'like', "%{$kw}%")
-                            ->orWhere('product_features', 'like', "%{$kw}%");
-                    });
+            if (! empty($ipRating)) {
+                $q->orWhere('product_description', 'like', "%{$ipRating}%")
+                    ->orWhere('product_name', 'like', "%{$ipRating}%")
+                    ->orWhere('product_features', 'like', "%{$ipRating}%");
+                $hasCondition = true;
+            }
+
+            if ($isOutdoor) {
+                $q->orWhere('category', 'like', '%Garden%')
+                    ->orWhere('category', 'like', '%Pool%')
+                    ->orWhere('category', 'like', '%Neon%')
+                    ->orWhere('product_name', 'like', '%Garden%')
+                    ->orWhere('product_name', 'like', '%Pool%')
+                    ->orWhere('product_name', 'like', '%Outdoor%')
+                    ->orWhere('product_description', 'like', '%IP6%')
+                    ->orWhere('product_description', 'like', '%IP67%')
+                    ->orWhere('product_description', 'like', '%IP68%')
+                    ->orWhere('product_description', 'like', '%outdoor%');
+                $hasCondition = true;
+            }
+
+            if (! empty($dimming)) {
+                $q->orWhere('product_description', 'like', "%{$dimming}%")
+                    ->orWhere('product_name', 'like', "%{$dimming}%")
+                    ->orWhere('dimming_control', true);
+                $hasCondition = true;
+            }
+
+            if (! empty($keywords)) {
+                foreach ($keywords as $kw) {
+                    $q->orWhere('product_name', 'like', "%{$kw}%")
+                        ->orWhere('category', 'like', "%{$kw}%")
+                        ->orWhere('product_code', 'like', "%{$kw}%")
+                        ->orWhere('product_description', 'like', "%{$kw}%");
                 }
-            });
+                $hasCondition = true;
+            }
+
+            if (! $hasCondition) {
+                $q->whereRaw('1 = 1');
+            }
+        });
+
+        $candidates = $builder->get();
+
+        // Score candidates based on relevance
+        $dimNumbers = [];
+        if (! empty($dimension)) {
+            preg_match_all('/\d+/', $dimension, $matches);
+            $dimNumbers = $matches[0] ?? [];
         }
 
-        return $builder->orderBy('sort_order', 'asc')->limit($limit)->get();
+        $scored = $candidates->map(function (Product $p) use ($keywords, $category, $ipRating, $dimNumbers, $dimming, $isOutdoor) {
+            $score = 0;
+            $name = mb_strtolower((string) $p->product_name);
+            $cat = mb_strtolower((string) $p->category);
+            $desc = mb_strtolower((string) $p->product_description);
+            $code = mb_strtolower((string) $p->product_code);
+
+            // Category match bonus
+            if (! empty($category)) {
+                $catLower = mb_strtolower($category);
+                if (str_contains($cat, $catLower)) {
+                    $score += 30;
+                }
+                if (str_contains($name, $catLower)) {
+                    $score += 25;
+                }
+            }
+
+            // IP Rating match bonus
+            if (! empty($ipRating)) {
+                $ipLower = mb_strtolower($ipRating);
+                if (str_contains($desc, $ipLower) || str_contains($name, $ipLower)) {
+                    $score += 40;
+                }
+            }
+
+            // Outdoor relevance
+            if ($isOutdoor) {
+                if (str_contains($cat, 'garden') || str_contains($cat, 'pool')) {
+                    $score += 35;
+                }
+                if (str_contains($desc, 'ip68') || str_contains($desc, 'ip67') || str_contains($desc, 'ip66') || str_contains($desc, 'ip65')) {
+                    $score += 25;
+                }
+                if (str_contains($desc, 'outdoor') || str_contains($name, 'outdoor')) {
+                    $score += 20;
+                }
+            }
+
+            // Dimension number match bonus (e.g. 80mm, 82mm, 55mm)
+            foreach ($dimNumbers as $num) {
+                if (str_contains($name, $num.'mm') || str_contains($name, $num.' mm') || str_contains($name, 'ø'.$num)) {
+                    $score += 35;
+                } elseif (str_contains($desc, $num.'mm') || str_contains($desc, $num)) {
+                    $score += 15;
+                }
+            }
+
+            // Keyword matches
+            foreach ($keywords as $kw) {
+                if (str_contains($name, $kw)) {
+                    $score += 20;
+                }
+                if (str_contains($cat, $kw)) {
+                    $score += 15;
+                }
+                if (str_contains($code, $kw)) {
+                    $score += 15;
+                }
+                if (str_contains($desc, $kw)) {
+                    $score += 5;
+                }
+            }
+
+            // Dimming match
+            if (! empty($dimming)) {
+                $dimLower = mb_strtolower($dimming);
+                if (str_contains($name, $dimLower) || str_contains($desc, $dimLower)) {
+                    $score += 20;
+                }
+            }
+
+            return ['product' => $p, 'score' => $score];
+        });
+
+        return $scored->filter(fn ($item) => $item['score'] > 0)
+            ->sortByDesc('score')
+            ->map(fn ($item) => $item['product'])
+            ->values();
     }
 
-    protected function basePublishedQuery(): Builder
+    protected function applyPublishedScope(Builder $query): void
     {
-        return Product::query()->where(function ($q) {
-            $q->whereNull('status')
-                ->orWhere('status', '')
-                ->orWhere('status', 'publish')
-                ->orWhere('status', 'published')
-                ->orWhere('status', 'active');
-        });
+        if (app()->isProduction()) {
+            $query->where(function ($q) {
+                $q->whereNull('status')
+                    ->orWhere('status', '')
+                    ->orWhere('status', 'publish')
+                    ->orWhere('status', 'published')
+                    ->orWhere('status', 'active');
+            });
+        } else {
+            // In local/testing/dev environments, allow draft/pending catalog items so development items can be explored
+            $query->where(function ($q) {
+                $q->whereNull('status')
+                    ->orWhere('status', '')
+                    ->orWhere('status', 'publish')
+                    ->orWhere('status', 'published')
+                    ->orWhere('status', 'pending')
+                    ->orWhere('status', 'draft')
+                    ->orWhere('status', 'active');
+            });
+        }
     }
 
     /**
      * @return list<string>
      */
-    protected function extractKeywords(string $text): array
+    protected function extractAndStemKeywords(string $text): array
     {
         $filler = [
             'i', 'want', 'to', 'explore', 'show', 'me', 'find', 'search', 'with', 'dimension',
@@ -237,9 +394,26 @@ class ProductSearchAndFilterTool implements IChatTool
         $cleaned = preg_replace('/[^\p{L}\p{N}\s-]/u', ' ', mb_strtolower($text));
         $words = preg_split('/\s+/', (string) $cleaned) ?: [];
 
+        $stemMap = [
+            'downlights' => 'downlight',
+            'strips' => 'strip',
+            'profiles' => 'profile',
+            'extrusions' => 'extrusion',
+            'drivers' => 'driver',
+            'fixtures' => 'fixture',
+            'accessories' => 'accessory',
+            'spikes' => 'spike',
+            'bulbs' => 'bulb',
+            'controllers' => 'controller',
+            'sensors' => 'sensor',
+        ];
+
         $keywords = [];
         foreach ($words as $w) {
             $w = trim($w);
+            if (isset($stemMap[$w])) {
+                $w = $stemMap[$w];
+            }
             if (mb_strlen($w) >= 2 && ! in_array($w, $filler, true)) {
                 $keywords[] = $w;
             }

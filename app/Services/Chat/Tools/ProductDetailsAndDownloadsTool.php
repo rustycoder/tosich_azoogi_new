@@ -38,12 +38,14 @@ class ProductDetailsAndDownloadsTool implements IChatTool
         $id = trim((string) ($arguments['product_identifier'] ?? ''));
 
         $product = Product::query()
-            ->where(function ($q) {
-                $q->whereNull('status')
-                    ->orWhere('status', '')
-                    ->orWhere('status', 'publish')
-                    ->orWhere('status', 'published')
-                    ->orWhere('status', 'active');
+            ->when(app()->isProduction(), function ($query) {
+                $query->where(function ($q) {
+                    $q->whereNull('status')
+                        ->orWhere('status', '')
+                        ->orWhere('status', 'publish')
+                        ->orWhere('status', 'published')
+                        ->orWhere('status', 'active');
+                });
             })
             ->where(function ($q) use ($id) {
                 if (is_numeric($id)) {
