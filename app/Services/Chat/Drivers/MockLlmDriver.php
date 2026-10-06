@@ -137,16 +137,17 @@ class MockLlmDriver implements IChatLlmDriver
 
             $productId = null;
             if ($action === 'add' || $action === 'remove') {
-                preg_match('/\b\d+\b/', $text, $matches);
-                $productId = ! empty($matches[0]) ? (int) $matches[0] : null;
+                // First try matching product by name or SKU in the query text
+                $matchedProduct = Product::where('status', 'publish')
+                    ->where(function ($q) use ($text) {
+                        $q->whereRaw('? LIKE CONCAT("%", LOWER(product_name), "%")', [$text])
+                            ->orWhereRaw('? LIKE CONCAT("%", LOWER(product_code), "%")', [$text]);
+                    })->first();
 
-                if (! $productId) {
-                    $matchedProduct = Product::where('status', 'publish')
-                        ->where(function ($q) use ($text) {
-                            $q->whereRaw('? LIKE CONCAT("%", LOWER(product_name), "%")', [$text])
-                                ->orWhereRaw('? LIKE CONCAT("%", LOWER(product_code), "%")', [$text]);
-                        })->first();
-                    $productId = $matchedProduct ? $matchedProduct->id : null;
+                if ($matchedProduct) {
+                    $productId = $matchedProduct->id;
+                } elseif (preg_match('/(?:product\s*#?|#)\s*(\d+)/i', $text, $matches)) {
+                    $productId = (int) $matches[1];
                 }
             }
 

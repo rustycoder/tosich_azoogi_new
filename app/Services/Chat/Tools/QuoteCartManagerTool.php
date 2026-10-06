@@ -46,26 +46,38 @@ class QuoteCartManagerTool implements IChatTool
     public function execute(array $arguments): array
     {
         $action = (string) ($arguments['action'] ?? 'view');
-        $productId = isset($arguments['product_id']) ? (int) $arguments['product_id'] : null;
+        $productId = $arguments['product_id'] ?? null;
         $qty = max(1, (int) ($arguments['quantity'] ?? 1));
 
         $quoteList = session()->get('visitor_quote_list', []);
 
-        if ($action === 'add' && $productId) {
-            $product = Product::find($productId);
+        if ($action === 'add' && ! empty($productId)) {
+            $product = Product::query()
+                ->where(function ($q) use ($productId) {
+                    if (is_numeric($productId)) {
+                        $q->where('id', (int) $productId);
+                    }
+                    $q->orWhere('airtable_id', (string) $productId)
+                        ->orWhere('product_code', (string) $productId)
+                        ->orWhere('slug', (string) $productId)
+                        ->orWhere('product_name', 'like', "%{$productId}%");
+                })
+                ->first();
+
             if (! $product) {
                 return [
-                    'result' => ['error' => "Product #{$productId} not found."],
+                    'result' => ['error' => "Product '{$productId}' not found in active catalog."],
                 ];
             }
 
-            $currentQty = $quoteList[$productId]['quantity'] ?? 0;
+            $prodKey = (string) $product->id;
+            $currentQty = $quoteList[$prodKey]['quantity'] ?? 0;
             $coverUrl = null;
             if (! empty($product->cover)) {
                 $coverUrl = str_starts_with($product->cover, 'http') ? $product->cover : asset($product->cover);
             }
 
-            $quoteList[$productId] = [
+            $quoteList[$prodKey] = [
                 'id' => $product->id,
                 'name' => $product->product_name,
                 'code' => $product->product_code,
@@ -90,13 +102,26 @@ class QuoteCartManagerTool implements IChatTool
             ];
         }
 
-        if ($action === 'remove' && $productId) {
-            unset($quoteList[$productId]);
+        if ($action === 'remove' && ! empty($productId)) {
+            $product = Product::query()
+                ->where(function ($q) use ($productId) {
+                    if (is_numeric($productId)) {
+                        $q->where('id', (int) $productId);
+                    }
+                    $q->orWhere('airtable_id', (string) $productId)
+                        ->orWhere('product_code', (string) $productId)
+                        ->orWhere('slug', (string) $productId)
+                        ->orWhere('product_name', 'like', "%{$productId}%");
+                })
+                ->first();
+
+            $keyToRemove = $product ? (string) $product->id : (string) $productId;
+            unset($quoteList[$keyToRemove]);
             session()->put('visitor_quote_list', $quoteList);
 
             return [
                 'result' => [
-                    'message' => 'Product removed from quote list.',
+                    'message' => $product ? "Removed '{$product->product_name}' from quote list." : 'Product removed from quote list.',
                     'total_items' => count($quoteList),
                     'quote_items' => array_values($quoteList),
                 ],
