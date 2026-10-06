@@ -297,7 +297,7 @@ class Product extends Model
     {
         $status = strtolower(trim((string) ($this->status ?? 'publish')));
 
-        return $status === '' || $status === 'publish';
+        return $status === '' || $status === 'publish' || $status === 'published' || $status === 'active';
     }
 
     public function isVisibleOnStorefront(bool $allowPreviewForAuth = true): bool
@@ -319,7 +319,9 @@ class Product extends Model
     public function quoteSummary(): array
     {
         return [
-            'id' => (string) $this->airtable_id,
+            'id' => (string) ($this->airtable_id ?: $this->id),
+            'db_id' => (string) $this->id,
+            'airtable_id' => (string) $this->airtable_id,
             'sku' => trim((string) ($this->product_code ?? '')),
             'name' => (string) $this->product_name,
             'image' => $this->coverUrl(),

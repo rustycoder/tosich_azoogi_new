@@ -691,9 +691,18 @@ class ProductRepository implements IProductRepository
             return collect();
         }
 
+        $numericIds = $wanted
+            ->filter(fn (string $id): bool => ctype_digit($id))
+            ->map(fn (string $id): int => (int) $id)
+            ->values()
+            ->all();
+
         $products = Product::query()
-            ->where(function ($query) use ($wanted): void {
-                $query->whereIn('airtable_id', $wanted->all())
+            ->where(function ($query) use ($wanted, $numericIds): void {
+                if (! empty($numericIds)) {
+                    $query->whereIn('id', $numericIds);
+                }
+                $query->orWhereIn('airtable_id', $wanted->all())
                     ->orWhereIn('product_code', $wanted->all())
                     ->orWhereIn('slug', $wanted->all());
             })
@@ -967,6 +976,7 @@ class ProductRepository implements IProductRepository
     private function quoteLookupKeys(Product $product): array
     {
         $keys = [
+            (string) $product->id,
             trim((string) $product->airtable_id),
             trim((string) $product->product_code),
             trim((string) $product->slug),

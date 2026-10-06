@@ -72,18 +72,22 @@ class QuoteCartManagerTool implements IChatTool
 
             $prodKey = (string) $product->id;
             $currentQty = $quoteList[$prodKey]['quantity'] ?? 0;
-            $coverUrl = null;
-            if (! empty($product->cover)) {
+            $coverUrl = $product->coverUrl();
+            if (empty($coverUrl) && ! empty($product->cover)) {
                 $coverUrl = str_starts_with($product->cover, 'http') ? $product->cover : asset($product->cover);
             }
 
             $quoteList[$prodKey] = [
-                'id' => $product->id,
+                'id' => (string) $product->id,
+                'db_id' => (string) $product->id,
+                'airtable_id' => (string) $product->airtable_id,
                 'name' => $product->product_name,
                 'code' => $product->product_code,
+                'sku' => $product->product_code,
                 'quantity' => $currentQty + $qty,
-                'image_url' => $coverUrl,
-                'url' => route('products.show', $product->slug ?: $product->id),
+                'image_url' => $coverUrl ?: asset('assets/quote.webp'),
+                'image' => $coverUrl ?: asset('assets/quote.webp'),
+                'url' => $product->publicPath() ?: route('products.show', $product->slug ?: $product->id),
             ];
 
             session()->put('visitor_quote_list', $quoteList);

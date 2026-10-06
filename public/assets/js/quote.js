@@ -92,16 +92,18 @@
     }
 
     const id = String(product.id || '').trim();
-    const sku = primarySku(product.sku);
+    const db_id = String(product.db_id || '').trim();
+    const sku = primarySku(product.sku || product.code);
     const details = {
       id: id || sku,
+      db_id,
       sku,
       name: String(product.name || '').trim(),
-      image: String(product.image || '').trim() || FALLBACK_IMAGE,
+      image: String(product.image || product.image_url || '').trim() || FALLBACK_IMAGE,
       url: String(product.url || '').trim(),
     };
 
-    [details.id, details.sku].filter(Boolean).forEach((key) => {
+    [details.id, details.db_id, details.sku].filter(Boolean).forEach((key) => {
       detailsByKey[cleanStr(key)] = details;
     });
   }
@@ -115,13 +117,14 @@
 
       const details = {
         id: String(product.id).trim(),
+        db_id: String(product.db_id || '').trim(),
         sku: primarySku(product.sku),
         name: String(product.name || '').trim(),
         image: String(product.image || '').trim() || FALLBACK_IMAGE,
         url: String(product.url || '').trim(),
       };
 
-      [details.id, details.sku].filter(Boolean).forEach((key) => {
+      [details.id, details.db_id, details.sku].filter(Boolean).forEach((key) => {
         next[cleanStr(key)] = details;
       });
     });
