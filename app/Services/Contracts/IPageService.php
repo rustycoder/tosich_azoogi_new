@@ -24,7 +24,7 @@ interface IPageService
      * @param  list<string>  $slugs
      * @return Collection<int, Page>
      */
-    public function dashboardList(array $slugs, string $search = ''): Collection;
+    public function dashboardList(array $slugs, string $search = '', ?string $category = null): Collection;
 
     /**
      * @return array{

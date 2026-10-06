@@ -101,7 +101,7 @@
 @stack('styles')
 <script defer src="{{ versioned_asset('assets/js/site-theme.js') }}"></script>
 @if (trim($__env->yieldContent('chrome', 'full')) !== 'none')
-<script>const AZOOGI_PRODUCTS = @json($productCatalog, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);</script>
+<script>const AZOOGI_PRODUCTS = @json($navigationCatalog ?? [], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);</script>
 <script>window.AZOOGI_QUOTE = { productsUrl: @json(route('quote.products')) };</script>
 <script defer src="{{ asset('assets/js/mega_menu.js') }}?v={{ config('app.asset_version') }}"></script>
 <script defer src="{{ versioned_asset('assets/js/site_header.js') }}"></script>
@@ -109,7 +109,7 @@
 <script defer src="{{ versioned_asset('assets/js/site-search.js') }}"></script>
 @endif
 @if (config('services.turnstile.site_key'))
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback&render=explicit" async defer></script>
 @endif
 @stack('head')
 @if (request()->routeIs('dashboard.pages.preview'))

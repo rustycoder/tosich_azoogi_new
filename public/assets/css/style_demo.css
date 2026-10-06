@@ -32,6 +32,7 @@
     --intro-bg: #000;
     --ink: #f3f3f3;
     --muted: #9a9a9a;
+    --semi-muted: #777777;
     --line: rgba(255, 255, 255, 0.12);
     --accent: #3aa028;
     --accent-2: #67d04e;
@@ -87,6 +88,7 @@
     --intro-bg: #f7f7f7;
     --ink: #111111;
     --muted: #555555;
+    --semi-muted: #777777;
     --line: rgba(0, 0, 0, 0.12);
     --accent: #3aa028;
     --accent-2: #2d7a1e;
@@ -97,7 +99,7 @@
     --rgba-hover: rgba(0, 0, 0, 0.05);
     --nav-bg: rgba(255, 255, 255, 0.98);
     --card-bg: rgba(0, 0, 0, 0.03);
-    --card-hover: rgba(0, 0, 0, 0.06);
+    --card-hover: rgba(0, 0, 0, 0.09);
     --border-light: rgba(0, 0, 0, 0.08);
     --shadow: rgba(0, 0, 0, 0.1);
     --thumb-bg: rgba(0, 0, 0, 0.2);
@@ -496,6 +498,16 @@ h3 {
     flex-direction: column;
 }
 
+.mega-menu a {
+    color: var(--ink);
+    padding: 0;
+}
+
+.mega-menu a:after {
+    display: none !important;
+    height: 0 !important;
+}
+
 @media (min-width: 1025px) {
     .has-dropdown:hover .mega-menu {
         opacity: 1;
@@ -660,16 +672,20 @@ h3 {
     letter-spacing: 0.05em;
 }
 
-.mega-panel-header .view-all-btn {
+.mega-panel-header .view-all-btn,
+.mega-menu .view-all-btn {
     font-size: var(--fs-kicker);
-    color: var(--accent);
+    color: var(--accent) !important;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    padding: 0 !important;
     transition: opacity 0.2s;
 }
 
-.mega-panel-header .view-all-btn:hover {
+.mega-panel-header .view-all-btn:hover,
+.mega-menu .view-all-btn:hover {
     text-decoration: underline;
+    opacity: 0.8;
 }
 
 .mega-panel {
@@ -3368,7 +3384,7 @@ aside p {
 }
 
 .mega-variant-card {
-    background: var(--bg-2) !important;
+    background: var(--track-bg) !important;
     border: 1px solid var(--line) !important;
     border-radius: 6px;
     padding: 0 !important;
@@ -3443,7 +3459,7 @@ a.mega-variant-card:after {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    background: var(--card-bg);
+    /* background: var(--card-bg); */
     padding: 6px 8px;
     border-radius: 0 0 6px 6px;
 }
@@ -3484,31 +3500,38 @@ a.mega-variant-card:after {
 }
 
 /* View All Buttons & Cards in Mega Menu */
-.view-all-range-btn {
+.view-all-range-btn,
+.mega-menu .view-all-range-btn,
+.menu .mega-menu .view-all-range-btn {
     display: block;
     width: 100%;
-    padding: 8px !important;
+    padding: 10px 16px !important;
     margin-top: 24px;
     text-align: center;
-    background: transparent;
-    border: 1px solid var(--accent);
-    color: var(--accent);
+    background: transparent !important;
+    border: 1px solid var(--accent) !important;
+    color: var(--accent) !important;
     font-family: var(--font-sans);
     font-size: var(--fs-kicker);
-    font-weight: 500;
+    font-weight: 600;
     text-decoration: none;
     border-radius: 6px;
     transition: all 0.2s ease;
     box-sizing: border-box;
 }
 
-.view-all-range-btn:hover {
-    background: var(--accent);
-    color: var(--pure-bg);
+.view-all-range-btn:hover,
+.mega-menu .view-all-range-btn:hover,
+.menu .mega-menu .view-all-range-btn:hover {
+    background: var(--accent) !important;
+    color: var(--pure-bg) !important;
     transform: translateY(-2px);
 }
 
-.view-all-range-btn:after {
+.view-all-range-btn:after,
+.mega-menu .view-all-range-btn:after,
+.menu .mega-menu .view-all-range-btn:after {
+    display: none !important;
     height: 0 !important;
 }
 
@@ -3897,6 +3920,16 @@ a.mega-variant-card:after {
 
 .contact-page .form-status.is-error {
     color: #ff8a80;
+}
+
+.turnstile-wrapper {
+    padding: 0 0 12px 0;
+    margin: 6px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 65px;
+    box-sizing: border-box;
 }
 
 .form-actions {

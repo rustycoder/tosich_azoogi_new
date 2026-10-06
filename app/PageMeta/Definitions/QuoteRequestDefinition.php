@@ -30,7 +30,6 @@ class QuoteRequestDefinition implements PageDefinition
     public function fields(): array
     {
         return [
-            Field::text('intro.kicker', 'Kicker', typographic: false),
             Field::text('intro.title', 'Title', typographic: false),
             Field::textarea('intro.body', 'Intro', typographic: false),
             Field::text('drawer.trigger_label', 'Header button label'),
@@ -59,7 +58,6 @@ class QuoteRequestDefinition implements PageDefinition
     public function seed(): array
     {
         $rows = [
-            ['key' => 'intro.kicker', 'sort_order' => 0, 'value' => 'Trade quote'],
             ['key' => 'intro.title', 'sort_order' => 0, 'value' => 'Get A Quote For Your Project'],
             ['key' => 'intro.body', 'sort_order' => 0, 'value' => 'Looking for tailored lighting solutions for your next project? Whether you\'re an architect, builder, designer or wholesaler, our team is here to help. Simply tell us what you need — and we\'ll provide a fast, accurate quote with expert support every step of the way.'],
             ['key' => 'drawer.trigger_label', 'sort_order' => 0, 'value' => 'Quote List'],

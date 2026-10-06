@@ -16,7 +16,12 @@ interface IProjectRepository
     /**
      * @return LengthAwarePaginator<int, Project>
      */
-    public function dashboardList(string $search = ''): LengthAwarePaginator;
+    public function dashboardList(
+        string $search = '',
+        ?string $status = null,
+        ?string $featured = null,
+        int $perPage = 15
+    ): LengthAwarePaginator;
 
     /**
      * @return Collection<int, Project>

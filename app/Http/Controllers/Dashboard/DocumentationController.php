@@ -57,6 +57,11 @@ class DocumentationController extends Controller
                     'title' => 'Image Dimensions & WebP',
                     'keywords' => 'webp image dimensions resolutions 1920x1080 1200x800 squoosh compression tinypng logos banner sizes images',
                 ],
+                'alt-text' => [
+                    'label' => 'Image Alt Text',
+                    'title' => 'Image Alt Text & Accessibility',
+                    'keywords' => 'alt text alternative text accessibility wcag 2.1 screen readers seo google images rankings cover_alt gallery_alts meta descriptions images media',
+                ],
             ],
             'SEO & Discovery' => [
                 'seo' => [
@@ -86,7 +91,7 @@ class DocumentationController extends Controller
                 'products' => [
                     'label' => 'Products & Airtable',
                     'title' => 'Product Catalog & Airtable',
-                    'keywords' => 'airtable sync product catalog specs variants live stream background job sku lighting fixtures products',
+                    'keywords' => 'airtable sync product catalog specs variants live stream background job sku lighting fixtures products order ordering hierarchy category block number formula maintenance sequence 201001 901041 20101 90141 catalog',
                 ],
                 'enquiries' => [
                     'label' => 'Enquiries & Quotes',
@@ -123,6 +128,11 @@ class DocumentationController extends Controller
             'media' => 'videos',
             'content' => 'pages',
             'maintenance' => 'deployment',
+            'alt' => 'alt-text',
+            'accessibility' => 'alt-text',
+            'ordering' => 'products',
+            'airtable' => 'products',
+            'catalog' => 'products',
         ];
 
         if (isset($aliases[$topic])) {

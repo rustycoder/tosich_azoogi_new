@@ -116,6 +116,47 @@
         });
     });
 
+    document.querySelectorAll('input[data-dash-toggle-switch]').forEach((checkbox) => {
+        checkbox.addEventListener('change', async () => {
+            if (checkbox.disabled) {
+                return;
+            }
+
+            checkbox.disabled = true;
+            const container = checkbox.closest('.dash-switch-label');
+            const statusLabel = container?.querySelector('.dash-switch-status');
+
+            try {
+                const response = await fetch(checkbox.dataset.dashToggleSwitch, {
+                    method: 'PATCH',
+                    headers: {
+                        Accept: 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': csrf,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('toggle-failed');
+                }
+
+                const data = await response.json();
+                checkbox.checked = data.on;
+                if (statusLabel) {
+                    statusLabel.textContent = data.label;
+                    statusLabel.classList.toggle('is-active', data.on);
+                    statusLabel.classList.toggle('is-inactive', !data.on);
+                }
+                toast(data.message);
+            } catch {
+                checkbox.checked = !checkbox.checked;
+                toast('Could not update status. Try again.', 'error');
+            } finally {
+                checkbox.disabled = false;
+            }
+        });
+    });
+
     const sortBody = document.querySelector('[data-dash-sort]');
 
     if (sortBody) {
@@ -164,6 +205,12 @@
 
                 const data = await response.json();
                 startOrder = order;
+                sortBody.querySelectorAll('[data-id]').forEach((row, idx) => {
+                    const badge = row.querySelector('.dash-order-badge');
+                    if (badge) {
+                        badge.textContent = '#' + (idx + 1);
+                    }
+                });
                 toast(data.message || 'Featured order updated.');
             } catch {
                 toast('Could not update order. Try again.', 'error');
@@ -743,6 +790,11 @@
                                 etaText.textContent = '0s';
                                 closeBtn.style.display = 'inline-block';
                                 toast('Product sync completed successfully!');
+                                if (window.location.pathname.includes('/dashboard/sync')) {
+                                    setTimeout(() => {
+                                        window.location.reload();
+                                    }, 1600);
+                                }
                             } else if (data.status === 'failed') {
                                 clearInterval(elapsedInterval);
                                 statusText.textContent = 'Failed';
@@ -879,14 +931,51 @@
 
     document.querySelectorAll('form.dash-form').forEach((form) => {
         form.addEventListener('click', (event) => {
-            const trigger = event.target.closest('[data-remove-gallery]');
-
-            if (!trigger || !form.contains(trigger)) {
+            const removeTrigger = event.target.closest('[data-remove-gallery]');
+            if (removeTrigger && form.contains(removeTrigger)) {
+                event.preventDefault();
+                removeTrigger.closest('[data-gallery-item]')?.remove();
                 return;
             }
 
-            event.preventDefault();
-            trigger.closest('[data-gallery-item]')?.remove();
+            const editTrigger = event.target.closest('[data-toggle-alt-edit]');
+            if (editTrigger && form.contains(editTrigger)) {
+                event.preventDefault();
+                const card = editTrigger.closest('[data-gallery-item]');
+                const editRow = card?.querySelector('[data-gallery-alt-edit]');
+                const input = editRow?.querySelector('input');
+                if (editRow) {
+                    const isHidden = editRow.hidden;
+                    editRow.hidden = !isHidden;
+                    editTrigger.classList.toggle('is-active', !editRow.hidden);
+                    if (!editRow.hidden && input) {
+                        input.focus();
+                    }
+                }
+            }
+        });
+
+        form.addEventListener('input', (event) => {
+            const galleryInput = event.target.closest('[data-gallery-alt-edit] input');
+            if (galleryInput && form.contains(galleryInput)) {
+                const card = galleryInput.closest('[data-gallery-item]');
+                const valDisplay = card?.querySelector('[data-gallery-alt-val]');
+                if (valDisplay) {
+                    const text = galleryInput.value.trim();
+                    const defaultAlt = valDisplay.dataset.defaultAlt || 'photo';
+                    valDisplay.textContent = text !== '' ? text : `Auto (${defaultAlt})`;
+                }
+                return;
+            }
+
+            if (event.target.id === 'cover_alt' && form.contains(event.target)) {
+                const valDisplay = form.querySelector('[data-cover-alt-val]');
+                if (valDisplay) {
+                    const text = event.target.value.trim();
+                    const defaultAlt = valDisplay.dataset.defaultAlt || 'Project';
+                    valDisplay.textContent = text !== '' ? text : `Auto (${defaultAlt})`;
+                }
+            }
         });
 
         const fileInputs = [...form.querySelectorAll('input[type="file"]')];

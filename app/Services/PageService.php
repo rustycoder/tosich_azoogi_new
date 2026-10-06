@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\PageCategory;
 use App\Models\Page;
 use App\PageMeta\Catalog;
 use App\PageMeta\Definitions\AudiencePageDefinition;
@@ -46,7 +47,7 @@ class PageService implements IPageService
         return $this->present($page);
     }
 
-    public function dashboardList(array $slugs, string $search = ''): Collection
+    public function dashboardList(array $slugs, string $search = '', ?string $category = null): Collection
     {
         $pages = $this->pages->findBySlugs($slugs)->keyBy('slug');
 
@@ -54,25 +55,47 @@ class PageService implements IPageService
             ->filter(fn (string $slug): bool => in_array($slug, $slugs, true))
             ->map(fn (string $slug): ?Page => $pages->get($slug))
             ->filter()
+            ->filter(function (Page $page) use ($category): bool {
+                if ($category === null || $category === '' || $category === 'all') {
+                    return true;
+                }
+
+                return Catalog::categoryForSlug($page->slug)->value === $category;
+            })
             ->filter(function (Page $page) use ($search): bool {
                 if ($search === '') {
                     return true;
                 }
 
-                $titles = [
+                $cat = Catalog::categoryForSlug($page->slug);
+                $terms = [
                     $page->title,
+                    $page->slug,
+                    $page->publicPath(),
                     Catalog::for($page->slug)->navLabel(),
+                    $cat->label(),
+                    $cat->shortLabel(),
                 ];
 
-                foreach ($titles as $title) {
-                    if (mb_stripos($title, $search) !== false) {
+                foreach ($terms as $term) {
+                    if (mb_stripos($term, $search) !== false) {
                         return true;
                     }
                 }
 
                 return false;
             })
-            ->sortBy(fn (Page $page): string => mb_strtolower(Catalog::for($page->slug)->navLabel()), SORT_NATURAL)
+            ->sortBy(function (Page $page): string {
+                $order = match (Catalog::categoryForSlug($page->slug)) {
+                    PageCategory::Core => 1,
+                    PageCategory::Technology => 2,
+                    PageCategory::Audience => 3,
+                    PageCategory::Legal => 4,
+                    PageCategory::System => 5,
+                };
+
+                return sprintf('%02d-%s', $order, mb_strtolower(Catalog::for($page->slug)->navLabel()));
+            }, SORT_NATURAL)
             ->values();
     }
 
@@ -220,7 +243,6 @@ class PageService implements IPageService
         ];
 
         if (in_array($page->slug, AudiencePageDefinition::SLUGS, true)) {
-            $data['leads'] = $meta->list('hero.lead');
             $data['cards'] = $meta->group('card');
         }
 

@@ -32,4 +32,13 @@ class ProductAttribute extends Model
             'is_visible_on_filters' => 'boolean',
         ];
     }
+
+    public function iconUrl(): ?string
+    {
+        if (filled($this->icon)) {
+            return media_url((string) $this->icon);
+        }
+
+        return null;
+    }
 }

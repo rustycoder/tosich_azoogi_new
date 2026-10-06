@@ -211,6 +211,8 @@ class EmailTemplateService implements IEmailTemplateService
             'company' => (string) ($enquiry->company ?: 'N/A'),
             'message' => nl2br(e((string) ($enquiry->message ?: 'None provided'))),
             'project' => (string) ($payload['project'] ?? 'N/A'),
+            'location' => (string) ($payload['location'] ?? 'N/A'),
+            'stage' => (string) ($payload['stage'] ?? 'N/A'),
             'specification' => nl2br(e((string) ($payload['specification'] ?? 'None specified'))),
             'role' => (string) ($payload['role'] ?? 'N/A'),
             'contact_method' => (string) ($payload['method'] ?? 'Email'),

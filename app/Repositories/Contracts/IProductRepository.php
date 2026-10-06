@@ -3,6 +3,8 @@
 namespace App\Repositories\Contracts;
 
 use App\Models\Product;
+use App\Models\ProductAttribute;
+use App\Models\ProductCategory;
 use App\Models\ProductSync;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
@@ -31,9 +33,34 @@ interface IProductRepository
     public function compiled(): array;
 
     /**
+     * @return array{categories: list<mixed>, products: list<mixed>, tree: list<mixed>}
+     */
+    public function navigationCatalog(): array;
+
+    /**
      * @return LengthAwarePaginator<int, Product>
      */
-    public function dashboardList(string $search = ''): LengthAwarePaginator;
+    public function dashboardList(string $search = '', ?string $category = null, int $perPage = 50, ?string $status = null): LengthAwarePaginator;
+
+    /**
+     * @return list<array{name: string, label: string, depth: int, airtable_id: string}>
+     */
+    public function hierarchicalCategories(): array;
+
+    /**
+     * @return LengthAwarePaginator<int, ProductCategory>
+     */
+    public function categoryDashboardList(string $search = '', ?string $parent = null, int $perPage = 50): LengthAwarePaginator;
+
+    /**
+     * @return LengthAwarePaginator<int, ProductAttribute>
+     */
+    public function attributeDashboardList(string $search = '', ?string $group = null, ?bool $visibleOnly = null, int $perPage = 50): LengthAwarePaginator;
+
+    /**
+     * @return list<string>
+     */
+    public function attributeGroups(): array;
 
     public function publishedByAirtableId(string $airtableId): ?Product;
 
@@ -58,5 +85,5 @@ interface IProductRepository
 
     public function finishSync(ProductSync $sync, bool $ok, int $productCount, ?string $error = null): void;
 
-    public function failStaleRunningSyncs(): void;
+    public function failStaleRunningSyncs(bool $forceAll = false): void;
 }

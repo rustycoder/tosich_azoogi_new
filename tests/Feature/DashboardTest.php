@@ -36,7 +36,7 @@ class DashboardTest extends TestCase
         $this->seed([AdminUserSeeder::class, PageSeeder::class]);
         $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
 
-        $this->actingAs($admin)->get('/dashboard')->assertOk();
+        $this->actingAs($admin)->get('/dashboard')->assertOk()->assertSee('Airtable Sync', false);
         $this->actingAs($admin)->get('/dashboard/staff')->assertOk();
         $this->actingAs($admin)->get('/dashboard/content/pages')->assertOk()->assertSee('Home', false)->assertSee('LED Calculator', false);
         $this->actingAs($admin)->get('/dashboard/content/pages/home')->assertOk();
@@ -44,7 +44,7 @@ class DashboardTest extends TestCase
         $this->actingAs($admin)->get('/dashboard/content/sections')->assertOk()->assertSee('Header', false)->assertSee('Footer', false)->assertSee('top of every public page', false)->assertSee('bottom of every public page', false);
         $this->actingAs($admin)->get('/dashboard/content/sections/header')->assertOk()->assertSee('dash-card', false)->assertDontSee('dash-visual-frame', false);
         $this->actingAs($admin)->get('/dashboard/content/projects')->assertOk();
-        $this->actingAs($admin)->get('/dashboard/content/products')->assertOk()->assertSee('Sync', false);
+        $this->actingAs($admin)->get('/dashboard/content/products')->assertOk();
     }
 
     public function test_staff_project_and_profile_screens_use_full_width_cards(): void
@@ -58,8 +58,8 @@ class DashboardTest extends TestCase
         $this->actingAs($admin)->get('/dashboard/staff')->assertOk()->assertSee('dash-list-card', false)->assertSee('name="q"', false);
         $this->actingAs($admin)->get('/dashboard/staff/create')->assertOk()->assertSee('dash-card', false);
         $this->actingAs($admin)->get(route('dashboard.staff.edit', $staff))->assertOk()->assertSee('dash-card', false);
-        $this->actingAs($admin)->get('/dashboard/content/projects')->assertOk()->assertSee('dash-list-card', false)->assertSee('dash-list-card-main', false)->assertSee('dash-list-thumb', false)->assertSee('name="q"', false);
-        $this->actingAs($admin)->get('/dashboard/content/products')->assertOk()->assertSee('name="q"', false)->assertSee('Sync', false)->assertSee('dash-list-card-main', false)->assertSee('dash-list-thumb', false);
+        $this->actingAs($admin)->get('/dashboard/content/projects')->assertOk()->assertSee('dash-airtable-table', false)->assertSee('dash-preview-thumb', false)->assertSee('name="q"', false);
+        $this->actingAs($admin)->get('/dashboard/content/products')->assertOk()->assertSee('name="q"', false)->assertSee('dash-airtable-table', false)->assertSee('dash-preview-thumb', false);
         $this->actingAs($admin)
             ->get('/dashboard/content/projects/create')
             ->assertOk()
@@ -74,7 +74,7 @@ class DashboardTest extends TestCase
             ->assertSee('>Details</h2>', false)
             ->assertSee('>Gallery</h2>', false);
         $this->actingAs($admin)->get('/dashboard/settings')->assertOk()->assertSee('dash-card', false);
-        $this->actingAs($admin)->get('/dashboard/content/pages')->assertOk()->assertSee('dash-list', false)->assertSee('name="q"', false);
+        $this->actingAs($admin)->get('/dashboard/content/pages')->assertOk()->assertSee('dash-table', false)->assertSee('name="q"', false);
         $this->actingAs($admin)->get('/dashboard/content/sections')->assertOk()->assertSee('dash-list', false)->assertSee('name="q"', false);
     }
 
@@ -114,11 +114,13 @@ class DashboardTest extends TestCase
             'product_name' => 'Garden Light',
             'product_code' => 'GL-100',
             'category' => 'Profiles',
+            'categories' => ['Profiles'],
         ]);
         Product::factory()->create([
             'product_name' => 'Neon Flex',
             'product_code' => 'NF-200',
             'category' => 'Garden',
+            'categories' => ['Garden'],
         ]);
 
         $this->actingAs($admin)
@@ -158,20 +160,44 @@ class DashboardTest extends TestCase
             ->assertDontSee('Garden Light', false);
     }
 
+    public function test_pages_index_can_filter_by_category(): void
+    {
+        $this->seed([AdminUserSeeder::class, PageSeeder::class]);
+        $admin = User::query()->where('email', 'admin@azoogi.com')->firstOrFail();
+
+        $this->actingAs($admin)
+            ->get('/dashboard/content/pages?category=technology')
+            ->assertOk()
+            ->assertSee('Casambi', false)
+            ->assertSee('DALI Centre', false)
+            ->assertDontSee('>Home</strong>', false)
+            ->assertDontSee('>Wholesaler</strong>', false);
+
+        $this->actingAs($admin)
+            ->get('/dashboard/content/pages?category=audience')
+            ->assertOk()
+            ->assertSee('Home Owner', false)
+            ->assertSee('Wholesaler', false)
+            ->assertDontSee('>Casambi</strong>', false);
+    }
+
     public function test_products_index_is_ordered_by_sku(): void
     {
         $admin = User::factory()->admin()->create();
         Product::factory()->create([
             'product_name' => 'Zebra Light',
             'product_code' => 'ZZ-9',
+            'sort_order' => 1,
         ]);
         Product::factory()->create([
             'product_name' => 'Apple Light',
             'product_code' => 'AA-1',
+            'sort_order' => 1,
         ]);
         Product::factory()->create([
             'product_name' => 'No Sku Light',
             'product_code' => null,
+            'sort_order' => 1,
         ]);
 
         $html = $this->actingAs($admin)
@@ -201,6 +227,7 @@ class DashboardTest extends TestCase
             Product::factory()->create([
                 'product_name' => 'Catalog Item '.$label,
                 'product_code' => 'SKU-'.$label,
+                'sort_order' => $index,
             ]);
             Project::factory()->create([
                 'title' => 'Catalog Project '.$label,
@@ -212,7 +239,7 @@ class DashboardTest extends TestCase
         }
 
         $this->actingAs($admin)
-            ->get('/dashboard/content/products')
+            ->get('/dashboard/content/products?per_page=15')
             ->assertOk()
             ->assertSee('Catalog Item 01', false)
             ->assertSee('Catalog Item 15', false)
@@ -220,7 +247,7 @@ class DashboardTest extends TestCase
             ->assertSee('dash-pagination', false);
 
         $this->actingAs($admin)
-            ->get('/dashboard/content/products?page=2')
+            ->get('/dashboard/content/products?per_page=15&page=2')
             ->assertOk()
             ->assertSee('Catalog Item 16', false)
             ->assertDontSee('Catalog Item 01', false);
@@ -293,7 +320,6 @@ class DashboardTest extends TestCase
             ->assertSee('Status', false)
             ->assertSee('Featured', false)
             ->assertSee('dash-pill', false)
-            ->assertSee('Last updated', false)
             ->assertSee('Pat Admin', false)
             ->assertSee('dash-updated', false);
 
@@ -302,12 +328,11 @@ class DashboardTest extends TestCase
             ->assertDontSee('Slug', false)
             ->assertDontSee('dash-pill is-slug', false)
             ->assertSee('Status', false)
-            ->assertSee('Last updated', false)
             ->assertSee('Pat Admin', false)
             ->assertSee('dash-updated', false)
             ->assertSee('dash-row-link-icon', false)
             ->assertSee('aria-label="Edit"', false)
-            ->assertSee('aria-label="Preview"', false)
+            ->assertDontSee('aria-label="Preview"', false)
             ->assertDontSee('aria-label="View"', false);
 
         $this->assertNotNull($staff->fresh()->updated_by);
@@ -830,6 +855,67 @@ class DashboardTest extends TestCase
         $this->assertSame(1, $third->fresh()->featured_order);
         $this->assertSame(2, $first->fresh()->featured_order);
         $this->assertSame(3, $second->fresh()->featured_order);
+    }
+
+    public function test_projects_can_be_filtered_by_status_featured_and_search(): void
+    {
+        $admin = User::factory()->admin()->create();
+        $activeFeatured = Project::factory()->create([
+            'title' => 'Opera House Glow',
+            'tag' => 'Hospitality',
+            'location' => 'Sydney NSW',
+            'status' => Status::Active,
+            'featured' => true,
+        ]);
+        $inactiveUnfeatured = Project::factory()->create([
+            'title' => 'Bridge Tunnel Dark',
+            'tag' => 'Infrastructure',
+            'location' => 'Brisbane QLD',
+            'status' => Status::Inactive,
+            'featured' => false,
+        ]);
+
+        // Filter by Status: Active
+        $this->actingAs($admin)
+            ->get('/dashboard/content/projects?status=active')
+            ->assertOk()
+            ->assertSee('Opera House Glow', false)
+            ->assertDontSee('Bridge Tunnel Dark', false);
+
+        // Filter by Status: Inactive
+        $this->actingAs($admin)
+            ->get('/dashboard/content/projects?status=inactive')
+            ->assertOk()
+            ->assertSee('Bridge Tunnel Dark', false)
+            ->assertDontSee('Opera House Glow', false);
+
+        // Filter by Featured: Featured
+        $this->actingAs($admin)
+            ->get('/dashboard/content/projects?featured=featured')
+            ->assertOk()
+            ->assertSee('Opera House Glow', false)
+            ->assertDontSee('Bridge Tunnel Dark', false);
+
+        // Filter by Featured: Not Featured
+        $this->actingAs($admin)
+            ->get('/dashboard/content/projects?featured=not_featured')
+            ->assertOk()
+            ->assertSee('Bridge Tunnel Dark', false)
+            ->assertDontSee('Opera House Glow', false);
+
+        // Search by location
+        $this->actingAs($admin)
+            ->get('/dashboard/content/projects?q=Sydney')
+            ->assertOk()
+            ->assertSee('Opera House Glow', false)
+            ->assertDontSee('Bridge Tunnel Dark', false);
+
+        // Search by tag
+        $this->actingAs($admin)
+            ->get('/dashboard/content/projects?q=Infrastructure')
+            ->assertOk()
+            ->assertSee('Bridge Tunnel Dark', false)
+            ->assertDontSee('Opera House Glow', false);
     }
 
     public function test_staff_can_toggle_assigned_page_status(): void

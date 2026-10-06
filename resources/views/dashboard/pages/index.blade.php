@@ -4,44 +4,266 @@
 
 @section('content')
 <div class="dash-head">
-    <div>
+    <div class="dash-head-title">
         <h1>Pages</h1>
-        <p class="dash-lead">Open a page to edit its seeded fields. New pages cannot be created here.</p>
+        <div class="dash-head-actions">
+            <span class="dash-pill is-active">{{ $categoryCounts['all'] ?? $pages->count() }} Managed Pages</span>
+        </div>
     </div>
+    <p class="dash-lead">Explore and customize CMS content across marketing pages, technical solution portals, audience landing pages, legal policies, and system templates.</p>
 </div>
 
-@include('dashboard.partials.search', [
-    'action' => route('dashboard.pages.index'),
-    'search' => $search,
-])
+<!-- Category Filter Tabs -->
+<nav class="dash-cat-tabs" aria-label="Page categories" id="pageCatTabs">
+    <a href="{{ route('dashboard.pages.index', array_filter(['q' => $search])) }}" 
+       class="dash-cat-tab {{ empty($activeCategory) || $activeCategory === 'all' ? 'is-active' : '' }}" 
+       data-cat="all">
+        <span class="dash-cat-tab-label">All Pages</span>
+        <span class="dash-cat-tab-count">{{ $categoryCounts['all'] ?? $pages->count() }}</span>
+    </a>
+    @foreach ($categories as $cat)
+        <a href="{{ route('dashboard.pages.index', array_filter(['category' => $cat->value, 'q' => $search])) }}" 
+           class="dash-cat-tab {{ ($activeCategory ?? '') === $cat->value ? 'is-active' : '' }}" 
+           data-cat="{{ $cat->value }}">
+            <span class="dash-cat-tab-label">{{ $cat->label() }}</span>
+            <span class="dash-cat-tab-count">{{ $categoryCounts[$cat->value] ?? 0 }}</span>
+        </a>
+    @endforeach
+</nav>
 
-<div class="dash-list">
-    @forelse ($pages as $page)
-        <article class="dash-list-card">
-            <div class="dash-list-card-copy">
-                @include('dashboard.partials.title-link', [
-                    'href' => route('dashboard.pages.edit', $page),
-                    'label' => \App\PageMeta\Catalog::for($page->slug)->navLabel(),
-                    'view' => $page->publicPath(),
-                ])
-                <p class="dash-list-sub">{{ $page->title }}</p>
-            </div>
-            <div class="dash-list-card-meta">
-                <div class="dash-updated">
-                    <span class="dash-list-label">Status</span>
-                    @include('dashboard.partials.toggle', [
-                        'url' => route('dashboard.pages.toggle-status', $page),
-                        'on' => $page->isActive(),
-                        'label' => $page->status->label(),
-                        'onClass' => 'is-active',
-                        'offClass' => 'is-inactive',
-                    ])
-                </div>
-                @include('dashboard.partials.updated', ['record' => $page])
-            </div>
-        </article>
-    @empty
-        <div class="dash-card dash-empty">{{ $search === '' ? 'No pages assigned to this account.' : 'No titles match that search.' }}</div>
-    @endforelse
+<!-- Search Toolbar -->
+<form class="dash-search" method="get" action="{{ route('dashboard.pages.index') }}" role="search" id="pagesSearchForm">
+    @if (!empty($activeCategory) && $activeCategory !== 'all')
+        <input type="hidden" name="category" value="{{ $activeCategory }}" id="searchCategoryInput">
+    @endif
+    <label class="visually-hidden" for="dash-search-q">Search pages by name, slug, SEO title, or category</label>
+    <div class="dash-search-field">
+        <svg class="dash-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <circle cx="11" cy="11" r="6.5"/>
+            <path d="M16.5 16.5 21 21"/>
+        </svg>
+        <input
+            id="dash-search-q"
+            type="search"
+            name="q"
+            value="{{ $search }}"
+            placeholder="Search pages by name, slug, SEO title, or description..."
+            maxlength="80"
+            autocomplete="off"
+        >
+        @if ($search !== '')
+            <a class="dash-search-clear" href="{{ route('dashboard.pages.index', array_filter(['category' => $activeCategory])) }}" title="Clear search" aria-label="Clear search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+            </a>
+        @endif
+        <button type="submit" class="dash-search-submit">Search</button>
+    </div>
+</form>
+
+<!-- Pages Table -->
+<div class="dash-table-wrap">
+    <table class="dash-table dash-pages-table" id="pagesTable">
+        <thead>
+            <tr>
+                <th scope="col" style="min-width: 260px; width: 34%;">Page Name</th>
+                <th scope="col" style="min-width: 360px; width: 52%;">SEO & Social Meta</th>
+                <th scope="col" style="width: 130px;">Status</th>
+            </tr>
+        </thead>
+            @php
+                $defaultHeroImages = [
+                    'home-owner' => '/assets/img/img-0.jpg',
+                    'architect-designer' => '/assets/hero02.jpg',
+                    'electrician-builder' => '/assets/img/img-1.jpg',
+                    'wholesaler' => '/assets/img/img-2.jpg',
+                    'products' => '/assets/hero02.jpg',
+                    'led-strip-calculator' => '/assets/hero01.jpg',
+                    'solutions' => '/assets/img/img-1.jpg',
+                    'contact' => '/assets/imgcontact.jpeg',
+                    'ai-lighting' => '/assets/img/ai-lighting/hero.jpg',
+                    'dali-centre' => '/assets/img/dali-system/video.jpg',
+                    'casambi' => '/assets/img/casambi/banner.png',
+                    'silvair' => '/assets/img/silvair/nlc.jpg',
+                    'madrix' => '/assets/img/madrix/banner.png',
+                    'projects' => '/assets/img/img-1.jpg',
+                ];
+            @endphp
+            @forelse ($pages as $page)
+                @php
+                    $def = \App\PageMeta\Catalog::for($page->slug);
+                    $cat = \App\PageMeta\Catalog::categoryForSlug($page->slug);
+                    $navLabel = $def->navLabel();
+                    $metaBag = \App\Support\PageMetaBag::for($page);
+                    $ogPreview = $page->og_image
+                        ?: $metaBag->get('hero.poster')
+                        ?: $metaBag->get('hero.image')
+                        ?: $metaBag->get('slide.media.image', 0)
+                        ?: $metaBag->get('card.image', 0)
+                        ?: ($defaultHeroImages[$page->slug] ?? null);
+                    $isCustomOg = filled($page->og_image);
+                @endphp
+                <tr class="dash-page-row" 
+                    data-cat="{{ $cat->value }}" 
+                    data-title="{{ mb_strtolower($navLabel . ' ' . $page->title . ' ' . $page->meta_description . ' ' . $page->slug . ' ' . $cat->label()) }}">
+                    <td class="dash-td-page">
+                        <div class="dash-page-primary">
+                            @include('dashboard.partials.title-link', [
+                                'href' => route('dashboard.pages.edit', $page),
+                                'label' => $navLabel,
+                            ])
+                            <div class="dash-updated">
+                                <span class="dash-updated-value">
+                                    <strong data-updater-name>{{ $page->updater?->name ?? 'Admin' }}</strong>
+                                    @if ($page->updated_at)
+                                        <span class="dash-updated-sep" aria-hidden="true">·</span>
+                                        <time data-updated-at datetime="{{ $page->updated_at->toIso8601String() }}">{{ $page->updated_at->timezone(config('app.timezone'))->format('j M Y, g:i A') }}</time>
+                                    @endif
+                                </span>
+                            </div>
+                            <div class="dash-page-cat-line">
+                                <span class="dash-cat-badge {{ $cat->badgeClass() }}">
+                                    {{ $cat->shortLabel() }}
+                                </span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="dash-td-seo">
+                        <div class="dash-seo-card">
+                            @if (!empty($ogPreview))
+                                <div class="dash-seo-og-thumb" title="{{ $isCustomOg ? 'Custom OG Social Share Image: ' . basename($page->og_image) : 'Using Hero Banner Image as Social Share fallback' }}">
+                                    <img src="{{ media_url($ogPreview) }}" alt="{{ $navLabel }} Share Image" loading="lazy">
+                                    @if (!$isCustomOg)
+                                        <span class="dash-og-fallback-badge">Banner</span>
+                                    @endif
+                                </div>
+                            @else
+                                <div class="dash-seo-og-thumb is-empty" title="No social share (OG) image configured">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                                        <polyline points="21 15 16 10 5 21"/>
+                                    </svg>
+                                    <span>No OG</span>
+                                </div>
+                            @endif
+                            <div class="dash-seo-info">
+                                <div class="dash-seo-title-row">
+                                    <strong class="dash-seo-title" title="{{ $page->title }}">{{ $page->title }}</strong>
+                                </div>
+                                <a href="{{ url($page->publicPath()) }}" target="_blank" rel="noopener noreferrer" class="dash-seo-url" title="Open live URL {{ url($page->publicPath()) }}">
+                                    <span>{{ url($page->publicPath()) }}</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="dash-ext-icon" aria-hidden="true">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/>
+                                    </svg>
+                                </a>
+                                @if (filled($page->meta_description))
+                                    <p class="dash-seo-desc" title="{{ $page->meta_description }}">{{ $page->meta_description }}</p>
+                                @else
+                                    <p class="dash-seo-desc is-empty">No meta description configured</p>
+                                @endif
+                            </div>
+                        </div>
+                    </td>
+                    <td class="dash-td-status">
+                        <label class="dash-switch-label" title="Toggle active status">
+                            <input 
+                                type="checkbox" 
+                                class="dash-switch-input" 
+                                {{ $page->isActive() ? 'checked' : '' }} 
+                                data-dash-toggle-switch="{{ route('dashboard.pages.toggle-status', $page) }}"
+                                aria-label="Toggle {{ $navLabel }} status"
+                            >
+                            <span class="dash-switch-slider" aria-hidden="true"></span>
+                            <span class="dash-switch-status {{ $page->isActive() ? 'is-active' : 'is-inactive' }}">
+                                {{ $page->status->label() }}
+                            </span>
+                        </label>
+                    </td>
+                </tr>
+            @empty
+                <tr id="serverEmptyRow">
+                    <td colspan="3">
+                        <div class="dash-empty">
+                            {{ $search === '' ? 'No pages found in this category.' : 'No pages match "' . $search . '".' }}
+                        </div>
+                    </td>
+                </tr>
+            @endforelse
+            <tr id="clientEmptyRow" style="display: none;">
+                <td colspan="3">
+                    <div class="dash-empty">No pages match your filter or search query.</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('#pageCatTabs .dash-cat-tab');
+    const table = document.getElementById('pagesTable');
+    if (!table) return;
+
+    const rows = table.querySelectorAll('tbody tr.dash-page-row');
+    const clientEmpty = document.getElementById('clientEmptyRow');
+    const searchInput = document.getElementById('dash-search-q');
+    const searchCatInput = document.getElementById('searchCategoryInput');
+
+    let currentCat = @json($activeCategory ?? 'all') || 'all';
+
+    const filterRows = () => {
+        const query = (searchInput ? searchInput.value : '').toLowerCase().trim();
+        let visibleCount = 0;
+
+        rows.forEach(row => {
+            const cat = row.getAttribute('data-cat');
+            const title = row.getAttribute('data-title') || '';
+            const matchesCat = (currentCat === 'all' || cat === currentCat);
+            const matchesQuery = query === '' || title.includes(query);
+
+            if (matchesCat && matchesQuery) {
+                row.style.display = '';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        if (clientEmpty) {
+            clientEmpty.style.display = (visibleCount === 0 && rows.length > 0) ? '' : 'none';
+        }
+    };
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+            if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+            e.preventDefault();
+
+            tabs.forEach(t => t.classList.remove('is-active'));
+            tab.classList.add('is-active');
+
+            currentCat = tab.getAttribute('data-cat') || 'all';
+            if (searchCatInput) {
+                searchCatInput.value = currentCat === 'all' ? '' : currentCat;
+            }
+
+            const url = new URL(window.location);
+            if (currentCat === 'all') {
+                url.searchParams.delete('category');
+            } else {
+                url.searchParams.set('category', currentCat);
+            }
+            window.history.pushState({}, '', url);
+
+            filterRows();
+        });
+    });
+
+    if (searchInput) {
+        searchInput.addEventListener('input', filterRows);
+    }
+});
+</script>
+@endpush
 @endsection

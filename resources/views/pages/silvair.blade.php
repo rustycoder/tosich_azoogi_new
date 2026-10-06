@@ -58,13 +58,9 @@
       <h1 class="sv-title"{!! cms_style($meta, 'hero.title') !!}>{!! accent_html($meta->get('hero.title', 0, 'Silvair Bluetooth {Qualified Mesh Lighting}')) !!}</h1>
       @php
         $svLead = $meta->get('hero.lead', 0, 'Commercial-grade Bluetooth mesh lighting control platform engineered for large-scale enterprise and industrial environments.');
-        $svIntro = $meta->get('intro.body', 0, 'Silvair delivers wire-free reliability, predictive maintenance, and energy analytics compliant with global open standards.');
       @endphp
       @if (trim($svLead) !== '')
         <p class="sv-lead"{!! cms_style($meta, 'hero.lead') !!}>{!! accent_html($svLead) !!}</p>
-      @endif
-      @if (trim($svIntro) !== '')
-        <p class="sv-intro" {!! cms_section_attr('intro') !!}{!! cms_style($meta, 'intro.body') !!}>{!! accent_html($svIntro) !!}</p>
       @endif
     </div>
   </section>
@@ -137,7 +133,7 @@
         @if ($softwareImage !== '')
           <div class="sv-feature-img sv-feature-img--contain">
             <figure>
-              <img src="{{ $softwareImage }}" alt="{{ $meta->get('software.title') }}" loading="lazy">
+              <img src="{{ $softwareImage }}" alt="{{ $meta->get('software.image_alt', 0, $meta->get('software.title', 0, 'Silvair commissioning software interface')) }}" loading="lazy">
             </figure>
           </div>
         @endif
@@ -148,7 +144,7 @@
         @if ($standardImage !== '')
           <div class="sv-feature-img">
             <figure>
-              <img src="{{ $standardImage }}" alt="{{ $meta->get('standard.title') }}" loading="lazy">
+              <img src="{{ $standardImage }}" alt="{{ $meta->get('standard.image_alt', 0, $meta->get('standard.title', 0, 'Silvair Bluetooth Networked Lighting Control standard architecture')) }}" loading="lazy">
             </figure>
           </div>
         @endif

@@ -17,15 +17,7 @@
     }
 
     return AZOOGI_PRODUCTS.products.filter((product) => {
-      if (!product || typeof product !== 'object') {
-        return false;
-      }
-
-      if (!product.status) {
-        return true;
-      }
-
-      return String(product.status).toLowerCase().trim() === 'publish';
+      return Boolean(product && typeof product === 'object');
     });
   }
 

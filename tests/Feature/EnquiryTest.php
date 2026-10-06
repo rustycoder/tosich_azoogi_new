@@ -36,6 +36,10 @@ class EnquiryTest extends TestCase
                 'quote-email' => 'pat@example.com',
                 'quote-company' => 'Summit Electrical',
                 'quote-project' => 'Harbour pavilion',
+                'quote-phone' => '+61 400 123 456',
+                'quote-location' => 'Sydney, NSW',
+                'quote-stage' => 'Design',
+                'quote-role' => 'Lighting Designer',
                 'quote-spec' => "Product: Garden Light (Garden Light)\nVariant Model: GL005",
                 'quote-message' => 'Need a black finish.',
             ])
@@ -47,6 +51,7 @@ class EnquiryTest extends TestCase
             'status' => EnquiryStatus::Pending->value,
             'name' => 'Pat Buyer',
             'email' => 'pat@example.com',
+            'phone' => '+61 400 123 456',
             'company' => 'Summit Electrical',
             'ip_address' => '203.0.113.10',
             'country' => 'AU',
@@ -55,6 +60,9 @@ class EnquiryTest extends TestCase
         $enquiry = Enquiry::query()->first();
         $this->assertNotNull($enquiry);
         $this->assertSame('Chrome on macOS', device_name($enquiry->user_agent));
+        $this->assertSame('Sydney, NSW', $enquiry->payload['location'] ?? null);
+        $this->assertSame('Design', $enquiry->payload['stage'] ?? null);
+        $this->assertSame('Lighting Designer', $enquiry->payload['role'] ?? null);
     }
 
     public function test_admin_sees_enquiries_kanban_and_pending_counts(): void

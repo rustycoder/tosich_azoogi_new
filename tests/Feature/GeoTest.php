@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Enums\Status;
 use App\Models\Product;
 use App\Models\Project;
+use App\Models\User;
 use App\Support\LlmsTxtBuilder;
 use Database\Seeders\PageSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -50,7 +51,10 @@ class GeoTest extends TestCase
         $this->assertStringContainsString('public', $cacheControl);
 
         $content = $response->getContent();
-        $this->assertStringContainsString('# Azoogi Architectural LED Lighting', $content);
+        $this->assertStringContainsString('# Azoogi | Australian Manufacturer of Custom Architectural LED Lighting', $content);
+        $this->assertStringContainsString('Matraville NSW', $content);
+        $this->assertStringContainsString('Australian Standards and EESS', $content);
+        $this->assertStringContainsString('Azoogi does not install', $content);
         $this->assertStringContainsString('Casambi Wireless Mesh Control', $content);
         $this->assertStringContainsString('Silvair Bluetooth Mesh', $content);
         $this->assertStringContainsString('DALI Control Centre', $content);
@@ -122,5 +126,37 @@ class GeoTest extends TestCase
         $this->assertStringContainsString('"@type": "WebSite"', $content);
         $this->assertStringContainsString('"@type": "SearchAction"', $content);
         $this->assertStringContainsString('Casambi Bluetooth Low Energy Mesh', $content);
+    }
+
+    public function test_authenticated_admin_can_view_and_edit_llm_feeds_in_dashboard(): void
+    {
+        $admin = User::factory()->admin()->create();
+
+        $response = $this->actingAs($admin)->get('/dashboard/content/llms');
+        $response->assertOk();
+        $response->assertSee('AI &amp; LLM Feeds', false);
+        $response->assertSee('Summary Mode');
+
+        // Update with custom content
+        $customText = "# Custom Azoogi LLM Index\n\n> Custom AI feed description for testing.";
+        $updateResponse = $this->actingAs($admin)->put('/dashboard/content/llms', [
+            'content' => $customText,
+            'is_custom' => '1',
+        ]);
+
+        $updateResponse->assertRedirect(route('dashboard.llms.index'));
+        $updateResponse->assertSessionHas('status');
+
+        // Verify /llms.txt serves custom content
+        $llmsResponse = $this->get('/llms.txt');
+        $llmsResponse->assertOk();
+        $this->assertStringContainsString('Custom Azoogi LLM Index', $llmsResponse->getContent());
+
+        // Reset back to default
+        $resetResponse = $this->actingAs($admin)->post('/dashboard/content/llms/reset');
+        $resetResponse->assertRedirect(route('dashboard.llms.index'));
+
+        $resetLlmsResponse = $this->get('/llms.txt');
+        $this->assertStringContainsString('Australian Manufacturer of Custom Architectural LED Lighting', $resetLlmsResponse->getContent());
     }
 }

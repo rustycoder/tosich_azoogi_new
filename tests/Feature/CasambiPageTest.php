@@ -32,7 +32,6 @@ class CasambiPageTest extends TestCase
             ->assertSee('Advanced Wireless Lighting Control &amp;', false)
             ->assertSee('Smart Ecosystems', false)
             ->assertSee('Scalable Bluetooth Mesh Technology. Standardized Luminaire Integration.', false)
-            ->assertSee('As an official Casambi technology and distribution partner, we bring intelligent, ultra-reliable Bluetooth Low Energy', false)
             ->assertSee('Why Choose Casambi?', false)
             ->assertSee('Casambi App &amp; Product Categories', false)
             ->assertSee('Configure. Control. Automate.', false)

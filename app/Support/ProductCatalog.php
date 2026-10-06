@@ -60,7 +60,7 @@ class ProductCatalog
                     continue;
                 }
 
-                if (! empty($product['status']) && strtolower(trim((string) $product['status'])) !== 'publish') {
+                if (app()->isProduction() && ! empty($product['status']) && strtolower(trim((string) $product['status'])) !== 'publish') {
                     continue;
                 }
 

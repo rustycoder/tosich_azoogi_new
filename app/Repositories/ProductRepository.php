@@ -46,6 +46,7 @@ class ProductRepository implements IProductRepository
                 'product_code' => $this->storedString($product['product_code'] ?? null),
                 'stocked_item' => $this->storedString($product['stocked_item'] ?? null),
                 'supplier_name' => $this->storedString($product['supplier_name'] ?? null),
+                'supplier_code' => $this->storedString($product['supplier_code'] ?? null),
                 'meta_title' => $this->storedString($product['meta_title'] ?? null, 255),
                 'meta_description' => $this->storedText($product['meta_description'] ?? null),
                 'product_description' => $this->storedText($product['product_description'] ?? null),
@@ -84,6 +85,7 @@ class ProductRepository implements IProductRepository
                 'product_code',
                 'stocked_item',
                 'supplier_name',
+                'supplier_code',
                 'meta_title',
                 'meta_description',
                 'product_description',
@@ -231,10 +233,20 @@ class ProductRepository implements IProductRepository
 
     public function compiled(): array
     {
-        $products = Product::query()
+        $productsQuery = Product::query()
             ->orderByRaw('sort_order is null')
             ->orderBy('sort_order')
-            ->orderBy('product_name')
+            ->orderBy('product_name');
+
+        if (app()->isProduction()) {
+            $productsQuery->where(function ($query): void {
+                $query->whereNull('status')
+                    ->orWhere('status', '')
+                    ->orWhereRaw('LOWER(status) = ?', ['publish']);
+            });
+        }
+
+        $products = $productsQuery
             ->get()
             ->map(fn (Product $product): array => $product->toStorefrontArray())
             ->all();
@@ -318,21 +330,338 @@ class ProductRepository implements IProductRepository
         return $this->normalizer->fromStored($products, $categories, $filterableAttributes, $attributeValuesOrder, $attributeGroupsOrder);
     }
 
-    public function dashboardList(string $search = ''): LengthAwarePaginator
+    public function navigationCatalog(): array
     {
+        $productsQuery = Product::query()
+            ->orderByRaw('sort_order is null')
+            ->orderBy('sort_order')
+            ->orderBy('product_name');
+
+        if (app()->isProduction()) {
+            $productsQuery->where(function ($query): void {
+                $query->whereNull('status')
+                    ->orWhere('status', '')
+                    ->orWhereRaw('LOWER(status) = ?', ['publish']);
+            });
+        }
+
+        $lightweightProducts = $productsQuery
+            ->get()
+            ->map(fn (Product $p): array => [
+                'id' => $p->airtable_id ?? (string) $p->id,
+                'name' => $p->product_name,
+                'product_name' => $p->product_name,
+                'slug' => $p->slug,
+                'product_code' => $p->product_code,
+                'category' => $p->category,
+                'categories' => $p->categories,
+                'category_path' => $p->category_path,
+                'category_paths' => $p->category_paths,
+                'cover' => $p->coverUrl(),
+                'image' => $p->coverUrl(),
+                'product_images' => $p->coverUrl() !== '' ? [$p->coverUrl()] : [],
+            ])
+            ->all();
+
+        $categories = ProductCategory::query()
+            ->orderByRaw('sort_order is null')
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->get()
+            ->map(function (ProductCategory $category): array {
+                $fields = [
+                    'Name' => $category->name,
+                ];
+
+                if ($category->description) {
+                    $fields['Descriptions'] = $category->description;
+                }
+
+                if ($category->featured_image) {
+                    $fields['Featured Image'] = $category->featured_image;
+                }
+
+                if ($category->icon) {
+                    $fields['Icon'] = $category->icon;
+                }
+
+                if ($category->parent_airtable_id) {
+                    $fields['Parent'] = [$category->parent_airtable_id];
+                }
+
+                if ($category->sort_order !== null) {
+                    $fields['Order'] = $category->sort_order;
+                }
+
+                return [
+                    'id' => $category->airtable_id,
+                    'fields' => $fields,
+                ];
+            })
+            ->all();
+
+        return $this->normalizer->fromStored($lightweightProducts, $categories, [], [], []);
+    }
+
+    public function dashboardList(string $search = '', ?string $category = null, int $perPage = 50, ?string $status = null): LengthAwarePaginator
+    {
+        $categoryNames = [];
+        if (filled($category) && $category !== 'all') {
+            $categoryNames[] = $category;
+
+            $matchingCat = ProductCategory::query()
+                ->where('name', $category)
+                ->orWhere('airtable_id', $category)
+                ->first();
+
+            if ($matchingCat) {
+                $allDescendants = $this->descendantCategoryNames($matchingCat->airtable_id);
+                $categoryNames = array_unique(array_merge($categoryNames, [$matchingCat->name], $allDescendants));
+            }
+        }
+
         return Product::query()
             ->with('updater:id,name')
             ->when($search !== '', function ($query) use ($search): void {
                 $query->where(function ($query) use ($search): void {
                     $query->where('product_name', 'like', '%'.$search.'%')
-                        ->orWhere('product_code', 'like', '%'.$search.'%');
+                        ->orWhere('product_code', 'like', '%'.$search.'%')
+                        ->orWhere('supplier_name', 'like', '%'.$search.'%')
+                        ->orWhere('supplier_code', 'like', '%'.$search.'%')
+                        ->orWhere('airtable_id', 'like', '%'.$search.'%');
                 });
             })
+            ->when(! empty($categoryNames), function ($query) use ($categoryNames): void {
+                $query->where(function ($q) use ($categoryNames): void {
+                    $q->whereIn('category', $categoryNames);
+                    foreach ($categoryNames as $catName) {
+                        $q->orWhereJsonContains('categories', $catName);
+                    }
+                });
+            })
+            ->when(filled($status) && $status !== 'all', function ($query) use ($status): void {
+                if ($status === 'publish') {
+                    $query->where(function ($q): void {
+                        $q->whereNull('status')
+                            ->orWhere('status', '')
+                            ->orWhereRaw('LOWER(status) = ?', ['publish']);
+                    });
+                } else {
+                    $query->whereRaw('LOWER(status) = ?', [strtolower($status)]);
+                }
+            })
+            ->orderByRaw('sort_order is null')
+            ->orderBy('sort_order')
             ->orderByRaw('product_code is null')
             ->orderBy('product_code')
             ->orderBy('product_name')
-            ->paginate(15)
+            ->paginate($perPage)
             ->withQueryString();
+    }
+
+    /**
+     * @return list<array{name: string, label: string, depth: int, airtable_id: string}>
+     */
+    public function hierarchicalCategories(): array
+    {
+        $categories = ProductCategory::query()
+            ->orderByRaw('sort_order is null')
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->get();
+
+        if ($categories->isEmpty()) {
+            return [];
+        }
+
+        $byParent = [];
+        foreach ($categories as $cat) {
+            $parentId = $cat->parent_airtable_id ?: '__root__';
+            $byParent[$parentId][] = $cat;
+        }
+
+        $result = [];
+        $traverse = function (string $parentId, int $depth) use (&$traverse, $byParent, &$result): void {
+            if (! isset($byParent[$parentId])) {
+                return;
+            }
+
+            foreach ($byParent[$parentId] as $category) {
+                $prefix = $depth > 0 ? str_repeat('— ', $depth) : '';
+                $result[] = [
+                    'name' => $category->name,
+                    'label' => $prefix.$category->name,
+                    'depth' => $depth,
+                    'airtable_id' => $category->airtable_id,
+                ];
+
+                $traverse($category->airtable_id, $depth + 1);
+            }
+        };
+
+        $traverse('__root__', 0);
+
+        $visited = collect($result)->pluck('airtable_id')->all();
+        foreach ($categories as $cat) {
+            if (! in_array($cat->airtable_id, $visited, true)) {
+                $result[] = [
+                    'name' => $cat->name,
+                    'label' => $cat->name,
+                    'depth' => 0,
+                    'airtable_id' => $cat->airtable_id,
+                ];
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function descendantCategoryNames(string $parentAirtableId): array
+    {
+        $children = ProductCategory::query()
+            ->where('parent_airtable_id', $parentAirtableId)
+            ->get();
+
+        $names = [];
+        foreach ($children as $child) {
+            $names[] = $child->name;
+            $names = array_merge($names, $this->descendantCategoryNames($child->airtable_id));
+        }
+
+        return array_values(array_unique($names));
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function descendantCategoryIds(string $parentAirtableId): array
+    {
+        $children = ProductCategory::query()
+            ->where('parent_airtable_id', $parentAirtableId)
+            ->get();
+
+        $ids = [];
+        foreach ($children as $child) {
+            $ids[] = $child->airtable_id;
+            $ids = array_merge($ids, $this->descendantCategoryIds($child->airtable_id));
+        }
+
+        return array_values(array_unique($ids));
+    }
+
+    public function categoryDashboardList(string $search = '', ?string $parent = null, int $perPage = 50): LengthAwarePaginator
+    {
+        $paginator = ProductCategory::query()
+            ->with('updater:id,name')
+            ->when($search !== '', function ($query) use ($search): void {
+                $query->where(function ($query) use ($search): void {
+                    $query->where('name', 'like', '%'.$search.'%')
+                        ->orWhere('airtable_id', 'like', '%'.$search.'%')
+                        ->orWhere('description', 'like', '%'.$search.'%');
+                });
+            })
+            ->when(filled($parent) && $parent !== 'all', function ($query) use ($parent): void {
+                if ($parent === 'root_only') {
+                    $query->where(function ($q): void {
+                        $q->whereNull('parent_airtable_id')
+                            ->orWhere('parent_airtable_id', '');
+                    });
+
+                    return;
+                }
+
+                $rootCat = ProductCategory::query()
+                    ->where('airtable_id', $parent)
+                    ->orWhere('name', $parent)
+                    ->first();
+
+                if ($rootCat) {
+                    $familyIds = array_merge([$rootCat->airtable_id], $this->descendantCategoryIds($rootCat->airtable_id));
+                    $query->whereIn('airtable_id', $familyIds);
+                } else {
+                    $query->where('parent_airtable_id', $parent);
+                }
+            })
+            ->orderByRaw('sort_order is null')
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->paginate($perPage)
+            ->withQueryString();
+
+        $parentIds = collect($paginator->items())
+            ->pluck('parent_airtable_id')
+            ->filter()
+            ->unique()
+            ->values();
+
+        $parentsMap = $parentIds->isNotEmpty()
+            ? ProductCategory::query()
+                ->whereIn('airtable_id', $parentIds)
+                ->pluck('name', 'airtable_id')
+            : collect();
+
+        $categoryNames = collect($paginator->items())->pluck('name')->filter()->values();
+
+        $productCounts = [];
+        if ($categoryNames->isNotEmpty()) {
+            foreach ($categoryNames as $catName) {
+                $productCounts[$catName] = Product::query()
+                    ->where(function ($q) use ($catName): void {
+                        $q->where('category', $catName)
+                            ->orWhereJsonContains('categories', $catName);
+                    })
+                    ->count();
+            }
+        }
+
+        foreach ($paginator->items() as $cat) {
+            $cat->parent_name = $cat->parent_airtable_id ? ($parentsMap[$cat->parent_airtable_id] ?? null) : null;
+            $cat->products_count = $productCounts[$cat->name] ?? 0;
+        }
+
+        return $paginator;
+    }
+
+    public function attributeDashboardList(string $search = '', ?string $group = null, ?bool $visibleOnly = null, int $perPage = 50): LengthAwarePaginator
+    {
+        return ProductAttribute::query()
+            ->with('updater:id,name')
+            ->when($search !== '', function ($query) use ($search): void {
+                $query->where(function ($query) use ($search): void {
+                    $query->where('name', 'like', '%'.$search.'%')
+                        ->orWhere('value', 'like', '%'.$search.'%')
+                        ->orWhere('airtable_id', 'like', '%'.$search.'%');
+                });
+            })
+            ->when(filled($group) && $group !== 'all', function ($query) use ($group): void {
+                $query->where('name', $group);
+            })
+            ->when($visibleOnly !== null, function ($query) use ($visibleOnly): void {
+                $query->where('is_visible_on_filters', $visibleOnly);
+            })
+            ->orderByRaw('sort_order is null')
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->orderBy('value')
+            ->paginate($perPage)
+            ->withQueryString();
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function attributeGroups(): array
+    {
+        return ProductAttribute::query()
+            ->whereNotNull('name')
+            ->where('name', '!=', '')
+            ->distinct()
+            ->orderBy('name')
+            ->pluck('name')
+            ->all();
     }
 
     public function publishedByAirtableId(string $airtableId): ?Product
@@ -461,16 +790,22 @@ class ProductRepository implements IProductRepository
         }
     }
 
-    public function failStaleRunningSyncs(): void
+    public function failStaleRunningSyncs(bool $forceAll = false): void
     {
-        ProductSync::query()
-            ->where('status', ProductSyncStatus::Running)
-            ->where('started_at', '<', now()->subMinutes(25))
-            ->get()
-            ->each(function (ProductSync $sync): void {
-                $this->appendSyncLog($sync, 'Marked failed after 25 minutes without finishing.');
-                $this->finishSync($sync, false, (int) $sync->products_count, 'Sync timed out.');
+        $query = ProductSync::query()->where('status', ProductSyncStatus::Running);
+
+        if (! $forceAll) {
+            $query->where(function ($q): void {
+                $q->where('started_at', '<', now()->subMinutes(3))
+                    ->orWhere('updated_at', '<', now()->subMinutes(2));
             });
+        }
+
+        $query->get()->each(function (ProductSync $sync) use ($forceAll): void {
+            $reason = $forceAll ? 'Manually force-reset running sync.' : 'Marked failed after 3 minutes without finishing.';
+            $this->appendSyncLog($sync, $reason);
+            $this->finishSync($sync, false, (int) $sync->products_count, $reason);
+        });
     }
 
     /**
@@ -623,9 +958,7 @@ class ProductRepository implements IProductRepository
 
     private function isPublished(Product $product): bool
     {
-        $status = strtolower(trim((string) ($product->status ?? 'publish')));
-
-        return $status === '' || $status === 'publish';
+        return $product->isPublished();
     }
 
     /**

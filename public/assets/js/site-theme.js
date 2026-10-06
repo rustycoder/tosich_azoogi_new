@@ -26,6 +26,37 @@
     btn.setAttribute('aria-checked', theme === 'dark' ? 'true' : 'false');
   }
 
+  function renderTurnstiles(targetTheme) {
+    if (!window.turnstile || typeof window.turnstile.render !== 'function') {
+      return;
+    }
+    const mode = (targetTheme === 'light' || targetTheme === 'dark') ? targetTheme : currentTheme();
+    document.querySelectorAll('.cf-turnstile').forEach((el) => {
+      const explicitTheme = el.getAttribute('data-theme');
+      const effectiveTheme = (explicitTheme && explicitTheme !== 'auto') ? explicitTheme : mode;
+      const existingId = el.getAttribute('data-turnstile-widget-id');
+      if (existingId) {
+        try {
+          window.turnstile.remove(existingId);
+        } catch (e) {}
+      }
+      const sitekey = el.getAttribute('data-sitekey');
+      const action = el.getAttribute('data-action');
+      if (sitekey) {
+        try {
+          const widgetId = window.turnstile.render(el, {
+            sitekey: sitekey,
+            theme: effectiveTheme,
+            action: action || undefined,
+          });
+          if (widgetId !== undefined) {
+            el.setAttribute('data-turnstile-widget-id', widgetId);
+          }
+        } catch (e) {}
+      }
+    });
+  }
+
   function toggleTheme() {
     const newTheme = currentTheme() === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', newTheme);
@@ -36,6 +67,7 @@
     }
     syncToggle(newTheme);
     updateLogos(newTheme);
+    renderTurnstiles(newTheme);
   }
 
   function initTheme() {
@@ -49,10 +81,15 @@
     }
     syncToggle(currentTheme());
     updateLogos();
+    renderTurnstiles(currentTheme());
   }
 
   window.toggleTheme = toggleTheme;
   window.updateLogos = updateLogos;
+  window.renderTurnstiles = renderTurnstiles;
+  window.onloadTurnstileCallback = function () {
+    renderTurnstiles();
+  };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initTheme);

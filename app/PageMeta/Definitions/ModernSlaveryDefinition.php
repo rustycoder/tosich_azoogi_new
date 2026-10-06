@@ -27,7 +27,6 @@ class ModernSlaveryDefinition extends LegalDefinition
     public function seed(): array
     {
         return $this->legalSeed(
-            'Legal',
             'Azoogi Pty Ltd — Anti-Modern Slavery Policy Statement',
             '',
             file_get_contents(database_path('seeders/data/legal/modern-slavery.html')),

@@ -17,10 +17,10 @@
 
 @section('content')
 @php
-    $cover = $project->cover ?: $project->cover_remote;
+    $cover = $project->cover;
     $gallery = array_values(array_filter(
         $project->gallery ?: [],
-        fn ($image) => $image !== $cover && $image !== $project->cover_remote,
+        fn ($image) => $image !== $cover,
     ));
     $gallery = array_slice($gallery, 0, 6);
 @endphp
@@ -73,7 +73,7 @@
         <div class="project-gallery">
           @foreach ($gallery as $image)
             <div class="image">
-              <img src="{{ media_url($image) }}" alt="{{ $project->title }}" loading="lazy">
+              <img src="{{ media_url($image) }}" alt="{{ $project->galleryAlt($image, $loop->iteration) }}" loading="lazy">
             </div>
           @endforeach
         </div>

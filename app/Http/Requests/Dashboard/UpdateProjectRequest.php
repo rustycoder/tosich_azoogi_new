@@ -28,7 +28,7 @@ class UpdateProjectRequest extends FormRequest
             'location' => ['nullable', 'string', 'max:255'],
             'type' => ['nullable', 'string', 'max:255'],
             'completed' => ['nullable', 'string', 'max:100'],
-            'cover_remote' => ['nullable', 'string', 'max:500'],
+            'cover_alt' => ['nullable', 'string', 'max:255'],
             'summary' => ['nullable', 'string'],
             'description' => ['nullable', 'string'],
             'cover_file' => ['nullable', 'image', 'max:8192'],
@@ -37,6 +37,8 @@ class UpdateProjectRequest extends FormRequest
             'gallery_sync' => ['sometimes', 'boolean'],
             'keep_gallery' => ['nullable', 'array'],
             'keep_gallery.*' => ['integer', 'min:0'],
+            'gallery_alts' => ['nullable', 'array'],
+            'gallery_alts.*' => ['nullable', 'string', 'max:255'],
         ];
     }
 }

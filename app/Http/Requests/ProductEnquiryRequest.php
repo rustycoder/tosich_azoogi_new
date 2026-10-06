@@ -23,6 +23,10 @@ class ProductEnquiryRequest extends FormRequest
             'quote-email' => ['required', 'email', 'max:191'],
             'quote-company' => ['required', 'string', 'max:191'],
             'quote-project' => ['required', 'string', 'max:191'],
+            'quote-phone' => ['nullable', 'string', 'max:191'],
+            'quote-location' => ['nullable', 'string', 'max:191'],
+            'quote-stage' => ['nullable', 'string', 'max:191'],
+            'quote-role' => ['nullable', 'string', 'max:191'],
             'quote-spec' => ['required', 'string', 'max:8000'],
             'quote-message' => ['nullable', 'string', 'max:2000'],
             'cf-turnstile-response' => [

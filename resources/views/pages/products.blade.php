@@ -901,6 +901,7 @@
 @if ($showCatalog)
   @push('scripts')
     <script>
+      const AZOOGI_PRODUCTS = @json($productCatalog ?? [], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
       const PARENT_CATEGORIES = @json(collect($rangeItems)->mapWithKeys(fn($item) => [$item['title'] => ['title' => $item['title'], 'description' => $item['body'] ?? '']]));
       const DEFAULT_HERO_TITLE = @json($meta->get('hero.title', 0, 'Our {Range}'));
       const DEFAULT_CATALOG_LEAD = "Explore our comprehensive range of commercial, architectural and smart LED lighting solutions.";
@@ -989,28 +990,24 @@
 
         function getLocalImg(imgUrl, filePath) {
           if (typeof window.getLocalImagePath === 'function') {
-            var pathFromWin = window.getLocalImagePath(imgUrl, filePath);
-            if (pathFromWin && !pathFromWin.startsWith('/') && !pathFromWin.startsWith('http')) {
-              return '/' + pathFromWin;
-            }
-            return pathFromWin;
+            return window.getLocalImagePath(imgUrl, filePath);
           }
-          if (!imgUrl || typeof imgUrl !== 'string' || !imgUrl.trim()) return '/assets/bg_default.png';
+          if (!imgUrl) return '/assets/bg_default.png';
+          if (typeof imgUrl === 'object') {
+            imgUrl = imgUrl.url || (imgUrl.thumbnails && imgUrl.thumbnails.full && imgUrl.thumbnails.full.url) || '/assets/bg_default.png';
+          }
+          if (typeof imgUrl !== 'string' || !imgUrl.trim()) return '/assets/bg_default.png';
           var clean = imgUrl.trim();
-          if (!clean.startsWith('http')) {
-            return clean.startsWith('/') ? clean : '/' + clean;
+          if (clean.includes('/products') && (clean.includes('azoogi.com') || clean.includes('tosichcapital.com'))) {
+            try {
+              var parsed = new URL(clean);
+              clean = parsed.pathname + parsed.search;
+            } catch (e) {}
           }
-          var filename = clean.split('/').pop().split('?')[0];
-          if (!filename) return '/assets/bg_default.png';
-          if (filePath) {
-            var cleanFilePath = decodeURIComponent(filePath);
-            var lastSlash = cleanFilePath.lastIndexOf('/');
-            if (lastSlash !== -1) {
-              var res = cleanFilePath.substring(0, lastSlash) + '/' + filename;
-              return res.startsWith('/') ? res : '/' + res;
-            }
+          if (clean.startsWith('http://') || clean.startsWith('https://')) {
+            return clean;
           }
-          return clean;
+          return clean.startsWith('/') ? clean : '/' + clean;
         }
 
         function extractSpecsFromFeatures(features) {
@@ -1081,9 +1078,6 @@
             vData = rawProductsById[vData];
           }
           if (!vData || typeof vData !== 'object') vData = {};
-
-          // Only show products with status 'publish'
-          if (vData.status && String(vData.status).toLowerCase().trim() !== 'publish') return;
 
           var itemKey = vData.id ? vData.id : vName;
           if (!vName) return;
@@ -1776,7 +1770,6 @@
           if (AZOOGI_PRODUCTS.products) {
             if (Array.isArray(AZOOGI_PRODUCTS.products)) {
               AZOOGI_PRODUCTS.products.forEach(function (prod) {
-                if (prod.status && String(prod.status).toLowerCase().trim() !== 'publish') return;
                 var pName = prod.product_name || prod.name || "Product";
                 var images = prod.product_images || [];
                 var imgUrl = images.length > 0 ? images[0] : '/assets/bg_default.png';

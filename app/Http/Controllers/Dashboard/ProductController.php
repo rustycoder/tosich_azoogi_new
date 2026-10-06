@@ -16,10 +16,25 @@ class ProductController extends Controller
     public function index(Request $request): View
     {
         $search = dash_search_query($request->query('q'));
+        $category = $request->query('category');
+        $activeCategory = filled($category) && $category !== 'all' ? (string) $category : null;
+
+        $status = $request->query('status');
+        $activeStatus = filled($status) && $status !== 'all' ? (string) $status : null;
+
+        $rawPerPage = (int) $request->query('per_page', 50);
+        $perPage = in_array($rawPerPage, [15, 25, 50, 100, 150, 200], true) ? $rawPerPage : 50;
+
+        $categories = $this->products->hierarchicalCategories();
 
         return view('dashboard.products.index', [
-            'products' => $this->products->dashboardList($search),
+            'products' => $this->products->dashboardList($search, $activeCategory, $perPage, $activeStatus),
             'search' => $search,
+            'categories' => $categories,
+            'activeCategory' => $activeCategory,
+            'activeStatus' => $activeStatus,
+            'perPage' => $perPage,
+            'perPageOptions' => [50, 100, 150, 200],
             'latestSync' => $this->products->latestSync(),
         ]);
     }
@@ -35,25 +50,30 @@ class ProductController extends Controller
 
     public function syncStream(Request $request): StreamedResponse
     {
-        set_time_limit(300);
+        @set_time_limit(300);
+        if (function_exists('apache_setenv')) {
+            @apache_setenv('no-gzip', '1');
+        }
+        @ini_set('zlib.output_compression', '0');
+        @ini_set('implicit_flush', '1');
 
         return response()->stream(function (): void {
             while (ob_get_level() > 0) {
-                ob_end_flush();
+                @ob_end_flush();
             }
 
             $sendEvent = function (array $data): void {
                 echo 'data: '.json_encode($data)."\n\n";
                 if (ob_get_level() > 0) {
-                    ob_flush();
+                    @ob_flush();
                 }
-                flush();
+                @flush();
             };
 
             try {
                 $this->products->sync((string) auth()->id(), function (array $event) use ($sendEvent): void {
                     $sendEvent($event);
-                });
+                }, force: true);
             } catch (\Throwable $e) {
                 $sendEvent([
                     'status' => 'failed',
@@ -66,7 +86,7 @@ class ProductController extends Controller
             }
         }, 200, [
             'Content-Type' => 'text/event-stream',
-            'Cache-Control' => 'no-cache, no-transform',
+            'Cache-Control' => 'no-cache, no-transform, no-store',
             'Connection' => 'keep-alive',
             'X-Accel-Buffering' => 'no',
         ]);

@@ -27,7 +27,6 @@ class DaliCentrePageTest extends TestCase
             ->assertSee('Centralized Architectural Lighting &amp;', false)
             ->assertSee('Smart DALI-2 Management', false)
             ->assertSee('Scalable IP Gateways. Precision Local Control. Comprehensive Energy Analytics.', false)
-            ->assertSee('A powerful centralized management platform designed for public buildings', false)
             ->assertSee('youtube-nocookie.com/embed/C0KcmW6NewI', false)
             ->assertSee('Why Choose AZOOGI DALI Centre?', false)
             ->assertSee('Core Hardware &amp; Gateway System Components', false)
@@ -87,17 +86,14 @@ class DaliCentrePageTest extends TestCase
         $hero = strpos($html, 'class="dc-hero"');
         $title = strpos($html, 'class="dc-title"');
         $lead = strpos($html, 'class="dc-lead"');
-        $intro = strpos($html, 'class="dc-intro"');
         $video = strpos($html, 'class="dc-video');
 
         $this->assertNotFalse($hero);
         $this->assertNotFalse($title);
         $this->assertNotFalse($lead);
-        $this->assertNotFalse($intro);
         $this->assertNotFalse($video);
         $this->assertLessThan($lead, $title);
-        $this->assertLessThan($intro, $lead);
-        $this->assertLessThan($video, $intro);
+        $this->assertLessThan($video, $lead);
         $this->assertStringContainsString('class="dc-hero-copy"', $html);
         $this->assertStringContainsString('youtube-nocookie.com/embed/C0KcmW6NewI', $html);
     }

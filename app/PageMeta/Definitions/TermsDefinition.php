@@ -22,7 +22,6 @@ class TermsDefinition extends LegalDefinition
     public function seed(): array
     {
         return $this->legalSeed(
-            'Legal',
             'Terms & Conditions',
             'Welcome to Azoogi Pty Ltd. We aim to be straightforward, friendly, and easy to deal with while delivering top-quality commercial and architectural lighting solutions to our Australian trade partners. These Terms & Conditions outline how our website, trade portal, and supply services operate.',
             file_get_contents(database_path('seeders/data/legal/terms.html')),

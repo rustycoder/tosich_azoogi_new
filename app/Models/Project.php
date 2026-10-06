@@ -21,10 +21,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'featured',
     'featured_order',
     'cover',
-    'cover_remote',
+    'cover_alt',
     'summary',
     'description',
     'gallery',
+    'gallery_alts',
     'status',
     'created_by',
     'updated_by',
@@ -44,6 +45,7 @@ class Project extends Model
             'featured' => 'boolean',
             'featured_order' => 'integer',
             'gallery' => 'array',
+            'gallery_alts' => 'array',
             'status' => Status::class,
         ];
     }
@@ -60,9 +62,43 @@ class Project extends Model
 
     public function coverUrl(): string
     {
-        $path = $this->cover ?: $this->cover_remote;
+        return media_url($this->cover);
+    }
 
-        return media_url($path);
+    public function coverAlt(): string
+    {
+        if (is_string($this->cover_alt) && trim($this->cover_alt) !== '') {
+            return trim($this->cover_alt);
+        }
+
+        $location = $this->location ? " in {$this->location}" : '';
+
+        return "{$this->title}{$location} — architectural lighting project cover photo";
+    }
+
+    public function galleryAlt(string|int $imageOrIndex, int $fallbackIndex = 1): string
+    {
+        $custom = null;
+        if (is_array($this->gallery_alts)) {
+            if (is_string($imageOrIndex) && isset($this->gallery_alts[$imageOrIndex])) {
+                $custom = $this->gallery_alts[$imageOrIndex];
+            } elseif (is_numeric($imageOrIndex) && isset($this->gallery_alts[(int) $imageOrIndex])) {
+                $custom = $this->gallery_alts[(int) $imageOrIndex];
+            } elseif (is_string($imageOrIndex) && is_array($this->gallery)) {
+                $foundIndex = array_search($imageOrIndex, $this->gallery, true);
+                if ($foundIndex !== false && isset($this->gallery_alts[$foundIndex])) {
+                    $custom = $this->gallery_alts[$foundIndex];
+                }
+            }
+        }
+
+        if (is_string($custom) && trim($custom) !== '') {
+            return trim($custom);
+        }
+
+        $location = $this->location ? " in {$this->location}" : '';
+
+        return "{$this->title}{$location} — architectural lighting gallery photo {$fallbackIndex}";
     }
 
     public function isActive(): bool
@@ -73,5 +109,20 @@ class Project extends Model
     public function publicPath(): string
     {
         return '/project-detail?slug='.$this->slug;
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function tags(): array
+    {
+        if (blank($this->tag)) {
+            return [];
+        }
+
+        return array_values(array_filter(
+            array_map('trim', explode(',', (string) $this->tag)),
+            fn (string $t): bool => $t !== '',
+        ));
     }
 }

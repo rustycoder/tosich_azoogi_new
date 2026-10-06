@@ -22,10 +22,24 @@ class ProjectController extends Controller
     public function index(Request $request): View
     {
         $search = dash_search_query($request->query('q'));
+        $status = $request->query('status');
+        $activeStatus = filled($status) && in_array($status, ['active', 'inactive'], true) ? (string) $status : null;
+
+        $featured = $request->query('featured');
+        $activeFeatured = filled($featured) && in_array($featured, ['featured', 'not_featured', '1', '0'], true) ? (string) $featured : null;
+
+        $rawPerPage = (int) $request->query('per_page', 15);
+        $perPage = in_array($rawPerPage, [15, 25, 50, 100], true) ? $rawPerPage : 15;
+
+        $projects = $this->projects->dashboardList($search, $activeStatus, $activeFeatured, $perPage);
 
         return view('dashboard.projects.index', [
-            'projects' => $this->projects->dashboardList($search),
+            'projects' => $projects,
             'search' => $search,
+            'activeStatus' => $activeStatus,
+            'activeFeatured' => $activeFeatured,
+            'perPage' => $perPage,
+            'perPageOptions' => [15, 25, 50, 100],
         ]);
     }
 

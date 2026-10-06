@@ -25,6 +25,14 @@ class EnsureCanManageContent
             abort(403);
         }
 
+        if ($resource === 'pages') {
+            if ($user && ($user->isAdmin() || $user->canManagePages())) {
+                return $next($request);
+            }
+
+            abort(403);
+        }
+
         if ($user && $user->canManage($resource)) {
             return $next($request);
         }

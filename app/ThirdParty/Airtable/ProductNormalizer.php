@@ -99,10 +99,6 @@ final class ProductNormalizer
             $fields = $record['fields'];
             $status = $this->statusValue($fields['Status'] ?? $fields['status'] ?? '');
 
-            if ($status !== '' && $status !== 'publish') {
-                continue;
-            }
-
             $name = (string) ($fields['Product_Name'] ?? $fields['Product Name'] ?? $fields['Name'] ?? $fields['Title'] ?? 'Unnamed Product');
             $resolvedCategories = $this->resolveCategories($fields['Category'] ?? $fields['Product Category'] ?? $fields['Categories'] ?? 'General', $catIndex);
             $features = [];
@@ -163,17 +159,18 @@ final class ProductNormalizer
                 'product_images' => $this->imageUrls($fields),
                 'product_dimension' => $this->sanitize($fields['Product Dimension'] ?? $fields['Product dimension'] ?? ''),
                 'stocked_item' => $this->sanitize($fields['Stocked Item'] ?? $fields['Stock / Quantity'] ?? ''),
-                'datasheet' => $this->sanitize($fields['Datasheet'] ?? ''),
-                'datasheet_file' => $this->sanitize($fields['Datasheet File'] ?? ''),
-                'installation_guide_file' => $this->sanitize($fields['Installation Guide File'] ?? ''),
-                'user_manual' => $this->sanitize($fields['User Manual'] ?? ''),
-                'ies_file' => $this->sanitize($fields['IES File'] ?? ''),
+                'datasheet' => $this->sanitize($fields['Datasheet'] ?? $fields['datasheet'] ?? ''),
+                'datasheet_file' => $this->sanitize($fields['Datasheet File'] ?? $fields['Datasheet file'] ?? $fields['datasheet_file'] ?? $fields['Datasheet_File'] ?? ''),
+                'installation_guide_file' => $this->sanitize($fields['Installation Guide File'] ?? $fields['Installation guide file'] ?? $fields['installation_guide_file'] ?? $fields['Installation_Guide_File'] ?? $fields['Installation Guide'] ?? $fields['Installation guide'] ?? ''),
+                'user_manual' => $this->sanitize($fields['User Manual'] ?? $fields['User manual'] ?? $fields['user_manual'] ?? $fields['User_Manual'] ?? $fields['User Manual File'] ?? $fields['User manual file'] ?? ''),
+                'ies_file' => $this->sanitize($fields['IES File'] ?? $fields['IES file'] ?? $fields['ies_file'] ?? $fields['IES_File'] ?? $fields['IES'] ?? $fields['ies'] ?? ''),
                 'technical_icons' => $this->sanitize($fields['Technical Icons'] ?? $fields['Technical icons'] ?? $fields['Technical_Icons'] ?? $fields['Product Icons'] ?? $fields['Product icons'] ?? ''),
                 'meta_keywords' => $this->sanitize($fields['Meta Keywords'] ?? $fields['meta_keywords'] ?? $fields['Meta keywords'] ?? $fields['meta keywords'] ?? ''),
                 'meta_title' => $this->sanitize($fields['Meta Title'] ?? $fields['Meta title'] ?? $fields['meta_title'] ?? ''),
                 'meta_description' => $this->sanitize($fields['Meta Descriptions'] ?? $fields['Meta Description'] ?? $fields['meta_description'] ?? $fields['meta_descriptions'] ?? ''),
-                'supplier_name' => $this->sanitize($fields['Supplier Name'] ?? ''),
-                'status' => $this->sanitize($fields['Status'] ?? ''),
+                'supplier_name' => $this->sanitize($fields['Supplier Name'] ?? $fields['Supplier name'] ?? $fields['Supplier_Name'] ?? $fields['supplier_name'] ?? ''),
+                'supplier_code' => $this->sanitize($fields['Supplier Code'] ?? $fields['Supplier code'] ?? $fields['Supplier_Code'] ?? $fields['supplier_code'] ?? $fields['Supplier Part Number'] ?? $fields['Supplier part number'] ?? $fields['Supplier SKU'] ?? $fields['Supplier sku'] ?? $fields['Supplier Item Code'] ?? $fields['Supplier item code'] ?? ''),
+                'status' => $status !== '' ? $status : $this->sanitize($fields['Status'] ?? ''),
                 'product_features' => $features,
                 'options' => $this->parseJsonField($fields['Options'] ?? $fields['options'] ?? [], []),
                 'dimming_control' => $this->booleanValue($fields['Dimming Control'] ?? $fields['Dimming control'] ?? $fields['dimming_control'] ?? $fields['Dimming_Control'] ?? false),
@@ -182,6 +179,14 @@ final class ProductNormalizer
             $product = [];
 
             foreach ($entry as $key => $value) {
+                if ($key === 'status') {
+                    if ($value !== null && $value !== '') {
+                        $product[$key] = $value;
+                    }
+
+                    continue;
+                }
+
                 if ($value !== null && $value !== '' && $value !== 'No' && $value !== 'draft' && $value !== 'simple' && $value !== [''] && $value !== []) {
                     $product[$key] = $value;
                 }
@@ -253,11 +258,20 @@ final class ProductNormalizer
         foreach ($fields as $key => $value) {
             $lower = mb_strtolower((string) $key);
 
-            if (str_contains($lower, 'dimension') || (! in_array($lower, $keys, true) && ! str_contains($lower, 'image') && ! str_contains($lower, 'attachment') && ! str_contains($lower, 'gallery') && ! str_contains($lower, 'photo'))) {
+            if (
+                str_contains($lower, 'dimension')
+                || str_contains($lower, 'url')
+                || str_contains($lower, 'link')
+                || (! in_array($lower, $keys, true) && ! str_contains($lower, 'image') && ! str_contains($lower, 'attachment') && ! str_contains($lower, 'gallery') && ! str_contains($lower, 'photo'))
+            ) {
                 continue;
             }
 
             foreach ($this->urlList($value) as $url) {
+                if (str_contains($url, '/products') && (str_contains($url, '?image') || str_contains($url, 'azoogi.com') || str_contains($url, 'tosichcapital.com'))) {
+                    continue;
+                }
+
                 $images[] = $url;
             }
         }

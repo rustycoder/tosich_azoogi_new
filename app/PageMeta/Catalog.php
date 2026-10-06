@@ -2,6 +2,7 @@
 
 namespace App\PageMeta;
 
+use App\Enums\PageCategory;
 use App\PageMeta\Definitions\AboutDefinition;
 use App\PageMeta\Definitions\AiLightingDefinition;
 use App\PageMeta\Definitions\ArchitectDesignerDefinition;
@@ -122,5 +123,17 @@ final class Catalog
     public static function has(string $slug): bool
     {
         return isset(self::DEFINITIONS[$slug]);
+    }
+
+    public static function categoryForSlug(string $slug): PageCategory
+    {
+        return match ($slug) {
+            'home', 'about', 'contact', 'products', 'projects', 'led-strip-calculator', 'request-a-quote', 'header', 'footer' => PageCategory::Core,
+            'solutions', 'casambi', 'silvair', 'dali-centre', 'madrix', 'ai-lighting', 'data-centre' => PageCategory::Technology,
+            'home-owner', 'architect-designer', 'electrician-builder', 'wholesaler' => PageCategory::Audience,
+            'privacy', 'terms', 'warranty-returns', 'modern-slavery' => PageCategory::Legal,
+            '404', '403', '419', '500', '503' => PageCategory::System,
+            default => PageCategory::Core,
+        };
     }
 }

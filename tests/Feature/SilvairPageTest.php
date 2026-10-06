@@ -31,7 +31,6 @@ class SilvairPageTest extends TestCase
             ->assertSee('Enterprise Bluetooth®', false)
             ->assertSee('Qualified Mesh Lighting', false)
             ->assertSee('Qualified Mesh Standard. Rapid Mobile Commissioning. Intelligent Energy Analytics.', false)
-            ->assertSee('As an official integration partner for Silvair, we deliver robust, interoperable Bluetooth® Mesh lighting control solutions', false)
             ->assertSee('Why Choose Silvair Wireless Controls?', false)
             ->assertSee('Key Silvair Platform Capabilities', false)
             ->assertSee('Mobile for installers. Web for managers.', false)

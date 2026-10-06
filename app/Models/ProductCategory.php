@@ -32,4 +32,22 @@ class ProductCategory extends Model
             'sort_order' => 'integer',
         ];
     }
+
+    public function featuredImageUrl(): ?string
+    {
+        if (filled($this->featured_image)) {
+            return media_url((string) $this->featured_image);
+        }
+
+        return null;
+    }
+
+    public function iconUrl(): ?string
+    {
+        if (filled($this->icon)) {
+            return media_url((string) $this->icon);
+        }
+
+        return null;
+    }
 }

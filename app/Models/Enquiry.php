@@ -90,6 +90,8 @@ class Enquiry extends Model
 
         foreach ([
             'project' => 'Project',
+            'location' => 'Project location',
+            'stage' => 'Project stage',
             'role' => 'Role',
             'method' => 'Contact method',
             'suburb' => 'Suburb or retailer',

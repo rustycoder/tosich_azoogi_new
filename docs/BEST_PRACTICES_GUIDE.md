@@ -189,5 +189,73 @@ php artisan geo:generate
 php artisan geo:generate --clear
 ```
 
+---
+
+## 7. Azoogi Airtable Ordering Guide & Catalog Hierarchy
+
+Ordering across the lighting catalog is driven by two cooperating `Order` fields:
+* The **Categories table** sets the order of categories.
+* The **Products table** sets the order of products within those categories.
+
+### 7.1 Category Order & Block Ranges
+
+Each top-level category owns a block of numbers in **steps of 100**. Its subcategories use the numbers directly after it:
+
+| Block | Parent Category | Subcategories |
+| :--- | :--- | :--- |
+| **100** | Landscape Lighting | `101` Garden Light, `102` Pool Light, `103` Handrail |
+| **200** | Neon Flex | `201` Mini Neon, `202` Standard Neon, `203` 3D Neon … `213` Long Run Neon |
+| **300** | COB Strips / SMD Strips | `301` COB Strips, `302–304` COB types, `305` SMD Strips, `306–307` SMD types, `308` Flex Panel Sheets |
+| **400** | Profiles | `401` Trimless … `414` Wall Washer *(the 403 and 407 parents hold the Surfaced and Recessed sub-groups)* |
+| **500** | Drivers | `501–504` Driver types |
+| **600** | Accessories | `601` Neon, `602` LED Strip, `603` Remotes (`604` RF Remotes, `605` Wall Panels), `606` Downlight Accessories |
+| **700** | Controllers | `701` DALI, `702` Tuya, `703` Casambi Controllers (empty), `704` Waterproof, `705` MADRIX Pixel |
+| **750** | Smart Controls | `751` Casambi Controls, `752` Smart Switches |
+| **800** | 48V Track Systems | `801` Azoogi TR11, `802` Luminaires, `803` Tracks, `804` Track Accessories, `805` Audio, `806` Ventilation |
+| **900** | Downlights | `901` Recessed, `902` Surface Mounted, `903` Pendant, `904` Wall Lights |
+
+#### Category Rules:
+1. **Unique numbers**: Every category has its own three-digit number. A subcategory's number is always higher than its parent's and lower than the next parent's block.
+2. **Adding a subcategory**: Give it the next free number inside its parent's block (e.g., a new Neon type is `214`).
+3. **Adding a top-level category**: Assign a new empty block (e.g., `1000`).
+4. **Moving a category**: You can change its number, but its products won't follow automatically. Each product's Order must also have its first three digits updated (see section 2).
+
+### 7.2 Product Order Formula & Structure
+
+Every product's number combines its category number with its position in that category:
+
+$$\text{Product Order} = \text{Category Order} \times 1000 + \text{position } (001–999)$$
+
+| Product | Category (Order) | Position | Product Order |
+| :--- | :--- | :--- | :--- |
+| First Mini Neon product | Mini Neon (`201`) | 1 | `201001` |
+| Fourth Mini Neon product | Mini Neon (`201`) | 4 | `201004` |
+| First Trimless profile | Trimless Profiles (`401`) | 1 | `401001` |
+| 41st Recessed downlight | Recessed (`901`) | 41 | `901041` |
+
+> **Direct Reading Example:** To read any product number, the first three digits are the category and the last three are the position. For example, `901041` is category `901` (Recessed), product `041`.
+
+#### Product Rules:
+* **Unique numbers**: No two products share an `Order` value.
+* **Category first**: Sorting the entire table by `Order` automatically lists products by category, following the category order above.
+* **Multi-category products**: A product in more than one category is numbered under the first category in its `Categories` field (e.g., PR126 listed under Suspended Profiles (`411`) has Order `411xxx`).
+* **Capacity**: Each category holds up to 999 products (`001`–`999`). The largest now is Neon Accessories with 46.
+
+### 7.3 How the Current Numbers Were Set
+1. Categories were placed in the sequence of the Categories table.
+2. Within each category, products that already had an order kept their relative sequence.
+3. Products with no order were placed at the end of their category, alphabetically by name.
+4. All numbers were then converted from the earlier ×100 format to ×1000 (e.g. `20101` became `201001`). Categories and positions stayed the same.
+
+### 7.4 Day-to-Day Maintenance SOP
+* **New product**: Find the highest number in its category and add 1. If the last Mini Neon is `201004`, the new one is `201005`.
+* **Reordering within a category**: Renumber only that category's products, and keep the same first three digits.
+* **Inserting in the middle**: Positions are consecutive, so there is no gap. Renumber the products after the insert point in that category (can be done in bulk).
+* **Changing a product's category**: Give it the next free number in the new category's range.
+* **New subcategory**: Its products start at `[category number]001`, for example `214001`.
+* **Checking the table**: Sort by `Order`. If a product appears in the wrong group, or its first three digits don't match its category, it needs renumbering.
+
+
+
 
 

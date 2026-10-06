@@ -62,7 +62,7 @@
                 @if ($sheet['dimension_image'] !== '')
                     <div class="dim-img-container">
                         <div class="dim-title">DIMENSIONS</div>
-                        <img class="dim-img" src="{{ $sheet['dimension_image'] }}" alt="Dimensions">
+                        <img class="dim-img" src="{{ $sheet['dimension_image'] }}" alt="{{ ($sheet['name'] !== '' ? $sheet['name'] : $sheet['title']) }} technical dimensions">
                     </div>
                 @endif
                 <div class="note-img-container">

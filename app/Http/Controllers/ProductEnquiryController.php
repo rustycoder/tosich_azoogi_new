@@ -18,10 +18,14 @@ class ProductEnquiryController extends Controller
         $this->enquiries->submit(EnquiryType::Product, [
             'name' => $data['quote-name'],
             'email' => $data['quote-email'],
+            'phone' => $data['quote-phone'] ?? null,
             'company' => $data['quote-company'] ?? null,
             'message' => $data['quote-message'] ?? null,
             'payload' => [
                 'project' => $data['quote-project'] ?? '',
+                'location' => $data['quote-location'] ?? '',
+                'stage' => $data['quote-stage'] ?? '',
+                'role' => $data['quote-role'] ?? '',
                 'specification' => $data['quote-spec'],
             ],
         ]);

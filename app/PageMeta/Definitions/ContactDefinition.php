@@ -34,7 +34,7 @@ class ContactDefinition implements PageDefinition
             Field::video('hero.video', 'Hero video'),
             Field::image('hero.poster', 'Hero poster', hint: ImageSize::Hero),
             Field::text('hero.title', 'Hero title', typographic: false),
-            Field::textarea('hero.lead', 'Hero intro', typographic: false)->recommendedWords(10, 30),
+            Field::textarea('hero.lead', 'Hero lead', typographic: false)->recommendedWords(10, 30),
             Field::text('hours.label', 'Hours label'),
             Field::textarea('hours.value', 'Hours'),
             Field::text('address.label', 'Address label'),
@@ -50,7 +50,6 @@ class ContactDefinition implements PageDefinition
             Field::textarea('intl.body', 'International body')->recommendedWords(25, 60),
             Field::text('intl.email', 'International email'),
             Field::text('intl.phone', 'International phone'),
-            Field::text('form.kicker', 'Form kicker'),
             Field::text('form.title', 'Form title'),
             Field::textarea('form.lead', 'Form lead')->recommendedWords(3, 15),
         ];
@@ -77,7 +76,6 @@ class ContactDefinition implements PageDefinition
             ['key' => 'intl.body', 'sort_order' => 0, 'value' => 'We regularly partner with architects, designers, developers, and trade contractors across the Asia-Pacific, Indian Ocean, and beyond. Our team is fully experienced in managing international logistics, cross-border time zones, and ensuring all products comply with local electrical, safety, and governance standards.'],
             ['key' => 'intl.email', 'sort_order' => 0, 'value' => 'exports@azoogi.com'],
             ['key' => 'intl.phone', 'sort_order' => 0, 'value' => '+61 2 7912 3524'],
-            ['key' => 'form.kicker', 'sort_order' => 0, 'value' => 'Contact'],
             ['key' => 'form.title', 'sort_order' => 0, 'value' => 'We’d love to {hear} from you!'],
             ['key' => 'form.lead', 'sort_order' => 0, 'value' => 'Use the form below.'],
         ];

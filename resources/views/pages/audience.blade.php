@@ -2,7 +2,7 @@
 
 @section('title', $page->title)
 
-@section('description', $leads[0] ?? $page->meta_description)
+@section('description', $meta->get('hero.lead', 0, $page->meta_description))
 
 @section('bodyClass', 'audience-page')
 
@@ -22,13 +22,13 @@
         'wholesaler' => '/assets/img/img-2.jpg',
     ];
     $defaultLeads = [
-        'home-owner' => ['Explore high-quality LED lighting solutions tailored for Australian homes — combining style, energy efficiency, and lasting performance.'],
-        'architect-designer' => ['Specification-grade LED lighting crafted to enhance contemporary interiors and bring your architectural vision to life.'],
-        'electrician-builder' => ['Engineered for straightforward installation, rapid turnarounds, and reliable performance on every residential and commercial build.'],
-        'wholesaler' => ['Stock with confidence. Fast quotes, protected trade margins, and dependable nationwide supply for leading electrical distributors.'],
+        'home-owner' => 'Explore high-quality LED lighting solutions tailored for Australian homes — combining style, energy efficiency, and lasting performance.',
+        'architect-designer' => 'At Azoogi, we understand that lighting is more than illumination… it’s the art of shaping atmosphere, evoking emotion, and bringing your vision to life. That’s why Australia’s leading interior and lighting designers choose Azoogi for products that balance style, performance, and reliability.',
+        'electrician-builder' => 'At Azoogi, we know that the right lighting solution doesn’t just look great – it makes your job faster, simpler, and more profitable. Engineered for straightforward installation and dependable performance on every build.',
+        'wholesaler' => 'Stock with confidence. Fast quotes, protected trade margins, and dependable nationwide supply for leading electrical distributors.',
     ];
     $heroPoster = $meta->get('hero.poster', 0, $defaultHeroImages[$page->slug] ?? '/assets/img/img-0.jpg');
-    $audienceLeads = ! empty($leads) ? $leads : ($defaultLeads[$page->slug] ?? []);
+    $leadText = $meta->get('hero.lead', 0, $defaultLeads[$page->slug] ?? '');
 @endphp
 
 @section('content')
@@ -46,11 +46,9 @@
     <div class="audience-hero-copy">
       <h1 class="h2 audience-hero-title"{!! cms_style($meta, 'hero.title') !!}>
         {!! accent_html($meta->get('hero.title')) !!}</h1>
-      @if (! empty($audienceLeads))
+      @if (trim($leadText) !== '')
         <div class="audience-hero-lead">
-          @foreach ($audienceLeads as $index => $paragraph)
-            <p{!! cms_style($meta, 'hero.lead', $index) !!}>{!! linkify_emails(accent_html($paragraph)) !!}</p>
-          @endforeach
+          <p{!! cms_style($meta, 'hero.lead') !!}>{!! linkify_emails(accent_html($leadText)) !!}</p>
         </div>
       @endif
     </div>

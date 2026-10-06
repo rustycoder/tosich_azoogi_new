@@ -20,6 +20,8 @@ use App\Repositories\ProductDatasheetRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\ProjectRepository;
 use App\Repositories\UserRepository;
+use App\Services\CatalogAuditService;
+use App\Services\Contracts\ICatalogAuditService;
 use App\Services\Contracts\IDashboardMetricsService;
 use App\Services\Contracts\IEmailTemplateService;
 use App\Services\Contracts\IEnquiryService;
@@ -72,6 +74,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IStaffService::class, StaffService::class);
         $this->app->bind(IProfileService::class, ProfileService::class);
         $this->app->bind(IProductSyncService::class, ProductSyncService::class);
+        $this->app->bind(ICatalogAuditService::class, CatalogAuditService::class);
         $this->app->bind(IEnquiryService::class, EnquiryService::class);
         $this->app->bind(IDashboardMetricsService::class, DashboardMetricsService::class);
         $this->app->bind(ILedCalculatorService::class, LedCalculatorService::class);
@@ -116,7 +119,7 @@ class AppServiceProvider extends ServiceProvider
                 'headerMeta' => isset($pages['header']) ? PageMetaBag::for($pages['header']) : PageMetaBag::empty(),
                 'footerMeta' => isset($pages['footer']) ? PageMetaBag::for($pages['footer']) : PageMetaBag::empty(),
                 'quoteMeta' => isset($pages['request-a-quote']) ? PageMetaBag::for($pages['request-a-quote']) : PageMetaBag::empty(),
-                'productCatalog' => $this->app->make(IProductRepository::class)->compiled(),
+                'navigationCatalog' => $this->app->make(IProductRepository::class)->navigationCatalog(),
             ]);
         });
     }

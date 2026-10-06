@@ -65,6 +65,9 @@
                                     @case('images')
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                                         @break
+                                    @case('alt-text')
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7V4h16v3M9 20h6M12 4v16"/><path d="M2 19h20M2 5h20" stroke-dasharray="2 2"/><circle cx="18" cy="15" r="3"/><path d="m20.5 17.5-1.5-1.5"/></svg>
+                                        @break
                                     @case('seo')
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                                         @break
@@ -352,6 +355,10 @@
                     </div>
                 </div>
 
+                <div class="dash-doc-callout info">
+                    <strong>Cover & Gallery Alt Text:</strong> You can edit cover and gallery alt text directly in the Project form with live card previews. Read the <a href="{{ route('dashboard.docs.index', ['topic' => 'alt-text']) }}" class="dash-doc-inline-link"><strong>Image Alt Text & Accessibility Guide &rarr;</strong></a> for writing tips and SEO benefits.
+                </div>
+
                 <div class="dash-doc-callout tip">
                     <strong>Auto-Sitemap Invalidation:</strong> Whenever a project is created, updated, or deleted, the public XML sitemap (<code>/sitemap.xml</code>) and AI feeds (<code>/llms.txt</code>) are automatically invalidated and refreshed.
                 </div>
@@ -362,16 +369,220 @@
         @if ($activeTopic === 'products')
             <article class="dash-card dash-doc-section" data-doc-block>
                 <div class="dash-doc-header">
-                    <h2>Product Catalog & Airtable Sync</h2>
-                    <span class="dash-pill-active">Automated Pipeline</span>
+                    <h2>Product Catalog & Airtable Guide</h2>
+                    <span class="dash-pill-active">Airtable Architecture & SOP</span>
                 </div>
-                <p>Product specifications, variants, category hierarchies, images, and datasheets are managed in Airtable and synced seamlessly to the website database.</p>
+                <p>Product specifications, variants, category hierarchies, images, and datasheets are managed in Airtable and synced to the website database. Ordering across the catalog is strictly governed by a mathematical hierarchy between the <strong>Categories</strong> and <strong>Products</strong> tables.</p>
 
                 <div class="dash-doc-callout info">
-                    <strong>How Synchronization Works:</strong> When you trigger a sync from <a href="{{ route('dashboard.products.index') }}"><strong>Products</strong></a>, the backend connects securely to Airtable, fetches all active product records, updates technical specifications, downloads new media assets to local storage, and rebuilds the product cache.
+                    <strong>Two Cooperating Order Fields:</strong> The <strong>Categories</strong> table sets the display order of categories, and the <strong>Products</strong> table sets the order of products within them. Following this system guarantees clean category grouping and deterministic product sorting site-wide.
                 </div>
 
-                <h3>Sync Modes</h3>
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>1. Category Order & Number Blocks</h3>
+                <p>Each top-level category owns a block of numbers in <strong>steps of 100</strong>. Its subcategories use the numbers directly after it:</p>
+
+                <div class="dash-table-wrap">
+                    <table class="dash-doc-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 100px;">Block</th>
+                                <th style="width: 240px;">Parent Category</th>
+                                <th>Subcategories & Ranges</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>100</code></td>
+                                <td><strong>Landscape Lighting</strong></td>
+                                <td><code>101</code> Garden Light, <code>102</code> Pool Light, <code>103</code> Handrail</td>
+                            </tr>
+                            <tr>
+                                <td><code>200</code></td>
+                                <td><strong>Neon Flex</strong></td>
+                                <td><code>201</code> Mini Neon, <code>202</code> Standard Neon, <code>203</code> 3D Neon … <code>213</code> Long Run Neon</td>
+                            </tr>
+                            <tr>
+                                <td><code>300</code></td>
+                                <td><strong>COB Strips / SMD Strips</strong></td>
+                                <td><code>301</code> COB Strips, <code>302–304</code> COB types, <code>305</code> SMD Strips, <code>306–307</code> SMD types, <code>308</code> Flex Panel Sheets</td>
+                            </tr>
+                            <tr>
+                                <td><code>400</code></td>
+                                <td><strong>Profiles</strong></td>
+                                <td><code>401</code> Trimless … <code>414</code> Wall Washer <em>(the 403 and 407 parents hold the Surfaced and Recessed sub-groups)</em></td>
+                            </tr>
+                            <tr>
+                                <td><code>500</code></td>
+                                <td><strong>Drivers</strong></td>
+                                <td><code>501–504</code> Driver types</td>
+                            </tr>
+                            <tr>
+                                <td><code>600</code></td>
+                                <td><strong>Accessories</strong></td>
+                                <td><code>601</code> Neon, <code>602</code> LED Strip, <code>603</code> Remotes (<code>604</code> RF Remotes, <code>605</code> Wall Panels), <code>606</code> Downlight Accessories</td>
+                            </tr>
+                            <tr>
+                                <td><code>700</code></td>
+                                <td><strong>Controllers</strong></td>
+                                <td><code>701</code> DALI, <code>702</code> Tuya, <code>703</code> Casambi Controllers (empty), <code>704</code> Waterproof, <code>705</code> MADRIX Pixel</td>
+                            </tr>
+                            <tr>
+                                <td><code>750</code></td>
+                                <td><strong>Smart Controls</strong></td>
+                                <td><code>751</code> Casambi Controls, <code>752</code> Smart Switches</td>
+                            </tr>
+                            <tr>
+                                <td><code>800</code></td>
+                                <td><strong>48V Track Systems</strong></td>
+                                <td><code>801</code> Azoogi TR11, <code>802</code> Luminaires, <code>803</code> Tracks, <code>804</code> Track Accessories, <code>805</code> Audio, <code>806</code> Ventilation</td>
+                            </tr>
+                            <tr>
+                                <td><code>900</code></td>
+                                <td><strong>Downlights</strong></td>
+                                <td><code>901</code> Recessed, <code>902</code> Surface Mounted, <code>903</code> Pendant, <code>904</code> Wall Lights</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="dash-doc-callout tip" style="margin-top: 14px;">
+                    <strong>Category Rules:</strong>
+                    <ul style="margin: 8px 0 0 18px; padding: 0;">
+                        <li><strong>Unique numbers:</strong> Every category has its own three-digit number. A subcategory's number is always higher than its parent's and lower than the next parent's block.</li>
+                        <li><strong>Adding a subcategory:</strong> Give it the next free number inside its parent's block. For example, a new Neon type would be <code>214</code>.</li>
+                        <li><strong>Adding a top-level category:</strong> Give it a new empty block, such as <code>1000</code>.</li>
+                        <li><strong>Moving a category:</strong> You can change its number, but its products won't follow automatically. Each product's Order must also have its first three digits updated (see Section 2).</li>
+                    </ul>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>2. Product Order Formula</h3>
+                <p>Every product's number combines its category number with its position in that category:</p>
+
+                <div style="margin: 16px 0; background: var(--dash-fill); border: 1px solid var(--dash-border); border-radius: 8px; padding: 16px 20px;">
+                    <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dash-muted); margin-bottom: 6px;">Order Generation Formula:</div>
+                    <div style="font-size: 18px; font-weight: 700; color: var(--dash-green-dark, #27771e); font-family: monospace;">
+                        Product Order = Category Order × 1000 + position (001–999)
+                    </div>
+                </div>
+
+                <div class="dash-table-wrap">
+                    <table class="dash-doc-table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Category (Order)</th>
+                                <th>Position</th>
+                                <th>Calculated Product Order</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>First Mini Neon product</strong></td>
+                                <td>Mini Neon (<code>201</code>)</td>
+                                <td><code>1</code></td>
+                                <td><code style="font-weight: 700; color: var(--dash-green-dark, #27771e);">201001</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fourth Mini Neon product</strong></td>
+                                <td>Mini Neon (<code>201</code>)</td>
+                                <td><code>4</code></td>
+                                <td><code style="font-weight: 700; color: var(--dash-green-dark, #27771e);">201004</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>First Trimless profile</strong></td>
+                                <td>Trimless Profiles (<code>401</code>)</td>
+                                <td><code>1</code></td>
+                                <td><code style="font-weight: 700; color: var(--dash-green-dark, #27771e);">401001</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>41st Recessed downlight</strong></td>
+                                <td>Recessed (<code>901</code>)</td>
+                                <td><code>41</code></td>
+                                <td><code style="font-weight: 700; color: var(--dash-green-dark, #27771e);">901041</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p style="margin-top: 12px;">To read any product number, the <strong>first three digits are the category</strong> and the <strong>last three are the position</strong>. For example, <code>901041</code> is category <strong>901</strong> (Recessed), product <strong>041</strong>.</p>
+
+                <div class="dash-doc-callout tip" style="margin-top: 14px;">
+                    <strong>Product Rules:</strong>
+                    <ul style="margin: 8px 0 0 18px; padding: 0;">
+                        <li><strong>Unique numbers:</strong> No two products share an <code>Order</code> value.</li>
+                        <li><strong>Category first:</strong> Sorting the whole table by <code>Order</code> lists products by category, following the category order above.</li>
+                        <li><strong>Multi-category products:</strong> A product in more than one category is numbered under the <em>first category</em> in its Categories field. For example, PR126 is listed under Suspended Profiles (<code>411</code>), so its Order is <code>411xxx</code>.</li>
+                        <li><strong>Capacity:</strong> Each category holds up to 999 products (001–999). The largest now is Neon Accessories with 46.</li>
+                    </ul>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>3. How the Current Numbers Were Set</h3>
+                <ul class="dash-doc-list">
+                    <li><strong>Categories</strong> were placed in the sequence of the Categories table.</li>
+                    <li><strong>Within each category</strong>, products that already had an order kept their relative sequence.</li>
+                    <li><strong>Products with no order</strong> were placed at the end of their category, alphabetically by name.</li>
+                    <li><strong>All numbers were converted</strong> from the earlier ×100 format to ×1000 (e.g. <code>20101</code> became <code>201001</code>). Categories and positions stayed the same.</li>
+                </ul>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>4. Day-to-Day Maintenance</h3>
+                <div class="dash-doc-steps">
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">1</div>
+                        <div class="dash-doc-step-content">
+                            <h4>New Product</h4>
+                            <p>Find the highest number in its category and add 1. If the last Mini Neon is <code>201004</code>, the new one is <code>201005</code>.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">2</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Reordering Within a Category</h4>
+                            <p>Renumber only that category's products, and keep the same first three digits.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">3</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Inserting in the Middle</h4>
+                            <p>Positions are consecutive, so there's no gap. Renumber the products after the insert point in that category (can be done in bulk).</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">4</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Changing a Product's Category</h4>
+                            <p>Give it the next free number in the new category's range.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">5</div>
+                        <div class="dash-doc-step-content">
+                            <h4>New Subcategory</h4>
+                            <p>Its products start at <code>[category number]001</code>, for example <code>214001</code>.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">6</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Checking the Table</h4>
+                            <p>Sort by <code>Order</code> in Airtable. If a product appears in the wrong group, or its first three digits don't match its category, it needs renumbering.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>5. Synchronization Pipeline & Execution</h3>
+                <p>When you trigger a sync from <a href="{{ route('dashboard.products.index') }}"><strong>Products</strong></a> or via CLI, the backend connects securely to Airtable, fetches all active product records, updates technical specifications, downloads new media assets to local storage, and rebuilds the product cache.</p>
+
                 <div class="dash-doc-grid-cards">
                     <div class="dash-doc-feature-card">
                         <h4>Live Stream Sync</h4>
@@ -383,10 +594,11 @@
                     </div>
                 </div>
 
-                <h3>Troubleshooting Sync Issues</h3>
+                <h3 style="margin-top: 20px;">Troubleshooting Sync Issues</h3>
                 <ul class="dash-doc-list">
-                    <li><strong>Missing Product Images</strong>: Ensure the image field in Airtable contains valid attachments and that <code>php artisan storage:link</code> has been generated on the server.</li>
-                    <li><strong>Duplicate Slugs</strong>: Ensure product codes and names in Airtable are unique to avoid URL routing collisions.</li>
+                    <li><strong>Missing Product Images:</strong> Ensure the image field in Airtable contains valid attachments and that <code>php artisan storage:link</code> has been generated on the server.</li>
+                    <li><strong>Duplicate Slugs:</strong> Ensure product codes and names in Airtable are unique to avoid URL routing collisions.</li>
+                    <li><strong>Out-of-Order Products:</strong> If products appear in the wrong order, verify the 5-digit <code>Order</code> value in Airtable and re-run sync.</li>
                 </ul>
             </article>
         @endif
@@ -501,12 +713,130 @@
                     </table>
                 </div>
 
-                <div class="dash-doc-callout tip">
-                    <strong>Recommended Free Optimization Tools:</strong>
+                <div class="dash-doc-callout info">
+                    <strong>Setting Alt Text & Accessibility:</strong> For instructions on configuring custom alt text, live preview badges, and search ranking benefits, read our dedicated <a href="{{ route('dashboard.docs.index', ['topic' => 'alt-text']) }}" class="dash-doc-inline-link"><strong>Image Alt Text & Accessibility Guide &rarr;</strong></a>
+                </div>
+            </article>
+        @endif
+
+        {{-- 8b. IMAGE ALT TEXT & ACCESSIBILITY --}}
+        @if ($activeTopic === 'alt-text')
+            <article class="dash-card dash-doc-section" data-doc-block>
+                <div class="dash-doc-header">
+                    <h2>Image Alt Text & Accessibility (WCAG 2.1 & SEO)</h2>
+                    <span class="dash-pill-active">Accessibility & SEO Standard</span>
+                </div>
+                <p>Alternative text (alt text) is a concise textual description embedded in image HTML tags (<code>&lt;img alt="..."&gt;</code>). It serves as the primary bridge between visual imagery and non-visual user agents&mdash;including search engine crawlers, assistive screen readers, and AI recommendation engines.</p>
+
+                <h3>Why Alt Text is Crucial for the Website</h3>
+                <div class="dash-doc-grid-cards">
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        </div>
+                        <h4>1. Search Engine Optimization (SEO) & Google Images</h4>
+                        <p>Search bots (Googlebot, Bingbot) cannot directly "see" photographic lighting installations. Alt text provides explicit keyword context that indexes project installations in Google Image search and rich result carousels.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+                        </div>
+                        <h4>2. Web Accessibility (WCAG 2.1 AA Compliance)</h4>
+                        <p>Visually impaired architects, lighting designers, and clients using screen readers (VoiceOver, NVDA, JAWS) rely on alt text read aloud to understand diagrams, installation photos, and lighting fixtures.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l1.912 5.813a2 2 0 0 0 1.275 1.275L21 12l-5.813 1.912a2 2 0 0 0-1.275 1.275L12 21l-1.912-5.813a2 2 0 0 0-1.275-1.275L3 12l5.813-1.912a2 2 0 0 0 1.275-1.275L12 3z"/></svg>
+                        </div>
+                        <h4>3. Generative AI Search (LLMs & GEO)</h4>
+                        <p>Modern AI search engines (ChatGPT, Perplexity, Google Gemini, Claude) crawl image alt attributes to synthesize answers about Azoogi's architectural lighting projects, citing them in AI-generated responses.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        </div>
+                        <h4>4. Graceful Degradation on Slow Networks</h4>
+                        <p>If a visitor is on a low-bandwidth cellular network and high-resolution photography fails to download immediately, the browser renders the alt text in place of the image, keeping page context intact.</p>
+                    </div>
+                </div>
+
+                <h3>How to Set Alt Text in the Backend CMS</h3>
+                <div class="dash-doc-steps">
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">1</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Project Cover Image Alt Text</h4>
+                            <p>In the Project Editor (<a href="{{ route('dashboard.projects.index') }}"><strong>Content &rarr; Projects</strong></a>), locate the <strong>Cover image alt text</strong> field directly below the cover upload dropzone. The preview card above updates in real time to show the active alt text badge.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">2</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Project Gallery Photo Alt Text</h4>
+                            <p>Every photo in the Gallery grid displays an image preview card with metadata badges (format, file size, dimensions, and aspect ratio). Click the <strong>Edit Alt</strong> pencil icon (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 13px; height: 13px; vertical-align: -2px; display: inline-block;"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>) to reveal the inline custom alt text field. Type your description, and the preview label reflects your input instantly.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">3</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Automatic Intelligent Fallbacks</h4>
+                            <p>If you leave the alt text blank, the Azoogi platform automatically generates a clean, descriptive fallback (e.g. <code>[Project Title]</code> for covers and <code>[Project Title] photo [Index]</code> for gallery photos) to guarantee 100% WCAG 2.1 compliance with zero empty alt tags across the public website.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">4</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Page Feature Diagrams & Schematics</h4>
+                            <p>Structured page sections (such as system architecture diagrams, software integration workflows, and Casambi mesh diagrams) include dedicated alt fields (e.g. <code>feature.image_alt</code>) ensuring technical schematics remain accessible.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Best Practice Writing Guidelines</h3>
+                <div class="dash-table-wrap">
+                    <table class="dash-doc-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Poor Alt Text (Avoid)</th>
+                                <th>Optimized Alt Text (Recommended)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Project Cover Photo</strong></td>
+                                <td><code>IMG_8492.jpg</code> or <code>Photo</code></td>
+                                <td><code>Crown Sydney Grand Atrium illuminated by custom curved RGBW linear profiles</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gallery Installation Shot</strong></td>
+                                <td><code>Image of boardroom lights</code></td>
+                                <td><code>Recessed micro-downlights and acoustic lighting suspended above executive boardroom table</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Exterior Facade Lighting</strong></td>
+                                <td><code>Azoogi project 2</code></td>
+                                <td><code>IP67 exterior wall-washers highlighting heritage sandstone facade in warm 2700K</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Technical Control Diagram</strong></td>
+                                <td><code>Diagram</code></td>
+                                <td><code>Casambi wireless BLE mesh network topology diagram linking sensors, switches, and drivers</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="dash-doc-callout info">
+                    <strong>Golden Rules for Writing Alt Text:</strong>
                     <ul>
-                        <li><a href="https://squoosh.app/" target="_blank" rel="noopener noreferrer">Squoosh.app</a> &mdash; Best for converting photos to high-efficiency WebP.</li>
-                        <li><a href="https://tinypng.com/" target="_blank" rel="noopener noreferrer">TinyPNG</a> &mdash; Fast bulk compression.</li>
-                        <li><a href="https://handbrake.fr/" target="_blank" rel="noopener noreferrer">HandBrake</a> &mdash; Free desktop app for video web optimization.</li>
+                        <li><strong>Be Specific & Descriptive:</strong> State the architectural setting, fixture type, and lighting effect.</li>
+                        <li><strong>Skip Redundant Prefixes:</strong> Do NOT start with <em>"Image of..."</em> or <em>"Picture of..."</em>&mdash;screen readers already announce that the element is an image.</li>
+                        <li><strong>Keep it Under 125 Characters:</strong> Most popular screen readers pause or truncate excessively verbose strings.</li>
+                        <li><strong>Include Natural Keywords:</strong> Mention relevant architectural lighting terminology naturally without keyword stuffing.</li>
                     </ul>
                 </div>
             </article>
@@ -528,7 +858,7 @@
                     <li><strong>Social Share Images (OG Images)</strong>: Upload high-res <code>1200×630px</code> WebP/JPG images per page. These automatically appear when links are shared on LinkedIn, WhatsApp, Slack, iMessage, and X/Twitter.</li>
                     <li><strong>Canonical URLs</strong>: Automatically generated for each page to prevent duplicate content indexing.</li>
                     <li><strong>Structured Data (Schema.org)</strong>: Automated <code>Organization</code> and <code>Product</code> JSON-LD schemas power Google rich snippets and search knowledge graphs.</li>
-                    <li><strong>Image Alt Text</strong>: Always include descriptive alt text for product and project imagery for screen readers and Google Image search ranking.</li>
+                    <li><strong>Image Alt Text</strong>: Always include descriptive alt text for product and project imagery for screen readers and Google Image search ranking. See our <a href="{{ route('dashboard.docs.index', ['topic' => 'alt-text']) }}" class="dash-doc-inline-link"><strong>Image Alt Text & Accessibility Guide &rarr;</strong></a></li>
                 </ul>
 
                 <div class="dash-doc-callout info">
@@ -660,6 +990,10 @@ php artisan sitemap:generate --clear</code></pre>
                         <span class="spec-label">Knowledge Graph</span>
                         <span class="spec-value"><strong>Schema.org Multi-Entity Graph (Org + WebSite)</strong></span>
                     </div>
+                </div>
+
+                <div class="dash-doc-callout info" style="margin-top: 14px;">
+                    <strong>Custom Feed Editor:</strong> You can view, customize, and edit the live Markdown files served to LLMs directly from <a href="{{ route('dashboard.llms.index') }}" class="dash-doc-inline-link"><strong>AI & LLM Feeds &rarr;</strong></a> in the dashboard.
                 </div>
 
                 <div class="dash-doc-callout tip" style="margin-top: 14px;">

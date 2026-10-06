@@ -9,14 +9,16 @@ use Throwable;
 
 class SyncProductsCommand extends Command
 {
-    protected $signature = 'products:sync';
+    protected $signature = 'products:sync {--force : Force reset any running or stuck syncs before executing}';
 
     protected $description = 'Pull Products, Categories, and Product attributes from Airtable into the product tables.';
 
     public function handle(IProductSyncService $products): int
     {
+        $force = (bool) $this->option('force');
+
         try {
-            $sync = $products->sync('schedule');
+            $sync = $products->sync('schedule', null, $force);
         } catch (RuntimeException $exception) {
             $this->warn($exception->getMessage());
 

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Jobs\SyncProductsJob;
 use App\Models\ProductSync;
 use App\Repositories\Contracts\IProductRepository;
+use App\Services\Contracts\ICatalogAuditService;
 use App\Services\Contracts\IProductSyncService;
 use App\ThirdParty\Airtable\Contracts\IAirtableClient;
 use App\ThirdParty\Airtable\ProductNormalizer;
@@ -19,13 +20,21 @@ class ProductSyncService implements IProductSyncService
         private IAirtableClient $airtable,
         private IProductRepository $products,
         private ProductNormalizer $normalizer,
+        private ICatalogAuditService $auditService,
     ) {}
 
     /**
      * @param  (callable(array<string, mixed> $event): void)|null  $onProgress
      */
-    public function sync(string $triggeredBy = 'schedule', ?callable $onProgress = null): ProductSync
+    public function sync(string $triggeredBy = 'schedule', ?callable $onProgress = null, bool $force = false): ProductSync
     {
+        @set_time_limit(300);
+        @ignore_user_abort(true);
+
+        if ($force) {
+            $this->products->failStaleRunningSyncs(true);
+        }
+
         if ($this->products->isSyncRunning()) {
             throw new RuntimeException('A product sync is already running.');
         }
@@ -96,16 +105,30 @@ class ProductSyncService implements IProductSyncService
 
             $emit(28, 'Fetching products...', 'Connecting to Airtable products table...');
             $this->log($run, 'Fetching products from Airtable ['.$productsTable.'].');
-            $records = $this->airtable->fetchRecords($productsTable);
+            $records = [];
+            $pageIndex = 0;
+            foreach ($this->airtable->eachPage($productsTable) as $page) {
+                $pageIndex++;
+                foreach ($page as $record) {
+                    $records[] = $record;
+                }
+                $emit(
+                    min(34, 28 + ($pageIndex * 2)),
+                    "Fetching products (page {$pageIndex})...",
+                    "Retrieved page {$pageIndex} from Airtable (".count($records).' product records loaded so far)...',
+                    count($records),
+                    0
+                );
+            }
             $this->log($run, 'Fetched '.count($records).' product record'.(count($records) === 1 ? '' : 's').'.');
-            $emit(32, 'Products fetched', 'Retrieved '.count($records).' raw product records.');
+            $emit(35, 'Products fetched', 'Retrieved all '.count($records).' raw product records from Airtable.', count($records), count($records));
 
             $emit(35, 'Compiling catalog...', 'Compiling and normalizing catalog data...');
-            $this->log($run, 'Compiling published products.');
+            $this->log($run, 'Compiling products.');
             $compiled = $this->normalizer->compileProducts($records, $categories, $attributes);
             $totalProducts = count($compiled);
-            $this->log($run, 'Compiled '.$totalProducts.' published product'.($totalProducts === 1 ? '' : 's').'.');
-            $emit(38, 'Catalog compiled', "Compiled {$totalProducts} published products for processing.", 0, $totalProducts);
+            $this->log($run, 'Compiled '.$totalProducts.' product'.($totalProducts === 1 ? '' : 's').'.');
+            $emit(38, 'Catalog compiled', "Compiled {$totalProducts} products for processing.", 0, $totalProducts);
 
             $this->log($run, 'Keeping Airtable image URLs (not localizing).');
 
@@ -127,6 +150,17 @@ class ProductSyncService implements IProductSyncService
 
             $this->products->appendSyncLog($run, 'Sync finished.');
             $this->products->finishSync($run, true, count($keepIds));
+
+            $emit(98, 'Auditing catalog quality & media...', 'Executing automated post-sync catalog and asset audit...');
+            $this->log($run, 'Executing post-sync catalog quality, WebP images, and SVG icons audit.');
+            try {
+                $this->auditService->audit();
+                $this->log($run, 'Post-sync catalog and asset audit completed successfully.');
+            } catch (Throwable $auditException) {
+                Log::warning('Post-sync catalog audit failed.', [
+                    'exception' => $auditException->getMessage(),
+                ]);
+            }
 
             $totalTime = (int) round(microtime(true) - $startTime);
             $emit(
@@ -161,9 +195,17 @@ class ProductSyncService implements IProductSyncService
         SyncProductsJob::dispatch($triggeredBy);
     }
 
-    public function dashboardList(string $search = ''): LengthAwarePaginator
+    public function dashboardList(string $search = '', ?string $category = null, int $perPage = 50, ?string $status = null): LengthAwarePaginator
     {
-        return $this->products->dashboardList($search);
+        return $this->products->dashboardList($search, $category, $perPage, $status);
+    }
+
+    /**
+     * @return list<array{name: string, label: string, depth: int, airtable_id: string}>
+     */
+    public function hierarchicalCategories(): array
+    {
+        return $this->products->hierarchicalCategories();
     }
 
     public function latestSync(): ?ProductSync

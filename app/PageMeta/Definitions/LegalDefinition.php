@@ -18,9 +18,8 @@ abstract class LegalDefinition implements PageDefinition
     public function fields(): array
     {
         return [
-            Field::text('legal.kicker', 'Kicker'),
-            Field::text('legal.title', 'Title', typographic: false),
-            Field::textarea('legal.lead', 'Lead', typographic: false),
+            Field::text('legal.title', 'Hero title', typographic: false),
+            Field::textarea('legal.lead', 'Hero lead', typographic: false),
             Field::html('legal.html', 'Body'),
         ];
     }
@@ -28,10 +27,9 @@ abstract class LegalDefinition implements PageDefinition
     /**
      * @return list<array{key: string, sort_order: int, value: string}>
      */
-    protected function legalSeed(string $kicker, string $title, string $lead, string $html): array
+    protected function legalSeed(string $title, string $lead, string $html): array
     {
         return [
-            ['key' => 'legal.kicker', 'sort_order' => 0, 'value' => $kicker],
             ['key' => 'legal.title', 'sort_order' => 0, 'value' => $title],
             ['key' => 'legal.lead', 'sort_order' => 0, 'value' => $lead],
             ['key' => 'legal.html', 'sort_order' => 0, 'value' => $html],
