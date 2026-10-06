@@ -60,10 +60,12 @@
                 <div class="azoogi-chat-starters-title">Welcome to Azoogi Lighting</div>
                 <p style="font-size: 13px; color: var(--chat-text); margin: 0;">How can our engineering team assist with your project today?</p>
                 <div class="azoogi-chat-chip-list" style="margin-top: 8px;">
-                    <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="Show me outdoor IP66 lighting fixtures">🌿 Outdoor IP66 Lighting</button>
-                    <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="Show commercial linear profiles with DALI dimming">🏢 Commercial Linear & DALI</button>
+                    <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="Show me garden lights">🌿 Garden Lights</button>
+                    <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="I want to explore downlights with dimension Ø82mm x 80mm (H)">💡 80mm Downlights</button>
+                    <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="Show commercial linear profiles with DALI dimming">🏢 Linear & DALI Profiles</button>
+                    <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="How to add products to quote list?">📝 How to Add to Quote?</button>
+                    <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="Show my quote list">📋 View Quote Items</button>
                     <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="How do I generate a custom PDF datasheet?">📄 Custom Datasheets</button>
-                    <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="I want to request a project quote">📋 Build a Quote Request</button>
                 </div>
             </div>
         </div>
