@@ -15,9 +15,11 @@ class OpenAiDriver implements IChatLlmDriver
     public function __construct(
         protected ?string $apiKey = null,
         protected string $model = 'gpt-4o-mini',
+        protected string $baseUrl = 'https://api.openai.com/v1',
     ) {
         $this->apiKey = $apiKey ?: (string) config('services.openai.api_key', env('OPENAI_API_KEY'));
         $this->model = (string) config('services.openai.chat_model', env('OPENAI_CHAT_MODEL', 'gpt-4o-mini'));
+        $this->baseUrl = rtrim((string) config('services.openai.base_url', env('OPENAI_BASE_URL', 'https://api.openai.com/v1')), '/');
     }
 
     public function chat(array $messages, array $tools = [], string $systemPrompt = ''): array
@@ -59,7 +61,7 @@ class OpenAiDriver implements IChatLlmDriver
 
         $response = Http::withToken($this->apiKey)
             ->timeout(30)
-            ->post('https://api.openai.com/v1/chat/completions', $payload);
+            ->post("{$this->baseUrl}/chat/completions", $payload);
 
         if (! $response->successful()) {
             Log::error('OpenAI Chat Error', ['body' => $response->body()]);
