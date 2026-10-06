@@ -106,12 +106,13 @@ class ChatOrchestrator
 
         $session->increment('messages_count');
 
-        // 2. Build conversation history for LLM
+        // 2. Build conversation history for LLM in strict chronological order
         $recentMessages = $session->messages()
-            ->latest('id')
+            ->reorder('id', 'desc')
             ->limit(10)
             ->get()
-            ->reverse();
+            ->reverse()
+            ->values();
 
         $history = [];
         foreach ($recentMessages as $msg) {
@@ -236,7 +237,8 @@ Core Brand Competencies:
 
 Your Role & Style:
 - Professional, technical, concise, and helpful.
-- When visitors ask about products, outdoor lighting, specs, or applications, call `public_search_and_filter_products` or `get_product_details_and_downloads` to provide structured interactive cards.
+- Always focus on the visitor's latest inquiry. If the visitor asks for a new product category or dimension (e.g. asking for downlights after garden lights), immediately search for the new category and do NOT carry over stale filters (such as old IP ratings or unrelated keywords) from prior turns.
+- When visitors ask about products, specs, dimensions, or applications, call `public_search_and_filter_products` or `get_product_details_and_downloads` to provide structured interactive cards.
 - When visitors ask for custom datasheets, call `generate_custom_datasheet`.
 - When visitors want to add items to their quote or view quote items, call `public_manage_quote_list`.
 - When visitors want to submit an enquiry or quote, guide them politely or call `public_submit_quote_enquiry`.

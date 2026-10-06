@@ -14,11 +14,11 @@ class GeminiDriver implements IChatLlmDriver
 {
     public function __construct(
         protected ?string $apiKey = null,
-        protected string $model = 'gemini-3.5-flash',
+        protected string $model = 'gemini-3.5-flash-lite',
         protected string $baseUrl = 'https://generativelanguage.googleapis.com/v1beta/openai',
     ) {
         $this->apiKey = $apiKey ?: (string) config('services.gemini.api_key', env('GEMINI_API_KEY'));
-        $this->model = (string) config('services.gemini.model', env('GEMINI_MODEL', 'gemini-3.5-flash'));
+        $this->model = (string) config('services.gemini.model', env('GEMINI_MODEL', 'gemini-3.5-flash-lite'));
         $this->baseUrl = rtrim((string) config('services.gemini.base_url', env('GEMINI_BASE_URL', 'https://generativelanguage.googleapis.com/v1beta/openai')), '/');
     }
 
@@ -62,9 +62,11 @@ class GeminiDriver implements IChatLlmDriver
         // List candidate models for automatic failover under rate limits (429) or high demand (503)
         $modelsToTry = array_unique([
             $this->model,
-            'gemini-3.5-flash',
             'gemini-3.5-flash-lite',
             'gemini-flash-lite-latest',
+            'gemini-3.6-flash',
+            'gemini-3.1-flash-lite',
+            'gemini-3.5-flash',
             'gemini-3.8-flash',
         ]);
 
