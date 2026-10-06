@@ -9,6 +9,7 @@ use App\Models\ChatSession;
 use App\Services\Chat\Contracts\IChatLlmDriver;
 use App\Services\Chat\Contracts\IChatTool;
 use App\Services\Chat\Drivers\AnthropicDriver;
+use App\Services\Chat\Drivers\GeminiDriver;
 use App\Services\Chat\Drivers\MockLlmDriver;
 use App\Services\Chat\Drivers\OpenAiDriver;
 use App\Services\Chat\Tools\CustomDatasheetGeneratorTool;
@@ -52,6 +53,10 @@ class ChatOrchestrator
     protected function resolveDriver(): IChatLlmDriver
     {
         $driverName = strtolower((string) config('services.chat.driver', env('CHAT_LLM_DRIVER', 'auto')));
+
+        if ($driverName === 'gemini' || (! empty(env('GEMINI_API_KEY')) && $driverName === 'auto')) {
+            return app(GeminiDriver::class);
+        }
 
         if ($driverName === 'openai' || (! empty(env('OPENAI_API_KEY')) && $driverName === 'auto')) {
             return app(OpenAiDriver::class);
@@ -167,11 +172,15 @@ class ChatOrchestrator
                 }
 
                 // Add assistant tool use message & tool responses to history
-                $history[] = [
-                    'role' => 'assistant',
-                    'content' => $llmResponse['content'] ?? '',
-                    'tool_calls' => $llmResponse['tool_calls'],
-                ];
+                if (! empty($llmResponse['raw_message'])) {
+                    $history[] = $llmResponse['raw_message'];
+                } else {
+                    $history[] = [
+                        'role' => 'assistant',
+                        'content' => $llmResponse['content'] ?? '',
+                        'tool_calls' => $llmResponse['tool_calls'],
+                    ];
+                }
 
                 foreach ($toolCallResultsForLlm as $tr) {
                     $history[] = $tr;
