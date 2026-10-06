@@ -286,21 +286,30 @@ class ProductSearchAndFilterTool implements IChatTool
                 $catLower = mb_strtolower($category);
                 $isTargetProduct = str_contains($cat, $catLower) || str_contains($name, $catLower);
 
-                // Downlight specific subcategories (Surface Mounted, Pendant, Recessed)
-                if ($catLower === 'downlight') {
-                    if (str_contains($cat, 'downlight') || str_contains($name, 'downlight') || in_array($cat, ['surface mounted', 'pendant', 'recessed'], true)) {
-                        $isTargetProduct = true;
-                        $score += 60;
-                    }
+                // Domain specific category expansions
+                if (str_contains($catLower, 'downlight')) {
+                    $isTargetProduct = str_contains($cat, 'downlight') || str_contains($name, 'downlight') || in_array($cat, ['surface mounted', 'pendant', 'recessed'], true);
+                } elseif (str_contains($catLower, 'garden')) {
+                    $isTargetProduct = str_contains($cat, 'garden') || str_contains($name, 'garden') || str_contains($cat, 'spike') || str_contains($name, 'spike');
+                } elseif (str_contains($catLower, 'pool')) {
+                    $isTargetProduct = str_contains($cat, 'pool') || str_contains($name, 'pool');
+                } elseif (str_contains($catLower, 'neon')) {
+                    $isTargetProduct = str_contains($cat, 'neon') || str_contains($name, 'neon') || str_contains($name, 'lumoflex') || str_contains($name, 'bend');
+                } elseif (str_contains($catLower, 'strip') || str_contains($catLower, 'tape')) {
+                    $isTargetProduct = str_contains($cat, 'strip') || str_contains($name, 'strip') || str_contains($cat, 'tape') || str_contains($name, 'tape');
+                } elseif (str_contains($catLower, 'handrail')) {
+                    $isTargetProduct = str_contains($cat, 'handrail') || str_contains($name, 'handrail');
+                } elseif (str_contains($catLower, 'profile') || str_contains($catLower, 'extrusion')) {
+                    $isTargetProduct = str_contains($cat, 'profile') || str_contains($name, 'profile') || str_contains($cat, 'extrusion') || str_contains($name, 'extrusion');
+                } elseif (str_contains($catLower, 'driver') || str_contains($catLower, 'power')) {
+                    $isTargetProduct = str_contains($cat, 'driver') || str_contains($name, 'driver') || str_contains($cat, 'power supply');
                 }
 
                 if ($isTargetProduct) {
-                    $score += 40;
+                    $score += 80;
                 } else {
-                    // Penalize irrelevant categories when user is looking for a distinct type
-                    if (str_contains($cat, 'profile') || str_contains($name, 'profile') || str_contains($cat, 'accessory') || str_contains($cat, 'accessories')) {
-                        $score -= 80;
-                    }
+                    // Heavily penalize unrelated categories when user explicitly asked for a specific category
+                    $score -= 120;
                 }
             }
 
@@ -330,16 +339,16 @@ class ProductSearchAndFilterTool implements IChatTool
             // Outdoor relevance
             if ($isOutdoor) {
                 if (str_contains($cat, 'garden') || str_contains($cat, 'pool') || str_contains($name, 'garden') || str_contains($name, 'pool')) {
-                    $score += 50;
+                    $score += 40;
                 }
-                if (str_contains($cat, 'neon') || str_contains($name, 'bend') || str_contains($name, 'spot')) {
-                    $score += 30;
+                if (str_contains($cat, 'neon') || str_contains($name, 'bend')) {
+                    $score += 20;
                 }
                 if (str_contains($desc, 'ip68') || str_contains($desc, 'ip67') || str_contains($desc, 'ip66') || str_contains($desc, 'ip65')) {
-                    $score += 30;
+                    $score += 25;
                 }
                 if (str_contains($desc, 'outdoor') || str_contains($name, 'outdoor') || str_contains($desc, 'waterproof')) {
-                    $score += 25;
+                    $score += 20;
                 }
             }
 
