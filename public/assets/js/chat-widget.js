@@ -143,27 +143,32 @@ document.addEventListener('DOMContentLoaded', () => {
         playChime();
     };
 
-    // Product Carousel Card Template
+    // Product Carousel Card Template (Matches Website Catalog .prod-card)
     const renderProductsCarousel = (products) => {
         if (!products.length) return '';
-        const items = products.map(p => `
-            <div class="azoogi-chat-product-card">
-                <img src="${p.image_url || '/assets/img/placeholder.jpg'}" alt="${p.name}" class="azoogi-chat-product-thumb" loading="lazy">
-                <div class="azoogi-chat-product-name">${p.name}</div>
-                <div class="azoogi-chat-product-sku">${p.code || ''}</div>
-                <div class="azoogi-chat-product-badges">
-                    ${(p.badges || []).map(b => `<span class="azoogi-chat-badge">${b}</span>`).join('')}
+        const items = products.map(p => {
+            const isFallback = !p.image_url || p.image_url.includes('placeholder') || p.image_url.includes('default');
+            const imgHtml = `<img src="${p.image_url || '/assets/quote.webp'}" alt="${escapeHtml(p.name)}" class="prod-swatch${isFallback ? ' is-fallback' : ''}" loading="lazy" onerror="this.onerror=null; this.src='/assets/quote.webp';">`;
+            const catLabel = p.category ? `<span class="cat-label">${escapeHtml(p.category)}</span>` : '';
+            const codeLabel = p.code ? `<span class="prod-card-code">${escapeHtml(p.code)}</span>` : '';
+            const detailUrl = p.url || `/products/${encodeURIComponent(p.slug || p.id)}`;
+
+            return `
+                <div class="prod-card" data-href="${detailUrl}" role="link" tabindex="0">
+                    <div class="prod-card-img">
+                        ${imgHtml}
+                    </div>
+                    <div class="prod-card-title">
+                        <div class="prod-card-title-text">
+                            ${catLabel}
+                            <span class="prod-card-name">${escapeHtml(p.name)}</span>
+                            ${codeLabel}
+                        </div>
+                        <button class="add-quote-btn js-add-quote" type="button" aria-label="Add to quote" data-id="${p.id}" data-name="${escapeHtml(p.name)}" data-sku="${escapeHtml(p.code || '')}" data-image="${escapeHtml(p.image_url || '')}" data-url="${escapeHtml(detailUrl)}" onclick="event.stopPropagation();">+</button>
+                    </div>
                 </div>
-                <div class="azoogi-chat-card-actions">
-                    <button type="button" class="azoogi-chat-btn-sm azoogi-chat-btn-primary js-add-quote" data-id="${p.id}" data-name="${p.name}">
-                        + Quote
-                    </button>
-                    <a href="${p.url}" target="_blank" class="azoogi-chat-btn-sm azoogi-chat-btn-outline">
-                        View
-                    </a>
-                </div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
 
         return `<div class="azoogi-chat-products-carousel">${items}</div>`;
     };
@@ -242,14 +247,25 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     };
 
-    // Card Action Listeners (Add to Quote)
+    // Card Action Listeners (Clicking card navigates to product, clicking '+' adds to quote)
     const attachCardListeners = (containerEl) => {
+        containerEl.querySelectorAll('.prod-card[data-href]').forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('.js-add-quote') || e.target.closest('.add-quote-btn')) return;
+                const href = card.getAttribute('data-href');
+                if (href) {
+                    window.open(href, '_blank');
+                }
+            });
+        });
+
         containerEl.querySelectorAll('.js-add-quote').forEach(btn => {
             btn.addEventListener('click', async (e) => {
+                e.stopPropagation();
                 const id = btn.getAttribute('data-id');
                 const name = btn.getAttribute('data-name');
                 btn.disabled = true;
-                btn.textContent = 'Adding...';
+                btn.textContent = '...';
 
                 try {
                     const res = await fetch('/api/chat/quote/add', {
@@ -259,18 +275,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                     const data = await res.json();
                     if (data.status === 'success') {
-                        btn.textContent = '✓ Added';
-                        btn.style.background = '#10b981';
+                        btn.textContent = '✓';
+                        btn.classList.add('added');
                         if (quoteBadge) {
                             quoteBadge.textContent = data.quote_count;
                             quoteBadge.style.display = data.quote_count > 0 ? 'block' : 'none';
                         }
+                        if (window.AzoogiQuote && typeof window.AzoogiQuote.refresh === 'function') {
+                            window.AzoogiQuote.refresh();
+                        }
                     } else {
-                        btn.textContent = '+ Quote';
+                        btn.textContent = '+';
                         btn.disabled = false;
                     }
                 } catch (err) {
-                    btn.textContent = '+ Quote';
+                    btn.textContent = '+';
                     btn.disabled = false;
                 }
             });

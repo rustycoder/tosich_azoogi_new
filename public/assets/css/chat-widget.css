@@ -351,102 +351,152 @@
     padding: 0 4px;
 }
 
-/* Product Cards Carousel in Chat */
+/* Product Cards Carousel in Chat - Exactly Matching Website .prod-card */
 .azoogi-chat-products-carousel {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     overflow-x: auto;
-    padding: 8px 0;
+    padding: 8px 2px 14px;
     width: 100%;
-    margin-top: 8px;
+    margin-top: 10px;
     scrollbar-width: thin;
+    scrollbar-color: var(--line, rgba(255, 255, 255, 0.15)) transparent;
+    scroll-snap-type: x mandatory;
+    box-sizing: border-box;
 }
 
-.azoogi-chat-product-card {
-    flex: 0 0 210px;
-    background: var(--chat-card-bg);
-    border: 1px solid var(--chat-card-border);
-    border-radius: 12px;
-    padding: 10px;
+.azoogi-chat-products-carousel::-webkit-scrollbar {
+    height: 4px;
+}
+
+.azoogi-chat-products-carousel::-webkit-scrollbar-thumb {
+    background: var(--line, rgba(255, 255, 255, 0.2));
+    border-radius: 4px;
+}
+
+.azoogi-chat-products-carousel .prod-card {
+    flex: 0 0 185px;
+    scroll-snap-align: start;
+    position: relative;
+    border: 1px solid var(--border-light, rgba(255, 255, 255, 0.08));
+    background: var(--card-bg, rgba(255, 255, 255, 0.03));
+    overflow: hidden;
+    border-radius: 3px;
+    transition: border-color .25s ease, transform .25s ease;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    transition: all 0.2s ease;
+    text-align: left;
+    box-sizing: border-box;
 }
 
-.azoogi-chat-product-card:hover {
-    border-color: var(--chat-accent);
+.azoogi-chat-products-carousel .prod-card:hover {
+    border-color: var(--accent, #67d04e);
     transform: translateY(-2px);
 }
 
-.azoogi-chat-product-thumb {
+.azoogi-chat-products-carousel .prod-card-img {
+    position: relative;
     width: 100%;
-    height: 110px;
-    object-fit: cover;
-    border-radius: 8px;
-    background: #000;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    background-color: var(--bg-2, #111111);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.azoogi-chat-product-name {
-    font-size: 12.5px;
-    font-weight: 600;
-    color: var(--chat-text);
+.azoogi-chat-products-carousel .prod-card-img img,
+.azoogi-chat-products-carousel .prod-card-img .prod-swatch {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s ease;
+    display: block;
+}
+
+.azoogi-chat-products-carousel .prod-card:hover .prod-card-img img,
+.azoogi-chat-products-carousel .prod-card:hover .prod-card-img .prod-swatch {
+    transform: scale(1.08);
+}
+
+.azoogi-chat-products-carousel .prod-card-title {
+    padding: 10px 12px 12px;
+    font-size: 12px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    line-height: 1.35;
+    flex-grow: 1;
+}
+
+.azoogi-chat-products-carousel .prod-card-title-text {
+    flex: 1;
+    min-width: 0;
+    white-space: pre-line;
+    color: var(--ink, #f3f3f3);
+    font-weight: 500;
+    font-size: 12px;
     line-height: 1.3;
 }
 
-.azoogi-chat-product-sku {
-    font-size: 11px;
-    color: var(--chat-accent);
-    font-family: monospace;
-}
-
-.azoogi-chat-product-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-}
-
-.azoogi-chat-badge {
-    font-size: 9.5px;
+.azoogi-chat-products-carousel .prod-card-name {
+    display: block;
+    color: var(--ink, #f3f3f3);
+    font-size: 12px;
     font-weight: 500;
-    padding: 2px 6px;
-    border-radius: 4px;
-    background: rgba(103, 208, 78, 0.15);
-    color: var(--chat-accent);
 }
 
-.azoogi-chat-card-actions {
-    display: flex;
-    gap: 6px;
-    margin-top: auto;
-}
-
-.azoogi-chat-btn-sm {
-    flex: 1;
-    padding: 6px 8px;
-    font-size: 11px;
+.azoogi-chat-products-carousel .cat-label {
+    display: block;
+    font-size: 9.5px;
+    color: var(--accent, #67d04e);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 3px;
     font-weight: 600;
-    border-radius: 6px;
-    text-align: center;
+}
+
+.azoogi-chat-products-carousel .prod-card-code {
+    display: block;
+    font-size: 9.5px;
+    color: var(--muted, #9a9a9a);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-top: 4px;
+    font-weight: 400;
+}
+
+.azoogi-chat-products-carousel .add-quote-btn {
+    background: var(--accent, #67d04e);
+    border: 1px solid var(--line, rgba(255, 255, 255, 0.12));
+    color: var(--pure-bg, #0b0b0b);
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    transition: all 0.2s;
-    text-decoration: none;
-    border: none;
+    transition: all .2s;
+    flex-shrink: 0;
+    font-size: 16px;
+    font-weight: 300;
+    padding: 0;
+    line-height: 1;
 }
 
-.azoogi-chat-btn-primary {
-    background: var(--chat-accent);
-    color: #0b0b0b;
+.azoogi-chat-products-carousel .add-quote-btn:hover {
+    background: var(--card-bg, rgba(255, 255, 255, 0.06));
+    color: var(--ink, #ffffff);
+    border-color: var(--accent, #67d04e);
 }
 
-.azoogi-chat-btn-primary:hover {
-    background: var(--chat-accent-hover);
-}
-
-.azoogi-chat-btn-outline {
-    background: transparent;
-    border: 1px solid var(--chat-border);
-    color: var(--chat-text);
+.azoogi-chat-products-carousel .add-quote-btn.added {
+    background: var(--accent-2, #3aa028);
+    color: #fff;
+    border-color: var(--accent-2, #3aa028);
 }
 
 .azoogi-chat-btn-outline:hover {
