@@ -92,6 +92,7 @@
 </script>
 @if (request()->routeIs('dashboard.pages.preview'))
 <base href="{{ rtrim(url('/'), '/') }}/">
+@endif
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" href="{{ versioned_asset('assets/css/style_demo.css') }}">
 <link rel="stylesheet" href="{{ versioned_asset('assets/css/quote.css') }}">
