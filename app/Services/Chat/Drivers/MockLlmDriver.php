@@ -62,10 +62,16 @@ class MockLlmDriver implements IChatLlmDriver
 
             // Case D: Quote Cart Management
             if (isset($toolResult['quote_items']) || isset($toolResult['total_items'])) {
-                $msg = $toolResult['message'] ?? 'Your quote request list has been updated.';
+                $total = (int) ($toolResult['total_items'] ?? count($toolResult['quote_items'] ?? []));
+                if ($total === 0) {
+                    $reply = "Your quote request list is currently empty. You can add fixtures by clicking '+ Add to Quote' on any product card or by asking me to add specific products.";
+                } else {
+                    $msg = $toolResult['message'] ?? "You currently have {$total} item(s) in your quote request list.";
+                    $reply = $msg.' You can review your items or proceed to submit your quote request.';
+                }
 
                 return [
-                    'content' => $msg.' You can review your items or proceed to submit your quote request.',
+                    'content' => $reply,
                     'tool_calls' => [],
                     'tokens_used' => 35,
                 ];
@@ -102,22 +108,28 @@ class MockLlmDriver implements IChatLlmDriver
 
         // Intent: Quote Cart Actions
         if (str_contains($text, 'quote') && (str_contains($text, 'add') || str_contains($text, 'cart') || str_contains($text, 'item') || str_contains($text, 'list') || str_contains($text, 'remove') || str_contains($text, 'clear') || str_contains($text, 'show') || str_contains($text, 'view'))) {
-            preg_match('/\b\d+\b/', $text, $matches);
-            $productId = ! empty($matches[0]) ? (int) $matches[0] : null;
-
-            if (! $productId) {
-                // Find first published product as fallback
-                $p = Product::where('status', 'publish')->first();
-                $productId = $p ? $p->id : 1;
-            }
-
-            $action = 'add';
+            $action = 'view';
             if (str_contains($text, 'remove') || str_contains($text, 'delete')) {
                 $action = 'remove';
             } elseif (str_contains($text, 'clear') || str_contains($text, 'empty')) {
                 $action = 'clear';
-            } elseif (str_contains($text, 'view') || str_contains($text, 'show') || str_contains($text, 'check') || str_contains($text, 'items') || str_contains($text, 'list')) {
-                $action = 'view';
+            } elseif (str_contains($text, 'add')) {
+                $action = 'add';
+            }
+
+            $productId = null;
+            if ($action === 'add' || $action === 'remove') {
+                preg_match('/\b\d+\b/', $text, $matches);
+                $productId = ! empty($matches[0]) ? (int) $matches[0] : null;
+
+                if (! $productId) {
+                    $matchedProduct = Product::where('status', 'publish')
+                        ->where(function ($q) use ($text) {
+                            $q->whereRaw('? LIKE CONCAT("%", LOWER(product_name), "%")', [$text])
+                                ->orWhereRaw('? LIKE CONCAT("%", LOWER(product_code), "%")', [$text]);
+                        })->first();
+                    $productId = $matchedProduct ? $matchedProduct->id : null;
+                }
             }
 
             return [

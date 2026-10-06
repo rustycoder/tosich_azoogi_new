@@ -293,8 +293,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.stopPropagation();
                 const id = btn.getAttribute('data-id');
                 const name = btn.getAttribute('data-name');
+                const sku = btn.getAttribute('data-sku') || '';
+                const image = btn.getAttribute('data-image') || '';
+                const url = btn.getAttribute('data-url') || '';
                 btn.disabled = true;
                 btn.textContent = '...';
+
+                // Synchronize with website quote drawer / storage
+                if (window.AzoogiQuote && typeof window.AzoogiQuote.add === 'function') {
+                    window.AzoogiQuote.add({
+                        id: id || sku || name,
+                        name: name,
+                        sku: sku,
+                        image: image,
+                        url: url
+                    });
+                }
 
                 try {
                     const res = await fetch('/api/chat/quote/add', {
@@ -306,12 +320,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (data.status === 'success') {
                         btn.textContent = '✓';
                         btn.classList.add('added');
-                        if (quoteBadge) {
-                            quoteBadge.textContent = data.quote_count;
-                            quoteBadge.style.display = data.quote_count > 0 ? 'block' : 'none';
-                        }
-                        if (window.AzoogiQuote && typeof window.AzoogiQuote.refresh === 'function') {
-                            window.AzoogiQuote.refresh();
+                        if (window.siteToast && typeof window.siteToast === 'function') {
+                            window.siteToast(`Added "${name}" to your quote request.`);
                         }
                     } else {
                         btn.textContent = '+';
