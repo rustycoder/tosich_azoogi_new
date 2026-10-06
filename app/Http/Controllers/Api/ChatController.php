@@ -23,7 +23,28 @@ class ChatController extends Controller
             'message' => 'required|string|max:1500',
             'session_uuid' => 'nullable|string|uuid',
             'referrer_url' => 'nullable|string|max:500',
+            'quote_items' => 'nullable|array',
         ]);
+
+        if ($request->has('quote_items')) {
+            $clientItems = (array) $request->input('quote_items', []);
+            $syncedList = [];
+            foreach ($clientItems as $it) {
+                if (empty($it['id']) && empty($it['name'])) {
+                    continue;
+                }
+                $id = (string) ($it['id'] ?? $it['name']);
+                $syncedList[$id] = [
+                    'id' => $it['id'] ?? null,
+                    'name' => (string) ($it['name'] ?? ''),
+                    'code' => (string) ($it['sku'] ?? $it['code'] ?? ''),
+                    'quantity' => max(1, (int) ($it['qty'] ?? $it['quantity'] ?? 1)),
+                    'image_url' => (string) ($it['image'] ?? $it['image_url'] ?? ''),
+                    'url' => (string) ($it['url'] ?? ''),
+                ];
+            }
+            session()->put('visitor_quote_list', $syncedList);
+        }
 
         $session = $this->orchestrator->getOrCreateSession(
             $validated['session_uuid'] ?? null,
@@ -31,13 +52,15 @@ class ChatController extends Controller
         );
 
         $result = $this->orchestrator->handleUserMessage($session, $validated['message']);
+        $currentQuoteList = session()->get('visitor_quote_list', []);
 
         return response()->json([
             'status' => 'success',
             'session_uuid' => $result['session_uuid'],
             'reply' => $result['response'],
             'cards' => $result['cards'],
-            'quote_count' => count(session()->get('visitor_quote_list', [])),
+            'quote_count' => count($currentQuoteList),
+            'quote_items' => array_values($currentQuoteList),
         ]);
     }
 

@@ -222,20 +222,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Quote Cart Card Template
     const renderQuoteCard = (items, quoteUrl) => {
-        const listHtml = items.map(it => `
-            <div style="display: flex; justify-content: space-between; font-size: 11.5px; padding: 4px 0; border-bottom: 1px solid var(--chat-border);">
-                <span><strong>${it.quantity}x</strong> ${it.name}</span>
-                <span style="color: var(--chat-accent); font-family: monospace;">${it.code || ''}</span>
+        const liveItems = (window.AzoogiQuote && typeof window.AzoogiQuote.items === 'function')
+            ? window.AzoogiQuote.items()
+            : (items || []);
+
+        const count = liveItems.length;
+        const listHtml = liveItems.map(it => `
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; padding: 5px 0; border-bottom: 1px solid var(--chat-border);">
+                <span><strong>${it.qty || it.quantity || 1}x</strong> ${escapeHtml(it.name)}</span>
+                <span style="color: var(--chat-accent); font-family: monospace; font-size: 10.5px;">${escapeHtml(it.sku || it.code || '')}</span>
             </div>
         `).join('');
 
         return `
             <div class="azoogi-chat-starters" style="margin-top: 8px;">
-                <div class="azoogi-chat-starters-title">Active Quote Items (${items.length})</div>
-                <div style="margin: 6px 0;">${listHtml || '<p style="font-size: 11px; color: var(--chat-muted);">Your quote cart is empty.</p>'}</div>
-                <a href="${quoteUrl}" class="azoogi-chat-btn-sm azoogi-chat-btn-primary" style="text-decoration: none; padding: 8px 12px; margin-top: 6px; display: block; text-align: center;">
-                    Proceed to Official Quote Request &rarr;
-                </a>
+                <div class="azoogi-chat-starters-title">Project Quote Request List (${count})</div>
+                <div style="margin: 6px 0;">${listHtml || '<p style="font-size: 11px; color: var(--chat-muted); margin: 4px 0;">Your quote list is currently empty.</p>'}</div>
+                <div style="display: flex; gap: 6px; margin-top: 8px;">
+                    <button type="button" class="azoogi-chat-btn-sm azoogi-chat-btn-outline" style="flex: 1; padding: 7px 10px; cursor: pointer;" onclick="if (window.AzoogiQuote && typeof window.AzoogiQuote.open === 'function') window.AzoogiQuote.open();">
+                        Open Quote Drawer
+                    </button>
+                    <a href="${quoteUrl}" class="azoogi-chat-btn-sm azoogi-chat-btn-primary" style="flex: 1; text-decoration: none; padding: 7px 10px; text-align: center;">
+                        Submit Quote &rarr;
+                    </a>
+                </div>
             </div>
         `;
     };
@@ -365,6 +375,10 @@ document.addEventListener('DOMContentLoaded', () => {
         appendUserMessage(text, null, true);
         showTypingIndicator();
 
+        const clientQuoteItems = (window.AzoogiQuote && typeof window.AzoogiQuote.items === 'function')
+            ? window.AzoogiQuote.items()
+            : [];
+
         try {
             const response = await fetch('/api/chat/message', {
                 method: 'POST',
@@ -375,7 +389,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({
                     message: text,
                     session_uuid: sessionUuid,
-                    referrer_url: window.location.href
+                    referrer_url: window.location.href,
+                    quote_items: clientQuoteItems
                 })
             });
 
@@ -387,9 +402,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     sessionUuid = data.session_uuid;
                     localStorage.setItem(STORAGE_UUID_KEY, sessionUuid);
                 }
-                if (quoteBadge && typeof data.quote_count === 'number') {
-                    quoteBadge.textContent = data.quote_count;
-                    quoteBadge.style.display = data.quote_count > 0 ? 'block' : 'none';
+                if (data.quote_items && window.AzoogiQuote && typeof window.AzoogiQuote.sync === 'function') {
+                    window.AzoogiQuote.sync(data.quote_items);
                 }
                 appendAssistantMessage(data.reply, data.cards, null, true);
             } else {

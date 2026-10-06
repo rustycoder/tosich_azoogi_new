@@ -664,6 +664,26 @@
     refresh: function () {
       markAddedButtons(displayItems());
     },
+    sync: function (entries) {
+      if (!Array.isArray(entries)) {
+        return;
+      }
+      const formatted = entries.map((item) => {
+        rememberDetails({
+          id: item.id || item.sku || item.code || item.name,
+          sku: item.code || item.sku || '',
+          name: item.name || '',
+          image: item.image_url || item.image || FALLBACK_IMAGE,
+          url: item.url || '',
+        });
+        return {
+          id: String(item.id || item.sku || item.code || item.name).trim(),
+          qty: Math.max(1, Number(item.quantity || item.qty) || 1),
+        };
+      });
+      writeItems(formatted);
+      hydrateFromApi();
+    },
   };
 
   if (document.readyState === 'loading') {
