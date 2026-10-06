@@ -441,7 +441,6 @@ class AirtableDataExtractor:
             meta_keywords = self.sanitize_field_value(fields.get("Meta Keywords") or fields.get("meta_keywords") or fields.get("Meta keywords") or fields.get("meta keywords") or "")
             supplier_name = self.sanitize_field_value(fields.get("Supplier Name") or "")
             status = self.sanitize_field_value(fields.get("Status") or "")
-            product_type = self.sanitize_field_value(fields.get("Product type") or "")
             product_order = self._get_order(fields, default=None)
 
             # Also check Attributes table referencing Product ID
@@ -475,7 +474,6 @@ class AirtableDataExtractor:
                 "meta_keywords": meta_keywords,
                 "supplier_name": supplier_name,
                 "status": status,
-                "product_type": product_type,
                 "product_features": product_features,
                 "options": options,
                 "constraints": constraints,

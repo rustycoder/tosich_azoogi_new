@@ -131,9 +131,6 @@ class LlmsTxtBuilder
             if (! empty($product->category)) {
                 $specs[] = 'Category: '.$product->category;
             }
-            if (! empty($product->product_type)) {
-                $specs[] = 'Type: '.$product->product_type;
-            }
             if ($product->dimming_control) {
                 $specs[] = 'Dimmable: Yes';
             }

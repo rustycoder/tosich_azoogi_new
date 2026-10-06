@@ -174,7 +174,6 @@ final class ProductNormalizer
                 'meta_description' => $this->sanitize($fields['Meta Descriptions'] ?? $fields['Meta Description'] ?? $fields['meta_description'] ?? $fields['meta_descriptions'] ?? ''),
                 'supplier_name' => $this->sanitize($fields['Supplier Name'] ?? ''),
                 'status' => $this->sanitize($fields['Status'] ?? ''),
-                'product_type' => $this->sanitize($fields['Product type'] ?? ''),
                 'product_features' => $features,
                 'options' => $this->parseJsonField($fields['Options'] ?? $fields['options'] ?? [], []),
                 'dimming_control' => $this->booleanValue($fields['Dimming Control'] ?? $fields['Dimming control'] ?? $fields['dimming_control'] ?? $fields['Dimming_Control'] ?? false),

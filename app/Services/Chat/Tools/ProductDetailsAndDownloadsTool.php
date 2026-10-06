@@ -92,7 +92,6 @@ class ProductDetailsAndDownloadsTool implements IChatTool
             'name' => $product->product_name,
             'code' => $product->product_code,
             'category' => $product->category,
-            'type' => $product->product_type,
             'description' => strip_tags((string) $product->product_description),
             'dimming' => $product->dimming_control ? 'Supported (Casambi / DALI / Phase)' : 'Standard Non-Dimming',
             'downloads' => $downloads,

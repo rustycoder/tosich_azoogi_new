@@ -17,7 +17,6 @@ return new class extends Migration
             $table->unsignedInteger('sort_order')->nullable();
             $table->string('cover', 500)->nullable();
             $table->string('product_code', 191)->nullable();
-            $table->string('product_type', 191)->nullable();
             $table->string('stocked_item', 191)->nullable();
             $table->string('supplier_name', 191)->nullable();
             $table->text('product_short_description')->nullable();

@@ -56,8 +56,7 @@ class SearchProductsTool implements McpToolInterface
                 $q->where('product_name', 'like', "%{$query}%")
                     ->orWhere('product_description', 'like', "%{$query}%")
                     ->orWhere('product_code', 'like', "%{$query}%")
-                    ->orWhere('category', 'like', "%{$query}%")
-                    ->orWhere('product_type', 'like', "%{$query}%");
+                    ->orWhere('category', 'like', "%{$query}%");
             });
         }
 
@@ -79,7 +78,6 @@ class SearchProductsTool implements McpToolInterface
                 'name' => $p->product_name,
                 'code' => $p->product_code,
                 'category' => $p->category,
-                'type' => $p->product_type,
                 'description' => $p->product_description,
                 'image_url' => $coverUrl,
                 'url' => route('products.show', $p->slug ?: $p->id),

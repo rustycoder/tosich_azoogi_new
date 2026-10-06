@@ -63,8 +63,7 @@ class ProductSearchAndFilterTool implements IChatTool
                 $q->where('product_name', 'like', "%{$query}%")
                     ->orWhere('product_description', 'like', "%{$query}%")
                     ->orWhere('product_code', 'like', "%{$query}%")
-                    ->orWhere('category', 'like', "%{$query}%")
-                    ->orWhere('product_type', 'like', "%{$query}%");
+                    ->orWhere('category', 'like', "%{$query}%");
             });
         }
 
