@@ -304,6 +304,21 @@ class ProductSearchAndFilterTool implements IChatTool
                 }
             }
 
+            // Distinguish actual lighting fixtures from drivers/power supplies/accessories
+            $wantsDriver = in_array('driver', $keywords, true) || in_array('power', $keywords, true) || in_array('psu', $keywords, true) || in_array('controller', $keywords, true) || in_array('dimmer', $keywords, true);
+            $wantsAccessory = in_array('accessory', $keywords, true) || in_array('clip', $keywords, true) || in_array('cap', $keywords, true) || in_array('profile', $keywords, true) || in_array('extrusion', $keywords, true);
+
+            $isDriverProduct = str_contains($cat, 'driver') || str_contains($name, 'driver') || str_contains($cat, 'power supply');
+            $isAccessoryProduct = str_contains($cat, 'accessory') || str_contains($cat, 'accessories') || str_contains($name, 'end cap') || str_contains($name, 'clip') || str_contains($name, 'mounting set') || str_contains($name, 'splicing kit');
+
+            if (! $wantsDriver && $isDriverProduct) {
+                $score -= 150; // Suppress drivers when searching for lights/fixtures
+            }
+
+            if (! $wantsAccessory && $isAccessoryProduct) {
+                $score -= 100; // Suppress mounting clips and end caps unless requested
+            }
+
             // IP Rating match bonus
             if (! empty($ipRating)) {
                 $ipLower = mb_strtolower($ipRating);
@@ -314,14 +329,17 @@ class ProductSearchAndFilterTool implements IChatTool
 
             // Outdoor relevance
             if ($isOutdoor) {
-                if (str_contains($cat, 'garden') || str_contains($cat, 'pool')) {
-                    $score += 35;
+                if (str_contains($cat, 'garden') || str_contains($cat, 'pool') || str_contains($name, 'garden') || str_contains($name, 'pool')) {
+                    $score += 50;
+                }
+                if (str_contains($cat, 'neon') || str_contains($name, 'bend') || str_contains($name, 'spot')) {
+                    $score += 30;
                 }
                 if (str_contains($desc, 'ip68') || str_contains($desc, 'ip67') || str_contains($desc, 'ip66') || str_contains($desc, 'ip65')) {
-                    $score += 25;
+                    $score += 30;
                 }
-                if (str_contains($desc, 'outdoor') || str_contains($name, 'outdoor')) {
-                    $score += 20;
+                if (str_contains($desc, 'outdoor') || str_contains($name, 'outdoor') || str_contains($desc, 'waterproof')) {
+                    $score += 25;
                 }
             }
 
