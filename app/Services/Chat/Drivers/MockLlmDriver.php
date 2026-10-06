@@ -78,7 +78,7 @@ class MockLlmDriver implements IChatLlmDriver
             }
 
             // Case E: Lead Enquiry Submission
-            if (isset($toolResult['enquiry_id']) || isset($toolResult['status'])) {
+            if (isset($toolResult['enquiry_id']) || isset($toolResult['lead_id'])) {
                 $ref = $toolResult['enquiry_id'] ?? rand(1000, 9999);
 
                 return [
@@ -96,6 +96,15 @@ class MockLlmDriver implements IChatLlmDriver
         }
 
         // 2. Intent Analysis for User Messages
+
+        // Intent: Informational / How-To Questions on Datasheets
+        if (preg_match('/\b(how|where|can i|explain|guide|help)\b/i', $text) && (str_contains($text, 'datasheet') || str_contains($text, 'spec sheet') || str_contains($text, 'pdf'))) {
+            return [
+                'content' => "You can generate custom PDF datasheets in two easy ways:\n\n1. **Product Pages**: Navigate to any product in our catalog, configure your custom options (e.g. CCT, beam angle, finish, or custom cut lengths), and click **\"Download Custom Datasheet\"**.\n2. **Direct in Chat**: Ask me directly (e.g., *\"Generate a datasheet for 12W Garden Light\"* or *\"Create a spec sheet for Lumoflex\"*), and I will generate and provide an instant download link card.",
+                'tool_calls' => [],
+                'tokens_used' => 60,
+            ];
+        }
 
         // Intent: Informational / How-To Questions on Quote List
         if (preg_match('/\b(how|where|can i|explain|guide|help)\b/i', $text) && str_contains($text, 'quote')) {
@@ -170,6 +179,14 @@ class MockLlmDriver implements IChatLlmDriver
             preg_match('/\b\d+\b/', $text, $matches);
             if (! empty($matches[0])) {
                 $product = Product::find((int) $matches[0]);
+            }
+            if (! $product) {
+                // Try matching product name in text
+                $product = Product::where('status', 'publish')
+                    ->where(function ($q) use ($text) {
+                        $q->whereRaw('? LIKE CONCAT("%", LOWER(product_name), "%")', [$text])
+                            ->orWhereRaw('? LIKE CONCAT("%", LOWER(product_code), "%")', [$text]);
+                    })->first();
             }
             if (! $product) {
                 $product = Product::where('status', 'publish')->whereNotNull('datasheet_file')->first()

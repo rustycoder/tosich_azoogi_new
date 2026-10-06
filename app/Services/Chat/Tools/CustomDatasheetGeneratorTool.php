@@ -75,6 +75,8 @@ class CustomDatasheetGeneratorTool implements IChatTool
             $export = $this->datasheetService->export([
                 'product_id' => $product->airtable_id ?: (string) $product->id,
                 'product_code' => $arguments['product_code'] ?? $product->product_code,
+                'project_name' => (string) ($arguments['project_name'] ?? ''),
+                'person_name' => (string) ($arguments['person_name'] ?? ''),
                 'length' => $arguments['length'] ?? null,
                 'selected_options' => (array) ($arguments['selected_options'] ?? []),
             ]);
