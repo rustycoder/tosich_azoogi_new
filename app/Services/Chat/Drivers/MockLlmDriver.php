@@ -19,13 +19,22 @@ class MockLlmDriver implements IChatLlmDriver
         if ($role === 'tool') {
             $toolResult = json_decode((string) ($lastMessage['content'] ?? '{}'), true) ?: [];
 
+            // Error from tool execution
+            if (isset($toolResult['error'])) {
+                return [
+                    'content' => "I couldn't locate a match for that specific inquiry: {$toolResult['error']}. Please try searching by category (Downlights, Linear Profiles, Neon Flex, Garden Light) or ask our engineering team for assistance.",
+                    'tool_calls' => [],
+                    'tokens_used' => 30,
+                ];
+            }
+
             // Case A: Product Search Results
             if (isset($toolResult['products'])) {
                 $count = (int) ($toolResult['matched_count'] ?? count($toolResult['products']));
                 if ($count > 0) {
                     $reply = "I found {$count} lighting fixture(s) matching your request. You can explore their technical specifications, download datasheets, or add them directly to your quote request below.";
                 } else {
-                    $reply = "We don't have an exact stock match for those specific dimensions or criteria, but Azoogi provides custom architectural linear profiles, custom cut lengths, and bespoke lighting engineering. Here are our closest architectural fixtures:";
+                    $reply = "I couldn't find any products in our catalog matching those specific criteria or dimensions. You can explore our main categories (Downlights, Linear Extrusions, Neon Flex, Garden & Pool Lights) or request custom architectural fabrication.";
                 }
 
                 return [
@@ -89,7 +98,7 @@ class MockLlmDriver implements IChatLlmDriver
             }
 
             return [
-                'content' => 'Here are the relevant product details and options matching your request below.',
+                'content' => 'I have processed your request. Please let me know if you need technical datasheets, IES photometric data, or custom cut lengths for your project.',
                 'tool_calls' => [],
                 'tokens_used' => 30,
             ];
