@@ -1,7 +1,3 @@
-@php
-    $quoteCount = count(session()->get('visitor_quote_list', []));
-@endphp
-
 <div class="azoogi-chat-widget" id="azoogi-chat-widget">
     <!-- Floating Bottom-Right Launcher -->
     <button type="button" class="azoogi-chat-launcher" id="azoogi-chat-launcher" aria-label="Open Azoogi AI Lighting Assistant">
@@ -18,7 +14,6 @@
             </svg>
         </div>
         <span class="azoogi-chat-launcher-text">Ask Azoogi AI</span>
-        <span class="azoogi-chat-launcher-badge" id="azoogi-chat-quote-badge" style="{{ $quoteCount > 0 ? 'display:block;' : '' }}">{{ $quoteCount }}</span>
     </button>
 
     <!-- Chat Container Window -->

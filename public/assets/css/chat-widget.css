@@ -94,23 +94,6 @@
     70%, 100% { transform: scale(1.8); opacity: 0; }
 }
 
-.azoogi-chat-launcher-badge {
-    position: absolute;
-    top: -4px;
-    right: -4px;
-    background: #ff3b30;
-    color: #ffffff;
-    font-size: 10px;
-    font-weight: 700;
-    padding: 2px 6px;
-    border-radius: 10px;
-    display: none;
-}
-
-.azoogi-chat-launcher.has-unread .azoogi-chat-launcher-badge {
-    display: block;
-}
-
 .azoogi-chat-launcher-close-icon {
     display: none;
 }
