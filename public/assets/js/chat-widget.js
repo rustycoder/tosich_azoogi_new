@@ -1,6 +1,6 @@
 /**
  * Azoogi AI Floating Chat Widget Client
- * Handles state persistence, interactive product cards, quote cart sync, and UI rendering.
+ * Handles state persistence across page navigation, interactive product cards, quote cart sync, and UI rendering.
  */
 document.addEventListener('DOMContentLoaded', () => {
     const widget = document.getElementById('azoogi-chat-widget');
@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const STORAGE_UUID_KEY = 'azoogi_chat_session_uuid';
     const STORAGE_SOUND_KEY = 'azoogi_chat_sound_enabled';
+    const STORAGE_OPEN_KEY = 'azoogi_chat_is_open';
+    const STORAGE_MESSAGES_KEY = 'azoogi_chat_messages_cache';
 
     let sessionUuid = localStorage.getItem(STORAGE_UUID_KEY);
     let soundEnabled = localStorage.getItem(STORAGE_SOUND_KEY) !== 'false';
@@ -44,16 +46,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Toggle Chat Window
+    // Toggle Chat Window & Persist Open State across pages
     const toggleChat = (forceState = null) => {
         const isOpen = forceState !== null ? forceState : !widget.classList.contains('is-open');
         if (isOpen) {
             widget.classList.add('is-open');
-            launcher.classList.remove('has-unread');
+            launcher?.classList.remove('has-unread');
+            localStorage.setItem(STORAGE_OPEN_KEY, 'true');
             setTimeout(() => input?.focus(), 200);
             scrollToBottom();
         } else {
             widget.classList.remove('is-open');
+            localStorage.setItem(STORAGE_OPEN_KEY, 'false');
         }
     };
 
@@ -80,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (e) {}
         }
         localStorage.removeItem(STORAGE_UUID_KEY);
+        localStorage.removeItem(STORAGE_MESSAGES_KEY);
         sessionUuid = null;
         body.innerHTML = getWelcomeTemplate();
         initChipListeners();
@@ -95,9 +100,27 @@ document.addEventListener('DOMContentLoaded', () => {
         return document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
     };
 
+    // Message History Cache Helpers
+    const getCachedMessages = () => {
+        try {
+            const raw = localStorage.getItem(STORAGE_MESSAGES_KEY);
+            return raw ? JSON.parse(raw) : [];
+        } catch (e) {
+            return [];
+        }
+    };
+
+    const saveMessageToCache = (msgObj) => {
+        try {
+            const msgs = getCachedMessages();
+            msgs.push(msgObj);
+            localStorage.setItem(STORAGE_MESSAGES_KEY, JSON.stringify(msgs));
+        } catch (e) {}
+    };
+
     // Render User Message
-    const appendUserMessage = (text) => {
-        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const appendUserMessage = (text, timeStr = null, saveToCache = true) => {
+        const time = timeStr || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         const el = document.createElement('div');
         el.className = 'azoogi-chat-msg is-user';
         el.innerHTML = `
@@ -106,11 +129,15 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         body.appendChild(el);
         scrollToBottom();
+
+        if (saveToCache) {
+            saveMessageToCache({ sender: 'user', content: text, time });
+        }
     };
 
     // Render Assistant Message with Cards
-    const appendAssistantMessage = (text, cards = []) => {
-        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const appendAssistantMessage = (text, cards = [], timeStr = null, saveToCache = true) => {
+        const time = timeStr || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         const el = document.createElement('div');
         el.className = 'azoogi-chat-msg is-assistant';
 
@@ -140,7 +167,11 @@ document.addEventListener('DOMContentLoaded', () => {
         body.appendChild(el);
         attachCardListeners(el);
         scrollToBottom();
-        playChime();
+
+        if (saveToCache) {
+            saveMessageToCache({ sender: 'assistant', content: text, cards, time });
+            playChime();
+        }
     };
 
     // Product Carousel Card Template (Matches Website Catalog .prod-card)
@@ -323,7 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isProcessing = true;
         sendBtn.disabled = true;
 
-        appendUserMessage(text);
+        appendUserMessage(text, null, true);
         showTypingIndicator();
 
         try {
@@ -352,13 +383,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     quoteBadge.textContent = data.quote_count;
                     quoteBadge.style.display = data.quote_count > 0 ? 'block' : 'none';
                 }
-                appendAssistantMessage(data.reply, data.cards);
+                appendAssistantMessage(data.reply, data.cards, null, true);
             } else {
-                appendAssistantMessage('Sorry, I encountered an error processing your request. Please try again.');
+                appendAssistantMessage('Sorry, I encountered an error processing your request. Please try again.', [], null, true);
             }
         } catch (e) {
             removeTypingIndicator();
-            appendAssistantMessage('Unable to reach the server. Please check your network connection.');
+            appendAssistantMessage('Unable to reach the server. Please check your network connection.', [], null, true);
         } finally {
             isProcessing = false;
             sendBtn.disabled = false;
@@ -384,7 +415,65 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    initChipListeners();
+    // Restore Session History on Page Load (Persist across navigation)
+    const restoreSessionHistory = async () => {
+        // 1. First, render instantly from local cache if available (zero flicker)
+        const cached = getCachedMessages();
+        if (cached && cached.length > 0) {
+            body.innerHTML = '';
+            cached.forEach(m => {
+                if (m.sender === 'user') {
+                    appendUserMessage(m.content, m.time, false);
+                } else {
+                    appendAssistantMessage(m.content, m.cards || [], m.time, false);
+                }
+            });
+        } else {
+            body.innerHTML = getWelcomeTemplate();
+            initChipListeners();
+        }
+
+        // 2. Fetch fresh session from server if UUID exists
+        if (sessionUuid) {
+            try {
+                const res = await fetch(`/api/chat/session/${sessionUuid}`);
+                const data = await res.json();
+                if (data.status === 'success' && Array.isArray(data.messages) && data.messages.length > 0) {
+                    body.innerHTML = '';
+                    const updatedCache = [];
+
+                    data.messages.forEach(m => {
+                        const time = m.created_at ? new Date(m.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '';
+                        if (m.sender === 'user') {
+                            appendUserMessage(m.content, time, false);
+                            updatedCache.push({ sender: 'user', content: m.content, time });
+                        } else {
+                            appendAssistantMessage(m.content, m.cards || [], time, false);
+                            updatedCache.push({ sender: 'assistant', content: m.content, cards: m.cards, time });
+                        }
+                    });
+
+                    localStorage.setItem(STORAGE_MESSAGES_KEY, JSON.stringify(updatedCache));
+
+                    if (quoteBadge && typeof data.quote_count === 'number') {
+                        quoteBadge.textContent = data.quote_count;
+                        quoteBadge.style.display = data.quote_count > 0 ? 'block' : 'none';
+                    }
+                }
+            } catch (err) {
+                // Fallback to cache already rendered
+            }
+        }
+
+        // 3. Check if chat was open prior to navigating
+        const wasOpen = localStorage.getItem(STORAGE_OPEN_KEY) === 'true';
+        if (wasOpen) {
+            toggleChat(true);
+        }
+    };
+
+    // Initialize session restoration on page load
+    restoreSessionHistory();
 
     // Welcome Template
     function getWelcomeTemplate() {
