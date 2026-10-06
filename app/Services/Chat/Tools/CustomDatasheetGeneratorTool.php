@@ -79,7 +79,7 @@ class CustomDatasheetGeneratorTool implements IChatTool
                 'selected_options' => (array) ($arguments['selected_options'] ?? []),
             ]);
 
-            $downloadUrl = route('datasheet.download', $export->uuid);
+            $downloadUrl = route('products.datasheet.show', $export->uuid);
 
             return [
                 'result' => [

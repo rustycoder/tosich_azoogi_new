@@ -38,7 +38,13 @@ class ProductDetailsAndDownloadsTool implements IChatTool
         $id = trim((string) ($arguments['product_identifier'] ?? ''));
 
         $product = Product::query()
-            ->where('status', 'active')
+            ->where(function ($q) {
+                $q->whereNull('status')
+                    ->orWhere('status', '')
+                    ->orWhere('status', 'publish')
+                    ->orWhere('status', 'published')
+                    ->orWhere('status', 'active');
+            })
             ->where(function ($q) use ($id) {
                 if (is_numeric($id)) {
                     $q->where('id', (int) $id);
@@ -57,33 +63,38 @@ class ProductDetailsAndDownloadsTool implements IChatTool
         }
 
         $downloads = [];
-        if (! empty($product->datasheet_file)) {
+        $datasheetUrl = $product->datasheetUrl();
+        if (! empty($datasheetUrl)) {
             $downloads[] = [
                 'type' => 'PDF Datasheet',
                 'name' => "{$product->product_name} - Datasheet (PDF)",
-                'url' => asset($product->datasheet_file),
+                'url' => $datasheetUrl,
                 'icon' => 'pdf',
             ];
         }
-        if (! empty($product->installation_guide_file)) {
+
+        $guideUrl = $product->guideUrl();
+        if (! empty($guideUrl)) {
             $downloads[] = [
                 'type' => 'Installation Guide',
                 'name' => "{$product->product_name} - Installation Manual (PDF)",
-                'url' => asset($product->installation_guide_file),
+                'url' => $guideUrl,
                 'icon' => 'manual',
             ];
         }
-        if (! empty($product->ies_file)) {
+
+        $iesUrl = $product->iesUrl();
+        if (! empty($iesUrl)) {
             $downloads[] = [
                 'type' => 'IES Photometric File',
                 'name' => "{$product->product_name} - Photometric Data (IES)",
-                'url' => asset($product->ies_file),
+                'url' => $iesUrl,
                 'icon' => 'ies',
             ];
         }
 
-        $coverUrl = null;
-        if (! empty($product->cover)) {
+        $coverUrl = $product->coverUrl();
+        if (empty($coverUrl) && ! empty($product->cover)) {
             $coverUrl = str_starts_with($product->cover, 'http') ? $product->cover : asset($product->cover);
         }
 
@@ -95,8 +106,8 @@ class ProductDetailsAndDownloadsTool implements IChatTool
             'description' => strip_tags((string) $product->product_description),
             'dimming' => $product->dimming_control ? 'Supported (Casambi / DALI / Phase)' : 'Standard Non-Dimming',
             'downloads' => $downloads,
-            'url' => route('products.show', $product->slug ?: $product->id),
-            'image_url' => $coverUrl,
+            'url' => $product->publicPath() ?: route('products.show', $product->slug ?: $product->id),
+            'image_url' => $coverUrl ?: asset('assets/quote.webp'),
         ];
 
         return [
