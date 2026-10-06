@@ -281,14 +281,26 @@ class ProductSearchAndFilterTool implements IChatTool
             $desc = mb_strtolower((string) $p->product_description);
             $code = mb_strtolower((string) $p->product_code);
 
-            // Category match bonus
+            // Category match bonus & Cross-category exclusion penalty
             if (! empty($category)) {
                 $catLower = mb_strtolower($category);
-                if (str_contains($cat, $catLower)) {
-                    $score += 30;
+                $isTargetProduct = str_contains($cat, $catLower) || str_contains($name, $catLower);
+
+                // Downlight specific subcategories (Surface Mounted, Pendant, Recessed)
+                if ($catLower === 'downlight') {
+                    if (str_contains($cat, 'downlight') || str_contains($name, 'downlight') || in_array($cat, ['surface mounted', 'pendant', 'recessed'], true)) {
+                        $isTargetProduct = true;
+                        $score += 60;
+                    }
                 }
-                if (str_contains($name, $catLower)) {
-                    $score += 25;
+
+                if ($isTargetProduct) {
+                    $score += 40;
+                } else {
+                    // Penalize irrelevant categories when user is looking for a distinct type
+                    if (str_contains($cat, 'profile') || str_contains($name, 'profile') || str_contains($cat, 'accessory') || str_contains($cat, 'accessories')) {
+                        $score -= 80;
+                    }
                 }
             }
 
