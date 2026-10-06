@@ -91,8 +91,17 @@ class MockLlmDriver implements IChatLlmDriver
 
         // 2. Intent Analysis for User Messages
 
+        // Intent: Informational / How-To Questions on Quote List
+        if (preg_match('/\b(how|where|can i|explain|guide|help)\b/i', $text) && str_contains($text, 'quote')) {
+            return [
+                'content' => "You can add products to your quote list in two convenient ways:\n\n1. **Product Cards**: Click the **\"+ Add to Quote\"** button on any product card in the catalog or right inside this chat.\n2. **Direct in Chat**: Ask me directly (e.g., *\"Add 12W Garden Light to my quote\"* or *\"Show my quote list\"*).\n\nWhen you're ready, ask me to submit your quote and provide your email to receive project pricing and lead times from our Sydney engineering team!",
+                'tool_calls' => [],
+                'tokens_used' => 60,
+            ];
+        }
+
         // Intent: Quote Cart Actions
-        if (str_contains($text, 'quote') && (str_contains($text, 'add') || str_contains($text, 'cart') || str_contains($text, 'item') || str_contains($text, 'list') || str_contains($text, 'remove') || str_contains($text, 'clear'))) {
+        if (str_contains($text, 'quote') && (str_contains($text, 'add') || str_contains($text, 'cart') || str_contains($text, 'item') || str_contains($text, 'list') || str_contains($text, 'remove') || str_contains($text, 'clear') || str_contains($text, 'show') || str_contains($text, 'view'))) {
             preg_match('/\b\d+\b/', $text, $matches);
             $productId = ! empty($matches[0]) ? (int) $matches[0] : null;
 
@@ -107,7 +116,7 @@ class MockLlmDriver implements IChatLlmDriver
                 $action = 'remove';
             } elseif (str_contains($text, 'clear') || str_contains($text, 'empty')) {
                 $action = 'clear';
-            } elseif (str_contains($text, 'view') || str_contains($text, 'show') || str_contains($text, 'check')) {
+            } elseif (str_contains($text, 'view') || str_contains($text, 'show') || str_contains($text, 'check') || str_contains($text, 'items') || str_contains($text, 'list')) {
                 $action = 'view';
             }
 
