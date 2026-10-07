@@ -17,12 +17,54 @@ class ChatController extends Controller
         protected ChatOrchestrator $orchestrator
     ) {}
 
+    public function init(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'session_uuid' => 'nullable|string|uuid',
+            'referrer_url' => 'nullable|string|max:500',
+            'name' => 'nullable|string|max:150',
+            'email' => 'nullable|email|max:150',
+            'project_name' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:50',
+            'company' => 'nullable|string|max:150',
+        ]);
+
+        $session = $this->orchestrator->getOrCreateSession(
+            $validated['session_uuid'] ?? null,
+            $validated['referrer_url'] ?? null,
+            array_filter([
+                'name' => $validated['name'] ?? null,
+                'email' => $validated['email'] ?? null,
+                'project_name' => $validated['project_name'] ?? null,
+                'phone' => $validated['phone'] ?? null,
+                'company' => $validated['company'] ?? null,
+            ]),
+        );
+
+        $greeting = $this->orchestrator->generatePersonalizedGreeting($session);
+        $branding = ChatOrchestrator::getWidgetBranding();
+
+        return response()->json([
+            'status' => 'success',
+            'session_uuid' => $session->uuid,
+            'lead_name' => $session->lead_name,
+            'lead_email' => $session->lead_email,
+            'project_name' => $session->project_name,
+            'greeting' => $greeting,
+            'has_lead' => $session->hasLead(),
+            'branding' => $branding,
+        ]);
+    }
+
     public function message(Request $request): JsonResponse
     {
         $validated = $request->validate([
             'message' => 'required|string|max:1500',
             'session_uuid' => 'nullable|string|uuid',
             'referrer_url' => 'nullable|string|max:500',
+            'name' => 'nullable|string|max:150',
+            'email' => 'nullable|email|max:150',
+            'project_name' => 'nullable|string|max:255',
             'quote_items' => 'nullable|array',
         ]);
 
@@ -49,6 +91,11 @@ class ChatController extends Controller
         $session = $this->orchestrator->getOrCreateSession(
             $validated['session_uuid'] ?? null,
             $validated['referrer_url'] ?? null,
+            array_filter([
+                'name' => $validated['name'] ?? null,
+                'email' => $validated['email'] ?? null,
+                'project_name' => $validated['project_name'] ?? null,
+            ]),
         );
 
         $result = $this->orchestrator->handleUserMessage($session, $validated['message']);

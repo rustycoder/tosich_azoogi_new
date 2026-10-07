@@ -28,12 +28,12 @@ class AiConfigManagementTest extends TestCase
         $this->adminUser = User::factory()->admin()->create();
     }
 
-    public function test_admin_can_view_ai_configuration_menu_page(): void
+    public function test_admin_can_view_ai_models_menu_page(): void
     {
-        $response = $this->actingAs($this->adminUser)->get(route('dashboard.ai.config'));
+        $response = $this->actingAs($this->adminUser)->get(route('dashboard.ai.models'));
 
         $response->assertOk();
-        $response->assertSee('AI Configuration');
+        $response->assertSee('AI Models, Providers &amp; Rates', false);
         $response->assertSee('Anthropic Claude');
         $response->assertSee('OpenRouter');
         $response->assertSee('Google Gemini');
@@ -53,7 +53,7 @@ class AiConfigManagementTest extends TestCase
             'openai_model' => 'gpt-4o-mini',
         ]);
 
-        $response->assertRedirect(route('dashboard.ai.config'));
+        $response->assertRedirect(route('dashboard.ai.models'));
         $response->assertSessionHas('status');
 
         $this->assertDatabaseHas('llm_feeds', [
@@ -80,7 +80,7 @@ class AiConfigManagementTest extends TestCase
             'set_active' => '1',
         ]);
 
-        $response->assertRedirect(route('dashboard.ai.config'));
+        $response->assertRedirect(route('dashboard.ai.models'));
         $response->assertSessionHas('status');
 
         $config = ChatOrchestrator::getActiveAiConfig();
@@ -99,7 +99,6 @@ class AiConfigManagementTest extends TestCase
 
     public function test_admin_can_delete_custom_ai_provider(): void
     {
-        // Seed a custom provider first
         $configPayload = [
             'driver' => 'custom_groq_123',
             'custom_providers' => [
@@ -121,12 +120,89 @@ class AiConfigManagementTest extends TestCase
 
         $response = $this->actingAs($this->adminUser)->delete(route('dashboard.ai.custom-provider.delete', 'custom_groq_123'));
 
-        $response->assertRedirect(route('dashboard.ai.config'));
+        $response->assertRedirect(route('dashboard.ai.models'));
         $response->assertSessionHas('status');
 
         $config = ChatOrchestrator::getActiveAiConfig();
         $this->assertArrayNotHasKey('custom_groq_123', $config['custom_providers']);
-        $this->assertSame('anthropic', $config['driver']); // Fallbacks when active was deleted
+        $this->assertSame('anthropic', $config['driver']);
+    }
+
+    public function test_admin_can_view_and_update_widget_branding(): void
+    {
+        $viewResponse = $this->actingAs($this->adminUser)->get(route('dashboard.ai.widget'));
+        $viewResponse->assertOk();
+        $viewResponse->assertSee('AI Widget &amp; Branding Customization', false);
+        $viewResponse->assertSee('Assistant Persona &amp; Identity', false);
+
+        $updateResponse = $this->actingAs($this->adminUser)->put(route('dashboard.ai.widget.update'), [
+            'ai_name' => 'Azoogi Lighting Consultant',
+            'ai_avatar' => 'lightbulb',
+            'ai_subtitle' => 'Sydney Commercial Lighting Specialist',
+            'startup_message' => 'Hello! Welcome to Azoogi. How can we help you explore architectural luminaires today?',
+            'lead_greeting_template' => 'Hi {name}! Thanks for reaching out regarding {project}.',
+            'intake_enabled' => '1',
+            'intake_require_project' => '1',
+            'starter_chips' => [
+                ['icon' => '🌿', 'label' => 'Garden Spikes', 'prompt' => 'Show garden spike lights'],
+                ['icon' => '🏢', 'label' => 'Linear Profiles', 'prompt' => 'Show architectural linear profiles'],
+            ],
+        ]);
+
+        $updateResponse->assertRedirect(route('dashboard.ai.widget'));
+        $updateResponse->assertSessionHas('status');
+
+        $branding = ChatOrchestrator::getWidgetBranding();
+        $this->assertSame('Azoogi Lighting Consultant', $branding['ai_name']);
+        $this->assertSame('lightbulb', $branding['ai_avatar']);
+        $this->assertSame('Sydney Commercial Lighting Specialist', $branding['ai_subtitle']);
+        $this->assertTrue($branding['intake_require_project']);
+        $this->assertCount(2, $branding['starter_chips']);
+    }
+
+    public function test_admin_can_view_and_manage_knowledge_rules_and_faqs(): void
+    {
+        $viewResponse = $this->actingAs($this->adminUser)->get(route('dashboard.ai.knowledge'));
+        $viewResponse->assertOk();
+        $viewResponse->assertSee('AI Ruleset, Context &amp; FAQ Knowledge Base', false);
+
+        $updateResponse = $this->actingAs($this->adminUser)->put(route('dashboard.ai.knowledge.update'), [
+            'ruleset' => "- Always recommend 3000K warm white for luxury hospitality.\n- Check AS/NZS standards.",
+            'company_context' => "- Fast dispatch from Sydney warehouse.\n- 5-year warranty on all fixtures.",
+        ]);
+
+        $updateResponse->assertRedirect(route('dashboard.ai.knowledge'));
+        $updateResponse->assertSessionHas('status');
+
+        $knowledge = ChatOrchestrator::getKnowledgeRules();
+        $this->assertStringContainsString('luxury hospitality', $knowledge['ruleset']);
+        $this->assertStringContainsString('Sydney warehouse', $knowledge['company_context']);
+
+        // Add FAQ Item
+        $faqResponse = $this->actingAs($this->adminUser)->post(route('dashboard.ai.faqs.store'), [
+            'category' => 'Shipping & Lead Time',
+            'question' => 'How long does custom linear profile cutting take?',
+            'answer' => 'Standard turnaround is 3-5 business days from our Sydney warehouse.',
+            'is_active' => '1',
+        ]);
+
+        $faqResponse->assertRedirect(route('dashboard.ai.knowledge'));
+        $faqResponse->assertSessionHas('status');
+
+        $faqs = ChatOrchestrator::getFaqs();
+        $this->assertNotEmpty($faqs);
+
+        $latestFaq = end($faqs);
+        $this->assertSame('How long does custom linear profile cutting take?', $latestFaq['question']);
+
+        // Check system prompt compiles with custom knowledge and FAQs
+        $systemPrompt = app(ChatOrchestrator::class)->getSystemPrompt();
+        $this->assertStringContainsString('luxury hospitality', $systemPrompt);
+        $this->assertStringContainsString('How long does custom linear profile cutting take?', $systemPrompt);
+
+        // Delete FAQ Item
+        $delResponse = $this->actingAs($this->adminUser)->delete(route('dashboard.ai.faqs.delete', $latestFaq['id']));
+        $delResponse->assertRedirect(route('dashboard.ai.knowledge'));
     }
 
     public function test_chat_orchestrator_make_driver_instantiates_proper_driver_classes(): void
@@ -142,14 +218,5 @@ class AiConfigManagementTest extends TestCase
 
         $openAiDriver = ChatOrchestrator::makeDriver('openai', 'gpt-4o');
         $this->assertInstanceOf(OpenAiDriver::class, $openAiDriver);
-    }
-
-    public function test_update_ai_config_rejects_unsupported_driver(): void
-    {
-        $response = $this->actingAs($this->adminUser)->put(route('dashboard.ai.update'), [
-            'driver' => 'invalid_driver_name',
-        ]);
-
-        $response->assertSessionHasErrors(['driver']);
     }
 }

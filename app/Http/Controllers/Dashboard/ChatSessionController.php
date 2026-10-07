@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Enums\EnquiryType;
 use App\Http\Controllers\Controller;
+use App\Models\ChatMessage;
 use App\Models\ChatSession;
 use App\Services\Contracts\IEnquiryService;
 use Illuminate\Http\JsonResponse;
@@ -33,6 +34,7 @@ class ChatSessionController extends Controller
             $query->where(function ($q) {
                 $q->whereNotNull('lead_email')
                     ->orWhereNotNull('lead_name')
+                    ->orWhereNotNull('project_name')
                     ->orWhereNotNull('enquiry_id');
             });
         }
@@ -43,19 +45,44 @@ class ChatSessionController extends Controller
             $query->where(function ($q) use ($search) {
                 $q->where('lead_name', 'like', "%{$search}%")
                     ->orWhere('lead_email', 'like', "%{$search}%")
+                    ->orWhere('project_name', 'like', "%{$search}%")
+                    ->orWhere('lead_company', 'like', "%{$search}%")
                     ->orWhere('ip_address', 'like', "%{$search}%")
                     ->orWhere('country', 'like', "%{$search}%")
                     ->orWhere('summary', 'like', "%{$search}%");
             });
         }
 
+        // Sort options
+        $currentSort = (string) $request->input('sort', 'latest');
+        if ($currentSort === 'highest_cost') {
+            $query->reorder('total_cost', 'desc');
+        } elseif ($currentSort === 'highest_tokens') {
+            $query->reorder('total_tokens', 'desc');
+        } elseif ($currentSort === 'most_messages') {
+            $query->reorder('messages_count', 'desc');
+        }
+
         $sessions = $query->paginate(20)->withQueryString();
 
+        $totalConversations = ChatSession::count();
+        $totalTokens = (int) ChatSession::sum('total_tokens') ?: (int) ChatMessage::sum('tokens_used');
+        $totalCost = (float) ChatSession::sum('total_cost') ?: (float) ChatMessage::sum('estimated_cost');
+        $avgCost = $totalConversations > 0 ? ($totalCost / $totalConversations) : 0.0;
+
         $metrics = [
-            'total_conversations' => ChatSession::count(),
-            'leads_captured' => ChatSession::whereNotNull('lead_email')->orWhereNotNull('enquiry_id')->count(),
+            'total_conversations' => $totalConversations,
+            'leads_captured' => ChatSession::where(function ($q) {
+                $q->whereNotNull('lead_email')
+                    ->orWhereNotNull('lead_name')
+                    ->orWhereNotNull('project_name')
+                    ->orWhereNotNull('enquiry_id');
+            })->count(),
             'active_today' => ChatSession::whereDate('created_at', today())->count(),
-            'total_messages' => ChatSession::sum('messages_count'),
+            'total_messages' => (int) ChatSession::sum('messages_count'),
+            'total_tokens' => $totalTokens,
+            'total_cost' => $totalCost,
+            'avg_cost' => $avgCost,
         ];
 
         return view('dashboard.chat.index', [
@@ -64,6 +91,7 @@ class ChatSessionController extends Controller
             'currentStatus' => $request->input('status'),
             'searchQuery' => $request->input('q'),
             'hasLead' => $request->boolean('has_lead'),
+            'currentSort' => $currentSort,
         ]);
     }
 
@@ -99,6 +127,7 @@ class ChatSessionController extends Controller
             'payload' => [
                 'source' => 'chat_session_manual_convert',
                 'chat_session_uuid' => $chatSession->uuid,
+                'project_name' => $chatSession->project_name,
             ],
         ]);
 

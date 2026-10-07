@@ -16,6 +16,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
     'tool_results',
     'cards_payload',
     'tokens_used',
+    'prompt_tokens',
+    'completion_tokens',
+    'model',
+    'driver',
+    'estimated_cost',
 ])]
 class ChatMessage extends Model
 {
@@ -29,6 +34,9 @@ class ChatMessage extends Model
             'tool_results' => 'array',
             'cards_payload' => 'array',
             'tokens_used' => 'integer',
+            'prompt_tokens' => 'integer',
+            'completion_tokens' => 'integer',
+            'estimated_cost' => 'decimal:6',
         ];
     }
 

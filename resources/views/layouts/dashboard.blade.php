@@ -74,9 +74,17 @@
             @endif
             @if ($canManagePages || $isAdmin)
                 <div class="dash-group">AI</div>
-                <a href="{{ route('dashboard.ai.config') }}" class="{{ request()->routeIs('dashboard.ai.*') ? 'is-active' : '' }}">
+                <a href="{{ route('dashboard.ai.models') }}" class="{{ request()->routeIs('dashboard.ai.models') || request()->routeIs('dashboard.ai.config') ? 'is-active' : '' }}">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-                    AI Configuration
+                    AI Models &amp; Rates
+                </a>
+                <a href="{{ route('dashboard.ai.widget') }}" class="{{ request()->routeIs('dashboard.ai.widget*') ? 'is-active' : '' }}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 3v18M15 9h6M15 15h6"/></svg>
+                    Widget &amp; Branding
+                </a>
+                <a href="{{ route('dashboard.ai.knowledge') }}" class="{{ request()->routeIs('dashboard.ai.knowledge*') || request()->routeIs('dashboard.ai.faqs*') ? 'is-active' : '' }}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="13" y2="11"/></svg>
+                    Knowledge, Rules &amp; FAQ
                 </a>
                 <a href="{{ route('dashboard.chat-sessions.index') }}" class="{{ request()->routeIs('dashboard.chat-sessions.*') ? 'is-active' : '' }}">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>

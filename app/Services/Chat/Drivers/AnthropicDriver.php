@@ -78,13 +78,19 @@ class AnthropicDriver implements IChatLlmDriver
         }
 
         if (! empty($tools)) {
+            $uniqueTools = [];
+            foreach ($tools as $t) {
+                if ($t instanceof IChatTool) {
+                    $uniqueTools[$t->getName()] = $t;
+                }
+            }
             $payload['tools'] = array_map(function (IChatTool $t) {
                 return [
                     'name' => $t->getName(),
                     'description' => $t->getDescription(),
                     'input_schema' => $t->getParameters(),
                 ];
-            }, $tools);
+            }, array_values($uniqueTools));
         }
 
         $response = Http::withHeaders([
@@ -114,12 +120,16 @@ class AnthropicDriver implements IChatLlmDriver
             }
         }
 
-        $tokensUsed = ((int) ($json['usage']['input_tokens'] ?? 0)) + ((int) ($json['usage']['output_tokens'] ?? 0));
+        $promptTokens = (int) ($json['usage']['input_tokens'] ?? 0);
+        $completionTokens = (int) ($json['usage']['output_tokens'] ?? 0);
+        $tokensUsed = $promptTokens + $completionTokens;
 
         return [
             'content' => $textContent !== '' ? $textContent : null,
             'tool_calls' => $parsedToolCalls,
             'tokens_used' => $tokensUsed,
+            'prompt_tokens' => $promptTokens,
+            'completion_tokens' => $completionTokens,
         ];
     }
 }

@@ -1,6 +1,18 @@
+@php
+    $branding = \App\Services\Chat\ChatOrchestrator::getWidgetBranding();
+    $avatarMap = [
+        'spark' => '⚡',
+        'lightbulb' => '💡',
+        'leaf' => '🌿',
+        'building' => '🏢',
+        'robot' => '🤖',
+    ];
+    $avatarChar = $avatarMap[$branding['ai_avatar'] ?? 'spark'] ?? '⚡';
+@endphp
+
 <div class="azoogi-chat-widget" id="azoogi-chat-widget">
     <!-- Floating Bottom-Right Launcher -->
-    <button type="button" class="azoogi-chat-launcher" id="azoogi-chat-launcher" aria-label="Open Azoogi AI Lighting Assistant">
+    <button type="button" class="azoogi-chat-launcher" id="azoogi-chat-launcher" aria-label="Open {{ $branding['ai_name'] }}">
         <div class="azoogi-chat-launcher-icon">
             <span class="azoogi-chat-launcher-pulse"></span>
             <!-- Main Chat Sparkle/Message SVG -->
@@ -13,21 +25,25 @@
                 <line x1="6" y1="6" x2="18" y2="18"/>
             </svg>
         </div>
-        <span class="azoogi-chat-launcher-text">Ask Azoogi AI</span>
+        <span class="azoogi-chat-launcher-text">Ask {{ $branding['ai_name'] }}</span>
     </button>
 
     <!-- Chat Container Window -->
-    <div class="azoogi-chat-container" id="azoogi-chat-container" role="dialog" aria-modal="true" aria-label="Azoogi AI Assistant">
+    <div class="azoogi-chat-container" id="azoogi-chat-container" role="dialog" aria-modal="true" aria-label="{{ $branding['ai_name'] }}">
         <!-- Header -->
         <div class="azoogi-chat-header">
             <div class="azoogi-chat-header-brand">
-                <div class="azoogi-chat-avatar">
-                    A
+                <div class="azoogi-chat-avatar js-chat-avatar">
+                    @if (($branding['ai_avatar'] ?? '') === 'custom' && !empty($branding['ai_custom_avatar_url']))
+                        <img src="{{ $branding['ai_custom_avatar_url'] }}" alt="{{ $branding['ai_name'] }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                    @else
+                        {{ $avatarChar }}
+                    @endif
                     <span class="azoogi-chat-status-dot"></span>
                 </div>
                 <div class="azoogi-chat-title-wrap">
-                    <h3>Azoogi Lighting AI</h3>
-                    <p>Architectural Specs, Products & Quotes</p>
+                    <h3 class="js-chat-header-title">{{ $branding['ai_name'] }}</h3>
+                    <p class="js-chat-header-subtitle">{{ $branding['ai_subtitle'] }}</p>
                 </div>
             </div>
             <div class="azoogi-chat-header-actions">
@@ -58,14 +74,11 @@
         <div class="azoogi-chat-body" id="azoogi-chat-body">
             <div class="azoogi-chat-starters">
                 <div class="azoogi-chat-starters-title">Welcome to Azoogi Lighting</div>
-                <p style="font-size: 13px; color: var(--chat-text); margin: 0;">How can our engineering team assist with your project today?</p>
+                <p style="font-size: 13px; color: var(--chat-text); margin: 0;">{{ $branding['startup_message'] }}</p>
                 <div class="azoogi-chat-chip-list" style="margin-top: 8px;">
-                    <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="Show me garden lights">🌿 Garden Lights</button>
-                    <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="I want to explore downlights with dimension Ø82mm x 80mm (H)">💡 80mm Downlights</button>
-                    <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="Show commercial linear profiles with DALI dimming">🏢 Linear & DALI Profiles</button>
-                    <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="How to add products to quote list?">📝 How to Add to Quote?</button>
-                    <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="Show my quote list">📋 View Quote Items</button>
-                    <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="How do I generate a custom PDF datasheet?">📄 Custom Datasheets</button>
+                    @foreach ($branding['starter_chips'] as $chip)
+                        <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="{{ $chip['prompt'] }}">{{ $chip['icon'] ?? '💡' }} {{ $chip['label'] }}</button>
+                    @endforeach
                 </div>
             </div>
         </div>

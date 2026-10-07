@@ -46,7 +46,6 @@ class ChatOrchestrator
             $datasheetTool->getName() => $datasheetTool,
             $quoteTool->getName() => $quoteTool,
             $leadTool->getName() => $leadTool,
-            'public_submit_quote_enquiry' => $leadTool,
         ];
 
         $this->driver = $this->resolveDriver();
@@ -163,13 +162,38 @@ class ChatOrchestrator
         return app(MockLlmDriver::class);
     }
 
-    public function getOrCreateSession(?string $uuid = null, ?string $referrerUrl = null): ChatSession
+    /**
+     * @param  array{name?: ?string, email?: ?string, project_name?: ?string, phone?: ?string, company?: ?string}  $leadData
+     */
+    public function getOrCreateSession(?string $uuid = null, ?string $referrerUrl = null, array $leadData = []): ChatSession
     {
+        $session = null;
         if (! empty($uuid)) {
             $session = ChatSession::where('uuid', $uuid)->first();
-            if ($session) {
-                return $session;
+        }
+
+        if ($session) {
+            $updates = [];
+            if (! empty($leadData['name']) && empty($session->lead_name)) {
+                $updates['lead_name'] = $leadData['name'];
             }
+            if (! empty($leadData['email']) && empty($session->lead_email)) {
+                $updates['lead_email'] = $leadData['email'];
+            }
+            if (! empty($leadData['project_name']) && empty($session->project_name)) {
+                $updates['project_name'] = $leadData['project_name'];
+            }
+            if (! empty($leadData['phone']) && empty($session->lead_phone)) {
+                $updates['lead_phone'] = $leadData['phone'];
+            }
+            if (! empty($leadData['company']) && empty($session->lead_company)) {
+                $updates['lead_company'] = $leadData['company'];
+            }
+            if (! empty($updates)) {
+                $session->update($updates);
+            }
+
+            return $session;
         }
 
         $origin = $this->originService->capture();
@@ -180,9 +204,153 @@ class ChatOrchestrator
             'country' => $origin['country'] ?? null,
             'user_agent' => $origin['user_agent'] ?? request()->userAgent(),
             'referrer_url' => $referrerUrl ?: request()->header('referer'),
+            'lead_name' => $leadData['name'] ?? null,
+            'lead_email' => $leadData['email'] ?? null,
+            'project_name' => $leadData['project_name'] ?? null,
+            'lead_phone' => $leadData['phone'] ?? null,
+            'lead_company' => $leadData['company'] ?? null,
             'status' => 'active',
             'messages_count' => 0,
         ]);
+    }
+
+    public static function getWidgetBranding(): array
+    {
+        $defaultChips = [
+            ['icon' => '🌿', 'label' => 'Garden Lights', 'prompt' => 'Show me outdoor garden lights'],
+            ['icon' => '💡', 'label' => '80mm Downlights', 'prompt' => 'I want to explore downlights with dimension Ø82mm x 80mm (H)'],
+            ['icon' => '🏢', 'label' => 'Linear & DALI Profiles', 'prompt' => 'Show commercial linear profiles with DALI dimming'],
+            ['icon' => '📝', 'label' => 'How to Add to Quote?', 'prompt' => 'How to add products to quote list?'],
+            ['icon' => '📋', 'label' => 'View Quote Items', 'prompt' => 'Show my quote list'],
+            ['icon' => '📄', 'label' => 'Custom Datasheets', 'prompt' => 'How do I generate a custom PDF datasheet?'],
+        ];
+
+        $branding = [];
+        try {
+            $feed = LlmFeed::query()->where('key', 'ai_widget_branding')->first();
+            if ($feed && ! empty($feed->content)) {
+                $decoded = json_decode((string) $feed->content, true);
+                if (is_array($decoded)) {
+                    $branding = $decoded;
+                }
+            }
+        } catch (Throwable) {
+        }
+
+        return [
+            'ai_name' => ! empty($branding['ai_name']) ? $branding['ai_name'] : 'Azoogi AI Assistant',
+            'ai_avatar' => ! empty($branding['ai_avatar']) ? $branding['ai_avatar'] : 'spark',
+            'ai_custom_avatar_url' => $branding['ai_custom_avatar_url'] ?? null,
+            'ai_subtitle' => ! empty($branding['ai_subtitle']) ? $branding['ai_subtitle'] : 'Architectural & Smart Controls Specialist',
+            'startup_message' => ! empty($branding['startup_message']) ? $branding['startup_message'] : 'Welcome to Azoogi Lighting! How can our architectural engineering team assist with your project specifications, lighting schedules, or quotes today?',
+            'lead_greeting_template' => $branding['lead_greeting_template'] ?? null,
+            'starter_chips' => ! empty($branding['starter_chips']) && is_array($branding['starter_chips']) ? $branding['starter_chips'] : $defaultChips,
+            'intake_enabled' => $branding['intake_enabled'] ?? true,
+            'intake_require_project' => $branding['intake_require_project'] ?? false,
+            'intake_require_email' => $branding['intake_require_email'] ?? false,
+            'intake_require_name' => $branding['intake_require_name'] ?? false,
+        ];
+    }
+
+    public static function getKnowledgeRules(): array
+    {
+        $defaultRuleset = <<<'RULES'
+- Provide concise, professional, and technically accurate responses tailored for architects, lighting designers, electrical engineers, and commercial contractors.
+- Strictly adhere to Australian Standards (AS/NZS 1158, AS/NZS 1680, AS/NZS 60598).
+- Suggest relevant beam angles, CCTs (2700K, 3000K, 4000K), CRI (CRI90+), IP ratings, and control protocols (DALI-2, Casambi BLE mesh, 0-10V, Triac).
+- When discussing custom LED profile lengths, remind users that custom cutting, diffusers, and endcaps are engineered to exact millimeter requirements.
+- Never provide fake product codes, false pricing guarantees, or unverifiable claims.
+RULES;
+
+        $defaultCompanyContext = <<<'CONTEXT'
+- Manufacturer & Headquarters: Azoogi Lighting, Sydney, New South Wales, Australia.
+- Warehouse & Dispatch: Fast dispatch from Sydney warehouse across Australia and New Zealand.
+- Warranty: 5-year standard commercial warranty on architectural luminaires and drivers.
+- Custom Cutting & Assembly: 3-5 business day standard turnaround for custom profile extrusion cutting and testing.
+- Photometrics: IES and LDT files available for DiaLux and Relux simulations upon request.
+CONTEXT;
+
+        $data = [];
+        try {
+            $feed = LlmFeed::query()->where('key', 'ai_knowledge_rules')->first();
+            if ($feed && ! empty($feed->content)) {
+                $decoded = json_decode((string) $feed->content, true);
+                if (is_array($decoded)) {
+                    $data = $decoded;
+                }
+            }
+        } catch (Throwable) {
+        }
+
+        return [
+            'ruleset' => ! empty($data['ruleset']) ? $data['ruleset'] : $defaultRuleset,
+            'company_context' => ! empty($data['company_context']) ? $data['company_context'] : $defaultCompanyContext,
+        ];
+    }
+
+    public static function getFaqs(): array
+    {
+        $defaultFaqs = [
+            [
+                'id' => 'faq_lead_times',
+                'category' => 'Shipping & Lead Time',
+                'question' => 'What are the standard lead times for custom linear profile cutting and testing?',
+                'answer' => 'Standard lead times for custom extrusion cutting, soldering, and testing are 3 to 5 business days dispatched from our Sydney warehouse.',
+                'is_active' => true,
+            ],
+            [
+                'id' => 'faq_casambi_compat',
+                'category' => 'Technical & Smart Controls',
+                'question' => 'Do Azoogi LED linear profiles and downlights support Casambi wireless Bluetooth controls?',
+                'answer' => 'Yes, all Azoogi constant voltage (24V) and constant current drivers can be paired seamlessly with Casambi CBU controllers and BLE mesh sensors.',
+                'is_active' => true,
+            ],
+            [
+                'id' => 'faq_warranty',
+                'category' => 'Warranty',
+                'question' => 'What warranty is provided on Azoogi architectural fixtures and drivers?',
+                'answer' => 'Azoogi provides a 5-year commercial warranty across our architectural luminaires, linear extrusions, and certified power supplies.',
+                'is_active' => true,
+            ],
+        ];
+
+        try {
+            $feed = LlmFeed::query()->where('key', 'ai_faqs')->first();
+            if ($feed && ! empty($feed->content)) {
+                $decoded = json_decode((string) $feed->content, true);
+                if (is_array($decoded)) {
+                    return $decoded;
+                }
+            }
+        } catch (Throwable) {
+        }
+
+        return $defaultFaqs;
+    }
+
+    public function generatePersonalizedGreeting(ChatSession $session): string
+    {
+        $branding = self::getWidgetBranding();
+        $name = $session->lead_name;
+        $project = $session->project_name;
+
+        if ($name && $project) {
+            if (! empty($branding['lead_greeting_template'])) {
+                return str_replace(['{name}', '{project}'], [$name, $project], $branding['lead_greeting_template']);
+            }
+
+            return "Hi {$name}! Thanks for connecting regarding {$project}. How can our architectural engineering team assist with your fixture schedules, photometric calculations, or quote specifications today?";
+        }
+
+        if ($name) {
+            return "Hi {$name}! Welcome to Azoogi. How can our architectural lighting team assist with your project specifications or custom fixtures today?";
+        }
+
+        if ($project) {
+            return "Welcome to Azoogi! How can we assist with fixture schedules and specifications for {$project} today?";
+        }
+
+        return $branding['startup_message'];
     }
 
     /**
@@ -215,16 +383,24 @@ class ChatOrchestrator
             ];
         }
 
-        $systemPrompt = $this->getSystemPrompt();
+        $systemPrompt = $this->getSystemPrompt($session);
         $cardsCollected = [];
         $executedToolCalls = [];
         $executedToolResults = [];
         $totalTokens = 0;
+        $totalPromptTokens = 0;
+        $totalCompletionTokens = 0;
 
         try {
             // Initial LLM call
             $llmResponse = $this->driver->chat($history, array_values($this->tools), $systemPrompt);
-            $totalTokens += $llmResponse['tokens_used'] ?? 0;
+            $pTokens = (int) ($llmResponse['prompt_tokens'] ?? 0);
+            $cTokens = (int) ($llmResponse['completion_tokens'] ?? 0);
+            $tTokens = (int) ($llmResponse['tokens_used'] ?? ($pTokens + $cTokens));
+
+            $totalTokens += $tTokens;
+            $totalPromptTokens += $pTokens;
+            $totalCompletionTokens += $cTokens;
 
             // Handle tool calling loop (max 3 rounds)
             $rounds = 0;
@@ -243,8 +419,10 @@ class ChatOrchestrator
                         }
                     }
 
-                    if (isset($this->tools[$toolName])) {
-                        $toolOutput = $this->tools[$toolName]->execute($toolArgs);
+                    $toolInstance = $this->tools[$toolName] ?? ($toolName === 'public_submit_quote_enquiry' ? ($this->tools['public_submit_lead_enquiry'] ?? null) : null);
+
+                    if ($toolInstance !== null) {
+                        $toolOutput = $toolInstance->execute($toolArgs);
                         $executedToolCalls[] = [
                             'id' => $tc['id'],
                             'name' => $toolName,
@@ -284,7 +462,13 @@ class ChatOrchestrator
 
                 // Call LLM again with tool results
                 $llmResponse = $this->driver->chat($history, array_values($this->tools), $systemPrompt);
-                $totalTokens += $llmResponse['tokens_used'] ?? 0;
+                $pTokens = (int) ($llmResponse['prompt_tokens'] ?? 0);
+                $cTokens = (int) ($llmResponse['completion_tokens'] ?? 0);
+                $tTokens = (int) ($llmResponse['tokens_used'] ?? ($pTokens + $cTokens));
+
+                $totalTokens += $tTokens;
+                $totalPromptTokens += $pTokens;
+                $totalCompletionTokens += $cTokens;
             }
 
             $assistantReply = $llmResponse['content'] ?: 'Here are the details you requested.';
@@ -293,7 +477,21 @@ class ChatOrchestrator
             $assistantReply = 'I apologize, but I encountered an issue retrieving that information. Please browse our product catalog or contact our sales engineering team directly.';
         }
 
-        // 3. Save assistant message
+        // 3. Resolve active model and compute estimated cost
+        $aiConfig = self::getActiveAiConfig();
+        $activeDriver = $aiConfig['driver'] ?? 'gemini';
+        $customProviders = $aiConfig['custom_providers'] ?? [];
+        $activeModel = match ($activeDriver) {
+            'anthropic' => $aiConfig['anthropic_model'] ?? 'claude-3-5-sonnet-20241022',
+            'openrouter' => $aiConfig['openrouter_model'] ?? 'anthropic/claude-3.5-sonnet',
+            'openai' => $aiConfig['openai_model'] ?? 'gpt-4o-mini',
+            'gemini' => $aiConfig['gemini_model'] ?? 'gemini-2.5-flash',
+            default => $customProviders[$activeDriver]['model'] ?? 'custom-model',
+        };
+
+        $estimatedCost = AiCostCalculator::calculate($activeModel, $totalPromptTokens, $totalCompletionTokens);
+
+        // 4. Save assistant message
         $assistantMsg = ChatMessage::create([
             'chat_session_id' => $session->id,
             'sender' => 'assistant',
@@ -302,9 +500,19 @@ class ChatOrchestrator
             'tool_results' => ! empty($executedToolResults) ? $executedToolResults : null,
             'cards_payload' => ! empty($cardsCollected) ? $cardsCollected : null,
             'tokens_used' => $totalTokens,
+            'prompt_tokens' => $totalPromptTokens,
+            'completion_tokens' => $totalCompletionTokens,
+            'model' => $activeModel,
+            'driver' => $activeDriver,
+            'estimated_cost' => $estimatedCost,
         ]);
 
         $session->increment('messages_count');
+        $session->increment('total_tokens', $totalTokens);
+        $session->increment('total_cost', $estimatedCost);
+        if (! $session->primary_model) {
+            $session->update(['primary_model' => $activeModel]);
+        }
 
         // Update session summary if it's the first exchange
         if ($session->messages_count <= 2 && empty($session->summary)) {
@@ -319,10 +527,16 @@ class ChatOrchestrator
         ];
     }
 
-    protected function getSystemPrompt(): string
+    public function getSystemPrompt(?ChatSession $session = null): string
     {
-        return <<<'PROMPT'
-You are the expert Azoogi Architectural Lighting & Intelligent Controls AI Assistant.
+        $branding = self::getWidgetBranding();
+        $knowledge = self::getKnowledgeRules();
+        $faqs = self::getFaqs();
+
+        $aiName = $branding['ai_name'];
+
+        $prompt = <<<PROMPT
+You are {$aiName}, the expert Architectural Lighting & Intelligent Controls AI Consultant for Azoogi.
 Azoogi is an Australian architectural lighting manufacturer and smart controls engineering specialist based in Sydney, NSW.
 
 Core Brand Competencies:
@@ -330,9 +544,27 @@ Core Brand Competencies:
 - Intelligent control ecosystems: Casambi (BLE Mesh), DALI / DALI-2, MADRIX (Pixel Mapping & DMX), and Silvair.
 - Custom length cutting, photometric IES testing, and Australian Standards compliance (AS/NZS).
 
-Your Role & Style:
-- Professional, technical, concise, and helpful.
-- Always focus on the visitor's latest inquiry. If the visitor asks for a new product category or dimension (e.g. asking for downlights after garden lights), immediately search for the new category and do NOT carry over stale filters (such as old IP ratings or unrelated keywords) from prior turns.
+SYSTEM INSTRUCTIONS & RULESET:
+{$knowledge['ruleset']}
+
+COMPANY CONTEXT & POLICIES:
+{$knowledge['company_context']}
+PROMPT;
+
+        $activeFaqs = array_filter($faqs, fn ($f) => ! empty($f['is_active']));
+        if (! empty($activeFaqs)) {
+            $faqText = "\n\nVERIFIED FAQ KNOWLEDGE BASE (Use these verified facts to answer client inquiries accurately):\n";
+            foreach ($activeFaqs as $faq) {
+                $faqText .= "Q: {$faq['question']}\nA: {$faq['answer']}\n\n";
+            }
+            $prompt .= trim($faqText);
+        }
+
+        $prompt .= <<<'TOOLS_PROMPT'
+
+
+TOOL USAGE & CATALOG GUIDELINES:
+- Always focus on the visitor's latest inquiry. If the visitor asks for a new product category or dimension (e.g. asking for downlights after garden lights), immediately search for the new category and do NOT carry over stale filters from prior turns.
 - When visitors ask about products, specs, dimensions, or applications, call `public_search_and_filter_products` or `get_product_details_and_downloads` to provide structured interactive cards.
 - When visitors ask for custom datasheets, call `generate_custom_datasheet`.
 - When visitors want to add items to their quote or view quote items, call `public_manage_quote_list`.
@@ -342,21 +574,35 @@ You can submit 3 distinct types of enquiries via `public_submit_lead_enquiry`:
 
 1. Contact Enquiry (`enquiry_type: "contact"`):
    - For general inquiries, support, consulting requests, engineering questions, or messages to the Azoogi team.
-   - Required information before submitting: Full Name, Email address, and Message/Inquiry. (Company optional).
-   - If the user asks to send a contact message or contact Azoogi, ask for their Name, Email, and Message first.
+   - Required information before submitting: Full Name, Email address, and Message/Inquiry.
 
 2. Quote Request Enquiry (`enquiry_type: "quote"`):
    - For requesting an official pricing quote on fixtures in their quote cart or specified items.
-   - Required information before submitting: Full Name, Email address, Phone number (or contact method), and Project notes.
-   - If the user asks to submit a quote request, ensure items are in their quote and ask for their Name, Email, and Phone number.
+   - Required information before submitting: Full Name, Email address, Phone number, and Project notes.
 
 3. Product Specification Enquiry (`enquiry_type: "product"`):
-   - For a single specific product configuration enquiry (e.g. from a product page with specific CCT, finish, beam angle, length, or dimming protocol).
-   - Required information before submitting: Product Name/SKU, configured specs, Full Name, Email address, and Project location/details.
-   - If the user asks to enquire about a specific product, ask for their preferred configurations, Name, and Email.
+   - For a single specific product configuration enquiry (e.g. specific CCT, finish, beam angle, length, or dimming protocol).
+   - Required information before submitting: Product Name/SKU, configured specs, Full Name, Email address, and Project location.
 
 IMPORTANT RULE:
 NEVER call `public_submit_lead_enquiry` with fake or blank details. Always politely ask the visitor to provide their name, email, and required details before calling the submission tool!
-PROMPT;
+TOOLS_PROMPT;
+
+        if ($session && ($session->lead_name || $session->project_name)) {
+            $visitorContext = "\n\nCURRENT VISITOR & PROJECT CONTEXT:\n";
+            if ($session->lead_name) {
+                $visitorContext .= "- Client / Visitor Name: {$session->lead_name}\n";
+            }
+            if ($session->lead_email) {
+                $visitorContext .= "- Contact Email: {$session->lead_email}\n";
+            }
+            if ($session->project_name) {
+                $visitorContext .= "- Project Reference: {$session->project_name}\n";
+                $visitorContext .= "Please address {$session->lead_name} professionally and tailor fixture recommendations, mounting options, and specifications specifically for the '{$session->project_name}' project.\n";
+            }
+            $prompt .= $visitorContext;
+        }
+
+        return $prompt;
     }
 }

@@ -47,6 +47,12 @@ class GeminiDriver implements IChatLlmDriver
 
         $toolDefinitions = [];
         if (! empty($tools)) {
+            $uniqueTools = [];
+            foreach ($tools as $t) {
+                if ($t instanceof IChatTool) {
+                    $uniqueTools[$t->getName()] = $t;
+                }
+            }
             $toolDefinitions = array_map(function (IChatTool $t) {
                 return [
                     'type' => 'function',
@@ -56,7 +62,7 @@ class GeminiDriver implements IChatLlmDriver
                         'parameters' => $t->getParameters(),
                     ],
                 ];
-            }, $tools);
+            }, array_values($uniqueTools));
         }
 
         // List candidate models for automatic failover under rate limits (429) or high demand (503)
@@ -104,11 +110,17 @@ class GeminiDriver implements IChatLlmDriver
                         }
                     }
 
+                    $promptTokens = (int) ($json['usage']['prompt_tokens'] ?? 0);
+                    $completionTokens = (int) ($json['usage']['completion_tokens'] ?? 0);
+                    $tokensUsed = (int) ($json['usage']['total_tokens'] ?? ($promptTokens + $completionTokens));
+
                     return [
                         'content' => $choice['content'] ?? null,
                         'tool_calls' => $parsedToolCalls,
                         'raw_message' => $choice,
-                        'tokens_used' => (int) ($json['usage']['total_tokens'] ?? 0),
+                        'tokens_used' => $tokensUsed,
+                        'prompt_tokens' => $promptTokens,
+                        'completion_tokens' => $completionTokens,
                     ];
                 }
 

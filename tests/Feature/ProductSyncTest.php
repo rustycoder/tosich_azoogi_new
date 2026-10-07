@@ -75,7 +75,7 @@ class ProductSyncTest extends TestCase
 
         $this->get('/products')
             ->assertOk()
-            ->assertSee('const AZOOGI_PRODUCTS', false)
+            ->assertSee('window.AZOOGI_PRODUCTS', false)
             ->assertSee('Garden Light', false)
             ->assertSee('NEON', false)
             ->assertDontSee('products_data.js', false)

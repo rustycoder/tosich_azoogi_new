@@ -11,6 +11,20 @@ class MockLlmDriver implements IChatLlmDriver
 {
     public function chat(array $messages, array $tools = [], string $systemPrompt = ''): array
     {
+        $res = $this->evaluateChat($messages, $tools, $systemPrompt);
+        $tokensUsed = (int) ($res['tokens_used'] ?? 40);
+        $promptTokens = (int) round($tokensUsed * 0.6);
+        $completionTokens = max(0, $tokensUsed - $promptTokens);
+
+        $res['tokens_used'] = $tokensUsed;
+        $res['prompt_tokens'] = $promptTokens;
+        $res['completion_tokens'] = $completionTokens;
+
+        return $res;
+    }
+
+    protected function evaluateChat(array $messages, array $tools = [], string $systemPrompt = ''): array
+    {
         $lastMessage = end($messages) ?: [];
         $role = $lastMessage['role'] ?? '';
         $text = strtolower(trim((string) ($lastMessage['content'] ?? '')));

@@ -20,10 +20,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const STORAGE_SOUND_KEY = 'azoogi_chat_sound_enabled';
     const STORAGE_OPEN_KEY = 'azoogi_chat_is_open';
     const STORAGE_MESSAGES_KEY = 'azoogi_chat_messages_cache';
+    const STORAGE_LEAD_KEY = 'azoogi_chat_lead_info';
 
     let sessionUuid = localStorage.getItem(STORAGE_UUID_KEY);
     let soundEnabled = localStorage.getItem(STORAGE_SOUND_KEY) !== 'false';
     let isProcessing = false;
+
+    const getStoredLead = () => {
+        try {
+            const raw = localStorage.getItem(STORAGE_LEAD_KEY);
+            return raw ? JSON.parse(raw) : null;
+        } catch (e) {
+            return null;
+        }
+    };
+
+    const saveStoredLead = (leadObj) => {
+        try {
+            localStorage.setItem(STORAGE_LEAD_KEY, JSON.stringify(leadObj));
+        } catch (e) {}
+    };
 
     // Web Audio Chime synthesizer
     const playChime = () => {
@@ -53,7 +69,14 @@ document.addEventListener('DOMContentLoaded', () => {
             widget.classList.add('is-open');
             launcher?.classList.remove('has-unread');
             localStorage.setItem(STORAGE_OPEN_KEY, 'true');
-            setTimeout(() => input?.focus(), 200);
+            setTimeout(() => {
+                const intakeNameInput = document.getElementById('azoogi-intake-name');
+                if (intakeNameInput) {
+                    intakeNameInput.focus();
+                } else {
+                    input?.focus();
+                }
+            }, 200);
             scrollToBottom();
         } else {
             widget.classList.remove('is-open');
@@ -86,8 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem(STORAGE_UUID_KEY);
         localStorage.removeItem(STORAGE_MESSAGES_KEY);
         sessionUuid = null;
-        body.innerHTML = getWelcomeTemplate();
-        initChipListeners();
+        renderInitialScreen();
     });
 
     const scrollToBottom = () => {
@@ -389,6 +411,8 @@ document.addEventListener('DOMContentLoaded', () => {
             ? window.AzoogiQuote.items()
             : [];
 
+        const leadInfo = getStoredLead() || {};
+
         try {
             const response = await fetch('/api/chat/message', {
                 method: 'POST',
@@ -400,6 +424,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     message: text,
                     session_uuid: sessionUuid,
                     referrer_url: window.location.href,
+                    name: leadInfo.name || null,
+                    email: leadInfo.email || null,
+                    project_name: leadInfo.project_name || null,
                     quote_items: clientQuoteItems
                 })
             });
@@ -447,6 +474,180 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // Render Pre-Chat Intake Form
+    function renderIntakeForm() {
+        const storedLead = getStoredLead() || {};
+        body.innerHTML = `
+            <div class="azoogi-chat-intake-card" id="azoogi-chat-intake-card">
+                <div class="azoogi-chat-intake-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 14px; height: 14px;"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                    Project Consultation
+                </div>
+                <h4 class="azoogi-chat-intake-title">Welcome to Azoogi AI</h4>
+                <p class="azoogi-chat-intake-desc">Please share a few details so our engineering team and AI can tailor fixture specs and lighting schedules for your project.</p>
+
+                <form id="azoogi-chat-intake-form">
+                    <div class="azoogi-chat-intake-field">
+                        <label for="azoogi-intake-name">Your Full Name <span class="req">*</span></label>
+                        <input type="text" id="azoogi-intake-name" class="azoogi-chat-intake-input" placeholder="e.g. Jane Doe" value="${escapeHtml(storedLead.name || '')}" required maxlength="100">
+                    </div>
+
+                    <div class="azoogi-chat-intake-field">
+                        <label for="azoogi-intake-email">Work Email Address <span class="req">*</span></label>
+                        <input type="email" id="azoogi-intake-email" class="azoogi-chat-intake-input" placeholder="e.g. jane@architecture.com.au" value="${escapeHtml(storedLead.email || '')}" required maxlength="120">
+                    </div>
+
+                    <div class="azoogi-chat-intake-field">
+                        <label for="azoogi-intake-project">Project Name / Reference</label>
+                        <input type="text" id="azoogi-intake-project" class="azoogi-chat-intake-input" placeholder="e.g. Bondi Beach Apartment Fitout" value="${escapeHtml(storedLead.project_name || '')}" maxlength="150">
+                    </div>
+
+                    <button type="submit" class="azoogi-chat-intake-submit" id="azoogi-intake-submit-btn">
+                        <span>Start Consultation</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width: 15px; height: 15px;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </button>
+
+                    <button type="button" class="azoogi-chat-intake-skip" id="azoogi-intake-skip-btn">
+                        Skip &amp; ask question anonymously &rarr;
+                    </button>
+                </form>
+            </div>
+        `;
+
+        const form = document.getElementById('azoogi-chat-intake-form');
+        const skipBtn = document.getElementById('azoogi-intake-skip-btn');
+
+        form?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('azoogi-intake-name')?.value.trim();
+            const email = document.getElementById('azoogi-intake-email')?.value.trim();
+            const projectName = document.getElementById('azoogi-intake-project')?.value.trim();
+
+            if (!name || !email) {
+                alert('Please enter your name and email address.');
+                return;
+            }
+
+            const submitBtn = document.getElementById('azoogi-intake-submit-btn');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Connecting...';
+            }
+
+            const leadObj = { name, email, project_name: projectName };
+            saveStoredLead(leadObj);
+
+            try {
+                const res = await fetch('/api/chat/init', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': getCsrfToken()
+                    },
+                    body: JSON.stringify({
+                        session_uuid: sessionUuid,
+                        name,
+                        email,
+                        project_name: projectName,
+                        referrer_url: window.location.href
+                    })
+                });
+
+                const data = await res.json();
+                if (data.session_uuid) {
+                    sessionUuid = data.session_uuid;
+                    localStorage.setItem(STORAGE_UUID_KEY, sessionUuid);
+                }
+
+                // Render customized welcome screen
+                renderWelcomeWithGreeting(data.greeting || `Hi ${name}! How can our team assist with ${projectName || 'your project'} today?`);
+            } catch (err) {
+                renderWelcomeWithGreeting(`Hi ${name}! Welcome to Azoogi. How can our team assist with your lighting project today?`);
+            }
+        });
+
+        skipBtn?.addEventListener('click', () => {
+            renderWelcomeWithGreeting(liveBranding.startup_message || 'Welcome to Azoogi Lighting! How can our engineering team assist with your project specifications today?');
+        });
+    }
+
+    let liveBranding = {
+        ai_name: 'Azoogi AI Assistant',
+        ai_avatar: 'spark',
+        ai_custom_avatar_url: null,
+        ai_subtitle: 'Architectural & Smart Controls Specialist',
+        startup_message: 'Welcome to Azoogi Lighting! How can our architectural engineering team assist with your project specifications, lighting schedules, or quotes today?',
+        starter_chips: [
+            { icon: '🌿', label: 'Garden Lights', prompt: 'Show me outdoor garden lights' },
+            { icon: '💡', label: '80mm Downlights', prompt: 'I want to explore downlights with dimension Ø82mm x 80mm (H)' },
+            { icon: '🏢', label: 'Linear & DALI Profiles', prompt: 'Show commercial linear profiles with DALI dimming' },
+            { icon: '📝', label: 'How to Add to Quote?', prompt: 'How to add products to quote list?' },
+            { icon: '📋', label: 'View Quote Items', prompt: 'Show my quote list' },
+            { icon: '📄', label: 'Custom Datasheets', prompt: 'How do I generate a custom PDF datasheet?' }
+        ]
+    };
+
+    function applyBranding(branding) {
+        if (!branding) return;
+        liveBranding = Object.assign({}, liveBranding, branding);
+
+        const titleEl = document.querySelector('.js-chat-header-title');
+        if (titleEl && liveBranding.ai_name) {
+            titleEl.textContent = liveBranding.ai_name;
+        }
+
+        const subEl = document.querySelector('.js-chat-header-subtitle');
+        if (subEl && liveBranding.ai_subtitle) {
+            subEl.textContent = liveBranding.ai_subtitle;
+        }
+
+        const launcherText = document.querySelector('.azoogi-chat-launcher-text');
+        if (launcherText && liveBranding.ai_name) {
+            launcherText.textContent = `Ask ${liveBranding.ai_name}`;
+        }
+
+        const avatarEl = document.querySelector('.js-chat-avatar');
+        if (avatarEl) {
+            const avatarMap = { spark: '⚡', lightbulb: '💡', leaf: '🌿', building: '🏢', robot: '🤖' };
+            if (liveBranding.ai_avatar === 'custom' && liveBranding.ai_custom_avatar_url) {
+                avatarEl.innerHTML = `<img src="${liveBranding.ai_custom_avatar_url}" alt="${liveBranding.ai_name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"><span class="azoogi-chat-status-dot"></span>`;
+            } else {
+                const char = avatarMap[liveBranding.ai_avatar] || '⚡';
+                avatarEl.innerHTML = `${char}<span class="azoogi-chat-status-dot"></span>`;
+            }
+        }
+    }
+
+    function renderWelcomeWithGreeting(greetingText) {
+        const chipsHtml = (liveBranding.starter_chips || []).map(chip => {
+            return `<button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="${escapeHtml(chip.prompt)}">${escapeHtml(chip.icon || '💡')} ${escapeHtml(chip.label)}</button>`;
+        }).join('');
+
+        body.innerHTML = `
+            <div class="azoogi-chat-starters">
+                <div class="azoogi-chat-starters-title">Welcome to Azoogi Lighting</div>
+                <p style="font-size: 13px; color: var(--chat-text); margin: 0 0 12px 0; line-height: 1.5;">${escapeHtml(greetingText)}</p>
+                <div class="azoogi-chat-chip-list">
+                    ${chipsHtml}
+                </div>
+            </div>
+        `;
+        initChipListeners();
+        input?.focus();
+    }
+
+    function renderInitialScreen() {
+        const storedLead = getStoredLead();
+        if (storedLead && (storedLead.name || storedLead.email)) {
+            const greeting = (storedLead.name && storedLead.project_name)
+                ? `Hi ${storedLead.name}! Welcome back. How can our team assist with ${storedLead.project_name} today?`
+                : (storedLead.name ? `Hi ${storedLead.name}! Welcome back to Azoogi Lighting.` : liveBranding.startup_message);
+            renderWelcomeWithGreeting(greeting);
+        } else {
+            renderIntakeForm();
+        }
+    }
+
     // Restore Session History on Page Load (Persist across navigation)
     const restoreSessionHistory = async () => {
         // 1. First, render instantly from local cache if available (zero flicker)
@@ -461,15 +662,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         } else {
-            body.innerHTML = getWelcomeTemplate();
-            initChipListeners();
+            renderInitialScreen();
         }
 
-        // 2. Fetch fresh session from server if UUID exists
+        // 2. Fetch fresh session & branding from server if UUID exists
         if (sessionUuid) {
             try {
                 const res = await fetch(`/api/chat/session/${sessionUuid}`);
                 const data = await res.json();
+                if (data.branding) {
+                    applyBranding(data.branding);
+                }
                 if (data.status === 'success' && Array.isArray(data.messages) && data.messages.length > 0) {
                     body.innerHTML = '';
                     const updatedCache = [];
@@ -509,17 +712,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Welcome Template
     function getWelcomeTemplate() {
+        const chipsHtml = (liveBranding.starter_chips || []).map(chip => {
+            return `<button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="${escapeHtml(chip.prompt)}">${escapeHtml(chip.icon || '💡')} ${escapeHtml(chip.label)}</button>`;
+        }).join('');
+
         return `
             <div class="azoogi-chat-starters">
                 <div class="azoogi-chat-starters-title">Welcome to Azoogi Lighting</div>
-                <p style="font-size: 13px; color: var(--chat-text); margin: 0;">How can our engineering team assist with your project today?</p>
+                <p style="font-size: 13px; color: var(--chat-text); margin: 0;">${escapeHtml(liveBranding.startup_message)}</p>
                 <div class="azoogi-chat-chip-list" style="margin-top: 8px;">
-                    <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="Show me garden lights">🌿 Garden Lights</button>
-                    <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="I want to explore downlights with dimension Ø82mm x 80mm (H)">💡 80mm Downlights</button>
-                    <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="Show commercial linear profiles with DALI dimming">🏢 Linear & DALI Profiles</button>
-                    <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="How to add products to quote list?">📝 How to Add to Quote?</button>
-                    <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="Show my quote list">📋 View Quote Items</button>
-                    <button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="How do I generate a custom PDF datasheet?">📄 Custom Datasheets</button>
+                    ${chipsHtml}
                 </div>
             </div>
         `;
@@ -533,10 +735,82 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function formatMarkdown(text) {
         if (!text) return '';
-        return text
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            .replace(/\*(.*?)\*/g, '<em>$1</em>')
-            .replace(/`([^`]+)`/g, '<code>$1</code>')
-            .replace(/\n/g, '<br>');
+
+        // 1. Normalize line endings
+        let str = text.replace(/\r\n/g, '\n').trim();
+
+        // 2. Escape raw HTML entities to prevent XSS
+        str = str.replace(/&/g, '&amp;')
+                 .replace(/</g, '&lt;')
+                 .replace(/>/g, '&gt;');
+
+        // 3. Code blocks (```code```)
+        str = str.replace(/```([\s\S]*?)```/g, (match, p1) => {
+            return `<pre class="azoogi-chat-codeblock"><code>${p1.trim()}</code></pre>`;
+        });
+
+        // 4. Inline code (`code`)
+        str = str.replace(/`([^`]+)`/g, '<code class="azoogi-chat-inline-code">$1</code>');
+
+        // 5. Headings (### Level 3, ## Level 2, # Level 1)
+        str = str.replace(/^###[ \t]+(.*)$/gm, '<h4 class="azoogi-chat-heading">$1</h4>');
+        str = str.replace(/^##[ \t]+(.*)$/gm, '<h3 class="azoogi-chat-heading">$1</h3>');
+        str = str.replace(/^#[ \t]+(.*)$/gm, '<h2 class="azoogi-chat-heading">$1</h2>');
+
+        // 6. Bold & Strong (**text** or __text__)
+        str = str.replace(/\*\*([^*]+)\*\*/g, '<strong class="azoogi-chat-bold">$1</strong>');
+        str = str.replace(/__([^_]+)__/g, '<strong class="azoogi-chat-bold">$1</strong>');
+
+        // 7. Italics (*text* or _text_)
+        str = str.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>');
+        str = str.replace(/(?<!_)_([^_]+)_(?!_)/g, '<em>$1</em>');
+
+        // 8. Markdown Links [text](url)
+        str = str.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="azoogi-chat-link">$1</a>');
+
+        // 9. Process line by line for structured lists & paragraphs
+        const lines = str.split('\n');
+        let html = '';
+        let inUl = false;
+        let inOl = false;
+
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim();
+
+            if (!line) {
+                if (inUl) { html += '</ul>'; inUl = false; }
+                if (inOl) { html += '</ol>'; inOl = false; }
+                continue;
+            }
+
+            // Bullet list item: - item or * item or • item
+            const ulMatch = line.match(/^[-*•]\s+(.*)$/);
+            // Numbered list item: 1. item
+            const olMatch = line.match(/^(\d+)\.\s+(.*)$/);
+
+            if (ulMatch) {
+                if (inOl) { html += '</ol>'; inOl = false; }
+                if (!inUl) { html += '<ul class="azoogi-chat-list">'; inUl = true; }
+                html += `<li>${ulMatch[1]}</li>`;
+            } else if (olMatch) {
+                if (inUl) { html += '</ul>'; inUl = false; }
+                if (!inOl) { html += '<ol class="azoogi-chat-list">'; inOl = true; }
+                html += `<li>${olMatch[2]}</li>`;
+            } else {
+                if (inUl) { html += '</ul>'; inUl = false; }
+                if (inOl) { html += '</ol>'; inOl = false; }
+
+                if (line.startsWith('<h') || line.startsWith('<pre')) {
+                    html += line;
+                } else {
+                    html += `<p class="azoogi-chat-p">${line}</p>`;
+                }
+            }
+        }
+
+        if (inUl) html += '</ul>';
+        if (inOl) html += '</ol>';
+
+        return html;
     }
 });

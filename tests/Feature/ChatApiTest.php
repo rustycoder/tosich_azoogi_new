@@ -141,4 +141,60 @@ class ChatApiTest extends TestCase
 
         $this->assertDatabaseCount('chat_messages', 0);
     }
+
+    public function test_visitor_can_initialize_session_with_pre_chat_intake_data(): void
+    {
+        $response = $this->postJson('/api/chat/init', [
+            'name' => 'Sarah Connor',
+            'email' => 'sarah@cyberdyne.com',
+            'project_name' => 'Skynet Headquarters Facade',
+        ]);
+
+        $response->assertOk()
+            ->assertJsonStructure([
+                'status',
+                'session_uuid',
+                'lead_name',
+                'lead_email',
+                'project_name',
+                'greeting',
+                'has_lead',
+            ])
+            ->assertJson([
+                'status' => 'success',
+                'lead_name' => 'Sarah Connor',
+                'lead_email' => 'sarah@cyberdyne.com',
+                'project_name' => 'Skynet Headquarters Facade',
+                'has_lead' => true,
+            ]);
+
+        $this->assertStringContainsString('Sarah', $response->json('greeting'));
+        $this->assertStringContainsString('Skynet Headquarters Facade', $response->json('greeting'));
+
+        $this->assertDatabaseHas('chat_sessions', [
+            'uuid' => $response->json('session_uuid'),
+            'lead_name' => 'Sarah Connor',
+            'lead_email' => 'sarah@cyberdyne.com',
+            'project_name' => 'Skynet Headquarters Facade',
+        ]);
+    }
+
+    public function test_visitor_message_persists_lead_and_project_name_in_database(): void
+    {
+        $response = $this->postJson('/api/chat/message', [
+            'message' => 'Need 4000K linear fixtures',
+            'name' => 'Marcus Wright',
+            'email' => 'marcus@resistance.org',
+            'project_name' => 'Underground Bunker Sector 4',
+        ]);
+
+        $response->assertOk();
+
+        $this->assertDatabaseHas('chat_sessions', [
+            'uuid' => $response->json('session_uuid'),
+            'lead_name' => 'Marcus Wright',
+            'lead_email' => 'marcus@resistance.org',
+            'project_name' => 'Underground Bunker Sector 4',
+        ]);
+    }
 }

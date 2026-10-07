@@ -20,8 +20,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'lead_email',
     'lead_phone',
     'lead_company',
+    'project_name',
     'enquiry_id',
     'messages_count',
+    'total_tokens',
+    'total_cost',
+    'primary_model',
     'status',
     'summary',
     'metadata',
@@ -37,6 +41,8 @@ class ChatSession extends Model
     {
         return [
             'messages_count' => 'integer',
+            'total_tokens' => 'integer',
+            'total_cost' => 'decimal:6',
             'metadata' => 'array',
         ];
     }
@@ -53,6 +59,6 @@ class ChatSession extends Model
 
     public function hasLead(): bool
     {
-        return ! empty($this->lead_email) || ! empty($this->lead_name) || $this->enquiry_id !== null;
+        return ! empty($this->lead_email) || ! empty($this->lead_name) || ! empty($this->project_name) || $this->enquiry_id !== null;
     }
 }

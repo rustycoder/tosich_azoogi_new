@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'AI Configuration & Model Engine')
+@section('title', 'AI Models, Providers & Rates')
 
 @section('content')
 <div class="dash-head">
@@ -9,23 +9,39 @@
         <span>/</span>
         <span>AI</span>
         <span>/</span>
-        <span>AI Configuration</span>
+        <span>AI Models &amp; Rates</span>
     </div>
     <div class="dash-head-title">
-        <h1>AI Configuration & Model Engine</h1>
+        <h1>AI Models, Providers &amp; Rates</h1>
         <div class="dash-head-actions">
             <button type="button" class="btn" id="btn-open-add-provider" style="display:inline-flex;align-items:center;gap:6px;background:var(--card-bg);border:1px solid var(--accent);color:var(--accent);font-weight:600;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 + Add AI Provider
             </button>
-            <a href="{{ route('dashboard.chat-sessions.index') }}" class="btn" style="display:inline-flex;align-items:center;gap:6px;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:16px;height:16px;" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                View Chat Logs
-            </a>
-            <button class="btn primary" type="submit" form="ai-config-form">Save All AI Settings</button>
+            <button class="btn primary" type="submit" form="ai-config-form">Save Model Settings</button>
         </div>
     </div>
-    <p class="dash-lead">Manage API credentials, view and copy authentication keys, configure custom endpoints (DeepSeek, Groq, Ollama), and select the active intelligence engine powering the public Azoogi AI Chat Assistant.</p>
+    <p class="dash-lead">Configure AI models (Anthropic Claude 3.5 Sonnet, Google Gemini 2.5 Flash, OpenAI GPT-4o Mini), manage API keys, test live connections, and inspect token pricing schedules.</p>
+
+    <!-- AI Subnavigation Tabs -->
+    <div style="display: flex; gap: 8px; margin-top: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px; flex-wrap: wrap;">
+        <a href="{{ route('dashboard.ai.models') }}" class="btn" style="background: var(--accent); color: #0b0b0b; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+            <span>Models &amp; Rates</span>
+        </a>
+        <a href="{{ route('dashboard.ai.widget') }}" class="btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 3v18M15 9h6M15 15h6"/></svg>
+            <span>Widget &amp; Branding</span>
+        </a>
+        <a href="{{ route('dashboard.ai.knowledge') }}" class="btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            <span>Knowledge, Rules &amp; FAQ</span>
+        </a>
+        <a href="{{ route('dashboard.chat-sessions.index') }}" class="btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <span>AI Chat Logs</span>
+        </a>
+    </div>
 </div>
 
 <!-- Copy Notification Toast (Floating) -->
