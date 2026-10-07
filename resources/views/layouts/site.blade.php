@@ -99,7 +99,7 @@
 @stack('styles')
 <script defer src="{{ versioned_asset('assets/js/site-theme.js') }}"></script>
 @if (trim($__env->yieldContent('chrome', 'full')) !== 'none')
-<script>const AZOOGI_PRODUCTS = @json($navigationCatalog ?? [], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);</script>
+<script>window.AZOOGI_PRODUCTS = @json($navigationCatalog ?? [], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);</script>
 <script>window.AZOOGI_QUOTE = { productsUrl: @json(route('quote.products')) };</script>
 <script defer src="{{ asset('assets/js/mega_menu.js') }}?v={{ config('app.asset_version') }}"></script>
 <script defer src="{{ versioned_asset('assets/js/site_header.js') }}"></script>
