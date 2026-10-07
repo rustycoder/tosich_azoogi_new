@@ -148,13 +148,14 @@ class AiConfigController extends Controller
     }
 
     /**
-     * Update Widget & Branding settings.
+     * Update Widget & Branding settings with image upload support and prompt chips.
      */
     public function updateWidget(Request $request): RedirectResponse
     {
         $validated = $request->validate([
             'ai_name' => ['required', 'string', 'max:100'],
-            'ai_avatar' => ['required', 'string', 'in:spark,lightbulb,leaf,building,robot,custom'],
+            'ai_avatar' => ['nullable', 'string', 'max:50'],
+            'ai_avatar_file' => ['nullable', 'image', 'mimes:png,jpg,jpeg,webp,svg', 'max:2048'],
             'ai_custom_avatar_url' => ['nullable', 'string', 'max:500'],
             'ai_subtitle' => ['required', 'string', 'max:150'],
             'startup_message' => ['required', 'string', 'max:1000'],
@@ -164,19 +165,30 @@ class AiConfigController extends Controller
             'intake_require_email' => ['nullable', 'boolean'],
             'intake_require_name' => ['nullable', 'boolean'],
             'starter_chips' => ['nullable', 'array'],
-            'starter_chips.*.icon' => ['nullable', 'string', 'max:20'],
-            'starter_chips.*.label' => ['required', 'string', 'max:80'],
-            'starter_chips.*.prompt' => ['required', 'string', 'max:250'],
         ]);
+
+        $existingBranding = ChatOrchestrator::getWidgetBranding();
+        $customAvatarUrl = ! empty($validated['ai_custom_avatar_url'])
+            ? trim($validated['ai_custom_avatar_url'])
+            : ($existingBranding['ai_custom_avatar_url'] ?? null);
+
+        if ($request->hasFile('ai_avatar_file') && $request->file('ai_avatar_file')->isValid()) {
+            $file = $request->file('ai_avatar_file');
+            $fileName = 'avatar_'.Str::uuid()->toString().'.'.$file->getClientOriginalExtension();
+            $file->storeAs('ai/avatars', $fileName, 'public');
+            $customAvatarUrl = '/storage/ai/avatars/'.$fileName;
+        }
 
         $starterChips = [];
         if (! empty($validated['starter_chips']) && is_array($validated['starter_chips'])) {
             foreach ($validated['starter_chips'] as $chip) {
-                if (! empty($chip['label']) && ! empty($chip['prompt'])) {
+                $promptText = is_array($chip)
+                    ? trim((string) ($chip['prompt'] ?? $chip['label'] ?? ''))
+                    : trim((string) $chip);
+
+                if ($promptText !== '') {
                     $starterChips[] = [
-                        'icon' => trim((string) ($chip['icon'] ?? '💡')),
-                        'label' => trim((string) $chip['label']),
-                        'prompt' => trim((string) $chip['prompt']),
+                        'prompt' => $promptText,
                     ];
                 }
             }
@@ -184,8 +196,8 @@ class AiConfigController extends Controller
 
         $brandingPayload = [
             'ai_name' => trim($validated['ai_name']),
-            'ai_avatar' => $validated['ai_avatar'],
-            'ai_custom_avatar_url' => ! empty($validated['ai_custom_avatar_url']) ? trim($validated['ai_custom_avatar_url']) : null,
+            'ai_avatar' => 'custom',
+            'ai_custom_avatar_url' => $customAvatarUrl,
             'ai_subtitle' => trim($validated['ai_subtitle']),
             'startup_message' => trim($validated['startup_message']),
             'lead_greeting_template' => ! empty($validated['lead_greeting_template']) ? trim($validated['lead_greeting_template']) : null,
@@ -210,35 +222,63 @@ class AiConfigController extends Controller
     }
 
     /**
-     * Display Knowledge, Rules & FAQ configuration view.
+     * Display AI System Rules configuration view.
      */
-    public function knowledge(): View
+    public function rules(): View
     {
         $knowledge = ChatOrchestrator::getKnowledgeRules();
-        $faqs = ChatOrchestrator::getFaqs();
         $compiledPrompt = app(ChatOrchestrator::class)->getSystemPrompt();
 
-        return view('dashboard.ai.knowledge', [
-            'knowledge' => $knowledge,
-            'faqs' => $faqs,
+        return view('dashboard.ai.rules', [
+            'ruleset' => $knowledge['ruleset'],
+            'rulesSections' => $knowledge['rules_sections'] ?? [],
             'compiledPrompt' => $compiledPrompt,
         ]);
     }
 
     /**
-     * Update Ruleset & Company Context.
+     * Update AI System Rules & Directives.
      */
-    public function updateKnowledge(Request $request): RedirectResponse
+    public function updateRules(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'ruleset' => ['required', 'string', 'max:5000'],
-            'company_context' => ['required', 'string', 'max:5000'],
+            'rules_tone' => ['nullable', 'string', 'max:2500'],
+            'rules_standards' => ['nullable', 'string', 'max:2500'],
+            'rules_specs' => ['nullable', 'string', 'max:2500'],
+            'rules_prohibitions' => ['nullable', 'string', 'max:2500'],
+            'rules_escalation' => ['nullable', 'string', 'max:2500'],
+            'rules_additional' => ['nullable', 'string', 'max:4000'],
+            'ruleset' => ['nullable', 'string', 'max:10000'],
         ]);
 
-        $payload = [
-            'ruleset' => trim($validated['ruleset']),
-            'company_context' => trim($validated['company_context']),
-        ];
+        $knowledge = ChatOrchestrator::getKnowledgeRules();
+        $hasSeparateFields = $request->has('rules_tone') || $request->has('rules_standards') || $request->has('rules_specs') || $request->has('rules_prohibitions') || $request->has('rules_escalation');
+
+        if ($hasSeparateFields) {
+            $sections = [
+                'tone' => trim((string) $request->input('rules_tone', '')),
+                'standards' => trim((string) $request->input('rules_standards', '')),
+                'specs' => trim((string) $request->input('rules_specs', '')),
+                'prohibitions' => trim((string) $request->input('rules_prohibitions', '')),
+                'escalation' => trim((string) $request->input('rules_escalation', '')),
+                'additional' => trim((string) $request->input('rules_additional', '')),
+            ];
+            $compiledRuleset = ChatOrchestrator::compileRuleset($sections);
+
+            $payload = [
+                'ruleset' => $compiledRuleset,
+                'rules_sections' => $sections,
+                'company_context' => $knowledge['company_context'],
+                'context_sections' => $knowledge['context_sections'] ?? [],
+            ];
+        } else {
+            $payload = [
+                'ruleset' => trim((string) ($validated['ruleset'] ?? '')),
+                'rules_sections' => $knowledge['rules_sections'] ?? [],
+                'company_context' => $knowledge['company_context'],
+                'context_sections' => $knowledge['context_sections'] ?? [],
+            ];
+        }
 
         LlmFeed::query()->updateOrCreate(
             ['key' => 'ai_knowledge_rules'],
@@ -249,8 +289,104 @@ class AiConfigController extends Controller
         );
 
         return redirect()
-            ->route('dashboard.ai.knowledge')
-            ->with('status', 'AI Ruleset & Company Context updated successfully.');
+            ->route('dashboard.ai.rules')
+            ->with('status', 'AI System Rules & Directives updated successfully.');
+    }
+
+    /**
+     * Display Company Context & Logistics configuration view.
+     */
+    public function context(): View
+    {
+        $knowledge = ChatOrchestrator::getKnowledgeRules();
+        $compiledPrompt = app(ChatOrchestrator::class)->getSystemPrompt();
+
+        return view('dashboard.ai.context', [
+            'company_context' => $knowledge['company_context'],
+            'contextSections' => $knowledge['context_sections'] ?? [],
+            'compiledPrompt' => $compiledPrompt,
+        ]);
+    }
+
+    /**
+     * Update Company Context & Manufacturing Policies.
+     */
+    public function updateContext(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'context_facility' => ['nullable', 'string', 'max:2500'],
+            'context_products' => ['nullable', 'string', 'max:2500'],
+            'context_fabrication' => ['nullable', 'string', 'max:2500'],
+            'context_dispatch' => ['nullable', 'string', 'max:2500'],
+            'context_warranty' => ['nullable', 'string', 'max:2500'],
+            'context_photometrics' => ['nullable', 'string', 'max:2500'],
+            'context_additional' => ['nullable', 'string', 'max:4000'],
+            'company_context' => ['nullable', 'string', 'max:10000'],
+        ]);
+
+        $knowledge = ChatOrchestrator::getKnowledgeRules();
+        $hasSeparateFields = $request->has('context_facility') || $request->has('context_products') || $request->has('context_fabrication') || $request->has('context_dispatch') || $request->has('context_warranty') || $request->has('context_photometrics');
+
+        if ($hasSeparateFields) {
+            $sections = [
+                'facility' => trim((string) $request->input('context_facility', '')),
+                'products' => trim((string) $request->input('context_products', '')),
+                'fabrication' => trim((string) $request->input('context_fabrication', '')),
+                'dispatch' => trim((string) $request->input('context_dispatch', '')),
+                'warranty' => trim((string) $request->input('context_warranty', '')),
+                'photometrics' => trim((string) $request->input('context_photometrics', '')),
+                'additional' => trim((string) $request->input('context_additional', '')),
+            ];
+            $compiledContext = ChatOrchestrator::compileContext($sections);
+
+            $payload = [
+                'ruleset' => $knowledge['ruleset'],
+                'rules_sections' => $knowledge['rules_sections'] ?? [],
+                'company_context' => $compiledContext,
+                'context_sections' => $sections,
+            ];
+        } else {
+            $payload = [
+                'ruleset' => $knowledge['ruleset'],
+                'rules_sections' => $knowledge['rules_sections'] ?? [],
+                'company_context' => trim((string) ($validated['company_context'] ?? '')),
+                'context_sections' => $knowledge['context_sections'] ?? [],
+            ];
+        }
+
+        LlmFeed::query()->updateOrCreate(
+            ['key' => 'ai_knowledge_rules'],
+            [
+                'content' => json_encode($payload, JSON_PRETTY_PRINT),
+                'is_custom' => true,
+            ]
+        );
+
+        return redirect()
+            ->route('dashboard.ai.context')
+            ->with('status', 'Company Context & Manufacturing Policies updated successfully.');
+    }
+
+    /**
+     * Display FAQ Knowledge Base management view.
+     */
+    public function faqs(): View
+    {
+        $faqs = ChatOrchestrator::getFaqs();
+        $compiledPrompt = app(ChatOrchestrator::class)->getSystemPrompt();
+
+        return view('dashboard.ai.faqs', [
+            'faqs' => $faqs,
+            'compiledPrompt' => $compiledPrompt,
+        ]);
+    }
+
+    /**
+     * Backward compatibility knowledge view alias.
+     */
+    public function knowledge(): View
+    {
+        return $this->rules();
     }
 
     /**
@@ -301,8 +437,8 @@ class AiConfigController extends Controller
         );
 
         return redirect()
-            ->route('dashboard.ai.knowledge')
-            ->with('status', 'FAQ item saved successfully.');
+            ->route('dashboard.ai.faqs')
+            ->with('status', 'FAQ Knowledge Item saved successfully.');
     }
 
     /**
@@ -322,7 +458,7 @@ class AiConfigController extends Controller
         );
 
         return redirect()
-            ->route('dashboard.ai.knowledge')
+            ->route('dashboard.ai.faqs')
             ->with('status', 'FAQ item removed.');
     }
 

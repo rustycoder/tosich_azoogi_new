@@ -22,26 +22,6 @@
         </div>
     </div>
     <p class="dash-lead">Define behavioral guidelines, tone of voice, forbidden claims, Sydney engineering &amp; manufacturing context, and maintain a verified FAQ knowledge base that the AI references to deliver 100% accurate responses.</p>
-
-    <!-- AI Subnavigation Tabs -->
-    <div style="display: flex; gap: 8px; margin-top: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px; flex-wrap: wrap;">
-        <a href="{{ route('dashboard.ai.models') }}" class="btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-            <span>Models &amp; Rates</span>
-        </a>
-        <a href="{{ route('dashboard.ai.widget') }}" class="btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 3v18M15 9h6M15 15h6"/></svg>
-            <span>Widget &amp; Branding</span>
-        </a>
-        <a href="{{ route('dashboard.ai.knowledge') }}" class="btn" style="background: var(--accent); color: #0b0b0b; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            <span>Knowledge, Rules &amp; FAQ</span>
-        </a>
-        <a href="{{ route('dashboard.chat-sessions.index') }}" class="btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-            <span>AI Chat Logs</span>
-        </a>
-    </div>
 </div>
 
 @if (session('status'))

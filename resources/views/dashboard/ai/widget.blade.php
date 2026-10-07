@@ -18,26 +18,6 @@
         </div>
     </div>
     <p class="dash-lead">Customize the public AI chat widget persona, assistant icon, display name, header subtitle, startup welcome greeting, starter prompt chips, and pre-chat intake behavior.</p>
-
-    <!-- AI Subnavigation Tabs -->
-    <div style="display: flex; gap: 8px; margin-top: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px; flex-wrap: wrap;">
-        <a href="{{ route('dashboard.ai.models') }}" class="btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-            <span>Models &amp; Rates</span>
-        </a>
-        <a href="{{ route('dashboard.ai.widget') }}" class="btn" style="background: var(--accent); color: #0b0b0b; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 3v18M15 9h6M15 15h6"/></svg>
-            <span>Widget &amp; Branding</span>
-        </a>
-        <a href="{{ route('dashboard.ai.knowledge') }}" class="btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            <span>Knowledge, Rules &amp; FAQ</span>
-        </a>
-        <a href="{{ route('dashboard.chat-sessions.index') }}" class="btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-            <span>AI Chat Logs</span>
-        </a>
-    </div>
 </div>
 
 @if (session('status'))
@@ -58,7 +38,7 @@
     </div>
 @endif
 
-<form id="ai-widget-form" method="POST" action="{{ route('dashboard.ai.widget.update') }}">
+<form id="ai-widget-form" method="POST" action="{{ route('dashboard.ai.widget.update') }}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 
@@ -73,62 +53,48 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; color: var(--accent);"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     <span>Assistant Persona &amp; Identity</span>
                 </div>
-                <p style="font-size: 12.5px; color: var(--dash-muted, var(--muted)); margin-top: 0; margin-bottom: 18px;">
-                    Configure how the AI introduces itself in the chat drawer header and website launcher.
+                <p style="font-size: 12.5px; color: var(--dash-muted, var(--muted)); margin-top: 0; margin-bottom: 20px;">
+                    Configure how the AI introduces itself in the chat drawer header, launcher button, and conversation threads.
                 </p>
 
-                <!-- Icon / Avatar Selector -->
-                <div style="margin-bottom: 20px;">
-                    <label style="display: block; font-size: 13px; font-weight: 600; color: var(--dash-ink, var(--ink)); margin-bottom: 8px;">
-                        Assistant Avatar Icon
-                    </label>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px;">
-                        <!-- Preset 1: Spark -->
-                        <label style="cursor: pointer; border: 1px solid {{ ($branding['ai_avatar'] ?? 'spark') === 'spark' ? 'var(--accent)' : 'var(--line)' }}; border-radius: 8px; padding: 12px; text-align: center; background: rgba(255, 255, 255, 0.02); display: flex; flex-direction: column; align-items: center; gap: 6px;" class="avatar-preset-card">
-                            <input type="radio" name="ai_avatar" value="spark" {{ ($branding['ai_avatar'] ?? 'spark') === 'spark' ? 'checked' : '' }} style="display: none;" onchange="updateAvatarSelection('spark')">
-                            <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #0b0b0b; display: flex; align-items: center; justify-content: center; font-size: 18px;">⚡</div>
-                            <span style="font-size: 11px; font-weight: 600; color: var(--dash-ink, var(--ink));">Spark (Default)</span>
-                        </label>
-
-                        <!-- Preset 2: Lightbulb -->
-                        <label style="cursor: pointer; border: 1px solid {{ ($branding['ai_avatar'] ?? '') === 'lightbulb' ? 'var(--accent)' : 'var(--line)' }}; border-radius: 8px; padding: 12px; text-align: center; background: rgba(255, 255, 255, 0.02); display: flex; flex-direction: column; align-items: center; gap: 6px;" class="avatar-preset-card">
-                            <input type="radio" name="ai_avatar" value="lightbulb" {{ ($branding['ai_avatar'] ?? '') === 'lightbulb' ? 'checked' : '' }} style="display: none;" onchange="updateAvatarSelection('lightbulb')">
-                            <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #0b0b0b; display: flex; align-items: center; justify-content: center; font-size: 18px;">💡</div>
-                            <span style="font-size: 11px; font-weight: 600; color: var(--dash-ink, var(--ink));">Luminaire</span>
-                        </label>
-
-                        <!-- Preset 3: Leaf -->
-                        <label style="cursor: pointer; border: 1px solid {{ ($branding['ai_avatar'] ?? '') === 'leaf' ? 'var(--accent)' : 'var(--line)' }}; border-radius: 8px; padding: 12px; text-align: center; background: rgba(255, 255, 255, 0.02); display: flex; flex-direction: column; align-items: center; gap: 6px;" class="avatar-preset-card">
-                            <input type="radio" name="ai_avatar" value="leaf" {{ ($branding['ai_avatar'] ?? '') === 'leaf' ? 'checked' : '' }} style="display: none;" onchange="updateAvatarSelection('leaf')">
-                            <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #0b0b0b; display: flex; align-items: center; justify-content: center; font-size: 18px;">🌿</div>
-                            <span style="font-size: 11px; font-weight: 600; color: var(--dash-ink, var(--ink));">Eco Leaf</span>
-                        </label>
-
-                        <!-- Preset 4: Building -->
-                        <label style="cursor: pointer; border: 1px solid {{ ($branding['ai_avatar'] ?? '') === 'building' ? 'var(--accent)' : 'var(--line)' }}; border-radius: 8px; padding: 12px; text-align: center; background: rgba(255, 255, 255, 0.02); display: flex; flex-direction: column; align-items: center; gap: 6px;" class="avatar-preset-card">
-                            <input type="radio" name="ai_avatar" value="building" {{ ($branding['ai_avatar'] ?? '') === 'building' ? 'checked' : '' }} style="display: none;" onchange="updateAvatarSelection('building')">
-                            <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #0b0b0b; display: flex; align-items: center; justify-content: center; font-size: 18px;">🏢</div>
-                            <span style="font-size: 11px; font-weight: 600; color: var(--dash-ink, var(--ink));">Architectural</span>
-                        </label>
-
-                        <!-- Preset 5: Robot -->
-                        <label style="cursor: pointer; border: 1px solid {{ ($branding['ai_avatar'] ?? '') === 'robot' ? 'var(--accent)' : 'var(--line)' }}; border-radius: 8px; padding: 12px; text-align: center; background: rgba(255, 255, 255, 0.02); display: flex; flex-direction: column; align-items: center; gap: 6px;" class="avatar-preset-card">
-                            <input type="radio" name="ai_avatar" value="robot" {{ ($branding['ai_avatar'] ?? '') === 'robot' ? 'checked' : '' }} style="display: none;" onchange="updateAvatarSelection('robot')">
-                            <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #0b0b0b; display: flex; align-items: center; justify-content: center; font-size: 18px;">🤖</div>
-                            <span style="font-size: 11px; font-weight: 600; color: var(--dash-ink, var(--ink));">Bot</span>
-                        </label>
-
-                        <!-- Preset 6: Custom URL -->
-                        <label style="cursor: pointer; border: 1px solid {{ ($branding['ai_avatar'] ?? '') === 'custom' ? 'var(--accent)' : 'var(--line)' }}; border-radius: 8px; padding: 12px; text-align: center; background: rgba(255, 255, 255, 0.02); display: flex; flex-direction: column; align-items: center; gap: 6px;" class="avatar-preset-card">
-                            <input type="radio" name="ai_avatar" value="custom" {{ ($branding['ai_avatar'] ?? '') === 'custom' ? 'checked' : '' }} style="display: none;" onchange="updateAvatarSelection('custom')">
-                            <div style="width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.1); color: var(--dash-ink, var(--ink)); display: flex; align-items: center; justify-content: center; font-size: 14px;">🖼️</div>
-                            <span style="font-size: 11px; font-weight: 600; color: var(--dash-ink, var(--ink));">Custom URL</span>
+                <!-- Icon Upload & Specifications Container -->
+                <div style="margin-bottom: 24px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <label class="dash-label" style="font-weight: 600; font-size: 13px; margin: 0;">
+                            Assistant Avatar Icon
                         </label>
                     </div>
 
-                    <div id="custom-avatar-url-row" style="margin-top: 10px; display: {{ ($branding['ai_avatar'] ?? '') === 'custom' ? 'block' : 'none' }};">
-                        <input type="url" name="ai_custom_avatar_url" id="ai_custom_avatar_url" class="dash-input" placeholder="https://example.com/logo.png" value="{{ old('ai_custom_avatar_url', $branding['ai_custom_avatar_url'] ?? '') }}" oninput="updatePreviewAvatar()">
-                        <span style="font-size: 11px; color: var(--dash-muted, var(--muted));">Paste full HTTPS URL to custom 1:1 image or SVG avatar.</span>
+                    <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--dash-line); border-radius: 12px; padding: 18px;">
+                        <!-- Specifications Card / Guidance Box -->
+                        <div style="background: rgba(103, 208, 78, 0.06); border: 1px solid rgba(103, 208, 78, 0.25); border-radius: 8px; padding: 12px 16px; margin-bottom: 16px;">
+                            <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: var(--accent); margin-bottom: 6px;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                <span>Icon Specifications &amp; Requirements</span>
+                            </div>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; font-size: 11.5px; color: var(--dash-ink, var(--ink));">
+                                <div>&bull; <strong>Aspect Ratio:</strong> 1:1 (Square)</div>
+                                <div>&bull; <strong>Resolution:</strong> 128&times;128px or 256&times;256px (Min: 64&times;64px)</div>
+                                <div>&bull; <strong>File Size:</strong> Max 2.0 MB</div>
+                                <div>&bull; <strong>Formats:</strong> PNG, SVG, WebP, JPG</div>
+                            </div>
+                        </div>
+
+                        <!-- Dropzone & File Input -->
+                        <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+                            <div style="position: relative; width: 72px; height: 72px; border-radius: 50%; overflow: hidden; background: var(--dash-fill-strong); border: 2px solid var(--accent); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                <img id="avatar-live-thumbnail" src="{{ !empty($branding['ai_custom_avatar_url']) ? $branding['ai_custom_avatar_url'] : '' }}" alt="Avatar Thumbnail" style="width: 100%; height: 100%; object-fit: cover; display: {{ !empty($branding['ai_custom_avatar_url']) ? 'block' : 'none' }};">
+                                <div id="avatar-placeholder-icon" style="font-size: 24px; color: var(--dash-muted, var(--muted)); display: {{ !empty($branding['ai_custom_avatar_url']) ? 'none' : 'block' }};">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 28px; height: 28px; color: var(--accent);"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                                </div>
+                            </div>
+
+                            <div style="flex: 1; min-width: 220px;">
+                                <label class="dash-label" for="ai_avatar_file" style="font-size: 12px; font-weight: 600; margin-bottom: 4px;">Upload New Icon File</label>
+                                <input type="file" name="ai_avatar_file" id="ai_avatar_file" accept="image/png,image/jpeg,image/webp,image/svg+xml" class="dash-input" style="padding: 9px 12px; font-size: 12px;" onchange="handleAvatarFileSelect(this)">
+                                <div style="font-size: 11px; color: var(--dash-muted, var(--muted)); margin-top: 4px;">Transparent PNG or SVG recommended for best rendering across all dark and light themes.</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -176,18 +142,19 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; color: var(--accent);"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                         <span>Starter Prompt Suggestion Chips</span>
                     </div>
-                    <button type="button" class="btn" onclick="addStarterChipRow()" style="font-size: 12px; padding: 6px 12px;">+ Add Chip</button>
+                    <button type="button" class="btn" onclick="addStarterChipRow()" style="font-size: 12px; padding: 6px 12px; border: 1px solid var(--accent); color: var(--accent);">+ Add Suggestion Chip</button>
                 </div>
                 <p style="font-size: 12.5px; color: var(--dash-muted, var(--muted)); margin-top: 0; margin-bottom: 16px;">
-                    Quick 1-click prompt suggestion buttons displayed inside the chat window.
+                    Quick 1-click prompt suggestion buttons displayed inside the chat window. Clicking a chip immediately submits the query to the AI.
                 </p>
 
                 <div id="starter-chips-container" style="display: flex; flex-direction: column; gap: 10px;">
                     @foreach ($branding['starter_chips'] as $i => $chip)
-                        <div class="chip-row" style="display: grid; grid-template-columns: 60px 140px 1fr 36px; gap: 8px; align-items: center; background: rgba(255,255,255,0.02); padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line);">
-                            <input type="text" name="starter_chips[{{ $i }}][icon]" value="{{ $chip['icon'] ?? '💡' }}" class="dash-input" style="text-align: center;" placeholder="Icon" oninput="updateLivePreview()">
-                            <input type="text" name="starter_chips[{{ $i }}][label]" value="{{ $chip['label'] ?? '' }}" class="dash-input" placeholder="Chip Label" required oninput="updateLivePreview()">
-                            <input type="text" name="starter_chips[{{ $i }}][prompt]" value="{{ $chip['prompt'] ?? '' }}" class="dash-input" placeholder="User Query Sent to AI" required>
+                        @php
+                            $promptVal = is_array($chip) ? ($chip['prompt'] ?? $chip['label'] ?? '') : (string) $chip;
+                        @endphp
+                        <div class="chip-row" style="display: grid; grid-template-columns: 1fr 36px; gap: 8px; align-items: center; background: rgba(255,255,255,0.02); padding: 8px 10px; border-radius: 8px; border: 1px solid var(--dash-line);">
+                            <input type="text" name="starter_chips[{{ $i }}][prompt]" value="{{ $promptVal }}" class="dash-input" placeholder="User Query Sent to AI (e.g. Show me outdoor garden lights)" required oninput="updateLivePreview()">
                             <button type="button" class="btn" style="padding: 0; display: flex; align-items: center; justify-content: center; color: #ef4444;" onclick="this.closest('.chip-row').remove(); updateLivePreview();" title="Remove Chip">✕</button>
                         </div>
                     @endforeach
@@ -247,8 +214,12 @@
                     <!-- Preview Header -->
                     <div style="padding: 14px 16px; background: rgba(22, 22, 22, 0.98); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: space-between;">
                         <div style="display: flex; align-items: center; gap: 10px;">
-                            <div id="preview-avatar-icon" style="width: 32px; height: 32px; border-radius: 50%; background: #67d04e; color: #0b0b0b; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; position: relative;">
-                                ⚡
+                            <div id="preview-avatar-icon" style="width: 32px; height: 32px; border-radius: 50%; background: #67d04e; color: #0b0b0b; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; position: relative; overflow: hidden;">
+                                @if (!empty($branding['ai_custom_avatar_url']))
+                                    <img src="{{ $branding['ai_custom_avatar_url'] }}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                                @else
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; color: #0b0b0b;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                                @endif
                                 <div style="position: absolute; bottom: 0; right: 0; width: 8px; height: 8px; border-radius: 50%; background: #10b981; border: 1.5px solid #161616;"></div>
                             </div>
                             <div>
@@ -272,9 +243,14 @@
                             <div style="font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #9a9a9a; margin-bottom: 6px;">Suggested Starters</div>
                             <div id="preview-chips-list" style="display: flex; flex-wrap: wrap; gap: 5px;">
                                 @foreach ($branding['starter_chips'] as $chip)
-                                    <span style="font-size: 11px; background: #222222; border: 1px solid rgba(255,255,255,0.12); color: #f3f3f3; padding: 4px 8px; border-radius: 12px;">
-                                        {{ $chip['icon'] ?? '💡' }} {{ $chip['label'] ?? '' }}
-                                    </span>
+                                    @php
+                                        $chipText = is_array($chip) ? ($chip['prompt'] ?? $chip['label'] ?? '') : (string) $chip;
+                                    @endphp
+                                    @if (!empty($chipText))
+                                        <span style="font-size: 11px; background: #222222; border: 1px solid rgba(255,255,255,0.12); color: #f3f3f3; padding: 4px 8px; border-radius: 12px;">
+                                            {{ $chipText }}
+                                        </span>
+                                    @endif
                                 @endforeach
                             </div>
                         </div>
@@ -308,49 +284,39 @@
 
 @push('scripts')
 <script>
-const avatarIcons = {
-    spark: '⚡',
-    lightbulb: '💡',
-    leaf: '🌿',
-    building: '🏢',
-    robot: '🤖'
-};
+let uploadedAvatarDataUrl = null;
 
-function updateAvatarSelection(preset) {
-    document.querySelectorAll('.avatar-preset-card').forEach(card => {
-        card.style.borderColor = 'var(--line)';
-    });
-    const selectedRadio = document.querySelector(`input[name="ai_avatar"][value="${preset}"]`);
-    if (selectedRadio) {
-        selectedRadio.checked = true;
-        selectedRadio.closest('.avatar-preset-card').style.borderColor = 'var(--accent)';
+function handleAvatarFileSelect(input) {
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            uploadedAvatarDataUrl = e.target.result;
+            const thumb = document.getElementById('avatar-live-thumbnail');
+            const placeholder = document.getElementById('avatar-placeholder-icon');
+            if (thumb) {
+                thumb.src = uploadedAvatarDataUrl;
+                thumb.style.display = 'block';
+            }
+            if (placeholder) {
+                placeholder.style.display = 'none';
+            }
+            updatePreviewAvatar();
+        };
+        reader.readAsDataURL(file);
     }
-
-    const customRow = document.getElementById('custom-avatar-url-row');
-    if (preset === 'custom') {
-        customRow.style.display = 'block';
-    } else {
-        customRow.style.display = 'none';
-    }
-
-    updatePreviewAvatar();
 }
 
 function updatePreviewAvatar() {
-    const selected = document.querySelector('input[name="ai_avatar"]:checked')?.value || 'spark';
     const previewEl = document.getElementById('preview-avatar-icon');
     if (!previewEl) return;
 
-    if (selected === 'custom') {
-        const url = document.getElementById('ai_custom_avatar_url')?.value;
-        if (url) {
-            previewEl.innerHTML = `<img src="${url}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"><div style="position: absolute; bottom: 0; right: 0; width: 8px; height: 8px; border-radius: 50%; background: #10b981; border: 1.5px solid #161616;"></div>`;
-            return;
-        }
+    const url = uploadedAvatarDataUrl || "{{ $branding['ai_custom_avatar_url'] ?? '' }}";
+    if (url) {
+        previewEl.innerHTML = `<img src="${url}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"><div style="position: absolute; bottom: 0; right: 0; width: 8px; height: 8px; border-radius: 50%; background: #10b981; border: 1.5px solid #161616;"></div>`;
+    } else {
+        previewEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; color: #0b0b0b;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><div style="position: absolute; bottom: 0; right: 0; width: 8px; height: 8px; border-radius: 50%; background: #10b981; border: 1.5px solid #161616;"></div>`;
     }
-
-    const iconChar = avatarIcons[selected] || '⚡';
-    previewEl.innerHTML = `${iconChar}<div style="position: absolute; bottom: 0; right: 0; width: 8px; height: 8px; border-radius: 50%; background: #10b981; border: 1.5px solid #161616;"></div>`;
 }
 
 function updateLivePreview() {
@@ -358,22 +324,28 @@ function updateLivePreview() {
     const subtitle = document.getElementById('ai_subtitle')?.value || 'Architectural & Smart Controls Specialist';
     const startup = document.getElementById('startup_message')?.value || 'Welcome to Azoogi Lighting!';
 
-    document.getElementById('preview-ai-name').textContent = name;
-    document.getElementById('preview-ai-subtitle').textContent = subtitle;
-    document.getElementById('preview-welcome-bubble').textContent = startup;
-    document.getElementById('preview-sender-name').textContent = name;
+    const nameEl = document.getElementById('preview-ai-name');
+    if (nameEl) nameEl.textContent = name;
+    
+    const subEl = document.getElementById('preview-ai-subtitle');
+    if (subEl) subEl.textContent = subtitle;
+    
+    const bubbleEl = document.getElementById('preview-welcome-bubble');
+    if (bubbleEl) bubbleEl.textContent = startup;
+    
+    const senderEl = document.getElementById('preview-sender-name');
+    if (senderEl) senderEl.textContent = name;
 
     // Update chips preview
     const chipsList = document.getElementById('preview-chips-list');
     if (chipsList) {
         chipsList.innerHTML = '';
         document.querySelectorAll('.chip-row').forEach(row => {
-            const icon = row.querySelector('input[name*="[icon]"]')?.value || '💡';
-            const label = row.querySelector('input[name*="[label]"]')?.value || '';
-            if (label) {
+            const prompt = row.querySelector('input[name*="[prompt]"]')?.value || '';
+            if (prompt.trim()) {
                 const span = document.createElement('span');
                 span.style.cssText = 'font-size: 11px; background: #222222; border: 1px solid rgba(255,255,255,0.12); color: #f3f3f3; padding: 4px 8px; border-radius: 12px;';
-                span.textContent = `${icon} ${label}`;
+                span.textContent = prompt.trim();
                 chipsList.appendChild(span);
             }
         });
@@ -387,15 +359,19 @@ function addStarterChipRow() {
     const index = container.querySelectorAll('.chip-row').length + Date.now();
     const row = document.createElement('div');
     row.className = 'chip-row';
-    row.style.cssText = 'display: grid; grid-template-columns: 60px 140px 1fr 36px; gap: 8px; align-items: center; background: rgba(255,255,255,0.02); padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line);';
+    row.style.cssText = 'display: grid; grid-template-columns: 1fr 36px; gap: 8px; align-items: center; background: rgba(255,255,255,0.02); padding: 8px 10px; border-radius: 8px; border: 1px solid var(--dash-line);';
     row.innerHTML = `
-        <input type="text" name="starter_chips[${index}][icon]" value="💡" class="dash-input" style="text-align: center;" placeholder="Icon" oninput="updateLivePreview()">
-        <input type="text" name="starter_chips[${index}][label]" value="" class="dash-input" placeholder="Chip Label" required oninput="updateLivePreview()">
-        <input type="text" name="starter_chips[${index}][prompt]" value="" class="dash-input" placeholder="User Query Sent to AI" required>
+        <input type="text" name="starter_chips[${index}][prompt]" value="" class="dash-input" placeholder="User Query Sent to AI (e.g. Show me outdoor garden lights)" required oninput="updateLivePreview()">
         <button type="button" class="btn" style="padding: 0; display: flex; align-items: center; justify-content: center; color: #ef4444;" onclick="this.closest('.chip-row').remove(); updateLivePreview();" title="Remove Chip">✕</button>
     `;
     container.appendChild(row);
+    row.querySelector('input').focus();
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    updatePreviewAvatar();
+});
 </script>
 @endpush
 @endsection
+

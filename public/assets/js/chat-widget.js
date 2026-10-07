@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('azoogi-chat-container');
     const closeBtn = document.getElementById('azoogi-chat-close');
     const resetBtn = document.getElementById('azoogi-chat-reset');
+    const emailTranscriptBtn = document.getElementById('azoogi-chat-email-transcript');
     const soundToggle = document.getElementById('azoogi-chat-sound-toggle');
     const body = document.getElementById('azoogi-chat-body');
     const input = document.getElementById('azoogi-chat-input');
@@ -86,6 +87,67 @@ document.addEventListener('DOMContentLoaded', () => {
 
     launcher?.addEventListener('click', () => toggleChat());
     closeBtn?.addEventListener('click', () => toggleChat(false));
+
+    // Forward transcript to sales team action
+    emailTranscriptBtn?.addEventListener('click', async () => {
+        if (!sessionUuid || getCachedMessages().length === 0) {
+            alert('Please start a conversation before emailing the transcript to our sales team.');
+            return;
+        }
+
+        let lead = getStoredLead() || {};
+        let email = lead.email;
+        if (!email) {
+            email = prompt('Please enter your email address so our sales engineering team can follow up with you:', '');
+            if (!email || !email.includes('@')) {
+                alert('A valid email address is required to forward the transcript.');
+                return;
+            }
+            lead.email = email.trim();
+            saveStoredLead(lead);
+        }
+
+        emailTranscriptBtn.disabled = true;
+        emailTranscriptBtn.style.opacity = '0.5';
+
+        try {
+            const res = await fetch('/api/chat/transcript/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': getCsrfToken()
+                },
+                body: JSON.stringify({
+                    session_uuid: sessionUuid,
+                    name: lead.name || null,
+                    email: lead.email || null,
+                    phone: lead.phone || null,
+                    company: lead.company || null,
+                    project_name: lead.project_name || null
+                })
+            });
+
+            const data = await res.json();
+            if (data.status === 'success') {
+                appendAssistantMessage(
+                    data.message || 'The conversation transcript and project specifications have been forwarded to our Sydney sales engineering desk.',
+                    data.cards || [],
+                    null,
+                    true
+                );
+                if (window.siteToast && typeof window.siteToast === 'function') {
+                    window.siteToast('Transcript successfully forwarded to sales@azoogi.com.au');
+                }
+            } else {
+                alert(data.message || 'Unable to forward transcript. Please try again or email sales@azoogi.com.au directly.');
+            }
+        } catch (err) {
+            alert('Network error forwarding transcript. Please try again.');
+        } finally {
+            emailTranscriptBtn.disabled = false;
+            emailTranscriptBtn.style.opacity = '1';
+        }
+    });
 
     // Sound toggle
     soundToggle?.addEventListener('click', () => {
@@ -176,6 +238,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     cardsHtml += renderProductDetailCard(card.data);
                 } else if (card.type === 'lead_confirmation_card') {
                     cardsHtml += renderLeadConfirmationCard(card);
+                } else if (card.type === 'transcript_sent_card') {
+                    cardsHtml += renderTranscriptSentCard(card);
                 }
             });
         }
@@ -313,6 +377,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="azoogi-chat-download-meta">
                     <div class="azoogi-chat-download-title">${title}</div>
                     <div class="azoogi-chat-download-sub">${sub}</div>
+                </div>
+            </div>
+        `;
+    };
+
+    // Transcript Sent Confirmation Card Template
+    const renderTranscriptSentCard = (data) => {
+        const recipient = data.recipient || 'sales@azoogi.com.au';
+        const leadText = data.lead_name || data.lead_email ? ` (${escapeHtml(data.lead_name || data.lead_email)})` : '';
+        return `
+            <div class="azoogi-chat-download-card" style="border-color: #67d04e;">
+                <div class="azoogi-chat-download-icon" style="background: rgba(103, 208, 78, 0.15); color: #67d04e;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                </div>
+                <div class="azoogi-chat-download-meta">
+                    <div class="azoogi-chat-download-title">Transcript Forwarded to Sales</div>
+                    <div class="azoogi-chat-download-sub">Sent to <strong>${escapeHtml(recipient)}</strong>${leadText} &bull; Our Sydney sales engineers will review your project requirements.</div>
                 </div>
             </div>
         `;
@@ -573,17 +657,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let liveBranding = {
         ai_name: 'Azoogi AI Assistant',
-        ai_avatar: 'spark',
+        ai_avatar: 'custom',
         ai_custom_avatar_url: null,
         ai_subtitle: 'Architectural & Smart Controls Specialist',
         startup_message: 'Welcome to Azoogi Lighting! How can our architectural engineering team assist with your project specifications, lighting schedules, or quotes today?',
         starter_chips: [
-            { icon: '🌿', label: 'Garden Lights', prompt: 'Show me outdoor garden lights' },
-            { icon: '💡', label: '80mm Downlights', prompt: 'I want to explore downlights with dimension Ø82mm x 80mm (H)' },
-            { icon: '🏢', label: 'Linear & DALI Profiles', prompt: 'Show commercial linear profiles with DALI dimming' },
-            { icon: '📝', label: 'How to Add to Quote?', prompt: 'How to add products to quote list?' },
-            { icon: '📋', label: 'View Quote Items', prompt: 'Show my quote list' },
-            { icon: '📄', label: 'Custom Datasheets', prompt: 'How do I generate a custom PDF datasheet?' }
+            { prompt: 'Show me outdoor garden lights' },
+            { prompt: 'I want to explore downlights with dimension Ø82mm x 80mm (H)' },
+            { prompt: 'Show commercial linear profiles with DALI dimming' },
+            { prompt: 'How to add products to quote list?' },
+            { prompt: 'Show my quote list' },
+            { prompt: 'How do I generate a custom PDF datasheet?' }
         ]
     };
 
@@ -608,19 +692,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const avatarEl = document.querySelector('.js-chat-avatar');
         if (avatarEl) {
-            const avatarMap = { spark: '⚡', lightbulb: '💡', leaf: '🌿', building: '🏢', robot: '🤖' };
-            if (liveBranding.ai_avatar === 'custom' && liveBranding.ai_custom_avatar_url) {
+            if (liveBranding.ai_custom_avatar_url) {
                 avatarEl.innerHTML = `<img src="${liveBranding.ai_custom_avatar_url}" alt="${liveBranding.ai_name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"><span class="azoogi-chat-status-dot"></span>`;
             } else {
-                const char = avatarMap[liveBranding.ai_avatar] || '⚡';
-                avatarEl.innerHTML = `${char}<span class="azoogi-chat-status-dot"></span>`;
+                avatarEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" style="color: #0b0b0b;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span class="azoogi-chat-status-dot"></span>`;
             }
         }
     }
 
     function renderWelcomeWithGreeting(greetingText) {
         const chipsHtml = (liveBranding.starter_chips || []).map(chip => {
-            return `<button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="${escapeHtml(chip.prompt)}">${escapeHtml(chip.icon || '💡')} ${escapeHtml(chip.label)}</button>`;
+            const text = (typeof chip === 'string') ? chip : (chip.prompt || chip.label || '');
+            if (!text) return '';
+            return `<button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="${escapeHtml(text)}">${escapeHtml(text)}</button>`;
         }).join('');
 
         body.innerHTML = `
@@ -713,7 +797,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Welcome Template
     function getWelcomeTemplate() {
         const chipsHtml = (liveBranding.starter_chips || []).map(chip => {
-            return `<button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="${escapeHtml(chip.prompt)}">${escapeHtml(chip.icon || '💡')} ${escapeHtml(chip.label)}</button>`;
+            const text = (typeof chip === 'string') ? chip : (chip.prompt || chip.label || '');
+            if (!text) return '';
+            return `<button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="${escapeHtml(text)}">${escapeHtml(text)}</button>`;
         }).join('');
 
         return `

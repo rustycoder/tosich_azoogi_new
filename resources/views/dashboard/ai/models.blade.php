@@ -22,26 +22,6 @@
         </div>
     </div>
     <p class="dash-lead">Configure AI models (Anthropic Claude 3.5 Sonnet, Google Gemini 2.5 Flash, OpenAI GPT-4o Mini), manage API keys, test live connections, and inspect token pricing schedules.</p>
-
-    <!-- AI Subnavigation Tabs -->
-    <div style="display: flex; gap: 8px; margin-top: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px; flex-wrap: wrap;">
-        <a href="{{ route('dashboard.ai.models') }}" class="btn" style="background: var(--accent); color: #0b0b0b; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-            <span>Models &amp; Rates</span>
-        </a>
-        <a href="{{ route('dashboard.ai.widget') }}" class="btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 3v18M15 9h6M15 15h6"/></svg>
-            <span>Widget &amp; Branding</span>
-        </a>
-        <a href="{{ route('dashboard.ai.knowledge') }}" class="btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            <span>Knowledge, Rules &amp; FAQ</span>
-        </a>
-        <a href="{{ route('dashboard.chat-sessions.index') }}" class="btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-            <span>AI Chat Logs</span>
-        </a>
-    </div>
 </div>
 
 <!-- Copy Notification Toast (Floating) -->
@@ -162,19 +142,19 @@
                         </p>
 
                         <!-- API Key Input -->
-                        <div class="dash-field" style="margin-bottom:12px;">
-                            <label style="font-size:12px;font-weight:600;margin-bottom:4px;display:flex;justify-content:space-between;">
+                        <div class="dash-field" style="margin-bottom:14px;">
+                            <label class="dash-label" style="display:flex;justify-content:space-between;align-items:center;">
                                 <span>Anthropic API Key</span>
-                                <span style="font-weight:normal;color:var(--muted);font-size:11px;">(Database Stored)</span>
+                                <span style="text-transform:none;font-weight:400;color:var(--dash-muted);font-size:10.5px;">(Database Stored)</span>
                             </label>
                             <div style="position:relative;display:flex;align-items:center;">
-                                <input type="password" name="anthropic_api_key" id="input_anthropic_api_key" value="{{ $aiConfig['anthropic_api_key'] ?? '' }}" placeholder="Paste Anthropic API Key (sk-ant-...)" style="width:100%;font-size:12px;padding:8px 68px 8px 12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;color:var(--ink);font-family:monospace;">
-                                <div style="position:absolute;right:6px;display:flex;align-items:center;gap:2px;">
-                                    <button type="button" class="js-toggle-key-visibility" data-target="input_anthropic_api_key" style="background:none;border:none;cursor:pointer;color:var(--muted);padding:4px;display:flex;align-items:center;" title="View / Hide API Key">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                <input type="password" name="anthropic_api_key" id="input_anthropic_api_key" class="dash-input" value="{{ $aiConfig['anthropic_api_key'] ?? '' }}" placeholder="Paste Anthropic API Key (sk-ant-...)" style="padding-right:72px;font-family:monospace;">
+                                <div style="position:absolute;right:8px;display:flex;align-items:center;gap:4px;">
+                                    <button type="button" class="btn js-toggle-key-visibility" data-target="input_anthropic_api_key" style="background:none;border:none;cursor:pointer;color:var(--dash-muted);padding:4px;display:flex;align-items:center;" title="View / Hide API Key">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                                     </button>
-                                    <button type="button" class="js-copy-key-btn" data-target="input_anthropic_api_key" style="background:none;border:none;cursor:pointer;color:var(--muted);padding:4px;display:flex;align-items:center;" title="Copy API Key to clipboard">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                    <button type="button" class="btn js-copy-key-btn" data-target="input_anthropic_api_key" style="background:none;border:none;cursor:pointer;color:var(--dash-muted);padding:4px;display:flex;align-items:center;" title="Copy API Key to clipboard">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                                     </button>
                                 </div>
                             </div>
@@ -182,8 +162,8 @@
 
                         <!-- Model Selector -->
                         <div class="dash-field" style="margin-bottom:0;">
-                            <label style="font-size:12px;font-weight:600;margin-bottom:4px;display:block;">Model Name</label>
-                            <input type="text" name="anthropic_model" id="input_anthropic_model" value="{{ old('anthropic_model', $aiConfig['anthropic_model'] ?? 'claude-3-5-sonnet-20241022') }}" list="anthropic_models_list" style="width:100%;font-size:12px;padding:8px 12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;color:var(--ink);font-family:monospace;">
+                            <label class="dash-label" for="input_anthropic_model">Model Name</label>
+                            <input type="text" name="anthropic_model" id="input_anthropic_model" class="dash-input" value="{{ old('anthropic_model', $aiConfig['anthropic_model'] ?? 'claude-3-5-sonnet-20241022') }}" list="anthropic_models_list" style="font-family:monospace;">
                             <datalist id="anthropic_models_list">
                                 <option value="claude-3-5-sonnet-20241022">claude-3-5-sonnet-20241022 (Recommended - High Quality)</option>
                                 <option value="claude-3-5-haiku-20241022">claude-3-5-haiku-20241022 (Fast & Economical)</option>
@@ -194,31 +174,31 @@
                 </div>
 
                 <!-- OpenRouter Option -->
-                <div class="provider-radio-card" style="border:2px solid {{ ($aiConfig['driver'] ?? '') === 'openrouter' ? 'var(--accent)' : 'var(--line)' }};background:var(--bg-2);border-radius:8px;padding:18px;position:relative;display:flex;flex-direction:column;justify-content:space-between;">
+                <div class="provider-radio-card" style="border:2px solid {{ ($aiConfig['driver'] ?? '') === 'openrouter' ? 'var(--accent)' : 'var(--dash-line)' }};background:var(--dash-card);border-radius:8px;padding:20px;position:relative;display:flex;flex-direction:column;justify-content:space-between;">
                     <div>
                         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-                            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;margin:0;white-space:nowrap;">
-                                <input type="radio" name="driver" value="openrouter" {{ ($aiConfig['driver'] ?? '') === 'openrouter' ? 'checked' : '' }} style="accent-color:var(--accent);transform:scale(1.15);">
-                                <span style="font-weight:700;font-size:16px;color:var(--ink);white-space:nowrap;">OpenRouter Gateway</span>
+                            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;margin:0;white-space:nowrap;text-transform:none;letter-spacing:normal;">
+                                <input type="radio" name="driver" value="openrouter" {{ ($aiConfig['driver'] ?? '') === 'openrouter' ? 'checked' : '' }} style="accent-color:var(--accent);width:16px;height:16px;">
+                                <span style="font-weight:700;font-size:15px;color:var(--dash-ink);white-space:nowrap;">OpenRouter Gateway</span>
                             </label>
                         </div>
-                        <p style="margin:0 0 16px 0;font-size:12px;color:var(--muted);line-height:1.4;">
+                        <p style="margin:0 0 16px 0;font-size:12px;color:var(--dash-muted);line-height:1.4;">
                             Single API key granting access to Claude, Llama 3.3, DeepSeek, Mistral, and more.
                         </p>
 
                         <!-- API Key Input -->
-                        <div class="dash-field" style="margin-bottom:12px;">
-                            <label style="font-size:12px;font-weight:600;margin-bottom:4px;display:flex;justify-content:space-between;">
+                        <div class="dash-field" style="margin-bottom:14px;">
+                            <label class="dash-label" style="display:flex;justify-content:space-between;align-items:center;">
                                 <span>OpenRouter API Key</span>
-                                <span style="font-weight:normal;color:var(--muted);font-size:11px;">(Database Stored)</span>
+                                <span style="text-transform:none;font-weight:400;color:var(--dash-muted);font-size:10.5px;">(Database Stored)</span>
                             </label>
                             <div style="position:relative;display:flex;align-items:center;">
-                                <input type="password" name="openrouter_api_key" id="input_openrouter_api_key" value="{{ $aiConfig['openrouter_api_key'] ?? '' }}" placeholder="Paste OpenRouter API Key (sk-or-v1-...)" style="width:100%;font-size:12px;padding:8px 68px 8px 12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;color:var(--ink);font-family:monospace;">
-                                <div style="position:absolute;right:6px;display:flex;align-items:center;gap:2px;">
-                                    <button type="button" class="js-toggle-key-visibility" data-target="input_openrouter_api_key" style="background:none;border:none;cursor:pointer;color:var(--muted);padding:4px;display:flex;align-items:center;" title="View / Hide API Key">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                <input type="password" name="openrouter_api_key" id="input_openrouter_api_key" class="dash-input" value="{{ $aiConfig['openrouter_api_key'] ?? '' }}" placeholder="Paste OpenRouter API Key (sk-or-v1-...)" style="padding-right:72px;font-family:monospace;">
+                                <div style="position:absolute;right:8px;display:flex;align-items:center;gap:4px;">
+                                    <button type="button" class="btn js-toggle-key-visibility" data-target="input_openrouter_api_key" style="background:none;border:none;cursor:pointer;color:var(--dash-muted);padding:4px;display:flex;align-items:center;" title="View / Hide API Key">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                                     </button>
-                                    <button type="button" class="js-copy-key-btn" data-target="input_openrouter_api_key" style="background:none;border:none;cursor:pointer;color:var(--muted);padding:4px;display:flex;align-items:center;" title="Copy API Key to clipboard">
+                                    <button type="button" class="btn js-copy-key-btn" data-target="input_openrouter_api_key" style="background:none;border:none;cursor:pointer;color:var(--dash-muted);padding:4px;display:flex;align-items:center;" title="Copy API Key to clipboard">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                                     </button>
                                 </div>
@@ -227,8 +207,8 @@
 
                         <!-- Model Selector -->
                         <div class="dash-field" style="margin-bottom:0;">
-                            <label style="font-size:12px;font-weight:600;margin-bottom:4px;display:block;">Model Name</label>
-                            <input type="text" name="openrouter_model" id="input_openrouter_model" value="{{ old('openrouter_model', $aiConfig['openrouter_model'] ?? 'anthropic/claude-3.5-sonnet') }}" list="openrouter_models_list" style="width:100%;font-size:12px;padding:8px 12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;color:var(--ink);font-family:monospace;">
+                            <label class="dash-label" for="input_openrouter_model">Model Name</label>
+                            <input type="text" name="openrouter_model" id="input_openrouter_model" class="dash-input" value="{{ old('openrouter_model', $aiConfig['openrouter_model'] ?? 'anthropic/claude-3.5-sonnet') }}" list="openrouter_models_list" style="font-family:monospace;">
                             <datalist id="openrouter_models_list">
                                 <option value="anthropic/claude-3.5-sonnet">anthropic/claude-3.5-sonnet</option>
                                 <option value="meta-llama/llama-3.3-70b-instruct">meta-llama/llama-3.3-70b-instruct</option>
@@ -241,31 +221,31 @@
                 </div>
 
                 <!-- Gemini Option -->
-                <div class="provider-radio-card" style="border:2px solid {{ ($aiConfig['driver'] ?? '') === 'gemini' ? 'var(--accent)' : 'var(--line)' }};background:var(--bg-2);border-radius:8px;padding:18px;position:relative;display:flex;flex-direction:column;justify-content:space-between;">
+                <div class="provider-radio-card" style="border:2px solid {{ ($aiConfig['driver'] ?? '') === 'gemini' ? 'var(--accent)' : 'var(--dash-line)' }};background:var(--dash-card);border-radius:8px;padding:20px;position:relative;display:flex;flex-direction:column;justify-content:space-between;">
                     <div>
                         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-                            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;margin:0;white-space:nowrap;">
-                                <input type="radio" name="driver" value="gemini" {{ ($aiConfig['driver'] ?? '') === 'gemini' ? 'checked' : '' }} style="accent-color:var(--accent);transform:scale(1.15);">
-                                <span style="font-weight:700;font-size:16px;color:var(--ink);white-space:nowrap;">Google Gemini</span>
+                            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;margin:0;white-space:nowrap;text-transform:none;letter-spacing:normal;">
+                                <input type="radio" name="driver" value="gemini" {{ ($aiConfig['driver'] ?? '') === 'gemini' ? 'checked' : '' }} style="accent-color:var(--accent);width:16px;height:16px;">
+                                <span style="font-weight:700;font-size:15px;color:var(--dash-ink);white-space:nowrap;">Google Gemini</span>
                             </label>
                         </div>
-                        <p style="margin:0 0 16px 0;font-size:12px;color:var(--muted);line-height:1.4;">
+                        <p style="margin:0 0 16px 0;font-size:12px;color:var(--dash-muted);line-height:1.4;">
                             High-speed multimodal models with fast reasoning and built-in function calling.
                         </p>
 
                         <!-- API Key Input -->
-                        <div class="dash-field" style="margin-bottom:12px;">
-                            <label style="font-size:12px;font-weight:600;margin-bottom:4px;display:flex;justify-content:space-between;">
+                        <div class="dash-field" style="margin-bottom:14px;">
+                            <label class="dash-label" style="display:flex;justify-content:space-between;align-items:center;">
                                 <span>Gemini API Key</span>
-                                <span style="font-weight:normal;color:var(--muted);font-size:11px;">(Database Stored)</span>
+                                <span style="text-transform:none;font-weight:400;color:var(--dash-muted);font-size:10.5px;">(Database Stored)</span>
                             </label>
                             <div style="position:relative;display:flex;align-items:center;">
-                                <input type="password" name="gemini_api_key" id="input_gemini_api_key" value="{{ $aiConfig['gemini_api_key'] ?? '' }}" placeholder="Paste Gemini API Key (AIzaSy...)" style="width:100%;font-size:12px;padding:8px 68px 8px 12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;color:var(--ink);font-family:monospace;">
-                                <div style="position:absolute;right:6px;display:flex;align-items:center;gap:2px;">
-                                    <button type="button" class="js-toggle-key-visibility" data-target="input_gemini_api_key" style="background:none;border:none;cursor:pointer;color:var(--muted);padding:4px;display:flex;align-items:center;" title="View / Hide API Key">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                <input type="password" name="gemini_api_key" id="input_gemini_api_key" class="dash-input" value="{{ $aiConfig['gemini_api_key'] ?? '' }}" placeholder="Paste Gemini API Key (AIzaSy...)" style="padding-right:72px;font-family:monospace;">
+                                <div style="position:absolute;right:8px;display:flex;align-items:center;gap:4px;">
+                                    <button type="button" class="btn js-toggle-key-visibility" data-target="input_gemini_api_key" style="background:none;border:none;cursor:pointer;color:var(--dash-muted);padding:4px;display:flex;align-items:center;" title="View / Hide API Key">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                                     </button>
-                                    <button type="button" class="js-copy-key-btn" data-target="input_gemini_api_key" style="background:none;border:none;cursor:pointer;color:var(--muted);padding:4px;display:flex;align-items:center;" title="Copy API Key to clipboard">
+                                    <button type="button" class="js-copy-key-btn" data-target="input_gemini_api_key" style="background:none;border:none;cursor:pointer;color:var(--dash-muted);padding:4px;display:flex;align-items:center;" title="Copy API Key to clipboard">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                                     </button>
                                 </div>
@@ -274,8 +254,8 @@
 
                         <!-- Model Selector -->
                         <div class="dash-field" style="margin-bottom:0;">
-                            <label style="font-size:12px;font-weight:600;margin-bottom:4px;display:block;">Model Name</label>
-                            <input type="text" name="gemini_model" id="input_gemini_model" value="{{ old('gemini_model', $aiConfig['gemini_model'] ?? 'gemini-2.5-flash') }}" list="gemini_models_list" style="width:100%;font-size:12px;padding:8px 12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;color:var(--ink);font-family:monospace;">
+                            <label class="dash-label" for="input_gemini_model">Model Name</label>
+                            <input type="text" name="gemini_model" id="input_gemini_model" class="dash-input" value="{{ old('gemini_model', $aiConfig['gemini_model'] ?? 'gemini-2.5-flash') }}" list="gemini_models_list" style="font-family:monospace;">
                             <datalist id="gemini_models_list">
                                 <option value="gemini-2.5-flash">gemini-2.5-flash (Fast & Cost Effective)</option>
                                 <option value="gemini-2.5-pro">gemini-2.5-pro (High Reasoning)</option>
@@ -287,31 +267,31 @@
                 </div>
 
                 <!-- OpenAI Option -->
-                <div class="provider-radio-card" style="border:2px solid {{ ($aiConfig['driver'] ?? '') === 'openai' ? 'var(--accent)' : 'var(--line)' }};background:var(--bg-2);border-radius:8px;padding:18px;position:relative;display:flex;flex-direction:column;justify-content:space-between;">
+                <div class="provider-radio-card" style="border:2px solid {{ ($aiConfig['driver'] ?? '') === 'openai' ? 'var(--accent)' : 'var(--dash-line)' }};background:var(--dash-card);border-radius:8px;padding:20px;position:relative;display:flex;flex-direction:column;justify-content:space-between;">
                     <div>
                         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-                            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;margin:0;white-space:nowrap;">
-                                <input type="radio" name="driver" value="openai" {{ ($aiConfig['driver'] ?? '') === 'openai' ? 'checked' : '' }} style="accent-color:var(--accent);transform:scale(1.15);">
-                                <span style="font-weight:700;font-size:16px;color:var(--ink);white-space:nowrap;">OpenAI Direct</span>
+                            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;margin:0;white-space:nowrap;text-transform:none;letter-spacing:normal;">
+                                <input type="radio" name="driver" value="openai" {{ ($aiConfig['driver'] ?? '') === 'openai' ? 'checked' : '' }} style="accent-color:var(--accent);width:16px;height:16px;">
+                                <span style="font-weight:700;font-size:15px;color:var(--dash-ink);white-space:nowrap;">OpenAI Direct</span>
                             </label>
                         </div>
-                        <p style="margin:0 0 16px 0;font-size:12px;color:var(--muted);line-height:1.4;">
+                        <p style="margin:0 0 16px 0;font-size:12px;color:var(--dash-muted);line-height:1.4;">
                             Direct API connection to OpenAI models including GPT-4o and lightweight mini models.
                         </p>
 
                         <!-- API Key Input -->
-                        <div class="dash-field" style="margin-bottom:12px;">
-                            <label style="font-size:12px;font-weight:600;margin-bottom:4px;display:flex;justify-content:space-between;">
+                        <div class="dash-field" style="margin-bottom:14px;">
+                            <label class="dash-label" style="display:flex;justify-content:space-between;align-items:center;">
                                 <span>OpenAI API Key</span>
-                                <span style="font-weight:normal;color:var(--muted);font-size:11px;">(Database Stored)</span>
+                                <span style="text-transform:none;font-weight:400;color:var(--dash-muted);font-size:10.5px;">(Database Stored)</span>
                             </label>
                             <div style="position:relative;display:flex;align-items:center;">
-                                <input type="password" name="openai_api_key" id="input_openai_api_key" value="{{ $aiConfig['openai_api_key'] ?? '' }}" placeholder="Paste OpenAI API Key (sk-...)" style="width:100%;font-size:12px;padding:8px 68px 8px 12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;color:var(--ink);font-family:monospace;">
-                                <div style="position:absolute;right:6px;display:flex;align-items:center;gap:2px;">
-                                    <button type="button" class="js-toggle-key-visibility" data-target="input_openai_api_key" style="background:none;border:none;cursor:pointer;color:var(--muted);padding:4px;display:flex;align-items:center;" title="View / Hide API Key">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                <input type="password" name="openai_api_key" id="input_openai_api_key" class="dash-input" value="{{ $aiConfig['openai_api_key'] ?? '' }}" placeholder="Paste OpenAI API Key (sk-...)" style="padding-right:72px;font-family:monospace;">
+                                <div style="position:absolute;right:8px;display:flex;align-items:center;gap:4px;">
+                                    <button type="button" class="js-toggle-key-visibility" data-target="input_openai_api_key" style="background:none;border:none;cursor:pointer;color:var(--dash-muted);padding:4px;display:flex;align-items:center;" title="View / Hide API Key">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                                     </button>
-                                    <button type="button" class="js-copy-key-btn" data-target="input_openai_api_key" style="background:none;border:none;cursor:pointer;color:var(--muted);padding:4px;display:flex;align-items:center;" title="Copy API Key to clipboard">
+                                    <button type="button" class="js-copy-key-btn" data-target="input_openai_api_key" style="background:none;border:none;cursor:pointer;color:var(--dash-muted);padding:4px;display:flex;align-items:center;" title="Copy API Key to clipboard">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                                     </button>
                                 </div>
@@ -320,8 +300,8 @@
 
                         <!-- Model Selector -->
                         <div class="dash-field" style="margin-bottom:0;">
-                            <label style="font-size:12px;font-weight:600;margin-bottom:4px;display:block;">Model Name</label>
-                            <input type="text" name="openai_model" id="input_openai_model" value="{{ old('openai_model', $aiConfig['openai_model'] ?? 'gpt-4o-mini') }}" list="openai_models_list" style="width:100%;font-size:12px;padding:8px 12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;color:var(--ink);font-family:monospace;">
+                            <label class="dash-label" for="input_openai_model">Model Name</label>
+                            <input type="text" name="openai_model" id="input_openai_model" class="dash-input" value="{{ old('openai_model', $aiConfig['openai_model'] ?? 'gpt-4o-mini') }}" list="openai_models_list" style="font-family:monospace;">
                             <datalist id="openai_models_list">
                                 <option value="gpt-4o-mini">gpt-4o-mini (Fast & Cost Effective)</option>
                                 <option value="gpt-4o">gpt-4o (Full Flagship)</option>
@@ -407,10 +387,10 @@
             </p>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;align-items:flex-end;margin-bottom:16px;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;align-items:flex-end;margin-bottom:16px;">
             <div class="dash-field" style="margin-bottom:0;">
-                <label style="font-size:12px;font-weight:600;margin-bottom:4px;display:block;">Provider to Ping</label>
-                <select id="test-driver-select" style="width:100%;font-size:13px;padding:8px 12px;background:var(--bg-2);border:1px solid var(--line);border-radius:6px;color:var(--ink);">
+                <label class="dash-label" for="test-driver-select">Provider to Ping</label>
+                <select id="test-driver-select" class="dash-select">
                     <optgroup label="Standard Built-in Providers">
                         <option value="anthropic" {{ ($aiConfig['driver'] ?? '') === 'anthropic' ? 'selected' : '' }}>Anthropic Claude</option>
                         <option value="openrouter" {{ ($aiConfig['driver'] ?? '') === 'openrouter' ? 'selected' : '' }}>OpenRouter Gateway</option>
@@ -428,13 +408,13 @@
             </div>
 
             <div class="dash-field" style="margin-bottom:0;">
-                <label style="font-size:12px;font-weight:600;margin-bottom:4px;display:block;">Model Override (Optional)</label>
-                <input type="text" id="test-model-input" placeholder="Leave empty for provider default" style="width:100%;font-size:13px;padding:8px 12px;background:var(--bg-2);border:1px solid var(--line);border-radius:6px;color:var(--ink);font-family:monospace;">
+                <label class="dash-label" for="test-model-input">Model Override (Optional)</label>
+                <input type="text" id="test-model-input" class="dash-input" placeholder="Leave empty for provider default" style="font-family:monospace;">
             </div>
 
             <div>
-                <button type="button" id="btn-run-ai-test" class="btn" style="width:100%;height:38px;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:600;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <button type="button" id="btn-run-ai-test" class="btn primary" style="width:100%;height:44px;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:600;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                     Run Live Ping Test
                 </button>
             </div>
@@ -568,14 +548,14 @@
 </div>
 
 <!-- Modal: Add Custom AI Provider -->
-<div id="add-provider-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);z-index:9999;align-items:center;justify-content:center;padding:20px;">
-    <div style="background:var(--bg-2);border:1px solid var(--line);border-radius:12px;width:100%;max-width:580px;box-shadow:0 20px 40px rgba(0,0,0,0.5);overflow:hidden;animation:fadeIn 0.2s ease;">
-        <div style="padding:20px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;">
+<div id="add-provider-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);z-index:9999;align-items:center;justify-content:center;padding:20px;">
+    <div style="background:var(--dash-card);border:1px solid var(--dash-line);border-radius:12px;width:100%;max-width:580px;box-shadow:0 24px 60px rgba(0,0,0,0.35);overflow:hidden;animation:fadeIn 0.2s ease;color:var(--dash-ink);">
+        <div style="padding:20px 24px;border-bottom:1px solid var(--dash-line);display:flex;justify-content:space-between;align-items:center;">
             <div>
-                <h3 style="margin:0 0 4px 0;font-size:18px;color:var(--ink);">Add Custom AI Provider</h3>
-                <p style="margin:0;font-size:12px;color:var(--muted);">Connect any third-party or local OpenAI/Anthropic/Gemini compatible endpoint.</p>
+                <h3 style="margin:0 0 4px 0;font-size:18px;color:var(--dash-ink);">Add Custom AI Provider</h3>
+                <p style="margin:0;font-size:12px;color:var(--dash-muted);">Connect any third-party or local OpenAI/Anthropic/Gemini compatible endpoint.</p>
             </div>
-            <button type="button" id="btn-close-modal" style="background:none;border:none;color:var(--muted);cursor:pointer;padding:4px;" aria-label="Close">
+            <button type="button" id="btn-close-modal" style="background:none;border:none;color:var(--dash-muted);cursor:pointer;padding:4px;" aria-label="Close">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
         </div>
@@ -598,13 +578,13 @@
 
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
                 <div class="dash-field" style="margin-bottom:0;">
-                    <label style="font-size:12px;font-weight:600;margin-bottom:4px;display:block;">Provider Display Name *</label>
-                    <input type="text" name="name" id="modal-name" required placeholder="e.g. DeepSeek AI" style="width:100%;font-size:13px;padding:8px 12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;color:var(--ink);">
+                    <label class="dash-label" for="modal-name">Provider Display Name *</label>
+                    <input type="text" name="name" id="modal-name" class="dash-input" required placeholder="e.g. DeepSeek AI">
                 </div>
 
                 <div class="dash-field" style="margin-bottom:0;">
-                    <label style="font-size:12px;font-weight:600;margin-bottom:4px;display:block;">API Protocol / Format *</label>
-                    <select name="type" id="modal-type" required style="width:100%;font-size:13px;padding:8px 12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;color:var(--ink);">
+                    <label class="dash-label" for="modal-type">API Protocol / Format *</label>
+                    <select name="type" id="modal-type" class="dash-select" required>
                         <option value="openai">OpenAI Compatible (Most Common)</option>
                         <option value="anthropic">Anthropic Compatible</option>
                         <option value="gemini">Google Gemini Compatible</option>
@@ -613,44 +593,44 @@
             </div>
 
             <div class="dash-field" style="margin-bottom:14px;">
-                <label style="font-size:12px;font-weight:600;margin-bottom:4px;display:block;">API Base Endpoint URL</label>
-                <input type="url" name="base_url" id="modal-url" placeholder="https://api.deepseek.com/v1" style="width:100%;font-size:13px;padding:8px 12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;color:var(--ink);font-family:monospace;">
-                <span style="font-size:11px;color:var(--muted);margin-top:3px;display:block;">Base URL before <code>/chat/completions</code>.</span>
+                <label class="dash-label" for="modal-url">API Base Endpoint URL</label>
+                <input type="url" name="base_url" id="modal-url" class="dash-input" placeholder="https://api.deepseek.com/v1" style="font-family:monospace;">
+                <span style="font-size:11px;color:var(--dash-muted);margin-top:3px;display:block;">Base URL before <code>/chat/completions</code>.</span>
             </div>
 
             <div class="dash-field" style="margin-bottom:14px;">
-                <label style="font-size:12px;font-weight:600;margin-bottom:4px;display:block;">API Key / Secret Token *</label>
+                <label class="dash-label" for="modal-key">API Key / Secret Token *</label>
                 <div style="position:relative;display:flex;align-items:center;">
-                    <input type="password" name="api_key" id="modal-key" required placeholder="sk-..." style="width:100%;font-size:13px;padding:8px 68px 8px 12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;color:var(--ink);font-family:monospace;">
-                    <div style="position:absolute;right:6px;display:flex;align-items:center;gap:2px;">
-                        <button type="button" class="js-toggle-key-visibility" data-target="modal-key" style="background:none;border:none;cursor:pointer;color:var(--muted);padding:4px;display:flex;align-items:center;" title="View / Hide API Key">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    <input type="password" name="api_key" id="modal-key" class="dash-input" required placeholder="sk-..." style="padding-right:72px;font-family:monospace;">
+                    <div style="position:absolute;right:8px;display:flex;align-items:center;gap:4px;">
+                        <button type="button" class="btn js-toggle-key-visibility" data-target="modal-key" style="background:none;border:none;cursor:pointer;color:var(--dash-muted);padding:4px;display:flex;align-items:center;" title="View / Hide API Key">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                         </button>
-                        <button type="button" class="js-copy-key-btn" data-target="modal-key" style="background:none;border:none;cursor:pointer;color:var(--muted);padding:4px;display:flex;align-items:center;" title="Copy API Key to clipboard">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        <button type="button" class="btn js-copy-key-btn" data-target="modal-key" style="background:none;border:none;cursor:pointer;color:var(--dash-muted);padding:4px;display:flex;align-items:center;" title="Copy API Key to clipboard">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                         </button>
                     </div>
                 </div>
             </div>
 
             <div class="dash-field" style="margin-bottom:14px;">
-                <label style="font-size:12px;font-weight:600;margin-bottom:4px;display:block;">Model Identifier *</label>
-                <input type="text" name="model" id="modal-model" required placeholder="e.g. deepseek-chat, llama-3.3-70b" style="width:100%;font-size:13px;padding:8px 12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;color:var(--ink);font-family:monospace;">
+                <label class="dash-label" for="modal-model">Model Identifier *</label>
+                <input type="text" name="model" id="modal-model" class="dash-input" required placeholder="e.g. deepseek-chat, llama-3.3-70b" style="font-family:monospace;">
             </div>
 
             <div class="dash-field" style="margin-bottom:18px;">
-                <label style="font-size:12px;font-weight:600;margin-bottom:4px;display:block;">Description / Notes (Optional)</label>
-                <input type="text" name="description" id="modal-desc" placeholder="e.g. High speed reasoning model for electrical architectural quotes" style="width:100%;font-size:13px;padding:8px 12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;color:var(--ink);">
+                <label class="dash-label" for="modal-desc">Description / Notes (Optional)</label>
+                <input type="text" name="description" id="modal-desc" class="dash-input" placeholder="e.g. High speed reasoning model for electrical architectural quotes">
             </div>
 
             <div style="margin-bottom:20px;">
-                <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;">
-                    <input type="checkbox" name="set_active" value="1" style="accent-color:var(--accent);">
-                    <span style="color:var(--ink);font-weight:600;">Set as Active AI Provider immediately upon creation</span>
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;text-transform:none;letter-spacing:normal;">
+                    <input type="checkbox" name="set_active" value="1" style="accent-color:var(--accent);width:16px;height:16px;">
+                    <span style="color:var(--dash-ink);font-weight:600;">Set as Active AI Provider immediately upon creation</span>
                 </label>
             </div>
 
-            <div style="display:flex;justify-content:flex-end;gap:10px;padding-top:16px;border-top:1px solid var(--line);">
+            <div style="display:flex;justify-content:flex-end;gap:10px;padding-top:16px;border-top:1px solid var(--dash-line);">
                 <button type="button" id="btn-cancel-modal" class="btn">Cancel</button>
                 <button type="submit" class="btn primary" style="font-weight:600;">Add & Save Provider</button>
             </div>

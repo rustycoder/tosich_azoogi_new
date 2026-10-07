@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ChatSession;
 use App\Models\Product;
 use App\Services\Chat\ChatOrchestrator;
+use App\Services\Chat\Tools\SendChatTranscriptToSalesTool;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -194,5 +195,33 @@ class ChatController extends Controller
         }
 
         return response()->json(['status' => 'success', 'message' => 'Chat session reset.']);
+    }
+
+    public function sendTranscript(Request $request, SendChatTranscriptToSalesTool $tool): JsonResponse
+    {
+        $validated = $request->validate([
+            'session_uuid' => 'required|string|uuid',
+            'name' => 'nullable|string|max:150',
+            'email' => 'nullable|email|max:150',
+            'phone' => 'nullable|string|max:50',
+            'company' => 'nullable|string|max:150',
+            'project_name' => 'nullable|string|max:255',
+            'notes' => 'nullable|string|max:1000',
+        ]);
+
+        $res = $tool->execute($validated);
+
+        if (($res['result']['status'] ?? '') === 'success') {
+            return response()->json([
+                'status' => 'success',
+                'message' => $res['result']['message'] ?? 'Transcript forwarded successfully to sales team.',
+                'cards' => ! empty($res['cards']) ? [$res['cards']] : [],
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'error',
+            'message' => $res['result']['message'] ?? 'Failed to send transcript.',
+        ], 422);
     }
 }

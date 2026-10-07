@@ -139,10 +139,18 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         Route::get('ai/widget', [AiConfigController::class, 'widget'])->name('ai.widget');
         Route::put('ai/widget', [AiConfigController::class, 'updateWidget'])->name('ai.widget.update');
 
-        Route::get('ai/knowledge', [AiConfigController::class, 'knowledge'])->name('ai.knowledge');
-        Route::put('ai/knowledge', [AiConfigController::class, 'updateKnowledge'])->name('ai.knowledge.update');
+        Route::get('ai/rules', [AiConfigController::class, 'rules'])->name('ai.rules');
+        Route::put('ai/rules', [AiConfigController::class, 'updateRules'])->name('ai.rules.update');
+
+        Route::get('ai/context', [AiConfigController::class, 'context'])->name('ai.context');
+        Route::put('ai/context', [AiConfigController::class, 'updateContext'])->name('ai.context.update');
+
+        Route::get('ai/faqs', [AiConfigController::class, 'faqs'])->name('ai.faqs');
         Route::post('ai/faqs', [AiConfigController::class, 'storeFaq'])->name('ai.faqs.store');
         Route::delete('ai/faqs/{id}', [AiConfigController::class, 'deleteFaq'])->name('ai.faqs.delete');
+
+        Route::get('ai/knowledge', [AiConfigController::class, 'knowledge'])->name('ai.knowledge');
+        Route::put('ai/knowledge', [AiConfigController::class, 'updateKnowledge'])->name('ai.knowledge.update');
 
         Route::get('content/llms', [LlmFeedController::class, 'index'])->name('llms.index');
         Route::put('content/llms', [LlmFeedController::class, 'update'])->name('llms.update');
@@ -207,4 +215,7 @@ Route::prefix('api/chat')->name('api.chat.')->group(function () {
         ->name('quote.add');
     Route::post('clear', [ApiChatController::class, 'clear'])
         ->name('clear');
+    Route::post('transcript/send', [ApiChatController::class, 'sendTranscript'])
+        ->middleware('throttle:30,1')
+        ->name('transcript.send');
 });

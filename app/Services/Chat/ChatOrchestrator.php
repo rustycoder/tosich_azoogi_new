@@ -17,6 +17,7 @@ use App\Services\Chat\Tools\CustomDatasheetGeneratorTool;
 use App\Services\Chat\Tools\ProductDetailsAndDownloadsTool;
 use App\Services\Chat\Tools\ProductSearchAndFilterTool;
 use App\Services\Chat\Tools\QuoteCartManagerTool;
+use App\Services\Chat\Tools\SendChatTranscriptToSalesTool;
 use App\Services\Chat\Tools\SubmitLeadEnquiryTool;
 use App\Services\Contracts\IVisitorOriginService;
 use Illuminate\Support\Facades\Log;
@@ -39,6 +40,7 @@ class ChatOrchestrator
         CustomDatasheetGeneratorTool $datasheetTool,
         QuoteCartManagerTool $quoteTool,
         SubmitLeadEnquiryTool $leadTool,
+        SendChatTranscriptToSalesTool $transcriptTool,
     ) {
         $this->tools = [
             $searchTool->getName() => $searchTool,
@@ -46,6 +48,7 @@ class ChatOrchestrator
             $datasheetTool->getName() => $datasheetTool,
             $quoteTool->getName() => $quoteTool,
             $leadTool->getName() => $leadTool,
+            $transcriptTool->getName() => $transcriptTool,
         ];
 
         $this->driver = $this->resolveDriver();
@@ -217,12 +220,12 @@ class ChatOrchestrator
     public static function getWidgetBranding(): array
     {
         $defaultChips = [
-            ['icon' => '🌿', 'label' => 'Garden Lights', 'prompt' => 'Show me outdoor garden lights'],
-            ['icon' => '💡', 'label' => '80mm Downlights', 'prompt' => 'I want to explore downlights with dimension Ø82mm x 80mm (H)'],
-            ['icon' => '🏢', 'label' => 'Linear & DALI Profiles', 'prompt' => 'Show commercial linear profiles with DALI dimming'],
-            ['icon' => '📝', 'label' => 'How to Add to Quote?', 'prompt' => 'How to add products to quote list?'],
-            ['icon' => '📋', 'label' => 'View Quote Items', 'prompt' => 'Show my quote list'],
-            ['icon' => '📄', 'label' => 'Custom Datasheets', 'prompt' => 'How do I generate a custom PDF datasheet?'],
+            ['prompt' => 'Show me outdoor garden lights'],
+            ['prompt' => 'I want to explore downlights with dimension Ø82mm x 80mm (H)'],
+            ['prompt' => 'Show commercial linear profiles with DALI dimming'],
+            ['prompt' => 'How to add products to quote list?'],
+            ['prompt' => 'Show my quote list'],
+            ['prompt' => 'How do I generate a custom PDF datasheet?'],
         ];
 
         $branding = [];
@@ -237,14 +240,31 @@ class ChatOrchestrator
         } catch (Throwable) {
         }
 
+        $chips = [];
+        $rawChips = ! empty($branding['starter_chips']) && is_array($branding['starter_chips']) ? $branding['starter_chips'] : $defaultChips;
+        foreach ($rawChips as $chip) {
+            if (is_string($chip) && trim($chip) !== '') {
+                $chips[] = ['prompt' => trim($chip)];
+            } elseif (is_array($chip) && (! empty($chip['prompt']) || ! empty($chip['label']))) {
+                $promptText = trim((string) ($chip['prompt'] ?? $chip['label'] ?? ''));
+                if ($promptText !== '') {
+                    $chips[] = [
+                        'prompt' => $promptText,
+                        'label' => ! empty($chip['label']) ? trim((string) $chip['label']) : $promptText,
+                        'icon' => ! empty($chip['icon']) ? trim((string) $chip['icon']) : null,
+                    ];
+                }
+            }
+        }
+
         return [
             'ai_name' => ! empty($branding['ai_name']) ? $branding['ai_name'] : 'Azoogi AI Assistant',
-            'ai_avatar' => ! empty($branding['ai_avatar']) ? $branding['ai_avatar'] : 'spark',
+            'ai_avatar' => ! empty($branding['ai_avatar']) ? $branding['ai_avatar'] : 'custom',
             'ai_custom_avatar_url' => $branding['ai_custom_avatar_url'] ?? null,
             'ai_subtitle' => ! empty($branding['ai_subtitle']) ? $branding['ai_subtitle'] : 'Architectural & Smart Controls Specialist',
             'startup_message' => ! empty($branding['startup_message']) ? $branding['startup_message'] : 'Welcome to Azoogi Lighting! How can our architectural engineering team assist with your project specifications, lighting schedules, or quotes today?',
             'lead_greeting_template' => $branding['lead_greeting_template'] ?? null,
-            'starter_chips' => ! empty($branding['starter_chips']) && is_array($branding['starter_chips']) ? $branding['starter_chips'] : $defaultChips,
+            'starter_chips' => ! empty($chips) ? $chips : $defaultChips,
             'intake_enabled' => $branding['intake_enabled'] ?? true,
             'intake_require_project' => $branding['intake_require_project'] ?? false,
             'intake_require_email' => $branding['intake_require_email'] ?? false,
@@ -254,21 +274,24 @@ class ChatOrchestrator
 
     public static function getKnowledgeRules(): array
     {
-        $defaultRuleset = <<<'RULES'
-- Provide concise, professional, and technically accurate responses tailored for architects, lighting designers, electrical engineers, and commercial contractors.
-- Strictly adhere to Australian Standards (AS/NZS 1158, AS/NZS 1680, AS/NZS 60598).
-- Suggest relevant beam angles, CCTs (2700K, 3000K, 4000K), CRI (CRI90+), IP ratings, and control protocols (DALI-2, Casambi BLE mesh, 0-10V, Triac).
-- When discussing custom LED profile lengths, remind users that custom cutting, diffusers, and endcaps are engineered to exact millimeter requirements.
-- Never provide fake product codes, false pricing guarantees, or unverifiable claims.
-RULES;
+        $defaultRulesSections = [
+            'tone' => 'Target Persona: Professional Trade Specialist. Deliver authoritative, technically rigorous advice for architects, lighting designers, and engineers (CRI90+, R9 values, MacAdam 3-step SDCM, beam spreads, UGR<19, IP ratings, thermal dissipation, lumens per watt, 24V constant voltage vs constant current, Casambi BLE mesh vs DALI-2). Deliver direct, practical, and clear guidance for sparkies, contractors, and counter staff (cut-lengths, driver wattage sizing with 20% headroom, polarity, IP connectors, aluminum heat sinking, and straightforward installation instructions).',
+            'standards' => 'Strictly adhere to Australian Standards (AS/NZS 1158, AS/NZS 1680, AS/NZS 60598, NCC Section J energy compliance, and SSL quality benchmarks).',
+            'specs' => 'Clarifying Protocol: Always ask 1-2 clarifying questions before final fixture recommendations (environment/IP rating: indoor IP20 vs outdoor/wet IP65/IP67; total run length/dimensions in meters; CCT: 2700K/3000K/4000K/RGBW; control protocol: Casambi, DALI-2, 0-10V, Triac). Suggest optimal beam angles, mounting profiles, and certified drivers.',
+            'prohibitions' => 'Strict Pricing Lockdown: Strictly locked down. You must NEVER display or quote trade or retail pricing in dollars ($) under any circumstances. Direct users to log into the Azoogi Trade Portal (https://portal.azoogi.com.au or /account/login) for wholesale pricing tiers, or direct them to add items to their quote list. Never invent fake product codes or unverifiable claims.',
+            'escalation' => 'Lead Times & Sales Transcript Handoff: Standard in-stock items dispatch in 24-48 hours from our Sydney warehouse; custom extrusion cutting and testing requires 3-5 business days. When discussing custom profile lengths, bespoke joinery, large project schedules over 50 fittings, or when the user finishes their queries, offer to forward the full chat transcript and fixture schedule to our Sydney sales engineering desk (sales@azoogi.com.au) using public_send_chat_transcript_to_sales.',
+            'additional' => '',
+        ];
 
-        $defaultCompanyContext = <<<'CONTEXT'
-- Manufacturer & Headquarters: Azoogi Lighting, Sydney, New South Wales, Australia.
-- Warehouse & Dispatch: Fast dispatch from Sydney warehouse across Australia and New Zealand.
-- Warranty: 5-year standard commercial warranty on architectural luminaires and drivers.
-- Custom Cutting & Assembly: 3-5 business day standard turnaround for custom profile extrusion cutting and testing.
-- Photometrics: IES and LDT files available for DiaLux and Relux simulations upon request.
-CONTEXT;
+        $defaultContextSections = [
+            'facility' => 'Azoogi Lighting operates a dedicated testing and custom extrusion fabrication facility in Sydney, New South Wales, Australia.',
+            'products' => 'Architectural linear profiles, custom LED strip extrusions, commercial downlights, track lighting, and smart controls ecosystems (Casambi, DALI-2, MADRIX).',
+            'fabrication' => 'Standard 3 to 5 business day turnaround for custom extrusion cutting, diffusers, endcaps, soldering, and photometric testing.',
+            'dispatch' => 'Fast dispatch from Sydney warehouse across Australia and New Zealand (in-stock items dispatch within 24-48 hours).',
+            'warranty' => '5-year standard commercial warranty on architectural luminaires and certified LED drivers.',
+            'photometrics' => 'IES and LDT photometric data files available for DiaLux and Relux simulations upon request.',
+            'additional' => '',
+        ];
 
         $data = [];
         try {
@@ -282,10 +305,76 @@ CONTEXT;
         } catch (Throwable) {
         }
 
+        $rulesSections = ! empty($data['rules_sections']) && is_array($data['rules_sections'])
+            ? array_merge($defaultRulesSections, $data['rules_sections'])
+            : $defaultRulesSections;
+
+        $contextSections = ! empty($data['context_sections']) && is_array($data['context_sections'])
+            ? array_merge($defaultContextSections, $data['context_sections'])
+            : $defaultContextSections;
+
+        $compiledRuleset = self::compileRuleset($rulesSections);
+        $compiledContext = self::compileContext($contextSections);
+
         return [
-            'ruleset' => ! empty($data['ruleset']) ? $data['ruleset'] : $defaultRuleset,
-            'company_context' => ! empty($data['company_context']) ? $data['company_context'] : $defaultCompanyContext,
+            'ruleset' => ! empty($data['ruleset']) ? $data['ruleset'] : $compiledRuleset,
+            'rules_sections' => $rulesSections,
+            'company_context' => ! empty($data['company_context']) ? $data['company_context'] : $compiledContext,
+            'context_sections' => $contextSections,
         ];
+    }
+
+    public static function compileRuleset(array $sections): string
+    {
+        $lines = [];
+        if (! empty($sections['tone'])) {
+            $lines[] = '- **Role & Tone of Voice:** '.trim($sections['tone']);
+        }
+        if (! empty($sections['standards'])) {
+            $lines[] = '- **Australian Standards & Compliance:** '.trim($sections['standards']);
+        }
+        if (! empty($sections['specs'])) {
+            $lines[] = '- **Technical Precision & Specification Suggestions:** '.trim($sections['specs']);
+        }
+        if (! empty($sections['prohibitions'])) {
+            $lines[] = '- **Strict Prohibitions & Forbidden Claims:** '.trim($sections['prohibitions']);
+        }
+        if (! empty($sections['escalation'])) {
+            $lines[] = '- **Human Escalation & Sales Desk Routing:** '.trim($sections['escalation']);
+        }
+        if (! empty($sections['additional'])) {
+            $lines[] = '- **Additional Directives:** '.trim($sections['additional']);
+        }
+
+        return implode("\n", $lines);
+    }
+
+    public static function compileContext(array $sections): string
+    {
+        $lines = [];
+        if (! empty($sections['facility'])) {
+            $lines[] = '- **Headquarters & Sydney Facility:** '.trim($sections['facility']);
+        }
+        if (! empty($sections['products'])) {
+            $lines[] = '- **Product Ranges & Core Competencies:** '.trim($sections['products']);
+        }
+        if (! empty($sections['fabrication'])) {
+            $lines[] = '- **Custom Cutting & Fabrication Turnaround:** '.trim($sections['fabrication']);
+        }
+        if (! empty($sections['dispatch'])) {
+            $lines[] = '- **Warehouse, Shipping & Dispatch:** '.trim($sections['dispatch']);
+        }
+        if (! empty($sections['warranty'])) {
+            $lines[] = '- **Commercial Warranty Policies:** '.trim($sections['warranty']);
+        }
+        if (! empty($sections['photometrics'])) {
+            $lines[] = '- **Photometrics & Lighting Simulation Support:** '.trim($sections['photometrics']);
+        }
+        if (! empty($sections['additional'])) {
+            $lines[] = '- **Additional Operational Notes:** '.trim($sections['additional']);
+        }
+
+        return implode("\n", $lines);
     }
 
     public static function getFaqs(): array
@@ -412,10 +501,19 @@ CONTEXT;
                     $toolName = $tc['name'];
                     $toolArgs = $tc['arguments'];
 
-                    // Inject session UUID if lead submission
-                    if (str_contains($toolName, 'lead_enquiry') || str_contains($toolName, 'quote_enquiry')) {
+                    // Inject session UUID & lead details if lead submission or transcript forwarding
+                    if (str_contains($toolName, 'lead_enquiry') || str_contains($toolName, 'quote_enquiry') || str_contains($toolName, 'transcript_to_sales')) {
                         if (empty($toolArgs['session_uuid'])) {
                             $toolArgs['session_uuid'] = $session->uuid;
+                        }
+                    }
+
+                    if (str_contains($toolName, 'transcript_to_sales')) {
+                        if (empty($toolArgs['name']) && ! empty($session->lead_name)) {
+                            $toolArgs['name'] = $session->lead_name;
+                        }
+                        if (empty($toolArgs['email']) && ! empty($session->lead_email)) {
+                            $toolArgs['email'] = $session->lead_email;
                         }
                     }
 
@@ -569,6 +667,13 @@ TOOL USAGE & CATALOG GUIDELINES:
 - When visitors ask for custom datasheets, call `generate_custom_datasheet`.
 - When visitors want to add items to their quote or view quote items, call `public_manage_quote_list`.
 
+PRICING & TRADE PORTAL PROTOCOL:
+- Strictly locked down: You must NEVER display or quote trade or retail pricing in dollars ($).
+- When asked for pricing, instruct the visitor to log into the Azoogi Trade Portal (https://portal.azoogi.com.au or /account/login) for trade accounts, or add products to their quote list to submit for formal pricing.
+
+SALES TRANSCRIPT HANDOFF (`public_send_chat_transcript_to_sales`):
+- When a client asks to forward their chat, when discussing complex project lead times, or when concluding their lighting consultation, call `public_send_chat_transcript_to_sales` to forward the conversation transcript, project specifications, and quote list to our Sydney sales engineering desk (sales@azoogi.com.au).
+
 ENQUIRIES & LEAD SUBMISSION (3 DISTINCT TYPES):
 You can submit 3 distinct types of enquiries via `public_submit_lead_enquiry`:
 
@@ -585,7 +690,7 @@ You can submit 3 distinct types of enquiries via `public_submit_lead_enquiry`:
    - Required information before submitting: Product Name/SKU, configured specs, Full Name, Email address, and Project location.
 
 IMPORTANT RULE:
-NEVER call `public_submit_lead_enquiry` with fake or blank details. Always politely ask the visitor to provide their name, email, and required details before calling the submission tool!
+NEVER call `public_submit_lead_enquiry` or `public_send_chat_transcript_to_sales` with fake details. Always confirm or politely ask the visitor to provide their name and email before submitting!
 TOOLS_PROMPT;
 
         if ($session && ($session->lead_name || $session->project_name)) {
