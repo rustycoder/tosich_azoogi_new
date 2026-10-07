@@ -2,3 +2,4 @@
 
 - `/products` with no `category` query is a parent-category gallery. Use the same categories as the home range marquee (`ProductCatalog::parentCategories()`). Gallery cards show title and the full stored category description when it exists — no fallback copy, no images, no line-clamp. Do not render search, tech filters, or product cards there.
 - The filtered catalogue (sidebar, search, product grid) only renders when `?category=` is present. Gallery cards, the mega menu, and the home marquee all link to `/products?category={name}`.
+- Global product catalog objects must be assigned to `window.AZOOGI_PRODUCTS` (never `const AZOOGI_PRODUCTS`) across layout and page scripts to prevent JS global redeclaration collisions between the lightweight navigation catalog in `layouts.site` and the full catalog in `pages.products`.
