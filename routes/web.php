@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ChatController as ApiChatController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Dashboard\AiConfigController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\ChatSessionController;
 use App\Http\Controllers\Dashboard\DashboardController;
@@ -128,6 +129,12 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         ->name('sections.update');
 
     Route::middleware('can.manage:pages')->group(function () {
+        Route::get('ai/config', [AiConfigController::class, 'index'])->name('ai.config');
+        Route::put('ai/config', [AiConfigController::class, 'update'])->name('ai.update');
+        Route::post('ai/test-connection', [AiConfigController::class, 'testConnection'])->name('ai.test-connection');
+        Route::post('ai/custom-provider', [AiConfigController::class, 'storeCustomProvider'])->name('ai.custom-provider.store');
+        Route::delete('ai/custom-provider/{id}', [AiConfigController::class, 'deleteCustomProvider'])->name('ai.custom-provider.delete');
+
         Route::get('content/llms', [LlmFeedController::class, 'index'])->name('llms.index');
         Route::put('content/llms', [LlmFeedController::class, 'update'])->name('llms.update');
         Route::post('content/llms/reset', [LlmFeedController::class, 'reset'])->name('llms.reset');

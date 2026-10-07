@@ -14,12 +14,12 @@ class GeminiDriver implements IChatLlmDriver
 {
     public function __construct(
         protected ?string $apiKey = null,
-        protected string $model = 'gemini-3.5-flash-lite',
-        protected string $baseUrl = 'https://generativelanguage.googleapis.com/v1beta/openai',
+        protected ?string $model = null,
+        protected ?string $baseUrl = null,
     ) {
         $this->apiKey = $apiKey ?: (string) config('services.gemini.api_key', env('GEMINI_API_KEY'));
-        $this->model = (string) config('services.gemini.model', env('GEMINI_MODEL', 'gemini-3.5-flash-lite'));
-        $this->baseUrl = rtrim((string) config('services.gemini.base_url', env('GEMINI_BASE_URL', 'https://generativelanguage.googleapis.com/v1beta/openai')), '/');
+        $this->model = $model ?: (string) config('services.gemini.model', env('GEMINI_MODEL', 'gemini-2.5-flash'));
+        $this->baseUrl = rtrim($baseUrl ?: (string) config('services.gemini.base_url', env('GEMINI_BASE_URL', 'https://generativelanguage.googleapis.com/v1beta/openai')), '/');
     }
 
     /**

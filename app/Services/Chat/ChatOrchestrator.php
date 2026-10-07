@@ -6,6 +6,7 @@ namespace App\Services\Chat;
 
 use App\Models\ChatMessage;
 use App\Models\ChatSession;
+use App\Models\LlmFeed;
 use App\Services\Chat\Contracts\IChatLlmDriver;
 use App\Services\Chat\Contracts\IChatTool;
 use App\Services\Chat\Drivers\AnthropicDriver;
@@ -51,23 +52,114 @@ class ChatOrchestrator
         $this->driver = $this->resolveDriver();
     }
 
+    public static function getActiveAiConfig(): array
+    {
+        $dbConfig = [];
+        try {
+            $feed = LlmFeed::query()->where('key', 'ai_chat_config')->first();
+            if ($feed && ! empty($feed->content)) {
+                $decoded = json_decode((string) $feed->content, true);
+                if (is_array($decoded)) {
+                    $dbConfig = $decoded;
+                }
+            }
+        } catch (Throwable) {
+            // DB not available during early boot or testing
+        }
+
+        return [
+            'driver' => $dbConfig['driver'] ?? config('services.chat.driver', env('CHAT_LLM_DRIVER', 'gemini')),
+            'gemini_api_key' => ! empty($dbConfig['gemini_api_key']) ? $dbConfig['gemini_api_key'] : config('services.gemini.api_key', env('GEMINI_API_KEY')),
+            'gemini_model' => ! empty($dbConfig['gemini_model']) ? $dbConfig['gemini_model'] : config('services.gemini.model', env('GEMINI_MODEL', 'gemini-2.5-flash')),
+            'anthropic_api_key' => ! empty($dbConfig['anthropic_api_key']) ? $dbConfig['anthropic_api_key'] : config('services.anthropic.api_key', env('ANTHROPIC_API_KEY')),
+            'anthropic_model' => ! empty($dbConfig['anthropic_model']) ? $dbConfig['anthropic_model'] : config('services.anthropic.chat_model', env('ANTHROPIC_CHAT_MODEL', 'claude-3-5-sonnet-20241022')),
+            'openrouter_api_key' => ! empty($dbConfig['openrouter_api_key']) ? $dbConfig['openrouter_api_key'] : config('services.openrouter.api_key', env('OPENROUTER_API_KEY')),
+            'openrouter_model' => ! empty($dbConfig['openrouter_model']) ? $dbConfig['openrouter_model'] : config('services.openrouter.model', env('OPENROUTER_MODEL', 'anthropic/claude-3.5-sonnet')),
+            'openai_api_key' => ! empty($dbConfig['openai_api_key']) ? $dbConfig['openai_api_key'] : config('services.openai.api_key', env('OPENAI_API_KEY')),
+            'openai_model' => ! empty($dbConfig['openai_model']) ? $dbConfig['openai_model'] : config('services.openai.chat_model', env('OPENAI_CHAT_MODEL', 'gpt-4o-mini')),
+            'custom_providers' => is_array($dbConfig['custom_providers'] ?? null) ? $dbConfig['custom_providers'] : [],
+        ];
+    }
+
+    public static function makeDriver(
+        string $driverName,
+        ?string $model = null,
+        ?string $apiKey = null,
+        ?string $baseUrl = null,
+        ?string $type = null
+    ): IChatLlmDriver {
+        $driverName = strtolower(trim($driverName));
+        $config = self::getActiveAiConfig();
+        $customProviders = $config['custom_providers'] ?? [];
+
+        // Check if $driverName matches a custom provider registered in DB
+        if (isset($customProviders[$driverName])) {
+            $cp = $customProviders[$driverName];
+            $driverType = $type ?: ($cp['type'] ?? 'openai');
+            $resolvedKey = $apiKey ?: ($cp['api_key'] ?? null);
+            $resolvedModel = $model ?: ($cp['model'] ?? null);
+            $resolvedBaseUrl = $baseUrl ?: ($cp['base_url'] ?? null);
+
+            return match ($driverType) {
+                'anthropic' => new AnthropicDriver(apiKey: $resolvedKey, model: $resolvedModel),
+                'gemini' => new GeminiDriver(apiKey: $resolvedKey, model: $resolvedModel, baseUrl: $resolvedBaseUrl),
+                default => new OpenAiDriver(
+                    apiKey: $resolvedKey,
+                    model: $resolvedModel ?: 'gpt-4o-mini',
+                    baseUrl: $resolvedBaseUrl ?: 'https://api.openai.com/v1'
+                ),
+            };
+        }
+
+        return match ($driverName) {
+            'gemini' => new GeminiDriver(
+                apiKey: $apiKey ?: ($config['gemini_api_key'] ?? null),
+                model: $model ?: ($config['gemini_model'] ?? null),
+                baseUrl: $baseUrl,
+            ),
+            'anthropic' => new AnthropicDriver(
+                apiKey: $apiKey ?: ($config['anthropic_api_key'] ?? null),
+                model: $model ?: ($config['anthropic_model'] ?? null),
+            ),
+            'openrouter' => new OpenAiDriver(
+                apiKey: $apiKey ?: ($config['openrouter_api_key'] ?? null),
+                model: $model ?: ($config['openrouter_model'] ?? null),
+                baseUrl: $baseUrl ?: (string) config('services.openrouter.base_url', env('OPENROUTER_BASE_URL', 'https://openrouter.ai/api/v1')),
+            ),
+            'openai' => new OpenAiDriver(
+                apiKey: $apiKey ?: ($config['openai_api_key'] ?? null),
+                model: $model ?: ($config['openai_model'] ?? null),
+                baseUrl: $baseUrl ?: (string) config('services.openai.base_url', env('OPENAI_BASE_URL', 'https://api.openai.com/v1')),
+            ),
+            default => app(MockLlmDriver::class),
+        };
+    }
+
     protected function resolveDriver(): IChatLlmDriver
     {
-        $driverName = strtolower((string) config('services.chat.driver', env('CHAT_LLM_DRIVER', 'auto')));
+        $aiConfig = self::getActiveAiConfig();
+        $driverName = strtolower((string) ($aiConfig['driver'] ?? config('services.chat.driver', env('CHAT_LLM_DRIVER', 'auto'))));
 
-        if ($driverName === 'gemini' || (! empty(env('GEMINI_API_KEY')) && $driverName === 'auto')) {
-            return app(GeminiDriver::class);
+        if ($driverName !== 'auto') {
+            return self::makeDriver($driverName);
         }
 
-        if ($driverName === 'openai' || (! empty(env('OPENAI_API_KEY')) && $driverName === 'auto')) {
-            return app(OpenAiDriver::class);
+        if (! empty($aiConfig['anthropic_api_key'])) {
+            return self::makeDriver('anthropic');
         }
 
-        if ($driverName === 'anthropic' || (! empty(env('ANTHROPIC_API_KEY')) && $driverName === 'auto')) {
-            return app(AnthropicDriver::class);
+        if (! empty($aiConfig['openrouter_api_key'])) {
+            return self::makeDriver('openrouter');
         }
 
-        // Fallback mock driver when no keys configured
+        if (! empty($aiConfig['gemini_api_key'])) {
+            return self::makeDriver('gemini');
+        }
+
+        if (! empty($aiConfig['openai_api_key'])) {
+            return self::makeDriver('openai');
+        }
+
         return app(MockLlmDriver::class);
     }
 

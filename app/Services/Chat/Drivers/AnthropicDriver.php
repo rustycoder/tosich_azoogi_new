@@ -14,10 +14,10 @@ class AnthropicDriver implements IChatLlmDriver
 {
     public function __construct(
         protected ?string $apiKey = null,
-        protected string $model = 'claude-3-5-haiku-20241022',
+        protected ?string $model = null,
     ) {
         $this->apiKey = $apiKey ?: (string) config('services.anthropic.api_key', env('ANTHROPIC_API_KEY'));
-        $this->model = (string) config('services.anthropic.chat_model', env('ANTHROPIC_CHAT_MODEL', 'claude-3-5-haiku-20241022'));
+        $this->model = $model ?: (string) config('services.anthropic.chat_model', env('ANTHROPIC_CHAT_MODEL', 'claude-3-5-sonnet-20241022'));
     }
 
     public function chat(array $messages, array $tools = [], string $systemPrompt = ''): array

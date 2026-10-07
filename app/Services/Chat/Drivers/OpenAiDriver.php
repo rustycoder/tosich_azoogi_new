@@ -14,12 +14,12 @@ class OpenAiDriver implements IChatLlmDriver
 {
     public function __construct(
         protected ?string $apiKey = null,
-        protected string $model = 'gpt-4o-mini',
-        protected string $baseUrl = 'https://api.openai.com/v1',
+        protected ?string $model = null,
+        protected ?string $baseUrl = null,
     ) {
         $this->apiKey = $apiKey ?: (string) config('services.openai.api_key', env('OPENAI_API_KEY'));
-        $this->model = (string) config('services.openai.chat_model', env('OPENAI_CHAT_MODEL', 'gpt-4o-mini'));
-        $this->baseUrl = rtrim((string) config('services.openai.base_url', env('OPENAI_BASE_URL', 'https://api.openai.com/v1')), '/');
+        $this->model = $model ?: (string) config('services.openai.chat_model', env('OPENAI_CHAT_MODEL', 'gpt-4o-mini'));
+        $this->baseUrl = rtrim($baseUrl ?: (string) config('services.openai.base_url', env('OPENAI_BASE_URL', 'https://api.openai.com/v1')), '/');
     }
 
     public function chat(array $messages, array $tools = [], string $systemPrompt = ''): array

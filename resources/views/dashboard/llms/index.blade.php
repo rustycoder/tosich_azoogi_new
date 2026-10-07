@@ -9,11 +9,15 @@
         <span>/</span>
         <span>Content Management</span>
         <span>/</span>
-        <span>AI & LLM Feeds</span>
+        <span>LLM Feeds (/llms.txt)</span>
     </div>
     <div class="dash-head-title">
-        <h1>AI & LLM Feeds (<code>/llms.txt</code>)</h1>
+        <h1>LLM Feeds (<code>/llms.txt</code> &amp; <code>/llms-full.txt</code>)</h1>
         <div class="dash-head-actions">
+            <a href="{{ route('dashboard.ai.config') }}" class="btn" style="display:inline-flex;align-items:center;gap:6px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:16px;height:16px;" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                AI Model &amp; Key Settings &rarr;
+            </a>
             <a href="{{ url('/llms.txt') }}" target="_blank" class="btn" style="display:inline-flex;align-items:center;gap:6px;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width:16px;height:16px;" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                 View /llms.txt
@@ -32,7 +36,7 @@
             <button class="btn primary" type="submit" form="llm-feed-form">Save Changes</button>
         </div>
     </div>
-    <p class="dash-lead">Manage machine-readable Markdown files consumed by AI models (ChatGPT, Perplexity, Claude, Gemini, Copilot) for brand authority and accurate product citations.</p>
+    <p class="dash-lead">Manage machine-readable Markdown files consumed by external AI search engines (ChatGPT, Perplexity, Claude, Gemini, Copilot) for brand authority and product citations.</p>
 </div>
 
 @if (session('status'))
@@ -65,7 +69,7 @@
     <div class="dash-card" style="padding:16px 20px;">
         <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;font-weight:600;margin-bottom:6px;">Showcase Projects</div>
         <div style="font-size:24px;font-weight:700;color:var(--ink);">{{ number_format($projectsCount) }}</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:4px;">Included with descriptions & tags</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px;">Included with descriptions &amp; tags</div>
     </div>
 
     <div class="dash-card" style="padding:16px 20px;">
@@ -76,7 +80,7 @@
 </div>
 
 <!-- Tab Navigation -->
-<div class="dash-tabs" style="display:flex;gap:8px;border-bottom:1px solid var(--line);margin-bottom:20px;">
+<div class="dash-tabs" style="display:flex;gap:8px;border-bottom:1px solid var(--line);margin-bottom:20px;flex-wrap:wrap;">
     <button type="button" class="dash-tab is-active" data-tab-target="tab-editor" style="padding:10px 16px;font-weight:600;font-size:14px;cursor:pointer;border:none;background:none;border-bottom:2px solid var(--accent);color:var(--ink);">
         Editor (<code>/llms.txt</code>)
     </button>
@@ -87,7 +91,7 @@
         Full Feed Preview (<code>/llms-full.txt</code>)
     </button>
     <button type="button" class="dash-tab" data-tab-target="tab-guidelines" style="padding:10px 16px;font-weight:600;font-size:14px;cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;color:var(--muted);">
-        AI Engine & GEO Handbook
+        AI Engine &amp; GEO Handbook
     </button>
 </div>
 
@@ -194,9 +198,9 @@
 
         <h3 style="font-size:15px;margin:20px 0 10px 0;">Key Best Practices for Architectural Lighting Feeds:</h3>
         <ul style="margin:0;padding-left:20px;font-size:14px;line-height:1.7;color:var(--muted);">
-            <li><strong style="color:var(--ink);">Geographic & Operational Clarity:</strong> Explicitly state HQ location (Matraville NSW) and clear business model (Sydney in-house assembly & profile cutting, supply & commissioning, with installation completed by electrical contractors).</li>
-            <li><strong style="color:var(--ink);">Compliance & Warranties:</strong> Mention Australian Standards compliance, EESS, and warranty terms (up to 5 years).</li>
-            <li><strong style="color:var(--ink);">Engineering & Photometric Tools:</strong> Highlight DIALux/AGi32 report support, direct IES file availability, and the LED Strip Calculator.</li>
+            <li><strong style="color:var(--ink);">Geographic &amp; Operational Clarity:</strong> Explicitly state HQ location (Matraville NSW) and clear business model (Sydney in-house assembly &amp; profile cutting, supply &amp; commissioning, with installation completed by electrical contractors).</li>
+            <li><strong style="color:var(--ink);">Compliance &amp; Warranties:</strong> Mention Australian Standards compliance, EESS, and warranty terms (up to 5 years).</li>
+            <li><strong style="color:var(--ink);">Engineering &amp; Photometric Tools:</strong> Highlight DIALux/AGi32 report support, direct IES file availability, and the LED Strip Calculator.</li>
             <li><strong style="color:var(--ink);">Structured Markdown Hierarchy:</strong> Use standard H1, H2, and H3 markdown tags with concise descriptive bullet points and markdown links.</li>
             <li><strong style="color:var(--ink);">Permitted AI Crawlers:</strong> Ensure robots.txt permits GPTBot, OAI-SearchBot, PerplexityBot, ClaudeBot, Google-Extended, and Bingbot.</li>
         </ul>
