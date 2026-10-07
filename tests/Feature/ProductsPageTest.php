@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Product;
+use App\Models\ProductAttribute;
 use App\Models\ProductCategory;
 use Database\Seeders\PageSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -79,7 +80,7 @@ class ProductsPageTest extends TestCase
     {
         $this->get('/products?category=NEON')
             ->assertOk()
-            ->assertSee('const AZOOGI_PRODUCTS', false)
+            ->assertSee('window.AZOOGI_PRODUCTS', false)
             ->assertDontSee('products_data.js', false)
             ->assertDontSee('class="prod-gallery"', false)
             ->assertSee('id="prodSidebar"', false)
@@ -100,7 +101,7 @@ class ProductsPageTest extends TestCase
     {
         $this->get('/products?category=NEON')
             ->assertOk()
-            ->assertSee('const AZOOGI_PRODUCTS', false)
+            ->assertSee('window.AZOOGI_PRODUCTS', false)
             ->assertDontSee('products_data.js', false)
             ->assertSee('id="prodSidebar"', false)
             ->assertSee('id="prodFilterOverlay"', false)
@@ -232,5 +233,114 @@ class ProductsPageTest extends TestCase
             ->assertOk()
             ->assertSee('Profiles', false)
             ->assertSee('Architectural aluminium channels and profiles.', false);
+    }
+
+    public function test_technical_specifications_are_included_for_filtering_in_catalog(): void
+    {
+        ProductAttribute::query()->create([
+            'airtable_id' => 'recAttrIpRating',
+            'name' => 'IP Rating',
+            'value' => 'IP65',
+            'sort_order' => 1,
+            'is_visible_on_filters' => true,
+        ]);
+        ProductAttribute::query()->create([
+            'airtable_id' => 'recAttrCct',
+            'name' => 'CCT',
+            'value' => '3000K',
+            'sort_order' => 2,
+            'is_visible_on_filters' => true,
+        ]);
+        ProductAttribute::query()->create([
+            'airtable_id' => 'recAttrHidden',
+            'name' => 'Internal Note',
+            'value' => 'Confidential',
+            'sort_order' => 3,
+            'is_visible_on_filters' => false,
+        ]);
+
+        Product::factory()->create([
+            'airtable_id' => 'recNeonSpec',
+            'product_name' => 'Neon Waterproof',
+            'category' => 'NEON',
+            'categories' => ['NEON'],
+            'category_path' => ['NEON'],
+            'product_features' => [
+                'IP Rating' => 'IP65',
+                'CCT' => ['3000K'],
+            ],
+        ]);
+
+        $response = $this->get('/products?category=NEON');
+
+        $response->assertOk()
+            ->assertSee('<span>Tech Specification</span>', false)
+            ->assertSee('id="filterAccordion"', false)
+            ->assertSee('filterable_attributes', false)
+            ->assertSee('function renderFilterAccordion', false)
+            ->assertSee('activeFilters.specs', false);
+
+        $catalog = $response->viewData('productCatalog');
+        $this->assertIsArray($catalog);
+        $this->assertContains('IP Rating', $catalog['filterable_attributes']);
+        $this->assertContains('CCT', $catalog['filterable_attributes']);
+        $this->assertNotContains('Internal Note', $catalog['filterable_attributes']);
+    }
+
+    public function test_catalog_html_contains_full_filterable_attributes_and_product_features_without_const_collision(): void
+    {
+        ProductAttribute::query()->create([
+            'airtable_id' => 'recDimming',
+            'name' => 'Dimming Protocol',
+            'value' => 'DALI-2',
+            'sort_order' => 1,
+            'is_visible_on_filters' => true,
+        ]);
+        ProductAttribute::query()->create([
+            'airtable_id' => 'recIp',
+            'name' => 'IP Rating',
+            'value' => 'IP20',
+            'sort_order' => 2,
+            'is_visible_on_filters' => true,
+        ]);
+
+        Product::factory()->create([
+            'airtable_id' => 'recDriverTest',
+            'product_name' => 'DALI Constant Current Driver',
+            'category' => 'Drivers',
+            'categories' => ['Drivers'],
+            'category_path' => ['Drivers'],
+            'product_features' => [
+                'Dimming Protocol' => 'DALI-2',
+                'IP Rating' => 'IP20',
+            ],
+        ]);
+
+        $response = $this->get('/products?category=Drivers');
+        $response->assertOk();
+
+        $html = (string) $response->getContent();
+
+        // 1. Ensure 'const AZOOGI_PRODUCTS' is never used (prevents JS SyntaxError collision)
+        $this->assertStringNotContainsString('const AZOOGI_PRODUCTS', $html);
+        $this->assertStringContainsString('window.AZOOGI_PRODUCTS', $html);
+
+        // 2. Extract the page-level window.AZOOGI_PRODUCTS assigned in products.blade.php
+        preg_match_all('/window\.AZOOGI_PRODUCTS\s*=\s*(\{.*?\});/s', $html, $matches);
+        $this->assertNotEmpty($matches[1]);
+
+        $lastPayload = json_decode(end($matches[1]), true);
+        $this->assertIsArray($lastPayload);
+        $this->assertContains('Dimming Protocol', $lastPayload['filterable_attributes']);
+        $this->assertContains('IP Rating', $lastPayload['filterable_attributes']);
+
+        // 3. Ensure products inside the payload contain their features
+        $matchingProduct = collect($lastPayload['products'])->firstWhere('id', 'recDriverTest');
+        $this->assertNotNull($matchingProduct);
+        $this->assertArrayHasKey('product_features', $matchingProduct);
+        $this->assertEquals([
+            'Dimming Protocol' => 'DALI-2',
+            'IP Rating' => 'IP20',
+        ], $matchingProduct['product_features']);
     }
 }
