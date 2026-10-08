@@ -89,15 +89,9 @@
     </div>
 
     <div class="dash-card" style="padding:16px 20px;">
-        <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;font-weight:600;margin-bottom:6px;">Custom AI Providers</div>
-        <div style="font-size:24px;font-weight:700;color:var(--ink);">{{ count($customProviders) }}</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:4px;">DeepSeek, Groq, Ollama, Together, etc.</div>
-    </div>
-
-    <div class="dash-card" style="padding:16px 20px;">
-        <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;font-weight:600;margin-bottom:6px;">Credential Storage</div>
-        <div style="font-size:16px;font-weight:600;color:var(--ink);">Database Managed</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:4px;">View, copy &amp; toggle keys at any time</div>
+        <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;font-weight:600;margin-bottom:6px;">Total AI Providers</div>
+        <div style="font-size:24px;font-weight:700;color:var(--ink);">{{ 4 + count($customProviders) }}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px;">4 Built-in + {{ count($customProviders) }} Custom</div>
     </div>
 </div>
 
@@ -158,6 +152,21 @@
                                 <option value="claude-3-5-haiku-20241022">claude-3-5-haiku-20241022 (Fast & Economical)</option>
                                 <option value="claude-3-opus-20240229">claude-3-opus-20240229</option>
                             </datalist>
+
+                            <!-- Diagnostic Test -->
+                            <div style="margin-top:12px;">
+                                <button type="button" class="btn js-card-diagnostic-btn" data-driver="anthropic" data-model-input="input_anthropic_model" style="width:100%;font-size:12px;padding:6px 12px;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--bg);border:1px solid var(--line);color:var(--ink);cursor:pointer;border-radius:6px;font-weight:600;">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;color:var(--accent);"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                                    Diagnostic Ping Test
+                                </button>
+                                <div class="js-card-diagnostic-results" style="display:none;margin-top:8px;padding:10px 12px;border-radius:6px;background:var(--bg);border:1px solid var(--line);font-size:11px;font-family:monospace;line-height:1.4;">
+                                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                                        <span class="js-diag-status" style="font-weight:700;padding:2px 6px;border-radius:4px;"></span>
+                                        <span class="js-diag-latency" style="color:var(--muted);"></span>
+                                    </div>
+                                    <pre class="js-diag-output" style="margin:0;white-space:pre-wrap;word-break:break-word;color:var(--ink);font-size:11px;font-family:monospace;max-height:120px;overflow-y:auto;"></pre>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -205,6 +214,21 @@
                                 <option value="openai/gpt-4o">openai/gpt-4o</option>
                                 <option value="deepseek/deepseek-r1">deepseek/deepseek-r1</option>
                             </datalist>
+
+                            <!-- Diagnostic Test -->
+                            <div style="margin-top:12px;">
+                                <button type="button" class="btn js-card-diagnostic-btn" data-driver="openrouter" data-model-input="input_openrouter_model" style="width:100%;font-size:12px;padding:6px 12px;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--bg);border:1px solid var(--line);color:var(--ink);cursor:pointer;border-radius:6px;font-weight:600;">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;color:var(--accent);"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                                    Diagnostic Ping Test
+                                </button>
+                                <div class="js-card-diagnostic-results" style="display:none;margin-top:8px;padding:10px 12px;border-radius:6px;background:var(--bg);border:1px solid var(--line);font-size:11px;font-family:monospace;line-height:1.4;">
+                                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                                        <span class="js-diag-status" style="font-weight:700;padding:2px 6px;border-radius:4px;"></span>
+                                        <span class="js-diag-latency" style="color:var(--muted);"></span>
+                                    </div>
+                                    <pre class="js-diag-output" style="margin:0;white-space:pre-wrap;word-break:break-word;color:var(--ink);font-size:11px;font-family:monospace;max-height:120px;overflow-y:auto;"></pre>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -251,6 +275,21 @@
                                 <option value="gemini-1.5-flash">gemini-1.5-flash</option>
                                 <option value="gemini-1.5-pro">gemini-1.5-pro</option>
                             </datalist>
+
+                            <!-- Diagnostic Test -->
+                            <div style="margin-top:12px;">
+                                <button type="button" class="btn js-card-diagnostic-btn" data-driver="gemini" data-model-input="input_gemini_model" style="width:100%;font-size:12px;padding:6px 12px;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--bg);border:1px solid var(--line);color:var(--ink);cursor:pointer;border-radius:6px;font-weight:600;">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;color:var(--accent);"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                                    Diagnostic Ping Test
+                                </button>
+                                <div class="js-card-diagnostic-results" style="display:none;margin-top:8px;padding:10px 12px;border-radius:6px;background:var(--bg);border:1px solid var(--line);font-size:11px;font-family:monospace;line-height:1.4;">
+                                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                                        <span class="js-diag-status" style="font-weight:700;padding:2px 6px;border-radius:4px;"></span>
+                                        <span class="js-diag-latency" style="color:var(--muted);"></span>
+                                    </div>
+                                    <pre class="js-diag-output" style="margin:0;white-space:pre-wrap;word-break:break-word;color:var(--ink);font-size:11px;font-family:monospace;max-height:120px;overflow-y:auto;"></pre>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -296,6 +335,21 @@
                                 <option value="gpt-4o">gpt-4o (Full Flagship)</option>
                                 <option value="o3-mini">o3-mini (Reasoning Model)</option>
                             </datalist>
+
+                            <!-- Diagnostic Test -->
+                            <div style="margin-top:12px;">
+                                <button type="button" class="btn js-card-diagnostic-btn" data-driver="openai" data-model-input="input_openai_model" style="width:100%;font-size:12px;padding:6px 12px;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--bg);border:1px solid var(--line);color:var(--ink);cursor:pointer;border-radius:6px;font-weight:600;">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;color:var(--accent);"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                                    Diagnostic Ping Test
+                                </button>
+                                <div class="js-card-diagnostic-results" style="display:none;margin-top:8px;padding:10px 12px;border-radius:6px;background:var(--bg);border:1px solid var(--line);font-size:11px;font-family:monospace;line-height:1.4;">
+                                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                                        <span class="js-diag-status" style="font-weight:700;padding:2px 6px;border-radius:4px;"></span>
+                                        <span class="js-diag-latency" style="color:var(--muted);"></span>
+                                    </div>
+                                    <pre class="js-diag-output" style="margin:0;white-space:pre-wrap;word-break:break-word;color:var(--ink);font-size:11px;font-family:monospace;max-height:120px;overflow-y:auto;"></pre>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -336,6 +390,21 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Diagnostic Test for Custom Provider -->
+                            <div style="margin-bottom:12px;">
+                                <button type="button" class="btn js-card-diagnostic-btn" data-driver="{{ $cpId }}" data-model-val="{{ $cp['model'] }}" style="width:100%;font-size:12px;padding:6px 12px;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--bg);border:1px solid var(--line);color:var(--ink);cursor:pointer;border-radius:6px;font-weight:600;">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;color:var(--accent);"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                                    Diagnostic Ping Test
+                                </button>
+                                <div class="js-card-diagnostic-results" style="display:none;margin-top:8px;padding:10px 12px;border-radius:6px;background:var(--bg);border:1px solid var(--line);font-size:11px;font-family:monospace;line-height:1.4;">
+                                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                                        <span class="js-diag-status" style="font-weight:700;padding:2px 6px;border-radius:4px;"></span>
+                                        <span class="js-diag-latency" style="color:var(--muted);"></span>
+                                    </div>
+                                    <pre class="js-diag-output" style="margin:0;white-space:pre-wrap;word-break:break-word;color:var(--ink);font-size:11px;font-family:monospace;max-height:120px;overflow-y:auto;"></pre>
+                                </div>
+                            </div>
                         </div>
 
                         <div style="display:flex;justify-content:flex-end;align-items:center;padding-top:10px;border-top:1px solid var(--line);">
@@ -360,80 +429,6 @@
         </div>
     </form>
 
-    <!-- Live Connectivity Diagnostic Box -->
-    <div class="dash-card" style="margin-bottom:20px;">
-        <div style="margin-bottom:16px;">
-            <h3 style="margin:0 0 6px 0;font-size:16px;display:flex;align-items:center;gap:8px;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--accent);"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                Live AI Model Connectivity & Diagnostic Ping
-            </h3>
-            <p style="margin:0;font-size:13px;color:var(--muted);">
-                Test live API response latency, verify database authentication keys, and inspect model outputs for built-in or custom providers without leaving the dashboard.
-            </p>
-        </div>
-
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;align-items:flex-end;margin-bottom:16px;">
-            <div class="dash-field" style="margin-bottom:0;">
-                <label class="dash-label" for="test-driver-select">Provider to Ping</label>
-                <select id="test-driver-select" class="dash-select">
-                    <optgroup label="Standard Built-in Providers">
-                        <option value="anthropic" {{ ($aiConfig['driver'] ?? '') === 'anthropic' ? 'selected' : '' }}>Anthropic Claude</option>
-                        <option value="openrouter" {{ ($aiConfig['driver'] ?? '') === 'openrouter' ? 'selected' : '' }}>OpenRouter Gateway</option>
-                        <option value="gemini" {{ ($aiConfig['driver'] ?? '') === 'gemini' ? 'selected' : '' }}>Google Gemini</option>
-                        <option value="openai" {{ ($aiConfig['driver'] ?? '') === 'openai' ? 'selected' : '' }}>OpenAI Direct</option>
-                    </optgroup>
-                    @if(!empty($customProviders))
-                        <optgroup label="Custom Added Providers">
-                            @foreach($customProviders as $cpId => $cp)
-                                <option value="{{ $cpId }}" {{ ($aiConfig['driver'] ?? '') === $cpId ? 'selected' : '' }}>{{ $cp['name'] }} ({{ $cp['model'] }})</option>
-                            @endforeach
-                        </optgroup>
-                    @endif
-                </select>
-            </div>
-
-            <div class="dash-field" style="margin-bottom:0;">
-                <label class="dash-label" for="test-model-input">Model Override (Optional)</label>
-                <input type="text" id="test-model-input" class="dash-input" placeholder="Leave empty for provider default" style="font-family:monospace;">
-            </div>
-
-            <div>
-                <button type="button" id="btn-run-ai-test" class="btn primary" style="width:100%;height:44px;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:600;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                    Run Live Ping Test
-                </button>
-            </div>
-        </div>
-
-        <!-- Test Output Box -->
-        <div id="ai-test-results" style="display:none;background:var(--bg-2);padding:16px;border-radius:6px;border:1px solid var(--line);">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-                <span id="ai-test-status-badge" style="font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;"></span>
-                <span id="ai-test-latency" style="font-size:12px;color:var(--muted);font-family:monospace;"></span>
-            </div>
-            <pre id="ai-test-output" style="margin:0;font-family:monospace;font-size:12px;white-space:pre-wrap;word-break:break-word;color:var(--ink);"></pre>
-        </div>
-    </div>
-
-    <!-- Link to Dedicated AI Rates & Pricing Page -->
-    <div class="dash-card" style="padding: 20px 24px; margin-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
-        <div style="display: flex; align-items: center; gap: 14px;">
-            <div style="width: 42px; height: 42px; border-radius: 10px; background: rgba(103, 208, 78, 0.12); border: 1px solid rgba(103, 208, 78, 0.3); display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 22px; height: 22px;"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            </div>
-            <div>
-                <h3 style="margin: 0 0 4px 0; font-size: 15px; font-weight: 700; color: var(--dash-ink, var(--ink));">
-                    Token Rates &amp; Pricing Schedule
-                </h3>
-                <p style="margin: 0; font-size: 12.5px; color: var(--dash-muted, var(--muted));">
-                    Inspect standard token rates per 1M tokens, interactive cost simulator, and compute billing across all LLM families.
-                </p>
-            </div>
-        </div>
-        <a href="{{ route('dashboard.ai.rates') }}" class="btn" style="display:inline-flex;align-items:center;gap:6px;">
-            Open AI Rates &amp; Pricing &rarr;
-        </a>
-    </div>
 </div>
 
 <!-- Modal: Add Custom AI Provider -->
@@ -729,31 +724,43 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Live AI Diagnostic Test Runner
-    const btnRunAiTest = document.getElementById('btn-run-ai-test');
-    const testDriverSelect = document.getElementById('test-driver-select');
-    const testModelInput = document.getElementById('test-model-input');
-    const testResultsBox = document.getElementById('ai-test-results');
-    const testStatusBadge = document.getElementById('ai-test-status-badge');
-    const testLatency = document.getElementById('ai-test-latency');
-    const testOutput = document.getElementById('ai-test-output');
+    // Live AI Diagnostic Test Runner (Inline per card)
+    document.querySelectorAll('.js-card-diagnostic-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const driver = btn.getAttribute('data-driver');
+            let model = null;
 
-    if (btnRunAiTest) {
-        btnRunAiTest.addEventListener('click', async () => {
-            const originalHtml = btnRunAiTest.innerHTML;
-            btnRunAiTest.disabled = true;
-            btnRunAiTest.innerHTML = '<span style="display:inline-block;animation:spin 1s linear infinite;">⏳</span> Connecting...';
+            const modelInputId = btn.getAttribute('data-model-input');
+            if (modelInputId) {
+                const modelInputEl = document.getElementById(modelInputId);
+                if (modelInputEl && modelInputEl.value.trim()) {
+                    model = modelInputEl.value.trim();
+                }
+            } else if (btn.getAttribute('data-model-val')) {
+                model = btn.getAttribute('data-model-val');
+            }
 
-            testResultsBox.style.display = 'block';
-            testStatusBadge.textContent = 'Testing in progress...';
-            testStatusBadge.style.background = '#e8f0fe';
-            testStatusBadge.style.color = '#1a73e8';
-            testLatency.textContent = 'Measuring latency...';
-            testOutput.textContent = 'Sending prompt to LLM endpoint...';
+            const wrapper = btn.closest('div');
+            const resultsBox = wrapper.querySelector('.js-card-diagnostic-results');
+            const statusBadge = resultsBox.querySelector('.js-diag-status');
+            const latencyEl = resultsBox.querySelector('.js-diag-latency');
+            const outputEl = resultsBox.querySelector('.js-diag-output');
+
+            const originalHtml = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<span style="display:inline-block;animation:spin 1s linear infinite;">⏳</span> Connecting...';
+
+            resultsBox.style.display = 'block';
+            statusBadge.textContent = 'Testing in progress...';
+            statusBadge.style.background = '#e8f0fe';
+            statusBadge.style.color = '#1a73e8';
+            latencyEl.textContent = 'Measuring latency...';
+            outputEl.textContent = 'Sending prompt to LLM endpoint...';
 
             const payload = {
-                driver: testDriverSelect ? testDriverSelect.value : 'anthropic',
-                model: testModelInput && testModelInput.value.trim() ? testModelInput.value.trim() : null
+                driver: driver || 'gemini',
+                model: model
             };
 
             try {
@@ -773,30 +780,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 const data = await res.json();
 
                 if (res.ok && data.success) {
-                    testStatusBadge.textContent = 'SUCCESS (200 OK)';
-                    testStatusBadge.style.background = '#e6f4ea';
-                    testStatusBadge.style.color = '#137333';
-                    testLatency.textContent = `Latency: ${data.latency_ms}ms | Tokens: ${data.tokens_used}`;
-                    testOutput.textContent = `Driver: ${data.driver}\nModel: ${data.model || 'Default'}\nResponse:\n${data.response}`;
+                    statusBadge.textContent = 'SUCCESS (200 OK)';
+                    statusBadge.style.background = '#e6f4ea';
+                    statusBadge.style.color = '#137333';
+                    latencyEl.textContent = `Latency: ${data.latency_ms}ms | Tokens: ${data.tokens_used}`;
+                    outputEl.textContent = `Driver: ${data.driver}\nModel: ${data.model || 'Default'}\nResponse:\n${data.response}`;
                 } else {
-                    testStatusBadge.textContent = 'FAILED / ERROR';
-                    testStatusBadge.style.background = '#fce8e6';
-                    testStatusBadge.style.color = '#c5221f';
-                    testLatency.textContent = `Latency: ${data.latency_ms || 0}ms`;
-                    testOutput.textContent = `Error Message:\n${data.error || 'Unknown error occurred.'}`;
+                    statusBadge.textContent = 'FAILED / ERROR';
+                    statusBadge.style.background = '#fce8e6';
+                    statusBadge.style.color = '#c5221f';
+                    latencyEl.textContent = `Latency: ${data.latency_ms || 0}ms`;
+                    outputEl.textContent = `Error Message:\n${data.error || 'Unknown error occurred.'}`;
                 }
             } catch (err) {
-                testStatusBadge.textContent = 'NETWORK / HTTP ERROR';
-                testStatusBadge.style.background = '#fce8e6';
-                testStatusBadge.style.color = '#c5221f';
-                testLatency.textContent = 'N/A';
-                testOutput.textContent = `Request failed: ${err.message}`;
+                statusBadge.textContent = 'NETWORK / HTTP ERROR';
+                statusBadge.style.background = '#fce8e6';
+                statusBadge.style.color = '#c5221f';
+                latencyEl.textContent = 'N/A';
+                outputEl.textContent = `Request failed: ${err.message}`;
             } finally {
-                btnRunAiTest.disabled = false;
-                btnRunAiTest.innerHTML = originalHtml;
+                btn.disabled = false;
+                btn.innerHTML = originalHtml;
             }
         });
-    }
+    });
 });
 </script>
 @endsection
