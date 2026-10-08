@@ -109,21 +109,10 @@
 
         <div class="dash-card" style="margin-bottom:20px;">
             <div style="margin-bottom:20px;">
-                <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
-                    <div>
-                        <h2 style="margin:0 0 6px 0;font-size:18px;">Select Active AI Provider & Enter API Keys</h2>
-                        <p style="margin:0;font-size:13px;color:var(--muted);max-width:800px;line-height:1.5;">
-                            Choose the active provider for the public chat assistant by selecting its radio button. All API keys entered below are saved directly into the database. You can click the <strong>Eye icon</strong> to view any key or the <strong>Copy icon</strong> to copy it.
-                        </p>
-                    </div>
-                    <div style="display:flex;gap:10px;">
-                        <button type="button" class="btn" id="btn-open-add-provider-2" style="font-weight:600;display:inline-flex;align-items:center;gap:4px;">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                            Add Provider
-                        </button>
-                        <button type="submit" class="btn primary" style="font-weight:600;">Save All AI Settings</button>
-                    </div>
-                </div>
+                <h2 style="margin:0 0 6px 0;font-size:18px;">Select Active AI Provider &amp; Enter API Keys</h2>
+                <p style="margin:0;font-size:13px;color:var(--muted);max-width:800px;line-height:1.5;">
+                    Choose the active provider for the public chat assistant by selecting its radio button. All API keys entered below are saved directly into the database. You can click the <strong>Eye icon</strong> to view any key or the <strong>Copy icon</strong> to copy it.
+                </p>
             </div>
 
             <!-- Provider Cards Selector -->
@@ -367,10 +356,6 @@
                         Connect DeepSeek, Groq, Ollama Local, Together AI, Mistral, xAI, or any custom API endpoint.
                     </p>
                 </div>
-            </div>
-
-            <div style="display:flex;justify-content:flex-end;padding-top:16px;border-top:1px solid var(--line);">
-                <button type="submit" class="btn primary" style="font-weight:600;">Save All AI Settings</button>
             </div>
         </div>
     </form>
@@ -696,7 +681,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Modal Add Provider Controls
     const addModal = document.getElementById('add-provider-modal');
     const openModalBtn1 = document.getElementById('btn-open-add-provider');
-    const openModalBtn2 = document.getElementById('btn-open-add-provider-2');
     const cardAddProvider = document.getElementById('btn-card-add-provider');
     const closeModalBtn = document.getElementById('btn-close-modal');
     const cancelModalBtn = document.getElementById('btn-cancel-modal');
@@ -714,7 +698,6 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     if (openModalBtn1) openModalBtn1.addEventListener('click', showModal);
-    if (openModalBtn2) openModalBtn2.addEventListener('click', showModal);
     if (cardAddProvider) cardAddProvider.addEventListener('click', showModal);
     if (closeModalBtn) closeModalBtn.addEventListener('click', hideModal);
     if (cancelModalBtn) cancelModalBtn.addEventListener('click', hideModal);
