@@ -196,57 +196,70 @@ class AiConfigManagementTest extends TestCase
         $this->assertStringStartsWith('/storage/ai/avatars/avatar_', $branding['ai_custom_avatar_url']);
     }
 
-    public function test_admin_can_view_and_update_rules_page(): void
+    public function test_admin_can_view_and_manage_rules_page(): void
     {
         $viewResponse = $this->actingAs($this->adminUser)->get(route('dashboard.ai.rules'));
         $viewResponse->assertOk();
         $viewResponse->assertSee('AI System Rules &amp; Behavioral Directives', false);
-        $viewResponse->assertSee('1. Role &amp; Tone of Voice', false);
-        $viewResponse->assertSee('2. Australian Standards &amp; Building Compliance', false);
+        $viewResponse->assertSee('+ Add Rule Item', false);
+        $viewResponse->assertSee('Role &amp; Tone of Voice', false);
 
-        $updateResponse = $this->actingAs($this->adminUser)->put(route('dashboard.ai.rules.update'), [
-            'rules_tone' => 'Maintain an authoritative, professional, and consultative architectural lighting tone.',
-            'rules_standards' => 'Strictly adhere to AS/NZS 1158 and AS/NZS 60598.',
-            'rules_specs' => 'Suggest 3000K warm white and CRI90+ for luxury residential projects.',
-            'rules_prohibitions' => 'Never invent fake product codes.',
-            'rules_escalation' => 'Direct bespoke linear cuts to the Sydney sales desk.',
-            'rules_additional' => 'Respond in concise bullet points.',
+        $storeResponse = $this->actingAs($this->adminUser)->post(route('dashboard.ai.rules.store'), [
+            'category' => 'Custom Directives',
+            'title' => 'Residential Lighting Directives',
+            'content' => 'Suggest 3000K warm white and CRI90+ for luxury residential projects.',
+            'is_active' => '1',
         ]);
 
-        $updateResponse->assertRedirect(route('dashboard.ai.rules'));
-        $updateResponse->assertSessionHas('status');
+        $storeResponse->assertRedirect(route('dashboard.ai.rules'));
+        $storeResponse->assertSessionHas('status');
+
+        $rules = ChatOrchestrator::getRulesItems();
+        $this->assertNotEmpty($rules);
+        $latestRule = end($rules);
+        $this->assertSame('Residential Lighting Directives', $latestRule['title']);
+        $this->assertSame('Custom Directives', $latestRule['category']);
 
         $knowledge = ChatOrchestrator::getKnowledgeRules();
-        $this->assertStringContainsString('authoritative, professional', $knowledge['ruleset']);
-        $this->assertStringContainsString('AS/NZS 1158', $knowledge['ruleset']);
+        $this->assertStringContainsString('Residential Lighting Directives', $knowledge['ruleset']);
         $this->assertStringContainsString('luxury residential', $knowledge['ruleset']);
+
+        // Delete Rule
+        $delResponse = $this->actingAs($this->adminUser)->delete(route('dashboard.ai.rules.delete', $latestRule['id']));
+        $delResponse->assertRedirect(route('dashboard.ai.rules'));
     }
 
-    public function test_admin_can_view_and_update_context_page(): void
+    public function test_admin_can_view_and_manage_context_page(): void
     {
         $viewResponse = $this->actingAs($this->adminUser)->get(route('dashboard.ai.context'));
         $viewResponse->assertOk();
         $viewResponse->assertSee('Company Context &amp; Manufacturing Policies', false);
-        $viewResponse->assertSee('1. Headquarters &amp; Sydney Assembly Facility', false);
-        $viewResponse->assertSee('4. Warehouse, Shipping &amp; Dispatch', false);
+        $viewResponse->assertSee('+ Add Context Item', false);
+        $viewResponse->assertSee('Headquarters &amp; Sydney Assembly Facility', false);
 
-        $updateResponse = $this->actingAs($this->adminUser)->put(route('dashboard.ai.context.update'), [
-            'context_facility' => 'Azoogi operates a custom fabrication workshop in Sydney, NSW.',
-            'context_products' => 'Specialized in architectural extrusions and DALI-2 smart controls.',
-            'context_fabrication' => 'Standard 3-5 business days turnaround.',
-            'context_dispatch' => 'Standard dispatch is 24-48 hours across Australia.',
-            'context_warranty' => '5-year replacement warranty on all fixtures.',
-            'context_photometrics' => 'IES files available upon request.',
-            'context_additional' => 'Sydney showroom open by appointment.',
+        $storeResponse = $this->actingAs($this->adminUser)->post(route('dashboard.ai.context.store'), [
+            'category' => 'Showroom & Support',
+            'title' => 'Sydney Design Studio Visits',
+            'content' => 'Sydney showroom and lighting lab open by appointment for architects.',
+            'is_active' => '1',
         ]);
 
-        $updateResponse->assertRedirect(route('dashboard.ai.context'));
-        $updateResponse->assertSessionHas('status');
+        $storeResponse->assertRedirect(route('dashboard.ai.context'));
+        $storeResponse->assertSessionHas('status');
+
+        $contextItems = ChatOrchestrator::getContextItems();
+        $this->assertNotEmpty($contextItems);
+        $latestItem = end($contextItems);
+        $this->assertSame('Sydney Design Studio Visits', $latestItem['title']);
+        $this->assertSame('Showroom & Support', $latestItem['category']);
 
         $knowledge = ChatOrchestrator::getKnowledgeRules();
-        $this->assertStringContainsString('Sydney, NSW', $knowledge['company_context']);
-        $this->assertStringContainsString('DALI-2', $knowledge['company_context']);
-        $this->assertStringContainsString('24-48 hours', $knowledge['company_context']);
+        $this->assertStringContainsString('Sydney Design Studio Visits', $knowledge['company_context']);
+        $this->assertStringContainsString('open by appointment', $knowledge['company_context']);
+
+        // Delete Context Item
+        $delResponse = $this->actingAs($this->adminUser)->delete(route('dashboard.ai.context.delete', $latestItem['id']));
+        $delResponse->assertRedirect(route('dashboard.ai.context'));
     }
 
     public function test_admin_can_view_and_manage_faqs_page(): void

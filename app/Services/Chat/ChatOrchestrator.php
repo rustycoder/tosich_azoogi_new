@@ -272,109 +272,177 @@ class ChatOrchestrator
         ];
     }
 
-    public static function getKnowledgeRules(): array
+    public static function getDefaultRulesItems(): array
     {
-        $defaultRulesSections = [
-            'tone' => 'Target Persona: Professional Trade Specialist. Deliver authoritative, technically rigorous advice for architects, lighting designers, and engineers (CRI90+, R9 values, MacAdam 3-step SDCM, beam spreads, UGR<19, IP ratings, thermal dissipation, lumens per watt, 24V constant voltage vs constant current, Casambi BLE mesh vs DALI-2). Deliver direct, practical, and clear guidance for sparkies, contractors, and counter staff (cut-lengths, driver wattage sizing with 20% headroom, polarity, IP connectors, aluminum heat sinking, and straightforward installation instructions).',
-            'standards' => 'Strictly adhere to Australian Standards (AS/NZS 1158, AS/NZS 1680, AS/NZS 60598, NCC Section J energy compliance, and SSL quality benchmarks).',
-            'specs' => 'Clarifying Protocol: Always ask 1-2 clarifying questions before final fixture recommendations (environment/IP rating: indoor IP20 vs outdoor/wet IP65/IP67; total run length/dimensions in meters; CCT: 2700K/3000K/4000K/RGBW; control protocol: Casambi, DALI-2, 0-10V, Triac). Suggest optimal beam angles, mounting profiles, and certified drivers.',
-            'prohibitions' => 'Strict Pricing Lockdown: Strictly locked down. You must NEVER display or quote trade or retail pricing in dollars ($) under any circumstances. Direct users to log into the Azoogi Trade Portal (https://portal.azoogi.com.au or /account/login) for wholesale pricing tiers, or direct them to add items to their quote list. Never invent fake product codes or unverifiable claims.',
-            'escalation' => 'Lead Times & Sales Transcript Handoff: Standard in-stock items dispatch in 24-48 hours from our Sydney warehouse; custom extrusion cutting and testing requires 3-5 business days. When discussing custom profile lengths, bespoke joinery, large project schedules over 50 fittings, or when the user finishes their queries, offer to forward the full chat transcript and fixture schedule to our Sydney sales engineering desk (sales@azoogi.com.au) using public_send_chat_transcript_to_sales.',
-            'additional' => '',
+        return [
+            [
+                'id' => 'rule_tone',
+                'category' => 'Tone & Persona',
+                'title' => 'Role & Tone of Voice',
+                'content' => 'Target Persona: Professional Trade Specialist. Deliver authoritative, technically rigorous advice for architects, lighting designers, and engineers (CRI90+, R9 values, MacAdam 3-step SDCM, beam spreads, UGR<19, IP ratings, thermal dissipation, lumens per watt, 24V constant voltage vs constant current, Casambi BLE mesh vs DALI-2). Deliver direct, practical, and clear guidance for sparkies, contractors, and counter staff (cut-lengths, driver wattage sizing with 20% headroom, polarity, IP connectors, aluminum heat sinking, and straightforward installation instructions).',
+                'is_active' => true,
+            ],
+            [
+                'id' => 'rule_standards',
+                'category' => 'Compliance & Standards',
+                'title' => 'Australian Standards & Building Compliance',
+                'content' => 'Strictly adhere to Australian Standards (AS/NZS 1158, AS/NZS 1680, AS/NZS 60598, NCC Section J energy compliance, and SSL quality benchmarks).',
+                'is_active' => true,
+            ],
+            [
+                'id' => 'rule_specs',
+                'category' => 'Technical Precision',
+                'title' => 'Technical Precision & Specification Suggestions',
+                'content' => 'Clarifying Protocol: Always ask 1-2 clarifying questions before final fixture recommendations (environment/IP rating: indoor IP20 vs outdoor/wet IP65/IP67; total run length/dimensions in meters; CCT: 2700K/3000K/4000K/RGBW; control protocol: Casambi, DALI-2, 0-10V, Triac). Suggest optimal beam angles, mounting profiles, and certified drivers.',
+                'is_active' => true,
+            ],
+            [
+                'id' => 'rule_prohibitions',
+                'category' => 'Strict Prohibitions',
+                'title' => 'Strict Pricing Lockdown & Prohibitions',
+                'content' => 'Strict Pricing Lockdown: Strictly locked down. You must NEVER display or quote trade or retail pricing in dollars ($) under any circumstances. Direct users to log into the Azoogi Trade Portal (https://portal.azoogi.com.au or /account/login) for wholesale pricing tiers, or direct them to add items to their quote list. Never invent fake product codes or unverifiable claims.',
+                'is_active' => true,
+            ],
+            [
+                'id' => 'rule_escalation',
+                'category' => 'Escalation & Handoff',
+                'title' => 'Human Escalation & Sales Desk Routing',
+                'content' => 'Lead Times & Sales Transcript Handoff: Standard in-stock items dispatch in 24-48 hours from our Sydney warehouse; custom extrusion cutting and testing requires 3-5 business days. When discussing custom profile lengths, bespoke joinery, large project schedules over 50 fittings, or when the user finishes their queries, offer to forward the full chat transcript and fixture schedule to our Sydney sales engineering desk (sales@azoogi.com.au) using public_send_chat_transcript_to_sales.',
+                'is_active' => true,
+            ],
         ];
+    }
 
-        $defaultContextSections = [
-            'facility' => 'Azoogi Lighting operates a dedicated testing and custom extrusion fabrication facility in Sydney, New South Wales, Australia.',
-            'products' => 'Architectural linear profiles, custom LED strip extrusions, commercial downlights, track lighting, and smart controls ecosystems (Casambi, DALI-2, MADRIX).',
-            'fabrication' => 'Standard 3 to 5 business day turnaround for custom extrusion cutting, diffusers, endcaps, soldering, and photometric testing.',
-            'dispatch' => 'Fast dispatch from Sydney warehouse across Australia and New Zealand (in-stock items dispatch within 24-48 hours).',
-            'warranty' => '5-year standard commercial warranty on architectural luminaires and certified LED drivers.',
-            'photometrics' => 'IES and LDT photometric data files available for DiaLux and Relux simulations upon request.',
-            'additional' => '',
+    public static function getDefaultContextItems(): array
+    {
+        return [
+            [
+                'id' => 'context_facility',
+                'category' => 'Facility & Workshop',
+                'title' => 'Headquarters & Sydney Assembly Facility',
+                'content' => 'Azoogi Lighting operates a dedicated testing and custom extrusion fabrication facility in Sydney, New South Wales, Australia.',
+                'is_active' => true,
+            ],
+            [
+                'id' => 'context_products',
+                'category' => 'Products & Capabilities',
+                'title' => 'Product Ranges & Core Competencies',
+                'content' => 'Architectural linear profiles, custom LED strip extrusions, commercial downlights, track lighting, and smart controls ecosystems (Casambi, DALI-2, MADRIX).',
+                'is_active' => true,
+            ],
+            [
+                'id' => 'context_fabrication',
+                'category' => 'Turnaround & Fabrication',
+                'title' => 'Custom Cutting & Fabrication Turnaround',
+                'content' => 'Standard 3 to 5 business day turnaround for custom extrusion cutting, diffusers, endcaps, soldering, and photometric testing.',
+                'is_active' => true,
+            ],
+            [
+                'id' => 'context_dispatch',
+                'category' => 'Shipping & Logistics',
+                'title' => 'Warehouse, Shipping & Dispatch',
+                'content' => 'Fast dispatch from Sydney warehouse across Australia and New Zealand (in-stock items dispatch within 24-48 hours).',
+                'is_active' => true,
+            ],
+            [
+                'id' => 'context_warranty',
+                'category' => 'Warranty & Policies',
+                'title' => 'Commercial Warranty Policies',
+                'content' => '5-year standard commercial warranty on architectural luminaires and certified LED drivers.',
+                'is_active' => true,
+            ],
+            [
+                'id' => 'context_photometrics',
+                'category' => 'Photometrics & Support',
+                'title' => 'Photometrics & Lighting Simulation Support',
+                'content' => 'IES and LDT photometric data files available for DiaLux and Relux simulations upon request.',
+                'is_active' => true,
+            ],
         ];
+    }
 
-        $data = [];
+    public static function getRulesItems(): array
+    {
         try {
-            $feed = LlmFeed::query()->where('key', 'ai_knowledge_rules')->first();
+            $feed = LlmFeed::query()->where('key', 'ai_rules_items')->first();
             if ($feed && ! empty($feed->content)) {
                 $decoded = json_decode((string) $feed->content, true);
-                if (is_array($decoded)) {
-                    $data = $decoded;
+                if (is_array($decoded) && ! empty($decoded)) {
+                    return $decoded;
                 }
             }
         } catch (Throwable) {
         }
 
-        $rulesSections = ! empty($data['rules_sections']) && is_array($data['rules_sections'])
-            ? array_merge($defaultRulesSections, $data['rules_sections'])
-            : $defaultRulesSections;
+        try {
+            $feed = LlmFeed::query()->where('key', 'ai_knowledge_rules')->first();
+            if ($feed && ! empty($feed->content)) {
+                $decoded = json_decode((string) $feed->content, true);
+                if (! empty($decoded['rules_items']) && is_array($decoded['rules_items'])) {
+                    return $decoded['rules_items'];
+                }
+            }
+        } catch (Throwable) {
+        }
 
-        $contextSections = ! empty($data['context_sections']) && is_array($data['context_sections'])
-            ? array_merge($defaultContextSections, $data['context_sections'])
-            : $defaultContextSections;
+        return self::getDefaultRulesItems();
+    }
 
-        $compiledRuleset = self::compileRuleset($rulesSections);
-        $compiledContext = self::compileContext($contextSections);
+    public static function getContextItems(): array
+    {
+        try {
+            $feed = LlmFeed::query()->where('key', 'ai_context_items')->first();
+            if ($feed && ! empty($feed->content)) {
+                $decoded = json_decode((string) $feed->content, true);
+                if (is_array($decoded) && ! empty($decoded)) {
+                    return $decoded;
+                }
+            }
+        } catch (Throwable) {
+        }
+
+        try {
+            $feed = LlmFeed::query()->where('key', 'ai_knowledge_rules')->first();
+            if ($feed && ! empty($feed->content)) {
+                $decoded = json_decode((string) $feed->content, true);
+                if (! empty($decoded['context_items']) && is_array($decoded['context_items'])) {
+                    return $decoded['context_items'];
+                }
+            }
+        } catch (Throwable) {
+        }
+
+        return self::getDefaultContextItems();
+    }
+
+    public static function getKnowledgeRules(): array
+    {
+        $ruleItems = self::getRulesItems();
+        $activeRules = array_filter($ruleItems, fn ($r) => ! empty($r['is_active']));
+        $ruleLines = [];
+        foreach ($activeRules as $r) {
+            $cat = ! empty($r['category']) ? " ({$r['category']})" : '';
+            $ruleLines[] = "- **{$r['title']}{$cat}:** ".trim($r['content']);
+        }
+        $compiledRuleset = implode("\n", $ruleLines);
+
+        $contextItems = self::getContextItems();
+        $activeContext = array_filter($contextItems, fn ($c) => ! empty($c['is_active']));
+        $contextLines = [];
+        foreach ($activeContext as $c) {
+            $cat = ! empty($c['category']) ? " ({$c['category']})" : '';
+            $contextLines[] = "- **{$c['title']}{$cat}:** ".trim($c['content']);
+        }
+        $compiledContext = implode("\n", $contextLines);
 
         return [
-            'ruleset' => ! empty($data['ruleset']) ? $data['ruleset'] : $compiledRuleset,
-            'rules_sections' => $rulesSections,
-            'company_context' => ! empty($data['company_context']) ? $data['company_context'] : $compiledContext,
-            'context_sections' => $contextSections,
+            'ruleset' => $compiledRuleset,
+            'rules_items' => $ruleItems,
+            'rules_sections' => [],
+            'company_context' => $compiledContext,
+            'context_items' => $contextItems,
+            'context_sections' => [],
         ];
-    }
-
-    public static function compileRuleset(array $sections): string
-    {
-        $lines = [];
-        if (! empty($sections['tone'])) {
-            $lines[] = '- **Role & Tone of Voice:** '.trim($sections['tone']);
-        }
-        if (! empty($sections['standards'])) {
-            $lines[] = '- **Australian Standards & Compliance:** '.trim($sections['standards']);
-        }
-        if (! empty($sections['specs'])) {
-            $lines[] = '- **Technical Precision & Specification Suggestions:** '.trim($sections['specs']);
-        }
-        if (! empty($sections['prohibitions'])) {
-            $lines[] = '- **Strict Prohibitions & Forbidden Claims:** '.trim($sections['prohibitions']);
-        }
-        if (! empty($sections['escalation'])) {
-            $lines[] = '- **Human Escalation & Sales Desk Routing:** '.trim($sections['escalation']);
-        }
-        if (! empty($sections['additional'])) {
-            $lines[] = '- **Additional Directives:** '.trim($sections['additional']);
-        }
-
-        return implode("\n", $lines);
-    }
-
-    public static function compileContext(array $sections): string
-    {
-        $lines = [];
-        if (! empty($sections['facility'])) {
-            $lines[] = '- **Headquarters & Sydney Facility:** '.trim($sections['facility']);
-        }
-        if (! empty($sections['products'])) {
-            $lines[] = '- **Product Ranges & Core Competencies:** '.trim($sections['products']);
-        }
-        if (! empty($sections['fabrication'])) {
-            $lines[] = '- **Custom Cutting & Fabrication Turnaround:** '.trim($sections['fabrication']);
-        }
-        if (! empty($sections['dispatch'])) {
-            $lines[] = '- **Warehouse, Shipping & Dispatch:** '.trim($sections['dispatch']);
-        }
-        if (! empty($sections['warranty'])) {
-            $lines[] = '- **Commercial Warranty Policies:** '.trim($sections['warranty']);
-        }
-        if (! empty($sections['photometrics'])) {
-            $lines[] = '- **Photometrics & Lighting Simulation Support:** '.trim($sections['photometrics']);
-        }
-        if (! empty($sections['additional'])) {
-            $lines[] = '- **Additional Operational Notes:** '.trim($sections['additional']);
-        }
-
-        return implode("\n", $lines);
     }
 
     public static function getFaqs(): array

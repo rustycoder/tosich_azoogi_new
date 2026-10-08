@@ -141,10 +141,14 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         Route::put('ai/widget', [AiConfigController::class, 'updateWidget'])->name('ai.widget.update');
 
         Route::get('ai/rules', [AiConfigController::class, 'rules'])->name('ai.rules');
+        Route::post('ai/rules', [AiConfigController::class, 'storeRule'])->name('ai.rules.store');
         Route::put('ai/rules', [AiConfigController::class, 'updateRules'])->name('ai.rules.update');
+        Route::delete('ai/rules/{id}', [AiConfigController::class, 'deleteRule'])->name('ai.rules.delete');
 
         Route::get('ai/context', [AiConfigController::class, 'context'])->name('ai.context');
+        Route::post('ai/context', [AiConfigController::class, 'storeContext'])->name('ai.context.store');
         Route::put('ai/context', [AiConfigController::class, 'updateContext'])->name('ai.context.update');
+        Route::delete('ai/context/{id}', [AiConfigController::class, 'deleteContext'])->name('ai.context.delete');
 
         Route::get('ai/faqs', [AiConfigController::class, 'faqs'])->name('ai.faqs');
         Route::post('ai/faqs', [AiConfigController::class, 'storeFaq'])->name('ai.faqs.store');

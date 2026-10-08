@@ -14,10 +14,13 @@
     <div class="dash-head-title">
         <h1>AI System Rules &amp; Behavioral Directives</h1>
         <div class="dash-head-actions">
-            <button class="btn primary" type="submit" form="ai-rules-form">Save System Rules</button>
+            <button type="button" class="btn primary" onclick="openRuleModal()" style="display: inline-flex; align-items: center; gap: 6px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>+ Add Rule Item</span>
+            </button>
         </div>
     </div>
-    <p class="dash-lead">Define behavioral guidelines, tone of voice, compliance standards, technical precision, forbidden claims, and escalation triggers across dedicated template sections.</p>
+    <p class="dash-lead">Manage dynamic behavioral guidelines, tone of voice, compliance standards, technical precision, strict prohibitions, and human escalation triggers.</p>
 </div>
 
 @if (session('status'))
@@ -38,133 +41,215 @@
     </div>
 @endif
 
-<form id="ai-rules-form" method="POST" action="{{ route('dashboard.ai.rules.update') }}">
-    @csrf
-    @method('PUT')
-
-    <div style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(320px, 1fr); gap: 24px; align-items: start;">
+<div style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(320px, 1fr); gap: 24px; align-items: start;">
+    
+    <!-- Left Column: Rules List & Live Search -->
+    <div style="display: flex; flex-direction: column; gap: 20px;">
         
-        <!-- Left Column: Separate Template Fields -->
-        <div style="display: flex; flex-direction: column; gap: 20px;">
-            
-            <!-- Section 1: Tone & Persona -->
-            <div class="dash-card" style="padding: 22px;">
-                <div style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--dash-ink); margin-bottom: 4px;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 17px; height: 17px; color: var(--accent);"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                    <span>1. Role &amp; Tone of Voice</span>
+        <!-- Search and Category Filter Bar -->
+        <div class="dash-card" style="padding: 16px 20px;">
+            <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 220px; position: relative;">
+                    <input type="text" id="rule-search-input" class="dash-input" placeholder="Search rules, directives, or keywords..." oninput="filterRules()" style="padding-left: 36px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; color: var(--dash-muted, var(--muted));"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                 </div>
-                <p style="font-size: 12px; color: var(--dash-muted); margin: 0 0 12px 0;">
-                    Define the conversational style, consultative demeanor, and architectural professionalism expected from the assistant.
-                </p>
-                <div class="dash-field" style="margin-bottom: 0;">
-                    <textarea name="rules_tone" id="rules_tone" class="dash-textarea" rows="3" placeholder="Provide concise, professional, and technically accurate responses tailored for architects, lighting designers, and engineers.">{{ old('rules_tone', $rulesSections['tone'] ?? '') }}</textarea>
-                </div>
-            </div>
-
-            <!-- Section 2: Standards & Compliance -->
-            <div class="dash-card" style="padding: 22px;">
-                <div style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--dash-ink); margin-bottom: 4px;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 17px; height: 17px; color: var(--accent);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    <span>2. Australian Standards &amp; Building Compliance</span>
-                </div>
-                <p style="font-size: 12px; color: var(--dash-muted); margin: 0 0 12px 0;">
-                    Mandatory compliance guidelines (e.g. AS/NZS 1158, AS/NZS 1680, AS/NZS 60598, and NCC Section J).
-                </p>
-                <div class="dash-field" style="margin-bottom: 0;">
-                    <textarea name="rules_standards" id="rules_standards" class="dash-textarea" rows="3" placeholder="Strictly adhere to Australian Standards (AS/NZS 1158, AS/NZS 1680, AS/NZS 60598, NCC Section J energy compliance).">{{ old('rules_standards', $rulesSections['standards'] ?? '') }}</textarea>
+                <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
+                    <button type="button" class="btn is-active rule-cat-btn" data-cat="all" onclick="filterRuleCategory('all', this)" style="font-size: 11.5px; padding: 6px 12px;">All ({{ count($rules) }})</button>
+                    @php
+                        $categories = array_values(array_unique(array_filter(array_column($rules, 'category'))));
+                    @endphp
+                    @foreach ($categories as $cat)
+                        <button type="button" class="btn rule-cat-btn" data-cat="{{ $cat }}" onclick="filterRuleCategory('{{ $cat }}', this)" style="font-size: 11.5px; padding: 6px 12px;">{{ $cat }}</button>
+                    @endforeach
                 </div>
             </div>
-
-            <!-- Section 3: Technical Specifications & Suggestions -->
-            <div class="dash-card" style="padding: 22px;">
-                <div style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--dash-ink); margin-bottom: 4px;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 17px; height: 17px; color: var(--accent);"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    <span>3. Technical Precision &amp; Specification Suggestions</span>
-                </div>
-                <p style="font-size: 12px; color: var(--dash-muted); margin: 0 0 12px 0;">
-                    Directives for suggesting relevant beam angles, CCTs (2700K/3000K/4000K), CRI90+, IP ratings, and control protocols (Casambi, DALI-2).
-                </p>
-                <div class="dash-field" style="margin-bottom: 0;">
-                    <textarea name="rules_specs" id="rules_specs" class="dash-textarea" rows="3" placeholder="Suggest relevant beam angles, CCTs, CRI90+, IP ratings, and control protocols (DALI-2, Casambi BLE mesh, 0-10V, Triac).">{{ old('rules_specs', $rulesSections['specs'] ?? '') }}</textarea>
-                </div>
-            </div>
-
-            <!-- Section 4: Strict Prohibitions & Forbidden Claims -->
-            <div class="dash-card" style="padding: 22px;">
-                <div style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--dash-ink); margin-bottom: 4px;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 17px; height: 17px; color: #ef4444;"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
-                    <span>4. Strict Prohibitions &amp; Forbidden Claims</span>
-                </div>
-                <p style="font-size: 12px; color: var(--dash-muted); margin: 0 0 12px 0;">
-                    Safeguards against hallucinated product codes, unauthorized discounts, false pricing guarantees, or unverifiable claims.
-                </p>
-                <div class="dash-field" style="margin-bottom: 0;">
-                    <textarea name="rules_prohibitions" id="rules_prohibitions" class="dash-textarea" rows="3" placeholder="Never provide fake product codes, false pricing guarantees, or unverifiable claims.">{{ old('rules_prohibitions', $rulesSections['prohibitions'] ?? '') }}</textarea>
-                </div>
-            </div>
-
-            <!-- Section 5: Human Escalation & Sales Desk Routing -->
-            <div class="dash-card" style="padding: 22px;">
-                <div style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--dash-ink); margin-bottom: 4px;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 17px; height: 17px; color: var(--accent);"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
-                    <span>5. Human Escalation &amp; Sales Desk Routing</span>
-                </div>
-                <p style="font-size: 12px; color: var(--dash-muted); margin: 0 0 12px 0;">
-                    Define when the AI should prompt the visitor for their contact info or route to the Sydney sales engineering desk.
-                </p>
-                <div class="dash-field" style="margin-bottom: 0;">
-                    <textarea name="rules_escalation" id="rules_escalation" class="dash-textarea" rows="3" placeholder="When discussing custom LED profile lengths, bespoke extrusion joinery, or large project schedules over 50 fittings, direct visitors to our Sydney sales engineering desk.">{{ old('rules_escalation', $rulesSections['escalation'] ?? '') }}</textarea>
-                </div>
-            </div>
-
-            <!-- Section 6: Additional Directives (Optional) -->
-            <div class="dash-card" style="padding: 22px;">
-                <div style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--dash-ink); margin-bottom: 4px;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 17px; height: 17px; color: var(--dash-muted);"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                    <span>6. Additional Directives (Optional)</span>
-                </div>
-                <p style="font-size: 12px; color: var(--dash-muted); margin: 0 0 12px 0;">
-                    Any additional specialized rules or specific directives for the AI model.
-                </p>
-                <div class="dash-field" style="margin-bottom: 0;">
-                    <textarea name="rules_additional" id="rules_additional" class="dash-textarea" rows="3" placeholder="Add any extra custom rules or instructions here...">{{ old('rules_additional', $rulesSections['additional'] ?? '') }}</textarea>
-                </div>
-            </div>
-
         </div>
 
-        <!-- Right Column: Compiled Prompt Inspector & Guidelines -->
-        <div style="position: sticky; top: 24px; display: flex; flex-direction: column; gap: 20px;">
-            
-            <!-- Live System Prompt Inspector -->
-            <div class="dash-card" style="padding: 20px; border-color: rgba(103, 208, 78, 0.3);">
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-                    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent);">
-                        Compiled System Prompt Preview
+        <!-- Rules Cards Container -->
+        <div id="rule-items-list" style="display: flex; flex-direction: column; gap: 14px;">
+            @forelse ($rules as $rule)
+                <div class="dash-card rule-card-item" data-category="{{ $rule['category'] ?? '' }}" data-search="{{ strtolower(($rule['category'] ?? '') . ' ' . ($rule['title'] ?? '') . ' ' . ($rule['content'] ?? '')) }}" style="padding: 20px; transition: transform 0.2s ease, border-color 0.2s ease;">
+                    <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px;">
+                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                            <span class="dash-pill is-active" style="font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.04em;">{{ $rule['category'] ?? 'General' }}</span>
+                            @if (($rule['is_active'] ?? true) === false)
+                                <span class="dash-pill" style="font-size: 10px; background: rgba(239, 68, 68, 0.15); color: #ef4444; border-color: rgba(239,68,68,0.3);">Inactive</span>
+                            @endif
+                        </div>
+                        <div style="display: flex; gap: 6px; flex-shrink: 0;">
+                            <button type="button" class="btn" style="font-size: 11.5px; padding: 4px 10px;" onclick="editRuleItem(@js($rule))">Edit</button>
+                            <form method="POST" action="{{ route('dashboard.ai.rules.delete', $rule['id']) }}" onsubmit="return confirm('Are you sure you want to delete this rule?');" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn" style="font-size: 11.5px; padding: 4px 8px; color: #ef4444;" title="Delete">✕</button>
+                            </form>
+                        </div>
                     </div>
-                    <span class="dash-pill is-active" style="font-size: 10px;">Injected into LLM</span>
+                    <div style="font-size: 14.5px; font-weight: 700; color: var(--dash-ink, var(--ink)); margin-bottom: 8px; line-height: 1.35;">
+                        {{ $rule['title'] ?? '' }}
+                    </div>
+                    <div style="font-size: 13px; color: var(--dash-muted, var(--muted)); line-height: 1.55; white-space: pre-wrap;">{{ $rule['content'] ?? '' }}</div>
                 </div>
-                <p style="font-size: 11.5px; color: var(--dash-muted, var(--muted)); margin-top: 0; margin-bottom: 10px;">
-                    All separate rule sections are dynamically assembled and injected into every chat invocation.
-                </p>
-                <div style="background: var(--dash-fill-strong); border: 1px solid var(--dash-line); border-radius: 8px; padding: 12px; max-height: 380px; overflow-y: auto; font-family: monospace; font-size: 11px; line-height: 1.5; color: var(--accent); white-space: pre-wrap; word-break: break-word;">{{ $compiledPrompt }}</div>
-            </div>
-
-            <!-- Best Practices Card -->
-            <div class="dash-card" style="padding: 18px;">
-                <div style="font-size: 13px; font-weight: 700; color: var(--dash-ink, var(--ink)); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px; color: var(--accent);"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                    <span>Rule Engineering Best Practices</span>
+            @empty
+                <div class="dash-card" style="padding: 40px; text-align: center; color: var(--dash-muted, var(--muted));">
+                    <div style="font-size: 32px; margin-bottom: 10px;">📜</div>
+                    <div style="font-size: 15px; font-weight: 600; color: var(--dash-ink, var(--ink)); margin-bottom: 6px;">No System Rules Defined</div>
+                    <div style="font-size: 12.5px; margin-bottom: 16px;">Add behavioral directives and guidelines to instruct the AI assistant.</div>
+                    <button type="button" class="btn primary" onclick="openRuleModal()">+ Add First Rule</button>
                 </div>
-                <ul style="font-size: 11.5px; color: var(--dash-muted, var(--muted)); margin: 0; padding-left: 18px; line-height: 1.6;">
-                    <li>Keep each template section focused on its specific domain.</li>
-                    <li>Use affirmative guidance alongside prohibitions to steer model behavior.</li>
-                    <li>Specify exact standards codes (e.g. AS/NZS 60598.1) for verified compliance.</li>
-                </ul>
-            </div>
-
+            @endforelse
         </div>
 
     </div>
-</form>
+
+    <!-- Right Column: Live Prompt Inspector & Rule Guidelines -->
+    <div style="position: sticky; top: 24px; display: flex; flex-direction: column; gap: 20px;">
+        
+        <!-- Live System Prompt Inspector -->
+        <div class="dash-card" style="padding: 20px; border-color: rgba(103, 208, 78, 0.3);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent);">
+                    Compiled System Prompt Preview
+                </div>
+                <span class="dash-pill is-active" style="font-size: 10px;">Live Injection</span>
+            </div>
+            <p style="font-size: 11.5px; color: var(--dash-muted, var(--muted)); margin-top: 0; margin-bottom: 10px;">
+                Active rules are dynamically compiled and injected into the AI system instructions.
+            </p>
+            <div style="background: rgba(15, 15, 15, 0.95); border: 1px solid var(--line); border-radius: 8px; padding: 12px; max-height: 380px; overflow-y: auto; font-family: monospace; font-size: 11px; line-height: 1.5; color: #a3e635; white-space: pre-wrap; word-break: break-word;">{{ $compiledPrompt }}</div>
+        </div>
+
+        <!-- Rule Guidance Tips -->
+        <div class="dash-card" style="padding: 18px;">
+            <div style="font-size: 13px; font-weight: 700; color: var(--dash-ink, var(--ink)); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px; color: var(--accent);"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                <span>Rule Formulation Tips</span>
+            </div>
+            <ul style="font-size: 11.5px; color: var(--dash-muted, var(--muted)); margin: 0; padding-left: 18px; line-height: 1.6;">
+                <li><strong>Tone &amp; Persona:</strong> Define trade-level technical rigor (e.g. CRI90+, SDCM<3, IP ratings).</li>
+                <li><strong>Prohibitions:</strong> Ensure strict pricing lockouts and prevent hallucinated item codes.</li>
+                <li><strong>Escalations:</strong> Specify when to trigger transcript handoffs to sales engineers.</li>
+                <li><strong>Toggles:</strong> Toggle rules inactive rather than deleting them if testing variations.</li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- System Rule Modal (Add & Edit) -->
+<div id="rule-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); z-index: 9999; align-items: center; justify-content: center; padding: 20px;">
+    <div class="dash-card" style="width: 100%; max-width: 620px; padding: 28px; background: var(--dash-card); border: 1px solid var(--dash-line); color: var(--dash-ink); box-shadow: 0 24px 60px rgba(0,0,0,0.35); border-radius: 14px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px;">
+            <h3 id="rule-modal-title" style="margin: 0; font-size: 17px; font-weight: 700; color: var(--dash-ink);">Add System Rule Item</h3>
+            <button type="button" class="btn" onclick="closeRuleModal()" style="padding: 4px 8px; font-size: 13px;">✕</button>
+        </div>
+
+        <form method="POST" action="{{ route('dashboard.ai.rules.store') }}" id="rule-form">
+            @csrf
+            <input type="hidden" name="id" id="modal-rule-id">
+
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+                <div>
+                    <label class="dash-label" for="modal-rule-category" style="font-size: 12.5px; font-weight: 600;">Category</label>
+                    <input type="text" name="category" id="modal-rule-category" class="dash-input" placeholder="e.g. Tone & Persona, Strict Prohibitions, Escalation & Handoff" required list="rule-category-suggestions">
+                    <datalist id="rule-category-suggestions">
+                        <option value="Tone & Persona">
+                        <option value="Compliance & Standards">
+                        <option value="Technical Precision">
+                        <option value="Strict Prohibitions">
+                        <option value="Escalation & Handoff">
+                        <option value="Custom Directives">
+                    </datalist>
+                </div>
+
+                <div>
+                    <label class="dash-label" for="modal-rule-title" style="font-size: 12.5px; font-weight: 600;">Rule Title / Directive Name</label>
+                    <input type="text" name="title" id="modal-rule-title" class="dash-input" placeholder="e.g. Australian Standards & Building Compliance" required>
+                </div>
+
+                <div>
+                    <label class="dash-label" for="modal-rule-content" style="font-size: 12.5px; font-weight: 600;">Rule Directive &amp; Instructions</label>
+                    <textarea name="content" id="modal-rule-content" class="dash-textarea" rows="5" placeholder="Define exact instructions, technical boundaries, compliance standards, or conversational guidance." required></textarea>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox" name="is_active" id="modal-rule-is-active" value="1" checked style="width: 16px; height: 16px; accent-color: var(--accent);">
+                    <label for="modal-rule-is-active" style="font-size: 13px; font-weight: 600; color: var(--dash-ink); cursor: pointer;">
+                        Active (Compiled into live AI system prompt)
+                    </label>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--dash-line);">
+                <button type="button" class="btn" onclick="closeRuleModal()">Cancel</button>
+                <button type="submit" class="btn primary">Save Rule Item</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@push('scripts')
+<script>
+let currentRuleCategoryFilter = 'all';
+
+function filterRules() {
+    const query = document.getElementById('rule-search-input')?.value.toLowerCase().trim() || '';
+    const cards = document.querySelectorAll('.rule-card-item');
+
+    cards.forEach(card => {
+        const cat = card.getAttribute('data-category') || '';
+        const searchContent = card.getAttribute('data-search') || '';
+
+        const matchesCat = (currentRuleCategoryFilter === 'all' || cat === currentRuleCategoryFilter);
+        const matchesQuery = (!query || searchContent.includes(query));
+
+        if (matchesCat && matchesQuery) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+function filterRuleCategory(cat, btn) {
+    currentRuleCategoryFilter = cat;
+    document.querySelectorAll('.rule-cat-btn').forEach(b => b.classList.remove('is-active'));
+    if (btn) btn.classList.add('is-active');
+    filterRules();
+}
+
+function openRuleModal() {
+    document.getElementById('rule-modal-title').textContent = 'Add System Rule Item';
+    document.getElementById('modal-rule-id').value = '';
+    document.getElementById('modal-rule-category').value = '';
+    document.getElementById('modal-rule-title').value = '';
+    document.getElementById('modal-rule-content').value = '';
+    document.getElementById('modal-rule-is-active').checked = true;
+
+    const modal = document.getElementById('rule-modal');
+    modal.style.display = 'flex';
+}
+
+function editRuleItem(rule) {
+    document.getElementById('rule-modal-title').textContent = 'Edit System Rule Item';
+    document.getElementById('modal-rule-id').value = rule.id || '';
+    document.getElementById('modal-rule-category').value = rule.category || '';
+    document.getElementById('modal-rule-title').value = rule.title || '';
+    document.getElementById('modal-rule-content').value = rule.content || '';
+    document.getElementById('modal-rule-is-active').checked = (rule.is_active !== false);
+
+    const modal = document.getElementById('rule-modal');
+    modal.style.display = 'flex';
+}
+
+function closeRuleModal() {
+    document.getElementById('rule-modal').style.display = 'none';
+}
+
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeRuleModal();
+});
+</script>
+@endpush
 @endsection
