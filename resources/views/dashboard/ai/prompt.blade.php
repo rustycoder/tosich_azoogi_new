@@ -64,22 +64,14 @@
 
 <!-- Main Compiled Prompt Display Card -->
 <div class="dash-card" style="padding: 24px; border-color: rgba(103, 208, 78, 0.35);">
-    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
-        <div>
-            <div style="font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); display: flex; align-items: center; gap: 8px;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-                <span>Full Compiled System Prompt (Runtime Feed)</span>
-            </div>
-            <p style="font-size: 12px; color: var(--dash-muted, var(--muted)); margin: 4px 0 0 0;">
-                This exact prompt is delivered to the configured LLM provider (Anthropic / OpenAI / Gemini) at the beginning of each chat conversation.
-            </p>
+    <div style="margin-bottom: 14px;">
+        <div style="font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); display: flex; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            <span>Full Compiled System Prompt (Runtime Feed)</span>
         </div>
-        <div style="display: flex; align-items: center; gap: 8px;">
-            <button type="button" class="btn" onclick="copySystemPrompt()" style="padding: 6px 12px; font-size: 12px; display: inline-flex; align-items: center; gap: 6px;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                <span>Copy Code</span>
-            </button>
-        </div>
+        <p style="font-size: 12px; color: var(--dash-muted, var(--muted)); margin: 4px 0 0 0;">
+            This exact prompt is delivered to the configured LLM provider (Anthropic / OpenAI / Gemini) at the beginning of each chat conversation.
+        </p>
     </div>
 
     <div style="position: relative;">

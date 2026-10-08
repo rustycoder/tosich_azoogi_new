@@ -90,9 +90,53 @@ class ChatTokenAndCostTrackingTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('Total Tokens Consumed');
+        $response->assertSee('Prompt Tokens (Input)');
+        $response->assertSee('Completion Tokens (Output)');
         $response->assertSee('Total Estimated Spend');
         $response->assertSee('1,500');
+        $response->assertSee('1,000');
+        $response->assertSee('500');
+        $response->assertSee('In: 1,000', false);
+        $response->assertSee('Out: 500', false);
         $response->assertSee('$0.0075');
+    }
+
+    public function test_dashboard_chat_logs_index_can_filter_by_date_range(): void
+    {
+        $oldSession = ChatSession::create([
+            'uuid' => 'old-session-uuid-11111',
+            'ip_address' => '127.0.0.1',
+            'country' => 'Australia',
+            'lead_name' => 'Old Session Lead',
+        ]);
+        $oldSession->timestamps = false;
+        $oldSession->created_at = now()->subDays(10);
+        $oldSession->updated_at = now()->subDays(10);
+        $oldSession->save();
+
+        $recentSession = ChatSession::create([
+            'uuid' => 'recent-session-uuid-22222',
+            'ip_address' => '127.0.0.1',
+            'country' => 'Australia',
+            'lead_name' => 'Recent Session Lead',
+        ]);
+        $recentSession->timestamps = false;
+        $recentSession->created_at = now()->subDay();
+        $recentSession->updated_at = now()->subDay();
+        $recentSession->save();
+
+        // Filter for past 3 days only
+        $startDate = now()->subDays(3)->toDateString();
+        $endDate = now()->toDateString();
+
+        $response = $this->actingAs($this->adminUser)->get(route('dashboard.chat-sessions.index', [
+            'start_date' => $startDate,
+            'end_date' => $endDate,
+        ]));
+
+        $response->assertOk();
+        $response->assertSee('Recent Session Lead');
+        $response->assertDontSee('Old Session Lead');
     }
 
     public function test_dashboard_chat_session_show_displays_token_breakdown_and_cost_audit(): void

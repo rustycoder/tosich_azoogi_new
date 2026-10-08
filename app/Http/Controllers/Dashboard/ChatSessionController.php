@@ -22,7 +22,19 @@ class ChatSessionController extends Controller
 
     public function index(Request $request): View
     {
-        $query = ChatSession::query()->withCount('messages')->latest('updated_at');
+        $query = ChatSession::query()
+            ->withCount('messages')
+            ->withSum('messages as total_prompt_tokens', 'prompt_tokens')
+            ->withSum('messages as total_completion_tokens', 'completion_tokens')
+            ->latest('updated_at');
+
+        // Filter by date range
+        if ($request->filled('start_date')) {
+            $query->whereDate('created_at', '>=', $request->input('start_date'));
+        }
+        if ($request->filled('end_date')) {
+            $query->whereDate('created_at', '<=', $request->input('end_date'));
+        }
 
         // Filter by status
         if ($request->filled('status')) {
@@ -67,8 +79,13 @@ class ChatSessionController extends Controller
 
         $totalConversations = ChatSession::count();
         $totalTokens = (int) ChatSession::sum('total_tokens') ?: (int) ChatMessage::sum('tokens_used');
+        $totalPromptTokens = (int) ChatMessage::sum('prompt_tokens');
+        $totalCompletionTokens = (int) ChatMessage::sum('completion_tokens');
         $totalCost = (float) ChatSession::sum('total_cost') ?: (float) ChatMessage::sum('estimated_cost');
         $avgCost = $totalConversations > 0 ? ($totalCost / $totalConversations) : 0.0;
+        $avgTokens = $totalConversations > 0 ? (int) round($totalTokens / $totalConversations) : 0;
+        $avgPromptTokens = $totalConversations > 0 ? (int) round($totalPromptTokens / $totalConversations) : 0;
+        $avgCompletionTokens = $totalConversations > 0 ? (int) round($totalCompletionTokens / $totalConversations) : 0;
 
         $metrics = [
             'total_conversations' => $totalConversations,
@@ -81,6 +98,11 @@ class ChatSessionController extends Controller
             'active_today' => ChatSession::whereDate('created_at', today())->count(),
             'total_messages' => (int) ChatSession::sum('messages_count'),
             'total_tokens' => $totalTokens,
+            'total_prompt_tokens' => $totalPromptTokens,
+            'total_completion_tokens' => $totalCompletionTokens,
+            'avg_tokens' => $avgTokens,
+            'avg_prompt_tokens' => $avgPromptTokens,
+            'avg_completion_tokens' => $avgCompletionTokens,
             'total_cost' => $totalCost,
             'avg_cost' => $avgCost,
         ];
@@ -92,6 +114,8 @@ class ChatSessionController extends Controller
             'searchQuery' => $request->input('q'),
             'hasLead' => $request->boolean('has_lead'),
             'currentSort' => $currentSort,
+            'startDate' => $request->input('start_date'),
+            'endDate' => $request->input('end_date'),
         ]);
     }
 

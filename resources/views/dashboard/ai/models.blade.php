@@ -14,10 +14,6 @@
     <div class="dash-head-title">
         <h1>AI Models &amp; Providers</h1>
         <div class="dash-head-actions">
-            <button type="button" class="btn" id="btn-open-add-provider" style="display:inline-flex;align-items:center;gap:6px;background:var(--card-bg);border:1px solid var(--accent);color:var(--accent);font-weight:600;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                + Add AI Provider
-            </button>
             <button class="btn primary" type="submit" form="ai-config-form">Save Model Settings</button>
         </div>
     </div>
@@ -112,15 +108,15 @@
             <!-- Provider Cards Selector -->
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-bottom:24px;">
                 <!-- Claude / Anthropic Option -->
-                <div class="provider-radio-card" style="border:2px solid {{ ($aiConfig['driver'] ?? 'anthropic') === 'anthropic' ? 'var(--accent)' : 'var(--line)' }};background:var(--bg-2);border-radius:8px;padding:18px;position:relative;display:flex;flex-direction:column;justify-content:space-between;">
+                <div class="provider-radio-card" style="border:2px solid {{ ($aiConfig['driver'] ?? 'anthropic') === 'anthropic' ? 'var(--accent)' : 'var(--dash-line)' }};background:var(--dash-card);border-radius:8px;padding:20px;position:relative;display:flex;flex-direction:column;justify-content:space-between;">
                     <div>
                         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-                            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;margin:0;white-space:nowrap;">
-                                <input type="radio" name="driver" value="anthropic" {{ ($aiConfig['driver'] ?? 'anthropic') === 'anthropic' ? 'checked' : '' }} style="accent-color:var(--accent);transform:scale(1.15);">
-                                <span style="font-weight:700;font-size:16px;color:var(--ink);white-space:nowrap;">Anthropic Claude</span>
+                            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;margin:0;white-space:nowrap;text-transform:none;letter-spacing:normal;">
+                                <input type="radio" name="driver" value="anthropic" {{ ($aiConfig['driver'] ?? 'anthropic') === 'anthropic' ? 'checked' : '' }} style="accent-color:var(--accent);width:16px;height:16px;">
+                                <span style="font-weight:700;font-size:15px;color:var(--dash-ink);white-space:nowrap;">Anthropic Claude</span>
                             </label>
                         </div>
-                        <p style="margin:0 0 16px 0;font-size:12px;color:var(--muted);line-height:1.4;">
+                        <p style="margin:0 0 16px 0;font-size:12px;color:var(--dash-muted);line-height:1.4;">
                             Elite technical accuracy, intelligent tool parsing, and structured architectural advice.
                         </p>
 
@@ -146,12 +142,27 @@
                         <!-- Model Selector -->
                         <div class="dash-field" style="margin-bottom:0;">
                             <label class="dash-label" for="input_anthropic_model">Model Name</label>
-                            <input type="text" name="anthropic_model" id="input_anthropic_model" class="dash-input" value="{{ old('anthropic_model', $aiConfig['anthropic_model'] ?? 'claude-3-5-sonnet-20241022') }}" list="anthropic_models_list" style="font-family:monospace;">
-                            <datalist id="anthropic_models_list">
-                                <option value="claude-3-5-sonnet-20241022">claude-3-5-sonnet-20241022 (Recommended - High Quality)</option>
-                                <option value="claude-3-5-haiku-20241022">claude-3-5-haiku-20241022 (Fast & Economical)</option>
-                                <option value="claude-3-opus-20240229">claude-3-opus-20240229</option>
-                            </datalist>
+                            <div class="dash-select-wrap" style="width:100%;">
+                                <select name="anthropic_model" id="input_anthropic_model" class="dash-select" style="width:100%;font-family:monospace;font-size:12.5px;">
+                                    <option value="claude-3-7-sonnet-latest" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? 'claude-3-5-sonnet-20241022') === 'claude-3-7-sonnet-latest' ? 'selected' : '' }}>claude-3-7-sonnet-latest (Recommended - Hybrid Reasoning Flagship)</option>
+                                    <option value="claude-3-7-sonnet-20250219" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? '') === 'claude-3-7-sonnet-20250219' ? 'selected' : '' }}>claude-3-7-sonnet-20250219 (Pinned Release)</option>
+                                    <option value="claude-3-5-sonnet-20241022" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? 'claude-3-5-sonnet-20241022') === 'claude-3-5-sonnet-20241022' ? 'selected' : '' }}>claude-3-5-sonnet-20241022 (High Quality)</option>
+                                    <option value="claude-3-5-sonnet-latest" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? '') === 'claude-3-5-sonnet-latest' ? 'selected' : '' }}>claude-3-5-sonnet-latest</option>
+                                    <option value="claude-3-5-haiku-20241022" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? '') === 'claude-3-5-haiku-20241022' ? 'selected' : '' }}>claude-3-5-haiku-20241022 (Fast &amp; Economical)</option>
+                                    <option value="claude-3-5-haiku-latest" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? '') === 'claude-3-5-haiku-latest' ? 'selected' : '' }}>claude-3-5-haiku-latest</option>
+                                    <option value="claude-3-opus-20240229" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? '') === 'claude-3-opus-20240229' ? 'selected' : '' }}>claude-3-opus-20240229 (Deep Complex Reasoning)</option>
+                                    <option value="claude-3-haiku-20240307" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? '') === 'claude-3-haiku-20240307' ? 'selected' : '' }}>claude-3-haiku-20240307</option>
+                                    <option value="claude-3-sonnet-20240229" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? '') === 'claude-3-sonnet-20240229' ? 'selected' : '' }}>claude-3-sonnet-20240229</option>
+                                    @php
+                                        $currAnthropic = old('anthropic_model', $aiConfig['anthropic_model'] ?? 'claude-3-5-sonnet-20241022');
+                                        $standardAnthropic = ['claude-3-7-sonnet-latest', 'claude-3-7-sonnet-20250219', 'claude-3-5-sonnet-20241022', 'claude-3-5-sonnet-latest', 'claude-3-5-haiku-20241022', 'claude-3-5-haiku-latest', 'claude-3-opus-20240229', 'claude-3-haiku-20240307', 'claude-3-sonnet-20240229'];
+                                    @endphp
+                                    @if(!in_array($currAnthropic, $standardAnthropic) && filled($currAnthropic))
+                                        <option value="{{ $currAnthropic }}" selected>{{ $currAnthropic }} (Custom)</option>
+                                    @endif
+                                </select>
+                                <svg class="dash-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                            </div>
 
                             <!-- Diagnostic Test -->
                             <div style="margin-top:12px;">
@@ -206,14 +217,34 @@
                         <!-- Model Selector -->
                         <div class="dash-field" style="margin-bottom:0;">
                             <label class="dash-label" for="input_openrouter_model">Model Name</label>
-                            <input type="text" name="openrouter_model" id="input_openrouter_model" class="dash-input" value="{{ old('openrouter_model', $aiConfig['openrouter_model'] ?? 'anthropic/claude-3.5-sonnet') }}" list="openrouter_models_list" style="font-family:monospace;">
-                            <datalist id="openrouter_models_list">
-                                <option value="anthropic/claude-3.5-sonnet">anthropic/claude-3.5-sonnet</option>
-                                <option value="meta-llama/llama-3.3-70b-instruct">meta-llama/llama-3.3-70b-instruct</option>
-                                <option value="google/gemini-2.5-flash">google/gemini-2.5-flash</option>
-                                <option value="openai/gpt-4o">openai/gpt-4o</option>
-                                <option value="deepseek/deepseek-r1">deepseek/deepseek-r1</option>
-                            </datalist>
+                            <div class="dash-select-wrap" style="width:100%;">
+                                <select name="openrouter_model" id="input_openrouter_model" class="dash-select" style="width:100%;font-family:monospace;font-size:12.5px;">
+                                    <option value="anthropic/claude-3.7-sonnet" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? 'anthropic/claude-3.5-sonnet') === 'anthropic/claude-3.7-sonnet' ? 'selected' : '' }}>anthropic/claude-3.7-sonnet (Hybrid Reasoning Flagship)</option>
+                                    <option value="anthropic/claude-3.5-sonnet" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? 'anthropic/claude-3.5-sonnet') === 'anthropic/claude-3.5-sonnet' ? 'selected' : '' }}>anthropic/claude-3.5-sonnet (High Quality)</option>
+                                    <option value="anthropic/claude-3.5-haiku" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'anthropic/claude-3.5-haiku' ? 'selected' : '' }}>anthropic/claude-3.5-haiku (Fast &amp; Economical)</option>
+                                    <option value="google/gemini-2.5-flash" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'google/gemini-2.5-flash' ? 'selected' : '' }}>google/gemini-2.5-flash (High Speed Multimodal)</option>
+                                    <option value="google/gemini-2.5-pro" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'google/gemini-2.5-pro' ? 'selected' : '' }}>google/gemini-2.5-pro (Advanced Multimodal)</option>
+                                    <option value="google/gemini-2.0-flash-001" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'google/gemini-2.0-flash-001' ? 'selected' : '' }}>google/gemini-2.0-flash-001</option>
+                                    <option value="openai/gpt-4o" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'openai/gpt-4o' ? 'selected' : '' }}>openai/gpt-4o (Flagship Omni)</option>
+                                    <option value="openai/gpt-4o-mini" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'openai/gpt-4o-mini' ? 'selected' : '' }}>openai/gpt-4o-mini (Fast &amp; Economical)</option>
+                                    <option value="openai/o3-mini" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'openai/o3-mini' ? 'selected' : '' }}>openai/o3-mini (STEM/Coding Reasoning)</option>
+                                    <option value="openai/o1" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'openai/o1' ? 'selected' : '' }}>openai/o1 (Deep Step-by-Step Reasoning)</option>
+                                    <option value="deepseek/deepseek-r1" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'deepseek/deepseek-r1' ? 'selected' : '' }}>deepseek/deepseek-r1 (Open Reasoning)</option>
+                                    <option value="deepseek/deepseek-chat" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'deepseek/deepseek-chat' ? 'selected' : '' }}>deepseek/deepseek-chat (Ultra-low Cost V3)</option>
+                                    <option value="meta-llama/llama-3.3-70b-instruct" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'meta-llama/llama-3.3-70b-instruct' ? 'selected' : '' }}>meta-llama/llama-3.3-70b-instruct (Open Weights Flagship)</option>
+                                    <option value="meta-llama/llama-3.1-405b-instruct" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'meta-llama/llama-3.1-405b-instruct' ? 'selected' : '' }}>meta-llama/llama-3.1-405b-instruct</option>
+                                    <option value="mistralai/mistral-large-2411" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'mistralai/mistral-large-2411' ? 'selected' : '' }}>mistralai/mistral-large-2411</option>
+                                    <option value="qwen/qwen-2.5-72b-instruct" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'qwen/qwen-2.5-72b-instruct' ? 'selected' : '' }}>qwen/qwen-2.5-72b-instruct</option>
+                                    @php
+                                        $currOr = old('openrouter_model', $aiConfig['openrouter_model'] ?? 'anthropic/claude-3.5-sonnet');
+                                        $standardOr = ['anthropic/claude-3.7-sonnet', 'anthropic/claude-3.5-sonnet', 'anthropic/claude-3.5-haiku', 'google/gemini-2.5-flash', 'google/gemini-2.5-pro', 'google/gemini-2.0-flash-001', 'openai/gpt-4o', 'openai/gpt-4o-mini', 'openai/o3-mini', 'openai/o1', 'deepseek/deepseek-r1', 'deepseek/deepseek-chat', 'meta-llama/llama-3.3-70b-instruct', 'meta-llama/llama-3.1-405b-instruct', 'mistralai/mistral-large-2411', 'qwen/qwen-2.5-72b-instruct'];
+                                    @endphp
+                                    @if(!in_array($currOr, $standardOr) && filled($currOr))
+                                        <option value="{{ $currOr }}" selected>{{ $currOr }} (Custom)</option>
+                                    @endif
+                                </select>
+                                <svg class="dash-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                            </div>
 
                             <!-- Diagnostic Test -->
                             <div style="margin-top:12px;">
@@ -268,13 +299,26 @@
                         <!-- Model Selector -->
                         <div class="dash-field" style="margin-bottom:0;">
                             <label class="dash-label" for="input_gemini_model">Model Name</label>
-                            <input type="text" name="gemini_model" id="input_gemini_model" class="dash-input" value="{{ old('gemini_model', $aiConfig['gemini_model'] ?? 'gemini-2.5-flash') }}" list="gemini_models_list" style="font-family:monospace;">
-                            <datalist id="gemini_models_list">
-                                <option value="gemini-2.5-flash">gemini-2.5-flash (Fast & Cost Effective)</option>
-                                <option value="gemini-2.5-pro">gemini-2.5-pro (High Reasoning)</option>
-                                <option value="gemini-1.5-flash">gemini-1.5-flash</option>
-                                <option value="gemini-1.5-pro">gemini-1.5-pro</option>
-                            </datalist>
+                            <div class="dash-select-wrap" style="width:100%;">
+                                <select name="gemini_model" id="input_gemini_model" class="dash-select" style="width:100%;font-family:monospace;font-size:12.5px;">
+                                    <option value="gemini-2.5-flash" {{ old('gemini_model', $aiConfig['gemini_model'] ?? 'gemini-2.5-flash') === 'gemini-2.5-flash' ? 'selected' : '' }}>gemini-2.5-flash (Recommended - Fast &amp; Cost Effective)</option>
+                                    <option value="gemini-2.5-pro" {{ old('gemini_model', $aiConfig['gemini_model'] ?? '') === 'gemini-2.5-pro' ? 'selected' : '' }}>gemini-2.5-pro (High Reasoning)</option>
+                                    <option value="gemini-2.0-flash" {{ old('gemini_model', $aiConfig['gemini_model'] ?? '') === 'gemini-2.0-flash' ? 'selected' : '' }}>gemini-2.0-flash (High Speed Next-Gen)</option>
+                                    <option value="gemini-2.0-flash-lite" {{ old('gemini_model', $aiConfig['gemini_model'] ?? '') === 'gemini-2.0-flash-lite' ? 'selected' : '' }}>gemini-2.0-flash-lite (Ultra Low Latency)</option>
+                                    <option value="gemini-2.0-pro-exp-02-05" {{ old('gemini_model', $aiConfig['gemini_model'] ?? '') === 'gemini-2.0-pro-exp-02-05' ? 'selected' : '' }}>gemini-2.0-pro-exp-02-05</option>
+                                    <option value="gemini-1.5-flash" {{ old('gemini_model', $aiConfig['gemini_model'] ?? '') === 'gemini-1.5-flash' ? 'selected' : '' }}>gemini-1.5-flash</option>
+                                    <option value="gemini-1.5-flash-8b" {{ old('gemini_model', $aiConfig['gemini_model'] ?? '') === 'gemini-1.5-flash-8b' ? 'selected' : '' }}>gemini-1.5-flash-8b (Cost-Optimized)</option>
+                                    <option value="gemini-1.5-pro" {{ old('gemini_model', $aiConfig['gemini_model'] ?? '') === 'gemini-1.5-pro' ? 'selected' : '' }}>gemini-1.5-pro</option>
+                                    @php
+                                        $currGemini = old('gemini_model', $aiConfig['gemini_model'] ?? 'gemini-2.5-flash');
+                                        $standardGemini = ['gemini-2.5-flash', 'gemini-2.5-pro', 'gemini-2.0-flash', 'gemini-2.0-flash-lite', 'gemini-2.0-pro-exp-02-05', 'gemini-1.5-flash', 'gemini-1.5-flash-8b', 'gemini-1.5-pro'];
+                                    @endphp
+                                    @if(!in_array($currGemini, $standardGemini) && filled($currGemini))
+                                        <option value="{{ $currGemini }}" selected>{{ $currGemini }} (Custom)</option>
+                                    @endif
+                                </select>
+                                <svg class="dash-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                            </div>
 
                             <!-- Diagnostic Test -->
                             <div style="margin-top:12px;">
@@ -329,12 +373,27 @@
                         <!-- Model Selector -->
                         <div class="dash-field" style="margin-bottom:0;">
                             <label class="dash-label" for="input_openai_model">Model Name</label>
-                            <input type="text" name="openai_model" id="input_openai_model" class="dash-input" value="{{ old('openai_model', $aiConfig['openai_model'] ?? 'gpt-4o-mini') }}" list="openai_models_list" style="font-family:monospace;">
-                            <datalist id="openai_models_list">
-                                <option value="gpt-4o-mini">gpt-4o-mini (Fast & Cost Effective)</option>
-                                <option value="gpt-4o">gpt-4o (Full Flagship)</option>
-                                <option value="o3-mini">o3-mini (Reasoning Model)</option>
-                            </datalist>
+                            <div class="dash-select-wrap" style="width:100%;">
+                                <select name="openai_model" id="input_openai_model" class="dash-select" style="width:100%;font-family:monospace;font-size:12.5px;">
+                                    <option value="gpt-4o-mini" {{ old('openai_model', $aiConfig['openai_model'] ?? 'gpt-4o-mini') === 'gpt-4o-mini' ? 'selected' : '' }}>gpt-4o-mini (Recommended - Fast &amp; Cost Effective)</option>
+                                    <option value="gpt-4o" {{ old('openai_model', $aiConfig['openai_model'] ?? '') === 'gpt-4o' ? 'selected' : '' }}>gpt-4o (Full Flagship Omni)</option>
+                                    <option value="gpt-4o-2024-11-20" {{ old('openai_model', $aiConfig['openai_model'] ?? '') === 'gpt-4o-2024-11-20' ? 'selected' : '' }}>gpt-4o-2024-11-20 (Pinned Release)</option>
+                                    <option value="o3-mini" {{ old('openai_model', $aiConfig['openai_model'] ?? '') === 'o3-mini' ? 'selected' : '' }}>o3-mini (High Speed STEM/Coding Reasoning)</option>
+                                    <option value="o1" {{ old('openai_model', $aiConfig['openai_model'] ?? '') === 'o1' ? 'selected' : '' }}>o1 (Deep Reasoning)</option>
+                                    <option value="o1-mini" {{ old('openai_model', $aiConfig['openai_model'] ?? '') === 'o1-mini' ? 'selected' : '' }}>o1-mini (Fast Reasoning)</option>
+                                    <option value="gpt-4.5-preview" {{ old('openai_model', $aiConfig['openai_model'] ?? '') === 'gpt-4.5-preview' ? 'selected' : '' }}>gpt-4.5-preview (Frontier Model)</option>
+                                    <option value="gpt-4-turbo" {{ old('openai_model', $aiConfig['openai_model'] ?? '') === 'gpt-4-turbo' ? 'selected' : '' }}>gpt-4-turbo</option>
+                                    <option value="gpt-3.5-turbo" {{ old('openai_model', $aiConfig['openai_model'] ?? '') === 'gpt-3.5-turbo' ? 'selected' : '' }}>gpt-3.5-turbo</option>
+                                    @php
+                                        $currOpenai = old('openai_model', $aiConfig['openai_model'] ?? 'gpt-4o-mini');
+                                        $standardOpenai = ['gpt-4o-mini', 'gpt-4o', 'gpt-4o-2024-11-20', 'o3-mini', 'o1', 'o1-mini', 'gpt-4.5-preview', 'gpt-4-turbo', 'gpt-3.5-turbo'];
+                                    @endphp
+                                    @if(!in_array($currOpenai, $standardOpenai) && filled($currOpenai))
+                                        <option value="{{ $currOpenai }}" selected>{{ $currOpenai }} (Custom)</option>
+                                    @endif
+                                </select>
+                                <svg class="dash-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                            </div>
 
                             <!-- Diagnostic Test -->
                             <div style="margin-top:12px;">
@@ -356,26 +415,47 @@
 
                 <!-- Custom Providers Dynamic List -->
                 @foreach($customProviders as $cpId => $cp)
-                    <div class="provider-radio-card" style="border:2px solid {{ ($aiConfig['driver'] ?? '') === $cpId ? 'var(--accent)' : 'var(--line)' }};background:var(--bg-2);border-radius:8px;padding:18px;position:relative;display:flex;flex-direction:column;justify-content:space-between;">
+                    @php
+                        $cpModels = !empty($cp['models']) && is_array($cp['models'])
+                            ? $cp['models']
+                            : array_values(array_filter(array_map('trim', preg_split('/[,\n\r;]+/', $cp['model'] ?? ''))));
+                        if (empty($cpModels)) {
+                            $cpModels = [$cp['model'] ?? 'custom-model'];
+                        }
+                        $activeCpModel = $cp['model'] ?? $cpModels[0];
+                    @endphp
+                    <div class="provider-radio-card" style="border:2px solid {{ ($aiConfig['driver'] ?? '') === $cpId ? 'var(--accent)' : 'var(--dash-line)' }};background:var(--dash-card);border-radius:8px;padding:20px;position:relative;display:flex;flex-direction:column;justify-content:space-between;">
                         <div>
                             <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
-                                <label style="display:flex;align-items:center;gap:10px;cursor:pointer;margin:0;white-space:nowrap;">
-                                    <input type="radio" name="driver" value="{{ $cpId }}" {{ ($aiConfig['driver'] ?? '') === $cpId ? 'checked' : '' }} style="accent-color:var(--accent);transform:scale(1.15);">
-                                    <span style="font-weight:700;font-size:16px;color:var(--ink);white-space:nowrap;">{{ $cp['name'] }}</span>
+                                <label style="display:flex;align-items:center;gap:10px;cursor:pointer;margin:0;white-space:nowrap;text-transform:none;letter-spacing:normal;">
+                                    <input type="radio" name="driver" value="{{ $cpId }}" {{ ($aiConfig['driver'] ?? '') === $cpId ? 'checked' : '' }} style="accent-color:var(--accent);width:16px;height:16px;">
+                                    <span style="font-weight:700;font-size:15px;color:var(--dash-ink);white-space:nowrap;">{{ $cp['name'] }}</span>
                                 </label>
                                 <span style="font-size:10px;padding:2px 6px;border-radius:4px;background:var(--card-bg);border:1px solid var(--line);text-transform:uppercase;font-weight:700;color:var(--accent);white-space:nowrap;">
                                     {{ strtoupper($cp['type'] ?? 'openai') }} API
                                 </span>
                             </div>
 
-                            <p style="margin:0 0 12px 0;font-size:12px;color:var(--muted);line-height:1.4;">
+                            <p style="margin:0 0 16px 0;font-size:12px;color:var(--dash-muted);line-height:1.4;">
                                 {{ $cp['description'] ?: 'Custom endpoint configured by administrator.' }}
                             </p>
 
                             <div style="background:var(--bg);padding:10px;border-radius:6px;border:1px solid var(--line);margin-bottom:12px;font-size:11px;font-family:monospace;">
-                                <div style="color:var(--muted);margin-bottom:6px;"><strong style="color:var(--ink);">Endpoint:</strong> {{ $cp['base_url'] ?: 'Provider default base URL' }}</div>
-                                <div style="color:var(--muted);margin-bottom:6px;"><strong style="color:var(--ink);">Model:</strong> <span style="color:var(--accent);">{{ $cp['model'] }}</span></div>
-                                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:4px;border-top:1px dashed var(--line);">
+                                <div style="color:var(--muted);margin-bottom:8px;"><strong style="color:var(--ink);">Endpoint:</strong> {{ $cp['base_url'] ?: 'Provider default base URL' }}</div>
+                                
+                                <div style="color:var(--muted);margin-bottom:8px;">
+                                    <strong style="color:var(--ink);display:block;margin-bottom:4px;">Active Model:</strong>
+                                    <div class="dash-select-wrap" style="width:100%;">
+                                        <select name="custom_provider_models[{{ $cpId }}]" id="input_custom_model_{{ $cpId }}" class="dash-select" style="width:100%;font-family:monospace;font-size:12px;padding:4px 28px 4px 8px;height:auto;">
+                                            @foreach($cpModels as $cm)
+                                                <option value="{{ $cm }}" {{ $activeCpModel === $cm ? 'selected' : '' }}>{{ $cm }}</option>
+                                            @endforeach
+                                        </select>
+                                        <svg class="dash-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                                    </div>
+                                </div>
+
+                                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:6px;border-top:1px dashed var(--line);">
                                     <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
                                         <strong style="color:var(--ink);">Key:</strong>
                                         <span id="cp_key_text_{{ $loop->index }}" data-real-key="{{ $cp['api_key'] ?? '' }}" data-masked="••••••••••••••••" style="color:var(--ink);">••••••••••••••••</span>
@@ -393,7 +473,7 @@
 
                             <!-- Diagnostic Test for Custom Provider -->
                             <div style="margin-bottom:12px;">
-                                <button type="button" class="btn js-card-diagnostic-btn" data-driver="{{ $cpId }}" data-model-val="{{ $cp['model'] }}" style="width:100%;font-size:12px;padding:6px 12px;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--bg);border:1px solid var(--line);color:var(--ink);cursor:pointer;border-radius:6px;font-weight:600;">
+                                <button type="button" class="btn js-card-diagnostic-btn" data-driver="{{ $cpId }}" data-model-input="input_custom_model_{{ $cpId }}" style="width:100%;font-size:12px;padding:6px 12px;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--bg);border:1px solid var(--line);color:var(--ink);cursor:pointer;border-radius:6px;font-weight:600;">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;color:var(--accent);"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                                     Diagnostic Ping Test
                                 </button>
@@ -420,7 +500,7 @@
                     <div style="width:44px;height:44px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;margin-bottom:12px;border:1px solid var(--line);color:var(--accent);">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width:22px;height:22px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                     </div>
-                    <div style="font-weight:700;font-size:15px;color:var(--ink);margin-bottom:4px;">+ Add Custom AI Provider</div>
+                    <div style="font-weight:700;font-size:15px;color:var(--ink);margin-bottom:4px;">Add Custom AI Provider</div>
                     <p style="font-size:12px;color:var(--muted);margin:0;max-width:240px;line-height:1.4;">
                         Connect DeepSeek, Groq, Ollama Local, Together AI, Mistral, xAI, or any custom API endpoint.
                     </p>
@@ -451,12 +531,12 @@
             <div style="margin-bottom:18px;">
                 <label style="font-size:11px;text-transform:uppercase;font-weight:700;color:var(--muted);letter-spacing:0.05em;display:block;margin-bottom:8px;">Quick Presets</label>
                 <div style="display:flex;flex-wrap:wrap;gap:6px;">
-                    <button type="button" class="btn js-preset-btn" data-name="DeepSeek" data-type="openai" data-url="https://api.deepseek.com/v1" data-model="deepseek-chat" data-desc="DeepSeek AI chat completions" style="padding:4px 10px;font-size:11px;">DeepSeek</button>
-                    <button type="button" class="btn js-preset-btn" data-name="Groq" data-type="openai" data-url="https://api.groq.com/openai/v1" data-model="llama-3.3-70b-versatile" data-desc="Groq Ultra-fast inference" style="padding:4px 10px;font-size:11px;">Groq</button>
-                    <button type="button" class="btn js-preset-btn" data-name="Ollama (Local)" data-type="openai" data-url="http://localhost:11434/v1" data-model="llama3.2" data-desc="Local self-hosted Ollama server" style="padding:4px 10px;font-size:11px;">Ollama</button>
-                    <button type="button" class="btn js-preset-btn" data-name="Together AI" data-type="openai" data-url="https://api.together.xyz/v1" data-model="meta-llama/Llama-3.3-70B-Instruct-Turbo" data-desc="Together AI GPU inference cloud" style="padding:4px 10px;font-size:11px;">Together AI</button>
-                    <button type="button" class="btn js-preset-btn" data-name="Mistral AI" data-type="openai" data-url="https://api.mistral.ai/v1" data-model="mistral-large-latest" data-desc="Mistral AI official API" style="padding:4px 10px;font-size:11px;">Mistral AI</button>
-                    <button type="button" class="btn js-preset-btn" data-name="xAI Grok" data-type="openai" data-url="https://api.x.ai/v1" data-model="grok-2-latest" data-desc="xAI Grok official API" style="padding:4px 10px;font-size:11px;">xAI Grok</button>
+                    <button type="button" class="btn js-preset-btn" data-name="DeepSeek" data-type="openai" data-url="https://api.deepseek.com/v1" data-model="deepseek-chat, deepseek-reasoner" data-desc="DeepSeek AI chat completions" style="padding:4px 10px;font-size:11px;">DeepSeek</button>
+                    <button type="button" class="btn js-preset-btn" data-name="Groq" data-type="openai" data-url="https://api.groq.com/openai/v1" data-model="llama-3.3-70b-versatile, mixtral-8x7b-32768" data-desc="Groq Ultra-fast inference" style="padding:4px 10px;font-size:11px;">Groq</button>
+                    <button type="button" class="btn js-preset-btn" data-name="Ollama (Local)" data-type="openai" data-url="http://localhost:11434/v1" data-model="llama3.2, mistral, qwen2.5" data-desc="Local self-hosted Ollama server" style="padding:4px 10px;font-size:11px;">Ollama</button>
+                    <button type="button" class="btn js-preset-btn" data-name="Together AI" data-type="openai" data-url="https://api.together.xyz/v1" data-model="meta-llama/Llama-3.3-70B-Instruct-Turbo, mistralai/Mixtral-8x22B-Instruct-v0.1" data-desc="Together AI GPU inference cloud" style="padding:4px 10px;font-size:11px;">Together AI</button>
+                    <button type="button" class="btn js-preset-btn" data-name="Mistral AI" data-type="openai" data-url="https://api.mistral.ai/v1" data-model="mistral-large-latest, mistral-small-latest" data-desc="Mistral AI official API" style="padding:4px 10px;font-size:11px;">Mistral AI</button>
+                    <button type="button" class="btn js-preset-btn" data-name="xAI Grok" data-type="openai" data-url="https://api.x.ai/v1" data-model="grok-2-latest, grok-beta" data-desc="xAI Grok official API" style="padding:4px 10px;font-size:11px;">xAI Grok</button>
                 </div>
             </div>
 
@@ -498,8 +578,9 @@
             </div>
 
             <div class="dash-field" style="margin-bottom:14px;">
-                <label class="dash-label" for="modal-model">Model Identifier *</label>
-                <input type="text" name="model" id="modal-model" class="dash-input" required placeholder="e.g. deepseek-chat, llama-3.3-70b" style="font-family:monospace;">
+                <label class="dash-label" for="modal-model">Model Identifier(s) *</label>
+                <input type="text" name="model" id="modal-model" class="dash-input" required placeholder="e.g. deepseek-chat, deepseek-reasoner" style="font-family:monospace;">
+                <span style="font-size:11px;color:var(--dash-muted);margin-top:3px;display:block;">You can enter multiple models separated by commas (e.g. <code>deepseek-chat, deepseek-reasoner</code>). A model selector dropdown will be created on the provider card.</span>
             </div>
 
             <div class="dash-field" style="margin-bottom:18px;">

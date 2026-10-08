@@ -17,7 +17,7 @@
             <span class="dash-pill is-active">{{ count($faqs) }} FAQ Items</span>
             <button type="button" class="btn primary" onclick="openFaqModal()" style="display: inline-flex; align-items: center; gap: 6px;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>+ Add FAQ Item</span>
+                <span>Add FAQ Item</span>
             </button>
         </div>
     </div>
@@ -179,7 +179,7 @@
                 <tr id="faqs-empty-row">
                     <td colspan="5">
                         <div class="dash-card dash-empty" style="text-align: center; padding: 36px 20px;">
-                            No FAQ items defined yet. Click "+ Add FAQ Item" to create one.
+                            No FAQ items defined yet. Click "Add FAQ Item" to create one.
                         </div>
                     </td>
                 </tr>

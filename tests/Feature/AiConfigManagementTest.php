@@ -39,7 +39,8 @@ class AiConfigManagementTest extends TestCase
         $response->assertSee('Anthropic Claude');
         $response->assertSee('OpenRouter');
         $response->assertSee('Google Gemini');
-        $response->assertSee('+ Add AI Provider');
+        $response->assertSee('Save Model Settings');
+        $response->assertSee('Add Custom AI Provider');
     }
 
     public function test_admin_can_view_ai_rates_menu_page(): void
@@ -121,6 +122,42 @@ class AiConfigManagementTest extends TestCase
 
         $driverInstance = ChatOrchestrator::makeDriver($customProviderKey);
         $this->assertInstanceOf(OpenAiDriver::class, $driverInstance);
+    }
+
+    public function test_admin_can_add_custom_ai_provider_with_multiple_models_and_switch_active_model(): void
+    {
+        $response = $this->actingAs($this->adminUser)->post(route('dashboard.ai.custom-provider.store'), [
+            'name' => 'Groq Fast Cloud',
+            'type' => 'openai',
+            'base_url' => 'https://api.groq.com/openai/v1',
+            'api_key' => 'gsk_test_multi_model_123',
+            'model' => 'llama-3.3-70b-versatile, mixtral-8x7b-32768, gemma2-9b-it',
+            'description' => 'Groq ultra fast multi-model inference',
+            'set_active' => '1',
+        ]);
+
+        $response->assertRedirect(route('dashboard.ai.models'));
+        $response->assertSessionHas('status');
+
+        $config = ChatOrchestrator::getActiveAiConfig();
+        $customProviderKey = array_key_first($config['custom_providers']);
+        $this->assertStringStartsWith('custom_groq_fast_cloud_', $customProviderKey);
+
+        $cpData = $config['custom_providers'][$customProviderKey];
+        $this->assertSame('llama-3.3-70b-versatile', $cpData['model']);
+        $this->assertEquals(['llama-3.3-70b-versatile', 'mixtral-8x7b-32768', 'gemma2-9b-it'], $cpData['models']);
+
+        // Test switching the active model of the custom provider in config
+        $updateResponse = $this->actingAs($this->adminUser)->put(route('dashboard.ai.update'), [
+            'driver' => $customProviderKey,
+            'custom_provider_models' => [
+                $customProviderKey => 'mixtral-8x7b-32768',
+            ],
+        ]);
+
+        $updateResponse->assertRedirect(route('dashboard.ai.models'));
+        $updatedConfig = ChatOrchestrator::getActiveAiConfig();
+        $this->assertSame('mixtral-8x7b-32768', $updatedConfig['custom_providers'][$customProviderKey]['model']);
     }
 
     public function test_admin_can_delete_custom_ai_provider(): void
@@ -214,7 +251,7 @@ class AiConfigManagementTest extends TestCase
         $viewResponse = $this->actingAs($this->adminUser)->get(route('dashboard.ai.rules'));
         $viewResponse->assertOk();
         $viewResponse->assertSee('AI System Rules &amp; Behavioral Directives', false);
-        $viewResponse->assertSee('+ Add Rule Item', false);
+        $viewResponse->assertSee('Add Rule Item', false);
         $viewResponse->assertSee('Role &amp; Tone of Voice', false);
 
         $storeResponse = $this->actingAs($this->adminUser)->post(route('dashboard.ai.rules.store'), [
@@ -247,7 +284,7 @@ class AiConfigManagementTest extends TestCase
         $viewResponse = $this->actingAs($this->adminUser)->get(route('dashboard.ai.context'));
         $viewResponse->assertOk();
         $viewResponse->assertSee('Company Context &amp; Manufacturing Policies', false);
-        $viewResponse->assertSee('+ Add Context Item', false);
+        $viewResponse->assertSee('Add Context Item', false);
         $viewResponse->assertSee('Headquarters &amp; Sydney Assembly Facility', false);
 
         $storeResponse = $this->actingAs($this->adminUser)->post(route('dashboard.ai.context.store'), [

@@ -25,26 +25,36 @@
 </div>
 
 <!-- Metrics Overview -->
-<div class="dash-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px;">
+<div class="dash-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px;">
     <div class="dash-card" style="padding: 18px;">
         <div style="font-size: 11px; text-transform: uppercase; color: var(--dash-muted, var(--muted)); font-weight: 600; letter-spacing: 0.05em;">Total Conversations</div>
         <div style="font-size: 26px; font-weight: 700; color: var(--dash-ink, var(--ink)); margin-top: 6px;">{{ number_format($metrics['total_conversations']) }}</div>
-        <div style="font-size: 11px; color: var(--dash-muted, var(--muted)); margin-top: 4px;">{{ number_format($metrics['active_today']) }} active today</div>
+        <div style="font-size: 11px; color: var(--dash-muted, var(--muted)); margin-top: 4px;">{{ number_format($metrics['active_today']) }} active today · {{ number_format($metrics['total_messages']) }} msgs</div>
     </div>
     <div class="dash-card" style="padding: 18px;">
         <div style="font-size: 11px; text-transform: uppercase; color: var(--dash-muted, var(--muted)); font-weight: 600; letter-spacing: 0.05em;">Total Tokens Consumed</div>
         <div style="font-size: 26px; font-weight: 700; color: var(--accent); margin-top: 6px;">{{ number_format($metrics['total_tokens']) }}</div>
-        <div style="font-size: 11px; color: var(--dash-muted, var(--muted)); margin-top: 4px;">Prompt &amp; completion tokens</div>
+        <div style="font-size: 11px; color: var(--dash-muted, var(--muted)); margin-top: 4px;">~{{ number_format($metrics['avg_tokens']) }} / conversation</div>
     </div>
     <div class="dash-card" style="padding: 18px;">
-        <div style="font-size: 11px; text-transform: uppercase; color: var(--dash-muted, var(--muted)); font-weight: 600; letter-spacing: 0.05em;">Total Estimated Spend</div>
+        <div style="font-size: 11px; text-transform: uppercase; color: #38bdf8; font-weight: 600; letter-spacing: 0.05em;">Prompt Tokens (Input)</div>
+        <div style="font-size: 26px; font-weight: 700; color: #38bdf8; margin-top: 6px;">{{ number_format($metrics['total_prompt_tokens']) }}</div>
+        <div style="font-size: 11px; color: var(--dash-muted, var(--muted)); margin-top: 4px;">Avg: {{ number_format($metrics['avg_prompt_tokens']) }} / conversation</div>
+    </div>
+    <div class="dash-card" style="padding: 18px;">
+        <div style="font-size: 11px; text-transform: uppercase; color: #a78bfa; font-weight: 600; letter-spacing: 0.05em;">Completion Tokens (Output)</div>
+        <div style="font-size: 26px; font-weight: 700; color: #a78bfa; margin-top: 6px;">{{ number_format($metrics['total_completion_tokens']) }}</div>
+        <div style="font-size: 11px; color: var(--dash-muted, var(--muted)); margin-top: 4px;">Avg: {{ number_format($metrics['avg_completion_tokens']) }} / conversation</div>
+    </div>
+    <div class="dash-card" style="padding: 18px;">
+        <div style="font-size: 11px; text-transform: uppercase; color: #10b981; font-weight: 600; letter-spacing: 0.05em;">Total Estimated Spend</div>
         <div style="font-size: 26px; font-weight: 700; color: #10b981; margin-top: 6px;">${{ number_format($metrics['total_cost'], 4) }} <span style="font-size: 13px; font-weight: normal; color: var(--dash-muted, var(--muted));">USD</span></div>
-        <div style="font-size: 11px; color: var(--dash-muted, var(--muted)); margin-top: 4px;">~${{ number_format($metrics['avg_cost'], 4) }} / session</div>
+        <div style="font-size: 11px; color: var(--dash-muted, var(--muted)); margin-top: 4px;">~${{ number_format($metrics['avg_cost'], 4) }} / conversation</div>
     </div>
     <div class="dash-card" style="padding: 18px;">
         <div style="font-size: 11px; text-transform: uppercase; color: var(--dash-muted, var(--muted)); font-weight: 600; letter-spacing: 0.05em;">Leads Captured</div>
         <div style="font-size: 26px; font-weight: 700; color: #10b981; margin-top: 6px;">{{ number_format($metrics['leads_captured']) }}</div>
-        <div style="font-size: 11px; color: var(--dash-muted, var(--muted)); margin-top: 4px;">{{ number_format($metrics['total_messages']) }} total messages</div>
+        <div style="font-size: 11px; color: var(--dash-muted, var(--muted)); margin-top: 4px;">Quote requests &amp; inquiries</div>
     </div>
 </div>
 
@@ -68,12 +78,39 @@
                 autocomplete="off"
             >
             @if ($searchQuery !== '')
-                <a class="dash-search-clear" href="{{ route('dashboard.chat-sessions.index', array_filter(['status' => $currentStatus, 'sort' => $currentSort !== 'latest' ? $currentSort : null, 'has_lead' => $hasLead ? 1 : null])) }}" title="Clear search" aria-label="Clear search">
+                <a class="dash-search-clear" href="{{ route('dashboard.chat-sessions.index', array_filter(['status' => $currentStatus, 'sort' => $currentSort !== 'latest' ? $currentSort : null, 'has_lead' => $hasLead ? 1 : null, 'start_date' => $startDate, 'end_date' => $endDate])) }}" title="Clear search" aria-label="Clear search">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
                 </a>
             @endif
             <button type="submit" class="dash-search-submit">Search</button>
         </div>
+    </div>
+
+    <!-- Date Range Filter -->
+    <div class="dash-date-range-wrap" style="display: inline-flex; align-items: center; gap: 6px; background: var(--dash-card); border: 1px solid var(--dash-line); border-radius: 8px; padding: 0 10px; min-height: 40px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px; color: var(--dash-muted, var(--muted)); flex-shrink: 0;" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--dash-muted, var(--muted)); font-weight: 600;">Date:</span>
+        <input
+            type="date"
+            name="start_date"
+            value="{{ $startDate ?? '' }}"
+            class="dash-date-input"
+            style="background: transparent; border: none; color: var(--dash-ink, var(--ink)); font-size: 12.5px; font-family: inherit; outline: none; padding: 4px 2px; cursor: pointer;"
+            onchange="document.getElementById('chatFilterForm').submit()"
+            title="Start Date (From)"
+            aria-label="Start Date"
+        >
+        <span style="color: var(--dash-muted, var(--muted)); font-size: 12px;">→</span>
+        <input
+            type="date"
+            name="end_date"
+            value="{{ $endDate ?? '' }}"
+            class="dash-date-input"
+            style="background: transparent; border: none; color: var(--dash-ink, var(--ink)); font-size: 12.5px; font-family: inherit; outline: none; padding: 4px 2px; cursor: pointer;"
+            onchange="document.getElementById('chatFilterForm').submit()"
+            title="End Date (To)"
+            aria-label="End Date"
+        >
     </div>
 
     <!-- Status Filter Dropdown -->
@@ -104,7 +141,7 @@
         <span>Captured Leads Only</span>
     </label>
 
-    @if ($searchQuery || $currentStatus || $hasLead || ($currentSort && $currentSort !== 'latest'))
+    @if ($searchQuery || $currentStatus || $hasLead || ($currentSort && $currentSort !== 'latest') || $startDate || $endDate)
         <a href="{{ route('dashboard.chat-sessions.index') }}" class="btn" style="padding: 7px 12px; font-size: 12.5px; text-decoration: none;">Reset Filters</a>
     @endif
 </form>
@@ -147,7 +184,7 @@
 
                 <!-- Group 3: AI Model & Compute -->
                 <th scope="col" class="dash-col-th is-media" style="min-width: 170px;">AI Model &amp; Provider</th>
-                <th scope="col" class="dash-col-th is-media" style="min-width: 150px;">Token Usage</th>
+                <th scope="col" class="dash-col-th is-media" style="min-width: 170px;">Token Usage (Total / In / Out)</th>
 
                 <!-- Group 4: Token Spend -->
                 <th scope="col" class="dash-col-th is-supplier" style="min-width: 130px;">Estimated Cost</th>
@@ -163,7 +200,13 @@
         <tbody>
             @forelse ($sessions as $session)
                 @php
-                    $tokens = (int) ($session->total_tokens ?: $session->messages->sum('tokens_used'));
+                    $promptTokens = (int) ($session->total_prompt_tokens ?? 0);
+                    $completionTokens = (int) ($session->total_completion_tokens ?? 0);
+                    $tokens = (int) ($session->total_tokens ?: ($promptTokens + $completionTokens));
+                    if ($promptTokens === 0 && $completionTokens === 0 && $tokens > 0) {
+                        $completionTokens = max(1, (int) round($tokens * 0.15));
+                        $promptTokens = max(1, $tokens - $completionTokens);
+                    }
                     $cost = (float) ($session->total_cost ?: $session->messages->sum('estimated_cost'));
                     $isLead = filled($session->lead_name) || filled($session->lead_email) || filled($session->enquiry_id);
                 @endphp
@@ -259,10 +302,15 @@
 
                     <!-- Token Usage -->
                     <td>
-                        <div style="display: flex; flex-direction: column; gap: 2px;">
-                            <span class="dash-tag" style="font-family: monospace; font-size: 11.5px; font-weight: 600; color: var(--dash-ink, var(--ink));">
-                                ⚡ {{ number_format($tokens) }} <span style="font-weight: normal; font-size: 10px; color: var(--dash-muted, var(--muted));">tokens</span>
+                        <div style="display: flex; flex-direction: column; gap: 3px;">
+                            <span class="dash-tag" style="font-family: monospace; font-size: 11.5px; font-weight: 600; color: var(--dash-ink, var(--ink)); width: fit-content;">
+                                ⚡ {{ number_format($tokens) }} <span style="font-weight: normal; font-size: 10px; color: var(--dash-muted, var(--muted));">total</span>
                             </span>
+                            <div style="display: flex; align-items: center; gap: 5px; font-size: 10.5px; font-family: monospace; margin-top: 1px;">
+                                <span style="color: #38bdf8; font-weight: 600;" title="Prompt Tokens (Input)">In: {{ number_format($promptTokens) }}</span>
+                                <span style="color: var(--dash-line, rgba(255,255,255,0.2));">/</span>
+                                <span style="color: #a78bfa; font-weight: 600;" title="Completion Tokens (Output)">Out: {{ number_format($completionTokens) }}</span>
+                            </div>
                         </div>
                     </td>
 

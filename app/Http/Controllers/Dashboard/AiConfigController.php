@@ -120,6 +120,13 @@ class AiConfigController extends Controller
         }
 
         $customProviders = $existingConfig['custom_providers'] ?? [];
+        $customProviderModels = (array) $request->input('custom_provider_models', []);
+        foreach ($customProviderModels as $cpId => $selectedModel) {
+            if (isset($customProviders[$cpId]) && filled($selectedModel)) {
+                $customProviders[$cpId]['model'] = trim((string) $selectedModel);
+            }
+        }
+
         $allowedDrivers = array_merge(['gemini', 'anthropic', 'openrouter', 'openai'], array_keys($customProviders));
 
         $validated = $request->validate([
@@ -132,6 +139,7 @@ class AiConfigController extends Controller
             'openrouter_model' => ['nullable', 'string', 'max:150'],
             'openai_api_key' => ['nullable', 'string', 'max:500'],
             'openai_model' => ['nullable', 'string', 'max:100'],
+            'custom_provider_models' => ['nullable', 'array'],
         ]);
 
         $resolveKey = function (string $keyName) use ($request, $existingConfig): ?string {
@@ -701,7 +709,7 @@ class AiConfigController extends Controller
             'type' => ['required', 'string', 'in:openai,anthropic,gemini'],
             'base_url' => ['nullable', 'url', 'max:255'],
             'api_key' => ['required', 'string', 'max:500'],
-            'model' => ['required', 'string', 'max:150'],
+            'model' => ['required', 'string', 'max:500'],
             'description' => ['nullable', 'string', 'max:255'],
             'set_active' => ['nullable', 'boolean'],
         ]);
@@ -715,6 +723,13 @@ class AiConfigController extends Controller
             }
         }
 
+        $rawModels = (string) $validated['model'];
+        $modelsList = array_values(array_filter(array_map('trim', preg_split('/[,\n\r;]+/', $rawModels))));
+        if (empty($modelsList)) {
+            $modelsList = [trim($rawModels)];
+        }
+        $primaryModel = $modelsList[0];
+
         $providerId = 'custom_'.Str::slug($validated['name'], '_').'_'.substr(md5(uniqid()), 0, 4);
 
         $customProviders = $config['custom_providers'] ?? [];
@@ -724,7 +739,8 @@ class AiConfigController extends Controller
             'type' => $validated['type'],
             'base_url' => ! empty($validated['base_url']) ? rtrim(trim($validated['base_url']), '/') : null,
             'api_key' => trim($validated['api_key']),
-            'model' => trim($validated['model']),
+            'model' => $primaryModel,
+            'models' => $modelsList,
             'description' => ! empty($validated['description']) ? trim($validated['description']) : null,
             'created_at' => now()->toIso8601String(),
         ];
