@@ -33,12 +33,22 @@
                 autocomplete="off"
             >
             @if ($search !== '')
-                <a class="dash-search-clear" href="{{ route('dashboard.categories.index', array_filter(['parent' => $activeParent, 'per_page' => $perPage !== 50 ? $perPage : null])) }}" title="Clear search" aria-label="Clear search">
+                <a class="dash-search-clear" href="{{ route('dashboard.categories.index', array_filter(['parent' => $activeParent, 'status' => $activeStatus, 'per_page' => $perPage !== 50 ? $perPage : null])) }}" title="Clear search" aria-label="Clear search">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
                 </a>
             @endif
             <button type="submit" class="dash-search-submit">Search</button>
         </div>
+    </div>
+
+    <!-- Status Filter Dropdown -->
+    <div class="dash-select-wrap">
+        <select name="status" class="dash-select" onchange="document.getElementById('catFilterForm').submit()" aria-label="Filter by status">
+            <option value="">All Statuses</option>
+            <option value="publish" {{ ($activeStatus ?? '') === 'publish' ? 'selected' : '' }}>Published</option>
+            <option value="draft" {{ ($activeStatus ?? '') === 'draft' ? 'selected' : '' }}>Draft / Inactive</option>
+        </select>
+        <svg class="dash-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
 
     <!-- Root Category Filter Dropdown -->
@@ -75,6 +85,7 @@
             <tr>
                 <th scope="col" style="width: 70px; text-align: center;">Order</th>
                 <th scope="col" class="dash-sticky-col" style="min-width: 220px;">Category Name</th>
+                <th scope="col" style="width: 100px; text-align: center;">Status</th>
                 <th scope="col" style="min-width: 170px;">Parent Category</th>
                 <th scope="col" style="width: 80px; text-align: center;">Image</th>
                 <th scope="col" style="width: 70px; text-align: center;">Icon</th>
@@ -87,6 +98,8 @@
                 @php
                     $img = $category->featuredImageUrl();
                     $icon = $category->iconUrl();
+                    $st = strtolower(trim((string) ($category->status ?? '')));
+                    $isPublished = $st === '' || $st === 'publish';
                 @endphp
                 <tr>
                     <!-- Sort Order (1st Column) -->
@@ -102,6 +115,15 @@
                             <strong style="color: var(--dash-ink); font-size: 13.5px;">{{ $category->name }}</strong>
                             <span class="dash-airtable-id">{{ $category->airtable_id }}</span>
                         </div>
+                    </td>
+
+                    <!-- Status -->
+                    <td style="text-align: center;">
+                        @if ($isPublished)
+                            <span class="dash-status-pill is-published">Publish</span>
+                        @else
+                            <span class="dash-status-pill is-draft">{{ ucfirst($category->status) }}</span>
+                        @endif
                     </td>
 
                     <!-- Parent Category -->
@@ -158,7 +180,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="7">
+                    <td colspan="8">
                         <div class="dash-card dash-empty">
                             {{ $search === '' ? 'No categories synced yet.' : 'No categories match "' . $search . '".' }}
                         </div>
