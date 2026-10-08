@@ -126,7 +126,6 @@ class ChatSessionController extends Controller
         return view('dashboard.chat.index', [
             'sessions' => $sessions,
             'metrics' => $metrics,
-            'currentStatus' => $request->input('status'),
             'currentReadStatus' => $readStatus,
             'favoriteOnly' => $favoriteOnly,
             'searchQuery' => $request->input('q'),

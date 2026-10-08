@@ -82,7 +82,7 @@
                 autocomplete="off"
             >
             @if ($searchQuery !== '')
-                <a class="dash-search-clear" href="{{ route('dashboard.chat-sessions.index', array_filter(['status' => $currentStatus, 'read_status' => $currentReadStatus, 'favorite_only' => $favoriteOnly ? 1 : null, 'sort' => $currentSort !== 'latest' ? $currentSort : null, 'has_lead' => $hasLead ? 1 : null, 'start_date' => $startDate, 'end_date' => $endDate])) }}" title="Clear search" aria-label="Clear search">
+                <a class="dash-search-clear" href="{{ route('dashboard.chat-sessions.index', array_filter(['read_status' => $currentReadStatus, 'favorite_only' => $favoriteOnly ? 1 : null, 'sort' => $currentSort !== 'latest' ? $currentSort : null, 'has_lead' => $hasLead ? 1 : null, 'start_date' => $startDate, 'end_date' => $endDate])) }}" title="Clear search" aria-label="Clear search">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
                 </a>
             @endif
@@ -127,17 +127,6 @@
         <svg class="dash-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
 
-    <!-- Status Filter Dropdown -->
-    <div class="dash-select-wrap">
-        <select name="status" class="dash-select" onchange="document.getElementById('chatFilterForm').submit()" aria-label="Filter by status">
-            <option value="">All Statuses</option>
-            <option value="active" {{ $currentStatus === 'active' ? 'selected' : '' }}>Active</option>
-            <option value="completed" {{ $currentStatus === 'completed' ? 'selected' : '' }}>Completed / Lead</option>
-            <option value="abandoned" {{ $currentStatus === 'abandoned' ? 'selected' : '' }}>Abandoned</option>
-        </select>
-        <svg class="dash-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-    </div>
-
     <!-- Sort Dropdown -->
     <div class="dash-select-wrap">
         <select name="sort" class="dash-select" onchange="document.getElementById('chatFilterForm').submit()" aria-label="Sort chat conversations">
@@ -164,7 +153,7 @@
         <span>Captured Leads Only</span>
     </label>
 
-    @if ($searchQuery || $currentStatus || $currentReadStatus || $favoriteOnly || $hasLead || ($currentSort && $currentSort !== 'latest') || $startDate || $endDate)
+    @if ($searchQuery || $currentReadStatus || $favoriteOnly || $hasLead || ($currentSort && $currentSort !== 'latest') || $startDate || $endDate)
         <a href="{{ route('dashboard.chat-sessions.index') }}" class="btn" style="padding: 7px 12px; font-size: 12.5px; text-decoration: none;">Reset Filters</a>
     @endif
 </form>
@@ -190,7 +179,6 @@
                 <th scope="col" style="min-width: 85px;">Tokens Out</th>
                 <th scope="col" style="min-width: 95px;">Total Tokens</th>
                 <th scope="col" style="min-width: 110px;">Estimated Cost</th>
-                <th scope="col" style="width: 95px; text-align: center;">Status</th>
                 <th scope="col" style="min-width: 130px;">Created Date</th>
                 <th scope="col" style="width: 110px; text-align: right;">Actions</th>
             </tr>
@@ -348,24 +336,7 @@
                         </div>
                     </td>
 
-                    <!-- 5. Conversion & Status -->
-                    <td style="text-align: center;">
-                        @if ($session->status === 'completed' || $session->enquiry_id)
-                            <span class="dash-pill is-active" style="font-size: 10.5px; background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.25);">
-                                Quote Lead
-                            </span>
-                        @elseif ($session->status === 'active')
-                            <span class="dash-pill is-active" style="font-size: 10.5px;">
-                                Active
-                            </span>
-                        @else
-                            <span class="dash-pill is-inactive" style="font-size: 10.5px;">
-                                {{ ucfirst($session->status) }}
-                            </span>
-                        @endif
-                    </td>
-
-                    <!-- 6. Audit & Actions -->
+                    <!-- 5. Audit & Actions -->
                     <!-- Created Date -->
                     <td>
                         <div class="dash-updated" style="gap: 2px;">
@@ -414,7 +385,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="17">
+                    <td colspan="16">
                         <div class="dash-card dash-empty">
                             {{ $searchQuery === '' ? 'No chat conversations recorded yet.' : 'No chat conversations match "' . $searchQuery . '".' }}
                         </div>
