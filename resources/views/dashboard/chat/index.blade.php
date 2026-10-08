@@ -186,7 +186,9 @@
                 <th scope="col" style="min-width: 240px;">Conversation Summary</th>
                 <th scope="col" style="width: 85px; text-align: center;">Messages</th>
                 <th scope="col" style="min-width: 150px;">AI Model</th>
-                <th scope="col" style="min-width: 160px;">Token Usage</th>
+                <th scope="col" style="min-width: 80px;">Tokens In</th>
+                <th scope="col" style="min-width: 85px;">Tokens Out</th>
+                <th scope="col" style="min-width: 95px;">Total Tokens</th>
                 <th scope="col" style="min-width: 110px;">Estimated Cost</th>
                 <th scope="col" style="width: 95px; text-align: center;">Status</th>
                 <th scope="col" style="min-width: 130px;">Created Date</th>
@@ -316,18 +318,25 @@
                         @endif
                     </td>
 
-                    <!-- Token Usage -->
+                    <!-- Tokens In -->
                     <td>
-                        <div style="display: flex; flex-direction: column; gap: 3px;">
-                            <span class="dash-tag" style="font-family: monospace; font-size: 11.5px; font-weight: 600; color: var(--dash-ink, var(--ink)); width: fit-content;">
-                                ⚡ {{ number_format($tokens) }} <span style="font-weight: normal; font-size: 10px; color: var(--dash-muted, var(--muted));">total</span>
-                            </span>
-                            <div style="display: flex; align-items: center; gap: 5px; font-size: 10.5px; font-family: monospace; margin-top: 1px;">
-                                <span style="color: #38bdf8; font-weight: 600;" title="Prompt Tokens (Input)">In: {{ number_format($promptTokens) }}</span>
-                                <span style="color: var(--dash-line, rgba(255,255,255,0.2));">/</span>
-                                <span style="color: #a78bfa; font-weight: 600;" title="Completion Tokens (Output)">Out: {{ number_format($completionTokens) }}</span>
-                            </div>
-                        </div>
+                        <span style="color: #38bdf8; font-weight: 600; font-family: monospace; font-size: 11.5px;" title="Input Tokens">
+                            {{ number_format($promptTokens) }}
+                        </span>
+                    </td>
+
+                    <!-- Tokens Out -->
+                    <td>
+                        <span style="color: #a78bfa; font-weight: 600; font-family: monospace; font-size: 11.5px;" title="Output Tokens">
+                            {{ number_format($completionTokens) }}
+                        </span>
+                    </td>
+
+                    <!-- Total Tokens -->
+                    <td>
+                        <span class="dash-tag" style="font-family: monospace; font-size: 11px; font-weight: 600; color: var(--dash-ink, var(--ink)); width: fit-content;">
+                            ⚡ {{ number_format($tokens) }}
+                        </span>
                     </td>
 
                     <!-- 4. Token Spend / Cost -->
@@ -405,7 +414,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="15">
+                    <td colspan="17">
                         <div class="dash-card dash-empty">
                             {{ $searchQuery === '' ? 'No chat conversations recorded yet.' : 'No chat conversations match "' . $searchQuery . '".' }}
                         </div>
