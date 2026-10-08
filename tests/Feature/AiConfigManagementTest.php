@@ -53,6 +53,19 @@ class AiConfigManagementTest extends TestCase
         $response->assertSee('Claude 3.5 Sonnet');
     }
 
+    public function test_admin_can_view_ai_prompt_page(): void
+    {
+        $response = $this->actingAs($this->adminUser)->get(route('dashboard.ai.prompt'));
+
+        $response->assertOk();
+        $response->assertSee('AI Live System Prompt Inspector');
+        $response->assertSee('Full Compiled System Prompt');
+        $response->assertSee('System Rules');
+        $response->assertSee('Company Context');
+        $response->assertSee('FAQ Knowledge');
+        $response->assertSee('Copy Full Prompt');
+    }
+
     public function test_admin_can_update_ai_driver_models_and_api_keys_in_database(): void
     {
         $response = $this->actingAs($this->adminUser)->put(route('dashboard.ai.update'), [

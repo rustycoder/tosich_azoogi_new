@@ -42,6 +42,26 @@
     </div>
 @endif
 
+<!-- Context Guidelines Banner -->
+<div class="dash-card" style="padding: 16px 20px; margin-bottom: 20px; border-left: 3px solid var(--accent); background: rgba(103, 208, 78, 0.04);">
+    <div style="font-size: 13px; font-weight: 700; color: var(--dash-ink, var(--ink)); margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 6px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px; color: var(--accent);"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <span>Company Context Guidelines &amp; Operational Policies</span>
+        </div>
+        <a href="{{ route('dashboard.ai.prompt') }}" style="font-size: 11.5px; color: var(--accent); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">
+            <span>View Full Live System Prompt</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 12px; height: 12px;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+    </div>
+    <ul style="font-size: 12px; color: var(--dash-muted, var(--muted)); margin: 0; padding-left: 18px; line-height: 1.6; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 4px 18px;">
+        <li><strong>Sydney Workshop:</strong> Mention local custom profile cutting and quick 3-5 day turnarounds.</li>
+        <li><strong>Logistics:</strong> Detail warehouse dispatch speeds (24-48h for in-stock items).</li>
+        <li><strong>Engineering:</strong> Highlight IES/LDT photometric files available for lighting designers.</li>
+        <li><strong>Warranty:</strong> Ensure standard 5-year commercial warranty terms are highlighted.</li>
+    </ul>
+</div>
+
 <!-- Search & Filter Controls Toolbar -->
 <div class="dash-toolbar-row" style="margin-bottom: 20px;">
     <!-- Search Input Field -->
@@ -173,37 +193,6 @@
             </tr>
         </tbody>
     </table>
-</div>
-
-<!-- Bottom Section: Live System Prompt Inspector & Guidance -->
-<div style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(320px, 1fr); gap: 24px; align-items: start;">
-    <!-- Live System Prompt Inspector -->
-    <div class="dash-card" style="padding: 20px; border-color: rgba(103, 208, 78, 0.3);">
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-            <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent);">
-                Compiled System Prompt Preview
-            </div>
-            <span class="dash-pill is-active" style="font-size: 10px;">Live Injection</span>
-        </div>
-        <p style="font-size: 11.5px; color: var(--dash-muted, var(--muted)); margin-top: 0; margin-bottom: 10px;">
-            Active context items are dynamically compiled and injected into the AI company background.
-        </p>
-        <div style="background: rgba(15, 15, 15, 0.95); border: 1px solid var(--line); border-radius: 8px; padding: 12px; max-height: 380px; overflow-y: auto; font-family: monospace; font-size: 11px; line-height: 1.5; color: #a3e635; white-space: pre-wrap; word-break: break-word;">{{ $compiledPrompt }}</div>
-    </div>
-
-    <!-- Context Guidance Tips -->
-    <div class="dash-card" style="padding: 18px;">
-        <div style="font-size: 13px; font-weight: 700; color: var(--dash-ink, var(--ink)); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px; color: var(--accent);"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-            <span>Context Guidelines</span>
-        </div>
-        <ul style="font-size: 11.5px; color: var(--dash-muted, var(--muted)); margin: 0; padding-left: 18px; line-height: 1.6;">
-            <li><strong>Sydney Workshop:</strong> Mention local custom profile cutting and quick 3-5 day turnarounds.</li>
-            <li><strong>Logistics:</strong> Detail warehouse dispatch speeds (24-48h for in-stock items).</li>
-            <li><strong>Engineering:</strong> Highlight IES/LDT photometric files available for lighting designers.</li>
-            <li><strong>Warranty:</strong> Ensure standard 5-year commercial warranty terms are highlighted.</li>
-        </ul>
-    </div>
 </div>
 
 <!-- Company Context Modal (Add & Edit) -->

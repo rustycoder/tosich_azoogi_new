@@ -546,6 +546,34 @@ class AiConfigController extends Controller
     }
 
     /**
+     * Display Compiled Live AI System Prompt Inspector.
+     */
+    public function prompt(): View
+    {
+        $compiledPrompt = app(ChatOrchestrator::class)->getSystemPrompt();
+        $rules = ChatOrchestrator::getRulesItems();
+        $contextItems = ChatOrchestrator::getContextItems();
+        $faqs = ChatOrchestrator::getFaqs();
+
+        $activeRulesCount = count(array_filter($rules, fn ($r) => ($r['is_active'] ?? true) !== false));
+        $activeContextCount = count(array_filter($contextItems, fn ($c) => ($c['is_active'] ?? true) !== false));
+        $activeFaqsCount = count(array_filter($faqs, fn ($f) => ($f['is_active'] ?? true) !== false));
+
+        $promptTokensEstimate = (int) ceil(strlen($compiledPrompt) / 3.8);
+
+        return view('dashboard.ai.prompt', [
+            'compiledPrompt' => $compiledPrompt,
+            'rules' => $rules,
+            'contextItems' => $contextItems,
+            'faqs' => $faqs,
+            'activeRulesCount' => $activeRulesCount,
+            'activeContextCount' => $activeContextCount,
+            'activeFaqsCount' => $activeFaqsCount,
+            'promptTokensEstimate' => $promptTokensEstimate,
+        ]);
+    }
+
+    /**
      * Backward compatibility knowledge view alias.
      */
     public function knowledge(): View

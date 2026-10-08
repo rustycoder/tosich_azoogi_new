@@ -157,6 +157,7 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         Route::patch('ai/faqs/{id}/status', [AiConfigController::class, 'toggleFaqStatus'])->name('ai.faqs.toggle-status');
         Route::delete('ai/faqs/{id}', [AiConfigController::class, 'deleteFaq'])->name('ai.faqs.delete');
 
+        Route::get('ai/prompt', [AiConfigController::class, 'prompt'])->name('ai.prompt');
         Route::get('ai/knowledge', [AiConfigController::class, 'knowledge'])->name('ai.knowledge');
         Route::put('ai/knowledge', [AiConfigController::class, 'updateKnowledge'])->name('ai.knowledge.update');
 
