@@ -27,6 +27,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'total_cost',
     'primary_model',
     'status',
+    'is_read',
+    'is_favorite',
     'summary',
     'metadata',
 ])]
@@ -43,6 +45,8 @@ class ChatSession extends Model
             'messages_count' => 'integer',
             'total_tokens' => 'integer',
             'total_cost' => 'decimal:6',
+            'is_read' => 'boolean',
+            'is_favorite' => 'boolean',
             'metadata' => 'array',
         ];
     }

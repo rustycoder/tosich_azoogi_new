@@ -29,6 +29,16 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><polyline points="15 18 9 12 15 6"/></svg>
                 <span>Back to All Chats</span>
             </a>
+            <!-- Favorite Toggle Button -->
+            <button type="button" class="btn" id="btnShowFavorite" onclick="toggleShowFavorite({{ $session->id }}, this)" style="display: inline-flex; align-items: center; gap: 6px; {{ $session->is_favorite ? 'color: #f59e0b; border-color: rgba(245,158,11,0.35); background: rgba(245,158,11,0.1);' : '' }}">
+                <svg id="showFavStar" viewBox="0 0 24 24" fill="{{ $session->is_favorite ? '#f59e0b' : 'none' }}" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <span id="btnShowFavoriteText">{{ $session->is_favorite ? 'Favorited' : 'Add to Favorites' }}</span>
+            </button>
+            <!-- Read/Unread Toggle Button -->
+            <button type="button" class="btn" id="btnShowRead" onclick="toggleShowRead({{ $session->id }}, this)" style="display: inline-flex; align-items: center; gap: 6px;">
+                <svg id="showReadIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 14px; height: 14px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span id="btnShowReadText">Mark as Unread</span>
+            </button>
             <button type="button" class="btn" id="btnCopyTranscript" onclick="copyFullTranscript()" style="display: inline-flex; align-items: center; gap: 6px;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                 <span id="btnCopyTranscriptText">Copy Transcript</span>
@@ -459,6 +469,75 @@
 
 @push('scripts')
 <script>
+async function toggleShowFavorite(sessionId, btn) {
+    btn.disabled = true;
+    try {
+        const response = await fetch(`/dashboard/chat-sessions/${sessionId}/toggle-favorite`, {
+            method: 'PATCH',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        if (data.success) {
+            const textEl = document.getElementById('btnShowFavoriteText');
+            const star = document.getElementById('showFavStar');
+            if (data.is_favorite) {
+                btn.style.color = '#f59e0b';
+                btn.style.borderColor = 'rgba(245,158,11,0.35)';
+                btn.style.background = 'rgba(245,158,11,0.1)';
+                if (textEl) textEl.textContent = 'Favorited';
+                if (star) star.setAttribute('fill', '#f59e0b');
+            } else {
+                btn.style.color = '';
+                btn.style.borderColor = '';
+                btn.style.background = '';
+                if (textEl) textEl.textContent = 'Add to Favorites';
+                if (star) star.setAttribute('fill', 'none');
+            }
+        }
+    } catch (e) {
+        console.error('Error toggling favorite:', e);
+    } finally {
+        btn.disabled = false;
+    }
+}
+
+async function toggleShowRead(sessionId, btn) {
+    btn.disabled = true;
+    try {
+        const response = await fetch(`/dashboard/chat-sessions/${sessionId}/toggle-read`, {
+            method: 'PATCH',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        if (data.success) {
+            const textEl = document.getElementById('btnShowReadText');
+            if (data.is_read) {
+                btn.style.color = '';
+                btn.style.borderColor = '';
+                btn.style.background = '';
+                if (textEl) textEl.textContent = 'Mark as Unread';
+            } else {
+                btn.style.color = '#38bdf8';
+                btn.style.borderColor = 'rgba(56,189,248,0.35)';
+                btn.style.background = 'rgba(56,189,248,0.1)';
+                if (textEl) textEl.textContent = 'Marked as Unread';
+            }
+        }
+    } catch (e) {
+        console.error('Error toggling read status:', e);
+    } finally {
+        btn.disabled = false;
+    }
+}
+
 function copyFullTranscript() {
     const rawEl = document.getElementById('raw-transcript-data');
     if (!rawEl) return;

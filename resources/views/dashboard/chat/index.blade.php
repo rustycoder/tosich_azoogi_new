@@ -29,7 +29,11 @@
     <div class="dash-card" style="padding: 18px;">
         <div style="font-size: 11px; text-transform: uppercase; color: var(--dash-muted, var(--muted)); font-weight: 600; letter-spacing: 0.05em;">Total Conversations</div>
         <div style="font-size: 26px; font-weight: 700; color: var(--dash-ink, var(--ink)); margin-top: 6px;">{{ number_format($metrics['total_conversations']) }}</div>
-        <div style="font-size: 11px; color: var(--dash-muted, var(--muted)); margin-top: 4px;">{{ number_format($metrics['active_today']) }} active today · {{ number_format($metrics['total_messages']) }} msgs</div>
+        <div style="font-size: 11px; color: var(--dash-muted, var(--muted)); margin-top: 4px;">
+            <span style="color: #38bdf8; font-weight: 600;">{{ number_format($metrics['unread_count']) }} unread</span> · 
+            <span style="color: #f59e0b; font-weight: 600;">{{ number_format($metrics['favorites_count']) }} starred</span> · 
+            {{ number_format($metrics['active_today']) }} active today
+        </div>
     </div>
     <div class="dash-card" style="padding: 18px;">
         <div style="font-size: 11px; text-transform: uppercase; color: var(--dash-muted, var(--muted)); font-weight: 600; letter-spacing: 0.05em;">Total Tokens Consumed</div>
@@ -78,7 +82,7 @@
                 autocomplete="off"
             >
             @if ($searchQuery !== '')
-                <a class="dash-search-clear" href="{{ route('dashboard.chat-sessions.index', array_filter(['status' => $currentStatus, 'sort' => $currentSort !== 'latest' ? $currentSort : null, 'has_lead' => $hasLead ? 1 : null, 'start_date' => $startDate, 'end_date' => $endDate])) }}" title="Clear search" aria-label="Clear search">
+                <a class="dash-search-clear" href="{{ route('dashboard.chat-sessions.index', array_filter(['status' => $currentStatus, 'read_status' => $currentReadStatus, 'favorite_only' => $favoriteOnly ? 1 : null, 'sort' => $currentSort !== 'latest' ? $currentSort : null, 'has_lead' => $hasLead ? 1 : null, 'start_date' => $startDate, 'end_date' => $endDate])) }}" title="Clear search" aria-label="Clear search">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
                 </a>
             @endif
@@ -113,6 +117,16 @@
         >
     </div>
 
+    <!-- Read Status Filter Dropdown -->
+    <div class="dash-select-wrap">
+        <select name="read_status" class="dash-select" onchange="document.getElementById('chatFilterForm').submit()" aria-label="Filter by read status">
+            <option value="">All Read / Unread</option>
+            <option value="unread" {{ ($currentReadStatus ?? '') === 'unread' ? 'selected' : '' }}>🔵 Unread ({{ $metrics['unread_count'] ?? 0 }})</option>
+            <option value="read" {{ ($currentReadStatus ?? '') === 'read' ? 'selected' : '' }}>✓ Read</option>
+        </select>
+        <svg class="dash-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+
     <!-- Status Filter Dropdown -->
     <div class="dash-select-wrap">
         <select name="status" class="dash-select" onchange="document.getElementById('chatFilterForm').submit()" aria-label="Filter by status">
@@ -135,13 +149,22 @@
         <svg class="dash-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
 
+    <!-- Favorites Only Checkbox Filter -->
+    <label style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--dash-ink, var(--ink)); cursor: pointer; padding: 0 4px; user-select: none;">
+        <input type="checkbox" name="favorite_only" value="1" {{ !empty($favoriteOnly) ? 'checked' : '' }} onchange="document.getElementById('chatFilterForm').submit()" style="accent-color: #f59e0b; width: 16px; height: 16px;">
+        <span style="display: inline-flex; align-items: center; gap: 4px;">
+            <svg viewBox="0 0 24 24" fill="{{ !empty($favoriteOnly) ? '#f59e0b' : 'none' }}" stroke="#f59e0b" stroke-width="1.8" style="width: 14px; height: 14px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Favorites Only
+        </span>
+    </label>
+
     <!-- Has Lead Checkbox Filter -->
     <label style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--dash-ink, var(--ink)); cursor: pointer; padding: 0 4px; user-select: none;">
         <input type="checkbox" name="has_lead" value="1" {{ $hasLead ? 'checked' : '' }} onchange="document.getElementById('chatFilterForm').submit()" style="accent-color: var(--accent); width: 16px; height: 16px;">
         <span>Captured Leads Only</span>
     </label>
 
-    @if ($searchQuery || $currentStatus || $hasLead || ($currentSort && $currentSort !== 'latest') || $startDate || $endDate)
+    @if ($searchQuery || $currentStatus || $currentReadStatus || $favoriteOnly || $hasLead || ($currentSort && $currentSort !== 'latest') || $startDate || $endDate)
         <a href="{{ route('dashboard.chat-sessions.index') }}" class="btn" style="padding: 7px 12px; font-size: 12.5px; text-decoration: none;">Reset Filters</a>
     @endif
 </form>
@@ -194,7 +217,7 @@
 
                 <!-- Group 6: Audit & Actions -->
                 <th scope="col" class="dash-col-th is-audit" style="min-width: 140px;">Created Date</th>
-                <th scope="col" class="dash-col-th is-audit" style="width: 130px; text-align: center;">Action</th>
+                <th scope="col" class="dash-col-th is-audit" style="width: 140px; text-align: center;">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -210,10 +233,18 @@
                     $cost = (float) ($session->total_cost ?: $session->messages->sum('estimated_cost'));
                     $isLead = filled($session->lead_name) || filled($session->lead_email) || filled($session->enquiry_id);
                 @endphp
-                <tr>
+                <tr id="session-row-{{ $session->id }}" style="{{ ! $session->is_read ? 'background: rgba(56, 189, 248, 0.02);' : '' }}">
                     <!-- 1. Visitor / Lead -->
                     <td>
                         <div class="dash-product-cell">
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                @if (! $session->is_read)
+                                    <span id="unread-badge-{{ $session->id }}" class="dash-pill" style="font-size: 9px; padding: 1px 6px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);">UNREAD</span>
+                                @endif
+                                @if ($session->is_favorite)
+                                    <span id="fav-badge-{{ $session->id }}" style="color: #f59e0b; font-size: 13px;" title="Favorited">★</span>
+                                @endif
+                            </div>
                             @if ($session->lead_name || $session->lead_email || $session->project_name)
                                 <a href="{{ route('dashboard.chat-sessions.show', $session) }}" class="dash-product-title" style="color: #10b981; font-weight: 600;">
                                     {{ $session->lead_name ?: ($session->project_name ?: 'Identified Lead') }}
@@ -354,12 +385,50 @@
                         </div>
                     </td>
 
-                    <!-- Action Link -->
+                    <!-- Action Icons (Favorite Star, Mark Read/Unread, Transcribe Icon) -->
                     <td style="text-align: center;">
-                        <a href="{{ route('dashboard.chat-sessions.show', $session) }}" class="btn" style="padding: 5px 11px; font-size: 12px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; white-space: nowrap;">
-                            <span>Transcript</span>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 12px; height: 12px;"><polyline points="9 18 15 12 9 6"/></svg>
-                        </a>
+                        <div style="display: inline-flex; align-items: center; gap: 5px; justify-content: center;">
+                            <!-- Favorite Star Button -->
+                            <button
+                                type="button"
+                                class="btn"
+                                id="btn-fav-{{ $session->id }}"
+                                onclick="toggleChatFavorite({{ $session->id }}, this)"
+                                style="padding: 0; width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; {{ $session->is_favorite ? 'color: #f59e0b; border-color: rgba(245,158,11,0.35); background: rgba(245,158,11,0.1);' : 'color: var(--dash-muted);' }}"
+                                title="{{ $session->is_favorite ? 'Remove from favorites' : 'Mark as favorite' }}"
+                                aria-label="{{ $session->is_favorite ? 'Remove from favorites' : 'Mark as favorite' }}"
+                            >
+                                <svg viewBox="0 0 24 24" fill="{{ $session->is_favorite ? '#f59e0b' : 'none' }}" stroke="currentColor" stroke-width="1.8" style="width: 14px; height: 14px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            </button>
+
+                            <!-- Mark Read / Unread Button -->
+                            <button
+                                type="button"
+                                class="btn"
+                                id="btn-read-{{ $session->id }}"
+                                onclick="toggleChatRead({{ $session->id }}, this)"
+                                style="padding: 0; width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; {{ ! $session->is_read ? 'color: #38bdf8; border-color: rgba(56,189,248,0.35); background: rgba(56,189,248,0.1);' : 'color: var(--dash-muted);' }}"
+                                title="{{ $session->is_read ? 'Mark as unread' : 'Mark as read' }}"
+                                aria-label="{{ $session->is_read ? 'Mark as unread' : 'Mark as read' }}"
+                            >
+                                @if (! $session->is_read)
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 14px; height: 14px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/><circle cx="19" cy="5" r="3" fill="#38bdf8" stroke="none"/></svg>
+                                @else
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 14px; height: 14px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                @endif
+                            </button>
+
+                            <!-- Transcribe / Transcript Icon Button -->
+                            <a
+                                href="{{ route('dashboard.chat-sessions.show', $session) }}"
+                                class="btn"
+                                style="padding: 0; width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; color: var(--accent); border-color: rgba(103, 208, 78, 0.35); background: rgba(103, 208, 78, 0.08);"
+                                title="View Conversation Transcript"
+                                aria-label="View Conversation Transcript"
+                            >
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 14px; height: 14px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                            </a>
+                        </div>
                     </td>
                 </tr>
             @empty
@@ -378,4 +447,87 @@
 <div style="margin-top: 18px;">
     {{ $sessions->links('dashboard.partials.pagination') }}
 </div>
+
+@push('scripts')
+<script>
+async function toggleChatFavorite(sessionId, btn) {
+    btn.disabled = true;
+    try {
+        const response = await fetch(`/dashboard/chat-sessions/${sessionId}/toggle-favorite`, {
+            method: 'PATCH',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        if (data.success) {
+            const svg = btn.querySelector('svg');
+            if (data.is_favorite) {
+                btn.style.color = '#f59e0b';
+                btn.style.borderColor = 'rgba(245,158,11,0.35)';
+                btn.style.background = 'rgba(245,158,11,0.1)';
+                btn.title = 'Remove from favorites';
+                btn.setAttribute('aria-label', 'Remove from favorites');
+                if (svg) svg.setAttribute('fill', '#f59e0b');
+            } else {
+                btn.style.color = 'var(--dash-muted)';
+                btn.style.borderColor = '';
+                btn.style.background = 'transparent';
+                btn.title = 'Mark as favorite';
+                btn.setAttribute('aria-label', 'Mark as favorite');
+                if (svg) svg.setAttribute('fill', 'none');
+            }
+        }
+    } catch (e) {
+        console.error('Error toggling favorite:', e);
+    } finally {
+        btn.disabled = false;
+    }
+}
+
+async function toggleChatRead(sessionId, btn) {
+    btn.disabled = true;
+    try {
+        const response = await fetch(`/dashboard/chat-sessions/${sessionId}/toggle-read`, {
+            method: 'PATCH',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        if (data.success) {
+            const row = document.getElementById(`session-row-${sessionId}`);
+            const badge = document.getElementById(`unread-badge-${sessionId}`);
+            if (data.is_read) {
+                btn.style.color = 'var(--dash-muted)';
+                btn.style.borderColor = '';
+                btn.style.background = 'transparent';
+                btn.title = 'Mark as unread';
+                btn.setAttribute('aria-label', 'Mark as unread');
+                btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 14px; height: 14px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`;
+                if (row) row.style.background = '';
+                if (badge) badge.style.display = 'none';
+            } else {
+                btn.style.color = '#38bdf8';
+                btn.style.borderColor = 'rgba(56,189,248,0.35)';
+                btn.style.background = 'rgba(56,189,248,0.1)';
+                btn.title = 'Mark as read';
+                btn.setAttribute('aria-label', 'Mark as read');
+                btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 14px; height: 14px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/><circle cx="19" cy="5" r="3" fill="#38bdf8" stroke="none"/></svg>`;
+                if (row) row.style.background = 'rgba(56, 189, 248, 0.02)';
+                if (badge) badge.style.display = '';
+            }
+        }
+    } catch (e) {
+        console.error('Error toggling read status:', e);
+    } finally {
+        btn.disabled = false;
+    }
+}
+</script>
+@endpush
 @endsection

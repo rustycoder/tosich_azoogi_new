@@ -155,7 +155,9 @@
                         @endphp
                         <div class="chip-row" style="display: grid; grid-template-columns: 1fr 36px; gap: 8px; align-items: center; background: rgba(255,255,255,0.02); padding: 8px 10px; border-radius: 8px; border: 1px solid var(--dash-line);">
                             <input type="text" name="starter_chips[{{ $i }}][prompt]" value="{{ $promptVal }}" class="dash-input" placeholder="User Query Sent to AI (e.g. Show me outdoor garden lights)" required oninput="updateLivePreview()">
-                            <button type="button" class="btn" style="padding: 0; display: flex; align-items: center; justify-content: center; color: #ef4444;" onclick="this.closest('.chip-row').remove(); updateLivePreview();" title="Remove Chip">✕</button>
+                            <button type="button" class="btn" style="padding: 0; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: #ef4444; border-color: rgba(239,68,68,0.25);" onclick="this.closest('.chip-row').remove(); updateLivePreview();" title="Delete Suggestion Chip" aria-label="Delete Suggestion Chip">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 15px; height: 15px;"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                            </button>
                         </div>
                     @endforeach
                 </div>
@@ -362,7 +364,9 @@ function addStarterChipRow() {
     row.style.cssText = 'display: grid; grid-template-columns: 1fr 36px; gap: 8px; align-items: center; background: rgba(255,255,255,0.02); padding: 8px 10px; border-radius: 8px; border: 1px solid var(--dash-line);';
     row.innerHTML = `
         <input type="text" name="starter_chips[${index}][prompt]" value="" class="dash-input" placeholder="User Query Sent to AI (e.g. Show me outdoor garden lights)" required oninput="updateLivePreview()">
-        <button type="button" class="btn" style="padding: 0; display: flex; align-items: center; justify-content: center; color: #ef4444;" onclick="this.closest('.chip-row').remove(); updateLivePreview();" title="Remove Chip">✕</button>
+        <button type="button" class="btn" style="padding: 0; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: #ef4444; border-color: rgba(239,68,68,0.25);" onclick="this.closest('.chip-row').remove(); updateLivePreview();" title="Delete Suggestion Chip" aria-label="Delete Suggestion Chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 15px; height: 15px;"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+        </button>
     `;
     container.appendChild(row);
     row.querySelector('input').focus();

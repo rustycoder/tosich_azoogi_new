@@ -65,6 +65,20 @@ class ChatSessionController extends Controller
             });
         }
 
+        // Filter by read status
+        $readStatus = (string) $request->input('read_status', '');
+        if ($readStatus === 'unread') {
+            $query->where('is_read', false);
+        } elseif ($readStatus === 'read') {
+            $query->where('is_read', true);
+        }
+
+        // Filter by favorites only
+        $favoriteOnly = $request->boolean('favorite_only');
+        if ($favoriteOnly) {
+            $query->where('is_favorite', true);
+        }
+
         // Sort options
         $currentSort = (string) $request->input('sort', 'latest');
         if ($currentSort === 'highest_cost') {
@@ -89,6 +103,8 @@ class ChatSessionController extends Controller
 
         $metrics = [
             'total_conversations' => $totalConversations,
+            'unread_count' => ChatSession::where('is_read', false)->count(),
+            'favorites_count' => ChatSession::where('is_favorite', true)->count(),
             'leads_captured' => ChatSession::where(function ($q) {
                 $q->whereNotNull('lead_email')
                     ->orWhereNotNull('lead_name')
@@ -111,6 +127,8 @@ class ChatSessionController extends Controller
             'sessions' => $sessions,
             'metrics' => $metrics,
             'currentStatus' => $request->input('status'),
+            'currentReadStatus' => $readStatus,
+            'favoriteOnly' => $favoriteOnly,
             'searchQuery' => $request->input('q'),
             'hasLead' => $request->boolean('has_lead'),
             'currentSort' => $currentSort,
@@ -121,12 +139,54 @@ class ChatSessionController extends Controller
 
     public function show(ChatSession $chatSession): View
     {
+        if (! $chatSession->is_read) {
+            $chatSession->update(['is_read' => true]);
+        }
+
         $chatSession->load(['messages', 'enquiry']);
 
         return view('dashboard.chat.show', [
             'session' => $chatSession,
             'messages' => $chatSession->messages,
         ]);
+    }
+
+    public function toggleRead(Request $request, ChatSession $chatSession): JsonResponse|RedirectResponse
+    {
+        $newVal = ! $chatSession->is_read;
+        if ($request->has('is_read')) {
+            $newVal = $request->boolean('is_read');
+        }
+        $chatSession->update(['is_read' => $newVal]);
+
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'is_read' => $chatSession->is_read,
+                'message' => $chatSession->is_read ? 'Marked as read.' : 'Marked as unread.',
+            ]);
+        }
+
+        return back()->with('success', $chatSession->is_read ? 'Conversation marked as read.' : 'Conversation marked as unread.');
+    }
+
+    public function toggleFavorite(Request $request, ChatSession $chatSession): JsonResponse|RedirectResponse
+    {
+        $newVal = ! $chatSession->is_favorite;
+        if ($request->has('is_favorite')) {
+            $newVal = $request->boolean('is_favorite');
+        }
+        $chatSession->update(['is_favorite' => $newVal]);
+
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'is_favorite' => $chatSession->is_favorite,
+                'message' => $chatSession->is_favorite ? 'Added to favorites.' : 'Removed from favorites.',
+            ]);
+        }
+
+        return back()->with('success', $chatSession->is_favorite ? 'Added to favorites.' : 'Removed from favorites.');
     }
 
     public function convertToEnquiry(Request $request, ChatSession $chatSession): RedirectResponse

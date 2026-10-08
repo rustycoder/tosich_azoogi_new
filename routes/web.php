@@ -72,6 +72,8 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
 
         Route::get('chat-sessions', [ChatSessionController::class, 'index'])->name('chat-sessions.index');
         Route::get('chat-sessions/{chatSession}', [ChatSessionController::class, 'show'])->name('chat-sessions.show');
+        Route::patch('chat-sessions/{chatSession}/toggle-read', [ChatSessionController::class, 'toggleRead'])->name('chat-sessions.toggle-read');
+        Route::patch('chat-sessions/{chatSession}/toggle-favorite', [ChatSessionController::class, 'toggleFavorite'])->name('chat-sessions.toggle-favorite');
         Route::post('chat-sessions/{chatSession}/convert-enquiry', [ChatSessionController::class, 'convertToEnquiry'])->name('chat-sessions.convert-enquiry');
         Route::delete('chat-sessions/{chatSession}', [ChatSessionController::class, 'destroy'])->name('chat-sessions.destroy');
     });
