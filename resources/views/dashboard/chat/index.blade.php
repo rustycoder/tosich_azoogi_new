@@ -245,8 +245,8 @@
                     <!-- Project Name -->
                     <td>
                         @if (filled($session->project_name))
-                            <span class="dash-tag" style="font-size: 11px; width: fit-content; background: rgba(56, 189, 248, 0.12); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.25);" title="Project: {{ $session->project_name }}">
-                                📁 {{ \Illuminate\Support\Str::limit($session->project_name, 22) }}
+                            <span style="color: var(--dash-ink, var(--ink)); font-size: 12px; font-family: inherit; font-weight: 500;" title="{{ $session->project_name }}">
+                                {{ $session->project_name }}
                             </span>
                         @endif
                     </td>
