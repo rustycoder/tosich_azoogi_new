@@ -569,6 +569,12 @@ final class ProductNormalizer
                 continue;
             }
 
+            $rawStatus = $fields['Status'] ?? $fields['status'] ?? $fields['Category Status'] ?? '';
+            $status = $this->statusValue($rawStatus);
+            if ($status !== '' && $status !== 'publish') {
+                continue;
+            }
+
             $parents = $fields['Parent'] ?? $fields['Parent Category'] ?? $fields['Parent_Category'] ?? [];
             $children = $fields['Child Categories'] ?? $fields['Subcategories'] ?? $fields['Children'] ?? [];
 

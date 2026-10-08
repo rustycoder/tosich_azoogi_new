@@ -135,9 +135,14 @@ class ProductRepository implements IProductRepository
             $parents = $fields['Parent'] ?? $fields['Parent Category'] ?? $fields['Parent_Category'] ?? [];
             $parentId = is_array($parents) ? (string) ($parents[0] ?? '') : (string) $parents;
 
+            $rawStatus = $fields['Status'] ?? $fields['status'] ?? $fields['Category Status'] ?? $fields['Category status'] ?? null;
+            $status = is_array($rawStatus) ? (string) ($rawStatus['name'] ?? $rawStatus[0] ?? '') : (string) $rawStatus;
+            $status = trim($status);
+
             $categoryRows[$airtableId] = [
                 'airtable_id' => $airtableId,
                 'name' => $name !== '' ? mb_substr($name, 0, 191) : 'Category',
+                'status' => $status !== '' ? mb_substr($status, 0, 50) : null,
                 'description' => $this->storedText(
                     $fields['Descriptions'] ?? $fields['Description'] ?? $fields['Category Description'] ?? $fields['Category description'] ?? null,
                 ),
@@ -200,6 +205,7 @@ class ProductRepository implements IProductRepository
         DB::transaction(function () use ($categoryRows, $attributeRows): void {
             $this->upsertByAirtableId(ProductCategory::class, array_values($categoryRows), [
                 'name',
+                'status',
                 'description',
                 'featured_image',
                 'icon',
@@ -251,15 +257,29 @@ class ProductRepository implements IProductRepository
             ->map(fn (Product $product): array => $product->toStorefrontArray())
             ->all();
 
-        $categories = ProductCategory::query()
+        $categoriesQuery = ProductCategory::query()
             ->orderByRaw('sort_order is null')
             ->orderBy('sort_order')
-            ->orderBy('name')
+            ->orderBy('name');
+
+        if (app()->isProduction()) {
+            $categoriesQuery->where(function ($query): void {
+                $query->whereNull('status')
+                    ->orWhere('status', '')
+                    ->orWhereRaw('LOWER(status) = ?', ['publish']);
+            });
+        }
+
+        $categories = $categoriesQuery
             ->get()
             ->map(function (ProductCategory $category): array {
                 $fields = [
                     'Name' => $category->name,
                 ];
+
+                if ($category->status) {
+                    $fields['Status'] = $category->status;
+                }
 
                 if ($category->description) {
                     $fields['Descriptions'] = $category->description;
@@ -363,15 +383,29 @@ class ProductRepository implements IProductRepository
             ])
             ->all();
 
-        $categories = ProductCategory::query()
+        $categoriesQuery = ProductCategory::query()
             ->orderByRaw('sort_order is null')
             ->orderBy('sort_order')
-            ->orderBy('name')
+            ->orderBy('name');
+
+        if (app()->isProduction()) {
+            $categoriesQuery->where(function ($query): void {
+                $query->whereNull('status')
+                    ->orWhere('status', '')
+                    ->orWhereRaw('LOWER(status) = ?', ['publish']);
+            });
+        }
+
+        $categories = $categoriesQuery
             ->get()
             ->map(function (ProductCategory $category): array {
                 $fields = [
                     'Name' => $category->name,
                 ];
+
+                if ($category->status) {
+                    $fields['Status'] = $category->status;
+                }
 
                 if ($category->description) {
                     $fields['Descriptions'] = $category->description;
@@ -552,7 +586,7 @@ class ProductRepository implements IProductRepository
         return array_values(array_unique($ids));
     }
 
-    public function categoryDashboardList(string $search = '', ?string $parent = null, int $perPage = 50): LengthAwarePaginator
+    public function categoryDashboardList(string $search = '', ?string $parent = null, int $perPage = 50, ?string $status = null): LengthAwarePaginator
     {
         $paginator = ProductCategory::query()
             ->with('updater:id,name')
@@ -562,6 +596,17 @@ class ProductRepository implements IProductRepository
                         ->orWhere('airtable_id', 'like', '%'.$search.'%')
                         ->orWhere('description', 'like', '%'.$search.'%');
                 });
+            })
+            ->when(filled($status) && $status !== 'all', function ($query) use ($status): void {
+                if ($status === 'publish') {
+                    $query->where(function ($q): void {
+                        $q->whereNull('status')
+                            ->orWhere('status', '')
+                            ->orWhereRaw('LOWER(status) = ?', ['publish']);
+                    });
+                } else {
+                    $query->whereRaw('LOWER(status) = ?', [strtolower($status)]);
+                }
             })
             ->when(filled($parent) && $parent !== 'all', function ($query) use ($parent): void {
                 if ($parent === 'root_only') {
