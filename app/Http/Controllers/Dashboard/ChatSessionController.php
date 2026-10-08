@@ -65,18 +65,18 @@ class ChatSessionController extends Controller
             });
         }
 
-        // Filter by read status
-        $readStatus = (string) $request->input('read_status', '');
-        if ($readStatus === 'unread') {
-            $query->where('is_read', false);
-        } elseif ($readStatus === 'read') {
-            $query->where('is_read', true);
+        // Filter by view (favorites, unread, read)
+        $filter = (string) $request->input('filter', $request->input('read_status', ''));
+        if ($request->boolean('favorite_only')) {
+            $filter = 'favorites';
         }
 
-        // Filter by favorites only
-        $favoriteOnly = $request->boolean('favorite_only');
-        if ($favoriteOnly) {
+        if ($filter === 'favorites') {
             $query->where('is_favorite', true);
+        } elseif ($filter === 'unread') {
+            $query->where('is_read', false);
+        } elseif ($filter === 'read') {
+            $query->where('is_read', true);
         }
 
         // Sort options
@@ -126,8 +126,7 @@ class ChatSessionController extends Controller
         return view('dashboard.chat.index', [
             'sessions' => $sessions,
             'metrics' => $metrics,
-            'currentReadStatus' => $readStatus,
-            'favoriteOnly' => $favoriteOnly,
+            'currentFilter' => $filter,
             'searchQuery' => $request->input('q'),
             'currentSort' => $currentSort,
             'startDate' => $request->input('start_date'),

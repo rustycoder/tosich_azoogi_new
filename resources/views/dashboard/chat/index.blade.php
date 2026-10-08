@@ -82,7 +82,7 @@
                 autocomplete="off"
             >
             @if ($searchQuery !== '')
-                <a class="dash-search-clear" href="{{ route('dashboard.chat-sessions.index', array_filter(['read_status' => $currentReadStatus, 'favorite_only' => $favoriteOnly ? 1 : null, 'sort' => $currentSort !== 'latest' ? $currentSort : null, 'start_date' => $startDate, 'end_date' => $endDate])) }}" title="Clear search" aria-label="Clear search">
+                <a class="dash-search-clear" href="{{ route('dashboard.chat-sessions.index', array_filter(['filter' => $currentFilter, 'sort' => $currentSort !== 'latest' ? $currentSort : null, 'start_date' => $startDate, 'end_date' => $endDate])) }}" title="Clear search" aria-label="Clear search">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
                 </a>
             @endif
@@ -117,12 +117,13 @@
         >
     </div>
 
-    <!-- Read Status Filter Dropdown -->
+    <!-- Filter View Dropdown (All / Favorites / Unread / Read) -->
     <div class="dash-select-wrap">
-        <select name="read_status" class="dash-select" onchange="document.getElementById('chatFilterForm').submit()" aria-label="Filter by read status">
-            <option value="">All Read / Unread</option>
-            <option value="unread" {{ ($currentReadStatus ?? '') === 'unread' ? 'selected' : '' }}>🔵 Unread ({{ $metrics['unread_count'] ?? 0 }})</option>
-            <option value="read" {{ ($currentReadStatus ?? '') === 'read' ? 'selected' : '' }}>✓ Read</option>
+        <select name="filter" class="dash-select" onchange="document.getElementById('chatFilterForm').submit()" aria-label="Filter conversations">
+            <option value="">All Conversations</option>
+            <option value="favorites" {{ ($currentFilter ?? '') === 'favorites' ? 'selected' : '' }}>Favorites ({{ $metrics['favorites_count'] ?? 0 }})</option>
+            <option value="unread" {{ ($currentFilter ?? '') === 'unread' ? 'selected' : '' }}>Unread ({{ $metrics['unread_count'] ?? 0 }})</option>
+            <option value="read" {{ ($currentFilter ?? '') === 'read' ? 'selected' : '' }}>Read</option>
         </select>
         <svg class="dash-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
@@ -138,16 +139,7 @@
         <svg class="dash-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
 
-    <!-- Favorites Only Checkbox Filter -->
-    <label style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--dash-ink, var(--ink)); cursor: pointer; padding: 0 4px; user-select: none;">
-        <input type="checkbox" name="favorite_only" value="1" {{ !empty($favoriteOnly) ? 'checked' : '' }} onchange="document.getElementById('chatFilterForm').submit()" style="accent-color: #f59e0b; width: 16px; height: 16px;">
-        <span style="display: inline-flex; align-items: center; gap: 4px;">
-            <svg viewBox="0 0 24 24" fill="{{ !empty($favoriteOnly) ? '#f59e0b' : 'none' }}" stroke="#f59e0b" stroke-width="1.8" style="width: 14px; height: 14px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            Favorites Only
-        </span>
-    </label>
-
-    @if ($searchQuery || $currentReadStatus || $favoriteOnly || ($currentSort && $currentSort !== 'latest') || $startDate || $endDate)
+    @if ($searchQuery || $currentFilter || ($currentSort && $currentSort !== 'latest') || $startDate || $endDate)
         <a href="{{ route('dashboard.chat-sessions.index') }}" class="btn" style="padding: 7px 12px; font-size: 12.5px; text-decoration: none;">Reset Filters</a>
     @endif
 </form>
