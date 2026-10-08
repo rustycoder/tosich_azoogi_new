@@ -169,61 +169,28 @@
     @endif
 </form>
 
-<!-- Airtable-Style Chat Sessions Table -->
-<div class="dash-airtable-wrap">
-    <table class="dash-airtable-table">
+<!-- FAQ-Style Chat Sessions Table (Ungrouped) -->
+<div class="dash-airtable-wrap" style="margin-bottom: 28px;">
+    <table class="dash-airtable-table" id="chat-sessions-table">
         <thead>
-            <!-- Group Header Tier 1 -->
-            <tr class="dash-group-header-row">
-                <th scope="colgroup" colspan="7" class="dash-group-th is-primary" style="text-align: center;">
-                    <span class="dash-group-badge is-primary">1. Session &amp; Visitor</span>
-                </th>
-                <th scope="colgroup" colspan="2" class="dash-group-th is-specs" style="text-align: center;">
-                    <span class="dash-group-badge is-specs">2. Conversation Context</span>
-                </th>
-                <th scope="colgroup" colspan="2" class="dash-group-th is-media" style="text-align: center;">
-                    <span class="dash-group-badge is-media">3. AI Model &amp; Compute</span>
-                </th>
-                <th scope="colgroup" colspan="1" class="dash-group-th is-supplier" style="text-align: center;">
-                    <span class="dash-group-badge is-supplier">4. Token Spend</span>
-                </th>
-                <th scope="colgroup" colspan="1" class="dash-group-th is-docs" style="text-align: center;">
-                    <span class="dash-group-badge is-docs">5. Conversion</span>
-                </th>
-                <th scope="colgroup" colspan="2" class="dash-group-th is-audit" style="text-align: center;">
-                    <span class="dash-group-badge is-audit">6. Audit &amp; Actions</span>
-                </th>
-            </tr>
-            <!-- Column Header Tier 2 -->
             <tr>
-                <!-- Group 1: Session & Visitor -->
-                <th scope="col" class="dash-col-th is-primary" style="width: 44px; text-align: center;" title="Favorite">
+                <th scope="col" style="width: 38px; text-align: center;" title="Favorite">
                     <svg viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1.8" style="width: 13px; height: 13px; vertical-align: middle;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </th>
-                <th scope="col" class="dash-col-th is-primary" style="min-width: 170px;">Visitor / Lead</th>
-                <th scope="col" class="dash-col-th is-primary" style="min-width: 150px;">Project Name</th>
-                <th scope="col" class="dash-col-th is-primary" style="min-width: 170px;">Email</th>
-                <th scope="col" class="dash-col-th is-primary" style="min-width: 110px;">Location</th>
-                <th scope="col" class="dash-col-th is-primary" style="min-width: 120px;">IP Address</th>
-                <th scope="col" class="dash-col-th is-primary" style="width: 100px; text-align: center;">Session ID</th>
-
-                <!-- Group 2: Conversation Context -->
-                <th scope="col" class="dash-col-th is-specs" style="min-width: 240px;">Conversation Summary</th>
-                <th scope="col" class="dash-col-th is-specs" style="width: 90px; text-align: center;">Messages</th>
-
-                <!-- Group 3: AI Model & Compute -->
-                <th scope="col" class="dash-col-th is-media" style="min-width: 160px;">AI Model &amp; Provider</th>
-                <th scope="col" class="dash-col-th is-media" style="min-width: 160px;">Token Usage (Total / In / Out)</th>
-
-                <!-- Group 4: Token Spend -->
-                <th scope="col" class="dash-col-th is-supplier" style="min-width: 120px;">Estimated Cost</th>
-
-                <!-- Group 5: Conversion -->
-                <th scope="col" class="dash-col-th is-docs" style="width: 105px; text-align: center;">Status</th>
-
-                <!-- Group 6: Audit & Actions -->
-                <th scope="col" class="dash-col-th is-audit" style="min-width: 130px;">Created Date</th>
-                <th scope="col" class="dash-col-th is-audit" style="width: 110px; text-align: center;">Actions</th>
+                <th scope="col" style="min-width: 170px;">Visitor / Lead</th>
+                <th scope="col" style="min-width: 140px;">Project Name</th>
+                <th scope="col" style="min-width: 160px;">Email</th>
+                <th scope="col" style="min-width: 100px;">Location</th>
+                <th scope="col" style="min-width: 115px;">IP Address</th>
+                <th scope="col" style="width: 95px; text-align: center;">Session ID</th>
+                <th scope="col" style="min-width: 240px;">Conversation Summary</th>
+                <th scope="col" style="width: 85px; text-align: center;">Messages</th>
+                <th scope="col" style="min-width: 150px;">AI Model</th>
+                <th scope="col" style="min-width: 160px;">Token Usage</th>
+                <th scope="col" style="min-width: 110px;">Estimated Cost</th>
+                <th scope="col" style="width: 95px; text-align: center;">Status</th>
+                <th scope="col" style="min-width: 130px;">Created Date</th>
+                <th scope="col" style="width: 110px; text-align: right;">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -240,20 +207,20 @@
                     $isLead = filled($session->lead_name) || filled($session->lead_email) || filled($session->enquiry_id);
                 @endphp
                 <tr id="session-row-{{ $session->id }}" style="{{ ! $session->is_read ? 'background: rgba(56, 189, 248, 0.02);' : '' }}">
-                    <!-- Favorite Column -->
-                    <td style="text-align: center; width: 44px; padding: 6px 4px;">
+                    <!-- Favorite Column (No border) -->
+                    <td style="text-align: center; width: 38px; padding: 6px 4px;">
                         <button
                             type="button"
-                            class="btn"
                             id="btn-fav-{{ $session->id }}"
                             onclick="toggleChatFavorite({{ $session->id }}, this)"
-                            style="padding: 0; width: 28px; height: 28px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; {{ $session->is_favorite ? 'color: #f59e0b; border-color: rgba(245,158,11,0.35); background: rgba(245,158,11,0.1);' : 'color: var(--dash-muted); border-color: transparent; background: transparent;' }}"
+                            style="border: none; background: transparent; padding: 4px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; outline: none; {{ $session->is_favorite ? 'color: #f59e0b;' : 'color: var(--dash-muted);' }}"
                             title="{{ $session->is_favorite ? 'Remove from favorites' : 'Mark as favorite' }}"
                             aria-label="{{ $session->is_favorite ? 'Remove from favorites' : 'Mark as favorite' }}"
                         >
-                            <svg viewBox="0 0 24 24" fill="{{ $session->is_favorite ? '#f59e0b' : 'none' }}" stroke="currentColor" stroke-width="1.8" style="width: 15px; height: 15px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            <svg viewBox="0 0 24 24" fill="{{ $session->is_favorite ? '#f59e0b' : 'none' }}" stroke="{{ $session->is_favorite ? '#f59e0b' : 'currentColor' }}" stroke-width="1.8" style="width: 16px; height: 16px; transition: transform 0.15s ease;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                         </button>
                     </td>
+
                     <!-- 1. Visitor / Lead Name -->
                     <td>
                         <div class="dash-product-cell">
@@ -330,7 +297,7 @@
 
                     <!-- Messages Count -->
                     <td style="text-align: center;">
-                        <span class="dash-tag is-specs-tag" style="font-weight: 600; font-size: 11px;">
+                        <span class="dash-tag" style="font-weight: 600; font-size: 11px;">
                             {{ $session->messages_count }} {{ \Illuminate\Support\Str::plural('msg', $session->messages_count) }}
                         </span>
                     </td>
@@ -403,16 +370,16 @@
                         </div>
                     </td>
 
-                    <!-- Action Icons (Mark Read/Unread, Transcribe Icon) -->
-                    <td style="text-align: center;">
-                        <div style="display: inline-flex; align-items: center; gap: 5px; justify-content: center;">
+                    <!-- Actions (Right aligned like FAQ) -->
+                    <td style="text-align: right;">
+                        <div style="display: inline-flex; gap: 6px; align-items: center; justify-content: flex-end;">
                             <!-- Mark Read / Unread Button -->
                             <button
                                 type="button"
                                 class="btn"
                                 id="btn-read-{{ $session->id }}"
                                 onclick="toggleChatRead({{ $session->id }}, this)"
-                                style="padding: 0; width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; {{ ! $session->is_read ? 'color: #38bdf8; border-color: rgba(56,189,248,0.35); background: rgba(56,189,248,0.1);' : 'color: var(--dash-muted);' }}"
+                                style="padding: 5px 8px; display: inline-flex; align-items: center; justify-content: center; {{ ! $session->is_read ? 'color: #38bdf8; border-color: rgba(56,189,248,0.35); background: rgba(56,189,248,0.1);' : '' }}"
                                 title="{{ $session->is_read ? 'Mark as unread' : 'Mark as read' }}"
                                 aria-label="{{ $session->is_read ? 'Mark as unread' : 'Mark as read' }}"
                             >
@@ -427,7 +394,7 @@
                             <a
                                 href="{{ route('dashboard.chat-sessions.show', $session) }}"
                                 class="btn"
-                                style="padding: 0; width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; color: var(--accent); border-color: rgba(103, 208, 78, 0.35); background: rgba(103, 208, 78, 0.08);"
+                                style="padding: 5px 8px; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; color: var(--accent); border-color: rgba(103, 208, 78, 0.35); background: rgba(103, 208, 78, 0.08);"
                                 title="View Conversation Transcript"
                                 aria-label="View Conversation Transcript"
                             >
@@ -471,18 +438,20 @@ async function toggleChatFavorite(sessionId, btn) {
             const svg = btn.querySelector('svg');
             if (data.is_favorite) {
                 btn.style.color = '#f59e0b';
-                btn.style.borderColor = 'rgba(245,158,11,0.35)';
-                btn.style.background = 'rgba(245,158,11,0.1)';
                 btn.title = 'Remove from favorites';
                 btn.setAttribute('aria-label', 'Remove from favorites');
-                if (svg) svg.setAttribute('fill', '#f59e0b');
+                if (svg) {
+                    svg.setAttribute('fill', '#f59e0b');
+                    svg.setAttribute('stroke', '#f59e0b');
+                }
             } else {
                 btn.style.color = 'var(--dash-muted)';
-                btn.style.borderColor = '';
-                btn.style.background = 'transparent';
                 btn.title = 'Mark as favorite';
                 btn.setAttribute('aria-label', 'Mark as favorite');
-                if (svg) svg.setAttribute('fill', 'none');
+                if (svg) {
+                    svg.setAttribute('fill', 'none');
+                    svg.setAttribute('stroke', 'currentColor');
+                }
             }
         }
     } catch (e) {
