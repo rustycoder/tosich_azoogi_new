@@ -129,7 +129,6 @@ class ChatSessionController extends Controller
             'currentReadStatus' => $readStatus,
             'favoriteOnly' => $favoriteOnly,
             'searchQuery' => $request->input('q'),
-            'hasLead' => $request->boolean('has_lead'),
             'currentSort' => $currentSort,
             'startDate' => $request->input('start_date'),
             'endDate' => $request->input('end_date'),

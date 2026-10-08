@@ -82,7 +82,7 @@
                 autocomplete="off"
             >
             @if ($searchQuery !== '')
-                <a class="dash-search-clear" href="{{ route('dashboard.chat-sessions.index', array_filter(['read_status' => $currentReadStatus, 'favorite_only' => $favoriteOnly ? 1 : null, 'sort' => $currentSort !== 'latest' ? $currentSort : null, 'has_lead' => $hasLead ? 1 : null, 'start_date' => $startDate, 'end_date' => $endDate])) }}" title="Clear search" aria-label="Clear search">
+                <a class="dash-search-clear" href="{{ route('dashboard.chat-sessions.index', array_filter(['read_status' => $currentReadStatus, 'favorite_only' => $favoriteOnly ? 1 : null, 'sort' => $currentSort !== 'latest' ? $currentSort : null, 'start_date' => $startDate, 'end_date' => $endDate])) }}" title="Clear search" aria-label="Clear search">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
                 </a>
             @endif
@@ -147,13 +147,7 @@
         </span>
     </label>
 
-    <!-- Has Lead Checkbox Filter -->
-    <label style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--dash-ink, var(--ink)); cursor: pointer; padding: 0 4px; user-select: none;">
-        <input type="checkbox" name="has_lead" value="1" {{ $hasLead ? 'checked' : '' }} onchange="document.getElementById('chatFilterForm').submit()" style="accent-color: var(--accent); width: 16px; height: 16px;">
-        <span>Captured Leads Only</span>
-    </label>
-
-    @if ($searchQuery || $currentReadStatus || $favoriteOnly || $hasLead || ($currentSort && $currentSort !== 'latest') || $startDate || $endDate)
+    @if ($searchQuery || $currentReadStatus || $favoriteOnly || ($currentSort && $currentSort !== 'latest') || $startDate || $endDate)
         <a href="{{ route('dashboard.chat-sessions.index') }}" class="btn" style="padding: 7px 12px; font-size: 12.5px; text-decoration: none;">Reset Filters</a>
     @endif
 </form>
