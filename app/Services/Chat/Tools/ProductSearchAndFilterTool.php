@@ -182,14 +182,22 @@ class ProductSearchAndFilterTool implements IChatTool
             ];
         })->values()->toArray();
 
+        $compactProducts = array_map(function ($p) {
+            return [
+                'name' => $p['name'],
+                'code' => $p['code'],
+                'category' => $p['category'],
+                'specs' => $p['description'],
+                'url' => $p['url'],
+            ];
+        }, $productCards);
+
         return [
             'result' => [
                 'matched_count' => count($productCards),
-                'query_used' => $rawQuery,
                 'detected_category' => $category,
                 'detected_ip_rating' => $ipRating,
-                'is_outdoor' => $isOutdoor,
-                'products' => $productCards,
+                'products' => $compactProducts,
             ],
             'cards' => [
                 'type' => 'products_carousel',

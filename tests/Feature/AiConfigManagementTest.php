@@ -35,7 +35,7 @@ class AiConfigManagementTest extends TestCase
         $response = $this->actingAs($this->adminUser)->get(route('dashboard.ai.models'));
 
         $response->assertOk();
-        $response->assertSee('AI Models &amp; Providers', false);
+        $response->assertSee('AI Models');
         $response->assertSee('Anthropic Claude');
         $response->assertSee('OpenRouter');
         $response->assertSee('Google Gemini');
@@ -48,7 +48,7 @@ class AiConfigManagementTest extends TestCase
         $response = $this->actingAs($this->adminUser)->get(route('dashboard.ai.rates'));
 
         $response->assertOk();
-        $response->assertSee('AI Rates &amp; Token Pricing', false);
+        $response->assertSee('AI Rates');
         $response->assertSee('Standard Token Rate Schedule');
         $response->assertSee('Live Cost Estimator Playground');
         $response->assertSee('Claude 3.5 Sonnet');
@@ -59,7 +59,7 @@ class AiConfigManagementTest extends TestCase
         $response = $this->actingAs($this->adminUser)->get(route('dashboard.ai.prompt'));
 
         $response->assertOk();
-        $response->assertSee('AI Live System Prompt Inspector');
+        $response->assertSee('AI Prompt');
         $response->assertSee('Full Compiled System Prompt');
         $response->assertSee('System Rules');
         $response->assertSee('Company Context');
@@ -195,7 +195,7 @@ class AiConfigManagementTest extends TestCase
     {
         $viewResponse = $this->actingAs($this->adminUser)->get(route('dashboard.ai.widget'));
         $viewResponse->assertOk();
-        $viewResponse->assertSee('AI Widget &amp; Branding Customization', false);
+        $viewResponse->assertSee('AI Widget');
         $viewResponse->assertSee('Assistant Persona &amp; Identity', false);
         $viewResponse->assertSee('Icon Specifications &amp; Requirements', false);
 
@@ -250,7 +250,7 @@ class AiConfigManagementTest extends TestCase
     {
         $viewResponse = $this->actingAs($this->adminUser)->get(route('dashboard.ai.rules'));
         $viewResponse->assertOk();
-        $viewResponse->assertSee('AI System Rules &amp; Behavioral Directives', false);
+        $viewResponse->assertSee('AI Rules');
         $viewResponse->assertSee('Add Rule Item', false);
         $viewResponse->assertSee('Role &amp; Tone of Voice', false);
 
@@ -283,7 +283,7 @@ class AiConfigManagementTest extends TestCase
     {
         $viewResponse = $this->actingAs($this->adminUser)->get(route('dashboard.ai.context'));
         $viewResponse->assertOk();
-        $viewResponse->assertSee('Company Context &amp; Manufacturing Policies', false);
+        $viewResponse->assertSee('Company Info');
         $viewResponse->assertSee('Add Context Item', false);
         $viewResponse->assertSee('Headquarters &amp; Sydney Assembly Facility', false);
 
@@ -316,7 +316,7 @@ class AiConfigManagementTest extends TestCase
     {
         $viewResponse = $this->actingAs($this->adminUser)->get(route('dashboard.ai.faqs'));
         $viewResponse->assertOk();
-        $viewResponse->assertSee('AI FAQ Knowledge Base', false);
+        $viewResponse->assertSee('AI FAQs');
 
         $faqResponse = $this->actingAs($this->adminUser)->post(route('dashboard.ai.faqs.store'), [
             'category' => 'Linear Profiles',

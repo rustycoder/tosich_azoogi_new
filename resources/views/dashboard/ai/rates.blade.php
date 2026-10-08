@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'AI Rates & Token Pricing')
+@section('title', 'AI Rates')
 
 @section('content')
 <div class="dash-head">
@@ -9,10 +9,10 @@
         <span>/</span>
         <span>AI</span>
         <span>/</span>
-        <span>AI Rates</span>
+        <span>Rates</span>
     </div>
     <div class="dash-head-title">
-        <h1>AI Rates &amp; Token Pricing</h1>
+        <h1>AI Rates</h1>
         <div class="dash-head-actions">
             <a href="{{ route('dashboard.ai.models') }}" class="btn" style="display:inline-flex;align-items:center;gap:6px;background:var(--card-bg);border:1px solid var(--line);color:var(--ink);">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>

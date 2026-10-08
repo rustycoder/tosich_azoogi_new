@@ -362,6 +362,14 @@
 
                 <div style="border-top: 1px solid var(--line); padding-top: 12px; display: flex; flex-direction: column; gap: 10px;">
                     <div>
+                        <div style="color: var(--dash-muted, var(--muted)); font-size: 10.5px; text-transform: uppercase; font-weight: 600;">Session Started (Created)</div>
+                        <div style="margin-top: 3px; color: var(--dash-ink, var(--ink)); font-size: 12px;">
+                            {{ $session->created_at ? $session->created_at->timezone(config('app.timezone'))->format('j M Y, g:i A') : 'N/A' }}
+                            <span style="color: var(--dash-muted, var(--muted)); font-size: 11px;">({{ $session->created_at ? $session->created_at->diffForHumans() : '' }})</span>
+                        </div>
+                    </div>
+
+                    <div>
                         <div style="color: var(--dash-muted, var(--muted)); font-size: 10.5px; text-transform: uppercase; font-weight: 600;">IP &amp; Geolocation</div>
                         <div style="margin-top: 3px; font-family: monospace; color: var(--dash-ink, var(--ink));">
                             {{ $session->ip_address }} ({{ $session->country ?: 'Australia' }})

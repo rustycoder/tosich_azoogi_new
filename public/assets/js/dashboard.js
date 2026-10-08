@@ -77,6 +77,55 @@
         menuButton?.setAttribute('aria-expanded', 'false');
     });
 
+    // Sidebar Accordion & Scroll Position Memory
+    const nav = document.querySelector('.dash-nav');
+    if (nav) {
+        const savedScroll = sessionStorage.getItem('dash_nav_scroll');
+        if (savedScroll !== null) {
+            nav.scrollTop = parseInt(savedScroll, 10);
+        } else {
+            const activeLink = nav.querySelector('a.is-active');
+            if (activeLink) {
+                activeLink.scrollIntoView({ block: 'nearest' });
+            }
+        }
+
+        nav.addEventListener('scroll', () => {
+            sessionStorage.setItem('dash_nav_scroll', String(nav.scrollTop));
+        }, { passive: true });
+
+        const groups = nav.querySelectorAll('.dash-nav-group');
+        groups.forEach((group) => {
+            const btn = group.querySelector('.dash-nav-group-btn');
+            const groupKey = group.dataset.navGroup;
+            const hasActiveLink = !!group.querySelector('a.is-active');
+
+            if (hasActiveLink) {
+                group.classList.add('is-open');
+                btn?.classList.add('is-active-group');
+                btn?.setAttribute('aria-expanded', 'true');
+            } else if (groupKey) {
+                const storedState = localStorage.getItem(`dash_nav_group_${groupKey}`);
+                if (storedState === 'closed') {
+                    group.classList.remove('is-open');
+                    btn?.setAttribute('aria-expanded', 'false');
+                } else if (storedState === 'open') {
+                    group.classList.add('is-open');
+                    btn?.setAttribute('aria-expanded', 'true');
+                }
+            }
+
+            btn?.addEventListener('click', () => {
+                const willOpen = !group.classList.contains('is-open');
+                group.classList.toggle('is-open', willOpen);
+                btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+                if (groupKey) {
+                    localStorage.setItem(`dash_nav_group_${groupKey}`, willOpen ? 'open' : 'closed');
+                }
+            });
+        });
+    }
+
     document.querySelectorAll('[data-dash-toggle]').forEach((button) => {
         button.addEventListener('click', async () => {
             if (button.disabled) {

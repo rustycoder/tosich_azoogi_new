@@ -44,7 +44,7 @@ class DashboardChatTest extends TestCase
         $response = $this->actingAs($this->admin)->get('/dashboard/chat-sessions');
 
         $response->assertOk()
-            ->assertSee('AI Chat Conversations')
+            ->assertSee('AI Chat Logs')
             ->assertSee('Sarah Connor')
             ->assertSee('sarah@skynet.com')
             ->assertSee('203.0.113.195');

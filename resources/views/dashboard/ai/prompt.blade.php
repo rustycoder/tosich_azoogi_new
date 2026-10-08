@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'AI Live System Prompt Inspector')
+@section('title', 'AI Prompt')
 
 @section('content')
 <div class="dash-head">
@@ -9,10 +9,10 @@
         <span>/</span>
         <span>AI</span>
         <span>/</span>
-        <span>System Prompt</span>
+        <span>Prompt</span>
     </div>
     <div class="dash-head-title">
-        <h1>AI Live System Prompt Inspector</h1>
+        <h1>AI Prompt</h1>
         <div class="dash-head-actions">
             <button type="button" class="btn primary" onclick="copySystemPrompt()" style="display: inline-flex; align-items: center; gap: 6px;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>

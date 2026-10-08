@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'AI Widget & Branding Customization')
+@section('title', 'AI Widget')
 
 @section('content')
 <div class="dash-head">
@@ -9,10 +9,10 @@
         <span>/</span>
         <span>AI</span>
         <span>/</span>
-        <span>Widget &amp; Branding</span>
+        <span>Widget</span>
     </div>
     <div class="dash-head-title">
-        <h1>AI Widget &amp; Branding Customization</h1>
+        <h1>AI Widget</h1>
         <div class="dash-head-actions">
             <button class="btn primary" type="submit" form="ai-widget-form">Save Widget Settings</button>
         </div>

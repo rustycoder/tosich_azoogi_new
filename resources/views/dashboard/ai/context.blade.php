@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Company Context & Policies')
+@section('title', 'Company Info')
 
 @section('content')
 <div class="dash-head">
@@ -9,10 +9,10 @@
         <span>/</span>
         <span>AI</span>
         <span>/</span>
-        <span>Company Context</span>
+        <span>Company Info</span>
     </div>
     <div class="dash-head-title">
-        <h1>Company Context &amp; Manufacturing Policies</h1>
+        <h1>Company Info</h1>
         <div class="dash-head-actions">
             <span class="dash-pill is-active">{{ count($contextItems) }} Context Items</span>
             <button type="button" class="btn primary" onclick="openContextModal()" style="display: inline-flex; align-items: center; gap: 6px;">

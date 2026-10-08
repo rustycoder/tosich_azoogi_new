@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'AI System Rules & Directives')
+@section('title', 'AI Rules')
 
 @section('content')
 <div class="dash-head">
@@ -9,10 +9,10 @@
         <span>/</span>
         <span>AI</span>
         <span>/</span>
-        <span>System Rules</span>
+        <span>Rules</span>
     </div>
     <div class="dash-head-title">
-        <h1>AI System Rules &amp; Behavioral Directives</h1>
+        <h1>AI Rules</h1>
         <div class="dash-head-actions">
             <span class="dash-pill is-active">{{ count($rules) }} Rules</span>
             <button type="button" class="btn primary" onclick="openRuleModal()" style="display: inline-flex; align-items: center; gap: 6px;">

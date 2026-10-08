@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'AI Models & Providers')
+@section('title', 'AI Models')
 
 @section('content')
 <div class="dash-head">
@@ -9,10 +9,10 @@
         <span>/</span>
         <span>AI</span>
         <span>/</span>
-        <span>AI Models</span>
+        <span>Models</span>
     </div>
     <div class="dash-head-title">
-        <h1>AI Models &amp; Providers</h1>
+        <h1>AI Models</h1>
         <div class="dash-head-actions">
             <button class="btn primary" type="submit" form="ai-config-form">Save Model Settings</button>
         </div>

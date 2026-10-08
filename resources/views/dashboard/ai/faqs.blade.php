@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'FAQ Knowledge Base')
+@section('title', 'AI FAQs')
 
 @section('content')
 <div class="dash-head">
@@ -9,10 +9,10 @@
         <span>/</span>
         <span>AI</span>
         <span>/</span>
-        <span>FAQ Knowledge Base</span>
+        <span>FAQs</span>
     </div>
     <div class="dash-head-title">
-        <h1>AI FAQ Knowledge Base</h1>
+        <h1>AI FAQs</h1>
         <div class="dash-head-actions">
             <span class="dash-pill is-active">{{ count($faqs) }} FAQ Items</span>
             <button type="button" class="btn primary" onclick="openFaqModal()" style="display: inline-flex; align-items: center; gap: 6px;">

@@ -26,7 +26,7 @@ class ChatSessionController extends Controller
             ->withCount('messages')
             ->withSum('messages as total_prompt_tokens', 'prompt_tokens')
             ->withSum('messages as total_completion_tokens', 'completion_tokens')
-            ->latest('updated_at');
+            ->latest('created_at');
 
         // Filter by date range
         if ($request->filled('start_date')) {

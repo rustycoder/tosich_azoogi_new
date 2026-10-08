@@ -86,7 +86,7 @@ class EnquiryTest extends TestCase
             ->assertSeeInOrder(['>Projects</h2>', '>Quote Enquiries</h2>', '>Product Enquiries</h2>', '>Contact Enquiries</h2>'], false)
             ->assertSee('aria-label="View all"', false)
             ->assertDontSee('>View all</a>', false)
-            ->assertSeeInOrder(['>Enquiries</div>', 'Quote', 'Product', 'Contact'], false);
+            ->assertSeeInOrder(['>Enquiries</span>', 'Quote', 'Product', 'Contact'], false);
 
         $this->actingAs($admin)
             ->get('/dashboard/enquiries')

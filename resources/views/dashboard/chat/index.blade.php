@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'AI Chat Conversations & Cost Tracking')
+@section('title', 'AI Chat Logs')
 
 @section('content')
 <div class="dash-head">
@@ -9,10 +9,10 @@
         <span>/</span>
         <span>AI</span>
         <span>/</span>
-        <span>AI Chat Logs</span>
+        <span>Chat Logs</span>
     </div>
     <div class="dash-head-title">
-        <h1>AI Chat Conversations &amp; Cost Tracking</h1>
+        <h1>AI Chat Logs</h1>
         <div class="dash-head-actions">
             <span class="dash-pill is-active">{{ $sessions->total() }} Conversations</span>
             <a href="{{ route('dashboard.ai.config') }}" class="btn" style="display: inline-flex; align-items: center; gap: 6px;">
@@ -193,7 +193,7 @@
                 <th scope="col" class="dash-col-th is-docs" style="width: 110px; text-align: center;">Status</th>
 
                 <!-- Group 6: Audit & Actions -->
-                <th scope="col" class="dash-col-th is-audit" style="min-width: 140px;">Last Activity</th>
+                <th scope="col" class="dash-col-th is-audit" style="min-width: 140px;">Created Date</th>
                 <th scope="col" class="dash-col-th is-audit" style="width: 130px; text-align: center;">Action</th>
             </tr>
         </thead>
@@ -341,14 +341,14 @@
                     </td>
 
                     <!-- 6. Audit & Actions -->
-                    <!-- Last Activity -->
+                    <!-- Created Date -->
                     <td>
                         <div class="dash-updated" style="gap: 2px;">
                             <span class="dash-updated-value" style="font-size: 11.5px;">
-                                <strong>{{ $session->updated_at->diffForHumans() }}</strong>
-                                @if ($session->updated_at)
+                                <strong>{{ $session->created_at->diffForHumans() }}</strong>
+                                @if ($session->created_at)
                                     <span class="dash-updated-sep" aria-hidden="true">·</span>
-                                    <time datetime="{{ $session->updated_at->toIso8601String() }}">{{ $session->updated_at->timezone(config('app.timezone'))->format('j M, g:ia') }}</time>
+                                    <time datetime="{{ $session->created_at->toIso8601String() }}">{{ $session->created_at->timezone(config('app.timezone'))->format('j M, g:ia') }}</time>
                                 @endif
                             </span>
                         </div>

@@ -112,8 +112,20 @@ class ProductDetailsAndDownloadsTool implements IChatTool
             'image_url' => $coverUrl ?: asset('assets/quote.webp'),
         ];
 
+        $llmResult = [
+            'name' => $product->product_name,
+            'code' => $product->product_code,
+            'category' => $product->category,
+            'specs' => strip_tags((string) $product->product_description),
+            'dimming' => $specs['dimming'],
+            'datasheet_url' => $datasheetUrl,
+            'manual_url' => $guideUrl,
+            'ies_url' => $iesUrl,
+            'url' => $specs['url'],
+        ];
+
         return [
-            'result' => $specs,
+            'result' => $llmResult,
             'cards' => [
                 'type' => 'product_detail_card',
                 'data' => $specs,

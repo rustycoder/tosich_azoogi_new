@@ -40,178 +40,258 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
             </button>
         </div>
-        <nav class="dash-nav">
+        <nav class="dash-nav" id="dash-nav">
             <a href="{{ route('dashboard.home') }}" class="{{ request()->routeIs('dashboard.home') ? 'is-active' : '' }}">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1z"/></svg>
-                Dashboard
+                <span>Dashboard</span>
             </a>
             @if ($canManageProducts || $isAdmin)
+                <div class="dash-nav-divider"></div>
                 <a href="{{ route('dashboard.sync.index') }}" class="{{ request()->routeIs('dashboard.sync.*') ? 'is-active' : '' }}">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
-                    Airtable Sync
+                    <span>Airtable Sync</span>
                 </a>
             @endif
+
             @if ($canManageQuoteEnquiries || $canManageProductEnquiries || $canManageContactEnquiries)
-                <div class="dash-group">Enquiries</div>
-                @if ($canManageQuoteEnquiries)
-                    <a href="{{ route('dashboard.enquiries.index', ['type' => 'quote']) }}" class="{{ request()->routeIs('dashboard.enquiries.*') && (request()->route('type') === 'quote' || request()->route('type') === null) ? 'is-active' : '' }}">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="6" y="5" width="12" height="15" rx="2"/><path d="M9 5V4h6v1M9 11h6M9 15h4"/></svg>
-                        Quote
-                    </a>
-                @endif
-                @if ($canManageProductEnquiries)
-                    <a href="{{ route('dashboard.enquiries.index', ['type' => 'products']) }}" class="{{ request()->routeIs('dashboard.enquiries.*') && request()->route('type') === 'products' ? 'is-active' : '' }}">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8.5 12 4l9 4.5-9 4.5L3 8.5z"/><path d="M3 8.5v7L12 20l9-4.5v-7M12 13v7"/></svg>
-                        Product
-                    </a>
-                @endif
-                @if ($canManageContactEnquiries)
-                    <a href="{{ route('dashboard.enquiries.index', ['type' => 'contacts']) }}" class="{{ request()->routeIs('dashboard.enquiries.*') && request()->route('type') === 'contacts' ? 'is-active' : '' }}">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="m3 8 9 6 9-6"/></svg>
-                        Contact
-                    </a>
-                @endif
+                @php
+                    $isEnquiriesActive = request()->routeIs('dashboard.enquiries.*');
+                @endphp
+                <div class="dash-nav-divider"></div>
+                <div class="dash-nav-group {{ $isEnquiriesActive ? 'is-open' : '' }}" data-nav-group="enquiries">
+                    <button type="button" class="dash-nav-group-btn {{ $isEnquiriesActive ? 'is-active-group' : '' }}" aria-expanded="{{ $isEnquiriesActive ? 'true' : 'false' }}">
+                        <span class="dash-nav-group-title">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="m3 8 9 6 9-6"/></svg>
+                            <span>Enquiries</span>
+                        </span>
+                        <svg class="dash-nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="dash-nav-sub">
+                        <div class="dash-nav-sub-inner">
+                            @if ($canManageQuoteEnquiries)
+                                <a href="{{ route('dashboard.enquiries.index', ['type' => 'quote']) }}" class="{{ request()->routeIs('dashboard.enquiries.*') && (request()->route('type') === 'quote' || request()->route('type') === null) ? 'is-active' : '' }}">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="6" y="5" width="12" height="15" rx="2"/><path d="M9 5V4h6v1M9 11h6M9 15h4"/></svg>
+                                    Quote
+                                </a>
+                            @endif
+                            @if ($canManageProductEnquiries)
+                                <a href="{{ route('dashboard.enquiries.index', ['type' => 'products']) }}" class="{{ request()->routeIs('dashboard.enquiries.*') && request()->route('type') === 'products' ? 'is-active' : '' }}">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8.5 12 4l9 4.5-9 4.5L3 8.5z"/><path d="M3 8.5v7L12 20l9-4.5v-7M12 13v7"/></svg>
+                                    Product
+                                </a>
+                            @endif
+                            @if ($canManageContactEnquiries)
+                                <a href="{{ route('dashboard.enquiries.index', ['type' => 'contacts']) }}" class="{{ request()->routeIs('dashboard.enquiries.*') && request()->route('type') === 'contacts' ? 'is-active' : '' }}">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="m3 8 9 6 9-6"/></svg>
+                                    Contact
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
             @endif
+
             @if ($canManagePages || $isAdmin)
-                <div class="dash-group">AI</div>
-                <a href="{{ route('dashboard.ai.models') }}" class="{{ request()->routeIs('dashboard.ai.models') || request()->routeIs('dashboard.ai.config') ? 'is-active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-                    AI Models
-                </a>
-                <a href="{{ route('dashboard.ai.rates') }}" class="{{ request()->routeIs('dashboard.ai.rates*') ? 'is-active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                    AI Rates
-                </a>
-                <a href="{{ route('dashboard.ai.widget') }}" class="{{ request()->routeIs('dashboard.ai.widget*') ? 'is-active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 3v18M15 9h6M15 15h6"/></svg>
-                    Widget &amp; Branding
-                </a>
-                <a href="{{ route('dashboard.ai.rules') }}" class="{{ request()->routeIs('dashboard.ai.rules*') ? 'is-active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-                    AI System Rules
-                </a>
-                <a href="{{ route('dashboard.ai.context') }}" class="{{ request()->routeIs('dashboard.ai.context*') ? 'is-active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                    Company Context
-                </a>
-                <a href="{{ route('dashboard.ai.faqs') }}" class="{{ request()->routeIs('dashboard.ai.faqs*') ? 'is-active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                    FAQ Knowledge Base
-                </a>
-                <a href="{{ route('dashboard.ai.prompt') }}" class="{{ request()->routeIs('dashboard.ai.prompt*') ? 'is-active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                    System Prompt
-                </a>
-                <a href="{{ route('dashboard.chat-sessions.index') }}" class="{{ request()->routeIs('dashboard.chat-sessions.*') ? 'is-active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                    AI Chat Logs
-                </a>
+                @php
+                    $isAiActive = request()->routeIs('dashboard.ai.*') || request()->routeIs('dashboard.chat-sessions.*');
+                @endphp
+                <div class="dash-nav-divider"></div>
+                <div class="dash-nav-group {{ $isAiActive ? 'is-open' : '' }}" data-nav-group="ai">
+                    <button type="button" class="dash-nav-group-btn {{ $isAiActive ? 'is-active-group' : '' }}" aria-expanded="{{ $isAiActive ? 'true' : 'false' }}">
+                        <span class="dash-nav-group-title">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                            <span>AI</span>
+                        </span>
+                        <svg class="dash-nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="dash-nav-sub">
+                        <div class="dash-nav-sub-inner">
+                            <a href="{{ route('dashboard.ai.models') }}" class="{{ request()->routeIs('dashboard.ai.models') || request()->routeIs('dashboard.ai.config') ? 'is-active' : '' }}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                                Models
+                            </a>
+                            <a href="{{ route('dashboard.ai.rates') }}" class="{{ request()->routeIs('dashboard.ai.rates*') ? 'is-active' : '' }}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                Rates
+                            </a>
+                            <a href="{{ route('dashboard.ai.widget') }}" class="{{ request()->routeIs('dashboard.ai.widget*') ? 'is-active' : '' }}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 3v18M15 9h6M15 15h6"/></svg>
+                                Widget
+                            </a>
+                            <a href="{{ route('dashboard.ai.rules') }}" class="{{ request()->routeIs('dashboard.ai.rules*') ? 'is-active' : '' }}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                                Rules
+                            </a>
+                            <a href="{{ route('dashboard.ai.context') }}" class="{{ request()->routeIs('dashboard.ai.context*') ? 'is-active' : '' }}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                Company Info
+                            </a>
+                            <a href="{{ route('dashboard.ai.faqs') }}" class="{{ request()->routeIs('dashboard.ai.faqs*') ? 'is-active' : '' }}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                                FAQs
+                            </a>
+                            <a href="{{ route('dashboard.ai.prompt') }}" class="{{ request()->routeIs('dashboard.ai.prompt*') ? 'is-active' : '' }}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                                Prompt
+                            </a>
+                            <a href="{{ route('dashboard.chat-sessions.index') }}" class="{{ request()->routeIs('dashboard.chat-sessions.*') ? 'is-active' : '' }}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                                Chat Logs
+                            </a>
+                        </div>
+                    </div>
+                </div>
             @endif
+
             @if ($canManageProjects || $canManageProducts || $canManagePages || $canManageSections)
-                <div class="dash-group">Content Management</div>
-                @if ($canManageProjects)
-                    <a href="{{ route('dashboard.projects.index') }}" class="{{ request()->routeIs('dashboard.projects.*') ? 'is-active' : '' }}">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 15l5-4 4 3 4-5 5 6"/></svg>
-                        Projects
-                    </a>
-                @endif
-                @if ($canManageProducts)
-                    <a href="{{ route('dashboard.products.index') }}" class="{{ request()->routeIs('dashboard.products.*') ? 'is-active' : '' }}">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8.5 12 4l9 4.5-9 4.5L3 8.5z"/><path d="M3 8.5v7L12 20l9-4.5v-7M12 13v7"/></svg>
-                        Products
-                    </a>
-                    <a href="{{ route('dashboard.categories.index') }}" class="{{ request()->routeIs('dashboard.categories.*') ? 'is-active' : '' }}">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7v13a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1h-8l-2-2H4a1 1 0 0 0-1 1z"/></svg>
-                        Categories
-                    </a>
-                    <a href="{{ route('dashboard.product-attributes.index') }}" class="{{ request()->routeIs('dashboard.product-attributes.*') ? 'is-active' : '' }}">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>
-                        Product Attributes
-                    </a>
-                @endif
-                @if ($canManagePages)
-                    <a href="{{ route('dashboard.pages.index') }}" class="{{ request()->routeIs('dashboard.pages.*') ? 'is-active' : '' }}">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v6h6"/></svg>
-                        Pages
-                    </a>
-                @endif
-                @if ($canManageSections)
-                    <a href="{{ route('dashboard.sections.index') }}" class="{{ request()->routeIs('dashboard.sections.*') ? 'is-active' : '' }}">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
-                        Sections
-                    </a>
-                @endif
-                @if ($canManagePages || $isAdmin)
-                    <a href="{{ route('dashboard.llms.index') }}" class="{{ request()->routeIs('dashboard.llms.*') ? 'is-active' : '' }}">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3l1.912 5.813a2 2 0 0 0 1.275 1.275L21 12l-5.813 1.912a2 2 0 0 0-1.275 1.275L12 21l-1.912-5.813a2 2 0 0 0-1.275-1.275L3 12l5.813-1.912a2 2 0 0 0 1.275-1.275L12 3z"/></svg>
-                        LLM Feeds (/llms.txt)
-                    </a>
-                @endif
+                @php
+                    $isContentActive = request()->routeIs('dashboard.projects.*')
+                        || request()->routeIs('dashboard.products.*')
+                        || request()->routeIs('dashboard.categories.*')
+                        || request()->routeIs('dashboard.product-attributes.*')
+                        || request()->routeIs('dashboard.pages.*')
+                        || request()->routeIs('dashboard.sections.*')
+                        || request()->routeIs('dashboard.llms.*');
+                @endphp
+                <div class="dash-nav-divider"></div>
+                <div class="dash-nav-group {{ $isContentActive ? 'is-open' : '' }}" data-nav-group="content">
+                    <button type="button" class="dash-nav-group-btn {{ $isContentActive ? 'is-active-group' : '' }}" aria-expanded="{{ $isContentActive ? 'true' : 'false' }}">
+                        <span class="dash-nav-group-title">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                            <span>Content</span>
+                        </span>
+                        <svg class="dash-nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="dash-nav-sub">
+                        <div class="dash-nav-sub-inner">
+                            @if ($canManageProjects)
+                                <a href="{{ route('dashboard.projects.index') }}" class="{{ request()->routeIs('dashboard.projects.*') ? 'is-active' : '' }}">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 15l5-4 4 3 4-5 5 6"/></svg>
+                                    Projects
+                                </a>
+                            @endif
+                            @if ($canManageProducts)
+                                <a href="{{ route('dashboard.products.index') }}" class="{{ request()->routeIs('dashboard.products.*') ? 'is-active' : '' }}">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8.5 12 4l9 4.5-9 4.5L3 8.5z"/><path d="M3 8.5v7L12 20l9-4.5v-7M12 13v7"/></svg>
+                                    Products
+                                </a>
+                                <a href="{{ route('dashboard.categories.index') }}" class="{{ request()->routeIs('dashboard.categories.*') ? 'is-active' : '' }}">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7v13a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1h-8l-2-2H4a1 1 0 0 0-1 1z"/></svg>
+                                    Categories
+                                </a>
+                                <a href="{{ route('dashboard.product-attributes.index') }}" class="{{ request()->routeIs('dashboard.product-attributes.*') ? 'is-active' : '' }}">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>
+                                    Product Attributes
+                                </a>
+                            @endif
+                            @if ($canManagePages)
+                                <a href="{{ route('dashboard.pages.index') }}" class="{{ request()->routeIs('dashboard.pages.*') ? 'is-active' : '' }}">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M14 3v6h6"/></svg>
+                                    Pages
+                                </a>
+                            @endif
+                            @if ($canManageSections)
+                                <a href="{{ route('dashboard.sections.index') }}" class="{{ request()->routeIs('dashboard.sections.*') ? 'is-active' : '' }}">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+                                    Sections
+                                </a>
+                            @endif
+                            @if ($canManagePages || $isAdmin)
+                                <a href="{{ route('dashboard.llms.index') }}" class="{{ request()->routeIs('dashboard.llms.*') ? 'is-active' : '' }}">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3l1.912 5.813a2 2 0 0 0 1.275 1.275L21 12l-5.813 1.912a2 2 0 0 0-1.275 1.275L12 21l-1.912-5.813a2 2 0 0 0-1.275-1.275L3 12l5.813-1.912a2 2 0 0 0 1.275-1.275L12 3z"/></svg>
+                                    AI Feeds
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
             @endif
-            @if ($canManageDatasheets)
-                <div class="dash-group">Datasheet</div>
-                <a href="{{ route('dashboard.datasheets.exports') }}" class="{{ request()->routeIs('dashboard.datasheets.*') ? 'is-active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>
-                    Exports
-                </a>
+
+            @if ($isAdmin || $canManageDatasheets)
+                @php
+                    $isAdminActive = request()->routeIs('dashboard.staff.*')
+                        || request()->routeIs('dashboard.email-templates.*')
+                        || request()->routeIs('dashboard.datasheets.*');
+                @endphp
+                <div class="dash-nav-divider"></div>
+                <div class="dash-nav-group {{ $isAdminActive ? 'is-open' : '' }}" data-nav-group="admin">
+                    <button type="button" class="dash-nav-group-btn {{ $isAdminActive ? 'is-active-group' : '' }}" aria-expanded="{{ $isAdminActive ? 'true' : 'false' }}">
+                        <span class="dash-nav-group-title">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+                            <span>Administration</span>
+                        </span>
+                        <svg class="dash-nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="dash-nav-sub">
+                        <div class="dash-nav-sub-inner">
+                            @if ($isAdmin)
+                                <a href="{{ route('dashboard.staff.index') }}" class="{{ request()->routeIs('dashboard.staff.*') ? 'is-active' : '' }}">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M4 19a5 5 0 0 1 10 0"/><circle cx="17" cy="9" r="2.4"/><path d="M16 19a4.2 4.2 0 0 1 4-3"/></svg>
+                                    Staff
+                                </a>
+                                <a href="{{ route('dashboard.email-templates.index') }}" class="{{ request()->routeIs('dashboard.email-templates.*') ? 'is-active' : '' }}">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                    Email
+                                </a>
+                            @endif
+                            @if ($canManageDatasheets)
+                                <a href="{{ route('dashboard.datasheets.exports') }}" class="{{ request()->routeIs('dashboard.datasheets.*') ? 'is-active' : '' }}">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>
+                                    Datasheet Exports
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
             @endif
-            @if ($isAdmin)
-                <div class="dash-group">Notification</div>
-                <a href="{{ route('dashboard.email-templates.index') }}" class="{{ request()->routeIs('dashboard.email-templates.*') ? 'is-active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    Email
-                </a>
-                <div class="dash-group">Administration</div>
-                <a href="{{ route('dashboard.staff.index') }}" class="{{ request()->routeIs('dashboard.staff.*') ? 'is-active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M4 19a5 5 0 0 1 10 0"/><circle cx="17" cy="9" r="2.4"/><path d="M16 19a4.2 4.2 0 0 1 4-3"/></svg>
-                    Staff
-                </a>
-            @endif
-            <div class="dash-group">Support</div>
+
+            <div class="dash-nav-divider"></div>
             <a href="{{ route('dashboard.docs.index') }}" class="{{ request()->routeIs('dashboard.docs.*') ? 'is-active' : '' }}">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
                     <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
                     <path d="M8 7h8M8 11h6"/>
                 </svg>
-                Documentation
+                <span>Documentation</span>
             </a>
         </nav>
         <div class="dash-user">
-            <div class="dash-user-name">{{ auth()->user()->name }}</div>
-            <div class="dash-user-meta">
-                <span>{{ auth()->user()->user_type->label() }}</span>
-                <div class="dash-user-actions">
-                    <a
-                        href="{{ route('dashboard.profile.edit') }}"
-                        class="dash-user-btn {{ request()->routeIs('dashboard.profile.*') ? 'is-active' : '' }}"
-                        title="Settings"
-                        aria-label="Settings"
-                    >
+            <div class="dash-user-info">
+                <div class="dash-user-name" title="{{ auth()->user()->name }}">{{ auth()->user()->name }}</div>
+                @if (strcasecmp(auth()->user()->name, auth()->user()->user_type->label()) !== 0)
+                    <span class="dash-user-role">{{ auth()->user()->user_type->label() }}</span>
+                @endif
+            </div>
+            <div class="dash-user-actions">
+                <a
+                    href="{{ route('dashboard.profile.edit') }}"
+                    class="dash-user-btn {{ request()->routeIs('dashboard.profile.*') ? 'is-active' : '' }}"
+                    title="Settings"
+                    aria-label="Settings"
+                >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>
+                    </svg>
+                </a>
+                <button type="button" class="dash-user-btn" id="theme-toggle" role="switch" aria-checked="false" title="Toggle theme" aria-label="Toggle theme">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path>
+                    </svg>
+                </button>
+                <form method="post" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="dash-user-btn" title="Log out" aria-label="Log out">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                            <circle cx="12" cy="12" r="3"/>
-                            <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>
-                        </svg>
-                    </a>
-                    <button type="button" class="dash-user-btn" id="theme-toggle" role="switch" aria-checked="false" title="Toggle theme" aria-label="Toggle theme">
-                        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <circle cx="12" cy="12" r="4"></circle>
-                            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
-                        </svg>
-                        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path>
+                            <path d="M10 7V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2v-2"/>
+                            <path d="M15 12H3m0 0 3-3m-3 3 3 3"/>
                         </svg>
                     </button>
-                    <form method="post" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="dash-user-btn" title="Log out" aria-label="Log out">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-                                <path d="M10 7V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2v-2"/>
-                                <path d="M15 12H3m0 0 3-3m-3 3 3 3"/>
-                            </svg>
-                        </button>
-                    </form>
-                </div>
+                </form>
             </div>
         </div>
     </aside>

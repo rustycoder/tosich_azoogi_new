@@ -74,7 +74,13 @@ class AnthropicDriver implements IChatLlmDriver
         ];
 
         if (! empty($systemPrompt)) {
-            $payload['system'] = $systemPrompt;
+            $payload['system'] = [
+                [
+                    'type' => 'text',
+                    'text' => $systemPrompt,
+                    'cache_control' => ['type' => 'ephemeral'],
+                ],
+            ];
         }
 
         if (! empty($tools)) {
@@ -84,18 +90,27 @@ class AnthropicDriver implements IChatLlmDriver
                     $uniqueTools[$t->getName()] = $t;
                 }
             }
-            $payload['tools'] = array_map(function (IChatTool $t) {
-                return [
+            $toolDefinitions = [];
+            $toolValues = array_values($uniqueTools);
+            $totalToolCount = count($toolValues);
+            foreach ($toolValues as $idx => $t) {
+                $toolDef = [
                     'name' => $t->getName(),
                     'description' => $t->getDescription(),
                     'input_schema' => $t->getParameters(),
                 ];
-            }, array_values($uniqueTools));
+                if ($idx === $totalToolCount - 1) {
+                    $toolDef['cache_control'] = ['type' => 'ephemeral'];
+                }
+                $toolDefinitions[] = $toolDef;
+            }
+            $payload['tools'] = $toolDefinitions;
         }
 
         $response = Http::withHeaders([
             'x-api-key' => $this->apiKey,
             'anthropic-version' => '2023-06-01',
+            'anthropic-beta' => 'prompt-caching-2024-07-31',
             'content-type' => 'application/json',
         ])->timeout(30)->post('https://api.anthropic.com/v1/messages', $payload);
 
@@ -121,14 +136,16 @@ class AnthropicDriver implements IChatLlmDriver
         }
 
         $promptTokens = (int) ($json['usage']['input_tokens'] ?? 0);
+        $cacheCreationTokens = (int) ($json['usage']['cache_creation_input_tokens'] ?? 0);
+        $cacheReadTokens = (int) ($json['usage']['cache_read_input_tokens'] ?? 0);
         $completionTokens = (int) ($json['usage']['output_tokens'] ?? 0);
-        $tokensUsed = $promptTokens + $completionTokens;
+        $tokensUsed = $promptTokens + $cacheCreationTokens + $cacheReadTokens + $completionTokens;
 
         return [
             'content' => $textContent !== '' ? $textContent : null,
             'tool_calls' => $parsedToolCalls,
             'tokens_used' => $tokensUsed,
-            'prompt_tokens' => $promptTokens,
+            'prompt_tokens' => $promptTokens + $cacheCreationTokens + $cacheReadTokens,
             'completion_tokens' => $completionTokens,
         ];
     }
