@@ -14,6 +14,7 @@
     <div class="dash-head-title">
         <h1>AI System Rules &amp; Behavioral Directives</h1>
         <div class="dash-head-actions">
+            <span class="dash-pill is-active">{{ count($rules) }} Rules</span>
             <button type="button" class="btn primary" onclick="openRuleModal()" style="display: inline-flex; align-items: center; gap: 6px;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 <span>+ Add Rule Item</span>
@@ -41,100 +42,162 @@
     </div>
 @endif
 
-<div style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(320px, 1fr); gap: 24px; align-items: start;">
-    
-    <!-- Left Column: Rules List & Live Search -->
-    <div style="display: flex; flex-direction: column; gap: 20px;">
-        
-        <!-- Search and Category Filter Bar -->
-        <div class="dash-card" style="padding: 16px 20px;">
-            <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 220px; position: relative;">
-                    <input type="text" id="rule-search-input" class="dash-input" placeholder="Search rules, directives, or keywords..." oninput="filterRules()" style="padding-left: 36px;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; color: var(--dash-muted, var(--muted));"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                </div>
-                <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
-                    <button type="button" class="btn is-active rule-cat-btn" data-cat="all" onclick="filterRuleCategory('all', this)" style="font-size: 11.5px; padding: 6px 12px;">All ({{ count($rules) }})</button>
-                    @php
-                        $categories = array_values(array_unique(array_filter(array_column($rules, 'category'))));
-                    @endphp
-                    @foreach ($categories as $cat)
-                        <button type="button" class="btn rule-cat-btn" data-cat="{{ $cat }}" onclick="filterRuleCategory('{{ $cat }}', this)" style="font-size: 11.5px; padding: 6px 12px;">{{ $cat }}</button>
-                    @endforeach
-                </div>
-            </div>
+<!-- Search & Filter Controls Toolbar -->
+<div class="dash-toolbar-row" style="margin-bottom: 20px;">
+    <!-- Search Input Field -->
+    <div class="dash-search">
+        <label class="visually-hidden" for="rule-search-input">Search rules</label>
+        <div class="dash-search-field">
+            <svg class="dash-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <circle cx="11" cy="11" r="6.5"/>
+                <path d="M16.5 16.5 21 21"/>
+            </svg>
+            <input
+                id="rule-search-input"
+                type="search"
+                placeholder="Search rules by category, directive title, or keywords..."
+                oninput="filterRules()"
+                autocomplete="off"
+            >
+            <button type="button" class="dash-search-clear" id="rule-search-clear" onclick="clearRuleSearch()" style="display:none;" title="Clear search" aria-label="Clear search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+            </button>
         </div>
+    </div>
 
-        <!-- Rules Cards Container -->
-        <div id="rule-items-list" style="display: flex; flex-direction: column; gap: 14px;">
+    <!-- Category Filter Dropdown -->
+    <div class="dash-select-wrap">
+        <select id="rule-category-select" class="dash-select" onchange="filterRules()" aria-label="Filter by category">
+            <option value="all">All Categories</option>
+            @php
+                $categories = array_values(array_unique(array_filter(array_column($rules, 'category'))));
+            @endphp
+            @foreach ($categories as $cat)
+                <option value="{{ $cat }}">{{ $cat }}</option>
+            @endforeach
+        </select>
+        <svg class="dash-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+
+    <!-- Status Filter Dropdown -->
+    <div class="dash-select-wrap">
+        <select id="rule-status-select" class="dash-select" onchange="filterRules()" aria-label="Filter by status">
+            <option value="all">All Statuses</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+        </select>
+        <svg class="dash-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+</div>
+
+<!-- AI System Rules Airtable-Style Table -->
+<div class="dash-airtable-wrap" style="margin-bottom: 28px;">
+    <table class="dash-airtable-table" id="rules-table">
+        <thead>
+            <tr>
+                <th scope="col" style="width: 90px; text-align: center;">Status</th>
+                <th scope="col" style="width: 170px;">Category</th>
+                <th scope="col" class="dash-sticky-col" style="min-width: 220px;">Rule Title / Directive</th>
+                <th scope="col" style="min-width: 380px;">Directive Instructions &amp; Constraints</th>
+                <th scope="col" style="width: 120px; text-align: right;">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="rules-table-body">
             @forelse ($rules as $rule)
-                <div class="dash-card rule-card-item" data-category="{{ $rule['category'] ?? '' }}" data-search="{{ strtolower(($rule['category'] ?? '') . ' ' . ($rule['title'] ?? '') . ' ' . ($rule['content'] ?? '')) }}" style="padding: 20px; transition: transform 0.2s ease, border-color 0.2s ease;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px;">
-                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                            <span class="dash-pill is-active" style="font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.04em;">{{ $rule['category'] ?? 'General' }}</span>
-                            @if (($rule['is_active'] ?? true) === false)
-                                <span class="dash-pill" style="font-size: 10px; background: rgba(239, 68, 68, 0.15); color: #ef4444; border-color: rgba(239,68,68,0.3);">Inactive</span>
-                            @endif
+                @php
+                    $isActive = ($rule['is_active'] ?? true) !== false;
+                @endphp
+                <tr class="rule-table-row" data-category="{{ $rule['category'] ?? '' }}" data-status="{{ $isActive ? 'active' : 'inactive' }}" data-search="{{ strtolower(($rule['category'] ?? '') . ' ' . ($rule['title'] ?? '') . ' ' . ($rule['content'] ?? '')) }}">
+                    <!-- Status -->
+                    <td style="text-align: center;">
+                        @if ($isActive)
+                            <span class="dash-status-pill is-published">Active</span>
+                        @else
+                            <span class="dash-status-pill is-draft">Inactive</span>
+                        @endif
+                    </td>
+
+                    <!-- Category -->
+                    <td>
+                        <span class="dash-tag is-primary" style="font-weight: 600;">
+                            {{ $rule['category'] ?? 'General' }}
+                        </span>
+                    </td>
+
+                    <!-- Rule Title (Sticky Left) -->
+                    <td class="dash-sticky-col">
+                        <div style="display: flex; flex-direction: column; gap: 3px;">
+                            <strong style="color: var(--dash-ink); font-size: 13.5px;">{{ $rule['title'] ?? '' }}</strong>
+                            <span class="dash-airtable-id">{{ $rule['id'] ?? '' }}</span>
                         </div>
-                        <div style="display: flex; gap: 6px; flex-shrink: 0;">
+                    </td>
+
+                    <!-- Directive Instructions -->
+                    <td>
+                        <p style="margin: 0; font-size: 12.5px; color: var(--dash-muted, var(--muted)); max-width: 580px; line-height: 1.5; white-space: pre-wrap;">{{ $rule['content'] ?? '' }}</p>
+                    </td>
+
+                    <!-- Actions -->
+                    <td style="text-align: right;">
+                        <div style="display: inline-flex; gap: 6px; align-items: center; justify-content: flex-end;">
                             <button type="button" class="btn" style="font-size: 11.5px; padding: 4px 10px;" onclick="editRuleItem(@js($rule))">Edit</button>
                             <form method="POST" action="{{ route('dashboard.ai.rules.delete', $rule['id']) }}" onsubmit="return confirm('Are you sure you want to delete this rule?');" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn" style="font-size: 11.5px; padding: 4px 8px; color: #ef4444;" title="Delete">✕</button>
+                                <button type="submit" class="btn" style="font-size: 11.5px; padding: 4px 8px; color: #ef4444;" title="Delete rule">✕</button>
                             </form>
                         </div>
-                    </div>
-                    <div style="font-size: 14.5px; font-weight: 700; color: var(--dash-ink, var(--ink)); margin-bottom: 8px; line-height: 1.35;">
-                        {{ $rule['title'] ?? '' }}
-                    </div>
-                    <div style="font-size: 13px; color: var(--dash-muted, var(--muted)); line-height: 1.55; white-space: pre-wrap;">{{ $rule['content'] ?? '' }}</div>
-                </div>
+                    </td>
+                </tr>
             @empty
-                <div class="dash-card" style="padding: 40px; text-align: center; color: var(--dash-muted, var(--muted));">
-                    <div style="font-size: 32px; margin-bottom: 10px;">📜</div>
-                    <div style="font-size: 15px; font-weight: 600; color: var(--dash-ink, var(--ink)); margin-bottom: 6px;">No System Rules Defined</div>
-                    <div style="font-size: 12.5px; margin-bottom: 16px;">Add behavioral directives and guidelines to instruct the AI assistant.</div>
-                    <button type="button" class="btn primary" onclick="openRuleModal()">+ Add First Rule</button>
-                </div>
+                <tr id="rules-empty-row">
+                    <td colspan="5">
+                        <div class="dash-card dash-empty" style="text-align: center; padding: 36px 20px;">
+                            No system rules defined yet. Click "+ Add Rule Item" to create one.
+                        </div>
+                    </td>
+                </tr>
             @endforelse
-        </div>
+            <tr id="rules-no-results-row" style="display: none;">
+                <td colspan="5">
+                    <div class="dash-card dash-empty" style="text-align: center; padding: 36px 20px;">
+                        No rules match your search or filter criteria.
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
+<!-- Bottom Section: Live System Prompt Inspector & Guidance -->
+<div style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(320px, 1fr); gap: 24px; align-items: start;">
+    <!-- Live System Prompt Inspector -->
+    <div class="dash-card" style="padding: 20px; border-color: rgba(103, 208, 78, 0.3);">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+            <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent);">
+                Compiled System Prompt Preview
+            </div>
+            <span class="dash-pill is-active" style="font-size: 10px;">Live Injection</span>
+        </div>
+        <p style="font-size: 11.5px; color: var(--dash-muted, var(--muted)); margin-top: 0; margin-bottom: 10px;">
+            Active rules are dynamically compiled and injected into the AI system instructions during runtime.
+        </p>
+        <div style="background: rgba(15, 15, 15, 0.95); border: 1px solid var(--line); border-radius: 8px; padding: 12px; max-height: 380px; overflow-y: auto; font-family: monospace; font-size: 11px; line-height: 1.5; color: #a3e635; white-space: pre-wrap; word-break: break-word;">{{ $compiledPrompt }}</div>
     </div>
 
-    <!-- Right Column: Live Prompt Inspector & Rule Guidelines -->
-    <div style="position: sticky; top: 24px; display: flex; flex-direction: column; gap: 20px;">
-        
-        <!-- Live System Prompt Inspector -->
-        <div class="dash-card" style="padding: 20px; border-color: rgba(103, 208, 78, 0.3);">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-                <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent);">
-                    Compiled System Prompt Preview
-                </div>
-                <span class="dash-pill is-active" style="font-size: 10px;">Live Injection</span>
-            </div>
-            <p style="font-size: 11.5px; color: var(--dash-muted, var(--muted)); margin-top: 0; margin-bottom: 10px;">
-                Active rules are dynamically compiled and injected into the AI system instructions.
-            </p>
-            <div style="background: rgba(15, 15, 15, 0.95); border: 1px solid var(--line); border-radius: 8px; padding: 12px; max-height: 380px; overflow-y: auto; font-family: monospace; font-size: 11px; line-height: 1.5; color: #a3e635; white-space: pre-wrap; word-break: break-word;">{{ $compiledPrompt }}</div>
+    <!-- Rule Guidance Tips -->
+    <div class="dash-card" style="padding: 18px;">
+        <div style="font-size: 13px; font-weight: 700; color: var(--dash-ink, var(--ink)); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px; color: var(--accent);"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            <span>Rule Formulation Tips</span>
         </div>
-
-        <!-- Rule Guidance Tips -->
-        <div class="dash-card" style="padding: 18px;">
-            <div style="font-size: 13px; font-weight: 700; color: var(--dash-ink, var(--ink)); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px; color: var(--accent);"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-                <span>Rule Formulation Tips</span>
-            </div>
-            <ul style="font-size: 11.5px; color: var(--dash-muted, var(--muted)); margin: 0; padding-left: 18px; line-height: 1.6;">
-                <li><strong>Tone &amp; Persona:</strong> Define trade-level technical rigor (e.g. CRI90+, SDCM<3, IP ratings).</li>
-                <li><strong>Prohibitions:</strong> Ensure strict pricing lockouts and prevent hallucinated item codes.</li>
-                <li><strong>Escalations:</strong> Specify when to trigger transcript handoffs to sales engineers.</li>
-                <li><strong>Toggles:</strong> Toggle rules inactive rather than deleting them if testing variations.</li>
-            </ul>
-        </div>
-
+        <ul style="font-size: 11.5px; color: var(--dash-muted, var(--muted)); margin: 0; padding-left: 18px; line-height: 1.6;">
+            <li><strong>Tone &amp; Persona:</strong> Define trade-level technical rigor (e.g. CRI90+, SDCM<3, IP ratings).</li>
+            <li><strong>Prohibitions:</strong> Ensure strict pricing lockouts and prevent hallucinated item codes.</li>
+            <li><strong>Escalations:</strong> Specify when to trigger transcript handoffs to sales engineers.</li>
+            <li><strong>Toggles:</strong> Toggle rules inactive rather than deleting them if testing variations.</li>
+        </ul>
     </div>
-
 </div>
 
 <!-- System Rule Modal (Add & Edit) -->
@@ -191,32 +254,50 @@
 
 @push('scripts')
 <script>
-let currentRuleCategoryFilter = 'all';
-
 function filterRules() {
-    const query = document.getElementById('rule-search-input')?.value.toLowerCase().trim() || '';
-    const cards = document.querySelectorAll('.rule-card-item');
+    const searchInput = document.getElementById('rule-search-input');
+    const clearBtn = document.getElementById('rule-search-clear');
+    const query = searchInput?.value.toLowerCase().trim() || '';
+    const selectedCategory = document.getElementById('rule-category-select')?.value || 'all';
+    const selectedStatus = document.getElementById('rule-status-select')?.value || 'all';
 
-    cards.forEach(card => {
-        const cat = card.getAttribute('data-category') || '';
-        const searchContent = card.getAttribute('data-search') || '';
+    if (clearBtn) {
+        clearBtn.style.display = query ? 'flex' : 'none';
+    }
 
-        const matchesCat = (currentRuleCategoryFilter === 'all' || cat === currentRuleCategoryFilter);
+    const rows = document.querySelectorAll('.rule-table-row');
+    let visibleCount = 0;
+
+    rows.forEach(row => {
+        const cat = row.getAttribute('data-category') || '';
+        const status = row.getAttribute('data-status') || '';
+        const searchContent = row.getAttribute('data-search') || '';
+
+        const matchesCat = (selectedCategory === 'all' || cat === selectedCategory);
+        const matchesStatus = (selectedStatus === 'all' || status === selectedStatus);
         const matchesQuery = (!query || searchContent.includes(query));
 
-        if (matchesCat && matchesQuery) {
-            card.style.display = 'block';
+        if (matchesCat && matchesStatus && matchesQuery) {
+            row.style.display = '';
+            visibleCount++;
         } else {
-            card.style.display = 'none';
+            row.style.display = 'none';
         }
     });
+
+    const noResultsRow = document.getElementById('rules-no-results-row');
+    if (noResultsRow) {
+        noResultsRow.style.display = (visibleCount === 0 && rows.length > 0) ? '' : 'none';
+    }
 }
 
-function filterRuleCategory(cat, btn) {
-    currentRuleCategoryFilter = cat;
-    document.querySelectorAll('.rule-cat-btn').forEach(b => b.classList.remove('is-active'));
-    if (btn) btn.classList.add('is-active');
-    filterRules();
+function clearRuleSearch() {
+    const searchInput = document.getElementById('rule-search-input');
+    if (searchInput) {
+        searchInput.value = '';
+        filterRules();
+        searchInput.focus();
+    }
 }
 
 function openRuleModal() {

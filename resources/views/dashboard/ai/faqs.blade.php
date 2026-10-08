@@ -14,6 +14,7 @@
     <div class="dash-head-title">
         <h1>AI FAQ Knowledge Base</h1>
         <div class="dash-head-actions">
+            <span class="dash-pill is-active">{{ count($faqs) }} FAQ Items</span>
             <button type="button" class="btn primary" onclick="openFaqModal()" style="display: inline-flex; align-items: center; gap: 6px;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 <span>+ Add FAQ Item</span>
@@ -41,99 +42,161 @@
     </div>
 @endif
 
-<div style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(320px, 1fr); gap: 24px; align-items: start;">
-    
-    <!-- Left Column: FAQ Knowledge Base List & Search -->
-    <div style="display: flex; flex-direction: column; gap: 20px;">
-        
-        <!-- Search and Filter Bar -->
-        <div class="dash-card" style="padding: 16px 20px;">
-            <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 220px; position: relative;">
-                    <input type="text" id="faq-search-input" class="dash-input" placeholder="Search questions, keywords, or answers..." oninput="filterFaqs()" style="padding-left: 36px;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; color: var(--dash-muted, var(--muted));"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                </div>
-                <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
-                    <button type="button" class="btn is-active faq-cat-btn" data-cat="all" onclick="filterFaqCategory('all', this)" style="font-size: 11.5px; padding: 6px 12px;">All ({{ count($faqs) }})</button>
-                    @php
-                        $categories = array_unique(array_filter(array_column($faqs, 'category')));
-                    @endphp
-                    @foreach ($categories as $cat)
-                        <button type="button" class="btn faq-cat-btn" data-cat="{{ $cat }}" onclick="filterFaqCategory('{{ $cat }}', this)" style="font-size: 11.5px; padding: 6px 12px;">{{ $cat }}</button>
-                    @endforeach
-                </div>
-            </div>
+<!-- Search & Filter Controls Toolbar -->
+<div class="dash-toolbar-row" style="margin-bottom: 20px;">
+    <!-- Search Input Field -->
+    <div class="dash-search">
+        <label class="visually-hidden" for="faq-search-input">Search FAQs</label>
+        <div class="dash-search-field">
+            <svg class="dash-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <circle cx="11" cy="11" r="6.5"/>
+                <path d="M16.5 16.5 21 21"/>
+            </svg>
+            <input
+                id="faq-search-input"
+                type="search"
+                placeholder="Search questions, categories, keywords, or verified answers..."
+                oninput="filterFaqs()"
+                autocomplete="off"
+            >
+            <button type="button" class="dash-search-clear" id="faq-search-clear" onclick="clearFaqSearch()" style="display:none;" title="Clear search" aria-label="Clear search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+            </button>
         </div>
+    </div>
 
-        <!-- FAQ Cards Container -->
-        <div id="faq-items-list" style="display: flex; flex-direction: column; gap: 14px;">
+    <!-- Category Filter Dropdown -->
+    <div class="dash-select-wrap">
+        <select id="faq-category-select" class="dash-select" onchange="filterFaqs()" aria-label="Filter by category">
+            <option value="all">All Categories</option>
+            @php
+                $categories = array_values(array_unique(array_filter(array_column($faqs, 'category'))));
+            @endphp
+            @foreach ($categories as $cat)
+                <option value="{{ $cat }}">{{ $cat }}</option>
+            @endforeach
+        </select>
+        <svg class="dash-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+
+    <!-- Status Filter Dropdown -->
+    <div class="dash-select-wrap">
+        <select id="faq-status-select" class="dash-select" onchange="filterFaqs()" aria-label="Filter by status">
+            <option value="all">All Statuses</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+        </select>
+        <svg class="dash-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+</div>
+
+<!-- FAQ Knowledge Base Airtable-Style Table -->
+<div class="dash-airtable-wrap" style="margin-bottom: 28px;">
+    <table class="dash-airtable-table" id="faqs-table">
+        <thead>
+            <tr>
+                <th scope="col" style="width: 90px; text-align: center;">Status</th>
+                <th scope="col" style="width: 170px;">Category</th>
+                <th scope="col" class="dash-sticky-col" style="min-width: 240px;">Question</th>
+                <th scope="col" style="min-width: 380px;">Verified Answer</th>
+                <th scope="col" style="width: 120px; text-align: right;">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="faqs-table-body">
             @forelse ($faqs as $faq)
-                <div class="dash-card faq-card-item" data-category="{{ $faq['category'] ?? '' }}" data-search="{{ strtolower(($faq['category'] ?? '') . ' ' . ($faq['question'] ?? '') . ' ' . ($faq['answer'] ?? '')) }}" style="padding: 20px; transition: transform 0.2s ease, border-color 0.2s ease;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px;">
-                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                            <span class="dash-pill is-active" style="font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.04em;">{{ $faq['category'] ?? 'General' }}</span>
-                            @if (($faq['is_active'] ?? true) === false)
-                                <span class="dash-pill" style="font-size: 10px; background: rgba(239, 68, 68, 0.15); color: #ef4444; border-color: rgba(239,68,68,0.3);">Inactive</span>
-                            @endif
+                @php
+                    $isActive = ($faq['is_active'] ?? true) !== false;
+                @endphp
+                <tr class="faq-table-row" data-category="{{ $faq['category'] ?? '' }}" data-status="{{ $isActive ? 'active' : 'inactive' }}" data-search="{{ strtolower(($faq['category'] ?? '') . ' ' . ($faq['question'] ?? '') . ' ' . ($faq['answer'] ?? '')) }}">
+                    <!-- Status -->
+                    <td style="text-align: center;">
+                        @if ($isActive)
+                            <span class="dash-status-pill is-published">Active</span>
+                        @else
+                            <span class="dash-status-pill is-draft">Inactive</span>
+                        @endif
+                    </td>
+
+                    <!-- Category -->
+                    <td>
+                        <span class="dash-tag is-primary" style="font-weight: 600;">
+                            {{ $faq['category'] ?? 'General' }}
+                        </span>
+                    </td>
+
+                    <!-- Question (Sticky Left) -->
+                    <td class="dash-sticky-col">
+                        <div style="display: flex; flex-direction: column; gap: 3px;">
+                            <strong style="color: var(--dash-ink); font-size: 13.5px;">{{ $faq['question'] ?? '' }}</strong>
+                            <span class="dash-airtable-id">{{ $faq['id'] ?? '' }}</span>
                         </div>
-                        <div style="display: flex; gap: 6px; flex-shrink: 0;">
+                    </td>
+
+                    <!-- Answer -->
+                    <td>
+                        <p style="margin: 0; font-size: 12.5px; color: var(--dash-muted, var(--muted)); max-width: 580px; line-height: 1.5; white-space: pre-wrap;">{{ $faq['answer'] ?? '' }}</p>
+                    </td>
+
+                    <!-- Actions -->
+                    <td style="text-align: right;">
+                        <div style="display: inline-flex; gap: 6px; align-items: center; justify-content: flex-end;">
                             <button type="button" class="btn" style="font-size: 11.5px; padding: 4px 10px;" onclick="editFaqItem(@js($faq))">Edit</button>
                             <form method="POST" action="{{ route('dashboard.ai.faqs.delete', $faq['id']) }}" onsubmit="return confirm('Are you sure you want to delete this FAQ item?');" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn" style="font-size: 11.5px; padding: 4px 8px; color: #ef4444;" title="Delete">✕</button>
+                                <button type="submit" class="btn" style="font-size: 11.5px; padding: 4px 8px; color: #ef4444;" title="Delete item">✕</button>
                             </form>
                         </div>
-                    </div>
-                    <div style="font-size: 14.5px; font-weight: 700; color: var(--dash-ink, var(--ink)); margin-bottom: 8px; line-height: 1.35;">
-                        {{ $faq['question'] ?? '' }}
-                    </div>
-                    <div style="font-size: 13px; color: var(--dash-muted, var(--muted)); line-height: 1.55; white-space: pre-wrap;">{{ $faq['answer'] ?? '' }}</div>
-                </div>
+                    </td>
+                </tr>
             @empty
-                <div class="dash-card" style="padding: 40px; text-align: center; color: var(--dash-muted, var(--muted));">
-                    <div style="font-size: 32px; margin-bottom: 10px;">📋</div>
-                    <div style="font-size: 15px; font-weight: 600; color: var(--dash-ink, var(--ink)); margin-bottom: 6px;">No FAQ Items Yet</div>
-                    <div style="font-size: 12.5px; margin-bottom: 16px;">Add frequently asked questions to ground the AI with exact answers.</div>
-                    <button type="button" class="btn primary" onclick="openFaqModal()">+ Add First FAQ</button>
-                </div>
+                <tr id="faqs-empty-row">
+                    <td colspan="5">
+                        <div class="dash-card dash-empty" style="text-align: center; padding: 36px 20px;">
+                            No FAQ items defined yet. Click "+ Add FAQ Item" to create one.
+                        </div>
+                    </td>
+                </tr>
             @endforelse
-        </div>
+            <tr id="faqs-no-results-row" style="display: none;">
+                <td colspan="5">
+                    <div class="dash-card dash-empty" style="text-align: center; padding: 36px 20px;">
+                        No FAQ items match your search or filter criteria.
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
+<!-- Bottom Section: Live System Prompt Inspector & Guidance -->
+<div style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(320px, 1fr); gap: 24px; align-items: start;">
+    <!-- Live System Prompt Inspector -->
+    <div class="dash-card" style="padding: 20px; border-color: rgba(103, 208, 78, 0.3);">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+            <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent);">
+                Compiled System Prompt Preview
+            </div>
+            <span class="dash-pill is-active" style="font-size: 10px;">Live Injection</span>
+        </div>
+        <p style="font-size: 11.5px; color: var(--dash-muted, var(--muted)); margin-top: 0; margin-bottom: 10px;">
+            Active FAQ entries are dynamically formatted and appended into the system prompt for immediate retrieval.
+        </p>
+        <div style="background: rgba(15, 15, 15, 0.95); border: 1px solid var(--line); border-radius: 8px; padding: 12px; max-height: 380px; overflow-y: auto; font-family: monospace; font-size: 11px; line-height: 1.5; color: #a3e635; white-space: pre-wrap; word-break: break-word;">{{ $compiledPrompt }}</div>
     </div>
 
-    <!-- Right Column: Live Prompt Inspector & FAQ Stats -->
-    <div style="position: sticky; top: 24px; display: flex; flex-direction: column; gap: 20px;">
-        
-        <!-- Live System Prompt Inspector -->
-        <div class="dash-card" style="padding: 20px; border-color: rgba(103, 208, 78, 0.3);">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-                <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent);">
-                    Compiled System Prompt Preview
-                </div>
-                <span class="dash-pill is-active" style="font-size: 10px;">Live Injection</span>
-            </div>
-            <p style="font-size: 11.5px; color: var(--dash-muted, var(--muted)); margin-top: 0; margin-bottom: 10px;">
-                Active FAQ entries are appended to the system prompt for immediate retrieval.
-            </p>
-            <div style="background: rgba(15, 15, 15, 0.95); border: 1px solid var(--line); border-radius: 8px; padding: 12px; max-height: 380px; overflow-y: auto; font-family: monospace; font-size: 11px; line-height: 1.5; color: #a3e635; white-space: pre-wrap; word-break: break-word;">{{ $compiledPrompt }}</div>
+    <!-- FAQ Guidance Card -->
+    <div class="dash-card" style="padding: 18px;">
+        <div style="font-size: 13px; font-weight: 700; color: var(--dash-ink, var(--ink)); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px; color: var(--accent);"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span>Knowledge Retrieval Tips</span>
         </div>
-
-        <!-- FAQ Guidance Card -->
-        <div class="dash-card" style="padding: 18px;">
-            <div style="font-size: 13px; font-weight: 700; color: var(--dash-ink, var(--ink)); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px; color: var(--accent);"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                <span>Knowledge Retrieval Tips</span>
-            </div>
-            <ul style="font-size: 11.5px; color: var(--dash-muted, var(--muted)); margin: 0; padding-left: 18px; line-height: 1.6;">
-                <li>Keep questions phrased as real clients would ask them.</li>
-                <li>Include warranty durations, IP ratings, and driver compatibility details.</li>
-                <li>Toggle inactive rather than deleting to temporarily hide seasonal information.</li>
-            </ul>
-        </div>
-
+        <ul style="font-size: 11.5px; color: var(--dash-muted, var(--muted)); margin: 0; padding-left: 18px; line-height: 1.6;">
+            <li>Keep questions phrased as real clients would ask them.</li>
+            <li>Include warranty durations, IP ratings, and driver compatibility details.</li>
+            <li>Toggle inactive rather than deleting to temporarily hide seasonal information.</li>
+        </ul>
     </div>
-
 </div>
 
 <!-- FAQ Modal (Add & Edit) -->
@@ -190,32 +253,50 @@
 
 @push('scripts')
 <script>
-let currentCategoryFilter = 'all';
-
 function filterFaqs() {
-    const query = document.getElementById('faq-search-input')?.value.toLowerCase().trim() || '';
-    const cards = document.querySelectorAll('.faq-card-item');
+    const searchInput = document.getElementById('faq-search-input');
+    const clearBtn = document.getElementById('faq-search-clear');
+    const query = searchInput?.value.toLowerCase().trim() || '';
+    const selectedCategory = document.getElementById('faq-category-select')?.value || 'all';
+    const selectedStatus = document.getElementById('faq-status-select')?.value || 'all';
 
-    cards.forEach(card => {
-        const cat = card.getAttribute('data-category') || '';
-        const searchContent = card.getAttribute('data-search') || '';
+    if (clearBtn) {
+        clearBtn.style.display = query ? 'flex' : 'none';
+    }
 
-        const matchesCat = (currentCategoryFilter === 'all' || cat === currentCategoryFilter);
+    const rows = document.querySelectorAll('.faq-table-row');
+    let visibleCount = 0;
+
+    rows.forEach(row => {
+        const cat = row.getAttribute('data-category') || '';
+        const status = row.getAttribute('data-status') || '';
+        const searchContent = row.getAttribute('data-search') || '';
+
+        const matchesCat = (selectedCategory === 'all' || cat === selectedCategory);
+        const matchesStatus = (selectedStatus === 'all' || status === selectedStatus);
         const matchesQuery = (!query || searchContent.includes(query));
 
-        if (matchesCat && matchesQuery) {
-            card.style.display = 'block';
+        if (matchesCat && matchesStatus && matchesQuery) {
+            row.style.display = '';
+            visibleCount++;
         } else {
-            card.style.display = 'none';
+            row.style.display = 'none';
         }
     });
+
+    const noResultsRow = document.getElementById('faqs-no-results-row');
+    if (noResultsRow) {
+        noResultsRow.style.display = (visibleCount === 0 && rows.length > 0) ? '' : 'none';
+    }
 }
 
-function filterFaqCategory(cat, btn) {
-    currentCategoryFilter = cat;
-    document.querySelectorAll('.faq-cat-btn').forEach(b => b.classList.remove('is-active'));
-    if (btn) btn.classList.add('is-active');
-    filterFaqs();
+function clearFaqSearch() {
+    const searchInput = document.getElementById('faq-search-input');
+    if (searchInput) {
+        searchInput.value = '';
+        filterFaqs();
+        searchInput.focus();
+    }
 }
 
 function openFaqModal() {

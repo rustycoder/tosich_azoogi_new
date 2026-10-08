@@ -14,6 +14,7 @@
     <div class="dash-head-title">
         <h1>Company Context &amp; Manufacturing Policies</h1>
         <div class="dash-head-actions">
+            <span class="dash-pill is-active">{{ count($contextItems) }} Context Items</span>
             <button type="button" class="btn primary" onclick="openContextModal()" style="display: inline-flex; align-items: center; gap: 6px;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                 <span>+ Add Context Item</span>
@@ -41,100 +42,162 @@
     </div>
 @endif
 
-<div style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(320px, 1fr); gap: 24px; align-items: start;">
-    
-    <!-- Left Column: Context Items List & Live Search -->
-    <div style="display: flex; flex-direction: column; gap: 20px;">
-        
-        <!-- Search and Category Filter Bar -->
-        <div class="dash-card" style="padding: 16px 20px;">
-            <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 220px; position: relative;">
-                    <input type="text" id="context-search-input" class="dash-input" placeholder="Search facilities, products, turnaround, or policies..." oninput="filterContext()" style="padding-left: 36px;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; color: var(--dash-muted, var(--muted));"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                </div>
-                <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
-                    <button type="button" class="btn is-active context-cat-btn" data-cat="all" onclick="filterContextCategory('all', this)" style="font-size: 11.5px; padding: 6px 12px;">All ({{ count($contextItems) }})</button>
-                    @php
-                        $categories = array_values(array_unique(array_filter(array_column($contextItems, 'category'))));
-                    @endphp
-                    @foreach ($categories as $cat)
-                        <button type="button" class="btn context-cat-btn" data-cat="{{ $cat }}" onclick="filterContextCategory('{{ $cat }}', this)" style="font-size: 11.5px; padding: 6px 12px;">{{ $cat }}</button>
-                    @endforeach
-                </div>
-            </div>
+<!-- Search & Filter Controls Toolbar -->
+<div class="dash-toolbar-row" style="margin-bottom: 20px;">
+    <!-- Search Input Field -->
+    <div class="dash-search">
+        <label class="visually-hidden" for="context-search-input">Search context</label>
+        <div class="dash-search-field">
+            <svg class="dash-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <circle cx="11" cy="11" r="6.5"/>
+                <path d="M16.5 16.5 21 21"/>
+            </svg>
+            <input
+                id="context-search-input"
+                type="search"
+                placeholder="Search facilities, products, turnaround, shipping, or policies..."
+                oninput="filterContext()"
+                autocomplete="off"
+            >
+            <button type="button" class="dash-search-clear" id="context-search-clear" onclick="clearContextSearch()" style="display:none;" title="Clear search" aria-label="Clear search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+            </button>
         </div>
+    </div>
 
-        <!-- Context Cards Container -->
-        <div id="context-items-list" style="display: flex; flex-direction: column; gap: 14px;">
+    <!-- Category Filter Dropdown -->
+    <div class="dash-select-wrap">
+        <select id="context-category-select" class="dash-select" onchange="filterContext()" aria-label="Filter by category">
+            <option value="all">All Categories</option>
+            @php
+                $categories = array_values(array_unique(array_filter(array_column($contextItems, 'category'))));
+            @endphp
+            @foreach ($categories as $cat)
+                <option value="{{ $cat }}">{{ $cat }}</option>
+            @endforeach
+        </select>
+        <svg class="dash-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+
+    <!-- Status Filter Dropdown -->
+    <div class="dash-select-wrap">
+        <select id="context-status-select" class="dash-select" onchange="filterContext()" aria-label="Filter by status">
+            <option value="all">All Statuses</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+        </select>
+        <svg class="dash-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+</div>
+
+<!-- Company Context Airtable-Style Table -->
+<div class="dash-airtable-wrap" style="margin-bottom: 28px;">
+    <table class="dash-airtable-table" id="context-table">
+        <thead>
+            <tr>
+                <th scope="col" style="width: 90px; text-align: center;">Status</th>
+                <th scope="col" style="width: 170px;">Category</th>
+                <th scope="col" class="dash-sticky-col" style="min-width: 220px;">Topic / Title</th>
+                <th scope="col" style="min-width: 380px;">Context Details &amp; Operational Policies</th>
+                <th scope="col" style="width: 120px; text-align: right;">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="context-table-body">
             @forelse ($contextItems as $item)
-                <div class="dash-card context-card-item" data-category="{{ $item['category'] ?? '' }}" data-search="{{ strtolower(($item['category'] ?? '') . ' ' . ($item['title'] ?? '') . ' ' . ($item['content'] ?? '')) }}" style="padding: 20px; transition: transform 0.2s ease, border-color 0.2s ease;">
-                    <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px;">
-                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                            <span class="dash-pill is-active" style="font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.04em;">{{ $item['category'] ?? 'General' }}</span>
-                            @if (($item['is_active'] ?? true) === false)
-                                <span class="dash-pill" style="font-size: 10px; background: rgba(239, 68, 68, 0.15); color: #ef4444; border-color: rgba(239,68,68,0.3);">Inactive</span>
-                            @endif
+                @php
+                    $isActive = ($item['is_active'] ?? true) !== false;
+                @endphp
+                <tr class="context-table-row" data-category="{{ $item['category'] ?? '' }}" data-status="{{ $isActive ? 'active' : 'inactive' }}" data-search="{{ strtolower(($item['category'] ?? '') . ' ' . ($item['title'] ?? '') . ' ' . ($item['content'] ?? '')) }}">
+                    <!-- Status -->
+                    <td style="text-align: center;">
+                        @if ($isActive)
+                            <span class="dash-status-pill is-published">Active</span>
+                        @else
+                            <span class="dash-status-pill is-draft">Inactive</span>
+                        @endif
+                    </td>
+
+                    <!-- Category -->
+                    <td>
+                        <span class="dash-tag is-primary" style="font-weight: 600;">
+                            {{ $item['category'] ?? 'General' }}
+                        </span>
+                    </td>
+
+                    <!-- Topic / Title (Sticky Left) -->
+                    <td class="dash-sticky-col">
+                        <div style="display: flex; flex-direction: column; gap: 3px;">
+                            <strong style="color: var(--dash-ink); font-size: 13.5px;">{{ $item['title'] ?? '' }}</strong>
+                            <span class="dash-airtable-id">{{ $item['id'] ?? '' }}</span>
                         </div>
-                        <div style="display: flex; gap: 6px; flex-shrink: 0;">
+                    </td>
+
+                    <!-- Context Details -->
+                    <td>
+                        <p style="margin: 0; font-size: 12.5px; color: var(--dash-muted, var(--muted)); max-width: 580px; line-height: 1.5; white-space: pre-wrap;">{{ $item['content'] ?? '' }}</p>
+                    </td>
+
+                    <!-- Actions -->
+                    <td style="text-align: right;">
+                        <div style="display: inline-flex; gap: 6px; align-items: center; justify-content: flex-end;">
                             <button type="button" class="btn" style="font-size: 11.5px; padding: 4px 10px;" onclick="editContextItem(@js($item))">Edit</button>
                             <form method="POST" action="{{ route('dashboard.ai.context.delete', $item['id']) }}" onsubmit="return confirm('Are you sure you want to delete this context item?');" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn" style="font-size: 11.5px; padding: 4px 8px; color: #ef4444;" title="Delete">✕</button>
+                                <button type="submit" class="btn" style="font-size: 11.5px; padding: 4px 8px; color: #ef4444;" title="Delete item">✕</button>
                             </form>
                         </div>
-                    </div>
-                    <div style="font-size: 14.5px; font-weight: 700; color: var(--dash-ink, var(--ink)); margin-bottom: 8px; line-height: 1.35;">
-                        {{ $item['title'] ?? '' }}
-                    </div>
-                    <div style="font-size: 13px; color: var(--dash-muted, var(--muted)); line-height: 1.55; white-space: pre-wrap;">{{ $item['content'] ?? '' }}</div>
-                </div>
+                    </td>
+                </tr>
             @empty
-                <div class="dash-card" style="padding: 40px; text-align: center; color: var(--dash-muted, var(--muted));">
-                    <div style="font-size: 32px; margin-bottom: 10px;">🏢</div>
-                    <div style="font-size: 15px; font-weight: 600; color: var(--dash-ink, var(--ink)); margin-bottom: 6px;">No Company Context Items Defined</div>
-                    <div style="font-size: 12.5px; margin-bottom: 16px;">Add company facilities, manufacturing timelines, or warranty policies to ground the AI assistant.</div>
-                    <button type="button" class="btn primary" onclick="openContextModal()">+ Add First Context Item</button>
-                </div>
+                <tr id="context-empty-row">
+                    <td colspan="5">
+                        <div class="dash-card dash-empty" style="text-align: center; padding: 36px 20px;">
+                            No company context items defined yet. Click "+ Add Context Item" to create one.
+                        </div>
+                    </td>
+                </tr>
             @endforelse
-        </div>
+            <tr id="context-no-results-row" style="display: none;">
+                <td colspan="5">
+                    <div class="dash-card dash-empty" style="text-align: center; padding: 36px 20px;">
+                        No context items match your search or filter criteria.
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
+<!-- Bottom Section: Live System Prompt Inspector & Guidance -->
+<div style="display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(320px, 1fr); gap: 24px; align-items: start;">
+    <!-- Live System Prompt Inspector -->
+    <div class="dash-card" style="padding: 20px; border-color: rgba(103, 208, 78, 0.3);">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+            <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent);">
+                Compiled System Prompt Preview
+            </div>
+            <span class="dash-pill is-active" style="font-size: 10px;">Live Injection</span>
+        </div>
+        <p style="font-size: 11.5px; color: var(--dash-muted, var(--muted)); margin-top: 0; margin-bottom: 10px;">
+            Active context items are dynamically compiled and injected into the AI company background.
+        </p>
+        <div style="background: rgba(15, 15, 15, 0.95); border: 1px solid var(--line); border-radius: 8px; padding: 12px; max-height: 380px; overflow-y: auto; font-family: monospace; font-size: 11px; line-height: 1.5; color: #a3e635; white-space: pre-wrap; word-break: break-word;">{{ $compiledPrompt }}</div>
     </div>
 
-    <!-- Right Column: Live Prompt Inspector & Context Guidelines -->
-    <div style="position: sticky; top: 24px; display: flex; flex-direction: column; gap: 20px;">
-        
-        <!-- Live System Prompt Inspector -->
-        <div class="dash-card" style="padding: 20px; border-color: rgba(103, 208, 78, 0.3);">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-                <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent);">
-                    Compiled System Prompt Preview
-                </div>
-                <span class="dash-pill is-active" style="font-size: 10px;">Live Injection</span>
-            </div>
-            <p style="font-size: 11.5px; color: var(--dash-muted, var(--muted)); margin-top: 0; margin-bottom: 10px;">
-                Active context items are dynamically compiled and injected into the AI company background.
-            </p>
-            <div style="background: rgba(15, 15, 15, 0.95); border: 1px solid var(--line); border-radius: 8px; padding: 12px; max-height: 380px; overflow-y: auto; font-family: monospace; font-size: 11px; line-height: 1.5; color: #a3e635; white-space: pre-wrap; word-break: break-word;">{{ $compiledPrompt }}</div>
+    <!-- Context Guidance Tips -->
+    <div class="dash-card" style="padding: 18px;">
+        <div style="font-size: 13px; font-weight: 700; color: var(--dash-ink, var(--ink)); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px; color: var(--accent);"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <span>Context Guidelines</span>
         </div>
-
-        <!-- Context Guidance Tips -->
-        <div class="dash-card" style="padding: 18px;">
-            <div style="font-size: 13px; font-weight: 700; color: var(--dash-ink, var(--ink)); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 15px; height: 15px; color: var(--accent);"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-                <span>Context Guidelines</span>
-            </div>
-            <ul style="font-size: 11.5px; color: var(--dash-muted, var(--muted)); margin: 0; padding-left: 18px; line-height: 1.6;">
-                <li><strong>Sydney Workshop:</strong> Mention local custom profile cutting and quick 3-5 day turnarounds.</li>
-                <li><strong>Logistics:</strong> Detail warehouse dispatch speeds (24-48h for in-stock items).</li>
-                <li><strong>Engineering:</strong> Highlight IES/LDT photometric files available for lighting designers.</li>
-                <li><strong>Warranty:</strong> Ensure standard 5-year commercial warranty terms are highlighted.</li>
-            </ul>
-        </div>
-
+        <ul style="font-size: 11.5px; color: var(--dash-muted, var(--muted)); margin: 0; padding-left: 18px; line-height: 1.6;">
+            <li><strong>Sydney Workshop:</strong> Mention local custom profile cutting and quick 3-5 day turnarounds.</li>
+            <li><strong>Logistics:</strong> Detail warehouse dispatch speeds (24-48h for in-stock items).</li>
+            <li><strong>Engineering:</strong> Highlight IES/LDT photometric files available for lighting designers.</li>
+            <li><strong>Warranty:</strong> Ensure standard 5-year commercial warranty terms are highlighted.</li>
+        </ul>
     </div>
-
 </div>
 
 <!-- Company Context Modal (Add & Edit) -->
@@ -191,32 +254,50 @@
 
 @push('scripts')
 <script>
-let currentContextCategoryFilter = 'all';
-
 function filterContext() {
-    const query = document.getElementById('context-search-input')?.value.toLowerCase().trim() || '';
-    const cards = document.querySelectorAll('.context-card-item');
+    const searchInput = document.getElementById('context-search-input');
+    const clearBtn = document.getElementById('context-search-clear');
+    const query = searchInput?.value.toLowerCase().trim() || '';
+    const selectedCategory = document.getElementById('context-category-select')?.value || 'all';
+    const selectedStatus = document.getElementById('context-status-select')?.value || 'all';
 
-    cards.forEach(card => {
-        const cat = card.getAttribute('data-category') || '';
-        const searchContent = card.getAttribute('data-search') || '';
+    if (clearBtn) {
+        clearBtn.style.display = query ? 'flex' : 'none';
+    }
 
-        const matchesCat = (currentContextCategoryFilter === 'all' || cat === currentContextCategoryFilter);
+    const rows = document.querySelectorAll('.context-table-row');
+    let visibleCount = 0;
+
+    rows.forEach(row => {
+        const cat = row.getAttribute('data-category') || '';
+        const status = row.getAttribute('data-status') || '';
+        const searchContent = row.getAttribute('data-search') || '';
+
+        const matchesCat = (selectedCategory === 'all' || cat === selectedCategory);
+        const matchesStatus = (selectedStatus === 'all' || status === selectedStatus);
         const matchesQuery = (!query || searchContent.includes(query));
 
-        if (matchesCat && matchesQuery) {
-            card.style.display = 'block';
+        if (matchesCat && matchesStatus && matchesQuery) {
+            row.style.display = '';
+            visibleCount++;
         } else {
-            card.style.display = 'none';
+            row.style.display = 'none';
         }
     });
+
+    const noResultsRow = document.getElementById('context-no-results-row');
+    if (noResultsRow) {
+        noResultsRow.style.display = (visibleCount === 0 && rows.length > 0) ? '' : 'none';
+    }
 }
 
-function filterContextCategory(cat, btn) {
-    currentContextCategoryFilter = cat;
-    document.querySelectorAll('.context-cat-btn').forEach(b => b.classList.remove('is-active'));
-    if (btn) btn.classList.add('is-active');
-    filterContext();
+function clearContextSearch() {
+    const searchInput = document.getElementById('context-search-input');
+    if (searchInput) {
+        searchInput.value = '';
+        filterContext();
+        searchInput.focus();
+    }
 }
 
 function openContextModal() {
