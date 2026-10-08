@@ -175,7 +175,7 @@
         <thead>
             <!-- Group Header Tier 1 -->
             <tr class="dash-group-header-row">
-                <th scope="colgroup" colspan="3" class="dash-group-th is-primary" style="text-align: center;">
+                <th scope="colgroup" colspan="6" class="dash-group-th is-primary" style="text-align: center;">
                     <span class="dash-group-badge is-primary">1. Session &amp; Visitor</span>
                 </th>
                 <th scope="colgroup" colspan="2" class="dash-group-th is-specs" style="text-align: center;">
@@ -197,27 +197,30 @@
             <!-- Column Header Tier 2 -->
             <tr>
                 <!-- Group 1: Session & Visitor -->
-                <th scope="col" class="dash-col-th is-primary" style="min-width: 200px;">Visitor / Lead</th>
-                <th scope="col" class="dash-col-th is-primary" style="min-width: 140px;">Location &amp; IP</th>
-                <th scope="col" class="dash-col-th is-primary" style="width: 110px; text-align: center;">Session ID</th>
+                <th scope="col" class="dash-col-th is-primary" style="min-width: 170px;">Visitor / Lead</th>
+                <th scope="col" class="dash-col-th is-primary" style="min-width: 150px;">Project Name</th>
+                <th scope="col" class="dash-col-th is-primary" style="min-width: 170px;">Email</th>
+                <th scope="col" class="dash-col-th is-primary" style="min-width: 110px;">Location</th>
+                <th scope="col" class="dash-col-th is-primary" style="min-width: 120px;">IP Address</th>
+                <th scope="col" class="dash-col-th is-primary" style="width: 100px; text-align: center;">Session ID</th>
 
                 <!-- Group 2: Conversation Context -->
-                <th scope="col" class="dash-col-th is-specs" style="min-width: 250px;">Conversation Summary</th>
+                <th scope="col" class="dash-col-th is-specs" style="min-width: 240px;">Conversation Summary</th>
                 <th scope="col" class="dash-col-th is-specs" style="width: 90px; text-align: center;">Messages</th>
 
                 <!-- Group 3: AI Model & Compute -->
-                <th scope="col" class="dash-col-th is-media" style="min-width: 170px;">AI Model &amp; Provider</th>
-                <th scope="col" class="dash-col-th is-media" style="min-width: 170px;">Token Usage (Total / In / Out)</th>
+                <th scope="col" class="dash-col-th is-media" style="min-width: 160px;">AI Model &amp; Provider</th>
+                <th scope="col" class="dash-col-th is-media" style="min-width: 160px;">Token Usage (Total / In / Out)</th>
 
                 <!-- Group 4: Token Spend -->
-                <th scope="col" class="dash-col-th is-supplier" style="min-width: 130px;">Estimated Cost</th>
+                <th scope="col" class="dash-col-th is-supplier" style="min-width: 120px;">Estimated Cost</th>
 
                 <!-- Group 5: Conversion -->
-                <th scope="col" class="dash-col-th is-docs" style="width: 110px; text-align: center;">Status</th>
+                <th scope="col" class="dash-col-th is-docs" style="width: 105px; text-align: center;">Status</th>
 
                 <!-- Group 6: Audit & Actions -->
-                <th scope="col" class="dash-col-th is-audit" style="min-width: 140px;">Created Date</th>
-                <th scope="col" class="dash-col-th is-audit" style="width: 140px; text-align: center;">Actions</th>
+                <th scope="col" class="dash-col-th is-audit" style="min-width: 130px;">Created Date</th>
+                <th scope="col" class="dash-col-th is-audit" style="width: 130px; text-align: center;">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -234,7 +237,7 @@
                     $isLead = filled($session->lead_name) || filled($session->lead_email) || filled($session->enquiry_id);
                 @endphp
                 <tr id="session-row-{{ $session->id }}" style="{{ ! $session->is_read ? 'background: rgba(56, 189, 248, 0.02);' : '' }}">
-                    <!-- 1. Visitor / Lead -->
+                    <!-- 1. Visitor / Lead Name -->
                     <td>
                         <div class="dash-product-cell">
                             <div style="display: flex; align-items: center; gap: 6px;">
@@ -245,20 +248,10 @@
                                     <span id="fav-badge-{{ $session->id }}" style="color: #f59e0b; font-size: 13px;" title="Favorited">★</span>
                                 @endif
                             </div>
-                            @if ($session->lead_name || $session->lead_email || $session->project_name)
+                            @if ($session->lead_name)
                                 <a href="{{ route('dashboard.chat-sessions.show', $session) }}" class="dash-product-title" style="color: #10b981; font-weight: 600;">
-                                    {{ $session->lead_name ?: ($session->project_name ?: 'Identified Lead') }}
+                                    {{ $session->lead_name }}
                                 </a>
-                                @if (filled($session->lead_email))
-                                    <span style="font-size: 11.5px; color: var(--dash-muted, var(--muted)); display: block; line-height: 1.3;">
-                                        {{ $session->lead_email }}
-                                    </span>
-                                @endif
-                                @if (filled($session->project_name))
-                                    <span class="dash-tag" style="font-size: 10px; width: fit-content; margin-top: 3px; background: rgba(56, 189, 248, 0.12); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.25);" title="Project: {{ $session->project_name }}">
-                                        📁 {{ \Illuminate\Support\Str::limit($session->project_name, 26) }}
-                                    </span>
-                                @endif
                                 @if (filled($session->lead_phone))
                                     <span style="font-size: 10.5px; color: var(--dash-muted, var(--muted)); display: block;">
                                         {{ $session->lead_phone }}
@@ -273,24 +266,50 @@
                         </div>
                     </td>
 
-                    <!-- Location & IP -->
+                    <!-- Project Name -->
                     <td>
-                        <div style="display: flex; flex-direction: column; gap: 3px;">
-                            @if (filled($session->country))
-                                <span class="dash-tag is-primary" style="font-size: 10.5px; width: fit-content;">
-                                    {{ $session->country }}
-                                </span>
-                            @else
-                                <span class="dash-tag" style="font-size: 10.5px; width: fit-content; color: var(--dash-muted, var(--muted));">
-                                    Australia
-                                </span>
-                            @endif
-                            @if (filled($session->ip_address))
-                                <span class="dash-code-badge" style="font-size: 10.5px; font-family: monospace;">
-                                    {{ $session->ip_address }}
-                                </span>
-                            @endif
-                        </div>
+                        @if (filled($session->project_name))
+                            <span class="dash-tag" style="font-size: 11px; width: fit-content; background: rgba(56, 189, 248, 0.12); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.25);" title="Project: {{ $session->project_name }}">
+                                📁 {{ \Illuminate\Support\Str::limit($session->project_name, 22) }}
+                            </span>
+                        @else
+                            <span style="color: var(--dash-muted, var(--muted)); font-size: 12px;">—</span>
+                        @endif
+                    </td>
+
+                    <!-- Email -->
+                    <td>
+                        @if (filled($session->lead_email))
+                            <a href="mailto:{{ $session->lead_email }}" style="color: var(--dash-ink, var(--ink)); font-size: 12px; font-family: inherit; font-weight: 500; text-decoration: none;" title="{{ $session->lead_email }}">
+                                {{ $session->lead_email }}
+                            </a>
+                        @else
+                            <span style="color: var(--dash-muted, var(--muted)); font-size: 12px;">—</span>
+                        @endif
+                    </td>
+
+                    <!-- Location -->
+                    <td>
+                        @if (filled($session->country))
+                            <span class="dash-tag is-primary" style="font-size: 10.5px; width: fit-content;">
+                                {{ $session->country }}
+                            </span>
+                        @else
+                            <span class="dash-tag" style="font-size: 10.5px; width: fit-content; color: var(--dash-muted, var(--muted));">
+                                Australia
+                            </span>
+                        @endif
+                    </td>
+
+                    <!-- IP Address -->
+                    <td>
+                        @if (filled($session->ip_address))
+                            <span class="dash-code-badge" style="font-size: 10.5px; font-family: monospace;">
+                                {{ $session->ip_address }}
+                            </span>
+                        @else
+                            <span style="color: var(--dash-muted, var(--muted)); font-size: 12px;">—</span>
+                        @endif
                     </td>
 
                     <!-- Session ID -->
