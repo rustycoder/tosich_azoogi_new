@@ -175,7 +175,7 @@
         <thead>
             <!-- Group Header Tier 1 -->
             <tr class="dash-group-header-row">
-                <th scope="colgroup" colspan="6" class="dash-group-th is-primary" style="text-align: center;">
+                <th scope="colgroup" colspan="7" class="dash-group-th is-primary" style="text-align: center;">
                     <span class="dash-group-badge is-primary">1. Session &amp; Visitor</span>
                 </th>
                 <th scope="colgroup" colspan="2" class="dash-group-th is-specs" style="text-align: center;">
@@ -197,6 +197,9 @@
             <!-- Column Header Tier 2 -->
             <tr>
                 <!-- Group 1: Session & Visitor -->
+                <th scope="col" class="dash-col-th is-primary" style="width: 44px; text-align: center;" title="Favorite">
+                    <svg viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1.8" style="width: 13px; height: 13px; vertical-align: middle;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </th>
                 <th scope="col" class="dash-col-th is-primary" style="min-width: 170px;">Visitor / Lead</th>
                 <th scope="col" class="dash-col-th is-primary" style="min-width: 150px;">Project Name</th>
                 <th scope="col" class="dash-col-th is-primary" style="min-width: 170px;">Email</th>
@@ -220,7 +223,7 @@
 
                 <!-- Group 6: Audit & Actions -->
                 <th scope="col" class="dash-col-th is-audit" style="min-width: 130px;">Created Date</th>
-                <th scope="col" class="dash-col-th is-audit" style="width: 130px; text-align: center;">Actions</th>
+                <th scope="col" class="dash-col-th is-audit" style="width: 110px; text-align: center;">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -237,6 +240,20 @@
                     $isLead = filled($session->lead_name) || filled($session->lead_email) || filled($session->enquiry_id);
                 @endphp
                 <tr id="session-row-{{ $session->id }}" style="{{ ! $session->is_read ? 'background: rgba(56, 189, 248, 0.02);' : '' }}">
+                    <!-- Favorite Column -->
+                    <td style="text-align: center; width: 44px; padding: 6px 4px;">
+                        <button
+                            type="button"
+                            class="btn"
+                            id="btn-fav-{{ $session->id }}"
+                            onclick="toggleChatFavorite({{ $session->id }}, this)"
+                            style="padding: 0; width: 28px; height: 28px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; {{ $session->is_favorite ? 'color: #f59e0b; border-color: rgba(245,158,11,0.35); background: rgba(245,158,11,0.1);' : 'color: var(--dash-muted); border-color: transparent; background: transparent;' }}"
+                            title="{{ $session->is_favorite ? 'Remove from favorites' : 'Mark as favorite' }}"
+                            aria-label="{{ $session->is_favorite ? 'Remove from favorites' : 'Mark as favorite' }}"
+                        >
+                            <svg viewBox="0 0 24 24" fill="{{ $session->is_favorite ? '#f59e0b' : 'none' }}" stroke="currentColor" stroke-width="1.8" style="width: 15px; height: 15px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </button>
+                    </td>
                     <!-- 1. Visitor / Lead Name -->
                     <td>
                         <div class="dash-product-cell">
@@ -386,22 +403,9 @@
                         </div>
                     </td>
 
-                    <!-- Action Icons (Favorite Star, Mark Read/Unread, Transcribe Icon) -->
+                    <!-- Action Icons (Mark Read/Unread, Transcribe Icon) -->
                     <td style="text-align: center;">
                         <div style="display: inline-flex; align-items: center; gap: 5px; justify-content: center;">
-                            <!-- Favorite Star Button -->
-                            <button
-                                type="button"
-                                class="btn"
-                                id="btn-fav-{{ $session->id }}"
-                                onclick="toggleChatFavorite({{ $session->id }}, this)"
-                                style="padding: 0; width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; {{ $session->is_favorite ? 'color: #f59e0b; border-color: rgba(245,158,11,0.35); background: rgba(245,158,11,0.1);' : 'color: var(--dash-muted);' }}"
-                                title="{{ $session->is_favorite ? 'Remove from favorites' : 'Mark as favorite' }}"
-                                aria-label="{{ $session->is_favorite ? 'Remove from favorites' : 'Mark as favorite' }}"
-                            >
-                                <svg viewBox="0 0 24 24" fill="{{ $session->is_favorite ? '#f59e0b' : 'none' }}" stroke="currentColor" stroke-width="1.8" style="width: 14px; height: 14px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                            </button>
-
                             <!-- Mark Read / Unread Button -->
                             <button
                                 type="button"
@@ -434,7 +438,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="11">
+                    <td colspan="15">
                         <div class="dash-card dash-empty">
                             {{ $searchQuery === '' ? 'No chat conversations recorded yet.' : 'No chat conversations match "' . $searchQuery . '".' }}
                         </div>
