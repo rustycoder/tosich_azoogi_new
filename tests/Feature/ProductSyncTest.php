@@ -120,7 +120,7 @@ class ProductSyncTest extends TestCase
                 return Http::response([
                     'records' => [
                         ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
-                    ]
+                    ],
                 ]);
             }
 
@@ -147,7 +147,7 @@ class ProductSyncTest extends TestCase
                             'Order' => 2,
                         ],
                     ],
-                ]
+                ],
             ]);
         });
 
@@ -200,7 +200,7 @@ class ProductSyncTest extends TestCase
                 return Http::response([
                     'records' => [
                         ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
-                    ]
+                    ],
                 ]);
             }
 
@@ -222,7 +222,7 @@ class ProductSyncTest extends TestCase
                             ],
                         ],
                     ],
-                ]
+                ],
             ]);
         });
 
@@ -235,7 +235,7 @@ class ProductSyncTest extends TestCase
         $this->assertSame($remoteUrl, $product->cover);
         $this->assertSame($remoteUrl, $product->coverUrl());
 
-        Http::assertNotSent(fn(Request $request): bool => $request->url() === $remoteUrl);
+        Http::assertNotSent(fn (Request $request): bool => $request->url() === $remoteUrl);
     }
 
     public function test_sync_saves_one_url_per_airtable_attachment_not_thumbnails(): void
@@ -255,7 +255,7 @@ class ProductSyncTest extends TestCase
                 return Http::response([
                     'records' => [
                         ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
-                    ]
+                    ],
                 ]);
             }
 
@@ -292,7 +292,7 @@ class ProductSyncTest extends TestCase
                             ],
                         ],
                     ],
-                ]
+                ],
             ]);
         });
 
@@ -323,9 +323,9 @@ class ProductSyncTest extends TestCase
 
         for ($index = 1; $index <= 3; $index++) {
             $rows[] = [
-                'id' => 'recNew' . $index,
-                'product_name' => 'Light ' . $index,
-                'product_images' => ['https://example.com/' . $index . '.jpg'],
+                'id' => 'recNew'.$index,
+                'product_name' => 'Light '.$index,
+                'product_images' => ['https://example.com/'.$index.'.jpg'],
                 'product_features' => ['Finish' => [['value' => 'Black']]],
             ];
         }
@@ -344,7 +344,7 @@ class ProductSyncTest extends TestCase
         DB::enableQueryLog();
         app(IProductRepository::class)->persistProducts($rows);
         $inserts = collect(DB::getQueryLog())->filter(
-            fn(array $query): bool => str_contains(strtolower($query['query']), 'insert'),
+            fn (array $query): bool => str_contains(strtolower($query['query']), 'insert'),
         );
 
         $this->assertCount(1, $inserts);
@@ -396,10 +396,10 @@ class ProductSyncTest extends TestCase
                                     'large' => ['url' => 'https://dl.airtable.com/thumb-large.jpg'],
                                     'full' => ['url' => 'https://dl.airtable.com/thumb-full.jpg'],
                                 ],
-                            ]
+                            ],
                         ],
                         'Icon' => [['url' => $iconUrl]],
-                    ]
+                    ],
                 ],
                 ['id' => 'recGarden', 'fields' => ['Name' => 'Garden', 'Order' => 2, 'Parent' => ['recNeon']]],
             ],
@@ -409,7 +409,7 @@ class ProductSyncTest extends TestCase
             ],
         );
         $inserts = collect(DB::getQueryLog())->filter(
-            fn(array $query): bool => str_contains(strtolower($query['query']), 'insert'),
+            fn (array $query): bool => str_contains(strtolower($query['query']), 'insert'),
         );
 
         $this->assertCount(2, $inserts);
@@ -482,7 +482,7 @@ class ProductSyncTest extends TestCase
     public function test_product_sync_is_scheduled_hourly(): void
     {
         $event = collect(app(Schedule::class)->events())
-            ->first(fn($scheduled): bool => str_contains((string) $scheduled->command, 'products:sync'));
+            ->first(fn ($scheduled): bool => str_contains((string) $scheduled->command, 'products:sync'));
 
         $this->assertNotNull($event);
         $this->assertSame('0 * * * *', $event->expression);
@@ -507,7 +507,7 @@ class ProductSyncTest extends TestCase
                 return Http::response([
                     'records' => [
                         ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
-                    ]
+                    ],
                 ]);
             }
 
@@ -534,7 +534,7 @@ class ProductSyncTest extends TestCase
                                 'Category' => 'NEON',
                             ],
                         ],
-                    ]
+                    ],
                 ]);
             }
 
@@ -696,7 +696,7 @@ class ProductSyncTest extends TestCase
                 return Http::response([
                     'records' => [
                         ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
-                    ]
+                    ],
                 ]);
             }
 
@@ -715,7 +715,7 @@ class ProductSyncTest extends TestCase
                             'Category' => 'NEON',
                         ],
                     ],
-                ]
+                ],
             ]);
         });
 
@@ -728,7 +728,7 @@ class ProductSyncTest extends TestCase
         $this->assertSame(100, end($events)['percentage']);
         $this->assertSame('completed', end($events)['status']);
         $this->assertFalse(collect($events)->contains(
-            fn(array $event): bool => str_contains((string) $event['step'], 'Downloading assets'),
+            fn (array $event): bool => str_contains((string) $event['step'], 'Downloading assets'),
         ));
 
         $response = $this->actingAs($admin)
@@ -751,7 +751,7 @@ class ProductSyncTest extends TestCase
                 return Http::response([
                     'records' => [
                         ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
-                    ]
+                    ],
                 ]);
             }
 
@@ -779,7 +779,7 @@ class ProductSyncTest extends TestCase
                             'Dimming Control' => false,
                         ],
                     ],
-                ]
+                ],
             ]);
         });
 
@@ -809,7 +809,7 @@ class ProductSyncTest extends TestCase
                 return Http::response([
                     'records' => [
                         ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
-                    ]
+                    ],
                 ]);
             }
 
@@ -830,7 +830,7 @@ class ProductSyncTest extends TestCase
                             'Product Description' => 'Long fallback description text.',
                         ],
                     ],
-                ]
+                ],
             ]);
         });
 
@@ -866,7 +866,7 @@ class ProductSyncTest extends TestCase
                 return Http::response([
                     'records' => [
                         ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
-                    ]
+                    ],
                 ]);
             }
 
@@ -904,7 +904,7 @@ class ProductSyncTest extends TestCase
                             'URL Slug' => 'led-strips/cob-strip-light',
                         ],
                     ],
-                ]
+                ],
             ]);
         });
 

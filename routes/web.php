@@ -131,6 +131,7 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::middleware('can.manage:pages')->group(function () {
         Route::get('ai/models', [AiConfigController::class, 'models'])->name('ai.models');
         Route::get('ai/config', [AiConfigController::class, 'models'])->name('ai.config');
+        Route::get('ai/rates', [AiConfigController::class, 'rates'])->name('ai.rates');
         Route::put('ai/models', [AiConfigController::class, 'updateModels'])->name('ai.update');
         Route::post('ai/test-connection', [AiConfigController::class, 'testConnection'])->name('ai.test-connection');
         Route::post('ai/custom-provider', [AiConfigController::class, 'storeCustomProvider'])->name('ai.custom-provider.store');

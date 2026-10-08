@@ -35,11 +35,22 @@ class AiConfigManagementTest extends TestCase
         $response = $this->actingAs($this->adminUser)->get(route('dashboard.ai.models'));
 
         $response->assertOk();
-        $response->assertSee('AI Models, Providers &amp; Rates', false);
+        $response->assertSee('AI Models &amp; Providers', false);
         $response->assertSee('Anthropic Claude');
         $response->assertSee('OpenRouter');
         $response->assertSee('Google Gemini');
         $response->assertSee('+ Add AI Provider');
+    }
+
+    public function test_admin_can_view_ai_rates_menu_page(): void
+    {
+        $response = $this->actingAs($this->adminUser)->get(route('dashboard.ai.rates'));
+
+        $response->assertOk();
+        $response->assertSee('AI Rates &amp; Token Pricing', false);
+        $response->assertSee('Standard Token Rate Schedule');
+        $response->assertSee('Live Cost Estimator Playground');
+        $response->assertSee('Claude 3.5 Sonnet');
     }
 
     public function test_admin_can_update_ai_driver_models_and_api_keys_in_database(): void

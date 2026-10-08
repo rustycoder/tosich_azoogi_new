@@ -76,7 +76,11 @@
                 <div class="dash-group">AI</div>
                 <a href="{{ route('dashboard.ai.models') }}" class="{{ request()->routeIs('dashboard.ai.models') || request()->routeIs('dashboard.ai.config') ? 'is-active' : '' }}">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-                    AI Models &amp; Rates
+                    AI Models
+                </a>
+                <a href="{{ route('dashboard.ai.rates') }}" class="{{ request()->routeIs('dashboard.ai.rates*') ? 'is-active' : '' }}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    AI Rates
                 </a>
                 <a href="{{ route('dashboard.ai.widget') }}" class="{{ request()->routeIs('dashboard.ai.widget*') ? 'is-active' : '' }}">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 3v18M15 9h6M15 15h6"/></svg>

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ChatMessage;
 use App\Models\ChatSession;
 use App\Models\LlmFeed;
+use App\Services\Chat\AiCostCalculator;
 use App\Services\Chat\ChatOrchestrator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -19,7 +20,7 @@ use Throwable;
 class AiConfigController extends Controller
 {
     /**
-     * Display AI Models, API Keys & Rate Schedule Configuration.
+     * Display AI Models & API Keys Configuration.
      */
     public function models(): View
     {
@@ -48,6 +49,51 @@ class AiConfigController extends Controller
             'activeSessionsCount' => $activeSessionsCount,
             'totalTokens' => $totalTokens,
             'totalCost' => $totalCost,
+        ]);
+    }
+
+    /**
+     * Display AI Rates, Pricing Schedules & Cost Estimation Engine.
+     */
+    public function rates(): View
+    {
+        $aiConfig = ChatOrchestrator::getActiveAiConfig();
+
+        $sessionsCount = ChatSession::count();
+        $messagesCount = ChatMessage::count();
+        $activeSessionsCount = ChatSession::where('status', 'active')->count();
+
+        $totalTokens = (int) ChatSession::sum('total_tokens') ?: (int) ChatMessage::sum('tokens_used');
+        $totalCost = (float) ChatSession::sum('total_cost') ?: (float) ChatMessage::sum('estimated_cost');
+
+        $activeModelName = $aiConfig['driver'] ?? 'gemini';
+        if (isset($aiConfig['custom_providers'][$activeModelName])) {
+            $activeModelIdentifier = $aiConfig['custom_providers'][$activeModelName]['model'] ?? 'custom-model';
+        } elseif ($activeModelName === 'anthropic') {
+            $activeModelIdentifier = $aiConfig['anthropic_model'] ?? 'claude-3-5-sonnet-20241022';
+        } elseif ($activeModelName === 'openrouter') {
+            $activeModelIdentifier = $aiConfig['openrouter_model'] ?? 'anthropic/claude-3.5-sonnet';
+        } elseif ($activeModelName === 'openai') {
+            $activeModelIdentifier = $aiConfig['openai_model'] ?? 'gpt-4o-mini';
+        } else {
+            $activeModelIdentifier = $aiConfig['gemini_model'] ?? 'gemini-2.5-flash';
+        }
+
+        [$activeInputRate, $activeOutputRate] = AiCostCalculator::getRatesForModel($activeModelIdentifier);
+
+        return view('dashboard.ai.rates', [
+            'aiConfig' => $aiConfig,
+            'activeModelName' => $activeModelName,
+            'activeModelIdentifier' => $activeModelIdentifier,
+            'activeInputRate' => $activeInputRate,
+            'activeOutputRate' => $activeOutputRate,
+            'pricingCatalog' => AiCostCalculator::getPricingCatalog(),
+            'sessionsCount' => $sessionsCount,
+            'messagesCount' => $messagesCount,
+            'activeSessionsCount' => $activeSessionsCount,
+            'totalTokens' => $totalTokens,
+            'totalCost' => $totalCost,
+            'customProviders' => $aiConfig['custom_providers'] ?? [],
         ]);
     }
 

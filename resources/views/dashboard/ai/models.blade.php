@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'AI Models, Providers & Rates')
+@section('title', 'AI Models & Providers')
 
 @section('content')
 <div class="dash-head">
@@ -9,10 +9,10 @@
         <span>/</span>
         <span>AI</span>
         <span>/</span>
-        <span>AI Models &amp; Rates</span>
+        <span>AI Models</span>
     </div>
     <div class="dash-head-title">
-        <h1>AI Models, Providers &amp; Rates</h1>
+        <h1>AI Models &amp; Providers</h1>
         <div class="dash-head-actions">
             <button type="button" class="btn" id="btn-open-add-provider" style="display:inline-flex;align-items:center;gap:6px;background:var(--card-bg);border:1px solid var(--accent);color:var(--accent);font-weight:600;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -21,7 +21,7 @@
             <button class="btn primary" type="submit" form="ai-config-form">Save Model Settings</button>
         </div>
     </div>
-    <p class="dash-lead">Configure AI models (Anthropic Claude 3.5 Sonnet, Google Gemini 2.5 Flash, OpenAI GPT-4o Mini), manage API keys, test live connections, and inspect token pricing schedules.</p>
+    <p class="dash-lead">Configure AI models (Anthropic Claude 3.5 Sonnet, Google Gemini 2.5 Flash, OpenAI GPT-4o Mini), manage API keys, and test live diagnostic connections.</p>
 </div>
 
 <!-- Copy Notification Toast (Floating) -->
@@ -430,120 +430,24 @@
         </div>
     </div>
 
-    <!-- Cost Calculation Engine Rate Schedule Documentation Card -->
-    <div class="dash-card" style="padding: 24px; margin-top: 24px;">
-        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; border-bottom: 1px solid var(--line); padding-bottom: 14px;">
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; color: var(--accent);"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                <h3 style="margin: 0; font-size: 16px; font-weight: 700; color: var(--dash-ink, var(--ink));">
-                    Cost Calculation Engine — Rate Schedule Definition
-                </h3>
+    <!-- Link to Dedicated AI Rates & Pricing Page -->
+    <div class="dash-card" style="padding: 20px 24px; margin-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 42px; height: 42px; border-radius: 10px; background: rgba(103, 208, 78, 0.12); border: 1px solid rgba(103, 208, 78, 0.3); display: flex; align-items: center; justify-content: center; color: var(--accent); flex-shrink: 0;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 22px; height: 22px;"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
             </div>
-            <span class="dash-doc-badge" style="background: rgba(16, 185, 129, 0.12); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); font-weight: 600; font-size: 11px;">
-                Precision: 6 Decimals ($ USD)
-            </span>
+            <div>
+                <h3 style="margin: 0 0 4px 0; font-size: 15px; font-weight: 700; color: var(--dash-ink, var(--ink));">
+                    Token Rates &amp; Pricing Schedule
+                </h3>
+                <p style="margin: 0; font-size: 12.5px; color: var(--dash-muted, var(--muted));">
+                    Inspect standard token rates per 1M tokens, interactive cost simulator, and compute billing across all LLM families.
+                </p>
+            </div>
         </div>
-
-        <p style="font-size: 13px; color: var(--dash-muted, var(--muted)); margin: 0 0 16px 0; line-height: 1.55;">
-            The system tracks prompt and completion tokens separately for every chat interaction and calculates exact compute costs using the mathematical formula:
-            <br>
-            <code style="display: inline-block; margin-top: 6px; padding: 4px 10px; background: var(--dash-bg, var(--bg)); border: 1px solid var(--line); border-radius: 4px; font-size: 12px; color: var(--dash-ink, var(--ink)); font-family: monospace;">
-                Cost (USD) = ((Prompt Tokens / 1,000,000) × Input Rate) + ((Completion Tokens / 1,000,000) × Output Rate)
-            </code>
-        </p>
-
-        <div style="overflow-x: auto;">
-            <table style="width: 100%; border-collapse: collapse; font-size: 12.5px; text-align: left;">
-                <thead>
-                    <tr style="border-bottom: 1px solid var(--line); background: rgba(255, 255, 255, 0.02);">
-                        <th style="padding: 10px 14px; font-weight: 600; color: var(--dash-muted, var(--muted));">Model Family / Pattern</th>
-                        <th style="padding: 10px 14px; font-weight: 600; color: #38bdf8;">Prompt (Input) Rate / 1M</th>
-                        <th style="padding: 10px 14px; font-weight: 600; color: var(--accent);">Completion (Output) Rate / 1M</th>
-                        <th style="padding: 10px 14px; font-weight: 600; color: var(--dash-muted, var(--muted));">Provider / Engine</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr style="border-bottom: 1px solid var(--line);">
-                        <td style="padding: 10px 14px;"><strong style="color: var(--dash-ink, var(--ink));">Claude 3.5 Sonnet</strong> <code style="font-size: 11px; color: var(--dash-muted, var(--muted));">(claude-3-5-sonnet*)</code></td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: #38bdf8;">$3.00 USD</td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: var(--accent);">$15.00 USD</td>
-                        <td style="padding: 10px 14px;"><span class="dash-tag is-primary" style="font-size: 10px;">Anthropic / OpenRouter</span></td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--line);">
-                        <td style="padding: 10px 14px;"><strong style="color: var(--dash-ink, var(--ink));">Claude 3.5 Haiku</strong> <code style="font-size: 11px; color: var(--dash-muted, var(--muted));">(claude-3-5-haiku*)</code></td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: #38bdf8;">$0.80 USD</td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: var(--accent);">$4.00 USD</td>
-                        <td style="padding: 10px 14px;"><span class="dash-tag is-primary" style="font-size: 10px;">Anthropic / OpenRouter</span></td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--line);">
-                        <td style="padding: 10px 14px;"><strong style="color: var(--dash-ink, var(--ink));">Claude 3 Opus</strong> <code style="font-size: 11px; color: var(--dash-muted, var(--muted));">(claude-3-opus*)</code></td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: #38bdf8;">$15.00 USD</td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: var(--accent);">$75.00 USD</td>
-                        <td style="padding: 10px 14px;"><span class="dash-tag is-primary" style="font-size: 10px;">Anthropic</span></td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--line);">
-                        <td style="padding: 10px 14px;"><strong style="color: var(--dash-ink, var(--ink));">Google Gemini 2.5 Flash</strong> <code style="font-size: 11px; color: var(--dash-muted, var(--muted));">(gemini-2.5-flash*, gemini-2.0-flash*)</code></td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: #38bdf8;">$0.15 USD</td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: var(--accent);">$0.60 USD</td>
-                        <td style="padding: 10px 14px;"><span class="dash-tag" style="font-size: 10px;">Google Gemini</span></td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--line);">
-                        <td style="padding: 10px 14px;"><strong style="color: var(--dash-ink, var(--ink));">Google Gemini 2.5 Pro / 1.5 Pro</strong> <code style="font-size: 11px; color: var(--dash-muted, var(--muted));">(gemini-2.5-pro*, gemini-1.5-pro*)</code></td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: #38bdf8;">$1.25 USD</td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: var(--accent);">$5.00 USD</td>
-                        <td style="padding: 10px 14px;"><span class="dash-tag" style="font-size: 10px;">Google Gemini</span></td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--line);">
-                        <td style="padding: 10px 14px;"><strong style="color: var(--dash-ink, var(--ink));">Google Gemini 1.5 Flash</strong> <code style="font-size: 11px; color: var(--dash-muted, var(--muted));">(gemini-1.5-flash*)</code></td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: #38bdf8;">$0.075 USD</td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: var(--accent);">$0.30 USD</td>
-                        <td style="padding: 10px 14px;"><span class="dash-tag" style="font-size: 10px;">Google Gemini</span></td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--line);">
-                        <td style="padding: 10px 14px;"><strong style="color: var(--dash-ink, var(--ink));">OpenAI GPT-4o Mini</strong> <code style="font-size: 11px; color: var(--dash-muted, var(--muted));">(gpt-4o-mini*)</code></td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: #38bdf8;">$0.15 USD</td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: var(--accent);">$0.60 USD</td>
-                        <td style="padding: 10px 14px;"><span class="dash-tag" style="font-size: 10px;">OpenAI / OpenRouter</span></td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--line);">
-                        <td style="padding: 10px 14px;"><strong style="color: var(--dash-ink, var(--ink));">OpenAI GPT-4o</strong> <code style="font-size: 11px; color: var(--dash-muted, var(--muted));">(gpt-4o*)</code></td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: #38bdf8;">$2.50 USD</td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: var(--accent);">$10.00 USD</td>
-                        <td style="padding: 10px 14px;"><span class="dash-tag" style="font-size: 10px;">OpenAI / OpenRouter</span></td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--line);">
-                        <td style="padding: 10px 14px;"><strong style="color: var(--dash-ink, var(--ink));">OpenAI o3-mini</strong> <code style="font-size: 11px; color: var(--dash-muted, var(--muted));">(o3-mini*)</code></td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: #38bdf8;">$1.10 USD</td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: var(--accent);">$4.40 USD</td>
-                        <td style="padding: 10px 14px;"><span class="dash-tag" style="font-size: 10px;">OpenAI</span></td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--line);">
-                        <td style="padding: 10px 14px;"><strong style="color: var(--dash-ink, var(--ink));">DeepSeek Chat (V3)</strong> <code style="font-size: 11px; color: var(--dash-muted, var(--muted));">(deepseek-chat, deepseek*)</code></td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: #38bdf8;">$0.14 USD</td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: var(--accent);">$0.28 USD</td>
-                        <td style="padding: 10px 14px;"><span class="dash-tag" style="font-size: 10px;">DeepSeek / OpenRouter</span></td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--line);">
-                        <td style="padding: 10px 14px;"><strong style="color: var(--dash-ink, var(--ink));">DeepSeek Reasoner (R1)</strong> <code style="font-size: 11px; color: var(--dash-muted, var(--muted));">(deepseek-reasoner, deepseek-r1)</code></td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: #38bdf8;">$0.55 USD</td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: var(--accent);">$2.19 USD</td>
-                        <td style="padding: 10px 14px;"><span class="dash-tag" style="font-size: 10px;">DeepSeek / OpenRouter</span></td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid var(--line);">
-                        <td style="padding: 10px 14px;"><strong style="color: var(--dash-ink, var(--ink));">Groq Llama 3.3 70B</strong> <code style="font-size: 11px; color: var(--dash-muted, var(--muted));">(llama-3.3-70b*)</code></td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: #38bdf8;">$0.59 USD</td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: var(--accent);">$0.79 USD</td>
-                        <td style="padding: 10px 14px;"><span class="dash-tag" style="font-size: 10px;">Groq / Meta</span></td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 10px 14px;"><strong style="color: var(--dash-ink, var(--ink));">Custom / Fallback Rate</strong> <code style="font-size: 11px; color: var(--dash-muted, var(--muted));">(unmatched models)</code></td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: #38bdf8;">$1.00 USD</td>
-                        <td style="padding: 10px 14px; font-family: monospace; font-weight: 600; color: var(--accent);">$3.00 USD</td>
-                        <td style="padding: 10px 14px;"><span class="dash-tag" style="font-size: 10px;">Default Fallback</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <a href="{{ route('dashboard.ai.rates') }}" class="btn" style="display:inline-flex;align-items:center;gap:6px;">
+            Open AI Rates &amp; Pricing &rarr;
+        </a>
     </div>
 </div>
 
