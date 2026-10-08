@@ -55,11 +55,6 @@
         <div style="font-size: 26px; font-weight: 700; color: #10b981; margin-top: 6px;">${{ number_format($metrics['total_cost'], 4) }} <span style="font-size: 13px; font-weight: normal; color: var(--dash-muted, var(--muted));">USD</span></div>
         <div style="font-size: 11px; color: var(--dash-muted, var(--muted)); margin-top: 4px;">~${{ number_format($metrics['avg_cost'], 4) }} / conversation</div>
     </div>
-    <div class="dash-card" style="padding: 18px;">
-        <div style="font-size: 11px; text-transform: uppercase; color: var(--dash-muted, var(--muted)); font-weight: 600; letter-spacing: 0.05em;">Leads Captured</div>
-        <div style="font-size: 26px; font-weight: 700; color: #10b981; margin-top: 6px;">{{ number_format($metrics['leads_captured']) }}</div>
-        <div style="font-size: 11px; color: var(--dash-muted, var(--muted)); margin-top: 4px;">Quote requests &amp; inquiries</div>
-    </div>
 </div>
 
 <!-- Search & Filter Controls Toolbar -->

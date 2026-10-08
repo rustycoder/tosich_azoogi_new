@@ -105,12 +105,6 @@ class ChatSessionController extends Controller
             'total_conversations' => $totalConversations,
             'unread_count' => ChatSession::where('is_read', false)->count(),
             'favorites_count' => ChatSession::where('is_favorite', true)->count(),
-            'leads_captured' => ChatSession::where(function ($q) {
-                $q->whereNotNull('lead_email')
-                    ->orWhereNotNull('lead_name')
-                    ->orWhereNotNull('project_name')
-                    ->orWhereNotNull('enquiry_id');
-            })->count(),
             'active_today' => ChatSession::whereDate('created_at', today())->count(),
             'total_messages' => (int) ChatSession::sum('messages_count'),
             'total_tokens' => $totalTokens,
