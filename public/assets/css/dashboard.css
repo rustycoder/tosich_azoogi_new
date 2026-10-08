@@ -1,5 +1,5 @@
 :root {
-  --dash-side: 215px;
+  --dash-side: 232px;
   --dash-green: #3aa028;
   --dash-green-dark: #2d7a1e;
   --dash-ink: #e8ece6;
@@ -267,10 +267,10 @@ html:has(.dash) {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 8px;
+  padding: 6.5px 8px;
   border-radius: 0;
   font-family: inherit;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1.3;
   letter-spacing: normal;
@@ -292,7 +292,7 @@ html:has(.dash) {
 .dash-nav-group-btn span,
 .dash-nav-group-title span {
   font-family: inherit;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   color: inherit;
   line-height: inherit;
@@ -305,8 +305,8 @@ html:has(.dash) {
 
 .dash-nav > a svg,
 .dash-nav-group-title svg {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   flex-shrink: 0;
   opacity: .85;
 }
@@ -431,7 +431,7 @@ html:has(.dash) {
   align-items: center;
   text-decoration: none;
   padding: 5px 6px;
-  font-size: 12.5px;
+  font-size: 13.5px;
   font-weight: 500;
   border-radius: 0;
   color: #a8b2a3;
@@ -442,7 +442,7 @@ html:has(.dash) {
 
 .dash-nav-sub a span {
   font-family: inherit;
-  font-size: 12.5px;
+  font-size: 13.5px;
   font-weight: inherit;
   color: inherit;
   line-height: inherit;
@@ -486,7 +486,7 @@ html:has(.dash) {
 
 .dash-group {
   margin: 8px 6px 4px;
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: #7d8578;
@@ -497,7 +497,7 @@ html:has(.dash) {
   margin-top: 6px;
   padding: 8px 2px 0;
   border-top: 1px solid var(--dash-line);
-  font-size: 12.5px;
+  font-size: 13px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -515,7 +515,7 @@ html:has(.dash) {
 .dash-user-name {
   color: var(--dash-ink);
   font-weight: 600;
-  font-size: 12.5px;
+  font-size: 13.5px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -524,7 +524,7 @@ html:has(.dash) {
 
 .dash-user-role {
   color: var(--dash-muted);
-  font-size: 10.5px;
+  font-size: 11.5px;
   line-height: 1.2;
   margin-top: 1px;
 }
