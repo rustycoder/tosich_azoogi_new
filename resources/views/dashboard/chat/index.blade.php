@@ -264,8 +264,6 @@
                             <span class="dash-tag" style="font-size: 11px; width: fit-content; background: rgba(56, 189, 248, 0.12); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.25);" title="Project: {{ $session->project_name }}">
                                 📁 {{ \Illuminate\Support\Str::limit($session->project_name, 22) }}
                             </span>
-                        @else
-                            <span style="color: var(--dash-muted, var(--muted)); font-size: 12px;">—</span>
                         @endif
                     </td>
 
@@ -275,8 +273,6 @@
                             <a href="mailto:{{ $session->lead_email }}" style="color: var(--dash-ink, var(--ink)); font-size: 12px; font-family: inherit; font-weight: 500; text-decoration: none;" title="{{ $session->lead_email }}">
                                 {{ $session->lead_email }}
                             </a>
-                        @else
-                            <span style="color: var(--dash-muted, var(--muted)); font-size: 12px;">—</span>
                         @endif
                     </td>
 
@@ -285,10 +281,6 @@
                         @if (filled($session->country))
                             <span class="dash-tag is-primary" style="font-size: 10.5px; width: fit-content;">
                                 {{ $session->country }}
-                            </span>
-                        @else
-                            <span class="dash-tag" style="font-size: 10.5px; width: fit-content; color: var(--dash-muted, var(--muted));">
-                                Australia
                             </span>
                         @endif
                     </td>
@@ -299,8 +291,6 @@
                             <span class="dash-code-badge" style="font-size: 10.5px; font-family: monospace;">
                                 {{ $session->ip_address }}
                             </span>
-                        @else
-                            <span style="color: var(--dash-muted, var(--muted)); font-size: 12px;">—</span>
                         @endif
                     </td>
 
