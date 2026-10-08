@@ -108,13 +108,15 @@
                     $isActive = ($faq['is_active'] ?? true) !== false;
                 @endphp
                 <tr class="faq-table-row" data-category="{{ $faq['category'] ?? '' }}" data-status="{{ $isActive ? 'active' : 'inactive' }}" data-search="{{ strtolower(($faq['category'] ?? '') . ' ' . ($faq['question'] ?? '') . ' ' . ($faq['answer'] ?? '')) }}">
-                    <!-- Status -->
+                    <!-- Status (Clickable Toggle just like in projects) -->
                     <td style="text-align: center;">
-                        @if ($isActive)
-                            <span class="dash-status-pill is-published">Active</span>
-                        @else
-                            <span class="dash-status-pill is-draft">Inactive</span>
-                        @endif
+                        @include('dashboard.partials.toggle', [
+                            'url' => route('dashboard.ai.faqs.toggle-status', $faq['id']),
+                            'on' => $isActive,
+                            'label' => $isActive ? 'Active' : 'Inactive',
+                            'onClass' => 'is-active',
+                            'offClass' => 'is-inactive',
+                        ])
                     </td>
 
                     <!-- Category -->
@@ -137,14 +139,18 @@
                         <p style="margin: 0; font-size: 12.5px; color: var(--dash-muted, var(--muted)); max-width: 580px; line-height: 1.5; white-space: pre-wrap;">{{ $faq['answer'] ?? '' }}</p>
                     </td>
 
-                    <!-- Actions -->
+                    <!-- Actions (Edit icon & Delete icon) -->
                     <td style="text-align: right;">
                         <div style="display: inline-flex; gap: 6px; align-items: center; justify-content: flex-end;">
-                            <button type="button" class="btn" style="font-size: 11.5px; padding: 4px 10px;" onclick="editFaqItem(@js($faq))">Edit</button>
+                            <button type="button" class="btn" style="padding: 5px 8px; display: inline-flex; align-items: center; justify-content: center;" onclick="editFaqItem(@js($faq))" title="Edit FAQ Item" aria-label="Edit FAQ Item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                            </button>
                             <form method="POST" action="{{ route('dashboard.ai.faqs.delete', $faq['id']) }}" onsubmit="return confirm('Are you sure you want to delete this FAQ item?');" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn" style="font-size: 11.5px; padding: 4px 8px; color: #ef4444;" title="Delete item">✕</button>
+                                <button type="submit" class="btn" style="padding: 5px 8px; color: #ef4444; border-color: rgba(239,68,68,0.3); display: inline-flex; align-items: center; justify-content: center;" title="Delete FAQ Item" aria-label="Delete FAQ Item">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                                </button>
                             </form>
                         </div>
                     </td>

@@ -355,6 +355,43 @@ class AiConfigController extends Controller
     }
 
     /**
+     * Toggle active status for an AI System Rule.
+     */
+    public function toggleRuleStatus(string $id): JsonResponse
+    {
+        $rules = ChatOrchestrator::getRulesItems();
+        $newState = true;
+        $found = false;
+
+        foreach ($rules as &$rule) {
+            if (($rule['id'] ?? '') === $id) {
+                $currentState = ($rule['is_active'] ?? true) !== false;
+                $newState = ! $currentState;
+                $rule['is_active'] = $newState;
+                $found = true;
+                break;
+            }
+        }
+        unset($rule);
+
+        if ($found) {
+            LlmFeed::query()->updateOrCreate(
+                ['key' => 'ai_rules_items'],
+                [
+                    'content' => json_encode($rules, JSON_PRETTY_PRINT),
+                    'is_custom' => true,
+                ]
+            );
+        }
+
+        return response()->json([
+            'on' => $newState,
+            'label' => $newState ? 'Active' : 'Inactive',
+            'message' => $newState ? 'System rule marked active.' : 'System rule marked inactive.',
+        ]);
+    }
+
+    /**
      * Update AI System Rules & Directives (Legacy bulk updater).
      */
     public function updateRules(Request $request): RedirectResponse
@@ -447,6 +484,43 @@ class AiConfigController extends Controller
         return redirect()
             ->route('dashboard.ai.context')
             ->with('status', 'Company Context item removed successfully.');
+    }
+
+    /**
+     * Toggle active status for a Company Context item.
+     */
+    public function toggleContextStatus(string $id): JsonResponse
+    {
+        $contextItems = ChatOrchestrator::getContextItems();
+        $newState = true;
+        $found = false;
+
+        foreach ($contextItems as &$item) {
+            if (($item['id'] ?? '') === $id) {
+                $currentState = ($item['is_active'] ?? true) !== false;
+                $newState = ! $currentState;
+                $item['is_active'] = $newState;
+                $found = true;
+                break;
+            }
+        }
+        unset($item);
+
+        if ($found) {
+            LlmFeed::query()->updateOrCreate(
+                ['key' => 'ai_context_items'],
+                [
+                    'content' => json_encode($contextItems, JSON_PRETTY_PRINT),
+                    'is_custom' => true,
+                ]
+            );
+        }
+
+        return response()->json([
+            'on' => $newState,
+            'label' => $newState ? 'Active' : 'Inactive',
+            'message' => $newState ? 'Company context marked active.' : 'Company context marked inactive.',
+        ]);
     }
 
     /**
@@ -550,6 +624,43 @@ class AiConfigController extends Controller
         return redirect()
             ->route('dashboard.ai.faqs')
             ->with('status', 'FAQ item removed.');
+    }
+
+    /**
+     * Toggle active status for an FAQ item.
+     */
+    public function toggleFaqStatus(string $id): JsonResponse
+    {
+        $faqs = ChatOrchestrator::getFaqs();
+        $newState = true;
+        $found = false;
+
+        foreach ($faqs as &$faq) {
+            if (($faq['id'] ?? '') === $id) {
+                $currentState = ($faq['is_active'] ?? true) !== false;
+                $newState = ! $currentState;
+                $faq['is_active'] = $newState;
+                $found = true;
+                break;
+            }
+        }
+        unset($faq);
+
+        if ($found) {
+            LlmFeed::query()->updateOrCreate(
+                ['key' => 'ai_faqs'],
+                [
+                    'content' => json_encode($faqs, JSON_PRETTY_PRINT),
+                    'is_custom' => true,
+                ]
+            );
+        }
+
+        return response()->json([
+            'on' => $newState,
+            'label' => $newState ? 'Active' : 'Inactive',
+            'message' => $newState ? 'FAQ item marked active.' : 'FAQ item marked inactive.',
+        ]);
     }
 
     /**

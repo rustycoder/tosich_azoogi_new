@@ -288,6 +288,55 @@ class AiConfigManagementTest extends TestCase
         $delResponse->assertRedirect(route('dashboard.ai.faqs'));
     }
 
+    public function test_admin_can_toggle_rule_context_and_faq_status(): void
+    {
+        // 1. Create a Rule and Toggle Status
+        $this->actingAs($this->adminUser)->post(route('dashboard.ai.rules.store'), [
+            'category' => 'Testing',
+            'title' => 'Toggle Test Rule',
+            'content' => 'Rule directive content to toggle.',
+            'is_active' => '1',
+        ]);
+        $rules = ChatOrchestrator::getRulesItems();
+        $ruleId = end($rules)['id'];
+
+        $toggleRuleRes = $this->actingAs($this->adminUser)->patch(route('dashboard.ai.rules.toggle-status', $ruleId));
+        $toggleRuleRes->assertOk();
+        $toggleRuleRes->assertJson(['on' => false, 'label' => 'Inactive']);
+
+        $toggleRuleRes2 = $this->actingAs($this->adminUser)->patch(route('dashboard.ai.rules.toggle-status', $ruleId));
+        $toggleRuleRes2->assertOk();
+        $toggleRuleRes2->assertJson(['on' => true, 'label' => 'Active']);
+
+        // 2. Create Context and Toggle Status
+        $this->actingAs($this->adminUser)->post(route('dashboard.ai.context.store'), [
+            'category' => 'Testing',
+            'title' => 'Toggle Test Context',
+            'content' => 'Context content to toggle.',
+            'is_active' => '1',
+        ]);
+        $contextItems = ChatOrchestrator::getContextItems();
+        $contextId = end($contextItems)['id'];
+
+        $toggleCtxRes = $this->actingAs($this->adminUser)->patch(route('dashboard.ai.context.toggle-status', $contextId));
+        $toggleCtxRes->assertOk();
+        $toggleCtxRes->assertJson(['on' => false, 'label' => 'Inactive']);
+
+        // 3. Create FAQ and Toggle Status
+        $this->actingAs($this->adminUser)->post(route('dashboard.ai.faqs.store'), [
+            'category' => 'Testing',
+            'question' => 'Toggle FAQ Question?',
+            'answer' => 'Answer to toggle.',
+            'is_active' => '1',
+        ]);
+        $faqs = ChatOrchestrator::getFaqs();
+        $faqId = end($faqs)['id'];
+
+        $toggleFaqRes = $this->actingAs($this->adminUser)->patch(route('dashboard.ai.faqs.toggle-status', $faqId));
+        $toggleFaqRes->assertOk();
+        $toggleFaqRes->assertJson(['on' => false, 'label' => 'Inactive']);
+    }
+
     public function test_chat_orchestrator_make_driver_instantiates_proper_driver_classes(): void
     {
         $anthropicDriver = ChatOrchestrator::makeDriver('anthropic', 'claude-3-5-sonnet-20241022');

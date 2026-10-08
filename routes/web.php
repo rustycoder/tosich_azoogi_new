@@ -143,15 +143,18 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         Route::get('ai/rules', [AiConfigController::class, 'rules'])->name('ai.rules');
         Route::post('ai/rules', [AiConfigController::class, 'storeRule'])->name('ai.rules.store');
         Route::put('ai/rules', [AiConfigController::class, 'updateRules'])->name('ai.rules.update');
+        Route::patch('ai/rules/{id}/status', [AiConfigController::class, 'toggleRuleStatus'])->name('ai.rules.toggle-status');
         Route::delete('ai/rules/{id}', [AiConfigController::class, 'deleteRule'])->name('ai.rules.delete');
 
         Route::get('ai/context', [AiConfigController::class, 'context'])->name('ai.context');
         Route::post('ai/context', [AiConfigController::class, 'storeContext'])->name('ai.context.store');
         Route::put('ai/context', [AiConfigController::class, 'updateContext'])->name('ai.context.update');
+        Route::patch('ai/context/{id}/status', [AiConfigController::class, 'toggleContextStatus'])->name('ai.context.toggle-status');
         Route::delete('ai/context/{id}', [AiConfigController::class, 'deleteContext'])->name('ai.context.delete');
 
         Route::get('ai/faqs', [AiConfigController::class, 'faqs'])->name('ai.faqs');
         Route::post('ai/faqs', [AiConfigController::class, 'storeFaq'])->name('ai.faqs.store');
+        Route::patch('ai/faqs/{id}/status', [AiConfigController::class, 'toggleFaqStatus'])->name('ai.faqs.toggle-status');
         Route::delete('ai/faqs/{id}', [AiConfigController::class, 'deleteFaq'])->name('ai.faqs.delete');
 
         Route::get('ai/knowledge', [AiConfigController::class, 'knowledge'])->name('ai.knowledge');
