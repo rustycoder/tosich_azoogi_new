@@ -50,7 +50,7 @@ interface IProductRepository
     /**
      * @return LengthAwarePaginator<int, ProductCategory>
      */
-    public function categoryDashboardList(string $search = '', ?string $parent = null, int $perPage = 50): LengthAwarePaginator;
+    public function categoryDashboardList(string $search = '', ?string $parent = null, int $perPage = 50, ?string $status = null): LengthAwarePaginator;
 
     /**
      * @return LengthAwarePaginator<int, ProductAttribute>

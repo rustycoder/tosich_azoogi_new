@@ -17,11 +17,13 @@ class CategoryController extends Controller
         $search = dash_search_query($request->query('q'));
         $parent = $request->query('parent');
         $activeParent = filled($parent) && $parent !== 'all' ? (string) $parent : null;
+        $status = $request->query('status');
+        $activeStatus = filled($status) && $status !== 'all' ? (string) $status : null;
 
         $rawPerPage = (int) $request->query('per_page', 50);
         $perPage = in_array($rawPerPage, [50, 100, 150, 200], true) ? $rawPerPage : 50;
 
-        $categories = $this->products->categoryDashboardList($search, $activeParent, $perPage);
+        $categories = $this->products->categoryDashboardList($search, $activeParent, $perPage, $activeStatus);
 
         $parentCategories = ProductCategory::query()
             ->where(function ($q): void {
@@ -38,6 +40,7 @@ class CategoryController extends Controller
             'search' => $search,
             'parentCategories' => $parentCategories,
             'activeParent' => $activeParent,
+            'activeStatus' => $activeStatus,
             'perPage' => $perPage,
             'perPageOptions' => [50, 100, 150, 200],
         ]);

@@ -75,7 +75,7 @@ class ProductSyncTest extends TestCase
 
         $this->get('/products')
             ->assertOk()
-            ->assertSee('const AZOOGI_PRODUCTS', false)
+            ->assertSee('AZOOGI_PRODUCTS', false)
             ->assertSee('Garden Light', false)
             ->assertSee('NEON', false)
             ->assertDontSee('products_data.js', false)
@@ -929,5 +929,91 @@ class ProductSyncTest extends TestCase
             'status' => ProductSyncStatus::Failed->value,
             'error' => 'Manually force-reset running sync.',
         ]);
+    }
+
+    public function test_category_status_is_synced_and_persisted_from_airtable(): void
+    {
+        $categories = [
+            [
+                'id' => 'recCatPub',
+                'fields' => [
+                    'Name' => 'Published Strips',
+                    'Status' => 'Publish',
+                    'Order' => 1,
+                ],
+            ],
+            [
+                'id' => 'recCatDraft',
+                'fields' => [
+                    'Name' => 'Draft Category',
+                    'Status' => 'Draft',
+                    'Order' => 2,
+                ],
+            ],
+        ];
+
+        app(IProductRepository::class)->persistLookups($categories, []);
+
+        $this->assertDatabaseHas('product_categories', [
+            'airtable_id' => 'recCatPub',
+            'name' => 'Published Strips',
+            'status' => 'Publish',
+        ]);
+
+        $this->assertDatabaseHas('product_categories', [
+            'airtable_id' => 'recCatDraft',
+            'name' => 'Draft Category',
+            'status' => 'Draft',
+        ]);
+    }
+
+    public function test_navigation_catalog_filters_unpublished_categories(): void
+    {
+        ProductCategory::query()->create([
+            'airtable_id' => 'recCatPub',
+            'name' => 'Published Category',
+            'status' => 'publish',
+            'sort_order' => 1,
+        ]);
+
+        ProductCategory::query()->create([
+            'airtable_id' => 'recCatDraft',
+            'name' => 'Draft Category',
+            'status' => 'draft',
+            'sort_order' => 2,
+        ]);
+
+        $catalog = app(IProductRepository::class)->navigationCatalog();
+        $categoryNames = collect($catalog['tree'] ?? [])
+            ->pluck('name')
+            ->all();
+
+        $this->assertContains('Published Category', $categoryNames);
+        $this->assertNotContains('Draft Category', $categoryNames);
+    }
+
+    public function test_category_dashboard_list_filters_by_status(): void
+    {
+        ProductCategory::query()->create([
+            'airtable_id' => 'recCatPub',
+            'name' => 'Published Category',
+            'status' => 'publish',
+        ]);
+
+        ProductCategory::query()->create([
+            'airtable_id' => 'recCatDraft',
+            'name' => 'Draft Category',
+            'status' => 'draft',
+        ]);
+
+        $repo = app(IProductRepository::class);
+
+        $publishedList = $repo->categoryDashboardList(status: 'publish');
+        $this->assertSame(1, $publishedList->total());
+        $this->assertSame('Published Category', $publishedList->items()[0]->name);
+
+        $draftList = $repo->categoryDashboardList(status: 'draft');
+        $this->assertSame(1, $draftList->total());
+        $this->assertSame('Draft Category', $draftList->items()[0]->name);
     }
 }

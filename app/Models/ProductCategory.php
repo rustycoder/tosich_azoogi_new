@@ -4,12 +4,14 @@ namespace App\Models;
 
 use App\Models\Concerns\Auditable;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 #[Fillable([
     'airtable_id',
     'name',
+    'status',
     'description',
     'featured_image',
     'icon',
@@ -22,6 +24,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class ProductCategory extends Model
 {
     use Auditable, SoftDeletes;
+
+    /**
+     * Scope query to only include published categories.
+     *
+     * @param  Builder<ProductCategory>  $query
+     */
+    public function scopePublished(Builder $query): void
+    {
+        $query->where(function (Builder $q): void {
+            $q->whereNull('status')
+                ->orWhere('status', '')
+                ->orWhereRaw('LOWER(status) = ?', ['publish']);
+        });
+    }
 
     /**
      * @return array<string, string>
