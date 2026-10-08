@@ -75,7 +75,7 @@ class ProductSyncTest extends TestCase
 
         $this->get('/products')
             ->assertOk()
-            ->assertSee('AZOOGI_PRODUCTS', false)
+            ->assertSee('window.AZOOGI_PRODUCTS', false)
             ->assertSee('Garden Light', false)
             ->assertSee('NEON', false)
             ->assertDontSee('products_data.js', false)
@@ -117,34 +117,38 @@ class ProductSyncTest extends TestCase
             $url = $request->url();
 
             if (str_contains($url, 'Categories')) {
-                return Http::response(['records' => [
-                    ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
-                ]]);
+                return Http::response([
+                    'records' => [
+                        ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
+                    ]
+                ]);
             }
 
             if (str_contains($url, 'attributes') || str_contains($url, 'Attributes')) {
                 return Http::response(['records' => []]);
             }
 
-            return Http::response(['records' => [
-                [
-                    'id' => 'recPublish',
-                    'fields' => [
-                        'Product Name' => 'Garden Light',
-                        'Status' => 'publish',
-                        'Order' => 1,
-                        'Category' => 'NEON',
+            return Http::response([
+                'records' => [
+                    [
+                        'id' => 'recPublish',
+                        'fields' => [
+                            'Product Name' => 'Garden Light',
+                            'Status' => 'publish',
+                            'Order' => 1,
+                            'Category' => 'NEON',
+                        ],
                     ],
-                ],
-                [
-                    'id' => 'recDraft',
-                    'fields' => [
-                        'Product Name' => 'Hidden Draft',
-                        'Status' => 'draft',
-                        'Order' => 2,
+                    [
+                        'id' => 'recDraft',
+                        'fields' => [
+                            'Product Name' => 'Hidden Draft',
+                            'Status' => 'draft',
+                            'Order' => 2,
+                        ],
                     ],
-                ],
-            ]]);
+                ]
+            ]);
         });
 
         app(IProductSyncService::class)->sync('test');
@@ -193,29 +197,33 @@ class ProductSyncTest extends TestCase
             $url = $request->url();
 
             if (str_contains($url, 'Categories')) {
-                return Http::response(['records' => [
-                    ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
-                ]]);
+                return Http::response([
+                    'records' => [
+                        ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
+                    ]
+                ]);
             }
 
             if (str_contains($url, 'attributes') || str_contains($url, 'Attributes')) {
                 return Http::response(['records' => []]);
             }
 
-            return Http::response(['records' => [
-                [
-                    'id' => 'recPublish',
-                    'fields' => [
-                        'Product Name' => 'Garden Light',
-                        'Status' => 'publish',
-                        'Order' => 1,
-                        'Category' => 'NEON',
-                        'Product Images' => [
-                            ['url' => $remoteUrl],
+            return Http::response([
+                'records' => [
+                    [
+                        'id' => 'recPublish',
+                        'fields' => [
+                            'Product Name' => 'Garden Light',
+                            'Status' => 'publish',
+                            'Order' => 1,
+                            'Category' => 'NEON',
+                            'Product Images' => [
+                                ['url' => $remoteUrl],
+                            ],
                         ],
                     ],
-                ],
-            ]]);
+                ]
+            ]);
         });
 
         app(IProductSyncService::class)->sync('test');
@@ -227,7 +235,7 @@ class ProductSyncTest extends TestCase
         $this->assertSame($remoteUrl, $product->cover);
         $this->assertSame($remoteUrl, $product->coverUrl());
 
-        Http::assertNotSent(fn (Request $request): bool => $request->url() === $remoteUrl);
+        Http::assertNotSent(fn(Request $request): bool => $request->url() === $remoteUrl);
     }
 
     public function test_sync_saves_one_url_per_airtable_attachment_not_thumbnails(): void
@@ -244,44 +252,48 @@ class ProductSyncTest extends TestCase
             $url = $request->url();
 
             if (str_contains($url, 'Categories')) {
-                return Http::response(['records' => [
-                    ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
-                ]]);
+                return Http::response([
+                    'records' => [
+                        ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
+                    ]
+                ]);
             }
 
             if (str_contains($url, 'attributes') || str_contains($url, 'Attributes')) {
                 return Http::response(['records' => []]);
             }
 
-            return Http::response(['records' => [
-                [
-                    'id' => 'recPublish',
-                    'fields' => [
-                        'Product Name' => 'Garden Light',
-                        'Status' => 'publish',
-                        'Order' => 1,
-                        'Category' => 'NEON',
-                        'Product Images' => [
-                            [
-                                'url' => $fullUrl,
-                                'filename' => 'hero.jpg',
-                                'thumbnails' => [
-                                    'small' => ['url' => 'https://v5.airtableusercontent.com/v3/small/hero.jpg'],
-                                    'large' => ['url' => 'https://v5.airtableusercontent.com/v3/large/hero.jpg'],
-                                    'full' => ['url' => 'https://v5.airtableusercontent.com/v3/full/hero-thumb.jpg'],
+            return Http::response([
+                'records' => [
+                    [
+                        'id' => 'recPublish',
+                        'fields' => [
+                            'Product Name' => 'Garden Light',
+                            'Status' => 'publish',
+                            'Order' => 1,
+                            'Category' => 'NEON',
+                            'Product Images' => [
+                                [
+                                    'url' => $fullUrl,
+                                    'filename' => 'hero.jpg',
+                                    'thumbnails' => [
+                                        'small' => ['url' => 'https://v5.airtableusercontent.com/v3/small/hero.jpg'],
+                                        'large' => ['url' => 'https://v5.airtableusercontent.com/v3/large/hero.jpg'],
+                                        'full' => ['url' => 'https://v5.airtableusercontent.com/v3/full/hero-thumb.jpg'],
+                                    ],
                                 ],
-                            ],
-                            [
-                                'url' => $secondUrl,
-                                'filename' => 'detail.jpg',
-                                'thumbnails' => [
-                                    'large' => ['url' => 'https://v5.airtableusercontent.com/v3/large/detail.jpg'],
+                                [
+                                    'url' => $secondUrl,
+                                    'filename' => 'detail.jpg',
+                                    'thumbnails' => [
+                                        'large' => ['url' => 'https://v5.airtableusercontent.com/v3/large/detail.jpg'],
+                                    ],
                                 ],
                             ],
                         ],
                     ],
-                ],
-            ]]);
+                ]
+            ]);
         });
 
         app(IProductSyncService::class)->sync('test');
@@ -311,9 +323,9 @@ class ProductSyncTest extends TestCase
 
         for ($index = 1; $index <= 3; $index++) {
             $rows[] = [
-                'id' => 'recNew'.$index,
-                'product_name' => 'Light '.$index,
-                'product_images' => ['https://example.com/'.$index.'.jpg'],
+                'id' => 'recNew' . $index,
+                'product_name' => 'Light ' . $index,
+                'product_images' => ['https://example.com/' . $index . '.jpg'],
                 'product_features' => ['Finish' => [['value' => 'Black']]],
             ];
         }
@@ -332,7 +344,7 @@ class ProductSyncTest extends TestCase
         DB::enableQueryLog();
         app(IProductRepository::class)->persistProducts($rows);
         $inserts = collect(DB::getQueryLog())->filter(
-            fn (array $query): bool => str_contains(strtolower($query['query']), 'insert'),
+            fn(array $query): bool => str_contains(strtolower($query['query']), 'insert'),
         );
 
         $this->assertCount(1, $inserts);
@@ -370,20 +382,25 @@ class ProductSyncTest extends TestCase
 
         app(IProductRepository::class)->persistLookups(
             [
-                ['id' => 'recNeon', 'fields' => [
-                    'Name' => 'NEON',
-                    'Order' => 1,
-                    'Descriptions' => $description,
-                    'Featured Image' => [[
-                        'url' => $featuredUrl,
-                        'thumbnails' => [
-                            'small' => ['url' => 'https://dl.airtable.com/thumb-small.jpg'],
-                            'large' => ['url' => 'https://dl.airtable.com/thumb-large.jpg'],
-                            'full' => ['url' => 'https://dl.airtable.com/thumb-full.jpg'],
+                [
+                    'id' => 'recNeon',
+                    'fields' => [
+                        'Name' => 'NEON',
+                        'Order' => 1,
+                        'Descriptions' => $description,
+                        'Featured Image' => [
+                            [
+                                'url' => $featuredUrl,
+                                'thumbnails' => [
+                                    'small' => ['url' => 'https://dl.airtable.com/thumb-small.jpg'],
+                                    'large' => ['url' => 'https://dl.airtable.com/thumb-large.jpg'],
+                                    'full' => ['url' => 'https://dl.airtable.com/thumb-full.jpg'],
+                                ],
+                            ]
                         ],
-                    ]],
-                    'Icon' => [['url' => $iconUrl]],
-                ]],
+                        'Icon' => [['url' => $iconUrl]],
+                    ]
+                ],
                 ['id' => 'recGarden', 'fields' => ['Name' => 'Garden', 'Order' => 2, 'Parent' => ['recNeon']]],
             ],
             [
@@ -392,7 +409,7 @@ class ProductSyncTest extends TestCase
             ],
         );
         $inserts = collect(DB::getQueryLog())->filter(
-            fn (array $query): bool => str_contains(strtolower($query['query']), 'insert'),
+            fn(array $query): bool => str_contains(strtolower($query['query']), 'insert'),
         );
 
         $this->assertCount(2, $inserts);
@@ -465,7 +482,7 @@ class ProductSyncTest extends TestCase
     public function test_product_sync_is_scheduled_hourly(): void
     {
         $event = collect(app(Schedule::class)->events())
-            ->first(fn ($scheduled): bool => str_contains((string) $scheduled->command, 'products:sync'));
+            ->first(fn($scheduled): bool => str_contains((string) $scheduled->command, 'products:sync'));
 
         $this->assertNotNull($event);
         $this->assertSame('0 * * * *', $event->expression);
@@ -487,9 +504,11 @@ class ProductSyncTest extends TestCase
             $url = $request->url();
 
             if (str_contains($url, 'Categories')) {
-                return Http::response(['records' => [
-                    ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
-                ]]);
+                return Http::response([
+                    'records' => [
+                        ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
+                    ]
+                ]);
             }
 
             if (str_contains($url, 'attributes') || str_contains($url, 'Attributes')) {
@@ -504,17 +523,19 @@ class ProductSyncTest extends TestCase
                     'airtable_id' => 'recPage1',
                 ]);
 
-                return Http::response(['records' => [
-                    [
-                        'id' => 'recPage2',
-                        'fields' => [
-                            'Product Name' => 'Second Light',
-                            'Status' => 'publish',
-                            'Order' => 2,
-                            'Category' => 'NEON',
+                return Http::response([
+                    'records' => [
+                        [
+                            'id' => 'recPage2',
+                            'fields' => [
+                                'Product Name' => 'Second Light',
+                                'Status' => 'publish',
+                                'Order' => 2,
+                                'Category' => 'NEON',
+                            ],
                         ],
-                    ],
-                ]]);
+                    ]
+                ]);
             }
 
             return Http::response([
@@ -672,26 +693,30 @@ class ProductSyncTest extends TestCase
             $url = $request->url();
 
             if (str_contains($url, 'Categories')) {
-                return Http::response(['records' => [
-                    ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
-                ]]);
+                return Http::response([
+                    'records' => [
+                        ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
+                    ]
+                ]);
             }
 
             if (str_contains($url, 'attributes') || str_contains($url, 'Attributes')) {
                 return Http::response(['records' => []]);
             }
 
-            return Http::response(['records' => [
-                [
-                    'id' => 'recPublish',
-                    'fields' => [
-                        'Product Name' => 'Stream Light',
-                        'Status' => 'publish',
-                        'Order' => 1,
-                        'Category' => 'NEON',
+            return Http::response([
+                'records' => [
+                    [
+                        'id' => 'recPublish',
+                        'fields' => [
+                            'Product Name' => 'Stream Light',
+                            'Status' => 'publish',
+                            'Order' => 1,
+                            'Category' => 'NEON',
+                        ],
                     ],
-                ],
-            ]]);
+                ]
+            ]);
         });
 
         $events = [];
@@ -703,7 +728,7 @@ class ProductSyncTest extends TestCase
         $this->assertSame(100, end($events)['percentage']);
         $this->assertSame('completed', end($events)['status']);
         $this->assertFalse(collect($events)->contains(
-            fn (array $event): bool => str_contains((string) $event['step'], 'Downloading assets'),
+            fn(array $event): bool => str_contains((string) $event['step'], 'Downloading assets'),
         ));
 
         $response = $this->actingAs($admin)
@@ -723,35 +748,39 @@ class ProductSyncTest extends TestCase
             $url = $request->url();
 
             if (str_contains($url, 'Categories')) {
-                return Http::response(['records' => [
-                    ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
-                ]]);
+                return Http::response([
+                    'records' => [
+                        ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
+                    ]
+                ]);
             }
 
             if (str_contains($url, 'attributes') || str_contains($url, 'Attributes')) {
                 return Http::response(['records' => []]);
             }
 
-            return Http::response(['records' => [
-                [
-                    'id' => 'recWithDimming',
-                    'fields' => [
-                        'Product Name' => 'Neon With Dimming',
-                        'Status' => 'publish',
-                        'Category' => 'NEON',
-                        'Dimming Control' => true,
+            return Http::response([
+                'records' => [
+                    [
+                        'id' => 'recWithDimming',
+                        'fields' => [
+                            'Product Name' => 'Neon With Dimming',
+                            'Status' => 'publish',
+                            'Category' => 'NEON',
+                            'Dimming Control' => true,
+                        ],
                     ],
-                ],
-                [
-                    'id' => 'recWithoutDimming',
-                    'fields' => [
-                        'Product Name' => 'Neon Without Dimming',
-                        'Status' => 'publish',
-                        'Category' => 'NEON',
-                        'Dimming Control' => false,
+                    [
+                        'id' => 'recWithoutDimming',
+                        'fields' => [
+                            'Product Name' => 'Neon Without Dimming',
+                            'Status' => 'publish',
+                            'Category' => 'NEON',
+                            'Dimming Control' => false,
+                        ],
                     ],
-                ],
-            ]]);
+                ]
+            ]);
         });
 
         app(IProductSyncService::class)->sync('test');
@@ -777,28 +806,32 @@ class ProductSyncTest extends TestCase
             $url = $request->url();
 
             if (str_contains($url, 'Categories')) {
-                return Http::response(['records' => [
-                    ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
-                ]]);
+                return Http::response([
+                    'records' => [
+                        ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
+                    ]
+                ]);
             }
 
             if (str_contains($url, 'attributes') || str_contains($url, 'Attributes')) {
                 return Http::response(['records' => []]);
             }
 
-            return Http::response(['records' => [
-                [
-                    'id' => 'recSeoProduct',
-                    'fields' => [
-                        'Product Name' => 'Neon 360 Light',
-                        'Status' => 'publish',
-                        'Category' => 'NEON',
-                        'Meta Title' => 'Custom SEO Title — Premium Neon 360',
-                        'Meta Descriptions' => 'Custom SEO Meta Description for Neon 360 Light.',
-                        'Product Description' => 'Long fallback description text.',
+            return Http::response([
+                'records' => [
+                    [
+                        'id' => 'recSeoProduct',
+                        'fields' => [
+                            'Product Name' => 'Neon 360 Light',
+                            'Status' => 'publish',
+                            'Category' => 'NEON',
+                            'Meta Title' => 'Custom SEO Title — Premium Neon 360',
+                            'Meta Descriptions' => 'Custom SEO Meta Description for Neon 360 Light.',
+                            'Product Description' => 'Long fallback description text.',
+                        ],
                     ],
-                ],
-            ]]);
+                ]
+            ]);
         });
 
         app(IProductSyncService::class)->sync('test');
@@ -830,45 +863,49 @@ class ProductSyncTest extends TestCase
             $url = $request->url();
 
             if (str_contains($url, 'Categories')) {
-                return Http::response(['records' => [
-                    ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
-                ]]);
+                return Http::response([
+                    'records' => [
+                        ['id' => 'recNeon', 'fields' => ['Name' => 'NEON', 'Order' => 1]],
+                    ]
+                ]);
             }
 
             if (str_contains($url, 'attributes') || str_contains($url, 'Attributes')) {
                 return Http::response(['records' => []]);
             }
 
-            return Http::response(['records' => [
-                [
-                    'id' => 'recCustomSlug',
-                    'fields' => [
-                        'Product Name' => 'Neon Flex Series 360',
-                        'Status' => 'publish',
-                        'Category' => 'NEON',
-                        'URL Slug' => 'custom-neon-360-series',
-                        'Meta Title' => 'Custom 360 Title',
-                        'Meta Descriptions' => 'Custom 360 Description',
+            return Http::response([
+                'records' => [
+                    [
+                        'id' => 'recCustomSlug',
+                        'fields' => [
+                            'Product Name' => 'Neon Flex Series 360',
+                            'Status' => 'publish',
+                            'Category' => 'NEON',
+                            'URL Slug' => 'custom-neon-360-series',
+                            'Meta Title' => 'Custom 360 Title',
+                            'Meta Descriptions' => 'Custom 360 Description',
+                        ],
                     ],
-                ],
-                [
-                    'id' => 'recAutoSlug',
-                    'fields' => [
-                        'Product Name' => 'COB Strip Light 24V',
-                        'Status' => 'publish',
-                        'Category' => 'NEON',
+                    [
+                        'id' => 'recAutoSlug',
+                        'fields' => [
+                            'Product Name' => 'COB Strip Light 24V',
+                            'Status' => 'publish',
+                            'Category' => 'NEON',
+                        ],
                     ],
-                ],
-                [
-                    'id' => 'recNestedSlug',
-                    'fields' => [
-                        'Product Name' => 'COB Strip Light',
-                        'Status' => 'publish',
-                        'Category' => 'NEON',
-                        'URL Slug' => 'led-strips/cob-strip-light',
+                    [
+                        'id' => 'recNestedSlug',
+                        'fields' => [
+                            'Product Name' => 'COB Strip Light',
+                            'Status' => 'publish',
+                            'Category' => 'NEON',
+                            'URL Slug' => 'led-strips/cob-strip-light',
+                        ],
                     ],
-                ],
-            ]]);
+                ]
+            ]);
         });
 
         app(IProductSyncService::class)->sync('test');
