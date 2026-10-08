@@ -240,14 +240,6 @@
                     <!-- 1. Visitor / Lead Name -->
                     <td>
                         <div class="dash-product-cell">
-                            <div style="display: flex; align-items: center; gap: 6px;">
-                                @if (! $session->is_read)
-                                    <span id="unread-badge-{{ $session->id }}" class="dash-pill" style="font-size: 9px; padding: 1px 6px; background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);">UNREAD</span>
-                                @endif
-                                @if ($session->is_favorite)
-                                    <span id="fav-badge-{{ $session->id }}" style="color: #f59e0b; font-size: 13px;" title="Favorited">★</span>
-                                @endif
-                            </div>
                             @if ($session->lead_name)
                                 <a href="{{ route('dashboard.chat-sessions.show', $session) }}" class="dash-product-title" style="color: #10b981; font-weight: 600;">
                                     {{ $session->lead_name }}
