@@ -2861,9 +2861,9 @@ aside p {
   box-sizing: border-box;
 }
 
-/* Sidebar Columns (First, Second, etc.) */
+/* Sidebar Columns (First, Second, Third, etc.) */
 .mega-sidebar {
-  width: 220px;
+  width: 200px;
   flex-shrink: 0;
   border-right: 1px solid var(--border-light);
   padding: 16px 0;
@@ -2876,6 +2876,10 @@ aside p {
   background: rgba(0, 0, 0, 0.01);
 }
 
+.mega-sidebar.level-3 {
+  background: rgba(0, 0, 0, 0.005);
+}
+
 .mega-sidebar-btn {
   width: 100%;
   text-align: left;
@@ -2884,7 +2888,7 @@ aside p {
   color: var(--muted);
   font-family: "Google Sans Flex", sans-serif;
   font-size: 13px;
-  padding: 12px 24px;
+  padding: 12px 20px;
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
@@ -2918,7 +2922,7 @@ aside p {
 /* Product Area Column (Rightmost panel) */
 .mega-products-view {
   flex: 1;
-  min-width: 450px;
+  min-width: 360px;
   padding: 24px;
   background: var(--pure-bg);
 }

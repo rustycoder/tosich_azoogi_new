@@ -1,5 +1,5 @@
 // Dynamic 2-Sidebar & Accordion Mega Menu Renderer for Azoogi
-(function() {
+(function () {
   let container = null;
   let innerWrapper = null;
   let productsById = {};
@@ -47,8 +47,8 @@
       }
     });
 
-    // 2. Max 2 Sidebars rule or if node is a product_row directly
-    if (columnIndex >= 2 || node.type === 'product_row') {
+    // 2. Max 3 Sidebars rule or if node is a product_row directly
+    if (columnIndex >= 3 || node.type === 'product_row') {
       renderProductsView(node, columnIndex);
       return;
     }
@@ -60,7 +60,7 @@
 
     const subCats = (node.children || []).filter(c => c.type === 'category');
 
-    // If subcategories exist under this parent category, render Level 2 Sidebar
+    // If subcategories exist under this parent category, render Next Level Sidebar
     if (subCats.length > 0) {
       const sidebarCol = document.createElement('div');
       sidebarCol.className = `mega-menu-column mega-sidebar level-${columnIndex + 1}`;
@@ -77,6 +77,7 @@
         `;
 
         const switchAction = () => {
+          // if (btn.classList.contains('active')) return;
           sidebarCol.querySelectorAll('.mega-sidebar-btn').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           renderLevel(child, columnIndex + 1);
@@ -99,7 +100,7 @@
         renderLevel(subCats[0], columnIndex + 1);
       }
     } else {
-      // No subcategories exist: skip Level 2 Sidebar and render Main Panel directly
+      // No subcategories exist: skip Next Level Sidebar and render Main Panel directly
       renderProductsView(node, columnIndex);
     }
   }
@@ -230,7 +231,7 @@
 
     let folderNodes = [];
     let directRowNodes = [];
-    
+
     if (node.type === 'product_row') {
       directRowNodes = [node];
     } else {
@@ -318,22 +319,22 @@
     } else if (currentNode.children) {
       const childRows = currentNode.children.filter(c => c.type === 'product_row');
       const childCats = currentNode.children.filter(c => c.type === 'category');
-      
+
       const childCards = extractProductCards(childRows);
       if (childCards.length > 0) {
         renderProductsGrid(childCards, currentNode.name, parentContainer, 12);
       }
-      
+
       childCats.forEach(cat => {
         const subHeader = document.createElement('div');
         subHeader.className = 'mega-product-subfolder-title';
         subHeader.textContent = cat.name;
         parentContainer.appendChild(subHeader);
-        
+
         const subContainer = document.createElement('div');
         subContainer.className = 'mega-product-subfolder-container';
         parentContainer.appendChild(subContainer);
-        
+
         renderFolderContent(cat, subContainer);
       });
 
@@ -358,7 +359,7 @@
     const fallback = '/assets/bg_default.png';
     if (!imgUrl || typeof imgUrl !== 'string') return fallback;
     if (!imgUrl.startsWith('http')) {
-      return imgUrl.startsWith('/') ? imgUrl : '/'+imgUrl;
+      return imgUrl.startsWith('/') ? imgUrl : '/' + imgUrl;
     }
     const filename = imgUrl.split('/').pop().split('?')[0];
     if (!filename) return fallback;
@@ -368,7 +369,7 @@
       if (lastSlash !== -1) {
         const folderPath = cleanFilePath.substring(0, lastSlash);
         const local = `${folderPath}/${filename}`;
-        return local.startsWith('/') ? local : '/'+local;
+        return local.startsWith('/') ? local : '/' + local;
       }
     }
     return imgUrl;
