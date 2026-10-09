@@ -27,6 +27,15 @@ class AiCostCalculator
         $normalized = strtolower(trim($model));
 
         // Claude family
+        if (str_contains($normalized, 'claude-opus-5-5') || str_contains($normalized, 'claude-opus-5.5')) {
+            return [15.00, 75.00];
+        }
+        if (str_contains($normalized, 'claude-sonnet-5-5') || str_contains($normalized, 'claude-sonnet-5.5')) {
+            return [3.00, 15.00];
+        }
+        if (str_contains($normalized, 'claude-haiku-5-5') || str_contains($normalized, 'claude-haiku-5.5')) {
+            return [0.80, 4.00];
+        }
         if (str_contains($normalized, 'claude-3-7-sonnet') || str_contains($normalized, 'claude-3.7-sonnet')) {
             return [3.00, 15.00];
         }

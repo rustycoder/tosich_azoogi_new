@@ -144,19 +144,10 @@
                             <label class="dash-label" for="input_anthropic_model">Model Name</label>
                             <div class="dash-select-wrap" style="width:100%;">
                                 <select name="anthropic_model" id="input_anthropic_model" class="dash-select" style="width:100%;font-family:monospace;font-size:12.5px;">
-                                    <option value="claude-opus-5-5" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? '') === 'claude-opus-5-5' ? 'selected' : '' }}>claude-opus-5-5 (Custom / Authorized Opus Tier)</option>
-                                    <option value="claude-3-7-sonnet-latest" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? 'claude-3-5-sonnet-20241022') === 'claude-3-7-sonnet-latest' ? 'selected' : '' }}>claude-3-7-sonnet-latest (Hybrid Reasoning Flagship)</option>
-                                    <option value="claude-3-7-sonnet-20250219" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? '') === 'claude-3-7-sonnet-20250219' ? 'selected' : '' }}>claude-3-7-sonnet-20250219 (Pinned Release)</option>
-                                    <option value="claude-3-5-sonnet-20241022" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? 'claude-3-5-sonnet-20241022') === 'claude-3-5-sonnet-20241022' ? 'selected' : '' }}>claude-3-5-sonnet-20241022 (High Quality)</option>
-                                    <option value="claude-3-5-sonnet-latest" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? '') === 'claude-3-5-sonnet-latest' ? 'selected' : '' }}>claude-3-5-sonnet-latest</option>
-                                    <option value="claude-3-5-haiku-20241022" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? '') === 'claude-3-5-haiku-20241022' ? 'selected' : '' }}>claude-3-5-haiku-20241022 (Fast &amp; Economical)</option>
-                                    <option value="claude-3-5-haiku-latest" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? '') === 'claude-3-5-haiku-latest' ? 'selected' : '' }}>claude-3-5-haiku-latest</option>
-                                    <option value="claude-3-opus-20240229" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? '') === 'claude-3-opus-20240229' ? 'selected' : '' }}>claude-3-opus-20240229 (Deep Complex Reasoning)</option>
-                                    <option value="claude-3-haiku-20240307" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? '') === 'claude-3-haiku-20240307' ? 'selected' : '' }}>claude-3-haiku-20240307</option>
-                                    <option value="claude-3-sonnet-20240229" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? '') === 'claude-3-sonnet-20240229' ? 'selected' : '' }}>claude-3-sonnet-20240229</option>
+                                    <option value="claude-opus-5-5" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? 'claude-opus-5-5') === 'claude-opus-5-5' ? 'selected' : '' }}>claude-opus-5-5 (Authorized Opus Tier / Verified Working)</option>
                                     @php
-                                        $currAnthropic = old('anthropic_model', $aiConfig['anthropic_model'] ?? 'claude-3-5-sonnet-20241022');
-                                        $standardAnthropic = ['claude-opus-5-5', 'claude-3-7-sonnet-latest', 'claude-3-7-sonnet-20250219', 'claude-3-5-sonnet-20241022', 'claude-3-5-sonnet-latest', 'claude-3-5-haiku-20241022', 'claude-3-5-haiku-latest', 'claude-3-opus-20240229', 'claude-3-haiku-20240307', 'claude-3-sonnet-20240229'];
+                                        $currAnthropic = old('anthropic_model', $aiConfig['anthropic_model'] ?? 'claude-opus-5-5');
+                                        $standardAnthropic = ['claude-opus-5-5'];
                                     @endphp
                                     @if(!in_array($currAnthropic, $standardAnthropic) && filled($currAnthropic))
                                         <option value="{{ $currAnthropic }}" selected>{{ $currAnthropic }} (Custom)</option>
@@ -193,7 +184,7 @@
                             </label>
                         </div>
                         <p style="margin:0 0 16px 0;font-size:12px;color:var(--dash-muted);line-height:1.4;">
-                            Single API key granting access to Claude, Llama 3.3, DeepSeek, Mistral, and more.
+                            Single API key granting access to DeepSeek, Llama 3.3, Gemini, Claude, and GPT-4o.
                         </p>
 
                         <!-- API Key Input -->
@@ -223,17 +214,27 @@
                                     <option value="deepseek/deepseek-chat" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? 'deepseek/deepseek-chat') === 'deepseek/deepseek-chat' ? 'selected' : '' }}>deepseek/deepseek-chat (Ultra-low Cost V3 / Recommended)</option>
                                     <option value="deepseek/deepseek-r1" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'deepseek/deepseek-r1' ? 'selected' : '' }}>deepseek/deepseek-r1 (High Reasoning)</option>
                                     <option value="openai/gpt-4o-mini" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'openai/gpt-4o-mini' ? 'selected' : '' }}>openai/gpt-4o-mini (Fast &amp; Economical)</option>
+                                    <option value="openai/gpt-4o" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'openai/gpt-4o' ? 'selected' : '' }}>openai/gpt-4o (Flagship Omni)</option>
+                                    <option value="openai/gpt-3.5-turbo" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'openai/gpt-3.5-turbo' ? 'selected' : '' }}>openai/gpt-3.5-turbo</option>
+                                    <option value="openai/o3-mini" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'openai/o3-mini' ? 'selected' : '' }}>openai/o3-mini (STEM Reasoning)</option>
                                     <option value="meta-llama/llama-3.3-70b-instruct" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'meta-llama/llama-3.3-70b-instruct' ? 'selected' : '' }}>meta-llama/llama-3.3-70b-instruct (Open Weights Flagship)</option>
-                                    <option value="anthropic/claude-sonnet-5.5" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'anthropic/claude-sonnet-5.5' ? 'selected' : '' }}>anthropic/claude-sonnet-5.5</option>
-                                    <option value="anthropic/claude-opus-5.5" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'anthropic/claude-opus-5.5' ? 'selected' : '' }}>anthropic/claude-opus-5.5</option>
-                                    <option value="anthropic/claude-haiku-5.5" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'anthropic/claude-haiku-5.5' ? 'selected' : '' }}>anthropic/claude-haiku-5.5</option>
+                                    <option value="meta-llama/llama-3.1-8b-instruct" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'meta-llama/llama-3.1-8b-instruct' ? 'selected' : '' }}>meta-llama/llama-3.1-8b-instruct</option>
+                                    <option value="meta-llama/llama-3.2-3b-instruct" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'meta-llama/llama-3.2-3b-instruct' ? 'selected' : '' }}>meta-llama/llama-3.2-3b-instruct</option>
                                     <option value="google/gemini-2.5-flash" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'google/gemini-2.5-flash' ? 'selected' : '' }}>google/gemini-2.5-flash</option>
                                     <option value="google/gemini-2.5-pro" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'google/gemini-2.5-pro' ? 'selected' : '' }}>google/gemini-2.5-pro</option>
-                                    <option value="openai/gpt-4o" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'openai/gpt-4o' ? 'selected' : '' }}>openai/gpt-4o (Flagship Omni)</option>
-                                    <option value="openai/o3-mini" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'openai/o3-mini' ? 'selected' : '' }}>openai/o3-mini (STEM Reasoning)</option>
+                                    <option value="anthropic/claude-sonnet-5.5" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'anthropic/claude-sonnet-5.5' ? 'selected' : '' }}>anthropic/claude-sonnet-5.5</option>
+                                    <option value="anthropic/claude-haiku-5.5" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'anthropic/claude-haiku-5.5' ? 'selected' : '' }}>anthropic/claude-haiku-5.5</option>
+                                    <option value="qwen/qwen-2.5-72b-instruct" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'qwen/qwen-2.5-72b-instruct' ? 'selected' : '' }}>qwen/qwen-2.5-72b-instruct</option>
+                                    <option value="qwen/qwen-2.5-coder-32b-instruct" {{ old('openrouter_model', $aiConfig['openrouter_model'] ?? '') === 'qwen/qwen-2.5-coder-32b-instruct' ? 'selected' : '' }}>qwen/qwen-2.5-coder-32b-instruct</option>
                                     @php
                                         $currOr = old('openrouter_model', $aiConfig['openrouter_model'] ?? 'deepseek/deepseek-chat');
-                                        $standardOr = ['deepseek/deepseek-chat', 'deepseek/deepseek-r1', 'openai/gpt-4o-mini', 'meta-llama/llama-3.3-70b-instruct', 'anthropic/claude-sonnet-5.5', 'anthropic/claude-opus-5.5', 'anthropic/claude-haiku-5.5', 'google/gemini-2.5-flash', 'google/gemini-2.5-pro', 'openai/gpt-4o', 'openai/o3-mini'];
+                                        $standardOr = [
+                                            'deepseek/deepseek-chat', 'deepseek/deepseek-r1', 'openai/gpt-4o-mini', 'openai/gpt-4o', 
+                                            'openai/gpt-3.5-turbo', 'openai/o3-mini', 'meta-llama/llama-3.3-70b-instruct', 
+                                            'meta-llama/llama-3.1-8b-instruct', 'meta-llama/llama-3.2-3b-instruct', 
+                                            'google/gemini-2.5-flash', 'google/gemini-2.5-pro', 'anthropic/claude-sonnet-5.5', 
+                                            'anthropic/claude-haiku-5.5', 'qwen/qwen-2.5-72b-instruct', 'qwen/qwen-2.5-coder-32b-instruct'
+                                        ];
                                     @endphp
                                     @if(!in_array($currOr, $standardOr) && filled($currOr))
                                         <option value="{{ $currOr }}" selected>{{ $currOr }} (Custom)</option>
@@ -301,13 +302,12 @@
                                     <option value="gemini-2.5-pro" {{ old('gemini_model', $aiConfig['gemini_model'] ?? '') === 'gemini-2.5-pro' ? 'selected' : '' }}>gemini-2.5-pro (High Reasoning)</option>
                                     <option value="gemini-2.0-flash" {{ old('gemini_model', $aiConfig['gemini_model'] ?? '') === 'gemini-2.0-flash' ? 'selected' : '' }}>gemini-2.0-flash (High Speed Next-Gen)</option>
                                     <option value="gemini-2.0-flash-lite" {{ old('gemini_model', $aiConfig['gemini_model'] ?? '') === 'gemini-2.0-flash-lite' ? 'selected' : '' }}>gemini-2.0-flash-lite (Ultra Low Latency)</option>
-                                    <option value="gemini-2.0-pro-exp-02-05" {{ old('gemini_model', $aiConfig['gemini_model'] ?? '') === 'gemini-2.0-pro-exp-02-05' ? 'selected' : '' }}>gemini-2.0-pro-exp-02-05</option>
                                     <option value="gemini-1.5-flash" {{ old('gemini_model', $aiConfig['gemini_model'] ?? '') === 'gemini-1.5-flash' ? 'selected' : '' }}>gemini-1.5-flash</option>
                                     <option value="gemini-1.5-flash-8b" {{ old('gemini_model', $aiConfig['gemini_model'] ?? '') === 'gemini-1.5-flash-8b' ? 'selected' : '' }}>gemini-1.5-flash-8b (Cost-Optimized)</option>
                                     <option value="gemini-1.5-pro" {{ old('gemini_model', $aiConfig['gemini_model'] ?? '') === 'gemini-1.5-pro' ? 'selected' : '' }}>gemini-1.5-pro</option>
                                     @php
                                         $currGemini = old('gemini_model', $aiConfig['gemini_model'] ?? 'gemini-2.5-flash');
-                                        $standardGemini = ['gemini-2.5-flash', 'gemini-2.5-pro', 'gemini-2.0-flash', 'gemini-2.0-flash-lite', 'gemini-2.0-pro-exp-02-05', 'gemini-1.5-flash', 'gemini-1.5-flash-8b', 'gemini-1.5-pro'];
+                                        $standardGemini = ['gemini-2.5-flash', 'gemini-2.5-pro', 'gemini-2.0-flash', 'gemini-2.0-flash-lite', 'gemini-1.5-flash', 'gemini-1.5-flash-8b', 'gemini-1.5-pro'];
                                     @endphp
                                     @if(!in_array($currGemini, $standardGemini) && filled($currGemini))
                                         <option value="{{ $currGemini }}" selected>{{ $currGemini }} (Custom)</option>
@@ -453,7 +453,7 @@
                 <label style="font-size:11px;text-transform:uppercase;font-weight:700;color:var(--muted);letter-spacing:0.05em;display:block;margin-bottom:8px;">Quick Presets</label>
                 <div style="display:flex;flex-wrap:wrap;gap:6px;">
                     <button type="button" class="btn js-preset-btn" data-name="DeepSeek" data-type="openai" data-url="https://api.deepseek.com/v1" data-model="deepseek-chat, deepseek-reasoner" data-desc="DeepSeek AI chat completions" style="padding:4px 10px;font-size:11px;">DeepSeek</button>
-                    <button type="button" class="btn js-preset-btn" data-name="OpenWebUI" data-type="openai" data-url="https://ai.example.com/api" data-model="qwen2.5-coder:3b, llama3.2" data-desc="Self-hosted OpenWebUI proxy endpoint" data-openwebui="1" style="padding:4px 10px;font-size:11px;">OpenWebUI</button>
+                    <button type="button" class="btn js-preset-btn" data-name="OpenWebUI" data-type="openai" data-url="https://ai.example.com/api" data-model="qwen2.5-coder:3b, llama3.2:3b, gemma3:4b, moondream:latest" data-desc="Self-hosted OpenWebUI proxy endpoint" data-openwebui="1" style="padding:4px 10px;font-size:11px;">OpenWebUI</button>
                     <button type="button" class="btn js-preset-btn" data-name="Groq" data-type="openai" data-url="https://api.groq.com/openai/v1" data-model="llama-3.3-70b-versatile, mixtral-8x7b-32768" data-desc="Groq Ultra-fast inference" style="padding:4px 10px;font-size:11px;">Groq</button>
                     <button type="button" class="btn js-preset-btn" data-name="Ollama (Local)" data-type="openai" data-url="http://localhost:11434/v1" data-model="llama3.2, mistral, qwen2.5" data-desc="Local self-hosted Ollama server" style="padding:4px 10px;font-size:11px;">Ollama</button>
                     <button type="button" class="btn js-preset-btn" data-name="Together AI" data-type="openai" data-url="https://api.together.xyz/v1" data-model="meta-llama/Llama-3.3-70B-Instruct-Turbo, mistralai/Mixtral-8x22B-Instruct-v0.1" data-desc="Together AI GPU inference cloud" style="padding:4px 10px;font-size:11px;">Together AI</button>

@@ -44,7 +44,7 @@ return [
 
     'gemini' => [
         'api_key' => env('GEMINI_API_KEY'),
-        'model' => env('GEMINI_MODEL', 'gemini-3.5-flash'),
+        'model' => env('GEMINI_MODEL', 'gemini-2.5-flash'),
         'base_url' => env('GEMINI_BASE_URL', 'https://generativelanguage.googleapis.com/v1beta/openai'),
     ],
 
@@ -56,13 +56,13 @@ return [
 
     'anthropic' => [
         'api_key' => env('ANTHROPIC_API_KEY'),
-        'model' => env('ANTHROPIC_MODEL', 'claude-3-5-sonnet-20241022'),
-        'chat_model' => env('ANTHROPIC_CHAT_MODEL', env('ANTHROPIC_MODEL', 'claude-3-5-sonnet-20241022')),
+        'model' => env('ANTHROPIC_MODEL', 'claude-opus-5-5'),
+        'chat_model' => env('ANTHROPIC_CHAT_MODEL', env('ANTHROPIC_MODEL', 'claude-opus-5-5')),
     ],
 
     'openrouter' => [
         'api_key' => env('OPENROUTER_API_KEY'),
-        'model' => env('OPENROUTER_MODEL', 'anthropic/claude-3.5-sonnet'),
+        'model' => env('OPENROUTER_MODEL', 'deepseek/deepseek-chat'),
         'base_url' => env('OPENROUTER_BASE_URL', 'https://openrouter.ai/api/v1'),
     ],
 
