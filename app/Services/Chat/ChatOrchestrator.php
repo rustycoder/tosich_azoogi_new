@@ -177,24 +177,27 @@ class ChatOrchestrator
         }
 
         if ($session) {
-            $updates = [];
-            if (! empty($leadData['name']) && empty($session->lead_name)) {
-                $updates['lead_name'] = $leadData['name'];
-            }
-            if (! empty($leadData['email']) && empty($session->lead_email)) {
-                $updates['lead_email'] = $leadData['email'];
-            }
-            if (! empty($leadData['project_name']) && empty($session->project_name)) {
-                $updates['project_name'] = $leadData['project_name'];
-            }
-            if (! empty($leadData['phone']) && empty($session->lead_phone)) {
-                $updates['lead_phone'] = $leadData['phone'];
-            }
-            if (! empty($leadData['company']) && empty($session->lead_company)) {
-                $updates['lead_company'] = $leadData['company'];
-            }
-            if (! empty($updates)) {
-                $session->update($updates);
+            // Only update lead info from ambient request if session is not already locked to a submitted enquiry
+            if (! $session->enquiry_id) {
+                $updates = [];
+                if (! empty($leadData['name'])) {
+                    $updates['lead_name'] = $leadData['name'];
+                }
+                if (! empty($leadData['email'])) {
+                    $updates['lead_email'] = $leadData['email'];
+                }
+                if (! empty($leadData['project_name'])) {
+                    $updates['project_name'] = $leadData['project_name'];
+                }
+                if (! empty($leadData['phone'])) {
+                    $updates['lead_phone'] = $leadData['phone'];
+                }
+                if (! empty($leadData['company'])) {
+                    $updates['lead_company'] = $leadData['company'];
+                }
+                if (! empty($updates)) {
+                    $session->update($updates);
+                }
             }
 
             return $session;
@@ -814,8 +817,8 @@ TOOL USAGE & CATALOG GUIDELINES:
 - When visitors ask about products, specs, dimensions, or applications, call `public_search_and_filter_products` or `get_product_details_and_downloads` to provide structured interactive cards.
 - When visitors ask for custom datasheets, call `generate_custom_datasheet`.
 - When visitors want to manage their quote list, call `public_manage_quote_list`:
-  * Use `action: "update"` when the user asks to change, update, or set the quantity of an existing item (e.g., "change quantity from 8 to 16" -> pass `action: "update"`, `quantity: 16`).
-  * Use `action: "add"` when adding a new product or adding additional units to an existing one.
+  * CRITICAL: When the user asks to "update quantity", "change units from X to Y", "set quantity to Y", or "change to Y units", you MUST pass `action: "update"` with `quantity: Y`. This sets the total item count to Y.
+  * Only use `action: "add"` when adding a brand new product or when explicitly instructed to add additional/extra units.
   * Use `action: "remove"` to delete an item, `action: "view"` to check contents, or `action: "clear"` to empty the list.
 
 PRICING & TRADE PORTAL PROTOCOL:

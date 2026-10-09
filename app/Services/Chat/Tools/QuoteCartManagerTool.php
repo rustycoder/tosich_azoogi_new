@@ -75,16 +75,40 @@ class QuoteCartManagerTool implements IChatTool
                 ];
             }
 
+            $matchingKey = null;
+            $currentQty = 0;
+
+            // Search for existing entry in quote list by ID, SKU, slug, Airtable ID, or name
+            foreach ($quoteList as $k => $item) {
+                $itemId = (string) ($item['id'] ?? '');
+                $itemDbId = (string) ($item['db_id'] ?? '');
+                $itemCode = (string) ($item['code'] ?? $item['sku'] ?? '');
+                $itemName = (string) ($item['name'] ?? '');
+
+                if (
+                    $k === (string) $product->id
+                    || $k === (string) $product->product_code
+                    || $k === (string) $product->slug
+                    || $k === (string) $product->airtable_id
+                    || $itemId === (string) $product->id
+                    || $itemDbId === (string) $product->id
+                    || ($itemCode !== '' && strcasecmp($itemCode, (string) $product->product_code) === 0)
+                    || ($itemName !== '' && strcasecmp($itemName, (string) $product->product_name) === 0)
+                ) {
+                    $matchingKey = $k;
+                    $currentQty = max(1, (int) ($item['quantity'] ?? 1));
+                    unset($quoteList[$k]); // Remove old key to prevent duplicates
+                }
+            }
+
             $prodKey = (string) $product->id;
-            $currentQty = $quoteList[$prodKey]['quantity'] ?? 0;
             $coverUrl = $product->coverUrl();
             if (empty($coverUrl) && ! empty($product->cover)) {
                 $coverUrl = str_starts_with($product->cover, 'http') ? $product->cover : asset($product->cover);
             }
 
-            $newQty = in_array($action, ['update', 'set', 'update_quantity', 'set_quantity'], true)
-                ? $qty
-                : ($currentQty + $qty);
+            $isExplicitSetOrUpdate = in_array($action, ['update', 'set', 'update_quantity', 'set_quantity'], true);
+            $newQty = $isExplicitSetOrUpdate ? $qty : ($currentQty + $qty);
 
             $quoteList[$prodKey] = [
                 'id' => (string) $product->id,
@@ -94,14 +118,14 @@ class QuoteCartManagerTool implements IChatTool
                 'code' => $product->product_code,
                 'sku' => $product->product_code,
                 'quantity' => $newQty,
-                'image_url' => $coverUrl ?: asset('assets/quote.webp'),
-                'image' => $coverUrl ?: asset('assets/quote.webp'),
+                'image_url' => $coverUrl ?: asset('assets/bg_default.png'),
+                'image' => $coverUrl ?: asset('assets/bg_default.png'),
                 'url' => $product->publicPath() ?: route('products.show', $product->slug ?: $product->id),
             ];
 
             session()->put('visitor_quote_list', $quoteList);
 
-            $actionWord = in_array($action, ['update', 'set', 'update_quantity', 'set_quantity'], true) ? 'Updated' : 'Added';
+            $actionWord = $isExplicitSetOrUpdate ? 'Updated' : 'Added';
 
             return [
                 'result' => [
@@ -131,8 +155,24 @@ class QuoteCartManagerTool implements IChatTool
                 })
                 ->first();
 
-            $keyToRemove = $product ? (string) $product->id : (string) $productId;
-            unset($quoteList[$keyToRemove]);
+            foreach ($quoteList as $k => $item) {
+                $itemId = (string) ($item['id'] ?? '');
+                $itemDbId = (string) ($item['db_id'] ?? '');
+                $itemCode = (string) ($item['code'] ?? $item['sku'] ?? '');
+                $itemName = (string) ($item['name'] ?? '');
+
+                if (
+                    ($product && ($k === (string) $product->id || $k === (string) $product->product_code || $k === (string) $product->slug || $k === (string) $product->airtable_id))
+                    || ($product && ($itemId === (string) $product->id || $itemDbId === (string) $product->id))
+                    || ($product && $itemCode !== '' && strcasecmp($itemCode, (string) $product->product_code) === 0)
+                    || ($product && $itemName !== '' && strcasecmp($itemName, (string) $product->product_name) === 0)
+                    || $k === (string) $productId
+                    || $itemId === (string) $productId
+                ) {
+                    unset($quoteList[$k]);
+                }
+            }
+
             session()->put('visitor_quote_list', $quoteList);
 
             return [

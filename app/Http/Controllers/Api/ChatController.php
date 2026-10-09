@@ -76,14 +76,35 @@ class ChatController extends Controller
                 if (empty($it['id']) && empty($it['name'])) {
                     continue;
                 }
-                $id = (string) ($it['id'] ?? $it['name']);
-                $syncedList[$id] = [
-                    'id' => $it['id'] ?? null,
-                    'name' => (string) ($it['name'] ?? ''),
-                    'code' => (string) ($it['sku'] ?? $it['code'] ?? ''),
+                $rawId = (string) ($it['id'] ?? $it['name']);
+                $resolvedProduct = Product::query()
+                    ->where(function ($q) use ($rawId, $it) {
+                        if (is_numeric($rawId)) {
+                            $q->where('id', (int) $rawId);
+                        }
+                        $q->orWhere('airtable_id', $rawId)
+                            ->orWhere('product_code', $rawId)
+                            ->orWhere('slug', $rawId);
+                        if (! empty($it['code'])) {
+                            $q->orWhere('product_code', (string) $it['code']);
+                        }
+                    })
+                    ->first();
+
+                $canonicalId = $resolvedProduct ? (string) $resolvedProduct->id : $rawId;
+                $coverUrl = $resolvedProduct ? $resolvedProduct->coverUrl() : null;
+
+                $syncedList[$canonicalId] = [
+                    'id' => $canonicalId,
+                    'db_id' => $resolvedProduct ? (string) $resolvedProduct->id : ($it['db_id'] ?? $canonicalId),
+                    'airtable_id' => $resolvedProduct ? (string) $resolvedProduct->airtable_id : null,
+                    'name' => $resolvedProduct ? $resolvedProduct->product_name : (string) ($it['name'] ?? ''),
+                    'code' => $resolvedProduct ? $resolvedProduct->product_code : (string) ($it['sku'] ?? $it['code'] ?? ''),
+                    'sku' => $resolvedProduct ? $resolvedProduct->product_code : (string) ($it['sku'] ?? $it['code'] ?? ''),
                     'quantity' => max(1, (int) ($it['qty'] ?? $it['quantity'] ?? 1)),
-                    'image_url' => (string) ($it['image'] ?? $it['image_url'] ?? ''),
-                    'url' => (string) ($it['url'] ?? ''),
+                    'image_url' => $coverUrl ?: (string) ($it['image'] ?? $it['image_url'] ?? asset('assets/bg_default.png')),
+                    'image' => $coverUrl ?: (string) ($it['image'] ?? $it['image_url'] ?? asset('assets/bg_default.png')),
+                    'url' => $resolvedProduct ? ($resolvedProduct->publicPath() ?: route('products.show', $resolvedProduct->slug ?: $resolvedProduct->id)) : (string) ($it['url'] ?? ''),
                 ];
             }
             session()->put('visitor_quote_list', $syncedList);

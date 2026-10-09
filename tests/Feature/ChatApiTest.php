@@ -236,4 +236,40 @@ class ChatApiTest extends TestCase
             'project_name' => 'Underground Bunker Sector 4',
         ]);
     }
+
+    public function test_quote_cart_manager_tool_updates_quantity_and_deduplicates_keys(): void
+    {
+        $product = Product::create([
+            'airtable_id' => 'rec_gl_003',
+            'product_name' => '12W Garden Light',
+            'slug' => '12w-garden-light',
+            'status' => 'active',
+            'category' => 'Garden Light',
+            'product_code' => 'GL003',
+        ]);
+
+        $tool = new QuoteCartManagerTool;
+
+        // 1. Initial add: 8 units by SKU "GL003"
+        $addResult = $tool->execute([
+            'action' => 'add',
+            'product_identifier' => 'GL003',
+            'quantity' => 8,
+        ]);
+
+        $this->assertSame('success', $addResult['result']['status']);
+        $this->assertSame(1, $addResult['result']['total_items']);
+        $this->assertSame(8, $addResult['result']['quote_items'][0]['quantity']);
+
+        // 2. User requests update to 16 units by product slug "12w-garden-light"
+        $updateResult = $tool->execute([
+            'action' => 'update',
+            'product_identifier' => '12w-garden-light',
+            'quantity' => 16,
+        ]);
+
+        $this->assertSame('success', $updateResult['result']['status']);
+        $this->assertSame(1, $updateResult['result']['total_items'], 'Must not create duplicate item entries for different key representations');
+        $this->assertSame(16, $updateResult['result']['quote_items'][0]['quantity'], 'Quantity must be updated to 16 rather than 8+16=24');
+    }
 }

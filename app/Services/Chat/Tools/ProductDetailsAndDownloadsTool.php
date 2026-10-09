@@ -109,7 +109,7 @@ class ProductDetailsAndDownloadsTool implements IChatTool
             'dimming' => $product->dimming_control ? 'Supported (Casambi / DALI / Phase)' : 'Standard Non-Dimming',
             'downloads' => $downloads,
             'url' => $product->publicPath() ?: route('products.show', $product->slug ?: $product->id),
-            'image_url' => $coverUrl ?: asset('assets/quote.webp'),
+            'image_url' => $coverUrl ?: asset('assets/bg_default.png'),
         ];
 
         $llmResult = [

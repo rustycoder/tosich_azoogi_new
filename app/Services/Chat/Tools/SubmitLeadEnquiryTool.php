@@ -196,6 +196,7 @@ class SubmitLeadEnquiryTool implements IChatTool
                         'lead_email' => $email,
                         'lead_phone' => $phone ?: null,
                         'lead_company' => $company ?: null,
+                        'project_name' => $projectName ?: $session->project_name,
                         'enquiry_id' => $enquiry->id,
                         'status' => 'completed',
                     ]);

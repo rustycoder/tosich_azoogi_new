@@ -176,7 +176,7 @@ class ProductSearchAndFilterTool implements IChatTool
                 'code' => $p->product_code,
                 'category' => $p->category,
                 'description' => $p->shortDescription() ?: mb_substr(strip_tags((string) $p->product_description), 0, 140).'...',
-                'image_url' => $coverUrl ?: asset('assets/quote.webp'),
+                'image_url' => $coverUrl ?: asset('assets/bg_default.png'),
                 'url' => $p->publicPath() ?: route('products.show', $p->slug ?: $p->id),
                 'datasheet_url' => $p->datasheetUrl(),
                 'badges' => array_values(array_unique($badges)),

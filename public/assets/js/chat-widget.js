@@ -170,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         localStorage.removeItem(STORAGE_UUID_KEY);
         localStorage.removeItem(STORAGE_MESSAGES_KEY);
+        localStorage.removeItem(STORAGE_LEAD_KEY);
         sessionUuid = null;
         renderInitialScreen();
     });
@@ -264,8 +265,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderProductsCarousel = (products) => {
         if (!products.length) return '';
         const items = products.map(p => {
-            const isFallback = !p.image_url || p.image_url.includes('placeholder') || p.image_url.includes('default');
-            const imgHtml = `<img src="${p.image_url || '/assets/quote.webp'}" alt="${escapeHtml(p.name)}" class="prod-swatch${isFallback ? ' is-fallback' : ''}" loading="lazy" onerror="this.onerror=null; this.src='/assets/quote.webp';">`;
+            const isFallback = !p.image_url || p.image_url.includes('placeholder') || p.image_url.includes('default') || p.image_url.includes('bg_default');
+            const imgHtml = `<img src="${p.image_url || '/assets/bg_default.png'}" alt="${escapeHtml(p.name)}" class="prod-swatch${isFallback ? ' is-fallback' : ''}" loading="lazy" onerror="this.onerror=null; this.src='/assets/bg_default.png';">`;
             const catLabel = p.category ? `<span class="cat-label">${escapeHtml(p.category)}</span>` : '';
             const detailUrl = p.url || `/products/${encodeURIComponent(p.slug || p.id)}`;
 

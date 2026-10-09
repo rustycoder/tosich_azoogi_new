@@ -100,10 +100,10 @@ class SendChatTranscriptToSalesTool implements IChatTool
         if ($phone !== '' && empty($session->lead_phone)) {
             $updates['lead_phone'] = $phone;
         }
-        if ($company !== '' && empty($session->lead_company)) {
+        if ($company !== '') {
             $updates['lead_company'] = $company;
         }
-        if ($projectName !== '' && empty($session->project_name)) {
+        if ($projectName !== '') {
             $updates['project_name'] = $projectName;
         }
 
