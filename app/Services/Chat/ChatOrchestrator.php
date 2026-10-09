@@ -593,6 +593,8 @@ class ChatOrchestrator
      */
     public function handleUserMessage(ChatSession $session, string $userText): array
     {
+        @set_time_limit(120);
+
         // 1. Record user message
         ChatMessage::create([
             'chat_session_id' => $session->id,

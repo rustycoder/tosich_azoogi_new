@@ -820,6 +820,8 @@ class AiConfigController extends Controller
      */
     public function testConnection(Request $request): JsonResponse
     {
+        @set_time_limit(120);
+
         $validated = $request->validate([
             'driver' => ['required', 'string'],
             'model' => ['nullable', 'string', 'max:150'],
