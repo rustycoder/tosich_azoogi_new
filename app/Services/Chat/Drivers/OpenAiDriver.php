@@ -16,6 +16,7 @@ class OpenAiDriver implements IChatLlmDriver
         protected ?string $apiKey = null,
         protected ?string $model = null,
         protected ?string $baseUrl = null,
+        protected array $extraBody = [],
     ) {
         $this->apiKey = $apiKey ?: (string) config('services.openai.api_key', env('OPENAI_API_KEY'));
         $this->model = $model ?: (string) config('services.openai.chat_model', env('OPENAI_CHAT_MODEL', 'gpt-4o-mini'));
@@ -45,6 +46,12 @@ class OpenAiDriver implements IChatLlmDriver
             'messages' => $formattedMessages,
             'temperature' => 0.4,
         ];
+
+        if (! empty($this->extraBody)) {
+            $payload = array_merge($payload, $this->extraBody);
+        } elseif (str_contains((string) $this->baseUrl, 'prisha') || str_contains((string) $this->baseUrl, 'ai.')) {
+            $payload['chat_id'] = 'api_bypass_fix';
+        }
 
         if (! empty($tools)) {
             $uniqueTools = [];
