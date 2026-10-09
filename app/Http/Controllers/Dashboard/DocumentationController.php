@@ -81,6 +81,51 @@ class DocumentationController extends Controller
                 ],
             ],
             'AI & Automation' => [
+                'ai-models' => [
+                    'label' => 'AI Models',
+                    'title' => 'AI Models, API Keys & Custom Providers',
+                    'keywords' => 'ai models gemini anthropic claude sonnet opus haiku openrouter openai gpt-4o custom provider ollama vllm openwebui api key test connection latency temperature parameters',
+                ],
+                'ai-rates' => [
+                    'label' => 'AI Rates & Costs',
+                    'title' => 'AI Pricing Rates, Token Budgets & Cost Engine',
+                    'keywords' => 'ai rates pricing costs tokens token calculator spend budget input output rates per million cost estimation calculation analytics usage tracking',
+                ],
+                'ai-widget' => [
+                    'label' => 'Widget & Branding',
+                    'title' => 'AI Chat Widget, Branding & Lead Capture',
+                    'keywords' => 'ai widget chatbot assistant branding avatar name subtitle startup message lead greeting intake form prompt chips starter buttons requirements enquiry conversion',
+                ],
+                'ai-rules' => [
+                    'label' => 'AI Rules',
+                    'title' => 'AI System Rules & Guardrails',
+                    'keywords' => 'ai rules system directives guardrails behavior safety tone compliance constraints recommendations active toggle lighting guidance technical policies',
+                ],
+                'ai-context' => [
+                    'label' => 'Company Info',
+                    'title' => 'Company Info, Logistics & Operational Context',
+                    'keywords' => 'company info context logistics azoogi background warehouse sydney lead times warranty certifications standards as/nzs extrusion cutting moq knowledge',
+                ],
+                'ai-faqs' => [
+                    'label' => 'FAQs',
+                    'title' => 'FAQ Knowledge Base & Curated Q&A',
+                    'keywords' => 'ai faqs questions answers knowledge base grounding lighting casambi dali silvair madrix fixtures drivers queries support q&a',
+                ],
+                'ai-prompt' => [
+                    'label' => 'AI Prompt',
+                    'title' => 'Live System Prompt Inspector & Token Metrics',
+                    'keywords' => 'ai prompt compiled prompt inspector system prompt token count assembly preview real-time instructions pipeline context window workbench',
+                ],
+                'ai-chat-logs' => [
+                    'label' => 'Chat Logs',
+                    'title' => 'Chat Logs, Visitor Sessions & Lead Conversions',
+                    'keywords' => 'chat logs sessions transcripts conversations leads quotes conversion unread favorites token stats export filter crm audit review',
+                ],
+                'ai-testing' => [
+                    'label' => 'AI Test Suite',
+                    'title' => 'AI Model Testing & Token Benchmarks',
+                    'keywords' => 'ai test testing prompts test suite questions tools token usage benchmark cost verification function calling search specs quote cart lead transcript latency',
+                ],
                 'mcp' => [
                     'label' => 'MCP Protocol & AI',
                     'title' => 'Model Context Protocol (MCP) & AI Integration',
@@ -133,6 +178,35 @@ class DocumentationController extends Controller
             'ordering' => 'products',
             'airtable' => 'products',
             'catalog' => 'products',
+            // AI Aliases
+            'models' => 'ai-models',
+            'model' => 'ai-models',
+            'rates' => 'ai-rates',
+            'rate' => 'ai-rates',
+            'pricing' => 'ai-rates',
+            'cost' => 'ai-rates',
+            'costs' => 'ai-rates',
+            'widget' => 'ai-widget',
+            'branding' => 'ai-widget',
+            'rules' => 'ai-rules',
+            'rule' => 'ai-rules',
+            'guardrails' => 'ai-rules',
+            'context' => 'ai-context',
+            'company-info' => 'ai-context',
+            'company' => 'ai-context',
+            'faqs' => 'ai-faqs',
+            'faq' => 'ai-faqs',
+            'prompt' => 'ai-prompt',
+            'prompts' => 'ai-prompt',
+            'chat-logs' => 'ai-chat-logs',
+            'chat' => 'ai-chat-logs',
+            'chats' => 'ai-chat-logs',
+            'conversations' => 'ai-chat-logs',
+            'sessions' => 'ai-chat-logs',
+            'testing' => 'ai-testing',
+            'test' => 'ai-testing',
+            'benchmark' => 'ai-testing',
+            'benchmarks' => 'ai-testing',
         ];
 
         if (isset($aliases[$topic])) {

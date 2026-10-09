@@ -92,6 +92,33 @@
                                     @case('mcp')
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
                                         @break
+                                    @case('ai-models')
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                                        @break
+                                    @case('ai-rates')
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                        @break
+                                    @case('ai-widget')
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 3v18M15 9h6M15 15h6"/></svg>
+                                        @break
+                                    @case('ai-rules')
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                                        @break
+                                    @case('ai-context')
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                        @break
+                                    @case('ai-faqs')
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                                        @break
+                                    @case('ai-prompt')
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                                        @break
+                                    @case('ai-chat-logs')
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                                        @break
+                                    @case('ai-testing')
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
+                                        @break
                                     @case('deployment')
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
                                         @break
@@ -160,6 +187,94 @@
 
                 <div class="dash-doc-callout info">
                     <strong>Tip for Editors:</strong> Always optimize images and background videos to the recommended web standards before uploading to keep page speed and Core Web Vitals at peak performance.
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>AI & Automation Suite</h3>
+                <p>Azoogi features a full suite of AI capabilities designed to empower customer support, assist architectural lighting specifications, and convert visitors into qualified project leads:</p>
+
+                <div class="dash-doc-grid-cards">
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                        </div>
+                        <h3>AI Models & Providers</h3>
+                        <p>Configure Gemini, Claude, OpenRouter, OpenAI, and custom GPU providers with live connection testing.</p>
+                        <a href="{{ route('dashboard.docs.index', ['topic' => 'ai-models']) }}" class="dash-doc-inline-link">Read Models Guide &rarr;</a>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <h3>Rates & Cost Engine</h3>
+                        <p>Track real-time input/output token usage, budget limits, and cost-per-conversation metrics.</p>
+                        <a href="{{ route('dashboard.docs.index', ['topic' => 'ai-rates']) }}" class="dash-doc-inline-link">Read Rates Guide &rarr;</a>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 3v18M15 9h6M15 15h6"/></svg>
+                        </div>
+                        <h3>Widget & Branding</h3>
+                        <p>Customize assistant name, avatar image, startup greeting, lead intake fields, and prompt chips.</p>
+                        <a href="{{ route('dashboard.docs.index', ['topic' => 'ai-widget']) }}" class="dash-doc-inline-link">Read Widget Guide &rarr;</a>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                        </div>
+                        <h3>System Rules & Guardrails</h3>
+                        <p>Define strict behavioral directives, electrical safety disclosures, and brand voice guidelines.</p>
+                        <a href="{{ route('dashboard.docs.index', ['topic' => 'ai-rules']) }}" class="dash-doc-inline-link">Read Rules Guide &rarr;</a>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        </div>
+                        <h3>Company Info & Logistics</h3>
+                        <p>Ground the AI in Sydney warehouse lead times, custom extrusion cutting, and warranty terms.</p>
+                        <a href="{{ route('dashboard.docs.index', ['topic' => 'ai-context']) }}" class="dash-doc-inline-link">Read Company Info Guide &rarr;</a>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                        <h3>FAQ Knowledge Base</h3>
+                        <p>Manage verified Q&A pairs covering Casambi, DALI-2, Neon Flex, and technical specs.</p>
+                        <a href="{{ route('dashboard.docs.index', ['topic' => 'ai-faqs']) }}" class="dash-doc-inline-link">Read FAQs Guide &rarr;</a>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        </div>
+                        <h3>Live System Prompt Inspector</h3>
+                        <p>Inspect the live compiled master prompt, estimated token counts, and assembly layers.</p>
+                        <a href="{{ route('dashboard.docs.index', ['topic' => 'ai-prompt']) }}" class="dash-doc-inline-link">Read Prompt Guide &rarr;</a>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                        </div>
+                        <h3>Chat Logs & Lead Conversions</h3>
+                        <p>Review real-time visitor transcripts, token spend, and convert chat sessions into sales quotes.</p>
+                        <a href="{{ route('dashboard.docs.index', ['topic' => 'ai-chat-logs']) }}" class="dash-doc-inline-link">Read Chat Logs Guide &rarr;</a>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
+                        </div>
+                        <h3>AI Test Suite & Benchmarks</h3>
+                        <p>1-click copy test prompts covering all 6 function tools, token benchmarking, and model comparisons.</p>
+                        <a href="{{ route('dashboard.docs.index', ['topic' => 'ai-testing']) }}" class="dash-doc-inline-link">Read AI Test Suite &rarr;</a>
+                    </div>
                 </div>
             </article>
         @endif
@@ -1270,6 +1385,1265 @@ php artisan route:cache
 php artisan view:cache
 php artisan geo:generate</code></pre>
                     <button type="button" class="dash-doc-copy-btn" data-copy-text="php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan geo:generate">Copy Command</button>
+                </div>
+            </article>
+        @endif
+
+        {{-- AI & AUTOMATION DOCUMENTATION SECTIONS --}}
+
+        {{-- AI.1: AI MODELS & PROVIDERS --}}
+        @if ($activeTopic === 'ai-models')
+            <article class="dash-card dash-doc-section" data-doc-block>
+                <div class="dash-doc-header">
+                    <h2>AI Models, API Keys & Custom Providers</h2>
+                    <span class="dash-pill-active">AI Core Configuration</span>
+                </div>
+                <p>The <strong>AI Models</strong> module serves as the primary control plane for configuring the Large Language Models (LLMs) that power the Azoogi conversational assistant. Administrators can seamlessly switch between world-class cloud providers (Google Gemini, Anthropic Claude, OpenRouter, and OpenAI) or connect private, on-premise AI providers (such as Ollama, vLLM, OpenWebUI, or LM Studio).</p>
+
+                <div class="dash-doc-grid-cards">
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                        </div>
+                        <h3>Multi-Provider Hub</h3>
+                        <p>Configure official APIs for Gemini, Anthropic Claude, OpenRouter, and OpenAI with 1-click active driver switching.</p>
+                        <a href="{{ route('dashboard.ai.models') }}" class="dash-doc-inline-link">Go to AI Models &rarr;</a>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                        </div>
+                        <h3>Live Diagnostic Testing</h3>
+                        <p>Test API keys, model latency, and handshake responses in real time before saving changes to production.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                        </div>
+                        <h3>Custom Provider Engine</h3>
+                        <p>Integrate private GPU servers, Ollama endpoints, OpenWebUI proxies, or vLLM deployments with custom JSON bodies.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        </div>
+                        <h3>Secure Encrypted Storage</h3>
+                        <p>API keys are securely stored in the database, masked in dashboard UI fields, and protected by role permissions.</p>
+                    </div>
+                </div>
+
+                <div class="dash-doc-callout info">
+                    <strong>Zero Downtime Provider Switching:</strong> When you change the active AI provider in the dashboard, the system updates the live configuration immediately without requiring server restarts or cache clearing.
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>1. Supported AI Providers & Model Matrix</h3>
+                <p>Azoogi natively supports the following industry-leading LLM engines:</p>
+
+                <div class="dash-table-wrap">
+                    <table class="dash-doc-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 140px;">Provider</th>
+                                <th style="width: 220px;">Default / Popular Models</th>
+                                <th>Strengths & Target Use Case</th>
+                                <th style="width: 120px;">Speed & Latency</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Google Gemini</strong></td>
+                                <td><code>gemini-2.5-flash</code> (Default)<br><code>gemini-2.5-flash-lite</code><br><code>gemini-1.5-pro</code></td>
+                                <td>Ultra-fast response times, massive context window (1M+ tokens), exceptional cost efficiency, and native multimodal reasoning. Ideal for high-traffic visitor chat.</td>
+                                <td><span class="dash-pill-active" style="background: #e6f4ea; color: #137333;">Fastest (&lt;800ms)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Anthropic Claude</strong></td>
+                                <td><code>claude-3-5-sonnet-20241022</code><br><code>claude-3-5-haiku-20241022</code><br><code>claude-3-opus-20240229</code></td>
+                                <td>Best-in-class nuanced reasoning, exceptional adherence to complex system guardrails, natural conversational tone, and flawless technical lighting guidance.</td>
+                                <td><span class="dash-pill-active" style="background: #fef7e0; color: #b06000;">Fast (1.2s)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>OpenRouter</strong></td>
+                                <td><code>anthropic/claude-3.5-sonnet</code><br><code>deepseek/deepseek-chat</code><br><code>meta-llama/llama-3.3-70b-instruct</code></td>
+                                <td>Universal aggregation gateway allowing access to hundreds of open-source and proprietary models under a single unified billing account and API key.</td>
+                                <td><span class="dash-pill-active" style="background: #e8f0fe; color: #1a73e8;">Variable</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>OpenAI</strong></td>
+                                <td><code>gpt-4o-mini</code><br><code>gpt-4o</code><br><code>o3-mini</code></td>
+                                <td>Reliable enterprise-grade generation, strong structured JSON extraction, and high compatibility.</td>
+                                <td><span class="dash-pill-active" style="background: #e6f4ea; color: #137333;">Fast (900ms)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Custom Providers</strong></td>
+                                <td>Ollama (e.g. <code>llama3.2:3b</code>)<br>OpenWebUI<br>vLLM / LM Studio</td>
+                                <td>Self-hosted local privacy, zero API costs, on-premise data compliance, and custom hardware acceleration.</td>
+                                <td><span class="dash-pill-active" style="background: #f3e8fd; color: #7b1fa2;">Hardware Dependent</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>2. Step-by-Step Configuration Guide</h3>
+
+                <div class="dash-doc-steps">
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">1</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Select the Active Provider</h4>
+                            <p>Navigate to <a href="{{ route('dashboard.ai.models') }}" class="dash-doc-inline-link"><strong>AI &rarr; Models</strong></a>. Click the radio selector next to the provider you wish to activate (Gemini, Anthropic, OpenRouter, OpenAI, or a Custom Provider).</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">2</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Enter Your API Key</h4>
+                            <p>Paste your API secret key into the corresponding provider card (e.g. <code>AIzaSy...</code> for Gemini or <code>sk-ant-...</code> for Anthropic). Keys are masked automatically for security.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">3</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Select or Enter Target Model Identifier</h4>
+                            <p>Choose your preferred model from the dropdown list, or select <em>Custom Model Identifier</em> to specify an exact model string (e.g. <code>gemini-2.5-flash</code> or <code>claude-3-5-sonnet-20241022</code>).</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">4</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Run Live Diagnostic Connection Test</h4>
+                            <p>Click the <strong>Test Connection</strong> button on the provider card. The backend will perform an instant live handshake with the AI API, displaying the status, round-trip latency, model identification, and sample output.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">5</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Save Configuration</h4>
+                            <p>Click <strong>Save Model Settings</strong> in the top-right corner. The new model will immediately start servicing live visitor chat sessions.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>3. Adding Custom AI Providers (Ollama, vLLM, OpenWebUI)</h3>
+                <p>To connect a self-hosted or third-party AI proxy, scroll down to <strong>Add Custom AI Provider</strong> in <a href="{{ route('dashboard.ai.models') }}" class="dash-doc-inline-link"><strong>AI &rarr; Models</strong></a> and configure the following parameters:</p>
+
+                <ul>
+                    <li><strong>Provider Name:</strong> A friendly display name (e.g., <em>Local Ollama RTX 4090</em> or <em>Internal OpenWebUI Gateway</em>).</li>
+                    <li><strong>Provider Type:</strong> Select the API protocol format: <code>openai</code> (OpenAI Compatible), <code>anthropic</code> (Anthropic Messages API), or <code>gemini</code>.</li>
+                    <li><strong>Base URL:</strong> The full endpoint URL (e.g., <code>http://192.168.1.50:11434/v1</code> for Ollama or <code>https://ai.company.com/api/v1</code>).</li>
+                    <li><strong>API Key:</strong> Secret bearer token (or <code>ollama</code> / dummy key if local authentication is disabled).</li>
+                    <li><strong>Model Identifier:</strong> The exact model name as registered in the host engine (e.g., <code>llama3.2:3b</code>, <code>qwen2.5-coder:7b</code>, or <code>mistral-small</code>). Supports comma-separated model lists.</li>
+                    <li><strong>OpenWebUI Compatibility Toggle:</strong> Enable this checkbox if routing through OpenWebUI; the orchestrator automatically injects required session bypass headers (<code>"chat_id": "api_bypass_fix"</code>).</li>
+                    <li><strong>Extra Body JSON Parameters (Optional):</strong> Supply custom parameters such as <code>{"temperature": 0.3, "top_p": 0.9}</code>.</li>
+                </ul>
+
+                <div class="dash-doc-callout tip">
+                    <strong>Testing Custom Providers:</strong> Always click <em>Test Connection</em> before setting a custom provider as active to verify firewall access, CORS headers, and model responsiveness.
+                </div>
+            </article>
+        @endif
+
+        {{-- AI.2: AI RATES & COST ESTIMATION --}}
+        @if ($activeTopic === 'ai-rates')
+            <article class="dash-card dash-doc-section" data-doc-block>
+                <div class="dash-doc-header">
+                    <h2>AI Pricing Rates, Token Budgets & Cost Engine</h2>
+                    <span class="dash-pill-active">Cost & Financial Analytics</span>
+                </div>
+                <p>The <strong>AI Rates</strong> module provides financial transparency into your LLM operational expenditure. It features a built-in mathematical cost estimation engine that tracks input and output token consumption for every visitor conversation turn and computes accurate dollar costs down to fractions of a cent.</p>
+
+                <div class="dash-doc-grid-cards">
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <h3>Real-Time Spend Tracking</h3>
+                        <p>Live computation of total tokens consumed and total USD spent across all visitor chat sessions.</p>
+                        <a href="{{ route('dashboard.ai.rates') }}" class="dash-doc-inline-link">Go to AI Rates &rarr;</a>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/></svg>
+                        </div>
+                        <h3>Granular Tokenomics</h3>
+                        <p>Inspects prompt tokens (input) and completion tokens (output) separately using official pricing tiers.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                        </div>
+                        <h3>Model Comparison Matrix</h3>
+                        <p>Comprehensive rate card comparing cost per million tokens across Gemini, Claude, OpenAI, and DeepSeek.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        </div>
+                        <h3>Average Cost Per Lead</h3>
+                        <p>Calculates average token weight and monetary cost per customer interaction to optimize ROI.</p>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>1. Mathematical Cost Calculation Engine</h3>
+                <p>Every time a visitor submits a message or the assistant streams a response, Azoogi's <code>AiCostCalculator</code> evaluates the exact token usage reported by the provider API:</p>
+
+                <div class="dash-doc-code-block" style="margin-bottom: 16px;">
+                    <div class="dash-doc-code-header"><span>Cost Calculation Formula</span></div>
+                    <pre><code>Estimated Cost ($ USD) = ( (Prompt Tokens × Input Rate) + (Completion Tokens × Output Rate) ) / 1,000,000</code></pre>
+                </div>
+
+                <p>Where rates are specified in <strong>USD per 1 Million Tokens ($/MTok)</strong>. This guarantees transparent, auditable pricing down to four decimal places (e.g. <code>$0.0014 USD</code> per typical session).</p>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>2. Model Rate Card Comparison</h3>
+                <p>The pricing table below outlines official rate schedules across all supported cloud LLMs:</p>
+
+                <div class="dash-table-wrap">
+                    <table class="dash-doc-table">
+                        <thead>
+                            <tr>
+                                <th>Model Name & Identifier</th>
+                                <th>Provider</th>
+                                <th style="width: 140px;">Input Rate ($/MTok)</th>
+                                <th style="width: 140px;">Output Rate ($/MTok)</th>
+                                <th>Cost Profile</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Gemini 2.5 Flash</strong> (<code>gemini-2.5-flash</code>)</td>
+                                <td>Google Gemini</td>
+                                <td><code>$0.075</code></td>
+                                <td><code>$0.300</code></td>
+                                <td><span class="dash-pill-active" style="background: #e6f4ea; color: #137333;">Ultra Affordable</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gemini 2.5 Flash-Lite</strong> (<code>gemini-2.5-flash-lite</code>)</td>
+                                <td>Google Gemini</td>
+                                <td><code>$0.0375</code></td>
+                                <td><code>$0.150</code></td>
+                                <td><span class="dash-pill-active" style="background: #e6f4ea; color: #137333;">Maximum Economy</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gemini 1.5 Pro</strong> (<code>gemini-1.5-pro</code>)</td>
+                                <td>Google Gemini</td>
+                                <td><code>$1.250</code></td>
+                                <td><code>$5.000</code></td>
+                                <td><span class="dash-pill-active" style="background: #e8f0fe; color: #1a73e8;">Advanced Reasoning</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Claude 3.5 Sonnet</strong> (<code>claude-3-5-sonnet-20241022</code>)</td>
+                                <td>Anthropic</td>
+                                <td><code>$3.000</code></td>
+                                <td><code>$15.000</code></td>
+                                <td><span class="dash-pill-active" style="background: #fef7e0; color: #b06000;">Flagship Quality</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Claude 3.5 Haiku</strong> (<code>claude-3-5-haiku-20241022</code>)</td>
+                                <td>Anthropic</td>
+                                <td><code>$0.800</code></td>
+                                <td><code>$4.000</code></td>
+                                <td><span class="dash-pill-active" style="background: #e6f4ea; color: #137333;">Balanced High Speed</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Claude 3 Opus</strong> (<code>claude-3-opus-20240229</code>)</td>
+                                <td>Anthropic</td>
+                                <td><code>$15.000</code></td>
+                                <td><code>$75.000</code></td>
+                                <td><span class="dash-pill-active" style="background: #fce8e6; color: #c5221f;">Heavy Compute</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>GPT-4o Mini</strong> (<code>gpt-4o-mini</code>)</td>
+                                <td>OpenAI</td>
+                                <td><code>$0.150</code></td>
+                                <td><code>$0.600</code></td>
+                                <td><span class="dash-pill-active" style="background: #e6f4ea; color: #137333;">Cost Efficient</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>GPT-4o</strong> (<code>gpt-4o</code>)</td>
+                                <td>OpenAI</td>
+                                <td><code>$2.500</code></td>
+                                <td><code>$10.000</code></td>
+                                <td><span class="dash-pill-active" style="background: #e8f0fe; color: #1a73e8;">General Purpose</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>DeepSeek V3</strong> (<code>deepseek/deepseek-chat</code>)</td>
+                                <td>OpenRouter</td>
+                                <td><code>$0.140</code></td>
+                                <td><code>$0.280</code></td>
+                                <td><span class="dash-pill-active" style="background: #e6f4ea; color: #137333;">High Efficiency</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>3. Practical Tips for Budget Optimization</h3>
+                <ul>
+                    <li><strong>Production Recommendation:</strong> <code>gemini-2.5-flash</code> provides the perfect sweet spot: sub-second generation, high factual precision with lighting catalogs, and costing less than <strong>$0.01 for every 15-20 conversations</strong>.</li>
+                    <li><strong>System Prompt Compression:</strong> Keep system rules and company context concise and focused; since the system prompt is evaluated on every conversation turn, concise wording reduces input tokens exponentially.</li>
+                    <li><strong>Auditing Outliers:</strong> Review the <a href="{{ route('dashboard.chat-sessions.index', ['sort' => 'highest_cost']) }}" class="dash-doc-inline-link"><strong>Chat Logs (Sorted by Highest Cost)</strong></a> to identify unusually long conversation sessions or automated scrapers.</li>
+                </ul>
+            </article>
+        @endif
+
+        {{-- AI.3: AI WIDGET & BRANDING --}}
+        @if ($activeTopic === 'ai-widget')
+            <article class="dash-card dash-doc-section" data-doc-block>
+                <div class="dash-doc-header">
+                    <h2>AI Chat Widget, Branding & Lead Capture</h2>
+                    <span class="dash-pill-active">Front-End Experience & Lead Gen</span>
+                </div>
+                <p>The <strong>AI Widget</strong> module controls the visual appearance, identity, welcome speech, and lead capture behavior of the floating conversational assistant on the live Azoogi website. Administrators can brand the assistant, customize welcome greetings, set up interactive suggestion chips, and configure required sales intake fields.</p>
+
+                <div class="dash-doc-grid-cards">
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 3v18M15 9h6M15 15h6"/></svg>
+                        </div>
+                        <h3>Assistant Identity & Avatar</h3>
+                        <p>Customize the assistant's name, role subtitle, and upload a custom branded avatar image.</p>
+                        <a href="{{ route('dashboard.ai.widget') }}" class="dash-doc-inline-link">Go to AI Widget &rarr;</a>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        </div>
+                        <h3>Startup & Welcome Message</h3>
+                        <p>Define the friendly greeting displayed when a visitor clicks to open the chat window.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg>
+                        </div>
+                        <h3>Lead Intake Form</h3>
+                        <p>Capture customer name, email address, and architectural project scope before or during chat.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+                        </div>
+                        <h3>Starter Prompt Chips</h3>
+                        <p>Provide 1-click suggested prompts (e.g. Casambi controls, IP68 Neon Flex) for instant engagement.</p>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>1. Visual Branding & Identity Settings</h3>
+                <p>In <a href="{{ route('dashboard.ai.widget') }}" class="dash-doc-inline-link"><strong>AI &rarr; Widget</strong></a>, configure how your AI assistant introduces itself:</p>
+
+                <ul>
+                    <li><strong>AI Assistant Name:</strong> The primary display name shown in the chat window header (e.g. <em>Azoogi Lighting Consultant</em> or <em>Azoogi AI Assistant</em>).</li>
+                    <li><strong>Assistant Subtitle / Role:</strong> A professional sub-heading (e.g. <em>Architectural Lighting & Smart Controls Specialist</em>).</li>
+                    <li><strong>Custom Avatar Image:</strong> Upload a square PNG, JPG, WebP, or SVG image (max 2MB). The system automatically saves the file to public storage (<code>/storage/ai/avatars/...</code>) and links it immediately. Alternatively, provide an absolute image URL.</li>
+                </ul>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>2. Conversational Messages & Dynamic Templates</h3>
+
+                <div class="dash-doc-steps">
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">1</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Startup Greeting Message</h4>
+                            <p>This message appears automatically as the first chat bubble when a visitor opens the widget. Example:</p>
+                            <div class="dash-doc-code-block" style="margin-top: 8px;">
+                                <pre><code>Hi there! 👋 Welcome to Azoogi Architectural Lighting. How can I assist you with your linear LED, profiles, or Casambi / DALI controls project today?</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">2</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Lead Intake Greeting Template</h4>
+                            <p>When a visitor fills out the lead intake form, the assistant can greet them personally using dynamic placeholders:</p>
+                            <div class="dash-doc-code-block" style="margin-top: 8px;">
+                                <pre><code>Thanks for sharing your details, {name}! I see you're working on "{project}". Let's find the exact fixtures and control specifications you need.</code></pre>
+                            </div>
+                            <p style="font-size: 13px; color: var(--muted); margin-top: 6px;">Supported placeholders: <code>{name}</code>, <code>{project}</code>, <code>{email}</code>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>3. Lead Intake Form & Field Requirements</h3>
+                <p>The widget includes an interactive Lead Intake modal that captures verified contact information and routes qualified leads directly to the sales team:</p>
+
+                <div class="dash-table-wrap">
+                    <table class="dash-doc-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 220px;">Intake Setting</th>
+                                <th style="width: 120px;">Default</th>
+                                <th>Description & Operational Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Enable Lead Intake Form</strong></td>
+                                <td><code>Enabled</code></td>
+                                <td>Toggles the modal prompt asking users if they would like to share their project info for tailored technical advice.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Require Customer Name</strong></td>
+                                <td><code>Optional</code></td>
+                                <td>When enabled, visitors must enter their full name before starting the conversation.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Require Email Address</strong></td>
+                                <td><code>Optional</code></td>
+                                <td>When enabled, visitors must provide a valid email address, allowing automated quote follow-ups.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Require Project Name / Scope</strong></td>
+                                <td><code>Optional</code></td>
+                                <td>When enabled, requires architects/contractors to enter their project name (e.g. <em>Sydney Harbour Residence</em>).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>4. Starter Prompt Chips (Quick Questions)</h3>
+                <p>Starter prompt chips appear below the welcome message as clickable pills. Clicking a chip instantly sends that prompt, guiding visitors directly to high-value solutions.</p>
+
+                <div class="dash-doc-callout info">
+                    <strong>Recommended Starter Chips for Lighting Projects:</strong>
+                    <ul style="margin-top: 8px; margin-bottom: 0;">
+                        <li><code>Recommend IP68 Neon Flex for outdoor facade lighting</code></li>
+                        <li><code>How do I set up Casambi Bluetooth wireless control?</code></li>
+                        <li><code>Compare DALI-2 drivers vs standard Phase dimming</code></li>
+                        <li><code>Request architectural sample pack & product catalog</code></li>
+                    </ul>
+                </div>
+            </article>
+        @endif
+
+        {{-- AI.4: AI RULES & GUARDRAILS --}}
+        @if ($activeTopic === 'ai-rules')
+            <article class="dash-card dash-doc-section" data-doc-block>
+                <div class="dash-doc-header">
+                    <h2>AI System Rules, Guardrails & Directives</h2>
+                    <span class="dash-pill-active">Prompt Governance & Safety</span>
+                </div>
+                <p>The <strong>AI Rules</strong> module allows administrators to establish strict operational boundaries, brand voice guidelines, safety guardrails, and lighting domain policies. Every active rule is automatically compiled into the master system prompt fed to the LLM on each conversation turn.</p>
+
+                <div class="dash-doc-grid-cards">
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                        </div>
+                        <h3>Granular Rule Management</h3>
+                        <p>Create, edit, and organize system directives with clear titles, categories, and detailed guidelines.</p>
+                        <a href="{{ route('dashboard.ai.rules') }}" class="dash-doc-inline-link">Go to AI Rules &rarr;</a>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+                        </div>
+                        <h3>Live AJAX Active Toggle</h3>
+                        <p>Instantly turn specific rules on or off without deleting them—perfect for seasonal promotions or A/B testing.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <h3>Safety & Compliance Guardrails</h3>
+                        <p>Enforce strict guardrails against competitor mentions, off-topic discussions, or unverified electrical advice.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        <h3>Dynamic Prompt Injection</h3>
+                        <p>Active rules are automatically structured under the <code>[SYSTEM RULES & GUARDRAILS]</code> prompt block.</p>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>1. Rule Categories & Best Practices</h3>
+                <p>Organize rules under descriptive categories to keep your system prompt structured and maintainable:</p>
+
+                <div class="dash-table-wrap">
+                    <table class="dash-doc-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 200px;">Rule Category</th>
+                                <th>Purpose & Example Directives</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Safety & Guardrails</strong></td>
+                                <td>Enforce electrical safety disclosures. Example: <em>"Always advise clients that 240V mains wiring and DALI bus connections must be installed by a licensed electrical contractor."</em></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tone & Brand Voice</strong></td>
+                                <td>Maintain an authoritative, sophisticated architectural tone. Example: <em>"Respond with professional expertise, using precise lighting design terminology (CRI, CCT, lumens/watt, IP ratings)."</em></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Product Recommendations</strong></td>
+                                <td>Guide how fixtures are suggested. Example: <em>"Always recommend matching aluminum extrusion profiles and appropriate 24V constant voltage drivers whenever suggesting COB or Neon Flex strips."</em></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sales & Lead Capture</strong></td>
+                                <td>Drive quote conversion. Example: <em>"When a visitor specifies dimensions or quantities exceeding 10 meters, proactively encourage them to submit an architectural quote inquiry."</em></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Australian Standards</strong></td>
+                                <td>Ensure compliance with national standards. Example: <em>"Reference AS/NZS 1680 interior lighting guidelines and AS/NZS 3000 wiring standards when answering technical questions."</em></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>2. How to Add or Modify a System Rule</h3>
+
+                <div class="dash-doc-steps">
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">1</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Navigate to AI Rules</h4>
+                            <p>Open <a href="{{ route('dashboard.ai.rules') }}" class="dash-doc-inline-link"><strong>AI &rarr; Rules</strong></a>.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">2</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Enter Rule Details</h4>
+                            <p>In the <strong>Add New System Rule</strong> card, select or type a <strong>Category</strong>, specify a clear <strong>Rule Title</strong>, and write the <strong>Directive Content</strong> (up to 4,000 characters).</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">3</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Save & Verify Active Status</h4>
+                            <p>Click <strong>Save System Rule</strong>. Ensure the status badge displays <strong>Active</strong>. You can click the toggle button anytime to switch between Active and Inactive.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        @endif
+
+        {{-- AI.5: COMPANY INFO & CONTEXT --}}
+        @if ($activeTopic === 'ai-context')
+            <article class="dash-card dash-doc-section" data-doc-block>
+                <div class="dash-doc-header">
+                    <h2>Company Info, Logistics & Operational Context</h2>
+                    <span class="dash-pill-active">Enterprise Grounding & Facts</span>
+                </div>
+                <p>The <strong>Company Info</strong> module manages foundational operational intelligence and domain knowledge about Azoogi. It grounds the AI assistant in verified facts regarding Azoogi's Sydney headquarters, custom extrusion cutting services, dispatch timelines, Australian Standards compliance, and trade support policies.</p>
+
+                <div class="dash-doc-grid-cards">
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        </div>
+                        <h3>Enterprise Knowledge</h3>
+                        <p>Store verified facts about Azoogi's business model, Sydney warehouse, and manufacturing capacity.</p>
+                        <a href="{{ route('dashboard.ai.context') }}" class="dash-doc-inline-link">Go to Company Info &rarr;</a>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                        </div>
+                        <h3>Logistics & Lead Times</h3>
+                        <p>Keep the AI updated with accurate dispatch times, courier cutoffs, and custom fabrication turnarounds.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        </div>
+                        <h3>Warranties & Standards</h3>
+                        <p>Ground responses in official 5-year commercial warranty terms, RCM compliance, and IP test standards.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <h3>Trade & Project Pricing</h3>
+                        <p>Inform the assistant on how to handle wholesale trade discounts, contractor accounts, and sample requests.</p>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>1. Key Context Domains & Sample Data</h3>
+                <p>Company info snippets are organized into logical domains to give the AI a complete, multi-faceted understanding of Azoogi's operations:</p>
+
+                <div class="dash-table-wrap">
+                    <table class="dash-doc-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 220px;">Context Domain</th>
+                                <th>Recommended Content & Operational Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Company Background</strong></td>
+                                <td>Azoogi is an Australian architectural lighting supplier based in Sydney, NSW, specializing in linear LED systems, commercial extrusion profiles, and smart wireless lighting control systems (Casambi, Silvair, DALI-2, MADRIX).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Warehouse & Logistics</strong></td>
+                                <td>Orders for in-stock items placed before 1:00 PM AEST dispatch same-day from the Sydney distribution facility. Standard delivery across Australia takes 2-4 business days. Express courier options are available for urgent site deliveries.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Custom Extrusion Cutting</strong></td>
+                                <td>Azoogi offers in-house precision cutting, soldering, and assembly of linear profiles to millimeter accuracy. Standard turnaround for custom pre-cut linear profiles is 3-5 business days.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Warranty & Guarantees</strong></td>
+                                <td>Standard 5-year commercial replacement warranty on all architectural LED strips and commercial drivers. Products hold Australian RCM (Regulatory Compliance Mark) certifications and strict photobiological safety ratings.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>2. Adding & Managing Context Items</h3>
+                <ol>
+                    <li>Go to <a href="{{ route('dashboard.ai.context') }}" class="dash-doc-inline-link"><strong>AI &rarr; Company Info</strong></a>.</li>
+                    <li>Fill out <strong>Category</strong>, <strong>Title</strong>, and <strong>Context Content</strong>.</li>
+                    <li>Toggle the item <strong>Active</strong>. The content will be included in the live compiled system prompt immediately.</li>
+                    <li>Use the <strong>Active / Inactive Toggle</strong> to temporarily disable snippets (e.g. during end-of-year warehouse inventory closures).</li>
+                </ol>
+            </article>
+        @endif
+
+        {{-- AI.6: AI FAQS --}}
+        @if ($activeTopic === 'ai-faqs')
+            <article class="dash-card dash-doc-section" data-doc-block>
+                <div class="dash-doc-header">
+                    <h2>FAQ Knowledge Base & Curated Q&A</h2>
+                    <span class="dash-pill-active">Domain Knowledge Base</span>
+                </div>
+                <p>The <strong>AI FAQs</strong> module provides a structured question-and-answer library for instant, high-precision retrieval of common technical questions, control protocol inquiries, fixture compatibility facts, and customer service details.</p>
+
+                <div class="dash-doc-grid-cards">
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                        <h3>Curated Q&A Pairs</h3>
+                        <p>Store verified answers to frequent customer questions regarding Casambi, DALI, Neon Flex, and drivers.</p>
+                        <a href="{{ route('dashboard.ai.faqs') }}" class="dash-doc-inline-link">Go to AI FAQs &rarr;</a>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+                        </div>
+                        <h3>Categorized Knowledge</h3>
+                        <p>Group FAQs by product lines, smart controls, installation techniques, and ordering policies.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+                        </div>
+                        <h3>Instant Active Toggle</h3>
+                        <p>Enable or silence individual FAQ items in real-time with an AJAX switch without modifying code.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <h3>Zero Hallucination Grounding</h3>
+                        <p>All active FAQs are automatically indexed and presented to the LLM as authoritative references.</p>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>1. High-Impact Lighting FAQ Examples</h3>
+                <div class="dash-table-wrap">
+                    <table class="dash-doc-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 160px;">Category</th>
+                                <th style="width: 280px;">Question</th>
+                                <th>Verified Technical Answer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Smart Controls</strong></td>
+                                <td><em>Can Casambi Bluetooth modules control standard 24V constant voltage LED strips?</em></td>
+                                <td>Yes. Casambi CVM or PWM dimming units wire directly between the 24V DC driver output and the LED strip, providing smooth 0.1–100% flicker-free dimming and color tuning without extra control wiring.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Extrusions</strong></td>
+                                <td><em>What is the maximum single run length for Azoogi aluminum profiles?</em></td>
+                                <td>Standard profiles are supplied in 2.0-meter and 3.0-meter stock lengths and can be seamlessly joined using alignment pins for continuous architectural runs. Custom factory pre-cuts are also available.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Waterproofing</strong></td>
+                                <td><em>What is the difference between IP65 and IP68 Neon Flex?</em></td>
+                                <td>IP65 Neon Flex is weather-resistant against water jets for general outdoor architectural outlines. IP68 Neon Flex features factory-sealed injection-moulded end caps suitable for submerged swimming pool and water feature applications.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>2. How to Add an FAQ Knowledge Item</h3>
+                <div class="dash-doc-steps">
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">1</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Navigate to AI FAQs</h4>
+                            <p>Open <a href="{{ route('dashboard.ai.faqs') }}" class="dash-doc-inline-link"><strong>AI &rarr; FAQs</strong></a>.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">2</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Enter FAQ Details</h4>
+                            <p>Select a <strong>Category</strong>, input the <strong>Question</strong> (up to 300 characters), and enter the verified <strong>Answer</strong> (up to 1,500 characters).</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">3</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Save & Verify</h4>
+                            <p>Click <strong>Save FAQ Item</strong>. The AI will immediately utilize the Q&A entry in all new visitor conversations.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        @endif
+
+        {{-- AI.7: AI SYSTEM PROMPT INSPECTOR --}}
+        @if ($activeTopic === 'ai-prompt')
+            <article class="dash-card dash-doc-section" data-doc-block>
+                <div class="dash-doc-header">
+                    <h2>Live System Prompt Inspector & Token Metrics</h2>
+                    <span class="dash-pill-active">System Prompt Diagnostics</span>
+                </div>
+                <p>The <strong>AI Prompt</strong> module provides complete architectural transparency into the exact, real-time system prompt generated by the backend and sent to the LLM provider API. It displays estimated token counts, component item breakdowns, and enables 1-click prompt copying for benchmarking in external developer tools.</p>
+
+                <div class="dash-doc-grid-cards">
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        </div>
+                        <h3>Live Prompt Rendering</h3>
+                        <p>View the exact master prompt assembled by <code>ChatOrchestrator</code> in real time.</p>
+                        <a href="{{ route('dashboard.ai.prompt') }}" class="dash-doc-inline-link">Go to AI Prompt &rarr;</a>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+                        </div>
+                        <h3>Live Token Estimator</h3>
+                        <p>Real-time calculation of prompt token weight to optimize response latency and context sizing.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                        </div>
+                        <h3>Assembly Component Badges</h3>
+                        <p>Visual count badges showing active Rules, Company Context snippets, and FAQ items included in the prompt.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        </div>
+                        <h3>1-Click Playground Copy</h3>
+                        <p>Instantly copy the compiled system prompt to clipboard for testing in Google AI Studio or Claude Workbench.</p>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>1. Master System Prompt Assembly Hierarchy</h3>
+                <p>When assembling the system prompt, <code>ChatOrchestrator::getSystemPrompt()</code> dynamically builds and formats the following layers in strict sequential hierarchy:</p>
+
+                <div class="dash-doc-code-block" style="margin-bottom: 20px;">
+                    <div class="dash-doc-code-header"><span>Prompt Assembly Architecture</span></div>
+                    <pre><code>[1. CORE IDENTITY & WIDGET BRANDING]
+   - Assistant Name, Role, Brand Tone & Architectural Demeanor
+
+[2. SYSTEM RULES & GUARDRAILS]
+   - Active Behavioral Directives, Safety Disclosures, Negative Constraints
+
+[3. COMPANY CONTEXT & OPERATIONAL LOGISTICS]
+   - Sydney Warehouse Location, Lead Times, Custom Cutting, Australian Standards
+
+[4. FAQ KNOWLEDGE BASE & TECHNICAL FACTS]
+   - Curated Q&A pairs (Casambi, DALI-2, Neon Flex, Profiles, Power Supplies)
+
+[5. PRODUCT CATALOG SCHEMA & CATEGORY HIERARCHY]
+   - Airtable Catalog Structure, Category Numbering Blocks (100–700), Specs
+
+[6. LEAD CAPTURE & CRM CONVERSION INSTRUCTIONS]
+   - Format Directives for capturing Project Scope, Name, Email, and Quote Requirements</code></pre>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>2. How to Inspect & Validate Prompt Updates</h3>
+                <ol>
+                    <li>After adding or updating any rule in <a href="{{ route('dashboard.ai.rules') }}" class="dash-doc-inline-link"><strong>AI Rules</strong></a>, company info in <a href="{{ route('dashboard.ai.context') }}" class="dash-doc-inline-link"><strong>Company Info</strong></a>, or FAQs in <a href="{{ route('dashboard.ai.faqs') }}" class="dash-doc-inline-link"><strong>AI FAQs</strong></a>, navigate to <a href="{{ route('dashboard.ai.prompt') }}" class="dash-doc-inline-link"><strong>AI &rarr; Prompt</strong></a>.</li>
+                    <li>Inspect the <strong>Active Component Badges</strong> (e.g. <em>8 Active Rules</em>, <em>4 Active Context Items</em>, <em>6 Active FAQs</em>).</li>
+                    <li>Check the <strong>Estimated Prompt Tokens</strong> meter (typically ~2,500 to ~4,500 tokens).</li>
+                    <li>Scroll through the live prompt viewer to verify that your new instructions are formatted cleanly and unambiguously.</li>
+                    <li>Click <strong>Copy Prompt to Clipboard</strong> if you want to benchmark responses against test user queries in external LLM sandboxes.</li>
+                </ol>
+            </article>
+        @endif
+
+        {{-- AI.8: AI CHAT LOGS & SESSIONS --}}
+        @if ($activeTopic === 'ai-chat-logs')
+            <article class="dash-card dash-doc-section" data-doc-block>
+                <div class="dash-doc-header">
+                    <h2>Chat Logs, Visitor Sessions & Lead Conversions</h2>
+                    <span class="dash-pill-active">Conversational Intelligence & CRM</span>
+                </div>
+                <p>The <strong>Chat Logs</strong> module provides a real-time conversational intelligence dashboard and sales conversion engine. It logs every website visitor chat session with turn-by-turn transcripts, granular token counts, computed USD costs, visitor geo-location, and enables 1-click conversion of high-intent chat discussions into official sales quote enquiries.</p>
+
+                <div class="dash-doc-grid-cards">
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                        </div>
+                        <h3>Live Session Monitor</h3>
+                        <p>Browse full turn-by-turn transcripts of all visitor interactions with timestamps and status tags.</p>
+                        <a href="{{ route('dashboard.chat-sessions.index') }}" class="dash-doc-inline-link">Go to Chat Logs &rarr;</a>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <h3>1-Click Lead Conversion</h3>
+                        <p>Convert promising chat conversations directly into official CRM Quote Enquiries with pre-filled details.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        </div>
+                        <h3>Starred Favorites & Read State</h3>
+                        <p>Star important conversations for team review and track unread sessions with instant status indicators.</p>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                        </div>
+                        <h3>Advanced Search & Filtering</h3>
+                        <p>Filter by date range, leads only, unread status, or search by keyword, visitor email, company, and IP.</p>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>1. Key Session Metrics & Analytics</h3>
+                <p>The Chat Logs header displays real-time operational KPIs:</p>
+
+                <ul>
+                    <li><strong>Total Conversations:</strong> Lifetime count of all visitor sessions initiated on the website.</li>
+                    <li><strong>Unread Sessions:</strong> Number of new visitor conversations that have not yet been reviewed by staff.</li>
+                    <li><strong>Active Today:</strong> Count of visitor interactions recorded in the current calendar day.</li>
+                    <li><strong>Starred / Favorites:</strong> High-priority architectural leads bookmarked by team members.</li>
+                    <li><strong>Total & Average Tokens:</strong> Comprehensive breakdown of prompt (input) vs completion (output) tokens.</li>
+                    <li><strong>Total Spend ($ USD):</strong> Aggregate dollar expenditure across all session transcripts.</li>
+                </ul>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>2. Inspecting Transcripts & Message Details</h3>
+                <p>Clicking on any session row in <a href="{{ route('dashboard.chat-sessions.index') }}" class="dash-doc-inline-link"><strong>AI &rarr; Chat Logs</strong></a> opens the dedicated transcript viewer:</p>
+
+                <div class="dash-table-wrap">
+                    <table class="dash-doc-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 200px;">Transcript Element</th>
+                                <th>Description & Insight</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Lead Information Card</strong></td>
+                                <td>Displays visitor Name, Email, Company, Project Name, IP Address, and Country origin captured by the Lead Intake Form.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Message Bubbles</strong></td>
+                                <td>Color-coded conversational view separating visitor queries (right) and assistant replies (left) with markdown rendering.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Token & Cost Badges</strong></td>
+                                <td>Each individual assistant response displays the exact model used, prompt tokens, completion tokens, and dollar cost for that turn.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Quick Action Bar</strong></td>
+                                <td>Buttons to <em>Convert to Enquiry</em>, <em>Toggle Star/Favorite</em>, <em>Mark as Read/Unread</em>, or <em>Delete Session</em>.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>3. 1-Click Converting Chat to Sales Enquiry</h3>
+
+                <div class="dash-doc-steps">
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">1</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Open the High-Intent Chat Session</h4>
+                            <p>Locate the conversation in <a href="{{ route('dashboard.chat-sessions.index') }}" class="dash-doc-inline-link"><strong>AI &rarr; Chat Logs</strong></a> and click to view the transcript.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">2</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Click "Convert to Enquiry"</h4>
+                            <p>Click the <strong>Convert to Quote Enquiry</strong> button in the top action toolbar.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">3</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Review Pre-Filled Quote Details</h4>
+                            <p>The system automatically transfers the customer's full name, email, company, project scope, and full chat transcript into the Azoogi Enquiry CRM.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">4</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Follow Up in Enquiries Dashboard</h4>
+                            <p>The enquiry is now tracked in <a href="{{ route('dashboard.enquiries.index', ['type' => 'quote']) }}" class="dash-doc-inline-link"><strong>Enquiries &rarr; Quote</strong></a> with direct links back to the original AI chat session.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        @endif
+
+        {{-- AI TEST SUITE & TOKEN BENCHMARKS --}}
+        @if ($activeTopic === 'ai-testing')
+            <article class="dash-card dash-doc-section" data-doc-block>
+                <div class="dash-doc-header">
+                    <h2>AI Model Testing, Tool Verification & Token Benchmarks</h2>
+                    <span class="dash-pill-active">AI Test Suite</span>
+                </div>
+                <p>This comprehensive test suite enables administrators and engineers to systematically test every registered tool, measure token consumption, observe latency, and verify accurate cost estimation across all supported AI engines (<strong>Anthropic Claude</strong>, <strong>Google Gemini</strong>, <strong>OpenRouter Gateway</strong>, and <strong>Prisha AI / Custom Endpoints</strong>).</p>
+
+                <div class="dash-doc-grid-cards">
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                        </div>
+                        <h3>Provider Comparison</h3>
+                        <p>Evaluate response fidelity, function calling accuracy, and output formats between Claude, Gemini, DeepSeek, and local Ollama models.</p>
+                        <a href="{{ route('dashboard.ai.models') }}" class="dash-doc-inline-link">Switch AI Provider &rarr;</a>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        </div>
+                        <h3>Token & Latency Auditing</h3>
+                        <p>Observe input prompt token overhead, tool definition schema sizing, completion token generation, and round-trip execution latency.</p>
+                        <a href="{{ route('dashboard.chat-sessions.index') }}" class="dash-doc-inline-link">Inspect Chat Logs &rarr;</a>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <h3>Cost Engine Verification</h3>
+                        <p>Verify that real-time USD cost calculation matches official provider rate cards across simple and complex multi-turn sessions.</p>
+                        <a href="{{ route('dashboard.ai.rates') }}" class="dash-doc-inline-link">View AI Rate Cards &rarr;</a>
+                    </div>
+
+                    <div class="dash-doc-feature-card">
+                        <div class="dash-doc-icon-wrap">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                        </div>
+                        <h3>100% Tool Coverage</h3>
+                        <p>Systematic test prompts covering all 6 registered function-calling tools: search, specs, datasheets, quotes, leads, and transcripts.</p>
+                    </div>
+                </div>
+
+                <div class="dash-doc-callout info">
+                    <strong>How to Benchmark Models:</strong> To benchmark a specific model, navigate to <a href="{{ route('dashboard.ai.models') }}" class="dash-doc-inline-link"><strong>AI &rarr; Models</strong></a>, select the target provider/model (e.g. <code>claude-opus-5-5</code>, <code>gemini-2.5-flash</code>, <code>deepseek/deepseek-chat</code>, or <code>qwen2.5-coder:3b</code>), and click <strong>Save All AI Settings</strong>. Then use the copy buttons below to paste each test prompt into the chat widget and check the resulting tokens in <a href="{{ route('dashboard.chat-sessions.index') }}" class="dash-doc-inline-link"><strong>Chat Logs</strong></a>.
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>1. Baseline Conversational Prompts (No Tools Triggered)</h3>
+                <p>Use these baseline questions to evaluate raw reasoning, response speed, and token cost without function execution overhead.</p>
+
+                <div class="dash-doc-code-block" style="margin-bottom: 12px;">
+                    <pre><code>Can you briefly introduce Azoogi and explain what type of lighting solutions you specialize in?</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="Can you briefly introduce Azoogi and explain what type of lighting solutions you specialize in?">Copy Prompt</button>
+                </div>
+
+                <div class="dash-doc-code-block" style="margin-bottom: 24px;">
+                    <pre><code>What is the difference between IP65 and IP68 waterproof ratings for architectural lighting?</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="What is the difference between IP65 and IP68 waterproof ratings for architectural lighting?">Copy Prompt</button>
+                </div>
+
+                <p style="font-size: 13px; color: var(--dash-muted);"><strong>Expected Outcome:</strong> Immediate fluent response without tool invocations (~150–350 total tokens).</p>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>2. Tool 1: Product Search & Filter (<code>public_search_and_filter_products</code>)</h3>
+                <p>Tests whether the model parses visitor requirements (category, application, IP rating, dimensions) into structured database filter arguments.</p>
+
+                <div class="dash-doc-code-block" style="margin-bottom: 12px;">
+                    <pre><code>I am looking for outdoor garden lights. What options do you have available?</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="I am looking for outdoor garden lights. What options do you have available?">Copy Prompt</button>
+                </div>
+
+                <div class="dash-doc-code-block" style="margin-bottom: 12px;">
+                    <pre><code>Show me your waterproof pool lighting fixtures with high IP rating.</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="Show me your waterproof pool lighting fixtures with high IP rating.">Copy Prompt</button>
+                </div>
+
+                <div class="dash-doc-code-block" style="margin-bottom: 24px;">
+                    <pre><code>Do you have any trimless bendable aluminium profiles around 50mm to 60mm width?</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="Do you have any trimless bendable aluminium profiles around 50mm to 60mm width?">Copy Prompt</button>
+                </div>
+
+                <p style="font-size: 13px; color: var(--dash-muted);"><strong>Expected Tool Call:</strong> <code>public_search_and_filter_products({"query": "garden light", "category": "Garden Light"})</code>. The model returns interactive product recommendation cards with thumbnails and links.</p>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>3. Tool 2: Product Specifications & Downloads (<code>public_get_product_details_and_downloads</code>)</h3>
+                <p>Tests whether the model resolves an entity slug/SKU and fetches deep technical parameters, cutouts, photometrics, and IES files.</p>
+
+                <div class="dash-doc-code-block" style="margin-bottom: 12px;">
+                    <pre><code>Can you give me the full technical specifications and download files for the 12W Garden Light?</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="Can you give me the full technical specifications and download files for the 12W Garden Light?">Copy Prompt</button>
+                </div>
+
+                <div class="dash-doc-code-block" style="margin-bottom: 24px;">
+                    <pre><code>What are the dimensions, cutouts, and available downloads for the Pool Light?</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="What are the dimensions, cutouts, and available downloads for the Pool Light?">Copy Prompt</button>
+                </div>
+
+                <p style="font-size: 13px; color: var(--dash-muted);"><strong>Expected Tool Call:</strong> <code>public_get_product_details_and_downloads({"slug": "12w-garden-light"})</code>.</p>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>4. Tool 3: Custom PDF Datasheet Generation (<code>public_generate_custom_datasheet</code>)</h3>
+                <p>Tests automated on-demand PDF compilation for architectural specifiers and lighting designers.</p>
+
+                <div class="dash-doc-code-block" style="margin-bottom: 12px;">
+                    <pre><code>Could you generate a custom PDF datasheet for the 7W Garden Light so I can share it with my client?</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="Could you generate a custom PDF datasheet for the 7W Garden Light so I can share it with my client?">Copy Prompt</button>
+                </div>
+
+                <div class="dash-doc-code-block" style="margin-bottom: 24px;">
+                    <pre><code>Please create a spec sheet for the trimless-bendable-profile-526x137mm.</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="Please create a spec sheet for the trimless-bendable-profile-526x137mm.">Copy Prompt</button>
+                </div>
+
+                <p style="font-size: 13px; color: var(--dash-muted);"><strong>Expected Tool Call:</strong> <code>public_generate_custom_datasheet({"slug": "7w-garden-light"})</code>. The model responds with a direct download button and PDF URL.</p>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>5. Tool 4: Quote Cart Management (<code>public_manage_quote_cart</code>)</h3>
+                <p>Tests visitor session quote cart manipulation (adding line items, viewing cart contents, and clearing items).</p>
+
+                <div class="dash-doc-code-block" style="margin-bottom: 12px;">
+                    <pre><code>Please add 15 units of the 12W Garden Light to my quote cart.</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="Please add 15 units of the 12W Garden Light to my quote cart.">Copy Prompt (Add)</button>
+                </div>
+
+                <div class="dash-doc-code-block" style="margin-bottom: 12px;">
+                    <pre><code>What items and quantities do I currently have in my quote cart?</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="What items and quantities do I currently have in my quote cart?">Copy Prompt (View)</button>
+                </div>
+
+                <div class="dash-doc-code-block" style="margin-bottom: 24px;">
+                    <pre><code>Please remove everything from my quote cart.</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="Please remove everything from my quote cart.">Copy Prompt (Clear)</button>
+                </div>
+
+                <p style="font-size: 13px; color: var(--dash-muted);"><strong>Expected Tool Call:</strong> <code>public_manage_quote_cart({"action": "add", "items": [{"slug": "12w-garden-light", "quantity": 15}]})</code>.</p>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>6. Tool 5: Lead Submission & CRM Intake (<code>public_submit_lead_enquiry</code>)</h3>
+                <p>Tests structured multi-field extraction (name, email, phone number, project title, and requirements) to automatically generate database lead records.</p>
+
+                <div class="dash-doc-code-block" style="margin-bottom: 24px;">
+                    <pre><code>I want to submit an inquiry for our new commercial project. My name is Alex Turner, email is alex.turner@example.com, phone is 0412345678, project name is 'Riverside Residences', and we need custom strip lighting for 50 balconies.</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="I want to submit an inquiry for our new commercial project. My name is Alex Turner, email is alex.turner@example.com, phone is 0412345678, project name is 'Riverside Residences', and we need custom strip lighting for 50 balconies.">Copy Prompt</button>
+                </div>
+
+                <p style="font-size: 13px; color: var(--dash-muted);"><strong>Expected Tool Call:</strong> <code>public_submit_lead_enquiry({"name": "Alex Turner", "email": "alex.turner@example.com", "phone": "0412345678", "project_name": "Riverside Residences", "message": "..."})</code>. Automatically creates an active enquiry in the CRM.</p>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>7. Tool 6: Sales Transcript Handoff (<code>public_send_chat_transcript_to_sales</code>)</h3>
+                <p>Tests compiling the entire visitor chat history and dispatching email notifications to sales engineers.</p>
+
+                <div class="dash-doc-code-block" style="margin-bottom: 24px;">
+                    <pre><code>Can you please email a copy of this entire conversation to sales@azoogi.com? My name is Alex.</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="Can you please email a copy of this entire conversation to sales@azoogi.com? My name is Alex.">Copy Prompt</button>
+                </div>
+
+                <p style="font-size: 13px; color: var(--dash-muted);"><strong>Expected Tool Call:</strong> <code>public_send_chat_transcript_to_sales({"recipient_email": "sales@azoogi.com", "customer_name": "Alex"})</code>.</p>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>8. Multi-Step Multi-Turn Workflow (Stress Benchmark)</h3>
+                <p>Execute this 4-step sequence in one continuous chat session to test conversational memory retention, token accumulation across turns, and combined tool orchestration:</p>
+
+                <div class="dash-doc-steps-list">
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">1</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Step 1: Product Discovery</h4>
+                            <div class="dash-doc-code-block" style="margin-top: 6px;">
+                                <pre><code>Find me 3 garden lights suitable for a villa driveway.</code></pre>
+                                <button type="button" class="dash-doc-copy-btn" data-copy-text="Find me 3 garden lights suitable for a villa driveway.">Copy Step 1</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">2</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Step 2: Technical Comparison</h4>
+                            <div class="dash-doc-code-block" style="margin-top: 6px;">
+                                <pre><code>Which one has higher wattage between the 7W and 12W models?</code></pre>
+                                <button type="button" class="dash-doc-copy-btn" data-copy-text="Which one has higher wattage between the 7W and 12W models?">Copy Step 2</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">3</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Step 3: Cart Modification</h4>
+                            <div class="dash-doc-code-block" style="margin-top: 6px;">
+                                <pre><code>Add 8 units of the 12W model to my quote.</code></pre>
+                                <button type="button" class="dash-doc-copy-btn" data-copy-text="Add 8 units of the 12W model to my quote.">Copy Step 3</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">4</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Step 4: Lead Submission</h4>
+                            <div class="dash-doc-code-block" style="margin-top: 6px;">
+                                <pre><code>My name is Sarah (sarah@example.com, 0498765432) for the 'Villa Royale' project. Please submit my quote.</code></pre>
+                                <button type="button" class="dash-doc-copy-btn" data-copy-text="My name is Sarah (sarah@example.com, 0498765432) for the 'Villa Royale' project. Please submit my quote.">Copy Step 4</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
+
+                <h3>9. Model Comparison & Benchmark Reference</h3>
+                <div class="dash-table-wrap">
+                    <table class="dash-doc-table">
+                        <thead>
+                            <tr>
+                                <th>AI Model</th>
+                                <th>Provider / Route</th>
+                                <th>Tool Calling Support</th>
+                                <th>Avg Latency</th>
+                                <th>Cost Profile (per 1M tokens)</th>
+                                <th>Recommended Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>claude-opus-5-5</strong></td>
+                                <td>Anthropic Direct</td>
+                                <td><span class="dash-pill-active">Native Tools</span></td>
+                                <td>~1.2s – 2.0s</td>
+                                <td>$15.00 In / $75.00 Out</td>
+                                <td>Highest reasoning quality & complex specification drafting.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>gemini-2.5-flash</strong></td>
+                                <td>Google Gemini</td>
+                                <td><span class="dash-pill-active">Native Tools</span></td>
+                                <td>~0.4s – 0.8s</td>
+                                <td>$0.15 In / $0.60 Out</td>
+                                <td><strong>Recommended Default</strong>: Ultra-fast, highly accurate tool calls, lowest spend.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>gemini-2.5-pro</strong></td>
+                                <td>Google Gemini</td>
+                                <td><span class="dash-pill-active">Native Tools</span></td>
+                                <td>~1.0s – 1.8s</td>
+                                <td>$1.25 In / $5.00 Out</td>
+                                <td>Advanced architectural lighting engineering.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>deepseek/deepseek-chat</strong></td>
+                                <td>OpenRouter Gateway</td>
+                                <td><span class="dash-pill-active">Native Tools</span></td>
+                                <td>~0.6s – 1.2s</td>
+                                <td>$0.14 In / $0.28 Out</td>
+                                <td>Maximum economy with DeepSeek V3 open-weights flagship.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>openai/gpt-4o-mini</strong></td>
+                                <td>OpenRouter Gateway</td>
+                                <td><span class="dash-pill-active">Native Tools</span></td>
+                                <td>~0.5s – 1.0s</td>
+                                <td>$0.15 In / $0.60 Out</td>
+                                <td>Reliable OpenAI tool execution at budget rates.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>qwen2.5-coder:3b</strong></td>
+                                <td>Prisha AI / OpenWebUI</td>
+                                <td><span class="dash-pill-active">Text / Prompt Injection</span></td>
+                                <td>~0.8s – 2.2s</td>
+                                <td>$0.00 (Self-hosted GPU)</td>
+                                <td>Private, self-hosted on-premise execution.</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </article>
         @endif
