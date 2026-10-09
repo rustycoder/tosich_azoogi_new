@@ -189,8 +189,7 @@ class ChatController extends Controller
         if (! empty($uuid)) {
             $session = ChatSession::where('uuid', $uuid)->first();
             if ($session) {
-                $session->messages()->delete();
-                $session->update(['messages_count' => 0, 'status' => 'active']);
+                $session->update(['status' => 'completed']);
             }
         }
 

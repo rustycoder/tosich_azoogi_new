@@ -6,6 +6,7 @@ namespace Tests\Feature;
 
 use App\Models\ChatSession;
 use App\Models\Product;
+use App\Services\Chat\Tools\QuoteCartManagerTool;
 use Database\Seeders\PageSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -90,6 +91,40 @@ class ChatApiTest extends TestCase
         $this->assertSame(2, $quoteList[$product->id]['quantity']);
     }
 
+    public function test_quote_cart_manager_tool_can_update_quantity(): void
+    {
+        $product = Product::create([
+            'airtable_id' => 'rec_chat_test_03',
+            'product_name' => '12W Garden Light',
+            'slug' => '12w-garden-light',
+            'status' => 'active',
+            'category' => 'Garden',
+            'product_code' => 'GL003',
+        ]);
+
+        $tool = app(QuoteCartManagerTool::class);
+
+        // 1. Initial add of 8 units
+        $tool->execute([
+            'action' => 'add',
+            'product_identifier' => 'GL003',
+            'quantity' => 8,
+        ]);
+
+        $quoteList = session()->get('visitor_quote_list', []);
+        $this->assertSame(8, $quoteList[$product->id]['quantity']);
+
+        // 2. Update quantity from 8 to 16
+        $tool->execute([
+            'action' => 'update',
+            'product_identifier' => 'GL003',
+            'quantity' => 16,
+        ]);
+
+        $quoteList = session()->get('visitor_quote_list', []);
+        $this->assertSame(16, $quoteList[$product->id]['quantity']);
+    }
+
     public function test_visitor_can_load_conversation_history_by_session_uuid(): void
     {
         $session = ChatSession::create([
@@ -124,7 +159,7 @@ class ChatApiTest extends TestCase
             'uuid' => 'b2c3d4e5-f6a7-8901-bcde-f12345678901',
             'ip_address' => '127.0.0.1',
             'status' => 'active',
-            'messages_count' => 2,
+            'messages_count' => 1,
         ]);
 
         $session->messages()->create([
@@ -139,7 +174,11 @@ class ChatApiTest extends TestCase
         $response->assertOk()
             ->assertJson(['status' => 'success']);
 
-        $this->assertDatabaseCount('chat_messages', 0);
+        $this->assertDatabaseHas('chat_sessions', [
+            'id' => $session->id,
+            'status' => 'completed',
+        ]);
+        $this->assertDatabaseCount('chat_messages', 1);
     }
 
     public function test_visitor_can_initialize_session_with_pre_chat_intake_data(): void

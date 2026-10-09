@@ -16,7 +16,7 @@ class QuoteCartManagerTool implements IChatTool
 
     public function getDescription(): string
     {
-        return 'Adds, removes, or views items in the visitor’s active quote list during chat, synchronizing with the website Quote Request cart.';
+        return 'Manages the visitor’s active quote list during chat (adding products, updating/setting item quantities, removing items, viewing cart, or clearing cart), synchronizing with the website Quote Request cart.';
     }
 
     public function getParameters(): array
@@ -27,16 +27,20 @@ class QuoteCartManagerTool implements IChatTool
             'properties' => [
                 'action' => [
                     'type' => 'string',
-                    'enum' => ['add', 'remove', 'view', 'clear'],
-                    'description' => 'Action to perform: add, remove, view, or clear.',
+                    'enum' => ['add', 'update', 'remove', 'view', 'clear'],
+                    'description' => 'Action to perform: "update" (use when user wants to change, set, or modify the quantity of an existing item, e.g. from 8 to 16 sets exact total quantity = 16), "add" (use when adding a new item or adding additional units to existing), "remove" (deletes item), "view" (shows current list), or "clear" (empties list).',
+                ],
+                'product_identifier' => [
+                    'type' => 'string',
+                    'description' => 'The product ID, product code / SKU (e.g. "GL003"), product slug, or product name to add, update, or remove.',
                 ],
                 'product_id' => [
-                    'type' => 'integer',
-                    'description' => 'Product ID (required for add and remove).',
+                    'type' => 'string',
+                    'description' => 'Alias for product_identifier. Can be numeric ID (15), product code ("GL003"), or slug.',
                 ],
                 'quantity' => [
                     'type' => 'integer',
-                    'description' => 'Quantity to add or set (default: 1).',
+                    'description' => 'The quantity number to add or the new total quantity to set when updating (default: 1).',
                     'default' => 1,
                 ],
             ],
@@ -45,13 +49,14 @@ class QuoteCartManagerTool implements IChatTool
 
     public function execute(array $arguments): array
     {
-        $action = (string) ($arguments['action'] ?? 'view');
-        $productId = $arguments['product_id'] ?? null;
+        $action = strtolower((string) ($arguments['action'] ?? 'view'));
+        $rawId = $arguments['product_identifier'] ?? $arguments['product_id'] ?? $arguments['product_code'] ?? $arguments['sku'] ?? $arguments['slug'] ?? null;
+        $productId = is_string($rawId) ? trim($rawId) : $rawId;
         $qty = max(1, (int) ($arguments['quantity'] ?? 1));
 
         $quoteList = session()->get('visitor_quote_list', []);
 
-        if ($action === 'add' && ! empty($productId)) {
+        if (in_array($action, ['add', 'update', 'set', 'update_quantity', 'set_quantity'], true) && ! empty($productId)) {
             $product = Product::query()
                 ->where(function ($q) use ($productId) {
                     if (is_numeric($productId)) {
@@ -77,6 +82,10 @@ class QuoteCartManagerTool implements IChatTool
                 $coverUrl = str_starts_with($product->cover, 'http') ? $product->cover : asset($product->cover);
             }
 
+            $newQty = in_array($action, ['update', 'set', 'update_quantity', 'set_quantity'], true)
+                ? $qty
+                : ($currentQty + $qty);
+
             $quoteList[$prodKey] = [
                 'id' => (string) $product->id,
                 'db_id' => (string) $product->id,
@@ -84,7 +93,7 @@ class QuoteCartManagerTool implements IChatTool
                 'name' => $product->product_name,
                 'code' => $product->product_code,
                 'sku' => $product->product_code,
-                'quantity' => $currentQty + $qty,
+                'quantity' => $newQty,
                 'image_url' => $coverUrl ?: asset('assets/quote.webp'),
                 'image' => $coverUrl ?: asset('assets/quote.webp'),
                 'url' => $product->publicPath() ?: route('products.show', $product->slug ?: $product->id),
@@ -92,9 +101,12 @@ class QuoteCartManagerTool implements IChatTool
 
             session()->put('visitor_quote_list', $quoteList);
 
+            $actionWord = in_array($action, ['update', 'set', 'update_quantity', 'set_quantity'], true) ? 'Updated' : 'Added';
+
             return [
                 'result' => [
-                    'message' => "Added {$qty}x '{$product->product_name}' to your quote list.",
+                    'status' => 'success',
+                    'message' => "{$actionWord} '{$product->product_name}' (Qty: {$newQty}) in your quote list.",
                     'total_items' => count($quoteList),
                     'quote_items' => array_values($quoteList),
                 ],
@@ -125,6 +137,7 @@ class QuoteCartManagerTool implements IChatTool
 
             return [
                 'result' => [
+                    'status' => 'success',
                     'message' => $product ? "Removed '{$product->product_name}' from quote list." : 'Product removed from quote list.',
                     'total_items' => count($quoteList),
                     'quote_items' => array_values($quoteList),
@@ -142,6 +155,7 @@ class QuoteCartManagerTool implements IChatTool
 
             return [
                 'result' => [
+                    'status' => 'success',
                     'message' => 'Quote list cleared.',
                     'total_items' => 0,
                     'quote_items' => [],
@@ -157,6 +171,7 @@ class QuoteCartManagerTool implements IChatTool
         // Action: view
         return [
             'result' => [
+                'status' => 'success',
                 'total_items' => count($quoteList),
                 'quote_items' => array_values($quoteList),
             ],

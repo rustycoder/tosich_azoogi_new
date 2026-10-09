@@ -2533,46 +2533,83 @@ php artisan geo:generate</code></pre>
                 <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 28px 0;">
 
                 <h3>8. Multi-Step Multi-Turn Workflow (Stress Benchmark)</h3>
-                <p>Execute this 4-step sequence in one continuous chat session to test conversational memory retention, token accumulation across turns, and combined tool orchestration:</p>
+                <p>Execute this 7-step sequence in one continuous chat session to test conversational memory retention, token accumulation across turns, and combined tool orchestration (baseline reasoning, product discovery, technical comparison, custom datasheet compilation, quote cart addition, unit quantity modifications, and CRM enquiry intake):</p>
 
                 <div class="dash-doc-steps-list">
                     <div class="dash-doc-step">
                         <div class="dash-doc-step-num">1</div>
                         <div class="dash-doc-step-content">
-                            <h4>Step 1: Product Discovery</h4>
+                            <h4>Step 1: Baseline Conversational Query (No Tools Triggered)</h4>
+                            <p style="margin: 2px 0 6px; font-size: 12.5px; color: var(--dash-muted);">Establishes initial session context, verifies persona tone, and tests raw LLM speed without tool invocation overhead.</p>
                             <div class="dash-doc-code-block" style="margin-top: 6px;">
-                                <pre><code>Find me 3 garden lights suitable for a villa driveway.</code></pre>
-                                <button type="button" class="dash-doc-copy-btn" data-copy-text="Find me 3 garden lights suitable for a villa driveway.">Copy Step 1</button>
+                                <pre><code>Can you briefly introduce Azoogi and explain your warranty policies on architectural lighting?</code></pre>
+                                <button type="button" class="dash-doc-copy-btn" data-copy-text="Can you briefly introduce Azoogi and explain your warranty policies on architectural lighting?">Copy Step 1</button>
                             </div>
                         </div>
                     </div>
                     <div class="dash-doc-step">
                         <div class="dash-doc-step-num">2</div>
                         <div class="dash-doc-step-content">
-                            <h4>Step 2: Technical Comparison</h4>
+                            <h4>Step 2: Product Discovery & Search</h4>
+                            <p style="margin: 2px 0 6px; font-size: 12.5px; color: var(--dash-muted);">Tests product filtering by category and architectural application via <code>public_search_and_filter_products</code>.</p>
                             <div class="dash-doc-code-block" style="margin-top: 6px;">
-                                <pre><code>Which one has higher wattage between the 7W and 12W models?</code></pre>
-                                <button type="button" class="dash-doc-copy-btn" data-copy-text="Which one has higher wattage between the 7W and 12W models?">Copy Step 2</button>
+                                <pre><code>Find me 3 garden lights suitable for a villa driveway.</code></pre>
+                                <button type="button" class="dash-doc-copy-btn" data-copy-text="Find me 3 garden lights suitable for a villa driveway.">Copy Step 2</button>
                             </div>
                         </div>
                     </div>
                     <div class="dash-doc-step">
                         <div class="dash-doc-step-num">3</div>
                         <div class="dash-doc-step-content">
-                            <h4>Step 3: Cart Modification</h4>
+                            <h4>Step 3: Technical Comparison & Specification</h4>
+                            <p style="margin: 2px 0 6px; font-size: 12.5px; color: var(--dash-muted);">Tests retrieving granular photometric specs, dimensions, and IP ratings via <code>public_get_product_specs</code>.</p>
                             <div class="dash-doc-code-block" style="margin-top: 6px;">
-                                <pre><code>Add 8 units of the 12W model to my quote.</code></pre>
-                                <button type="button" class="dash-doc-copy-btn" data-copy-text="Add 8 units of the 12W model to my quote.">Copy Step 3</button>
+                                <pre><code>Which one has higher wattage between the 7W and 12W models, and what IP rating does it have?</code></pre>
+                                <button type="button" class="dash-doc-copy-btn" data-copy-text="Which one has higher wattage between the 7W and 12W models, and what IP rating does it have?">Copy Step 3</button>
                             </div>
                         </div>
                     </div>
                     <div class="dash-doc-step">
                         <div class="dash-doc-step-num">4</div>
                         <div class="dash-doc-step-content">
-                            <h4>Step 4: Lead Submission</h4>
+                            <h4>Step 4: Custom PDF Datasheet Generation & Download</h4>
+                            <p style="margin: 2px 0 6px; font-size: 12.5px; color: var(--dash-muted);">Tests on-demand PDF compilation and download card generation via <code>public_generate_custom_datasheet</code>.</p>
+                            <div class="dash-doc-code-block" style="margin-top: 6px;">
+                                <pre><code>Could you generate a custom PDF datasheet for the 12W Garden Light so I can share it with my client?</code></pre>
+                                <button type="button" class="dash-doc-copy-btn" data-copy-text="Could you generate a custom PDF datasheet for the 12W Garden Light so I can share it with my client?">Copy Step 4</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">5</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Step 5: Quote Cart Addition</h4>
+                            <p style="margin: 2px 0 6px; font-size: 12.5px; color: var(--dash-muted);">Tests adding line items to visitor quote state via <code>public_manage_quote_cart</code>.</p>
+                            <div class="dash-doc-code-block" style="margin-top: 6px;">
+                                <pre><code>Add 8 units of the 12W Garden Light to my quote list.</code></pre>
+                                <button type="button" class="dash-doc-copy-btn" data-copy-text="Add 8 units of the 12W Garden Light to my quote list.">Copy Step 5</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">6</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Step 6: Changing Product Quantities / Units in Cart</h4>
+                            <p style="margin: 2px 0 6px; font-size: 12.5px; color: var(--dash-muted);">Tests updating quantities of an existing cart item via <code>public_manage_quote_cart</code>.</p>
+                            <div class="dash-doc-code-block" style="margin-top: 6px;">
+                                <pre><code>Please update the quantity of the 12W Garden Light in my quote list from 8 units to 16 units.</code></pre>
+                                <button type="button" class="dash-doc-copy-btn" data-copy-text="Please update the quantity of the 12W Garden Light in my quote list from 8 units to 16 units.">Copy Step 6</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">7</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Step 7: Lead CRM Intake & Quote Enquiry Submission</h4>
+                            <p style="margin: 2px 0 6px; font-size: 12.5px; color: var(--dash-muted);">Tests multi-field lead extraction and CRM conversion via <code>public_submit_lead_enquiry</code>.</p>
                             <div class="dash-doc-code-block" style="margin-top: 6px;">
                                 <pre><code>My name is Sarah (sarah@example.com, 0498765432) for the 'Villa Royale' project. Please submit my quote.</code></pre>
-                                <button type="button" class="dash-doc-copy-btn" data-copy-text="My name is Sarah (sarah@example.com, 0498765432) for the 'Villa Royale' project. Please submit my quote.">Copy Step 4</button>
+                                <button type="button" class="dash-doc-copy-btn" data-copy-text="My name is Sarah (sarah@example.com, 0498765432) for the 'Villa Royale' project. Please submit my quote.">Copy Step 7</button>
                             </div>
                         </div>
                     </div>

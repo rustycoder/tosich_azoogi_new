@@ -170,6 +170,7 @@ class ProductSearchAndFilterTool implements IChatTool
             return [
                 'type' => 'product_card',
                 'id' => $p->id,
+                'slug' => $p->slug ?: (string) $p->id,
                 'airtable_id' => $p->airtable_id,
                 'name' => $p->product_name,
                 'code' => $p->product_code,
@@ -184,8 +185,10 @@ class ProductSearchAndFilterTool implements IChatTool
 
         $compactProducts = array_map(function ($p) {
             return [
+                'id' => $p['id'],
                 'name' => $p['name'],
                 'code' => $p['code'],
+                'slug' => $p['slug'] ?? null,
                 'category' => $p['category'],
                 'specs' => $p['description'],
                 'url' => $p['url'],

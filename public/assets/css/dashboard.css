@@ -3632,7 +3632,7 @@ code {
   grid-template-columns: 280px minmax(0, 1fr);
   gap: 24px;
   align-items: start;
-  max-width: 1360px;
+  max-width: 100%;
   width: 100%;
 }
 
@@ -3754,12 +3754,24 @@ code {
   flex-direction: column;
   gap: 20px;
   min-width: 0;
-  max-width: 1020px;
+  max-width: 100%;
   width: 100%;
 }
 
+.dash-card.dash-doc-section,
 .dash-doc-section {
-  padding: 24px;
+  display: block;
+  padding: 28px 32px;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+}
+
+.dash-doc-section > * {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .dash-doc-header {
@@ -3767,7 +3779,7 @@ code {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   border-bottom: 1px solid var(--dash-line);
   padding-bottom: 12px;
 }
@@ -3782,7 +3794,7 @@ code {
 .dash-doc-section h3 {
   font-size: 15px;
   font-weight: 600;
-  margin: 20px 0 10px;
+  margin: 24px 0 10px;
   color: var(--dash-ink);
 }
 
@@ -3791,13 +3803,16 @@ code {
   font-size: 14px;
   line-height: 1.6;
   margin: 0 0 12px;
+  overflow-wrap: break-word;
 }
 
 .dash-doc-grid-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 14px;
   margin: 16px 0;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .dash-doc-feature-card {
@@ -3808,6 +3823,8 @@ code {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .dash-doc-icon-wrap {
@@ -3906,6 +3923,16 @@ code {
   border-left: 4px solid var(--dash-green);
   background: var(--dash-fill);
   color: var(--dash-ink);
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+}
+
+.dash-doc-callout code,
+.dash-doc-section code {
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .dash-doc-callout.info {
@@ -3947,10 +3974,22 @@ code {
   font-weight: 600;
 }
 
+.dash-doc-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 16px 0;
+  border: 1px solid var(--dash-line);
+  border-radius: 8px;
+  background: var(--dash-card);
+  box-sizing: border-box;
+}
+
 .dash-doc-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
+  min-width: 600px;
 }
 
 .dash-doc-table th,
@@ -3975,6 +4014,9 @@ code {
   border-radius: 8px;
   padding: 14px 16px;
   margin: 12px 0;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .dash-doc-code-block pre {
@@ -3984,6 +4026,10 @@ code {
   font-size: 12.5px;
   line-height: 1.55;
   color: #d8e4d6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-width: 100%;
+  padding-right: 90px;
 }
 
 .dash-doc-copy-btn {
@@ -3999,6 +4045,7 @@ code {
   border-radius: 4px;
   cursor: pointer;
   transition: all .15s ease;
+  z-index: 2;
 }
 
 .dash-doc-copy-btn:hover {

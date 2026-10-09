@@ -29,11 +29,15 @@ class CustomDatasheetGeneratorTool implements IChatTool
     {
         return [
             'type' => 'object',
-            'required' => ['product_id'],
+            'required' => ['product_identifier'],
             'properties' => [
+                'product_identifier' => [
+                    'type' => 'string',
+                    'description' => 'The product ID, product code SKU (e.g. "GL003"), slug, or product name.',
+                ],
                 'product_id' => [
                     'type' => 'string',
-                    'description' => 'Product ID or Airtable ID.',
+                    'description' => 'Alias for product_identifier.',
                 ],
                 'product_code' => [
                     'type' => 'string',
@@ -53,7 +57,7 @@ class CustomDatasheetGeneratorTool implements IChatTool
 
     public function execute(array $arguments): array
     {
-        $id = (string) ($arguments['product_id'] ?? '');
+        $id = trim((string) ($arguments['product_identifier'] ?? $arguments['product_id'] ?? $arguments['product_code'] ?? $arguments['slug'] ?? ''));
         $product = Product::query()
             ->where(function ($q) use ($id) {
                 if (is_numeric($id)) {
@@ -61,13 +65,14 @@ class CustomDatasheetGeneratorTool implements IChatTool
                 }
                 $q->orWhere('airtable_id', $id)
                     ->orWhere('slug', $id)
-                    ->orWhere('product_code', $id);
+                    ->orWhere('product_code', $id)
+                    ->orWhere('product_name', 'like', "%{$id}%");
             })
             ->first();
 
         if (! $product) {
             return [
-                'result' => ['error' => "Product not found: {$id}"],
+                'result' => ['error' => "Product not found matching: {$id}"],
             ];
         }
 
