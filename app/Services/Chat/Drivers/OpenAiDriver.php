@@ -72,7 +72,17 @@ class OpenAiDriver implements IChatLlmDriver
             }, array_values($uniqueTools));
         }
 
+        $headers = [];
+        if ($this->isOpenRouter()) {
+            $headers['HTTP-Referer'] = (string) config('app.url', 'https://azoogi.com.au');
+            $headers['X-Title'] = 'Azoogi Lighting';
+            if (! isset($payload['max_tokens'])) {
+                $payload['max_tokens'] = 2048;
+            }
+        }
+
         $response = Http::withToken($this->apiKey)
+            ->withHeaders($headers)
             ->timeout(120)
             ->post("{$this->baseUrl}/chat/completions", $payload);
 
@@ -82,6 +92,7 @@ class OpenAiDriver implements IChatLlmDriver
             if (str_contains($body, 'NoneType') || str_contains($body, 'startswith') || str_contains($body, 'chat_id')) {
                 $payload['chat_id'] = 'api_bypass_fix';
                 $response = Http::withToken($this->apiKey)
+                    ->withHeaders($headers)
                     ->timeout(120)
                     ->post("{$this->baseUrl}/chat/completions", $payload);
             }
@@ -137,5 +148,14 @@ class OpenAiDriver implements IChatLlmDriver
         $host = (string) parse_url($this->baseUrl, PHP_URL_HOST);
 
         return str_contains($host, 'openwebui') || str_contains($host, 'webui');
+    }
+
+    protected function isOpenRouter(): bool
+    {
+        if (empty($this->baseUrl)) {
+            return false;
+        }
+
+        return str_contains($this->baseUrl, 'openrouter.ai');
     }
 }
