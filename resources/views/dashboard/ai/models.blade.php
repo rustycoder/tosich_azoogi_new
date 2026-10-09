@@ -144,7 +144,8 @@
                             <label class="dash-label" for="input_anthropic_model">Model Name</label>
                             <div class="dash-select-wrap" style="width:100%;">
                                 <select name="anthropic_model" id="input_anthropic_model" class="dash-select" style="width:100%;font-family:monospace;font-size:12.5px;">
-                                    <option value="claude-3-7-sonnet-latest" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? 'claude-3-5-sonnet-20241022') === 'claude-3-7-sonnet-latest' ? 'selected' : '' }}>claude-3-7-sonnet-latest (Recommended - Hybrid Reasoning Flagship)</option>
+                                    <option value="claude-opus-5-5" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? '') === 'claude-opus-5-5' ? 'selected' : '' }}>claude-opus-5-5 (Custom / Authorized Opus Tier)</option>
+                                    <option value="claude-3-7-sonnet-latest" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? 'claude-3-5-sonnet-20241022') === 'claude-3-7-sonnet-latest' ? 'selected' : '' }}>claude-3-7-sonnet-latest (Hybrid Reasoning Flagship)</option>
                                     <option value="claude-3-7-sonnet-20250219" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? '') === 'claude-3-7-sonnet-20250219' ? 'selected' : '' }}>claude-3-7-sonnet-20250219 (Pinned Release)</option>
                                     <option value="claude-3-5-sonnet-20241022" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? 'claude-3-5-sonnet-20241022') === 'claude-3-5-sonnet-20241022' ? 'selected' : '' }}>claude-3-5-sonnet-20241022 (High Quality)</option>
                                     <option value="claude-3-5-sonnet-latest" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? '') === 'claude-3-5-sonnet-latest' ? 'selected' : '' }}>claude-3-5-sonnet-latest</option>
@@ -155,7 +156,7 @@
                                     <option value="claude-3-sonnet-20240229" {{ old('anthropic_model', $aiConfig['anthropic_model'] ?? '') === 'claude-3-sonnet-20240229' ? 'selected' : '' }}>claude-3-sonnet-20240229</option>
                                     @php
                                         $currAnthropic = old('anthropic_model', $aiConfig['anthropic_model'] ?? 'claude-3-5-sonnet-20241022');
-                                        $standardAnthropic = ['claude-3-7-sonnet-latest', 'claude-3-7-sonnet-20250219', 'claude-3-5-sonnet-20241022', 'claude-3-5-sonnet-latest', 'claude-3-5-haiku-20241022', 'claude-3-5-haiku-latest', 'claude-3-opus-20240229', 'claude-3-haiku-20240307', 'claude-3-sonnet-20240229'];
+                                        $standardAnthropic = ['claude-opus-5-5', 'claude-3-7-sonnet-latest', 'claude-3-7-sonnet-20250219', 'claude-3-5-sonnet-20241022', 'claude-3-5-sonnet-latest', 'claude-3-5-haiku-20241022', 'claude-3-5-haiku-latest', 'claude-3-opus-20240229', 'claude-3-haiku-20240307', 'claude-3-sonnet-20240229'];
                                     @endphp
                                     @if(!in_array($currAnthropic, $standardAnthropic) && filled($currAnthropic))
                                         <option value="{{ $currAnthropic }}" selected>{{ $currAnthropic }} (Custom)</option>
