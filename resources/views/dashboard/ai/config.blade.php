@@ -270,51 +270,6 @@
                     </div>
                 </div>
 
-                <!-- OpenAI Option -->
-                <div class="provider-radio-card" style="border:2px solid {{ ($aiConfig['driver'] ?? '') === 'openai' ? 'var(--accent)' : 'var(--line)' }};background:var(--bg-2);border-radius:8px;padding:18px;position:relative;display:flex;flex-direction:column;justify-content:space-between;">
-                    <div>
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-                            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;margin:0;white-space:nowrap;">
-                                <input type="radio" name="driver" value="openai" {{ ($aiConfig['driver'] ?? '') === 'openai' ? 'checked' : '' }} style="accent-color:var(--accent);transform:scale(1.15);">
-                                <span style="font-weight:700;font-size:16px;color:var(--ink);white-space:nowrap;">OpenAI Direct</span>
-                            </label>
-                        </div>
-                        <p style="margin:0 0 16px 0;font-size:12px;color:var(--muted);line-height:1.4;">
-                            Direct API connection to OpenAI models including GPT-4o and lightweight mini models.
-                        </p>
-
-                        <!-- API Key Input -->
-                        <div class="dash-field" style="margin-bottom:12px;">
-                            <label style="font-size:12px;font-weight:600;margin-bottom:4px;display:flex;justify-content:space-between;">
-                                <span>OpenAI API Key</span>
-                                <span style="font-weight:normal;color:var(--muted);font-size:11px;">(Database Stored)</span>
-                            </label>
-                            <div style="position:relative;display:flex;align-items:center;">
-                                <input type="password" name="openai_api_key" id="input_openai_api_key" value="{{ $aiConfig['openai_api_key'] ?? '' }}" placeholder="Paste OpenAI API Key (sk-...)" style="width:100%;font-size:12px;padding:8px 68px 8px 12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;color:var(--ink);font-family:monospace;">
-                                <div style="position:absolute;right:6px;display:flex;align-items:center;gap:2px;">
-                                    <button type="button" class="js-toggle-key-visibility" data-target="input_openai_api_key" style="background:none;border:none;cursor:pointer;color:var(--muted);padding:4px;display:flex;align-items:center;" title="View / Hide API Key">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                                    </button>
-                                    <button type="button" class="js-copy-key-btn" data-target="input_openai_api_key" style="background:none;border:none;cursor:pointer;color:var(--muted);padding:4px;display:flex;align-items:center;" title="Copy API Key to clipboard">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Model Selector -->
-                        <div class="dash-field" style="margin-bottom:0;">
-                            <label style="font-size:12px;font-weight:600;margin-bottom:4px;display:block;">Model Name</label>
-                            <input type="text" name="openai_model" id="input_openai_model" value="{{ old('openai_model', $aiConfig['openai_model'] ?? 'gpt-4o-mini') }}" list="openai_models_list" style="width:100%;font-size:12px;padding:8px 12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;color:var(--ink);font-family:monospace;">
-                            <datalist id="openai_models_list">
-                                <option value="gpt-4o-mini">gpt-4o-mini (Fast & Cost Effective)</option>
-                                <option value="gpt-4o">gpt-4o (Full Flagship)</option>
-                                <option value="o3-mini">o3-mini (Reasoning Model)</option>
-                            </datalist>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Custom Providers Dynamic List -->
                 @foreach($customProviders as $cpId => $cp)
                     <div class="provider-radio-card" style="border:2px solid {{ ($aiConfig['driver'] ?? '') === $cpId ? 'var(--accent)' : 'var(--line)' }};background:var(--bg-2);border-radius:8px;padding:18px;position:relative;display:flex;flex-direction:column;justify-content:space-between;">
@@ -399,7 +354,6 @@
                         <option value="anthropic" {{ ($aiConfig['driver'] ?? '') === 'anthropic' ? 'selected' : '' }}>Anthropic Claude</option>
                         <option value="openrouter" {{ ($aiConfig['driver'] ?? '') === 'openrouter' ? 'selected' : '' }}>OpenRouter Gateway</option>
                         <option value="gemini" {{ ($aiConfig['driver'] ?? '') === 'gemini' ? 'selected' : '' }}>Google Gemini</option>
-                        <option value="openai" {{ ($aiConfig['driver'] ?? '') === 'openai' ? 'selected' : '' }}>OpenAI Direct</option>
                     </optgroup>
                     @if(!empty($customProviders))
                         <optgroup label="Custom Added Providers">

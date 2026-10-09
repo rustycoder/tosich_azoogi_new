@@ -30,7 +30,6 @@ class AiConfigController extends Controller
             'gemini' => ! empty($aiConfig['gemini_api_key']),
             'anthropic' => ! empty($aiConfig['anthropic_api_key']),
             'openrouter' => ! empty($aiConfig['openrouter_api_key']),
-            'openai' => ! empty($aiConfig['openai_api_key']),
         ];
 
         $sessionsCount = ChatSession::count();
@@ -127,7 +126,7 @@ class AiConfigController extends Controller
             }
         }
 
-        $allowedDrivers = array_merge(['gemini', 'anthropic', 'openrouter', 'openai'], array_keys($customProviders));
+        $allowedDrivers = array_merge(['gemini', 'anthropic', 'openrouter'], array_keys($customProviders));
 
         $validated = $request->validate([
             'driver' => ['required', 'string', 'in:'.implode(',', $allowedDrivers)],

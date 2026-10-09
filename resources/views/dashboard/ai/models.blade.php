@@ -17,7 +17,7 @@
             <button class="btn primary" type="submit" form="ai-config-form">Save Model Settings</button>
         </div>
     </div>
-    <p class="dash-lead">Configure AI models (Anthropic Claude 3.5 Sonnet, Google Gemini 2.5 Flash, OpenAI GPT-4o Mini), manage API keys, and test live diagnostic connections.</p>
+    <p class="dash-lead">Configure AI models (Anthropic Claude Opus / Sonnet, Google Gemini, OpenRouter &amp; Custom Models), manage API keys, and test live diagnostic connections.</p>
 </div>
 
 <!-- Copy Notification Toast (Floating) -->
@@ -319,81 +319,6 @@
                             <!-- Diagnostic Test -->
                             <div style="margin-top:12px;">
                                 <button type="button" class="btn js-card-diagnostic-btn" data-driver="gemini" data-model-input="input_gemini_model" style="width:100%;font-size:12px;padding:6px 12px;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--bg);border:1px solid var(--line);color:var(--ink);cursor:pointer;border-radius:6px;font-weight:600;">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;color:var(--accent);"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                                    Diagnostic Ping Test
-                                </button>
-                                <div class="js-card-diagnostic-results" style="display:none;margin-top:8px;padding:10px 12px;border-radius:6px;background:var(--bg);border:1px solid var(--line);font-size:11px;font-family:monospace;line-height:1.4;">
-                                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-                                        <span class="js-diag-status" style="font-weight:700;padding:2px 6px;border-radius:4px;"></span>
-                                        <span class="js-diag-latency" style="color:var(--muted);"></span>
-                                    </div>
-                                    <pre class="js-diag-output" style="margin:0;white-space:pre-wrap;word-break:break-word;color:var(--ink);font-size:11px;font-family:monospace;max-height:120px;overflow-y:auto;"></pre>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- OpenAI Option -->
-                <div class="provider-radio-card" style="border:2px solid {{ ($aiConfig['driver'] ?? '') === 'openai' ? 'var(--accent)' : 'var(--dash-line)' }};background:var(--dash-card);border-radius:8px;padding:20px;position:relative;display:flex;flex-direction:column;justify-content:space-between;">
-                    <div>
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-                            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;margin:0;white-space:nowrap;text-transform:none;letter-spacing:normal;">
-                                <input type="radio" name="driver" value="openai" {{ ($aiConfig['driver'] ?? '') === 'openai' ? 'checked' : '' }} style="accent-color:var(--accent);width:16px;height:16px;">
-                                <span style="font-weight:700;font-size:15px;color:var(--dash-ink);white-space:nowrap;">OpenAI Direct</span>
-                            </label>
-                        </div>
-                        <p style="margin:0 0 16px 0;font-size:12px;color:var(--dash-muted);line-height:1.4;">
-                            Direct API connection to OpenAI models including GPT-4o and lightweight mini models.
-                        </p>
-
-                        <!-- API Key Input -->
-                        <div class="dash-field" style="margin-bottom:14px;">
-                            <label class="dash-label" style="display:flex;justify-content:space-between;align-items:center;">
-                                <span>OpenAI API Key</span>
-                                <span style="text-transform:none;font-weight:400;color:var(--dash-muted);font-size:10.5px;">(Database Stored)</span>
-                            </label>
-                            <div style="position:relative;display:flex;align-items:center;">
-                                <input type="password" name="openai_api_key" id="input_openai_api_key" class="dash-input" value="{{ $aiConfig['openai_api_key'] ?? '' }}" placeholder="Paste OpenAI API Key (sk-...)" style="padding-right:72px;font-family:monospace;">
-                                <div style="position:absolute;right:8px;display:flex;align-items:center;gap:4px;">
-                                    <button type="button" class="js-toggle-key-visibility" data-target="input_openai_api_key" style="background:none;border:none;cursor:pointer;color:var(--dash-muted);padding:4px;display:flex;align-items:center;" title="View / Hide API Key">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                                    </button>
-                                    <button type="button" class="js-copy-key-btn" data-target="input_openai_api_key" style="background:none;border:none;cursor:pointer;color:var(--dash-muted);padding:4px;display:flex;align-items:center;" title="Copy API Key to clipboard">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Model Selector -->
-                        <div class="dash-field" style="margin-bottom:0;">
-                            <label class="dash-label" for="input_openai_model">Model Name</label>
-                            <div class="dash-select-wrap" style="width:100%;">
-                                <select name="openai_model" id="input_openai_model" class="dash-select" style="width:100%;font-family:monospace;font-size:12.5px;">
-                                    <option value="gpt-4o-mini" {{ old('openai_model', $aiConfig['openai_model'] ?? 'gpt-4o-mini') === 'gpt-4o-mini' ? 'selected' : '' }}>gpt-4o-mini (Recommended - Fast &amp; Cost Effective)</option>
-                                    <option value="gpt-4o" {{ old('openai_model', $aiConfig['openai_model'] ?? '') === 'gpt-4o' ? 'selected' : '' }}>gpt-4o (Full Flagship Omni)</option>
-                                    <option value="gpt-4o-2024-11-20" {{ old('openai_model', $aiConfig['openai_model'] ?? '') === 'gpt-4o-2024-11-20' ? 'selected' : '' }}>gpt-4o-2024-11-20 (Pinned Release)</option>
-                                    <option value="o3-mini" {{ old('openai_model', $aiConfig['openai_model'] ?? '') === 'o3-mini' ? 'selected' : '' }}>o3-mini (High Speed STEM/Coding Reasoning)</option>
-                                    <option value="o1" {{ old('openai_model', $aiConfig['openai_model'] ?? '') === 'o1' ? 'selected' : '' }}>o1 (Deep Reasoning)</option>
-                                    <option value="o1-mini" {{ old('openai_model', $aiConfig['openai_model'] ?? '') === 'o1-mini' ? 'selected' : '' }}>o1-mini (Fast Reasoning)</option>
-                                    <option value="gpt-4.5-preview" {{ old('openai_model', $aiConfig['openai_model'] ?? '') === 'gpt-4.5-preview' ? 'selected' : '' }}>gpt-4.5-preview (Frontier Model)</option>
-                                    <option value="gpt-4-turbo" {{ old('openai_model', $aiConfig['openai_model'] ?? '') === 'gpt-4-turbo' ? 'selected' : '' }}>gpt-4-turbo</option>
-                                    <option value="gpt-3.5-turbo" {{ old('openai_model', $aiConfig['openai_model'] ?? '') === 'gpt-3.5-turbo' ? 'selected' : '' }}>gpt-3.5-turbo</option>
-                                    @php
-                                        $currOpenai = old('openai_model', $aiConfig['openai_model'] ?? 'gpt-4o-mini');
-                                        $standardOpenai = ['gpt-4o-mini', 'gpt-4o', 'gpt-4o-2024-11-20', 'o3-mini', 'o1', 'o1-mini', 'gpt-4.5-preview', 'gpt-4-turbo', 'gpt-3.5-turbo'];
-                                    @endphp
-                                    @if(!in_array($currOpenai, $standardOpenai) && filled($currOpenai))
-                                        <option value="{{ $currOpenai }}" selected>{{ $currOpenai }} (Custom)</option>
-                                    @endif
-                                </select>
-                                <svg class="dash-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-                            </div>
-
-                            <!-- Diagnostic Test -->
-                            <div style="margin-top:12px;">
-                                <button type="button" class="btn js-card-diagnostic-btn" data-driver="openai" data-model-input="input_openai_model" style="width:100%;font-size:12px;padding:6px 12px;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--bg);border:1px solid var(--line);color:var(--ink);cursor:pointer;border-radius:6px;font-weight:600;">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;color:var(--accent);"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                                     Diagnostic Ping Test
                                 </button>
