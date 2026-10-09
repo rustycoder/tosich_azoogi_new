@@ -73,7 +73,7 @@ class OpenAiDriver implements IChatLlmDriver
         }
 
         $response = Http::withToken($this->apiKey)
-            ->timeout(60)
+            ->timeout(120)
             ->post("{$this->baseUrl}/chat/completions", $payload);
 
         // Generic OpenWebUI self-healing: If an endpoint fails due to missing OpenWebUI chat_id, auto-retry with chat_id
@@ -82,7 +82,7 @@ class OpenAiDriver implements IChatLlmDriver
             if (str_contains($body, 'NoneType') || str_contains($body, 'startswith') || str_contains($body, 'chat_id')) {
                 $payload['chat_id'] = 'api_bypass_fix';
                 $response = Http::withToken($this->apiKey)
-                    ->timeout(60)
+                    ->timeout(120)
                     ->post("{$this->baseUrl}/chat/completions", $payload);
             }
         }
