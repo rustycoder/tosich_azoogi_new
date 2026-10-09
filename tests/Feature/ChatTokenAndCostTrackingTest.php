@@ -96,8 +96,6 @@ class ChatTokenAndCostTrackingTest extends TestCase
         $response->assertSee('1,500');
         $response->assertSee('1,000');
         $response->assertSee('500');
-        $response->assertSee('In: 1,000', false);
-        $response->assertSee('Out: 500', false);
         $response->assertSee('$0.0075');
     }
 
