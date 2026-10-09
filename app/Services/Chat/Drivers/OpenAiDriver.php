@@ -49,7 +49,7 @@ class OpenAiDriver implements IChatLlmDriver
 
         if (! empty($this->extraBody)) {
             $payload = array_merge($payload, $this->extraBody);
-        } elseif (str_contains((string) $this->baseUrl, 'prisha') || str_contains((string) $this->baseUrl, 'ai.')) {
+        } elseif ($this->isLikelyOpenWebUi()) {
             $payload['chat_id'] = 'api_bypass_fix';
         }
 
@@ -73,8 +73,19 @@ class OpenAiDriver implements IChatLlmDriver
         }
 
         $response = Http::withToken($this->apiKey)
-            ->timeout(30)
+            ->timeout(60)
             ->post("{$this->baseUrl}/chat/completions", $payload);
+
+        // Generic OpenWebUI self-healing: If an endpoint fails due to missing OpenWebUI chat_id, auto-retry with chat_id
+        if (! $response->successful() && ! isset($payload['chat_id'])) {
+            $body = $response->body();
+            if (str_contains($body, 'NoneType') || str_contains($body, 'startswith') || str_contains($body, 'chat_id')) {
+                $payload['chat_id'] = 'api_bypass_fix';
+                $response = Http::withToken($this->apiKey)
+                    ->timeout(60)
+                    ->post("{$this->baseUrl}/chat/completions", $payload);
+            }
+        }
 
         if (! $response->successful()) {
             Log::error('OpenAI Chat Error', ['body' => $response->body()]);
@@ -108,5 +119,23 @@ class OpenAiDriver implements IChatLlmDriver
             'prompt_tokens' => $promptTokens,
             'completion_tokens' => $completionTokens,
         ];
+    }
+
+    protected function isLikelyOpenWebUi(): bool
+    {
+        if (empty($this->baseUrl)) {
+            return false;
+        }
+
+        $urlPath = (string) parse_url($this->baseUrl, PHP_URL_PATH);
+
+        // OpenWebUI uses endpoints like /api (instead of standard OpenAI /v1)
+        if (str_ends_with(rtrim($urlPath, '/'), '/api') || str_contains($urlPath, 'openwebui') || str_contains($urlPath, 'webui')) {
+            return true;
+        }
+
+        $host = (string) parse_url($this->baseUrl, PHP_URL_HOST);
+
+        return str_contains($host, 'openwebui') || str_contains($host, 'webui');
     }
 }

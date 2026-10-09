@@ -108,7 +108,8 @@ class ChatOrchestrator
                 default => new OpenAiDriver(
                     apiKey: $resolvedKey,
                     model: $resolvedModel ?: 'gpt-4o-mini',
-                    baseUrl: $resolvedBaseUrl ?: 'https://api.openai.com/v1'
+                    baseUrl: $resolvedBaseUrl ?: 'https://api.openai.com/v1',
+                    extraBody: is_array($cp['extra_body'] ?? null) ? $cp['extra_body'] : []
                 ),
             };
         }

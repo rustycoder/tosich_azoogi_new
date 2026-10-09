@@ -712,6 +712,8 @@ class AiConfigController extends Controller
             'model' => ['required', 'string', 'max:500'],
             'description' => ['nullable', 'string', 'max:255'],
             'set_active' => ['nullable', 'boolean'],
+            'is_openwebui' => ['nullable', 'boolean'],
+            'extra_body' => ['nullable', 'string', 'max:2000'],
         ]);
 
         $existingFeed = LlmFeed::query()->where('key', 'ai_chat_config')->first();
@@ -730,6 +732,17 @@ class AiConfigController extends Controller
         }
         $primaryModel = $modelsList[0];
 
+        $extraBody = [];
+        if (! empty($validated['extra_body'])) {
+            $parsedExtra = json_decode($validated['extra_body'], true);
+            if (is_array($parsedExtra)) {
+                $extraBody = $parsedExtra;
+            }
+        }
+        if ($request->boolean('is_openwebui') && empty($extraBody['chat_id'])) {
+            $extraBody['chat_id'] = 'api_bypass_fix';
+        }
+
         $providerId = 'custom_'.Str::slug($validated['name'], '_').'_'.substr(md5(uniqid()), 0, 4);
 
         $customProviders = $config['custom_providers'] ?? [];
@@ -742,6 +755,7 @@ class AiConfigController extends Controller
             'model' => $primaryModel,
             'models' => $modelsList,
             'description' => ! empty($validated['description']) ? trim($validated['description']) : null,
+            'extra_body' => ! empty($extraBody) ? $extraBody : null,
             'created_at' => now()->toIso8601String(),
         ];
 

@@ -532,6 +532,7 @@
                 <label style="font-size:11px;text-transform:uppercase;font-weight:700;color:var(--muted);letter-spacing:0.05em;display:block;margin-bottom:8px;">Quick Presets</label>
                 <div style="display:flex;flex-wrap:wrap;gap:6px;">
                     <button type="button" class="btn js-preset-btn" data-name="DeepSeek" data-type="openai" data-url="https://api.deepseek.com/v1" data-model="deepseek-chat, deepseek-reasoner" data-desc="DeepSeek AI chat completions" style="padding:4px 10px;font-size:11px;">DeepSeek</button>
+                    <button type="button" class="btn js-preset-btn" data-name="OpenWebUI" data-type="openai" data-url="https://ai.example.com/api" data-model="qwen2.5-coder:3b, llama3.2" data-desc="Self-hosted OpenWebUI proxy endpoint" data-openwebui="1" style="padding:4px 10px;font-size:11px;">OpenWebUI</button>
                     <button type="button" class="btn js-preset-btn" data-name="Groq" data-type="openai" data-url="https://api.groq.com/openai/v1" data-model="llama-3.3-70b-versatile, mixtral-8x7b-32768" data-desc="Groq Ultra-fast inference" style="padding:4px 10px;font-size:11px;">Groq</button>
                     <button type="button" class="btn js-preset-btn" data-name="Ollama (Local)" data-type="openai" data-url="http://localhost:11434/v1" data-model="llama3.2, mistral, qwen2.5" data-desc="Local self-hosted Ollama server" style="padding:4px 10px;font-size:11px;">Ollama</button>
                     <button type="button" class="btn js-preset-btn" data-name="Together AI" data-type="openai" data-url="https://api.together.xyz/v1" data-model="meta-llama/Llama-3.3-70B-Instruct-Turbo, mistralai/Mixtral-8x22B-Instruct-v0.1" data-desc="Together AI GPU inference cloud" style="padding:4px 10px;font-size:11px;">Together AI</button>
@@ -559,7 +560,7 @@
             <div class="dash-field" style="margin-bottom:14px;">
                 <label class="dash-label" for="modal-url">API Base Endpoint URL</label>
                 <input type="url" name="base_url" id="modal-url" class="dash-input" placeholder="https://api.deepseek.com/v1" style="font-family:monospace;">
-                <span style="font-size:11px;color:var(--dash-muted);margin-top:3px;display:block;">Base URL before <code>/chat/completions</code>.</span>
+                <span style="font-size:11px;color:var(--dash-muted);margin-top:3px;display:block;">Base URL before <code>/chat/completions</code>. (e.g. <code>https://ai.domain.com/api</code> or <code>https://api.deepseek.com/v1</code>)</span>
             </div>
 
             <div class="dash-field" style="margin-bottom:14px;">
@@ -583,9 +584,17 @@
                 <span style="font-size:11px;color:var(--dash-muted);margin-top:3px;display:block;">You can enter multiple models separated by commas (e.g. <code>deepseek-chat, deepseek-reasoner</code>). A model selector dropdown will be created on the provider card.</span>
             </div>
 
-            <div class="dash-field" style="margin-bottom:18px;">
+            <div class="dash-field" style="margin-bottom:14px;">
                 <label class="dash-label" for="modal-desc">Description / Notes (Optional)</label>
                 <input type="text" name="description" id="modal-desc" class="dash-input" placeholder="e.g. High speed reasoning model for electrical architectural quotes">
+            </div>
+
+            <div style="margin-bottom:14px;">
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;text-transform:none;letter-spacing:normal;">
+                    <input type="checkbox" name="is_openwebui" id="modal-openwebui" value="1" style="accent-color:var(--accent);width:16px;height:16px;">
+                    <span style="color:var(--dash-ink);font-weight:600;">Enable OpenWebUI Proxy Compatibility</span>
+                </label>
+                <span style="font-size:11px;color:var(--dash-muted);margin-top:3px;display:block;padding-left:24px;">Automatically supplies bypass parameters needed by self-hosted OpenWebUI backend routers.</span>
             </div>
 
             <div style="margin-bottom:20px;">
@@ -786,6 +795,10 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('modal-url').value = btn.getAttribute('data-url') || '';
             document.getElementById('modal-model').value = btn.getAttribute('data-model') || '';
             document.getElementById('modal-desc').value = btn.getAttribute('data-desc') || '';
+            const openwebuiEl = document.getElementById('modal-openwebui');
+            if (openwebuiEl) {
+                openwebuiEl.checked = btn.getAttribute('data-openwebui') === '1';
+            }
             document.getElementById('modal-key').focus();
         });
     });
