@@ -3629,9 +3629,11 @@ code {
 
 .dash-doc-layout {
   display: grid;
-  grid-template-columns: 290px 1fr;
-  gap: 20px;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 24px;
   align-items: start;
+  max-width: 1360px;
+  width: 100%;
 }
 
 .dash-doc-sidebar {
@@ -3751,6 +3753,9 @@ code {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  min-width: 0;
+  max-width: 1020px;
+  width: 100%;
 }
 
 .dash-doc-section {
