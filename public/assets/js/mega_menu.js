@@ -49,8 +49,8 @@
       }
     });
 
-    // 2. Max 2 Sidebars rule or if node is a product_row directly
-    if (columnIndex >= 2 || node.type === 'product_row') {
+    // 2. Max 3 Sidebars rule or if node is a product_row directly
+    if (columnIndex >= 3 || node.type === 'product_row') {
       renderProductsView(node, columnIndex);
       return;
     }
@@ -62,7 +62,7 @@
 
     const subCats = (node.children || []).filter(c => c.type === 'category');
 
-    // If subcategories exist under this parent category, render Level 2 Sidebar
+    // If subcategories exist under this parent category, render Next Level Sidebar
     if (subCats.length > 0) {
       const sidebarCol = document.createElement('div');
       sidebarCol.className = `mega-menu-column mega-sidebar level-${columnIndex + 1}`;
@@ -79,6 +79,7 @@
         `;
 
         const switchAction = () => {
+          if (btn.classList.contains('active')) return;
           sidebarCol.querySelectorAll('.mega-sidebar-btn').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           renderLevel(child, columnIndex + 1);
@@ -101,7 +102,7 @@
         renderLevel(subCats[0], columnIndex + 1);
       }
     } else {
-      // No subcategories exist: skip Level 2 Sidebar and render Main Panel directly
+      // No subcategories exist: skip Next Level Sidebar and render Main Panel directly
       renderProductsView(node, columnIndex);
     }
   }
