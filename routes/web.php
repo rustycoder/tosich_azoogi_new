@@ -27,6 +27,7 @@ use App\Http\Controllers\Site\PageController;
 use App\Http\Controllers\Site\ProductController as SiteProductController;
 use App\Http\Controllers\Site\ProductDatasheetController;
 use App\Http\Controllers\Site\ProductDetailController;
+use App\Http\Controllers\Site\ProductImageController;
 use App\Http\Controllers\Site\ProjectController as SiteProjectController;
 use App\Http\Controllers\Site\QuoteProductController;
 use App\Http\Controllers\Site\SitemapController;
@@ -192,6 +193,12 @@ Route::get('/projects', [SiteProjectController::class, 'index'])->name('projects
 Route::get('/project-detail', [SiteProjectController::class, 'show'])->name('project-detail');
 
 Route::get('/products', [SiteProductController::class, 'index'])->name('products');
+Route::get('/products/{identifier}.{format}', [ProductImageController::class, 'show'])
+    ->where([
+        'identifier' => '(?s).+',
+        'format' => 'jpe?g|png|webp|JPE?G|PNG|WEBP',
+    ])
+    ->name('products.image');
 Route::get('/products/{slug}', ProductDetailController::class)->where('slug', '(?s).+')->name('products.show');
 Route::get('/product-detail', ProductDetailController::class)->name('product-detail');
 Route::get('/led-strip-calculator', [PageController::class, '__invoke'])->defaults('slug', 'led-strip-calculator')->name('led-strip-calculator');
