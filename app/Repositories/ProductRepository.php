@@ -308,44 +308,7 @@ class ProductRepository implements IProductRepository
             })
             ->all();
 
-        $filterableAttributes = ProductAttribute::query()
-            ->where('is_visible_on_filters', true)
-            ->orderByRaw('sort_order is null')
-            ->orderBy('sort_order')
-            ->orderBy('name')
-            ->pluck('name')
-            ->unique()
-            ->values()
-            ->all();
-
-        $attributeGroupsOrder = ProductAttribute::query()
-            ->orderByRaw('sort_order is null')
-            ->orderBy('sort_order')
-            ->orderBy('name')
-            ->pluck('name')
-            ->unique()
-            ->values()
-            ->all();
-
-        $attributesList = ProductAttribute::query()
-            ->whereNotNull('value')
-            ->where('value', '!=', '')
-            ->orderByRaw('sort_order is null')
-            ->orderBy('sort_order')
-            ->orderBy('id')
-            ->get(['name', 'value', 'sort_order']);
-
-        $attributeValuesOrder = [];
-        foreach ($attributesList as $attr) {
-            $attrName = trim($attr->name);
-            $attrVal = trim((string) $attr->value);
-            if ($attrName !== '' && $attrVal !== '') {
-                $attributeValuesOrder[$attrName] ??= [];
-                if (! in_array($attrVal, $attributeValuesOrder[$attrName], true)) {
-                    $attributeValuesOrder[$attrName][] = $attrVal;
-                }
-            }
-        }
+        [$filterableAttributes, $attributeGroupsOrder, $attributeValuesOrder] = $this->attributeCatalogMeta();
 
         return $this->normalizer->fromStored($products, $categories, $filterableAttributes, $attributeValuesOrder, $attributeGroupsOrder);
     }
@@ -434,7 +397,9 @@ class ProductRepository implements IProductRepository
             })
             ->all();
 
-        return $this->normalizer->fromStored($lightweightProducts, $categories, [], [], []);
+        [$filterableAttributes, $attributeGroupsOrder, $attributeValuesOrder] = $this->attributeCatalogMeta();
+
+        return $this->normalizer->fromStored($lightweightProducts, $categories, $filterableAttributes, $attributeValuesOrder, $attributeGroupsOrder);
     }
 
     public function dashboardList(string $search = '', ?string $category = null, int $perPage = 50, ?string $status = null): LengthAwarePaginator
@@ -1042,5 +1007,52 @@ class ProductRepository implements IProductRepository
         }
 
         return array_values(array_filter($keys, fn (string $key): bool => $key !== ''));
+    }
+
+    /**
+     * @return array{0: list<string>, 1: list<string>, 2: array<string, list<string>>}
+     */
+    private function attributeCatalogMeta(): array
+    {
+        $filterableAttributes = ProductAttribute::query()
+            ->where('is_visible_on_filters', true)
+            ->orderByRaw('sort_order is null')
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->pluck('name')
+            ->unique()
+            ->values()
+            ->all();
+
+        $attributeGroupsOrder = ProductAttribute::query()
+            ->orderByRaw('sort_order is null')
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->pluck('name')
+            ->unique()
+            ->values()
+            ->all();
+
+        $attributesList = ProductAttribute::query()
+            ->whereNotNull('value')
+            ->where('value', '!=', '')
+            ->orderByRaw('sort_order is null')
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get(['name', 'value']);
+
+        $attributeValuesOrder = [];
+        foreach ($attributesList as $attr) {
+            $attrName = trim((string) $attr->name);
+            $attrVal = trim((string) $attr->value);
+            if ($attrName !== '' && $attrVal !== '') {
+                $attributeValuesOrder[$attrName] ??= [];
+                if (! in_array($attrVal, $attributeValuesOrder[$attrName], true)) {
+                    $attributeValuesOrder[$attrName][] = $attrVal;
+                }
+            }
+        }
+
+        return [$filterableAttributes, $attributeGroupsOrder, $attributeValuesOrder];
     }
 }
