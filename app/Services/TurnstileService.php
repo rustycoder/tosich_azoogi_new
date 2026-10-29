@@ -14,6 +14,10 @@ class TurnstileService implements ITurnstileService
             return true;
         }
 
+        if (app()->environment('local')) {
+            return true;
+        }
+
         if (empty($response)) {
             return false;
         }

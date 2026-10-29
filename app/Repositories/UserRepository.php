@@ -12,7 +12,7 @@ class UserRepository implements IUserRepository
     public function dashboardList(string $search = ''): LengthAwarePaginator
     {
         return User::query()
-            ->with('updater:id,name')
+            ->with(['updater:id,name', 'contentPermissions'])
             ->where('user_type', UserType::Staff)
             ->when($search !== '', function ($query) use ($search): void {
                 $query->where('name', 'like', '%'.$search.'%');

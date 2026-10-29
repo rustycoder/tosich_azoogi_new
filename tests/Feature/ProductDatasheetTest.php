@@ -91,6 +91,7 @@ class ProductDatasheetTest extends TestCase
         $this->assertSame('GL005', $export->product_code);
         $this->assertSame('203.0.113.10', $export->ip_address);
         $this->assertSame('AU', $export->country);
+        $this->assertStringStartsWith('/product-datasheet/', $response->json('url'));
         $this->assertStringContainsString((string) $export->uuid, $response->json('url'));
 
         $this->get($response->json('url'))
@@ -157,7 +158,7 @@ class ProductDatasheetTest extends TestCase
         $this->actingAs($admin)
             ->get('/dashboard')
             ->assertOk()
-            ->assertSeeInOrder(['>Administration</span>', 'Datasheet Exports'], false)
+            ->assertSeeInOrder(['>Enquiries</span>', 'Datasheet Exports'], false)
             ->assertDontSee('<h2>Datasheet</h2>', false)
             ->assertDontSee('Review generated datasheet exports.', false)
             ->assertDontSee('Datasheet exports', false);
@@ -265,7 +266,7 @@ class ProductDatasheetTest extends TestCase
         $this->actingAs($staff->fresh())
             ->get('/dashboard')
             ->assertOk()
-            ->assertSeeInOrder(['>Administration</span>', 'Datasheet Exports'], false);
+            ->assertSeeInOrder(['>Enquiries</span>', 'Datasheet Exports'], false);
     }
 
     public function test_datasheet_maps_dimming_control_option_to_dimming_spec(): void

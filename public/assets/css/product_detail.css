@@ -1420,6 +1420,34 @@ a.meta-badge:hover {
   min-width: 140px;
   font-family: var(--font-sans);
   text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.datasheet-dialog-actions .btn:disabled {
+  opacity: 0.75;
+  cursor: wait;
+  pointer-events: none;
+}
+
+.datasheet-spinner {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  animation: ds-spin 0.75s linear infinite;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+@keyframes ds-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .datasheet-field-error {

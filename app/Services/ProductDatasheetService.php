@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\DatasheetTemplate;
 use App\Models\Product;
 use App\Models\ProductDatasheetExport;
 use App\Repositories\Contracts\IProductDatasheetRepository;
@@ -95,13 +96,17 @@ class ProductDatasheetService implements IProductDatasheetService
             ];
         }
 
+        $specificationsTable = $this->renderSpecificationsTable($specifications);
+
         return [
             'title' => (string) ($export->product_name ?: $export->product_code),
             'name' => (string) $export->product_name,
+            'product_name' => (string) ($export->product_name ?: $export->product_code),
             'product_code' => (string) ($export->product_code ?? ''),
             'category' => (string) ($configuration['category'] ?? ''),
             'description' => (string) ($configuration['description'] ?? ''),
             'specifications' => $specifications,
+            'specifications_table' => $specificationsTable,
             'product_image' => $export->listingImageUrl(),
             'dimension_image' => $this->dimensionImageUrl($export, $configuration),
             'project_name' => $export->project_name,
@@ -111,7 +116,185 @@ class ProductDatasheetService implements IProductDatasheetService
             'phone' => '1300 641 261',
             'website' => 'www.azoogi.com.au',
             'address' => 'Unit 47, 10-12 Girawah Place, Matraville, NSW, 2036',
+            'logo_left' => '/assets/img/datasheet-logo.png',
+            'logo_right' => '/assets/img/lighting-council.png',
+            'review_logo' => '/assets/logo_dark.png',
+            'technical_icons' => $this->renderTechnicalIcons($export, $configuration),
+            'specification_icons' => $this->renderTechnicalIcons($export, $configuration),
         ];
+    }
+
+    public function renderTechnicalIcons(ProductDatasheetExport $export, array $configuration = []): string
+    {
+        $product = $export->product;
+        $features = is_array($product?->product_features) ? $product->product_features : [];
+
+        $rawIcons = $product?->technical_icons
+            ?? ($configuration['technical_icons'] ?? null)
+            ?? ($features['Technical Icons'] ?? null)
+            ?? ($features['Technical icons'] ?? null)
+            ?? ($features['technical_icons'] ?? null)
+            ?? ($features['Product Icons'] ?? null)
+            ?? ($features['Product icons'] ?? null)
+            ?? ($features['product_icons'] ?? null)
+            ?? ($features['Icons'] ?? null)
+            ?? ($features['Icon'] ?? null);
+
+        $iconUrls = [];
+        if (is_array($rawIcons)) {
+            foreach ($rawIcons as $item) {
+                if (is_string($item) && trim($item) !== '') {
+                    $iconUrls[] = trim($item);
+                } elseif (is_array($item) && ! empty($item['url'])) {
+                    $iconUrls[] = trim((string) $item['url']);
+                }
+            }
+        } elseif (is_string($rawIcons) && trim($rawIcons) !== '') {
+            $iconUrls[] = trim($rawIcons);
+        }
+
+        $iconUrls = array_values(array_unique($iconUrls));
+
+        if (! empty($iconUrls)) {
+            $html = '';
+            foreach ($iconUrls as $url) {
+                $resolved = htmlspecialchars(media_url($url), ENT_QUOTES, 'UTF-8');
+                $html .= '<img class="spec-icon-img" src="'.$resolved.'" alt="Specification Icon">';
+            }
+
+            return $html;
+        }
+
+        // Fallback: extract specification badges from specs
+        $specs = is_array($configuration['specifications'] ?? null) ? $configuration['specifications'] : [];
+        $specMap = [];
+        foreach ($specs as $s) {
+            if (is_array($s) && ! empty($s['label'])) {
+                $specMap[strtolower(trim((string) $s['label']))] = trim((string) ($s['value'] ?? ''));
+            }
+        }
+
+        $badges = [];
+
+        // Warranty badge
+        $warranty = $specMap['warranty'] ?? $this->joinValues($this->featureValues($features, 'Warranty', 'warranty'));
+        if ($warranty !== '') {
+            if (preg_match('/(\d+)\s*year/i', $warranty, $m)) {
+                $badges[] = $m[1].'YR';
+            } elseif (mb_strlen($warranty) <= 6) {
+                $badges[] = strtoupper($warranty);
+            }
+        }
+
+        // IP Rating badge
+        $ip = $specMap['ip rating'] ?? $specMap['ingress'] ?? $this->joinValues($this->featureValues($features, 'IP Rating', 'IP rating', 'Ingress'));
+        if ($ip !== '') {
+            if (preg_match('/(IP\s*\d{2})/i', $ip, $m)) {
+                $badges[] = strtoupper(str_replace(' ', '', $m[1]));
+            }
+        }
+
+        // Voltage badge
+        $voltage = $specMap['input voltage'] ?? $specMap['voltage'] ?? $this->joinValues($this->featureValues($features, 'Input Voltage', 'Voltage'));
+        if ($voltage !== '') {
+            if (preg_match('/(\d+)\s*V/i', $voltage, $m)) {
+                $badges[] = $m[1].'V';
+            }
+        }
+
+        // Dimming badge
+        $dimming = $specMap['dimming'] ?? $specMap['control'] ?? $this->joinValues($this->featureValues($features, 'Dimming', 'Control', 'Dimming / Control'));
+        if ($dimming !== '') {
+            if (stripos($dimming, 'DALI') !== false) {
+                $badges[] = 'DALI';
+            } elseif (stripos($dimming, '1-10V') !== false) {
+                $badges[] = '1-10V';
+            } elseif (stripos($dimming, 'Phase') !== false) {
+                $badges[] = 'PHASE';
+            } elseif (stripos($dimming, 'Casambi') !== false) {
+                $badges[] = 'CASAMBI';
+            }
+        }
+
+        if (empty($badges)) {
+            $badges = ['5YR', 'IP67', '24V', 'DALI'];
+        }
+
+        $html = '';
+        foreach ($badges as $badge) {
+            $html .= '<span class="feature-badge">'.htmlspecialchars($badge, ENT_QUOTES, 'UTF-8').'</span>';
+        }
+
+        return $html;
+    }
+
+    public function renderSpecificationsTable(array $specifications): string
+    {
+        if (empty($specifications)) {
+            return '';
+        }
+
+        $html = '<p class="params-title">SPECIFICATIONS</p>'."\n";
+        $html .= '<table class="params">'."\n";
+        foreach ($specifications as $row) {
+            $label = htmlspecialchars((string) ($row['label'] ?? ''), ENT_QUOTES, 'UTF-8');
+            $value = htmlspecialchars((string) ($row['value'] ?? ''), ENT_QUOTES, 'UTF-8');
+            $html .= '    <tr>'."\n";
+            $html .= '        <td>'.$label.'</td>'."\n";
+            $html .= '        <td>'.$value.'</td>'."\n";
+            $html .= '    </tr>'."\n";
+        }
+        $html .= '</table>';
+
+        return $html;
+    }
+
+    public function sampleData(): array
+    {
+        $specifications = [
+            ['label' => 'Brand', 'value' => 'Azoogi'],
+            ['label' => 'Dimensions', 'value' => '10mm (W) x 10mm (H)'],
+            ['label' => 'Light Source', 'value' => 'SMD LED'],
+            ['label' => 'Wattage', 'value' => '10W/m'],
+            ['label' => 'Luminous Flux', 'value' => '850 lm/m'],
+            ['label' => 'Optics', 'value' => '120°'],
+            ['label' => 'Color Temperature', 'value' => '3000K Warm White'],
+            ['label' => 'IP Rating', 'value' => 'IP67'],
+            ['label' => 'Dimming', 'value' => 'DALI-2 / 1-10V / Phase'],
+            ['label' => 'Warranty', 'value' => '5 Years'],
+        ];
+
+        return [
+            'title' => 'Mini Neon Side View',
+            'name' => 'Mini Neon Side View',
+            'product_name' => 'Mini Neon Side View',
+            'product_code' => 'SV1010-10W-3K-IP67',
+            'category' => 'Side View Neon Flex',
+            'description' => 'Precision architectural linear neon with seamless side-bending optical distribution, UV stabilisation, and IP67 weather resistance for exterior facades and cove details.',
+            'specifications' => $specifications,
+            'specifications_table' => $this->renderSpecificationsTable($specifications),
+            'product_image' => '/assets/img/neon.webp',
+            'dimension_image' => '/assets/img/neon.webp',
+            'project_name' => '',
+            'person_name' => '',
+            'reviewed_on' => '',
+            'email' => 'sales@azoogi.com',
+            'phone' => '1300 641 261',
+            'website' => 'www.azoogi.com.au',
+            'address' => 'Unit 47, 10-12 Girawah Place, Matraville, NSW, 2036',
+            'logo_left' => '/assets/img/datasheet-logo.png',
+            'logo_right' => '/assets/img/lighting-council.png',
+            'review_logo' => '/assets/logo_dark.png',
+            'technical_icons' => '<span class="feature-badge">5YR</span><span class="feature-badge">IP67</span><span class="feature-badge">24V</span><span class="feature-badge">DALI</span>',
+            'specification_icons' => '<span class="feature-badge">5YR</span><span class="feature-badge">IP67</span><span class="feature-badge">24V</span><span class="feature-badge">DALI</span>',
+        ];
+    }
+
+    public function renderTemplate(DatasheetTemplate $template, ?ProductDatasheetExport $export = null, bool $autoPrint = false): string
+    {
+        $data = $export !== null ? $this->sheet($export) : $this->sampleData();
+
+        return $template->render($data, $autoPrint);
     }
 
     public function dashboardList(string $search = ''): LengthAwarePaginator
@@ -135,6 +318,7 @@ class ProductDatasheetService implements IProductDatasheetService
             'length' => $length,
             'product_image' => $this->firstAsset($product->product_images) ?: (string) ($product->cover ?? ''),
             'dimension_image' => $this->firstAsset($product->product_dimension),
+            'technical_icons' => $product->technical_icons,
         ];
     }
 

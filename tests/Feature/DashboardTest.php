@@ -55,7 +55,7 @@ class DashboardTest extends TestCase
         Product::factory()->create();
 
         $this->actingAs($admin)->get('/dashboard')->assertOk()->assertSee('data-dash-menu', false);
-        $this->actingAs($admin)->get('/dashboard/staff')->assertOk()->assertSee('dash-list-card', false)->assertSee('name="q"', false);
+        $this->actingAs($admin)->get('/dashboard/staff')->assertOk()->assertSee('dash-airtable-table', false)->assertSee('name="q"', false);
         $this->actingAs($admin)->get('/dashboard/staff/create')->assertOk()->assertSee('dash-card', false);
         $this->actingAs($admin)->get(route('dashboard.staff.edit', $staff))->assertOk()->assertSee('dash-card', false);
         $this->actingAs($admin)->get('/dashboard/content/projects')->assertOk()->assertSee('dash-airtable-table', false)->assertSee('dash-preview-thumb', false)->assertSee('name="q"', false);

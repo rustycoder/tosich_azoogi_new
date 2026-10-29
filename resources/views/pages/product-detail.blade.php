@@ -1920,7 +1920,17 @@
                     return;
                 }
                 clearDatasheetErrors();
+                if (datasheetSubmit) {
+                    datasheetSubmit.disabled = false;
+                    datasheetSubmit.innerHTML = 'Generate datasheet';
+                }
+                if (datasheetCancel) {
+                    datasheetCancel.disabled = false;
+                }
                 datasheetDialog?.showModal();
+                if (typeof window.renderTurnstiles === 'function') {
+                    window.renderTurnstiles();
+                }
                 document.getElementById('datasheet-project-name')?.focus();
             });
 
@@ -1936,6 +1946,13 @@
             datasheetForm?.addEventListener('submit', async (event) => {
                 event.preventDefault();
                 clearDatasheetErrors();
+
+                let targetTab = null;
+                try {
+                    targetTab = window.open('about:blank', '_blank');
+                } catch (e) {
+                    targetTab = null;
+                }
 
                 const token = datasheetForm.querySelector('input[name="_token"]')?.value || '';
                 const selected = {};
@@ -1954,8 +1971,20 @@
                 const catLower = (product.category || '').toLowerCase();
                 const isLinear = catLower.includes('neon') || catLower.includes('linear') || pNameLower.includes('strip') || pNameLower.includes('nnr');
 
+                const originalSubmitHtml = datasheetSubmit ? datasheetSubmit.innerHTML : 'Generate datasheet';
+
                 if (datasheetSubmit) {
                     datasheetSubmit.disabled = true;
+                    datasheetSubmit.innerHTML = `
+                        <svg class="datasheet-spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-opacity="0.25"/>
+                            <path d="M12 3a9 9 0 0 1 9 9" stroke="currentColor"/>
+                        </svg>
+                        <span>Generating datasheet...</span>
+                    `;
+                }
+                if (datasheetCancel) {
+                    datasheetCancel.disabled = true;
                 }
 
                 try {
@@ -1981,6 +2010,9 @@
                     const payload = await response.json().catch(() => ({}));
 
                     if (response.status === 422) {
+                        if (targetTab && !targetTab.closed) {
+                            try { targetTab.close(); } catch (e) { }
+                        }
                         const errors = payload.errors || {};
                         Object.keys(errors).forEach((key) => {
                             setDatasheetError(key, Array.isArray(errors[key]) ? errors[key][0] : String(errors[key]));
@@ -1995,6 +2027,9 @@
                     }
 
                     if (!response.ok || !payload.url) {
+                        if (targetTab && !targetTab.closed) {
+                            try { targetTab.close(); } catch (e) { }
+                        }
                         setDatasheetError('form', 'The datasheet could not be generated. Try again.');
                         if (window.turnstile) {
                             try { window.turnstile.reset(); } catch (e) { }
@@ -2006,8 +2041,15 @@
                     if (window.turnstile) {
                         try { window.turnstile.reset(); } catch (e) { }
                     }
-                    window.open(payload.url, '_blank', 'noopener');
+                    if (targetTab && !targetTab.closed) {
+                        targetTab.location.href = payload.url;
+                    } else {
+                        window.location.assign(payload.url);
+                    }
                 } catch (error) {
+                    if (targetTab && !targetTab.closed) {
+                        try { targetTab.close(); } catch (e) { }
+                    }
                     setDatasheetError('form', 'The datasheet could not be generated. Try again.');
                     if (window.turnstile) {
                         try { window.turnstile.reset(); } catch (e) { }
@@ -2015,6 +2057,10 @@
                 } finally {
                     if (datasheetSubmit) {
                         datasheetSubmit.disabled = false;
+                        datasheetSubmit.innerHTML = originalSubmitHtml;
+                    }
+                    if (datasheetCancel) {
+                        datasheetCancel.disabled = false;
                     }
                 }
             });

@@ -27,7 +27,11 @@ class StoreProductDatasheetRequest extends FormRequest
             'selected_options.*' => ['nullable', 'string', 'max:191'],
             'length' => ['nullable', 'numeric', 'min:0', 'max:1000'],
             'cf-turnstile-response' => [
-                Rule::when((bool) config('services.turnstile.enabled'), ['required', 'string', new Turnstile]),
+                Rule::when(
+                    (bool) config('services.turnstile.enabled') && ! app()->environment('local'),
+                    ['required', 'string', new Turnstile],
+                    ['nullable', 'string', new Turnstile]
+                ),
             ],
         ];
     }

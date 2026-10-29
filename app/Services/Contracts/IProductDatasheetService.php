@@ -2,6 +2,7 @@
 
 namespace App\Services\Contracts;
 
+use App\Models\DatasheetTemplate;
 use App\Models\ProductDatasheetExport;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -34,10 +35,27 @@ interface IProductDatasheetService
      *     email: string,
      *     phone: string,
      *     website: string,
-     *     address: string
+     *     address: string,
+     *     product_code?: string,
+     *     product_name?: string,
+     *     specifications_table?: string,
+     *     logo_left?: string,
+     *     logo_right?: string,
+     *     review_logo?: string,
+     *     technical_icons?: string,
+     *     specification_icons?: string
      * }
      */
     public function sheet(ProductDatasheetExport $export): array;
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function sampleData(): array;
+
+    public function renderTechnicalIcons(ProductDatasheetExport $export, array $configuration = []): string;
+
+    public function renderTemplate(DatasheetTemplate $template, ?ProductDatasheetExport $export = null, bool $autoPrint = false): string;
 
     /**
      * @return LengthAwarePaginator<int, ProductDatasheetExport>

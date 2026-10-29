@@ -7,6 +7,7 @@ use App\Http\Controllers\Dashboard\AiConfigController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\ChatSessionController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\DatasheetTemplateController;
 use App\Http\Controllers\Dashboard\DocumentationController;
 use App\Http\Controllers\Dashboard\EmailTemplateController;
 use App\Http\Controllers\Dashboard\EnquiryController;
@@ -63,6 +64,17 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
         Route::post('email-templates/{emailTemplate}/test', [EmailTemplateController::class, 'test'])->name('email-templates.test');
         Route::post('email-templates/{emailTemplate}/reset', [EmailTemplateController::class, 'reset'])->name('email-templates.reset');
         Route::patch('email-templates/{emailTemplate}/toggle-status', [EmailTemplateController::class, 'toggleStatus'])->name('email-templates.toggle-status');
+
+        Route::get('datasheet-templates', [DatasheetTemplateController::class, 'index'])->name('datasheet-templates.index');
+        Route::get('datasheet-templates/create', [DatasheetTemplateController::class, 'create'])->name('datasheet-templates.create');
+        Route::post('datasheet-templates', [DatasheetTemplateController::class, 'store'])->name('datasheet-templates.store');
+        Route::get('datasheet-templates/{datasheetTemplate}/edit', [DatasheetTemplateController::class, 'edit'])->name('datasheet-templates.edit');
+        Route::put('datasheet-templates/{datasheetTemplate}', [DatasheetTemplateController::class, 'update'])->name('datasheet-templates.update');
+        Route::delete('datasheet-templates/{datasheetTemplate}', [DatasheetTemplateController::class, 'destroy'])->name('datasheet-templates.destroy');
+        Route::patch('datasheet-templates/{datasheetTemplate}/activate', [DatasheetTemplateController::class, 'activate'])->name('datasheet-templates.activate');
+        Route::post('datasheet-templates/{datasheetTemplate}/duplicate', [DatasheetTemplateController::class, 'duplicate'])->name('datasheet-templates.duplicate');
+        Route::post('datasheet-templates/{datasheetTemplate}/reset', [DatasheetTemplateController::class, 'reset'])->name('datasheet-templates.reset');
+        Route::match(['get', 'post'], 'datasheet-templates/preview/{datasheetTemplate?}', [DatasheetTemplateController::class, 'preview'])->name('datasheet-templates.preview');
     });
 
     Route::middleware('can.manage:enquiries')->group(function () {

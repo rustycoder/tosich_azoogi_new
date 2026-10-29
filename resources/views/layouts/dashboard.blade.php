@@ -53,9 +53,10 @@
                 </a>
             @endif
 
-            @if ($canManageQuoteEnquiries || $canManageProductEnquiries || $canManageContactEnquiries)
+            @if ($canManageQuoteEnquiries || $canManageProductEnquiries || $canManageContactEnquiries || $canManageDatasheets)
                 @php
-                    $isEnquiriesActive = request()->routeIs('dashboard.enquiries.*');
+                    $isEnquiriesActive = request()->routeIs('dashboard.enquiries.*')
+                        || request()->routeIs('dashboard.datasheets.*');
                 @endphp
                 <div class="dash-nav-divider"></div>
                 <div class="dash-nav-group {{ $isEnquiriesActive ? 'is-open' : '' }}" data-nav-group="enquiries">
@@ -84,6 +85,12 @@
                                 <a href="{{ route('dashboard.enquiries.index', ['type' => 'contacts']) }}" class="{{ request()->routeIs('dashboard.enquiries.*') && request()->route('type') === 'contacts' ? 'is-active' : '' }}">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="m3 8 9 6 9-6"/></svg>
                                     Contact
+                                </a>
+                            @endif
+                            @if ($canManageDatasheets)
+                                <a href="{{ route('dashboard.datasheets.exports') }}" class="{{ request()->routeIs('dashboard.datasheets.*') ? 'is-active' : '' }}">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>
+                                    Datasheet Exports
                                 </a>
                             @endif
                         </div>
@@ -207,11 +214,11 @@
                 </div>
             @endif
 
-            @if ($isAdmin || $canManageDatasheets)
+            @if ($isAdmin)
                 @php
                     $isAdminActive = request()->routeIs('dashboard.staff.*')
                         || request()->routeIs('dashboard.email-templates.*')
-                        || request()->routeIs('dashboard.datasheets.*');
+                        || request()->routeIs('dashboard.datasheet-templates.*');
                 @endphp
                 <div class="dash-nav-divider"></div>
                 <div class="dash-nav-group {{ $isAdminActive ? 'is-open' : '' }}" data-nav-group="admin">
@@ -224,22 +231,18 @@
                     </button>
                     <div class="dash-nav-sub">
                         <div class="dash-nav-sub-inner">
-                            @if ($isAdmin)
-                                <a href="{{ route('dashboard.staff.index') }}" class="{{ request()->routeIs('dashboard.staff.*') ? 'is-active' : '' }}">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M4 19a5 5 0 0 1 10 0"/><circle cx="17" cy="9" r="2.4"/><path d="M16 19a4.2 4.2 0 0 1 4-3"/></svg>
-                                    Staff
-                                </a>
-                                <a href="{{ route('dashboard.email-templates.index') }}" class="{{ request()->routeIs('dashboard.email-templates.*') ? 'is-active' : '' }}">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                                    Email
-                                </a>
-                            @endif
-                            @if ($canManageDatasheets)
-                                <a href="{{ route('dashboard.datasheets.exports') }}" class="{{ request()->routeIs('dashboard.datasheets.*') ? 'is-active' : '' }}">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>
-                                    Datasheet Exports
-                                </a>
-                            @endif
+                            <a href="{{ route('dashboard.staff.index') }}" class="{{ request()->routeIs('dashboard.staff.*') ? 'is-active' : '' }}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M4 19a5 5 0 0 1 10 0"/><circle cx="17" cy="9" r="2.4"/><path d="M16 19a4.2 4.2 0 0 1 4-3"/></svg>
+                                Staff
+                            </a>
+                            <a href="{{ route('dashboard.email-templates.index') }}" class="{{ request()->routeIs('dashboard.email-templates.*') ? 'is-active' : '' }}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                Email
+                            </a>
+                            <a href="{{ route('dashboard.datasheet-templates.index') }}" class="{{ request()->routeIs('dashboard.datasheet-templates.*') ? 'is-active' : '' }}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                                Datasheet Templates
+                            </a>
                         </div>
                     </div>
                 </div>

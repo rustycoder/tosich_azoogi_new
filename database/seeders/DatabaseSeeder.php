@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             PageSeeder::class,
             ProjectSeeder::class,
             ProductSeeder::class,
+            DatasheetTemplateSeeder::class,
         ]);
     }
 }
