@@ -556,13 +556,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Quick chip starter listeners
+    // Quick chip starter & welcome action listeners
     const initChipListeners = () => {
         document.querySelectorAll('.js-chat-chip').forEach(chip => {
             chip.addEventListener('click', () => {
                 const prompt = chip.getAttribute('data-prompt') || chip.textContent.trim();
                 sendMessage(prompt);
             });
+        });
+
+        const ctaBtn = document.getElementById('azoogi-chat-cta-btn');
+        ctaBtn?.addEventListener('click', () => {
+            sendMessage("I'd like to book an architectural lighting consultation.");
+        });
+
+        const reportLink = document.getElementById('azoogi-chat-report-link');
+        reportLink?.addEventListener('click', () => {
+            if (confirm("Need help or want to start a fresh conversation?\n\nClick OK to start a fresh conversation, or Cancel to continue.")) {
+                resetBtn?.click();
+            }
         });
     };
 
@@ -709,21 +721,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderWelcomeWithGreeting(greetingText) {
-        const chipsHtml = (liveBranding.starter_chips || []).map(chip => {
-            const text = (typeof chip === 'string') ? chip : (chip.prompt || chip.label || '');
-            if (!text) return '';
-            return `<button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="${escapeHtml(text)}">${escapeHtml(text)}</button>`;
-        }).join('');
-
-        body.innerHTML = `
-            <div class="azoogi-chat-starters">
-                <div class="azoogi-chat-starters-title">Welcome to Azoogi Lighting</div>
-                <p style="font-size: 13px; color: var(--chat-text); margin: 0 0 12px 0; line-height: 1.5;">${escapeHtml(greetingText)}</p>
-                <div class="azoogi-chat-chip-list">
-                    ${chipsHtml}
-                </div>
-            </div>
-        `;
+        body.innerHTML = getWelcomeTemplate(greetingText);
         initChipListeners();
         input?.focus();
     }
@@ -801,21 +799,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize session restoration on page load
     restoreSessionHistory();
+    initChipListeners();
 
-    // Welcome Template
-    function getWelcomeTemplate() {
-        const chipsHtml = (liveBranding.starter_chips || []).map(chip => {
+    // Welcome Template matching Alfred design
+    function getWelcomeTemplate(greetingText = null) {
+        const textToUse = greetingText || liveBranding.startup_message || 'Welcome to Azoogi Lighting! How can our architectural engineering team assist with your project specifications, lighting schedules, or quotes today?';
+        const chips = liveBranding.starter_chips || [];
+        const chipsHtml = chips.map((chip, idx) => {
             const text = (typeof chip === 'string') ? chip : (chip.prompt || chip.label || '');
             if (!text) return '';
-            return `<button type="button" class="azoogi-chat-chip js-chat-chip" data-prompt="${escapeHtml(text)}">${escapeHtml(text)}</button>`;
+            const isFeatured = idx === chips.length - 1 || text.toLowerCase().includes('quote') || text.toLowerCase().includes('demo') || text.toLowerCase().includes('datasheet');
+            const iconSvg = isFeatured ? `<svg viewBox="0 0 24 24" fill="currentColor" width="10" height="10" style="margin-right: 6px;"><polygon points="6 3 20 12 6 21 6 3"/></svg>` : '';
+            return `<button type="button" class="azoogi-chat-chip js-chat-chip ${isFeatured ? 'is-featured' : ''}" data-prompt="${escapeHtml(text)}">${iconSvg}<span>${escapeHtml(text)}</span></button>`;
         }).join('');
 
+        const avatarImg = liveBranding.ai_custom_avatar_url
+            ? `<img src="${escapeHtml(liveBranding.ai_custom_avatar_url)}" alt="AI">`
+            : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>`;
+
         return `
-            <div class="azoogi-chat-starters">
-                <div class="azoogi-chat-starters-title">Welcome to Azoogi Lighting</div>
-                <p style="font-size: 13px; color: var(--chat-text); margin: 0;">${escapeHtml(liveBranding.startup_message)}</p>
-                <div class="azoogi-chat-chip-list" style="margin-top: 8px;">
+            <div class="azoogi-chat-welcome-container">
+                <div class="azoogi-chat-welcome-msg">
+                    <div class="azoogi-chat-welcome-avatar">
+                        ${avatarImg}
+                    </div>
+                    <div class="azoogi-chat-welcome-bubble">
+                        <p>${escapeHtml(textToUse)}</p>
+                    </div>
+                </div>
+
+                <div class="azoogi-chat-chip-list">
                     ${chipsHtml}
+                </div>
+
+                <div class="azoogi-chat-welcome-actions">
+                    <button type="button" class="azoogi-chat-cta-btn" id="azoogi-chat-cta-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        <span>Book a consultation</span>
+                    </button>
+                    <button type="button" class="azoogi-chat-report-link" id="azoogi-chat-report-link">Report an issue with this chat</button>
                 </div>
             </div>
         `;

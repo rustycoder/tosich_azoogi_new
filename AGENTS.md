@@ -43,6 +43,7 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 ## Replies
 
 - Be concise in your explanations - focus on what's important rather than explaining obvious details.
+- Keep replies straight to the point (under 3 bullet points), avoid walls of text, and ask direct clarifying questions when requirements are open.
 
 === boost rules ===
 

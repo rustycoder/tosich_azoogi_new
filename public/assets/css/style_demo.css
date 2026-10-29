@@ -1220,59 +1220,44 @@ body.nav-open .nav-overlay {
     color: var(--pure-bg);
 }
 
-/* slider controls  */
-.slider-ctrl {
+/* Hero slider centered dots pagination */
+.slider-dots {
     position: absolute;
-    left: max(28px, calc((100% - var(--site-max)) / 2 + 28px));
-    right: max(28px, calc((100% - var(--site-max)) / 2 + 28px));
+    left: 50%;
+    transform: translateX(-50%);
     bottom: 6vh;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    gap: 24px;
-    z-index: 3;
-    color: var(--always-white);
-}
-
-.pp {
-    width: 46px;
-    height: 46px;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    color: var(--always-white);
+    gap: 12px;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+.slider-dot {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
     cursor: pointer;
-    transition: all 0.3s;
-    flex-shrink: 0;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
+    display: block;
 }
 
-.pp:hover {
-    background: var(--always-white);
-    color: #111111;
-    border-color: var(--always-white);
+.slider-dot:hover {
+    background: rgba(255, 255, 255, 0.85);
+    transform: scale(1.2);
 }
 
-.pp svg {
-    width: 14px;
-    height: 14px;
-}
-
-.counter {
-    color: var(--always-white);
-    font-size: var(--fs-kicker);
-    letter-spacing: 0.2em;
-    min-width: 60px;
-    text-align: right;
-}
-
-.counter b {
-    font-size: var(--fs-body);
-}
-
-.counter span {
-    opacity: 0.5;
+.slider-dot.active {
+    width: 28px;
+    border-radius: 9999px;
+    background: var(--always-white, #ffffff);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
 }
 
 /* --- Page Layout & Breadcrumbs --- */
@@ -2631,9 +2616,9 @@ footer {
         padding: 0 20px 18vh;
     }
 
-    .slider-ctrl {
-        left: 20px;
-        right: 20px;
+    .slider-dots {
+        bottom: 5vh;
+        gap: 10px;
     }
 }
 

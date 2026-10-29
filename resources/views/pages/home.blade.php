@@ -48,11 +48,10 @@
     </div>
   @endforeach
 
-  <div class="slider-ctrl">
-    <div class="counter"><b id="cur">01</b> <span>/ <b id="tot">04</b></span></div>
-    <div class="pp" id="pp" aria-label="Pause">
-      <svg id="ppIcon" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
-    </div>
+  <div class="slider-dots" id="sliderDots" role="tablist" aria-label="Hero slider pagination">
+    @foreach ($slides as $idx => $slide)
+      <button type="button" class="slider-dot{{ $loop->first ? ' active' : '' }}" data-slide="{{ $loop->index }}" aria-label="Go to slide {{ $loop->iteration }}" role="tab" aria-selected="{{ $loop->first ? 'true' : 'false' }}"></button>
+    @endforeach
   </div>
 </section>
 
@@ -174,20 +173,17 @@
   };
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
-  /* ===== Hero slider with play/pause ===== */
+  /* ===== Hero slider with centered dots ===== */
   (() => {
     const slides = document.querySelectorAll('.hero .slide');
+    const dots = document.querySelectorAll('.slider-dots .slider-dot');
     const n = slides.length;
-    const cur = document.getElementById('cur');
-    const tot = document.getElementById('tot');
-    const pp = document.getElementById('pp');
-    const ppIcon = document.getElementById('ppIcon');
+    if (n === 0) return;
     const DUR = 6000;
-    let idx = 0, playing = true, start = performance.now(), raf, elapsed = 0;
-
-    tot.textContent = String(n).padStart(2, '0');
+    let idx = 0, start = performance.now(), raf;
 
     function show(i) {
+      idx = i;
       slides.forEach((s, k) => {
         s.classList.toggle('active', k === i);
         const vid = s.querySelector('video.bg-video');
@@ -199,27 +195,33 @@
           vid.pause();
         }
       });
-      cur.textContent = String(i + 1).padStart(2, '0');
+      dots.forEach((d, k) => {
+        const isActive = k === i;
+        d.classList.toggle('active', isActive);
+        d.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
       window.dispatchEvent(new CustomEvent('hero:slide', { detail: { index: i } }));
     }
+
     function loop(t) {
-      if (!playing) { raf = requestAnimationFrame(loop); return; }
       const p = Math.min(1, (t - start) / DUR);
-      if (p >= 1) { idx = (idx + 1) % n; show(idx); start = t; }
+      if (p >= 1) {
+        idx = (idx + 1) % n;
+        show(idx);
+        start = t;
+      }
       raf = requestAnimationFrame(loop);
     }
-    pp.addEventListener('click', () => {
-      playing = !playing;
-      ppIcon.innerHTML = playing
-        ? '<rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/>'
-        : '<polygon points="7,4 20,12 7,20"/>';
-      if (playing) {
-        start = performance.now() - elapsed;
-      } else {
-        elapsed = performance.now() - start;
-      }
+
+    dots.forEach((dot, k) => {
+      dot.addEventListener('click', () => {
+        show(k);
+        start = performance.now();
+      });
     });
-    show(0); raf = requestAnimationFrame(loop);
+
+    show(0);
+    raf = requestAnimationFrame(loop);
   })();
 
   /* ===== Reveal on scroll ===== */

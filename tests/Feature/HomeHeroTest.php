@@ -32,8 +32,10 @@ class HomeHeroTest extends TestCase
             ->assertDontSee('class="eyebrow"', false)
             ->assertDontSee('id="lines"', false)
             ->assertDontSee('class="line"', false)
-            ->assertSee('class="slider-ctrl"', false)
-            ->assertSee('id="pp"', false);
+            ->assertDontSee('id="pp"', false)
+            ->assertDontSee('class="counter"', false)
+            ->assertSee('class="slider-dots"', false)
+            ->assertSee('class="slider-dot active"', false);
     }
 
     public function test_home_hero_uses_slide_image_as_video_poster_and_image_fallback(): void
