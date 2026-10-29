@@ -11,11 +11,6 @@
             <svg class="azoogi-chat-launcher-main-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
                 <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
             </svg>
-            <!-- Close SVG when open -->
-            <svg class="azoogi-chat-launcher-close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="16" height="16">
-                <line x1="18" y1="6" x2="6" y2="18"/>
-                <line x1="6" y1="6" x2="18" y2="18"/>
-            </svg>
         </div>
         <span class="azoogi-chat-launcher-text">Ask {{ $branding['ai_name'] }}</span>
     </button>
@@ -53,7 +48,7 @@
                         <path d="M3 21v-5h5"/>
                     </svg>
                 </button>
-                <button type="button" class="azoogi-chat-header-btn" id="azoogi-chat-close" title="Minimize chat" aria-label="Close chat">
+                <button type="button" class="azoogi-chat-header-btn" id="azoogi-chat-close" title="Close chat" aria-label="Close chat">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
                         <line x1="18" y1="6" x2="6" y2="18"/>
                         <line x1="6" y1="6" x2="18" y2="18"/>
@@ -82,7 +77,7 @@
 
         <!-- Footer Input -->
         <div class="azoogi-chat-footer">
-            <input type="text" id="azoogi-chat-input" class="azoogi-chat-input" placeholder="Ask about products, specs, or quotes..." autocomplete="off" maxlength="1000">
+            <input type="text" id="azoogi-chat-input" class="azoogi-chat-input" placeholder="Ask me anything..." autocomplete="off" maxlength="1000">
             <button type="button" id="azoogi-chat-send" class="azoogi-chat-send-btn" aria-label="Send message">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="16" height="16">
                     <line x1="22" y1="2" x2="11" y2="13"/>

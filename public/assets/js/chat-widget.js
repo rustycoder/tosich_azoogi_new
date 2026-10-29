@@ -88,6 +88,13 @@ document.addEventListener('DOMContentLoaded', () => {
     launcher?.addEventListener('click', () => toggleChat());
     closeBtn?.addEventListener('click', () => toggleChat(false));
 
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && widget.classList.contains('is-open')) {
+            toggleChat(false);
+        }
+    });
+
     // Forward transcript to sales team action
     emailTranscriptBtn?.addEventListener('click', async () => {
         if (!sessionUuid || getCachedMessages().length === 0) {
