@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Product;
+use App\Models\ProductAttribute;
 use App\Repositories\Contracts\IProductRepository;
 use Database\Seeders\PageSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -221,6 +222,46 @@ class ProductDetailTest extends TestCase
         $this->assertEquals('https://example.com/repo-neon.jpg', $found['cover'] ?? null);
         $this->assertEquals('https://example.com/repo-neon.jpg', $found['image'] ?? null);
         $this->assertNotEmpty($found['product_images'] ?? []);
+    }
+
+    public function test_product_detail_configuration_uses_attribute_group_order(): void
+    {
+        ProductAttribute::query()->create([
+            'airtable_id' => 'recCct',
+            'name' => 'CCT',
+            'value' => '3000K',
+            'sort_order' => 2,
+            'is_visible_on_filters' => true,
+        ]);
+        ProductAttribute::query()->create([
+            'airtable_id' => 'recIp',
+            'name' => 'IP Rating',
+            'value' => 'IP65',
+            'sort_order' => 1,
+            'is_visible_on_filters' => true,
+        ]);
+
+        $product = Product::query()->create([
+            'airtable_id' => 'recConfigOrder',
+            'product_name' => 'Config Order Strip',
+            'slug' => 'config-order-strip',
+            'category' => 'LED Strip',
+            'status' => 'Published',
+            'product_code' => 'AZ-ORDER-01',
+            'options' => [
+                'CCT' => ['3000K'],
+                'IP Rating' => ['IP65'],
+            ],
+        ]);
+
+        $catalog = app(IProductRepository::class)->navigationCatalog();
+        $this->assertSame(['IP Rating', 'CCT'], $catalog['attribute_groups_order']);
+
+        $html = $this->get('/products/'.$product->slug)
+            ->assertOk()
+            ->getContent();
+
+        $this->assertStringContainsString('"attribute_groups_order":["IP Rating","CCT"]', $html);
     }
 
     public function test_multiline_and_special_character_url_resolves_product_detail_when_product_exists(): void
