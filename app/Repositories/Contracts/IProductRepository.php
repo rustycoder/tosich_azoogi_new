@@ -55,12 +55,17 @@ interface IProductRepository
     /**
      * @return LengthAwarePaginator<int, ProductAttribute>
      */
-    public function attributeDashboardList(string $search = '', ?string $group = null, ?bool $visibleOnly = null, int $perPage = 50): LengthAwarePaginator;
+    public function attributeDashboardList(string $search = '', ?string $group = null, ?bool $visibleOnly = null, int $perPage = 50, ?string $attributeName = null): LengthAwarePaginator;
 
     /**
      * @return list<string>
      */
     public function attributeGroups(): array;
+
+    /**
+     * @return list<string>
+     */
+    public function attributeNames(): array;
 
     public function publishedByAirtableId(string $airtableId): ?Product;
 

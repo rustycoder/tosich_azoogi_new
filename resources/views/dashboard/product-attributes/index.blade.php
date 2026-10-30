@@ -28,12 +28,12 @@
                 type="search"
                 name="q"
                 value="{{ $search }}"
-                placeholder="Search by attribute group, value / term, or Airtable ID..."
+                placeholder="Search by group, attribute name, value / term, or Airtable ID..."
                 maxlength="100"
                 autocomplete="off"
             >
             @if ($search !== '')
-                <a class="dash-search-clear" href="{{ route('dashboard.product-attributes.index', array_filter(['group' => $activeGroup, 'visibility' => $visibility, 'per_page' => $perPage !== 50 ? $perPage : null])) }}" title="Clear search" aria-label="Clear search">
+                <a class="dash-search-clear" href="{{ route('dashboard.product-attributes.index', array_filter(['group' => $activeGroup, 'name' => $activeName, 'visibility' => $visibility, 'per_page' => $perPage !== 50 ? $perPage : null])) }}" title="Clear search" aria-label="Clear search">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
                 </a>
             @endif
@@ -48,6 +48,19 @@
             @foreach ($groups as $grpName)
                 <option value="{{ $grpName }}" {{ ($activeGroup ?? '') === $grpName ? 'selected' : '' }}>
                     {{ $grpName }}
+                </option>
+            @endforeach
+        </select>
+        <svg class="dash-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+
+    <!-- Attribute Name Dropdown -->
+    <div class="dash-select-wrap">
+        <select name="name" class="dash-select" onchange="document.getElementById('attrFilterForm').submit()" aria-label="Filter by attribute name">
+            <option value="">All Names</option>
+            @foreach ($names as $attrName)
+                <option value="{{ $attrName }}" {{ ($activeName ?? '') === $attrName ? 'selected' : '' }}>
+                    {{ $attrName }}
                 </option>
             @endforeach
         </select>
@@ -83,7 +96,8 @@
         <thead>
             <tr>
                 <th scope="col" style="width: 70px; text-align: center;">Order</th>
-                <th scope="col" style="min-width: 180px;">Attribute Group</th>
+                <th scope="col" style="min-width: 150px;">Attribute Group</th>
+                <th scope="col" style="min-width: 170px;">Attribute Name</th>
                 <th scope="col" class="dash-sticky-col" style="min-width: 220px;">Attribute Value (Term)</th>
                 <th scope="col" style="width: 80px; text-align: center;">Icon</th>
                 <th scope="col" style="width: 160px; text-align: center;">Filter Visibility</th>
@@ -104,7 +118,16 @@
                         @endif
                     </td>
 
-                    <!-- Attribute Group Name -->
+                    <!-- Attribute Group -->
+                    <td>
+                        @if (filled($attr->attribute_group))
+                            <span class="dash-tag" style="font-weight: 600; font-size: 11.5px;">{{ $attr->attribute_group }}</span>
+                        @else
+                            <span style="color: var(--dash-muted); font-size: 12px;">—</span>
+                        @endif
+                    </td>
+
+                    <!-- Attribute Name -->
                     <td>
                         <span class="dash-tag is-primary" style="font-weight: 700; font-size: 12px;">{{ $attr->name }}</span>
                     </td>
@@ -150,7 +173,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6">
+                    <td colspan="7">
                         <div class="dash-card dash-empty">
                             {{ $search === '' ? 'No product attributes synced yet.' : 'No attributes match "' . $search . '".' }}
                         </div>

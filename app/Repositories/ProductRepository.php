@@ -640,19 +640,28 @@ class ProductRepository implements IProductRepository
         return $paginator;
     }
 
-    public function attributeDashboardList(string $search = '', ?string $group = null, ?bool $visibleOnly = null, int $perPage = 50): LengthAwarePaginator
-    {
+    public function attributeDashboardList(
+        string $search = '',
+        ?string $group = null,
+        ?bool $visibleOnly = null,
+        int $perPage = 50,
+        ?string $attributeName = null,
+    ): LengthAwarePaginator {
         return ProductAttribute::query()
             ->with('updater:id,name')
             ->when($search !== '', function ($query) use ($search): void {
                 $query->where(function ($query) use ($search): void {
                     $query->where('name', 'like', '%'.$search.'%')
                         ->orWhere('value', 'like', '%'.$search.'%')
+                        ->orWhere('attribute_group', 'like', '%'.$search.'%')
                         ->orWhere('airtable_id', 'like', '%'.$search.'%');
                 });
             })
             ->when(filled($group) && $group !== 'all', function ($query) use ($group): void {
-                $query->where('name', $group);
+                $query->where('attribute_group', $group);
+            })
+            ->when(filled($attributeName) && $attributeName !== 'all', function ($query) use ($attributeName): void {
+                $query->where('name', $attributeName);
             })
             ->when($visibleOnly !== null, function ($query) use ($visibleOnly): void {
                 $query->where('is_visible_on_filters', $visibleOnly);
@@ -669,6 +678,20 @@ class ProductRepository implements IProductRepository
      * @return list<string>
      */
     public function attributeGroups(): array
+    {
+        return ProductAttribute::query()
+            ->whereNotNull('attribute_group')
+            ->where('attribute_group', '!=', '')
+            ->distinct()
+            ->orderBy('attribute_group')
+            ->pluck('attribute_group')
+            ->all();
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function attributeNames(): array
     {
         return ProductAttribute::query()
             ->whereNotNull('name')

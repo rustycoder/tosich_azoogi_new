@@ -333,6 +333,7 @@ class DashboardProductTableTest extends TestCase
             'airtable_id' => 'recATTR_CCT_3000',
             'name' => 'Colour Temperature',
             'value' => '3000K Warm White',
+            'attribute_group' => 'Light',
             'icon' => 'https://example.com/3000k.svg',
             'is_visible_on_filters' => true,
             'sort_order' => 1,
@@ -342,6 +343,7 @@ class DashboardProductTableTest extends TestCase
             'airtable_id' => 'recATTR_IP65',
             'name' => 'IP Rating',
             'value' => 'IP65 Water Resistant',
+            'attribute_group' => 'Compliance & Life',
             'icon' => null,
             'is_visible_on_filters' => false,
             'sort_order' => 2,
@@ -351,6 +353,10 @@ class DashboardProductTableTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('dash-airtable-table', false);
+        $response->assertSee('Attribute Group');
+        $response->assertSee('Attribute Name');
+        $response->assertSee('Light');
+        $response->assertSee('Compliance & Life');
         $response->assertSee('Colour Temperature');
         $response->assertSee('3000K Warm White');
         $response->assertSee('recATTR_CCT_3000');
@@ -363,11 +369,23 @@ class DashboardProductTableTest extends TestCase
         $html = $response->getContent();
         $this->assertTrue(strpos($html, '3000K Warm White') < strpos($html, 'IP65 Water Resistant'));
 
-        // Filter by group
-        $groupRes = $this->actingAs($admin)->get(route('dashboard.product-attributes.index', ['group' => 'IP Rating']));
+        // Filter by attribute group
+        $groupRes = $this->actingAs($admin)->get(route('dashboard.product-attributes.index', ['group' => 'Compliance & Life']));
         $groupRes->assertOk();
         $groupRes->assertSee('IP65 Water Resistant');
         $groupRes->assertDontSee('3000K Warm White');
+
+        // Filter by attribute name
+        $nameRes = $this->actingAs($admin)->get(route('dashboard.product-attributes.index', ['name' => 'Colour Temperature']));
+        $nameRes->assertOk();
+        $nameRes->assertSee('3000K Warm White');
+        $nameRes->assertDontSee('IP65 Water Resistant');
+
+        // Search by group name
+        $searchRes = $this->actingAs($admin)->get(route('dashboard.product-attributes.index', ['q' => 'Compliance']));
+        $searchRes->assertOk();
+        $searchRes->assertSee('IP65 Water Resistant');
+        $searchRes->assertDontSee('3000K Warm White');
 
         // Test per_page selector
         $attrPerPageRes = $this->actingAs($admin)->get(route('dashboard.product-attributes.index', ['per_page' => 100]));
