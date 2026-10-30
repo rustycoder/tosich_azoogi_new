@@ -324,4 +324,48 @@ class ProductDatasheetTest extends TestCase
         $this->assertSame(['https://example.com/manual.pdf'], $storefront['user_manual']);
         $this->assertSame(['https://example.com/ies.ies'], $storefront['ies_file']);
     }
+
+    public function test_custom_datasheet_does_not_duplicate_selected_options_with_features(): void
+    {
+        Product::factory()->create([
+            'airtable_id' => 'recGardenDupTest',
+            'product_name' => 'Garden Spotlight',
+            'product_code' => 'GSL-01',
+            'category' => 'Garden Lights',
+            'status' => 'publish',
+            'product_features' => [
+                'Current Type' => [['value' => 'AC/DC']],
+                'Finish' => [['value' => 'Black'], ['value' => 'Brass']],
+                'Colour Temperature' => [['value' => 'Warm White']],
+                'Voltage' => [['value' => '12V/24V']],
+                'Power' => [['value' => '3W']],
+                'IP Rating' => [['value' => 'IP67']],
+            ],
+        ]);
+
+        $response = $this->postJson('/product-datasheet', [
+            'product_id' => 'recGardenDupTest',
+            'project_name' => 'Garden Terrace',
+            'person_name' => 'Emma Watson',
+            'product_code' => 'GSL-01-BLK',
+            'selected_options' => [
+                'Voltage' => '12V/24V',
+                'Finish' => 'Black',
+                'Current Type' => 'AC/DC',
+                'Colour Temperature' => 'Warm White',
+            ],
+        ]);
+
+        $response->assertOk();
+
+        $export = ProductDatasheetExport::query()->where('airtable_id', 'recGardenDupTest')->firstOrFail();
+        $specs = $export->configuration['specifications'] ?? [];
+
+        $labels = array_column($specs, 'label');
+        $this->assertSame(count($labels), count(array_unique(array_map('strtolower', $labels))), 'Specifications contains duplicate attribute labels');
+
+        $this->assertCount(1, array_filter($labels, fn ($l) => stripos($l, 'Current Type') !== false));
+        $this->assertCount(1, array_filter($labels, fn ($l) => stripos($l, 'Voltage') !== false));
+        $this->assertCount(1, array_filter($labels, fn ($l) => stripos($l, 'Finish') !== false));
+    }
 }

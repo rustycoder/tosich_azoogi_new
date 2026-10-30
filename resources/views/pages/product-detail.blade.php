@@ -1947,13 +1947,6 @@
                 event.preventDefault();
                 clearDatasheetErrors();
 
-                let targetTab = null;
-                try {
-                    targetTab = window.open('about:blank', '_blank');
-                } catch (e) {
-                    targetTab = null;
-                }
-
                 const token = datasheetForm.querySelector('input[name="_token"]')?.value || '';
                 const selected = {};
                 const optionSet = product.options || {};
@@ -2010,9 +2003,6 @@
                     const payload = await response.json().catch(() => ({}));
 
                     if (response.status === 422) {
-                        if (targetTab && !targetTab.closed) {
-                            try { targetTab.close(); } catch (e) { }
-                        }
                         const errors = payload.errors || {};
                         Object.keys(errors).forEach((key) => {
                             setDatasheetError(key, Array.isArray(errors[key]) ? errors[key][0] : String(errors[key]));
@@ -2027,9 +2017,6 @@
                     }
 
                     if (!response.ok || !payload.url) {
-                        if (targetTab && !targetTab.closed) {
-                            try { targetTab.close(); } catch (e) { }
-                        }
                         setDatasheetError('form', 'The datasheet could not be generated. Try again.');
                         if (window.turnstile) {
                             try { window.turnstile.reset(); } catch (e) { }
@@ -2041,15 +2028,19 @@
                     if (window.turnstile) {
                         try { window.turnstile.reset(); } catch (e) { }
                     }
-                    if (targetTab && !targetTab.closed) {
-                        targetTab.location.href = payload.url;
-                    } else {
-                        window.location.assign(payload.url);
+
+                    // Open the generated datasheet in a new tab now that generation is completed
+                    const openedTab = window.open(payload.url, '_blank');
+                    if (!openedTab || openedTab.closed || typeof openedTab.closed === 'undefined') {
+                        const link = document.createElement('a');
+                        link.href = payload.url;
+                        link.target = '_blank';
+                        link.rel = 'noopener noreferrer';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
                     }
                 } catch (error) {
-                    if (targetTab && !targetTab.closed) {
-                        try { targetTab.close(); } catch (e) { }
-                    }
                     setDatasheetError('form', 'The datasheet could not be generated. Try again.');
                     if (window.turnstile) {
                         try { window.turnstile.reset(); } catch (e) { }

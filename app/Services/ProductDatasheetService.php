@@ -25,6 +25,9 @@ class ProductDatasheetService implements IProductDatasheetService
         'Dimensions' => ['Dimension', 'Dimensions', 'Size', 'Strip Width'],
         'Light Source' => ['Light Source', 'LED Type', 'Chip'],
         'Wattage' => ['Wattage', 'Power', 'Power Consumption Rate'],
+        'Voltage' => ['Voltage', 'Input Voltage', 'Operating Voltage'],
+        'Current Type' => ['Current Type', 'Current', 'Input Current'],
+        'Finish' => ['Finish', 'Color', 'Colour', 'Housing Color', 'Body Color'],
         'Luminous Flux' => ['Luminous Flux', 'Lumen', 'Lumens'],
         'Optics' => ['Optics', 'Beam Angle', 'Beam'],
         'Color Temperature' => ['Color Temperature', 'Colour Temperature', 'CCT', 'Light Color'],
@@ -358,9 +361,9 @@ class ProductDatasheetService implements IProductDatasheetService
         }
 
         $canonicalGroups = [
-            'Light' => [],
             'Physical' => [],
             'Electrical & Control' => [],
+            'Light' => [],
             'Compliance & Life' => [],
             'Other' => [],
         ];
@@ -390,62 +393,68 @@ class ProductDatasheetService implements IProductDatasheetService
             ];
         }
 
-        $leftGroups = [
-            'LIGHT' => $canonicalGroups['Light'],
-            'PHYSICAL' => $canonicalGroups['Physical'],
-        ];
-
-        $rightGroups = [
-            'ELECTRICAL & CONTROL' => $canonicalGroups['Electrical & Control'],
-            'COMPLIANCE & LIFE' => $canonicalGroups['Compliance & Life'],
-        ];
-
-        if (! empty($canonicalGroups['Other'])) {
-            $rightGroups['OTHER'] = $canonicalGroups['Other'];
-        }
-
-        $renderColumn = function (array $groups): string {
-            $html = '';
-            foreach ($groups as $title => $items) {
-                if (empty($items)) {
-                    continue;
-                }
-                $html .= '<div class="spec-section">'."\n";
-                $html .= '    <div class="spec-sec-title">'.htmlspecialchars($title, ENT_QUOTES, 'UTF-8').'</div>'."\n";
-                foreach ($items as $item) {
-                    $k = htmlspecialchars((string) $item['label'], ENT_QUOTES, 'UTF-8');
-                    $v = htmlspecialchars((string) $item['value'], ENT_QUOTES, 'UTF-8');
-                    $html .= '    <div class="spec-row"><span class="k">'.$k.'</span><span class="v">'.$v.'</span></div>'."\n";
-                }
-                $html .= '</div>'."\n";
+        $renderSection = function (string $title, array $items): string {
+            if (empty($items)) {
+                return '<div class="spec-section empty"></div>';
             }
+
+            $html = '<div class="spec-section">'."\n";
+            $html .= '    <div class="spec-sec-title">'.htmlspecialchars($title, ENT_QUOTES, 'UTF-8').'</div>'."\n";
+            foreach ($items as $item) {
+                $k = htmlspecialchars((string) $item['label'], ENT_QUOTES, 'UTF-8');
+                $v = htmlspecialchars((string) $item['value'], ENT_QUOTES, 'UTF-8');
+                $html .= '    <div class="spec-row"><span class="k">'.$k.'</span><span class="v">'.$v.'</span></div>'."\n";
+            }
+            $html .= '</div>';
 
             return $html;
         };
 
-        $leftHtml = $renderColumn($leftGroups);
-        $rightHtml = $renderColumn($rightGroups);
+        $rowsHtml = '';
+
+        // Row 1: 1. Physical (Left) & 2. Electrical & Control (Right)
+        $hasPhysical = ! empty($canonicalGroups['Physical']);
+        $hasElectrical = ! empty($canonicalGroups['Electrical & Control']);
+        if ($hasPhysical || $hasElectrical) {
+            $left = $renderSection('PHYSICAL', $canonicalGroups['Physical']);
+            $right = $renderSection('ELECTRICAL & CONTROL', $canonicalGroups['Electrical & Control']);
+            $rowsHtml .= '    <div class="specs-row">'."\n";
+            $rowsHtml .= "        {$left}\n";
+            $rowsHtml .= "        {$right}\n";
+            $rowsHtml .= '    </div>'."\n";
+        }
+
+        // Row 2: 3. Light (Left) & 4. Compliance & Life (Right)
+        $hasLight = ! empty($canonicalGroups['Light']);
+        $hasCompliance = ! empty($canonicalGroups['Compliance & Life']);
+        if ($hasLight || $hasCompliance) {
+            $left = $renderSection('LIGHT', $canonicalGroups['Light']);
+            $right = $renderSection('COMPLIANCE & LIFE', $canonicalGroups['Compliance & Life']);
+            $rowsHtml .= '    <div class="specs-row">'."\n";
+            $rowsHtml .= "        {$left}\n";
+            $rowsHtml .= "        {$right}\n";
+            $rowsHtml .= '    </div>'."\n";
+        }
+
+        // Row 3: Other (if any unmapped attributes exist)
+        if (! empty($canonicalGroups['Other'])) {
+            $other = $renderSection('OTHER', $canonicalGroups['Other']);
+            $empty = '<div class="spec-section empty"></div>';
+            $rowsHtml .= '    <div class="specs-row">'."\n";
+            $rowsHtml .= "        {$other}\n";
+            $rowsHtml .= "        {$empty}\n";
+            $rowsHtml .= '    </div>'."\n";
+        }
 
         return <<<HTML
 <div class="specs-grid-wrap">
-    <div class="specs-column">
-{$leftHtml}    </div>
-    <div class="specs-column">
-{$rightHtml}    </div>
-</div>
+{$rowsHtml}</div>
 HTML;
     }
 
     public function sampleData(): array
     {
         $specifications = [
-            // LIGHT
-            ['label' => 'Delivered output', 'value' => '1,440 lm (20 W, 2700 K)', 'group' => 'Light'],
-            ['label' => 'CRI / Colour consistency', 'value' => '90 / <3 SDCM', 'group' => 'Light'],
-            ['label' => 'Beam angle', 'value' => '36°', 'group' => 'Light'],
-            ['label' => 'Peak intensity', 'value' => '4,000 cd', 'group' => 'Light'],
-            ['label' => 'Glare', 'value' => 'UGR <19', 'group' => 'Light'],
-
             // PHYSICAL
             ['label' => 'Housing', 'value' => 'Aluminium, powder-coated', 'group' => 'Physical'],
             ['label' => 'Finish', 'value' => 'External and internal, white or black', 'group' => 'Physical'],
@@ -457,6 +466,13 @@ HTML;
             ['label' => 'Drive', 'value' => '500 mA constant current', 'group' => 'Electrical & Control'],
             ['label' => 'Dimming', 'value' => 'On/off, DALI, phase-cut, Casambi', 'group' => 'Electrical & Control'],
             ['label' => 'Driver', 'value' => 'External', 'group' => 'Electrical & Control'],
+
+            // LIGHT
+            ['label' => 'Delivered output', 'value' => '1,440 lm (20 W, 2700 K)', 'group' => 'Light'],
+            ['label' => 'CRI / Colour consistency', 'value' => '90 / <3 SDCM', 'group' => 'Light'],
+            ['label' => 'Beam angle', 'value' => '36°', 'group' => 'Light'],
+            ['label' => 'Peak intensity', 'value' => '4,000 cd', 'group' => 'Light'],
+            ['label' => 'Glare', 'value' => 'UGR <19', 'group' => 'Light'],
 
             // COMPLIANCE & LIFE
             ['label' => 'Ingress', 'value' => 'IP20', 'group' => 'Compliance & Life'],
@@ -527,23 +543,43 @@ HTML;
 
     /**
      * @param  array<string, string>  $selectedOptions
-     * @return list<array{label: string, value: string}>
+     * @return list<array{label: string, value: string, group: string}>
      */
     private function specifications(Product $product, string $productCode, array $selectedOptions, ?float $length): array
     {
         $features = is_array($product->product_features) ? $product->product_features : [];
         $rows = [];
+        $usedNormalizedKeys = [];
         $usedOptionKeys = [];
+        $excludedOptionKeys = ['model', 'product code', 'product_code', 'sku'];
 
+        $markUsed = function (string ...$keys) use (&$usedNormalizedKeys): void {
+            foreach ($keys as $key) {
+                $norm = $this->normalizeKey($key);
+                if ($norm !== '') {
+                    $usedNormalizedKeys[$norm] = true;
+                }
+            }
+        };
+
+        $isUsed = function (string $key) use (&$usedNormalizedKeys): bool {
+            $norm = $this->normalizeKey($key);
+
+            return isset($usedNormalizedKeys[$norm]);
+        };
+
+        // 1. Process standard specification fields
         foreach (self::SPEC_FIELDS as $label => $aliases) {
             $value = match ($label) {
                 'Brand' => $this->joinValues($this->featureValues($features, ...$aliases)) ?: 'Azoogi',
                 default => $this->joinValues($this->featureValues($features, ...$aliases)),
             };
 
+            $matchedOptionKey = null;
             foreach ($selectedOptions as $optionKey => $optionValue) {
                 if ($this->optionMatches($optionKey, [$label, ...$aliases])) {
                     $value = $optionValue;
+                    $matchedOptionKey = $optionKey;
                     $usedOptionKeys[] = $optionKey;
                     break;
                 }
@@ -558,40 +594,69 @@ HTML;
                 'value' => $value,
                 'group' => $this->attributeGroupFor($label, $value),
             ];
+
+            $markUsed($label, ...$aliases);
+            if ($matchedOptionKey !== null) {
+                $markUsed($matchedOptionKey);
+            }
         }
 
-        $excludedOptionKeys = ['model', 'product code', 'product_code', 'sku'];
-
+        // 2. Add remaining user-selected options (selected values take precedence and must not be duplicated)
         foreach ($selectedOptions as $optionKey => $optionValue) {
-            if (in_array($optionKey, $usedOptionKeys, true) || $optionValue === '' || in_array(strtolower(trim($optionKey)), $excludedOptionKeys, true)) {
+            $trimmedKey = trim((string) $optionKey);
+            $trimmedVal = trim((string) $optionValue);
+
+            if ($trimmedVal === '' || in_array(strtolower($trimmedKey), $excludedOptionKeys, true)) {
+                continue;
+            }
+
+            if (in_array($optionKey, $usedOptionKeys, true) || $isUsed($trimmedKey)) {
                 continue;
             }
 
             $rows[] = [
-                'label' => $optionKey,
-                'value' => $optionValue,
-                'group' => $this->attributeGroupFor($optionKey, $optionValue),
+                'label' => $trimmedKey,
+                'value' => $trimmedVal,
+                'group' => $this->attributeGroupFor($trimmedKey, $trimmedVal),
             ];
+
+            $usedOptionKeys[] = $optionKey;
+            $markUsed($trimmedKey);
         }
 
+        // 3. Add any fixed product features that were NOT selectable options and NOT in SPEC_FIELDS
         foreach ($features as $featureKey => $featureValues) {
-            $isUsed = false;
-            foreach (self::SPEC_FIELDS as $aliases) {
-                if ($this->optionMatches($featureKey, $aliases)) {
-                    $isUsed = true;
+            $trimmedFeatureKey = trim((string) $featureKey);
+
+            if (empty($featureValues) || in_array(strtolower($trimmedFeatureKey), $excludedOptionKeys, true)) {
+                continue;
+            }
+
+            // If this feature matches an already used key or matches ANY user selected option, skip it
+            if ($isUsed($trimmedFeatureKey)) {
+                continue;
+            }
+
+            $matchesSelected = false;
+            foreach (array_keys($selectedOptions) as $optKey) {
+                if ($this->normalizeKey($trimmedFeatureKey) === $this->normalizeKey($optKey)) {
+                    $matchesSelected = true;
                     break;
                 }
             }
-            if ($isUsed || empty($featureValues)) {
+            if ($matchesSelected) {
                 continue;
             }
+
             $val = $this->joinValues($this->featureValues($features, $featureKey));
-            if ($val !== '' && ! in_array(strtolower(trim($featureKey)), $excludedOptionKeys, true)) {
+            if ($val !== '') {
                 $rows[] = [
-                    'label' => $featureKey,
+                    'label' => $trimmedFeatureKey,
                     'value' => $val,
-                    'group' => $this->attributeGroupFor($featureKey, $val),
+                    'group' => $this->attributeGroupFor($trimmedFeatureKey, $val),
                 ];
+
+                $markUsed($trimmedFeatureKey);
             }
         }
 

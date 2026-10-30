@@ -1060,12 +1060,19 @@ html, body {
 
 /* 5. Technical Specifications */
 .specs-grid-wrap {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 7mm;
+  display: flex;
+  flex-direction: column;
+  gap: 4mm;
   margin-top: 1mm;
   margin-bottom: 2mm;
   page-break-inside: avoid;
+}
+
+.specs-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7mm;
+  align-items: start;
 }
 
 .specs-column {
@@ -1077,6 +1084,10 @@ html, body {
 .spec-section {
   display: flex;
   flex-direction: column;
+}
+
+.spec-section.empty {
+  min-height: 1px;
 }
 
 .spec-sec-title {
@@ -1106,14 +1117,15 @@ html, body {
   font-weight: 400;
   text-align: left;
   padding-right: 8px;
-  flex: 1;
+  flex: 1 1 auto;
 }
 
 .spec-row .v {
   color: #111827;
   font-weight: 600;
   text-align: right;
-  flex-shrink: 0;
+  flex: 0 1 auto;
+  max-width: 65%;
 }
 
 /* Dynamic Specifications Table (When rendered from Airtable specs) */

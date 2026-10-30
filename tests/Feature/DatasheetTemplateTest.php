@@ -559,9 +559,24 @@ class DatasheetTemplateTest extends TestCase
         $this->assertStringContainsString('Warranty', $rendered);
         $this->assertStringContainsString('5 years', $rendered);
 
-        // Verify 2-column structure
+        // Verify grid rows structure ensuring horizontal alignment
         $this->assertStringContainsString('class="specs-grid-wrap"', $rendered);
-        $this->assertStringContainsString('class="specs-column"', $rendered);
+        $this->assertStringContainsString('class="specs-row"', $rendered);
+
+        // Verify exact order of groups: 1. Physical, 2. Electrical and Control, 3. Light, 4. Compliance and Life
+        $posPhysical = strpos($rendered, 'PHYSICAL');
+        $posElectrical = strpos($rendered, 'ELECTRICAL &amp; CONTROL');
+        $posLight = strpos($rendered, 'LIGHT');
+        $posCompliance = strpos($rendered, 'COMPLIANCE &amp; LIFE');
+
+        $this->assertNotFalse($posPhysical);
+        $this->assertNotFalse($posElectrical);
+        $this->assertNotFalse($posLight);
+        $this->assertNotFalse($posCompliance);
+
+        $this->assertTrue($posPhysical < $posElectrical, 'PHYSICAL should appear before ELECTRICAL & CONTROL');
+        $this->assertTrue($posElectrical < $posLight, 'ELECTRICAL & CONTROL should appear before LIGHT');
+        $this->assertTrue($posLight < $posCompliance, 'LIGHT should appear before COMPLIANCE & LIFE');
     }
 
     public function test_standard_template_preserves_flat_specification_table(): void
