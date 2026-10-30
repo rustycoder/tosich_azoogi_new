@@ -293,6 +293,8 @@ final class ProductNormalizer
             $value = $fields['Term Name'] ?? $fields['Attribute Value'] ?? $fields['Attribute_Value'] ?? $fields['Value'] ?? $fields['Option'] ?? $fields['Term Value'] ?? '';
             $icon = $this->firstUrl($fields['Attribute Icon'] ?? $fields['Attribute_Icon'] ?? $fields['Attribute icon'] ?? $fields['Icon'] ?? $fields['attribute_icon'] ?? $fields['attribute icon'] ?? '');
             $links = $fields['Simple Products'] ?? $fields['Product'] ?? $fields['Products'] ?? [];
+            $groupRaw = $fields['Attribute Group'] ?? $fields['Attribute group'] ?? $fields['Attributes Group'] ?? $fields['Attributes group'] ?? $fields['attributes group'] ?? $fields['Group'] ?? '';
+            $group = is_array($groupRaw) ? (string) ($groupRaw[0] ?? '') : (string) $groupRaw;
 
             if (is_string($links)) {
                 $links = [$links];
@@ -303,6 +305,7 @@ final class ProductNormalizer
                 'name' => $name,
                 'value' => $value === null ? '' : (string) $value,
                 'icon' => $icon,
+                'group' => trim($group),
                 'order' => $this->orderValue($fields),
                 'product_ids' => array_values(array_filter(
                     is_array($links) ? $links : [],

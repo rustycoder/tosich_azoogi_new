@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'icon',
     'sort_order',
     'is_visible_on_filters',
+    'attribute_group',
     'created_by',
     'updated_by',
     'deleted_by',

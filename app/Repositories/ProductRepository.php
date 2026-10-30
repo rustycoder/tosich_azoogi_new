@@ -185,6 +185,9 @@ class ProductRepository implements IProductRepository
             );
 
             $orderRaw = $fields['Order'] ?? $fields['order'] ?? $fields['Sort Order'] ?? $fields['Sort order'] ?? $fields['sort_order'] ?? null;
+            $groupRaw = $fields['Attribute Group'] ?? $fields['Attribute group'] ?? $fields['Attributes Group'] ?? $fields['Attributes group'] ?? $fields['attributes group'] ?? $fields['Group'] ?? null;
+            $group = is_array($groupRaw) ? (string) ($groupRaw[0] ?? '') : (string) ($groupRaw ?? '');
+            $group = trim($group);
 
             $attributeRows[$airtableId] = [
                 'airtable_id' => $airtableId,
@@ -195,6 +198,7 @@ class ProductRepository implements IProductRepository
                 ),
                 'sort_order' => $orderRaw !== null && is_numeric($orderRaw) ? (int) $orderRaw : null,
                 'is_visible_on_filters' => $isVisibleOnFilters,
+                'attribute_group' => $group !== '' ? mb_substr($group, 0, 100) : null,
                 'created_by' => $userId,
                 'updated_by' => $userId,
                 'deleted_by' => null,
@@ -226,6 +230,7 @@ class ProductRepository implements IProductRepository
                 'icon',
                 'sort_order',
                 'is_visible_on_filters',
+                'attribute_group',
                 'updated_by',
                 'deleted_by',
                 'deleted_at',

@@ -110,6 +110,7 @@ class DatasheetTemplate extends Model
             'project_name',
             'person_name',
             'specifications_table',
+            'grouped_specifications_table',
             'product_image',
             'dimension_image',
             'reviewed_on',
@@ -744,55 +745,9 @@ HTML;
         </div>
     </div>
 
-    <!-- Technical Specifications: Balanced 2-Column Layout -->
-    <div class="specs-grid-wrap">
-        <div class="specs-column">
-            <div class="spec-section">
-                <div class="spec-sec-title">LIGHT</div>
-                <div class="spec-row"><span class="k">Delivered output</span><span class="v">1,240 lm</span></div>
-                <div class="spec-row"><span class="k">Colour temperature</span><span class="v">3000 K &plusmn;100 K</span></div>
-                <div class="spec-row"><span class="k">CRI</span><span class="v">90</span></div>
-                <div class="spec-row"><span class="k">Beam / field angle</span><span class="v">20&deg; / 37&deg;</span></div>
-                <div class="spec-row"><span class="k">Peak intensity</span><span class="v">8,070 cd</span></div>
-                <div class="spec-row"><span class="k">Efficacy</span><span class="v">74 lm/W</span></div>
-                <div class="spec-row"><span class="k">Light source</span><span class="v">COB</span></div>
-            </div>
-            <div class="spec-section">
-                <div class="spec-sec-title">PHYSICAL</div>
-                <div class="spec-row"><span class="k">Housing</span><span class="v">316 stainless steel, PC lens</span></div>
-                <div class="spec-row"><span class="k">Mounting</span><span class="v">In-ground, pre-pour sleeve</span></div>
-                <div class="spec-row"><span class="k">Cut-out</span><span class="v">&Oslash;76 mm</span></div>
-                <div class="spec-row"><span class="k">Sleeve</span><span class="v">&Oslash;74 &times; 140 mm</span></div>
-                <div class="spec-row"><span class="k">Cable</span><span class="v">1 m VDE rubber, 2 &times; 0.75 mm&sup2;</span></div>
-            </div>
-        </div>
-
-        <div class="specs-column">
-            <div class="spec-section">
-                <div class="spec-sec-title">ELECTRICAL &amp; CONTROL</div>
-                <div class="spec-row"><span class="k">System power</span><span class="v">15 W</span></div>
-                <div class="spec-row"><span class="k">Input voltage</span><span class="v">24 V DC</span></div>
-                <div class="spec-row"><span class="k">Dimming</span><span class="v">DALI</span></div>
-                <div class="spec-row"><span class="k">Driver</span><span class="v">Remote 24 V DC DALI supply</span></div>
-            </div>
-            <div class="spec-section">
-                <div class="spec-sec-title">COMPLIANCE &amp; LIFE</div>
-                <div class="spec-row"><span class="k">Ingress</span><span class="v">IP67</span></div>
-                <div class="spec-row"><span class="k">Rated life</span><span class="v">50,000 h L80</span></div>
-                <div class="spec-row"><span class="k">Operating temp.</span><span class="v">-15 to +45 &deg;C</span></div>
-                <div class="spec-row"><span class="k">Photometry</span><span class="v">IES file available</span></div>
-                <div class="spec-row"><span class="k">Warranty</span><span class="v">5 years</span></div>
-            </div>
-            <div class="spec-section">
-                <div class="spec-sec-title">ORDERING</div>
-                <div class="spec-row"><span class="k">{{product_code}}-SL</span><span class="v">Pre-pour sleeve &Oslash;74 &times; 140</span></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Dynamic Specs Table (Rendered when product has dynamic features) -->
+    <!-- Technical Specifications: Grouped 2-Column Layout -->
     <div class="dynamic-specs-block">
-        {{specifications_table}}
+        {{grouped_specifications_table}}
     </div>
 
     <!-- Footer -->
@@ -1107,14 +1062,16 @@ html, body {
 .specs-grid-wrap {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 6mm;
+  gap: 7mm;
+  margin-top: 1mm;
   margin-bottom: 2mm;
+  page-break-inside: avoid;
 }
 
 .specs-column {
   display: flex;
   flex-direction: column;
-  gap: 2.5mm;
+  gap: 3mm;
 }
 
 .spec-section {
@@ -1123,34 +1080,40 @@ html, body {
 }
 
 .spec-sec-title {
-  font-size: 7pt;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 7.8pt;
   font-weight: 800;
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
   color: #111827;
   text-transform: uppercase;
-  padding-bottom: 1.5px;
-  border-bottom: 1px solid #111827;
-  margin-bottom: 2px;
+  padding-bottom: 2px;
+  border-bottom: 1.2px solid #111827;
+  margin-bottom: 1px;
 }
 
 .spec-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 1.8px 0;
-  border-bottom: 1px solid #f3f4f6;
-  font-size: 7pt;
+  padding: 2.4px 0;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 7.2pt;
+  line-height: 1.35;
 }
 
 .spec-row .k {
-  color: #4b5563;
-  font-weight: 500;
+  color: #374151;
+  font-weight: 400;
+  text-align: left;
+  padding-right: 8px;
+  flex: 1;
 }
 
 .spec-row .v {
   color: #111827;
   font-weight: 600;
   text-align: right;
+  flex-shrink: 0;
 }
 
 /* Dynamic Specifications Table (When rendered from Airtable specs) */

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\DatasheetTemplate;
 use App\Models\Product;
+use App\Models\ProductAttribute;
 use App\Models\ProductDatasheetExport;
 use App\Repositories\Contracts\IProductDatasheetRepository;
 use App\Repositories\Contracts\IProductRepository;
@@ -31,6 +32,102 @@ class ProductDatasheetService implements IProductDatasheetService
         'Dimming' => ['Dimming', 'Dimmable', 'Dimming Type', 'Dimming Control', 'Control Option'],
         'Mounting' => ['Mounting', 'Installation', 'Mount'],
         'Warranty' => ['Warranty'],
+    ];
+
+    /**
+     * @var array<string, string>|null
+     */
+    private static ?array $attributeGroupCache = null;
+
+    /**
+     * @var array<string, string>
+     */
+    private const FALLBACK_GROUPS = [
+        // Light
+        'colourtemperature' => 'Light',
+        'colortemperature' => 'Light',
+        'cct' => 'Light',
+        'lightcolor' => 'Light',
+        'lightsource' => 'Light',
+        'optics' => 'Light',
+        'beamangle' => 'Light',
+        'beam' => 'Light',
+        'fieldangle' => 'Light',
+        'cri' => 'Light',
+        'colourconsistency' => 'Light',
+        'cricolourconsistency' => 'Light',
+        'luminousflux' => 'Light',
+        'lumen' => 'Light',
+        'lumens' => 'Light',
+        'deliveredoutput' => 'Light',
+        'peakintensity' => 'Light',
+        'glare' => 'Light',
+        'visualcomfort' => 'Light',
+        'pixel' => 'Light',
+        'efficacy' => 'Light',
+
+        // Electrical & Control
+        'wattage' => 'Electrical & Control',
+        'power' => 'Electrical & Control',
+        'systempower' => 'Electrical & Control',
+        'voltage' => 'Electrical & Control',
+        'inputvoltage' => 'Electrical & Control',
+        'outputvoltage' => 'Electrical & Control',
+        'outputcurrent' => 'Electrical & Control',
+        'outputtype' => 'Electrical & Control',
+        'currenttype' => 'Electrical & Control',
+        'drive' => 'Electrical & Control',
+        'driver' => 'Electrical & Control',
+        'dimming' => 'Electrical & Control',
+        'dimmable' => 'Electrical & Control',
+        'dimmingtype' => 'Electrical & Control',
+        'dimmingcontrol' => 'Electrical & Control',
+        'dimmingprotocol' => 'Electrical & Control',
+        'controlprotocol' => 'Electrical & Control',
+        'controloption' => 'Electrical & Control',
+        'maximumrun' => 'Electrical & Control',
+        'buttons' => 'Electrical & Control',
+        'channels' => 'Electrical & Control',
+        'outputs' => 'Electrical & Control',
+
+        // Physical
+        'dimensions' => 'Physical',
+        'dimension' => 'Physical',
+        'size' => 'Physical',
+        'finish' => 'Physical',
+        'housing' => 'Physical',
+        'mounting' => 'Physical',
+        'mountingoption' => 'Physical',
+        'neonmountingoptions' => 'Physical',
+        'cutout' => 'Physical',
+        'diameter' => 'Physical',
+        'length' => 'Physical',
+        'stemlength' => 'Physical',
+        'sidelength' => 'Physical',
+        'modulelength' => 'Physical',
+        'cableentry' => 'Physical',
+        'cuttingincrement' => 'Physical',
+        'stripwidth' => 'Physical',
+        'profilesize' => 'Physical',
+        'profilelength' => 'Physical',
+        'channelconfiguration' => 'Physical',
+        'reflectorcolour' => 'Physical',
+        'material' => 'Physical',
+        'brand' => 'Physical',
+        'suppliername' => 'Physical',
+
+        // Compliance & Life
+        'iprating' => 'Compliance & Life',
+        'ip' => 'Compliance & Life',
+        'ikrating' => 'Compliance & Life',
+        'ingress' => 'Compliance & Life',
+        'warranty' => 'Compliance & Life',
+        'ratedlife' => 'Compliance & Life',
+        'operatingtemp' => 'Compliance & Life',
+        'operatingtemperature' => 'Compliance & Life',
+        'photometry' => 'Compliance & Life',
+        'compliance' => 'Compliance & Life',
+        'certification' => 'Compliance & Life',
     ];
 
     public function __construct(
@@ -90,13 +187,17 @@ class ProductDatasheetService implements IProductDatasheetService
                 continue;
             }
 
+            $group = ! empty($row['group']) ? (string) $row['group'] : $this->attributeGroupFor($label, $value);
+
             $specifications[] = [
                 'label' => $label,
                 'value' => $value,
+                'group' => $group,
             ];
         }
 
         $specificationsTable = $this->renderSpecificationsTable($specifications);
+        $groupedSpecificationsTable = $this->renderGroupedSpecificationsTable($specifications);
 
         return [
             'title' => (string) ($export->product_name ?: $export->product_code),
@@ -107,6 +208,7 @@ class ProductDatasheetService implements IProductDatasheetService
             'description' => (string) ($configuration['description'] ?? ''),
             'specifications' => $specifications,
             'specifications_table' => $specificationsTable,
+            'grouped_specifications_table' => $groupedSpecificationsTable,
             'product_image' => $export->listingImageUrl(),
             'dimension_image' => $this->dimensionImageUrl($export, $configuration),
             'project_name' => $export->project_name,
@@ -249,19 +351,119 @@ class ProductDatasheetService implements IProductDatasheetService
         return $html;
     }
 
+    public function renderGroupedSpecificationsTable(array $specifications): string
+    {
+        if (empty($specifications)) {
+            return '';
+        }
+
+        $canonicalGroups = [
+            'Light' => [],
+            'Physical' => [],
+            'Electrical & Control' => [],
+            'Compliance & Life' => [],
+            'Other' => [],
+        ];
+
+        foreach ($specifications as $row) {
+            if (! is_array($row)) {
+                continue;
+            }
+
+            $label = trim((string) ($row['label'] ?? ''));
+            $value = trim((string) ($row['value'] ?? ''));
+
+            if ($label === '' || $value === '') {
+                continue;
+            }
+
+            $group = ! empty($row['group']) ? (string) $row['group'] : $this->attributeGroupFor($label, $value);
+            $canonical = $this->canonicalGroup($group);
+
+            if (! isset($canonicalGroups[$canonical])) {
+                $canonical = 'Other';
+            }
+
+            $canonicalGroups[$canonical][] = [
+                'label' => $label,
+                'value' => $value,
+            ];
+        }
+
+        $leftGroups = [
+            'LIGHT' => $canonicalGroups['Light'],
+            'PHYSICAL' => $canonicalGroups['Physical'],
+        ];
+
+        $rightGroups = [
+            'ELECTRICAL & CONTROL' => $canonicalGroups['Electrical & Control'],
+            'COMPLIANCE & LIFE' => $canonicalGroups['Compliance & Life'],
+        ];
+
+        if (! empty($canonicalGroups['Other'])) {
+            $rightGroups['OTHER'] = $canonicalGroups['Other'];
+        }
+
+        $renderColumn = function (array $groups): string {
+            $html = '';
+            foreach ($groups as $title => $items) {
+                if (empty($items)) {
+                    continue;
+                }
+                $html .= '<div class="spec-section">'."\n";
+                $html .= '    <div class="spec-sec-title">'.htmlspecialchars($title, ENT_QUOTES, 'UTF-8').'</div>'."\n";
+                foreach ($items as $item) {
+                    $k = htmlspecialchars((string) $item['label'], ENT_QUOTES, 'UTF-8');
+                    $v = htmlspecialchars((string) $item['value'], ENT_QUOTES, 'UTF-8');
+                    $html .= '    <div class="spec-row"><span class="k">'.$k.'</span><span class="v">'.$v.'</span></div>'."\n";
+                }
+                $html .= '</div>'."\n";
+            }
+
+            return $html;
+        };
+
+        $leftHtml = $renderColumn($leftGroups);
+        $rightHtml = $renderColumn($rightGroups);
+
+        return <<<HTML
+<div class="specs-grid-wrap">
+    <div class="specs-column">
+{$leftHtml}    </div>
+    <div class="specs-column">
+{$rightHtml}    </div>
+</div>
+HTML;
+    }
+
     public function sampleData(): array
     {
         $specifications = [
-            ['label' => 'Brand', 'value' => 'Azoogi'],
-            ['label' => 'Dimensions', 'value' => '10mm (W) x 10mm (H)'],
-            ['label' => 'Light Source', 'value' => 'SMD LED'],
-            ['label' => 'Wattage', 'value' => '10W/m'],
-            ['label' => 'Luminous Flux', 'value' => '850 lm/m'],
-            ['label' => 'Optics', 'value' => '120°'],
-            ['label' => 'Color Temperature', 'value' => '3000K Warm White'],
-            ['label' => 'IP Rating', 'value' => 'IP67'],
-            ['label' => 'Dimming', 'value' => 'DALI-2 / 1-10V / Phase'],
-            ['label' => 'Warranty', 'value' => '5 Years'],
+            // LIGHT
+            ['label' => 'Delivered output', 'value' => '1,440 lm (20 W, 2700 K)', 'group' => 'Light'],
+            ['label' => 'CRI / Colour consistency', 'value' => '90 / <3 SDCM', 'group' => 'Light'],
+            ['label' => 'Beam angle', 'value' => '36°', 'group' => 'Light'],
+            ['label' => 'Peak intensity', 'value' => '4,000 cd', 'group' => 'Light'],
+            ['label' => 'Glare', 'value' => 'UGR <19', 'group' => 'Light'],
+
+            // PHYSICAL
+            ['label' => 'Housing', 'value' => 'Aluminium, powder-coated', 'group' => 'Physical'],
+            ['label' => 'Finish', 'value' => 'External and internal, white or black', 'group' => 'Physical'],
+            ['label' => 'Mounting', 'value' => 'Surface mounted', 'group' => 'Physical'],
+            ['label' => 'Size', 'value' => 'Ø80 × 124 mm', 'group' => 'Physical'],
+
+            // ELECTRICAL & CONTROL
+            ['label' => 'System power', 'value' => '20 W', 'group' => 'Electrical & Control'],
+            ['label' => 'Drive', 'value' => '500 mA constant current', 'group' => 'Electrical & Control'],
+            ['label' => 'Dimming', 'value' => 'On/off, DALI, phase-cut, Casambi', 'group' => 'Electrical & Control'],
+            ['label' => 'Driver', 'value' => 'External', 'group' => 'Electrical & Control'],
+
+            // COMPLIANCE & LIFE
+            ['label' => 'Ingress', 'value' => 'IP20', 'group' => 'Compliance & Life'],
+            ['label' => 'Rated life', 'value' => '50,000 h L80', 'group' => 'Compliance & Life'],
+            ['label' => 'Operating temp.', 'value' => '-15 to +45 °C', 'group' => 'Compliance & Life'],
+            ['label' => 'Photometry', 'value' => 'IES file available', 'group' => 'Compliance & Life'],
+            ['label' => 'Warranty', 'value' => '5 years', 'group' => 'Compliance & Life'],
         ];
 
         return [
@@ -273,6 +475,7 @@ class ProductDatasheetService implements IProductDatasheetService
             'description' => 'Precision architectural linear neon with seamless side-bending optical distribution, UV stabilisation, and IP67 weather resistance for exterior facades and cove details.',
             'specifications' => $specifications,
             'specifications_table' => $this->renderSpecificationsTable($specifications),
+            'grouped_specifications_table' => $this->renderGroupedSpecificationsTable($specifications),
             'product_image' => '/assets/img/neon.webp',
             'dimension_image' => '/assets/img/neon.webp',
             'project_name' => '',
@@ -353,6 +556,7 @@ class ProductDatasheetService implements IProductDatasheetService
             $rows[] = [
                 'label' => $label,
                 'value' => $value,
+                'group' => $this->attributeGroupFor($label, $value),
             ];
         }
 
@@ -366,10 +570,96 @@ class ProductDatasheetService implements IProductDatasheetService
             $rows[] = [
                 'label' => $optionKey,
                 'value' => $optionValue,
+                'group' => $this->attributeGroupFor($optionKey, $optionValue),
             ];
         }
 
+        foreach ($features as $featureKey => $featureValues) {
+            $isUsed = false;
+            foreach (self::SPEC_FIELDS as $aliases) {
+                if ($this->optionMatches($featureKey, $aliases)) {
+                    $isUsed = true;
+                    break;
+                }
+            }
+            if ($isUsed || empty($featureValues)) {
+                continue;
+            }
+            $val = $this->joinValues($this->featureValues($features, $featureKey));
+            if ($val !== '' && ! in_array(strtolower(trim($featureKey)), $excludedOptionKeys, true)) {
+                $rows[] = [
+                    'label' => $featureKey,
+                    'value' => $val,
+                    'group' => $this->attributeGroupFor($featureKey, $val),
+                ];
+            }
+        }
+
         return $rows;
+    }
+
+    public function attributeGroupFor(string $name, ?string $value = null): string
+    {
+        $normalized = $this->normalizeKey($name);
+
+        if (self::$attributeGroupCache === null) {
+            self::$attributeGroupCache = [];
+            try {
+                $attributes = ProductAttribute::query()
+                    ->whereNotNull('attribute_group')
+                    ->where('attribute_group', '!=', '')
+                    ->select(['name', 'attribute_group'])
+                    ->get();
+
+                foreach ($attributes as $attr) {
+                    $key = $this->normalizeKey((string) $attr->name);
+                    self::$attributeGroupCache[$key] = (string) $attr->attribute_group;
+                }
+            } catch (\Throwable) {
+                // Ignore if table is not yet migrated in test runs
+            }
+        }
+
+        if (isset(self::$attributeGroupCache[$normalized])) {
+            return $this->canonicalGroup(self::$attributeGroupCache[$normalized]);
+        }
+
+        if (isset(self::FALLBACK_GROUPS[$normalized])) {
+            return self::FALLBACK_GROUPS[$normalized];
+        }
+
+        if (str_contains($normalized, 'light') || str_contains($normalized, 'optic') || str_contains($normalized, 'color') || str_contains($normalized, 'colour') || str_contains($normalized, 'beam') || str_contains($normalized, 'lumen') || str_contains($normalized, 'cri')) {
+            return 'Light';
+        }
+
+        if (str_contains($normalized, 'volt') || str_contains($normalized, 'watt') || str_contains($normalized, 'power') || str_contains($normalized, 'dim') || str_contains($normalized, 'driver') || str_contains($normalized, 'current')) {
+            return 'Electrical & Control';
+        }
+
+        if (str_contains($normalized, 'ip') || str_contains($normalized, 'warranty') || str_contains($normalized, 'ingress') || str_contains($normalized, 'life') || str_contains($normalized, 'temp') || str_contains($normalized, 'photometr')) {
+            return 'Compliance & Life';
+        }
+
+        return 'Physical';
+    }
+
+    private function canonicalGroup(string $raw): string
+    {
+        $lower = strtolower(trim($raw));
+        if (str_contains($lower, 'light') || str_contains($lower, 'optic') || str_contains($lower, 'photometric')) {
+            return 'Light';
+        }
+        if (str_contains($lower, 'elect') || str_contains($lower, 'control') || str_contains($lower, 'power') || str_contains($lower, 'volt')) {
+            return 'Electrical & Control';
+        }
+        if (str_contains($lower, 'physical') || str_contains($lower, 'dimension') || str_contains($lower, 'mech')) {
+            return 'Physical';
+        }
+        if (str_contains($lower, 'complian') || str_contains($lower, 'life') || str_contains($lower, 'warrant') || str_contains($lower, 'ingress')) {
+            return 'Compliance & Life';
+        }
+
+        return $raw !== '' ? $raw : 'Physical';
     }
 
     /**

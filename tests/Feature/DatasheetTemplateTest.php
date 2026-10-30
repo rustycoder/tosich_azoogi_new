@@ -5,8 +5,10 @@ namespace Tests\Feature;
 use App\Enums\UserType;
 use App\Models\DatasheetTemplate;
 use App\Models\Product;
+use App\Models\ProductAttribute;
 use App\Models\ProductDatasheetExport;
 use App\Models\User;
+use App\Repositories\Contracts\IProductRepository;
 use App\Services\Contracts\IProductDatasheetService;
 use Database\Seeders\DatasheetTemplateSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -444,5 +446,156 @@ class DatasheetTemplateTest extends TestCase
         $this->assertStringContainsString('SLL-002', $renderedWithoutIcons);
         $this->assertStringContainsString('<span class="feature-badge">5YR</span>', $renderedWithoutIcons);
         $this->assertStringContainsString('<span class="feature-badge">IP65</span>', $renderedWithoutIcons);
+    }
+
+    public function test_product_attributes_save_attribute_group(): void
+    {
+        /** @var IProductRepository $repo */
+        $repo = app(IProductRepository::class);
+
+        $attributes = [
+            [
+                'id' => 'recOptic1',
+                'fields' => [
+                    'Attribute name' => 'Optics',
+                    'Term Name' => '36° Beam',
+                    'Attribute Group' => 'Light',
+                ],
+            ],
+            [
+                'id' => 'recVolt1',
+                'fields' => [
+                    'Attribute name' => 'Voltage',
+                    'Term Name' => '24V DC',
+                    'Attribute Group' => 'Electrical & Control',
+                ],
+            ],
+            [
+                'id' => 'recMat1',
+                'fields' => [
+                    'Attribute name' => 'Housing',
+                    'Term Name' => 'Aluminium',
+                    'Attribute Group' => 'Physical',
+                ],
+            ],
+            [
+                'id' => 'recIp1',
+                'fields' => [
+                    'Attribute name' => 'IP Rating',
+                    'Term Name' => 'IP68',
+                    'Attribute Group' => 'Compliance & Life',
+                ],
+            ],
+        ];
+
+        $repo->persistLookups([], $attributes);
+
+        $opticAttr = ProductAttribute::where('airtable_id', 'recOptic1')->first();
+        $this->assertNotNull($opticAttr);
+        $this->assertSame('Light', $opticAttr->attribute_group);
+
+        $voltAttr = ProductAttribute::where('airtable_id', 'recVolt1')->first();
+        $this->assertNotNull($voltAttr);
+        $this->assertSame('Electrical & Control', $voltAttr->attribute_group);
+
+        $matAttr = ProductAttribute::where('airtable_id', 'recMat1')->first();
+        $this->assertNotNull($matAttr);
+        $this->assertSame('Physical', $matAttr->attribute_group);
+
+        $ipAttr = ProductAttribute::where('airtable_id', 'recIp1')->first();
+        $this->assertNotNull($ipAttr);
+        $this->assertSame('Compliance & Life', $ipAttr->attribute_group);
+    }
+
+    public function test_modern_specifier_template_groups_attributes_into_canonical_sections(): void
+    {
+        $this->seed(DatasheetTemplateSeeder::class);
+
+        $template = DatasheetTemplate::query()->where('slug', 'modern-specifier-a4')->firstOrFail();
+        $this->assertContains('grouped_specifications_table', $template->available_tokens);
+
+        $product = Product::factory()->create([
+            'product_name' => 'Architectural Spotlight',
+            'product_code' => 'ARC-SPOT-01',
+        ]);
+
+        $export = ProductDatasheetExport::factory()->create([
+            'product_id' => $product->id,
+            'product_name' => 'Architectural Spotlight',
+            'product_code' => 'ARC-SPOT-01',
+            'configuration' => [
+                'specifications' => [
+                    ['label' => 'Delivered output', 'value' => '1,440 lm (20 W, 2700 K)', 'group' => 'Light'],
+                    ['label' => 'Beam angle', 'value' => '36°', 'group' => 'Light'],
+                    ['label' => 'System power', 'value' => '20 W', 'group' => 'Electrical & Control'],
+                    ['label' => 'Dimming', 'value' => 'DALI, phase-cut', 'group' => 'Electrical & Control'],
+                    ['label' => 'Housing', 'value' => 'Aluminium, powder-coated', 'group' => 'Physical'],
+                    ['label' => 'Size', 'value' => 'Ø80 × 124 mm', 'group' => 'Physical'],
+                    ['label' => 'Ingress', 'value' => 'IP20', 'group' => 'Compliance & Life'],
+                    ['label' => 'Warranty', 'value' => '5 years', 'group' => 'Compliance & Life'],
+                ],
+            ],
+        ]);
+
+        /** @var IProductDatasheetService $service */
+        $service = app(IProductDatasheetService::class);
+        $rendered = $service->renderTemplate($template, $export);
+
+        // Verify all 4 canonical group titles are rendered
+        $this->assertStringContainsString('LIGHT', $rendered);
+        $this->assertStringContainsString('ELECTRICAL &amp; CONTROL', $rendered);
+        $this->assertStringContainsString('PHYSICAL', $rendered);
+        $this->assertStringContainsString('COMPLIANCE &amp; LIFE', $rendered);
+
+        // Verify specs within groups
+        $this->assertStringContainsString('Delivered output', $rendered);
+        $this->assertStringContainsString('1,440 lm (20 W, 2700 K)', $rendered);
+        $this->assertStringContainsString('System power', $rendered);
+        $this->assertStringContainsString('20 W', $rendered);
+        $this->assertStringContainsString('Housing', $rendered);
+        $this->assertStringContainsString('Aluminium, powder-coated', $rendered);
+        $this->assertStringContainsString('Ingress', $rendered);
+        $this->assertStringContainsString('IP20', $rendered);
+        $this->assertStringContainsString('Warranty', $rendered);
+        $this->assertStringContainsString('5 years', $rendered);
+
+        // Verify 2-column structure
+        $this->assertStringContainsString('class="specs-grid-wrap"', $rendered);
+        $this->assertStringContainsString('class="specs-column"', $rendered);
+    }
+
+    public function test_standard_template_preserves_flat_specification_table(): void
+    {
+        $this->seed(DatasheetTemplateSeeder::class);
+
+        $template = DatasheetTemplate::query()->where('slug', 'standard-azoogi-a4')->firstOrFail();
+
+        $product = Product::factory()->create([
+            'product_name' => 'Standard Linear Flex',
+            'product_code' => 'SLF-01',
+        ]);
+
+        $export = ProductDatasheetExport::factory()->create([
+            'product_id' => $product->id,
+            'product_name' => 'Standard Linear Flex',
+            'product_code' => 'SLF-01',
+            'configuration' => [
+                'specifications' => [
+                    ['label' => 'Wattage', 'value' => '15W/m', 'group' => 'Electrical & Control'],
+                    ['label' => 'IP Rating', 'value' => 'IP67', 'group' => 'Compliance & Life'],
+                ],
+            ],
+        ]);
+
+        /** @var IProductDatasheetService $service */
+        $service = app(IProductDatasheetService::class);
+        $rendered = $service->renderTemplate($template, $export);
+
+        // Standard template uses flat table with params class and does NOT use the grouped grid
+        $this->assertStringContainsString('<p class="params-title">SPECIFICATIONS</p>', $rendered);
+        $this->assertStringContainsString('<table class="params">', $rendered);
+        $this->assertStringContainsString('<td>Wattage</td>', $rendered);
+        $this->assertStringContainsString('<td>15W/m</td>', $rendered);
+        $this->assertStringNotContainsString('class="specs-grid-wrap"', $rendered);
     }
 }

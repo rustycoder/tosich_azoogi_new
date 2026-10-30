@@ -39,6 +39,7 @@ interface IProductDatasheetService
      *     product_code?: string,
      *     product_name?: string,
      *     specifications_table?: string,
+     *     grouped_specifications_table?: string,
      *     logo_left?: string,
      *     logo_right?: string,
      *     review_logo?: string,
@@ -54,6 +55,10 @@ interface IProductDatasheetService
     public function sampleData(): array;
 
     public function renderTechnicalIcons(ProductDatasheetExport $export, array $configuration = []): string;
+
+    public function renderSpecificationsTable(array $specifications): string;
+
+    public function renderGroupedSpecificationsTable(array $specifications): string;
 
     public function renderTemplate(DatasheetTemplate $template, ?ProductDatasheetExport $export = null, bool $autoPrint = false): string;
 
