@@ -40,15 +40,15 @@
                 <div class="mega-menu" id="dynamic-mega-menu"></div>
             </div>
             @foreach ($nav as $item)
-                <a href="{{ chrome_url($item['href'] ?? '') }}"{!! chrome_target_attrs($item['target'] ?? null) !!}>{{ $item['label'] }}</a>
+                <a href="{{ chrome_url($item['href'] ?? '') }}" {!! chrome_target_attrs($item['target'] ?? null) !!}>{{ $item['label'] }}</a>
             @endforeach
         </div>
         <div class="nav-actions">
             <a href="{{ url('/led-strip-calculator') }}" class="cta">LED Calculator</a>
-            <button type="button" class="search-trigger" id="search-trigger"
-                aria-label="Search products" aria-expanded="false" aria-controls="site-search">
-                <svg class="search-trigger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <button type="button" class="search-trigger" id="search-trigger" aria-label="Search products"
+                aria-expanded="false" aria-controls="site-search">
+                <svg class="search-trigger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <circle cx="11" cy="11" r="6.5" />
                     <path d="M16.5 16.5 21 21" />
                 </svg>
@@ -73,14 +73,15 @@
             <form class="site-search-form" id="site-search-form" role="search">
                 <label class="visually-hidden" for="site-search-q">Search products</label>
                 <div class="site-search-field">
-                    <svg class="site-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <svg class="site-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <circle cx="11" cy="11" r="6.5" />
                         <path d="M16.5 16.5 21 21" />
                     </svg>
-                    <input id="site-search-q" type="search" name="q" placeholder="Search products..."
-                        autocomplete="off" maxlength="80">
-                    <button type="button" class="site-search-clear" id="site-search-clear" aria-label="Clear search" hidden>&times;</button>
+                    <input id="site-search-q" type="search" name="q" placeholder="Search products..." autocomplete="off"
+                        maxlength="80">
+                    <button type="button" class="site-search-clear" id="site-search-clear" aria-label="Clear search"
+                        hidden>&times;</button>
                 </div>
             </form>
             <div class="site-search-results" id="site-search-results" hidden></div>
