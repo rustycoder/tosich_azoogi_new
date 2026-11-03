@@ -37,7 +37,7 @@ class MadrixPageTest extends TestCase
             ->assertSee('Design, Integration &amp; Local Support', false)
             ->assertSee('Ready to Bring Your Lighting Designs to Life?', false)
             ->assertSee('Request a MADRIX Quote', false)
-            ->assertSee('href="'.url('/contact').'"', false)
+            ->assertSee('href="' . url('/contact') . '"', false)
             ->assertSee('Previous image', false)
             ->assertSee('Next image', false)
             ->assertSee('>Products <', false)
