@@ -165,7 +165,7 @@ class SitemapBuilder
 
         foreach ($projects as $project) {
             $urls[] = [
-                'loc' => url('/project-detail').'?slug='.urlencode($project->slug),
+                'loc' => url('/projects/'.rawurlencode($project->slug)),
                 'lastmod' => $project->updated_at?->format('Y-m-d'),
                 'changefreq' => 'monthly',
                 'priority' => 0.7,

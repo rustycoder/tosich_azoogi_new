@@ -84,7 +84,7 @@ class ProjectsPageTest extends TestCase
             'completed' => '2024',
         ]);
 
-        $html = $this->get('/project-detail?slug='.$project->slug)
+        $html = $this->get('/projects/'.$project->slug)
             ->assertOk()
             ->assertSee('All Projects', false)
             ->assertSee('Project Overview', false)
@@ -122,7 +122,7 @@ class ProjectsPageTest extends TestCase
             'gallery' => ['/assets/img/img-1.jpg', '/assets/img/img-2.jpg'],
         ]);
 
-        $html = $this->get('/project-detail?slug='.$project->slug)
+        $html = $this->get('/projects/'.$project->slug)
             ->assertOk()
             ->assertSee('Pavilion lighting across the harbour boardwalk.', false)
             ->assertSee('class="project-gallery-section"', false)
@@ -236,5 +236,12 @@ class ProjectsPageTest extends TestCase
 
         $this->assertSame('28px', $meta->fresh()->font_size);
         $this->assertSame('left', $meta->fresh()->text_align);
+    }
+
+    public function test_legacy_project_detail_links_redirect_permanently_to_clean_project_urls(): void
+    {
+        $this->get('/project-detail?slug=the-eve-hotel')
+            ->assertStatus(301)
+            ->assertRedirect(route('projects.show', ['slug' => 'the-eve-hotel']));
     }
 }

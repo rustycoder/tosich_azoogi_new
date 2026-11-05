@@ -43,7 +43,7 @@
 
     if (gridEl) {
       gridEl.innerHTML = projects.map((p) => `
-        <a class="project-card" href="/project-detail?slug=${encodeURIComponent(p.slug)}">
+        <a class="project-card" href="/projects/${encodeURIComponent(p.slug)}">
           <div class="project-card-media">
             <img src="${escapeHtml(coverOf(p))}" alt="${escapeHtml(p.title)}" loading="lazy">
           </div>

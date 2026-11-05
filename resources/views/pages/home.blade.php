@@ -136,7 +136,7 @@
 
     <div class="grid">
       @foreach ($featuredProjects as $project)
-        <div class="proj reveal"><a href="{{ route('project-detail', ['slug' => $project->slug]) }}"><img src="{{ $project->coverUrl() }}" alt="{{ $project->title }}"/><div class="cap"><small>{{ $project->tag }}@if ($project->location) &mdash; {{ $project->location }}@endif</small><h3>{!! accent_html($project->title) !!}</h3></div></a></div>
+        <div class="proj reveal"><a href="{{ route('projects.show', ['slug' => $project->slug]) }}"><img src="{{ $project->coverUrl() }}" alt="{{ $project->title }}"/><div class="cap"><small>{{ $project->tag }}@if ($project->location) &mdash; {{ $project->location }}@endif</small><h3>{!! accent_html($project->title) !!}</h3></div></a></div>
       @endforeach
     </div>
   </div>

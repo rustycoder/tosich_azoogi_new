@@ -36,7 +36,7 @@ class PageTest extends TestCase
             'products' => ['/products', 'Products'],
             'product-detail' => ['/product-detail', 'Azoogi'],
             'projects' => ['/projects', 'Projects'],
-            'project-detail' => ['/project-detail?slug=zushi-restaurant', 'Zushi'],
+            'project-detail' => ['/projects/zushi-restaurant', 'Zushi'],
             'about' => ['/about', 'About'],
             'solutions' => ['/solutions', 'Solutions'],
             'casambi' => ['/casambi', 'Casambi'],

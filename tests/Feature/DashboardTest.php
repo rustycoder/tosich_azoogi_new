@@ -524,7 +524,7 @@ class DashboardTest extends TestCase
 
         $this->assertSoftDeleted($project);
         $this->assertSame($staff->id, $project->fresh()->deleted_by);
-        $this->get('/project-detail?slug=harbour-pavilion')->assertNotFound();
+        $this->get('/projects/harbour-pavilion')->assertNotFound();
     }
 
     public function test_admin_can_create_staff_and_assign_permissions(): void

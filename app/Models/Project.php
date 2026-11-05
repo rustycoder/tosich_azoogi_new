@@ -108,7 +108,7 @@ class Project extends Model
 
     public function publicPath(): string
     {
-        return '/project-detail?slug='.$this->slug;
+        return '/projects/'.rawurlencode((string) $this->slug);
     }
 
     /**

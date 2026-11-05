@@ -211,7 +211,7 @@ class LlmsTxtBuilder
             ->get();
 
         foreach ($projects as $project) {
-            $url = $baseUrl.'/project-detail?slug='.urlencode($project->slug);
+            $url = $baseUrl.$project->publicPath();
             $tag = $project->tag ? ' | '.$project->tag : '';
             $location = $project->location ? ' ('.$project->location.')' : '';
             $summaryText = trim((string) ($project->summary ?: $project->description));

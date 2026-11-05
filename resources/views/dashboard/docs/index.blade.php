@@ -1041,7 +1041,7 @@
                             </tr>
                             <tr>
                                 <td><strong>Projects & Audience Pages</strong></td>
-                                <td><code>/projects</code>, <code>/project-detail?slug=...</code>, <code>/architect-designer</code>, <code>/electrician-builder</code>, <code>/home-owner</code>, <code>/wholesaler</code>, <code>/about</code>, <code>/contact</code></td>
+                                <td><code>/projects</code>, <code>/projects/{slug}</code>, <code>/architect-designer</code>, <code>/electrician-builder</code>, <code>/home-owner</code>, <code>/wholesaler</code>, <code>/about</code>, <code>/contact</code></td>
                                 <td><span class="dash-pill-active">0.7</span></td>
                                 <td>monthly</td>
                             </tr>

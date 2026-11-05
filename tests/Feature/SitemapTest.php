@@ -105,7 +105,7 @@ class SitemapTest extends TestCase
         $content = $response->getContent();
 
         $this->assertStringContainsString('<loc>'.url('/products/sample-cob-strip').'</loc>', $content);
-        $this->assertStringContainsString('<loc>'.url('/project-detail?slug=sample-flagship-project').'</loc>', $content);
+        $this->assertStringContainsString('<loc>'.url('/projects/sample-flagship-project').'</loc>', $content);
         $this->assertStringNotContainsString('draft-project', $content);
     }
 

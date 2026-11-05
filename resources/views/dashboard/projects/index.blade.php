@@ -134,7 +134,7 @@
                         @include('dashboard.partials.title-link', [
                             'label' => $project->title,
                             'href' => route('dashboard.projects.edit', $project),
-                            'view' => route('project-detail', ['slug' => $project->slug]),
+                            'view' => route('projects.show', ['slug' => $project->slug]),
                         ])
                     </td>
 

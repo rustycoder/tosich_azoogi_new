@@ -40,7 +40,7 @@
       <div class="projects-count" id="projectsCount"{!! cms_style($meta, 'list.showing') !!}>{{ $meta->get('list.showing') }} {{ $projects->count() }} {{ $projects->count() === 1 ? $meta->get('list.singular') : $meta->get('list.plural') }}</div>
       <div class="projects-grid" id="projectsGrid">
         @foreach ($projects as $project)
-          <a class="project-card" href="{{ route('project-detail', ['slug' => $project->slug]) }}">
+          <a class="project-card" href="{{ route('projects.show', ['slug' => $project->slug]) }}">
             <span class="project-card-media">
               <img src="{{ $project->coverUrl() }}" alt="{{ $project->coverAlt() }}" loading="lazy">
             </span>

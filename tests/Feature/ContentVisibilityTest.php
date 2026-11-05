@@ -41,8 +41,8 @@ class ContentVisibilityTest extends TestCase
         $deleted = Project::factory()->create(['slug' => 'gone-gallery']);
         $deleted->delete();
 
-        $this->get('/project-detail?slug=quiet-house')->assertNotFound();
-        $this->get('/project-detail?slug=gone-gallery')->assertNotFound();
+        $this->get('/projects/quiet-house')->assertNotFound();
+        $this->get('/projects/gone-gallery')->assertNotFound();
         $this->get('/projects')->assertDontSee($inactive->title, false);
     }
 

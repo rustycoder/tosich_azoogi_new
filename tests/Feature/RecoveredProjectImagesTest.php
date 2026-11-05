@@ -76,7 +76,7 @@ class RecoveredProjectImagesTest extends TestCase
             ->assertOk()
             ->assertSee('/'.$cover, false);
 
-        $detail = $this->get('/project-detail?slug='.$slug)
+        $detail = $this->get('/projects/'.$slug)
             ->assertOk()
             ->assertSee('/'.$cover, false);
 

@@ -202,7 +202,8 @@ Route::get('/architect-designer', [PageController::class, '__invoke'])->defaults
 Route::get('/electrician-builder', [PageController::class, '__invoke'])->defaults('slug', 'electrician-builder')->name('electrician-builder');
 Route::get('/wholesaler', [PageController::class, '__invoke'])->defaults('slug', 'wholesaler')->name('wholesaler');
 Route::get('/projects', [SiteProjectController::class, 'index'])->name('projects');
-Route::get('/project-detail', [SiteProjectController::class, 'show'])->name('project-detail');
+Route::get('/projects/{slug}', [SiteProjectController::class, 'show'])->name('projects.show');
+Route::get('/project-detail', [SiteProjectController::class, 'redirectLegacyDetail'])->name('project-detail');
 
 Route::get('/products', [SiteProductController::class, 'index'])->name('products');
 Route::get('/products/{identifier}.{format}', [ProductImageController::class, 'show'])

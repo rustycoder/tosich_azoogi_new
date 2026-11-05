@@ -69,7 +69,7 @@ class ProjectAltTextTest extends TestCase
             ->assertOk()
             ->assertSee('alt="Custom Eve Hotel Cover Alt"', false);
 
-        $this->get(route('project-detail', ['slug' => 'the-eve-hotel']))
+        $this->get(route('projects.show', ['slug' => 'the-eve-hotel']))
             ->assertOk()
             ->assertSee('alt="Custom Eve Hotel Gallery 1 Alt"', false)
             ->assertSee('alt="The Eve Hotel in Sydney NSW — architectural lighting gallery photo 2"', false);
