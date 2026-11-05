@@ -206,6 +206,11 @@ class AiConfigManagementTest extends TestCase
             'lead_greeting_template' => 'Hi {name}! Thanks for reaching out regarding {project}.',
             'intake_enabled' => '1',
             'intake_require_project' => '1',
+            'show_consultation_btn' => '0',
+            'consultation_btn_text' => 'Schedule Lighting Call',
+            'show_report_issue' => '1',
+            'report_issue_text' => 'Report a chat problem',
+            'disclaimer_text' => 'Custom disclaimer for engineering verification.',
             'starter_chips' => [
                 ['prompt' => 'Show garden spike lights'],
                 ['prompt' => 'Show architectural linear profiles'],
@@ -219,6 +224,11 @@ class AiConfigManagementTest extends TestCase
         $this->assertSame('Azoogi Lighting Consultant', $branding['ai_name']);
         $this->assertSame('Sydney Commercial Lighting Specialist', $branding['ai_subtitle']);
         $this->assertTrue($branding['intake_require_project']);
+        $this->assertFalse($branding['show_consultation_btn']);
+        $this->assertSame('Schedule Lighting Call', $branding['consultation_btn_text']);
+        $this->assertTrue($branding['show_report_issue']);
+        $this->assertSame('Report a chat problem', $branding['report_issue_text']);
+        $this->assertSame('Custom disclaimer for engineering verification.', $branding['disclaimer_text']);
         $this->assertCount(2, $branding['starter_chips']);
         $this->assertSame('Show garden spike lights', $branding['starter_chips'][0]['prompt']);
     }

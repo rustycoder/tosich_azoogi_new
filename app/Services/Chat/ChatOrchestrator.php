@@ -273,6 +273,13 @@ class ChatOrchestrator
             'intake_require_project' => $branding['intake_require_project'] ?? false,
             'intake_require_email' => $branding['intake_require_email'] ?? false,
             'intake_require_name' => $branding['intake_require_name'] ?? false,
+            'show_consultation_btn' => (bool) ($branding['show_consultation_btn'] ?? true),
+            'consultation_btn_text' => ! empty($branding['consultation_btn_text']) ? trim((string) $branding['consultation_btn_text']) : 'Book a consultation',
+            'show_report_issue' => (bool) ($branding['show_report_issue'] ?? true),
+            'report_issue_text' => ! empty($branding['report_issue_text']) ? trim((string) $branding['report_issue_text']) : 'Report an issue with this chat',
+            'disclaimer_text' => isset($branding['disclaimer_text']) && trim((string) $branding['disclaimer_text']) !== ''
+                ? trim((string) $branding['disclaimer_text'])
+                : 'Azoogi AI can make mistakes. Verify critical specs with our engineering team.',
         ];
     }
 

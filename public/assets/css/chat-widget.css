@@ -1057,6 +1057,242 @@
     color: var(--chat-text);
 }
 
+/* Custom In-Widget Pop-up Modals (Refresh Conversation & Report Issue) */
+.azoogi-chat-modal-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 60;
+    background: rgba(8, 8, 10, 0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] .azoogi-chat-modal-overlay {
+    background: rgba(15, 23, 42, 0.45);
+}
+
+.azoogi-chat-modal-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.azoogi-chat-modal-card {
+    width: 100%;
+    max-width: 360px;
+    background: var(--chat-header-bg);
+    border: 1px solid var(--chat-border);
+    border-radius: 18px;
+    padding: 22px 20px;
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--chat-border);
+    text-align: center;
+    transform: translateY(10px) scale(0.96);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box;
+}
+
+[data-theme="light"] .azoogi-chat-modal-card {
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.azoogi-chat-modal-card.is-form {
+    max-width: 400px;
+    text-align: left;
+}
+
+.azoogi-chat-modal-overlay.is-open .azoogi-chat-modal-card {
+    transform: translateY(0) scale(1);
+}
+
+.azoogi-chat-modal-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(103, 208, 78, 0.14);
+    border: 1px solid rgba(103, 208, 78, 0.35);
+    color: var(--chat-accent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    flex-shrink: 0;
+}
+
+.azoogi-chat-modal-icon.is-sm {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 0;
+}
+
+.azoogi-chat-modal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.azoogi-chat-modal-head-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.azoogi-chat-modal-close {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: var(--chat-muted);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.azoogi-chat-modal-close:hover {
+    color: var(--chat-text);
+    background: var(--chat-bubble-ai);
+}
+
+.azoogi-chat-modal-title {
+    margin: 0 0 6px 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--chat-text);
+    line-height: 1.3;
+}
+
+.azoogi-chat-modal-head .azoogi-chat-modal-title {
+    margin: 0;
+}
+
+.azoogi-chat-modal-desc {
+    margin: 0 0 18px 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--chat-muted);
+}
+
+.azoogi-chat-modal-field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.azoogi-chat-modal-field {
+    margin-bottom: 10px;
+}
+
+.azoogi-chat-modal-field-row .azoogi-chat-modal-field {
+    margin-bottom: 0;
+}
+
+.azoogi-chat-modal-field label {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--chat-text);
+    margin-bottom: 5px;
+}
+
+.azoogi-chat-modal-field label span.req {
+    color: var(--chat-accent);
+    margin-left: 2px;
+}
+
+.azoogi-chat-modal-textarea {
+    resize: vertical;
+    min-height: 82px;
+    max-height: 160px;
+    line-height: 1.45;
+}
+
+.azoogi-chat-modal-feedback {
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 1.4;
+    margin-top: 8px;
+}
+
+.azoogi-chat-modal-feedback.is-success {
+    background: rgba(16, 185, 129, 0.14);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    color: #10b981;
+}
+
+.azoogi-chat-modal-feedback.is-error {
+    background: rgba(239, 68, 68, 0.14);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    color: #ef4444;
+}
+
+.azoogi-chat-modal-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.azoogi-chat-modal-btn {
+    flex: 1;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.azoogi-chat-modal-btn.is-cancel {
+    background: var(--chat-card-bg);
+    border: 1px solid var(--chat-border);
+    color: var(--chat-text);
+}
+
+.azoogi-chat-modal-btn.is-cancel:hover {
+    border-color: var(--chat-muted);
+    background: var(--chat-bubble-ai);
+}
+
+.azoogi-chat-modal-btn.is-confirm {
+    background: var(--chat-accent);
+    border: 1px solid var(--chat-accent);
+    color: #0b0b0b;
+    box-shadow: 0 4px 14px var(--chat-accent-glow);
+}
+
+[data-theme="light"] .azoogi-chat-modal-btn.is-confirm {
+    color: #ffffff;
+}
+
+.azoogi-chat-modal-btn.is-confirm:hover:not(:disabled) {
+    background: var(--chat-accent-hover);
+    border-color: var(--chat-accent-hover);
+    transform: translateY(-1px);
+}
+
+.azoogi-chat-modal-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
 /* Mobile Responsiveness (<600px) */
 @media (max-width: 600px) {
     .azoogi-chat-container {

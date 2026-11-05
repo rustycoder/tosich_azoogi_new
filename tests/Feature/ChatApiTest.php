@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Mail\ChatIssueReportedMail;
 use App\Models\ChatSession;
 use App\Models\Product;
 use App\Services\Chat\Tools\QuoteCartManagerTool;
 use Database\Seeders\PageSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class ChatApiTest extends TestCase
@@ -271,5 +273,44 @@ class ChatApiTest extends TestCase
         $this->assertSame('success', $updateResult['result']['status']);
         $this->assertSame(1, $updateResult['result']['total_items'], 'Must not create duplicate item entries for different key representations');
         $this->assertSame(16, $updateResult['result']['quote_items'][0]['quantity'], 'Quantity must be updated to 16 rather than 8+16=24');
+    }
+
+    public function test_visitor_can_report_chat_issue_and_email_is_sent_to_admins(): void
+    {
+        Mail::fake();
+
+        $session = ChatSession::create([
+            'uuid' => '550e8400-e29b-41d4-a716-446655440099',
+            'ip_address' => '127.0.0.1',
+            'lead_name' => 'Alex Architect',
+            'lead_email' => 'alex@studio.com.au',
+            'status' => 'active',
+            'messages_count' => 1,
+        ]);
+
+        $session->messages()->create([
+            'sender' => 'user',
+            'content' => 'Can I get DALI specs?',
+        ]);
+
+        $response = $this->postJson('/api/chat/report-issue', [
+            'issue' => 'The datasheet download link did not open in Safari.',
+            'session_uuid' => $session->uuid,
+            'name' => 'Alex Architect',
+            'email' => 'alex@studio.com.au',
+            'page_url' => 'http://localhost:8000/solutions',
+        ]);
+
+        $response->assertOk()
+            ->assertJson([
+                'status' => 'success',
+            ]);
+
+        Mail::assertSent(ChatIssueReportedMail::class, function (ChatIssueReportedMail $mail) {
+            return $mail->hasTo('admin@azoogi.com')
+                && $mail->hasTo('adrian@azoogi.com')
+                && $mail->issueDescription === 'The datasheet download link did not open in Safari.'
+                && $mail->reporterEmail === 'alex@studio.com.au';
+        });
     }
 }

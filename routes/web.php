@@ -256,4 +256,7 @@ Route::prefix('api/chat')->name('api.chat.')->group(function () {
     Route::post('transcript/send', [ApiChatController::class, 'sendTranscript'])
         ->middleware('throttle:30,1')
         ->name('transcript.send');
+    Route::post('report-issue', [ApiChatController::class, 'reportIssue'])
+        ->middleware('throttle:20,1')
+        ->name('report-issue');
 });

@@ -2,7 +2,7 @@
     $branding = \App\Services\Chat\ChatOrchestrator::getWidgetBranding();
 @endphp
 
-<div class="azoogi-chat-widget" id="azoogi-chat-widget">
+<div class="azoogi-chat-widget" id="azoogi-chat-widget" data-branding="{{ json_encode($branding) }}">
     <!-- Floating Bottom-Right Launcher -->
     <button type="button" class="azoogi-chat-launcher" id="azoogi-chat-launcher" aria-label="Open {{ $branding['ai_name'] }}">
         <div class="azoogi-chat-launcher-icon">
@@ -98,18 +98,90 @@
                 </div>
 
                 <!-- CTA Actions Block matching design -->
-                <div class="azoogi-chat-welcome-actions">
-                    <button type="button" class="azoogi-chat-cta-btn" id="azoogi-chat-cta-btn">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                            <line x1="16" y1="2" x2="16" y2="6"/>
-                            <line x1="8" y1="2" x2="8" y2="6"/>
-                            <line x1="3" y1="10" x2="21" y2="10"/>
-                        </svg>
-                        <span>Book a consultation</span>
-                    </button>
-                    <button type="button" class="azoogi-chat-report-link" id="azoogi-chat-report-link">Report an issue with this chat</button>
+                @if (!empty($branding['show_consultation_btn']) || !empty($branding['show_report_issue']))
+                    <div class="azoogi-chat-welcome-actions" id="azoogi-chat-welcome-actions">
+                        @if (!empty($branding['show_consultation_btn']))
+                            <button type="button" class="azoogi-chat-cta-btn" id="azoogi-chat-cta-btn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                    <line x1="16" y1="2" x2="16" y2="6"/>
+                                    <line x1="8" y1="2" x2="8" y2="6"/>
+                                    <line x1="3" y1="10" x2="21" y2="10"/>
+                                </svg>
+                                <span>{{ $branding['consultation_btn_text'] ?? 'Book a consultation' }}</span>
+                            </button>
+                        @endif
+                        @if (!empty($branding['show_report_issue']))
+                            <button type="button" class="azoogi-chat-report-link" id="azoogi-chat-report-link">{{ $branding['report_issue_text'] ?? 'Report an issue with this chat' }}</button>
+                        @endif
+                    </div>
+                @endif
+            </div>
+        </div>
+
+        <!-- Custom Pop-up Dialog: Refresh Conversation -->
+        <div class="azoogi-chat-modal-overlay" id="azoogi-chat-refresh-modal" aria-hidden="true">
+            <div class="azoogi-chat-modal-card" role="alertdialog" aria-labelledby="azoogi-refresh-modal-title" aria-describedby="azoogi-refresh-modal-desc">
+                <div class="azoogi-chat-modal-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                        <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                        <path d="M21 3v5h-5"/>
+                        <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+                        <path d="M3 21v-5h5"/>
+                    </svg>
                 </div>
+                <h4 class="azoogi-chat-modal-title" id="azoogi-refresh-modal-title">Refresh Conversation?</h4>
+                <p class="azoogi-chat-modal-desc" id="azoogi-refresh-modal-desc">This will clear your current chat history and start a fresh consultation.</p>
+                <div class="azoogi-chat-modal-actions">
+                    <button type="button" class="azoogi-chat-modal-btn is-cancel" id="azoogi-refresh-cancel-btn">Cancel</button>
+                    <button type="button" class="azoogi-chat-modal-btn is-confirm" id="azoogi-refresh-confirm-btn">Start Fresh</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom Pop-up Dialog: Report an Issue -->
+        <div class="azoogi-chat-modal-overlay" id="azoogi-chat-report-modal" aria-hidden="true">
+            <div class="azoogi-chat-modal-card is-form" role="dialog" aria-labelledby="azoogi-report-modal-title">
+                <div class="azoogi-chat-modal-head">
+                    <div class="azoogi-chat-modal-head-title">
+                        <span class="azoogi-chat-modal-icon is-sm">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="12" y1="8" x2="12" y2="12"/>
+                                <line x1="12" y1="16" x2="12.01" y2="16"/>
+                            </svg>
+                        </span>
+                        <h4 class="azoogi-chat-modal-title" id="azoogi-report-modal-title">Report an Issue</h4>
+                    </div>
+                    <button type="button" class="azoogi-chat-modal-close" id="azoogi-report-close-btn" aria-label="Close dialog">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                </div>
+                <p class="azoogi-chat-modal-desc" style="text-align: left; margin-bottom: 12px;">Let our team know what issue you faced with this chat and we will look into it right away.</p>
+                <form id="azoogi-chat-report-form">
+                    <div class="azoogi-chat-modal-field-row">
+                        <div class="azoogi-chat-modal-field">
+                            <label for="azoogi-report-name">Your Name (Optional)</label>
+                            <input type="text" id="azoogi-report-name" class="azoogi-chat-intake-input" placeholder="Jane Doe" maxlength="120">
+                        </div>
+                        <div class="azoogi-chat-modal-field">
+                            <label for="azoogi-report-email">Your Email (Optional)</label>
+                            <input type="email" id="azoogi-report-email" class="azoogi-chat-intake-input" placeholder="jane@studio.com.au" maxlength="150">
+                        </div>
+                    </div>
+                    <div class="azoogi-chat-modal-field">
+                        <label for="azoogi-report-issue-input">What issue did you face? <span class="req">*</span></label>
+                        <textarea id="azoogi-report-issue-input" class="azoogi-chat-intake-input azoogi-chat-modal-textarea" rows="4" placeholder="Describe the issue you experienced..." required maxlength="2000"></textarea>
+                    </div>
+                    <div id="azoogi-report-feedback" class="azoogi-chat-modal-feedback" style="display: none;"></div>
+                    <div class="azoogi-chat-modal-actions" style="margin-top: 14px;">
+                        <button type="button" class="azoogi-chat-modal-btn is-cancel" id="azoogi-report-cancel-btn">Cancel</button>
+                        <button type="submit" class="azoogi-chat-modal-btn is-confirm" id="azoogi-report-submit-btn">Send Report</button>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -126,8 +198,8 @@
                     </svg>
                 </button>
             </div>
-            <div class="azoogi-chat-disclaimer">
-                Azoogi AI can make mistakes. Verify critical specs with our engineering team.
+            <div class="azoogi-chat-disclaimer js-chat-disclaimer" id="azoogi-chat-disclaimer" style="{{ empty($branding['disclaimer_text']) ? 'display: none;' : '' }}">
+                {{ $branding['disclaimer_text'] ?? 'Azoogi AI can make mistakes. Verify critical specs with our engineering team.' }}
             </div>
         </div>
     </div>

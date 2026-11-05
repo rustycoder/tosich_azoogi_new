@@ -10,6 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('azoogi-chat-container');
     const closeBtn = document.getElementById('azoogi-chat-close');
     const resetBtn = document.getElementById('azoogi-chat-reset');
+    const refreshModal = document.getElementById('azoogi-chat-refresh-modal');
+    const refreshCancelBtn = document.getElementById('azoogi-refresh-cancel-btn');
+    const refreshConfirmBtn = document.getElementById('azoogi-refresh-confirm-btn');
+    const reportModal = document.getElementById('azoogi-chat-report-modal');
+    const reportCloseBtn = document.getElementById('azoogi-report-close-btn');
+    const reportCancelBtn = document.getElementById('azoogi-report-cancel-btn');
+    const reportForm = document.getElementById('azoogi-chat-report-form');
     const emailTranscriptBtn = document.getElementById('azoogi-chat-email-transcript');
     const soundToggle = document.getElementById('azoogi-chat-sound-toggle');
     const body = document.getElementById('azoogi-chat-body');
@@ -91,6 +98,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close on Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && widget.classList.contains('is-open')) {
+            if (refreshModal?.classList.contains('is-open')) {
+                closeRefreshModal();
+                return;
+            }
+            if (reportModal?.classList.contains('is-open')) {
+                closeReportModal();
+                return;
+            }
             toggleChat(false);
         }
     });
@@ -163,9 +178,24 @@ document.addEventListener('DOMContentLoaded', () => {
         soundToggle.style.opacity = soundEnabled ? '1' : '0.4';
     });
 
-    // Reset Chat
-    resetBtn?.addEventListener('click', async () => {
-        if (!confirm('Start a fresh conversation?')) return;
+    // Refresh Conversation Pop-up Dialog
+    const openRefreshModal = () => {
+        if (!refreshModal) return;
+        refreshModal.classList.add('is-open');
+        refreshModal.setAttribute('aria-hidden', 'false');
+    };
+
+    const closeRefreshModal = () => {
+        if (!refreshModal) return;
+        refreshModal.classList.remove('is-open');
+        refreshModal.setAttribute('aria-hidden', 'true');
+    };
+
+    const executeResetChat = async () => {
+        if (refreshConfirmBtn) {
+            refreshConfirmBtn.disabled = true;
+            refreshConfirmBtn.textContent = 'Refreshing...';
+        }
         if (sessionUuid) {
             try {
                 await fetch('/api/chat/clear', {
@@ -179,7 +209,127 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem(STORAGE_MESSAGES_KEY);
         localStorage.removeItem(STORAGE_LEAD_KEY);
         sessionUuid = null;
+        if (refreshConfirmBtn) {
+            refreshConfirmBtn.disabled = false;
+            refreshConfirmBtn.textContent = 'Start Fresh';
+        }
+        closeRefreshModal();
         renderInitialScreen();
+    };
+
+    resetBtn?.addEventListener('click', () => openRefreshModal());
+    refreshCancelBtn?.addEventListener('click', () => closeRefreshModal());
+    refreshConfirmBtn?.addEventListener('click', () => executeResetChat());
+    refreshModal?.addEventListener('click', (e) => {
+        if (e.target === refreshModal) closeRefreshModal();
+    });
+
+    // Report Issue Pop-up Dialog
+    const openReportModal = () => {
+        if (!reportModal) return;
+        const storedLead = getStoredLead() || {};
+        const nameInput = document.getElementById('azoogi-report-name');
+        const emailInput = document.getElementById('azoogi-report-email');
+        const issueInput = document.getElementById('azoogi-report-issue-input');
+        const feedbackEl = document.getElementById('azoogi-report-feedback');
+
+        if (nameInput && !nameInput.value && storedLead.name) {
+            nameInput.value = storedLead.name;
+        }
+        if (emailInput && !emailInput.value && storedLead.email) {
+            emailInput.value = storedLead.email;
+        }
+        if (feedbackEl) {
+            feedbackEl.style.display = 'none';
+            feedbackEl.className = 'azoogi-chat-modal-feedback';
+            feedbackEl.textContent = '';
+        }
+
+        reportModal.classList.add('is-open');
+        reportModal.setAttribute('aria-hidden', 'false');
+        setTimeout(() => issueInput?.focus(), 100);
+    };
+
+    const closeReportModal = () => {
+        if (!reportModal) return;
+        reportModal.classList.remove('is-open');
+        reportModal.setAttribute('aria-hidden', 'true');
+    };
+
+    reportCloseBtn?.addEventListener('click', () => closeReportModal());
+    reportCancelBtn?.addEventListener('click', () => closeReportModal());
+    reportModal?.addEventListener('click', (e) => {
+        if (e.target === reportModal) closeReportModal();
+    });
+
+    reportForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const nameInput = document.getElementById('azoogi-report-name');
+        const emailInput = document.getElementById('azoogi-report-email');
+        const issueInput = document.getElementById('azoogi-report-issue-input');
+        const submitBtn = document.getElementById('azoogi-report-submit-btn');
+        const feedbackEl = document.getElementById('azoogi-report-feedback');
+
+        const issueText = issueInput?.value.trim() || '';
+        if (!issueText) return;
+
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+        }
+        if (feedbackEl) {
+            feedbackEl.style.display = 'none';
+        }
+
+        try {
+            const res = await fetch('/api/chat/report-issue', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': getCsrfToken()
+                },
+                body: JSON.stringify({
+                    issue: issueText,
+                    session_uuid: sessionUuid,
+                    name: nameInput?.value.trim() || null,
+                    email: emailInput?.value.trim() || null,
+                    page_url: window.location.href
+                })
+            });
+
+            const data = await res.json();
+            if (res.ok && data.status === 'success') {
+                if (feedbackEl) {
+                    feedbackEl.textContent = data.message || 'Thank you! Your report has been sent to our team.';
+                    feedbackEl.className = 'azoogi-chat-modal-feedback is-success';
+                    feedbackEl.style.display = 'block';
+                }
+                if (issueInput) issueInput.value = '';
+                if (window.siteToast && typeof window.siteToast === 'function') {
+                    window.siteToast('Issue report sent to our team.');
+                }
+                setTimeout(() => {
+                    closeReportModal();
+                }, 1400);
+            } else {
+                if (feedbackEl) {
+                    feedbackEl.textContent = data.message || 'Unable to submit report. Please try again.';
+                    feedbackEl.className = 'azoogi-chat-modal-feedback is-error';
+                    feedbackEl.style.display = 'block';
+                }
+            }
+        } catch (err) {
+            if (feedbackEl) {
+                feedbackEl.textContent = 'Network error submitting report. Please try again.';
+                feedbackEl.className = 'azoogi-chat-modal-feedback is-error';
+                feedbackEl.style.display = 'block';
+            }
+        } finally {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Report';
+            }
+        }
     });
 
     const scrollToBottom = () => {
@@ -572,9 +722,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const reportLink = document.getElementById('azoogi-chat-report-link');
         reportLink?.addEventListener('click', () => {
-            if (confirm("Need help or want to start a fresh conversation?\n\nClick OK to start a fresh conversation, or Cancel to continue.")) {
-                resetBtn?.click();
-            }
+            openReportModal();
         });
     };
 
@@ -681,6 +829,12 @@ document.addEventListener('DOMContentLoaded', () => {
         ai_custom_avatar_url: null,
         ai_subtitle: 'Architectural & Smart Controls Specialist',
         startup_message: 'Welcome to Azoogi Lighting! How can our architectural engineering team assist with your project specifications, lighting schedules, or quotes today?',
+        intake_enabled: true,
+        show_consultation_btn: true,
+        consultation_btn_text: 'Book a consultation',
+        show_report_issue: true,
+        report_issue_text: 'Report an issue with this chat',
+        disclaimer_text: 'Azoogi AI can make mistakes. Verify critical specs with our engineering team.',
         starter_chips: [
             { prompt: 'Show me outdoor garden lights' },
             { prompt: 'I want to explore downlights with dimension Ø82mm x 80mm (H)' },
@@ -690,6 +844,16 @@ document.addEventListener('DOMContentLoaded', () => {
             { prompt: 'How do I generate a custom PDF datasheet?' }
         ]
     };
+
+    try {
+        const rawInitialBranding = widget.getAttribute('data-branding');
+        if (rawInitialBranding) {
+            const parsedInitialBranding = JSON.parse(rawInitialBranding);
+            if (parsedInitialBranding && typeof parsedInitialBranding === 'object') {
+                liveBranding = Object.assign({}, liveBranding, parsedInitialBranding);
+            }
+        }
+    } catch (e) {}
 
     function applyBranding(branding) {
         if (!branding) return;
@@ -710,12 +874,22 @@ document.addEventListener('DOMContentLoaded', () => {
             launcherText.textContent = `Ask ${liveBranding.ai_name}`;
         }
 
+        const disclaimerEl = document.querySelector('.js-chat-disclaimer');
+        if (disclaimerEl) {
+            if (liveBranding.disclaimer_text) {
+                disclaimerEl.textContent = liveBranding.disclaimer_text;
+                disclaimerEl.style.display = '';
+            } else {
+                disclaimerEl.style.display = 'none';
+            }
+        }
+
         const avatarEl = document.querySelector('.js-chat-avatar');
         if (avatarEl) {
             if (liveBranding.ai_custom_avatar_url) {
                 avatarEl.innerHTML = `<img src="${liveBranding.ai_custom_avatar_url}" alt="${liveBranding.ai_name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"><span class="azoogi-chat-status-dot"></span>`;
             } else {
-                avatarEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" style="color: #0b0b0b;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span class="azoogi-chat-status-dot"></span>`;
+                avatarEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span class="azoogi-chat-status-dot"></span>`;
             }
         }
     }
@@ -733,6 +907,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 ? `Hi ${storedLead.name}! Welcome back. How can our team assist with ${storedLead.project_name} today?`
                 : (storedLead.name ? `Hi ${storedLead.name}! Welcome back to Azoogi Lighting.` : liveBranding.startup_message);
             renderWelcomeWithGreeting(greeting);
+        } else if (liveBranding.intake_enabled === false) {
+            renderWelcomeWithGreeting(liveBranding.startup_message);
         } else {
             renderIntakeForm();
         }
@@ -817,6 +993,35 @@ document.addEventListener('DOMContentLoaded', () => {
             ? `<img src="${escapeHtml(liveBranding.ai_custom_avatar_url)}" alt="AI">`
             : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>`;
 
+        const showCta = liveBranding.show_consultation_btn !== false;
+        const ctaText = liveBranding.consultation_btn_text || 'Book a consultation';
+        const showReport = liveBranding.show_report_issue !== false;
+        const reportText = liveBranding.report_issue_text || 'Report an issue with this chat';
+
+        let actionsHtml = '';
+        if (showCta || showReport) {
+            const ctaBtnHtml = showCta ? `
+                <button type="button" class="azoogi-chat-cta-btn" id="azoogi-chat-cta-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    <span>${escapeHtml(ctaText)}</span>
+                </button>
+            ` : '';
+            const reportBtnHtml = showReport ? `
+                <button type="button" class="azoogi-chat-report-link" id="azoogi-chat-report-link">${escapeHtml(reportText)}</button>
+            ` : '';
+            actionsHtml = `
+                <div class="azoogi-chat-welcome-actions" id="azoogi-chat-welcome-actions">
+                    ${ctaBtnHtml}
+                    ${reportBtnHtml}
+                </div>
+            `;
+        }
+
         return `
             <div class="azoogi-chat-welcome-container">
                 <div class="azoogi-chat-welcome-msg">
@@ -832,18 +1037,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${chipsHtml}
                 </div>
 
-                <div class="azoogi-chat-welcome-actions">
-                    <button type="button" class="azoogi-chat-cta-btn" id="azoogi-chat-cta-btn">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                            <line x1="16" y1="2" x2="16" y2="6"/>
-                            <line x1="8" y1="2" x2="8" y2="6"/>
-                            <line x1="3" y1="10" x2="21" y2="10"/>
-                        </svg>
-                        <span>Book a consultation</span>
-                    </button>
-                    <button type="button" class="azoogi-chat-report-link" id="azoogi-chat-report-link">Report an issue with this chat</button>
-                </div>
+                ${actionsHtml}
             </div>
         `;
     }

@@ -3,6 +3,7 @@
 @section('title', 'AI Widget')
 
 @section('content')
+<link rel="stylesheet" href="{{ versioned_asset('assets/css/chat-widget.css') }}">
 <div class="dash-head">
     <div class="dash-crumb">
         <a href="{{ route('dashboard.home') }}">Dashboard</a>
@@ -163,7 +164,59 @@
                 </div>
             </div>
 
-            <!-- Card 4: Pre-Chat Intake Form Settings -->
+            <!-- Card 4: CTA Actions, Issue Reporting & Disclaimer -->
+            <div class="dash-card" style="padding: 24px;">
+                <div style="font-size: 15px; font-weight: 700; color: var(--dash-ink, var(--ink)); margin-bottom: 4px; display: flex; align-items: center; gap: 8px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; color: var(--accent);"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    <span>Consultation Button, Issue Reporting &amp; Disclaimer</span>
+                </div>
+                <p style="font-size: 12.5px; color: var(--dash-muted, var(--muted)); margin-top: 0; margin-bottom: 18px;">
+                    Configure the consultation call-to-action button, the issue report link (emails reports to <code>admin@azoogi.com</code> and <code>adrian@azoogi.com</code>), and the chat disclaimer notice.
+                </p>
+
+                <div style="display: flex; flex-direction: column; gap: 18px;">
+                    <!-- Book Consultation Button -->
+                    <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--dash-line); border-radius: 10px; padding: 14px 16px;">
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; margin-bottom: 10px;">
+                            <input type="hidden" name="show_consultation_btn" value="0">
+                            <input type="checkbox" name="show_consultation_btn" id="show_consultation_btn" value="1" {{ ($branding['show_consultation_btn'] ?? true) ? 'checked' : '' }} style="width: 18px; height: 18px; accent-color: var(--accent);" onchange="updateLivePreview()">
+                            <div>
+                                <div style="font-size: 13.5px; font-weight: 600; color: var(--dash-ink, var(--ink));">Show "Book Consultation" Button in Chat</div>
+                                <div style="font-size: 12px; color: var(--dash-muted, var(--muted));">Displays the primary consultation CTA button under the starter chips.</div>
+                            </div>
+                        </label>
+                        <div>
+                            <label class="dash-label" for="consultation_btn_text" style="font-weight: 600; font-size: 12.5px;">Consultation Button Text</label>
+                            <input type="text" name="consultation_btn_text" id="consultation_btn_text" class="dash-input" value="{{ old('consultation_btn_text', $branding['consultation_btn_text'] ?? 'Book a consultation') }}" placeholder="Book a consultation" maxlength="120" oninput="updateLivePreview()">
+                        </div>
+                    </div>
+
+                    <!-- Report an Issue Link -->
+                    <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--dash-line); border-radius: 10px; padding: 14px 16px;">
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; margin-bottom: 10px;">
+                            <input type="hidden" name="show_report_issue" value="0">
+                            <input type="checkbox" name="show_report_issue" id="show_report_issue" value="1" {{ ($branding['show_report_issue'] ?? true) ? 'checked' : '' }} style="width: 18px; height: 18px; accent-color: var(--accent);" onchange="updateLivePreview()">
+                            <div>
+                                <div style="font-size: 13.5px; font-weight: 600; color: var(--dash-ink, var(--ink));">Show "Report an Issue with this Chat" Link</div>
+                                <div style="font-size: 12px; color: var(--dash-muted, var(--muted));">Opens a pop-up dialog allowing visitors to report chat issues directly to <code>admin@azoogi.com</code> and <code>adrian@azoogi.com</code>.</div>
+                            </div>
+                        </label>
+                        <div>
+                            <label class="dash-label" for="report_issue_text" style="font-weight: 600; font-size: 12.5px;">Report Issue Display Text</label>
+                            <input type="text" name="report_issue_text" id="report_issue_text" class="dash-input" value="{{ old('report_issue_text', $branding['report_issue_text'] ?? 'Report an issue with this chat') }}" placeholder="Report an issue with this chat" maxlength="150" oninput="updateLivePreview()">
+                        </div>
+                    </div>
+
+                    <!-- Disclaimer Text -->
+                    <div>
+                        <label class="dash-label" for="disclaimer_text" style="font-weight: 600; font-size: 13px;">Chat Disclaimer Text</label>
+                        <input type="text" name="disclaimer_text" id="disclaimer_text" class="dash-input" value="{{ old('disclaimer_text', $branding['disclaimer_text'] ?? 'Azoogi AI can make mistakes. Verify critical specs with our engineering team.') }}" placeholder="Azoogi AI can make mistakes. Verify critical specs with our engineering team." maxlength="500" oninput="updateLivePreview()">
+                        <span style="font-size: 11px; color: var(--dash-muted, var(--muted));">Displayed below the message input bar at the bottom of the chat drawer.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5: Pre-Chat Intake Form Settings -->
             <div class="dash-card" style="padding: 24px;">
                 <div style="font-size: 15px; font-weight: 700; color: var(--dash-ink, var(--ink)); margin-bottom: 4px; display: flex; align-items: center; gap: 8px;">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; color: var(--accent);"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
@@ -175,6 +228,7 @@
 
                 <div style="display: flex; flex-direction: column; gap: 14px;">
                     <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="hidden" name="intake_enabled" value="0">
                         <input type="checkbox" name="intake_enabled" value="1" {{ !empty($branding['intake_enabled']) ? 'checked' : '' }} style="width: 18px; height: 18px; accent-color: var(--accent);">
                         <div>
                             <div style="font-size: 13.5px; font-weight: 600; color: var(--dash-ink, var(--ink));">Enable Pre-Chat Intake Card</div>
@@ -201,7 +255,7 @@
 
         </div>
 
-        <!-- Right Column: Live Interactive Widget Preview -->
+        <!-- Right Column: Live Interactive Widget Preview (1:1 Frontend Match) -->
         <div style="position: sticky; top: 24px;">
             <div class="dash-card" style="padding: 20px; border-color: rgba(103, 208, 78, 0.3);">
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
@@ -211,67 +265,113 @@
                     <span class="dash-pill is-active" style="font-size: 10px;">Real-time</span>
                 </div>
 
-                <!-- Mockup of Chat Container -->
-                <div style="background: rgba(15, 15, 15, 0.96); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px; overflow: hidden; box-shadow: 0 16px 40px rgba(0,0,0,0.5); font-family: 'Inter', sans-serif;">
-                    <!-- Preview Header -->
-                    <div style="padding: 14px 16px; background: rgba(22, 22, 22, 0.98); border-bottom: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: space-between;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <div id="preview-avatar-icon" style="width: 32px; height: 32px; border-radius: 50%; background: #67d04e; color: #0b0b0b; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; position: relative; overflow: hidden;">
+                <!-- Exact Frontend Chat Container Preview -->
+                <div class="azoogi-chat-container" style="position: relative; inset: auto; width: 100%; max-width: 100%; height: auto; max-height: 620px; opacity: 1; visibility: visible; transform: none; z-index: 1;">
+                    <!-- Header -->
+                    <div class="azoogi-chat-header">
+                        <div class="azoogi-chat-header-brand">
+                            <div class="azoogi-chat-avatar" id="preview-avatar-icon">
                                 @if (!empty($branding['ai_custom_avatar_url']))
-                                    <img src="{{ $branding['ai_custom_avatar_url'] }}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                                    <img src="{{ $branding['ai_custom_avatar_url'] }}" alt="{{ $branding['ai_name'] ?? 'Azoogi AI Assistant' }}">
                                 @else
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; color: #0b0b0b;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                                    </svg>
                                 @endif
-                                <div style="position: absolute; bottom: 0; right: 0; width: 8px; height: 8px; border-radius: 50%; background: #10b981; border: 1.5px solid #161616;"></div>
+                                <span class="azoogi-chat-status-dot"></span>
                             </div>
-                            <div>
-                                <div id="preview-ai-name" style="font-size: 13px; font-weight: 700; color: #ffffff; line-height: 1.2;">
-                                    {{ $branding['ai_name'] ?? 'Azoogi AI Assistant' }}
-                                </div>
-                                <div id="preview-ai-subtitle" style="font-size: 10.5px; color: #9a9a9a; line-height: 1.2;">
-                                    {{ $branding['ai_subtitle'] ?? 'Architectural & Smart Controls Specialist' }}
-                                </div>
+                            <div class="azoogi-chat-title-wrap">
+                                <h3 id="preview-ai-name">{{ $branding['ai_name'] ?? 'Azoogi AI Assistant' }}</h3>
+                                <p id="preview-ai-subtitle">{{ $branding['ai_subtitle'] ?? 'Architectural & Smart Controls Specialist' }}</p>
                             </div>
                         </div>
-                        <div style="display: flex; gap: 6px; color: #9a9a9a;">
-                            <span style="font-size: 12px;">✕</span>
+                        <div class="azoogi-chat-header-actions">
+                            <button type="button" class="azoogi-chat-header-btn" title="Refresh conversation" disabled style="cursor: default;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
+                                    <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                                    <path d="M21 3v5h-5"/>
+                                    <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+                                    <path d="M3 21v-5h5"/>
+                                </svg>
+                            </button>
+                            <button type="button" class="azoogi-chat-header-btn azoogi-chat-header-close-btn" title="Close chat" disabled style="cursor: default;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                                    <line x1="18" y1="6" x2="6" y2="18"/>
+                                    <line x1="6" y1="6" x2="18" y2="18"/>
+                                </svg>
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Preview Body -->
-                    <div style="padding: 16px; display: flex; flex-direction: column; gap: 12px; max-height: 380px; overflow-y: auto;">
-                        <!-- Starter Chips Block -->
-                        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 10px;">
-                            <div style="font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #9a9a9a; margin-bottom: 6px;">Suggested Starters</div>
-                            <div id="preview-chips-list" style="display: flex; flex-wrap: wrap; gap: 5px;">
+                    <!-- Chat Body Scroll Area -->
+                    <div class="azoogi-chat-body" style="max-height: 410px;">
+                        <div class="azoogi-chat-welcome-container">
+                            <!-- AI Assistant Greeting Message -->
+                            <div class="azoogi-chat-welcome-msg">
+                                <div class="azoogi-chat-welcome-avatar" id="preview-welcome-avatar-icon">
+                                    @if (!empty($branding['ai_custom_avatar_url']))
+                                        <img src="{{ $branding['ai_custom_avatar_url'] }}" alt="{{ $branding['ai_name'] ?? 'Azoogi AI Assistant' }}">
+                                    @else
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                                        </svg>
+                                    @endif
+                                </div>
+                                <div class="azoogi-chat-welcome-bubble">
+                                    <p id="preview-welcome-bubble">{{ $branding['startup_message'] ?? 'Welcome to Azoogi Lighting!' }}</p>
+                                </div>
+                            </div>
+
+                            <!-- Suggestion Chips -->
+                            <div class="azoogi-chat-chip-list" id="preview-chips-list">
                                 @foreach ($branding['starter_chips'] as $chip)
                                     @php
                                         $chipText = is_array($chip) ? ($chip['prompt'] ?? $chip['label'] ?? '') : (string) $chip;
+                                        $isFeatured = $loop->last || str_contains(strtolower($chipText), 'quote') || str_contains(strtolower($chipText), 'demo') || str_contains(strtolower($chipText), 'datasheet');
                                     @endphp
                                     @if (!empty($chipText))
-                                        <span style="font-size: 11px; background: #222222; border: 1px solid rgba(255,255,255,0.12); color: #f3f3f3; padding: 4px 8px; border-radius: 12px;">
-                                            {{ $chipText }}
-                                        </span>
+                                        <button type="button" class="azoogi-chat-chip {{ $isFeatured ? 'is-featured' : '' }}" disabled style="cursor: default;">
+                                            @if ($isFeatured)
+                                                <svg viewBox="0 0 24 24" fill="currentColor" width="10" height="10" style="margin-right: 6px;"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+                                            @endif
+                                            <span>{{ $chipText }}</span>
+                                        </button>
                                     @endif
                                 @endforeach
                             </div>
-                        </div>
 
-                        <!-- Assistant Message Bubble -->
-                        <div style="align-self: flex-start; max-width: 90%;">
-                            <div id="preview-welcome-bubble" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; border-bottom-left-radius: 3px; padding: 10px 14px; font-size: 12.5px; color: #f3f3f3; line-height: 1.5;">
-                                {{ $branding['startup_message'] ?? 'Welcome to Azoogi Lighting!' }}
-                            </div>
-                            <div style="font-size: 9px; color: #9a9a9a; margin-top: 3px; padding-left: 2px;">
-                                <span id="preview-sender-name">{{ $branding['ai_name'] ?? 'Azoogi AI Assistant' }}</span> &bull; Just now
+                            <!-- CTA Actions Block -->
+                            <div class="azoogi-chat-welcome-actions" id="preview-welcome-actions" style="{{ (!($branding['show_consultation_btn'] ?? true) && !($branding['show_report_issue'] ?? true)) ? 'display: none;' : '' }}">
+                                <button type="button" class="azoogi-chat-cta-btn" id="preview-cta-btn" disabled style="cursor: default; {{ ($branding['show_consultation_btn'] ?? true) ? '' : 'display: none;' }}">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                        <line x1="16" y1="2" x2="16" y2="6"/>
+                                        <line x1="8" y1="2" x2="8" y2="6"/>
+                                        <line x1="3" y1="10" x2="21" y2="10"/>
+                                    </svg>
+                                    <span id="preview-cta-btn-text">{{ $branding['consultation_btn_text'] ?? 'Book a consultation' }}</span>
+                                </button>
+                                <button type="button" class="azoogi-chat-report-link" id="preview-report-link" disabled style="cursor: default; {{ ($branding['show_report_issue'] ?? true) ? '' : 'display: none;' }}">{{ $branding['report_issue_text'] ?? 'Report an issue with this chat' }}</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Preview Input Bar -->
-                    <div style="padding: 10px 14px; background: rgba(22, 22, 22, 0.98); border-top: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; gap: 8px;">
-                        <input type="text" placeholder="Ask about beam angles, linear extrusions..." disabled style="flex: 1; background: #222222; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 20px; padding: 6px 12px; font-size: 11px; color: #9a9a9a;">
-                        <button type="button" disabled style="width: 28px; height: 28px; border-radius: 50%; background: #67d04e; border: none; color: #0b0b0b; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">➤</button>
+                    <!-- Footer Input -->
+                    <div class="azoogi-chat-footer">
+                        <div class="azoogi-chat-input-bar">
+                            <div class="azoogi-chat-input-wrapper">
+                                <input type="text" class="azoogi-chat-input" placeholder="Ask me anything..." disabled>
+                            </div>
+                            <button type="button" class="azoogi-chat-send-btn" disabled style="cursor: default;" aria-label="Send message">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="18" height="18">
+                                    <line x1="22" y1="2" x2="11" y2="13"/>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="azoogi-chat-disclaimer" id="preview-disclaimer-text" style="{{ empty($branding['disclaimer_text']) ? 'display: none;' : '' }}">
+                            {{ $branding['disclaimer_text'] ?? 'Azoogi AI can make mistakes. Verify critical specs with our engineering team.' }}
+                        </div>
                     </div>
                 </div>
 
@@ -311,13 +411,23 @@ function handleAvatarFileSelect(input) {
 
 function updatePreviewAvatar() {
     const previewEl = document.getElementById('preview-avatar-icon');
-    if (!previewEl) return;
-
+    const welcomeAvatarEl = document.getElementById('preview-welcome-avatar-icon');
     const url = uploadedAvatarDataUrl || "{{ $branding['ai_custom_avatar_url'] ?? '' }}";
-    if (url) {
-        previewEl.innerHTML = `<img src="${url}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;"><div style="position: absolute; bottom: 0; right: 0; width: 8px; height: 8px; border-radius: 50%; background: #10b981; border: 1.5px solid #161616;"></div>`;
-    } else {
-        previewEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; color: #0b0b0b;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><div style="position: absolute; bottom: 0; right: 0; width: 8px; height: 8px; border-radius: 50%; background: #10b981; border: 1.5px solid #161616;"></div>`;
+
+    if (previewEl) {
+        if (url) {
+            previewEl.innerHTML = `<img src="${url}" alt="Avatar"><span class="azoogi-chat-status-dot"></span>`;
+        } else {
+            previewEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span class="azoogi-chat-status-dot"></span>`;
+        }
+    }
+
+    if (welcomeAvatarEl) {
+        if (url) {
+            welcomeAvatarEl.innerHTML = `<img src="${url}" alt="Avatar">`;
+        } else {
+            welcomeAvatarEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>`;
+        }
     }
 }
 
@@ -325,6 +435,11 @@ function updateLivePreview() {
     const name = document.getElementById('ai_name')?.value || 'Azoogi AI Assistant';
     const subtitle = document.getElementById('ai_subtitle')?.value || 'Architectural & Smart Controls Specialist';
     const startup = document.getElementById('startup_message')?.value || 'Welcome to Azoogi Lighting!';
+    const showCta = document.getElementById('show_consultation_btn')?.checked ?? true;
+    const ctaText = document.getElementById('consultation_btn_text')?.value || 'Book a consultation';
+    const showReport = document.getElementById('show_report_issue')?.checked ?? true;
+    const reportText = document.getElementById('report_issue_text')?.value || 'Report an issue with this chat';
+    const disclaimerText = document.getElementById('disclaimer_text')?.value ?? '';
 
     const nameEl = document.getElementById('preview-ai-name');
     if (nameEl) nameEl.textContent = name;
@@ -334,22 +449,59 @@ function updateLivePreview() {
     
     const bubbleEl = document.getElementById('preview-welcome-bubble');
     if (bubbleEl) bubbleEl.textContent = startup;
-    
-    const senderEl = document.getElementById('preview-sender-name');
-    if (senderEl) senderEl.textContent = name;
 
-    // Update chips preview
+    const actionsWrap = document.getElementById('preview-welcome-actions');
+    const ctaBtn = document.getElementById('preview-cta-btn');
+    const ctaBtnTextEl = document.getElementById('preview-cta-btn-text');
+    const reportLinkEl = document.getElementById('preview-report-link');
+
+    if (ctaBtnTextEl) ctaBtnTextEl.textContent = ctaText;
+    if (ctaBtn) ctaBtn.style.display = showCta ? '' : 'none';
+    if (reportLinkEl) {
+        reportLinkEl.textContent = reportText;
+        reportLinkEl.style.display = showReport ? '' : 'none';
+    }
+    if (actionsWrap) {
+        actionsWrap.style.display = (showCta || showReport) ? '' : 'none';
+    }
+
+    const disclaimerEl = document.getElementById('preview-disclaimer-text');
+    if (disclaimerEl) {
+        if (disclaimerText.trim()) {
+            disclaimerEl.textContent = disclaimerText.trim();
+            disclaimerEl.style.display = '';
+        } else {
+            disclaimerEl.style.display = 'none';
+        }
+    }
+
+    // Update chips preview matching frontend chip layout and featured state
     const chipsList = document.getElementById('preview-chips-list');
     if (chipsList) {
         chipsList.innerHTML = '';
+        const prompts = [];
         document.querySelectorAll('.chip-row').forEach(row => {
-            const prompt = row.querySelector('input[name*="[prompt]"]')?.value || '';
-            if (prompt.trim()) {
+            const prompt = (row.querySelector('input[name*="[prompt]"]')?.value || '').trim();
+            if (prompt) prompts.push(prompt);
+        });
+
+        prompts.forEach((promptText, idx) => {
+            const lower = promptText.toLowerCase();
+            const isFeatured = idx === prompts.length - 1 || lower.includes('quote') || lower.includes('demo') || lower.includes('datasheet');
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.disabled = true;
+            btn.style.cursor = 'default';
+            btn.className = 'azoogi-chat-chip' + (isFeatured ? ' is-featured' : '');
+            if (isFeatured) {
+                btn.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor" width="10" height="10" style="margin-right: 6px;"><polygon points="6 3 20 12 6 21 6 3"/></svg><span></span>`;
+                btn.querySelector('span').textContent = promptText;
+            } else {
                 const span = document.createElement('span');
-                span.style.cssText = 'font-size: 11px; background: #222222; border: 1px solid rgba(255,255,255,0.12); color: #f3f3f3; padding: 4px 8px; border-radius: 12px;';
-                span.textContent = prompt.trim();
-                chipsList.appendChild(span);
+                span.textContent = promptText;
+                btn.appendChild(span);
             }
+            chipsList.appendChild(btn);
         });
     }
 

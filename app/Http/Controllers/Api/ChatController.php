@@ -5,12 +5,16 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ChatIssueReportedMail;
 use App\Models\ChatSession;
 use App\Models\Product;
 use App\Services\Chat\ChatOrchestrator;
 use App\Services\Chat\Tools\SendChatTranscriptToSalesTool;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use Throwable;
 
 class ChatController extends Controller
 {
@@ -243,5 +247,47 @@ class ChatController extends Controller
             'status' => 'error',
             'message' => $res['result']['message'] ?? 'Failed to send transcript.',
         ], 422);
+    }
+
+    public function reportIssue(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'issue' => 'required|string|max:2000',
+            'session_uuid' => 'nullable|string|uuid',
+            'name' => 'nullable|string|max:150',
+            'email' => 'nullable|email|max:150',
+            'page_url' => 'nullable|string|max:500',
+        ]);
+
+        $session = null;
+        if (! empty($validated['session_uuid'])) {
+            $session = ChatSession::where('uuid', $validated['session_uuid'])->first();
+        }
+
+        $messages = $session ? $session->messages()->orderBy('id', 'asc')->get() : [];
+        $recipients = ['admin@azoogi.com', 'adrian@azoogi.com'];
+
+        try {
+            Mail::to($recipients)->send(new ChatIssueReportedMail(
+                issueDescription: trim((string) $validated['issue']),
+                session: $session,
+                messages: $messages,
+                reporterName: ! empty($validated['name']) ? trim((string) $validated['name']) : null,
+                reporterEmail: ! empty($validated['email']) ? trim((string) $validated['email']) : null,
+                pageUrl: ! empty($validated['page_url']) ? trim((string) $validated['page_url']) : null,
+            ));
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Thank you! Your report has been sent to our team.',
+            ]);
+        } catch (Throwable $e) {
+            Log::error('Failed to send chat issue report: '.$e->getMessage(), ['exception' => $e]);
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Unable to submit report right now. Please try again shortly.',
+            ], 500);
+        }
     }
 }

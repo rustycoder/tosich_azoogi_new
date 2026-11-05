@@ -217,6 +217,11 @@ class AiConfigController extends Controller
             'intake_require_project' => ['nullable', 'boolean'],
             'intake_require_email' => ['nullable', 'boolean'],
             'intake_require_name' => ['nullable', 'boolean'],
+            'show_consultation_btn' => ['nullable', 'boolean'],
+            'consultation_btn_text' => ['nullable', 'string', 'max:120'],
+            'show_report_issue' => ['nullable', 'boolean'],
+            'report_issue_text' => ['nullable', 'string', 'max:150'],
+            'disclaimer_text' => ['nullable', 'string', 'max:500'],
             'starter_chips' => ['nullable', 'array'],
         ]);
 
@@ -259,6 +264,21 @@ class AiConfigController extends Controller
             'intake_require_project' => $request->boolean('intake_require_project', false),
             'intake_require_email' => $request->boolean('intake_require_email', false),
             'intake_require_name' => $request->boolean('intake_require_name', false),
+            'show_consultation_btn' => $request->has('show_consultation_btn')
+                ? $request->boolean('show_consultation_btn')
+                : ($existingBranding['show_consultation_btn'] ?? true),
+            'consultation_btn_text' => ! empty($validated['consultation_btn_text'])
+                ? trim((string) $validated['consultation_btn_text'])
+                : ($existingBranding['consultation_btn_text'] ?? 'Book a consultation'),
+            'show_report_issue' => $request->has('show_report_issue')
+                ? $request->boolean('show_report_issue')
+                : ($existingBranding['show_report_issue'] ?? true),
+            'report_issue_text' => ! empty($validated['report_issue_text'])
+                ? trim((string) $validated['report_issue_text'])
+                : ($existingBranding['report_issue_text'] ?? 'Report an issue with this chat'),
+            'disclaimer_text' => isset($validated['disclaimer_text']) && trim((string) $validated['disclaimer_text']) !== ''
+                ? trim((string) $validated['disclaimer_text'])
+                : ($existingBranding['disclaimer_text'] ?? 'Azoogi AI can make mistakes. Verify critical specs with our engineering team.'),
         ];
 
         LlmFeed::query()->updateOrCreate(
