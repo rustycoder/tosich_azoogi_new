@@ -2004,6 +2004,35 @@
                     datasheetCancel.disabled = true;
                 }
 
+                const getDatasheetTurnstileToken = () => {
+                    const inputVal = datasheetForm.querySelector('input[name="cf-turnstile-response"]')?.value || '';
+                    if (inputVal) {
+                        return inputVal;
+                    }
+                    if (window.turnstile && typeof window.turnstile.getResponse === 'function') {
+                        try {
+                            const widgetId = document.getElementById('datasheet-turnstile-container')?.getAttribute('data-turnstile-widget-id');
+                            return (widgetId ? window.turnstile.getResponse(widgetId) : window.turnstile.getResponse()) || '';
+                        } catch (e) {
+                            return '';
+                        }
+                    }
+                    return '';
+                };
+
+                const resetDatasheetTurnstile = () => {
+                    if (window.turnstile && typeof window.turnstile.reset === 'function') {
+                        try {
+                            const widgetId = document.getElementById('datasheet-turnstile-container')?.getAttribute('data-turnstile-widget-id');
+                            if (widgetId) {
+                                window.turnstile.reset(widgetId);
+                            } else {
+                                window.turnstile.reset();
+                            }
+                        } catch (e) { }
+                    }
+                };
+
                 try {
                     const response = await fetch(datasheetForm.action, {
                         method: 'POST',
@@ -2020,7 +2049,7 @@
                             product_code: product.product_code || datasheetSku || '',
                             selected_options: selected,
                             length: isLinear ? selectedLength : null,
-                            'cf-turnstile-response': datasheetForm.querySelector('input[name="cf-turnstile-response"]')?.value || (window.turnstile ? window.turnstile.getResponse() : ''),
+                            'cf-turnstile-response': getDatasheetTurnstileToken(),
                         }),
                     });
 
@@ -2034,41 +2063,27 @@
                         if (!Object.keys(errors).length) {
                             setDatasheetError('form', 'Enter the project name and client name.');
                         }
-                        if (window.turnstile) {
-                            try { window.turnstile.reset(); } catch (e) { }
-                        }
+                        resetDatasheetTurnstile();
                         return;
                     }
 
                     if (!response.ok || !payload.url) {
                         setDatasheetError('form', 'The datasheet could not be generated. Try again.');
-                        if (window.turnstile) {
-                            try { window.turnstile.reset(); } catch (e) { }
-                        }
+                        resetDatasheetTurnstile();
                         return;
                     }
 
                     datasheetDialog?.close();
-                    if (window.turnstile) {
-                        try { window.turnstile.reset(); } catch (e) { }
-                    }
+                    resetDatasheetTurnstile();
 
-                    // Open the generated datasheet in a new tab now that generation is completed
+                    // Open the generated datasheet in a new tab; fall back to same-tab navigation if blocked by popup blocker
                     const openedTab = window.open(payload.url, '_blank');
                     if (!openedTab || openedTab.closed || typeof openedTab.closed === 'undefined') {
-                        const link = document.createElement('a');
-                        link.href = payload.url;
-                        link.target = '_blank';
-                        link.rel = 'noopener noreferrer';
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
+                        window.location.assign(payload.url);
                     }
                 } catch (error) {
                     setDatasheetError('form', 'The datasheet could not be generated. Try again.');
-                    if (window.turnstile) {
-                        try { window.turnstile.reset(); } catch (e) { }
-                    }
+                    resetDatasheetTurnstile();
                 } finally {
                     if (datasheetSubmit) {
                         datasheetSubmit.disabled = false;

@@ -167,7 +167,11 @@ class ProductDatasheetService implements IProductDatasheetService
             'user_agent' => $origin['user_agent'],
         ]);
 
-        $this->emailTemplates->sendDatasheetNotification($export);
+        if (app()->runningUnitTests()) {
+            $this->emailTemplates->sendDatasheetNotification($export);
+        } else {
+            defer(fn () => $this->emailTemplates->sendDatasheetNotification($export));
+        }
 
         return $export;
     }

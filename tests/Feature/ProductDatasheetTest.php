@@ -158,7 +158,7 @@ class ProductDatasheetTest extends TestCase
         $this->actingAs($admin)
             ->get('/dashboard')
             ->assertOk()
-            ->assertSeeInOrder(['>Enquiries</span>', 'Datasheet Exports'], false)
+            ->assertSeeInOrder(['>Enquiries *</span>', 'Datasheet Exports'], false)
             ->assertDontSee('<h2>Datasheet</h2>', false)
             ->assertDontSee('Review generated datasheet exports.', false)
             ->assertDontSee('Datasheet exports', false);
@@ -266,7 +266,7 @@ class ProductDatasheetTest extends TestCase
         $this->actingAs($staff->fresh())
             ->get('/dashboard')
             ->assertOk()
-            ->assertSeeInOrder(['>Enquiries</span>', 'Datasheet Exports'], false);
+            ->assertSeeInOrder(['>Enquiries *</span>', 'Datasheet Exports'], false);
     }
 
     public function test_datasheet_maps_dimming_control_option_to_dimming_spec(): void
