@@ -10,6 +10,7 @@
 @extends('layouts.site')
 
 @section('title', $pageTitle)
+@section('robots', 'noindex, nofollow')
 
 @section('description', $pageDescription)
 

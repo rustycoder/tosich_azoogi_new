@@ -34,6 +34,13 @@ class NotFoundPageTest extends TestCase
         $response->assertSee(route('contact'));
     }
 
+    public function test_404_page_is_marked_noindex(): void
+    {
+        $this->get('/this-page-does-not-exist')
+            ->assertNotFound()
+            ->assertSee('<meta name="robots" content="noindex, nofollow">', false);
+    }
+
     public function test_admin_can_view_edit_and_preview_404_page_in_dashboard(): void
     {
         $admin = User::factory()->admin()->create();
