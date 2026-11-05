@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Mcp\Security;
 
+use App\Models\DatasheetTemplate;
 use App\Models\EmailTemplate;
 use App\Models\Enquiry;
+use App\Models\LlmFeed;
 use App\Models\Page;
 use App\Models\PageMeta;
-use App\Models\Product;
-use App\Models\ProductAttribute;
-use App\Models\ProductCategory;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use InvalidArgumentException;
 
@@ -26,14 +26,11 @@ class MutationGuard
         'page' => Page::class,
         'pagemeta' => PageMeta::class,
         'page_meta' => PageMeta::class,
-        'product' => Product::class,
-        'category' => ProductCategory::class,
-        'product_category' => ProductCategory::class,
-        'attribute' => ProductAttribute::class,
-        'product_attribute' => ProductAttribute::class,
         'project' => Project::class,
         'enquiry' => Enquiry::class,
         'email_template' => EmailTemplate::class,
+        'datasheet_template' => DatasheetTemplate::class,
+        'llm_feed' => LlmFeed::class,
     ];
 
     /**
@@ -101,5 +98,28 @@ class MutationGuard
         }
 
         return $clean;
+    }
+
+    /**
+     * Authorize whether an authenticated user (when present) can mutate or manage a given model key.
+     */
+    public function authorizeUserForModel(?User $user, string $modelKey): void
+    {
+        if (! $user || $user->isAdmin()) {
+            return;
+        }
+
+        $key = strtolower(trim($modelKey));
+        $permitted = match ($key) {
+            'page', 'pagemeta', 'page_meta', 'llm_feed' => $user->canManagePages() || $user->canManageSections(),
+            'project' => $user->canManageProjects(),
+            'enquiry' => $user->canManageEnquiries(),
+            'datasheet_template' => $user->canManageDatasheets(),
+            default => false,
+        };
+
+        if (! $permitted) {
+            throw new InvalidArgumentException("You do not have permission to modify '{$modelKey}' records.");
+        }
     }
 }

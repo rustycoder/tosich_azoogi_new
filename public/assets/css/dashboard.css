@@ -6339,3 +6339,66 @@ a.dash-product-title:hover {
   white-space: pre-wrap;
   word-break: break-word;
 }
+
+.dash-copilot-mcp-card {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--dash-line);
+  background: var(--dash-fill);
+  color: var(--dash-ink);
+  font-size: 12px;
+}
+
+.dash-copilot-mcp-card.is-error {
+  border-color: var(--dash-pill-cancelled-ink);
+  background: var(--dash-pill-cancelled-bg);
+}
+
+.dash-copilot-mcp-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.dash-copilot-mcp-badge {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: 5px;
+  background: var(--dash-pill-active-bg);
+  color: var(--dash-pill-active-ink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.dash-copilot-mcp-summary {
+  font-weight: 500;
+  color: var(--dash-ink);
+}
+
+.dash-copilot-mcp-details {
+  margin-top: 8px;
+}
+
+.dash-copilot-mcp-details summary {
+  cursor: pointer;
+  font-size: 11px;
+  color: var(--dash-muted);
+  user-select: none;
+}
+
+.dash-copilot-mcp-details pre {
+  margin: 6px 0 0;
+  padding: 8px;
+  border-radius: 6px;
+  background: var(--dash-card);
+  border: 1px solid var(--dash-line);
+  color: var(--dash-ink);
+  font-size: 11px;
+  max-height: 220px;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}

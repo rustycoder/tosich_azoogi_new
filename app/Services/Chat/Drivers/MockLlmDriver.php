@@ -25,6 +25,13 @@ class MockLlmDriver implements IChatLlmDriver
 
     protected function evaluateChat(array $messages, array $tools = [], string $systemPrompt = ''): array
     {
+        $toolNames = array_map(fn ($t) => method_exists($t, 'getName') ? $t->getName() : '', $tools);
+        $isAdminCopilot = in_array('backend_query_records', $toolNames, true) || str_contains($systemPrompt, 'Admin Copilot');
+
+        if ($isAdminCopilot) {
+            return $this->evaluateAdminCopilot($messages);
+        }
+
         $lastMessage = end($messages) ?: [];
         $role = $lastMessage['role'] ?? '';
         $text = strtolower(trim((string) ($lastMessage['content'] ?? '')));
@@ -350,6 +357,151 @@ class MockLlmDriver implements IChatLlmDriver
                 ],
             ],
             'tokens_used' => 45,
+        ];
+    }
+
+    /**
+     * @param  array<int, array<string, mixed>>  $messages
+     * @return array<string, mixed>
+     */
+    protected function evaluateAdminCopilot(array $messages): array
+    {
+        $lastMessage = end($messages) ?: [];
+        $role = $lastMessage['role'] ?? '';
+        $text = strtolower(trim((string) ($lastMessage['content'] ?? '')));
+
+        if ($role === 'tool') {
+            $toolResult = json_decode((string) ($lastMessage['content'] ?? '{}'), true) ?: [];
+
+            if (isset($toolResult['error'])) {
+                return [
+                    'content' => 'The backend operation encountered an issue: '.$toolResult['error'],
+                    'tool_calls' => [],
+                    'tokens_used' => 30,
+                ];
+            }
+
+            if (isset($toolResult['updated_fields'])) {
+                $prefix = ! empty($toolResult['dry_run']) ? '[Dry Run Preview] ' : '';
+
+                return [
+                    'content' => "{$prefix}Page content for **{$toolResult['page']}** (`{$toolResult['slug']}`) has been processed. Review the changes in the action card below.",
+                    'tool_calls' => [],
+                    'tokens_used' => 40,
+                ];
+            }
+
+            if (isset($toolResult['audit_summary']) || isset($toolResult['latest_sync'])) {
+                return [
+                    'content' => $toolResult['message'] ?? 'Here is the latest Airtable catalog synchronization and quality audit summary.',
+                    'tool_calls' => [],
+                    'tokens_used' => 40,
+                ];
+            }
+
+            if (isset($toolResult['enquiries_summary']) || isset($toolResult['traffic_summary']) || isset($toolResult['datasheets_summary'])) {
+                return [
+                    'content' => 'Here is the current backend analytics summary across enquiries, traffic, and PDF datasheet exports.',
+                    'tool_calls' => [],
+                    'tokens_used' => 40,
+                ];
+            }
+
+            return [
+                'content' => 'The MCP backend tool completed successfully. See the structured details in the card below.',
+                'tool_calls' => [],
+                'tokens_used' => 35,
+            ];
+        }
+
+        if (str_contains($text, 'sync') || str_contains($text, 'airtable') || str_contains($text, 'catalog audit')) {
+            $action = str_contains($text, 'trigger') || str_contains($text, 'run sync') ? 'trigger_sync' : (str_contains($text, 'run audit') ? 'run_audit' : 'status');
+
+            return [
+                'content' => null,
+                'tool_calls' => [
+                    [
+                        'id' => uniqid('mcp_call_'),
+                        'name' => 'backend_airtable_sync_audit',
+                        'arguments' => ['action' => $action],
+                    ],
+                ],
+                'tokens_used' => 35,
+            ];
+        }
+
+        if (str_contains($text, 'seo') || str_contains($text, 'sitemap') || str_contains($text, 'llms.txt')) {
+            $action = str_contains($text, 'sitemap') ? 'refresh_sitemap' : (str_contains($text, 'llms') ? 'refresh_llms_txt' : 'audit_seo');
+
+            return [
+                'content' => null,
+                'tool_calls' => [
+                    [
+                        'id' => uniqid('mcp_call_'),
+                        'name' => 'backend_seo_and_geo_manager',
+                        'arguments' => ['action' => $action],
+                    ],
+                ],
+                'tokens_used' => 35,
+            ];
+        }
+
+        if (str_contains($text, 'faq') || str_contains($text, 'system rule') || str_contains($text, 'company context')) {
+            $section = str_contains($text, 'rule') ? 'rules' : (str_contains($text, 'context') ? 'context' : 'faqs');
+
+            return [
+                'content' => null,
+                'tool_calls' => [
+                    [
+                        'id' => uniqid('mcp_call_'),
+                        'name' => 'backend_manage_ai_knowledge',
+                        'arguments' => ['section' => $section, 'action' => 'list'],
+                    ],
+                ],
+                'tokens_used' => 35,
+            ];
+        }
+
+        if (str_contains($text, 'chat') && (str_contains($text, 'log') || str_contains($text, 'session') || str_contains($text, 'unread'))) {
+            $filter = str_contains($text, 'unread') ? 'unread' : 'all';
+
+            return [
+                'content' => null,
+                'tool_calls' => [
+                    [
+                        'id' => uniqid('mcp_call_'),
+                        'name' => 'backend_chat_sessions_insight',
+                        'arguments' => ['action' => 'list', 'filter' => $filter],
+                    ],
+                ],
+                'tokens_used' => 35,
+            ];
+        }
+
+        if (str_contains($text, 'analytics') || str_contains($text, 'traffic') || str_contains($text, 'enquir') || str_contains($text, 'pending')) {
+            return [
+                'content' => null,
+                'tool_calls' => [
+                    [
+                        'id' => uniqid('mcp_call_'),
+                        'name' => 'backend_dashboard_analytics',
+                        'arguments' => ['metric' => 'all'],
+                    ],
+                ],
+                'tokens_used' => 35,
+            ];
+        }
+
+        return [
+            'content' => null,
+            'tool_calls' => [
+                [
+                    'id' => uniqid('mcp_call_'),
+                    'name' => 'backend_dashboard_analytics',
+                    'arguments' => ['metric' => 'all'],
+                ],
+            ],
+            'tokens_used' => 35,
         ];
     }
 }

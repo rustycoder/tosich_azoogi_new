@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\ChatController as ApiChatController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Dashboard\AdminChatController;
 use App\Http\Controllers\Dashboard\AiConfigController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\ChatSessionController;
@@ -48,6 +49,12 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::get('docs/{topic?}', [DocumentationController::class, 'index'])->name('docs.index');
     Route::get('settings', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('settings', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::prefix('ai-copilot')->name('ai-copilot.')->group(function () {
+        Route::post('init', [AdminChatController::class, 'init'])->name('init');
+        Route::post('message', [AdminChatController::class, 'message'])->name('message');
+        Route::post('clear', [AdminChatController::class, 'clear'])->name('clear');
+    });
 
     Route::middleware('admin')->group(function () {
         Route::get('staff', [StaffController::class, 'index'])->name('staff.index');

@@ -67,6 +67,11 @@ class UpdatePageContentTool implements McpToolInterface
             return ['isError' => true, 'content' => "Page not found with slug or title matching: {$slug}"];
         }
 
+        $user = auth()->user();
+        if ($user && ! $user->isAdmin() && ! $user->canManagePages() && ! $user->canManageSections()) {
+            return ['isError' => true, 'content' => 'You do not have permission to update page content.'];
+        }
+
         try {
             return DB::transaction(function () use ($page, $updates, $dryRun) {
                 $changed = [];

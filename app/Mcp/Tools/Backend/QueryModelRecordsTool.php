@@ -35,7 +35,7 @@ class QueryModelRecordsTool implements McpToolInterface
             'properties' => [
                 'model' => [
                     'type' => 'string',
-                    'description' => 'Target model (e.g., page, pagemeta, product, category, enquiry, project).',
+                    'description' => 'Target model (e.g., page, pagemeta, enquiry, project, email_template, datasheet_template, llm_feed).',
                 ],
                 'where' => [
                     'type' => 'object',

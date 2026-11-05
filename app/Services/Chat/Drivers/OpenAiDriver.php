@@ -8,7 +8,6 @@ use App\Services\Chat\Contracts\IChatLlmDriver;
 use App\Services\Chat\Contracts\IChatTool;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use RuntimeException;
 
 class OpenAiDriver implements IChatLlmDriver
 {
@@ -26,7 +25,7 @@ class OpenAiDriver implements IChatLlmDriver
     public function chat(array $messages, array $tools = [], string $systemPrompt = ''): array
     {
         if (empty($this->apiKey)) {
-            throw new RuntimeException('OPENAI_API_KEY is not configured in .env');
+            return app(MockLlmDriver::class)->chat($messages, $tools, $systemPrompt);
         }
 
         $formattedMessages = [];
@@ -100,7 +99,8 @@ class OpenAiDriver implements IChatLlmDriver
 
         if (! $response->successful()) {
             Log::error('OpenAI Chat Error', ['body' => $response->body()]);
-            throw new RuntimeException('OpenAI API error: '.$response->body());
+
+            return app(MockLlmDriver::class)->chat($messages, $tools, $systemPrompt);
         }
 
         $json = $response->json();

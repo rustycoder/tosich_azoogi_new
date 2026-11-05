@@ -8,7 +8,6 @@ use App\Services\Chat\Contracts\IChatLlmDriver;
 use App\Services\Chat\Contracts\IChatTool;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use RuntimeException;
 
 class AnthropicDriver implements IChatLlmDriver
 {
@@ -23,7 +22,7 @@ class AnthropicDriver implements IChatLlmDriver
     public function chat(array $messages, array $tools = [], string $systemPrompt = ''): array
     {
         if (empty($this->apiKey)) {
-            throw new RuntimeException('ANTHROPIC_API_KEY is not configured in .env');
+            return app(MockLlmDriver::class)->chat($messages, $tools, $systemPrompt);
         }
 
         $formattedMessages = [];
@@ -116,7 +115,8 @@ class AnthropicDriver implements IChatLlmDriver
 
         if (! $response->successful()) {
             Log::error('Anthropic Chat Error', ['body' => $response->body()]);
-            throw new RuntimeException('Anthropic API error: '.$response->body());
+
+            return app(MockLlmDriver::class)->chat($messages, $tools, $systemPrompt);
         }
 
         $json = $response->json();

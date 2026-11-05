@@ -39,7 +39,7 @@ class MutateModelTool implements McpToolInterface
             'properties' => [
                 'model' => [
                     'type' => 'string',
-                    'description' => 'Allowed model identifier (e.g., product, category, pagemeta, project, enquiry, email_template).',
+                    'description' => 'Allowed model identifier (e.g., page, pagemeta, project, enquiry, email_template, datasheet_template, llm_feed).',
                 ],
                 'action' => [
                     'type' => 'string',
@@ -72,6 +72,7 @@ class MutateModelTool implements McpToolInterface
         $dryRun = (bool) ($arguments['dry_run'] ?? false);
 
         try {
+            $this->guard->authorizeUserForModel(auth()->user(), $modelKey);
             $modelInstance = $this->guard->resolveModel($modelKey);
             $cleanAttributes = $this->guard->sanitizeAttributes($modelInstance, $rawAttributes);
 

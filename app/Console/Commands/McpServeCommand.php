@@ -5,9 +5,14 @@ declare(strict_types=1);
 namespace App\Console\Commands;
 
 use App\Mcp\Protocol\McpServer;
+use App\Mcp\Tools\Backend\AirtableSyncAndAuditTool;
+use App\Mcp\Tools\Backend\ChatSessionsInsightTool;
+use App\Mcp\Tools\Backend\DashboardAnalyticsTool;
 use App\Mcp\Tools\Backend\InspectSchemaTool;
+use App\Mcp\Tools\Backend\ManageAiKnowledgeTool;
 use App\Mcp\Tools\Backend\MutateModelTool;
 use App\Mcp\Tools\Backend\QueryModelRecordsTool;
+use App\Mcp\Tools\Backend\SeoAndGeoManagerTool;
 use App\Mcp\Tools\Backend\UpdatePageContentTool;
 use App\Mcp\Tools\Frontend\ListBladeViewsTool;
 use App\Mcp\Tools\Frontend\ListRoutesTool;
@@ -53,6 +58,11 @@ class McpServeCommand extends Command
             $server->registerTool(app(QueryModelRecordsTool::class));
             $server->registerTool(app(MutateModelTool::class));
             $server->registerTool(app(UpdatePageContentTool::class));
+            $server->registerTool(app(AirtableSyncAndAuditTool::class));
+            $server->registerTool(app(ManageAiKnowledgeTool::class));
+            $server->registerTool(app(ChatSessionsInsightTool::class));
+            $server->registerTool(app(DashboardAnalyticsTool::class));
+            $server->registerTool(app(SeoAndGeoManagerTool::class));
         }
 
         if (in_array($mode, ['all', 'public_chat'], true)) {

@@ -35,7 +35,7 @@ class InspectSchemaTool implements McpToolInterface
             'properties' => [
                 'model' => [
                     'type' => 'string',
-                    'description' => 'Allowlisted model identifier (e.g., page, pagemeta, product, category, enquiry, project).',
+                    'description' => 'Allowlisted model identifier (e.g., page, pagemeta, enquiry, project, email_template, datasheet_template, llm_feed).',
                 ],
             ],
         ];
