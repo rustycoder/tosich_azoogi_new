@@ -38,6 +38,15 @@ class HomeHeroTest extends TestCase
             ->assertSee('class="slider-dot active"', false);
     }
 
+    public function test_home_page_has_a_single_h1_for_the_first_hero_slide(): void
+    {
+        $html = (string) $this->get('/')->assertOk()->getContent();
+
+        $this->assertSame(1, substr_count($html, '<h1 class="slide-title"'));
+        $this->assertGreaterThan(0, substr_count($html, '<h2 class="slide-title"'));
+        $this->assertLessThan(strpos($html, '<h2 class="slide-title"'), strpos($html, '<h1 class="slide-title"'));
+    }
+
     public function test_home_hero_uses_slide_image_as_video_poster_and_image_fallback(): void
     {
         $html = $this->get('/')->assertOk()->getContent();

@@ -38,7 +38,11 @@
         </video>
       @endif
       <div class="slide-inner">
-        <h1 class="slide-title"{!! cms_style($meta, 'slide.title', $loop->index) !!}>{!! accent_html($slide['title'] ?? '') !!}</h1>
+        @if ($loop->first)
+          <h1 class="slide-title"{!! cms_style($meta, 'slide.title', $loop->index) !!}>{!! accent_html($slide['title'] ?? '') !!}</h1>
+        @else
+          <h2 class="slide-title"{!! cms_style($meta, 'slide.title', $loop->index) !!}>{!! accent_html($slide['title'] ?? '') !!}</h2>
+        @endif
         <p class="slide-sub"{!! cms_style($meta, 'slide.subtitle', $loop->index) !!}>{!! accent_html($slide['subtitle'] ?? '') !!}</p>
         <div class="slide-actions">
           <a class="btn primary" href="{{ $slide['cta.primary.href'] ?? '#' }}"{!! cms_style($meta, 'slide.cta.primary.label', $loop->index) !!}>{{ $slide['cta.primary.label'] ?? '' }}</a>
