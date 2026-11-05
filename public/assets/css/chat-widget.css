@@ -369,10 +369,11 @@
 
 .azoogi-chat-chip {
     background: var(--chat-card-bg);
-    border: 1px solid var(--chat-card-border);
+    border: 1.5px solid var(--chat-accent);
+    box-shadow: 0 0 14px var(--chat-accent-glow);
     color: var(--chat-text);
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     padding: 8px 16px;
     border-radius: 9999px;
     cursor: pointer;
@@ -381,13 +382,16 @@
     display: inline-flex;
     align-items: center;
     line-height: 1.35;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
     font-family: inherit;
 }
 
+.azoogi-chat-chip svg {
+    flex-shrink: 0;
+}
+
 .azoogi-chat-chip:hover {
-    border-color: var(--chat-accent);
-    box-shadow: 0 0 12px var(--chat-accent-glow);
+    border-color: var(--chat-accent-hover);
+    box-shadow: 0 0 20px var(--chat-accent-glow);
     transform: translateY(-1px);
 }
 

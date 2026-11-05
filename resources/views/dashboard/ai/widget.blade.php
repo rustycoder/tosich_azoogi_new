@@ -327,13 +327,10 @@
                                 @foreach ($branding['starter_chips'] as $chip)
                                     @php
                                         $chipText = is_array($chip) ? ($chip['prompt'] ?? $chip['label'] ?? '') : (string) $chip;
-                                        $isFeatured = $loop->last || str_contains(strtolower($chipText), 'quote') || str_contains(strtolower($chipText), 'demo') || str_contains(strtolower($chipText), 'datasheet');
                                     @endphp
                                     @if (!empty($chipText))
-                                        <button type="button" class="azoogi-chat-chip {{ $isFeatured ? 'is-featured' : '' }}" disabled style="cursor: default;">
-                                            @if ($isFeatured)
-                                                <svg viewBox="0 0 24 24" fill="currentColor" width="10" height="10" style="margin-right: 6px;"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-                                            @endif
+                                        <button type="button" class="azoogi-chat-chip is-featured" disabled style="cursor: default;">
+                                            <svg viewBox="0 0 24 24" fill="currentColor" width="10" height="10" style="margin-right: 6px; flex-shrink: 0;"><polygon points="6 3 20 12 6 21 6 3"/></svg>
                                             <span>{{ $chipText }}</span>
                                         </button>
                                     @endif
@@ -485,22 +482,14 @@ function updateLivePreview() {
             if (prompt) prompts.push(prompt);
         });
 
-        prompts.forEach((promptText, idx) => {
-            const lower = promptText.toLowerCase();
-            const isFeatured = idx === prompts.length - 1 || lower.includes('quote') || lower.includes('demo') || lower.includes('datasheet');
+        prompts.forEach((promptText) => {
             const btn = document.createElement('button');
             btn.type = 'button';
             btn.disabled = true;
             btn.style.cursor = 'default';
-            btn.className = 'azoogi-chat-chip' + (isFeatured ? ' is-featured' : '');
-            if (isFeatured) {
-                btn.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor" width="10" height="10" style="margin-right: 6px;"><polygon points="6 3 20 12 6 21 6 3"/></svg><span></span>`;
-                btn.querySelector('span').textContent = promptText;
-            } else {
-                const span = document.createElement('span');
-                span.textContent = promptText;
-                btn.appendChild(span);
-            }
+            btn.className = 'azoogi-chat-chip is-featured';
+            btn.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor" width="10" height="10" style="margin-right: 6px; flex-shrink: 0;"><polygon points="6 3 20 12 6 21 6 3"/></svg><span></span>`;
+            btn.querySelector('span').textContent = promptText;
             chipsList.appendChild(btn);
         });
     }

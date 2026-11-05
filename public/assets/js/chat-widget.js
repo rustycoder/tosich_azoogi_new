@@ -981,12 +981,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function getWelcomeTemplate(greetingText = null) {
         const textToUse = greetingText || liveBranding.startup_message || 'Welcome to Azoogi Lighting! How can our architectural engineering team assist with your project specifications, lighting schedules, or quotes today?';
         const chips = liveBranding.starter_chips || [];
-        const chipsHtml = chips.map((chip, idx) => {
+        const chipsHtml = chips.map((chip) => {
             const text = (typeof chip === 'string') ? chip : (chip.prompt || chip.label || '');
             if (!text) return '';
-            const isFeatured = idx === chips.length - 1 || text.toLowerCase().includes('quote') || text.toLowerCase().includes('demo') || text.toLowerCase().includes('datasheet');
-            const iconSvg = isFeatured ? `<svg viewBox="0 0 24 24" fill="currentColor" width="10" height="10" style="margin-right: 6px;"><polygon points="6 3 20 12 6 21 6 3"/></svg>` : '';
-            return `<button type="button" class="azoogi-chat-chip js-chat-chip ${isFeatured ? 'is-featured' : ''}" data-prompt="${escapeHtml(text)}">${iconSvg}<span>${escapeHtml(text)}</span></button>`;
+            const iconSvg = `<svg viewBox="0 0 24 24" fill="currentColor" width="10" height="10" style="margin-right: 6px; flex-shrink: 0;"><polygon points="6 3 20 12 6 21 6 3"/></svg>`;
+            return `<button type="button" class="azoogi-chat-chip js-chat-chip is-featured" data-prompt="${escapeHtml(text)}">${iconSvg}<span>${escapeHtml(text)}</span></button>`;
         }).join('');
 
         const avatarImg = liveBranding.ai_custom_avatar_url

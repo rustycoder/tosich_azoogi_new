@@ -84,13 +84,10 @@
                     @foreach ($branding['starter_chips'] as $idx => $chip)
                         @php
                             $chipText = is_array($chip) ? ($chip['prompt'] ?? $chip['label'] ?? '') : (string) $chip;
-                            $isFeatured = $loop->last || str_contains(strtolower($chipText), 'quote') || str_contains(strtolower($chipText), 'demo') || str_contains(strtolower($chipText), 'datasheet');
                         @endphp
                         @if (!empty($chipText))
-                            <button type="button" class="azoogi-chat-chip js-chat-chip {{ $isFeatured ? 'is-featured' : '' }}" data-prompt="{{ $chipText }}">
-                                @if ($isFeatured)
-                                    <svg viewBox="0 0 24 24" fill="currentColor" width="10" height="10" style="margin-right: 6px;"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-                                @endif
+                            <button type="button" class="azoogi-chat-chip js-chat-chip is-featured" data-prompt="{{ $chipText }}">
+                                <svg viewBox="0 0 24 24" fill="currentColor" width="10" height="10" style="margin-right: 6px; flex-shrink: 0;"><polygon points="6 3 20 12 6 21 6 3"/></svg>
                                 <span>{{ $chipText }}</span>
                             </button>
                         @endif
