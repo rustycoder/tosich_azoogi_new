@@ -102,5 +102,25 @@ class DocumentationTest extends TestCase
         $productResponse->assertSee('901041', false);
         $productResponse->assertSee('201001', false);
         $productResponse->assertSee('Landscape Lighting', false);
+
+        $mcpResponse = $this->actingAs($user)->get('/dashboard/docs/mcp');
+        $mcpResponse->assertOk();
+        $mcpResponse->assertSee('In-Dashboard Admin Copilot', false);
+        $mcpResponse->assertSee('frontend_list_blade_views', false);
+        $mcpResponse->assertSee('frontend_read_blade_view', false);
+        $mcpResponse->assertSee('frontend_list_routes', false);
+        $mcpResponse->assertSee('frontend_search_assets', false);
+        $mcpResponse->assertSee('backend_inspect_schema', false);
+        $mcpResponse->assertSee('backend_query_records', false);
+        $mcpResponse->assertSee('backend_update_page_content', false);
+        $mcpResponse->assertSee('backend_mutate_model', false);
+        $mcpResponse->assertSee('backend_airtable_sync_audit', false);
+        $mcpResponse->assertSee('backend_manage_ai_knowledge', false);
+        $mcpResponse->assertSee('backend_chat_sessions_insight', false);
+        $mcpResponse->assertSee('backend_dashboard_analytics', false);
+        $mcpResponse->assertSee('backend_seo_and_geo_manager', false);
+        $mcpResponse->assertSee('public_search_products', false);
+        $mcpResponse->assertSee('public_manage_quote_list', false);
+        $mcpResponse->assertSee('public_submit_quote_enquiry', false);
     }
 }

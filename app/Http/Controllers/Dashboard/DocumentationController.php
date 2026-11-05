@@ -129,7 +129,7 @@ class DocumentationController extends Controller
                 'mcp' => [
                     'label' => 'MCP Protocol & AI',
                     'title' => 'Model Context Protocol (MCP) & AI Integration',
-                    'keywords' => 'mcp model context protocol ai claude cursor stdio json-rpc tools frontend exploration backend mutations page updates quotes chatbot automation',
+                    'keywords' => 'mcp model context protocol ai claude cursor stdio json-rpc tools frontend exploration backend mutations page updates quotes chatbot automation admin copilotbackend_inspect_schema backend_query_records backend_mutate_model backend_update_page_content backend_airtable_sync_audit backend_manage_ai_knowledge backend_chat_sessions_insight backend_dashboard_analytics backend_seo_and_geo_manager frontend_list_blade_views frontend_read_blade_view frontend_list_routes frontend_search_assets public_search_products public_manage_quote_list public_submit_quote_enquiry',
                 ],
             ],
             'Operations & Admin' => [

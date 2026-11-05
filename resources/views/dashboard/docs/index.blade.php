@@ -2692,14 +2692,22 @@ php artisan geo:generate</code></pre>
                     <h2>Model Context Protocol (MCP) & AI Integration</h2>
                     <span class="dash-pill-active">AI Engine</span>
                 </div>
-                <p>Azoogi features a <strong>native PHP implementation of the Model Context Protocol (MCP)</strong> conforming to the <code>2024-11-05</code> specification. MCP allows external Large Language Models (such as Anthropic Claude Desktop, Cursor AI, or IDE assistants) to securely inspect front-end views, read route definitions, explore assets, and execute validated database updates using natural language prompts.</p>
+                <p>Azoogi features a <strong>native PHP implementation of the Model Context Protocol (MCP)</strong> conforming to the <code>2024-11-05</code> specification. MCP powers both the <strong>in-dashboard Admin Copilot</strong> (floating bottom-right button across all dashboard pages) and external Large Language Models (such as Anthropic Claude Desktop, Cursor AI, or IDE assistants) to securely inspect front-end views, read route definitions, explore assets, and execute validated backend operations using natural language prompts.</p>
 
                 <div class="dash-doc-callout info">
-                    <strong>Zero Node.js Overhead:</strong> The MCP server runs 100% natively in PHP through the standard input/output stream (<code>stdio</code>) via an Artisan console command without external runtime dependencies.
+                    <strong>Zero Node.js Overhead &amp; Dual Access:</strong> Every Backend MCP tool works in two ways: (1) directly inside the browser via the floating <strong>Admin Copilot</strong> widget, and (2) over standard input/output (<code>stdio</code>) via Artisan for external AI clients. Sidebar menu items marked with an asterisk (<code>*</code>) indicate sections that can be inspected or managed via Backend MCP.
                 </div>
 
-                <h3>1. Quick Start & Artisan Server</h3>
-                <p>The MCP server runs as a background process or interactive stdio listener via Artisan:</p>
+                <h3>1. Using the In-Dashboard Admin Copilot</h3>
+                <p>Logged-in administrators and staff can click the <strong>Admin Copilot</strong> button in the bottom-right corner of any dashboard page to run Backend MCP tools conversationally:</p>
+                <ul>
+                    <li><strong>Role-Scoped Execution:</strong> All commands run under your authenticated user session and respect your assigned staff permissions.</li>
+                    <li><strong>Interactive MCP Payload Cards:</strong> Every tool execution renders a collapsible <em>Inspect MCP Payload</em> card showing the exact tool name, summary, and JSON response.</li>
+                    <li><strong>Airtable Read-Only Protection:</strong> Airtable-synced catalog tables (<code>Products</code>, <code>Categories</code>, and <code>Product Attributes</code>) are strictly read-only in the dashboard; MCP can trigger Airtable syncs and quality audits via <code>backend_airtable_sync_audit</code>, but cannot directly overwrite individual product or category rows.</li>
+                </ul>
+
+                <h3>2. Quick Start &amp; Artisan Server (External Clients)</h3>
+                <p>The MCP server can also run as a background process or interactive stdio listener via Artisan:</p>
                 <div class="dash-doc-code-block" style="margin-bottom: 16px;">
                     <pre><code># Start the MCP server exposing all tool suites (Frontend, Backend, and Public Chat)
 php artisan mcp:serve --mode=all
@@ -2707,7 +2715,7 @@ php artisan mcp:serve --mode=all
 # Expose only read-only frontend exploration tools
 php artisan mcp:serve --mode=frontend
 
-# Expose only backend mutations and CMS updating tools
+# Expose only backend operations, analytics, and CMS tools
 php artisan mcp:serve --mode=backend
 
 # Expose catalog search and quote builder tools
@@ -2715,12 +2723,8 @@ php artisan mcp:serve --mode=public_chat</code></pre>
                     <button type="button" class="dash-doc-copy-btn" data-copy-text="php artisan mcp:serve --mode=all">Copy Command</button>
                 </div>
 
-                <h3>2. Connecting MCP to Claude Desktop</h3>
-                <p>To connect Claude Desktop to your local Azoogi backend, open your Claude configuration file:</p>
-                <ul>
-                    <li><strong>macOS:</strong> <code>~/Library/Application Support/Claude/claude_desktop_config.json</code></li>
-                    <li><strong>Windows:</strong> <code>%APPDATA%\Claude\claude_desktop_config.json</code></li>
-                </ul>
+                <h3>3. Connecting MCP to Claude Desktop &amp; Cursor IDE</h3>
+                <p>To connect <strong>Claude Desktop</strong> (`~/Library/Application Support/Claude/claude_desktop_config.json` on macOS or `%APPDATA%\Claude\claude_desktop_config.json` on Windows) or <strong>Cursor IDE</strong> (`.cursor/mcp.json`):</p>
                 <div class="dash-doc-code-block" style="margin-bottom: 16px;">
                     <pre><code>{
   "mcpServers": {
@@ -2748,125 +2752,172 @@ php artisan mcp:serve --mode=public_chat</code></pre>
 }'>Copy JSON Config</button>
                 </div>
 
-                <h3>3. Connecting MCP to Cursor IDE</h3>
-                <p>To connect Cursor to the Azoogi MCP server, create or edit <code>.cursor/mcp.json</code> in your project root:</p>
-                <div class="dash-doc-code-block" style="margin-bottom: 16px;">
-                    <pre><code>{
-  "mcpServers": {
-    "azoogi-app": {
-      "command": "php",
-      "args": ["artisan", "mcp:serve", "--mode=all"]
-    }
-  }
-}</code></pre>
-                    <button type="button" class="dash-doc-copy-btn" data-copy-text='{
-  "mcpServers": {
-    "azoogi-app": {
-      "command": "php",
-      "args": ["artisan", "mcp:serve", "--mode=all"]
-    }
-  }
-}'>Copy JSON Config</button>
-                </div>
-
-                <h3>4. Example Natural Language Use Cases</h3>
-                <div class="dash-doc-steps">
-                    <div class="dash-doc-step">
-                        <div class="dash-doc-step-num">A</div>
-                        <div class="dash-doc-step-content">
-                            <h4>Update Solution Page Hero Banner Copy</h4>
-                            <p>Prompt in Claude or Cursor:</p>
-                            <p><em>&ldquo;Update the solution page hero banner title to 'Innovative Commercial Lighting Solutions' and the lead text to 'High-efficiency luminaires and smart controls built for modern architecture'.&rdquo;</em></p>
-                            <p><strong>Action Taken:</strong> The AI invokes <code>backend_update_page_content</code>, matches the <code>solutions</code> slug, and writes to MySQL <code>page_meta</code> inside an atomic database transaction.</p>
-                        </div>
-                    </div>
-                    <div class="dash-doc-step">
-                        <div class="dash-doc-step-num">B</div>
-                        <div class="dash-doc-step-content">
-                            <h4>Visitor Product Search & Quote Creation</h4>
-                            <p>Prompt on website chat or AI assistant:</p>
-                            <p><em>&ldquo;Search for our outdoor garden spike lights, add 6 units of the 50W model to my quote, and submit a quote request for info@archstudio.com.au.&rdquo;</em></p>
-                            <p><strong>Action Taken:</strong> The AI queries <code>public_search_products</code>, updates session cart via <code>public_manage_quote_list</code>, and registers the lead via <code>public_submit_quote_enquiry</code>.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <h3>5. Available MCP Tool Reference</h3>
+                <h3>4. Frontend Exploration MCP Tools (<code>--mode=frontend</code>)</h3>
+                <p>Read-only tools designed for inspecting Blade templates, route registrations, CSS stylesheets, and JavaScript assets without modifying files:</p>
                 <div class="dash-doc-table-wrap">
                     <table class="dash-doc-table">
                         <thead>
                             <tr>
                                 <th>Tool Identifier</th>
-                                <th>Category</th>
-                                <th>Description</th>
+                                <th>Input Arguments</th>
+                                <th>What It Does</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td><code>frontend_list_blade_views</code></td>
-                                <td><span class="dash-pill-active" style="font-size: 11px;">Frontend</span></td>
-                                <td>Recursively scans <code>resources/views</code> for templates, layouts, and components.</td>
+                                <td><code>subdirectory</code> (optional, e.g. <code>"pages"</code>, <code>"dashboard"</code>)</td>
+                                <td>Recursively scans <code>resources/views</code> and returns all Blade template paths and dot-notation view names.</td>
                             </tr>
                             <tr>
                                 <td><code>frontend_read_blade_view</code></td>
-                                <td><span class="dash-pill-active" style="font-size: 11px;">Frontend</span></td>
-                                <td>Safely reads Blade file contents with directory traversal protection.</td>
+                                <td><code>view</code> (required, e.g. <code>"pages.solutions"</code>)</td>
+                                <td>Safely reads the full HTML/Blade source code of a template with directory-traversal protection.</td>
                             </tr>
                             <tr>
                                 <td><code>frontend_list_routes</code></td>
-                                <td><span class="dash-pill-active" style="font-size: 11px;">Frontend</span></td>
-                                <td>Lists registered application routes with HTTP methods, URIs, and middleware.</td>
+                                <td><code>search</code> (optional URI or route name filter)</td>
+                                <td>Lists registered Laravel routes including HTTP methods, URI patterns, route names, controller actions, and middleware.</td>
                             </tr>
                             <tr>
                                 <td><code>frontend_search_assets</code></td>
-                                <td><span class="dash-pill-active" style="font-size: 11px;">Frontend</span></td>
-                                <td>Grep search across Blade views, CSS stylesheets, and JavaScript files.</td>
-                            </tr>
-                            <tr>
-                                <td><code>backend_update_page_content</code></td>
-                                <td><span class="dash-pill-active" style="font-size: 11px; background: rgba(58, 160, 40, 0.2); color: #67d04e;">Backend</span></td>
-                                <td>Updates page metadata, hero titles, subtitles, banner texts, or custom section values.</td>
-                            </tr>
-                            <tr>
-                                <td><code>backend_inspect_schema</code></td>
-                                <td><span class="dash-pill-active" style="font-size: 11px; background: rgba(58, 160, 40, 0.2); color: #67d04e;">Backend</span></td>
-                                <td>Inspects MySQL database table columns, types, and primary keys for models.</td>
-                            </tr>
-                            <tr>
-                                <td><code>backend_query_records</code></td>
-                                <td><span class="dash-pill-active" style="font-size: 11px; background: rgba(58, 160, 40, 0.2); color: #67d04e;">Backend</span></td>
-                                <td>Queries records from allowlisted Eloquent models with safe filtering and pagination.</td>
-                            </tr>
-                            <tr>
-                                <td><code>backend_mutate_model</code></td>
-                                <td><span class="dash-pill-active" style="font-size: 11px; background: rgba(58, 160, 40, 0.2); color: #67d04e;">Backend</span></td>
-                                <td>Safely executes validated create, update, or delete operations on allowlisted models.</td>
-                            </tr>
-                            <tr>
-                                <td><code>public_search_products</code></td>
-                                <td><span class="dash-pill-active" style="font-size: 11px; background: rgba(56, 189, 248, 0.2); color: #38bdf8;">Chat / Quotes</span></td>
-                                <td>Searches active product catalog by application, category, or keyword.</td>
-                            </tr>
-                            <tr>
-                                <td><code>public_manage_quote_list</code></td>
-                                <td><span class="dash-pill-active" style="font-size: 11px; background: rgba(56, 189, 248, 0.2); color: #38bdf8;">Chat / Quotes</span></td>
-                                <td>Adds, removes, or inspects items in visitor quote cart.</td>
-                            </tr>
-                            <tr>
-                                <td><code>public_submit_quote_enquiry</code></td>
-                                <td><span class="dash-pill-active" style="font-size: 11px; background: rgba(56, 189, 248, 0.2); color: #38bdf8;">Chat / Quotes</span></td>
-                                <td>Creates quote enquiry records in MySQL with customer details and selected items.</td>
+                                <td><code>query</code> (required), <code>type</code> (<code>all|css|js|blade</code>)</td>
+                                <td>Performs a fast keyword search across <code>public/assets/css</code>, <code>public/assets/js</code>, and <code>resources/views</code> with matching line numbers.</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <h3>6. Security Controls & Guardrails</h3>
+                <h3>5. Backend Operations &amp; CMS MCP Tools (<code>--mode=backend</code>)</h3>
+                <p>Tools that power the <strong>Admin Copilot</strong> and external backend administration across dashboard menus marked with <code>*</code>:</p>
+                <div class="dash-doc-table-wrap">
+                    <table class="dash-doc-table">
+                        <thead>
+                            <tr>
+                                <th>Tool Identifier</th>
+                                <th>Input Arguments</th>
+                                <th>Dashboard Menus Covered &amp; Capabilities</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>backend_inspect_schema</code></td>
+                                <td><code>model</code> (required: <code>page</code>, <code>pagemeta</code>, <code>project</code>, <code>enquiry</code>, <code>email_template</code>, <code>datasheet_template</code>, <code>llm_feed</code>)</td>
+                                <td>Inspects database table columns, data types, and editable (<code>fillable</code>) fields for allowlisted backend models.</td>
+                            </tr>
+                            <tr>
+                                <td><code>backend_query_records</code></td>
+                                <td><code>model</code> (required), <code>where</code>, <code>limit</code> (1–50), <code>order_by</code>, <code>direction</code></td>
+                                <td>Queries live records across <strong>Pages *</strong>, <strong>Sections *</strong>, <strong>Projects *</strong>, <strong>Enquiries *</strong>, <strong>Email *</strong>, <strong>Datasheet Templates *</strong>, and <strong>AI Feeds *</strong>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>backend_update_page_content</code></td>
+                                <td><code>page_slug</code> (required), <code>meta_updates</code> (key-value object), <code>dry_run</code> (boolean)</td>
+                                <td>Updates hero titles, leads, banner copy, or custom section values on any page under <strong>Pages *</strong> and <strong>Sections *</strong>. Supports <code>dry_run: true</code> for before/after diff previews.</td>
+                            </tr>
+                            <tr>
+                                <td><code>backend_mutate_model</code></td>
+                                <td><code>model</code> (required), <code>action</code> (<code>create|update|delete</code>), <code>id</code>, <code>attributes</code>, <code>dry_run</code></td>
+                                <td>Creates, updates, or deletes records on allowlisted models (e.g. creating a project, updating an enquiry status, editing an email or datasheet template) inside a safe database transaction.</td>
+                            </tr>
+                            <tr>
+                                <td><code>backend_airtable_sync_audit</code></td>
+                                <td><code>action</code> (<code>status|run_audit|trigger_sync</code>)</td>
+                                <td>Covers <strong>Airtable Sync *</strong>: checks the latest sync timestamp/counts, runs a catalog quality &amp; WebP/SVG audit, or triggers a fresh synchronization from Airtable.</td>
+                            </tr>
+                            <tr>
+                                <td><code>backend_manage_ai_knowledge</code></td>
+                                <td><code>section</code> (<code>rules|context|faqs</code>), <code>action</code> (<code>list|upsert|toggle|delete</code>), <code>id</code>, <code>category</code>, <code>title</code>, <code>content</code>, <code>is_active</code></td>
+                                <td>Covers <strong>AI &rarr; Rules *</strong>, <strong>Company Info *</strong>, and <strong>FAQs *</strong>: lists, adds, edits, toggles active/inactive, or deletes AI knowledge items.</td>
+                            </tr>
+                            <tr>
+                                <td><code>backend_chat_sessions_insight</code></td>
+                                <td><code>action</code> (<code>list|transcript|toggle_read|toggle_favorite|convert_to_enquiry</code>), <code>filter</code> (<code>all|unread|favorites|leads</code>), <code>search</code>, <code>session_id</code></td>
+                                <td>Covers <strong>AI &rarr; Chat Logs *</strong>: lists customer AI chat sessions, retrieves full message transcripts, toggles read/star flags, or converts a chat session into a formal Quote Enquiry.</td>
+                            </tr>
+                            <tr>
+                                <td><code>backend_dashboard_analytics</code></td>
+                                <td><code>metric</code> (<code>all|enquiries|traffic|datasheets</code>)</td>
+                                <td>Covers <strong>Dashboard *</strong>, <strong>Enquiries *</strong>, and <strong>Datasheet Exports *</strong>: summarizes pending Quote/Product/Contact enquiries, page visits, visitor countries, top viewed products, and most downloaded PDF datasheets.</td>
+                            </tr>
+                            <tr>
+                                <td><code>backend_seo_and_geo_manager</code></td>
+                                <td><code>action</code> (<code>audit_seo|refresh_sitemap|refresh_llms_txt|refresh_all</code>)</td>
+                                <td>Covers <strong>Pages *</strong> and <strong>AI Feeds *</strong>: audits all pages for missing SEO titles, meta descriptions, or OpenGraph images, and regenerates <code>/sitemap.xml</code>, <code>/llms.txt</code>, and <code>/llms-full.txt</code>.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>6. Public Chat &amp; Quote MCP Tools (<code>--mode=public_chat</code>)</h3>
+                <p>Customer-facing tools exposed for product discovery, quote cart management, and lead capture:</p>
+                <div class="dash-doc-table-wrap">
+                    <table class="dash-doc-table">
+                        <thead>
+                            <tr>
+                                <th>Tool Identifier</th>
+                                <th>Input Arguments</th>
+                                <th>What It Does</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>public_search_products</code></td>
+                                <td><code>query</code> (required), <code>category</code>, <code>limit</code></td>
+                                <td>Searches published products in the catalog by keyword, category, SKU, or technical specification.</td>
+                            </tr>
+                            <tr>
+                                <td><code>public_manage_quote_list</code></td>
+                                <td><code>action</code> (<code>add|remove|list|clear</code>), <code>product_id</code>, <code>quantity</code></td>
+                                <td>Adds, updates, removes, or lists fixtures in the visitor's active quote request cart.</td>
+                            </tr>
+                            <tr>
+                                <td><code>public_submit_quote_enquiry</code></td>
+                                <td><code>name</code>, <code>email</code>, <code>phone</code>, <code>company</code>, <code>notes</code></td>
+                                <td>Packages the visitor's quote list and contact details into a new Quote Enquiry in the database.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>7. Example Natural Language Prompts (Admin Copilot or Claude)</h3>
+                <div class="dash-doc-steps">
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">A</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Update Page Hero Copy or Preview Changes</h4>
+                            <p><em>&ldquo;Update the solutions page hero title to 'Innovative Commercial Lighting Solutions' and lead text to 'Engineered for modern architecture' (run a dry run preview first).&rdquo;</em> &rarr; Invokes <code>backend_update_page_content</code>.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">B</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Manage AI FAQs &amp; System Rules</h4>
+                            <p><em>&ldquo;Add a new FAQ under Controls asking 'Do you support DALI-2 Emergency testing?' with the answer 'Yes, DALI-2 emergency lighting and central monitoring are supported.'&rdquo;</em> &rarr; Invokes <code>backend_manage_ai_knowledge</code>.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">C</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Review Unread Customer Chats &amp; Convert Leads</h4>
+                            <p><em>&ldquo;Show me unread customer chat sessions and convert session #14 into a quote enquiry.&rdquo;</em> &rarr; Invokes <code>backend_chat_sessions_insight</code>.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">D</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Audit SEO Metadata &amp; Refresh Sitemap / GEO Feeds</h4>
+                            <p><em>&ldquo;Run an SEO audit on all pages to see which ones are missing meta descriptions, then refresh /sitemap.xml and /llms.txt.&rdquo;</em> &rarr; Invokes <code>backend_seo_and_geo_manager</code>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>8. Security Controls &amp; Guardrails</h3>
                 <ul>
-                    <li><strong>Strict Model Allowlisting:</strong> Only models explicitly registered in <code>MutationGuard</code> (Page, PageMeta, Product, Category, Project, Enquiry) can be manipulated. Sensitive models like <code>User</code> are strictly locked down.</li>
-                    <li><strong>Forbidden Column Protection:</strong> Columns such as <code>id</code>, <code>password</code>, <code>is_admin</code>, <code>remember_token</code>, and <code>api_token</code> cannot be modified through MCP mutations.</li>
-                    <li><strong>Atomic DB Transactions:</strong> All mutations are executed within <code>DB::transaction()</code> blocks to guarantee that failures or invalid attributes immediately rollback changes.</li>
-                    <li><strong>Dry-Run Previews:</strong> Destructive or complex updates support <code>"dry_run": true</code>, returning an exact before-and-after attribute diff before committing changes to MySQL.</li>
+                    <li><strong>Strict Model Allowlisting:</strong> Only models explicitly registered in <code>MutationGuard</code> (<code>Page</code>, <code>PageMeta</code>, <code>Project</code>, <code>Enquiry</code>, <code>EmailTemplate</code>, <code>DatasheetTemplate</code>, <code>LlmFeed</code>) can be queried or mutated via generic model tools. Sensitive models like <code>User</code> (Staff) and Airtable-owned catalog models (<code>Product</code>, <code>ProductCategory</code>, <code>ProductAttribute</code>) are blocked from direct mutation.</li>
+                    <li><strong>Role-Based Access Control (RBAC):</strong> When invoked via the in-dashboard Admin Copilot, <code>MutationGuard</code> and every backend tool verify the logged-in user's permissions (<code>canManagePages</code>, <code>canManageProjects</code>, <code>canManageEnquiries</code>, etc.).</li>
+                    <li><strong>Forbidden Column Protection:</strong> Columns such as <code>id</code>, <code>password</code>, <code>is_admin</code>, <code>role</code>, <code>remember_token</code>, and <code>api_token</code> can never be modified.</li>
+                    <li><strong>Atomic DB Transactions &amp; Dry-Run Previews:</strong> All mutations run inside <code>DB::transaction()</code> blocks, support <code>"dry_run": true</code> rollback previews, and record audit entries in the daily application log.</li>
                 </ul>
             </article>
         @endif
