@@ -89,8 +89,11 @@
                                     @case('staff')
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><path d="M4 19a5 5 0 0 1 10 0"/><circle cx="17" cy="9" r="2.4"/><path d="M16 19a4.2 4.2 0 0 1 4-3"/></svg>
                                         @break
-                                    @case('mcp')
+                                    @case('mcp-backend')
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+                                        @break
+                                    @case('mcp-frontend')
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg>
                                         @break
                                     @case('ai-models')
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
@@ -2685,17 +2688,17 @@ php artisan geo:generate</code></pre>
             </article>
         @endif
 
-        {{-- 17. MODEL CONTEXT PROTOCOL (MCP) & AI ASSISTANT --}}
-        @if ($activeTopic === 'mcp')
+        {{-- 17. MCP BACKEND & ADMIN COPILOT --}}
+        @if ($activeTopic === 'mcp-backend')
             <article class="dash-card dash-doc-section" data-doc-block>
                 <div class="dash-doc-header">
-                    <h2>Model Context Protocol (MCP) & AI Integration</h2>
-                    <span class="dash-pill-active">AI Engine</span>
+                    <h2>MCP Backend &amp; Admin Copilot</h2>
+                    <span class="dash-pill-active">Backend AI Engine</span>
                 </div>
-                <p>Azoogi features a <strong>native PHP implementation of the Model Context Protocol (MCP)</strong> conforming to the <code>2024-11-05</code> specification. MCP powers both the <strong>in-dashboard Admin Copilot</strong> (floating bottom-right button across all dashboard pages) and external Large Language Models (such as Anthropic Claude Desktop, Cursor AI, or IDE assistants) to securely inspect front-end views, read route definitions, explore assets, and execute validated backend operations using natural language prompts.</p>
+                <p>Azoogi features a <strong>native PHP Backend Model Context Protocol (MCP)</strong> suite conforming to the <code>2024-11-05</code> specification. Backend MCP tools power both the <strong>in-dashboard Admin Copilot</strong> (floating bottom-right button across all dashboard pages) and external AI clients (Claude Desktop, Cursor IDE) to securely inspect schemas, query records, update CMS content, manage AI knowledge, audit Airtable syncs, and refresh SEO/GEO feeds.</p>
 
                 <div class="dash-doc-callout info">
-                    <strong>Zero Node.js Overhead &amp; Dual Access:</strong> Every Backend MCP tool works in two ways: (1) directly inside the browser via the floating <strong>Admin Copilot</strong> widget, and (2) over standard input/output (<code>stdio</code>) via Artisan for external AI clients. Sidebar menu items marked with an asterisk (<code>*</code>) indicate sections that can be inspected or managed via Backend MCP.
+                    <strong>Dual Access &amp; Asterisk (<code>*</code>) Indicators:</strong> Every Backend MCP tool works in two ways: (1) directly inside the browser via the floating <strong>Admin Copilot</strong> widget, and (2) over standard input/output (<code>stdio</code>) via Artisan. Sidebar menu items marked with an asterisk (<code>*</code>) indicate sections that can be inspected or managed via Backend MCP. Looking for frontend template &amp; public chat tools? See <a href="{{ route('dashboard.docs.index', ['topic' => 'mcp-frontend']) }}"><strong>MCP Frontend &rarr;</strong></a>
                 </div>
 
                 <h3>1. Using the In-Dashboard Admin Copilot</h3>
@@ -2703,28 +2706,22 @@ php artisan geo:generate</code></pre>
                 <ul>
                     <li><strong>Role-Scoped Execution:</strong> All commands run under your authenticated user session and respect your assigned staff permissions.</li>
                     <li><strong>Interactive MCP Payload Cards:</strong> Every tool execution renders a collapsible <em>Inspect MCP Payload</em> card showing the exact tool name, summary, and JSON response.</li>
-                    <li><strong>Airtable Read-Only Protection:</strong> Airtable-synced catalog tables (<code>Products</code>, <code>Categories</code>, and <code>Product Attributes</code>) are strictly read-only in the dashboard; MCP can trigger Airtable syncs and quality audits via <code>backend_airtable_sync_audit</code>, but cannot directly overwrite individual product or category rows.</li>
+                    <li><strong>Airtable Read-Only Protection:</strong> Airtable-synced catalog tables (<code>Products</code>, <code>Categories</code>, and <code>Product Attributes</code>) are strictly read-only in the dashboard; Backend MCP can trigger Airtable syncs and quality audits via <code>backend_airtable_sync_audit</code>, but cannot directly overwrite individual product or category rows.</li>
                 </ul>
 
-                <h3>2. Quick Start &amp; Artisan Server (External Clients)</h3>
-                <p>The MCP server can also run as a background process or interactive stdio listener via Artisan:</p>
+                <h3>2. Starting the Backend MCP Server (External Clients)</h3>
+                <p>To expose Backend MCP tools over <code>stdio</code> for external IDE or desktop AI clients:</p>
                 <div class="dash-doc-code-block" style="margin-bottom: 16px;">
-                    <pre><code># Start the MCP server exposing all tool suites (Frontend, Backend, and Public Chat)
-php artisan mcp:serve --mode=all
-
-# Expose only read-only frontend exploration tools
-php artisan mcp:serve --mode=frontend
-
-# Expose only backend operations, analytics, and CMS tools
+                    <pre><code># Expose only Backend operations, analytics, and CMS tools
 php artisan mcp:serve --mode=backend
 
-# Expose catalog search and quote builder tools
-php artisan mcp:serve --mode=public_chat</code></pre>
-                    <button type="button" class="dash-doc-copy-btn" data-copy-text="php artisan mcp:serve --mode=all">Copy Command</button>
+# Or expose all tool suites (Frontend, Backend, and Public Chat)
+php artisan mcp:serve --mode=all</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="php artisan mcp:serve --mode=backend">Copy Command</button>
                 </div>
 
-                <h3>3. Connecting MCP to Claude Desktop &amp; Cursor IDE</h3>
-                <p>To connect <strong>Claude Desktop</strong> (`~/Library/Application Support/Claude/claude_desktop_config.json` on macOS or `%APPDATA%\Claude\claude_desktop_config.json` on Windows) or <strong>Cursor IDE</strong> (`.cursor/mcp.json`):</p>
+                <h3>3. Connecting Backend MCP to Claude Desktop &amp; Cursor IDE</h3>
+                <p>Add the following configuration to <strong>Claude Desktop</strong> (<code>~/Library/Application Support/Claude/claude_desktop_config.json</code> on macOS) or <strong>Cursor IDE</strong> (<code>.cursor/mcp.json</code>):</p>
                 <div class="dash-doc-code-block" style="margin-bottom: 16px;">
                     <pre><code>{
   "mcpServers": {
@@ -2733,7 +2730,7 @@ php artisan mcp:serve --mode=public_chat</code></pre>
       "args": [
         "{{ base_path('artisan') }}",
         "mcp:serve",
-        "--mode=all"
+        "--mode=backend"
       ]
     }
   }
@@ -2745,51 +2742,15 @@ php artisan mcp:serve --mode=public_chat</code></pre>
       "args": [
         "{{ str_replace('\\', '/', base_path('artisan')) }}",
         "mcp:serve",
-        "--mode=all"
+        "--mode=backend"
       ]
     }
   }
 }'>Copy JSON Config</button>
                 </div>
 
-                <h3>4. Frontend Exploration MCP Tools (<code>--mode=frontend</code>)</h3>
-                <p>Read-only tools designed for inspecting Blade templates, route registrations, CSS stylesheets, and JavaScript assets without modifying files:</p>
-                <div class="dash-doc-table-wrap">
-                    <table class="dash-doc-table">
-                        <thead>
-                            <tr>
-                                <th>Tool Identifier</th>
-                                <th>Input Arguments</th>
-                                <th>What It Does</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><code>frontend_list_blade_views</code></td>
-                                <td><code>subdirectory</code> (optional, e.g. <code>"pages"</code>, <code>"dashboard"</code>)</td>
-                                <td>Recursively scans <code>resources/views</code> and returns all Blade template paths and dot-notation view names.</td>
-                            </tr>
-                            <tr>
-                                <td><code>frontend_read_blade_view</code></td>
-                                <td><code>view</code> (required, e.g. <code>"pages.solutions"</code>)</td>
-                                <td>Safely reads the full HTML/Blade source code of a template with directory-traversal protection.</td>
-                            </tr>
-                            <tr>
-                                <td><code>frontend_list_routes</code></td>
-                                <td><code>search</code> (optional URI or route name filter)</td>
-                                <td>Lists registered Laravel routes including HTTP methods, URI patterns, route names, controller actions, and middleware.</td>
-                            </tr>
-                            <tr>
-                                <td><code>frontend_search_assets</code></td>
-                                <td><code>query</code> (required), <code>type</code> (<code>all|css|js|blade</code>)</td>
-                                <td>Performs a fast keyword search across <code>public/assets/css</code>, <code>public/assets/js</code>, and <code>resources/views</code> with matching line numbers.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <h3>5. Backend Operations &amp; CMS MCP Tools (<code>--mode=backend</code>)</h3>
-                <p>Tools that power the <strong>Admin Copilot</strong> and external backend administration across dashboard menus marked with <code>*</code>:</p>
+                <h3>4. Backend Operations &amp; CMS MCP Tools (<code>--mode=backend</code>)</h3>
+                <p>All 9 Backend MCP tools that power the <strong>Admin Copilot</strong> and external backend administration across dashboard menus marked with <code>*</code>:</p>
                 <div class="dash-doc-table-wrap">
                     <table class="dash-doc-table">
                         <thead>
@@ -2849,38 +2810,7 @@ php artisan mcp:serve --mode=public_chat</code></pre>
                     </table>
                 </div>
 
-                <h3>6. Public Chat &amp; Quote MCP Tools (<code>--mode=public_chat</code>)</h3>
-                <p>Customer-facing tools exposed for product discovery, quote cart management, and lead capture:</p>
-                <div class="dash-doc-table-wrap">
-                    <table class="dash-doc-table">
-                        <thead>
-                            <tr>
-                                <th>Tool Identifier</th>
-                                <th>Input Arguments</th>
-                                <th>What It Does</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><code>public_search_products</code></td>
-                                <td><code>query</code> (required), <code>category</code>, <code>limit</code></td>
-                                <td>Searches published products in the catalog by keyword, category, SKU, or technical specification.</td>
-                            </tr>
-                            <tr>
-                                <td><code>public_manage_quote_list</code></td>
-                                <td><code>action</code> (<code>add|remove|list|clear</code>), <code>product_id</code>, <code>quantity</code></td>
-                                <td>Adds, updates, removes, or lists fixtures in the visitor's active quote request cart.</td>
-                            </tr>
-                            <tr>
-                                <td><code>public_submit_quote_enquiry</code></td>
-                                <td><code>name</code>, <code>email</code>, <code>phone</code>, <code>company</code>, <code>notes</code></td>
-                                <td>Packages the visitor's quote list and contact details into a new Quote Enquiry in the database.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <h3>7. Example Natural Language Prompts (Admin Copilot or Claude)</h3>
+                <h3>5. Example Backend Prompts (Admin Copilot or Claude)</h3>
                 <div class="dash-doc-steps">
                     <div class="dash-doc-step">
                         <div class="dash-doc-step-num">A</div>
@@ -2912,13 +2842,160 @@ php artisan mcp:serve --mode=public_chat</code></pre>
                     </div>
                 </div>
 
-                <h3>8. Security Controls &amp; Guardrails</h3>
+                <h3>6. Backend Security Controls &amp; Guardrails</h3>
                 <ul>
                     <li><strong>Strict Model Allowlisting:</strong> Only models explicitly registered in <code>MutationGuard</code> (<code>Page</code>, <code>PageMeta</code>, <code>Project</code>, <code>Enquiry</code>, <code>EmailTemplate</code>, <code>DatasheetTemplate</code>, <code>LlmFeed</code>) can be queried or mutated via generic model tools. Sensitive models like <code>User</code> (Staff) and Airtable-owned catalog models (<code>Product</code>, <code>ProductCategory</code>, <code>ProductAttribute</code>) are blocked from direct mutation.</li>
                     <li><strong>Role-Based Access Control (RBAC):</strong> When invoked via the in-dashboard Admin Copilot, <code>MutationGuard</code> and every backend tool verify the logged-in user's permissions (<code>canManagePages</code>, <code>canManageProjects</code>, <code>canManageEnquiries</code>, etc.).</li>
                     <li><strong>Forbidden Column Protection:</strong> Columns such as <code>id</code>, <code>password</code>, <code>is_admin</code>, <code>role</code>, <code>remember_token</code>, and <code>api_token</code> can never be modified.</li>
                     <li><strong>Atomic DB Transactions &amp; Dry-Run Previews:</strong> All mutations run inside <code>DB::transaction()</code> blocks, support <code>"dry_run": true</code> rollback previews, and record audit entries in the daily application log.</li>
                 </ul>
+            </article>
+        @endif
+
+        {{-- 18. MCP FRONTEND & PUBLIC CHAT --}}
+        @if ($activeTopic === 'mcp-frontend')
+            <article class="dash-card dash-doc-section" data-doc-block>
+                <div class="dash-doc-header">
+                    <h2>MCP Frontend &amp; Public Chat Tools</h2>
+                    <span class="dash-pill-active">Frontend &amp; Catalog MCP</span>
+                </div>
+                <p>The <strong>Frontend &amp; Public Chat MCP suites</strong> allow AI coding assistants, frontend developers, and customer-facing AI agents to safely inspect Blade templates, route definitions, CSS/JS assets, and interact with the public product catalog and quote builder without modifying server files or backend configurations.</p>
+
+                <div class="dash-doc-callout info">
+                    <strong>Read-Only Code Exploration &amp; Public Quote Tools:</strong> Frontend MCP tools (<code>--mode=frontend</code>) are strictly read-only and guarded against directory traversal. Public Chat MCP tools (<code>--mode=public_chat</code>) expose product search and quote cart actions. Looking for backend CMS mutations and Admin Copilot? See <a href="{{ route('dashboard.docs.index', ['topic' => 'mcp-backend']) }}"><strong>MCP Backend &rarr;</strong></a>
+                </div>
+
+                <h3>1. Starting the Frontend or Public Chat MCP Server</h3>
+                <p>Run the Artisan MCP listener scoped to frontend exploration or public catalog chat:</p>
+                <div class="dash-doc-code-block" style="margin-bottom: 16px;">
+                    <pre><code># Expose only read-only frontend Blade, route, and asset exploration tools
+php artisan mcp:serve --mode=frontend
+
+# Expose only public catalog search and quote builder tools
+php artisan mcp:serve --mode=public_chat</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text="php artisan mcp:serve --mode=frontend">Copy Command</button>
+                </div>
+
+                <h3>2. Connecting Frontend MCP to Claude Desktop &amp; Cursor IDE</h3>
+                <p>To give Cursor IDE or Claude Desktop read-only access to Azoogi's frontend templates, routes, and stylesheets:</p>
+                <div class="dash-doc-code-block" style="margin-bottom: 16px;">
+                    <pre><code>{
+  "mcpServers": {
+    "azoogi-frontend": {
+      "command": "php",
+      "args": [
+        "{{ base_path('artisan') }}",
+        "mcp:serve",
+        "--mode=frontend"
+      ]
+    }
+  }
+}</code></pre>
+                    <button type="button" class="dash-doc-copy-btn" data-copy-text='{
+  "mcpServers": {
+    "azoogi-frontend": {
+      "command": "php",
+      "args": [
+        "{{ str_replace('\\', '/', base_path('artisan')) }}",
+        "mcp:serve",
+        "--mode=frontend"
+      ]
+    }
+  }
+}'>Copy JSON Config</button>
+                </div>
+
+                <h3>3. Frontend Exploration MCP Tools (<code>--mode=frontend</code>)</h3>
+                <p>Read-only tools designed for inspecting Blade templates, route registrations, CSS stylesheets, and JavaScript assets:</p>
+                <div class="dash-doc-table-wrap">
+                    <table class="dash-doc-table">
+                        <thead>
+                            <tr>
+                                <th>Tool Identifier</th>
+                                <th>Input Arguments</th>
+                                <th>What It Does</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>frontend_list_blade_views</code></td>
+                                <td><code>subdirectory</code> (optional, e.g. <code>"pages"</code>, <code>"dashboard"</code>, <code>"partials"</code>)</td>
+                                <td>Recursively scans <code>resources/views</code> and returns all Blade template paths and dot-notation view names.</td>
+                            </tr>
+                            <tr>
+                                <td><code>frontend_read_blade_view</code></td>
+                                <td><code>view</code> (required, e.g. <code>"pages.solutions"</code> or <code>"partials.header"</code>)</td>
+                                <td>Safely reads the full HTML/Blade source code of a template with directory-traversal protection.</td>
+                            </tr>
+                            <tr>
+                                <td><code>frontend_list_routes</code></td>
+                                <td><code>search</code> (optional URI or route name filter)</td>
+                                <td>Lists registered Laravel routes including HTTP methods, URI patterns, route names, controller actions, and middleware.</td>
+                            </tr>
+                            <tr>
+                                <td><code>frontend_search_assets</code></td>
+                                <td><code>query</code> (required), <code>type</code> (<code>all|css|js|blade</code>)</td>
+                                <td>Performs a fast keyword search across <code>public/assets/css</code>, <code>public/assets/js</code>, and <code>resources/views</code> with matching line numbers.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>4. Public Chat &amp; Quote MCP Tools (<code>--mode=public_chat</code>)</h3>
+                <p>Customer-facing tools used by the storefront AI assistant and external public chat integrations for product discovery and quote requests:</p>
+                <div class="dash-doc-table-wrap">
+                    <table class="dash-doc-table">
+                        <thead>
+                            <tr>
+                                <th>Tool Identifier</th>
+                                <th>Input Arguments</th>
+                                <th>What It Does</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>public_search_products</code></td>
+                                <td><code>query</code> (required), <code>category</code>, <code>limit</code></td>
+                                <td>Searches published products in the catalog by keyword, category, SKU, or technical specification.</td>
+                            </tr>
+                            <tr>
+                                <td><code>public_manage_quote_list</code></td>
+                                <td><code>action</code> (<code>add|remove|list|clear</code>), <code>product_id</code>, <code>quantity</code></td>
+                                <td>Adds, updates, removes, or lists fixtures in the visitor's active quote request cart.</td>
+                            </tr>
+                            <tr>
+                                <td><code>public_submit_quote_enquiry</code></td>
+                                <td><code>name</code>, <code>email</code>, <code>phone</code>, <code>company</code>, <code>notes</code></td>
+                                <td>Packages the visitor's quote list and contact details into a new Quote Enquiry in the database.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>5. Example Frontend &amp; Public Chat Prompts</h3>
+                <div class="dash-doc-steps">
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">A</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Inspect Blade Templates &amp; Dynamic Meta Keys</h4>
+                            <p><em>&ldquo;List all Blade views under pages and read pages.casambi to show me which PageMeta keys are rendered in the hero section.&rdquo;</em> &rarr; Invokes <code>frontend_list_blade_views</code> and <code>frontend_read_blade_view</code>.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">B</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Search CSS Classes &amp; JavaScript Handlers</h4>
+                            <p><em>&ldquo;Search all CSS and JS assets for '.mega-menu' to see where the mega menu dropdown transitions are defined.&rdquo;</em> &rarr; Invokes <code>frontend_search_assets</code>.</p>
+                        </div>
+                    </div>
+                    <div class="dash-doc-step">
+                        <div class="dash-doc-step-num">C</div>
+                        <div class="dash-doc-step-content">
+                            <h4>Search Products &amp; Build a Customer Quote</h4>
+                            <p><em>&ldquo;Find IP67 outdoor linear LED fixtures, add 10 units to my quote list, and submit a quote enquiry for Jane Doe (jane@studio.com.au).&rdquo;</em> &rarr; Invokes <code>public_search_products</code>, <code>public_manage_quote_list</code>, and <code>public_submit_quote_enquiry</code>.</p>
+                        </div>
+                    </div>
+                </div>
             </article>
         @endif
 

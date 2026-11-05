@@ -126,10 +126,15 @@ class DocumentationController extends Controller
                     'title' => 'AI Model Testing & Token Benchmarks',
                     'keywords' => 'ai test testing prompts test suite questions tools token usage benchmark cost verification function calling search specs quote cart lead transcript latency',
                 ],
-                'mcp' => [
-                    'label' => 'MCP Protocol & AI',
-                    'title' => 'Model Context Protocol (MCP) & AI Integration',
-                    'keywords' => 'mcp model context protocol ai claude cursor stdio json-rpc tools frontend exploration backend mutations page updates quotes chatbot automation admin copilotbackend_inspect_schema backend_query_records backend_mutate_model backend_update_page_content backend_airtable_sync_audit backend_manage_ai_knowledge backend_chat_sessions_insight backend_dashboard_analytics backend_seo_and_geo_manager frontend_list_blade_views frontend_read_blade_view frontend_list_routes frontend_search_assets public_search_products public_manage_quote_list public_submit_quote_enquiry',
+                'mcp-backend' => [
+                    'label' => 'MCP Backend',
+                    'title' => 'MCP Backend & Admin Copilot',
+                    'keywords' => 'mcp model context protocol backend admin copilot mutations page updates analytics seo geo airtable sync audit ai knowledge rules faqs chat logs stdio json-rpc claude cursor backend_inspect_schema backend_query_records backend_mutate_model backend_update_page_content backend_airtable_sync_audit backend_manage_ai_knowledge backend_chat_sessions_insight backend_dashboard_analytics backend_seo_and_geo_manager',
+                ],
+                'mcp-frontend' => [
+                    'label' => 'MCP Frontend',
+                    'title' => 'MCP Frontend & Public Chat',
+                    'keywords' => 'mcp model context protocol frontend exploration blade views routes assets css js public chat quote list enquiry search products stdio json-rpc claude cursor frontend_list_blade_views frontend_read_blade_view frontend_list_routes frontend_search_assets public_search_products public_manage_quote_list public_submit_quote_enquiry',
                 ],
             ],
             'Operations & Admin' => [
@@ -207,6 +212,9 @@ class DocumentationController extends Controller
             'test' => 'ai-testing',
             'benchmark' => 'ai-testing',
             'benchmarks' => 'ai-testing',
+            'mcp' => 'mcp-backend',
+            'mcp-back' => 'mcp-backend',
+            'mcp-front' => 'mcp-frontend',
         ];
 
         if (isset($aliases[$topic])) {
