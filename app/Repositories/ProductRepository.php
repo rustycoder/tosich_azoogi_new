@@ -407,6 +407,33 @@ class ProductRepository implements IProductRepository
         return $this->normalizer->fromStored($lightweightProducts, $categories, $filterableAttributes, $attributeValuesOrder, $attributeGroupsOrder);
     }
 
+    public function storefrontProductsInCategory(string $categoryName): Collection
+    {
+        $needle = mb_strtolower(trim($categoryName));
+
+        if ($needle === '') {
+            return collect();
+        }
+
+        $productsQuery = Product::query()
+            ->orderByRaw('sort_order is null')
+            ->orderBy('sort_order')
+            ->orderBy('product_name');
+
+        if (app()->isProduction()) {
+            $productsQuery->where(function ($query): void {
+                $query->whereNull('status')
+                    ->orWhere('status', '')
+                    ->orWhereRaw('LOWER(status) = ?', ['publish']);
+            });
+        }
+
+        return $productsQuery
+            ->get()
+            ->filter(fn (Product $product): bool => $product->belongsToCategory($needle))
+            ->values();
+    }
+
     public function dashboardList(string $search = '', ?string $category = null, int $perPage = 50, ?string $status = null): LengthAwarePaginator
     {
         $categoryNames = [];

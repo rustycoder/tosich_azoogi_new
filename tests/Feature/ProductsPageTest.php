@@ -97,6 +97,29 @@ class ProductsPageTest extends TestCase
             ->assertSee("urlParams.get('category')", false);
     }
 
+    public function test_category_page_server_renders_product_links_and_category_meta(): void
+    {
+        $neonProduct = Product::query()->where('product_name', 'Neon Flex')->firstOrFail();
+
+        $this->get('/products?category=NEON')
+            ->assertOk()
+            ->assertSee('<title>NEON — Azoogi LED Lighting</title>', false)
+            ->assertSee('<meta name="description" content="Seamless flexible linear lighting for interior and exterior architectural contours, including wet areas and long facade runs.">', false)
+            ->assertSee('<link rel="canonical" href="'.url('/products').'?category=NEON">', false)
+            ->assertSee('<strong id="resultCount">1</strong>', false)
+            ->assertSee('<a class="prod-card" href="'.$neonProduct->publicPath().'">', false)
+            ->assertDontSee('Trimless Profile</div>', false);
+    }
+
+    public function test_category_page_without_stored_description_uses_category_specific_meta(): void
+    {
+        $this->get('/products?category=Profiles')
+            ->assertOk()
+            ->assertSee('<title>Profiles — Azoogi LED Lighting</title>', false)
+            ->assertSee('Browse Azoogi Profiles — architectural and commercial LED lighting', false)
+            ->assertSee('<link rel="canonical" href="'.url('/products').'?category=Profiles">', false);
+    }
+
     public function test_products_page_renders_a_contained_mobile_filter_drawer(): void
     {
         $this->get('/products?category=NEON')

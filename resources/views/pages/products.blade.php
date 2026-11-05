@@ -1,8 +1,13 @@
 @extends('layouts.site')
 
-@section('title', $page->title)
-
-@section('description', $page->meta_description)
+@if ($showCatalog)
+  @section('title', $selectedCategory.' — Azoogi LED Lighting')
+  @section('description', $categoryMetaDescription)
+  @section('canonical', url('/products').'?category='.urlencode($selectedCategory))
+@else
+  @section('title', $page->title)
+  @section('description', $page->meta_description)
+@endif
 
 @section('bodyClass')
   products-page {{ $showCatalog ? 'is-catalog' : 'is-gallery' }}
@@ -538,6 +543,12 @@
           min-width: 0;
         }
 
+        a.prod-card {
+          display: block;
+          color: inherit;
+          text-decoration: none;
+        }
+
         .prod-card:hover {
           border-color: var(--accent);
         }
@@ -825,7 +836,7 @@
 
 
           <div class="prod-toolbar">
-            <div class="result-count"><strong id="resultCount">0</strong> products found</div>
+            <div class="result-count"><strong id="resultCount">{{ $categoryProducts->count() }}</strong> products found</div>
             <div class="toolbar-right">
               <input type="text" id="prodSearchInput" class="prod-search-input" placeholder="Search products...">
               <button type="button" class="prod-mobile-filter-btn" id="prodFilterOpen">Filters</button>
@@ -840,7 +851,18 @@
 
           <div class="active-tags" id="activeTags"></div>
 
-          <div class="prod-grid" id="productGrid"></div>
+          <div class="prod-grid" id="productGrid">
+            @foreach ($categoryProducts as $categoryProduct)
+              <a class="prod-card" href="{{ $categoryProduct->publicPath() }}">
+                <div class="prod-card-img">
+                  <img src="{{ $categoryProduct->coverUrl() ?: '/assets/bg_default.png' }}" alt="{{ $categoryProduct->product_name }}" class="prod-swatch" loading="lazy">
+                </div>
+                <div class="prod-card-title">
+                  <div class="prod-card-title-text"><span class="cat-label">{{ $categoryProduct->category }}</span>{{ $categoryProduct->product_name }}</div>
+                </div>
+              </a>
+            @endforeach
+          </div>
 
           <div class="pagination" id="paginationContainer"></div>
         </main>

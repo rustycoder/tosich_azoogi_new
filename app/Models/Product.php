@@ -300,6 +300,42 @@ class Product extends Model
         return $status === '' || $status === 'publish' || $status === 'published' || $status === 'active';
     }
 
+    /**
+     * Whether the product is assigned to the category, or sits under it in any category path.
+     */
+    public function belongsToCategory(string $categoryName): bool
+    {
+        $needle = mb_strtolower(trim($categoryName));
+
+        if ($needle === '') {
+            return false;
+        }
+
+        $names = [$this->category];
+
+        foreach ([$this->categories, $this->category_path] as $list) {
+            if (is_array($list)) {
+                array_push($names, ...array_values($list));
+            }
+        }
+
+        if (is_array($this->category_paths)) {
+            foreach ($this->category_paths as $path) {
+                if (is_array($path)) {
+                    array_push($names, ...array_values($path));
+                }
+            }
+        }
+
+        foreach ($names as $name) {
+            if (is_string($name) && mb_strtolower(trim($name)) === $needle) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function isVisibleOnStorefront(bool $allowPreviewForAuth = true): bool
     {
         if (! app()->isProduction()) {

@@ -38,6 +38,13 @@ interface IProductRepository
     public function navigationCatalog(): array;
 
     /**
+     * Storefront-visible products assigned to a category or any of its descendants.
+     *
+     * @return Collection<int, Product>
+     */
+    public function storefrontProductsInCategory(string $categoryName): Collection;
+
+    /**
      * @return LengthAwarePaginator<int, Product>
      */
     public function dashboardList(string $search = '', ?string $category = null, int $perPage = 50, ?string $status = null): LengthAwarePaginator;
