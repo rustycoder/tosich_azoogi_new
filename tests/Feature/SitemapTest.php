@@ -6,6 +6,7 @@ use App\Enums\Status;
 use App\Models\Product;
 use App\Models\Project;
 use App\Support\SitemapBuilder;
+use Database\Seeders\ErrorPageSeeder;
 use Database\Seeders\PageSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
@@ -63,6 +64,18 @@ class SitemapTest extends TestCase
         $this->assertStringNotContainsString(url('/footer'), $content);
         $this->assertStringNotContainsString(url('/404-not-found'), $content);
         $this->assertStringNotContainsString(url('/500-server-error'), $content);
+    }
+
+    public function test_sitemap_excludes_seeded_error_pages(): void
+    {
+        $this->seed(ErrorPageSeeder::class);
+        SitemapBuilder::clearCache();
+
+        $content = $this->get('/sitemap.xml')->getContent();
+
+        foreach (['403', '404', '419', '500', '503'] as $errorSlug) {
+            $this->assertStringNotContainsString('<loc>'.url('/'.$errorSlug).'</loc>', $content);
+        }
     }
 
     public function test_sitemap_includes_published_products_and_active_projects(): void

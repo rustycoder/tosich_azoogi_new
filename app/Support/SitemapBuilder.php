@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Enums\ContentResource;
 use App\Enums\Status;
 use App\Models\Page;
 use App\Models\Product;
@@ -18,8 +19,13 @@ class SitemapBuilder
      * Non-public page slugs that should never appear in the sitemap.
      */
     private const EXCLUDED_PAGE_SLUGS = [
-        'header',
-        'footer',
+        ContentResource::Header->value,
+        ContentResource::Footer->value,
+        ContentResource::Forbidden->value,
+        ContentResource::NotFound->value,
+        ContentResource::PageExpired->value,
+        ContentResource::ServerError->value,
+        ContentResource::ServiceUnavailable->value,
         '403-forbidden',
         '404-not-found',
         '419-page-expired',
