@@ -77,6 +77,55 @@ class ProductDetailTest extends TestCase
         $this->assertStringContainsString('AZ-NF360-TEST', $content);
     }
 
+    public function test_product_detail_server_renders_real_product_content_for_crawlers(): void
+    {
+        $product = Product::query()->create([
+            'airtable_id' => 'recGardenLight3w',
+            'product_name' => '3W Garden Light',
+            'slug' => '3w-garden-light',
+            'category' => 'Garden Light',
+            'category_path' => ['Landscape Lighting', 'Garden Light'],
+            'status' => 'Published',
+            'product_code' => 'GL005',
+            'product_description' => 'Low warm white glow for path markers & landscape accents.',
+            'meta_keywords' => 'garden light, IP67 waterproof',
+            'product_images' => ['https://example.com/garden-light.jpg'],
+        ]);
+
+        $response = $this->get('/products/'.$product->slug);
+
+        $response->assertOk()
+            ->assertSee('<h1 id="product-name">3W Garden Light</h1>', false)
+            ->assertSee('Low warm white glow for path markers &amp; landscape accents.', false)
+            ->assertSee('<a href="/products?category=Landscape+Lighting">Landscape Lighting</a>', false)
+            ->assertSee('<span class="meta-badge">IP67 Waterproof</span>', false)
+            ->assertSee('src="https://example.com/garden-light.jpg" id="gallery-main-img"', false)
+            ->assertSee('<link rel="canonical" href="'.url('/products/3w-garden-light').'">', false)
+            ->assertDontSee('Lorem ipsum', false)
+            ->assertDontSee('Neon Flex Series 360', false)
+            ->assertDontSee('360° Light Emission', false);
+
+        $content = (string) $response->getContent();
+        $this->assertStringContainsString('"@type":"BreadcrumbList"', $content);
+        $this->assertStringContainsString('"sku":"GL005"', $content);
+        $this->assertStringContainsString('"url":"'.url('/products/3w-garden-light').'"', $content);
+        $this->assertStringContainsString('<meta property="og:image" content="https://example.com/garden-light.jpg">', $content);
+    }
+
+    public function test_product_detail_query_url_canonicalises_to_the_product_slug(): void
+    {
+        Product::query()->create([
+            'airtable_id' => 'recCanonicalTest',
+            'product_name' => 'Canonical Test Light',
+            'slug' => 'canonical-test-light',
+            'status' => 'Published',
+        ]);
+
+        $this->get('/product-detail?id=recCanonicalTest')
+            ->assertOk()
+            ->assertSee('<link rel="canonical" href="'.url('/products/canonical-test-light').'">', false);
+    }
+
     public function test_product_detail_resolves_various_query_parameters(): void
     {
         $product = Product::query()->create([

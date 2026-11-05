@@ -9,25 +9,55 @@
 @endsection
 
 @section('ogType', 'product')
-@section('ogImage', $product?->primary_image_url ?? asset('assets/logo_dark.png'))
+@section('ogImage', $product?->absoluteCoverUrl() ?? asset('assets/logo_dark.png'))
+
+@if ($product)
+    @section('canonical', url($product->publicPath()))
+@endif
 
 @section('schema')
     @php
-        $productSchema = [
+        $productCanonicalUrl = $product ? url($product->publicPath()) : url()->current();
+        $productSchema = array_filter([
             '@context' => 'https://schema.org',
             '@type' => 'Product',
             'name' => $product?->product_name ?? 'Azoogi Lighting Product',
-            'image' => $product?->primary_image_url ?? asset('assets/logo_dark.png'),
+            'url' => $productCanonicalUrl,
+            'sku' => $product?->product_code ?: null,
+            'mpn' => $product?->product_code ?: null,
+            'image' => $product?->absoluteCoverUrl() ?? asset('assets/logo_dark.png'),
             'description' => !empty($product?->meta_description) ? $product->meta_description : (!empty($product?->product_description) ? \Illuminate\Support\Str::limit(trim(preg_replace('/\s+/', ' ', strip_tags($product->product_description))), 250) : 'Azoogi architectural lighting fixture.'),
             'brand' => [
                 '@type' => 'Brand',
                 'name' => 'Azoogi',
             ],
             'category' => $product?->category ?? 'Architectural Lighting',
+        ], fn ($value) => $value !== null);
+
+        $breadcrumbItems = [
+            ['name' => 'Home', 'url' => url('/')],
+            ['name' => 'Products', 'url' => url('/products')],
+        ];
+        foreach ($product?->breadcrumbCategories() ?? [] as $breadcrumbCategory) {
+            $breadcrumbItems[] = ['name' => $breadcrumbCategory, 'url' => url('/products').'?category='.urlencode($breadcrumbCategory)];
+        }
+        $breadcrumbItems[] = ['name' => $product?->product_name ?? 'Product', 'url' => $productCanonicalUrl];
+
+        $breadcrumbSchema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => collect($breadcrumbItems)->values()->map(fn (array $item, int $index): array => [
+                '@type' => 'ListItem',
+                'position' => $index + 1,
+                'name' => $item['name'],
+                'item' => $item['url'],
+            ])->all(),
         ];
     @endphp
     <script
-        type="application/ld+json">{!! json_encode($productSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+        type="application/ld+json">{!! json_encode($productSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) !!}</script>
+    <script
+        type="application/ld+json">{!! json_encode($breadcrumbSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) !!}</script>
 @endsection
 
 @section('chrome', 'full')
@@ -48,10 +78,12 @@
                 <a href="/">Home</a>
                 <span>/</span>
                 <a href="/products">Products</a>
+                @foreach ($product?->breadcrumbCategories() ?? [] as $breadcrumbCategory)
+                    <span>/</span>
+                    <a href="/products?category={{ urlencode($breadcrumbCategory) }}">{{ $breadcrumbCategory }}</a>
+                @endforeach
                 <span>/</span>
-                <a href="#">IP67 Neon</a>
-                <span>/</span>
-                <span style="color: var(--ink);">Neon Flex Series 360</span>
+                <span style="color: var(--ink);">{{ $product?->product_name ?? 'Product' }}</span>
             </div>
             <!-- ==================== BREADCRUMBS END ==================== -->
 
@@ -63,36 +95,27 @@
 
                     <!-- PRODUCT TITLE GROUP START -->
                     <div class="product-title-group">
-                        <h1 id="product-name">Neon Flex Series 360</h1>
+                        <h1 id="product-name">{{ $product?->product_name ?? 'Azoogi Lighting Product' }}</h1>
                         <!-- <div class="product-code" id="product-code-label">MODEL: AZ-NF360-3000K-DOME</div> -->
                     </div>
                     <!-- PRODUCT TITLE GROUP END -->
 
                     <!-- PRODUCT METADATA BADGES START -->
-                    <div class="product-meta-badges">
-                        <span class="meta-badge" id="badge-ip">IP67 Waterproof</span>
-                        <span class="meta-badge">360° Light Emission</span>
-                        <a href="/warranty-returns" class="meta-badge">5-Year Warranty</a>
-                        <span class="meta-badge">24V DC Input</span>
-                        <span class="meta-badge">CRI 90+</span>
+                    @php($keywordBadges = $product?->keywordBadges() ?? [])
+                    <div class="product-meta-badges"@if ($keywordBadges === []) style="display:none;"@endif>
+                        @foreach ($keywordBadges as $keywordBadge)
+                            <span class="meta-badge">{{ $keywordBadge }}</span>
+                        @endforeach
                     </div>
                     <!-- PRODUCT METADATA BADGES END -->
 
                     <!-- PRODUCT SHORT DESCRIPTION START -->
                     <div class="product-desc" id="product-desc">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas condimentum lacinia.
-                        Suspendisse nec
-                        tincidunt ante, sed sodales tellus. Aliquam quis pulvinar mi. Nunc at feugiat sem. Pellentesque
-                        molestie mi
-                        eget faucibus interdum. Quisque ornare leo sed neque ullamcorper, in viverra tellus feugiat.
-                        Phasellus augue
-                        magna, imperdiet id libero eu, ultricies cursus leo.
-
-                        Nulla neque dolor, sagittis in felis sit amet, congue iaculis magna. Fusce sodales enim sit amet dui
-                        gravida
-                        accumsan. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                        Morbi non
-                        dolor et dui finibus commodo rutrum et tortor.
+                        @if (filled($product?->product_description))
+                            {!! nl2br(e(trim(strip_tags($product->product_description)))) !!}
+                        @else
+                            Experience discreet luxury and a sophisticated, seamless glow that beautifully enhances your elegant spaces.
+                        @endif
                     </div>
                     <!-- PRODUCT SHORT DESCRIPTION END -->
 
@@ -120,8 +143,9 @@
 
                     <!-- MAIN IMAGE COVER START -->
                     <div class="gallery-main-wrapper">
-                        <img class="gallery-main-image" src="" id="gallery-main-img"
-                            alt="{{ $product?->product_name ?? 'Azoogi Lighting Product' }}" style="display:none;">
+                        @php($mainImageUrl = $product?->coverUrl() ?? '')
+                        <img class="gallery-main-image" src="{{ $mainImageUrl }}" id="gallery-main-img"
+                            alt="{{ $product?->product_name ?? 'Azoogi Lighting Product' }}"@if ($mainImageUrl === '') style="display:none;"@endif>
                     </div>
                     <!-- MAIN IMAGE COVER END -->
 

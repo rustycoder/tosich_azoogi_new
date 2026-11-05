@@ -301,6 +301,66 @@ class Product extends Model
     }
 
     /**
+     * Category names for the storefront breadcrumb, root first.
+     *
+     * @return list<string>
+     */
+    public function breadcrumbCategories(): array
+    {
+        $segments = is_array($this->category_path) ? $this->category_path : [];
+
+        if ($segments === [] && filled($this->category)) {
+            $segments = [(string) $this->category];
+        }
+
+        $names = [];
+        foreach ($segments as $segment) {
+            if (is_string($segment) && trim($segment) !== '' && trim($segment) !== 'undefined') {
+                $names[] = trim($segment);
+            }
+        }
+
+        return array_values(array_unique($names));
+    }
+
+    /**
+     * Title-cased meta keywords shown as badges on the product page.
+     *
+     * @return list<string>
+     */
+    public function keywordBadges(): array
+    {
+        $raw = $this->meta_keywords;
+        $keywords = is_array($raw) ? $raw : explode(',', (string) $raw);
+
+        $badges = [];
+        foreach ($keywords as $keyword) {
+            foreach (explode(',', (string) $keyword) as $part) {
+                $part = trim($part);
+                if ($part !== '') {
+                    $badges[] = implode(' ', array_map(fn (string $word): string => ucfirst($word), explode(' ', $part)));
+                }
+            }
+        }
+
+        return array_values(array_unique($badges));
+    }
+
+    /**
+     * Absolute URL of the main product image, for social cards and structured data.
+     */
+    public function absoluteCoverUrl(): ?string
+    {
+        $cover = $this->coverUrl();
+
+        if ($cover === '') {
+            return null;
+        }
+
+        return str_starts_with($cover, 'http://') || str_starts_with($cover, 'https://') ? $cover : url($cover);
+    }
+
+    /**
      * Whether the product is assigned to the category, or sits under it in any category path.
      */
     public function belongsToCategory(string $categoryName): bool
