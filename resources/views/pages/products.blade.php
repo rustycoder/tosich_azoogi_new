@@ -855,7 +855,7 @@
             @foreach ($categoryProducts as $categoryProduct)
               <a class="prod-card" href="{{ $categoryProduct->publicPath() }}">
                 <div class="prod-card-img">
-                  <img src="{{ $categoryProduct->coverUrl() ?: '/assets/bg_default.png' }}" alt="{{ $categoryProduct->product_name }}" class="prod-swatch" loading="lazy">
+                  <img src="{{ $categoryProduct->storefrontImageUrl() ?: '/assets/bg_default.png' }}" alt="{{ $categoryProduct->product_name }}" class="prod-swatch" loading="lazy">
                 </div>
                 <div class="prod-card-title">
                   <div class="prod-card-title-text"><span class="cat-label">{{ $categoryProduct->category }}</span>{{ $categoryProduct->product_name }}</div>

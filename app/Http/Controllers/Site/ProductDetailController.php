@@ -76,7 +76,7 @@ class ProductDetailController extends Controller
                     'sku' => $p->product_code,
                     'category' => $p->category,
                     'sub' => $p->category,
-                    'img' => $p->coverUrl(),
+                    'img' => $p->storefrontImageUrl(),
                     'url' => $p->slug ? route('products.show', $p->slug) : url('/product-detail?id='.$p->airtable_id),
                 ])
                 ->all();

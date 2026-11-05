@@ -255,4 +255,28 @@ class ProductImageDeliveryTest extends TestCase
 
         $this->get('/products/DRAFT-IMG.jpg')->assertNotFound();
     }
+
+    public function test_storefront_pages_link_airtable_images_through_stable_product_image_urls(): void
+    {
+        $airtableUrl = 'https://v5.airtableusercontent.com/v3/u/59/59/1793793600000/abc/def';
+        Product::query()->create([
+            'airtable_id' => 'recExpiringImage',
+            'product_name' => 'Expiring Image Light',
+            'slug' => 'expiring-image-light',
+            'category' => 'Garden Light',
+            'categories' => ['Garden Light'],
+            'status' => 'Published',
+            'product_images' => [$airtableUrl, $airtableUrl.'-second'],
+        ]);
+
+        $detail = (string) $this->get('/products/expiring-image-light')->assertOk()->getContent();
+        $this->assertStringNotContainsString('airtableusercontent.com', $detail);
+        $this->assertStringContainsString('src="/products/expiring-image-light.webp" id="gallery-main-img"', $detail);
+        $this->assertStringContainsString('expiring-image-light-1.webp', $detail);
+        $this->assertStringContainsString('<meta property="og:image" content="'.url('/products/expiring-image-light.jpg').'">', $detail);
+
+        $category = (string) $this->get('/products?category=Garden%20Light')->assertOk()->getContent();
+        $this->assertStringNotContainsString('airtableusercontent.com', $category);
+        $this->assertStringContainsString('/products/expiring-image-light.webp', $category);
+    }
 }

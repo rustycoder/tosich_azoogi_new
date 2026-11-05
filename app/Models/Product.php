@@ -347,11 +347,74 @@ class Product extends Model
     }
 
     /**
+     * Product gallery URLs for storefront scripts, with expiring links swapped for stable ones.
+     *
+     * @return list<mixed>|null
+     */
+    public function storefrontProductImages(): ?array
+    {
+        if (! is_array($this->product_images)) {
+            return $this->product_images;
+        }
+
+        $images = [];
+        foreach (array_values($this->product_images) as $index => $image) {
+            $url = is_string($image) ? $image : (is_array($image) ? (string) ($image['url'] ?? '') : '');
+            if ($url === '' || ! $this->isExpiringImageUrl($url)) {
+                $images[] = $image;
+
+                continue;
+            }
+
+            $images[] = $index === 0 && media_url($url) === $this->coverUrl()
+                ? $this->storefrontImageUrl()
+                : $this->storefrontImageUrl($index);
+        }
+
+        return $images;
+    }
+
+    /**
+     * Stable storefront URL for a product image.
+     *
+     * Airtable attachment URLs expire within hours, so external images are served
+     * through the products.image route, which resolves the current source on request.
+     */
+    public function storefrontImageUrl(?int $index = null, string $format = 'webp'): string
+    {
+        $source = $this->coverUrl($index);
+        $identifier = (string) ($this->slug ?: $this->airtable_id);
+
+        if ($source === '' || $identifier === '' || ! $this->isExpiringImageUrl($source)) {
+            return $source;
+        }
+
+        return route('products.image', [
+            'identifier' => $index === null ? $identifier : $identifier.'-'.$index,
+            'format' => $format,
+        ], false);
+    }
+
+    /**
+     * Whether an image URL points at an external host whose links expire (e.g. Airtable).
+     */
+    private function isExpiringImageUrl(string $url): bool
+    {
+        if (! str_starts_with($url, 'http://') && ! str_starts_with($url, 'https://')) {
+            return false;
+        }
+
+        $host = strtolower((string) parse_url($url, PHP_URL_HOST));
+
+        return str_ends_with($host, 'airtableusercontent.com') || str_ends_with($host, 'airtable.com');
+    }
+
+    /**
      * Absolute URL of the main product image, for social cards and structured data.
      */
     public function absoluteCoverUrl(): ?string
     {
-        $cover = $this->coverUrl();
+        $cover = $this->storefrontImageUrl(null, 'jpg');
 
         if ($cover === '') {
             return null;
@@ -420,7 +483,7 @@ class Product extends Model
             'airtable_id' => (string) $this->airtable_id,
             'sku' => trim((string) ($this->product_code ?? '')),
             'name' => (string) $this->product_name,
-            'image' => $this->coverUrl(),
+            'image' => $this->storefrontImageUrl(),
             'url' => $this->publicPath(),
         ];
     }
@@ -442,7 +505,7 @@ class Product extends Model
             'product_code' => $this->product_code,
             'sku_mappings' => $this->sku_mappings,
             'product_description' => $this->product_description,
-            'product_images' => $this->product_images,
+            'product_images' => $this->storefrontProductImages(),
             'product_dimension' => $this->product_dimension,
             'stocked_item' => $this->stocked_item,
             'datasheet' => $this->datasheet,

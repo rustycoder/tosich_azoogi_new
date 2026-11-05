@@ -40,7 +40,7 @@ class QuoteProductTest extends TestCase
             ->assertJsonPath('products.0.id', 'recGarden01')
             ->assertJsonPath('products.0.sku', 'GL005')
             ->assertJsonPath('products.0.name', '3W Garden Light')
-            ->assertJsonPath('products.0.image', $image)
+            ->assertJsonPath('products.0.image', '/products/garden-light.webp')
             ->assertJsonPath('products.0.url', '/products/garden-light');
     }
 
@@ -66,7 +66,7 @@ class QuoteProductTest extends TestCase
             ->assertJsonCount(1, 'products')
             ->assertJsonPath('products.0.id', 'recNeon01')
             ->assertJsonPath('products.0.name', 'Neon Flex')
-            ->assertJsonPath('products.0.image', $image);
+            ->assertJsonPath('products.0.image', '/products/neon-flex.webp');
     }
 
     public function test_quote_products_endpoint_omits_unpublished_products(): void

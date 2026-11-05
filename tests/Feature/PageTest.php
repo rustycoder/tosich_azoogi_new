@@ -92,7 +92,7 @@ class PageTest extends TestCase
             ->assertDontSee('/audience?slug=', false);
     }
 
-    public function test_home_range_section_shows_remote_product_images(): void
+    public function test_home_range_section_shows_remote_product_images_through_stable_urls(): void
     {
         $remoteUrl = 'https://v5.airtableusercontent.com/v3/full/hero.jpg';
 
@@ -101,7 +101,7 @@ class PageTest extends TestCase
             'name' => 'NEON',
             'sort_order' => 1,
         ]);
-        Product::factory()->create([
+        $product = Product::factory()->create([
             'product_name' => 'Neon Flex',
             'category' => 'NEON',
             'status' => 'publish',
@@ -113,8 +113,8 @@ class PageTest extends TestCase
         $this->get('/')
             ->assertOk()
             ->assertSee('Explore the full Azoogi lighting catalogue.', false)
-            ->assertSee('src="'.$remoteUrl.'"', false)
-            ->assertDontSee('/https://v5.airtableusercontent.com', false);
+            ->assertSee('src="/products/'.$product->slug.'-0.webp"', false)
+            ->assertDontSee('v5.airtableusercontent.com/v3/full/hero.jpg', false);
     }
 
     public function test_home_range_cards_show_the_full_stored_category_description(): void

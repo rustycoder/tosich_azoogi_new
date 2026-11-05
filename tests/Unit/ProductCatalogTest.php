@@ -56,12 +56,12 @@ class ProductCatalogTest extends TestCase
         $this->assertSame([], ProductCatalog::parentCategories());
     }
 
-    public function test_range_cards_keep_remote_airtable_image_urls(): void
+    public function test_range_cards_serve_remote_airtable_images_through_stable_product_urls(): void
     {
         $remoteUrl = 'https://v5.airtableusercontent.com/v3/full/hero.jpg';
 
         ProductCategory::query()->create(['airtable_id' => 'recNeon', 'name' => 'NEON', 'sort_order' => 1]);
-        Product::factory()->create([
+        $product = Product::factory()->create([
             'product_name' => 'Neon Flex',
             'category' => 'NEON',
             'status' => 'publish',
@@ -73,7 +73,7 @@ class ProductCatalogTest extends TestCase
         $neon = collect(ProductCatalog::parentCategories())->firstWhere('title', 'NEON');
 
         $this->assertIsArray($neon);
-        $this->assertSame($remoteUrl, $neon['image']);
+        $this->assertSame('/products/'.$product->slug.'-0.webp', $neon['image']);
     }
 
     public function test_range_cards_use_stored_category_description_and_featured_image(): void

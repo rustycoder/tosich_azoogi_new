@@ -143,7 +143,7 @@
 
                     <!-- MAIN IMAGE COVER START -->
                     <div class="gallery-main-wrapper">
-                        @php($mainImageUrl = $product?->coverUrl() ?? '')
+                        @php($mainImageUrl = $product?->storefrontImageUrl() ?? '')
                         <img class="gallery-main-image" src="{{ $mainImageUrl }}" id="gallery-main-img"
                             alt="{{ $product?->product_name ?? 'Azoogi Lighting Product' }}"@if ($mainImageUrl === '') style="display:none;"@endif>
                     </div>
@@ -398,7 +398,7 @@
                             <div class="configured-spec-card" id="configured-spec-card">
                                 <div class="spec-card-media">
                                     <img id="spec-card-img"
-                                        src="{{ $product?->coverUrl() ?? asset('assets/bg_default.png') }}"
+                                        src="{{ $product?->storefrontImageUrl() ?: asset('assets/bg_default.png') }}"
                                         alt="{{ $product?->product_name ?? 'Configured Product' }}">
                                 </div>
                                 <div class="spec-card-content">
