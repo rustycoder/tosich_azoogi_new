@@ -1059,6 +1059,13 @@ html, body {
 }
 
 /* 5. Technical Specifications */
+.dynamic-specs-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7mm;
+  align-items: start;
+}
+
 .specs-grid-wrap {
   display: flex;
   flex-direction: column;
@@ -1069,10 +1076,9 @@ html, body {
 }
 
 .specs-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 7mm;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .specs-column {

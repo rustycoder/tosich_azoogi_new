@@ -410,45 +410,44 @@ class ProductDatasheetService implements IProductDatasheetService
             return $html;
         };
 
-        $rowsHtml = '';
-
-        // Row 1: 1. Physical (Left) & 2. Electrical & Control (Right)
-        $hasPhysical = ! empty($canonicalGroups['Physical']);
-        $hasElectrical = ! empty($canonicalGroups['Electrical & Control']);
-        if ($hasPhysical || $hasElectrical) {
-            $left = $renderSection('PHYSICAL', $canonicalGroups['Physical']);
-            $right = $renderSection('ELECTRICAL & CONTROL', $canonicalGroups['Electrical & Control']);
-            $rowsHtml .= '    <div class="specs-row">'."\n";
-            $rowsHtml .= "        {$left}\n";
-            $rowsHtml .= "        {$right}\n";
-            $rowsHtml .= '    </div>'."\n";
+        $leftRowsHtml = '';
+        if (! empty($canonicalGroups['Physical'])) {
+            $section = $renderSection('PHYSICAL', $canonicalGroups['Physical']);
+            $leftRowsHtml .= '    <div class="specs-row">'."\n";
+            $leftRowsHtml .= "        {$section}\n";
+            $leftRowsHtml .= '    </div>'."\n";
         }
-
-        // Row 2: 3. Light (Left) & 4. Compliance & Life (Right)
-        $hasLight = ! empty($canonicalGroups['Light']);
-        $hasCompliance = ! empty($canonicalGroups['Compliance & Life']);
-        if ($hasLight || $hasCompliance) {
-            $left = $renderSection('LIGHT', $canonicalGroups['Light']);
-            $right = $renderSection('COMPLIANCE & LIFE', $canonicalGroups['Compliance & Life']);
-            $rowsHtml .= '    <div class="specs-row">'."\n";
-            $rowsHtml .= "        {$left}\n";
-            $rowsHtml .= "        {$right}\n";
-            $rowsHtml .= '    </div>'."\n";
+        if (! empty($canonicalGroups['Light'])) {
+            $section = $renderSection('LIGHT', $canonicalGroups['Light']);
+            $leftRowsHtml .= '    <div class="specs-row">'."\n";
+            $leftRowsHtml .= "        {$section}\n";
+            $leftRowsHtml .= '    </div>'."\n";
         }
-
-        // Row 3: Other (if any unmapped attributes exist)
         if (! empty($canonicalGroups['Other'])) {
-            $other = $renderSection('OTHER', $canonicalGroups['Other']);
-            $empty = '<div class="spec-section empty"></div>';
-            $rowsHtml .= '    <div class="specs-row">'."\n";
-            $rowsHtml .= "        {$other}\n";
-            $rowsHtml .= "        {$empty}\n";
-            $rowsHtml .= '    </div>'."\n";
+            $section = $renderSection('OTHER', $canonicalGroups['Other']);
+            $leftRowsHtml .= '    <div class="specs-row">'."\n";
+            $leftRowsHtml .= "        {$section}\n";
+            $leftRowsHtml .= '    </div>'."\n";
+        }
+
+        $rightRowsHtml = '';
+        if (! empty($canonicalGroups['Electrical & Control'])) {
+            $section = $renderSection('ELECTRICAL & CONTROL', $canonicalGroups['Electrical & Control']);
+            $rightRowsHtml .= '    <div class="specs-row">'."\n";
+            $rightRowsHtml .= "        {$section}\n";
+            $rightRowsHtml .= '    </div>'."\n";
+        }
+        if (! empty($canonicalGroups['Compliance & Life'])) {
+            $section = $renderSection('COMPLIANCE & LIFE', $canonicalGroups['Compliance & Life']);
+            $rightRowsHtml .= '    <div class="specs-row">'."\n";
+            $rightRowsHtml .= "        {$section}\n";
+            $rightRowsHtml .= '    </div>'."\n";
         }
 
         return <<<HTML
 <div class="specs-grid-wrap">
-{$rowsHtml}</div>
+{$leftRowsHtml}</div><div class="specs-grid-wrap">
+{$rightRowsHtml}</div>
 HTML;
     }
 

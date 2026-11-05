@@ -563,20 +563,21 @@ class DatasheetTemplateTest extends TestCase
         $this->assertStringContainsString('class="specs-grid-wrap"', $rendered);
         $this->assertStringContainsString('class="specs-row"', $rendered);
 
-        // Verify exact order of groups: 1. Physical, 2. Electrical and Control, 3. Light, 4. Compliance and Life
+        // Verify exact order of groups in the two specs-grid-wrap columns:
+        // Left wrap: 1. Physical, 2. Light; Right wrap: 3. Electrical & Control, 4. Compliance & Life
         $posPhysical = strpos($rendered, 'PHYSICAL');
-        $posElectrical = strpos($rendered, 'ELECTRICAL &amp; CONTROL');
         $posLight = strpos($rendered, 'LIGHT');
+        $posElectrical = strpos($rendered, 'ELECTRICAL &amp; CONTROL');
         $posCompliance = strpos($rendered, 'COMPLIANCE &amp; LIFE');
 
         $this->assertNotFalse($posPhysical);
-        $this->assertNotFalse($posElectrical);
         $this->assertNotFalse($posLight);
+        $this->assertNotFalse($posElectrical);
         $this->assertNotFalse($posCompliance);
 
-        $this->assertTrue($posPhysical < $posElectrical, 'PHYSICAL should appear before ELECTRICAL & CONTROL');
-        $this->assertTrue($posElectrical < $posLight, 'ELECTRICAL & CONTROL should appear before LIGHT');
-        $this->assertTrue($posLight < $posCompliance, 'LIGHT should appear before COMPLIANCE & LIFE');
+        $this->assertTrue($posPhysical < $posLight, 'PHYSICAL should appear before LIGHT in the first specs-grid-wrap');
+        $this->assertTrue($posLight < $posElectrical, 'LIGHT should appear before ELECTRICAL & CONTROL');
+        $this->assertTrue($posElectrical < $posCompliance, 'ELECTRICAL & CONTROL should appear before COMPLIANCE & LIFE in the second specs-grid-wrap');
     }
 
     public function test_standard_template_preserves_flat_specification_table(): void
