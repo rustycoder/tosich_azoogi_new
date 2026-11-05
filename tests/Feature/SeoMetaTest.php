@@ -89,4 +89,13 @@ class SeoMetaTest extends TestCase
         $publicResponse->assertSee('<meta property="og:description" content="Custom About Description">', false);
         $publicResponse->assertSee('<meta property="og:image" content="'.media_url($page->og_image).'">', false);
     }
+
+    public function test_head_meta_escapes_ampersands_only_once(): void
+    {
+        $this->get('/products?category='.urlencode('Outdoor & Architectural'))
+            ->assertOk()
+            ->assertSee('<title>Outdoor &amp; Architectural — Azoogi LED Lighting</title>', false)
+            ->assertSee('<meta property="og:title" content="Outdoor &amp; Architectural — Azoogi LED Lighting">', false)
+            ->assertDontSee('&amp;amp;', false);
+    }
 }
