@@ -190,6 +190,7 @@ class AiChatTranscriptAndGuardrailsTest extends TestCase
 
         $rules = ChatOrchestrator::getRulesItems();
         $ruleIds = array_column($rules, 'id');
+        $this->assertContains('rule_australian_english', $ruleIds);
         $this->assertContains('rule_brand_positioning', $ruleIds);
         $this->assertContains('rule_scope_guardrail', $ruleIds);
         $this->assertContains('rule_custom_admin', $ruleIds);
@@ -205,5 +206,18 @@ class AiChatTranscriptAndGuardrailsTest extends TestCase
         $facility = collect($context)->firstWhere('id', 'context_facility');
         $this->assertStringContainsString('Australia and the South Pacific', $facility['content']);
         $this->assertStringNotContainsString('Sydney', $facility['content']);
+    }
+
+    public function test_system_prompt_includes_off_topic_guardrail_australian_english_and_category_redirect_instructions(): void
+    {
+        $orchestrator = app(ChatOrchestrator::class);
+        $prompt = $orchestrator->getSystemPrompt();
+
+        $this->assertStringContainsString('SCOPE & OFF-TOPIC GUARDRAIL', $prompt);
+        $this->assertStringContainsString('Do NOT entertain jokes, trivia, riddles, casual chit-chat', $prompt);
+        $this->assertStringContainsString('LANGUAGE & SPELLING', $prompt);
+        $this->assertStringContainsString('Australian English', $prompt);
+        $this->assertStringContainsString('BROAD / VAGUE QUERIES', $prompt);
+        $this->assertStringContainsString('category_redirect', $prompt);
     }
 }
