@@ -402,7 +402,7 @@ class EmailTemplateService implements IEmailTemplateService
                 'key' => self::KEY_PRODUCT,
                 'name' => 'Product Enquiry Notification',
                 'description' => 'Sent to sales team when a visitor requests information on a specific product.',
-                'recipient_emails' => 'sales@azoogi.com',
+                'recipient_emails' => (string) config('mail.sales_address', 'sales@azoogi.com'),
                 'subject' => 'New Product Enquiry from {{name}} - {{project}}',
                 'available_tokens' => [
                     'name', 'email', 'company', 'project', 'specification', 'message',
@@ -440,7 +440,7 @@ class EmailTemplateService implements IEmailTemplateService
                 'key' => self::KEY_QUOTE,
                 'name' => 'Quote Request Notification',
                 'description' => 'Sent to sales team when a client requests a quote with their bill of materials.',
-                'recipient_emails' => 'sales@azoogi.com',
+                'recipient_emails' => (string) config('mail.sales_address', 'sales@azoogi.com'),
                 'subject' => 'New Quote Request from {{name}}',
                 'available_tokens' => [
                     'name', 'email', 'phone', 'role', 'contact_method', 'suburb',
@@ -483,7 +483,7 @@ class EmailTemplateService implements IEmailTemplateService
                 'key' => self::KEY_DATASHEET,
                 'name' => 'Custom Datasheet Download Notification',
                 'description' => 'Sent to sales team when an architect or engineer customizes and exports a product datasheet.',
-                'recipient_emails' => 'sales@azoogi.com',
+                'recipient_emails' => (string) config('mail.sales_address', 'sales@azoogi.com'),
                 'subject' => 'Custom Datasheet Downloaded: {{product_name}}',
                 'available_tokens' => [
                     'person_name', 'project_name', 'product_name', 'product_code',

@@ -158,10 +158,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     true
                 );
                 if (window.siteToast && typeof window.siteToast === 'function') {
-                    window.siteToast('Transcript successfully forwarded to sales@azoogi.com.au');
+                    window.siteToast(`Transcript successfully forwarded to ${liveBranding.sales_email || 'sales@azoogi.com'}`);
                 }
             } else {
-                alert(data.message || 'Unable to forward transcript. Please try again or email sales@azoogi.com.au directly.');
+                alert(data.message || `Unable to forward transcript. Please try again or email ${liveBranding.sales_email || 'sales@azoogi.com'} directly.`);
             }
         } catch (err) {
             alert('Network error forwarding transcript. Please try again.');
@@ -255,6 +255,9 @@ document.addEventListener('DOMContentLoaded', () => {
         reportModal.classList.remove('is-open');
         reportModal.setAttribute('aria-hidden', 'true');
     };
+
+    const headerReportBtn = document.getElementById('azoogi-chat-header-report-btn');
+    headerReportBtn?.addEventListener('click', () => openReportModal());
 
     reportCloseBtn?.addEventListener('click', () => closeReportModal());
     reportCancelBtn?.addEventListener('click', () => closeReportModal());
@@ -542,7 +545,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Transcript Sent Confirmation Card Template
     const renderTranscriptSentCard = (data) => {
-        const recipient = data.recipient || 'sales@azoogi.com.au';
+        const recipient = data.recipient || liveBranding.sales_email || 'sales@azoogi.com';
         const leadText = data.lead_name || data.lead_email ? ` (${escapeHtml(data.lead_name || data.lead_email)})` : '';
         return `
             <div class="azoogi-chat-download-card" style="border-color: #67d04e;">
@@ -835,6 +838,7 @@ document.addEventListener('DOMContentLoaded', () => {
         show_report_issue: true,
         report_issue_text: 'Report an issue with this chat',
         disclaimer_text: 'Azoogi AI can make mistakes. Verify critical specs with our engineering team.',
+        sales_email: 'sales@azoogi.com',
         starter_chips: [
             { prompt: 'Show me outdoor garden lights' },
             { prompt: 'I want to explore downlights with dimension Ø82mm x 80mm (H)' },
@@ -882,6 +886,11 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 disclaimerEl.style.display = 'none';
             }
+        }
+
+        if (headerReportBtn) {
+            headerReportBtn.style.display = liveBranding.show_report_issue !== false ? '' : 'none';
+            headerReportBtn.title = liveBranding.report_issue_text || 'Report an issue with this chat';
         }
 
         const avatarEl = document.querySelector('.js-chat-avatar');

@@ -265,7 +265,7 @@ class ChatController extends Controller
         }
 
         $messages = $session ? $session->messages()->orderBy('id', 'asc')->get() : [];
-        $recipients = ['admin@azoogi.com', 'adrian@azoogi.com'];
+        $recipients = ChatOrchestrator::getReportIssueRecipients();
 
         try {
             Mail::to($recipients)->send(new ChatIssueReportedMail(

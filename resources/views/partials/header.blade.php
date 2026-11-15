@@ -3,7 +3,7 @@
     $logoFile = trim($__env->yieldContent('logo', 'logo_white.png'));
     $description = $headerMeta->get('header.description', 0, 'Australian-Owned B2B Trade Wholesaler - Custom Lighting & Smart Control Solutions');
     $phone = $headerMeta->get('header.phone', 0, '1300 641 261');
-    $email = $headerMeta->get('header.email', 0, 'sales@azoogi.com');
+    $email = $headerMeta->get('header.email', 0, config('mail.sales_address', 'sales@azoogi.com'));
     $words = collect($headerMeta->group('header.word'))
         ->pluck('text')
         ->map(fn(?string $word): string => trim((string) $word))

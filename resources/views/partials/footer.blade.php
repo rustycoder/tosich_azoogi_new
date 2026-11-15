@@ -5,7 +5,7 @@
         'We design, engineer, manufacture, assemble, and test our products in-house, offering custom powder coating to deliver fully tailored lighting solutions',
     );
     $phone = $footerMeta->get('footer.phone', 0, '1300 641 261');
-    $email = $footerMeta->get('footer.email', 0, 'sales@azoogi.com');
+    $email = $footerMeta->get('footer.email', 0, config('mail.sales_address', 'sales@azoogi.com'));
     $message = $footerMeta->get('footer.message', 0, 'Azoogi Pty Ltd. All rights reserved.');
     $productHeading = $footerMeta->get('footer.products.heading', 0, 'Products');
     $companyHeading = $footerMeta->get('footer.company.heading', 0, 'Company');

@@ -192,7 +192,7 @@ html, body {
     <div class="meta">
       Need help now? <a href="tel:1300641261">1300 641 261</a>
       &nbsp;&middot;&nbsp;
-      <a href="mailto:sales@azoogi.com">sales@azoogi.com</a>
+      <a href="mailto:{{ config('mail.sales_address') }}">{{ config('mail.sales_address') }}</a>
       &nbsp;&middot;&nbsp;
       <a href="/privacy">Privacy</a>
       &nbsp;&middot;&nbsp;

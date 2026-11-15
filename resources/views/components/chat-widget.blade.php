@@ -37,6 +37,12 @@
                 </div>
             </div>
             <div class="azoogi-chat-header-actions">
+                <button type="button" class="azoogi-chat-header-btn" id="azoogi-chat-header-report-btn" title="{{ $branding['report_issue_text'] ?? 'Report an issue with this chat' }}" aria-label="Report an issue" style="{{ empty($branding['show_report_issue']) ? 'display: none;' : '' }}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
+                        <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+                        <line x1="4" y1="22" x2="4" y2="15"/>
+                    </svg>
+                </button>
                 <button type="button" class="azoogi-chat-header-btn" id="azoogi-chat-sound-toggle" title="Toggle audio chime" aria-label="Toggle sound">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
                         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>

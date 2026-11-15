@@ -221,6 +221,7 @@ class AiConfigController extends Controller
             'consultation_btn_text' => ['nullable', 'string', 'max:120'],
             'show_report_issue' => ['nullable', 'boolean'],
             'report_issue_text' => ['nullable', 'string', 'max:150'],
+            'report_issue_emails' => ['nullable', 'string', 'max:500'],
             'disclaimer_text' => ['nullable', 'string', 'max:500'],
             'starter_chips' => ['nullable', 'array'],
         ]);
@@ -276,6 +277,9 @@ class AiConfigController extends Controller
             'report_issue_text' => ! empty($validated['report_issue_text'])
                 ? trim((string) $validated['report_issue_text'])
                 : ($existingBranding['report_issue_text'] ?? 'Report an issue with this chat'),
+            'report_issue_emails' => isset($validated['report_issue_emails']) && trim((string) $validated['report_issue_emails']) !== ''
+                ? trim((string) $validated['report_issue_emails'])
+                : ($existingBranding['report_issue_emails'] ?? 'admin@azoogi.com, adrian@azoogi.com'),
             'disclaimer_text' => isset($validated['disclaimer_text']) && trim((string) $validated['disclaimer_text']) !== ''
                 ? trim((string) $validated['disclaimer_text'])
                 : ($existingBranding['disclaimer_text'] ?? 'Azoogi AI can make mistakes. Verify critical specs with our engineering team.'),

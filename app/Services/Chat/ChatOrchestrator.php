@@ -277,14 +277,40 @@ class ChatOrchestrator
             'consultation_btn_text' => ! empty($branding['consultation_btn_text']) ? trim((string) $branding['consultation_btn_text']) : 'Book a consultation',
             'show_report_issue' => (bool) ($branding['show_report_issue'] ?? true),
             'report_issue_text' => ! empty($branding['report_issue_text']) ? trim((string) $branding['report_issue_text']) : 'Report an issue with this chat',
+            'report_issue_emails' => ! empty($branding['report_issue_emails']) ? trim((string) $branding['report_issue_emails']) : 'admin@azoogi.com, adrian@azoogi.com',
             'disclaimer_text' => isset($branding['disclaimer_text']) && trim((string) $branding['disclaimer_text']) !== ''
                 ? trim((string) $branding['disclaimer_text'])
                 : 'Azoogi AI can make mistakes. Verify critical specs with our engineering team.',
+            'sales_email' => (string) config('mail.sales_address', 'sales@azoogi.com'),
         ];
+    }
+
+    /**
+     * @return list<string>
+     */
+    public static function getReportIssueRecipients(): array
+    {
+        $branding = self::getWidgetBranding();
+        $raw = (string) ($branding['report_issue_emails'] ?? '');
+        $parts = preg_split('/[,;\r\n]+/', $raw) ?: [];
+
+        $valid = [];
+        foreach ($parts as $part) {
+            $email = trim($part);
+            if ($email !== '' && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $valid[] = $email;
+            }
+        }
+
+        $valid = array_values(array_unique($valid));
+
+        return $valid !== [] ? $valid : ['admin@azoogi.com', 'adrian@azoogi.com'];
     }
 
     public static function getDefaultRulesItems(): array
     {
+        $salesEmail = (string) config('mail.sales_address', 'sales@azoogi.com');
+
         return [
             [
                 'id' => 'rule_tone',
@@ -318,7 +344,7 @@ class ChatOrchestrator
                 'id' => 'rule_escalation',
                 'category' => 'Escalation & Handoff',
                 'title' => 'Human Escalation & Sales Desk Routing',
-                'content' => 'Lead Times & Sales Transcript Handoff: Standard in-stock items dispatch in 24-48 hours from our Sydney warehouse; custom extrusion cutting and testing requires 3-5 business days. When discussing custom profile lengths, bespoke joinery, large project schedules over 50 fittings, or when the user finishes their queries, offer to forward the full chat transcript and fixture schedule to our Sydney sales engineering desk (sales@azoogi.com.au) using public_send_chat_transcript_to_sales.',
+                'content' => "Lead Times & Sales Transcript Handoff: Standard in-stock items dispatch in 24-48 hours from our Sydney warehouse; custom extrusion cutting and testing requires 3-5 business days. When discussing custom profile lengths, bespoke joinery, large project schedules over 50 fittings, or when the user finishes their queries, offer to forward the full chat transcript and fixture schedule to our Sydney sales engineering desk ({$salesEmail}) using public_send_chat_transcript_to_sales.",
                 'is_active' => true,
             ],
         ];
@@ -836,7 +862,7 @@ PRICING & TRADE PORTAL PROTOCOL:
 - When asked for pricing, instruct the visitor to log into the Azoogi Trade Portal (https://portal.azoogi.com.au or /account/login) for trade accounts, or add products to their quote list to submit for formal pricing.
 
 SALES TRANSCRIPT HANDOFF (`public_send_chat_transcript_to_sales`):
-- When a client asks to forward their chat, when discussing complex project lead times, or when concluding their lighting consultation, call `public_send_chat_transcript_to_sales` to forward the conversation transcript, project specifications, and quote list to our Sydney sales engineering desk (sales@azoogi.com.au).
+- When a client asks to forward their chat, when discussing complex project lead times, or when concluding their lighting consultation, call `public_send_chat_transcript_to_sales` to forward the conversation transcript, project specifications, and quote list to our Sydney sales engineering desk (__SALES_EMAIL__).
 
 ENQUIRIES & LEAD SUBMISSION (3 DISTINCT TYPES):
 You can submit 3 distinct types of enquiries via `public_submit_lead_enquiry`:
@@ -856,6 +882,8 @@ You can submit 3 distinct types of enquiries via `public_submit_lead_enquiry`:
 IMPORTANT RULE:
 NEVER call `public_submit_lead_enquiry` or `public_send_chat_transcript_to_sales` with fake details. Always confirm or politely ask the visitor to provide their name and email before submitting!
 TOOLS_PROMPT;
+
+        $prompt = str_replace('__SALES_EMAIL__', $branding['sales_email'], $prompt);
 
         if ($session && ($session->lead_name || $session->project_name)) {
             $visitorContext = "\n\nCURRENT VISITOR & PROJECT CONTEXT:\n";

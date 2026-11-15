@@ -20,7 +20,9 @@ class SendChatTranscriptToSalesTool implements IChatTool
 
     public function getDescription(): string
     {
-        return 'Forwards the complete conversation transcript, project specifications, client contact details, and shortlisted fixtures to the Azoogi Sydney sales & engineering team (sales@azoogi.com.au) for formal review, photometric verification, stock scheduling, or pricing.';
+        $salesEmail = (string) config('mail.sales_address', 'sales@azoogi.com');
+
+        return "Forwards the complete conversation transcript, project specifications, client contact details, and shortlisted fixtures to the Azoogi Sydney sales & engineering team ({$salesEmail}) for formal review, photometric verification, stock scheduling, or pricing.";
     }
 
     public function getParameters(): array
@@ -113,7 +115,7 @@ class SendChatTranscriptToSalesTool implements IChatTool
 
         $messages = $session->messages()->orderBy('id', 'asc')->get();
         $quoteItems = session()->get('visitor_quote_list', []);
-        $recipient = (string) config('mail.sales_address', env('SALES_EMAIL', 'sales@azoogi.com.au'));
+        $recipient = (string) config('mail.sales_address', 'sales@azoogi.com');
 
         try {
             Mail::to($recipient)->send(new ChatTranscriptForwardedMail(
@@ -148,7 +150,7 @@ class SendChatTranscriptToSalesTool implements IChatTool
             return [
                 'result' => [
                     'status' => 'error',
-                    'message' => 'Unable to forward transcript at this moment. Please email sales@azoogi.com.au directly.',
+                    'message' => "Unable to forward transcript at this moment. Please email {$recipient} directly.",
                 ],
             ];
         }

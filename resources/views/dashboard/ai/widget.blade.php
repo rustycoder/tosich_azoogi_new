@@ -171,7 +171,7 @@
                     <span>Consultation Button, Issue Reporting &amp; Disclaimer</span>
                 </div>
                 <p style="font-size: 12.5px; color: var(--dash-muted, var(--muted)); margin-top: 0; margin-bottom: 18px;">
-                    Configure the consultation call-to-action button, the issue report link (emails reports to <code>admin@azoogi.com</code> and <code>adrian@azoogi.com</code>), and the chat disclaimer notice.
+                    Configure the consultation call-to-action button, the issue report trigger &amp; recipient emails, and the chat disclaimer notice.
                 </p>
 
                 <div style="display: flex; flex-direction: column; gap: 18px;">
@@ -197,13 +197,20 @@
                             <input type="hidden" name="show_report_issue" value="0">
                             <input type="checkbox" name="show_report_issue" id="show_report_issue" value="1" {{ ($branding['show_report_issue'] ?? true) ? 'checked' : '' }} style="width: 18px; height: 18px; accent-color: var(--accent);" onchange="updateLivePreview()">
                             <div>
-                                <div style="font-size: 13.5px; font-weight: 600; color: var(--dash-ink, var(--ink));">Show "Report an Issue with this Chat" Link</div>
-                                <div style="font-size: 12px; color: var(--dash-muted, var(--muted));">Opens a pop-up dialog allowing visitors to report chat issues directly to <code>admin@azoogi.com</code> and <code>adrian@azoogi.com</code>.</div>
+                                <div style="font-size: 13.5px; font-weight: 600; color: var(--dash-ink, var(--ink));">Show "Report an Issue with this Chat" Button &amp; Link</div>
+                                <div style="font-size: 12px; color: var(--dash-muted, var(--muted));">Shows the report icon in the chat header (always accessible) and link on the welcome screen, emailing reports to the recipients below.</div>
                             </div>
                         </label>
-                        <div>
-                            <label class="dash-label" for="report_issue_text" style="font-weight: 600; font-size: 12.5px;">Report Issue Display Text</label>
-                            <input type="text" name="report_issue_text" id="report_issue_text" class="dash-input" value="{{ old('report_issue_text', $branding['report_issue_text'] ?? 'Report an issue with this chat') }}" placeholder="Report an issue with this chat" maxlength="150" oninput="updateLivePreview()">
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <div>
+                                <label class="dash-label" for="report_issue_text" style="font-weight: 600; font-size: 12.5px;">Report Issue Display Text</label>
+                                <input type="text" name="report_issue_text" id="report_issue_text" class="dash-input" value="{{ old('report_issue_text', $branding['report_issue_text'] ?? 'Report an issue with this chat') }}" placeholder="Report an issue with this chat" maxlength="150" oninput="updateLivePreview()">
+                            </div>
+                            <div>
+                                <label class="dash-label" for="report_issue_emails" style="font-weight: 600; font-size: 12.5px;">Report Recipient Emails</label>
+                                <input type="text" name="report_issue_emails" id="report_issue_emails" class="dash-input" value="{{ old('report_issue_emails', $branding['report_issue_emails'] ?? 'admin@azoogi.com, adrian@azoogi.com') }}" placeholder="admin@azoogi.com, adrian@azoogi.com" maxlength="500">
+                                <span style="font-size: 11px; color: var(--dash-muted, var(--muted));">Comma-separated email addresses that receive issue reports.</span>
+                            </div>
                         </div>
                     </div>
 

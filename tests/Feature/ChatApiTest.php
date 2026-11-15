@@ -6,6 +6,7 @@ namespace Tests\Feature;
 
 use App\Mail\ChatIssueReportedMail;
 use App\Models\ChatSession;
+use App\Models\LlmFeed;
 use App\Models\Product;
 use App\Services\Chat\Tools\QuoteCartManagerTool;
 use Database\Seeders\PageSeeder;
@@ -311,6 +312,33 @@ class ChatApiTest extends TestCase
                 && $mail->hasTo('adrian@azoogi.com')
                 && $mail->issueDescription === 'The datasheet download link did not open in Safari.'
                 && $mail->reporterEmail === 'alex@studio.com.au';
+        });
+    }
+
+    public function test_report_chat_issue_uses_configured_widget_recipient_emails(): void
+    {
+        Mail::fake();
+
+        LlmFeed::query()->updateOrCreate(
+            ['key' => 'ai_widget_branding'],
+            [
+                'content' => json_encode([
+                    'report_issue_emails' => 'support@azoogi.com, qa@azoogi.com',
+                ]),
+                'is_custom' => true,
+            ]
+        );
+
+        $response = $this->postJson('/api/chat/report-issue', [
+            'issue' => 'Custom recipient check.',
+        ]);
+
+        $response->assertOk()->assertJson(['status' => 'success']);
+
+        Mail::assertSent(ChatIssueReportedMail::class, function (ChatIssueReportedMail $mail) {
+            return $mail->hasTo('support@azoogi.com')
+                && $mail->hasTo('qa@azoogi.com')
+                && ! $mail->hasTo('admin@azoogi.com');
         });
     }
 }
