@@ -431,4 +431,142 @@ class ChatApiTest extends TestCase
         $this->assertSame('category_card', $result['cards']['items'][0]['type']);
         $this->assertStringContainsString('/products?category=', $result['cards']['items'][0]['url']);
     }
+
+    public function test_catalog_wide_vague_query_returns_category_cards(): void
+    {
+        /** @var ProductSearchAndFilterTool $tool */
+        $tool = app(ProductSearchAndFilterTool::class);
+        $result = $tool->execute(['query' => 'what lighting do you have?']);
+
+        $this->assertSame('category_redirect', $result['result']['mode']);
+        $this->assertSame([], $result['result']['products']);
+        $this->assertSame('categories_carousel', $result['cards']['type']);
+        $this->assertNotEmpty($result['cards']['items']);
+        $this->assertNotEmpty($result['result']['catalog_url']);
+    }
+
+    public function test_outdoor_strip_returns_outdoor_strips_and_excludes_garden_lights_accessories_and_controllers(): void
+    {
+        Product::create([
+            'airtable_id' => 'rec_out_strip_01',
+            'product_name' => 'IP67 Outdoor LED Strip 24V',
+            'slug' => 'ip67-outdoor-led-strip-24v',
+            'status' => 'active',
+            'category' => 'LED Strip',
+            'category_path' => ['Strips and Flex', 'Outdoor Strips'],
+            'product_code' => 'STRIP-OUT-67',
+            'product_description' => 'Waterproof IP67 silicone encapsulated outdoor LED strip.',
+        ]);
+
+        Product::create([
+            'airtable_id' => 'rec_garden_01',
+            'product_name' => '7W Garden Spike Light',
+            'slug' => '7w-garden-spike-light',
+            'status' => 'active',
+            'category' => 'Garden Light',
+            'category_path' => ['Outdoor & Architectural', 'Garden Light'],
+            'product_code' => 'GL001',
+            'product_description' => 'IP65 outdoor garden spike spotlight.',
+        ]);
+
+        Product::create([
+            'airtable_id' => 'rec_strip_conn_01',
+            'product_name' => 'IP67 Strip Power Feed Cable',
+            'slug' => 'ip67-strip-power-feed-cable',
+            'status' => 'active',
+            'category' => 'Strip Accessories',
+            'category_path' => ['Strips and Flex', 'Accessories'],
+            'product_code' => 'ACC-67',
+            'product_description' => 'Waterproof power feed cable for outdoor LED strip.',
+        ]);
+
+        Product::create([
+            'airtable_id' => 'rec_strip_ctrl_01',
+            'product_name' => 'Outdoor Strip RGB Controller',
+            'slug' => 'outdoor-strip-rgb-controller',
+            'status' => 'active',
+            'category' => 'Controllers',
+            'category_path' => ['Strips and Flex', 'Controllers'],
+            'product_code' => 'CTRL-67',
+            'product_description' => 'IP67 outdoor LED strip controller.',
+        ]);
+
+        /** @var ProductSearchAndFilterTool $tool */
+        $tool = app(ProductSearchAndFilterTool::class);
+        $result = $tool->execute(['query' => 'Do you have outdoor strip?']);
+
+        $this->assertSame('products_carousel', $result['cards']['type']);
+        $names = array_column($result['result']['products'], 'name');
+        $this->assertContains('IP67 Outdoor LED Strip 24V', $names);
+        $this->assertNotContains('7W Garden Spike Light', $names);
+        $this->assertNotContains('IP67 Strip Power Feed Cable', $names);
+        $this->assertNotContains('Outdoor Strip RGB Controller', $names);
+    }
+
+    public function test_outdoor_strip_with_only_accessories_falls_back_to_category_cards(): void
+    {
+        Product::create([
+            'airtable_id' => 'rec_strip_acc_only',
+            'product_name' => 'Strip Mounting Clip Set',
+            'slug' => 'strip-mounting-clip-set',
+            'status' => 'active',
+            'category' => 'Strip Accessories',
+            'category_path' => ['Strips and Flex', 'Accessories'],
+            'product_code' => 'CLIP-01',
+            'product_description' => 'Silicone mounting clip for LED strip.',
+        ]);
+
+        Product::create([
+            'airtable_id' => 'rec_strip_ctrl_only',
+            'product_name' => 'Strip RF Controller',
+            'slug' => 'strip-rf-controller',
+            'status' => 'active',
+            'category' => 'Controllers',
+            'category_path' => ['Drivers & Controls', 'Controllers'],
+            'product_code' => 'CTRL-01',
+            'product_description' => 'RF controller for LED strip.',
+        ]);
+
+        /** @var ProductSearchAndFilterTool $tool */
+        $tool = app(ProductSearchAndFilterTool::class);
+        $result = $tool->execute(['query' => 'Do you have outdoor strip?']);
+
+        $this->assertSame('category_redirect', $result['result']['mode']);
+        $this->assertSame([], $result['result']['products']);
+        $this->assertSame('categories_carousel', $result['cards']['type']);
+    }
+
+    public function test_outdoor_downlight_returns_downlights_and_excludes_garden_lights(): void
+    {
+        Product::create([
+            'airtable_id' => 'rec_out_dl_01',
+            'product_name' => 'IP65 Outdoor Architectural Downlight',
+            'slug' => 'ip65-outdoor-architectural-downlight',
+            'status' => 'active',
+            'category' => 'Downlight',
+            'category_path' => ['Downlight', 'Exterior Downlights'],
+            'product_code' => 'DL-OUT-65',
+            'product_description' => 'Weatherproof IP65 outdoor soffit downlight.',
+        ]);
+
+        Product::create([
+            'airtable_id' => 'rec_garden_02',
+            'product_name' => 'Garden Bollard Light',
+            'slug' => 'garden-bollard-light',
+            'status' => 'active',
+            'category' => 'Garden Light',
+            'category_path' => ['Outdoor & Architectural', 'Garden Light'],
+            'product_code' => 'GB001',
+            'product_description' => 'Outdoor IP65 garden bollard.',
+        ]);
+
+        /** @var ProductSearchAndFilterTool $tool */
+        $tool = app(ProductSearchAndFilterTool::class);
+        $result = $tool->execute(['query' => 'outdoor downlight']);
+
+        $this->assertSame('products_carousel', $result['cards']['type']);
+        $names = array_column($result['result']['products'], 'name');
+        $this->assertContains('IP65 Outdoor Architectural Downlight', $names);
+        $this->assertNotContains('Garden Bollard Light', $names);
+    }
 }

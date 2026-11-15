@@ -113,10 +113,10 @@ class ProductSearchAndFilterTool implements IChatTool
         // 1. First priority: High precision search with scoring
         $scored = $this->searchAndScoreProducts($keywords, $category, $ipRating, $dimension, $dimming, $isOutdoor);
 
-        // 2. If no products scored, perform broad fallback (respecting explicit/detected category first)
+        // 2. If no products scored, perform broad fallback (respecting explicit/detected category first, never falling back to accessories/controllers)
         if ($scored->isEmpty()) {
             if (! empty($category)) {
-                $scored = Product::query()
+                $fallbackCandidates = Product::query()
                     ->where(fn ($q) => $this->applyPublishedScope($q))
                     ->where(function ($q) use ($category) {
                         $q->where('category', 'like', "%{$category}%")
@@ -124,8 +124,17 @@ class ProductSearchAndFilterTool implements IChatTool
                             ->orWhere('product_name', 'like', "%{$category}%");
                     })
                     ->orderBy('sort_order', 'asc')
-                    ->limit($limit)
+                    ->limit($limit * 4)
                     ->get();
+
+                $scored = $fallbackCandidates
+                    ->reject(fn (Product $p): bool => $this->shouldSuppressNonFixture($p, $keywords, $category))
+                    ->take($limit)
+                    ->values();
+
+                if ($scored->isEmpty()) {
+                    return $this->buildCategoryRedirectResponse($keywords, $category, $isOutdoor);
+                }
             } elseif ($isOutdoor) {
                 $scored = Product::query()
                     ->where(fn ($q) => $this->applyPublishedScope($q))
@@ -300,33 +309,16 @@ class ProductSearchAndFilterTool implements IChatTool
             $cat = mb_strtolower((string) $p->category);
             $catPath = mb_strtolower(is_array($p->category_path) ? implode(' ', $p->category_path) : (string) $p->category_path);
             $desc = mb_strtolower((string) $p->product_description);
+            $featuresText = mb_strtolower(is_array($p->product_features) ? json_encode($p->product_features) : (string) $p->product_features);
             $code = mb_strtolower((string) $p->product_code);
 
             // Identify non-fixture product types first so category expansion does not falsely boost them
-            $wantsDriver = in_array('driver', $keywords, true) || in_array('power', $keywords, true) || in_array('psu', $keywords, true) || in_array('controller', $keywords, true) || in_array('dimmer', $keywords, true);
-            $wantsAccessory = in_array('accessory', $keywords, true)
-                || in_array('accessories', $keywords, true)
-                || in_array('connector', $keywords, true)
-                || in_array('joiner', $keywords, true)
-                || in_array('coupler', $keywords, true)
-                || in_array('clip', $keywords, true)
-                || in_array('cap', $keywords, true)
-                || in_array('bracket', $keywords, true);
-            $wantsProfile = in_array('profile', $keywords, true)
-                || in_array('extrusion', $keywords, true)
-                || str_contains(mb_strtolower($category), 'profile')
-                || str_contains(mb_strtolower($category), 'extrusion');
+            $wantsDriver = $this->wantsDriverOrControl($keywords);
+            $wantsAccessory = $this->wantsAccessory($keywords);
+            $wantsProfile = $this->wantsProfile($keywords, $category);
 
-            $isDriverProduct = str_contains($cat, 'driver') || str_contains($name, 'driver') || str_contains($cat, 'power supply');
-            $isAccessoryProduct = str_contains($cat, 'accessory')
-                || str_contains($cat, 'accessories')
-                || str_contains($name, 'end cap')
-                || str_contains($name, 'clip')
-                || str_contains($name, 'mounting set')
-                || str_contains($name, 'splicing kit')
-                || str_contains($name, 'connector')
-                || str_contains($name, 'joiner')
-                || str_contains($name, 'coupler');
+            $isDriverProduct = $this->isDriverOrControlProduct($name, $cat, $catPath);
+            $isAccessoryProduct = $this->isAccessoryProduct($name, $cat, $catPath);
             $isProfileProduct = (str_contains($cat, 'profile') || str_contains($name, 'profile') || str_contains($cat, 'extrusion') || str_contains($name, 'extrusion'))
                 && ! $isAccessoryProduct;
 
@@ -384,7 +376,7 @@ class ProductSearchAndFilterTool implements IChatTool
             // IP Rating match bonus
             if (! empty($ipRating)) {
                 $ipLower = mb_strtolower($ipRating);
-                if (str_contains($desc, $ipLower) || str_contains($name, $ipLower)) {
+                if (str_contains($desc, $ipLower) || str_contains($name, $ipLower) || str_contains($featuresText, $ipLower)) {
                     $score += 40;
                 }
             }
@@ -397,10 +389,12 @@ class ProductSearchAndFilterTool implements IChatTool
                 if (empty($category) && (str_contains($cat, 'neon') || str_contains($name, 'bend'))) {
                     $score += 20;
                 }
-                if (str_contains($desc, 'ip68') || str_contains($desc, 'ip67') || str_contains($desc, 'ip66') || str_contains($desc, 'ip65')) {
+                if (str_contains($desc, 'ip68') || str_contains($desc, 'ip67') || str_contains($desc, 'ip66') || str_contains($desc, 'ip65')
+                    || str_contains($featuresText, 'ip68') || str_contains($featuresText, 'ip67') || str_contains($featuresText, 'ip66') || str_contains($featuresText, 'ip65')) {
                     $score += 25;
                 }
-                if (str_contains($desc, 'outdoor') || str_contains($name, 'outdoor') || str_contains($desc, 'waterproof')) {
+                if (str_contains($desc, 'outdoor') || str_contains($name, 'outdoor') || str_contains($desc, 'waterproof')
+                    || str_contains($featuresText, 'outdoor') || str_contains($featuresText, 'waterproof')) {
                     $score += 20;
                 }
             }
@@ -717,5 +711,114 @@ class ProductSearchAndFilterTool implements IChatTool
             ),
             $fallbackCategories
         );
+    }
+
+    /**
+     * @param  list<string>  $keywords
+     */
+    protected function shouldSuppressNonFixture(Product $p, array $keywords, string $category): bool
+    {
+        $name = mb_strtolower((string) $p->product_name);
+        $cat = mb_strtolower((string) $p->category);
+        $catPath = mb_strtolower(is_array($p->category_path) ? implode(' ', $p->category_path) : (string) $p->category_path);
+
+        $isAccessory = $this->isAccessoryProduct($name, $cat, $catPath);
+        $isDriverOrControl = $this->isDriverOrControlProduct($name, $cat, $catPath);
+        $isProfile = (str_contains($cat, 'profile') || str_contains($name, 'profile') || str_contains($cat, 'extrusion') || str_contains($name, 'extrusion'))
+            && ! $isAccessory;
+
+        if (! $this->wantsAccessory($keywords) && $isAccessory) {
+            return true;
+        }
+        if (! $this->wantsDriverOrControl($keywords) && $isDriverOrControl) {
+            return true;
+        }
+        if (! $this->wantsProfile($keywords, $category) && $isProfile) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param  list<string>  $keywords
+     */
+    protected function wantsDriverOrControl(array $keywords): bool
+    {
+        return in_array('driver', $keywords, true)
+            || in_array('power', $keywords, true)
+            || in_array('psu', $keywords, true)
+            || in_array('controller', $keywords, true)
+            || in_array('dimmer', $keywords, true)
+            || in_array('decoder', $keywords, true)
+            || in_array('repeater', $keywords, true);
+    }
+
+    /**
+     * @param  list<string>  $keywords
+     */
+    protected function wantsAccessory(array $keywords): bool
+    {
+        return in_array('accessory', $keywords, true)
+            || in_array('accessories', $keywords, true)
+            || in_array('connector', $keywords, true)
+            || in_array('joiner', $keywords, true)
+            || in_array('coupler', $keywords, true)
+            || in_array('clip', $keywords, true)
+            || in_array('cap', $keywords, true)
+            || in_array('bracket', $keywords, true)
+            || in_array('cable', $keywords, true)
+            || in_array('lead', $keywords, true)
+            || in_array('diffuser', $keywords, true)
+            || in_array('sealant', $keywords, true)
+            || in_array('glue', $keywords, true);
+    }
+
+    /**
+     * @param  list<string>  $keywords
+     */
+    protected function wantsProfile(array $keywords, string $category): bool
+    {
+        return in_array('profile', $keywords, true)
+            || in_array('extrusion', $keywords, true)
+            || str_contains(mb_strtolower($category), 'profile')
+            || str_contains(mb_strtolower($category), 'extrusion');
+    }
+
+    protected function isDriverOrControlProduct(string $name, string $cat, string $catPath): bool
+    {
+        return str_contains($cat, 'driver')
+            || str_contains($catPath, 'driver')
+            || str_contains($name, 'driver')
+            || str_contains($cat, 'power supply')
+            || str_contains($cat, 'controller')
+            || str_contains($catPath, 'controller')
+            || str_contains($name, 'controller')
+            || str_contains($cat, 'dimmer')
+            || str_contains($name, 'dimmer')
+            || str_contains($name, 'decoder')
+            || str_contains($name, 'repeater');
+    }
+
+    protected function isAccessoryProduct(string $name, string $cat, string $catPath): bool
+    {
+        return str_contains($cat, 'accessory')
+            || str_contains($cat, 'accessories')
+            || str_contains($catPath, 'accessory')
+            || str_contains($catPath, 'accessories')
+            || str_contains($name, 'end cap')
+            || str_contains($name, 'clip')
+            || str_contains($name, 'mounting set')
+            || str_contains($name, 'splicing kit')
+            || str_contains($name, 'connector')
+            || str_contains($name, 'joiner')
+            || str_contains($name, 'coupler')
+            || str_contains($name, 'power feed')
+            || str_contains($name, 'cable')
+            || str_contains($name, 'lead')
+            || str_contains($name, 'glue')
+            || str_contains($name, 'sealant')
+            || str_contains($name, 'diffuser')
+            || str_contains($name, 'bracket');
     }
 }
