@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await res.json();
             if (data.status === 'success') {
                 appendAssistantMessage(
-                    data.message || 'The conversation transcript and project specifications have been forwarded to our Sydney sales engineering desk.',
+                    data.message || `The conversation transcript and project specifications have been forwarded to ${liveBranding.sales_team_label || 'our sales and product team'}.`,
                     data.cards || [],
                     null,
                     true
@@ -557,7 +557,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="azoogi-chat-download-meta">
                     <div class="azoogi-chat-download-title">Transcript Forwarded to Sales</div>
-                    <div class="azoogi-chat-download-sub">Sent to <strong>${escapeHtml(recipient)}</strong>${leadText} &bull; Our Sydney sales engineers will review your project requirements.</div>
+                    <div class="azoogi-chat-download-sub">Sent to <strong>${escapeHtml(recipient)}</strong>${leadText} &bull; ${escapeHtml((liveBranding.sales_team_label || 'our sales and product team').replace(/^./, c => c.toUpperCase()))} will review your project requirements.</div>
                 </div>
             </div>
         `;
@@ -839,6 +839,8 @@ document.addEventListener('DOMContentLoaded', () => {
         report_issue_text: 'Report an issue with this chat',
         disclaimer_text: 'Azoogi AI can make mistakes. Verify critical specs with our engineering team.',
         sales_email: 'sales@azoogi.com',
+        sales_team_label: 'our sales and product team',
+        engineering_team_label: 'our engineering and design team',
         starter_chips: [
             { prompt: 'Show me outdoor garden lights' },
             { prompt: 'I want to explore downlights with dimension Ø82mm x 80mm (H)' },

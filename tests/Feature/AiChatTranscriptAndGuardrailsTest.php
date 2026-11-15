@@ -7,8 +7,10 @@ namespace Tests\Feature;
 use App\Mail\ChatTranscriptForwardedMail;
 use App\Models\ChatMessage;
 use App\Models\ChatSession;
+use App\Models\LlmFeed;
 use App\Services\Chat\ChatOrchestrator;
 use App\Services\Chat\Tools\SendChatTranscriptToSalesTool;
+use Database\Seeders\AiChatRulesSyncSeeder;
 use Database\Seeders\PageSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
@@ -35,6 +37,10 @@ class AiChatTranscriptAndGuardrailsTest extends TestCase
         $this->assertStringContainsString('Azoogi Trade Portal', $prompt);
         $this->assertStringContainsString('Clarifying Protocol', $prompt);
         $this->assertStringContainsString('PRODUCT HYPERLINKING', $prompt);
+        $this->assertStringContainsString('Australia and the South Pacific', $prompt);
+        $this->assertStringContainsString('our engineering and design team', $prompt);
+        $this->assertStringContainsString('our sales and product team', $prompt);
+        $this->assertStringNotContainsString('based in Sydney', $prompt);
         $this->assertStringContainsString('public_send_chat_transcript_to_sales', $prompt);
     }
 
@@ -131,5 +137,66 @@ class AiChatTranscriptAndGuardrailsTest extends TestCase
         $this->assertSame('Harbour Penthouse', $session->project_name);
 
         Mail::assertSent(ChatTranscriptForwardedMail::class);
+    }
+
+    public function test_ai_chat_rules_sync_seeder_updates_legacy_rules_and_preserves_custom_entries(): void
+    {
+        LlmFeed::query()->updateOrCreate(
+            ['key' => 'ai_rules_items'],
+            [
+                'content' => json_encode([
+                    [
+                        'id' => 'rule_escalation',
+                        'category' => 'Escalation',
+                        'title' => 'Old Escalation',
+                        'content' => 'Forward to Sydney sales engineering desk (sales@azoogi.com.au).',
+                        'is_active' => true,
+                    ],
+                    [
+                        'id' => 'rule_custom_admin',
+                        'category' => 'Custom',
+                        'title' => 'Admin Custom Rule',
+                        'content' => 'Custom admin instruction (sales@azoogi.com.au).',
+                        'is_active' => true,
+                    ],
+                ]),
+                'is_custom' => true,
+            ]
+        );
+
+        LlmFeed::query()->updateOrCreate(
+            ['key' => 'ai_context_items'],
+            [
+                'content' => json_encode([
+                    [
+                        'id' => 'context_facility',
+                        'category' => 'Facility',
+                        'title' => 'Sydney Assembly Facility',
+                        'content' => 'Based in Sydney, NSW.',
+                        'is_active' => true,
+                    ],
+                ]),
+                'is_custom' => true,
+            ]
+        );
+
+        $this->seed(AiChatRulesSyncSeeder::class);
+
+        $rules = ChatOrchestrator::getRulesItems();
+        $ruleIds = array_column($rules, 'id');
+        $this->assertContains('rule_brand_positioning', $ruleIds);
+        $this->assertContains('rule_custom_admin', $ruleIds);
+
+        $customRule = collect($rules)->firstWhere('id', 'rule_custom_admin');
+        $this->assertStringContainsString('sales@azoogi.com', $customRule['content']);
+        $this->assertStringNotContainsString('sales@azoogi.com.au', $customRule['content']);
+
+        $escalationRule = collect($rules)->firstWhere('id', 'rule_escalation');
+        $this->assertStringNotContainsString('Sydney', $escalationRule['content']);
+
+        $context = ChatOrchestrator::getContextItems();
+        $facility = collect($context)->firstWhere('id', 'context_facility');
+        $this->assertStringContainsString('Australia and the South Pacific', $facility['content']);
+        $this->assertStringNotContainsString('Sydney', $facility['content']);
     }
 }

@@ -220,6 +220,26 @@
                         <input type="text" name="disclaimer_text" id="disclaimer_text" class="dash-input" value="{{ old('disclaimer_text', $branding['disclaimer_text'] ?? 'Azoogi AI can make mistakes. Verify critical specs with our engineering team.') }}" placeholder="Azoogi AI can make mistakes. Verify critical specs with our engineering team." maxlength="500" oninput="updateLivePreview()">
                         <span style="font-size: 11px; color: var(--dash-muted, var(--muted));">Displayed below the message input bar at the bottom of the chat drawer.</span>
                     </div>
+
+                    <!-- Brand Positioning & Team Labels -->
+                    <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--dash-line); border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px;">
+                        <div style="font-size: 13.5px; font-weight: 600; color: var(--dash-ink, var(--ink));">Brand Positioning &amp; Team Labels</div>
+                        <div style="font-size: 12px; color: var(--dash-muted, var(--muted));">Dynamically used by the AI system prompt, tool confirmations, and chat widget UI.</div>
+                        <div>
+                            <label class="dash-label" for="company_positioning" style="font-weight: 600; font-size: 12.5px;">Company Positioning</label>
+                            <textarea name="company_positioning" id="company_positioning" class="dash-input" rows="2" maxlength="1000" placeholder="Azoogi is a national architectural lighting supplier and smart controls engineering specialist with projects across Australia and the South Pacific.">{{ old('company_positioning', $branding['company_positioning'] ?? 'Azoogi is a national architectural lighting supplier and smart controls engineering specialist with projects across Australia and the South Pacific.') }}</textarea>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <div>
+                                <label class="dash-label" for="sales_team_label" style="font-weight: 600; font-size: 12.5px;">Sales Team Label</label>
+                                <input type="text" name="sales_team_label" id="sales_team_label" class="dash-input" value="{{ old('sales_team_label', $branding['sales_team_label'] ?? 'our sales and product team') }}" placeholder="our sales and product team" maxlength="120">
+                            </div>
+                            <div>
+                                <label class="dash-label" for="engineering_team_label" style="font-weight: 600; font-size: 12.5px;">Engineering Team Label</label>
+                                <input type="text" name="engineering_team_label" id="engineering_team_label" class="dash-input" value="{{ old('engineering_team_label', $branding['engineering_team_label'] ?? 'our engineering and design team') }}" placeholder="our engineering and design team" maxlength="120">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

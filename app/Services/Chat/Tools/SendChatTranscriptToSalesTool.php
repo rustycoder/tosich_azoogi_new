@@ -6,6 +6,7 @@ namespace App\Services\Chat\Tools;
 
 use App\Mail\ChatTranscriptForwardedMail;
 use App\Models\ChatSession;
+use App\Services\Chat\ChatOrchestrator;
 use App\Services\Chat\Contracts\IChatTool;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -20,9 +21,11 @@ class SendChatTranscriptToSalesTool implements IChatTool
 
     public function getDescription(): string
     {
+        $branding = ChatOrchestrator::getWidgetBranding();
         $salesEmail = (string) config('mail.sales_address', 'sales@azoogi.com');
+        $salesTeam = $branding['sales_team_label'];
 
-        return "Forwards the complete conversation transcript, project specifications, client contact details, and shortlisted fixtures to the Azoogi Sydney sales & engineering team ({$salesEmail}) for formal review, photometric verification, stock scheduling, or pricing.";
+        return "Forwards the complete conversation transcript, project specifications, client contact details, and shortlisted fixtures to {$salesTeam} ({$salesEmail}) for formal review, photometric verification, stock scheduling, or pricing.";
     }
 
     public function getParameters(): array
@@ -128,13 +131,14 @@ class SendChatTranscriptToSalesTool implements IChatTool
             ));
 
             $leadContact = $session->lead_email ?: ($session->lead_name ?: 'your contact address');
+            $salesTeam = ChatOrchestrator::getWidgetBranding()['sales_team_label'];
 
             return [
                 'result' => [
                     'status' => 'success',
                     'session_uuid' => $session->uuid,
                     'recipient' => $recipient,
-                    'message' => "The complete conversation transcript and fixture requirements have been securely forwarded to our Sydney sales engineering desk ({$recipient}). Our team will follow up via {$leadContact}.",
+                    'message' => "The complete conversation transcript and fixture requirements have been securely forwarded to {$salesTeam} ({$recipient}). Our team will follow up via {$leadContact}.",
                 ],
                 'cards' => [
                     'type' => 'transcript_sent_card',

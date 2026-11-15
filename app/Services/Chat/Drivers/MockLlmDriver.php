@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services\Chat\Drivers;
 
 use App\Models\Product;
+use App\Services\Chat\ChatOrchestrator;
 use App\Services\Chat\Contracts\IChatLlmDriver;
 
 class MockLlmDriver implements IChatLlmDriver
@@ -31,6 +32,11 @@ class MockLlmDriver implements IChatLlmDriver
         if ($isAdminCopilot) {
             return $this->evaluateAdminCopilot($messages);
         }
+
+        $branding = ChatOrchestrator::getWidgetBranding();
+        $salesTeam = $branding['sales_team_label'];
+        $engineeringTeam = $branding['engineering_team_label'];
+        $companyPositioning = $branding['company_positioning'];
 
         $lastMessage = end($messages) ?: [];
         $role = $lastMessage['role'] ?? '';
@@ -113,9 +119,9 @@ class MockLlmDriver implements IChatLlmDriver
                 $enquiryType = $toolResult['enquiry_type'] ?? 'contact';
 
                 $customMessage = match ($enquiryType) {
-                    'quote' => "Thank you! Your quote request has been submitted to our Sydney sales engineering team (Ref #{$ref}). A lighting specialist will review your project requirements and be in touch shortly.",
-                    'product' => "Thank you! Your product specification enquiry has been submitted (Ref #{$ref}). Our engineering team will review your specifications and contact you shortly.",
-                    default => "Thank you! Your contact message has been sent to our Sydney sales engineering team (Ref #{$ref}). We will review your inquiry and reply shortly.",
+                    'quote' => "Thank you! Your quote request has been submitted to {$salesTeam} (Ref #{$ref}). A lighting specialist will review your project requirements and be in touch shortly.",
+                    'product' => "Thank you! Your product specification enquiry has been submitted (Ref #{$ref}). ".ucfirst($engineeringTeam).' will review your specifications and contact you shortly.',
+                    default => "Thank you! Your contact message has been sent to {$salesTeam} (Ref #{$ref}). We will review your inquiry and reply shortly.",
                 };
 
                 return [
@@ -146,7 +152,7 @@ class MockLlmDriver implements IChatLlmDriver
         // Intent: Informational / How-To Questions on Quote List
         if (preg_match('/\b(how|where|can i|explain|guide|help)\b/i', $text) && str_contains($text, 'quote')) {
             return [
-                'content' => "You can add products to your quote list in two convenient ways:\n\n1. **Product Cards**: Click the **\"+ Add to Quote\"** button on any product card in the catalog or right inside this chat.\n2. **Direct in Chat**: Ask me directly (e.g., *\"Add 12W Garden Light to my quote\"* or *\"Show my quote list\"*).\n\nWhen you're ready, ask me to submit your quote and provide your email to receive project pricing and lead times from our Sydney engineering team!",
+                'content' => "You can add products to your quote list in two convenient ways:\n\n1. **Product Cards**: Click the **\"+ Add to Quote\"** button on any product card in the catalog or right inside this chat.\n2. **Direct in Chat**: Ask me directly (e.g., *\"Add 12W Garden Light to my quote\"* or *\"Show my quote list\"*).\n\nWhen you're ready, ask me to submit your quote and provide your email to receive project pricing and lead times from {$salesTeam}!",
                 'tool_calls' => [],
                 'tokens_used' => 60,
             ];
@@ -220,7 +226,7 @@ class MockLlmDriver implements IChatLlmDriver
             }
 
             return [
-                'content' => "I would be happy to forward your message to our Sydney sales and engineering team. To send your contact enquiry, please provide:\n\n1. **Your Full Name**\n2. **Your Email Address**\n3. **Your Message or Question**\n\nOnce provided, I will send your enquiry directly to our team.",
+                'content' => "I would be happy to forward your message to {$salesTeam}. To send your contact enquiry, please provide:\n\n1. **Your Full Name**\n2. **Your Email Address**\n3. **Your Message or Question**\n\nOnce provided, I will send your enquiry directly to our team.",
                 'tool_calls' => [],
                 'tokens_used' => 45,
             ];
@@ -310,7 +316,7 @@ class MockLlmDriver implements IChatLlmDriver
             }
 
             return [
-                'content' => 'Azoogi is headquartered in Sydney, NSW, Australia. Our sales engineering team operates Monday through Friday, 8:30 AM – 5:00 PM AEST. For project consultations, photometric schedules, or custom linear fabrication, please reach out via our contact page.',
+                'content' => "{$companyPositioning} ".ucfirst($engineeringTeam)." and {$salesTeam} operate Monday through Friday, 8:30 AM – 5:00 PM AEST. For project consultations, photometric schedules, or custom linear fabrication, please reach out via our contact page.",
                 'tool_calls' => [],
                 'tokens_used' => 45,
             ];

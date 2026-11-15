@@ -7,6 +7,7 @@ namespace App\Services\Chat\Tools;
 use App\Enums\EnquiryType;
 use App\Models\ChatSession;
 use App\Models\Product;
+use App\Services\Chat\ChatOrchestrator;
 use App\Services\Chat\Contracts\IChatTool;
 use App\Services\Contracts\IEnquiryService;
 use Throwable;
@@ -24,7 +25,11 @@ class SubmitLeadEnquiryTool implements IChatTool
 
     public function getDescription(): string
     {
-        return 'Submits verified visitor enquiries to the Sydney lighting engineering & sales team in MySQL. Supports 3 distinct enquiry types: "contact" (general inquiry/message/consultation), "quote" (quote request for items in quote list), and "product" (specific single product configuration enquiry). Only call this when required information (name, email, message) is collected.';
+        $branding = ChatOrchestrator::getWidgetBranding();
+        $engineeringTeam = $branding['engineering_team_label'];
+        $salesTeam = $branding['sales_team_label'];
+
+        return "Submits verified visitor enquiries to {$engineeringTeam} and {$salesTeam} in MySQL. Supports 3 distinct enquiry types: \"contact\" (general inquiry/message/consultation), \"quote\" (quote request for items in quote list), and \"product\" (specific single product configuration enquiry). Only call this when required information (name, email, message) is collected.";
     }
 
     public function getParameters(): array
@@ -124,7 +129,8 @@ class SubmitLeadEnquiryTool implements IChatTool
                     ],
                 ]);
 
-                $confirmationMessage = "Thank you {$name}! Your contact message (Ref #{$enquiry->id}) has been forwarded to our Sydney engineering team. We will be in touch via {$email} shortly.";
+                $engineeringTeam = ChatOrchestrator::getWidgetBranding()['engineering_team_label'];
+                $confirmationMessage = "Thank you {$name}! Your contact message (Ref #{$enquiry->id}) has been forwarded to {$engineeringTeam}. We will be in touch via {$email} shortly.";
             } elseif ($type === EnquiryType::Product) {
                 // Single Product Enquiry
                 $productName = $productId;

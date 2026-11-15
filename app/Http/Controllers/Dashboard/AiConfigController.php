@@ -223,6 +223,9 @@ class AiConfigController extends Controller
             'report_issue_text' => ['nullable', 'string', 'max:150'],
             'report_issue_emails' => ['nullable', 'string', 'max:500'],
             'disclaimer_text' => ['nullable', 'string', 'max:500'],
+            'company_positioning' => ['nullable', 'string', 'max:1000'],
+            'sales_team_label' => ['nullable', 'string', 'max:120'],
+            'engineering_team_label' => ['nullable', 'string', 'max:120'],
             'starter_chips' => ['nullable', 'array'],
         ]);
 
@@ -283,6 +286,15 @@ class AiConfigController extends Controller
             'disclaimer_text' => isset($validated['disclaimer_text']) && trim((string) $validated['disclaimer_text']) !== ''
                 ? trim((string) $validated['disclaimer_text'])
                 : ($existingBranding['disclaimer_text'] ?? 'Azoogi AI can make mistakes. Verify critical specs with our engineering team.'),
+            'company_positioning' => isset($validated['company_positioning']) && trim((string) $validated['company_positioning']) !== ''
+                ? trim((string) $validated['company_positioning'])
+                : ($existingBranding['company_positioning'] ?? 'Azoogi is a national architectural lighting supplier and smart controls engineering specialist with projects across Australia and the South Pacific.'),
+            'sales_team_label' => isset($validated['sales_team_label']) && trim((string) $validated['sales_team_label']) !== ''
+                ? trim((string) $validated['sales_team_label'])
+                : ($existingBranding['sales_team_label'] ?? 'our sales and product team'),
+            'engineering_team_label' => isset($validated['engineering_team_label']) && trim((string) $validated['engineering_team_label']) !== ''
+                ? trim((string) $validated['engineering_team_label'])
+                : ($existingBranding['engineering_team_label'] ?? 'our engineering and design team'),
         ];
 
         LlmFeed::query()->updateOrCreate(

@@ -282,6 +282,15 @@ class ChatOrchestrator
                 ? trim((string) $branding['disclaimer_text'])
                 : 'Azoogi AI can make mistakes. Verify critical specs with our engineering team.',
             'sales_email' => (string) config('mail.sales_address', 'sales@azoogi.com'),
+            'company_positioning' => ! empty($branding['company_positioning'])
+                ? trim((string) $branding['company_positioning'])
+                : 'Azoogi is a national architectural lighting supplier and smart controls engineering specialist with projects across Australia and the South Pacific.',
+            'sales_team_label' => ! empty($branding['sales_team_label'])
+                ? trim((string) $branding['sales_team_label'])
+                : 'our sales and product team',
+            'engineering_team_label' => ! empty($branding['engineering_team_label'])
+                ? trim((string) $branding['engineering_team_label'])
+                : 'our engineering and design team',
         ];
     }
 
@@ -344,7 +353,14 @@ class ChatOrchestrator
                 'id' => 'rule_escalation',
                 'category' => 'Escalation & Handoff',
                 'title' => 'Human Escalation & Sales Desk Routing',
-                'content' => "Lead Times & Sales Transcript Handoff: Standard in-stock items dispatch in 24-48 hours from our Sydney warehouse; custom extrusion cutting and testing requires 3-5 business days. When discussing custom profile lengths, bespoke joinery, large project schedules over 50 fittings, or when the user finishes their queries, offer to forward the full chat transcript and fixture schedule to our Sydney sales engineering desk ({$salesEmail}) using public_send_chat_transcript_to_sales.",
+                'content' => "Lead Times & Sales Transcript Handoff: Standard in-stock items dispatch in 24-48 hours; custom extrusion cutting and testing requires 3-5 business days. When discussing custom profile lengths, bespoke joinery, large project schedules over 50 fittings, or when the user finishes their queries, offer to forward the full chat transcript and fixture schedule to our sales and product team ({$salesEmail}) using public_send_chat_transcript_to_sales.",
+                'is_active' => true,
+            ],
+            [
+                'id' => 'rule_brand_positioning',
+                'category' => 'Brand Positioning',
+                'title' => 'National Positioning & Team Terminology',
+                'content' => "Never describe Azoogi as Sydney-based or refer to a 'Sydney team'. Present Azoogi as a national supplier with projects across Australia and the South Pacific. Always refer to 'our engineering and design team' or 'our sales and product team'.",
                 'is_active' => true,
             ],
         ];
@@ -355,9 +371,9 @@ class ChatOrchestrator
         return [
             [
                 'id' => 'context_facility',
-                'category' => 'Facility & Workshop',
-                'title' => 'Headquarters & Sydney Assembly Facility',
-                'content' => 'Azoogi Lighting operates a dedicated testing and custom extrusion fabrication facility in Sydney, New South Wales, Australia.',
+                'category' => 'National Coverage & Fabrication',
+                'title' => 'National Supplier & Custom Fabrication',
+                'content' => 'Azoogi Lighting is a national architectural lighting supplier with projects across Australia and the South Pacific, backed by dedicated testing and custom extrusion fabrication.',
                 'is_active' => true,
             ],
             [
@@ -377,8 +393,8 @@ class ChatOrchestrator
             [
                 'id' => 'context_dispatch',
                 'category' => 'Shipping & Logistics',
-                'title' => 'Warehouse, Shipping & Dispatch',
-                'content' => 'Fast dispatch from Sydney warehouse across Australia and New Zealand (in-stock items dispatch within 24-48 hours).',
+                'title' => 'National & Regional Dispatch',
+                'content' => 'Fast dispatch across Australia, New Zealand, and the South Pacific (in-stock items dispatch within 24-48 hours).',
                 'is_active' => true,
             ],
             [
@@ -566,7 +582,7 @@ class ChatOrchestrator
                 'id' => 'faq_lead_times',
                 'category' => 'Shipping & Lead Time',
                 'question' => 'What are the standard lead times for custom linear profile cutting and testing?',
-                'answer' => 'Standard lead times for custom extrusion cutting, soldering, and testing are 3 to 5 business days dispatched from our Sydney warehouse.',
+                'answer' => 'Standard lead times for custom extrusion cutting, soldering, and testing are 3 to 5 business days for dispatch across Australia and the South Pacific.',
                 'is_active' => true,
             ],
             [
@@ -816,10 +832,13 @@ class ChatOrchestrator
         $faqs = self::getFaqs();
 
         $aiName = $branding['ai_name'];
+        $companyPositioning = $branding['company_positioning'];
+        $salesTeam = $branding['sales_team_label'];
+        $engineeringTeam = $branding['engineering_team_label'];
 
         $prompt = <<<PROMPT
 You are {$aiName}, the expert Architectural Lighting & Intelligent Controls AI Consultant for Azoogi.
-Azoogi is an Australian architectural lighting manufacturer and smart controls engineering specialist based in Sydney, NSW.
+{$companyPositioning} Always refer to '{$engineeringTeam}' or '{$salesTeam}' rather than location-specific team names.
 
 Core Brand Competencies:
 - Architectural linear profiles, custom LED strip extrusions, high-CRI downlights, floodlights, and commercial lighting.
@@ -862,7 +881,7 @@ PRICING & TRADE PORTAL PROTOCOL:
 - When asked for pricing, instruct the visitor to log into the Azoogi Trade Portal (https://portal.azoogi.com.au or /account/login) for trade accounts, or add products to their quote list to submit for formal pricing.
 
 SALES TRANSCRIPT HANDOFF (`public_send_chat_transcript_to_sales`):
-- When a client asks to forward their chat, when discussing complex project lead times, or when concluding their lighting consultation, call `public_send_chat_transcript_to_sales` to forward the conversation transcript, project specifications, and quote list to our Sydney sales engineering desk (__SALES_EMAIL__).
+- When a client asks to forward their chat, when discussing complex project lead times, or when concluding their lighting consultation, call `public_send_chat_transcript_to_sales` to forward the conversation transcript, project specifications, and quote list to __SALES_TEAM__ (__SALES_EMAIL__).
 
 ENQUIRIES & LEAD SUBMISSION (3 DISTINCT TYPES):
 You can submit 3 distinct types of enquiries via `public_submit_lead_enquiry`:
@@ -883,7 +902,11 @@ IMPORTANT RULE:
 NEVER call `public_submit_lead_enquiry` or `public_send_chat_transcript_to_sales` with fake details. Always confirm or politely ask the visitor to provide their name and email before submitting!
 TOOLS_PROMPT;
 
-        $prompt = str_replace('__SALES_EMAIL__', $branding['sales_email'], $prompt);
+        $prompt = str_replace(
+            ['__SALES_EMAIL__', '__SALES_TEAM__'],
+            [$branding['sales_email'], $salesTeam],
+            $prompt
+        );
 
         if ($session && ($session->lead_name || $session->project_name)) {
             $visitorContext = "\n\nCURRENT VISITOR & PROJECT CONTEXT:\n";
