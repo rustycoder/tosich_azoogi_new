@@ -659,28 +659,45 @@ class ProductSearchAndFilterTool implements IChatTool
         };
 
         if ($parentCategories !== []) {
-            $matched = [];
+            $titleMatched = [];
+            $bodyMatched = [];
+
             foreach ($parentCategories as $item) {
                 $titleLower = mb_strtolower((string) ($item['title'] ?? ''));
                 $bodyLower = mb_strtolower((string) ($item['body'] ?? ''));
-                $haystack = $titleLower.' '.$bodyLower;
+                $card = $formatCard(
+                    (string) $item['title'],
+                    (string) ($item['body'] ?? ''),
+                    (string) ($item['image'] ?? ''),
+                    (string) ($item['href'] ?? url('/products')),
+                    isset($item['count']) ? (int) $item['count'] : null
+                );
 
+                $matchedByTitle = false;
                 foreach ($searchTerms as $term) {
-                    if ($term !== '' && str_contains($haystack, $term)) {
-                        $matched[] = $formatCard(
-                            (string) $item['title'],
-                            (string) ($item['body'] ?? ''),
-                            (string) ($item['image'] ?? ''),
-                            (string) ($item['href'] ?? url('/products')),
-                            isset($item['count']) ? (int) $item['count'] : null
-                        );
+                    if ($term !== '' && str_contains($titleLower, $term)) {
+                        $titleMatched[] = $card;
+                        $matchedByTitle = true;
                         break;
+                    }
+                }
+
+                if (! $matchedByTitle) {
+                    foreach ($searchTerms as $term) {
+                        if ($term !== '' && str_contains($bodyLower, $term)) {
+                            $bodyMatched[] = $card;
+                            break;
+                        }
                     }
                 }
             }
 
-            if ($matched !== []) {
-                return array_slice($matched, 0, 6);
+            if ($titleMatched !== []) {
+                return array_slice($titleMatched, 0, 6);
+            }
+
+            if ($bodyMatched !== []) {
+                return array_slice($bodyMatched, 0, 6);
             }
 
             // Catalog-wide / general query: return top parent categories

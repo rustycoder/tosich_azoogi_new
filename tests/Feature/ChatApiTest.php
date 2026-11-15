@@ -8,6 +8,7 @@ use App\Mail\ChatIssueReportedMail;
 use App\Models\ChatSession;
 use App\Models\LlmFeed;
 use App\Models\Product;
+use App\Services\Chat\ChatOrchestrator;
 use App\Services\Chat\Tools\ProductSearchAndFilterTool;
 use App\Services\Chat\Tools\QuoteCartManagerTool;
 use Database\Seeders\PageSeeder;
@@ -568,5 +569,35 @@ class ChatApiTest extends TestCase
         $names = array_column($result['result']['products'], 'name');
         $this->assertContains('IP65 Outdoor Architectural Downlight', $names);
         $this->assertNotContains('Garden Bollard Light', $names);
+    }
+
+    public function test_orchestrator_deduplicates_and_filters_category_cards_to_reply_links(): void
+    {
+        /** @var ChatOrchestrator $orchestrator */
+        $orchestrator = app(ChatOrchestrator::class);
+
+        $cards = [
+            [
+                'type' => 'categories_carousel',
+                'items' => [
+                    ['type' => 'category_card', 'name' => 'Profiles', 'url' => 'https://example.com/products?category=Profiles'],
+                    ['type' => 'category_card', 'name' => 'Neon Flex', 'url' => 'https://example.com/products?category=Neon+Flex'],
+                ],
+            ],
+            [
+                'type' => 'categories_carousel',
+                'items' => [
+                    ['type' => 'category_card', 'name' => 'Neon Flex', 'url' => 'https://example.com/products?category=Neon+Flex'],
+                ],
+            ],
+        ];
+
+        $reply = 'We supply flexible outdoor solutions through our [Neon Flex](https://example.com/products?category=Neon+Flex) range.';
+        $normalized = $orchestrator->normalizeCollectedCards($cards, $reply);
+
+        $this->assertCount(1, $normalized);
+        $this->assertSame('categories_carousel', $normalized[0]['type']);
+        $this->assertCount(1, $normalized[0]['items']);
+        $this->assertSame('Neon Flex', $normalized[0]['items'][0]['name']);
     }
 }

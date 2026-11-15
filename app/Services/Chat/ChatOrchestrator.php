@@ -795,6 +795,7 @@ class ChatOrchestrator
         };
 
         $estimatedCost = AiCostCalculator::calculate($activeModel, $totalPromptTokens, $totalCompletionTokens);
+        $cardsCollected = $this->normalizeCollectedCards($cardsCollected, $assistantReply);
 
         // 4. Save assistant message
         $assistantMsg = ChatMessage::create([
@@ -830,6 +831,77 @@ class ChatOrchestrator
             'cards' => $cardsCollected,
             'message_id' => $assistantMsg->id,
         ];
+    }
+
+    /**
+     * Merge and deduplicate category carousels across tool calls, keeping only categories
+     * relevant to the assistant's reply when explicit category links are present.
+     *
+     * @param  array<int, mixed>  $cardsCollected
+     * @return array<int, mixed>
+     */
+    public function normalizeCollectedCards(array $cardsCollected, string $assistantReply): array
+    {
+        if ($cardsCollected === []) {
+            return [];
+        }
+
+        $otherCards = [];
+        $categoryItemsByKey = [];
+
+        foreach ($cardsCollected as $card) {
+            if (! is_array($card)) {
+                continue;
+            }
+
+            if (($card['type'] ?? '') === 'categories_carousel' && is_array($card['items'] ?? null)) {
+                foreach ($card['items'] as $item) {
+                    if (! is_array($item)) {
+                        continue;
+                    }
+                    $key = mb_strtolower(trim((string) ($item['name'] ?? $item['url'] ?? '')));
+                    if ($key !== '' && ! isset($categoryItemsByKey[$key])) {
+                        $categoryItemsByKey[$key] = $item;
+                    }
+                }
+            } else {
+                $otherCards[] = $card;
+            }
+        }
+
+        if ($categoryItemsByKey === []) {
+            return $otherCards;
+        }
+
+        $mergedCategories = array_values($categoryItemsByKey);
+
+        // If the reply links specific /products?category=... URLs, filter to only those categories
+        if (preg_match_all('/\/products\?category=([^)\s"\'&]+)/i', $assistantReply, $matches)) {
+            $linkedCategories = array_map(
+                fn (string $raw): string => mb_strtolower(trim(urldecode($raw))),
+                $matches[1]
+            );
+            $linkedCategories = array_values(array_filter(array_unique($linkedCategories)));
+
+            if ($linkedCategories !== []) {
+                $filtered = array_values(array_filter($mergedCategories, function (array $item) use ($linkedCategories): bool {
+                    $nameLower = mb_strtolower(trim((string) ($item['name'] ?? '')));
+
+                    return in_array($nameLower, $linkedCategories, true);
+                }));
+
+                if ($filtered !== []) {
+                    $mergedCategories = $filtered;
+                }
+            }
+        }
+
+        $otherCards[] = [
+            'type' => 'categories_carousel',
+            'items' => $mergedCategories,
+        ];
+
+        return $otherCards;
     }
 
     public function getSystemPrompt(?ChatSession $session = null): string
