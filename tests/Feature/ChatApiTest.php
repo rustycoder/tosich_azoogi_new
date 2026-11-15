@@ -373,4 +373,47 @@ class ChatApiTest extends TestCase
         $this->assertContains('Bendable Plaster Aluminium Profile', $names);
         $this->assertNotContains('COB LED Strip Connector', $names);
     }
+
+    public function test_cob_strip_search_returns_strips_and_excludes_connectors_and_profiles(): void
+    {
+        Product::create([
+            'airtable_id' => 'rec_cob_strip_01',
+            'product_name' => 'Single Colour COB',
+            'slug' => 'single-colour-cob',
+            'status' => 'active',
+            'category' => 'LED Strip',
+            'category_path' => ['LED Strip', 'COB'],
+            'product_code' => 'COB001',
+            'product_description' => 'Dot-free 24V COB LED strip.',
+        ]);
+
+        Product::create([
+            'airtable_id' => 'rec_cob_conn_01',
+            'product_name' => 'COB LED Strip Connector',
+            'slug' => 'cob-led-strip-connector',
+            'status' => 'active',
+            'category' => 'Accessories',
+            'product_code' => 'CONN-COB-01',
+            'product_description' => 'Solderless connector for COB LED strip.',
+        ]);
+
+        Product::create([
+            'airtable_id' => 'rec_strip_prof_01',
+            'product_name' => 'Recessed LED Strip Profile',
+            'slug' => 'recessed-led-strip-profile',
+            'status' => 'active',
+            'category' => 'Profile',
+            'product_code' => 'PROF-REC-01',
+            'product_description' => 'Aluminium profile for COB and SMD LED strip.',
+        ]);
+
+        /** @var ProductSearchAndFilterTool $tool */
+        $tool = app(ProductSearchAndFilterTool::class);
+        $result = $tool->execute(['query' => 'COB strip']);
+
+        $names = array_column($result['result']['products'], 'name');
+        $this->assertContains('Single Colour COB', $names);
+        $this->assertNotContains('COB LED Strip Connector', $names);
+        $this->assertNotContains('Recessed LED Strip Profile', $names);
+    }
 }

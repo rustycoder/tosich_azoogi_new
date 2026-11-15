@@ -229,6 +229,7 @@ class ProductSearchAndFilterTool implements IChatTool
 
             if (! empty($category)) {
                 $q->where('category', 'like', "%{$category}%")
+                    ->orWhere('category_path', 'like', "%{$category}%")
                     ->orWhere('product_name', 'like', "%{$category}%");
                 $hasCondition = true;
             }
@@ -289,42 +290,11 @@ class ProductSearchAndFilterTool implements IChatTool
             $score = 0;
             $name = mb_strtolower((string) $p->product_name);
             $cat = mb_strtolower((string) $p->category);
+            $catPath = mb_strtolower(is_array($p->category_path) ? implode(' ', $p->category_path) : (string) $p->category_path);
             $desc = mb_strtolower((string) $p->product_description);
             $code = mb_strtolower((string) $p->product_code);
 
-            // Category match bonus & Cross-category exclusion penalty
-            if (! empty($category)) {
-                $catLower = mb_strtolower($category);
-                $isTargetProduct = str_contains($cat, $catLower) || str_contains($name, $catLower);
-
-                // Domain specific category expansions
-                if (str_contains($catLower, 'downlight')) {
-                    $isTargetProduct = str_contains($cat, 'downlight') || str_contains($name, 'downlight') || in_array($cat, ['surface mounted', 'pendant', 'recessed'], true);
-                } elseif (str_contains($catLower, 'garden')) {
-                    $isTargetProduct = str_contains($cat, 'garden') || str_contains($name, 'garden') || str_contains($cat, 'spike') || str_contains($name, 'spike');
-                } elseif (str_contains($catLower, 'pool')) {
-                    $isTargetProduct = str_contains($cat, 'pool') || str_contains($name, 'pool');
-                } elseif (str_contains($catLower, 'neon')) {
-                    $isTargetProduct = str_contains($cat, 'neon') || str_contains($name, 'neon') || str_contains($name, 'lumoflex') || str_contains($name, 'bend');
-                } elseif (str_contains($catLower, 'strip') || str_contains($catLower, 'tape')) {
-                    $isTargetProduct = str_contains($cat, 'strip') || str_contains($name, 'strip') || str_contains($cat, 'tape') || str_contains($name, 'tape');
-                } elseif (str_contains($catLower, 'handrail')) {
-                    $isTargetProduct = str_contains($cat, 'handrail') || str_contains($name, 'handrail');
-                } elseif (str_contains($catLower, 'profile') || str_contains($catLower, 'extrusion')) {
-                    $isTargetProduct = str_contains($cat, 'profile') || str_contains($name, 'profile') || str_contains($cat, 'extrusion') || str_contains($name, 'extrusion');
-                } elseif (str_contains($catLower, 'driver') || str_contains($catLower, 'power')) {
-                    $isTargetProduct = str_contains($cat, 'driver') || str_contains($name, 'driver') || str_contains($cat, 'power supply');
-                }
-
-                if ($isTargetProduct) {
-                    $score += 80;
-                } else {
-                    // Heavily penalize unrelated categories when user explicitly asked for a specific category
-                    $score -= 120;
-                }
-            }
-
-            // Distinguish actual lighting fixtures from drivers/power supplies/accessories
+            // Identify non-fixture product types first so category expansion does not falsely boost them
             $wantsDriver = in_array('driver', $keywords, true) || in_array('power', $keywords, true) || in_array('psu', $keywords, true) || in_array('controller', $keywords, true) || in_array('dimmer', $keywords, true);
             $wantsAccessory = in_array('accessory', $keywords, true)
                 || in_array('accessories', $keywords, true)
@@ -334,6 +304,10 @@ class ProductSearchAndFilterTool implements IChatTool
                 || in_array('clip', $keywords, true)
                 || in_array('cap', $keywords, true)
                 || in_array('bracket', $keywords, true);
+            $wantsProfile = in_array('profile', $keywords, true)
+                || in_array('extrusion', $keywords, true)
+                || str_contains(mb_strtolower($category), 'profile')
+                || str_contains(mb_strtolower($category), 'extrusion');
 
             $isDriverProduct = str_contains($cat, 'driver') || str_contains($name, 'driver') || str_contains($cat, 'power supply');
             $isAccessoryProduct = str_contains($cat, 'accessory')
@@ -345,13 +319,58 @@ class ProductSearchAndFilterTool implements IChatTool
                 || str_contains($name, 'connector')
                 || str_contains($name, 'joiner')
                 || str_contains($name, 'coupler');
+            $isProfileProduct = (str_contains($cat, 'profile') || str_contains($name, 'profile') || str_contains($cat, 'extrusion') || str_contains($name, 'extrusion'))
+                && ! $isAccessoryProduct;
+
+            // Category match bonus & Cross-category exclusion penalty
+            if (! empty($category)) {
+                $catLower = mb_strtolower($category);
+                $isTargetProduct = str_contains($cat, $catLower) || str_contains($catPath, $catLower) || str_contains($name, $catLower);
+
+                // Domain specific category expansions
+                if (str_contains($catLower, 'downlight')) {
+                    $isTargetProduct = str_contains($cat, 'downlight') || str_contains($name, 'downlight') || in_array($cat, ['surface mounted', 'pendant', 'recessed'], true);
+                } elseif (str_contains($catLower, 'garden')) {
+                    $isTargetProduct = str_contains($cat, 'garden') || str_contains($name, 'garden') || str_contains($cat, 'spike') || str_contains($name, 'spike');
+                } elseif (str_contains($catLower, 'pool')) {
+                    $isTargetProduct = str_contains($cat, 'pool') || str_contains($name, 'pool');
+                } elseif (str_contains($catLower, 'neon')) {
+                    $isTargetProduct = str_contains($cat, 'neon') || str_contains($name, 'neon') || str_contains($name, 'lumoflex') || str_contains($name, 'bend');
+                } elseif (str_contains($catLower, 'strip') || str_contains($catLower, 'tape')) {
+                    $isTargetProduct = (
+                        str_contains($cat, 'strip')
+                        || str_contains($catPath, 'strip')
+                        || str_contains($name, 'strip')
+                        || str_contains($cat, 'tape')
+                        || str_contains($name, 'tape')
+                        || (in_array('cob', $keywords, true) && str_contains($name, 'cob'))
+                    ) && ! $isAccessoryProduct && ! $isProfileProduct && ! $isDriverProduct;
+                } elseif (str_contains($catLower, 'handrail')) {
+                    $isTargetProduct = str_contains($cat, 'handrail') || str_contains($name, 'handrail');
+                } elseif (str_contains($catLower, 'profile') || str_contains($catLower, 'extrusion')) {
+                    $isTargetProduct = $isProfileProduct;
+                } elseif (str_contains($catLower, 'driver') || str_contains($catLower, 'power')) {
+                    $isTargetProduct = $isDriverProduct;
+                }
+
+                if ($isTargetProduct) {
+                    $score += 80;
+                } else {
+                    // Heavily penalize unrelated categories when user explicitly asked for a specific category
+                    $score -= 120;
+                }
+            }
 
             if (! $wantsDriver && $isDriverProduct) {
-                $score -= 150; // Suppress drivers when searching for lights/fixtures
+                $score -= 300; // Suppress drivers when searching for lights/fixtures
             }
 
             if (! $wantsAccessory && $isAccessoryProduct) {
-                $score -= 100; // Suppress mounting clips and end caps unless requested
+                $score -= 300; // Suppress connectors, mounting clips, and end caps unless requested
+            }
+
+            if (! $wantsProfile && $isProfileProduct) {
+                $score -= 200; // Suppress profiles/extrusions unless explicitly requested
             }
 
             // IP Rating match bonus
