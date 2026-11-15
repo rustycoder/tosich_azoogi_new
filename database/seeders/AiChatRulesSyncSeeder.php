@@ -31,7 +31,7 @@ class AiChatRulesSyncSeeder extends Seeder
             $defaultsById[$item['id']] = $item;
         }
 
-        $managedIds = ['rule_specs', 'rule_escalation', 'rule_brand_positioning'];
+        $managedIds = ['rule_specs', 'rule_escalation', 'rule_brand_positioning', 'rule_scope_guardrail'];
         $existing = ChatOrchestrator::getRulesItems();
         $seenIds = [];
         $updated = [];

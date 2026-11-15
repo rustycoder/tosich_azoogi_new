@@ -37,6 +37,7 @@ class AiChatTranscriptAndGuardrailsTest extends TestCase
         $this->assertStringContainsString('Azoogi Trade Portal', $prompt);
         $this->assertStringContainsString('Clarifying Protocol', $prompt);
         $this->assertStringContainsString('PRODUCT HYPERLINKING', $prompt);
+        $this->assertStringContainsString('SCOPE & OFF-TOPIC GUARDRAIL', $prompt);
         $this->assertStringContainsString('Australia and the South Pacific', $prompt);
         $this->assertStringContainsString('our engineering and design team', $prompt);
         $this->assertStringContainsString('our sales and product team', $prompt);
@@ -185,6 +186,7 @@ class AiChatTranscriptAndGuardrailsTest extends TestCase
         $rules = ChatOrchestrator::getRulesItems();
         $ruleIds = array_column($rules, 'id');
         $this->assertContains('rule_brand_positioning', $ruleIds);
+        $this->assertContains('rule_scope_guardrail', $ruleIds);
         $this->assertContains('rule_custom_admin', $ruleIds);
 
         $customRule = collect($rules)->firstWhere('id', 'rule_custom_admin');

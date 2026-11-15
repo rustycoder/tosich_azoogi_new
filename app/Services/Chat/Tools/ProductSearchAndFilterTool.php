@@ -326,10 +326,25 @@ class ProductSearchAndFilterTool implements IChatTool
 
             // Distinguish actual lighting fixtures from drivers/power supplies/accessories
             $wantsDriver = in_array('driver', $keywords, true) || in_array('power', $keywords, true) || in_array('psu', $keywords, true) || in_array('controller', $keywords, true) || in_array('dimmer', $keywords, true);
-            $wantsAccessory = in_array('accessory', $keywords, true) || in_array('clip', $keywords, true) || in_array('cap', $keywords, true) || in_array('profile', $keywords, true) || in_array('extrusion', $keywords, true);
+            $wantsAccessory = in_array('accessory', $keywords, true)
+                || in_array('accessories', $keywords, true)
+                || in_array('connector', $keywords, true)
+                || in_array('joiner', $keywords, true)
+                || in_array('coupler', $keywords, true)
+                || in_array('clip', $keywords, true)
+                || in_array('cap', $keywords, true)
+                || in_array('bracket', $keywords, true);
 
             $isDriverProduct = str_contains($cat, 'driver') || str_contains($name, 'driver') || str_contains($cat, 'power supply');
-            $isAccessoryProduct = str_contains($cat, 'accessory') || str_contains($cat, 'accessories') || str_contains($name, 'end cap') || str_contains($name, 'clip') || str_contains($name, 'mounting set') || str_contains($name, 'splicing kit');
+            $isAccessoryProduct = str_contains($cat, 'accessory')
+                || str_contains($cat, 'accessories')
+                || str_contains($name, 'end cap')
+                || str_contains($name, 'clip')
+                || str_contains($name, 'mounting set')
+                || str_contains($name, 'splicing kit')
+                || str_contains($name, 'connector')
+                || str_contains($name, 'joiner')
+                || str_contains($name, 'coupler');
 
             if (! $wantsDriver && $isDriverProduct) {
                 $score -= 150; // Suppress drivers when searching for lights/fixtures
@@ -385,6 +400,20 @@ class ProductSearchAndFilterTool implements IChatTool
                 }
                 if (str_contains($desc, $kw)) {
                     $score += 5;
+                }
+            }
+
+            if ($keywords !== []) {
+                $nameAndCat = $name.' '.$cat;
+                $allKeywordsMatched = true;
+                foreach ($keywords as $kw) {
+                    if (! str_contains($nameAndCat, $kw)) {
+                        $allKeywordsMatched = false;
+                        break;
+                    }
+                }
+                if ($allKeywordsMatched) {
+                    $score += 50;
                 }
             }
 

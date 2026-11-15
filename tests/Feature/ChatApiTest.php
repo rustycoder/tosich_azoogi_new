@@ -8,6 +8,7 @@ use App\Mail\ChatIssueReportedMail;
 use App\Models\ChatSession;
 use App\Models\LlmFeed;
 use App\Models\Product;
+use App\Services\Chat\Tools\ProductSearchAndFilterTool;
 use App\Services\Chat\Tools\QuoteCartManagerTool;
 use Database\Seeders\PageSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -340,5 +341,36 @@ class ChatApiTest extends TestCase
                 && $mail->hasTo('qa@azoogi.com')
                 && ! $mail->hasTo('admin@azoogi.com');
         });
+    }
+
+    public function test_plaster_profile_search_excludes_strip_connectors(): void
+    {
+        Product::create([
+            'airtable_id' => 'rec_plaster_01',
+            'product_name' => 'Bendable Plaster Aluminium Profile',
+            'slug' => 'bendable-plaster-aluminium-profile',
+            'status' => 'active',
+            'category' => 'Profile',
+            'product_code' => 'PROF-PLASTER-1616',
+            'product_description' => 'Flush-mounted plaster-in aluminium extrusion profile for walls and ceilings.',
+        ]);
+
+        Product::create([
+            'airtable_id' => 'rec_conn_01',
+            'product_name' => 'COB LED Strip Connector',
+            'slug' => 'cob-led-strip-connector',
+            'status' => 'active',
+            'category' => 'Accessories',
+            'product_code' => 'CONN-COB-10',
+            'product_description' => 'Solderless strip connector compatible with aluminium and plaster profile installations.',
+        ]);
+
+        /** @var ProductSearchAndFilterTool $tool */
+        $tool = app(ProductSearchAndFilterTool::class);
+        $result = $tool->execute(['query' => 'plaster profile']);
+
+        $names = array_column($result['result']['products'], 'name');
+        $this->assertContains('Bendable Plaster Aluminium Profile', $names);
+        $this->assertNotContains('COB LED Strip Connector', $names);
     }
 }
