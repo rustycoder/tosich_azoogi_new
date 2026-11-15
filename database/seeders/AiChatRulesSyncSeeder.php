@@ -37,7 +37,7 @@ class AiChatRulesSyncSeeder extends Seeder
         $updated = [];
 
         foreach ($existing as $item) {
-            if (! is_array($item)) {
+            if (!is_array($item)) {
                 continue;
             }
 
@@ -81,7 +81,7 @@ class AiChatRulesSyncSeeder extends Seeder
         $updated = [];
 
         foreach ($existing as $item) {
-            if (! is_array($item)) {
+            if (!is_array($item)) {
                 continue;
             }
 
@@ -113,17 +113,17 @@ class AiChatRulesSyncSeeder extends Seeder
     protected function syncFaqs(): void
     {
         $feed = LlmFeed::query()->where('key', 'ai_faqs')->first();
-        if (! $feed || empty($feed->content)) {
+        if (!$feed || empty($feed->content)) {
             return;
         }
 
         $decoded = json_decode((string) $feed->content, true);
-        if (! is_array($decoded)) {
+        if (!is_array($decoded)) {
             return;
         }
 
         $updated = array_map(function ($faq) {
-            if (! is_array($faq)) {
+            if (!is_array($faq)) {
                 return $faq;
             }
 
@@ -142,16 +142,16 @@ class AiChatRulesSyncSeeder extends Seeder
     protected function syncWidgetBranding(string $salesEmail): void
     {
         $feed = LlmFeed::query()->where('key', 'ai_widget_branding')->first();
-        $existing = ($feed && ! empty($feed->content))
+        $existing = ($feed && !empty($feed->content))
             ? json_decode((string) $feed->content, true)
             : [];
 
-        if (! is_array($existing)) {
+        if (!is_array($existing)) {
             $existing = [];
         }
 
         $defaults = ChatOrchestrator::getWidgetBranding();
-        $merged = array_merge($defaults, array_filter($existing, fn ($v) => $v !== null && $v !== ''));
+        $merged = array_merge($defaults, array_filter($existing, fn($v) => $v !== null && $v !== ''));
         $merged['sales_email'] = $salesEmail;
 
         LlmFeed::query()->updateOrCreate(
