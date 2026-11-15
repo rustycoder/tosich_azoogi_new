@@ -416,4 +416,19 @@ class ChatApiTest extends TestCase
         $this->assertNotContains('COB LED Strip Connector', $names);
         $this->assertNotContains('Recessed LED Strip Profile', $names);
     }
+
+    public function test_vague_query_returns_category_redirect_and_visual_category_cards(): void
+    {
+        /** @var ProductSearchAndFilterTool $tool */
+        $tool = app(ProductSearchAndFilterTool::class);
+        $result = $tool->execute(['query' => 'show me outdoor lights']);
+
+        $this->assertSame('category_redirect', $result['result']['mode']);
+        $this->assertSame([], $result['result']['products']);
+        $this->assertNotEmpty($result['result']['categories']);
+        $this->assertSame('categories_carousel', $result['cards']['type']);
+        $this->assertNotEmpty($result['cards']['items']);
+        $this->assertSame('category_card', $result['cards']['items'][0]['type']);
+        $this->assertStringContainsString('/products?category=', $result['cards']['items'][0]['url']);
+    }
 }

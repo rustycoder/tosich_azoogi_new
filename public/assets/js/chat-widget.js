@@ -391,6 +391,8 @@ document.addEventListener('DOMContentLoaded', () => {
             cards.forEach(card => {
                 if (card.type === 'products_carousel' && Array.isArray(card.items)) {
                     cardsHtml += renderProductsCarousel(card.items);
+                } else if (card.type === 'categories_carousel' && Array.isArray(card.items)) {
+                    cardsHtml += renderCategoriesCarousel(card.items);
                 } else if (card.type === 'datasheet_download_card') {
                     cardsHtml += renderDatasheetCard(card.data);
                 } else if (card.type === 'quote_cart_card') {
@@ -447,6 +449,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join('');
 
         return `<div class="azoogi-chat-products-carousel">${items}</div>`;
+    };
+
+    // Visual Category Carousel Card Template
+    const renderCategoriesCarousel = (categories) => {
+        if (!categories.length) return '';
+        const items = categories.map(c => {
+            const isFallback = !c.image_url || c.image_url.includes('placeholder') || c.image_url.includes('default') || c.image_url.includes('bg_default');
+            const imgHtml = `<img src="${c.image_url || '/assets/bg_default.png'}" alt="${escapeHtml(c.name)}" class="prod-swatch${isFallback ? ' is-fallback' : ''}" loading="lazy" onerror="this.onerror=null; this.src='/assets/bg_default.png';">`;
+            const countLabel = typeof c.product_count === 'number' && c.product_count > 0
+                ? `${c.product_count} Products`
+                : 'Category';
+            const catUrl = c.url || `/products?category=${encodeURIComponent(c.name || '')}`;
+            const descHtml = c.description ? `<span class="azoogi-chat-category-desc">${escapeHtml(c.description)}</span>` : '';
+
+            return `
+                <div class="prod-card azoogi-chat-category-card" data-href="${escapeHtml(catUrl)}" role="link" tabindex="0">
+                    <div class="prod-card-img">
+                        ${imgHtml}
+                        <span class="azoogi-chat-category-badge">${escapeHtml(countLabel)}</span>
+                    </div>
+                    <div class="prod-card-title">
+                        <div class="prod-card-title-text">
+                            <span class="cat-label">Browse Range</span>
+                            <span class="prod-card-name">${escapeHtml(c.name)}</span>
+                            ${descHtml}
+                        </div>
+                        <span class="azoogi-chat-category-arrow" aria-hidden="true">→</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        return `<div class="azoogi-chat-products-carousel azoogi-chat-categories-carousel">${items}</div>`;
     };
 
     // Custom Datasheet Download Card Template

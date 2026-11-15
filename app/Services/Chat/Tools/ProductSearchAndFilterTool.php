@@ -6,8 +6,10 @@ namespace App\Services\Chat\Tools;
 
 use App\Models\Product;
 use App\Services\Chat\Contracts\IChatTool;
+use App\Support\ProductCatalog;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class ProductSearchAndFilterTool implements IChatTool
 {
@@ -103,12 +105,28 @@ class ProductSearchAndFilterTool implements IChatTool
             }
         }
 
+        // 0. For vague / broad category queries, direct to category pages instead of a messy product list
+        if ($this->isBroadCategoryQuery($keywords, $category, $ipRating, $dimension, $dimming)) {
+            return $this->buildCategoryRedirectResponse($keywords, $category, $isOutdoor);
+        }
+
         // 1. First priority: High precision search with scoring
         $scored = $this->searchAndScoreProducts($keywords, $category, $ipRating, $dimension, $dimming, $isOutdoor);
 
-        // 2. If no products scored, perform broad fallback
+        // 2. If no products scored, perform broad fallback (respecting explicit/detected category first)
         if ($scored->isEmpty()) {
-            if ($isOutdoor) {
+            if (! empty($category)) {
+                $scored = Product::query()
+                    ->where(fn ($q) => $this->applyPublishedScope($q))
+                    ->where(function ($q) use ($category) {
+                        $q->where('category', 'like', "%{$category}%")
+                            ->orWhere('category_path', 'like', "%{$category}%")
+                            ->orWhere('product_name', 'like', "%{$category}%");
+                    })
+                    ->orderBy('sort_order', 'asc')
+                    ->limit($limit)
+                    ->get();
+            } elseif ($isOutdoor) {
                 $scored = Product::query()
                     ->where(fn ($q) => $this->applyPublishedScope($q))
                     ->where(function ($q) {
@@ -118,16 +136,6 @@ class ProductSearchAndFilterTool implements IChatTool
                             ->orWhere('category', 'like', '%Pool%')
                             ->orWhere('product_description', 'like', '%IP6%')
                             ->orWhere('product_description', 'like', '%outdoor%');
-                    })
-                    ->orderBy('sort_order', 'asc')
-                    ->limit($limit)
-                    ->get();
-            } elseif (! empty($category)) {
-                $scored = Product::query()
-                    ->where(fn ($q) => $this->applyPublishedScope($q))
-                    ->where(function ($q) use ($category) {
-                        $q->where('category', 'like', "%{$category}%")
-                            ->orWhere('product_name', 'like', "%{$category}%");
                     })
                     ->orderBy('sort_order', 'asc')
                     ->limit($limit)
@@ -241,7 +249,7 @@ class ProductSearchAndFilterTool implements IChatTool
                 $hasCondition = true;
             }
 
-            if ($isOutdoor) {
+            if ($isOutdoor && empty($category)) {
                 $q->orWhere('category', 'like', '%Garden%')
                     ->orWhere('category', 'like', '%Pool%')
                     ->orWhere('category', 'like', '%Neon%')
@@ -383,10 +391,10 @@ class ProductSearchAndFilterTool implements IChatTool
 
             // Outdoor relevance
             if ($isOutdoor) {
-                if (str_contains($cat, 'garden') || str_contains($cat, 'pool') || str_contains($name, 'garden') || str_contains($name, 'pool')) {
+                if (empty($category) && (str_contains($cat, 'garden') || str_contains($cat, 'pool') || str_contains($name, 'garden') || str_contains($name, 'pool'))) {
                     $score += 40;
                 }
-                if (str_contains($cat, 'neon') || str_contains($name, 'bend')) {
+                if (empty($category) && (str_contains($cat, 'neon') || str_contains($name, 'bend'))) {
                     $score += 20;
                 }
                 if (str_contains($desc, 'ip68') || str_contains($desc, 'ip67') || str_contains($desc, 'ip66') || str_contains($desc, 'ip65')) {
@@ -518,5 +526,196 @@ class ProductSearchAndFilterTool implements IChatTool
         }
 
         return array_values(array_unique($keywords));
+    }
+
+    /**
+     * Determine whether the query is too broad/vague to show specific products.
+     *
+     * @param  list<string>  $keywords
+     */
+    protected function isBroadCategoryQuery(
+        array $keywords,
+        string $category,
+        string $ipRating,
+        string $dimension,
+        string $dimming
+    ): bool {
+        if ($ipRating !== '' || $dimension !== '' || $dimming !== '') {
+            return false;
+        }
+
+        if ($keywords === []) {
+            return true;
+        }
+
+        // Environment modifier + concrete product category (e.g. "outdoor strip", "outdoor downlight")
+        // is a specific filtered search, not a generic category browse.
+        $environmentModifiers = ['outdoor', 'exterior', 'indoor', 'interior'];
+        if ($category !== '' && array_intersect($keywords, $environmentModifiers) !== []) {
+            return false;
+        }
+
+        $genericBroadTokens = [
+            'product', 'products', 'catalog', 'catalogue', 'range', 'ranges', 'category', 'categories',
+            'light', 'lighting', 'led', 'fixture', 'architectural', 'commercial', 'indoor', 'interior',
+            'outdoor', 'exterior', 'all', 'browse', 'view', 'see',
+            'downlight', 'strip', 'tape', 'flex', 'neon', 'profile', 'extrusion', 'linear',
+            'driver', 'power', 'supply', 'supplies', 'garden', 'pool', 'accessory',
+        ];
+
+        foreach ($keywords as $kw) {
+            if (preg_match('/\d/', $kw) === 1) {
+                return false;
+            }
+
+            if (! in_array($kw, $genericBroadTokens, true)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Build a category-level redirect payload with visual category cards.
+     *
+     * @param  list<string>  $keywords
+     * @return array<string, mixed>
+     */
+    protected function buildCategoryRedirectResponse(array $keywords, string $category, bool $isOutdoor): array
+    {
+        $categoryCards = $this->resolveCategoryCards($keywords, $category, $isOutdoor);
+
+        return [
+            'result' => [
+                'mode' => 'category_redirect',
+                'matched_count' => 0,
+                'detected_category' => $category,
+                'catalog_url' => url('/products'),
+                'categories' => array_map(fn (array $card): array => [
+                    'name' => $card['name'],
+                    'url' => $card['url'],
+                    'product_count' => $card['product_count'],
+                ], $categoryCards),
+                'products' => [],
+            ],
+            'cards' => [
+                'type' => 'categories_carousel',
+                'items' => $categoryCards,
+            ],
+        ];
+    }
+
+    /**
+     * Resolve matching visual category cards from the catalog's parent categories.
+     *
+     * @param  list<string>  $keywords
+     * @return list<array<string, mixed>>
+     */
+    protected function resolveCategoryCards(array $keywords, string $category, bool $isOutdoor): array
+    {
+        $parentCategories = ProductCatalog::parentCategories();
+
+        $keywordSynonyms = [
+            'strip' => ['strip', 'strips and flex', 'flex', 'tape'],
+            'tape' => ['strip', 'strips and flex', 'flex'],
+            'flex' => ['strip', 'strips and flex', 'neon'],
+            'neon' => ['neon'],
+            'profile' => ['profile', 'profiles', 'linear'],
+            'extrusion' => ['profile', 'profiles', 'linear'],
+            'linear' => ['linear', 'linear lights', 'profile', 'profiles'],
+            'driver' => ['driver', 'drivers'],
+            'power' => ['driver', 'drivers'],
+            'outdoor' => ['outdoor', 'outdoor & architectural', 'garden', 'pool'],
+            'exterior' => ['outdoor', 'outdoor & architectural', 'garden', 'pool'],
+            'garden' => ['garden', 'outdoor', 'outdoor & architectural'],
+            'pool' => ['pool', 'outdoor', 'outdoor & architectural'],
+            'downlight' => ['downlight', 'downlights'],
+            'accessory' => ['accessory', 'accessories'],
+        ];
+
+        $searchTerms = [];
+        if ($category !== '') {
+            $searchTerms[] = mb_strtolower($category);
+        } elseif ($isOutdoor) {
+            $searchTerms[] = 'outdoor';
+        }
+        foreach ($keywords as $kw) {
+            if ($category !== '' && in_array($kw, ['outdoor', 'exterior', 'indoor', 'interior'], true)) {
+                continue;
+            }
+            $searchTerms[] = $kw;
+            foreach ($keywordSynonyms[$kw] ?? [] as $syn) {
+                $searchTerms[] = $syn;
+            }
+        }
+        $searchTerms = array_values(array_unique(array_filter($searchTerms)));
+
+        $formatCard = function (string $title, string $body, string $imageUrl, string $href, ?int $count): array {
+            $cleanDesc = trim((string) preg_replace('/\s+/', ' ', strip_tags($body)));
+
+            return [
+                'type' => 'category_card',
+                'name' => $title,
+                'description' => $cleanDesc !== '' ? Str::limit($cleanDesc, 80) : "Browse {$title} range",
+                'image_url' => $imageUrl !== '' ? $imageUrl : asset('assets/bg_default.png'),
+                'url' => $href,
+                'product_count' => $count,
+            ];
+        };
+
+        if ($parentCategories !== []) {
+            $matched = [];
+            foreach ($parentCategories as $item) {
+                $titleLower = mb_strtolower((string) ($item['title'] ?? ''));
+                $bodyLower = mb_strtolower((string) ($item['body'] ?? ''));
+                $haystack = $titleLower.' '.$bodyLower;
+
+                foreach ($searchTerms as $term) {
+                    if ($term !== '' && str_contains($haystack, $term)) {
+                        $matched[] = $formatCard(
+                            (string) $item['title'],
+                            (string) ($item['body'] ?? ''),
+                            (string) ($item['image'] ?? ''),
+                            (string) ($item['href'] ?? url('/products')),
+                            isset($item['count']) ? (int) $item['count'] : null
+                        );
+                        break;
+                    }
+                }
+            }
+
+            if ($matched !== []) {
+                return array_slice($matched, 0, 6);
+            }
+
+            // Catalog-wide / general query: return top parent categories
+            return array_slice(array_map(
+                fn (array $item): array => $formatCard(
+                    (string) $item['title'],
+                    (string) ($item['body'] ?? ''),
+                    (string) ($item['image'] ?? ''),
+                    (string) ($item['href'] ?? url('/products')),
+                    isset($item['count']) ? (int) $item['count'] : null
+                ),
+                $parentCategories
+            ), 0, 6);
+        }
+
+        // Fallback when compiled tree is empty (e.g. isolated test environments)
+        $fallbackCategories = $category !== ''
+            ? [$category]
+            : ($isOutdoor ? ['Outdoor & Architectural', 'Garden Light', 'Pool Light'] : ['Profiles', 'Linear Lights', 'Strips and Flex', 'NEON', 'Outdoor & Architectural', 'Drivers']);
+
+        return array_map(
+            fn (string $name): array => $formatCard(
+                $name,
+                '',
+                asset('assets/bg_default.png'),
+                url('/products').'?category='.urlencode($name),
+                null
+            ),
+            $fallbackCategories
+        );
     }
 }

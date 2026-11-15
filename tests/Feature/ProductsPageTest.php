@@ -366,4 +366,24 @@ class ProductsPageTest extends TestCase
             'IP Rating' => 'IP20',
         ], $matchingProduct['product_features']);
     }
+
+    public function test_products_page_search_script_supports_tokenized_cob_strip_matching_and_relevance_sorting(): void
+    {
+        Product::factory()->create([
+            'airtable_id' => 'recCobStripPage',
+            'product_name' => 'Single Colour COB',
+            'category' => 'LED Strip',
+            'categories' => ['LED Strip'],
+            'category_path' => ['LED Strip'],
+        ]);
+
+        $response = $this->get('/products?category=LED+Strip');
+        $response->assertOk();
+
+        $html = (string) $response->getContent();
+        $this->assertStringContainsString('function normalizeSearchTokens', $html);
+        $this->assertStringContainsString('function tokenMatchesText', $html);
+        $this->assertStringContainsString('function scoreProductSearch', $html);
+        $this->assertStringContainsString('hasPositiveMatch', $html);
+    }
 }

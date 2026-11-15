@@ -6,6 +6,7 @@ namespace App\Mail;
 
 use App\Models\ChatMessage;
 use App\Models\ChatSession;
+use App\Services\Chat\ChatOrchestrator;
 use Illuminate\Bus\Queueable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Mail\Mailable;
@@ -53,6 +54,9 @@ class ChatTranscriptForwardedMail extends Mailable
     {
         return new Content(
             view: 'emails.chat-transcript-forwarded',
+            with: [
+                'disclaimerText' => ChatOrchestrator::getWidgetBranding()['disclaimer_text'],
+            ],
         );
     }
 }

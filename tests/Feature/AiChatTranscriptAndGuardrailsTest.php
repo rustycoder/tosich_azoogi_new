@@ -90,10 +90,15 @@ class AiChatTranscriptAndGuardrailsTest extends TestCase
         $this->assertSame('transcript_sent_card', $result['cards']['type']);
 
         Mail::assertSent(ChatTranscriptForwardedMail::class, function (ChatTranscriptForwardedMail $mail) use ($session) {
+            $rendered = $mail->render();
+            $disclaimer = ChatOrchestrator::getWidgetBranding()['disclaimer_text'];
+
             return $mail->session->id === $session->id &&
                    $mail->notes === 'Please confirm stock and lead time for 120m custom cutting.' &&
                    count($mail->messages) === 2 &&
-                   count($mail->quoteItems) === 1;
+                   count($mail->quoteItems) === 1 &&
+                   str_contains($rendered, 'Disclaimer:') &&
+                   str_contains($rendered, $disclaimer);
         });
     }
 

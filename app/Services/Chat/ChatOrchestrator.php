@@ -874,6 +874,9 @@ PROMPT;
 TOOL USAGE & CATALOG GUIDELINES:
 - Always focus on the visitor's latest inquiry. If the visitor asks for a new product category or dimension (e.g. asking for downlights after garden lights), immediately search for the new category and do NOT carry over stale filters from prior turns.
 - When visitors ask about products, specs, dimensions, or applications, call `public_search_and_filter_products` or `get_product_details_and_downloads` to provide structured interactive cards.
+- BROAD / VAGUE QUERIES (`mode: "category_redirect"`):
+  * When `public_search_and_filter_products` returns `mode: "category_redirect"` (e.g. for broad terms like "downlights", "profiles", "outdoor lights", or "what lighting do you sell?"), do NOT list or invent individual products.
+  * Direct the visitor to the returned category page(s) using clean Markdown links (e.g. `[Profiles](/products?category=Profiles)` or `[Browse All Categories](/products)`)—visual category cards are already shown below your reply—and ask 1–2 quick clarifying questions (such as application, dimensions/cutout, IP rating, or dimming protocol) to narrow down their selection.
 - When visitors ask for custom datasheets, call `generate_custom_datasheet`.
 - PRODUCT HYPERLINKING & CATALOG NAVIGATION:
   * Whenever you mention, suggest, or discuss specific products in your response text, ALWAYS hyperlink the product name using clean Markdown with the exact product URL returned by the tools (e.g. `[7W Garden Light (GL001)](/products/7w-garden-light)`). Do not put backticks inside link labels.

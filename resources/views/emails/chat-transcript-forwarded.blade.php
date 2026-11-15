@@ -153,6 +153,13 @@
                                 @endforelse
                             </div>
 
+                            @if (! empty($disclaimerText))
+                                <!-- Disclaimer -->
+                                <div style="margin-top: 16px; padding: 12px 16px; background-color: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 12px; line-height: 1.5; color: #4b5563;">
+                                    <strong style="color: #111827;">Disclaimer:</strong> {{ $disclaimerText }}
+                                </div>
+                            @endif
+
                             <!-- Dashboard Link -->
                             <div style="text-align: center; margin-top: 28px;">
                                 <a href="{{ url('/dashboard/ai/sessions') }}" style="display: inline-block; background-color: #0b0b0b; color: #ffffff; text-decoration: none; font-size: 13.5px; font-weight: 600; padding: 12px 24px; border-radius: 6px; letter-spacing: 0.3px;">
