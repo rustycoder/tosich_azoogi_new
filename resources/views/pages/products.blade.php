@@ -1595,36 +1595,123 @@
           renderGrid();
         }
 
+        function normalizeSearchTokens(query) {
+          var stemMap = {
+            strips: 'strip',
+            profiles: 'profile',
+            extrusions: 'extrusion',
+            downlights: 'downlight',
+            drivers: 'driver',
+            connectors: 'connector',
+            accessories: 'accessory',
+            lights: 'light',
+            floodlights: 'floodlight',
+            spikes: 'spike'
+          };
+          return query.split(/\s+/).map(function (w) {
+            var clean = w.replace(/^[^\w]+|[^\w]+$/g, '');
+            return stemMap[clean] || clean;
+          }).filter(Boolean);
+        }
+
+        function tokenMatchesText(token, text) {
+          if (!token || !text) return false;
+          if (token.length <= 3 && /^[a-z]+$/.test(token)) {
+            var re = new RegExp('(?:^|[^a-z])' + token + '(?:$|[^a-z])');
+            return re.test(text);
+          }
+          return text.indexOf(token) !== -1;
+        }
+
+        function scoreProductSearch(p, searchLower, tokens) {
+          var nameLower = String(p.name || '').toLowerCase();
+          var modelLower = String(p.modelName || '').toLowerCase();
+          var catLower = String(p.cat || '').toLowerCase();
+          var subLower = String(p.sub || '').toLowerCase();
+          var catPathLower = Array.isArray(p.category_path) ? p.category_path.join(' ').toLowerCase() : '';
+          var skuLower = String(p.sku || '').toLowerCase();
+
+          var specParts = [];
+          if (p.specs) {
+            for (var skey in p.specs) {
+              if (!p.specs.hasOwnProperty(skey)) continue;
+              var sval = p.specs[skey];
+              var valStr = Array.isArray(sval)
+                ? sval.map(function (item) { return (typeof item === 'object' && item !== null && item.value !== undefined) ? item.value : item; }).join(' ')
+                : ((typeof sval === 'object' && sval !== null && sval.value !== undefined) ? sval.value : String(sval));
+              specParts.push(valStr);
+            }
+          }
+          var specsLower = specParts.join(' ').toLowerCase();
+          var primaryText = [nameLower, modelLower, catLower, subLower, catPathLower].join(' ');
+          var combinedText = primaryText + ' ' + skuLower + ' ' + specsLower;
+
+          for (var i = 0; i < tokens.length; i++) {
+            if (!tokenMatchesText(tokens[i], combinedText)) {
+              return null;
+            }
+          }
+
+          var score = 0;
+          if (nameLower.indexOf(searchLower) !== -1 || modelLower.indexOf(searchLower) !== -1) {
+            score += 100;
+          } else if (primaryText.indexOf(searchLower) !== -1) {
+            score += 60;
+          }
+
+          var allInPrimary = tokens.every(function (t) { return tokenMatchesText(t, primaryText); });
+          if (allInPrimary) {
+            score += 50;
+          }
+
+          tokens.forEach(function (t) {
+            if (tokenMatchesText(t, nameLower) || tokenMatchesText(t, modelLower)) score += 20;
+            if (tokenMatchesText(t, catLower) || tokenMatchesText(t, subLower) || tokenMatchesText(t, catPathLower)) score += 15;
+            if (tokenMatchesText(t, skuLower)) score += 15;
+            if (tokenMatchesText(t, specsLower)) score += 5;
+          });
+
+          var wantsAccessory = tokens.some(function (t) {
+            return ['accessory', 'connector', 'joiner', 'coupler', 'clip', 'cap', 'bracket'].indexOf(t) !== -1;
+          });
+          var wantsProfile = tokens.some(function (t) {
+            return t === 'profile' || t === 'extrusion';
+          });
+
+          var isAccessory = catLower.indexOf('accessor') !== -1 || subLower.indexOf('accessor') !== -1 ||
+            nameLower.indexOf('connector') !== -1 || nameLower.indexOf('joiner') !== -1 ||
+            nameLower.indexOf('coupler') !== -1 || nameLower.indexOf('end cap') !== -1 ||
+            nameLower.indexOf('clip') !== -1 || nameLower.indexOf('mounting set') !== -1 ||
+            nameLower.indexOf('splicing kit') !== -1;
+
+          var isProfile = !isAccessory && (
+            catLower.indexOf('profile') !== -1 || subLower.indexOf('profile') !== -1 ||
+            nameLower.indexOf('profile') !== -1 || catLower.indexOf('extrusion') !== -1 ||
+            nameLower.indexOf('extrusion') !== -1
+          );
+
+          if (!wantsAccessory && isAccessory) {
+            score -= 120;
+          }
+          if (!wantsProfile && isProfile) {
+            score -= 80;
+          }
+
+          return score;
+        }
+
         function renderGrid() {
           var countEl = document.getElementById('resultCount');
           var grid = document.getElementById('productGrid');
           var searchLower = activeFilters.search.trim().toLowerCase();
+          var searchTokens = searchLower !== "" ? normalizeSearchTokens(searchLower) : [];
+          var searchScores = {};
 
           var filtered = products.filter(function (p) {
-            if (searchLower !== "") {
-              var matchSearch = p.name.toLowerCase().indexOf(searchLower) !== -1 ||
-                p.modelName.toLowerCase().indexOf(searchLower) !== -1 ||
-                p.sub.toLowerCase().indexOf(searchLower) !== -1 ||
-                p.cat.toLowerCase().indexOf(searchLower) !== -1 ||
-                (p.sku && p.sku.toLowerCase().indexOf(searchLower) !== -1) ||
-                (p.category_path && p.category_path.some(function (cp) {
-                  return cp.toLowerCase().indexOf(searchLower) !== -1;
-                }));
-
-              if (!matchSearch && p.specs) {
-                for (var skey in p.specs) {
-                  if (!p.specs.hasOwnProperty(skey)) continue;
-                  var sval = p.specs[skey];
-                  var valStr = Array.isArray(sval)
-                    ? sval.map(function (item) { return (typeof item === 'object' && item !== null && item.value !== undefined) ? item.value : item; }).join(' ')
-                    : ((typeof sval === 'object' && sval !== null && sval.value !== undefined) ? sval.value : String(sval));
-                  if (valStr.toLowerCase().indexOf(searchLower) !== -1) {
-                    matchSearch = true;
-                    break;
-                  }
-                }
-              }
-              if (!matchSearch) return false;
+            if (searchLower !== "" && searchTokens.length > 0) {
+              var sScore = scoreProductSearch(p, searchLower, searchTokens);
+              if (sScore === null) return false;
+              searchScores[p.id || p.name] = sScore;
             }
 
             if (activeFilters.categories.length > 0) {
@@ -1658,6 +1745,17 @@
             return true;
           });
 
+          if (searchLower !== "" && searchTokens.length > 0) {
+            var hasPositiveMatch = filtered.some(function (p) {
+              return (searchScores[p.id || p.name] || 0) > 0;
+            });
+            if (hasPositiveMatch) {
+              filtered = filtered.filter(function (p) {
+                return (searchScores[p.id || p.name] || 0) > 0;
+              });
+            }
+          }
+
           // Sort filtered products
           if (activeFilters.sort === 'name_asc') {
             filtered.sort(function (a, b) { return a.name.localeCompare(b.name); });
@@ -1665,6 +1763,11 @@
             filtered.sort(function (a, b) { return b.name.localeCompare(a.name); });
           } else if (activeFilters.sort === 'cat_asc') {
             filtered.sort(function (a, b) { return a.sub.localeCompare(b.sub) || a.name.localeCompare(b.name); });
+          } else if (searchLower !== "" && searchTokens.length > 0) {
+            filtered.sort(function (a, b) {
+              var scoreDiff = (searchScores[b.id || b.name] || 0) - (searchScores[a.id || a.name] || 0);
+              return scoreDiff !== 0 ? scoreDiff : a.name.localeCompare(b.name);
+            });
           }
 
           if (countEl) countEl.textContent = filtered.length;
