@@ -778,9 +778,54 @@
     border-color: var(--accent-2, #3aa028);
 }
 
+.azoogi-chat-btn-sm {
+    appearance: none;
+    -webkit-appearance: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.25;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    white-space: nowrap;
+}
+
+.azoogi-chat-btn-primary {
+    background: var(--chat-accent);
+    border-color: var(--chat-accent);
+    color: #0b0b0b;
+    box-shadow: 0 2px 10px var(--chat-accent-glow);
+}
+
+[data-theme="light"] .azoogi-chat-btn-primary {
+    color: #ffffff;
+}
+
+.azoogi-chat-btn-primary:hover {
+    background: var(--chat-accent-hover);
+    border-color: var(--chat-accent-hover);
+    transform: translateY(-1px);
+}
+
+.azoogi-chat-btn-outline {
+    background: var(--chat-card-bg);
+    border: 1px solid var(--chat-border);
+    color: var(--chat-text);
+}
+
 .azoogi-chat-btn-outline:hover {
     border-color: var(--chat-accent);
     color: var(--chat-accent);
+    background: rgba(103, 208, 78, 0.08);
+    transform: translateY(-1px);
 }
 
 /* Custom Datasheet Download Card */
