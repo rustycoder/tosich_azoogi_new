@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let safe = escapeHtml(text || '');
         safe = safe.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
         safe = safe.replace(/`([^`]+)`/g, '<code>$1</code>');
+        safe = safe.replace(/\[([^\]]+)\]\(((?:https?:\/\/|\/|mailto:)[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" style="color: var(--accent, #67d04e); text-decoration: underline;">$1</a>');
         safe = safe.replace(/\n/g, '<br>');
         return safe;
     };

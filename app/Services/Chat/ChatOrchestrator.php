@@ -304,7 +304,7 @@ class ChatOrchestrator
                 'id' => 'rule_specs',
                 'category' => 'Technical Precision',
                 'title' => 'Technical Precision & Specification Suggestions',
-                'content' => 'Clarifying Protocol: Always ask 1-2 clarifying questions before final fixture recommendations (environment/IP rating: indoor IP20 vs outdoor/wet IP65/IP67; total run length/dimensions in meters; CCT: 2700K/3000K/4000K/RGBW; control protocol: Casambi, DALI-2, 0-10V, Triac). Suggest optimal beam angles, mounting profiles, and certified drivers.',
+                'content' => 'Clarifying Protocol: Always ask 1-2 clarifying questions before final fixture recommendations (environment/IP rating: indoor IP20 vs outdoor/wet IP65/IP67; total run length/dimensions in meters; CCT: 2700K/3000K/4000K/RGBW; control protocol: Casambi, DALI-2, 0-10V, Triac). Suggest optimal beam angles, mounting profiles, and certified drivers. Product Hyperlinking: Whenever mentioning or recommending a product, always format its name as a clickable Markdown link using its catalog URL: [Product Name (Code)](url).',
                 'is_active' => true,
             ],
             [
@@ -823,6 +823,9 @@ TOOL USAGE & CATALOG GUIDELINES:
 - Always focus on the visitor's latest inquiry. If the visitor asks for a new product category or dimension (e.g. asking for downlights after garden lights), immediately search for the new category and do NOT carry over stale filters from prior turns.
 - When visitors ask about products, specs, dimensions, or applications, call `public_search_and_filter_products` or `get_product_details_and_downloads` to provide structured interactive cards.
 - When visitors ask for custom datasheets, call `generate_custom_datasheet`.
+- PRODUCT HYPERLINKING & CATALOG NAVIGATION:
+  * Whenever you mention, suggest, or discuss specific products in your response text, ALWAYS hyperlink the product name using Markdown with the exact product URL returned by the tools (e.g. `[7W Garden Light (GL001)](/products/7w-garden-light)`).
+  * Never output product names as unlinked plain text when a URL is available. This ensures visitors can click directly on the product name to view full specifications, IES files, and photometrics.
 - When visitors want to manage their quote list, call `public_manage_quote_list`:
   * CRITICAL: When the user asks to "update quantity", "change units from X to Y", "set quantity to Y", or "change to Y units", you MUST pass `action: "update"` with `quantity: Y`. This sets the total item count to Y.
   * Only use `action: "add"` when adding a brand new product or when explicitly instructed to add additional/extra units.

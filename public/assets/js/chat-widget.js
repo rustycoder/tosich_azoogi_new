@@ -1079,8 +1079,8 @@ document.addEventListener('DOMContentLoaded', () => {
         str = str.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>');
         str = str.replace(/(?<!_)_([^_]+)_(?!_)/g, '<em>$1</em>');
 
-        // 8. Markdown Links [text](url)
-        str = str.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="azoogi-chat-link">$1</a>');
+        // 8. Markdown Links [text](url) - supports absolute (https?://) and relative (/products/...) URLs
+        str = str.replace(/\[([^\]]+)\]\(((?:https?:\/\/|\/|mailto:)[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="azoogi-chat-link">$1</a>');
 
         // 9. Process line by line for structured lists & paragraphs
         const lines = str.split('\n');

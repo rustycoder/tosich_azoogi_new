@@ -583,6 +583,8 @@
     text-decoration: underline;
     text-underline-offset: 2px;
     font-weight: 500;
+    cursor: pointer;
+    word-break: break-word;
 }
 
 .azoogi-chat-bubble a.azoogi-chat-link:hover {

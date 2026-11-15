@@ -34,6 +34,7 @@ class AiChatTranscriptAndGuardrailsTest extends TestCase
         $this->assertStringContainsString('Strict Pricing Lockdown', $prompt);
         $this->assertStringContainsString('Azoogi Trade Portal', $prompt);
         $this->assertStringContainsString('Clarifying Protocol', $prompt);
+        $this->assertStringContainsString('PRODUCT HYPERLINKING', $prompt);
         $this->assertStringContainsString('public_send_chat_transcript_to_sales', $prompt);
     }
 
