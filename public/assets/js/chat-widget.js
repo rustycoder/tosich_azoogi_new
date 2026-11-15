@@ -1077,21 +1077,36 @@ document.addEventListener('DOMContentLoaded', () => {
         // 4. Inline code (`code`)
         str = str.replace(/`([^`]+)`/g, '<code class="azoogi-chat-inline-code">$1</code>');
 
-        // 5. Headings (### Level 3, ## Level 2, # Level 1)
+        // 5. Extract & protect Markdown Links [text](url) before bold/italics so URLs and target="_blank" are never mangled
+        const protectedLinks = [];
+        str = str.replace(/\[([^\]]+)\]\(((?:https?:\/\/|\/|mailto:)[^\s)]+)\)/g, (match, label, url) => {
+            const token = `@@AZOOGILINK${protectedLinks.length}@@`;
+            protectedLinks.push({ label, url });
+            return token;
+        });
+
+        // 6. Headings (### Level 3, ## Level 2, # Level 1)
         str = str.replace(/^###[ \t]+(.*)$/gm, '<h4 class="azoogi-chat-heading">$1</h4>');
         str = str.replace(/^##[ \t]+(.*)$/gm, '<h3 class="azoogi-chat-heading">$1</h3>');
         str = str.replace(/^#[ \t]+(.*)$/gm, '<h2 class="azoogi-chat-heading">$1</h2>');
 
-        // 6. Bold & Strong (**text** or __text__)
-        str = str.replace(/\*\*([^*]+)\*\*/g, '<strong class="azoogi-chat-bold">$1</strong>');
-        str = str.replace(/__([^_]+)__/g, '<strong class="azoogi-chat-bold">$1</strong>');
+        const applyInlineFormatting = (s) => s
+            .replace(/\*\*([^*]+)\*\*/g, '<strong class="azoogi-chat-bold">$1</strong>')
+            .replace(/__([^_]+)__/g, '<strong class="azoogi-chat-bold">$1</strong>')
+            .replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>')
+            .replace(/(?<!_)_([^_]+)_(?!_)/g, '<em>$1</em>');
 
-        // 7. Italics (*text* or _text_)
-        str = str.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>');
-        str = str.replace(/(?<!_)_([^_]+)_(?!_)/g, '<em>$1</em>');
+        // 7. Bold & Italics
+        str = applyInlineFormatting(str);
 
-        // 8. Markdown Links [text](url) - supports absolute (https?://) and relative (/products/...) URLs
-        str = str.replace(/\[([^\]]+)\]\(((?:https?:\/\/|\/|mailto:)[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="azoogi-chat-link">$1</a>');
+        // 8. Restore Markdown Links as clean clickable anchors (hiding the raw URL/slug)
+        protectedLinks.forEach(({ label, url }, idx) => {
+            const formattedLabel = applyInlineFormatting(label);
+            str = str.replace(
+                `@@AZOOGILINK${idx}@@`,
+                `<a href="${url}" target="_blank" rel="noopener noreferrer" class="azoogi-chat-link">${formattedLabel}</a>`
+            );
+        });
 
         // 9. Process line by line for structured lists & paragraphs
         const lines = str.split('\n');
