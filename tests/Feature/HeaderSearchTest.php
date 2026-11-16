@@ -60,6 +60,9 @@ class HeaderSearchTest extends TestCase
         $this->assertStringContainsString("getElementById('site-search-clear')", $script);
         $this->assertStringContainsString("input.value = ''", $script);
         $this->assertStringContainsString('AZOOGI_PRODUCTS.products', $script);
+        $this->assertStringContainsString('product.category_path', $script);
+        $this->assertStringContainsString('product.category_paths', $script);
+        $this->assertStringContainsString('tokens.every', $script);
         $this->assertStringContainsString('/products/', $script);
         $this->assertStringContainsString("window.addEventListener('quote:open', closeSearch)", $script);
     }

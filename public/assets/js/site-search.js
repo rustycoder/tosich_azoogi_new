@@ -42,6 +42,24 @@
     return Object.values(mappings).map((value) => String(value || '').trim()).filter(Boolean);
   }
 
+  function categoryPathValues(product) {
+    const values = [];
+
+    if (Array.isArray(product.category_path)) {
+      values.push(...product.category_path);
+    }
+
+    if (Array.isArray(product.category_paths)) {
+      product.category_paths.forEach((path) => {
+        if (Array.isArray(path)) {
+          values.push(...path);
+        }
+      });
+    }
+
+    return values;
+  }
+
   function haystack(product) {
     const parts = [
       product.product_name,
@@ -50,6 +68,7 @@
       product.category,
       product.product_short_description,
       ...(Array.isArray(product.categories) ? product.categories : []),
+      ...categoryPathValues(product),
       ...skuValues(product),
     ];
 
@@ -169,7 +188,13 @@
       return;
     }
 
-    currentMatches = publishedProducts().filter((product) => haystack(product).indexOf(term) !== -1).slice(0, RESULT_LIMIT);
+    const tokens = term.split(/\s+/).filter(Boolean);
+    currentMatches = publishedProducts()
+      .filter((product) => {
+        const text = haystack(product);
+        return tokens.every((token) => text.indexOf(token) !== -1);
+      })
+      .slice(0, RESULT_LIMIT);
 
     if (currentMatches.length === 0) {
       results.hidden = false;
