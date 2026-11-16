@@ -160,7 +160,7 @@
   }
 
   function countItems(items) {
-    return items.reduce((sum, item) => sum + (Number(item.qty) || 1), 0);
+    return Array.isArray(items) ? items.length : 0;
   }
 
   function isFallbackImage(img) {
