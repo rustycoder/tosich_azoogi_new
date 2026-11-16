@@ -255,7 +255,7 @@
                                             @endphp
                                             <a href="{{ $pUrl }}" target="_blank" rel="noopener noreferrer" class="prod-card">
                                                 <div class="prod-card-img">
-                                                    <img src="{{ $pImg !== '' ? $pImg : '/assets/bg_default.png' }}" alt="{{ $p['name'] ?? 'Product' }}" class="prod-swatch{{ $isFallback ? ' is-fallback' : '' }}" loading="lazy">
+                                                    <img src="{{ $pImg !== '' ? $pImg : '/assets/bg_default.png' }}" alt="{{ $p['name'] ?? 'Product' }}" class="prod-swatch{{ $isFallback ? ' is-fallback' : '' }}" loading="lazy" onerror="this.onerror=null; this.src='/assets/bg_default.png';">
                                                 </div>
                                                 <div class="prod-card-title">
                                                     <div class="prod-card-title-text">
@@ -281,7 +281,7 @@
                                             @endphp
                                             <a href="{{ $cUrl }}" target="_blank" rel="noopener noreferrer" class="prod-card azoogi-chat-category-card">
                                                 <div class="prod-card-img">
-                                                    <img src="{{ $cImg !== '' ? $cImg : '/assets/bg_default.png' }}" alt="{{ $c['name'] ?? 'Category' }}" class="prod-swatch{{ $isFallback ? ' is-fallback' : '' }}" loading="lazy">
+                                                    <img src="{{ $cImg !== '' ? $cImg : '/assets/bg_default.png' }}" alt="{{ $c['name'] ?? 'Category' }}" class="prod-swatch{{ $isFallback ? ' is-fallback' : '' }}" loading="lazy" onerror="this.onerror=null; this.src='/assets/bg_default.png';">
                                                     <span class="azoogi-chat-category-badge">{{ $countLabel }}</span>
                                                 </div>
                                                 <div class="prod-card-title">

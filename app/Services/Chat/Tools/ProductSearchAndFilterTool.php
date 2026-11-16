@@ -161,7 +161,7 @@ class ProductSearchAndFilterTool implements IChatTool
         $products = $scored->take($limit);
 
         $productCards = $products->map(function (Product $p) {
-            $coverUrl = $p->coverUrl();
+            $coverUrl = $p->storefrontImageUrl();
             if (empty($coverUrl) && ! empty($p->cover)) {
                 $coverUrl = str_starts_with($p->cover, 'http') ? $p->cover : asset($p->cover);
             }

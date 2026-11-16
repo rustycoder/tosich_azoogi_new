@@ -6,6 +6,7 @@ namespace Tests\Feature;
 
 use App\Models\ChatMessage;
 use App\Models\ChatSession;
+use App\Models\Product;
 use App\Models\User;
 use Database\Seeders\AdminUserSeeder;
 use Database\Seeders\PageSeeder;
@@ -251,5 +252,51 @@ class DashboardChatTest extends TestCase
             ->assertSee('Single Colour COB')
             ->assertSee('Neon Flex')
             ->assertSee('37 Products');
+    }
+
+    public function test_admin_transcript_replaces_expired_airtable_image_urls_with_stable_storefront_route(): void
+    {
+        $product = Product::create([
+            'airtable_id' => 'rec_airtable_img_test',
+            'product_name' => '34.4mm (W) x 14mm (H)',
+            'slug' => 'trimless-3414',
+            'status' => 'active',
+            'category' => 'Trimless Profiles',
+            'product_code' => 'TP3414-SS-BEND',
+            'cover' => 'https://v5.airtableusercontent.com/v3/u/expired-token/image.png',
+        ]);
+
+        $session = ChatSession::create([
+            'uuid' => 'e1f2a3b4-c5d6-7890-ef01-901234567890',
+            'lead_name' => 'Expired Img Test',
+            'status' => 'active',
+        ]);
+
+        ChatMessage::create([
+            'chat_session_id' => $session->id,
+            'sender' => 'assistant',
+            'content' => 'Here is the profile.',
+            'cards_payload' => [
+                [
+                    'type' => 'products_carousel',
+                    'items' => [
+                        [
+                            'type' => 'product_card',
+                            'id' => $product->id,
+                            'name' => '34.4mm (W) x 14mm (H)',
+                            'category' => 'Trimless Profiles',
+                            'image_url' => 'https://v5.airtableusercontent.com/v3/u/expired-token/image.png',
+                            'url' => '/products/trimless-3414',
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $response = $this->actingAs($this->admin)->get("/dashboard/chat-sessions/{$session->id}");
+
+        $response->assertOk()
+            ->assertDontSee('v5.airtableusercontent.com')
+            ->assertSee('/products/trimless-3414.webp');
     }
 }
