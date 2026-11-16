@@ -600,4 +600,44 @@ class ChatApiTest extends TestCase
         $this->assertCount(1, $normalized[0]['items']);
         $this->assertSame('Neon Flex', $normalized[0]['items'][0]['name']);
     }
+
+    public function test_sibling_profiles_sharing_a_slug_receive_distinct_urls_resolving_to_each_sku(): void
+    {
+        Product::create([
+            'airtable_id' => 'rec_pr115',
+            'product_name' => 'Bendable Plaster Profile',
+            'slug' => 'bendable-plaster-profile',
+            'status' => 'active',
+            'category' => 'Profiles',
+            'category_path' => ['Profiles', 'Plaster'],
+            'product_code' => 'PR115',
+            'product_description' => '61.5mm bendable plaster aluminium profile.',
+        ]);
+
+        Product::create([
+            'airtable_id' => 'rec_tp3414',
+            'product_name' => 'Bendable Plaster Profile',
+            'slug' => 'bendable-plaster-profile',
+            'status' => 'active',
+            'category' => 'Profiles',
+            'category_path' => ['Profiles', 'Plaster'],
+            'product_code' => 'TP3414-SS-BEND',
+            'product_description' => '34.4mm (W) x 14mm (H) bendable plaster aluminium profile.',
+        ]);
+
+        /** @var ProductSearchAndFilterTool $tool */
+        $tool = app(ProductSearchAndFilterTool::class);
+        $result = $tool->execute(['query' => 'bendable plaster profile']);
+
+        $productsByCode = collect($result['result']['products'])->keyBy('code');
+        $this->assertArrayHasKey('PR115', $productsByCode->all());
+        $this->assertArrayHasKey('TP3414-SS-BEND', $productsByCode->all());
+
+        $pr115Url = $productsByCode['PR115']['url'];
+        $tp3414Url = $productsByCode['TP3414-SS-BEND']['url'];
+        $this->assertNotSame($pr115Url, $tp3414Url);
+
+        $this->get($pr115Url)->assertOk()->assertSee('PR115');
+        $this->get($tp3414Url)->assertOk()->assertSee('TP3414-SS-BEND');
+    }
 }

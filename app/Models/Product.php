@@ -77,13 +77,40 @@ class Product extends Model
 
     public function publicPath(): string
     {
-        if (! empty($this->slug)) {
-            $encoded = implode('/', array_map('rawurlencode', explode('/', (string) $this->slug)));
+        $slug = trim((string) $this->slug);
+        if ($slug !== '') {
+            $hasDuplicateSlug = static::query()
+                ->where('slug', $slug)
+                ->when($this->id !== null, fn ($q) => $q->where('id', '!=', $this->id))
+                ->exists();
 
-            return '/products/'.ltrim($encoded, '/');
+            if (! $hasDuplicateSlug) {
+                $encoded = implode('/', array_map('rawurlencode', explode('/', $slug)));
+
+                return '/products/'.ltrim($encoded, '/');
+            }
         }
 
-        return '/product-detail?id='.rawurlencode((string) $this->airtable_id);
+        $code = trim((string) $this->product_code);
+        if ($code !== '') {
+            $hasDuplicateCode = static::query()
+                ->whereRaw('LOWER(product_code) = ?', [mb_strtolower($code)])
+                ->when($this->id !== null, fn ($q) => $q->where('id', '!=', $this->id))
+                ->exists();
+            $collidesWithSlug = static::query()
+                ->where('slug', $code)
+                ->exists();
+
+            if (! $hasDuplicateCode && ! $collidesWithSlug) {
+                return '/products/'.rawurlencode($code);
+            }
+        }
+
+        if (! empty($this->airtable_id)) {
+            return '/product-detail?id='.rawurlencode((string) $this->airtable_id);
+        }
+
+        return '/products/'.rawurlencode((string) $this->id);
     }
 
     public function coverUrl(?int $index = null): string
