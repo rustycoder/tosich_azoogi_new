@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Models\ChatMessage;
 use App\Models\ChatSession;
 use App\Models\User;
 use Database\Seeders\AdminUserSeeder;
@@ -196,5 +197,59 @@ class DashboardChatTest extends TestCase
         $responseFav->assertOk()
             ->assertSee('Starred Lead')
             ->assertDontSee('Unread Lead');
+    }
+
+    public function test_admin_transcript_renders_accent_links_product_cards_and_category_cards(): void
+    {
+        $session = ChatSession::create([
+            'uuid' => 'd0e1f2a3-b4c5-6789-def0-890123456789',
+            'lead_name' => 'Transcript Viewer',
+            'status' => 'active',
+        ]);
+
+        ChatMessage::create([
+            'chat_session_id' => $session->id,
+            'sender' => 'assistant',
+            'content' => 'Check out [Single Colour COB](/products/single-colour-cob) or browse [Neon Flex](/products?category=Neon+Flex).',
+            'cards_payload' => [
+                [
+                    'type' => 'products_carousel',
+                    'items' => [
+                        [
+                            'type' => 'product_card',
+                            'id' => 1,
+                            'name' => 'Single Colour COB',
+                            'category' => 'LED Strip',
+                            'image_url' => '/assets/bg_default.png',
+                            'url' => '/products/single-colour-cob',
+                        ],
+                    ],
+                ],
+                [
+                    'type' => 'categories_carousel',
+                    'items' => [
+                        [
+                            'type' => 'category_card',
+                            'name' => 'Neon Flex',
+                            'description' => 'Silicone-encased outdoor neon.',
+                            'image_url' => '/assets/bg_default.png',
+                            'url' => '/products?category=Neon+Flex',
+                            'product_count' => 37,
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $response = $this->actingAs($this->admin)->get("/dashboard/chat-sessions/{$session->id}");
+
+        $response->assertOk()
+            ->assertSee('.dash-transcript-content a', false)
+            ->assertSee('chat-widget.css', false)
+            ->assertSee('azoogi-chat-products-carousel', false)
+            ->assertSee('azoogi-chat-categories-carousel', false)
+            ->assertSee('Single Colour COB')
+            ->assertSee('Neon Flex')
+            ->assertSee('37 Products');
     }
 }

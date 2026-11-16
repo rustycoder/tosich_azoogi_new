@@ -3,6 +3,39 @@
 @section('title', 'Chat Session Transcript & Cost Audit')
 
 @section('content')
+<link rel="stylesheet" href="{{ versioned_asset('assets/css/chat-widget.css') }}">
+<style>
+.dash-transcript-content a {
+    color: var(--accent, #67d04e);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 500;
+}
+.dash-transcript-content a:hover {
+    opacity: 0.85;
+}
+.dash-transcript-content p:last-child {
+    margin-bottom: 0;
+}
+.dash-transcript-cards {
+    max-width: 88%;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    --chat-border: var(--dash-line, rgba(255, 255, 255, 0.12));
+    --chat-text: var(--dash-ink, var(--ink));
+    --chat-muted: var(--dash-muted, var(--muted));
+    --chat-accent: var(--accent, #67d04e);
+}
+.dash-transcript-cards .azoogi-chat-products-carousel {
+    margin-top: 4px;
+    padding-bottom: 10px;
+}
+.dash-transcript-cards .prod-card {
+    text-decoration: none;
+    color: inherit;
+}
+</style>
 <div class="dash-head">
     <div class="dash-crumb">
         <a href="{{ route('dashboard.home') }}">Dashboard</a>
@@ -203,6 +236,141 @@
                             {!! \Illuminate\Support\Str::markdown($msg->content) !!}
                         </div>
                     </div>
+
+                    <!-- Interactive Cards Rendered Exactly Like User Chat -->
+                    @if (! $isUser && is_array($msg->cards_payload) && count($msg->cards_payload) > 0)
+                        <div class="dash-transcript-cards">
+                            @foreach ($msg->cards_payload as $card)
+                                @php
+                                    $cardType = is_array($card) ? ($card['type'] ?? '') : '';
+                                @endphp
+
+                                @if ($cardType === 'products_carousel' && ! empty($card['items']) && is_array($card['items']))
+                                    <div class="azoogi-chat-products-carousel">
+                                        @foreach ($card['items'] as $p)
+                                            @php
+                                                $pUrl = (string) ($p['url'] ?? ('/products/' . urlencode((string) ($p['slug'] ?? $p['id'] ?? ''))));
+                                                $pImg = (string) ($p['image_url'] ?? '/assets/bg_default.png');
+                                                $isFallback = $pImg === '' || str_contains($pImg, 'placeholder') || str_contains($pImg, 'default') || str_contains($pImg, 'bg_default');
+                                            @endphp
+                                            <a href="{{ $pUrl }}" target="_blank" rel="noopener noreferrer" class="prod-card">
+                                                <div class="prod-card-img">
+                                                    <img src="{{ $pImg !== '' ? $pImg : '/assets/bg_default.png' }}" alt="{{ $p['name'] ?? 'Product' }}" class="prod-swatch{{ $isFallback ? ' is-fallback' : '' }}" loading="lazy">
+                                                </div>
+                                                <div class="prod-card-title">
+                                                    <div class="prod-card-title-text">
+                                                        @if (! empty($p['category']))
+                                                            <span class="cat-label">{{ $p['category'] }}</span>
+                                                        @endif
+                                                        <span class="prod-card-name">{{ $p['name'] ?? '' }}</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                @elseif ($cardType === 'categories_carousel' && ! empty($card['items']) && is_array($card['items']))
+                                    <div class="azoogi-chat-products-carousel azoogi-chat-categories-carousel">
+                                        @foreach ($card['items'] as $c)
+                                            @php
+                                                $cUrl = (string) ($c['url'] ?? ('/products?category=' . urlencode((string) ($c['name'] ?? ''))));
+                                                $cImg = (string) ($c['image_url'] ?? '/assets/bg_default.png');
+                                                $isFallback = $cImg === '' || str_contains($cImg, 'placeholder') || str_contains($cImg, 'default') || str_contains($cImg, 'bg_default');
+                                                $countLabel = isset($c['product_count']) && (int) $c['product_count'] > 0
+                                                    ? ((int) $c['product_count']) . ' Products'
+                                                    : 'Category';
+                                            @endphp
+                                            <a href="{{ $cUrl }}" target="_blank" rel="noopener noreferrer" class="prod-card azoogi-chat-category-card">
+                                                <div class="prod-card-img">
+                                                    <img src="{{ $cImg !== '' ? $cImg : '/assets/bg_default.png' }}" alt="{{ $c['name'] ?? 'Category' }}" class="prod-swatch{{ $isFallback ? ' is-fallback' : '' }}" loading="lazy">
+                                                    <span class="azoogi-chat-category-badge">{{ $countLabel }}</span>
+                                                </div>
+                                                <div class="prod-card-title">
+                                                    <div class="prod-card-title-text">
+                                                        <span class="cat-label">Browse Range</span>
+                                                        <span class="prod-card-name">{{ $c['name'] ?? '' }}</span>
+                                                        @if (! empty($c['description']))
+                                                            <span class="azoogi-chat-category-desc">{{ $c['description'] }}</span>
+                                                        @endif
+                                                    </div>
+                                                    <span class="azoogi-chat-category-arrow" aria-hidden="true">→</span>
+                                                </div>
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                @elseif ($cardType === 'datasheet_download_card' && ! empty($card['data']))
+                                    @php $ds = $card['data']; @endphp
+                                    <div class="azoogi-chat-download-card">
+                                        <div class="azoogi-chat-download-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V8z"/><polyline points="14,3 14,8 19,8"/></svg>
+                                        </div>
+                                        <div class="azoogi-chat-download-meta">
+                                            <div class="azoogi-chat-download-title">{{ $ds['product_name'] ?? 'Datasheet' }}</div>
+                                            <div class="azoogi-chat-download-sub">Custom PDF Specification Sheet</div>
+                                        </div>
+                                        @if (! empty($ds['download_url']))
+                                            <a href="{{ $ds['download_url'] }}" target="_blank" rel="noopener noreferrer" class="azoogi-chat-btn-sm azoogi-chat-btn-primary" style="padding: 8px 12px; text-decoration: none;">
+                                                Download PDF
+                                            </a>
+                                        @endif
+                                    </div>
+                                @elseif ($cardType === 'quote_cart_card')
+                                    @php $qItems = is_array($card['items'] ?? null) ? $card['items'] : []; @endphp
+                                    <div class="azoogi-chat-starters" style="margin-top: 4px;">
+                                        <div class="azoogi-chat-starters-title">Project Quote Request List ({{ count($qItems) }})</div>
+                                        <div style="margin: 6px 0;">
+                                            @forelse ($qItems as $it)
+                                                <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; padding: 5px 0; border-bottom: 1px solid var(--chat-border);">
+                                                    <span><strong>{{ $it['qty'] ?? $it['quantity'] ?? 1 }}x</strong> {{ $it['name'] ?? '' }}</span>
+                                                    <span style="color: var(--chat-accent); font-family: monospace; font-size: 10.5px;">{{ $it['sku'] ?? $it['code'] ?? '' }}</span>
+                                                </div>
+                                            @empty
+                                                <p style="font-size: 11px; color: var(--chat-muted); margin: 4px 0;">Quote list was empty at this turn.</p>
+                                            @endforelse
+                                        </div>
+                                        @if (! empty($card['quote_url']))
+                                            <a href="{{ $card['quote_url'] }}" target="_blank" rel="noopener noreferrer" class="azoogi-chat-btn-sm azoogi-chat-btn-primary" style="display: inline-block; margin-top: 6px; text-decoration: none; padding: 7px 12px;">
+                                                Open Quote Page &rarr;
+                                            </a>
+                                        @endif
+                                    </div>
+                                @elseif ($cardType === 'product_detail_card' && ! empty($card['data']))
+                                    @php $pd = $card['data']; @endphp
+                                    <div class="azoogi-chat-starters" style="margin-top: 4px;">
+                                        <div style="font-weight: 600; font-size: 13px; color: var(--chat-text);">{{ $pd['name'] ?? '' }} {{ ! empty($pd['code']) ? '(' . $pd['code'] . ')' : '' }}</div>
+                                        @if (! empty($pd['description']))
+                                            <p style="font-size: 12px; color: var(--chat-muted); margin: 6px 0;">{{ $pd['description'] }}</p>
+                                        @endif
+                                        @if (! empty($pd['dimming']))
+                                            <div style="font-size: 11.5px; color: var(--chat-accent); margin-bottom: 6px;"><strong>Control:</strong> {{ $pd['dimming'] }}</div>
+                                        @endif
+                                        @if (! empty($pd['downloads']) && is_array($pd['downloads']))
+                                            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                                                @foreach ($pd['downloads'] as $d)
+                                                    <a href="{{ $d['url'] ?? '#' }}" target="_blank" rel="noopener noreferrer" class="azoogi-chat-btn-sm azoogi-chat-btn-outline" style="text-decoration: none; margin-top: 4px; display: inline-flex; align-items: center; gap: 4px;">
+                                                        {{ $d['type'] ?? 'Download' }}
+                                                    </a>
+                                                @endforeach
+                                            </div>
+                                        @endif
+                                    </div>
+                                @elseif ($cardType === 'lead_confirmation_card')
+                                    <div class="azoogi-chat-starters" style="margin-top: 4px;">
+                                        <div style="font-weight: 600; font-size: 12.5px; color: var(--chat-accent);">Enquiry Submitted ({{ ucfirst((string) ($card['enquiry_type'] ?? 'enquiry')) }})</div>
+                                        <div style="font-size: 12px; color: var(--chat-muted); margin-top: 4px;">
+                                            {{ $card['name'] ?? '' }} {{ ! empty($card['email']) ? '(' . $card['email'] . ')' : '' }}
+                                        </div>
+                                    </div>
+                                @elseif ($cardType === 'transcript_sent_card')
+                                    <div class="azoogi-chat-starters" style="margin-top: 4px;">
+                                        <div style="font-weight: 600; font-size: 12.5px; color: var(--chat-accent);">Transcript Forwarded to Sales</div>
+                                        @if (! empty($card['recipient']))
+                                            <div style="font-size: 12px; color: var(--chat-muted); margin-top: 4px;">Recipient: {{ $card['recipient'] }}</div>
+                                        @endif
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    @endif
 
                     <!-- Token Usage & Cost Audit Pill for Assistant Turns -->
                     @if (! $isUser && ($msg->tokens_used > 0 || $msg->estimated_cost > 0 || $msg->prompt_tokens > 0))
