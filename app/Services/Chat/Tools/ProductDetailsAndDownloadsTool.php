@@ -37,7 +37,7 @@ class ProductDetailsAndDownloadsTool implements IChatTool
     {
         $id = trim((string) ($arguments['product_identifier'] ?? ''));
 
-        $product = Product::query()
+        $baseQuery = Product::query()
             ->when(app()->isProduction(), function ($query) {
                 $query->where(function ($q) {
                     $q->whereNull('status')
@@ -46,17 +46,28 @@ class ProductDetailsAndDownloadsTool implements IChatTool
                         ->orWhere('status', 'published')
                         ->orWhere('status', 'active');
                 });
-            })
-            ->where(function ($q) use ($id) {
+            });
+
+        $idLower = mb_strtolower($id);
+        $product = (clone $baseQuery)
+            ->where(function ($q) use ($id, $idLower) {
                 if (is_numeric($id)) {
                     $q->where('id', (int) $id);
                 }
-                $q->orWhere('product_code', $id)
-                    ->orWhere('slug', $id)
-                    ->orWhere('airtable_id', $id)
-                    ->orWhere('product_name', 'like', "%{$id}%");
+                $q->orWhereRaw('LOWER(product_code) = ?', [$idLower])
+                    ->orWhereRaw('LOWER(slug) = ?', [$idLower])
+                    ->orWhere('airtable_id', $id);
             })
             ->first();
+
+        if (! $product) {
+            $product = (clone $baseQuery)
+                ->where(function ($q) use ($id) {
+                    $q->where('sku_mappings', 'like', "%{$id}%")
+                        ->orWhere('product_name', 'like', "%{$id}%");
+                })
+                ->first();
+        }
 
         if (! $product) {
             return [
@@ -95,7 +106,7 @@ class ProductDetailsAndDownloadsTool implements IChatTool
             ];
         }
 
-        $coverUrl = $product->coverUrl();
+        $coverUrl = $product->storefrontImageUrl();
         if (empty($coverUrl) && ! empty($product->cover)) {
             $coverUrl = str_starts_with($product->cover, 'http') ? $product->cover : asset($product->cover);
         }

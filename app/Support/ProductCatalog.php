@@ -71,7 +71,15 @@ class ProductCatalog
                     $count++;
 
                     if ($image === null && ! empty($product['product_images'][0])) {
-                        $image = (string) $product['product_images'][0];
+                        $rawImg = (string) $product['product_images'][0];
+                        $host = strtolower((string) parse_url($rawImg, PHP_URL_HOST));
+                        $identifier = (string) (($product['slug'] ?? '') ?: ($product['airtable_id'] ?? ''));
+
+                        if ($identifier !== '' && (str_ends_with($host, 'airtableusercontent.com') || str_ends_with($host, 'airtable.com'))) {
+                            $image = route('products.image', ['identifier' => $identifier, 'format' => 'webp'], false);
+                        } else {
+                            $image = $rawImg;
+                        }
                     }
                 }
             }

@@ -96,7 +96,7 @@ class ChatController extends Controller
                     ->first();
 
                 $canonicalId = $resolvedProduct ? (string) $resolvedProduct->id : $rawId;
-                $coverUrl = $resolvedProduct ? $resolvedProduct->coverUrl() : null;
+                $coverUrl = $resolvedProduct ? $resolvedProduct->storefrontImageUrl() : null;
 
                 $syncedList[$canonicalId] = [
                     'id' => $canonicalId,
@@ -182,8 +182,8 @@ class ChatController extends Controller
         $qty = (int) ($validated['quantity'] ?? 1);
         $quoteList = session()->get('visitor_quote_list', []);
 
-        $coverUrl = null;
-        if (! empty($product->cover)) {
+        $coverUrl = $product->storefrontImageUrl();
+        if (empty($coverUrl) && ! empty($product->cover)) {
             $coverUrl = str_starts_with($product->cover, 'http') ? $product->cover : asset($product->cover);
         }
 

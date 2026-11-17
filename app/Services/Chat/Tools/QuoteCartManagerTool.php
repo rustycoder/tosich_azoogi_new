@@ -102,7 +102,7 @@ class QuoteCartManagerTool implements IChatTool
             }
 
             $prodKey = (string) $product->id;
-            $coverUrl = $product->coverUrl();
+            $coverUrl = $product->storefrontImageUrl();
             if (empty($coverUrl) && ! empty($product->cover)) {
                 $coverUrl = str_starts_with($product->cover, 'http') ? $product->cover : asset($product->cover);
             }

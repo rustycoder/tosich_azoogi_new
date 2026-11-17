@@ -442,7 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${catLabel}
                             <span class="prod-card-name">${escapeHtml(p.name)}</span>
                         </div>
-                        <button class="add-quote-btn js-add-quote" type="button" aria-label="Add to quote" data-id="${p.id}" data-name="${escapeHtml(p.name)}" data-sku="${escapeHtml(p.code || '')}" data-image="${escapeHtml(p.image_url || '')}" data-url="${escapeHtml(detailUrl)}" onclick="event.stopPropagation();">+</button>
+                        <button class="add-quote-btn js-add-quote" type="button" aria-label="Add to quote" data-id="${p.id}" data-airtable-id="${escapeHtml(p.airtable_id || '')}" data-name="${escapeHtml(p.name)}" data-sku="${escapeHtml(p.code || '')}" data-image="${escapeHtml(p.image_url || '')}" data-url="${escapeHtml(detailUrl)}" onclick="event.stopPropagation();">+</button>
                     </div>
                 </div>
             `;
@@ -614,6 +614,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', async (e) => {
                 e.stopPropagation();
                 const id = btn.getAttribute('data-id');
+                const airtableId = btn.getAttribute('data-airtable-id') || '';
                 const name = btn.getAttribute('data-name');
                 const sku = btn.getAttribute('data-sku') || '';
                 const image = btn.getAttribute('data-image') || '';
@@ -624,7 +625,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Synchronize with website quote drawer / storage
                 if (window.AzoogiQuote && typeof window.AzoogiQuote.add === 'function') {
                     window.AzoogiQuote.add({
-                        id: id || sku || name,
+                        id: airtableId || id || sku || name,
+                        db_id: id,
                         name: name,
                         sku: sku,
                         image: image,

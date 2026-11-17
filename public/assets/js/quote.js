@@ -261,7 +261,18 @@
     rememberDetails({ ...next, id });
     const stored = readStored();
     const key = itemKey({ id, sku: next.sku });
-    const existing = stored.find((entry) => itemKey(entry) === key);
+    const candidateKeys = [
+      cleanStr(key),
+      cleanStr(id),
+      cleanStr(next.db_id),
+      cleanStr(primarySku(next.sku || next.code)),
+    ].filter(Boolean);
+
+    const existing = stored.find((entry) => {
+      const entryKey = cleanStr(itemKey(entry));
+      const entryId = cleanStr(entry.id);
+      return candidateKeys.includes(entryKey) || candidateKeys.includes(entryId);
+    });
 
     if (existing) {
       existing.qty = (Number(existing.qty) || 1) + 1;
@@ -601,7 +612,7 @@
       }
 
       const cardBtn = event.target.closest('.add-quote-btn');
-      if (cardBtn) {
+      if (cardBtn && !cardBtn.classList.contains('js-add-quote')) {
         const item = extractFromCard(cardBtn);
         if (!item) {
           return;

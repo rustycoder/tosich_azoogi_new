@@ -284,6 +284,7 @@ class ProductSearchAndFilterTool implements IChatTool
                     $q->orWhere('product_name', 'like', "%{$kw}%")
                         ->orWhere('category', 'like', "%{$kw}%")
                         ->orWhere('product_code', 'like', "%{$kw}%")
+                        ->orWhere('sku_mappings', 'like', "%{$kw}%")
                         ->orWhere('product_description', 'like', "%{$kw}%");
                 }
                 $hasCondition = true;
@@ -310,7 +311,8 @@ class ProductSearchAndFilterTool implements IChatTool
             $catPath = mb_strtolower(is_array($p->category_path) ? implode(' ', $p->category_path) : (string) $p->category_path);
             $desc = mb_strtolower((string) $p->product_description);
             $featuresText = mb_strtolower(is_array($p->product_features) ? json_encode($p->product_features) : (string) $p->product_features);
-            $code = mb_strtolower((string) $p->product_code);
+            $code = mb_strtolower(trim((string) $p->product_code));
+            $skuMappingsText = mb_strtolower(is_array($p->sku_mappings) ? implode(' ', array_map(fn ($v) => is_scalar($v) ? (string) $v : json_encode($v), $p->sku_mappings)) : (string) $p->sku_mappings);
 
             // Identify non-fixture product types first so category expansion does not falsely boost them
             $wantsDriver = $this->wantsDriverOrControl($keywords);
@@ -410,13 +412,18 @@ class ProductSearchAndFilterTool implements IChatTool
 
             // Keyword matches
             foreach ($keywords as $kw) {
+                if ($code !== '' && $code === $kw) {
+                    $score += 500;
+                } elseif ($code !== '' && str_contains($code, $kw)) {
+                    $score += 35;
+                }
+                if ($skuMappingsText !== '' && str_contains($skuMappingsText, $kw)) {
+                    $score += 120;
+                }
                 if (str_contains($name, $kw)) {
                     $score += 20;
                 }
                 if (str_contains($cat, $kw)) {
-                    $score += 15;
-                }
-                if (str_contains($code, $kw)) {
                     $score += 15;
                 }
                 if (str_contains($desc, $kw)) {

@@ -9,6 +9,7 @@ use App\Models\ChatSession;
 use App\Models\LlmFeed;
 use App\Models\Product;
 use App\Services\Chat\ChatOrchestrator;
+use App\Services\Chat\Tools\ProductDetailsAndDownloadsTool;
 use App\Services\Chat\Tools\ProductSearchAndFilterTool;
 use App\Services\Chat\Tools\QuoteCartManagerTool;
 use Database\Seeders\PageSeeder;
@@ -639,5 +640,69 @@ class ChatApiTest extends TestCase
 
         $this->get($pr115Url)->assertOk()->assertSee('PR115');
         $this->get($tp3414Url)->assertOk()->assertSee('TP3414-SS-BEND');
+    }
+
+    public function test_exact_sku_query_ranks_exact_product_code_first_and_uses_stable_image_route(): void
+    {
+        Product::create([
+            'airtable_id' => 'rec_tp5213',
+            'product_name' => '52.6mm (W) x 13mm (H) Bendable Profile',
+            'slug' => 'tp5213-ds-bend',
+            'status' => 'active',
+            'category' => 'Trimless Profiles',
+            'product_code' => 'TP5213-DS-BEND',
+            'product_description' => '52.6mm bendable aluminium profile (34mm compatible accessory).',
+            'cover' => 'https://v5.airtableusercontent.com/v3/u/expired/tp5213.png',
+        ]);
+
+        Product::create([
+            'airtable_id' => 'rec_tp3414_exact',
+            'product_name' => '34.4mm (W) x 14mm (H)',
+            'slug' => 'tp3414-ss-bend',
+            'status' => 'active',
+            'category' => 'Trimless Profiles',
+            'product_code' => 'TP3414-SS-BEND',
+            'product_description' => '34.4mm (W) x 14mm (H) bendable plaster aluminium profile.',
+            'cover' => 'https://v5.airtableusercontent.com/v3/u/expired/tp3414.png',
+        ]);
+
+        /** @var ProductSearchAndFilterTool $tool */
+        $tool = app(ProductSearchAndFilterTool::class);
+        $result = $tool->execute(['query' => '34.4mm TP3414-SS-BEND']);
+
+        $this->assertNotEmpty($result['result']['products']);
+        $this->assertSame('TP3414-SS-BEND', $result['result']['products'][0]['code']);
+        $this->assertSame('/products/tp3414-ss-bend.webp', $result['cards']['items'][0]['image_url']);
+        $this->assertStringNotContainsString('airtableusercontent.com', $result['cards']['items'][0]['image_url']);
+    }
+
+    public function test_product_details_tool_prefers_exact_sku_over_partial_name_match(): void
+    {
+        Product::create([
+            'airtable_id' => 'rec_other_bend',
+            'product_name' => 'Alternative for TP3414-SS-BEND',
+            'slug' => 'tp5213-alt',
+            'status' => 'active',
+            'category' => 'Trimless Profiles',
+            'product_code' => 'TP5213-DS-BEND',
+            'cover' => 'https://v5.airtableusercontent.com/v3/u/expired/alt.png',
+        ]);
+
+        Product::create([
+            'airtable_id' => 'rec_tp3414_detail',
+            'product_name' => '34.4mm (W) x 14mm (H)',
+            'slug' => 'tp3414-ss-bend-detail',
+            'status' => 'active',
+            'category' => 'Trimless Profiles',
+            'product_code' => 'TP3414-SS-BEND',
+            'cover' => 'https://v5.airtableusercontent.com/v3/u/expired/tp3414.png',
+        ]);
+
+        /** @var ProductDetailsAndDownloadsTool $tool */
+        $tool = app(ProductDetailsAndDownloadsTool::class);
+        $result = $tool->execute(['product_identifier' => 'TP3414-SS-BEND']);
+
+        $this->assertSame('TP3414-SS-BEND', $result['result']['code']);
+        $this->assertSame('/products/tp3414-ss-bend-detail.webp', $result['cards']['data']['image_url']);
     }
 }
