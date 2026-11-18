@@ -68,8 +68,8 @@ class SearchProductsTool implements McpToolInterface
         }
 
         $products = $builder->limit($limit)->get()->map(function (Product $p) {
-            $coverUrl = null;
-            if (! empty($p->cover)) {
+            $coverUrl = $p->storefrontImageUrl();
+            if (empty($coverUrl) && ! empty($p->cover)) {
                 $coverUrl = str_starts_with($p->cover, 'http') ? $p->cover : asset($p->cover);
             }
 

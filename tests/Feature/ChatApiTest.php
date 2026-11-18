@@ -5,13 +5,16 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use App\Mail\ChatIssueReportedMail;
+use App\Models\ChatMessage;
 use App\Models\ChatSession;
 use App\Models\LlmFeed;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Services\Chat\ChatOrchestrator;
 use App\Services\Chat\Tools\ProductDetailsAndDownloadsTool;
 use App\Services\Chat\Tools\ProductSearchAndFilterTool;
 use App\Services\Chat\Tools\QuoteCartManagerTool;
+use App\Support\ProductCatalog;
 use Database\Seeders\PageSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
@@ -704,5 +707,74 @@ class ChatApiTest extends TestCase
 
         $this->assertSame('TP3414-SS-BEND', $result['result']['code']);
         $this->assertSame('/products/tp3414-ss-bend-detail.webp', $result['cards']['data']['image_url']);
+    }
+
+    public function test_chat_session_endpoint_hydrates_expired_airtable_image_urls(): void
+    {
+        $product = Product::create([
+            'airtable_id' => 'rec_sess_img',
+            'product_name' => 'Session Image Product',
+            'slug' => 'session-image-product',
+            'status' => 'active',
+            'category' => 'Downlight',
+            'product_code' => 'DL-SESS-01',
+            'cover' => 'https://v5.airtableusercontent.com/v3/u/expired/sess.png',
+        ]);
+
+        $session = ChatSession::create([
+            'uuid' => 'f2a3b4c5-d6e7-8901-f012-012345678901',
+            'status' => 'active',
+        ]);
+
+        ChatMessage::create([
+            'chat_session_id' => $session->id,
+            'sender' => 'assistant',
+            'content' => 'Here is a product.',
+            'cards_payload' => [
+                [
+                    'type' => 'products_carousel',
+                    'items' => [
+                        [
+                            'type' => 'product_card',
+                            'id' => $product->id,
+                            'name' => 'Session Image Product',
+                            'image_url' => 'https://v5.airtableusercontent.com/v3/u/expired/sess.png',
+                            'url' => '/products/session-image-product',
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $response = $this->getJson("/api/chat/session/{$session->uuid}");
+
+        $response->assertOk();
+        $cards = $response->json('messages.0.cards');
+        $this->assertSame('/products/session-image-product.webp', $cards[0]['items'][0]['image_url']);
+    }
+
+    public function test_parent_categories_never_return_airtable_featured_image_urls(): void
+    {
+        ProductCategory::create([
+            'airtable_id' => 'cat_profiles_01',
+            'name' => 'Profiles',
+            'featured_image' => 'https://v5.airtableusercontent.com/v3/u/expired/cat.png',
+        ]);
+
+        Product::create([
+            'airtable_id' => 'rec_cat_prod_01',
+            'product_name' => 'Profile Test',
+            'slug' => 'profile-test',
+            'status' => 'active',
+            'category' => 'Profiles',
+            'category_path' => ['Profiles'],
+            'product_images' => ['https://v5.airtableusercontent.com/v3/u/expired/prod.png'],
+        ]);
+
+        $categories = ProductCatalog::parentCategories();
+        foreach ($categories as $cat) {
+            $this->assertStringNotContainsString('airtableusercontent.com', (string) ($cat['image'] ?? ''));
+            $this->assertStringNotContainsString('airtable.com', (string) ($cat['image'] ?? ''));
+        }
     }
 }

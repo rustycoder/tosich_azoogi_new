@@ -10,6 +10,7 @@ use App\Models\ChatSession;
 use App\Models\Product;
 use App\Services\Chat\ChatOrchestrator;
 use App\Services\Chat\Tools\SendChatTranscriptToSalesTool;
+use App\Support\ChatCardImageHydrator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -148,6 +149,8 @@ class ChatController extends Controller
                 'quote_count' => count(session()->get('visitor_quote_list', [])),
             ]);
         }
+
+        ChatCardImageHydrator::hydrate($session->messages);
 
         $formattedMessages = $session->messages->map(function ($msg) {
             return [

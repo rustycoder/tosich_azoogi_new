@@ -410,7 +410,7 @@ class Product extends Model
     public function storefrontImageUrl(?int $index = null, string $format = 'webp'): string
     {
         $source = $this->coverUrl($index);
-        $identifier = (string) ($this->slug ?: $this->airtable_id);
+        $identifier = (string) ($this->slug ?: ($this->airtable_id ?: $this->id));
 
         if ($source === '' || $identifier === '' || ! $this->isExpiringImageUrl($source)) {
             return $source;
